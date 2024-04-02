@@ -1,0 +1,62 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "datanessence:item/instabilityreader",
+      "predicate": {
+        "datanessence:instability": 0.0
+      }
+    },
+    {
+      "model": "datanessence:item/instabilityreader2",
+      "predicate": {
+        "datanessence:instability": 125.0
+      }
+    },
+    {
+      "model": "datanessence:item/instabilityreader3",
+      "predicate": {
+        "datanessence:instability": 250.0
+      }
+    },
+    {
+      "model": "datanessence:item/instabilityreader4",
+      "predicate": {
+        "datanessence:instability": 375.0
+      }
+    },
+    {
+      "model": "datanessence:item/instabilityreader5",
+      "predicate": {
+        "datanessence:instability": 500.0
+      }
+    },
+    {
+      "model": "datanessence:item/instabilityreader6",
+      "predicate": {
+        "datanessence:instability": 625.0
+      }
+    },
+    {
+      "model": "datanessence:item/instabilityreader7",
+      "predicate": {
+        "datanessence:instability": 750.0
+      }
+    },
+    {
+      "model": "datanessence:item/instabilityreader8",
+      "predicate": {
+        "datanessence:instability": 875.0
+      }
+    },
+    {
+      "model": "datanessence:item/instabilityreader9",
+      "predicate": {
+        "datanessence:instability": 1000.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "datanessence:item/instabilityreader1"
+  }
+}

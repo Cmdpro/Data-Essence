@@ -1,0 +1,5 @@
+// 1.20.1	2024-03-11T15:18:28.1284237	Tags for minecraft:item mod id datanessence
+a8771c8878712a567c60afa1d2da443b5b5a65be data/forge/tags/items/ores.json
+f3255a65856df51ad6f826d5df492099302f5bc7 data/minecraft/tags/items/arrows.json
+068e1c84b2824fe962fb7c69f7d9c35d6d7b8f76 data/minecraft/tags/items/music_discs.json
+d46f15e0614c7b1d6e6f4ff5f49594fa678f687e data/datanessence/tags/items/gauntlets.json

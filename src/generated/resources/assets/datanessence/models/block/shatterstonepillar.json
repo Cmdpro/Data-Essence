@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "datanessence:block/shatterstonepillartop",
+    "side": "datanessence:block/shatterstonepillar"
+  }
+}

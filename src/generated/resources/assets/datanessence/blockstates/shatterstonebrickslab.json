@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "datanessence:block/shatterstonebrickslab"
+    },
+    "type=double": {
+      "model": "datanessence:block/shatterstonebricks"
+    },
+    "type=top": {
+      "model": "datanessence:block/shatterstonebrickslab_top"
+    }
+  }
+}
