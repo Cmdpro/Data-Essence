@@ -38,7 +38,6 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(ItemInit.DATANESSENCEGUIDEICON);
         simpleItem(ItemInit.DATATABLET);
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

@@ -16,9 +16,8 @@ import java.util.function.Supplier;
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DataNEssence.MOD_ID);
     public static final RegistryObject<Item> DATATABLET = register("datatablet", () -> new DataTablet(new Item.Properties().stacksTo(1)));
+
     private static <T extends Item> RegistryObject<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);
     }
-    public static final RegistryObject<Item> DATANESSENCEGUIDEICON =
-            register("datanessenceguideicon", () -> new Item(new Item.Properties()));
 }

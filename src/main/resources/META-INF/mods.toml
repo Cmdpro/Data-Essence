@@ -67,12 +67,6 @@ A magic mod about runes'''
     versionRange="[4.2.4,)"
     ordering="NONE"
     side="BOTH"
-[[dependencies.datanessence]]
-    modId="modonomicon"
-    mandatory=true
-    versionRange="[1.59.0,)"
-    ordering="NONE"
-    side="BOTH"
 #[[dependencies.datanessence]]
 #    modId="curios"
 #    mandatory=true
