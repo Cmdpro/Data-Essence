@@ -3,7 +3,6 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.*;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.klikli_dev.modonomicon.data.LoaderRegistry;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

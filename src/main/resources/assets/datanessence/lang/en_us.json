@@ -1,5 +1,9 @@
 {
   "item.datanessence.datatablet": "Data Tablet",
   "creativemodetab.datanessenceblocks": "Data & Essence Blocks",
-  "creativemodetab.datanessenceitems": "Data & Essence Items"
+  "creativemodetab.datanessenceitems": "Data & Essence Items",
+
+  "item.datanessence.datatablet.pagetype.crafting.fabricator.essence": "%1$s Essence",
+  "item.datanessence.datatablet.pagetype.crafting.fabricator.naturalessence": "%1$s Natural Essence",
+  "item.datanessence.datatablet.pagetype.crafting.fabricator.exoticessence": "%1$s Exotic Essence"
 }

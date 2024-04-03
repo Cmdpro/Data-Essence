@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "datanessence:block/shatterstone",
-    "side": "datanessence:block/shatterstone",
-    "top": "datanessence:block/shatterstone"
-  }
-}

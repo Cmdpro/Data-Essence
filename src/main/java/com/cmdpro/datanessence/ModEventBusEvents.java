@@ -2,6 +2,7 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.*;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
+import com.cmdpro.datanessence.init.RecipeInit;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;

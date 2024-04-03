@@ -37,6 +37,7 @@ import java.nio.charset.MalformedInputException;
 
 public class DataTabletScreen extends Screen {
     public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/datatablet.png");
+    public static final ResourceLocation TEXTURECRAFTING = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/datatabletcrafting.png");
     public DataTabletScreen(Component pTitle) {
         super(pTitle);
         offsetX = (imageWidth/2);
@@ -72,6 +73,7 @@ public class DataTabletScreen extends Screen {
                         screenType = 2;
                         clickedEntry = i;
                         page = 0;
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
                         return true;
                     }
                 }

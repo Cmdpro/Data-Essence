@@ -2,12 +2,6 @@ package com.cmdpro.datanessence.api;
 
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
-import com.klikli_dev.modonomicon.book.BookEntry;
-import com.klikli_dev.modonomicon.book.conditions.BookAndCondition;
-import com.klikli_dev.modonomicon.book.conditions.BookCondition;
-import com.klikli_dev.modonomicon.book.conditions.BookOrCondition;
-import com.klikli_dev.modonomicon.book.conditions.context.BookConditionContext;
-import com.klikli_dev.modonomicon.bookstate.BookUnlockStateManager;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;

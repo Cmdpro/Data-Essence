@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "datanessence:block/shatterstonebricks",
-    "side": "datanessence:block/shatterstonebricks",
-    "top": "datanessence:block/shatterstonebricks"
-  }
-}

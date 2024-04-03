@@ -16,7 +16,7 @@ public class RecipeInit {
     public static final RegistryObject<RecipeSerializer<ShapelessFabricationRecipe>> SHAPELESSFABRICATIONRECIPE = RECIPES.register("shapelessfabricationrecipe", () -> ShapelessFabricationRecipe.Serializer.INSTANCE);
     public static final RegistryObject<RecipeSerializer<ShapedFabricationRecipe>> SHAPEDFABRICATIONRECIPE = RECIPES.register("shapedfabricationrecipe", () -> ShapedFabricationRecipe.Serializer.INSTANCE);
     public static final RegistryObject<RecipeType<IFabricationRecipe>> FABRICATIONCRAFTING =
-            RECIPE_TYPES.register("fabricationrecipe", () -> RecipeType.simple(new ResourceLocation(DataNEssence.MOD_ID, "runicrecipe")));
+            RECIPE_TYPES.register("fabricationrecipe", () -> RecipeType.simple(new ResourceLocation(DataNEssence.MOD_ID, "fabricationrecipe")));
     public static void register(IEventBus eventBus) {
         RECIPES.register(eventBus);
         RECIPE_TYPES.register(eventBus);

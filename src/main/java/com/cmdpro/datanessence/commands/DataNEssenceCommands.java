@@ -2,8 +2,6 @@ package com.cmdpro.datanessence.commands;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
-import com.klikli_dev.modonomicon.bookstate.BookUnlockStateManager;
-import com.klikli_dev.modonomicon.data.BookDataManager;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
