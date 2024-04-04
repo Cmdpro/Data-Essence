@@ -153,6 +153,16 @@ public class DataTabletScreen extends Screen {
         }
         graphics.disableScissor();
         super.render(graphics, mouseX, mouseY, delta);
+        if (screenType == 0) {
+            for (Entry i : ClientEntries.entries.values()) {
+                if (mouseX >= ((i.x * 20) - 10) + offsetX + x && mouseX <= ((i.x * 20) + 10) + offsetX + x) {
+                    if (mouseY >= ((i.y * 20) - 10) + offsetY + y && mouseY <= ((i.y * 20) + 10) + offsetY + y) {
+                        graphics.renderTooltip(Minecraft.getInstance().font, i.name, mouseX, mouseY);
+                        break;
+                    }
+                }
+            }
+        }
     }
     public void drawPage(Page page, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;

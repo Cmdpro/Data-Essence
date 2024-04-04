@@ -10,6 +10,7 @@ import com.cmdpro.datanessence.screen.datatablet.pages.crafting.CraftingType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class FabricatorType extends CraftingType {
     public void render(CraftingPage page, DataTabletScreen screen, GuiGraphics pGuiGraphics, int xOffset, int x, int yOffset, int y, Recipe recipe, int pMouseX, int pMouseY) {
         if (recipe instanceof IFabricationRecipe recipe2) {
             pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x, yOffset + y, 10, 196, 123, 60);
+            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(Items.CRAFTING_TABLE), xOffset + x + 92, yOffset + y + 41, pMouseX, pMouseY);
             if (recipe2.getEssenceCost() > 0) {
                 pGuiGraphics.fill(x+xOffset+6, y+yOffset+20-(int)Math.ceil(14f*(recipe2.getEssenceCost()/1000f)), x+xOffset+9, y+yOffset+20, 0xFFFF00FF);
                 if (pMouseX >= x+xOffset+6 && pMouseY >= y+yOffset+(19-14)) {
