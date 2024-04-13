@@ -1,0 +1,20 @@
+{
+  "icon": {
+    "item": "datanessence:datatablet"
+  },
+  "x": 0,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:crafting",
+      "text": "item.datanessence.datatablet.pages.test2.page1.text",
+      "recipes": [
+        "datanessence:testrecipe",
+        "minecraft:ender_eye",
+        "minecraft:crafting_table"
+      ]
+    }
+  ],
+  "parent": "datanessence:test1",
+  "name": "item.datanessence.datatablet.pages.test2.name"
+}

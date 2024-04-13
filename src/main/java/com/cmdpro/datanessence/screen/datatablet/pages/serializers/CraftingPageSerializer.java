@@ -18,7 +18,7 @@ public class CraftingPageSerializer extends PageSerializer<CraftingPage> {
     public CraftingPage fromJson(JsonObject json) {
         Component text = Component.translatable(json.get("text").getAsString());
         ArrayList<ResourceLocation> recipes = new ArrayList<>();
-        for (JsonElement i : json.get("text").getAsJsonArray()) {
+        for (JsonElement i : json.get("recipes").getAsJsonArray()) {
             recipes.add(ResourceLocation.tryParse(i.getAsString()));
         }
         return new CraftingPage(text, recipes.toArray(new ResourceLocation[0]));

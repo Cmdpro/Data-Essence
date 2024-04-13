@@ -2,6 +2,8 @@ package com.cmdpro.datanessence.api;
 
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
+import com.cmdpro.datanessence.screen.datatablet.Page;
+import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -20,6 +22,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 public class DataNEssenceUtil {
+    public static Supplier<IForgeRegistry<PageSerializer>> PAGE_TYPE_REGISTRY = null;
     public static boolean playerHasEntry(Player player, String entry) {
         if (entry != null) {
             return player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get().getUnlocked().contains(ResourceLocation.tryParse(entry));

@@ -54,6 +54,7 @@ public class DataNEssence
         MenuInit.register(bus);
         RecipeInit.register(bus);
         CreativeModeTabInit.register(bus);
+        PageTypeInit.PAGE_TYPES.register(bus);
         GeckoLib.initialize();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

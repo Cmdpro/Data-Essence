@@ -32,6 +32,11 @@ public class ModMessages {
                 .encoder(PlayerDataSyncS2CPacket::toBytes)
                 .consumerMainThread(PlayerDataSyncS2CPacket::handle)
                 .add();
+        net.messageBuilder(EntrySyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(EntrySyncS2CPacket::new)
+                .encoder(EntrySyncS2CPacket::toBytes)
+                .consumerMainThread(EntrySyncS2CPacket::handle)
+                .add();
 
     }
     public static <MSG> void sendToServer(MSG message) {

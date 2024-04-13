@@ -3,6 +3,7 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.api.*;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.RecipeInit;
+import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Monster;
@@ -38,7 +39,8 @@ public class ModEventBusEvents {
     }
     @SubscribeEvent
     public static void registerRegistries(NewRegistryEvent event) {
-
+        DataNEssenceUtil.PAGE_TYPE_REGISTRY = event.create(new RegistryBuilder<PageSerializer>()
+                .setName(new ResourceLocation(DataNEssence.MOD_ID, "pagetypes")));
     }
     @SubscribeEvent
     public static void entitySpawnRestriction(SpawnPlacementRegisterEvent event) {

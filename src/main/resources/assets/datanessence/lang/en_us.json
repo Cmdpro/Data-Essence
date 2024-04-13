@@ -5,5 +5,12 @@
 
   "item.datanessence.datatablet.pagetype.crafting.fabricator.essence": "%1$s Essence",
   "item.datanessence.datatablet.pagetype.crafting.fabricator.naturalessence": "%1$s Natural Essence",
-  "item.datanessence.datatablet.pagetype.crafting.fabricator.exoticessence": "%1$s Exotic Essence"
+  "item.datanessence.datatablet.pagetype.crafting.fabricator.exoticessence": "%1$s Exotic Essence",
+
+  "item.datanessence.datatablet.pages.test1.name": "Cool Page 1",
+  "item.datanessence.datatablet.pages.test1.page1.text": "This page is cool",
+  "item.datanessence.datatablet.pages.test1.page2.text": "Page 2 works",
+  "item.datanessence.datatablet.pages.test1.page3.text": "Page 3 works as well!",
+  "item.datanessence.datatablet.pages.test2.page1.text": "testing",
+  "item.datanessence.datatablet.pages.test2.name": "Cool Page 2"
 }
