@@ -25,7 +25,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.*;
 
-public class ShapedFabricationRecipe implements IFabricationRecipe {
+public class ShapedIFabricationRecipe implements IFabricationRecipe {
     private final String entry;
     private final float essenceCost;
     private final float naturalEssenceCost;
@@ -44,7 +44,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
     private final ResourceLocation id;
     final boolean showNotification;
 
-    public ShapedFabricationRecipe(ResourceLocation pId, int pWidth, int pHeight, NonNullList<Ingredient> pRecipeItems, ItemStack pResult, boolean pShowNotification, String entry, float essenceCost, float naturalEssenceCost, float exoticEssenceCost) {
+    public ShapedIFabricationRecipe(ResourceLocation pId, int pWidth, int pHeight, NonNullList<Ingredient> pRecipeItems, ItemStack pResult, boolean pShowNotification, String entry, float essenceCost, float naturalEssenceCost, float exoticEssenceCost) {
         this.entry = entry;
         this.essenceCost = essenceCost;
         this.naturalEssenceCost = naturalEssenceCost;
@@ -306,29 +306,29 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
         }
     }
 
-    public static class Serializer implements RecipeSerializer<ShapedFabricationRecipe> {
+    public static class Serializer implements RecipeSerializer<ShapedIFabricationRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
                 new ResourceLocation(DataNEssence.MOD_ID,"shapedfabricationrecipe");
 
         @Override
-        public ShapedFabricationRecipe fromJson(ResourceLocation id, JsonObject json) {
-            Map<String, Ingredient> map = ShapedFabricationRecipe.keyFromJson(GsonHelper.getAsJsonObject(json, "key"));
-            String[] astring = ShapedFabricationRecipe.shrink(ShapedFabricationRecipe.patternFromJson(GsonHelper.getAsJsonArray(json, "pattern")));
+        public ShapedIFabricationRecipe fromJson(ResourceLocation id, JsonObject json) {
+            Map<String, Ingredient> map = ShapedIFabricationRecipe.keyFromJson(GsonHelper.getAsJsonObject(json, "key"));
+            String[] astring = ShapedIFabricationRecipe.shrink(ShapedIFabricationRecipe.patternFromJson(GsonHelper.getAsJsonArray(json, "pattern")));
             int i = astring[0].length();
             int j = astring.length;
-            NonNullList<Ingredient> nonnulllist = ShapedFabricationRecipe.dissolvePattern(astring, map, i, j);
-            ItemStack itemstack = ShapedFabricationRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+            NonNullList<Ingredient> nonnulllist = ShapedIFabricationRecipe.dissolvePattern(astring, map, i, j);
+            ItemStack itemstack = ShapedIFabricationRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
             boolean flag = GsonHelper.getAsBoolean(json, "show_notification", true);
             String entry = GsonHelper.getAsString(json, "entry");
             float essenceCost = GsonHelper.getAsFloat(json, "essenceCost", 0);
             float naturalEssenceCost = GsonHelper.getAsFloat(json, "naturalEssenceCost", 0);
             float exoticEssenceCost = GsonHelper.getAsFloat(json, "exoticEssenceCost", 0);
-            return new ShapedFabricationRecipe(id, i, j, nonnulllist, itemstack, flag, entry, essenceCost, naturalEssenceCost, exoticEssenceCost);
+            return new ShapedIFabricationRecipe(id, i, j, nonnulllist, itemstack, flag, entry, essenceCost, naturalEssenceCost, exoticEssenceCost);
         }
 
         @Override
-        public ShapedFabricationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public ShapedIFabricationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             int i = buf.readVarInt();
             int j = buf.readVarInt();
             NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i * j, Ingredient.EMPTY);
@@ -343,11 +343,11 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
             float essenceCost = buf.readFloat();
             float naturalEssenceCost = buf.readFloat();
             float exoticEssenceCost = buf.readFloat();
-            return new ShapedFabricationRecipe(id, i, j, nonnulllist, itemstack, flag, entry, essenceCost, naturalEssenceCost, exoticEssenceCost);
+            return new ShapedIFabricationRecipe(id, i, j, nonnulllist, itemstack, flag, entry, essenceCost, naturalEssenceCost, exoticEssenceCost);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, ShapedFabricationRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, ShapedIFabricationRecipe recipe) {
             buf.writeVarInt(recipe.width);
             buf.writeVarInt(recipe.height);
 

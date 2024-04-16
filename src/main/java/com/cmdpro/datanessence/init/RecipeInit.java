@@ -13,8 +13,8 @@ import net.minecraftforge.registries.RegistryObject;
 public class RecipeInit {
     public static final DeferredRegister<RecipeSerializer<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, DataNEssence.MOD_ID);
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, DataNEssence.MOD_ID);
-    public static final RegistryObject<RecipeSerializer<ShapelessFabricationRecipe>> SHAPELESSFABRICATIONRECIPE = RECIPES.register("shapelessfabricationrecipe", () -> ShapelessFabricationRecipe.Serializer.INSTANCE);
-    public static final RegistryObject<RecipeSerializer<ShapedFabricationRecipe>> SHAPEDFABRICATIONRECIPE = RECIPES.register("shapedfabricationrecipe", () -> ShapedFabricationRecipe.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<ShapelessIFabricationRecipe>> SHAPELESSFABRICATIONRECIPE = RECIPES.register("shapelessfabricationrecipe", () -> ShapelessIFabricationRecipe.Serializer.INSTANCE);
+    public static final RegistryObject<RecipeSerializer<ShapedIFabricationRecipe>> SHAPEDFABRICATIONRECIPE = RECIPES.register("shapedfabricationrecipe", () -> ShapedIFabricationRecipe.Serializer.INSTANCE);
     public static final RegistryObject<RecipeType<IFabricationRecipe>> FABRICATIONCRAFTING =
             RECIPE_TYPES.register("fabricationrecipe", () -> RecipeType.simple(new ResourceLocation(DataNEssence.MOD_ID, "fabricationrecipe")));
     public static void register(IEventBus eventBus) {

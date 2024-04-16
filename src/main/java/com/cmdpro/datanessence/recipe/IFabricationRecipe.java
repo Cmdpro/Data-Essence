@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.recipe;
 
 import com.cmdpro.datanessence.init.RecipeInit;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
