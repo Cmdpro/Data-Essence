@@ -27,12 +27,12 @@ public class CraftingPage extends TextPage {
     public ResourceLocation[] recipes;
     @Override
     public int textYOffset() {
-        int x = 3;
-        int y = 3;
+        int x = 4;
+        int y = 4;
         for (ResourceLocation i : recipes) {
-            x += 127;
-            if (x > 254) {
-                x = 3;
+            x += 125;
+            if (x > 4+125) {
+                x = 4;
                 y += 64;
             }
         }
@@ -43,8 +43,8 @@ public class CraftingPage extends TextPage {
     @Override
     public void render(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset) {
         super.render(screen, pGuiGraphics, pPartialTick, pMouseX, pMouseY, xOffset, yOffset);
-        int x = 3;
-        int y = 3;
+        int x = 4;
+        int y = 4;
         for (ResourceLocation i : recipes) {
             Optional<? extends Recipe<?>> optional = Minecraft.getInstance().level.getRecipeManager().byKey(i);
             if (optional.isPresent()) {
@@ -55,9 +55,9 @@ public class CraftingPage extends TextPage {
                     }
                 }
             }
-            x += 127;
-            if (x > 254) {
-                x = 3;
+            x += 125;
+            if (x > 4+125) {
+                x = 4;
                 y += 64;
             }
         }
