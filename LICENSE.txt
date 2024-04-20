@@ -1,5 +1,5 @@
 Data & Essence has 2 licenses:
-All asset files within src/main/resources/assets/datanessence/ are (c) 2024 by Eset Kalenko and are All Rights Reserved
+All asset files within src/main/resources/assets/datanessence/textures/ are (c) 2024 by Eset Kalenko and are All Rights Reserved
 MIT License for the rest of the files
 
 MIT License
