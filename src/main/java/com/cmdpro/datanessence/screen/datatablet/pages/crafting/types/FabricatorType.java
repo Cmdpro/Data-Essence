@@ -18,21 +18,31 @@ public class FabricatorType extends CraftingType {
     public void render(CraftingPage page, DataTabletScreen screen, GuiGraphics pGuiGraphics, int xOffset, int x, int yOffset, int y, Recipe recipe, int pMouseX, int pMouseY) {
         if (recipe instanceof IFabricationRecipe recipe2) {
             pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x, yOffset + y, 10, 196, 123, 60);
-            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(Items.CRAFTING_TABLE), xOffset + x + 92, yOffset + y + 43, pMouseX, pMouseY);
+            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(Items.CRAFTING_TABLE), xOffset + x + 98, yOffset + y + 43, pMouseX, pMouseY);
             if (recipe2.getEssenceCost() > 0) {
-                pGuiGraphics.fill(x+xOffset+6, y+yOffset+20-(int)Math.ceil(14f*(recipe2.getEssenceCost()/1000f)), x+xOffset+9, y+yOffset+20, 0xFFFF00FF);
-                if (pMouseX >= x+xOffset+6 && pMouseY >= y+yOffset+(19-14)) {
-                    if (pMouseX <= x+xOffset+9 && pMouseY <= y+yOffset+19) {
+                pGuiGraphics.fill(x+xOffset+5, y+yOffset+28-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), x+xOffset+8, y+yOffset+28, 0xFFFF00FF);
+                if (pMouseX >= x+xOffset+5 && pMouseY >= y+yOffset+(28-22)) {
+                    if (pMouseX <= x+xOffset+8 && pMouseY <= y+yOffset+28) {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.essence", recipe2.getEssenceCost()).getVisualOrderText());
                     }
                 }
             }
+            if (recipe2.getLunarEssenceCost() > 0) {
+                pGuiGraphics.fill(x+xOffset+13, y+yOffset+28-(int)Math.ceil(22f*(recipe2.getLunarEssenceCost()/1000f)), x+xOffset+16, y+yOffset+28, 0xFFAAAAFF);
+                if (pMouseX >= x+xOffset+13 && pMouseY >= y+yOffset+(28-22)) {
+                    if (pMouseX <= x+xOffset+16 && pMouseY <= y+yOffset+28) {
+                        page.showTooltip = true;
+                        page.tooltipToShow.clear();
+                        page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.lunaressence", recipe2.getLunarEssenceCost()).getVisualOrderText());
+                    }
+                }
+            }
             if (recipe2.getNaturalEssenceCost() > 0) {
-                pGuiGraphics.fill(x+xOffset+6, y+yOffset+37-(int)Math.ceil(14f*(recipe2.getNaturalEssenceCost()/1000f)), x+xOffset+9, y+yOffset+37, 0xFF00FF00);
-                if (pMouseX >= x+xOffset+6 && pMouseY >= y+yOffset+(36-14)) {
-                    if (pMouseX <= x+xOffset+9 && pMouseY <= y+yOffset+36) {
+                pGuiGraphics.fill(x+xOffset+5, y+yOffset+54-(int)Math.ceil(22f*(recipe2.getNaturalEssenceCost()/1000f)), x+xOffset+8, y+yOffset+54, 0xFF00FF00);
+                if (pMouseX >= x+xOffset+5 && pMouseY >= y+yOffset+(54-22)) {
+                    if (pMouseX <= x+xOffset+8 && pMouseY <= y+yOffset+54) {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.naturalessence", recipe2.getNaturalEssenceCost()).getVisualOrderText());
@@ -40,16 +50,16 @@ public class FabricatorType extends CraftingType {
                 }
             }
             if (recipe2.getExoticEssenceCost() > 0) {
-                pGuiGraphics.fill(x+xOffset+6, y+yOffset+54-(int)Math.ceil(14f*(recipe2.getExoticEssenceCost()/1000f)), x+xOffset+9, y+yOffset+54, 0xFFFFFFFF);
-                if (pMouseX >= x+xOffset+6 && pMouseY >= y+yOffset+(53-14)) {
-                    if (pMouseX <= x+xOffset+9 && pMouseY <= y+yOffset+53) {
+                pGuiGraphics.fill(x+xOffset+13, y+yOffset+54-(int)Math.ceil(22f*(recipe2.getExoticEssenceCost()/1000f)), x+xOffset+16, y+yOffset+54, 0xFFFFFFFF);
+                if (pMouseX >= x+xOffset+13 && pMouseY >= y+yOffset+(54-22)) {
+                    if (pMouseX <= x+xOffset+16 && pMouseY <= y+yOffset+54) {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.exoticessence", recipe2.getExoticEssenceCost()).getVisualOrderText());
                     }
                 }
             }
-            page.renderItemWithTooltip(pGuiGraphics, recipe.getResultItem(RegistryAccess.EMPTY), xOffset + x + 92, yOffset + y + 22, pMouseX, pMouseY);
+            page.renderItemWithTooltip(pGuiGraphics, recipe.getResultItem(RegistryAccess.EMPTY), xOffset + x + 98, yOffset + y + 22, pMouseX, pMouseY);
             if (recipe2 instanceof ShapelessFabricationRecipe) {
                 pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x + 93, yOffset + y + 4, 242, 185, 14, 11);
             }
@@ -61,7 +71,7 @@ public class FabricatorType extends CraftingType {
                 wrap = shaped.getWidth();
             }
             for (Ingredient o : recipe2.getIngredients()) {
-                page.renderIngredientWithTooltip(screen, pGuiGraphics, o, xOffset + x + 14 + x2, yOffset + y + 4 + y2, pMouseX, pMouseY);
+                page.renderIngredientWithTooltip(screen, pGuiGraphics, o, xOffset + x + 20 + x2, yOffset + y + 4 + y2, pMouseX, pMouseY);
                 x2 += 17;
                 p++;
                 if (p >= wrap) {

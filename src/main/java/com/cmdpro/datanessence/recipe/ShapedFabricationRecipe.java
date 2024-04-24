@@ -351,7 +351,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
             float lunarEssenceCost = buf.readFloat();
             float naturalEssenceCost = buf.readFloat();
             float exoticEssenceCost = buf.readFloat();
-            return new ShapedFabricationRecipe(id, i, j, nonnulllist, itemstack, flag, entry, essenceCost, lunar, naturalEssenceCost, exoticEssenceCost);
+            return new ShapedFabricationRecipe(id, i, j, nonnulllist, itemstack, flag, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
         }
 
         @Override
