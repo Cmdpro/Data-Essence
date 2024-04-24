@@ -18,8 +18,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public class ShapelessIFabricationRecipe implements IFabricationRecipe {
+public class ShapelessFabricationRecipe implements IFabricationRecipe {
     private final float essenceCost;
+    private final float lunarEssenceCost;
     private final float naturalEssenceCost;
     private final float exoticEssenceCost;
     private final ResourceLocation id;
@@ -28,10 +29,11 @@ public class ShapelessIFabricationRecipe implements IFabricationRecipe {
     final NonNullList<Ingredient> ingredients;
     private final boolean isSimple;
 
-    public ShapelessIFabricationRecipe(ResourceLocation id, ItemStack result, NonNullList<Ingredient> ingredients, String entry, float essenceCost, float naturalEssenceCost, float exoticEssenceCost) {
+    public ShapelessFabricationRecipe(ResourceLocation id, ItemStack result, NonNullList<Ingredient> ingredients, String entry, float essenceCost, float lunarEssenceCost, float naturalEssenceCost, float exoticEssenceCost) {
         this.id = id;
         this.entry = entry;
         this.essenceCost = essenceCost;
+        this.lunarEssenceCost = lunarEssenceCost;
         this.naturalEssenceCost = naturalEssenceCost;
         this.exoticEssenceCost = exoticEssenceCost;
         this.result = result;
@@ -103,6 +105,10 @@ public class ShapelessIFabricationRecipe implements IFabricationRecipe {
     public float getEssenceCost() {
         return essenceCost;
     }
+    @Override
+    public float getLunarEssenceCost() {
+        return lunarEssenceCost;
+    }
 
     @Override
     public float getNaturalEssenceCost() {
@@ -112,25 +118,26 @@ public class ShapelessIFabricationRecipe implements IFabricationRecipe {
     public float getExoticEssenceCost() {
         return exoticEssenceCost;
     }
-    public static class Serializer implements RecipeSerializer<ShapelessIFabricationRecipe> {
+    public static class Serializer implements RecipeSerializer<ShapelessFabricationRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
                 new ResourceLocation(DataNEssence.MOD_ID,"shapelessrunicrecipe");
 
         @Override
-        public ShapelessIFabricationRecipe fromJson(ResourceLocation id, JsonObject json) {
+        public ShapelessFabricationRecipe fromJson(ResourceLocation id, JsonObject json) {
             String entry = GsonHelper.getAsString(json, "entry");
             float essenceCost = GsonHelper.getAsFloat(json, "essenceCost", 0);
+            float lunarEssenceCost = GsonHelper.getAsFloat(json, "lunarEssenceCost", 0);
             float naturalEssenceCost = GsonHelper.getAsFloat(json, "naturalEssenceCost", 0);
             float exoticEssenceCost = GsonHelper.getAsFloat(json, "exoticEssenceCost", 0);
             NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
             if (nonnulllist.isEmpty()) {
                 throw new JsonParseException("No ingredients for shapeless recipe");
-            } else if (nonnulllist.size() > ShapedIFabricationRecipe.MAX_WIDTH * ShapedIFabricationRecipe.MAX_HEIGHT) {
-                throw new JsonParseException("Too many ingredients for shapeless recipe. The maximum is " + (ShapedIFabricationRecipe.MAX_WIDTH * ShapedIFabricationRecipe.MAX_HEIGHT));
+            } else if (nonnulllist.size() > ShapedFabricationRecipe.MAX_WIDTH * ShapedFabricationRecipe.MAX_HEIGHT) {
+                throw new JsonParseException("Too many ingredients for shapeless recipe. The maximum is " + (ShapedFabricationRecipe.MAX_WIDTH * ShapedFabricationRecipe.MAX_HEIGHT));
             } else {
-                ItemStack itemstack = ShapedIFabricationRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-                return new ShapelessIFabricationRecipe(id, itemstack, nonnulllist, entry, essenceCost, naturalEssenceCost, exoticEssenceCost);
+                ItemStack itemstack = ShapedFabricationRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+                return new ShapelessFabricationRecipe(id, itemstack, nonnulllist, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
             }
         }
 
@@ -148,7 +155,7 @@ public class ShapelessIFabricationRecipe implements IFabricationRecipe {
         }
 
         @Override
-        public ShapelessIFabricationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+        public ShapelessFabricationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
             int i = buf.readVarInt();
             NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i, Ingredient.EMPTY);
 
@@ -159,13 +166,14 @@ public class ShapelessIFabricationRecipe implements IFabricationRecipe {
             ItemStack itemstack = buf.readItem();
             String entry = buf.readUtf();
             float essenceCost = buf.readFloat();
+            float lunarEssenceCost = buf.readFloat();
             float naturalEssenceCost = buf.readFloat();
             float exoticEssenceCost = buf.readFloat();
-            return new ShapelessIFabricationRecipe(id, itemstack, nonnulllist, entry, essenceCost, naturalEssenceCost, exoticEssenceCost);
+            return new ShapelessFabricationRecipe(id, itemstack, nonnulllist, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, ShapelessIFabricationRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, ShapelessFabricationRecipe recipe) {
             buf.writeVarInt(recipe.ingredients.size());
 
             for(Ingredient ingredient : recipe.ingredients) {
@@ -175,6 +183,7 @@ public class ShapelessIFabricationRecipe implements IFabricationRecipe {
             buf.writeItem(recipe.result);
             buf.writeUtf(recipe.entry);
             buf.writeFloat(recipe.essenceCost);
+            buf.writeFloat(recipe.lunarEssenceCost);
             buf.writeFloat(recipe.naturalEssenceCost);
             buf.writeFloat(recipe.exoticEssenceCost);
         }

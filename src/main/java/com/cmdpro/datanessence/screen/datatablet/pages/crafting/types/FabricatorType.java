@@ -2,8 +2,8 @@ package com.cmdpro.datanessence.screen.datatablet.pages.crafting.types;
 
 import com.cmdpro.datanessence.init.RecipeInit;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
-import com.cmdpro.datanessence.recipe.ShapedIFabricationRecipe;
-import com.cmdpro.datanessence.recipe.ShapelessIFabricationRecipe;
+import com.cmdpro.datanessence.recipe.ShapedFabricationRecipe;
+import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.pages.CraftingPage;
 import com.cmdpro.datanessence.screen.datatablet.pages.crafting.CraftingType;
@@ -50,14 +50,14 @@ public class FabricatorType extends CraftingType {
                 }
             }
             page.renderItemWithTooltip(pGuiGraphics, recipe.getResultItem(RegistryAccess.EMPTY), xOffset + x + 92, yOffset + y + 22, pMouseX, pMouseY);
-            if (recipe2 instanceof ShapelessIFabricationRecipe) {
+            if (recipe2 instanceof ShapelessFabricationRecipe) {
                 pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x + 93, yOffset + y + 4, 242, 185, 14, 11);
             }
             int x2 = 1;
             int y2 = 1;
             int p = 0;
             int wrap = 3;
-            if (recipe2 instanceof ShapedIFabricationRecipe shaped) {
+            if (recipe2 instanceof ShapedFabricationRecipe shaped) {
                 wrap = shaped.getWidth();
             }
             for (Ingredient o : recipe2.getIngredients()) {

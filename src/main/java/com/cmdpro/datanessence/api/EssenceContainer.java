@@ -10,6 +10,7 @@ public class EssenceContainer extends BlockEntity {
     private float essence;
     private float naturalEssence;
     private float exoticEssence;
+    private float lunarEssence;
 
     public EssenceContainer(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -20,6 +21,12 @@ public class EssenceContainer extends BlockEntity {
     }
     public void setEssence(float amount) {
         essence = amount;
+    }
+    public float getLunarEssence() {
+        return lunarEssence;
+    }
+    public void setLunarEssence(float amount) {
+        lunarEssence = amount;
     }
     public float getNaturalEssence() {
         return naturalEssence;
