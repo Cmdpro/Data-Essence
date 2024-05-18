@@ -88,9 +88,11 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt){
         CompoundTag tag = pkt.getTag();
         setEssence(tag.getFloat("essence"));
+        setLunarEssence(tag.getFloat("lunarEssence"));
         setNaturalEssence(tag.getFloat("naturalEssence"));
         setExoticEssence(tag.getFloat("exoticEssence"));
         essenceCost = tag.getFloat("essenceCost");
+        lunarEssenceCost = tag.getFloat("lunarEssenceCost");
         naturalEssenceCost = tag.getFloat("naturalEssenceCost");
         exoticEssenceCost = tag.getFloat("exoticEssenceCost");
 
@@ -100,9 +102,11 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     public CompoundTag getUpdateTag() {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("essence", getEssence());
+        tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
         tag.putFloat("exoticEssence", getExoticEssence());
         tag.putFloat("essenceCost", essenceCost);
+        tag.putFloat("lunarEssenceCost", lunarEssenceCost);
         tag.putFloat("naturalEssenceCost", naturalEssenceCost);
         tag.putFloat("exoticEssenceCost", exoticEssenceCost);
         tag.put("item", item.save(new CompoundTag()));
@@ -112,6 +116,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     protected void saveAdditional(@NotNull CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
         tag.putFloat("essence", getEssence());
+        tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
         tag.putFloat("exoticEssence", getExoticEssence());
         super.saveAdditional(tag);
@@ -121,6 +126,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         super.load(nbt);
         itemHandler.deserializeNBT(nbt.getCompound("inventory"));
         setEssence(nbt.getFloat("essence"));
+        setLunarEssence(nbt.getFloat("lunarEssence"));
         setNaturalEssence(nbt.getFloat("naturalEssence"));
         setExoticEssence(nbt.getFloat("exoticEssence"));
     }
@@ -177,6 +183,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     public IFabricationRecipe recipe;
     public boolean enoughEssence;
     public float essenceCost;
+    public float lunarEssenceCost;
     public float naturalEssenceCost;
     public float exoticEssenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {

@@ -51,12 +51,13 @@ public class DataNEssence
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
 
         ItemInit.ITEMS.register(bus);
-        MenuInit.register(bus);
-        RecipeInit.register(bus);
-        CreativeModeTabInit.register(bus);
+        MenuInit.MENUS.register(bus);
+        RecipeInit.RECIPES.register(bus);
+        RecipeInit.RECIPE_TYPES.register(bus);
+        CreativeModeTabInit.CREATIVE_MODE_TABS.register(bus);
         PageTypeInit.PAGE_TYPES.register(bus);
         BlockInit.BLOCKS.register(bus);
-        BlockEntityInit.register(bus);
+        BlockEntityInit.BLOCK_ENTITIES.register(bus);
         GeckoLib.initialize();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -69,6 +70,7 @@ public class DataNEssence
 
         }
         if (event.getTabKey() == CreativeModeTabInit.ITEMS.getKey()) {
+            event.accept(ItemInit.DATATABLET);
         }
         //if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
 
