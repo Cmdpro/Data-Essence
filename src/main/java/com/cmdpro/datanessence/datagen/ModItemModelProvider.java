@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.init.BlockInit;
 import com.cmdpro.datanessence.init.ItemInit;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
@@ -39,6 +40,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         simpleItem(ItemInit.DATATABLET);
+        evenSimplerBlockItem(BlockInit.FABRICATOR);
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),

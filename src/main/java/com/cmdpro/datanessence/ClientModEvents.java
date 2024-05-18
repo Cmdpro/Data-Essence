@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.init.*;
+import com.cmdpro.datanessence.renderers.FabricatorRenderer;
 import com.cmdpro.datanessence.screen.FabricatorScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,6 +15,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class ClientModEvents {
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(BlockEntityInit.FABRICATOR.get(), FabricatorRenderer::new);
     }
 
     @SubscribeEvent

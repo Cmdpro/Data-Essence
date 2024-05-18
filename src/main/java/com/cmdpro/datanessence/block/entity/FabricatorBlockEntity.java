@@ -47,7 +47,7 @@ import java.util.*;
 public class FabricatorBlockEntity extends EssenceContainer implements MenuProvider, GeoBlockEntity {
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(10) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(9) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -141,7 +141,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     }
     public CraftingContainer getCraftingInv() {
         List<ItemStack> items = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
+        for (int i = 0; i < 9; i++) {
             items.add(itemHandler.getStackInSlot(i));
         }
         CraftingContainer inventory = new NonMenuCraftingContainer(items, 3, 3);
@@ -166,10 +166,10 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                         pLevel.addFreshEntity(entity);
                         pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
                     } else {
-                        pPlayer.sendSystemMessage(Component.translatable("block.runology.runicworkbench.dontknowhow"));
+                        pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.dontknowhow"));
                     }
                 } else {
-                    pPlayer.sendSystemMessage(Component.translatable("block.runology.runicworkbench.notenoughenergy"));
+                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.notenoughessence"));
                 }
             }
         }
@@ -197,7 +197,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get();
                 pBlockEntity.essenceCost = recipe.get().getEssenceCost();
-                pBlockEntity.lunarEssenceCost = recipe.get().getNaturalEssenceCost();
+                pBlockEntity.lunarEssenceCost = recipe.get().getLunarEssenceCost();
                 pBlockEntity.naturalEssenceCost = recipe.get().getNaturalEssenceCost();
                 pBlockEntity.exoticEssenceCost = recipe.get().getExoticEssenceCost();
                 pBlockEntity.item = recipe.get().getResultItem(pLevel.registryAccess());
@@ -227,9 +227,9 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     }
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
         if (!item.isEmpty()) {
-            event.getController().setAnimation(RawAnimation.begin().then("animation.runicworkbench.ready", Animation.LoopType.LOOP));
+            event.getController().setAnimation(RawAnimation.begin().then("animation.fabricator.ready", Animation.LoopType.LOOP));
         } else {
-            event.getController().setAnimation(RawAnimation.begin().then("animation.runicworkbench.idle", Animation.LoopType.LOOP));
+            event.getController().setAnimation(RawAnimation.begin().then("animation.fabricator.idle", Animation.LoopType.LOOP));
         }
         return PlayState.CONTINUE;
     }

@@ -30,7 +30,7 @@ public class FabricatorScreen extends AbstractContainerScreen<FabricatorMenu> {
         int y = (height - imageHeight) / 2;
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.25f);
-        pGuiGraphics.renderItem(menu.blockEntity.item, x+124, y+35);
+        pGuiGraphics.renderItem(menu.blockEntity.item, x+145, y+35);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1F);
         if (menu.blockEntity.getEssence() > 0) {
             pGuiGraphics.blit(TEXTURE, x + 8, y + 69 - (int) Math.ceil(52f * (menu.blockEntity.getEssence() / 1000f)), 178, 63 - (int) Math.ceil(52f * (menu.blockEntity.getEssence() / 1000f)), 7, (int) Math.ceil(52f * (menu.blockEntity.getEssence() / 1000f)));

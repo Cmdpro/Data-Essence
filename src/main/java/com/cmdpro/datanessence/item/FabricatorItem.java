@@ -22,7 +22,7 @@ public class FabricatorItem extends BlockItem implements GeoItem {
     }
 
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.runiccauldron.hand", Animation.LoopType.LOOP));
+        event.getController().setAnimation(RawAnimation.begin().then("animation.fabricator.hand", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 
