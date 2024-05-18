@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.init.*;
+import com.cmdpro.datanessence.screen.FabricatorScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -17,6 +18,7 @@ public class ClientModEvents {
 
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
+        MenuScreens.register(MenuInit.FABRICATORMENU.get(), FabricatorScreen::new);
     }
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {

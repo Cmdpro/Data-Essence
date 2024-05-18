@@ -5,11 +5,11 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.List;
 
 public class ClientPlayerData {
-    private static float currentChunkInstability;
-    public static void set(float currentChunkInstability) {
-        ClientPlayerData.currentChunkInstability = currentChunkInstability;
+    private static boolean[] unlockedEssences = new boolean[] { false, false, false, false };
+    public static void set(boolean[] unlockedEssences) {
+        ClientPlayerData.unlockedEssences = unlockedEssences;
     }
-    public static float getPlayerChunkInstability() {
-        return currentChunkInstability;
+    public static boolean[] getUnlockedEssences() {
+        return unlockedEssences;
     }
 }

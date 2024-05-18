@@ -7,6 +7,7 @@
   "item.datanessence.datatablet.pagetype.crafting.fabricator.lunaressence": "%1$s Lunar Essence",
   "item.datanessence.datatablet.pagetype.crafting.fabricator.naturalessence": "%1$s Natural Essence",
   "item.datanessence.datatablet.pagetype.crafting.fabricator.exoticessence": "%1$s Exotic Essence",
+  "item.datanessence.datatablet.pagetype.crafting.fabricator.unknown": "%1$s ???",
 
   "item.datanessence.datatablet.pages.test1.name": "Cool Page 1",
   "item.datanessence.datatablet.pages.test1.page1.text": "This page is cool",

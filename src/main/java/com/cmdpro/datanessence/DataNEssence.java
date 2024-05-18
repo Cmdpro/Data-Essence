@@ -71,6 +71,7 @@ public class DataNEssence
         }
         if (event.getTabKey() == CreativeModeTabInit.ITEMS.getKey()) {
             event.accept(ItemInit.DATATABLET);
+            event.accept(ItemInit.FABRICATORITEM);
         }
         //if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
 

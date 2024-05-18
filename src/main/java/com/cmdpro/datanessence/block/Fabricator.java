@@ -33,8 +33,6 @@ public class Fabricator extends BaseEntityBlock {
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
     }
-
-
     @Override
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.ENTITYBLOCK_ANIMATED;
@@ -43,7 +41,12 @@ public class Fabricator extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new FabricatorBlockEntity(pPos, pState);
+        FabricatorBlockEntity ent = new FabricatorBlockEntity(pPos, pState);
+        ent.setEssence(1000);
+        ent.setLunarEssence(750);
+        ent.setNaturalEssence(500);
+        ent.setExoticEssence(250);
+        return ent;
     }
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {

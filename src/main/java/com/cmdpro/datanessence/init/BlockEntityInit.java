@@ -15,7 +15,7 @@ public class BlockEntityInit {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, DataNEssence.MOD_ID);
     public static final RegistryObject<BlockEntityType<FabricatorBlockEntity>> FABRICATOR =
-            register("fabricatorblockentity", () ->
+            register("fabricator", () ->
                     BlockEntityType.Builder.of(FabricatorBlockEntity::new,
                             BlockInit.FABRICATOR.get()).build(null));
 

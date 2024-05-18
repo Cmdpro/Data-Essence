@@ -32,7 +32,7 @@ public class FabricatorMenu extends AbstractContainerMenu {
             int i, j;
             for (i = 0; i < 3; i++) {
                 for (j = 0; j < 3; j++) {
-                    this.addSlot(new SlotItemHandler(handler, j + (i * 3), 30 + (j * 18), 17 + (i * 18)));
+                    this.addSlot(new SlotItemHandler(handler, j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
                 }
             }
         });

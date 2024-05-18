@@ -112,6 +112,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         tag.put("item", item.save(new CompoundTag()));
         return tag;
     }
+
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         tag.put("inventory", itemHandler.serializeNBT());
@@ -156,6 +157,10 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                         for (int i = 1; i < 10; i++) {
                             ent.itemHandler.getStackInSlot(i).shrink(1);
                         }
+                        ent.setEssence(ent.getEssence()-ent.essenceCost);
+                        ent.setLunarEssence(ent.getLunarEssence()-ent.lunarEssenceCost);
+                        ent.setNaturalEssence(ent.getNaturalEssence()-ent.naturalEssenceCost);
+                        ent.setExoticEssence(ent.getExoticEssence()-ent.exoticEssenceCost);
                         ItemStack stack = ent.recipe.assemble(ent.getCraftingInv(), pLevel.registryAccess());
                         ItemEntity entity = new ItemEntity(pLevel, (float) pPos.getX() + 0.5f, (float) pPos.getY() + 1f, (float) pPos.getZ() + 0.5f, stack);
                         pLevel.addFreshEntity(entity);
@@ -192,11 +197,13 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get();
                 pBlockEntity.essenceCost = recipe.get().getEssenceCost();
+                pBlockEntity.lunarEssenceCost = recipe.get().getNaturalEssenceCost();
                 pBlockEntity.naturalEssenceCost = recipe.get().getNaturalEssenceCost();
                 pBlockEntity.exoticEssenceCost = recipe.get().getExoticEssenceCost();
                 pBlockEntity.item = recipe.get().getResultItem(pLevel.registryAccess());
                 boolean enoughEssence = false;
                 if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost &&
+                        pBlockEntity.getLunarEssence() >= pBlockEntity.lunarEssenceCost &&
                         pBlockEntity.getNaturalEssence() >= pBlockEntity.naturalEssenceCost &&
                         pBlockEntity.getExoticEssence() >= pBlockEntity.exoticEssenceCost) {
                     enoughEssence = true;
@@ -205,6 +212,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
             } else {
                 pBlockEntity.recipe = null;
                 pBlockEntity.essenceCost = 0;
+                pBlockEntity.lunarEssenceCost = 0;
                 pBlockEntity.naturalEssenceCost = 0;
                 pBlockEntity.exoticEssenceCost = 0;
                 pBlockEntity.item = ItemStack.EMPTY;
@@ -237,7 +245,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.runology.runicworkbench");
+        return Component.empty();
     }
 
     @Nullable

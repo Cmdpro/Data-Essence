@@ -21,15 +21,22 @@ public class PlayerModData {
     public List<ResourceLocation> getUnlocked() {
         return unlocked;
     }
-
+    public boolean[] getUnlockedEssences() {
+        return unlockedEssences;
+    }
+    public void setUnlockedEssences(boolean[] value) {
+        unlockedEssences = value;
+    }
+    private boolean[] unlockedEssences = new boolean[] { true, true, true, true };
     public void updateData(ServerPlayer player) {
-        ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(0), (player));
+        ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(unlockedEssences), (player));
     }
     public void updateData(Player player) {
         updateData((ServerPlayer)player);
     }
     public void copyFrom(PlayerModData source) {
         this.unlocked = source.unlocked;
+        this.unlockedEssences = source.unlockedEssences;
     }
     public void saveNBTData(CompoundTag nbt) {
         if (!unlocked.isEmpty()) {
@@ -41,6 +48,10 @@ public class PlayerModData {
             }
             nbt.put("unlocked", tag);
         }
+        nbt.putBoolean("essenceUnlocked", unlockedEssences[0]);
+        nbt.putBoolean("lunarEssenceUnlocked", unlockedEssences[1]);
+        nbt.putBoolean("naturalEssenceUnlocked", unlockedEssences[2]);
+        nbt.putBoolean("exoticEssenceUnlocked", unlockedEssences[3]);
     }
     public void loadNBTData(CompoundTag nbt) {
         unlocked.clear();
@@ -50,5 +61,6 @@ public class PlayerModData {
                 list.add(ResourceLocation.of(((CompoundTag) o).getString("value"), ':'));
             }
         }
+        unlockedEssences = new boolean[] { nbt.getBoolean("essenceUnlocked"), nbt.getBoolean("lunarEssenceUnlocked"), nbt.getBoolean("naturalEssenceUnlocked"), nbt.getBoolean("exoticEssenceUnlocked") };
     }
 }

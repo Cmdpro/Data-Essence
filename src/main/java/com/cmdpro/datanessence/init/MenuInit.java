@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
 public class MenuInit {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, DataNEssence.MOD_ID);
 
-    public static final RegistryObject<MenuType<FabricatorMenu>> FABRICATORMENU = register(FabricatorMenu::new, "fabricatormenu");
+    public static final RegistryObject<MenuType<FabricatorMenu>> FABRICATORMENU = register(FabricatorMenu::new, "fabricator");
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> register(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }
