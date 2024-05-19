@@ -14,6 +14,7 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.joml.Math;
 
 import java.util.Map;
 import java.util.Optional;
@@ -36,6 +37,34 @@ public class DataNEssenceUtil {
         for (Vec3 point = point1; length < distance; point = point.add(vector)) {
             ((ServerLevel)level).sendParticles(particle, point.x, point.y, point.z, 1, 0, 0, 0, 0);
             length += space;
+        }
+    }
+    public static void transferEssence(EssenceContainer from, EssenceContainer to, float amount) {
+        if (from.getMaxEssence() > 0 && to.getMaxEssence() > 0) {
+            float trueAmount = Math.clamp(Math.min(from.getEssence(), amount), 0, to.getMaxEssence()-to.getEssence());
+            from.setEssence(from.getEssence()-trueAmount);
+            to.setEssence(to.getEssence()+trueAmount);
+        }
+    }
+    public static void transferLunarEssence(EssenceContainer from, EssenceContainer to, float amount) {
+        if (from.getMaxLunarEssence() > 0 && to.getMaxLunarEssence() > 0) {
+            float trueAmount = Math.clamp(Math.min(from.getLunarEssence(), amount), 0, to.getMaxLunarEssence()-to.getLunarEssence());
+            from.setLunarEssence(from.getLunarEssence()-trueAmount);
+            to.setLunarEssence(to.getLunarEssence()+trueAmount);
+        }
+    }
+    public static void transferNaturalEssence(EssenceContainer from, EssenceContainer to, float amount) {
+        if (from.getMaxNaturalEssence() > 0 && to.getMaxNaturalEssence() > 0) {
+            float trueAmount = Math.clamp(Math.min(from.getNaturalEssence(), amount), 0, to.getMaxNaturalEssence()-to.getNaturalEssence());
+            from.setNaturalEssence(from.getNaturalEssence()-trueAmount);
+            to.setNaturalEssence(to.getNaturalEssence()+trueAmount);
+        }
+    }
+    public static void transferExoticEssence(EssenceContainer from, EssenceContainer to, float amount) {
+        if (from.getMaxExoticEssence() > 0 && to.getMaxExoticEssence() > 0) {
+            float trueAmount = Math.clamp(Math.min(from.getExoticEssence(), amount), 0, to.getMaxExoticEssence()-to.getExoticEssence());
+            from.setExoticEssence(from.getExoticEssence()-trueAmount);
+            to.setExoticEssence(to.getExoticEssence()+trueAmount);
         }
     }
 }

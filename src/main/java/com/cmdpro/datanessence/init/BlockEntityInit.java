@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.init;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.block.entity.EssencePointBlockEntity;
 import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -18,6 +19,10 @@ public class BlockEntityInit {
             register("fabricator", () ->
                     BlockEntityType.Builder.of(FabricatorBlockEntity::new,
                             BlockInit.FABRICATOR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<EssencePointBlockEntity>> ESSENCEPOINT =
+            register("essencepoint", () ->
+                    BlockEntityType.Builder.of(EssencePointBlockEntity::new,
+                            BlockInit.ESSENCEPOINT.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> RegistryObject<T> register(final String name, final Supplier<T> blockentity) {

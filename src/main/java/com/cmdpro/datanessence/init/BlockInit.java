@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.init;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.block.EssencePoint;
 import com.cmdpro.datanessence.block.Fabricator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
@@ -25,6 +26,8 @@ public class BlockInit {
     public static final DeferredRegister<Item> ITEMS = ItemInit.ITEMS;
     public static final RegistryObject<Block> FABRICATOR = registerBlock("fabricator",
             () -> new Fabricator(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
+    public static final RegistryObject<Block> ESSENCEPOINT = registerBlock("essencepoint",
+            () -> new EssencePoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
     private static <T extends Block> RegistryObject<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {
         return BLOCKS.register(name, block);

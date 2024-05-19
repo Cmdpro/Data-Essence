@@ -22,11 +22,17 @@ public class EssenceContainer extends BlockEntity {
     public void setEssence(float amount) {
         essence = amount;
     }
+    public float getMaxEssence() {
+        return 0;
+    }
     public float getLunarEssence() {
         return lunarEssence;
     }
     public void setLunarEssence(float amount) {
         lunarEssence = amount;
+    }
+    public float getMaxLunarEssence() {
+        return 0;
     }
     public float getNaturalEssence() {
         return naturalEssence;
@@ -34,10 +40,16 @@ public class EssenceContainer extends BlockEntity {
     public void setNaturalEssence(float amount) {
         naturalEssence = amount;
     }
+    public float getMaxNaturalEssence() {
+        return 0;
+    }
     public float getExoticEssence() {
         return exoticEssence;
     }
     public void setExoticEssence(float amount) {
         exoticEssence = amount;
+    }
+    public float getMaxExoticEssence() {
+        return 0;
     }
 }
