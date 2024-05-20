@@ -1,7 +1,10 @@
 package com.cmdpro.datanessence.moddata;
 
+import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.block.entity.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerDataSyncS2CPacket;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -18,6 +21,13 @@ public class PlayerModData {
         unlocked = new ArrayList<>();
     }
     private List<ResourceLocation> unlocked;
+    private BaseEssencePointBlockEntity linkFrom;
+    public BaseEssencePointBlockEntity getLinkFrom() {
+        return linkFrom;
+    }
+    public void setLinkFrom(BaseEssencePointBlockEntity value) {
+        linkFrom = value;
+    }
     public List<ResourceLocation> getUnlocked() {
         return unlocked;
     }
@@ -29,7 +39,7 @@ public class PlayerModData {
     }
     private boolean[] unlockedEssences = new boolean[] { true, true, true, true };
     public void updateData(ServerPlayer player) {
-        ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(unlockedEssences), (player));
+        ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(unlockedEssences, linkFrom.getBlockPos()), (player));
     }
     public void updateData(Player player) {
         updateData((ServerPlayer)player);

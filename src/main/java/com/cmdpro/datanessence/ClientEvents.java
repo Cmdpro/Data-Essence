@@ -2,9 +2,11 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,6 +18,9 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import software.bernie.geckolib.util.RenderUtils;
+import team.lodestar.lodestone.helpers.RenderHelper;
+import team.lodestar.lodestone.registry.client.LodestoneRenderTypeRegistry;
 import team.lodestar.lodestone.systems.rendering.VFXBuilders;
 
 import java.awt.*;
@@ -23,6 +28,15 @@ import java.awt.*;
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID)
 public class ClientEvents {
     public static SimpleSoundInstance music;
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onRenderLevelStage(RenderLevelStageEvent event) {
+        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
+            VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld();
+            builder.setColor(Color.MAGENTA)
+                    .setRenderType(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyAndCache(new ResourceLocation(DataNEssence.MOD_ID, "textures/vfx/beam.png")))
+                    .renderBeam(event.getPoseStack().last().pose(), ClientPlayerData.getLinkPos().getCenter(), Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick()), 0.025f);
+        }
+    }
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event)
     {/*

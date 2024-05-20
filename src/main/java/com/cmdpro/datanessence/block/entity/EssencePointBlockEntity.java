@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.entity;
 
+import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
@@ -33,11 +34,16 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity impleme
     }
     @Override
     public void transfer(EssenceContainer other) {
+        DataNEssenceUtil.transferEssence(this, other, 10);
+    }
 
+    @Override
+    public float getMaxEssence() {
+        return 10;
     }
 
     @Override
     public void take(EssenceContainer other) {
-
+        DataNEssenceUtil.transferEssence(other, this, 10);
     }
 }

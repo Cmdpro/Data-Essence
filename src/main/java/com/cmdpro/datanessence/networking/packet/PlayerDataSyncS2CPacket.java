@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -13,9 +14,11 @@ import java.util.function.Supplier;
 
 public class PlayerDataSyncS2CPacket {
     private final boolean[] unlockedEssences;
+    private final BlockPos linkPos;
 
-    public PlayerDataSyncS2CPacket(boolean[] unlockedEssences) {
+    public PlayerDataSyncS2CPacket(boolean[] unlockedEssences, BlockPos linkPos) {
         this.unlockedEssences = unlockedEssences;
+        this.linkPos = linkPos;
     }
 
     public PlayerDataSyncS2CPacket(FriendlyByteBuf buf) {
@@ -24,6 +27,7 @@ public class PlayerDataSyncS2CPacket {
         boolean natural = buf.readBoolean();
         boolean exotic = buf.readBoolean();
         unlockedEssences = new boolean[]{essence, lunar, natural, exotic};
+        linkPos = buf.readBlockPos();
     }
 
     public void toBytes(FriendlyByteBuf buf) {
@@ -47,6 +51,7 @@ public class PlayerDataSyncS2CPacket {
         } else {
             buf.writeBoolean(false);
         }
+        buf.writeBlockPos(linkPos);
     }
 
     public void handle(Supplier<NetworkEvent.Context> supplier) {
@@ -59,7 +64,7 @@ public class PlayerDataSyncS2CPacket {
 
     public static class ClientPacketHandler {
         public static void handlePacket(PlayerDataSyncS2CPacket msg, Supplier<NetworkEvent.Context> supplier) {
-            ClientPlayerData.set(msg.unlockedEssences);
+            ClientPlayerData.set(msg.unlockedEssences, msg.linkPos);
         }
     }
 }
