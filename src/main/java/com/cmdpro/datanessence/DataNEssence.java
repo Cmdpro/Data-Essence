@@ -71,12 +71,12 @@ public class DataNEssence
         }
         if (event.getTabKey() == CreativeModeTabInit.ITEMS.getKey()) {
             event.accept(ItemInit.DATATABLET);
+            event.accept(ItemInit.ESSENCEWIRE);
+        }
+        if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
             event.accept(ItemInit.FABRICATORITEM);
             event.accept(ItemInit.ESSENCEPOINTITEM);
         }
-        //if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
-
-        //}
     }
     private void setup(final FMLCommonSetupEvent event)
     {

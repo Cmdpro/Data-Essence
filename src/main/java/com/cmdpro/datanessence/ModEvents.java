@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.datanessence.block.BaseEssencePoint;
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.networking.ModMessages;
@@ -15,6 +16,7 @@ import net.minecraftforge.event.*;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = DataNEssence.MOD_ID)
@@ -25,6 +27,24 @@ public class ModEvents {
             if (!event.getObject().getCapability(PlayerModDataProvider.PLAYER_MODDATA).isPresent()) {
                 event.addCapability(new ResourceLocation(DataNEssence.MOD_ID, "properties"), new PlayerModDataProvider());
             }
+        }
+    }
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.side == LogicalSide.SERVER) {
+            event.player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
+                if (data.getLinkFrom() != null) {
+                    if (data.getLinkFrom().getBlockPos().getCenter().distanceTo(event.player.getBoundingBox().getCenter()) > 20) {
+                        data.setLinkFrom(null);
+                        data.updateData(event.player);
+                    } else if (data.getLinkFrom().getBlockState().getBlock() instanceof BaseEssencePoint block) {
+                        if (!event.player.isHolding(block.getRequiredWire())) {
+                            data.setLinkFrom(null);
+                            data.updateData(event.player);
+                        }
+                    }
+                }
+            });
         }
     }
     @SubscribeEvent

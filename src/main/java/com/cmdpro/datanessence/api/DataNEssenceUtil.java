@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
@@ -38,6 +39,11 @@ public class DataNEssenceUtil {
             ((ServerLevel)level).sendParticles(particle, point.x, point.y, point.z, 1, 0, 0, 0, 0);
             length += space;
         }
+    }
+    public static void updatePlayerData(Player player) {
+        player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent(data -> {
+            data.updateData((ServerPlayer)player);
+        });
     }
     public static void transferEssence(EssenceContainer from, EssenceContainer to, float amount) {
         if (from.getMaxEssence() > 0 && to.getMaxEssence() > 0) {

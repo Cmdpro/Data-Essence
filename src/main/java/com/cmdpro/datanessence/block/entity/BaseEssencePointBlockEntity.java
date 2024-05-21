@@ -47,9 +47,7 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
             }
             if (pBlockEntity.link != null) {
                 if (pLevel.getBlockEntity(pBlockEntity.link) instanceof EssenceContainer ent) {
-                    if (ent.getMaxEssence() > 0 && pBlockEntity.getMaxEssence() > 0) {
-                        pBlockEntity.transfer(ent);
-                    }
+                    pBlockEntity.transfer(ent);
                 } else {
                     pBlockEntity.link = null;
                     pBlockEntity.updateBlock();

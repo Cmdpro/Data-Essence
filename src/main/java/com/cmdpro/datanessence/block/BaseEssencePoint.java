@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block;
 
+import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.block.entity.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
@@ -36,12 +37,12 @@ import org.jetbrains.annotations.Nullable;
 public abstract class BaseEssencePoint extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<AttachFace> FACE = BlockStateProperties.ATTACH_FACE;
-    protected static final VoxelShape NORTH_AABB = Block.box(0.0D, 0.0D, 12.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape SOUTH_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 4.0D);
-    protected static final VoxelShape WEST_AABB = Block.box(12.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-    protected static final VoxelShape EAST_AABB = Block.box(0.0D, 0.0D, 0.0D, 4.0D, 16.0D, 16.0D);
-    protected static final VoxelShape UP_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 4.0D, 16.0D);
-    protected static final VoxelShape DOWN_AABB = Block.box(0.0D, 12.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    protected static final VoxelShape NORTH_AABB = Block.box(4.0D, 4.0D, 12.0D, 12.0D, 12.0D, 16.0D);
+    protected static final VoxelShape SOUTH_AABB = Block.box(4.0D, 4.0D, 0.0D, 12.0D, 12.0D, 4.0D);
+    protected static final VoxelShape WEST_AABB = Block.box(12.0D, 4.0D, 4.0D, 16.0D, 12.0D, 12.0D);
+    protected static final VoxelShape EAST_AABB = Block.box(0.0D, 4.0D, 4.0D, 4.0D, 12.0D, 12.0D);
+    protected static final VoxelShape UP_AABB = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 4.0D, 12.0D);
+    protected static final VoxelShape DOWN_AABB = Block.box(4.0D, 12.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
     public BaseEssencePoint(Properties pProperties) {
         super(pProperties);
@@ -100,6 +101,7 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
                         if (data.getLinkFrom() == null) {
                             if (ent.link == null) {
                                 data.setLinkFrom(ent);
+                                DataNEssenceUtil.updatePlayerData(pPlayer);
                             }
                         } else {
                             if (data.getLinkFrom().getBlockState().getBlock() instanceof BaseEssencePoint other) {
@@ -107,6 +109,7 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
                                     data.getLinkFrom().link = pPos;
                                     data.getLinkFrom().updateBlock();
                                     data.setLinkFrom(null);
+                                    DataNEssenceUtil.updatePlayerData(pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
                                 }
                             }

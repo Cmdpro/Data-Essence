@@ -61,6 +61,24 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
             return super.isItemValid(slot, stack);
         }
     };
+
+    @Override
+    public float getMaxEssence() {
+        return 1000;
+    }
+    @Override
+    public float getMaxLunarEssence() {
+        return 1000;
+    }
+    @Override
+    public float getMaxNaturalEssence() {
+        return 1000;
+    }
+    @Override
+    public float getMaxExoticEssence() {
+        return 1000;
+    }
+
     public void drops() {
         SimpleContainer inventory = getInv();
 

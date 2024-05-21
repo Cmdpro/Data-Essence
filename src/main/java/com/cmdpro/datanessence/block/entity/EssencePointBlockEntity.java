@@ -4,7 +4,9 @@ import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
@@ -35,6 +37,16 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity impleme
     @Override
     public void transfer(EssenceContainer other) {
         DataNEssenceUtil.transferEssence(this, other, 10);
+    }
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag) {
+        super.saveAdditional(tag);
+        tag.putFloat("essence", getEssence());
+    }
+    @Override
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
+        setEssence(nbt.getFloat("essence"));
     }
 
     @Override
