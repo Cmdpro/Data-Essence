@@ -18,7 +18,7 @@ public class ItemInit {
     public static final RegistryObject<Item> ESSENCEWIRE = register("essencewire", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> DATATABLET = register("datatablet", () -> new DataTablet(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FABRICATORITEM = register("fabricator", () -> new FabricatorItem(BlockInit.FABRICATOR.get(), new Item.Properties()));
-    public static final RegistryObject<Item> ESSENCEPOINTITEM = register("essencepoint", () -> new FabricatorItem(BlockInit.ESSENCEPOINT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ESSENCEPOINTITEM = register("essencepoint", () -> new EssencePointItem(BlockInit.ESSENCEPOINT.get(), new Item.Properties()));
     private static <T extends Item> RegistryObject<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);
     }

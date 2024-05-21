@@ -50,6 +50,9 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
                     if (ent.getMaxEssence() > 0 && pBlockEntity.getMaxEssence() > 0) {
                         pBlockEntity.transfer(ent);
                     }
+                } else {
+                    pBlockEntity.link = null;
+                    pBlockEntity.updateBlock();
                 }
             }
         }
@@ -74,6 +77,8 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
         CompoundTag tag = pkt.getTag();
         if (tag.getBoolean("hasLink")) {
             link = new BlockPos(tag.getInt("linkX"), tag.getInt("linkY"), tag.getInt("linkZ"));
+        } else {
+            link = null;
         }
     }
     @Override

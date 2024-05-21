@@ -39,7 +39,11 @@ public class PlayerModData {
     }
     private boolean[] unlockedEssences = new boolean[] { true, true, true, true };
     public void updateData(ServerPlayer player) {
-        ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(unlockedEssences, linkFrom.getBlockPos()), (player));
+        BlockPos linkFrom = null;
+        if (this.linkFrom != null) {
+            linkFrom = this.linkFrom.getBlockPos();
+        }
+        ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(unlockedEssences, linkFrom), (player));
     }
     public void updateData(Player player) {
         updateData((ServerPlayer)player);

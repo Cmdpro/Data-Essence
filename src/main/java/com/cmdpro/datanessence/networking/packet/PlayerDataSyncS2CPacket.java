@@ -27,7 +27,12 @@ public class PlayerDataSyncS2CPacket {
         boolean natural = buf.readBoolean();
         boolean exotic = buf.readBoolean();
         unlockedEssences = new boolean[]{essence, lunar, natural, exotic};
-        linkPos = buf.readBlockPos();
+        boolean hasLinkPos = buf.readBoolean();
+        if (hasLinkPos) {
+            linkPos = buf.readBlockPos();
+        } else {
+            linkPos = null;
+        }
     }
 
     public void toBytes(FriendlyByteBuf buf) {
@@ -51,7 +56,10 @@ public class PlayerDataSyncS2CPacket {
         } else {
             buf.writeBoolean(false);
         }
-        buf.writeBlockPos(linkPos);
+        buf.writeBoolean(linkPos != null);
+        if (linkPos != null) {
+            buf.writeBlockPos(linkPos);
+        }
     }
 
     public void handle(Supplier<NetworkEvent.Context> supplier) {

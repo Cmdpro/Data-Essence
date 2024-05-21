@@ -19,9 +19,9 @@ public class CreativeModeTabInit {
     public static RegistryObject<CreativeModeTab> ITEMS = register("datanessenceitems", () ->
             CreativeModeTab.builder().icon(() -> new ItemStack(ItemInit.DATATABLET.get()))
                     .title(Component.translatable("creativemodetab.datanessenceitems")).build());
-    //public static RegistryObject<CreativeModeTab> BLOCKS = CREATIVE_MODE_TABS.register("datanessenceblocks", () ->
-    //        CreativeModeTab.builder().icon(() -> new ItemStack(ItemInit.RUNICWORKBENCHITEM.get()))
-    //                .title(Component.translatable("creativemodetab.datanessenceblocks")).build());
+    public static RegistryObject<CreativeModeTab> BLOCKS = CREATIVE_MODE_TABS.register("datanessenceblocks", () ->
+            CreativeModeTab.builder().icon(() -> new ItemStack(ItemInit.FABRICATORITEM.get()))
+                    .title(Component.translatable("creativemodetab.datanessenceblocks")).build());
 
     private static <T extends CreativeModeTab> RegistryObject<T> register(final String name, final Supplier<T> tab) {
         return CREATIVE_MODE_TABS.register(name, tab);

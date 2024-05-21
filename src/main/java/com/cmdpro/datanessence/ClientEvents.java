@@ -31,10 +31,12 @@ public class ClientEvents {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
-            VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld();
-            builder.setColor(Color.MAGENTA)
-                    .setRenderType(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyAndCache(new ResourceLocation(DataNEssence.MOD_ID, "textures/vfx/beam.png")))
-                    .renderBeam(event.getPoseStack().last().pose(), ClientPlayerData.getLinkPos().getCenter(), Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick()), 0.025f);
+            if (ClientPlayerData.getLinkPos() != null) {
+                VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld();
+                builder.setColor(Color.MAGENTA)
+                        .setRenderType(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyAndCache(new ResourceLocation(DataNEssence.MOD_ID, "textures/vfx/beam.png")))
+                        .renderBeam(event.getPoseStack().last().pose(), ClientPlayerData.getLinkPos().getCenter(), Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick()), 0.025f);
+            }
         }
     }
     @SubscribeEvent

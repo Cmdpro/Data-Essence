@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.init.*;
+import com.cmdpro.datanessence.renderers.EssencePointRenderer;
 import com.cmdpro.datanessence.renderers.FabricatorRenderer;
 import com.cmdpro.datanessence.screen.FabricatorScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -16,6 +17,7 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityInit.FABRICATOR.get(), FabricatorRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.ESSENCEPOINT.get(), EssencePointRenderer::new);
     }
 
     @SubscribeEvent

@@ -41,6 +41,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(ItemInit.DATATABLET);
         evenSimplerBlockItem(BlockInit.FABRICATOR);
+        evenSimplerBlockItem(BlockInit.ESSENCEPOINT);
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),

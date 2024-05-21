@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class ClientDataNEssenceUtil {
     public static void drawSphere(VFXBuilders.WorldVFXBuilder builder, PoseStack stack, Color color, float alpha, float radius, int longs, int lats) {
-        builder.setPosColorTexLightmapDefaultFormat().setColor(color).setAlpha(alpha).renderSphere(RenderHandler.DELAYED_RENDER.getBuffer(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyWithModifierAndCache(new ResourceLocation("textures/misc/white.png"), b -> b.replaceVertexFormat(VertexFormat.Mode.TRIANGLES).setCullState(LodestoneRenderTypeRegistry.NO_CULL))), stack, radius, longs, lats);
+        builder.setColor(color).setAlpha(alpha).setRenderType(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyWithModifierAndCache(new ResourceLocation("textures/misc/white.png"), b -> b.replaceVertexFormat(VertexFormat.Mode.TRIANGLES).setCullState(LodestoneRenderTypeRegistry.NO_CULL))).renderSphere(stack, radius, longs, lats);
     }
     public static void drawLine(ParticleOptions particle, Vec3 point1, Vec3 point2, Level level, double space) {
         double distance = point1.distanceTo(point2);

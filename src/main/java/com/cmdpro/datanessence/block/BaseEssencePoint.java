@@ -9,6 +9,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -95,19 +97,27 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
             if (entity instanceof BaseEssencePointBlockEntity ent) {
                 if (pPlayer.isHolding(getRequiredWire())) {
                     pPlayer.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
-                        if (data.getLinkFrom().getBlockState().getBlock() instanceof BaseEssencePoint other) {
-                            if (other.getRequiredWire() == getRequiredWire()) {
-                                if (data.getLinkFrom() == null) {
-                                    if (ent.link == null) {
-                                        data.setLinkFrom(ent);
-                                    }
-                                } else {
+                        if (data.getLinkFrom() == null) {
+                            if (ent.link == null) {
+                                data.setLinkFrom(ent);
+                            }
+                        } else {
+                            if (data.getLinkFrom().getBlockState().getBlock() instanceof BaseEssencePoint other) {
+                                if (other.getRequiredWire() == getRequiredWire() && ent != data.getLinkFrom()) {
                                     data.getLinkFrom().link = pPos;
+                                    data.getLinkFrom().updateBlock();
                                     data.setLinkFrom(null);
+                                    pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
                                 }
                             }
                         }
                     });
+                } else if (pPlayer.isShiftKeyDown()) {
+                    if (ent.link != null) {
+                        ent.link = null;
+                        ent.updateBlock();
+                        pPlayer.addItem(new ItemStack(getRequiredWire()));
+                    }
                 }
             }
         }
