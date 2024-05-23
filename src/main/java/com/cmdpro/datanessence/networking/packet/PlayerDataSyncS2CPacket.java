@@ -36,10 +36,10 @@ public class PlayerDataSyncS2CPacket {
         } else {
             linkPos = null;
         }
-        float r = buf.readFloat();
-        float g = buf.readFloat();
-        float b = buf.readFloat();
-        float a = buf.readFloat();
+        int r = buf.readInt();
+        int g = buf.readInt();
+        int b = buf.readInt();
+        int a = buf.readInt();
         linkColor = new Color(r, g, b, a);
     }
 
@@ -68,10 +68,10 @@ public class PlayerDataSyncS2CPacket {
         if (linkPos != null) {
             buf.writeBlockPos(linkPos);
         }
-        buf.writeFloat((float)linkColor.getRed()/255f);
-        buf.writeFloat((float)linkColor.getBlue()/255f);
-        buf.writeFloat((float)linkColor.getGreen()/255f);
-        buf.writeFloat((float)linkColor.getAlpha()/255f);
+        buf.writeInt(linkColor.getRed());
+        buf.writeInt(linkColor.getGreen());
+        buf.writeInt(linkColor.getBlue());
+        buf.writeInt(linkColor.getAlpha());
     }
 
     public void handle(Supplier<NetworkEvent.Context> supplier) {

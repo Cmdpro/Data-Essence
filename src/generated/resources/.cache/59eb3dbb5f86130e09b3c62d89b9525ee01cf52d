@@ -1,1 +1,11 @@
-// 1.20.1	2024-04-13T17:05:18.7894993	Loot Tables
+// 1.20.1	2024-05-23T10:09:46.5450985	Loot Tables
+008e25d2836ccb0421103e4a4048ad3d873607d3 data/datanessence/loot_tables/blocks/essencebuffer.json
+2ce77d56ce3183c1dc5fa8c69f308cb390e3eabe data/datanessence/loot_tables/blocks/essencepoint.json
+342a011c725aaf41d84643f0b638e95e38c9784b data/datanessence/loot_tables/blocks/exoticessencepoint.json
+cc264d7f4e88e760ab31df3690efb2e3342c0a44 data/datanessence/loot_tables/blocks/fabricator.json
+d009dce8d2936057fcc922c920463cf1b1e71f7e data/datanessence/loot_tables/blocks/fluidbuffer.json
+ca327a5f3dce75bfac84ac541020be70c45291d4 data/datanessence/loot_tables/blocks/fluidpoint.json
+f9b4bfc90c87c059c61e1f17d1387509248a5b28 data/datanessence/loot_tables/blocks/itembuffer.json
+dbfdc960b3781297552c312d5d7e13e430c49e5e data/datanessence/loot_tables/blocks/itempoint.json
+4f33c260397331772d3c019c4409af7d28170a5f data/datanessence/loot_tables/blocks/lunaressencepoint.json
+013278ab51a7ac0827d60a13583de0042a7461af data/datanessence/loot_tables/blocks/naturalessencepoint.json
