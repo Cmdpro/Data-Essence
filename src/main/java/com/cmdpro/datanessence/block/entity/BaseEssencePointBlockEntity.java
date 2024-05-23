@@ -3,11 +3,14 @@ package com.cmdpro.datanessence.block.entity;
 import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.block.BaseEssencePoint;
 import com.cmdpro.datanessence.init.BlockEntityInit;
+import com.cmdpro.datanessence.init.ItemInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,6 +54,10 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
                 } else {
                     pBlockEntity.link = null;
                     pBlockEntity.updateBlock();
+                    if (pState.getBlock() instanceof BaseEssencePoint block) {
+                        ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(block.getRequiredWire()));
+                        pLevel.addFreshEntity(item);
+                    }
                 }
             }
         }

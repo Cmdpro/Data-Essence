@@ -3,11 +3,13 @@ package com.cmdpro.datanessence.block;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.block.entity.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.init.BlockEntityInit;
+import com.cmdpro.datanessence.init.ItemInit;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -32,6 +34,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.minecraftforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseEssencePoint extends BaseEntityBlock {
@@ -90,6 +93,17 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
         return null;
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity ent) {
+            if (ent.link != null) {
+                ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
+                pLevel.addFreshEntity(item);
+            }
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
     public abstract Item getRequiredWire();
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
@@ -105,7 +119,7 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
                             }
                         } else {
                             if (data.getLinkFrom().getBlockState().getBlock() instanceof BaseEssencePoint other) {
-                                if (other.getRequiredWire() == getRequiredWire() && ent != data.getLinkFrom()) {
+                                if (other.getRequiredWire() == getRequiredWire() && ent != data.getLinkFrom() && (ent.link == null || !ent.link.equals(data.getLinkFrom().getBlockPos()))) {
                                     data.getLinkFrom().link = pPos;
                                     data.getLinkFrom().updateBlock();
                                     data.setLinkFrom(null);
@@ -119,7 +133,8 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
                     if (ent.link != null) {
                         ent.link = null;
                         ent.updateBlock();
-                        pPlayer.addItem(new ItemStack(getRequiredWire()));
+                        ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
+                        pLevel.addFreshEntity(item);
                     }
                 }
             }

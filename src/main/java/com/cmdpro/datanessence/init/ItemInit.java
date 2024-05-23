@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DataNEssence.MOD_ID);
-    public static final RegistryObject<Item> ESSENCEWIRE = register("essencewire", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> ESSENCEWIRE = register("essencewire", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> DATATABLET = register("datatablet", () -> new DataTablet(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> FABRICATORITEM = register("fabricator", () -> new FabricatorItem(BlockInit.FABRICATOR.get(), new Item.Properties()));
     public static final RegistryObject<Item> ESSENCEPOINTITEM = register("essencepoint", () -> new EssencePointItem(BlockInit.ESSENCEPOINT.get(), new Item.Properties()));
