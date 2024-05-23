@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.init.BlockInit;
 import com.cmdpro.datanessence.init.TagInit;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -20,6 +21,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
+                .add(BlockInit.ESSENCEBUFFER.get())
+                .add(BlockInit.FLUIDBUFFER.get())
+                .add(BlockInit.ESSENCEPOINT.get())
+                .add(BlockInit.FABRICATOR.get())
+                .add(BlockInit.ITEMBUFFER.get());
     }
 }

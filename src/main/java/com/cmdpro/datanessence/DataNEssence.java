@@ -76,6 +76,9 @@ public class DataNEssence
         if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
             event.accept(ItemInit.FABRICATORITEM);
             event.accept(ItemInit.ESSENCEPOINTITEM);
+            event.accept(BlockInit.ESSENCEBUFFER);
+            event.accept(BlockInit.ITEMBUFFER);
+            event.accept(BlockInit.FLUIDBUFFER);
         }
     }
     private void setup(final FMLCommonSetupEvent event)

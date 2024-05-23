@@ -1,5 +1,8 @@
 package com.cmdpro.datanessence.api;
 
+import com.cmdpro.datanessence.block.entity.EssenceBufferBlockEntity;
+import com.cmdpro.datanessence.block.entity.FluidBufferBlockEntity;
+import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.screen.datatablet.Page;
@@ -9,11 +12,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.joml.Math;
 
@@ -30,6 +40,78 @@ public class DataNEssenceUtil {
             return player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get().getUnlocked().contains(ResourceLocation.tryParse(entry));
         }
         return false;
+    }
+    public static void getEssenceFromBuffersBelow(EssenceContainer container) {
+        for (int i = 1; i <= 5; i++) {
+            BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
+            if (ent instanceof EssenceBufferBlockEntity buffer) {
+                transferEssence(buffer, container, buffer.getMaxEssence());
+                transferLunarEssence(buffer, container, buffer.getMaxLunarEssence());
+                transferNaturalEssence(buffer, container, buffer.getMaxNaturalEssence());
+                transferExoticEssence(buffer, container, buffer.getMaxExoticEssence());
+            } else if (!(ent instanceof ItemBufferBlockEntity || ent instanceof FluidBufferBlockEntity)) {
+                break;
+            }
+        }
+    }
+    public static void getItemsFromBuffersBelow(BlockEntity container) {
+        for (int i = 1; i <= 5; i++) {
+            BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
+            if (ent instanceof ItemBufferBlockEntity buffer) {
+                container.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((resolved) -> {
+                    buffer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((resolved2) -> {
+                        boolean movedAnything = false;
+                        for (int o = 0; o < resolved2.getSlots(); o++) {
+                            ItemStack copy = resolved2.getStackInSlot(o).copy();
+                            if (!copy.isEmpty()) {
+                                copy.setCount(Math.clamp(0, 16, copy.getCount()));
+                                ItemStack copy2 = copy.copy();
+                                int p = 0;
+                                while (p < resolved.getSlots()) {
+                                    ItemStack copyCopy = copy.copy();
+                                    int remove = resolved.insertItem(p, copyCopy, false).getCount();
+                                    if (remove < copyCopy.getCount()) {
+                                        movedAnything = true;
+                                    }
+                                    copy.setCount(remove);
+                                    if (remove <= 0) {
+                                        break;
+                                    }
+                                    p++;
+                                }
+                                if (movedAnything) {
+                                    resolved2.extractItem(o, copy2.getCount()-copy.getCount(), false);
+                                    break;
+                                }
+                            }
+                        }
+                    });
+                });
+            } else if (!(ent instanceof EssenceBufferBlockEntity || ent instanceof FluidBufferBlockEntity)) {
+                break;
+            }
+        }
+    }
+    public static void getFluidsFromBuffersBelow(BlockEntity container) {
+        for (int i = 1; i <= 5; i++) {
+            BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
+            if (ent instanceof FluidBufferBlockEntity buffer) {
+                container.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved) -> {
+                    buffer.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved2) -> {
+                        for (int o = 0; o < resolved2.getTanks(); o++) {
+                            FluidStack copy = resolved2.getFluidInTank(o).copy();
+                            if (!copy.isEmpty()) {
+                                copy.setAmount(Math.clamp(0, 4000, copy.getAmount()));
+                                int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
+                                resolved2.getFluidInTank(o).shrink(filled);
+                            }
+                        }
+                    });
+                });
+            } else if (!(ent instanceof EssenceBufferBlockEntity || ent instanceof ItemBufferBlockEntity)) {
+                break;
+            }
+        }
     }
     public static void drawLine(ParticleOptions particle, Vec3 point1, Vec3 point2, Level level, double space) {
         double distance = point1.distanceTo(point2);

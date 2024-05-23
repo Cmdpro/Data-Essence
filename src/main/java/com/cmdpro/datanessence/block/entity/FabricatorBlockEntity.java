@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.entity;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.init.BlockEntityInit;
@@ -211,6 +212,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     public float exoticEssenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
+            DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
             Optional<IFabricationRecipe> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeInit.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get();

@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.init.BlockInit;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -19,7 +20,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-
+        blockWithItem(BlockInit.ESSENCEBUFFER);
+        blockWithItem(BlockInit.ITEMBUFFER);
+        blockWithItem(BlockInit.FLUIDBUFFER);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

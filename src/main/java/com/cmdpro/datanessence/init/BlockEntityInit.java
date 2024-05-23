@@ -1,8 +1,7 @@
 package com.cmdpro.datanessence.init;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.entity.EssencePointBlockEntity;
-import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
+import com.cmdpro.datanessence.block.entity.*;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -23,6 +22,18 @@ public class BlockEntityInit {
             register("essencepoint", () ->
                     BlockEntityType.Builder.of(EssencePointBlockEntity::new,
                             BlockInit.ESSENCEPOINT.get()).build(null));
+    public static final RegistryObject<BlockEntityType<EssenceBufferBlockEntity>> ESSENCEBUFFER =
+            register("essencebuffer", () ->
+                    BlockEntityType.Builder.of(EssenceBufferBlockEntity::new,
+                            BlockInit.ESSENCEBUFFER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ItemBufferBlockEntity>> ITEMBUFFER =
+            register("itembuffer", () ->
+                    BlockEntityType.Builder.of(ItemBufferBlockEntity::new,
+                            BlockInit.ITEMBUFFER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FluidBufferBlockEntity>> FLUIDBUFFER =
+            register("fluidbuffer", () ->
+                    BlockEntityType.Builder.of(FluidBufferBlockEntity::new,
+                            BlockInit.FLUIDBUFFER.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> RegistryObject<T> register(final String name, final Supplier<T> blockentity) {
