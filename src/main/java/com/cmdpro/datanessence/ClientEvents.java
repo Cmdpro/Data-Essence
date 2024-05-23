@@ -37,7 +37,7 @@ public class ClientEvents {
                 Vec3 pos1 = ClientPlayerData.getLinkPos().getCenter();
                 Vec3 pos2 = Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick());
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                builder.setColor(Color.MAGENTA)
+                builder.setColor(ClientPlayerData.getLinkColor())
                         .setRenderType(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyAndCache(new ResourceLocation(DataNEssence.MOD_ID, "textures/vfx/beam.png")))
                         .renderBeam(event.getPoseStack().last().pose(), pos1, pos2, 0.025f);
                 event.getPoseStack().translate(pos.x, pos.y, pos.z);

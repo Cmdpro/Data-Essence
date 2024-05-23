@@ -4,13 +4,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 
+import java.awt.*;
 import java.util.List;
 
 public class ClientPlayerData {
     private static boolean[] unlockedEssences = new boolean[] { false, false, false, false };
-    public static void set(boolean[] unlockedEssences, BlockPos linkPos) {
+    public static void set(boolean[] unlockedEssences, BlockPos linkPos, Color linkColor) {
         ClientPlayerData.unlockedEssences = unlockedEssences;
         ClientPlayerData.linkPos = linkPos;
+        ClientPlayerData.linkColor = linkColor;
     }
     public static boolean[] getUnlockedEssences() {
         return unlockedEssences;
@@ -18,5 +20,9 @@ public class ClientPlayerData {
     public static BlockPos getLinkPos() {
         return linkPos;
     }
-    public static BlockPos linkPos;
+    private static BlockPos linkPos;
+    public static Color getLinkColor() {
+        return linkColor;
+    }
+    private static Color linkColor;
 }

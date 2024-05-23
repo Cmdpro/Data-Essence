@@ -36,6 +36,16 @@ public class BlockInit {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final RegistryObject<Block> ESSENCEPOINT = registerBlock("essencepoint",
             () -> new EssencePoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
+    public static final RegistryObject<Block> LUNARESSENCEPOINT = registerBlock("lunaressencepoint",
+            () -> new LunarEssencePoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
+    public static final RegistryObject<Block> NATURALESSENCEPOINT = registerBlock("naturalessencepoint",
+            () -> new NaturalEssencePoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
+    public static final RegistryObject<Block> EXOTICESSENCEPOINT = registerBlock("exoticessencepoint",
+            () -> new ExoticEssencePoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
+    public static final RegistryObject<Block> FLUIDPOINT = registerBlock("fluidpoint",
+            () -> new FluidPoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
+    public static final RegistryObject<Block> ITEMPOINT = registerBlock("itempoint",
+            () -> new ItemPoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
     private static <T extends Block> RegistryObject<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {
         return BLOCKS.register(name, block);

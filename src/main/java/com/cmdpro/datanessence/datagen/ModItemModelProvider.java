@@ -42,6 +42,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemInit.DATATABLET);
         evenSimplerBlockItem(BlockInit.FABRICATOR);
         evenSimplerBlockItem(BlockInit.ESSENCEPOINT);
+        evenSimplerBlockItem(BlockInit.LUNARESSENCEPOINT);
+        evenSimplerBlockItem(BlockInit.NATURALESSENCEPOINT);
+        evenSimplerBlockItem(BlockInit.EXOTICESSENCEPOINT);
+        evenSimplerBlockItem(BlockInit.ITEMPOINT);
+        evenSimplerBlockItem(BlockInit.FLUIDPOINT);
+        /*
+        evenSimplerBlockItem(BlockInit.ESSENCEBUFFER);
+        evenSimplerBlockItem(BlockInit.FLUIDBUFFER);
+        evenSimplerBlockItem(BlockInit.ITEMBUFFER);
+        */
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),

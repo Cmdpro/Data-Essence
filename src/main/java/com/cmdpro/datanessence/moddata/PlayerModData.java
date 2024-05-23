@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.moddata;
 
-import com.cmdpro.datanessence.api.EssenceContainer;
-import com.cmdpro.datanessence.block.entity.BaseEssencePointBlockEntity;
+import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerDataSyncS2CPacket;
 import net.minecraft.core.BlockPos;
@@ -11,9 +11,10 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class PlayerModData {
@@ -21,11 +22,11 @@ public class PlayerModData {
         unlocked = new ArrayList<>();
     }
     private List<ResourceLocation> unlocked;
-    private BaseEssencePointBlockEntity linkFrom;
-    public BaseEssencePointBlockEntity getLinkFrom() {
+    private BlockEntity linkFrom;
+    public BlockEntity getLinkFrom() {
         return linkFrom;
     }
-    public void setLinkFrom(BaseEssencePointBlockEntity value) {
+    public void setLinkFrom(BlockEntity value) {
         linkFrom = value;
     }
     public List<ResourceLocation> getUnlocked() {
@@ -39,11 +40,17 @@ public class PlayerModData {
     }
     private boolean[] unlockedEssences = new boolean[] { true, true, true, true };
     public void updateData(ServerPlayer player) {
+        Color linkColor = new Color(0, 0, 0, 0);
         BlockPos linkFrom = null;
         if (this.linkFrom != null) {
             linkFrom = this.linkFrom.getBlockPos();
+            if (this.linkFrom instanceof BaseEssencePointBlockEntity linkFrom2) {
+                linkColor = linkFrom2.linkColor();
+            } else if (this.linkFrom instanceof BaseCapabilityPointBlockEntity linkFrom2) {
+                linkColor = linkFrom2.linkColor();
+            }
         }
-        ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(unlockedEssences, linkFrom), (player));
+        ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(unlockedEssences, linkFrom, linkColor), (player));
     }
     public void updateData(Player player) {
         updateData((ServerPlayer)player);

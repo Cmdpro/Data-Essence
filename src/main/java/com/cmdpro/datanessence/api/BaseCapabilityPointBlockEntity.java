@@ -1,9 +1,7 @@
-package com.cmdpro.datanessence.block.entity;
+package com.cmdpro.datanessence.api;
 
-import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.block.BaseEssencePoint;
-import com.cmdpro.datanessence.init.BlockEntityInit;
-import com.cmdpro.datanessence.init.ItemInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -12,23 +10,20 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
-public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
+import java.awt.*;
+
+public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     public BlockPos link;
 
-    public BaseEssencePointBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
+    public BaseCapabilityPointBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
-
+    public abstract Color linkColor();
     @Override
     protected void saveAdditional(CompoundTag pTag) {
         super.saveAdditional(pTag);
@@ -39,22 +34,22 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
             pTag.putInt("linkZ", link.getZ());
         }
     }
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseEssencePointBlockEntity pBlockEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseCapabilityPointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            if (pLevel.getBlockEntity(pPos.relative(pBlockEntity.getDirection().getOpposite())) instanceof EssenceContainer ent) {
-                if (pBlockEntity.link == null) {
-                    pBlockEntity.transfer(ent);
-                } else {
-                    pBlockEntity.take(ent);
-                }
+            BlockEntity ent = pLevel.getBlockEntity(pPos.relative(pBlockEntity.getDirection().getOpposite()));
+            if (pBlockEntity.link == null) {
+                pBlockEntity.transfer(ent);
+            } else {
+                pBlockEntity.take(ent);
             }
             if (pBlockEntity.link != null) {
-                if (pLevel.getBlockEntity(pBlockEntity.link) instanceof EssenceContainer ent) {
-                    pBlockEntity.transfer(ent);
+                BlockEntity ent2 = pLevel.getBlockEntity(pBlockEntity.link);
+                if (ent2 != null) {
+                    pBlockEntity.transfer(ent2);
                 } else {
                     pBlockEntity.link = null;
                     pBlockEntity.updateBlock();
-                    if (pState.getBlock() instanceof BaseEssencePoint block) {
+                    if (pState.getBlock() instanceof BaseCapabilityPoint block) {
                         ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(block.getRequiredWire()));
                         pLevel.addFreshEntity(item);
                     }
@@ -62,8 +57,8 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
             }
         }
     }
-    public abstract void transfer(EssenceContainer other);
-    public abstract void take(EssenceContainer other);
+    public abstract void transfer(BlockEntity other);
+    public abstract void take(BlockEntity other);
     public Direction getDirection() {
         if (getBlockState().getValue(BaseEssencePoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;

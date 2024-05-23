@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.entity;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,6 +29,16 @@ public class FluidBufferBlockEntity extends BlockEntity {
     public void onLoad() {
         super.onLoad();
         lazyFluidHandler = LazyOptional.of(() -> fluidHandler);
+    }
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag) {
+        tag.put("fluid", fluidHandler.writeToNBT(new CompoundTag()));
+        super.saveAdditional(tag);
+    }
+    @Override
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
+        fluidHandler.readFromNBT(nbt.getCompound("fluid"));
     }
     @Override
     public void invalidateCaps()  {

@@ -22,6 +22,26 @@ public class BlockEntityInit {
             register("essencepoint", () ->
                     BlockEntityType.Builder.of(EssencePointBlockEntity::new,
                             BlockInit.ESSENCEPOINT.get()).build(null));
+    public static final RegistryObject<BlockEntityType<LunarEssencePointBlockEntity>> LUNARESSENCEPOINT =
+            register("lunaressencepoint", () ->
+                    BlockEntityType.Builder.of(LunarEssencePointBlockEntity::new,
+                            BlockInit.LUNARESSENCEPOINT.get()).build(null));
+    public static final RegistryObject<BlockEntityType<NaturalEssencePointBlockEntity>> NATURALESSENCEPOINT =
+            register("naturalessencepoint", () ->
+                    BlockEntityType.Builder.of(NaturalEssencePointBlockEntity::new,
+                            BlockInit.NATURALESSENCEPOINT.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ExoticEssencePointBlockEntity>> EXOTICESSENCEPOINT =
+            register("exoticessencepoint", () ->
+                    BlockEntityType.Builder.of(ExoticEssencePointBlockEntity::new,
+                            BlockInit.EXOTICESSENCEPOINT.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ItemPointBlockEntity>> ITEMPOINT =
+            register("itempoint", () ->
+                    BlockEntityType.Builder.of(ItemPointBlockEntity::new,
+                            BlockInit.ITEMPOINT.get()).build(null));
+    public static final RegistryObject<BlockEntityType<FluidPointBlockEntity>> FLUIDPOINT =
+            register("fluidpoint", () ->
+                    BlockEntityType.Builder.of(FluidPointBlockEntity::new,
+                            BlockInit.FLUIDPOINT.get()).build(null));
     public static final RegistryObject<BlockEntityType<EssenceBufferBlockEntity>> ESSENCEBUFFER =
             register("essencebuffer", () ->
                     BlockEntityType.Builder.of(EssenceBufferBlockEntity::new,

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "datanessence:essencebuffer",
+    "datanessence:fluidbuffer",
+    "datanessence:essencepoint",
+    "datanessence:fabricator",
+    "datanessence:itembuffer"
+  ]
+}

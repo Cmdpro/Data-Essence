@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
@@ -37,6 +38,16 @@ public class ItemBufferBlockEntity extends BlockEntity {
             return lazyItemHandler.cast();
         }
         return super.getCapability(cap, side);
+    }
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag) {
+        tag.put("inventory", itemHandler.serializeNBT());
+        super.saveAdditional(tag);
+    }
+    @Override
+    public void load(CompoundTag nbt) {
+        super.load(nbt);
+        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
     }
     public void drops() {
         SimpleContainer inventory = getInv();

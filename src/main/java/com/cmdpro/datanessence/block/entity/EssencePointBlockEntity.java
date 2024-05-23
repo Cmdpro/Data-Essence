@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.entity;
 
+import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.init.BlockEntityInit;
@@ -14,6 +15,8 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.awt.*;
+
 public class EssencePointBlockEntity extends BaseEssencePointBlockEntity implements GeoBlockEntity {
     public EssencePointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.ESSENCEPOINT.get(), pos, state);
@@ -23,6 +26,10 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity impleme
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
         event.getController().setAnimation(RawAnimation.begin().then("animation.essencepoint.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
+    }
+    @Override
+    public Color linkColor() {
+        return Color.MAGENTA;
     }
 
     @Override

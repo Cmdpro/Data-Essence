@@ -72,10 +72,20 @@ public class DataNEssence
         if (event.getTabKey() == CreativeModeTabInit.ITEMS.getKey()) {
             event.accept(ItemInit.DATATABLET);
             event.accept(ItemInit.ESSENCEWIRE);
+            event.accept(ItemInit.LUNARESSENCEWIRE);
+            event.accept(ItemInit.NATURALESSENCEWIRE);
+            event.accept(ItemInit.EXOTICESSENCEWIRE);
+            event.accept(ItemInit.ITEMWIRE);
+            event.accept(ItemInit.FLUIDWIRE);
         }
         if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
             event.accept(ItemInit.FABRICATORITEM);
             event.accept(ItemInit.ESSENCEPOINTITEM);
+            event.accept(ItemInit.LUNARESSENCEPOINTITEM);
+            event.accept(ItemInit.NATURALESSENCEPOINTITEM);
+            event.accept(ItemInit.EXOTICESSENCEPOINTITEM);
+            event.accept(ItemInit.ITEMPOINTITEM);
+            event.accept(ItemInit.FLUIDPOINTITEM);
             event.accept(BlockInit.ESSENCEBUFFER);
             event.accept(BlockInit.ITEMBUFFER);
             event.accept(BlockInit.FLUIDBUFFER);

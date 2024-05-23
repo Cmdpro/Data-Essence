@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.datanessence.block.ExoticEssencePoint;
 import com.cmdpro.datanessence.init.*;
-import com.cmdpro.datanessence.renderers.EssencePointRenderer;
-import com.cmdpro.datanessence.renderers.FabricatorRenderer;
+import com.cmdpro.datanessence.renderers.*;
 import com.cmdpro.datanessence.screen.FabricatorScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,6 +18,11 @@ public class ClientModEvents {
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityInit.FABRICATOR.get(), FabricatorRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityInit.ESSENCEPOINT.get(), EssencePointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.LUNARESSENCEPOINT.get(), LunarEssencePointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.NATURALESSENCEPOINT.get(), NaturalEssencePointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.EXOTICESSENCEPOINT.get(), ExoticEssencePointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.ITEMPOINT.get(), ItemPointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.FLUIDPOINT.get(), FluidPointRenderer::new);
     }
 
     @SubscribeEvent
