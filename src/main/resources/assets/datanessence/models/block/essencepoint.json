@@ -5,6 +5,9 @@
     32,
     32
   ],
+  "textures": {
+    "particle": "datanessence:block/essencepoint"
+  },
   "display": {
     "thirdperson_righthand": {
       "rotation": [

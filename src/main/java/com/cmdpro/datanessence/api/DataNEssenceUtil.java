@@ -47,28 +47,28 @@ public class DataNEssenceUtil {
     }
     public static void transferEssence(EssenceContainer from, EssenceContainer to, float amount) {
         if (from.getMaxEssence() > 0 && to.getMaxEssence() > 0) {
-            float trueAmount = Math.clamp(Math.min(from.getEssence(), amount), 0, to.getMaxEssence()-to.getEssence());
+            float trueAmount = Math.clamp(0, to.getMaxEssence()-to.getEssence(), Math.min(from.getEssence(), amount));
             from.setEssence(from.getEssence()-trueAmount);
             to.setEssence(to.getEssence()+trueAmount);
         }
     }
     public static void transferLunarEssence(EssenceContainer from, EssenceContainer to, float amount) {
         if (from.getMaxLunarEssence() > 0 && to.getMaxLunarEssence() > 0) {
-            float trueAmount = Math.clamp(Math.min(from.getLunarEssence(), amount), 0, to.getMaxLunarEssence()-to.getLunarEssence());
+            float trueAmount = Math.clamp(0, to.getMaxLunarEssence()-to.getLunarEssence(), Math.min(from.getLunarEssence(), amount));
             from.setLunarEssence(from.getLunarEssence()-trueAmount);
             to.setLunarEssence(to.getLunarEssence()+trueAmount);
         }
     }
     public static void transferNaturalEssence(EssenceContainer from, EssenceContainer to, float amount) {
         if (from.getMaxNaturalEssence() > 0 && to.getMaxNaturalEssence() > 0) {
-            float trueAmount = Math.clamp(Math.min(from.getNaturalEssence(), amount), 0, to.getMaxNaturalEssence()-to.getNaturalEssence());
+            float trueAmount = Math.clamp(0, to.getMaxNaturalEssence()-to.getNaturalEssence(), Math.min(from.getNaturalEssence(), amount));
             from.setNaturalEssence(from.getNaturalEssence()-trueAmount);
             to.setNaturalEssence(to.getNaturalEssence()+trueAmount);
         }
     }
     public static void transferExoticEssence(EssenceContainer from, EssenceContainer to, float amount) {
         if (from.getMaxExoticEssence() > 0 && to.getMaxExoticEssence() > 0) {
-            float trueAmount = Math.clamp(Math.min(from.getExoticEssence(), amount), 0, to.getMaxExoticEssence()-to.getExoticEssence());
+            float trueAmount = Math.clamp(0, to.getMaxExoticEssence()-to.getExoticEssence(), Math.min(from.getExoticEssence(), amount));
             from.setExoticEssence(from.getExoticEssence()-trueAmount);
             to.setExoticEssence(to.getExoticEssence()+trueAmount);
         }

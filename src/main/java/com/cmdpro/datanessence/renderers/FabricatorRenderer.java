@@ -35,7 +35,7 @@ public class FabricatorRenderer extends GeoBlockRenderer<FabricatorBlockEntity> 
     public void postRender(PoseStack poseStack, FabricatorBlockEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
         poseStack.pushPose();
-        poseStack.translate(0D, 1.5D, 0D);
+        poseStack.translate(0D, 1D, 0D);
         poseStack.mulPose(Axis.YP.rotationDegrees(animatable.getLevel().getLevelData().getGameTime() % 360));
         poseStack.scale(0.75F, 0.75F, 0.75F);
         Minecraft.getInstance().getItemRenderer().renderStatic(animatable.item, ItemDisplayContext.GUI, packedLight, packedOverlay, poseStack, bufferSource, animatable.getLevel(), 0);
