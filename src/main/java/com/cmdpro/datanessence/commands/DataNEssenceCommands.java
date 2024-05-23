@@ -1,17 +1,24 @@
 package com.cmdpro.datanessence.commands;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
+import com.cmdpro.datanessence.screen.datatablet.Entries;
+import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.commands.CommandRuntimeException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraftforge.common.util.LazyOptional;
 
 public class DataNEssenceCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher){
@@ -22,6 +29,15 @@ public class DataNEssenceCommands {
                             return resetlearned(command);
                         })
                 )
+                .then(Commands.literal("unlock")
+                        .then(Commands.argument("id", ResourceLocationArgument.id())
+                                .suggests((stack, builder) -> {
+                                    return SharedSuggestionProvider.suggest(Entries.entries.keySet().stream().map(ResourceLocation::toString), builder);
+                                })
+                                .executes((command -> {
+                                    return unlock(command);
+                                })))
+                )
         );
     }
 
@@ -30,8 +46,32 @@ public class DataNEssenceCommands {
             Player player = (Player) command.getSource().getEntity();
             player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent(data -> {
                 data.getUnlocked().clear();
-                data.updateData(player);
+                data.updateUnlockedEntries(player);
+                command.getSource().sendSuccess(() -> {
+                    return Component.translatable("commands.datanessence.resetlearned");
+                }, true);
             });
+        }
+        return Command.SINGLE_SUCCESS;
+    }
+    private static int unlock(CommandContext<CommandSourceStack> command){
+        if(command.getSource().getEntity() instanceof Player) {
+            Player player = (Player) command.getSource().getEntity();
+            ResourceLocation entry = command.getArgument("id", ResourceLocation.class);
+            if (Entries.entries.containsKey(entry)) {
+                player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
+                    if (!data.getUnlocked().contains(entry)) {
+                        DataNEssenceUtil.DataTabletUtil.unlockEntryAndParents(player, entry);
+                        command.getSource().sendSuccess(() -> {
+                            return Component.translatable("commands.datanessence.unlock.unlockentry", entry);
+                        }, true);
+                    } else {
+                        throw new CommandRuntimeException(Component.translatable("commands.datanessence.unlock.entryalreadyunlocked", entry));
+                    }
+                });
+            } else {
+                throw new CommandRuntimeException(Component.translatable("commands.datanessence.unlock.entrydoesntexist", entry));
+            }
         }
         return Command.SINGLE_SUCCESS;
     }/*

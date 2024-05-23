@@ -8,12 +8,7 @@ import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
 
-import javax.annotation.Nonnull;
-import javax.xml.crypto.Data;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class EntryManager extends SimpleJsonResourceReloadListener {
     protected static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
@@ -31,7 +26,7 @@ public class EntryManager extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
-        ClientEntries.entries.clear();
+        Entries.entries.clear();
         DataNEssence.LOGGER.info("Adding Data and Essence Entries");
         for (Map.Entry<ResourceLocation, JsonElement> i : pObject.entrySet()) {
             ResourceLocation location = i.getKey();
@@ -45,13 +40,13 @@ public class EntryManager extends SimpleJsonResourceReloadListener {
                     DataNEssence.LOGGER.info("Skipping loading element {} as its serializer returned null", location);
                     continue;
                 }
-                ClientEntries.entries.put(i.getKey(), entry);
+                Entries.entries.put(i.getKey(), entry);
             } catch (IllegalArgumentException | JsonParseException e) {
                 DataNEssence.LOGGER.error("Parsing error loading entry {}", location, e);
             }
         }
-        DataNEssence.LOGGER.info("Loaded {} entries", ClientEntries.entries.size());
-        for (Entry i : ClientEntries.entries.values()) {
+        DataNEssence.LOGGER.info("Loaded {} entries", Entries.entries.size());
+        for (Entry i : Entries.entries.values()) {
             i.updateParentEntry();
         }
     }

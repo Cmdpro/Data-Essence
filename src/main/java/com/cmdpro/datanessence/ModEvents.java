@@ -5,7 +5,7 @@ import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
-import com.cmdpro.datanessence.screen.datatablet.ClientEntries;
+import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -62,7 +62,7 @@ public class ModEvents {
         }
     }
     protected static void syncToPlayer(ServerPlayer player) {
-        ModMessages.sendToPlayer(new EntrySyncS2CPacket(ClientEntries.entries), player);
+        ModMessages.sendToPlayer(new EntrySyncS2CPacket(Entries.entries), player);
     }
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
@@ -88,6 +88,7 @@ public class ModEvents {
             if(event.getEntity() instanceof ServerPlayer player) {
                 player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent(data -> {
                     data.updateData((ServerPlayer)event.getEntity());
+                    data.updateUnlockedEntries((ServerPlayer)event.getEntity());
                 });
             }
         }

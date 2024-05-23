@@ -5,6 +5,8 @@ import com.cmdpro.datanessence.block.entity.FluidBufferBlockEntity;
 import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
+import com.cmdpro.datanessence.screen.datatablet.Entries;
+import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.Page;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import net.minecraft.core.particles.ParticleOptions;
@@ -34,13 +36,46 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 public class DataNEssenceUtil {
-    public static Supplier<IForgeRegistry<PageSerializer>> PAGE_TYPE_REGISTRY = null;
-    public static boolean playerHasEntry(Player player, String entry) {
-        if (entry != null) {
-            return player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get().getUnlocked().contains(ResourceLocation.tryParse(entry));
+    public static class DataTabletUtil {
+        public static void unlockEntry(Player player, ResourceLocation entry) {
+            player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
+                Entry entry2 = Entries.entries.get(entry);
+                if (entry2 != null && (entry2.getParentEntry() == null || data.getUnlocked().contains(entry2.getParentEntry().id)) && !data.getUnlocked().contains(entry)) {
+                    data.getUnlocked().add(entry);
+                    data.updateUnlockedEntries(player);
+                }
+            });
         }
-        return false;
+        public static void unlockEntryAndParents(Player player, ResourceLocation entry) {
+            player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
+                Entry entry2 = Entries.entries.get(entry);
+                if (entry2 != null && !data.getUnlocked().contains(entry)) {
+                    data.getUnlocked().add(entry);
+                    Entry parent = entry2.getParentEntry();
+                    while (parent != null) {
+                        data.getUnlocked().add(parent.id);
+                        parent = parent.getParentEntry();
+                    }
+                    data.updateUnlockedEntries(player);
+                }
+            });
+        }
+        public static void lockEntry(Player player, ResourceLocation entry) {
+            player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
+                if (!data.getUnlocked().contains(entry)) {
+                    data.getUnlocked().remove(entry);
+                    data.updateUnlockedEntries(player);
+                }
+            });
+        }
+        public static boolean playerHasEntry(Player player, String entry) {
+            if (entry != null) {
+                return player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get().getUnlocked().contains(ResourceLocation.tryParse(entry));
+            }
+            return false;
+        }
     }
+    public static Supplier<IForgeRegistry<PageSerializer>> PAGE_TYPE_REGISTRY = null;
     public static void getEssenceFromBuffersBelow(EssenceContainer container) {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));

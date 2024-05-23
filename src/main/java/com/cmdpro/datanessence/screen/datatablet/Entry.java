@@ -33,8 +33,8 @@ public class Entry {
         updateParentEntry();
     }
     public boolean updateParentEntry() {
-        if (ClientEntries.entries.containsKey(parent)) {
-            this.parentEntry = ClientEntries.entries.get(parent);
+        if (Entries.entries.containsKey(parent)) {
+            this.parentEntry = Entries.entries.get(parent);
             return true;
         } else {
             return false;

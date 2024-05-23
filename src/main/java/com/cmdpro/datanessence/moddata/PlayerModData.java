@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerDataSyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.UnlockedEntrySyncS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -55,6 +56,12 @@ public class PlayerModData {
     public void updateData(Player player) {
         updateData((ServerPlayer)player);
     }
+    public void updateUnlockedEntries(ServerPlayer player) {
+        ModMessages.sendToPlayer(new UnlockedEntrySyncS2CPacket(unlocked), (player));
+    }
+    public void updateUnlockedEntries(Player player) {
+        updateUnlockedEntries((ServerPlayer)player);
+    }
     public void copyFrom(PlayerModData source) {
         this.unlocked = source.unlocked;
         this.unlockedEssences = source.unlockedEssences;
@@ -81,6 +88,7 @@ public class PlayerModData {
             for (Tag o : (ListTag)nbt.get("unlocked")) {
                 list.add(ResourceLocation.of(((CompoundTag) o).getString("value"), ':'));
             }
+            unlocked = list;
         }
         unlockedEssences = new boolean[] { nbt.getBoolean("essenceUnlocked"), nbt.getBoolean("lunarEssenceUnlocked"), nbt.getBoolean("naturalEssenceUnlocked"), nbt.getBoolean("exoticEssenceUnlocked") };
     }
