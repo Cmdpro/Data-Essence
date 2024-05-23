@@ -172,7 +172,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         if (blockEntity instanceof FabricatorBlockEntity ent) {
             if (ent.recipe != null) {
                 if (ent.enoughEssence) {
-                    if (DataNEssenceUtil.playerHasEntry(pPlayer, ent.recipe.getEntry())) {
+                    if (DataNEssenceUtil.DataTabletUtil.playerHasEntry(pPlayer, ent.recipe.getEntry())) {
                         for (int i = 1; i < 10; i++) {
                             ent.itemHandler.getStackInSlot(i).shrink(1);
                         }

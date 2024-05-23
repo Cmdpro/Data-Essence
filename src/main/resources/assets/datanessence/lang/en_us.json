@@ -14,5 +14,10 @@
   "item.datanessence.datatablet.pages.test1.page2.text": "Page 2 works",
   "item.datanessence.datatablet.pages.test1.page3.text": "Page 3 works as well!",
   "item.datanessence.datatablet.pages.test2.page1.text": "testing",
-  "item.datanessence.datatablet.pages.test2.name": "Cool Page 2"
+  "item.datanessence.datatablet.pages.test2.name": "Cool Page 2",
+
+  "commands.datanessence.resetlearned": "Reset all entries back to their original state",
+  "commands.datanessence.unlock.unlockentry": "Unlocked Entry \"%1$s\"",
+  "commands.datanessence.unlock.entrydoesntexist": "Entry \"%1$s\" does not exist!",
+  "commands.datanessence.unlock.entryalreadyunlocked": "Entry \"%1$s\" was already unlocked!"
 }
