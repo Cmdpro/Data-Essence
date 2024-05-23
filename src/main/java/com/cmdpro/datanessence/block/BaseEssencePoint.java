@@ -15,9 +15,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -85,6 +85,23 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
         return null;
     }
 
+    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
+        return canAttach(pLevel, pPos, getConnectedDirection(pState).getOpposite());
+    }
+    public static Direction getConnectedDirection(BlockState pState) {
+        switch ((AttachFace)pState.getValue(FACE)) {
+            case CEILING:
+                return Direction.DOWN;
+            case FLOOR:
+                return Direction.UP;
+            default:
+                return pState.getValue(FACING);
+        }
+    }
+    public static boolean canAttach(LevelReader pReader, BlockPos pPos, Direction pDirection) {
+        BlockPos blockpos = pPos.relative(pDirection);
+        return pReader.getBlockState(blockpos).isFaceSturdy(pReader, blockpos, pDirection.getOpposite());
+    }
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity ent) {
@@ -95,7 +112,9 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
     }
-
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+        return getConnectedDirection(pState).getOpposite() == pFacing && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
+    }
     public abstract Item getRequiredWire();
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {

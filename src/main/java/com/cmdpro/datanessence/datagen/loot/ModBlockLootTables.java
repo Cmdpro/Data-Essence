@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.datagen.loot;
 
+import com.cmdpro.datanessence.init.BlockInit;
 import com.cmdpro.datanessence.init.ItemInit;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -28,7 +29,16 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-
+        dropSelf(BlockInit.FABRICATOR.get());
+        dropSelf(BlockInit.ESSENCEPOINT.get());
+        dropSelf(BlockInit.LUNARESSENCEPOINT.get());
+        dropSelf(BlockInit.NATURALESSENCEPOINT.get());
+        dropSelf(BlockInit.EXOTICESSENCEPOINT.get());
+        dropSelf(BlockInit.ESSENCEBUFFER.get());
+        dropSelf(BlockInit.ITEMBUFFER.get());
+        dropSelf(BlockInit.FLUIDBUFFER.get());
+        dropSelf(BlockInit.ITEMPOINT.get());
+        dropSelf(BlockInit.FLUIDPOINT.get());
     }
 
     protected LootTable.Builder createMysteriumOreDrops(Block pBlock, Item item) {
@@ -48,11 +58,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return new ArrayList<>()/*lockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).filter((block) -> {
+        return BlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).filter((block) -> {
             if (block instanceof LiquidBlock) {
                 return false;
             }
             return true;
-        })::iterator*/;
+        })::iterator;
     }
 }
