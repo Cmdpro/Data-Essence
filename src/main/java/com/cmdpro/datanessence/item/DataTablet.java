@@ -23,7 +23,7 @@ public class DataTablet extends Item {
         if (pLevel.isClientSide) {
             Minecraft.getInstance().setScreen(new DataTabletScreen(Component.empty()));
         } else {
-            DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, new ResourceLocation(DataNEssence.MOD_ID, "test1"));
+            DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, new ResourceLocation(DataNEssence.MOD_ID, "fabricator"));
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
     }
