@@ -26,7 +26,7 @@ public class TextPage extends Page {
         int offsetY = 0;
         for (FormattedCharSequence i : text) {
             pGuiGraphics.drawString(Minecraft.getInstance().font, i, xOffset + 4, yOffset + 4 + offsetY + textYOffset(), 0xFFFFFFFF);
-            offsetY += Minecraft.getInstance().font.lineHeight+4;
+            offsetY += Minecraft.getInstance().font.lineHeight+2;
         }
     }
 
