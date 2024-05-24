@@ -24,6 +24,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -172,8 +174,12 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         if (blockEntity instanceof FabricatorBlockEntity ent) {
             if (ent.recipe != null) {
                 if (ent.enoughEssence) {
-                    if (DataNEssenceUtil.DataTabletUtil.playerHasEntry(pPlayer, ent.recipe.getEntry())) {
-                        for (int i = 1; i < 10; i++) {
+                    IFabricationRecipe fabricationRecipe = null;
+                    if (ent.recipe instanceof IFabricationRecipe) {
+                        fabricationRecipe = (IFabricationRecipe)ent.recipe;
+                    }
+                    if (fabricationRecipe == null || DataNEssenceUtil.DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry())) {
+                        for (int i = 0; i < 9; i++) {
                             ent.itemHandler.getStackInSlot(i).shrink(1);
                         }
                         ent.setEssence(ent.getEssence()-ent.essenceCost);
@@ -204,7 +210,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         super.invalidateCaps();
         lazyItemHandler.invalidate();
     }
-    public IFabricationRecipe recipe;
+    public CraftingRecipe recipe;
     public boolean enoughEssence;
     public float essenceCost;
     public float lunarEssenceCost;
@@ -230,12 +236,23 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
             } else {
-                pBlockEntity.recipe = null;
-                pBlockEntity.essenceCost = 0;
-                pBlockEntity.lunarEssenceCost = 0;
-                pBlockEntity.naturalEssenceCost = 0;
-                pBlockEntity.exoticEssenceCost = 0;
-                pBlockEntity.item = ItemStack.EMPTY;
+                Optional<CraftingRecipe> recipe2 = pLevel.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pBlockEntity.getCraftingInv(), pLevel);
+                if (recipe2.isPresent()) {
+                    pBlockEntity.recipe = recipe2.get();
+                    pBlockEntity.item = recipe2.get().getResultItem(pLevel.registryAccess());
+                    pBlockEntity.enoughEssence = true;
+                    pBlockEntity.essenceCost = 0;
+                    pBlockEntity.lunarEssenceCost = 0;
+                    pBlockEntity.naturalEssenceCost = 0;
+                    pBlockEntity.exoticEssenceCost = 0;
+                } else {
+                    pBlockEntity.recipe = null;
+                    pBlockEntity.essenceCost = 0;
+                    pBlockEntity.lunarEssenceCost = 0;
+                    pBlockEntity.naturalEssenceCost = 0;
+                    pBlockEntity.exoticEssenceCost = 0;
+                    pBlockEntity.item = ItemStack.EMPTY;
+                }
             }
             pBlockEntity.updateBlock();
         }
