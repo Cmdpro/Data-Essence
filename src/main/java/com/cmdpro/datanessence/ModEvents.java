@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
+import com.cmdpro.datanessence.screen.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
 import net.minecraft.resources.ResourceLocation;
@@ -50,6 +51,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void addReloadListenerEvent(AddReloadListenerEvent event) {
         event.addListener(EntryManager.getOrCreateInstance());
+        event.addListener(DataBankEntryManager.getOrCreateInstance());
     }
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {

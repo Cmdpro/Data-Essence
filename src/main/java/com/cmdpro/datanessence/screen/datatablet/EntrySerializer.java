@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.screen.datatablet;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -49,7 +50,7 @@ public class EntrySerializer {
         for (JsonElement i : json.getAsJsonArray("pages")) {
             JsonObject obj = i.getAsJsonObject();
             if (obj.has("type")) {
-                PageSerializer pageSerializer = DataNEssenceUtil.PAGE_TYPE_REGISTRY.get().getValue(ResourceLocation.tryParse(obj.get("type").getAsString()));
+                PageSerializer pageSerializer = DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get().getValue(ResourceLocation.tryParse(obj.get("type").getAsString()));
                 Page page = pageSerializer.fromJson(obj);
                 pages.add(page);
             } else {
@@ -78,12 +79,12 @@ public class EntrySerializer {
     }
     public static Page pageFromNetwork(FriendlyByteBuf buf) {
         ResourceLocation type = buf.readResourceLocation();
-        PageSerializer pageSerializer = DataNEssenceUtil.PAGE_TYPE_REGISTRY.get().getValue(type);
+        PageSerializer pageSerializer = DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get().getValue(type);
         Page page = pageSerializer.fromNetwork(buf);
         return page;
     }
     public static void pageToNetwork(FriendlyByteBuf buf, Page page) {
-        buf.writeResourceLocation(DataNEssenceUtil.PAGE_TYPE_REGISTRY.get().getKey(page.getSerializer()));
+        buf.writeResourceLocation(DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get().getKey(page.getSerializer()));
         page.getSerializer().toNetwork(page, buf);
     }
     public static void toNetwork(FriendlyByteBuf buf, Entry entry) {

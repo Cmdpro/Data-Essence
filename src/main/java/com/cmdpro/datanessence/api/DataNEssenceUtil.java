@@ -86,7 +86,6 @@ public class DataNEssenceUtil {
             });
         }
     }
-    public static Supplier<IForgeRegistry<PageSerializer>> PAGE_TYPE_REGISTRY = null;
     public static void getEssenceFromBuffersBelow(EssenceContainer container) {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));

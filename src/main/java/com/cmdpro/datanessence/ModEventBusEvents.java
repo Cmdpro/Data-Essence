@@ -3,6 +3,8 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.api.*;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.RecipeInit;
+import com.cmdpro.datanessence.screen.databank.Minigame;
+import com.cmdpro.datanessence.screen.databank.MinigameCreator;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -39,8 +41,10 @@ public class ModEventBusEvents {
     }
     @SubscribeEvent
     public static void registerRegistries(NewRegistryEvent event) {
-        DataNEssenceUtil.PAGE_TYPE_REGISTRY = event.create(new RegistryBuilder<PageSerializer>()
+        DataNEssenceRegistries.PAGE_TYPE_REGISTRY = event.create(new RegistryBuilder<PageSerializer>()
                 .setName(new ResourceLocation(DataNEssence.MOD_ID, "pagetypes")));
+        DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY = event.create(new RegistryBuilder<MinigameCreator>()
+                .setName(new ResourceLocation(DataNEssence.MOD_ID, "minigames")));
     }
     @SubscribeEvent
     public static void entitySpawnRestriction(SpawnPlacementRegisterEvent event) {
