@@ -1,6 +1,5 @@
 package com.cmdpro.datanessence.api;
 
-import com.cmdpro.datanessence.block.BaseEssencePoint;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;

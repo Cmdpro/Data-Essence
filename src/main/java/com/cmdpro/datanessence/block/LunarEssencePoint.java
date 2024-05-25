@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block;
 
-import com.cmdpro.datanessence.block.entity.EssencePointBlockEntity;
+import com.cmdpro.datanessence.api.BaseEssencePoint;
 import com.cmdpro.datanessence.block.entity.LunarEssencePointBlockEntity;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import com.cmdpro.datanessence.init.ItemInit;

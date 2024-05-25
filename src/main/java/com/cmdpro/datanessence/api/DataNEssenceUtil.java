@@ -6,7 +6,11 @@ import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.networking.ModMessages;
+import com.cmdpro.datanessence.networking.packet.DataBankEntrySyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.PlayerTierSyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.UnlockedEntrySyncS2CPacket;
+import com.cmdpro.datanessence.screen.databank.DataBankEntries;
+import com.cmdpro.datanessence.screen.databank.DataBankEntry;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.Page;
@@ -31,6 +35,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.joml.Math;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -38,6 +43,18 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.function.Supplier;
 
 public class DataNEssenceUtil {
+    public static class DataBankUtil {
+        public static void sendDataBankEntries(ServerPlayer player, ResourceLocation[] ids) {
+            Map<ResourceLocation, DataBankEntry> entries = new HashMap<>();
+            for (ResourceLocation i : ids) {
+                entries.put(i, DataBankEntries.entries.get(i));
+            }
+            ModMessages.sendToPlayer(new DataBankEntrySyncS2CPacket(entries), (player));
+        }
+        public static void sendDataBankEntries(Player player, ResourceLocation[] ids) {
+            sendDataBankEntries((ServerPlayer)player, ids);
+        }
+    }
     public static class DataTabletUtil {
         public static void unlockEntry(Player player, ResourceLocation entry) {
             player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {

@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence;
 
-import com.cmdpro.datanessence.block.BaseEssencePoint;
+import com.cmdpro.datanessence.api.BaseEssencePoint;
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.networking.ModMessages;

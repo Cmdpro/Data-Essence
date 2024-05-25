@@ -6,4 +6,5 @@ import java.util.HashMap;
 
 public class DataBankEntries {
     public static HashMap<ResourceLocation, DataBankEntry> entries = new HashMap<>();
+    public static HashMap<ResourceLocation, DataBankEntry> clientEntries = new HashMap<>();
 }

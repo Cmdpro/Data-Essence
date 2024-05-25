@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block;
 
+import com.cmdpro.datanessence.api.BaseEssencePoint;
 import com.cmdpro.datanessence.block.entity.ExoticEssencePointBlockEntity;
-import com.cmdpro.datanessence.block.entity.NaturalEssencePointBlockEntity;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import com.cmdpro.datanessence.init.ItemInit;
 import net.minecraft.core.BlockPos;
