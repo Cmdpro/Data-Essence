@@ -43,8 +43,7 @@ public class MinigameInit {
         }
 
         public TestMinigame createNew(int playerX, int playerY) {
-            TestMinigame minigame = new TestMinigame();
-            minigame.playerPos = new Vector2i(playerX, playerY);
+            TestMinigame minigame = new TestMinigame(new Vector2i(playerX, playerY));
             return minigame;
         }
     });

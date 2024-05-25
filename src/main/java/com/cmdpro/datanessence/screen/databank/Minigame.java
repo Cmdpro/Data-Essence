@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.screen.databank;
 
+import com.cmdpro.datanessence.screen.DataBankScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Minigame {
-    public abstract void render(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY);
+    public abstract void render(DataBankScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y);
     public List<Component> getTooltip() { return new ArrayList<>(); }
     public void mouseClicked(double pMouseX, double pMouseY, int pButton) {}
     public void mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {}

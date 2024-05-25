@@ -3,6 +3,9 @@ package com.cmdpro.datanessence.screen;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import com.cmdpro.datanessence.screen.databank.DataBankEntries;
+import com.cmdpro.datanessence.screen.databank.DataBankEntry;
+import com.cmdpro.datanessence.screen.databank.Minigame;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.Page;
@@ -33,10 +36,9 @@ public class DataBankScreen extends Screen {
     public double offsetX;
     public double offsetY;
     public int screenType;
-    public Entry clickedEntry;
-    public int page;
-    public int ticks;
-
+    public DataBankEntry clickedEntry;
+    public int minigameProgress;
+/*
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
         if (pButton == 0 && (screenType == 0 || screenType == 1)) {
@@ -45,19 +47,27 @@ public class DataBankScreen extends Screen {
             return true;
         }
         return false;
-    }
+    }*/
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         if (pButton == 0 && screenType == 0) {
-            for (Entry i : Entries.entries.values()) {
-                if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
-                    if (pMouseX >= ((i.x * 20) - 10) + offsetX + x && pMouseX <= ((i.x * 20) + 10) + offsetX + x) {
-                        if (pMouseY >= ((i.y * 20) - 10) + offsetY + y && pMouseY <= ((i.y * 20) + 10) + offsetY + y) {
+            int currentTier = 1;
+            int y2 = 8;
+            int x2 = x+4;
+            for (DataBankEntry i : DataBankEntries.entries.values()) {
+                if (i.tier <= ClientPlayerData.getTier()) {
+                    if (i.tier != currentTier) {
+                        currentTier = i.tier;
+                        y2 += 32;
+                        x2 = x+4;
+                    }
+                    if (pMouseX >= ((x2 * 20) - 10) + offsetX + x && pMouseX <= ((x2* 20) + 10) + offsetX + x) {
+                        if (pMouseY >= ((y2 * 20) - 10) + offsetY + y && pMouseY <= ((y2 * 20) + 10) + offsetY + y) {
                             screenType = 1;
                             clickedEntry = i;
-                            page = 0;
+                            minigameProgress = 0;
                             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
                             return true;
                         }
@@ -75,7 +85,6 @@ public class DataBankScreen extends Screen {
     @Override
     public void tick() {
         super.tick();
-        ticks++;
     }
 
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
@@ -114,13 +123,16 @@ public class DataBankScreen extends Screen {
             graphics.pose().pushPose();
             graphics.pose().translate(0, 0, 399);
             graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.datatablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y+8, 0xFFc90d8b);
-            graphics.blit(TEXTURE, x+3, y+3, 48, 166, 4, 4);
-            graphics.blit(TEXTURE, x+3, y+imageHeight-7, 48, 170, 4, 4);
-            graphics.blit(TEXTURE, x+imageWidth-7, y+3, 52, 166, 4, 4);
-            graphics.blit(TEXTURE, x+imageWidth-7, y+imageHeight-7, 52, 170, 4, 4);
+            graphics.blit(TEXTURE, x+3, y+3, 20, 166, 4, 4);
+            graphics.blit(TEXTURE, x+3, y+imageHeight-7, 20, 170, 4, 4);
+            graphics.blit(TEXTURE, x+imageWidth-7, y+3, 24, 166, 4, 4);
+            graphics.blit(TEXTURE, x+imageWidth-7, y+imageHeight-7, 24, 170, 4, 4);
             graphics.pose().popPose();
         } else if (screenType == 1) {
-            // TODO : Make this be the screen with the minigames
+            drawMinigame(clickedEntry.minigames[minigameProgress], graphics, delta, mouseX, mouseY);
+            graphics.blit(TEXTURE, x+(imageWidth/3), y+32-10, 0, 166, 20, 20);
+            graphics.renderItem(clickedEntry.icon, x+(imageWidth/3), y+32-8);
+            graphics.blit(TEXTURE, x+(imageWidth/3)-30, y+((imageHeight/3)*2)+32, 20, 174, 60, 12);
         }
         graphics.disableScissor();
         super.render(graphics, mouseX, mouseY, delta);
@@ -137,56 +149,30 @@ public class DataBankScreen extends Screen {
             }
         }
     }
-    public void drawPage(Page page, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
+    public void drawMinigame(Minigame minigame, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        page.render(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
+        pGuiGraphics.fill(x+(imageWidth/3), y+(imageHeight/3), x-((imageWidth/3)*2), y-((imageHeight/3)*2), 0xFF000000);
+        pGuiGraphics.enableScissor(x+(imageWidth/3), y+(imageHeight/3), x-((imageWidth/3)*2), y-((imageHeight/3)*2));
+        minigame.render(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x+(imageWidth/3), y+(imageHeight/3));
         pGuiGraphics.disableScissor();
-        if (this.page+1 < clickedEntry.pages.length) {
-            pGuiGraphics.blit(TEXTURE, (x + imageWidth) + 6, y + ((imageHeight / 2) - 20), 32, 166, 12, 40);
-        }
-        if (this.page > 0) {
-            pGuiGraphics.blit(TEXTURE, x - 18, y + ((imageHeight / 2) - 20), 20, 166, 12, 40);
-        }
-        page.renderPost(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
-        pGuiGraphics.enableScissor(x+1, y+1, x+imageWidth-1, y+imageHeight-1);
-    }
-    public void drawLines(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
-        GlStateManager._depthMask(false);
-        GlStateManager._disableCull();
-        RenderSystem.setShader(GameRenderer::getRendertypeLinesShader);
-        Tesselator tess = RenderSystem.renderThreadTesselator();
-        BufferBuilder buf = tess.getBuilder();
-        RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
-        for (Entry i : Entries.entries.values()) {
-            if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
-                if (i.getParentEntry() != null) {
-                    int x1 = x + ((i.x * 20) + 1) + (int) offsetX;
-                    int y1 = y + ((i.y * 20) + 1) + (int) offsetY;
-                    int x2 = x + ((i.getParentEntry().x * 20) + 1) + (int) offsetX;
-                    int y2 = y + ((i.getParentEntry().y * 20) + 1) + (int) offsetY;
-                    buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
-                    buf.vertex(x1, y1, 0.0D).color(201, 13, 139, 255).normal(x2 - x1, y2 - y1, 0).endVertex();
-                    buf.vertex(x2, y2, 0.0D).color(201, 13, 139, 255).normal(x1 - x2, y1 - y2, 0).endVertex();
-                    tess.end();
-                }
-            }
-        }
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        GlStateManager._enableCull();
-        GlStateManager._depthMask(true);
-        RenderSystem.lineWidth(1);
     }
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        drawLines(pGuiGraphics, pPartialTick, pMouseX, pMouseY);
-        for (Entry i : Entries.entries.values()) {
-            if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
-                pGuiGraphics.blit(TEXTURE, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166, 20, 20);
-                pGuiGraphics.renderItem(i.icon, x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
+        int currentTier = 1;
+        int y2 = 8;
+        int x2 = x+4;
+        for (DataBankEntry i : DataBankEntries.entries.values()) {
+            if (i.tier <= ClientPlayerData.getTier()) {
+                if (i.tier != currentTier) {
+                    currentTier = i.tier;
+                    y2 += 32;
+                    x2 = x+4;
+                }
+                pGuiGraphics.blit(TEXTURE, x + (x2 - 10) + (int) offsetX, y + (y2 - 10) + (int) offsetY, 0, 166, 20, 20);
+                pGuiGraphics.renderItem(i.icon, x + (x2 - 8) + (int) offsetX, y + (y2 - 8) + (int) offsetY);
+                x2 += 20;
             }
         }
     }
