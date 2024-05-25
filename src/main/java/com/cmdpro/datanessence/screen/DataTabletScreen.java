@@ -126,12 +126,16 @@ public class DataTabletScreen extends Screen {
         renderBg(graphics, delta, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        graphics.enableScissor(x+5, y+5, x+imageWidth-5, y+imageHeight-5);
+        graphics.enableScissor(x+3, y+3, x+imageWidth-3, y+imageHeight-3);
         if (screenType == 0) {
             drawEntries(graphics, delta, mouseX, mouseY);
             graphics.pose().pushPose();
             graphics.pose().translate(0, 0, 399);
             graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.datatablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y+8, 0xFFc90d8b);
+            graphics.blit(TEXTURE, x+3, y+3, 48, 166, 4, 4);
+            graphics.blit(TEXTURE, x+3, y+imageHeight-7, 48, 170, 4, 4);
+            graphics.blit(TEXTURE, x+imageWidth-7, y+3, 52, 166, 4, 4);
+            graphics.blit(TEXTURE, x+imageWidth-7, y+imageHeight-7, 52, 170, 4, 4);
             graphics.pose().popPose();
         } else if (screenType == 1) {
 
