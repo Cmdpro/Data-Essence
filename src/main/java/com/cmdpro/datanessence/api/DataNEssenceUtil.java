@@ -5,6 +5,8 @@ import com.cmdpro.datanessence.block.entity.FluidBufferBlockEntity;
 import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
+import com.cmdpro.datanessence.networking.ModMessages;
+import com.cmdpro.datanessence.networking.packet.PlayerTierSyncS2CPacket;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.Page;
@@ -73,6 +75,15 @@ public class DataNEssenceUtil {
                 return player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get().getUnlocked().contains(ResourceLocation.tryParse(entry));
             }
             return false;
+        }
+        public static int getTier(Player player) {
+            return player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get().getTier();
+        }
+        public static void setTier(Player player, int tier) {
+            player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
+                data.setTier(tier);
+                data.sendTier(player, true);
+            });
         }
     }
     public static Supplier<IForgeRegistry<PageSerializer>> PAGE_TYPE_REGISTRY = null;

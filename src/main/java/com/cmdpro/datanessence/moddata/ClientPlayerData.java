@@ -14,6 +14,9 @@ public class ClientPlayerData {
         ClientPlayerData.linkPos = linkPos;
         ClientPlayerData.linkColor = linkColor;
     }
+    public static void setTier(int tier) {
+        ClientPlayerData.tier = tier;
+    }
     public static boolean[] getUnlockedEssences() {
         return unlockedEssences;
     }
@@ -25,4 +28,8 @@ public class ClientPlayerData {
         return linkColor;
     }
     private static Color linkColor;
+    public static int getTier() {
+        return tier;
+    }
+    private static int tier;
 }

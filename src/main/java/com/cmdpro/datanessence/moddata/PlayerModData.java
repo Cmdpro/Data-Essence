@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerDataSyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.PlayerTierSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.UnlockedEntrySyncS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -23,6 +24,13 @@ public class PlayerModData {
         unlocked = new ArrayList<>();
     }
     private List<ResourceLocation> unlocked;
+    private int tier;
+    public int getTier() {
+        return tier;
+    }
+    public void setTier(int value) {
+        tier = value;
+    }
     private BlockEntity linkFrom;
     public BlockEntity getLinkFrom() {
         return linkFrom;
@@ -62,6 +70,12 @@ public class PlayerModData {
     public void updateUnlockedEntries(Player player) {
         updateUnlockedEntries((ServerPlayer)player);
     }
+    public void sendTier(ServerPlayer player, boolean showIndicator) {
+        ModMessages.sendToPlayer(new PlayerTierSyncS2CPacket(tier, showIndicator), player);
+    }
+    public void sendTier(Player player, boolean showIndicator) {
+        sendTier((ServerPlayer)player, showIndicator);
+    }
     public void copyFrom(PlayerModData source) {
         this.unlocked = source.unlocked;
         this.unlockedEssences = source.unlockedEssences;
@@ -80,6 +94,7 @@ public class PlayerModData {
         nbt.putBoolean("lunarEssenceUnlocked", unlockedEssences[1]);
         nbt.putBoolean("naturalEssenceUnlocked", unlockedEssences[2]);
         nbt.putBoolean("exoticEssenceUnlocked", unlockedEssences[3]);
+        nbt.putInt("tier", tier);
     }
     public void loadNBTData(CompoundTag nbt) {
         unlocked.clear();
@@ -91,5 +106,6 @@ public class PlayerModData {
             unlocked = list;
         }
         unlockedEssences = new boolean[] { nbt.getBoolean("essenceUnlocked"), nbt.getBoolean("lunarEssenceUnlocked"), nbt.getBoolean("naturalEssenceUnlocked"), nbt.getBoolean("exoticEssenceUnlocked") };
+        tier = nbt.getInt("tier");
     }
 }

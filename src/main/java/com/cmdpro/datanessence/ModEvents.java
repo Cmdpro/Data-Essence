@@ -87,8 +87,9 @@ public class ModEvents {
         if(!event.getLevel().isClientSide()) {
             if(event.getEntity() instanceof ServerPlayer player) {
                 player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent(data -> {
-                    data.updateData((ServerPlayer)event.getEntity());
-                    data.updateUnlockedEntries((ServerPlayer)event.getEntity());
+                    data.updateData(player);
+                    data.updateUnlockedEntries(player);
+                    data.sendTier(player, false);
                 });
             }
         }

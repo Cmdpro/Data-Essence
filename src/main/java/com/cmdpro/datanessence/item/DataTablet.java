@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.item;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -23,6 +24,9 @@ public class DataTablet extends Item {
         if (pLevel.isClientSide) {
             Minecraft.getInstance().setScreen(new DataTabletScreen(Component.empty()));
         } else {
+            if (DataNEssenceUtil.DataTabletUtil.getTier(pPlayer) <= 0) {
+                DataNEssenceUtil.DataTabletUtil.setTier(pPlayer, 1);
+            }
             DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, new ResourceLocation(DataNEssence.MOD_ID, "fabricator"));
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);

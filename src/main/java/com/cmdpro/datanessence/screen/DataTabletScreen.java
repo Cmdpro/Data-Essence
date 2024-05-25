@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
@@ -125,9 +126,13 @@ public class DataTabletScreen extends Screen {
         renderBg(graphics, delta, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        graphics.enableScissor(x+1, y+1, x+imageWidth-1, y+imageHeight-1);
+        graphics.enableScissor(x+5, y+5, x+imageWidth-5, y+imageHeight-5);
         if (screenType == 0) {
             drawEntries(graphics, delta, mouseX, mouseY);
+            graphics.pose().pushPose();
+            graphics.pose().translate(0, 0, 399);
+            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.datatablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y+8, 0xFFc90d8b);
+            graphics.pose().popPose();
         } else if (screenType == 1) {
 
         } else if (screenType == 2) {
@@ -181,8 +186,8 @@ public class DataTabletScreen extends Screen {
                     int x2 = x + ((i.getParentEntry().x * 20) + 1) + (int) offsetX;
                     int y2 = y + ((i.getParentEntry().y * 20) + 1) + (int) offsetY;
                     buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
-                    buf.vertex(x1, y1, 0.0D).color(83, 0, 81, 255).normal(x2 - x1, y2 - y1, 0).endVertex();
-                    buf.vertex(x2, y2, 0.0D).color(83, 0, 81, 255).normal(x1 - x2, y1 - y2, 0).endVertex();
+                    buf.vertex(x1, y1, 0.0D).color(201, 13, 139, 255).normal(x2 - x1, y2 - y1, 0).endVertex();
+                    buf.vertex(x2, y2, 0.0D).color(201, 13, 139, 255).normal(x1 - x2, y1 - y2, 0).endVertex();
                     tess.end();
                 }
             }
