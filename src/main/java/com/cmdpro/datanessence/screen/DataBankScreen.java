@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.screen.databank.*;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.Page;
+import com.electronwill.nightconfig.core.utils.StringUtils;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.BufferBuilder;
@@ -23,9 +24,9 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import org.abego.treelayout.internal.util.java.lang.string.StringUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DataBankScreen extends Screen {
     public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/databank.png");
@@ -45,10 +46,12 @@ public class DataBankScreen extends Screen {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         if (pButton == 0 && screenType == 0) {
-            int currentTier = 1;
-            int y2 = 32;
+            int currentTier = -1;
+            int y2 = 0;
             int x2 = 4;
-            for (DataBankEntry i : DataBankEntries.clientEntries.values()) {
+            List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
+            entries.sort(Comparator.comparingInt((a) -> a.tier));
+            for (DataBankEntry i : entries) {
                 if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
                     if (i.tier != currentTier) {
                         currentTier = i.tier;
@@ -197,10 +200,12 @@ public class DataBankScreen extends Screen {
         graphics.disableScissor();
         super.render(graphics, mouseX, mouseY, delta);
         if (screenType == 0) {
-            int currentTier = 1;
-            int y2 = 32;
+            int currentTier = -1;
+            int y2 = 0;
             int x2 = 4;
-            for (DataBankEntry i : DataBankEntries.clientEntries.values()) {
+            List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
+            entries.sort(Comparator.comparingInt((a) -> a.tier));
+            for (DataBankEntry i : entries) {
                 if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
                     if (i.tier != currentTier) {
                         currentTier = i.tier;
@@ -240,10 +245,13 @@ public class DataBankScreen extends Screen {
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        int currentTier = 1;
-        int y2 = 32;
+        int currentTier = -1;
+        int y2 = 0;
         int x2 = 4;
-        for (DataBankEntry i : DataBankEntries.clientEntries.values()) {
+        HashMap<Integer, Integer> tiers = new HashMap<>();
+        List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
+        entries.sort(Comparator.comparingInt((a) -> a.tier));
+        for (DataBankEntry i : entries) {
             if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
                 if (i.tier != currentTier) {
                     currentTier = i.tier;
@@ -253,7 +261,22 @@ public class DataBankScreen extends Screen {
                 x2 += 30;
                 pGuiGraphics.blit(TEXTURE, x + (x2 - 10) + (int) offsetX, y + (y2 - 10) + (int) offsetY, 0, 166, 20, 20);
                 pGuiGraphics.renderItem(i.icon, x + (x2 - 8) + (int) offsetX, y + (y2 - 8) + (int) offsetY);
+                if (tiers.containsKey(i.tier)) {
+                    tiers.put(i.tier, tiers.get(i.tier)+1);
+                } else {
+                    tiers.put(i.tier, 0);
+                }
             }
+        }
+        int o = 1;
+        for (Map.Entry<Integer, Integer> i : tiers.entrySet()) {
+            pGuiGraphics.blit(TEXTURE, x+4, y+((32*o)-14), 28, 166, 3, 28);
+            int width = (i.getValue()*30)+30;
+            pGuiGraphics.blitRepeating(TEXTURE, x+7, y+((32*o)-14), width+13, 28, 30, 166, 1, 28);
+            pGuiGraphics.blit(TEXTURE, x+20+width, y+((32*o)-14), 30, 166, 3, 28);
+            pGuiGraphics.blit(TEXTURE, x+18, y+((32*o)-14), 30, 166, 3, 28);
+            pGuiGraphics.drawCenteredString(Minecraft.getInstance().font, i.getKey().toString(), x+13, y+(32*o)-(Minecraft.getInstance().font.lineHeight/2), 0xFFc90d8b);
+            o++;
         }
     }
 }

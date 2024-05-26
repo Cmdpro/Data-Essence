@@ -13,10 +13,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class DataBankEntrySyncS2CPacket {
     private final Map<ResourceLocation, DataBankEntry> entries;
@@ -39,7 +41,7 @@ public class DataBankEntrySyncS2CPacket {
             DataBankEntries.clientEntries.clear();
             for (Map.Entry<ResourceLocation, DataBankEntry> i : entries.entrySet()) {
                 DataBankEntries.clientEntries.put(i.getKey(), i.getValue());
-            }
+            };
         });
         return true;
     }

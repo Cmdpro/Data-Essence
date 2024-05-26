@@ -8,6 +8,7 @@ import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.commands.CommandRuntimeException;
@@ -29,6 +30,13 @@ public class DataNEssenceCommands {
                             return resetlearned(command);
                         })
                 )
+                .then(Commands.literal("settier")
+                        .then(Commands.argument("tier", IntegerArgumentType.integer(0))
+                                .executes((command) -> {
+                                    return settier(command);
+                                }))
+
+                )
                 .then(Commands.literal("unlock")
                         .then(Commands.argument("id", ResourceLocationArgument.id())
                                 .suggests((stack, builder) -> {
@@ -40,7 +48,17 @@ public class DataNEssenceCommands {
                 )
         );
     }
-
+    private static int settier(CommandContext<CommandSourceStack> command) {
+        if(command.getSource().getEntity() instanceof Player) {
+            Player player = (Player) command.getSource().getEntity();
+            int tier = command.getArgument("tier", int.class);
+            DataNEssenceUtil.DataTabletUtil.setTier(player, tier);
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.datanessence.settier", tier);
+            }, true);
+        }
+        return Command.SINGLE_SUCCESS;
+    }
     private static int resetlearned(CommandContext<CommandSourceStack> command){
         if(command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();

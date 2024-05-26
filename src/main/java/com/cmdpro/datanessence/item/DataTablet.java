@@ -30,7 +30,8 @@ public class DataTablet extends Item {
             } else {
                 DataNEssenceUtil.DataBankUtil.sendDataBankEntries(pPlayer, new ResourceLocation[] {
                         new ResourceLocation(DataNEssence.MOD_ID, "test1"),
-                        new ResourceLocation(DataNEssence.MOD_ID, "test2")
+                        new ResourceLocation(DataNEssence.MOD_ID, "test2"),
+                        new ResourceLocation(DataNEssence.MOD_ID, "fabricator")
                 });
             }
         } else {
