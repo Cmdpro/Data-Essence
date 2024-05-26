@@ -29,7 +29,7 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity impleme
     }
     @Override
     public Color linkColor() {
-        return Color.MAGENTA;
+        return new Color(0xe236ef);
     }
 
     @Override

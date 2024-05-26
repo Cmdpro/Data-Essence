@@ -46,7 +46,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
     }
     @Override
     public Color linkColor() {
-        return Color.BLUE;
+        return new Color(0x56bae9);
     }
     @Override
     public void invalidateCaps()  {

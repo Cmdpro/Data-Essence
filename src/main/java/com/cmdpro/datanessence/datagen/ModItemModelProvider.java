@@ -40,6 +40,13 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         simpleItem(ItemInit.DATATABLET);
+        simpleItemWithSubdirectory(ItemInit.ESSENCEWIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.LUNARESSENCEWIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.NATURALESSENCEWIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.EXOTICESSENCEWIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.ITEMWIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.FLUIDWIRE, "wires");
+
         evenSimplerBlockItem(BlockInit.FABRICATOR);
         evenSimplerBlockItem(BlockInit.ESSENCEPOINT);
         evenSimplerBlockItem(BlockInit.LUNARESSENCEPOINT);
@@ -57,6 +64,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(item.getId().getPath(),
                 new ResourceLocation("item/generated")).texture("layer0",
                 new ResourceLocation(DataNEssence.MOD_ID,"item/" + item.getId().getPath()));
+    }
+    private ItemModelBuilder simpleItemWithSubdirectory(RegistryObject<Item> item, String subdirectory) {
+        return withExistingParent(item.getId().getPath(),
+                new ResourceLocation("item/generated")).texture("layer0",
+                new ResourceLocation(DataNEssence.MOD_ID,"item/" + subdirectory + "/" + item.getId().getPath()));
     }
     private ItemModelBuilder flatBlockItemWithTexture(RegistryObject<Block> item, ResourceLocation texture) {
         return withExistingParent(item.getId().getPath(),

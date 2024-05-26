@@ -57,7 +57,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
     }
     @Override
     public Color linkColor() {
-        return Color.GRAY;
+        return new Color(0xef4d3d);
     }
 
     @Override

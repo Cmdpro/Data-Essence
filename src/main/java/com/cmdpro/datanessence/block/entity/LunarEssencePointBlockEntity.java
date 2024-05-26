@@ -29,7 +29,7 @@ public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity im
     }
     @Override
     public Color linkColor() {
-        return Color.YELLOW;
+        return new Color(0xf5fbc0);
     }
 
     @Override

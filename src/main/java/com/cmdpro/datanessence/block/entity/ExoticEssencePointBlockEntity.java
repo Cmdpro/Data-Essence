@@ -44,7 +44,7 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity i
 
     @Override
     public Color linkColor() {
-        return Color.WHITE;
+        return new Color(0xe7fcf9);
     }
 
     @Override

@@ -180,7 +180,7 @@ dependencies {
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft 'net.neoforged:forge:1.20.1-47.1.79'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.2.4')
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
     // compile against the JEI API but do not include it at runtime
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))

@@ -53,7 +53,7 @@ public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity 
     }
     @Override
     public Color linkColor() {
-        return Color.GREEN;
+        return new Color(0x57f36c);
     }
 
     @Override
