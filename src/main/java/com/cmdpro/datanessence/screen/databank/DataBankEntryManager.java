@@ -17,7 +17,7 @@ public class DataBankEntryManager extends SimpleJsonResourceReloadListener {
 
     public static DataBankEntryManager instance;
     protected DataBankEntryManager() {
-        super(GSON, "datatablet/entries");
+        super(GSON, "datatablet/databankentries");
     }
     public static DataBankEntryManager getOrCreateInstance() {
         if (instance == null) {
@@ -47,7 +47,7 @@ public class DataBankEntryManager extends SimpleJsonResourceReloadListener {
                 DataNEssence.LOGGER.error("Parsing error loading data bank entry {}", location, e);
             }
         }
-        DataNEssence.LOGGER.info("Loaded {} data bank entries", Entries.entries.size());
+        DataNEssence.LOGGER.info("Loaded {} data bank entries", DataBankEntries.entries.size());
     }
     public static DataBankEntrySerializer serializer = new DataBankEntrySerializer();
     protected DataBankEntry deserializeEntry(ResourceLocation id, JsonObject json) {

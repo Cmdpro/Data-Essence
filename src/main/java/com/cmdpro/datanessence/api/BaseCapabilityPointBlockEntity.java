@@ -1,7 +1,5 @@
 package com.cmdpro.datanessence.api;
 
-import com.cmdpro.datanessence.block.BaseCapabilityPoint;
-import com.cmdpro.datanessence.block.BaseEssencePoint;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -37,21 +35,23 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseCapabilityPointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BlockEntity ent = pLevel.getBlockEntity(pPos.relative(pBlockEntity.getDirection().getOpposite()));
-            if (pBlockEntity.link == null) {
-                pBlockEntity.transfer(ent);
-            } else {
-                pBlockEntity.take(ent);
-            }
-            if (pBlockEntity.link != null) {
-                BlockEntity ent2 = pLevel.getBlockEntity(pBlockEntity.link);
-                if (ent2 != null) {
-                    pBlockEntity.transfer(ent2);
+            if (ent != null) {
+                if (pBlockEntity.link == null) {
+                    pBlockEntity.transfer(ent);
                 } else {
-                    pBlockEntity.link = null;
-                    pBlockEntity.updateBlock();
-                    if (pState.getBlock() instanceof BaseCapabilityPoint block) {
-                        ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(block.getRequiredWire()));
-                        pLevel.addFreshEntity(item);
+                    pBlockEntity.take(ent);
+                }
+                if (pBlockEntity.link != null) {
+                    BlockEntity ent2 = pLevel.getBlockEntity(pBlockEntity.link);
+                    if (ent2 != null) {
+                        pBlockEntity.transfer(ent2);
+                    } else {
+                        pBlockEntity.link = null;
+                        pBlockEntity.updateBlock();
+                        if (pState.getBlock() instanceof BaseCapabilityPoint block) {
+                            ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(block.getRequiredWire()));
+                            pLevel.addFreshEntity(item);
+                        }
                     }
                 }
             }

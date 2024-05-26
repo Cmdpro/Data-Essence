@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block;
 
-import com.cmdpro.datanessence.block.entity.EssencePointBlockEntity;
+import com.cmdpro.datanessence.api.BaseCapabilityPoint;
 import com.cmdpro.datanessence.block.entity.FluidPointBlockEntity;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import com.cmdpro.datanessence.init.ItemInit;

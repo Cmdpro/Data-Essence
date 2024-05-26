@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.RecipeInit;
 import com.cmdpro.datanessence.screen.databank.Minigame;
 import com.cmdpro.datanessence.screen.databank.MinigameCreator;
+import com.cmdpro.datanessence.screen.databank.MinigameSerializer;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.SpawnPlacements;
@@ -43,7 +44,7 @@ public class ModEventBusEvents {
     public static void registerRegistries(NewRegistryEvent event) {
         DataNEssenceRegistries.PAGE_TYPE_REGISTRY = event.create(new RegistryBuilder<PageSerializer>()
                 .setName(new ResourceLocation(DataNEssence.MOD_ID, "pagetypes")));
-        DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY = event.create(new RegistryBuilder<MinigameCreator>()
+        DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY = event.create(new RegistryBuilder<MinigameSerializer>()
                 .setName(new ResourceLocation(DataNEssence.MOD_ID, "minigames")));
     }
     @SubscribeEvent

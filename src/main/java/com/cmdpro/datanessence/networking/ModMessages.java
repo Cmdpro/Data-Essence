@@ -47,6 +47,16 @@ public class ModMessages {
                 .encoder(PlayerTierSyncS2CPacket::toBytes)
                 .consumerMainThread(PlayerTierSyncS2CPacket::handle)
                 .add();
+        net.messageBuilder(DataBankEntrySyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(DataBankEntrySyncS2CPacket::new)
+                .encoder(DataBankEntrySyncS2CPacket::toBytes)
+                .consumerMainThread(DataBankEntrySyncS2CPacket::handle)
+                .add();
+        net.messageBuilder(PlayerFinishDataBankMinigameC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PlayerFinishDataBankMinigameC2SPacket::new)
+                .encoder(PlayerFinishDataBankMinigameC2SPacket::toBytes)
+                .consumerMainThread(PlayerFinishDataBankMinigameC2SPacket::handle)
+                .add();
 
     }
     public static <MSG> void sendToServer(MSG message) {

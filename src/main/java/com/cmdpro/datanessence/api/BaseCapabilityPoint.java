@@ -1,8 +1,5 @@
-package com.cmdpro.datanessence.block;
+package com.cmdpro.datanessence.api;
 
-import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,7 +14,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -29,7 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public abstract class BaseEssencePoint extends BaseEntityBlock {
+public abstract class BaseCapabilityPoint extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<AttachFace> FACE = BlockStateProperties.ATTACH_FACE;
     protected static final VoxelShape NORTH_AABB = Block.box(4.0D, 4.0D, 12.0D, 12.0D, 12.0D, 16.0D);
@@ -39,7 +39,7 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
     protected static final VoxelShape UP_AABB = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 4.0D, 12.0D);
     protected static final VoxelShape DOWN_AABB = Block.box(4.0D, 12.0D, 4.0D, 12.0D, 16.0D, 12.0D);
 
-    public BaseEssencePoint(Properties pProperties) {
+    public BaseCapabilityPoint(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.FLOOR));
     }
@@ -85,6 +85,17 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
         return null;
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        if (pLevel.getBlockEntity(pPos) instanceof BaseCapabilityPointBlockEntity ent) {
+            if (ent.link != null) {
+                ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
+                pLevel.addFreshEntity(item);
+            }
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         return canAttach(pLevel, pPos, getConnectedDirection(pState).getOpposite());
     }
@@ -102,25 +113,12 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
         BlockPos blockpos = pPos.relative(pDirection);
         return pReader.getBlockState(blockpos).isFaceSturdy(pReader, blockpos, pDirection.getOpposite());
     }
-    @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
-        if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity ent) {
-            if (ent.link != null) {
-                ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
-                pLevel.addFreshEntity(item);
-            }
-        }
-        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
-    }
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        return getConnectedDirection(pState).getOpposite() == pFacing && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
-    }
     public abstract Item getRequiredWire();
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if (entity instanceof BaseEssencePointBlockEntity ent) {
+            if (entity instanceof BaseCapabilityPointBlockEntity ent) {
                 if (pPlayer.isHolding(getRequiredWire())) {
                     pPlayer.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
                         if (data.getLinkFrom() == null) {
@@ -129,9 +127,9 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
                                 DataNEssenceUtil.updatePlayerData(pPlayer);
                             }
                         } else {
-                            if (data.getLinkFrom().getBlockState().getBlock() instanceof BaseEssencePoint other) {
+                            if (data.getLinkFrom().getBlockState().getBlock() instanceof BaseCapabilityPoint other) {
                                 if (other.getRequiredWire() == getRequiredWire() && ent != data.getLinkFrom() && (ent.link == null || !ent.link.equals(data.getLinkFrom().getBlockPos()))) {
-                                    if (data.getLinkFrom() instanceof BaseEssencePointBlockEntity linkFrom) {
+                                    if (data.getLinkFrom() instanceof BaseCapabilityPointBlockEntity linkFrom) {
                                         linkFrom.link = pPos;
                                         linkFrom.updateBlock();
                                         data.setLinkFrom(null);
@@ -153,5 +151,8 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
             }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
+    }
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+        return getConnectedDirection(pState).getOpposite() == pFacing && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 }

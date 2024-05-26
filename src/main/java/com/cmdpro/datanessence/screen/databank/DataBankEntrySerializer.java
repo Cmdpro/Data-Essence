@@ -36,20 +36,20 @@ public class DataBankEntrySerializer {
         ItemStack icon = CraftingHelper.getItemStack(json.getAsJsonObject("icon"), true, false);
         int tier = json.get("tier").getAsInt();
         Component name = Component.translatable(json.get("name").getAsString());
-        List<Minigame> minigames = new ArrayList<>();
+        List<MinigameCreator> minigames = new ArrayList<>();
         int o = 0;
         for (JsonElement i : json.getAsJsonArray("minigames")) {
             JsonObject obj = i.getAsJsonObject();
             if (obj.has("type")) {
-                MinigameCreator minigameSerializer = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get().getValue(ResourceLocation.tryParse(obj.get("type").getAsString()));
-                Minigame minigame = minigameSerializer.fromJson(obj);
+                MinigameSerializer minigameSerializer = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get().getValue(ResourceLocation.tryParse(obj.get("type").getAsString()));
+                MinigameCreator minigame = minigameSerializer.fromJson(obj);
                 minigames.add(minigame);
             } else {
                 throw new JsonSyntaxException("Page type missing in entry JSON for " + entryId.toString() + " in page " + o);
             }
             o++;
         }
-        DataBankEntry entry = new DataBankEntry(entryId, icon, tier, minigames.toArray(new Minigame[0]), name);
+        DataBankEntry entry = new DataBankEntry(entryId, icon, tier, minigames.toArray(new MinigameCreator[0]), name);
         return entry;
     }
     @Nonnull
@@ -58,19 +58,19 @@ public class DataBankEntrySerializer {
         ItemStack icon = buf.readItem();
         int tier = buf.readInt();
         Component name = buf.readComponent();
-        Minigame[] minigames = buf.readList(DataBankEntrySerializer::minigameFromNetwork).toArray(new Minigame[0]);
+        MinigameCreator[] minigames = buf.readList(DataBankEntrySerializer::minigameFromNetwork).toArray(new MinigameCreator[0]);
         DataBankEntry entry = new DataBankEntry(id, icon, tier, minigames, name);
         return entry;
     }
-    public static Minigame minigameFromNetwork(FriendlyByteBuf buf) {
+    public static MinigameCreator minigameFromNetwork(FriendlyByteBuf buf) {
         ResourceLocation type = buf.readResourceLocation();
-        MinigameCreator minigameSerializer = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get().getValue(type);
-        Minigame minigame = minigameSerializer.fromNetwork(buf);
+        MinigameSerializer minigameSerializer = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get().getValue(type);
+        MinigameCreator minigame = minigameSerializer.fromNetwork(buf);
         return minigame;
     }
-    public static void minigameToNetwork(FriendlyByteBuf buf, Minigame page) {
-        buf.writeResourceLocation(DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get().getKey(page.getCreator()));
-        page.getCreator().toNetwork(page, buf);
+    public static void minigameToNetwork(FriendlyByteBuf buf, MinigameCreator creator) {
+        buf.writeResourceLocation(DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get().getKey(creator.getSerializer()));
+        creator.getSerializer().toNetwork(creator, buf);
     }
     public static void toNetwork(FriendlyByteBuf buf, DataBankEntry entry) {
         buf.writeResourceLocation(entry.id);

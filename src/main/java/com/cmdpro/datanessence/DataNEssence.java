@@ -58,6 +58,7 @@ public class DataNEssence
         PageTypeInit.PAGE_TYPES.register(bus);
         BlockInit.BLOCKS.register(bus);
         BlockEntityInit.BLOCK_ENTITIES.register(bus);
+        MinigameInit.MINIGAME_TYPES.register(bus);
         GeckoLib.initialize();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
