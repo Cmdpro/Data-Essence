@@ -23,26 +23,13 @@ public class DataTablet extends Item {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        if (pPlayer.isShiftKeyDown()) {
-            if (pLevel.isClientSide) {
-                DataBankEntries.clientEntries.clear();
-                Minecraft.getInstance().setScreen(new DataBankScreen(Component.empty()));
-            } else {
-                DataNEssenceUtil.DataBankUtil.sendDataBankEntries(pPlayer, new ResourceLocation[] {
-                        new ResourceLocation(DataNEssence.MOD_ID, "test1"),
-                        new ResourceLocation(DataNEssence.MOD_ID, "test2"),
-                        new ResourceLocation(DataNEssence.MOD_ID, "fabricator")
-                });
-            }
+        if (pLevel.isClientSide) {
+            Minecraft.getInstance().setScreen(new DataTabletScreen(Component.empty()));
         } else {
-            if (pLevel.isClientSide) {
-                Minecraft.getInstance().setScreen(new DataTabletScreen(Component.empty()));
-            } else {
-                if (DataNEssenceUtil.DataTabletUtil.getTier(pPlayer) <= 0) {
-                    DataNEssenceUtil.DataTabletUtil.setTier(pPlayer, 1);
-                }
-                DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, new ResourceLocation(DataNEssence.MOD_ID, "fabricator"));
+            if (DataNEssenceUtil.DataTabletUtil.getTier(pPlayer) <= 0) {
+                DataNEssenceUtil.DataTabletUtil.setTier(pPlayer, 1);
             }
+            DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, new ResourceLocation(DataNEssence.MOD_ID, "fabricator"));
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
     }

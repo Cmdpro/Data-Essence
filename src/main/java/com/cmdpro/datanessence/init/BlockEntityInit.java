@@ -54,6 +54,10 @@ public class BlockEntityInit {
             register("fluidbuffer", () ->
                     BlockEntityType.Builder.of(FluidBufferBlockEntity::new,
                             BlockInit.FLUIDBUFFER.get()).build(null));
+    public static final RegistryObject<BlockEntityType<DataBankBlockEntity>> DATABANK =
+            register("databank", () ->
+                    BlockEntityType.Builder.of(DataBankBlockEntity::new,
+                            BlockInit.DATABANK.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> RegistryObject<T> register(final String name, final Supplier<T> blockentity) {

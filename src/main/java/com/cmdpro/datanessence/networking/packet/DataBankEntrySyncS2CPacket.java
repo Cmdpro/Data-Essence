@@ -1,13 +1,17 @@
 package com.cmdpro.datanessence.networking.packet;
 
+import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.cmdpro.datanessence.screen.databank.DataBankEntries;
 import com.cmdpro.datanessence.screen.databank.DataBankEntry;
 import com.cmdpro.datanessence.screen.databank.DataBankEntrySerializer;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.EntrySerializer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
@@ -41,7 +45,8 @@ public class DataBankEntrySyncS2CPacket {
             DataBankEntries.clientEntries.clear();
             for (Map.Entry<ResourceLocation, DataBankEntry> i : entries.entrySet()) {
                 DataBankEntries.clientEntries.put(i.getKey(), i.getValue());
-            };
+            }
+            Minecraft.getInstance().setScreen(new DataBankScreen(Component.empty()));
         });
         return true;
     }

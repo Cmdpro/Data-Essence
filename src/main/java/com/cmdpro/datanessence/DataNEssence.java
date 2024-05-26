@@ -90,6 +90,7 @@ public class DataNEssence
             event.accept(BlockInit.ESSENCEBUFFER);
             event.accept(BlockInit.ITEMBUFFER);
             event.accept(BlockInit.FLUIDBUFFER);
+            event.accept(BlockInit.DATABANK);
         }
     }
     private void setup(final FMLCommonSetupEvent event)
