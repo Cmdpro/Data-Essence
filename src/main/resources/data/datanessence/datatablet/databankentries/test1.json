@@ -10,5 +10,6 @@
       "playerY": 25
     }
   ],
-  "name": "item.datanessence.datatablet.pages.test1.name"
+  "name": "item.datanessence.datatablet.pages.test1.name",
+  "entry": "datanessence:test1"
 }

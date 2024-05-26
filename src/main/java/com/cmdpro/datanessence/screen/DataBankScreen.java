@@ -52,7 +52,7 @@ public class DataBankScreen extends Screen {
             List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
             entries.sort(Comparator.comparingInt((a) -> a.tier));
             for (DataBankEntry i : entries) {
-                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
                     if (i.tier != currentTier) {
                         currentTier = i.tier;
                         y2 += 32;
@@ -140,10 +140,10 @@ public class DataBankScreen extends Screen {
                 if (minigames[minigameProgress].isFinished()) {
                     minigameProgress++;
                     if (minigameProgress >= minigames.length) {
-                        if (!ClientPlayerUnlockedEntries.getUnlocked().contains(clickedEntry.id)) {
-                            ClientPlayerUnlockedEntries.getUnlocked().add(clickedEntry.id);
+                        if (!ClientPlayerUnlockedEntries.getUnlocked().contains(clickedEntry.entry)) {
+                            ClientPlayerUnlockedEntries.getUnlocked().add(clickedEntry.entry);
                         }
-                        ModMessages.sendToServer(new PlayerFinishDataBankMinigameC2SPacket(clickedEntry.id));
+                        ModMessages.sendToServer(new PlayerFinishDataBankMinigameC2SPacket(clickedEntry.entry));
                         screenType = 0;
                     }
                 }
@@ -206,7 +206,7 @@ public class DataBankScreen extends Screen {
             List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
             entries.sort(Comparator.comparingInt((a) -> a.tier));
             for (DataBankEntry i : entries) {
-                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
                     if (i.tier != currentTier) {
                         currentTier = i.tier;
                         y2 += 32;
@@ -252,7 +252,7 @@ public class DataBankScreen extends Screen {
         List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
         entries.sort(Comparator.comparingInt((a) -> a.tier));
         for (DataBankEntry i : entries) {
-            if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+            if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
                 if (i.tier != currentTier) {
                     currentTier = i.tier;
                     y2 += 32;

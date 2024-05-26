@@ -33,6 +33,9 @@ public class DataBankEntrySerializer {
         if (!json.has("minigames")) {
             throw new JsonSyntaxException("Element minigames missing in entry JSON for " + entryId.toString());
         }
+        if (!json.has("entry")) {
+            throw new JsonSyntaxException("Element entry missing in entry JSON for " + entryId.toString());
+        }
         ItemStack icon = CraftingHelper.getItemStack(json.getAsJsonObject("icon"), true, false);
         int tier = json.get("tier").getAsInt();
         Component name = Component.translatable(json.get("name").getAsString());
@@ -49,7 +52,7 @@ public class DataBankEntrySerializer {
             }
             o++;
         }
-        DataBankEntry entry = new DataBankEntry(entryId, icon, tier, minigames.toArray(new MinigameCreator[0]), name);
+        DataBankEntry entry = new DataBankEntry(entryId, icon, tier, minigames.toArray(new MinigameCreator[0]), name, ResourceLocation.tryParse(json.get("entry").getAsString()));
         return entry;
     }
     @Nonnull
@@ -59,7 +62,8 @@ public class DataBankEntrySerializer {
         int tier = buf.readInt();
         Component name = buf.readComponent();
         MinigameCreator[] minigames = buf.readList(DataBankEntrySerializer::minigameFromNetwork).toArray(new MinigameCreator[0]);
-        DataBankEntry entry = new DataBankEntry(id, icon, tier, minigames, name);
+        ResourceLocation entry2 = buf.readResourceLocation();
+        DataBankEntry entry = new DataBankEntry(id, icon, tier, minigames, name, entry2);
         return entry;
     }
     public static MinigameCreator minigameFromNetwork(FriendlyByteBuf buf) {
@@ -78,5 +82,6 @@ public class DataBankEntrySerializer {
         buf.writeInt(entry.tier);
         buf.writeComponent(entry.name);
         buf.writeCollection(Arrays.stream(entry.minigames).toList(), DataBankEntrySerializer::minigameToNetwork);
+        buf.writeResourceLocation(entry.entry);
     }
 }

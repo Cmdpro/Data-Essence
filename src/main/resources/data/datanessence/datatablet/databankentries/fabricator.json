@@ -10,5 +10,6 @@
       "playerY": 25
     }
   ],
-  "name": "item.datanessence.datatablet.pages.fabricator.name"
+  "name": "item.datanessence.datatablet.pages.fabricator.name",
+  "entry": "datanessence:fabricator"
 }
