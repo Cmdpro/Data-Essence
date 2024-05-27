@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
 import com.cmdpro.datanessence.init.BlockEntityInit;
+import com.cmdpro.datanessence.init.ItemInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -64,7 +65,7 @@ public class Fabricator extends BaseEntityBlock {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof FabricatorBlockEntity ent) {
-                if (pPlayer.isShiftKeyDown()) {
+                if (pPlayer.isHolding(ItemInit.MAGICWRENCH.get())) {
                     FabricatorBlockEntity.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
                 } else {
                     NetworkHooks.openScreen(((ServerPlayer) pPlayer), (FabricatorBlockEntity) entity, pPos);
