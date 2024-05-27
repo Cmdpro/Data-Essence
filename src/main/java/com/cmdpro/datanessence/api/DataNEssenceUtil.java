@@ -61,7 +61,7 @@ public class DataNEssenceUtil {
                 Entry entry2 = Entries.entries.get(entry);
                 if (entry2 != null && (entry2.getParentEntry() == null || data.getUnlocked().contains(entry2.getParentEntry().id)) && !data.getUnlocked().contains(entry)) {
                     data.getUnlocked().add(entry);
-                    data.updateUnlockedEntries(player);
+                    data.unlockEntry(player, entry);
                 }
             });
         }
@@ -70,20 +70,13 @@ public class DataNEssenceUtil {
                 Entry entry2 = Entries.entries.get(entry);
                 if (entry2 != null && !data.getUnlocked().contains(entry)) {
                     data.getUnlocked().add(entry);
+                    data.unlockEntry(player, entry);
                     Entry parent = entry2.getParentEntry();
                     while (parent != null) {
                         data.getUnlocked().add(parent.id);
+                        data.unlockEntry(player, parent.id);
                         parent = parent.getParentEntry();
                     }
-                    data.updateUnlockedEntries(player);
-                }
-            });
-        }
-        public static void lockEntry(Player player, ResourceLocation entry) {
-            player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
-                if (!data.getUnlocked().contains(entry)) {
-                    data.getUnlocked().remove(entry);
-                    data.updateUnlockedEntries(player);
                 }
             });
         }

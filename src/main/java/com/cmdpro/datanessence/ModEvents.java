@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.UnlockedEntrySyncS2CPacket;
 import com.cmdpro.datanessence.screen.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.screen.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.screen.datatablet.Entries;

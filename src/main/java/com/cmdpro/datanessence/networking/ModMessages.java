@@ -62,6 +62,11 @@ public class ModMessages {
                 .encoder(PlayerChangeDriveDataC2SPacket::toBytes)
                 .consumerMainThread(PlayerChangeDriveDataC2SPacket::handle)
                 .add();
+        net.messageBuilder(UnlockEntryS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(UnlockEntryS2CPacket::new)
+                .encoder(UnlockEntryS2CPacket::toBytes)
+                .consumerMainThread(UnlockEntryS2CPacket::handle)
+                .add();
 
     }
     public static <MSG> void sendToServer(MSG message) {

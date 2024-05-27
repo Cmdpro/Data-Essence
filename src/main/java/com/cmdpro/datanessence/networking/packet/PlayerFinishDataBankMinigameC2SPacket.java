@@ -32,8 +32,10 @@ public class PlayerFinishDataBankMinigameC2SPacket {
         context.enqueueWork(() -> {
             supplier.get().getSender().getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
                 DataBankEntry entry2 = DataBankEntries.entries.get(entry);
-                if (entry2.tier <= data.getTier()) {
-                    DataNEssenceUtil.DataTabletUtil.unlockEntry(supplier.get().getSender(), entry2.entry);
+                if (entry2 != null) {
+                    if (entry2.tier <= data.getTier()) {
+                        DataNEssenceUtil.DataTabletUtil.unlockEntry(supplier.get().getSender(), entry2.entry);
+                    }
                 }
             });
         });

@@ -53,6 +53,10 @@ public class DataBankScreen extends Screen {
             entries.sort(Comparator.comparingInt((a) -> a.tier));
             for (DataBankEntry i : entries) {
                 if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
+                    Entry entry = Entries.entries.get(i.entry);
+                    if (entry == null || !(entry.getParentEntry() == null || ClientPlayerUnlockedEntries.getUnlocked().contains(entry.getParentEntry().id))) {
+                        continue;
+                    }
                     if (i.tier != currentTier) {
                         currentTier = i.tier;
                         y2 += 32;
@@ -207,6 +211,10 @@ public class DataBankScreen extends Screen {
             entries.sort(Comparator.comparingInt((a) -> a.tier));
             for (DataBankEntry i : entries) {
                 if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
+                    Entry entry = Entries.entries.get(i.entry);
+                    if (entry == null || !(entry.getParentEntry() == null || ClientPlayerUnlockedEntries.getUnlocked().contains(entry.getParentEntry().id))) {
+                        continue;
+                    }
                     if (i.tier != currentTier) {
                         currentTier = i.tier;
                         y2 += 32;
@@ -253,6 +261,10 @@ public class DataBankScreen extends Screen {
         entries.sort(Comparator.comparingInt((a) -> a.tier));
         for (DataBankEntry i : entries) {
             if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
+                Entry entry = Entries.entries.get(i.entry);
+                if (entry == null || !(entry.getParentEntry() == null || ClientPlayerUnlockedEntries.getUnlocked().contains(entry.getParentEntry().id))) {
+                    continue;
+                }
                 if (i.tier != currentTier) {
                     currentTier = i.tier;
                     y2 += 32;

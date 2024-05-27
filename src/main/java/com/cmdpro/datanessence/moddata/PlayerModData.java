@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerDataSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.PlayerTierSyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.UnlockEntryS2CPacket;
 import com.cmdpro.datanessence.networking.packet.UnlockedEntrySyncS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -70,6 +71,12 @@ public class PlayerModData {
     public void updateUnlockedEntries(Player player) {
         updateUnlockedEntries((ServerPlayer)player);
     }
+    public void unlockEntry(ServerPlayer player, ResourceLocation entry) {
+        ModMessages.sendToPlayer(new UnlockEntryS2CPacket(entry), (player));
+    }
+    public void unlockEntry(Player player, ResourceLocation entry) {
+        unlockEntry((ServerPlayer)player, entry);
+    }
     public void sendTier(ServerPlayer player, boolean showIndicator) {
         ModMessages.sendToPlayer(new PlayerTierSyncS2CPacket(tier, showIndicator), player);
     }
@@ -79,6 +86,7 @@ public class PlayerModData {
     public void copyFrom(PlayerModData source) {
         this.unlocked = source.unlocked;
         this.unlockedEssences = source.unlockedEssences;
+        this.tier = source.tier;
     }
     public void saveNBTData(CompoundTag nbt) {
         if (!unlocked.isEmpty()) {
