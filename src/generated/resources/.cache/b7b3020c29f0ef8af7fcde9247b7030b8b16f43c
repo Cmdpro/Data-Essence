@@ -1,9 +1,16 @@
-// 1.20.1	2024-05-22T23:13:22.9883319	Item Models: datanessence
+// 1.20.1	2024-05-26T20:39:27.308097	Item Models: datanessence
 cff6b18d50d23271fc89e5a53f987ece26dea1d8 assets/datanessence/models/item/datatablet.json
 9f2e96c44de5ae8b34bedddc005584c439558dd9 assets/datanessence/models/item/essencepoint.json
+e5f9ca6a62113b3b5236ea39655f795e3922256f assets/datanessence/models/item/essencewire.json
 2d03c6af1e2da5fa57963ea4189edb0071359bdc assets/datanessence/models/item/exoticessencepoint.json
+2ad08fafa3f16345727f1075e345b74be83eb321 assets/datanessence/models/item/exoticessencewire.json
 8482c1dc572a76bcafa6a26a2a944f95ec3211d3 assets/datanessence/models/item/fabricator.json
 a2d932a78b9d97a4e77695234165212e14bbaf24 assets/datanessence/models/item/fluidpoint.json
+549b586b45d8ca95784bf9fa0ac010837164533e assets/datanessence/models/item/fluidwire.json
 6d25df3d3bd1e7dd5b33bda2dc4d5787d5160f34 assets/datanessence/models/item/itempoint.json
+f95f9d2ece5383b1602d5ecbd685b9039a3f8d6b assets/datanessence/models/item/itemwire.json
 d8ea955e0a23e118429319e44508fee4ad28d124 assets/datanessence/models/item/lunaressencepoint.json
+07368e9b5fea8919f1af888e30b9c9d5ff53b31f assets/datanessence/models/item/lunaressencewire.json
+4436228bdb136b7af0cb5f373442fa9154ca54c6 assets/datanessence/models/item/magicwrench.json
 65f138b69c53f8852b7ada8f9c3d8585efea54c8 assets/datanessence/models/item/naturalessencepoint.json
+e852eee0b27f73809a2b49c05ee70d87041b436c assets/datanessence/models/item/naturalessencewire.json

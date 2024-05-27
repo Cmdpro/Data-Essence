@@ -1,4 +1,5 @@
-// 1.20.1	2024-05-23T10:09:46.5450985	Loot Tables
+// 1.20.1	2024-05-26T20:39:27.308097	Loot Tables
+ba8308b89a0da62ffc1c401201f0371fca54a10f data/datanessence/loot_tables/blocks/databank.json
 008e25d2836ccb0421103e4a4048ad3d873607d3 data/datanessence/loot_tables/blocks/essencebuffer.json
 2ce77d56ce3183c1dc5fa8c69f308cb390e3eabe data/datanessence/loot_tables/blocks/essencepoint.json
 342a011c725aaf41d84643f0b638e95e38c9784b data/datanessence/loot_tables/blocks/exoticessencepoint.json

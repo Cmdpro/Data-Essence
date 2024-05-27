@@ -39,21 +39,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockInit.FLUIDBUFFER.get());
         dropSelf(BlockInit.ITEMPOINT.get());
         dropSelf(BlockInit.FLUIDPOINT.get());
-    }
-
-    protected LootTable.Builder createMysteriumOreDrops(Block pBlock, Item item) {
-        return createSilkTouchDispatchTable(pBlock,
-                this.applyExplosionDecay(pBlock,
-                        LootItem.lootTableItem(item)
-                                .apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-                                .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
-    }
-    protected LootTable.Builder createElementalOreDrops(Block pBlock, Item item) {
-        return createSilkTouchDispatchTable(pBlock,
-                this.applyExplosionDecay(pBlock,
-                        LootItem.lootTableItem(item)
-                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(4.0F, 5.0F)))
-                                .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
+        this.add(BlockInit.DATABANK.get(),
+                block -> noDrop());
     }
 
     @Override

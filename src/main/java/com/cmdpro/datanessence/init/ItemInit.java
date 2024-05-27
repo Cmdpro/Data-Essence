@@ -15,6 +15,7 @@ import java.util.function.Supplier;
 
 public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DataNEssence.MOD_ID);
+    public static final RegistryObject<Item> MAGICWRENCH = register("magicwrench", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> ESSENCEWIRE = register("essencewire", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> LUNARESSENCEWIRE = register("lunaressencewire", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> NATURALESSENCEWIRE = register("naturalessencewire", () -> new Item(new Item.Properties()));

@@ -3,7 +3,13 @@
     "datanessence:essencebuffer",
     "datanessence:fluidbuffer",
     "datanessence:essencepoint",
+    "datanessence:lunaressencepoint",
+    "datanessence:naturalessencepoint",
+    "datanessence:exoticessencepoint",
+    "datanessence:itempoint",
+    "datanessence:fluidpoint",
     "datanessence:fabricator",
-    "datanessence:itembuffer"
+    "datanessence:itembuffer",
+    "datanessence:databank"
   ]
 }

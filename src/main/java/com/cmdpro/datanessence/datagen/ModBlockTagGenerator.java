@@ -25,7 +25,13 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockInit.ESSENCEBUFFER.get())
                 .add(BlockInit.FLUIDBUFFER.get())
                 .add(BlockInit.ESSENCEPOINT.get())
+                .add(BlockInit.LUNARESSENCEPOINT.get())
+                .add(BlockInit.NATURALESSENCEPOINT.get())
+                .add(BlockInit.EXOTICESSENCEPOINT.get())
+                .add(BlockInit.ITEMPOINT.get())
+                .add(BlockInit.FLUIDPOINT.get())
                 .add(BlockInit.FABRICATOR.get())
-                .add(BlockInit.ITEMBUFFER.get());
+                .add(BlockInit.ITEMBUFFER.get())
+                .add(BlockInit.DATABANK.get());
     }
 }
