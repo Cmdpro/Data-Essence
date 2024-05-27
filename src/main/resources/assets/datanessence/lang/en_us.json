@@ -18,6 +18,8 @@
   "block.datanessence.itempoint": "Item Point",
   "block.datanessence.fluidpoint": "Fluid Point",
   "block.datanessence.fabricator": "Fabricator",
+  "block.datanessence.fabricator.dontknowhow": "You don't know how to make this recipe!",
+  "block.datanessence.fabricator.notenoughessence": "This fabricator does not have enough essence!",
   "block.datanessence.essencebuffer": "Essence Buffer",
   "block.datanessence.itembuffer": "Item Buffer",
   "block.datanessence.fluidbuffer": "Fluid Buffer",
