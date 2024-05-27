@@ -42,12 +42,17 @@ public class DataBankEntrySyncS2CPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
+            ClientPacketHandler.handlePacket(this, supplier);
+        });
+        return true;
+    }
+    public static class ClientPacketHandler {
+        public static void handlePacket(DataBankEntrySyncS2CPacket msg, Supplier<NetworkEvent.Context> supplier) {
             DataBankEntries.clientEntries.clear();
-            for (Map.Entry<ResourceLocation, DataBankEntry> i : entries.entrySet()) {
+            for (Map.Entry<ResourceLocation, DataBankEntry> i : msg.entries.entrySet()) {
                 DataBankEntries.clientEntries.put(i.getKey(), i.getValue());
             }
             Minecraft.getInstance().setScreen(new DataBankScreen(Component.empty()));
-        });
-        return true;
+        }
     }
 }

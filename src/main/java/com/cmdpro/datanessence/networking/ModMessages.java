@@ -57,6 +57,11 @@ public class ModMessages {
                 .encoder(PlayerFinishDataBankMinigameC2SPacket::toBytes)
                 .consumerMainThread(PlayerFinishDataBankMinigameC2SPacket::handle)
                 .add();
+        net.messageBuilder(PlayerChangeDriveDataC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(PlayerChangeDriveDataC2SPacket::new)
+                .encoder(PlayerChangeDriveDataC2SPacket::toBytes)
+                .consumerMainThread(PlayerChangeDriveDataC2SPacket::handle)
+                .add();
 
     }
     public static <MSG> void sendToServer(MSG message) {

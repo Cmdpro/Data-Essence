@@ -29,14 +29,19 @@ public class EntrySyncS2CPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
+            ClientPacketHandler.handlePacket(this, supplier);
+        });
+        return true;
+    }
+    public static class ClientPacketHandler {
+        public static void handlePacket(EntrySyncS2CPacket msg, Supplier<NetworkEvent.Context> supplier) {
             Entries.entries.clear();
-            for (Map.Entry<ResourceLocation, Entry> i : entries.entrySet()) {
+            for (Map.Entry<ResourceLocation, Entry> i : msg.entries.entrySet()) {
                 Entries.entries.put(i.getKey(), i.getValue());
             }
             for (Entry i : Entries.entries.values()) {
                 i.updateParentEntry();
             }
-        });
-        return true;
+        }
     }
 }

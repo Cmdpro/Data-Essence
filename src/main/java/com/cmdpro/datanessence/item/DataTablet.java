@@ -24,7 +24,7 @@ public class DataTablet extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (pLevel.isClientSide) {
-            Minecraft.getInstance().setScreen(new DataTabletScreen(Component.empty()));
+            Client.openScreen();
         } else {
             if (DataNEssenceUtil.DataTabletUtil.getTier(pPlayer) <= 0) {
                 DataNEssenceUtil.DataTabletUtil.setTier(pPlayer, 1);
@@ -32,5 +32,10 @@ public class DataTablet extends Item {
             DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, new ResourceLocation(DataNEssence.MOD_ID, "fabricator"));
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
+    }
+    public static class Client {
+        public static void openScreen() {
+            Minecraft.getInstance().setScreen(new DataTabletScreen(Component.empty()));
+        }
     }
 }

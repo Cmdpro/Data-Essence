@@ -78,6 +78,8 @@ public class DataNEssence
             event.accept(ItemInit.EXOTICESSENCEWIRE);
             event.accept(ItemInit.ITEMWIRE);
             event.accept(ItemInit.FLUIDWIRE);
+            event.accept(ItemInit.MAGICWRENCH);
+            event.accept(ItemInit.DATADRIVE);
         }
         if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
             event.accept(ItemInit.FABRICATORITEM);
