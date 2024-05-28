@@ -39,10 +39,18 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockInit.FLUIDBUFFER.get());
         dropSelf(BlockInit.ITEMPOINT.get());
         dropSelf(BlockInit.FLUIDPOINT.get());
+        dropSelf(BlockInit.ESSENCECRYSTAL.get());
         this.add(BlockInit.DATABANK.get(),
                 block -> noDrop());
+        this.add(BlockInit.ESSENCECRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemInit.ESSENCESHARD.get()));
     }
-
+    protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
+        return createSilkTouchDispatchTable(pBlock,
+                this.applyExplosionDecay(pBlock,
+                        LootItem.lootTableItem(item)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(8.0F, 12.0F)))
+                                .apply(ApplyBonusCount.addOreBonusCount(Enchantments.BLOCK_FORTUNE))));
+    }
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return BlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).filter((block) -> {

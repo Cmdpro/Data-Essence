@@ -56,6 +56,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(BlockInit.EXOTICESSENCEPOINT);
         evenSimplerBlockItem(BlockInit.ITEMPOINT);
         evenSimplerBlockItem(BlockInit.FLUIDPOINT);
+        evenSimplerBlockItem(BlockInit.ESSENCECRYSTAL);
         /*
         evenSimplerBlockItem(BlockInit.ESSENCEBUFFER);
         evenSimplerBlockItem(BlockInit.FLUIDBUFFER);

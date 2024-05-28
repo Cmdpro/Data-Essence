@@ -49,6 +49,9 @@ public class BlockInit {
     public static final RegistryObject<Block> DATABANK = register("databank",
             () -> new DataBank(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ESSENCECRYSTAL = register("essencecrystal",
+            () -> new EssenceCrystal(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     private static <T extends Block> RegistryObject<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {
         return BLOCKS.register(name, block);

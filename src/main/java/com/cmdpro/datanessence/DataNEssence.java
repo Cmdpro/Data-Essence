@@ -80,6 +80,7 @@ public class DataNEssence
             event.accept(ItemInit.FLUIDWIRE);
             event.accept(ItemInit.MAGICWRENCH);
             event.accept(ItemInit.DATADRIVE);
+            event.accept(ItemInit.ESSENCESHARD);
         }
         if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
             event.accept(ItemInit.FABRICATORITEM);
@@ -93,6 +94,7 @@ public class DataNEssence
             event.accept(BlockInit.ITEMBUFFER);
             event.accept(BlockInit.FLUIDBUFFER);
             event.accept(BlockInit.DATABANK);
+            event.accept(BlockInit.ESSENCECRYSTAL);
         }
     }
     private void setup(final FMLCommonSetupEvent event)

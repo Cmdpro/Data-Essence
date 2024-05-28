@@ -1,0 +1,82 @@
+{
+  "variants": {
+    "facing=down,model=0": {
+      "model": "datanessence:block/essencecrystal",
+      "x": 180
+    },
+    "facing=east,model=0": {
+      "model": "datanessence:block/essencecrystal",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,model=0": {
+      "model": "datanessence:block/essencecrystal",
+      "x": 90
+    },
+    "facing=south,model=0": {
+      "model": "datanessence:block/essencecrystal",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,model=0": {
+      "model": "datanessence:block/essencecrystal"
+    },
+    "facing=west,model=0": {
+      "model": "datanessence:block/essencecrystal",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,model=1": {
+      "model": "datanessence:block/essencecrystal2",
+      "x": 180
+    },
+    "facing=east,model=1": {
+      "model": "datanessence:block/essencecrystal2",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,model=1": {
+      "model": "datanessence:block/essencecrystal2",
+      "x": 90
+    },
+    "facing=south,model=1": {
+      "model": "datanessence:block/essencecrystal2",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,model=1": {
+      "model": "datanessence:block/essencecrystal2"
+    },
+    "facing=west,model=1": {
+      "model": "datanessence:block/essencecrystal2",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,model=2": {
+      "model": "datanessence:block/essencecrystal3",
+      "x": 180
+    },
+    "facing=east,model=2": {
+      "model": "datanessence:block/essencecrystal3",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,model=2": {
+      "model": "datanessence:block/essencecrystal3",
+      "x": 90
+    },
+    "facing=south,model=2": {
+      "model": "datanessence:block/essencecrystal3",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,model=2": {
+      "model": "datanessence:block/essencecrystal3"
+    },
+    "facing=west,model=2": {
+      "model": "datanessence:block/essencecrystal3",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
