@@ -63,7 +63,7 @@ public class EssenceCrystalFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
             if (foundValid) {
-                setBlock(pContext.level(), pos.offset(xOffset, yOffset, zOffset), BlockInit.ESSENCECRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, dir));
+                setBlock(pContext.level(), pos.offset(xOffset, yOffset, zOffset), BlockInit.ESSENCECRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, dir).setValue(EssenceCrystal.MODEL, pContext.random().nextIntBetweenInclusive(0, 2)));
             }
         }
         return true;
