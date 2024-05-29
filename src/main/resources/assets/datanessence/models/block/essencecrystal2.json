@@ -5,6 +5,7 @@
 		"0": "datanessence:block/essencecrystal2",
 		"particle": "datanessence:block/essencecrystal2"
 	},
+	"render_type": "minecraft:translucent",
 	"elements": [
 		{
 			"from": [6, 0, 6],
