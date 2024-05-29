@@ -33,6 +33,9 @@ public class DataDrive extends Item {
                 pTooltipComponents.add(Component.translatable("item.datanessence.datadrive.loaded", Entries.entries.get(ResourceLocation.tryParse(pStack.getTag().getString("dataId"))).name).withStyle(ChatFormatting.GRAY));
             }
         }
+        else {
+            pTooltipComponents.add(Component.translatable("item.datanessence.datadrive.empty").withStyle(ChatFormatting.GRAY));
+        }
     }
 
     @Override
