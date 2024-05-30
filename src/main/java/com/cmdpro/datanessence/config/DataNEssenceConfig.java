@@ -17,17 +17,28 @@ public class DataNEssenceConfig {
         }
     }
     public DataNEssenceConfig(ForgeConfigSpec.Builder builder) {
-        builder.push("destructivePotential");
-        stabilizedShatterSpreadsValue = buildBoolean(builder, "stabilizedShatterSpreads", "all", true, "Should Stabilized Shatters spread the shatter realm?");
+        builder.push("balancing");
+        fluidPointTransferValue = buildInteger(builder, "fluidPointTransfer", "all", 50, 1, 1000000, "How much should a fluid point transfer?");
+        essencePointTransferValue = buildInteger(builder, "essencePointTransfer", "all", 50, 1, 1000000, "How much should an essence point transfer?");
+        itemPointTransferValue = buildInteger(builder, "itemPointTransfer", "all", 4, 1, 64, "How much should an item point transfer? (Applies to all essence point types)");
     }
     private static ForgeConfigSpec.BooleanValue buildBoolean(ForgeConfigSpec.Builder builder, String name, String catagory, boolean defaultValue, String comment) {
         return builder.comment(comment).translation(name).define(name, defaultValue);
     }
-    public static boolean stabilizedShatterSpreads = false;
-    public final ForgeConfigSpec.BooleanValue stabilizedShatterSpreadsValue;
+    private static ForgeConfigSpec.IntValue buildInteger(ForgeConfigSpec.Builder builder, String name, String catagory, int defaultValue, int min, int max, String comment) {
+        return builder.comment(comment).translation(name).defineInRange(name, defaultValue, min, max);
+    }
+    public static int fluidPointTransfer = 50;
+    public static int essencePointTransfer = 50;
+    public static int itemPointTransfer = 4;
+    public final ForgeConfigSpec.IntValue fluidPointTransferValue;
+    public final ForgeConfigSpec.IntValue essencePointTransferValue;
+    public final ForgeConfigSpec.IntValue itemPointTransferValue;
     public static void bake(ModConfig config) {
         try {
-            stabilizedShatterSpreads = COMMON.stabilizedShatterSpreadsValue.get();
+            fluidPointTransfer = COMMON.fluidPointTransferValue.get();
+            essencePointTransfer = COMMON.essencePointTransferValue.get();
+            itemPointTransfer = COMMON.itemPointTransferValue.get();
         } catch (Exception e) {
             DataNEssence.LOGGER.warn("Failed to load DataNEssence config");
             e.printStackTrace();

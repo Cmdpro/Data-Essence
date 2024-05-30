@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block.entity;
 
 import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -77,7 +78,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
                 for (int o = 0; o < resolved2.getSlots(); o++) {
                     ItemStack copy = resolved2.getStackInSlot(o).copy();
                     if (!copy.isEmpty()) {
-                        copy.setCount(Math.clamp(0, 4, copy.getCount()));
+                        copy.setCount(Math.clamp(0, DataNEssenceConfig.itemPointTransfer, copy.getCount()));
                         ItemStack copy2 = copy.copy();
                         int p = 0;
                         while (p < resolved.getSlots()) {
@@ -139,7 +140,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
                 for (int o = 0; o < resolved2.getSlots(); o++) {
                     ItemStack copy = resolved2.getStackInSlot(o).copy();
                     if (!copy.isEmpty()) {
-                        copy.setCount(Math.clamp(0, 4, copy.getCount()));
+                        copy.setCount(Math.clamp(0, DataNEssenceConfig.itemPointTransfer, copy.getCount()));
                         ItemStack copy2 = copy.copy();
                         int p = 0;
                         while (p < resolved.getSlots()) {

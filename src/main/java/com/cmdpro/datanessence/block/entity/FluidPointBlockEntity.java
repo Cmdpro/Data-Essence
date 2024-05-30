@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block.entity;
 
 import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -29,7 +30,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
     public FluidPointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityInit.FLUIDPOINT.get(), pos, state);
     }
-    private final FluidTank fluidHandler = new FluidTank(1000);
+    private final FluidTank fluidHandler = new FluidTank(DataNEssenceConfig.fluidPointTransfer);
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
     @Override
     public void onLoad() {
@@ -76,7 +77,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
                 for (int o = 0; o < resolved2.getTanks(); o++) {
                     FluidStack copy = resolved2.getFluidInTank(o).copy();
                     if (!copy.isEmpty()) {
-                        copy.setAmount(Math.clamp(0, 50, copy.getAmount()));
+                        copy.setAmount(Math.clamp(0, DataNEssenceConfig.fluidPointTransfer, copy.getAmount()));
                         int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
                         resolved2.getFluidInTank(o).shrink(filled);
                     }
@@ -102,7 +103,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
                 for (int o = 0; o < resolved2.getTanks(); o++) {
                     FluidStack copy = resolved2.getFluidInTank(o).copy();
                     if (!copy.isEmpty()) {
-                        copy.setAmount(Math.clamp(0, 50, copy.getAmount()));
+                        copy.setAmount(Math.clamp(0, DataNEssenceConfig.fluidPointTransfer, copy.getAmount()));
                         int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
                         resolved2.getFluidInTank(o).shrink(filled);
                     }

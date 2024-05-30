@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.entity;
 import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -39,17 +40,17 @@ public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity 
     }
     @Override
     public void transfer(EssenceContainer other) {
-        DataNEssenceUtil.transferNaturalEssence(this, other, 10);
+        DataNEssenceUtil.transferNaturalEssence(this, other, DataNEssenceConfig.essencePointTransfer);
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putFloat("essence", getNaturalEssence());
+        tag.putFloat("naturalEssence", getNaturalEssence());
     }
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        setNaturalEssence(nbt.getFloat("essence"));
+        setNaturalEssence(nbt.getFloat("naturalEssence"));
     }
     @Override
     public Color linkColor() {
@@ -58,11 +59,11 @@ public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity 
 
     @Override
     public float getMaxNaturalEssence() {
-        return 10;
+        return DataNEssenceConfig.essencePointTransfer;
     }
 
     @Override
     public void take(EssenceContainer other) {
-        DataNEssenceUtil.transferNaturalEssence(other, this, 10);
+        DataNEssenceUtil.transferNaturalEssence(other, this, DataNEssenceConfig.essencePointTransfer);
     }
 }

@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.entity;
 import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -43,7 +44,7 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity impleme
     }
     @Override
     public void transfer(EssenceContainer other) {
-        DataNEssenceUtil.transferEssence(this, other, 50);
+        DataNEssenceUtil.transferEssence(this, other, DataNEssenceConfig.essencePointTransfer);
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
@@ -58,11 +59,11 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity impleme
 
     @Override
     public float getMaxEssence() {
-        return 50;
+        return DataNEssenceConfig.essencePointTransfer;
     }
 
     @Override
     public void take(EssenceContainer other) {
-        DataNEssenceUtil.transferEssence(other, this, 50);
+        DataNEssenceUtil.transferEssence(other, this, DataNEssenceConfig.essencePointTransfer);
     }
 }

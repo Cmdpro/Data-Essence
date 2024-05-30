@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.entity;
 import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -43,26 +44,26 @@ public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity im
     }
     @Override
     public void transfer(EssenceContainer other) {
-        DataNEssenceUtil.transferLunarEssence(this, other, 10);
+        DataNEssenceUtil.transferLunarEssence(this, other, DataNEssenceConfig.essencePointTransfer);
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
         super.saveAdditional(tag);
-        tag.putFloat("essence", getLunarEssence());
+        tag.putFloat("lunarEssence", getLunarEssence());
     }
     @Override
     public void load(CompoundTag nbt) {
         super.load(nbt);
-        setLunarEssence(nbt.getFloat("essence"));
+        setLunarEssence(nbt.getFloat("lunarEssence"));
     }
 
     @Override
     public float getMaxLunarEssence() {
-        return 10;
+        return DataNEssenceConfig.essencePointTransfer;
     }
 
     @Override
     public void take(EssenceContainer other) {
-        DataNEssenceUtil.transferLunarEssence(other, this, 10);
+        DataNEssenceUtil.transferLunarEssence(other, this, DataNEssenceConfig.essencePointTransfer);
     }
 }
