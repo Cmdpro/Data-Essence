@@ -18,6 +18,10 @@ public class BlockEntityInit {
             register("fabricator", () ->
                     BlockEntityType.Builder.of(FabricatorBlockEntity::new,
                             BlockInit.FABRICATOR.get()).build(null));
+    public static final RegistryObject<BlockEntityType<EssenceBurnerBlockEntity>> ESSENCEBURNER =
+            register("essenceburner", () ->
+                    BlockEntityType.Builder.of(EssenceBurnerBlockEntity::new,
+                            BlockInit.ESSENCEBURNER.get()).build(null));
     public static final RegistryObject<BlockEntityType<EssencePointBlockEntity>> ESSENCEPOINT =
             register("essencepoint", () ->
                     BlockEntityType.Builder.of(EssencePointBlockEntity::new,

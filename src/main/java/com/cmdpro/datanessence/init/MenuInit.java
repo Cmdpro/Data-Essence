@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.init;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.screen.EssenceBurnerMenu;
 import com.cmdpro.datanessence.screen.FabricatorMenu;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -16,6 +17,7 @@ public class MenuInit {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, DataNEssence.MOD_ID);
 
     public static final RegistryObject<MenuType<FabricatorMenu>> FABRICATORMENU = register(FabricatorMenu::new, "fabricator");
+    public static final RegistryObject<MenuType<EssenceBurnerMenu>> ESSENCEBURNERMENU = register(EssenceBurnerMenu::new, "essenceburner");
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> register(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

@@ -3,6 +3,8 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.block.ExoticEssencePoint;
 import com.cmdpro.datanessence.init.*;
 import com.cmdpro.datanessence.renderers.*;
+import com.cmdpro.datanessence.screen.EssenceBurnerMenu;
+import com.cmdpro.datanessence.screen.EssenceBurnerScreen;
 import com.cmdpro.datanessence.screen.FabricatorScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.api.distmarker.Dist;
@@ -28,6 +30,7 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
         MenuScreens.register(MenuInit.FABRICATORMENU.get(), FabricatorScreen::new);
+        MenuScreens.register(MenuInit.ESSENCEBURNERMENU.get(), EssenceBurnerScreen::new);
     }
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
