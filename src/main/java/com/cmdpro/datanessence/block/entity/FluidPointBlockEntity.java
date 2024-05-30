@@ -76,7 +76,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
                 for (int o = 0; o < resolved2.getTanks(); o++) {
                     FluidStack copy = resolved2.getFluidInTank(o).copy();
                     if (!copy.isEmpty()) {
-                        copy.setAmount(Math.clamp(0, 4000, copy.getAmount()));
+                        copy.setAmount(Math.clamp(0, 50, copy.getAmount()));
                         int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
                         resolved2.getFluidInTank(o).shrink(filled);
                     }

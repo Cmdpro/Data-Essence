@@ -43,7 +43,7 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity impleme
     }
     @Override
     public void transfer(EssenceContainer other) {
-        DataNEssenceUtil.transferEssence(this, other, 10);
+        DataNEssenceUtil.transferEssence(this, other, 50);
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
@@ -58,11 +58,11 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity impleme
 
     @Override
     public float getMaxEssence() {
-        return 10;
+        return 50;
     }
 
     @Override
     public void take(EssenceContainer other) {
-        DataNEssenceUtil.transferEssence(other, this, 10);
+        DataNEssenceUtil.transferEssence(other, this, 50);
     }
 }
