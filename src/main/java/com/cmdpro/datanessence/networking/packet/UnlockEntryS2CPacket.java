@@ -1,6 +1,11 @@
 package com.cmdpro.datanessence.networking.packet;
 
+import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
+import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import com.cmdpro.datanessence.screen.datatablet.Entries;
+import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -35,8 +40,14 @@ public class UnlockEntryS2CPacket {
 
     public static class ClientPacketHandler {
         public static void handlePacket(UnlockEntryS2CPacket msg, Supplier<NetworkEvent.Context> supplier) {
-            if (!ClientPlayerUnlockedEntries.getUnlocked().contains(msg.unlocked)) {
-                ClientPlayerUnlockedEntries.getUnlocked().add(msg.unlocked);
+            Entry entry = Entries.entries.get(msg.unlocked);
+            if (entry != null) {
+                if (!ClientPlayerUnlockedEntries.getUnlocked().contains(msg.unlocked)) {
+                    ClientPlayerUnlockedEntries.getUnlocked().add(msg.unlocked);
+                }
+                if (entry.critical) {
+                    ClientDataNEssenceUtil.unlockedCriticalData(entry);
+                }
             }
         }
     }

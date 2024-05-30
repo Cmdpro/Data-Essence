@@ -181,11 +181,16 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
             DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
             if (pBlockEntity.burnTime <= 0) {
                 pBlockEntity.essenceBurnCooldown = 0;
-                if (pBlockEntity.itemHandler.getStackInSlot(0).getItem() instanceof EssenceShard) {
-                    if (ForgeHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING) > 0) {
-                        pBlockEntity.itemHandler.extractItem(1, 1, false);
-                        pBlockEntity.maxBurnTime = ForgeHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING);
-                        pBlockEntity.burnTime = pBlockEntity.maxBurnTime;
+                if (pBlockEntity.itemHandler.getStackInSlot(0).getItem() instanceof EssenceShard shard) {
+                    if (pBlockEntity.getEssence()+shard.essenceAmount <= pBlockEntity.getMaxEssence() &&
+                            pBlockEntity.getLunarEssence()+shard.lunarEssenceAmount <= pBlockEntity.getMaxLunarEssence() &&
+                            pBlockEntity.getNaturalEssence()+shard.naturalEssenceAmount <= pBlockEntity.getMaxNaturalEssence() &&
+                            pBlockEntity.getExoticEssence()+shard.exoticEssenceAmount <= pBlockEntity.getMaxExoticEssence()) {
+                        if (ForgeHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING) > 0) {
+                            pBlockEntity.itemHandler.extractItem(1, 1, false);
+                            pBlockEntity.maxBurnTime = ForgeHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING);
+                            pBlockEntity.burnTime = pBlockEntity.maxBurnTime;
+                        }
                     }
                 }
             } else {

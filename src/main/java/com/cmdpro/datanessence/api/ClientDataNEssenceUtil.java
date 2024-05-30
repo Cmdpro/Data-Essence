@@ -1,7 +1,10 @@
 package com.cmdpro.datanessence.api;
 
+import com.cmdpro.datanessence.screen.datatablet.Entry;
+import com.cmdpro.datanessence.toasts.CriticalDataToast;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -11,6 +14,7 @@ import team.lodestar.lodestone.registry.client.LodestoneRenderTypeRegistry;
 import team.lodestar.lodestone.systems.rendering.VFXBuilders;
 
 import java.awt.*;
+import java.util.Map;
 
 public class ClientDataNEssenceUtil {
     public static void drawSphere(VFXBuilders.WorldVFXBuilder builder, PoseStack stack, Color color, float alpha, float radius, int longs, int lats) {
@@ -24,5 +28,8 @@ public class ClientDataNEssenceUtil {
             level.addParticle(particle, point.x, point.y, point.z, 0, 0, 0);
             length += space;
         }
+    }
+    public static void unlockedCriticalData(Entry entry) {
+        Minecraft.getInstance().getToasts().addToast(new CriticalDataToast(entry));
     }
 }

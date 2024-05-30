@@ -58,7 +58,11 @@ public class EntrySerializer {
             }
             o++;
         }
-        Entry entry = new Entry(entryId, icon, x, y, pages.toArray(new Page[0]), parent, name);
+        boolean critical = false;
+        if (json.has("critical")) {
+            critical = json.get("critical").getAsBoolean();
+        }
+        Entry entry = new Entry(entryId, icon, x, y, pages.toArray(new Page[0]), parent, name, critical);
         return entry;
     }
     @Nonnull
@@ -74,7 +78,8 @@ public class EntrySerializer {
         if (hasParent) {
             parent = buf.readResourceLocation();
         }
-        Entry entry = new Entry(id, icon, x, y, pages, parent, name);
+        boolean critical = buf.readBoolean();
+        Entry entry = new Entry(id, icon, x, y, pages, parent, name, critical);
         return entry;
     }
     public static Page pageFromNetwork(FriendlyByteBuf buf) {
@@ -98,5 +103,6 @@ public class EntrySerializer {
         if (entry.getParentEntry() != null) {
             buf.writeResourceLocation(entry.getParentEntry().id);
         }
+        buf.writeBoolean(entry.critical);
     }
 }

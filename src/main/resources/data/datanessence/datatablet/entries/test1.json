@@ -18,5 +18,6 @@
       "text": "item.datanessence.datatablet.pages.test1.page3.text"
     }
   ],
-  "name": "item.datanessence.datatablet.pages.test1.name"
+  "name": "item.datanessence.datatablet.pages.test1.name",
+  "critical": true
 }

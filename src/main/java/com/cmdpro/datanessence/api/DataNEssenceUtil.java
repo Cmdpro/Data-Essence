@@ -15,6 +15,7 @@ import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.Page;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
+import net.minecraft.client.gui.components.toasts.AdvancementToast;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
