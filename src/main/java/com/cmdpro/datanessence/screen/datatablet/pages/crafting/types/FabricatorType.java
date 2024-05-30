@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.screen.datatablet.pages.crafting.types;
 
+import com.cmdpro.datanessence.init.ItemInit;
 import com.cmdpro.datanessence.init.RecipeInit;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
@@ -19,7 +20,7 @@ public class FabricatorType extends CraftingType {
     public void render(CraftingPage page, DataTabletScreen screen, GuiGraphics pGuiGraphics, int xOffset, int x, int yOffset, int y, Recipe recipe, int pMouseX, int pMouseY) {
         if (recipe instanceof IFabricationRecipe recipe2) {
             pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x, yOffset + y, 10, 196, 123, 60);
-            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(Items.CRAFTING_TABLE), xOffset + x + 98, yOffset + y + 43, pMouseX, pMouseY);
+            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(ItemInit.FABRICATORITEM.get()), xOffset + x + 98, yOffset + y + 43, pMouseX, pMouseY);
             if (recipe2.getEssenceCost() > 0) {
                 pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, x+xOffset+5, y+yOffset+28-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 6, 224-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)));
                 if (pMouseX >= x+xOffset+5 && pMouseY >= y+yOffset+(28-22)) {
