@@ -39,7 +39,7 @@ public class DataBank extends BaseEntityBlock {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof DataBankBlockEntity ent) {
                 if (ent.type != null) {
-                    DataNEssenceUtil.DataBankUtil.sendDataBankEntries(pPlayer, DataBankTypeManager.instance.types.get(ent.type));
+                    DataNEssenceUtil.DataBankUtil.sendDataBankEntries(pPlayer, DataBankTypeManager.types.get(ent.type));
                 }
             }
         }

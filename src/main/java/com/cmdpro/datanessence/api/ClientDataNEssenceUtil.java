@@ -1,5 +1,8 @@
 package com.cmdpro.datanessence.api;
 
+import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
+import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
+import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.toasts.CriticalDataToast;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -8,6 +11,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
 import team.lodestar.lodestone.handlers.RenderHandler;
 import team.lodestar.lodestone.registry.client.LodestoneRenderTypeRegistry;
@@ -19,6 +25,20 @@ import java.util.Map;
 public class ClientDataNEssenceUtil {
     public static void drawSphere(VFXBuilders.WorldVFXBuilder builder, PoseStack stack, Color color, float alpha, float radius, int longs, int lats) {
         builder.setColor(color).setAlpha(alpha).setRenderType(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyWithModifierAndCache(new ResourceLocation("textures/misc/white.png"), b -> b.replaceVertexFormat(VertexFormat.Mode.TRIANGLES).setCullState(LodestoneRenderTypeRegistry.NO_CULL))).renderSphere(stack, radius, longs, lats);
+    }
+    public static BlockState getHiddenBlock(Block block) {
+        for (HiddenBlock i : HiddenBlocksManager.blocks.values()) {
+            if (i.originalBlock == null || i.hiddenAs == null || i.entry == null) {
+                continue;
+            }
+            if (i.originalBlock.equals(block)) {
+                if (!ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
+                    return i.hiddenAs;
+                }
+                break;
+            }
+        }
+        return null;
     }
     public static void drawLine(ParticleOptions particle, Vec3 point1, Vec3 point2, Level level, double space) {
         double distance = point1.distanceTo(point2);

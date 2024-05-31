@@ -1,36 +1,34 @@
-package com.cmdpro.datanessence.screen.databank;
+package com.cmdpro.datanessence.hiddenblocks;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.google.gson.*;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class DataBankTypeManager extends SimpleJsonResourceReloadListener {
+public class HiddenBlocksManager extends SimpleJsonResourceReloadListener {
     protected static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
 
-    public static DataBankTypeManager instance;
-    protected DataBankTypeManager() {
-        super(GSON, "datanessence/datatablet/databanktypes");
+    public static HiddenBlocksManager instance;
+    protected HiddenBlocksManager() {
+        super(GSON, "datanessence/hiddenblocks");
     }
-    public static DataBankTypeManager getOrCreateInstance() {
+    public static HiddenBlocksManager getOrCreateInstance() {
         if (instance == null) {
-            instance = new DataBankTypeManager();
+            instance = new HiddenBlocksManager();
         }
         return instance;
     }
-    public static Map<ResourceLocation, ResourceLocation[]> types;
+    public static Map<ResourceLocation, HiddenBlock> blocks = new HashMap<>();
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
-        types = new HashMap<>();
-        DataNEssence.LOGGER.info("Adding Data and Essence Data Bank Types");
+        blocks = new HashMap<>();
+        DataNEssence.LOGGER.info("Adding Data and Essence Hidden Blocks");
         for (Map.Entry<ResourceLocation, JsonElement> i : pObject.entrySet()) {
             ResourceLocation location = i.getKey();
             if (location.getPath().startsWith("_")) {
@@ -39,13 +37,13 @@ public class DataBankTypeManager extends SimpleJsonResourceReloadListener {
 
             try {
                 JsonObject obj = i.getValue().getAsJsonObject();
-                ResourceLocation[] ids = serializer.read(i.getKey(), obj);
-                types.put(i.getKey(), ids);
+                HiddenBlock block = serializer.read(i.getKey(), obj);
+                blocks.put(i.getKey(), block);
             } catch (IllegalArgumentException | JsonParseException e) {
                 DataNEssence.LOGGER.error("Parsing error loading data bank type {}", location, e);
             }
         }
-        DataNEssence.LOGGER.info("Loaded {} data bank types", types.size());
+        DataNEssence.LOGGER.info("Loaded {} hidden blocks", blocks.size());
     }
-    public static DataBankTypeSerializer serializer = new DataBankTypeSerializer();
+    public static HiddenBlocksSerializer serializer = new HiddenBlocksSerializer();
 }

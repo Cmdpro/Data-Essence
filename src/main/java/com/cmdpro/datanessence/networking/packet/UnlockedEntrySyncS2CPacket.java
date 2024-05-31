@@ -2,6 +2,8 @@ package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -39,6 +41,9 @@ public class UnlockedEntrySyncS2CPacket {
     public static class ClientPacketHandler {
         public static void handlePacket(UnlockedEntrySyncS2CPacket msg, Supplier<NetworkEvent.Context> supplier) {
             ClientPlayerUnlockedEntries.set(msg.unlocked);
+            for (ChunkRenderDispatcher.RenderChunk i : Minecraft.getInstance().levelRenderer.viewArea.chunks) {
+                i.setDirty(false);
+            }
         }
     }
 }

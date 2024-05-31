@@ -3,6 +3,9 @@ package com.cmdpro.datanessence.api;
 import com.cmdpro.datanessence.block.entity.EssenceBufferBlockEntity;
 import com.cmdpro.datanessence.block.entity.FluidBufferBlockEntity;
 import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
+import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
+import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
+import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.networking.ModMessages;
@@ -25,7 +28,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
@@ -96,6 +101,23 @@ public class DataNEssenceUtil {
                 data.sendTier(player, true);
             });
         }
+    }
+    public static BlockState getHiddenBlock(Block block, Player player) {
+        if (player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).isPresent()) {
+            PlayerModData data = player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get();
+            for (HiddenBlock i : HiddenBlocksManager.blocks.values()) {
+                if (i.originalBlock == null || i.hiddenAs == null || i.entry == null) {
+                    continue;
+                }
+                if (i.originalBlock.equals(block)) {
+                    if (!data.getUnlocked().contains(i.entry)) {
+                        return i.hiddenAs;
+                    }
+                    break;
+                }
+            }
+        }
+        return null;
     }
     public static void getEssenceFromBuffersBelow(EssenceContainer container) {
         for (int i = 1; i <= 5; i++) {

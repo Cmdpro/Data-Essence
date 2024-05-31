@@ -6,8 +6,12 @@ import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
@@ -47,6 +51,9 @@ public class UnlockEntryS2CPacket {
                 }
                 if (entry.critical) {
                     ClientDataNEssenceUtil.unlockedCriticalData(entry);
+                }
+                for (ChunkRenderDispatcher.RenderChunk i : Minecraft.getInstance().levelRenderer.viewArea.chunks) {
+                    i.setDirty(false);
                 }
             }
         }

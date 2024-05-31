@@ -67,6 +67,11 @@ public class ModMessages {
                 .encoder(UnlockEntryS2CPacket::toBytes)
                 .consumerMainThread(UnlockEntryS2CPacket::handle)
                 .add();
+        net.messageBuilder(HiddenBlockSyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+                .decoder(HiddenBlockSyncS2CPacket::new)
+                .encoder(HiddenBlockSyncS2CPacket::toBytes)
+                .consumerMainThread(HiddenBlockSyncS2CPacket::handle)
+                .add();
 
     }
     public static <MSG> void sendToServer(MSG message) {

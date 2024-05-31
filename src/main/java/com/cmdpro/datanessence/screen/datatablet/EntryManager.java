@@ -15,7 +15,7 @@ public class EntryManager extends SimpleJsonResourceReloadListener {
 
     public static EntryManager instance;
     protected EntryManager() {
-        super(GSON, "datatablet/entries");
+        super(GSON, "datanessence/datatablet/entries");
     }
     public static EntryManager getOrCreateInstance() {
         if (instance == null) {

@@ -1,15 +1,18 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.BaseEssencePoint;
+import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.moddata.PlayerModData;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.HiddenBlockSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.UnlockedEntrySyncS2CPacket;
 import com.cmdpro.datanessence.screen.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.screen.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.*;
@@ -55,6 +58,7 @@ public class ModEvents {
         event.addListener(EntryManager.getOrCreateInstance());
         event.addListener(DataBankEntryManager.getOrCreateInstance());
         event.addListener(DataBankTypeManager.getOrCreateInstance());
+        event.addListener(HiddenBlocksManager.getOrCreateInstance());
     }
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {
@@ -68,6 +72,7 @@ public class ModEvents {
     }
     protected static void syncToPlayer(ServerPlayer player) {
         ModMessages.sendToPlayer(new EntrySyncS2CPacket(Entries.entries), player);
+        ModMessages.sendToPlayer(new HiddenBlockSyncS2CPacket(HiddenBlocksManager.blocks), player);
     }
     @SubscribeEvent
     public static void onPlayerCloned(PlayerEvent.Clone event) {
