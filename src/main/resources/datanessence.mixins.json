@@ -7,7 +7,7 @@
     "BlockBehaviourMixin"
   ],
   "client": [
-    "client.BlockRenderDispatcherMixin",
+    "client.BlockModelShaperMixin",
     "client.BlockMixin"
   ]
 }
