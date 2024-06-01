@@ -26,6 +26,8 @@
   "block.datanessence.fluidbuffer": "Fluid Buffer",
   "block.datanessence.databank": "Data Bank",
   "item.datanessence.magicwrench": "Magic Wrench (PLACEHOLDER NAME)",
+  "block.datanessence.essencecrystal": "Essence Crystal",
+  "item.datanessence.essenceshard": "Essence Shard",
 
   "item.datanessence.datatablet.pagetype.crafting.fabricator.essence": "%1$s Essence",
   "item.datanessence.datatablet.pagetype.crafting.fabricator.lunaressence": "%1$s Lunar Essence",
