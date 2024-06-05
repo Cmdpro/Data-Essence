@@ -41,6 +41,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(ItemInit.DATATABLET);
         simpleItem(ItemInit.DATADRIVE);
+        simpleItem(ItemInit.ESSENCESHARD);
         simpleItemWithSubdirectory(ItemInit.ESSENCEWIRE, "wires");
         simpleItemWithSubdirectory(ItemInit.LUNARESSENCEWIRE, "wires");
         simpleItemWithSubdirectory(ItemInit.NATURALESSENCEWIRE, "wires");
