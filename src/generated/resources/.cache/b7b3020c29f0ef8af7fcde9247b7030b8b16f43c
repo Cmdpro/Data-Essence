@@ -1,8 +1,9 @@
-// 1.20.1	2024-05-29T00:52:25.295782483	Item Models: datanessence
+// 1.20.1	2024-06-05T12:20:18.3937056	Item Models: datanessence
 a98cabc842f44b1cf80a827aa076fd1210f28589 assets/datanessence/models/item/datadrive.json
 cff6b18d50d23271fc89e5a53f987ece26dea1d8 assets/datanessence/models/item/datatablet.json
 d64f81d4befc4dc962300a1b72e2f6abed96b394 assets/datanessence/models/item/essencecrystal.json
 9f2e96c44de5ae8b34bedddc005584c439558dd9 assets/datanessence/models/item/essencepoint.json
+6d37820af287d68475dddd5969936095c135331d assets/datanessence/models/item/essenceshard.json
 e5f9ca6a62113b3b5236ea39655f795e3922256f assets/datanessence/models/item/essencewire.json
 2d03c6af1e2da5fa57963ea4189edb0071359bdc assets/datanessence/models/item/exoticessencepoint.json
 2ad08fafa3f16345727f1075e345b74be83eb321 assets/datanessence/models/item/exoticessencewire.json

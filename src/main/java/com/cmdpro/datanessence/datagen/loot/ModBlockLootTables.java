@@ -40,6 +40,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockInit.ITEMPOINT.get());
         dropSelf(BlockInit.FLUIDPOINT.get());
         dropSelf(BlockInit.ESSENCECRYSTAL.get());
+        dropSelf(BlockInit.ESSENCEBURNER.get());
         this.add(BlockInit.DATABANK.get(),
                 block -> noDrop());
         this.add(BlockInit.ESSENCECRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemInit.ESSENCESHARD.get()));
