@@ -79,8 +79,10 @@ public class DataNEssenceUtil {
                     data.unlockEntry(player, entry);
                     Entry parent = entry2.getParentEntry();
                     while (parent != null) {
-                        data.getUnlocked().add(parent.id);
-                        data.unlockEntry(player, parent.id);
+                        if (!data.getUnlocked().contains(parent.id)) {
+                            data.getUnlocked().add(parent.id);
+                            data.unlockEntry(player, parent.id);
+                        }
                         parent = parent.getParentEntry();
                     }
                 }
