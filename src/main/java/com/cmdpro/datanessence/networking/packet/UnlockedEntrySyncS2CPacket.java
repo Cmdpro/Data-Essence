@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.networking.packet;
 
+import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import net.minecraft.client.Minecraft;
@@ -41,9 +42,7 @@ public class UnlockedEntrySyncS2CPacket {
     public static class ClientPacketHandler {
         public static void handlePacket(UnlockedEntrySyncS2CPacket msg, Supplier<NetworkEvent.Context> supplier) {
             ClientPlayerUnlockedEntries.set(msg.unlocked);
-            for (ChunkRenderDispatcher.RenderChunk i : Minecraft.getInstance().levelRenderer.viewArea.chunks) {
-                i.setDirty(false);
-            }
+            ClientDataNEssenceUtil.updateWorld();
         }
     }
 }

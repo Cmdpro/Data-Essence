@@ -52,9 +52,7 @@ public class UnlockEntryS2CPacket {
                 if (entry.critical) {
                     ClientDataNEssenceUtil.unlockedCriticalData(entry);
                 }
-                for (ChunkRenderDispatcher.RenderChunk i : Minecraft.getInstance().levelRenderer.viewArea.chunks) {
-                    i.setDirty(false);
-                }
+                ClientDataNEssenceUtil.updateWorld();
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksSerializer;
@@ -49,9 +50,7 @@ public class HiddenBlockSyncS2CPacket {
             for (Map.Entry<ResourceLocation, HiddenBlock> i : msg.blocks.entrySet()) {
                 HiddenBlocksManager.blocks.put(i.getKey(), i.getValue());
             }
-            for (ChunkRenderDispatcher.RenderChunk i : Minecraft.getInstance().levelRenderer.viewArea.chunks) {
-                i.setDirty(false);
-            }
+            ClientDataNEssenceUtil.updateWorld();
         }
     }
 }

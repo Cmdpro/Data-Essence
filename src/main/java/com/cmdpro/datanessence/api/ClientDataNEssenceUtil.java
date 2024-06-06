@@ -8,6 +8,7 @@ import com.cmdpro.datanessence.toasts.CriticalDataToast;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -51,5 +52,10 @@ public class ClientDataNEssenceUtil {
     }
     public static void unlockedCriticalData(Entry entry) {
         Minecraft.getInstance().getToasts().addToast(new CriticalDataToast(entry));
+    }
+    public static void updateWorld() {
+        for (ChunkRenderDispatcher.RenderChunk i : Minecraft.getInstance().levelRenderer.viewArea.chunks) {
+            i.setDirty(false);
+        }
     }
 }
