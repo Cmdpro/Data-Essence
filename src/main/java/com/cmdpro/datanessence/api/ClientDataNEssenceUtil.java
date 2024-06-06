@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.api;
 
+import com.cmdpro.datanessence.ClientModEvents;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
@@ -52,6 +53,7 @@ public class ClientDataNEssenceUtil {
     }
     public static void unlockedCriticalData(Entry entry) {
         Minecraft.getInstance().getToasts().addToast(new CriticalDataToast(entry));
+        ClientModEvents.progressionProcessor.setActive(true);
     }
     public static void updateWorld() {
         for (ChunkRenderDispatcher.RenderChunk i : Minecraft.getInstance().levelRenderer.viewArea.chunks) {
