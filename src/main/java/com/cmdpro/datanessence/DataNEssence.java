@@ -97,6 +97,9 @@ public class DataNEssence
             event.accept(BlockInit.FLUIDBUFFER);
             event.accept(BlockInit.DATABANK);
             event.accept(BlockInit.ESSENCECRYSTAL);
+            event.accept(BlockInit.DECOESSENCEBUFFER);
+            event.accept(BlockInit.DECOITEMBUFFER);
+            event.accept(BlockInit.DECOFLUIDBUFFER);
         }
     }
     private void setup(final FMLCommonSetupEvent event)

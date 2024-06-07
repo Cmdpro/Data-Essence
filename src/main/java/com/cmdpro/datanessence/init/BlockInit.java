@@ -55,6 +55,15 @@ public class BlockInit {
     public static final RegistryObject<Block> ESSENCECRYSTAL = register("essencecrystal",
             () -> new EssenceCrystal(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> DECOESSENCEBUFFER = register("decoessencebuffer",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> DECOFLUIDBUFFER = register("decofluidbuffer",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> DECOITEMBUFFER = register("decoitembuffer",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     private static <T extends Block> RegistryObject<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {
         return BLOCKS.register(name, block);

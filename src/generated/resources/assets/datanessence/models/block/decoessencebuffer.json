@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "datanessence:block/buffer/essencebuffertopbottom",
+    "side": "datanessence:block/buffer/essencebufferside"
+  }
+}

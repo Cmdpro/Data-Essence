@@ -28,6 +28,9 @@
   "item.datanessence.magicwrench": "Magic Wrench (PLACEHOLDER NAME)",
   "block.datanessence.essencecrystal": "Essence Crystal",
   "item.datanessence.essenceshard": "Essence Shard",
+  "block.datanessence.decoessencebuffer": "Essence Buffer (Decorative)",
+  "block.datanessence.decoitembuffer": "Item Buffer (Decorative)",
+  "block.datanessence.decofluidbuffer": "Fluid Buffer (Decorative)",
 
   "item.datanessence.datatablet.pagetype.crafting.fabricator.essence": "%1$s Essence",
   "item.datanessence.datatablet.pagetype.crafting.fabricator.lunaressence": "%1$s Lunar Essence",
