@@ -30,6 +30,7 @@ public class DataTablet extends Item {
                 DataNEssenceUtil.DataTabletUtil.setTier(pPlayer, 1);
             }
             DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, new ResourceLocation(DataNEssence.MOD_ID, "fabricator"));
+            DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, new ResourceLocation(DataNEssence.MOD_ID, "datatablet"));
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
     }
