@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
@@ -20,14 +21,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
-        /*
-        blockWithItem(BlockInit.ESSENCEBUFFER);
-        blockWithItem(BlockInit.ITEMBUFFER);
-        blockWithItem(BlockInit.FLUIDBUFFER);
-        */
+
+        bufferBlock(BlockInit.ESSENCEBUFFER);
+        bufferBlock(BlockInit.ITEMBUFFER);
+        bufferBlock(BlockInit.FLUIDBUFFER);
+
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+    private void bufferBlock(RegistryObject<Block> blockRegistryObject) {
+        ResourceLocation loc = blockRegistryObject.getKey().location();
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath() + "side"), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath() + "topbottom")));
     }
 }
