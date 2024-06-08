@@ -4,7 +4,6 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.*;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

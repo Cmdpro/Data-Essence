@@ -17,19 +17,16 @@ import java.nio.charset.MalformedInputException;
 import java.util.List;
 
 public class TextPage extends Page {
-    public TextPage(Component text, ResourceLocation font) {
+    public TextPage(Component text) {
         this.text = text;
-        this.font = font;
     }
     public Component text;
-    public ResourceLocation font;
     public int textYOffset() {
         return 0;
     }
     @Override
     public void render(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset) {
         MutableComponent component = this.text.copy();
-        component.withStyle(component.getStyle().withFont(font));
         List<FormattedCharSequence> text = Minecraft.getInstance().font.split(component, DataTabletScreen.imageWidth - 8);
         int offsetY = 0;
         for (FormattedCharSequence i : text) {
