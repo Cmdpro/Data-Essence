@@ -131,7 +131,6 @@ public class DataTabletScreen extends Screen {
             drawEntries(graphics, delta, mouseX, mouseY);
             graphics.pose().pushPose();
             graphics.pose().translate(0, 0, 399);
-            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.datatablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y+8, 0xFFc90d8b);
             graphics.blit(TEXTURE, x+3, y+3, 48, 166, 4, 4);
             graphics.blit(TEXTURE, x+3, y+imageHeight-7, 48, 170, 4, 4);
             graphics.blit(TEXTURE, x+imageWidth-7, y+3, 52, 166, 4, 4);
@@ -157,6 +156,9 @@ public class DataTabletScreen extends Screen {
                     }
                 }
             }
+            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.datatablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
+        } else if (screenType == 2) {
+            graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.name, x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
         }
     }
     public void drawPage(Page page, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
