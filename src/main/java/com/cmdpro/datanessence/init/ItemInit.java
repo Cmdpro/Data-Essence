@@ -32,6 +32,10 @@ public class ItemInit {
     public static final RegistryObject<Item> EXOTICESSENCEPOINTITEM = register("exoticessencepoint", () -> new ExoticEssencePointItem(BlockInit.EXOTICESSENCEPOINT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ITEMPOINTITEM = register("itempoint", () -> new ItemPointItem(BlockInit.ITEMPOINT.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLUIDPOINTITEM = register("fluidpoint", () -> new FluidPointItem(BlockInit.FLUIDPOINT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> ESSENCEBOMB = register("essencebomb", () -> new EssenceBombItem(new Item.Properties()));
+    public static final RegistryObject<Item> LUNARESSENCEBOMB = register("lunaressencebomb", () -> new LunarEssenceBombItem(new Item.Properties()));
+    public static final RegistryObject<Item> NATURALESSENCEBOMB = register("naturalessencebomb", () -> new NaturalEssenceBombItem(new Item.Properties()));
+    public static final RegistryObject<Item> EXOTICESSENCEBOMB = register("exoticessencebomb", () -> new ExoticEssenceBombItem(new Item.Properties()));
     private static <T extends Item> RegistryObject<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);
     }
