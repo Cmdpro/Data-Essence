@@ -64,6 +64,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(BlockInit.DECOITEMBUFFER);
         evenSimplerBlockItem(BlockInit.DECOFLUIDBUFFER);
 
+        evenSimplerBlockItem(BlockInit.ANCIENTROCKCOLUMN);
+        evenSimplerBlockItem(BlockInit.ANCIENTROCKBRICKS);
+        evenSimplerBlockItem(BlockInit.ANCIENTROCKTILES);
+        evenSimplerBlockItem(BlockInit.ENERGIZEDANCIENTROCKCOLUMN);
+
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),

@@ -31,6 +31,10 @@
   "block.datanessence.decoessencebuffer": "Essence Buffer (Decorative)",
   "block.datanessence.decoitembuffer": "Item Buffer (Decorative)",
   "block.datanessence.decofluidbuffer": "Fluid Buffer (Decorative)",
+  "block.datanessence.ancientrocktiles": "Ancient Rock Tiles",
+  "block.datanessence.ancientrockbricks": "Ancient Rock Bricks",
+  "block.datanessence.ancientrockcolumn": "Ancient Rock Column",
+  "block.datanessence.energizedancientrockcolumn": "Energized Ancient Rock Column",
 
   "item.datanessence.datatablet.pagetype.crafting.fabricator.essence": "%1$s Essence",
   "item.datanessence.datatablet.pagetype.crafting.fabricator.lunaressence": "%1$s Lunar Essence",

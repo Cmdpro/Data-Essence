@@ -103,6 +103,10 @@ public class DataNEssence
             event.accept(BlockInit.DECOESSENCEBUFFER);
             event.accept(BlockInit.DECOITEMBUFFER);
             event.accept(BlockInit.DECOFLUIDBUFFER);
+            event.accept(BlockInit.ANCIENTROCKCOLUMN);
+            event.accept(BlockInit.ANCIENTROCKBRICKS);
+            event.accept(BlockInit.ANCIENTROCKTILES);
+            event.accept(BlockInit.ENERGIZEDANCIENTROCKCOLUMN);
         }
     }
     private void setup(final FMLCommonSetupEvent event)

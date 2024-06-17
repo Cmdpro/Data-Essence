@@ -1,8 +1,12 @@
-// 1.20.1	2024-06-07T13:47:37.9210396	Loot Tables
+// 1.20.1	2024-06-17T02:44:14.819638478	Loot Tables
+b4354da465a7e9ff14ce14bafa63350f6346c170 data/datanessence/loot_tables/blocks/ancientrockbricks.json
+c9fbf441a13022935d8828f62ff7a50e3c01f1fc data/datanessence/loot_tables/blocks/ancientrockcolumn.json
+c84d0f233b1046818b2cb3cf6057a78798279234 data/datanessence/loot_tables/blocks/ancientrocktiles.json
 ba8308b89a0da62ffc1c401201f0371fca54a10f data/datanessence/loot_tables/blocks/databank.json
 cdd10e5c8f70d292ccee4dba6df2dc0cb43b66ae data/datanessence/loot_tables/blocks/decoessencebuffer.json
 82b1918746406f02b7f1b16287192bf30cecc1c9 data/datanessence/loot_tables/blocks/decofluidbuffer.json
 ae2ccc932fdb2065198cb23a9560fa909f9923f0 data/datanessence/loot_tables/blocks/decoitembuffer.json
+07bc294cfd989994f92e5a71d0590466b4c942bf data/datanessence/loot_tables/blocks/energizedancientrockcolumn.json
 008e25d2836ccb0421103e4a4048ad3d873607d3 data/datanessence/loot_tables/blocks/essencebuffer.json
 0a8a003541ec1f1addf8e31f7822e39276a7aae2 data/datanessence/loot_tables/blocks/essenceburner.json
 c9db1eb8ff145a03df7fbb35f475b259fc596310 data/datanessence/loot_tables/blocks/essencecrystal.json
