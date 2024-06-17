@@ -1,0 +1,17 @@
+{
+  "icon": {
+    "item": "datanessence:fabricator"
+  },
+  "x": 0,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:crafting",
+      "text": "item.datanessence.data_tablet.pages.fabricator.page1.text",
+      "recipes": [
+        "datanessence:crafting/fabricator"
+      ]
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.fabricator.name"
+}

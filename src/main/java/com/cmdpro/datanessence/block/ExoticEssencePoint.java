@@ -21,7 +21,7 @@ public class ExoticEssencePoint extends BaseEssencePoint {
 
     @Override
     public Item getRequiredWire() {
-        return ItemInit.EXOTICESSENCEWIRE.get();
+        return ItemInit.EXOTIC_ESSENCE_WIRE.get();
     }
 
     @Nullable
@@ -32,7 +32,7 @@ public class ExoticEssencePoint extends BaseEssencePoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.EXOTICESSENCEPOINT.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityInit.EXOTIC_ESSENCE_POINT.get(),
                 ExoticEssencePointBlockEntity::tick);
     }
 }

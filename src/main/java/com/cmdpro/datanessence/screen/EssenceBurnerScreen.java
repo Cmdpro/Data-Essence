@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EssenceBurnerScreen extends AbstractContainerScreen<EssenceBurnerMenu> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/essenceburner.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/essence_burner.png");
     public EssenceBurnerScreen(EssenceBurnerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
@@ -68,9 +68,9 @@ public class EssenceBurnerScreen extends AbstractContainerScreen<EssenceBurnerMe
                 if (pMouseX <= x + 8+7 && pMouseY <= y + 69) {
                     component.clear();
                     if (ClientPlayerData.getUnlockedEssences()[0]) {
-                        component.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.essence", menu.blockEntity.getEssence()).getVisualOrderText());
+                        component.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.essence", menu.blockEntity.getEssence()).getVisualOrderText());
                     } else {
-                        component.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", menu.blockEntity.getEssence()).getVisualOrderText());
+                        component.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", menu.blockEntity.getEssence()).getVisualOrderText());
                     }
                 }
             }
@@ -80,9 +80,9 @@ public class EssenceBurnerScreen extends AbstractContainerScreen<EssenceBurnerMe
                 if (pMouseX <= x + 19+7 && pMouseY <= y + 69) {
                     component.clear();
                     if (ClientPlayerData.getUnlockedEssences()[1]) {
-                        component.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.lunaressence", menu.blockEntity.getLunarEssence()).getVisualOrderText());
+                        component.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.lunar_essence", menu.blockEntity.getLunarEssence()).getVisualOrderText());
                     } else {
-                        component.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", menu.blockEntity.getLunarEssence()).getVisualOrderText());
+                        component.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", menu.blockEntity.getLunarEssence()).getVisualOrderText());
                     }
                 }
             }
@@ -92,9 +92,9 @@ public class EssenceBurnerScreen extends AbstractContainerScreen<EssenceBurnerMe
                 if (pMouseX <= x + 30+7 && pMouseY <= y + 69) {
                     component.clear();
                     if (ClientPlayerData.getUnlockedEssences()[2]) {
-                        component.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.naturalessence", menu.blockEntity.getNaturalEssence()).getVisualOrderText());
+                        component.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.natural_essence", menu.blockEntity.getNaturalEssence()).getVisualOrderText());
                     } else {
-                        component.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", menu.blockEntity.getNaturalEssence()).getVisualOrderText());
+                        component.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", menu.blockEntity.getNaturalEssence()).getVisualOrderText());
                     }
                 }
             }
@@ -104,9 +104,9 @@ public class EssenceBurnerScreen extends AbstractContainerScreen<EssenceBurnerMe
                 if (pMouseX <= x + 41+7 && pMouseY <= y + 69) {
                     component.clear();
                     if (ClientPlayerData.getUnlockedEssences()[3]) {
-                        component.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.exoticessence", menu.blockEntity.getExoticEssence()).getVisualOrderText());
+                        component.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.exotic_essence", menu.blockEntity.getExoticEssence()).getVisualOrderText());
                     } else {
-                        component.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", menu.blockEntity.getExoticEssence()).getVisualOrderText());
+                        component.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", menu.blockEntity.getExoticEssence()).getVisualOrderText());
                     }
                 }
             }

@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.function.Supplier;
 
 public class PageTypeInit {
-    public static final DeferredRegister<PageSerializer> PAGE_TYPES = DeferredRegister.create(new ResourceLocation(DataNEssence.MOD_ID, "pagetypes"), DataNEssence.MOD_ID);
+    public static final DeferredRegister<PageSerializer> PAGE_TYPES = DeferredRegister.create(new ResourceLocation(DataNEssence.MOD_ID, "page_types"), DataNEssence.MOD_ID);
 
     public static final RegistryObject<CraftingPageSerializer> CRAFTINGPAGE = register("crafting", () -> CraftingPageSerializer.INSTANCE);
     public static final RegistryObject<TextPageSerializer> TEXTPAGE = register("text", () -> TextPageSerializer.INSTANCE);

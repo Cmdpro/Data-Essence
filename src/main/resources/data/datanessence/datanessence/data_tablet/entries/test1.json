@@ -1,0 +1,24 @@
+{
+  "icon": {
+    "item": "datanessence:data_tablet"
+  },
+  "x": 0,
+  "y": 4,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": "item.datanessence.data_tablet.pages.test1.page1.text"
+    },
+    {
+      "type": "datanessence:text",
+      "text": "item.datanessence.data_tablet.pages.test1.page2.text",
+      "font": "datanessence:ancient"
+    },
+    {
+      "type": "datanessence:text",
+      "text": "item.datanessence.data_tablet.pages.test1.page3.text"
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.test1.name",
+  "critical": true
+}

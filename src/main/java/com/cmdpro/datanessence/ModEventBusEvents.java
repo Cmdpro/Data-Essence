@@ -43,7 +43,7 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void registerRegistries(NewRegistryEvent event) {
         DataNEssenceRegistries.PAGE_TYPE_REGISTRY = event.create(new RegistryBuilder<PageSerializer>()
-                .setName(new ResourceLocation(DataNEssence.MOD_ID, "pagetypes")));
+                .setName(new ResourceLocation(DataNEssence.MOD_ID, "page_types")));
         DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY = event.create(new RegistryBuilder<MinigameSerializer>()
                 .setName(new ResourceLocation(DataNEssence.MOD_ID, "minigames")));
     }

@@ -17,11 +17,11 @@ public class ThrownLunarEssenceBombProjectile extends ThrowableItemProjectile {
         super(pEntityType, pLevel);
     }
     public ThrownLunarEssenceBombProjectile(LivingEntity pShooter, Level pLevel) {
-        super(EntityInit.LUNARESSENCEBOMB.get(), pShooter, pLevel);
+        super(EntityInit.LUNAR_ESSENCE_BOMB.get(), pShooter, pLevel);
     }
     @Override
     protected Item getDefaultItem() {
-        return ItemInit.LUNARESSENCEBOMB.get();
+        return ItemInit.LUNAR_ESSENCE_BOMB.get();
     }
     @Override
     protected void onHit(HitResult pResult) {

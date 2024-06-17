@@ -2,8 +2,8 @@
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "essencecrystal2",
-		"particle": "essencecrystal2"
+		"0": "essence_crystal_2",
+		"particle": "essence_crystal_2"
 	},
 	"elements": [
 		{

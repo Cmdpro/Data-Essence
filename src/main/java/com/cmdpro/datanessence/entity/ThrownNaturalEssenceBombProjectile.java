@@ -21,11 +21,11 @@ public class ThrownNaturalEssenceBombProjectile extends ThrowableItemProjectile 
         super(pEntityType, pLevel);
     }
     public ThrownNaturalEssenceBombProjectile(LivingEntity pShooter, Level pLevel) {
-        super(EntityInit.NATURALESSENCEBOMB.get(), pShooter, pLevel);
+        super(EntityInit.NATURAL_ESSENCE_BOMB.get(), pShooter, pLevel);
     }
     @Override
     protected Item getDefaultItem() {
-        return ItemInit.NATURALESSENCEBOMB.get();
+        return ItemInit.NATURAL_ESSENCE_BOMB.get();
     }
 
     @Override

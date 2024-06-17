@@ -21,7 +21,7 @@ public class NaturalEssencePoint extends BaseEssencePoint {
 
     @Override
     public Item getRequiredWire() {
-        return ItemInit.NATURALESSENCEWIRE.get();
+        return ItemInit.NATURAL_ESSENCE_WIRE.get();
     }
 
     @Nullable
@@ -32,7 +32,7 @@ public class NaturalEssencePoint extends BaseEssencePoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.NATURALESSENCEPOINT.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityInit.NATURAL_ESSENCE_POINT.get(),
                 NaturalEssencePointBlockEntity::tick);
     }
 }

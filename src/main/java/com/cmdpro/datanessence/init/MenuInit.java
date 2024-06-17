@@ -17,7 +17,7 @@ public class MenuInit {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, DataNEssence.MOD_ID);
 
     public static final RegistryObject<MenuType<FabricatorMenu>> FABRICATORMENU = register(FabricatorMenu::new, "fabricator");
-    public static final RegistryObject<MenuType<EssenceBurnerMenu>> ESSENCEBURNERMENU = register(EssenceBurnerMenu::new, "essenceburner");
+    public static final RegistryObject<MenuType<EssenceBurnerMenu>> ESSENCEBURNERMENU = register(EssenceBurnerMenu::new, "essence_burner");
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> register(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

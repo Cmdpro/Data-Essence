@@ -17,7 +17,7 @@ public class DataBankEntryManager extends SimpleJsonResourceReloadListener {
 
     public static DataBankEntryManager instance;
     protected DataBankEntryManager() {
-        super(GSON, "datanessence/datatablet/databankentries");
+        super(GSON, "datanessence/data_tablet/data_bank_entries");
     }
     public static DataBankEntryManager getOrCreateInstance() {
         if (instance == null) {

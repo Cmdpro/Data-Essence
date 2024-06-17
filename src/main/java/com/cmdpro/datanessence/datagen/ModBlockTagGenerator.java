@@ -22,16 +22,16 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(BlockInit.ESSENCEBUFFER.get())
-                .add(BlockInit.FLUIDBUFFER.get())
-                .add(BlockInit.ESSENCEPOINT.get())
-                .add(BlockInit.LUNARESSENCEPOINT.get())
-                .add(BlockInit.NATURALESSENCEPOINT.get())
-                .add(BlockInit.EXOTICESSENCEPOINT.get())
-                .add(BlockInit.ITEMPOINT.get())
-                .add(BlockInit.FLUIDPOINT.get())
+                .add(BlockInit.ESSENCE_BUFFER.get())
+                .add(BlockInit.FLUID_BUFFER.get())
+                .add(BlockInit.ESSENCE_POINT.get())
+                .add(BlockInit.LUNAR_ESSENCE_POINT.get())
+                .add(BlockInit.NATURAL_ESSENCE_POINT.get())
+                .add(BlockInit.EXOTIC_ESSENCE_POINT.get())
+                .add(BlockInit.ITEM_POINT.get())
+                .add(BlockInit.FLUID_POINT.get())
                 .add(BlockInit.FABRICATOR.get())
-                .add(BlockInit.ITEMBUFFER.get())
-                .add(BlockInit.DATABANK.get());
+                .add(BlockInit.ITEM_BUFFER.get())
+                .add(BlockInit.DATA_BANK.get());
     }
 }

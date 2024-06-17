@@ -121,7 +121,7 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
     public static class Serializer implements RecipeSerializer<ShapelessFabricationRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(DataNEssence.MOD_ID,"shapelessrunicrecipe");
+                new ResourceLocation(DataNEssence.MOD_ID,"shapeless_runic_recipe");
 
         @Override
         public ShapelessFabricationRecipe fromJson(ResourceLocation id, JsonObject json) {

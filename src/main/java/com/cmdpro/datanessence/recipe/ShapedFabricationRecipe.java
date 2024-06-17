@@ -315,7 +315,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
     public static class Serializer implements RecipeSerializer<ShapedFabricationRecipe> {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID =
-                new ResourceLocation(DataNEssence.MOD_ID,"shapedfabricationrecipe");
+                new ResourceLocation(DataNEssence.MOD_ID,"shaped_fabrication_recipe");
 
         @Override
         public ShapedFabricationRecipe fromJson(ResourceLocation id, JsonObject json) {

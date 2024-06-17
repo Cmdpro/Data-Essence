@@ -1,0 +1,22 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": 1000,
+  "lunarEssenceCost": 750,
+  "naturalEssenceCost": 500,
+  "exoticEssenceCost": 250,
+  "entry": "datanessence:test2",
+  "pattern": [
+    "aaa",
+    "aaa",
+    "aaa"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:cobblestone"
+    }
+  },
+  "result": {
+    "item": "minecraft:stone",
+    "count": 4
+  }
+}

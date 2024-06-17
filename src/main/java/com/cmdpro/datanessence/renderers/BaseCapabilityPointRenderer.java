@@ -72,7 +72,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         public ResourceLocation texture;
         @Override
         public ResourceLocation getModelResource(T object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/essencepoint.geo.json");
+            return new ResourceLocation(DataNEssence.MOD_ID, "geo/essence_point.geo.json");
         }
 
         @Override
@@ -82,7 +82,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
 
         @Override
         public ResourceLocation getAnimationResource(T animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/essencepoint.animation.json");
+            return new ResourceLocation(DataNEssence.MOD_ID, "animations/essence_point.animation.json");
         }
     }
 }

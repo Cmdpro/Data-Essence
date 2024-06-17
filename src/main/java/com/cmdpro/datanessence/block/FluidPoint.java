@@ -21,7 +21,7 @@ public class FluidPoint extends BaseCapabilityPoint {
 
     @Override
     public Item getRequiredWire() {
-        return ItemInit.FLUIDWIRE.get();
+        return ItemInit.FLUID_WIRE.get();
     }
 
     @Nullable
@@ -32,7 +32,7 @@ public class FluidPoint extends BaseCapabilityPoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.FLUIDPOINT.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityInit.FLUID_POINT.get(),
                 FluidPointBlockEntity::tick);
     }
 }

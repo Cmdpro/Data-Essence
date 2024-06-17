@@ -25,12 +25,12 @@ public class DataNEssenceCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher){
         dispatcher.register(Commands.literal(DataNEssence.MOD_ID)
                 .requires(source -> source.hasPermission(4))
-                .then(Commands.literal("resetlearned")
+                .then(Commands.literal("reset_learned")
                         .executes((command) -> {
                             return resetlearned(command);
                         })
                 )
-                .then(Commands.literal("settier")
+                .then(Commands.literal("set_tier")
                         .then(Commands.argument("tier", IntegerArgumentType.integer(0))
                                 .executes((command) -> {
                                     return settier(command);
@@ -54,7 +54,7 @@ public class DataNEssenceCommands {
             int tier = command.getArgument("tier", int.class);
             DataNEssenceUtil.DataTabletUtil.setTier(player, tier);
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.datanessence.settier", tier);
+                return Component.translatable("commands.datanessence.set_tier", tier);
             }, true);
         }
         return Command.SINGLE_SUCCESS;
@@ -66,7 +66,7 @@ public class DataNEssenceCommands {
                 data.getUnlocked().clear();
                 data.updateUnlockedEntries(player);
                 command.getSource().sendSuccess(() -> {
-                    return Component.translatable("commands.datanessence.resetlearned");
+                    return Component.translatable("commands.datanessence.reset_learned");
                 }, true);
             });
         }
@@ -81,14 +81,14 @@ public class DataNEssenceCommands {
                     if (!data.getUnlocked().contains(entry)) {
                         DataNEssenceUtil.DataTabletUtil.unlockEntryAndParents(player, entry);
                         command.getSource().sendSuccess(() -> {
-                            return Component.translatable("commands.datanessence.unlock.unlockentry", entry);
+                            return Component.translatable("commands.datanessence.unlock.unlock_entry", entry);
                         }, true);
                     } else {
-                        throw new CommandRuntimeException(Component.translatable("commands.datanessence.unlock.entryalreadyunlocked", entry));
+                        throw new CommandRuntimeException(Component.translatable("commands.datanessence.unlock.entry_already_unlocked", entry));
                     }
                 });
             } else {
-                throw new CommandRuntimeException(Component.translatable("commands.datanessence.unlock.entrydoesntexist", entry));
+                throw new CommandRuntimeException(Component.translatable("commands.datanessence.unlock.entry_doesnt_exist", entry));
             }
         }
         return Command.SINGLE_SUCCESS;

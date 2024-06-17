@@ -16,7 +16,7 @@ public class HiddenBlocksManager extends SimpleJsonResourceReloadListener {
 
     public static HiddenBlocksManager instance;
     protected HiddenBlocksManager() {
-        super(GSON, "datanessence/hiddenblocks");
+        super(GSON, "datanessence/hidden_blocks");
     }
     public static HiddenBlocksManager getOrCreateInstance() {
         if (instance == null) {

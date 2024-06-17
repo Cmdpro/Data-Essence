@@ -14,17 +14,17 @@ public class ItemPointItemRenderer extends GeoItemRenderer<ItemPointItem> {
     public static class Model extends GeoModel<ItemPointItem> {
         @Override
         public ResourceLocation getModelResource(ItemPointItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/essencepoint.geo.json");
+            return new ResourceLocation(DataNEssence.MOD_ID, "geo/essence_point.geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(ItemPointItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "textures/block/itempoint.png");
+            return new ResourceLocation(DataNEssence.MOD_ID, "textures/block/item_point.png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(ItemPointItem animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/essencepoint.animation.json");
+            return new ResourceLocation(DataNEssence.MOD_ID, "animations/essence_point.animation.json");
         }
     }
 }

@@ -32,7 +32,7 @@ import java.util.Map;
 public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(DataNEssence.MOD_ID, "fabrication");
     public final static ResourceLocation TEXTURE =
-            new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/datatabletcrafting.png");
+            new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
     private final IDrawable background;
     private final IDrawable icon;
     private final ICraftingGridHelper craftingGridHelper;
@@ -40,7 +40,7 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
     public FabricatorRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createDrawable(TEXTURE, 10, 196, 123, 60);
         this.craftingGridHelper = guiHelper.createCraftingGridHelper();
-        icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemInit.FABRICATORITEM.get()));
+        icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemInit.FABRICATOR_ITEM.get()));
     }
 
     @Override
@@ -95,9 +95,9 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
                 if (mouseX <= 8 && mouseY <= 28) {
                     tooltip.clear();
                     if (ClientPlayerData.getUnlockedEssences()[0]) {
-                        tooltip.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.essence", recipe.getEssenceCost()));
+                        tooltip.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.essence", recipe.getEssenceCost()));
                     } else {
-                        tooltip.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", recipe.getEssenceCost()));
+                        tooltip.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe.getEssenceCost()));
                     }
                 }
             }
@@ -107,9 +107,9 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
                 if (mouseX <= 16 && mouseY <= 28) {
                     tooltip.clear();
                     if (ClientPlayerData.getUnlockedEssences()[1]) {
-                        tooltip.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.lunaressence", recipe.getLunarEssenceCost()));
+                        tooltip.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.lunar_essence", recipe.getLunarEssenceCost()));
                     } else {
-                        tooltip.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", recipe.getLunarEssenceCost()));
+                        tooltip.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe.getLunarEssenceCost()));
                     }
                 }
             }
@@ -119,9 +119,9 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
                 if (mouseX <= 8 && mouseY <= 54) {
                     tooltip.clear();
                     if (ClientPlayerData.getUnlockedEssences()[2]) {
-                        tooltip.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.naturalessence", recipe.getNaturalEssenceCost()));
+                        tooltip.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.natural_essence", recipe.getNaturalEssenceCost()));
                     } else {
-                        tooltip.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", recipe.getNaturalEssenceCost()));
+                        tooltip.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe.getNaturalEssenceCost()));
                     }
                 }
             }
@@ -131,9 +131,9 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
                 if (mouseX <= 16 && mouseY <= 54) {
                     tooltip.clear();
                     if (ClientPlayerData.getUnlockedEssences()[3]) {
-                        tooltip.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.exoticessence", recipe.getExoticEssenceCost()));
+                        tooltip.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.exotic_essence", recipe.getExoticEssenceCost()));
                     } else {
-                        tooltip.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", recipe.getExoticEssenceCost()));
+                        tooltip.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe.getExoticEssenceCost()));
                     }
                 }
             }

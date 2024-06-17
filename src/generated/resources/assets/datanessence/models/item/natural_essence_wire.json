@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "datanessence:item/wires/natural_essence_wire"
+  }
+}

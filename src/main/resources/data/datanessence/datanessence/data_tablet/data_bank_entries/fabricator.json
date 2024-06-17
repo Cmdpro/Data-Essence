@@ -1,0 +1,15 @@
+{
+  "icon": {
+    "item": "datanessence:fabricator"
+  },
+  "tier": 1,
+  "minigames": [
+    {
+      "type": "datanessence:test",
+      "playerX": 50,
+      "playerY": 25
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.fabricator.name",
+  "entry": "datanessence:fabricator"
+}

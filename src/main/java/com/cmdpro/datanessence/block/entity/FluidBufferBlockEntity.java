@@ -22,7 +22,7 @@ public class FluidBufferBlockEntity extends BlockEntity {
     private final FluidTank fluidHandler = new FluidTank(1000);
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
     public FluidBufferBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(BlockEntityInit.FLUIDBUFFER.get(), pPos, pBlockState);
+        super(BlockEntityInit.FLUID_BUFFER.get(), pPos, pBlockState);
     }
 
     @Override

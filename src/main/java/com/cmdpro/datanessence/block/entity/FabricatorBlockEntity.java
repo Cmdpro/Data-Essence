@@ -191,10 +191,10 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                         pLevel.addFreshEntity(entity);
                         pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
                     } else {
-                        pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.dontknowhow"));
+                        pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.dont_know_how"));
                     }
                 } else {
-                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.notenoughessence"));
+                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.not_enough_essence"));
                 }
             }
         }

@@ -1,6 +1,0 @@
-{
-  "parent": "datanessence:block/essencepoint",
-  "textures": {
-    "particle": "datanessence:block/lunaressencepoint"
-  }
-}

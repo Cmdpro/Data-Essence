@@ -98,7 +98,7 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
     public EssenceBurnerBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.ESSENCEBURNER.get(), pos, state);
+        super(BlockEntityInit.ESSENCE_BURNER.get(), pos, state);
         maxBurnTime = 1;
     }
     @Nonnull

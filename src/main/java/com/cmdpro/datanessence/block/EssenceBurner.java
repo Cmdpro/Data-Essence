@@ -73,7 +73,7 @@ public class EssenceBurner extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.ESSENCEBURNER.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityInit.ESSENCE_BURNER.get(),
                 EssenceBurnerBlockEntity::tick);
     }
 }

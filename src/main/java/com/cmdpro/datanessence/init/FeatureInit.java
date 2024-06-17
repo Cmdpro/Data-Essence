@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 public class FeatureInit {
     public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES,
             DataNEssence.MOD_ID);
-    public static final RegistryObject<Feature<NoneFeatureConfiguration>> ESSENCECRYSTAL = register("essencecrystal", () -> new EssenceCrystalFeature(NoneFeatureConfiguration.CODEC));
+    public static final RegistryObject<Feature<NoneFeatureConfiguration>> ESSENCE_CRYSTAL = register("essence_crystal", () -> new EssenceCrystalFeature(NoneFeatureConfiguration.CODEC));
 
     private static <T extends Feature<?>> RegistryObject<T> register(final String name, final Supplier<T> feature) {
         return FEATURES.register(name, feature);

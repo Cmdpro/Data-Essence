@@ -15,11 +15,11 @@ public class ThrownExoticEssenceBombProjectile extends ThrowableItemProjectile {
     }
 
     public ThrownExoticEssenceBombProjectile(LivingEntity pShooter, Level pLevel) {
-        super(EntityInit.EXOTICESSENCEBOMB.get(), pShooter, pLevel);
+        super(EntityInit.EXOTIC_ESSENCE_BOMB.get(), pShooter, pLevel);
     }
     @Override
     protected Item getDefaultItem() {
-        return ItemInit.EXOTICESSENCEBOMB.get();
+        return ItemInit.EXOTIC_ESSENCE_BOMB.get();
     }
 
 }

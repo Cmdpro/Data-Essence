@@ -30,7 +30,7 @@ import java.awt.*;
 
 public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity implements GeoBlockEntity {
     public ItemPointBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.ITEMPOINT.get(), pos, state);
+        super(BlockEntityInit.ITEM_POINT.get(), pos, state);
     }
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -53,7 +53,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
 
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.essencepoint.idle", Animation.LoopType.LOOP));
+        event.getController().setAnimation(RawAnimation.begin().then("animation.essence_point.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
     @Override

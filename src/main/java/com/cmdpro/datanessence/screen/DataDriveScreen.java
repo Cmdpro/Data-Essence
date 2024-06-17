@@ -25,7 +25,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 
 public class DataDriveScreen extends Screen {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/datatablet.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
     public DataDriveScreen(Component pTitle, boolean offhand) {
         super(pTitle);
         offsetX = (imageWidth/2);
@@ -98,7 +98,7 @@ public class DataDriveScreen extends Screen {
         drawEntries(graphics, delta, mouseX, mouseY);
         graphics.pose().pushPose();
         graphics.pose().translate(0, 0, 399);
-        graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.datadrive.text", ClientPlayerData.getTier()), x+(imageWidth/2), y+8, 0xFFc90d8b);
+        graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.data_drive.text", ClientPlayerData.getTier()), x+(imageWidth/2), y+8, 0xFFc90d8b);
         graphics.blit(TEXTURE, x+3, y+3, 48, 166, 4, 4);
         graphics.blit(TEXTURE, x+3, y+imageHeight-7, 48, 170, 4, 4);
         graphics.blit(TEXTURE, x+imageWidth-7, y+3, 52, 166, 4, 4);

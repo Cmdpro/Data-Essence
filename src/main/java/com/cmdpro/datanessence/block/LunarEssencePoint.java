@@ -21,7 +21,7 @@ public class LunarEssencePoint extends BaseEssencePoint {
 
     @Override
     public Item getRequiredWire() {
-        return ItemInit.LUNARESSENCEWIRE.get();
+        return ItemInit.LUNAR_ESSENCE_WIRE.get();
     }
 
     @Nullable
@@ -32,7 +32,7 @@ public class LunarEssencePoint extends BaseEssencePoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.LUNARESSENCEPOINT.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityInit.LUNAR_ESSENCE_POINT.get(),
                 LunarEssencePointBlockEntity::tick);
     }
 }

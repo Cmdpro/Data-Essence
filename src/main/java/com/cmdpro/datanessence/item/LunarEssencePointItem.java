@@ -24,7 +24,7 @@ public class LunarEssencePointItem extends BlockItem implements GeoItem {
     }
 
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.essencepoint.hand", Animation.LoopType.LOOP));
+        event.getController().setAnimation(RawAnimation.begin().then("animation.essence_point.hand", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
     @Override

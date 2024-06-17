@@ -1,0 +1,6 @@
+{
+  "parent": "datanessence:block/essence_point",
+  "textures": {
+    "particle": "datanessence:block/natural_essence_point"
+  }
+}

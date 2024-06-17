@@ -20,12 +20,12 @@ import java.awt.*;
 
 public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity implements GeoBlockEntity {
     public LunarEssencePointBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.LUNARESSENCEPOINT.get(), pos, state);
+        super(BlockEntityInit.LUNAR_ESSENCE_POINT.get(), pos, state);
     }
 
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.essencepoint.idle", Animation.LoopType.LOOP));
+        event.getController().setAnimation(RawAnimation.begin().then("animation.essence_point.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
     @Override

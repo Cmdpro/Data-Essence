@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "datanessence:block/energized_ancient_rock_column_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "datanessence:block/energized_ancient_rock_column"
+    },
+    "axis=z": {
+      "model": "datanessence:block/energized_ancient_rock_column_horizontal",
+      "x": 90
+    }
+  }
+}

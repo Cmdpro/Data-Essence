@@ -18,7 +18,7 @@ public class DataBankTypeManager extends SimpleJsonResourceReloadListener {
 
     public static DataBankTypeManager instance;
     protected DataBankTypeManager() {
-        super(GSON, "datanessence/datatablet/databanktypes");
+        super(GSON, "datanessence/data_tablet/data_bank_types");
     }
     public static DataBankTypeManager getOrCreateInstance() {
         if (instance == null) {

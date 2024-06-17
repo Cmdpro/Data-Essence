@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "datanessence:block/buffer/item_buffer_top_bottom",
+    "side": "datanessence:block/buffer/item_buffer_side"
+  }
+}

@@ -30,11 +30,11 @@ public class DataDrive extends Item {
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
         if (pStack.hasTag()) {
             if (pStack.getTag().contains("dataId")) {
-                pTooltipComponents.add(Component.translatable("item.datanessence.datadrive.loaded", Entries.entries.get(ResourceLocation.tryParse(pStack.getTag().getString("dataId"))).name).withStyle(ChatFormatting.GRAY));
+                pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.loaded", Entries.entries.get(ResourceLocation.tryParse(pStack.getTag().getString("dataId"))).name).withStyle(ChatFormatting.GRAY));
             }
         }
         else {
-            pTooltipComponents.add(Component.translatable("item.datanessence.datadrive.empty").withStyle(ChatFormatting.GRAY));
+            pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.empty").withStyle(ChatFormatting.GRAY));
         }
     }
 

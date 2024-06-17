@@ -22,7 +22,7 @@ public class ItemPoint extends BaseCapabilityPoint {
 
     @Override
     public Item getRequiredWire() {
-        return ItemInit.ITEMWIRE.get();
+        return ItemInit.ITEM_WIRE.get();
     }
 
     @Nullable
@@ -43,7 +43,7 @@ public class ItemPoint extends BaseCapabilityPoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.ITEMPOINT.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityInit.ITEM_POINT.get(),
                 ItemPointBlockEntity::tick);
     }
 }

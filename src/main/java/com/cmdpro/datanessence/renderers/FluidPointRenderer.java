@@ -29,7 +29,7 @@ public class FluidPointRenderer extends BaseCapabilityPointRenderer<FluidPointBl
     EntityRenderDispatcher renderDispatcher;
 
     public FluidPointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(new ResourceLocation(DataNEssence.MOD_ID, "textures/block/fluidpoint.png")));
+        super(new Model(new ResourceLocation(DataNEssence.MOD_ID, "textures/block/fluid_point.png")));
         renderDispatcher = rendererProvider.getEntityRenderer();
     }
 }

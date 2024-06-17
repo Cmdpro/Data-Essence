@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "datanessence:block/deco_essence_buffer_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "datanessence:block/deco_essence_buffer"
+    },
+    "axis=z": {
+      "model": "datanessence:block/deco_essence_buffer_horizontal",
+      "x": 90
+    }
+  }
+}

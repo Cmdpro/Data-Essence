@@ -33,7 +33,7 @@ import software.bernie.geckolib.GeckoLib;
 @Mod.EventBusSubscriber(modid = DataNEssence.MOD_ID)
 public class DataNEssence
 {
-    public static final ResourceKey<DamageType> magicProjectile = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "magicprojectile"));
+    public static final ResourceKey<DamageType> magicProjectile = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "magic_projectile"));
     public static final String MOD_ID = "datanessence";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -72,41 +72,41 @@ public class DataNEssence
 
         }
         if (event.getTabKey() == CreativeModeTabInit.ITEMS.getKey()) {
-            event.accept(ItemInit.DATATABLET);
-            event.accept(ItemInit.ESSENCEWIRE);
-            event.accept(ItemInit.LUNARESSENCEWIRE);
-            event.accept(ItemInit.NATURALESSENCEWIRE);
-            event.accept(ItemInit.EXOTICESSENCEWIRE);
-            event.accept(ItemInit.ITEMWIRE);
-            event.accept(ItemInit.FLUIDWIRE);
-            event.accept(ItemInit.MAGICWRENCH);
-            event.accept(ItemInit.DATADRIVE);
-            event.accept(ItemInit.ESSENCESHARD);
-            event.accept(ItemInit.ESSENCEBOMB);
-            event.accept(ItemInit.LUNARESSENCEBOMB);
-            event.accept(ItemInit.NATURALESSENCEBOMB);
-            event.accept(ItemInit.EXOTICESSENCEBOMB);
+            event.accept(ItemInit.DATA_TABLET);
+            event.accept(ItemInit.ESSENCE_WIRE);
+            event.accept(ItemInit.LUNAR_ESSENCE_WIRE);
+            event.accept(ItemInit.NATURAL_ESSENCE_WIRE);
+            event.accept(ItemInit.EXOTIC_ESSENCE_WIRE);
+            event.accept(ItemInit.ITEM_WIRE);
+            event.accept(ItemInit.FLUID_WIRE);
+            event.accept(ItemInit.MAGIC_WRENCH);
+            event.accept(ItemInit.DATA_DRIVE);
+            event.accept(ItemInit.ESSENCE_SHARD);
+            event.accept(ItemInit.ESSENCE_BOMB);
+            event.accept(ItemInit.LUNAR_ESSENCE_BOMB);
+            event.accept(ItemInit.NATURAL_ESSENCE_BOMB);
+            event.accept(ItemInit.EXOTIC_ESSENCE_BOMB);
         }
         if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
-            event.accept(ItemInit.FABRICATORITEM);
-            event.accept(ItemInit.ESSENCEPOINTITEM);
-            event.accept(ItemInit.LUNARESSENCEPOINTITEM);
-            event.accept(ItemInit.NATURALESSENCEPOINTITEM);
-            event.accept(ItemInit.EXOTICESSENCEPOINTITEM);
-            event.accept(ItemInit.ITEMPOINTITEM);
-            event.accept(ItemInit.FLUIDPOINTITEM);
-            event.accept(BlockInit.ESSENCEBUFFER);
-            event.accept(BlockInit.ITEMBUFFER);
-            event.accept(BlockInit.FLUIDBUFFER);
-            event.accept(BlockInit.DATABANK);
-            event.accept(BlockInit.ESSENCECRYSTAL);
-            event.accept(BlockInit.DECOESSENCEBUFFER);
-            event.accept(BlockInit.DECOITEMBUFFER);
-            event.accept(BlockInit.DECOFLUIDBUFFER);
-            event.accept(BlockInit.ANCIENTROCKCOLUMN);
-            event.accept(BlockInit.ANCIENTROCKBRICKS);
-            event.accept(BlockInit.ANCIENTROCKTILES);
-            event.accept(BlockInit.ENERGIZEDANCIENTROCKCOLUMN);
+            event.accept(ItemInit.FABRICATOR_ITEM);
+            event.accept(ItemInit.ESSENCE_POINT_ITEM);
+            event.accept(ItemInit.LUNAR_ESSENCE_POINT_ITEM);
+            event.accept(ItemInit.NATURAL_ESSENCE_POINT_ITEM);
+            event.accept(ItemInit.EXOTIC_ESSENCE_POINT_ITEM);
+            event.accept(ItemInit.ITEM_POINT_ITEM);
+            event.accept(ItemInit.FLUID_POINT_ITEM);
+            event.accept(BlockInit.ESSENCE_BUFFER);
+            event.accept(BlockInit.ITEM_BUFFER);
+            event.accept(BlockInit.FLUID_BUFFER);
+            event.accept(BlockInit.DATA_BANK);
+            event.accept(BlockInit.ESSENCE_CRYSTAL);
+            event.accept(BlockInit.DECO_ESSENCE_BUFFER);
+            event.accept(BlockInit.DECO_ITEM_BUFFER);
+            event.accept(BlockInit.DECO_FLUID_BUFFER);
+            event.accept(BlockInit.ANCIENT_ROCK_COLUMN);
+            event.accept(BlockInit.ANCIENT_ROCK_BRICKS);
+            event.accept(BlockInit.ANCIENT_ROCK_TILES);
+            event.accept(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN);
         }
     }
     private void setup(final FMLCommonSetupEvent event)

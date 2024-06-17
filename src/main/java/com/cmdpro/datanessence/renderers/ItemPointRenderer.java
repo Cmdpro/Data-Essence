@@ -12,7 +12,7 @@ public class ItemPointRenderer extends BaseCapabilityPointRenderer<ItemPointBloc
     EntityRenderDispatcher renderDispatcher;
 
     public ItemPointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(new ResourceLocation(DataNEssence.MOD_ID, "textures/block/itempoint.png")));
+        super(new Model(new ResourceLocation(DataNEssence.MOD_ID, "textures/block/item_point.png")));
         renderDispatcher = rendererProvider.getEntityRenderer();
     }
 }

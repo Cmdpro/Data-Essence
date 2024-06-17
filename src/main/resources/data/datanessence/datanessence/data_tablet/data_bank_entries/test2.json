@@ -1,0 +1,15 @@
+{
+  "icon": {
+    "item": "datanessence:data_tablet"
+  },
+  "tier": 2,
+  "minigames": [
+    {
+      "type": "datanessence:test",
+      "playerX": 50,
+      "playerY": 25
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.test2.name",
+  "entry": "datanessence:test2"
+}

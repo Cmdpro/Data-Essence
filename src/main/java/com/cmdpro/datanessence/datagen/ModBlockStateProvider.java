@@ -22,18 +22,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
-        bufferBlock(BlockInit.ESSENCEBUFFER);
-        bufferBlock(BlockInit.ITEMBUFFER);
-        bufferBlock(BlockInit.FLUIDBUFFER);
+        bufferBlock(BlockInit.ESSENCE_BUFFER);
+        bufferBlock(BlockInit.ITEM_BUFFER);
+        bufferBlock(BlockInit.FLUID_BUFFER);
 
-        ancientDecoBlockWithItem(BlockInit.ANCIENTROCKBRICKS);
-        ancientDecoBlockWithItem(BlockInit.ANCIENTROCKTILES);
-        ancientDecoCubeColumn(BlockInit.ANCIENTROCKCOLUMN);
-        ancientDecoCubeColumn(BlockInit.ENERGIZEDANCIENTROCKCOLUMN);
+        ancientDecoBlockWithItem(BlockInit.ANCIENT_ROCK_BRICKS);
+        ancientDecoBlockWithItem(BlockInit.ANCIENT_ROCK_TILES);
+        ancientDecoCubeColumn(BlockInit.ANCIENT_ROCK_COLUMN);
+        ancientDecoCubeColumn(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN);
 
-        bufferDecoBlock(BlockInit.DECOESSENCEBUFFER);
-        bufferDecoBlock(BlockInit.DECOITEMBUFFER);
-        bufferDecoBlock(BlockInit.DECOFLUIDBUFFER);
+        bufferDecoBlock(BlockInit.DECO_ESSENCE_BUFFER);
+        bufferDecoBlock(BlockInit.DECO_ITEM_BUFFER);
+        bufferDecoBlock(BlockInit.DECO_FLUID_BUFFER);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
@@ -53,10 +53,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void bufferBlock(RegistryObject<Block> blockRegistryObject) {
         ResourceLocation loc = blockRegistryObject.getKey().location();
-        simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath() + "side"), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath() + "topbottom")));
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath() + "_side"), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath() + "_top_bottom")));
     }
     private void bufferDecoBlock(RegistryObject<Block> blockRegistryObject) {
         ResourceLocation loc = blockRegistryObject.getKey().location();
-        axisBlock((RotatedPillarBlock)blockRegistryObject.get(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath().replaceFirst("deco", "") + "side"), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath().replaceFirst("deco", "") + "topbottom"));
+        axisBlock((RotatedPillarBlock)blockRegistryObject.get(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath().replaceFirst("deco_", "") + "_side"), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath().replaceFirst("deco_", "") + "_top_bottom"));
     }
 }

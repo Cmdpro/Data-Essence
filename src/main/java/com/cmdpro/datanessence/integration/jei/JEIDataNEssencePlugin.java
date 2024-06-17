@@ -38,7 +38,7 @@ public class JEIDataNEssencePlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ItemInit.FABRICATORITEM.get()), FABRICATIONRECIPE);
+        registration.addRecipeCatalyst(new ItemStack(ItemInit.FABRICATOR_ITEM.get()), FABRICATIONRECIPE);
     }
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {

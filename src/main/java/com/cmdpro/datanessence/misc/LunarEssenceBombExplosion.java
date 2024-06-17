@@ -173,15 +173,15 @@ public class LunarEssenceBombExplosion extends Explosion {
                                     if (level.getBlockState(blockPos).isAir()) {
                                         if (level.getBlockState(blockPos.below()).isCollisionShapeFullBlock(level, blockPos.below())) {
                                             found = true;
-                                            level.setBlockAndUpdate(blockPos, BlockInit.ESSENCECRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, Direction.UP).setValue(EssenceCrystal.MODEL, random.nextIntBetweenInclusive(0, 2)));
+                                            level.setBlockAndUpdate(blockPos, BlockInit.ESSENCE_CRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, Direction.UP).setValue(EssenceCrystal.MODEL, random.nextIntBetweenInclusive(0, 2)));
                                         } else {
                                             break;
                                         }
                                     }
                                 }
                                 if (!found) {
-                                    LootTable loottable = ((ServerLevel)level).getServer().getLootData().getLootTable(BlockInit.ESSENCECRYSTAL.get().getLootTable());
-                                    List<ItemStack> loot = loottable.getRandomItems(new LootParams.Builder((ServerLevel)level).withParameter(LootContextParams.BLOCK_STATE, BlockInit.ESSENCECRYSTAL.get().defaultBlockState()).create(LootContextParamSets.BLOCK));
+                                    LootTable loottable = ((ServerLevel)level).getServer().getLootData().getLootTable(BlockInit.ESSENCE_CRYSTAL.get().getLootTable());
+                                    List<ItemStack> loot = loottable.getRandomItems(new LootParams.Builder((ServerLevel)level).withParameter(LootContextParams.BLOCK_STATE, BlockInit.ESSENCE_CRYSTAL.get().defaultBlockState()).create(LootContextParamSets.BLOCK));
                                     for (ItemStack o : loot) {
                                         livingentity.spawnAtLocation(o);
                                     }

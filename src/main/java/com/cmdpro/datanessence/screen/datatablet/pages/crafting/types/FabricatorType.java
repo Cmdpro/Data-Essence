@@ -20,7 +20,7 @@ public class FabricatorType extends CraftingType {
     public void render(CraftingPage page, DataTabletScreen screen, GuiGraphics pGuiGraphics, int xOffset, int x, int yOffset, int y, Recipe recipe, int pMouseX, int pMouseY) {
         if (recipe instanceof IFabricationRecipe recipe2) {
             pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x, yOffset + y, 10, 196, 123, 60);
-            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(ItemInit.FABRICATORITEM.get()), xOffset + x + 98, yOffset + y + 43, pMouseX, pMouseY);
+            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(ItemInit.FABRICATOR_ITEM.get()), xOffset + x + 98, yOffset + y + 43, pMouseX, pMouseY);
             if (recipe2.getEssenceCost() > 0) {
                 pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, x+xOffset+5, y+yOffset+28-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 6, 224-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)));
                 if (pMouseX >= x+xOffset+5 && pMouseY >= y+yOffset+(28-22)) {
@@ -28,9 +28,9 @@ public class FabricatorType extends CraftingType {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         if (ClientPlayerData.getUnlockedEssences()[0]) {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.essence", recipe2.getEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.essence", recipe2.getEssenceCost()).getVisualOrderText());
                         } else {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", recipe2.getEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe2.getEssenceCost()).getVisualOrderText());
                         }
                     }
                 }
@@ -42,9 +42,9 @@ public class FabricatorType extends CraftingType {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         if (ClientPlayerData.getUnlockedEssences()[1]) {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.lunaressence", recipe2.getLunarEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.lunar_essence", recipe2.getLunarEssenceCost()).getVisualOrderText());
                         } else {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", recipe2.getLunarEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe2.getLunarEssenceCost()).getVisualOrderText());
                         }
                     }
                 }
@@ -56,9 +56,9 @@ public class FabricatorType extends CraftingType {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         if (ClientPlayerData.getUnlockedEssences()[2]) {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.naturalessence", recipe2.getNaturalEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.natural_essence", recipe2.getNaturalEssenceCost()).getVisualOrderText());
                         } else {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", recipe2.getNaturalEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe2.getNaturalEssenceCost()).getVisualOrderText());
                         }
                     }
                 }
@@ -70,9 +70,9 @@ public class FabricatorType extends CraftingType {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         if (ClientPlayerData.getUnlockedEssences()[3]) {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.exoticessence", recipe2.getExoticEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.exotic_essence", recipe2.getExoticEssenceCost()).getVisualOrderText());
                         } else {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.datatablet.pagetype.crafting.fabricator.unknown", recipe2.getExoticEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe2.getExoticEssenceCost()).getVisualOrderText());
                         }
                     }
                 }

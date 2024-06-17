@@ -25,7 +25,7 @@ import java.util.List;
 
 public class DataBankBlockEntity extends BlockEntity {
     public DataBankBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.DATABANK.get(), pos, state);
+        super(BlockEntityInit.DATA_BANK.get(), pos, state);
     }
     public ResourceLocation type;
     @Override

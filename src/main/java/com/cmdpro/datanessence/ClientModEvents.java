@@ -22,12 +22,12 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityInit.FABRICATOR.get(), FabricatorRenderer::new);
-        event.registerBlockEntityRenderer(BlockEntityInit.ESSENCEPOINT.get(), EssencePointRenderer::new);
-        event.registerBlockEntityRenderer(BlockEntityInit.LUNARESSENCEPOINT.get(), LunarEssencePointRenderer::new);
-        event.registerBlockEntityRenderer(BlockEntityInit.NATURALESSENCEPOINT.get(), NaturalEssencePointRenderer::new);
-        event.registerBlockEntityRenderer(BlockEntityInit.EXOTICESSENCEPOINT.get(), ExoticEssencePointRenderer::new);
-        event.registerBlockEntityRenderer(BlockEntityInit.ITEMPOINT.get(), ItemPointRenderer::new);
-        event.registerBlockEntityRenderer(BlockEntityInit.FLUIDPOINT.get(), FluidPointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.ESSENCE_POINT.get(), EssencePointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.LUNAR_ESSENCE_POINT.get(), LunarEssencePointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.NATURAL_ESSENCE_POINT.get(), NaturalEssencePointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.EXOTIC_ESSENCE_POINT.get(), ExoticEssencePointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.ITEM_POINT.get(), ItemPointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.FLUID_POINT.get(), FluidPointRenderer::new);
     }
 
     @SubscribeEvent

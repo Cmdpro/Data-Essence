@@ -12,7 +12,7 @@ public class NaturalEssencePointRenderer extends BaseEssencePointRenderer<Natura
     EntityRenderDispatcher renderDispatcher;
 
     public NaturalEssencePointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(new ResourceLocation(DataNEssence.MOD_ID, "textures/block/naturalessencepoint.png")));
+        super(new Model(new ResourceLocation(DataNEssence.MOD_ID, "textures/block/natural_essence_point.png")));
         renderDispatcher = rendererProvider.getEntityRenderer();
     }
 }

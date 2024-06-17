@@ -30,27 +30,27 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(BlockInit.FABRICATOR.get());
-        dropSelf(BlockInit.ESSENCEPOINT.get());
-        dropSelf(BlockInit.LUNARESSENCEPOINT.get());
-        dropSelf(BlockInit.NATURALESSENCEPOINT.get());
-        dropSelf(BlockInit.EXOTICESSENCEPOINT.get());
-        dropSelf(BlockInit.ESSENCEBUFFER.get());
-        dropSelf(BlockInit.ITEMBUFFER.get());
-        dropSelf(BlockInit.FLUIDBUFFER.get());
-        dropSelf(BlockInit.ITEMPOINT.get());
-        dropSelf(BlockInit.FLUIDPOINT.get());
-        dropSelf(BlockInit.ESSENCECRYSTAL.get());
-        dropSelf(BlockInit.ESSENCEBURNER.get());
-        dropSelf(BlockInit.DECOESSENCEBUFFER.get());
-        dropSelf(BlockInit.DECOITEMBUFFER.get());
-        dropSelf(BlockInit.DECOFLUIDBUFFER.get());
-        this.add(BlockInit.DATABANK.get(),
+        dropSelf(BlockInit.ESSENCE_POINT.get());
+        dropSelf(BlockInit.LUNAR_ESSENCE_POINT.get());
+        dropSelf(BlockInit.NATURAL_ESSENCE_POINT.get());
+        dropSelf(BlockInit.EXOTIC_ESSENCE_POINT.get());
+        dropSelf(BlockInit.ESSENCE_BUFFER.get());
+        dropSelf(BlockInit.ITEM_BUFFER.get());
+        dropSelf(BlockInit.FLUID_BUFFER.get());
+        dropSelf(BlockInit.ITEM_POINT.get());
+        dropSelf(BlockInit.FLUID_POINT.get());
+        dropSelf(BlockInit.ESSENCE_CRYSTAL.get());
+        dropSelf(BlockInit.ESSENCE_BURNER.get());
+        dropSelf(BlockInit.DECO_ESSENCE_BUFFER.get());
+        dropSelf(BlockInit.DECO_ITEM_BUFFER.get());
+        dropSelf(BlockInit.DECO_FLUID_BUFFER.get());
+        this.add(BlockInit.DATA_BANK.get(),
                 block -> noDrop());
-        this.add(BlockInit.ESSENCECRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemInit.ESSENCESHARD.get()));
-        dropSelf(BlockInit.ANCIENTROCKCOLUMN.get());
-        dropSelf(BlockInit.ANCIENTROCKBRICKS.get());
-        dropSelf(BlockInit.ANCIENTROCKTILES.get());
-        dropSelf(BlockInit.ENERGIZEDANCIENTROCKCOLUMN.get());
+        this.add(BlockInit.ESSENCE_CRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemInit.ESSENCE_SHARD.get()));
+        dropSelf(BlockInit.ANCIENT_ROCK_COLUMN.get());
+        dropSelf(BlockInit.ANCIENT_ROCK_BRICKS.get());
+        dropSelf(BlockInit.ANCIENT_ROCK_TILES.get());
+        dropSelf(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN.get());
     }
     protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,

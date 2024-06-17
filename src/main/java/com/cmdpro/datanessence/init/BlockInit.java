@@ -25,58 +25,59 @@ public class BlockInit {
     public static final DeferredRegister<Item> ITEMS = ItemInit.ITEMS;
     public static final RegistryObject<Block> FABRICATOR = registerBlock("fabricator",
             () -> new Fabricator(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
-    public static final RegistryObject<Block> ESSENCEBUFFER = register("essencebuffer",
+    public static final RegistryObject<Block> ESSENCE_BUFFER = register("essence_buffer",
             () -> new EssenceBuffer(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ITEMBUFFER = register("itembuffer",
+    public static final RegistryObject<Block> ITEM_BUFFER = register("item_buffer",
             () -> new ItemBuffer(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> FLUIDBUFFER = register("fluidbuffer",
+    public static final RegistryObject<Block> FLUID_BUFFER = register("fluid_buffer",
             () -> new FluidBuffer(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ESSENCEPOINT = registerBlock("essencepoint",
+    public static final RegistryObject<Block> ESSENCE_POINT = registerBlock("essence_point",
             () -> new EssencePoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
-    public static final RegistryObject<Block> LUNARESSENCEPOINT = registerBlock("lunaressencepoint",
+    public static final RegistryObject<Block> LUNAR_ESSENCE_POINT = registerBlock("lunar_essence_point",
             () -> new LunarEssencePoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
-    public static final RegistryObject<Block> NATURALESSENCEPOINT = registerBlock("naturalessencepoint",
+    public static final RegistryObject<Block> NATURAL_ESSENCE_POINT = registerBlock("natural_essence_point",
             () -> new NaturalEssencePoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
-    public static final RegistryObject<Block> EXOTICESSENCEPOINT = registerBlock("exoticessencepoint",
+    public static final RegistryObject<Block> EXOTIC_ESSENCE_POINT = registerBlock("exotic_essence_point",
             () -> new ExoticEssencePoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
-    public static final RegistryObject<Block> FLUIDPOINT = registerBlock("fluidpoint",
+    public static final RegistryObject<Block> FLUID_POINT = registerBlock("fluid_point",
             () -> new FluidPoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
-    public static final RegistryObject<Block> ITEMPOINT = registerBlock("itempoint",
+    public static final RegistryObject<Block> ITEM_POINT = registerBlock("item_point",
             () -> new ItemPoint(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
-    public static final RegistryObject<Block> DATABANK = register("databank",
+    public static final RegistryObject<Block> DATA_BANK = register("data_bank",
             () -> new DataBank(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ESSENCEBURNER = register("essenceburner",
+    public static final RegistryObject<Block> ESSENCE_BURNER = register("essence_burner",
             () -> new EssenceBurner(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ESSENCECRYSTAL = register("essencecrystal",
+    public static final RegistryObject<Block> ESSENCE_CRYSTAL = register("essence_crystal",
             () -> new EssenceCrystal(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> DECOESSENCEBUFFER = register("decoessencebuffer",
+    public static final RegistryObject<Block> DECO_ESSENCE_BUFFER = register("deco_essence_buffer",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> DECOFLUIDBUFFER = register("decofluidbuffer",
+    public static final RegistryObject<Block> DECO_FLUID_BUFFER = register("deco_fluid_buffer",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> DECOITEMBUFFER = register("decoitembuffer",
+    public static final RegistryObject<Block> DECO_ITEM_BUFFER = register("deco_item_buffer",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Ancient Rock
     // sidenote, WHY must your registry names be like this :despair:
-    public static final RegistryObject<Block> ANCIENTROCKBRICKS = register("ancientrockbricks",
+    // there you go :D
+    public static final RegistryObject<Block> ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ANCIENTROCKTILES = register("ancientrocktiles",
+    public static final RegistryObject<Block> ANCIENT_ROCK_TILES = register("ancient_rock_tiles",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ANCIENTROCKCOLUMN = register("ancientrockcolumn",
+    public static final RegistryObject<Block> ANCIENT_ROCK_COLUMN = register("ancient_rock_column",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final RegistryObject<Block> ENERGIZEDANCIENTROCKCOLUMN = register("energizedancientrockcolumn",
+    public static final RegistryObject<Block> ENERGIZED_ANCIENT_ROCK_COLUMN = register("energized_ancient_rock_column",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 

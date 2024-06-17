@@ -29,7 +29,7 @@ public class ItemBufferBlockEntity extends BlockEntity {
 
     };
     public ItemBufferBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(BlockEntityInit.ITEMBUFFER.get(), pPos, pBlockState);
+        super(BlockEntityInit.ITEM_BUFFER.get(), pPos, pBlockState);
     }
 
     @Override

@@ -40,7 +40,7 @@ public class PlayerChangeDriveDataC2SPacket {
             context.getSender().getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
                 if (data.getUnlocked().contains(entry)) {
                     ItemStack stack = context.getSender().getItemInHand(offhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
-                    if (stack.is(ItemInit.DATADRIVE.get())) {
+                    if (stack.is(ItemInit.DATA_DRIVE.get())) {
                         stack.getOrCreateTag().putString("dataId", entry.toString());
                     }
                 }

@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class EssenceBufferBlockEntity extends EssenceContainer {
     public EssenceBufferBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(BlockEntityInit.ESSENCEBUFFER.get(), pPos, pBlockState);
+        super(BlockEntityInit.ESSENCE_BUFFER.get(), pPos, pBlockState);
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {

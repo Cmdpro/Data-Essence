@@ -39,35 +39,35 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(ItemInit.DATATABLET);
-        simpleItem(ItemInit.DATADRIVE);
-        simpleItem(ItemInit.ESSENCESHARD);
-        simpleItemWithSubdirectory(ItemInit.ESSENCEWIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.LUNARESSENCEWIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.NATURALESSENCEWIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.EXOTICESSENCEWIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.ITEMWIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.FLUIDWIRE, "wires");
+        simpleItem(ItemInit.DATA_TABLET);
+        simpleItem(ItemInit.DATA_DRIVE);
+        simpleItem(ItemInit.ESSENCE_SHARD);
+        simpleItemWithSubdirectory(ItemInit.ESSENCE_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.LUNAR_ESSENCE_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.NATURAL_ESSENCE_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.EXOTIC_ESSENCE_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.ITEM_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemInit.FLUID_WIRE, "wires");
 
-        handheldItem(ItemInit.MAGICWRENCH);
+        handheldItem(ItemInit.MAGIC_WRENCH);
 
         evenSimplerBlockItem(BlockInit.FABRICATOR);
-        evenSimplerBlockItem(BlockInit.ESSENCEPOINT);
-        evenSimplerBlockItem(BlockInit.LUNARESSENCEPOINT);
-        evenSimplerBlockItem(BlockInit.NATURALESSENCEPOINT);
-        evenSimplerBlockItem(BlockInit.EXOTICESSENCEPOINT);
-        evenSimplerBlockItem(BlockInit.ITEMPOINT);
-        evenSimplerBlockItem(BlockInit.FLUIDPOINT);
-        evenSimplerBlockItem(BlockInit.ESSENCECRYSTAL);
+        evenSimplerBlockItem(BlockInit.ESSENCE_POINT);
+        evenSimplerBlockItem(BlockInit.LUNAR_ESSENCE_POINT);
+        evenSimplerBlockItem(BlockInit.NATURAL_ESSENCE_POINT);
+        evenSimplerBlockItem(BlockInit.EXOTIC_ESSENCE_POINT);
+        evenSimplerBlockItem(BlockInit.ITEM_POINT);
+        evenSimplerBlockItem(BlockInit.FLUID_POINT);
+        evenSimplerBlockItem(BlockInit.ESSENCE_CRYSTAL);
 
-        evenSimplerBlockItem(BlockInit.DECOESSENCEBUFFER);
-        evenSimplerBlockItem(BlockInit.DECOITEMBUFFER);
-        evenSimplerBlockItem(BlockInit.DECOFLUIDBUFFER);
+        evenSimplerBlockItem(BlockInit.DECO_ESSENCE_BUFFER);
+        evenSimplerBlockItem(BlockInit.DECO_ITEM_BUFFER);
+        evenSimplerBlockItem(BlockInit.DECO_FLUID_BUFFER);
 
-        evenSimplerBlockItem(BlockInit.ANCIENTROCKCOLUMN);
-        evenSimplerBlockItem(BlockInit.ANCIENTROCKBRICKS);
-        evenSimplerBlockItem(BlockInit.ANCIENTROCKTILES);
-        evenSimplerBlockItem(BlockInit.ENERGIZEDANCIENTROCKCOLUMN);
+        evenSimplerBlockItem(BlockInit.ANCIENT_ROCK_COLUMN);
+        evenSimplerBlockItem(BlockInit.ANCIENT_ROCK_BRICKS);
+        evenSimplerBlockItem(BlockInit.ANCIENT_ROCK_TILES);
+        evenSimplerBlockItem(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN);
 
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

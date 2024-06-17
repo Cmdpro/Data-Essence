@@ -65,7 +65,7 @@ public class Fabricator extends BaseEntityBlock {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof FabricatorBlockEntity ent) {
-                if (pPlayer.isHolding(ItemInit.MAGICWRENCH.get())) {
+                if (pPlayer.isHolding(ItemInit.MAGIC_WRENCH.get())) {
                     FabricatorBlockEntity.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
                 } else {
                     NetworkHooks.openScreen(((ServerPlayer) pPlayer), (FabricatorBlockEntity) entity, pPos);

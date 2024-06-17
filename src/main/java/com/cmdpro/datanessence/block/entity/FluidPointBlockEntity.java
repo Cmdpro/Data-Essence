@@ -28,7 +28,7 @@ import java.awt.*;
 
 public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implements GeoBlockEntity {
     public FluidPointBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.FLUIDPOINT.get(), pos, state);
+        super(BlockEntityInit.FLUID_POINT.get(), pos, state);
     }
     private final FluidTank fluidHandler = new FluidTank(DataNEssenceConfig.fluidPointTransfer);
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
@@ -57,7 +57,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
 
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.essencepoint.idle", Animation.LoopType.LOOP));
+        event.getController().setAnimation(RawAnimation.begin().then("animation.essence_point.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 
