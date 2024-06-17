@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.essencepoint.hand": {
+		"animation.essence_point.hand": {
 			"loop": true,
 			"bones": {
 				"body": {
@@ -11,7 +11,7 @@
 				}
 			}
 		},
-		"animation.essencepoint.idle": {
+		"animation.essence_point.idle": {
 			"loop": true,
 			"animation_length": 1,
 			"bones": {
