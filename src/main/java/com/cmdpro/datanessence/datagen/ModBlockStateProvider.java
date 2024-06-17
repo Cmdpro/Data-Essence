@@ -26,6 +26,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
         bufferBlock(BlockInit.ITEMBUFFER);
         bufferBlock(BlockInit.FLUIDBUFFER);
 
+        ancientDecoBlockWithItem(BlockInit.ANCIENTROCKBRICKS);
+        ancientDecoBlockWithItem(BlockInit.ANCIENTROCKTILES);
+        ancientDecoCubeColumn(BlockInit.ANCIENTROCKCOLUMN);
+        ancientDecoCubeColumn(BlockInit.ENERGIZEDANCIENTROCKCOLUMN);
+
         bufferDecoBlock(BlockInit.DECOESSENCEBUFFER);
         bufferDecoBlock(BlockInit.DECOITEMBUFFER);
         bufferDecoBlock(BlockInit.DECOFLUIDBUFFER);
@@ -33,6 +38,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+    private void cubeColumn(RegistryObject<Block> blockRegistryObject) {
+        ResourceLocation loc = blockRegistryObject.getKey().location();
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "horizontal"), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath())));
+    }
+    private void ancientDecoBlockWithItem(RegistryObject<Block> blockRegistryObject) {
+        ResourceLocation loc = blockRegistryObject.getKey().location();
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeAll(loc.getPath(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath())));
+    }
+    private void ancientDecoCubeColumn(RegistryObject<Block> blockRegistryObject) {
+        ResourceLocation loc = blockRegistryObject.getKey().location();
+        axisBlock((RotatedPillarBlock)blockRegistryObject.get(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath()), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_vertical"));
     }
     private void bufferBlock(RegistryObject<Block> blockRegistryObject) {
         ResourceLocation loc = blockRegistryObject.getKey().location();
