@@ -73,9 +73,3 @@ A magitech mod about harnessing essence and learning from the data from a past c
 #    versionRange="[5.4.0+1.20.1,)"
 #    ordering="NONE"
 #    side="BOTH"
-[[dependencies.datanessence]]
-    modId="lodestone"
-    mandatory=true
-    versionRange="[1.20.1-1.4.2,)"
-    ordering="NONE"
-    side="BOTH"

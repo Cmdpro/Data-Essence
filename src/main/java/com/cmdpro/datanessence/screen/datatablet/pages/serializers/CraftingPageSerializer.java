@@ -7,6 +7,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.ArrayList;
@@ -17,7 +18,9 @@ public class CraftingPageSerializer extends PageSerializer<CraftingPage> {
     public static final CraftingPageSerializer INSTANCE = new CraftingPageSerializer();
     @Override
     public CraftingPage fromJson(JsonObject json) {
-        Component text = Component.translatable(json.get("text").getAsString());
+        ResourceLocation font = json.has("font") ? ResourceLocation.tryParse(json.get("font").getAsString()) : Minecraft.DEFAULT_FONT;
+        MutableComponent text = Component.translatable(json.get("text").getAsString());
+        text = text.withStyle(text.getStyle().withFont(font));
         ArrayList<ResourceLocation> recipes = new ArrayList<>();
         for (JsonElement i : json.get("recipes").getAsJsonArray()) {
             recipes.add(ResourceLocation.tryParse(i.getAsString()));

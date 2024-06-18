@@ -18,9 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
-import team.lodestar.lodestone.registry.client.LodestoneRenderTypeRegistry;
-import team.lodestar.lodestone.systems.rendering.LodestoneRenderType;
-import team.lodestar.lodestone.systems.rendering.VFXBuilders;
 
 import java.awt.*;
 

@@ -3,7 +3,10 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.init.ItemInit;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.shaders.system.ShaderInstance;
+import com.cmdpro.datanessence.shaders.system.ShaderManager;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.resources.ResourceLocation;
@@ -18,10 +21,8 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import org.joml.Quaternionf;
 import software.bernie.geckolib.util.RenderUtils;
-import team.lodestar.lodestone.helpers.RenderHelper;
-import team.lodestar.lodestone.registry.client.LodestoneRenderTypeRegistry;
-import team.lodestar.lodestone.systems.rendering.VFXBuilders;
 
 import java.awt.*;
 
@@ -30,17 +31,20 @@ public class ClientEvents {
     public static SimpleSoundInstance music;
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
-        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
+        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES)) {
             if (ClientPlayerData.getLinkPos() != null) {
-                VFXBuilders.WorldVFXBuilder builder = VFXBuilders.createWorld();
                 Vec3 pos = event.getCamera().getPosition();
                 Vec3 pos1 = ClientPlayerData.getLinkPos().getCenter();
                 Vec3 pos2 = Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick());
+                event.getPoseStack().pushPose();
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                builder.setColor(ClientPlayerData.getLinkColor())
-                        .setRenderType(LodestoneRenderTypeRegistry.TRANSPARENT_TEXTURE.applyAndCache(new ResourceLocation(DataNEssence.MOD_ID, "textures/vfx/beam.png")))
-                        .renderBeam(event.getPoseStack().last().pose(), pos1, pos2, 0.025f);
-                event.getPoseStack().translate(pos.x, pos.y, pos.z);
+                ClientDataNEssenceUtil.renderBeam(event.getPoseStack(), Minecraft.getInstance().renderBuffers().bufferSource(), BeaconRenderer.BEAM_LOCATION, event.getPartialTick(), 1.0f, Minecraft.getInstance().level.getGameTime(), pos1, pos2, ClientPlayerData.getLinkColor(), 0.025f, 0.03f);
+                event.getPoseStack().popPose();
+            }
+        }
+        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
+            for (ShaderInstance i : ShaderManager.instances) {
+                i.process();
             }
         }
     }
