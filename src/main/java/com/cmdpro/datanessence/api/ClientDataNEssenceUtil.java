@@ -131,7 +131,7 @@ public class ClientDataNEssenceUtil {
     }
     public static void unlockedCriticalData(Entry entry) {
         Minecraft.getInstance().getToasts().addToast(new CriticalDataToast(entry));
-        ClientModEvents.progressionProcessor.setActive(true);
+        ClientModEvents.progressionShader.setActive(true);
     }
     public static void updateWorld() {
         for (ChunkRenderDispatcher.RenderChunk i : Minecraft.getInstance().levelRenderer.viewArea.chunks) {

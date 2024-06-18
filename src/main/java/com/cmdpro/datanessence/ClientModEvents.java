@@ -32,10 +32,10 @@ public class ClientModEvents {
     public static void doSetup(FMLClientSetupEvent event) {
         MenuScreens.register(MenuInit.FABRICATORMENU.get(), FabricatorScreen::new);
         MenuScreens.register(MenuInit.ESSENCEBURNERMENU.get(), EssenceBurnerScreen::new);
-        progressionProcessor = new ProgressionShader();
-        ShaderManager.addShader(progressionProcessor);
+        progressionShader = new ProgressionShader();
+        ShaderManager.addShader(progressionShader);
     }
-    public static ShaderInstance progressionProcessor;
+    public static ShaderInstance progressionShader;
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
 
