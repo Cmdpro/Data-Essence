@@ -1,0 +1,21 @@
+{
+  "targets": [
+    "final"
+  ],
+  "passes": [
+    {
+      "name": "datanessence:warping_point",
+      "intarget": "minecraft:main",
+      "outtarget": "final",
+      "uniforms": [
+      ]
+    },
+    {
+      "name": "blit",
+      "intarget": "final",
+      "outtarget": "minecraft:main"
+    }
+  ]
+}
+
+

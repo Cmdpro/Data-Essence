@@ -1,11 +1,14 @@
 package com.cmdpro.datanessence.shaders.system;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EffectInstance;
 import net.minecraft.client.renderer.PostChain;
 import net.minecraft.client.renderer.PostPass;
 import net.minecraft.resources.ResourceLocation;
+import org.joml.Matrix4f;
 
 import java.io.IOException;
 import java.util.List;
@@ -18,6 +21,7 @@ public abstract class ShaderInstance {
     public float time;
     public List<PostPass> passes;
     private boolean active;
+    public static PoseStack viewStack;
     public boolean isActive() {
         return active;
     }
@@ -26,6 +30,11 @@ public abstract class ShaderInstance {
             time = 0;
         }
         this.active = active;
+    }
+    public void resize(int pWidth, int pHeight) {
+        if (postChain != null) {
+            postChain.resize(pWidth, pHeight);
+        }
     }
     public void process() {
         if (postChain == null) {
@@ -43,7 +52,9 @@ public abstract class ShaderInstance {
             }
             for (PostPass i : passes) {
                 i.getEffect().safeGetUniform("time").set(time);
-                setUniforms(i.getEffect());
+                i.getEffect().safeGetUniform("CameraPosition").set(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f());
+                i.getEffect().safeGetUniform("ModelViewMat").set(RenderSystem.getModelViewMatrix());
+                setUniforms(i);
             }
             beforeProcess();
             if (active) {
@@ -53,7 +64,7 @@ public abstract class ShaderInstance {
             }
         }
     }
-    public void setUniforms(EffectInstance instance) {}
+    public void setUniforms(PostPass instance) {}
     public void beforeProcess() {}
     public void afterProcess() {}
 }

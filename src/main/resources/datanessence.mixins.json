@@ -8,6 +8,7 @@
   ],
   "client": [
     "client.BlockModelShaperMixin",
-    "client.BlockMixin"
+    "client.BlockMixin",
+    "client.GameRendererMixin"
   ]
 }
