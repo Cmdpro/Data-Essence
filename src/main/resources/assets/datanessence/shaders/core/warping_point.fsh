@@ -76,7 +76,7 @@ void main()
     float insideDivide = 4;
     float hit;
     vec3 hitPosition, hitNormal;
-    vec3 pos = worldPos(distance(CameraPosition, ObjectPosition)+(sphereWidth/2), coord2, inverse(ProjMat), inverse(ModelViewMat), CameraPosition);
+    vec3 pos = worldPos(distance(CameraPosition, ObjectPosition)+(sphereWidth/2), coord2, inverse(ProjMat), inverse(ViewMat), CameraPosition);
     Raycast_float(CameraPosition, normalize(CameraPosition-pos), ObjectPosition, sphereWidth/insideDivide, hit, hitPosition, hitNormal);
 
     fragColor = vec4(1.0-hit, 1.0-hit, 1.0-hit, 1);
