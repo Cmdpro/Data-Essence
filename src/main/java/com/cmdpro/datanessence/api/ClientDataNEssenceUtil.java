@@ -50,6 +50,7 @@ public class ClientDataNEssenceUtil {
         }
         return null;
     }
+    public static PoseStack viewStack;
     public static void renderBlackHole(PoseStack stack, Vec3 pos, MultiBufferSource source, float radius, int longs, int lats) {
         stack.pushPose();
         stack.translate(pos.x, pos.y, pos.z);
@@ -58,8 +59,7 @@ public class ClientDataNEssenceUtil {
         shader.safeGetUniform("CameraPosition").set(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f());
         shader.safeGetUniform("ObjectPosition").set(pos.toVector3f());
 
-        shader.safeGetUniform("ModelViewMatrix").set(RenderSystem.getModelViewMatrix());
-        shader.safeGetUniform("InvViewMat").set(new Matrix4f(RenderSystem.getModelViewStack().last().pose()).invert());
+        shader.safeGetUniform("ViewMat").set(new Matrix4f(viewStack.last().pose()));
         shader.safeGetUniform("lookVector").set(Minecraft.getInstance().gameRenderer.getMainCamera().getLookVector());
         VertexConsumer consumer = source.getBuffer(DataNEssenceRenderTypes.WARPING_POINT);
         float startU = 0;
