@@ -35,6 +35,7 @@
   "block.datanessence.ancient_rock_bricks": "Ancient Rock Bricks",
   "block.datanessence.ancient_rock_column": "Ancient Rock Column",
   "block.datanessence.energized_ancient_rock_column": "Energized Ancient Rock Column",
+  "block.datanessence.essence_burner": "Essence Burner",
 
   "item.datanessence.data_tablet.page_type.crafting.fabricator.essence": "%1$s Essence",
   "item.datanessence.data_tablet.page_type.crafting.fabricator.lunar_essence": "%1$s Lunar Essence",
