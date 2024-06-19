@@ -5,7 +5,6 @@ import com.cmdpro.datanessence.shaders.ProgressionShader;
 import com.cmdpro.datanessence.renderers.*;
 import com.cmdpro.datanessence.screen.EssenceBurnerScreen;
 import com.cmdpro.datanessence.screen.FabricatorScreen;
-import com.cmdpro.datanessence.shaders.WarpingPointShader;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -35,12 +34,8 @@ public class ClientModEvents {
         MenuScreens.register(MenuInit.ESSENCEBURNERMENU.get(), EssenceBurnerScreen::new);
         progressionShader = new ProgressionShader();
         ShaderManager.addShader(progressionShader);
-        warpingPointShader = new WarpingPointShader();
-        ShaderManager.addShader(warpingPointShader);
-        warpingPointShader.setActive(true);
     }
     public static ShaderInstance progressionShader;
-    public static ShaderInstance warpingPointShader;
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
 

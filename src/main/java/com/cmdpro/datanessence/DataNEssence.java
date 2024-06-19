@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.init.*;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -50,7 +51,6 @@ public class DataNEssence
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, DataNEssenceConfig.COMMON_SPEC, "datanessence.toml");
-
         ItemInit.ITEMS.register(bus);
         MenuInit.MENUS.register(bus);
         RecipeInit.RECIPES.register(bus);

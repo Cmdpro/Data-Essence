@@ -5,7 +5,10 @@ import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
+import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
+import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
 import com.cmdpro.datanessence.toasts.CriticalDataToast;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
@@ -13,6 +16,7 @@ import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.particles.ParticleOptions;
@@ -26,6 +30,7 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.awt.*;
 import java.util.Map;
@@ -44,6 +49,61 @@ public class ClientDataNEssenceUtil {
             }
         }
         return null;
+    }
+    public static void renderBlackHole(PoseStack stack, Vec3 pos, MultiBufferSource source, float radius, int longs, int lats) {
+        stack.pushPose();
+        stack.translate(pos.x, pos.y, pos.z);
+        Matrix4f last = stack.last().pose();
+        ShaderInstance shader = DataNEssenceCoreShaders.WARPINGPOINT.instance;
+        shader.safeGetUniform("CameraPosition").set(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f());
+        shader.safeGetUniform("ObjectPosition").set(pos.toVector3f());
+
+        shader.safeGetUniform("ModelViewMatrix").set(RenderSystem.getModelViewMatrix());
+        shader.safeGetUniform("InvViewMat").set(new Matrix4f(RenderSystem.getModelViewStack().last().pose()).invert());
+        shader.safeGetUniform("lookVector").set(Minecraft.getInstance().gameRenderer.getMainCamera().getLookVector());
+        VertexConsumer consumer = source.getBuffer(DataNEssenceRenderTypes.WARPING_POINT);
+        float startU = 0;
+        float startV = 0;
+        float endU = Mth.PI * 2 * 1;
+        float endV = Mth.PI * 1;
+        float stepU = (endU - startU) / longs;
+        float stepV = (endV - startV) / lats;
+        for (int i = 0; i < longs; ++i) {
+            // U-points
+            for (int j = 0; j < lats; ++j) {
+                // V-points
+                float u = i * stepU + startU;
+                float v = j * stepV + startV;
+                float un = (i + 1 == longs) ? endU : (i + 1) * stepU + startU;
+                float vn = (j + 1 == lats) ? endV : (j + 1) * stepV + startV;
+                Vector3f p0 = parametricSphere(u, v, radius);
+                Vector3f p1 = parametricSphere(u, vn, radius);
+                Vector3f p2 = parametricSphere(un, v, radius);
+                Vector3f p3 = parametricSphere(un, vn, radius);
+
+                consumer.vertex(last, p0.x(), p0.y(), p0.z())
+                        .endVertex();
+                consumer.vertex(last, p2.x(), p2.y(), p2.z())
+                        .endVertex();
+                consumer.vertex(last, p1.x(), p1.y(), p1.z())
+                        .endVertex();
+                consumer.vertex(last, p1.x(), p1.y(), p1.z())
+                        .endVertex();
+
+                consumer.vertex(last, p3.x(), p3.y(), p3.z())
+                        .endVertex();
+                consumer.vertex(last, p1.x(), p1.y(), p1.z())
+                        .endVertex();
+                consumer.vertex(last, p2.x(), p2.y(), p2.z())
+                        .endVertex();
+                consumer.vertex(last, p2.x(), p2.y(), p2.z())
+                        .endVertex();
+            }
+        }
+        stack.popPose();
+    }
+    public static Vector3f parametricSphere(float u, float v, float r) {
+        return new Vector3f(Mth.cos(u) * Mth.sin(v) * r, Mth.cos(v) * r, Mth.sin(u) * Mth.sin(v) * r);
     }
     public static void renderBeam(PoseStack pPoseStack, MultiBufferSource pBufferSource, ResourceLocation pBeamLocation, float pPartialTick, float pTextureScale, long pGameTime, Vec3 pointA, Vec3 pointB, Color color, float pBeamRadius, float pGlowRadius) {
         float height = (float)pointA.distanceTo(pointB);

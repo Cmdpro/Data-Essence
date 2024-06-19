@@ -21,7 +21,7 @@ public abstract class ShaderInstance {
     public float time;
     public List<PostPass> passes;
     private boolean active;
-    public static PoseStack viewStack;
+    public PoseStack viewModelStack;
     public boolean isActive() {
         return active;
     }
