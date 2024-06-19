@@ -56,13 +56,13 @@ public class ClientEvents {
                 ClientDataNEssenceUtil.renderBeam(event.getPoseStack(), Minecraft.getInstance().renderBuffers().bufferSource(), BeaconRenderer.BEAM_LOCATION, event.getPartialTick(), 1.0f, Minecraft.getInstance().level.getGameTime(), pos1, pos2, ClientPlayerData.getLinkColor(), 0.025f, 0.03f);
                 event.getPoseStack().popPose();
             }
-            /*
+
             event.getPoseStack().pushPose();
             Vec3 pos = new Vec3(100, 100, 100);
             event.getPoseStack().translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
             ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), 4, 16, 16);
             event.getPoseStack().popPose();
-            */
+
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
             for (ShaderInstance i : ShaderManager.instances) {
