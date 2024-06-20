@@ -18,6 +18,7 @@
     { "name": "lookVector", "type": "float", "count": 3, "values": [ 0.0, 0.0, 0.0 ] },
     { "name": "CameraPosition", "type": "float", "count": 3, "values": [ 0.0, 0.0, 0.0 ] },
     { "name": "ScreenSize", "type": "float", "count": 2, "values": [ 0.0, 0.0 ] },
-    { "name": "ObjectPosition", "type": "float", "count": 3, "values": [ 0.0, 0.0, 0.0 ] }
+    { "name": "ObjectPosition", "type": "float", "count": 3, "values": [ 0.0, 0.0, 0.0 ] },
+    { "name": "FOV", "type": "float", "count": 1, "values": [ 0.0 ] }
   ]
 }

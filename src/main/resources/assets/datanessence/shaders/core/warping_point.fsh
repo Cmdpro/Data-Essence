@@ -9,6 +9,7 @@ uniform vec2 ScreenSize;
 uniform vec3 lookVector;
 uniform vec3 CameraPosition;
 uniform vec3 ObjectPosition;
+uniform float FOV;
 
 in vec4 screenUV;
 out vec4 fragColor;
@@ -74,9 +75,9 @@ void main()
     Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth, hit2, hitPosition2, hitNormal2);
     vec2 objScreen = worldToScreen(ObjectPosition-CameraPosition, ProjMat, ViewMat);
     vec2 posScreen = worldToScreen(pos-CameraPosition, ProjMat, ViewMat);
-    vec2 distortion = normalize(objScreen-posScreen)*0.2;
-    float distortion2 = 1-(acos(clamp(dot(hitNormal2, normalize(CameraPosition-ObjectPosition)), 0, 1))/1.57);
-    vec3 color = getTexture(coord+(distortion2*distortion));
+    vec2 distortion = normalize(objScreen-posScreen)*0.6;
+    float distortion2 = 1-(acos(clamp(dot(hitNormal2, normalize(CameraPosition-ObjectPosition)), 0, 1))/(1.57*3));
+    float distortion3 = sphereWidth/(tan(radians(degrees(FOV)*0.5)) * (distance(ObjectPosition, CameraPosition)*2));
+    vec3 color = getTexture(coord+(distortion2*distortion*distortion3));
     fragColor = vec4(mix(color, vec3(0, 0, 0), hit), 1);
-    //fragColor = vec4(objScreen.x, objScreen.y, 0, 1);
 }

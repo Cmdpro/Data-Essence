@@ -60,6 +60,7 @@ public class ClientDataNEssenceUtil {
         shader.safeGetUniform("ObjectPosition").set(pos.toVector3f());
         shader.safeGetUniform("ViewMat").set(new Matrix4f(viewStack.last().normal()));
         shader.safeGetUniform("lookVector").set(Minecraft.getInstance().gameRenderer.getMainCamera().getLookVector());
+        shader.safeGetUniform("FOV").set((float)Math.toRadians(Minecraft.getInstance().gameRenderer.getFov(Minecraft.getInstance().gameRenderer.getMainCamera(), Minecraft.getInstance().getFrameTime(), true)));
         VertexConsumer consumer = source.getBuffer(DataNEssenceRenderTypes.WARPING_POINT);
         float startU = 0;
         float startV = 0;
