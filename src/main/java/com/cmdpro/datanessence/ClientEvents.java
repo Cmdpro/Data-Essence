@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
+import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.init.ItemInit;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
@@ -62,9 +63,14 @@ public class ClientEvents {
             DataNEssenceCoreShaders.WARPINGPOINT.instance.setSampler("DepthBuffer", tempRenderTarget.getDepthTextureId());
             DataNEssenceCoreShaders.WARPINGPOINT.instance.setSampler("ColorBuffer", tempRenderTarget.getColorTextureId());
             event.getPoseStack().pushPose();
-            Vec3 pos = new Vec3(100, 100, 100);
             event.getPoseStack().translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
-            ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), 4, 16, 16);
+            for (Entity i : Minecraft.getInstance().level.entitiesForRendering()) {
+                if (i instanceof BlackHole) {
+                    Vec3 pos = i.getBoundingBox().getCenter();
+                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), 4, 16, 16);
+                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), -4, 16, 16);
+                }
+            }
             event.getPoseStack().popPose();
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {

@@ -36,6 +36,10 @@
   "block.datanessence.ancient_rock_column": "Ancient Rock Column",
   "block.datanessence.energized_ancient_rock_column": "Energized Ancient Rock Column",
   "block.datanessence.essence_burner": "Essence Burner",
+  "death.attack.magicprojectile": "%1$s was killed by %2$s using magic",
+  "death.attack.magicprojectile.player": "%1$s was killed by %2$s using magic",
+  "death.attack.magicprojectile.item": "%1$s was killed by %2$s using magic",
+  "death.attack.black_hole": "%1$s was spaghettified",
 
   "item.datanessence.data_tablet.page_type.crafting.fabricator.essence": "%1$s Essence",
   "item.datanessence.data_tablet.page_type.crafting.fabricator.lunar_essence": "%1$s Lunar Essence",

@@ -8,6 +8,8 @@ import com.cmdpro.datanessence.screen.FabricatorScreen;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -30,6 +32,12 @@ public class ClientModEvents {
 
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
+        EntityRenderers.register(EntityInit.ESSENCE_BOMB.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(EntityInit.LUNAR_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(EntityInit.NATURAL_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(EntityInit.EXOTIC_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(EntityInit.BLACK_HOLE.get(), EmptyEntityRenderer::new);
+
         MenuScreens.register(MenuInit.FABRICATORMENU.get(), FabricatorScreen::new);
         MenuScreens.register(MenuInit.ESSENCEBURNERMENU.get(), EssenceBurnerScreen::new);
         progressionShader = new ProgressionShader();
