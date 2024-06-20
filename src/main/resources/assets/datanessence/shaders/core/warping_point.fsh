@@ -91,9 +91,6 @@ void main()
     Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth, hit2, hitPosition2, hitNormal2);
     vec2 objScreen = worldToScreen(ObjectPosition-CameraPosition, ProjMat, ViewMat);
     vec2 posScreen = worldToScreen(pos-CameraPosition, ProjMat, ViewMat);
-    //vec2 screenRadius = (vec2(sphereWidth, sphereWidth)/(tan(radians(degrees(FOV)*0.5)) * (2*distance(ObjectPosition, CameraPosition))))*screenSpaceScale;
-    //vec2 distortion = normalize(posScreen-objScreen)*screenRadius;
-    //float distortion2 = pow((1-(acos(clamp(dot(hitNormal2, normalize(CameraPosition-ObjectPosition)), 0, 1))/1.57))/(1-insidePercentage), distortionExponent) * clamp(dot(normalize(CameraPosition-pos), normalize(ObjectPosition-CameraPosition)), 0, 1);
 
     vec2 screenRadius = (vec2(sphereWidth, sphereWidth)/(tan(radians(degrees(FOV)*vec2(0.5, 2)))*(2*distance(ObjectPosition, CameraPosition))))*screenSpaceScale; //Radius of sphere in screen space, or at least a close enough approximation
     vec2 vecToCenter = normalize(posScreen-objScreen)*screenRadius; //Screen Space vector towards center

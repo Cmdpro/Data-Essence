@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
@@ -35,6 +36,7 @@ import software.bernie.geckolib.GeckoLib;
 public class DataNEssence
 {
     public static final ResourceKey<DamageType> magicProjectile = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "magic_projectile"));
+    public static final ResourceKey<DamageType> blackHole = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "black_hole"));
     public static final String MOD_ID = "datanessence";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -57,6 +59,7 @@ public class DataNEssence
         RecipeInit.RECIPE_TYPES.register(bus);
         CreativeModeTabInit.CREATIVE_MODE_TABS.register(bus);
         PageTypeInit.PAGE_TYPES.register(bus);
+        EntityInit.ENTITY_TYPES.register(bus);
         BlockInit.BLOCKS.register(bus);
         BlockEntityInit.BLOCK_ENTITIES.register(bus);
         MinigameInit.MINIGAME_TYPES.register(bus);
