@@ -103,6 +103,7 @@ public class DataNEssence
             event.accept(BlockInit.DECO_ESSENCE_BUFFER);
             event.accept(BlockInit.DECO_ITEM_BUFFER);
             event.accept(BlockInit.DECO_FLUID_BUFFER);
+            event.accept(BlockInit.POLISHED_OBSIDIAN);
             event.accept(BlockInit.ANCIENT_ROCK_COLUMN);
             event.accept(BlockInit.ANCIENT_ROCK_BRICKS);
             event.accept(BlockInit.ANCIENT_ROCK_TILES);

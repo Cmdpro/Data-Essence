@@ -66,8 +66,6 @@ public class BlockInit {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Ancient Rock
-    // sidenote, WHY must your registry names be like this :despair:
-    // there you go :D
     public static final RegistryObject<Block> ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -79,6 +77,11 @@ public class BlockInit {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final RegistryObject<Block> ENERGIZED_ANCIENT_ROCK_COLUMN = register("energized_ancient_rock_column",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
+    // Obsidian Deco
+    public static final RegistryObject<Block> POLISHED_OBSIDIAN = register("polished_obsidian",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(final String name,
