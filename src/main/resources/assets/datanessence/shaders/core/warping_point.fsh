@@ -62,22 +62,25 @@ vec2 worldToScreen(vec3 worldPos, mat4 projMat, mat4 viewMat) {
 
 void main()
 {
+    float distortionExponent = 4;
+    float screenSpaceScale = 0.5;
+
     vec2 coord = gl_FragCoord.xy/ScreenSize;
     vec3 point = worldPos(texture(DepthBuffer, coord).r, coord, inverse(ProjMat), inverse(ViewMat), CameraPosition);
     float sphereWidth = 4;
-    float insideDivide = 4;
+    float insidePercentage = 0.25;
     float hit;
     vec3 hitPosition, hitNormal;
     vec3 pos = worldPos(distance(CameraPosition, ObjectPosition), coord, inverse(ProjMat), inverse(ViewMat), CameraPosition);
-    Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth/insideDivide, hit, hitPosition, hitNormal);
+    Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth*insidePercentage, hit, hitPosition, hitNormal);
     float hit2;
     vec3 hitPosition2, hitNormal2;
     Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth, hit2, hitPosition2, hitNormal2);
     vec2 objScreen = worldToScreen(ObjectPosition-CameraPosition, ProjMat, ViewMat);
     vec2 posScreen = worldToScreen(pos-CameraPosition, ProjMat, ViewMat);
-    vec3 distortion3 = vec3(sphereWidth, sphereWidth, sphereWidth)/(tan(radians(degrees(FOV)*0.5)) * (2*distance(ObjectPosition, CameraPosition)));
-    vec2 distortion = normalize(objScreen-posScreen)*distortion3.xy;
-    float distortion2 = 1-(acos(clamp(dot(hitNormal2, normalize(CameraPosition-ObjectPosition)), 0, 1))/sphereWidth);
+    vec2 screenRadius = (vec2(sphereWidth, sphereWidth)/(tan(radians(degrees(FOV)*0.5)) * (2*distance(ObjectPosition, CameraPosition))))*screenSpaceScale;
+    vec2 distortion = normalize(posScreen-objScreen)*screenRadius;
+    float distortion2 = pow((1-insidePercentage)/(1-(acos(clamp(dot(hitNormal2, normalize(CameraPosition-ObjectPosition)), 0, 1))/1.57)), distortionExponent) * clamp(dot(normalize(CameraPosition-pos), normalize(ObjectPosition-CameraPosition)), 0, 1);
     vec3 color = getTexture(coord+(distortion2*distortion));
     fragColor = vec4(mix(color, vec3(0, 0, 0), hit), 1);
 }
