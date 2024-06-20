@@ -34,6 +34,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         bufferDecoBlock(BlockInit.DECO_ESSENCE_BUFFER);
         bufferDecoBlock(BlockInit.DECO_ITEM_BUFFER);
         bufferDecoBlock(BlockInit.DECO_FLUID_BUFFER);
+
+        decoBlock(BlockInit.POLISHED_OBSIDIAN);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
@@ -58,5 +60,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void bufferDecoBlock(RegistryObject<Block> blockRegistryObject) {
         ResourceLocation loc = blockRegistryObject.getKey().location();
         axisBlock((RotatedPillarBlock)blockRegistryObject.get(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath().replaceFirst("deco_", "") + "_side"), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/buffer/" + loc.getPath().replaceFirst("deco_", "") + "_top_bottom"));
+    }
+    private void decoBlock(RegistryObject<Block> blockRegistryObject) {
+        ResourceLocation loc = blockRegistryObject.getKey().location();
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeAll(loc.getPath(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/")));
     }
 }
