@@ -58,8 +58,7 @@ public class ClientDataNEssenceUtil {
         ShaderInstance shader = DataNEssenceCoreShaders.WARPINGPOINT.instance;
         shader.safeGetUniform("CameraPosition").set(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f());
         shader.safeGetUniform("ObjectPosition").set(pos.toVector3f());
-
-        shader.safeGetUniform("ViewMat").set(new Matrix4f(viewStack.last().pose()));
+        shader.safeGetUniform("ViewMat").set(new Matrix4f(viewStack.last().normal()));
         shader.safeGetUniform("lookVector").set(Minecraft.getInstance().gameRenderer.getMainCamera().getLookVector());
         VertexConsumer consumer = source.getBuffer(DataNEssenceRenderTypes.WARPING_POINT);
         float startU = 0;

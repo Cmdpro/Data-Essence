@@ -56,28 +56,15 @@ vec3 worldPos(float z, vec2 texCoord, mat4 invProjMat, mat4 invViewMat, vec3 cam
 
 void main()
 {
-    /*
-    vec2 uv = gl_FragCoord.xy/ScreenSize;
-    vec2 texC = uv;
-    vec4 clipSpacePosition = ProjMat * (ModelViewMat * vec4(ObjectPosition-CameraPosition, 1));
-    clipSpacePosition /= clipSpacePosition.w;
-    vec2 lpos = ((clipSpacePosition.xy + 1.0) / 2.0);
-    vec2 texC2 = uv.xy;
-    texC = mix(texC2, (texC * 2.0 - lpos * 2.0) * 0.0 * 0.5 + lpos, (1.0 / (distance((texC2 * 2.0 - lpos * 2.0) * 10 * 0.5 + lpos, lpos) - 1.0)));
-    vec3 getColor = getTexture(texC);
-    getColor *= clamp(pow(distance(texC2, vec2(lpos)),8.8) * 300000000.0,0.0,1.0);
-    fragColor = vec4(getColor,1.0);
-    */
     vec2 coord = gl_FragCoord.xy/ScreenSize;
-    vec2 coord2 = vec2(gl_FragCoord.x, ScreenSize.y-gl_FragCoord.y)/ScreenSize;
 
     vec3 color = getTexture(coord);
     float sphereWidth = 4;
     float insideDivide = 4;
     float hit;
     vec3 hitPosition, hitNormal;
-    vec3 pos = worldPos(distance(CameraPosition, ObjectPosition)+(sphereWidth/2), coord2, inverse(ProjMat), inverse(ViewMat), CameraPosition);
-    Raycast_float(CameraPosition, normalize(CameraPosition-pos), ObjectPosition, sphereWidth/insideDivide, hit, hitPosition, hitNormal);
+    vec3 pos = worldPos(distance(CameraPosition, ObjectPosition)+(sphereWidth/2), coord, inverse(ProjMat), inverse(ViewMat), CameraPosition);
+    Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth/insideDivide, hit, hitPosition, hitNormal);
 
     fragColor = vec4(1.0-hit, 1.0-hit, 1.0-hit, 1);
 }
