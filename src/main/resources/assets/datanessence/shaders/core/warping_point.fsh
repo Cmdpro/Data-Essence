@@ -59,16 +59,29 @@ vec2 worldToScreen(vec3 worldPos, mat4 projMat, mat4 viewMat) {
     clipSpacePosition /= clipSpacePosition.w;
     return (vec2(clipSpacePosition.x, 1.0-clipSpacePosition.y) + 1.0) / 2.0;
 }
+vec2 MirrorUVCoordinates_float(vec2 UVs)
+{
+    vec2 NewUVs = UVs;
+    // Mirror U coordinate
+    if (UVs.x < 0.0 || UVs.x > 1.0) {
+        NewUVs.x = 1.0 - abs((UVs.x - 2.0 * floor(UVs.x / 2.0)) - 1.0);
+    }
 
+    // Mirror V coordinate
+    if (UVs.y < 0.0 || UVs.y > 1.0) {
+        NewUVs.y = 1.0 - abs((UVs.y - 2.0 * floor(UVs.y / 2.0)) - 1.0);
+    }
+    return NewUVs;
+}
 void main()
 {
-    float distortionExponent = 4;
-    float screenSpaceScale = 0.5;
+    float distortionExponent = 1;
+    float screenSpaceScale = 1;
 
     vec2 coord = gl_FragCoord.xy/ScreenSize;
     vec3 point = worldPos(texture(DepthBuffer, coord).r, coord, inverse(ProjMat), inverse(ViewMat), CameraPosition);
     float sphereWidth = 4;
-    float insidePercentage = 0.25;
+    float insidePercentage = 0.5;
     float hit;
     vec3 hitPosition, hitNormal;
     vec3 pos = worldPos(distance(CameraPosition, ObjectPosition), coord, inverse(ProjMat), inverse(ViewMat), CameraPosition);
@@ -78,9 +91,16 @@ void main()
     Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth, hit2, hitPosition2, hitNormal2);
     vec2 objScreen = worldToScreen(ObjectPosition-CameraPosition, ProjMat, ViewMat);
     vec2 posScreen = worldToScreen(pos-CameraPosition, ProjMat, ViewMat);
-    vec2 screenRadius = (vec2(sphereWidth, sphereWidth)/(tan(radians(degrees(FOV)*0.5)) * (2*distance(ObjectPosition, CameraPosition))))*screenSpaceScale;
-    vec2 distortion = normalize(posScreen-objScreen)*screenRadius;
-    float distortion2 = pow((1-insidePercentage)/(1-(acos(clamp(dot(hitNormal2, normalize(CameraPosition-ObjectPosition)), 0, 1))/1.57)), distortionExponent) * clamp(dot(normalize(CameraPosition-pos), normalize(ObjectPosition-CameraPosition)), 0, 1);
-    vec3 color = getTexture(coord+(distortion2*distortion));
+    //vec2 screenRadius = (vec2(sphereWidth, sphereWidth)/(tan(radians(degrees(FOV)*0.5)) * (2*distance(ObjectPosition, CameraPosition))))*screenSpaceScale;
+    //vec2 distortion = normalize(posScreen-objScreen)*screenRadius;
+    //float distortion2 = pow((1-(acos(clamp(dot(hitNormal2, normalize(CameraPosition-ObjectPosition)), 0, 1))/1.57))/(1-insidePercentage), distortionExponent) * clamp(dot(normalize(CameraPosition-pos), normalize(ObjectPosition-CameraPosition)), 0, 1);
+
+    vec2 screenRadius = (vec2(sphereWidth, sphereWidth)/(tan(radians(degrees(FOV)*vec2(0.5, 2)))*(2*distance(ObjectPosition, CameraPosition))))*screenSpaceScale; //Radius of sphere in screen space, or at least a close enough approximation
+    vec2 vecToCenter = normalize(posScreen-objScreen)*screenRadius; //Screen Space vector towards center
+    vec2 distortion = 1-(acos(clamp(dot(hitNormal2, CameraPosition-ObjectPosition), 0, 1))/vec2(1.57, 2)); //Increase distortion towards black hole
+    distortion = pow((1-insidePercentage)/distortion, vec2(distortionExponent, distortionExponent)); //Remap so it goes from 0-1 from the edge of the sphere to the edge of the black hole
+    distortion = distortion*clamp(dot(normalize(pos-CameraPosition)*-1, normalize(ObjectPosition-CameraPosition)), 0, 1); //Minimize distortion at grazing angles
+
+    vec3 color = getTexture(MirrorUVCoordinates_float(coord+(distortion*vecToCenter)));
     fragColor = vec4(mix(color, vec3(0, 0, 0), hit), 1);
 }

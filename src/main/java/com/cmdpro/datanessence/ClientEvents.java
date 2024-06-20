@@ -39,7 +39,7 @@ import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID)
 public class ClientEvents {
-    private static RenderTarget tempRenderTarget;
+    public static RenderTarget tempRenderTarget;
     public static SimpleSoundInstance music;
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
