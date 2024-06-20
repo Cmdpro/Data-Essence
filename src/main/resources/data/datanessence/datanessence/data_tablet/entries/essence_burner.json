@@ -1,0 +1,21 @@
+{
+  "icon": {
+    "item": "datanessence:essence_burner"
+  },
+  "x": 2,
+  "y": 1,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": "item.datanessence.data_tablet.pages.essence_burner.page1.text"
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": "item.datanessence.data_tablet.pages.essence_burner.page2.text",
+      "recipes": [
+        "datanessence:crafting/fabricator"
+      ]
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.essence_burner.name"
+}
