@@ -9,7 +9,8 @@
       "type": "datanessence:crafting",
       "text": "item.datanessence.data_tablet.pages.fabricator.page1.text",
       "recipes": [
-        "datanessence:crafting/fabricator"
+        "datanessence:crafting/fabricator",
+        "datanessence:crafting/magic_wrench"
       ]
     }
   ],

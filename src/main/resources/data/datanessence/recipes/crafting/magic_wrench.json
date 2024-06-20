@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " CA",
+    " OC",
+    "O  "
+  ],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "A": { "item": "minecraft:amethyst_shard" },
+    "O": { "item": "minecraft:obsidian" }
+  },
+  "result": { "item": "datanessence:magic_wrench" }
+}
