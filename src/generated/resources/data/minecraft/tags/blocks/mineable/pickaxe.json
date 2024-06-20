@@ -10,6 +10,7 @@
     "datanessence:fluid_point",
     "datanessence:fabricator",
     "datanessence:item_buffer",
-    "datanessence:data_bank"
+    "datanessence:data_bank",
+    "datanessence:polished_obsidian"
   ]
 }

@@ -32,6 +32,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockInit.FLUID_POINT.get())
                 .add(BlockInit.FABRICATOR.get())
                 .add(BlockInit.ITEM_BUFFER.get())
-                .add(BlockInit.DATA_BANK.get());
+                .add(BlockInit.DATA_BANK.get())
+                .add(BlockInit.POLISHED_OBSIDIAN.get());
+        this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
+                .add(BlockInit.POLISHED_OBSIDIAN.get());
     }
 }

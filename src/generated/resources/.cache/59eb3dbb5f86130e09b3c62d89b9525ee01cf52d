@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-17T11:04:57.4402599	Loot Tables
+// 1.20.1	2024-06-20T11:24:48.5551611	Loot Tables
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_tables/blocks/ancient_rock_bricks.json
 6540cac2211b8a360d5bbebd6d8ecce140f3d3cb data/datanessence/loot_tables/blocks/ancient_rock_column.json
 56b95cac73dc52cf9672428b3a4720b45303f3a8 data/datanessence/loot_tables/blocks/ancient_rock_tiles.json
@@ -19,3 +19,4 @@ f2a29214b3a71ca945068d1c8409c2bced4dcaec data/datanessence/loot_tables/blocks/fl
 ef9d3be9f05eaba2865a62ce63165bdc9f414942 data/datanessence/loot_tables/blocks/item_point.json
 7122cc53668c8a584d5d86f73545270ff3436096 data/datanessence/loot_tables/blocks/lunar_essence_point.json
 1ed73f5842b4051a664a087d5148b597d822e857 data/datanessence/loot_tables/blocks/natural_essence_point.json
+612f96b09f9dd5c05c4105bbf22280578325c299 data/datanessence/loot_tables/blocks/polished_obsidian.json
