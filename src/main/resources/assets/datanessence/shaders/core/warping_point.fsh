@@ -75,8 +75,8 @@ void main()
     Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth, hit2, hitPosition2, hitNormal2);
     vec2 objScreen = worldToScreen(ObjectPosition-CameraPosition, ProjMat, ViewMat);
     vec2 posScreen = worldToScreen(pos-CameraPosition, ProjMat, ViewMat);
-    vec2 distortion = normalize(objScreen-posScreen)*0.6;
-    float distortion2 = 1-(acos(clamp(dot(hitNormal2, normalize(CameraPosition-ObjectPosition)), 0, 1))/(1.57*3));
+    vec2 distortion = normalize(objScreen-posScreen)*(0.2*sphereWidth);
+    float distortion2 = 1-(acos(clamp(dot(hitNormal2, normalize(CameraPosition-ObjectPosition)), 0, 1))/sphereWidth);
     float distortion3 = sphereWidth/(tan(radians(degrees(FOV)*0.5)) * (distance(ObjectPosition, CameraPosition)*2));
     vec3 color = getTexture(coord+(distortion2*distortion*distortion3));
     fragColor = vec4(mix(color, vec3(0, 0, 0), hit), 1);
