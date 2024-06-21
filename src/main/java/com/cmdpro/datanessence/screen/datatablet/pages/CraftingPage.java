@@ -29,12 +29,14 @@ public class CraftingPage extends TextPage {
     public int textYOffset() {
         int x = 4;
         int y = 4;
+        int o = 0;
         for (ResourceLocation i : recipes) {
             x += 125;
-            if (x > 4+125) {
+            if (o >= 2) {
                 x = 4;
                 y += 64;
             }
+            o++;
         }
         return y+58;
     }
@@ -56,10 +58,12 @@ public class CraftingPage extends TextPage {
                 }
             }
             x += 125;
-            if (x > 4+125) {
+            int o = 0;
+            if (o >= 2) {
                 x = 4;
                 y += 64;
             }
+            o++;
         }
     }
     @Override

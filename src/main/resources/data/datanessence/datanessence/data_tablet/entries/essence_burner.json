@@ -13,7 +13,7 @@
       "type": "datanessence:crafting",
       "text": "item.datanessence.data_tablet.pages.essence_burner.page2.text",
       "recipes": [
-        "datanessence:crafting/fabricator"
+        "datanessence:fabrication/essence_burner"
       ]
     }
   ],
