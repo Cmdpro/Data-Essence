@@ -80,7 +80,7 @@ void main()
 
     vec2 coord = gl_FragCoord.xy/ScreenSize;
     vec3 point = worldPos(texture(DepthBuffer, coord).r, coord, inverse(ProjMat), inverse(ViewMat), CameraPosition);
-    float sphereWidth = 4;
+    float sphereWidth = 6;
     float insidePercentage = 0.5;
     float hit;
     vec3 hitPosition, hitNormal;

@@ -44,8 +44,12 @@ public class BlackHole extends Entity {
                 float mult = Math.clamp(0, 0.5f, 20-i.distanceTo(this));
                 Vec3 add = getBoundingBox().getCenter().subtract(i.position()).normalize().multiply(mult, mult, mult);
                 if (add.length() >= 0.1) {
-                    Vec3 movement = i.getDeltaMovement().add(add);
-                    i.setDeltaMovement(movement);
+                    if (getBoundingBox().getCenter().distanceTo(i.position()) <= 2) {
+                        i.setDeltaMovement(add);
+                    } else {
+                        Vec3 movement = i.getDeltaMovement().add(add);
+                        i.setDeltaMovement(movement);
+                    }
                 }
             }
         }

@@ -67,8 +67,8 @@ public class ClientEvents {
             for (Entity i : Minecraft.getInstance().level.entitiesForRendering()) {
                 if (i instanceof BlackHole) {
                     Vec3 pos = i.getBoundingBox().getCenter();
-                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), 4, 16, 16);
-                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), -4, 16, 16);
+                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), 6, 16, 16);
+                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), -6, 16, 16);
                 }
             }
             event.getPoseStack().popPose();
