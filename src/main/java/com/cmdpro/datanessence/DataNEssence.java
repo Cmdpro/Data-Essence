@@ -112,6 +112,7 @@ public class DataNEssence
             event.accept(BlockInit.ANCIENT_ROCK_TILES);
             event.accept(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN);
             event.accept(BlockInit.ESSENCE_BURNER);
+            event.accept(BlockInit.TRAVERSITE_ROAD);
         }
     }
     private void setup(final FMLCommonSetupEvent event)

@@ -55,6 +55,9 @@ public class BlockInit {
     public static final RegistryObject<Block> ESSENCE_CRYSTAL = register("essence_crystal",
             () -> new EssenceCrystal(BlockBehaviour.Properties.copy(Blocks.AMETHYST_CLUSTER).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> TRAVERSITE_ROAD = register("traversite_road",
+            () -> new TraversiteRoad(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).noOcclusion().strength(2.0f), 2),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final RegistryObject<Block> DECO_ESSENCE_BUFFER = register("deco_essence_buffer",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
