@@ -7,12 +7,17 @@ import com.cmdpro.datanessence.screen.EssenceBurnerScreen;
 import com.cmdpro.datanessence.screen.FabricatorScreen;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -29,7 +34,14 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityInit.ITEM_POINT.get(), ItemPointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityInit.FLUID_POINT.get(), FluidPointRenderer::new);
     }
+    public static void drawHUD(ForgeGui gui, GuiGraphics guiGraphics, float pt, int width, int height) {
 
+    }
+    public static final IGuiOverlay HUD = ClientModEvents::drawHUD;
+    @SubscribeEvent
+    public static void renderHUD(RegisterGuiOverlaysEvent event) {
+        event.registerAboveAll("mod_hud", HUD);
+    }
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
         EntityRenderers.register(EntityInit.ESSENCE_BOMB.get(), ThrownItemRenderer::new);

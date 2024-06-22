@@ -1,9 +1,14 @@
 package com.cmdpro.datanessence.networking.packet;
 
+import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.toasts.CriticalDataToast;
+import com.cmdpro.datanessence.toasts.TierToast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.commands.TitleCommand;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
@@ -42,7 +47,8 @@ public class PlayerTierSyncS2CPacket {
         public static void handlePacket(PlayerTierSyncS2CPacket msg, Supplier<NetworkEvent.Context> supplier) {
             ClientPlayerData.setTier(msg.tier);
             if (msg.showIndicator) {
-                //TODO : Add some sort of indicator of you going up a tier
+                ClientDataNEssenceUtil.progressionShader();
+                Minecraft.getInstance().getToasts().addToast(new TierToast(msg.tier));
             }
         }
     }

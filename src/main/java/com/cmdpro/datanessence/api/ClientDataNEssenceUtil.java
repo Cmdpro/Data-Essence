@@ -191,6 +191,10 @@ public class ClientDataNEssenceUtil {
     }
     public static void unlockedCriticalData(Entry entry) {
         Minecraft.getInstance().getToasts().addToast(new CriticalDataToast(entry));
+        progressionShader();
+    }
+    public static void progressionShader() {
+        ClientModEvents.progressionShader.time = 0;
         ClientModEvents.progressionShader.setActive(true);
     }
     public static void updateWorld() {
