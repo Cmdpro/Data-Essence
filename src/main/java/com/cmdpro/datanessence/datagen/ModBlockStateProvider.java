@@ -38,6 +38,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         decoBlock(BlockInit.POLISHED_OBSIDIAN);
         essenceBurner(BlockInit.ESSENCE_BURNER);
+
+        blockWithItem(BlockInit.TRAVERSITE_ROAD);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {
