@@ -41,17 +41,17 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
                 } else {
                     pBlockEntity.take(ent);
                 }
-                if (pBlockEntity.link != null) {
-                    BlockEntity ent2 = pLevel.getBlockEntity(pBlockEntity.link);
-                    if (ent2 != null) {
-                        pBlockEntity.transfer(ent2);
-                    } else {
-                        pBlockEntity.link = null;
-                        pBlockEntity.updateBlock();
-                        if (pState.getBlock() instanceof BaseCapabilityPoint block) {
-                            ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(block.getRequiredWire()));
-                            pLevel.addFreshEntity(item);
-                        }
+            }
+            if (pBlockEntity.link != null) {
+                BlockEntity ent2 = pLevel.getBlockEntity(pBlockEntity.link);
+                if (ent2 != null) {
+                    pBlockEntity.transfer(ent2);
+                } else {
+                    pBlockEntity.link = null;
+                    pBlockEntity.updateBlock();
+                    if (pState.getBlock() instanceof BaseCapabilityPoint block) {
+                        ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(block.getRequiredWire()));
+                        pLevel.addFreshEntity(item);
                     }
                 }
             }

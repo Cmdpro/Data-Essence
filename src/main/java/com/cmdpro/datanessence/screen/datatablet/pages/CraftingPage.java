@@ -47,6 +47,7 @@ public class CraftingPage extends TextPage {
         super.render(screen, pGuiGraphics, pPartialTick, pMouseX, pMouseY, xOffset, yOffset);
         int x = 4;
         int y = 4;
+        int p = 0;
         for (ResourceLocation i : recipes) {
             Optional<? extends Recipe<?>> optional = Minecraft.getInstance().level.getRecipeManager().byKey(i);
             if (optional.isPresent()) {
@@ -58,12 +59,11 @@ public class CraftingPage extends TextPage {
                 }
             }
             x += 125;
-            int o = 0;
-            if (o >= 2) {
+            p++;
+            if (p >= 2) {
                 x = 4;
                 y += 64;
             }
-            o++;
         }
     }
     @Override
