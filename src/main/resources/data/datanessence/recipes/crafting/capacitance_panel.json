@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "   ",
+    "   "
+  ],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" }
+  },
+  "result": { "item": "datanessence:capacitance_panel", "count": 2 }
+}

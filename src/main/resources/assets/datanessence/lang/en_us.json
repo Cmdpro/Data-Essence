@@ -77,6 +77,9 @@
   "item.datanessence.data_tablet.pages.essence_burner.page2.text": " ◇ Requires: Essence Shards and furnace fuel (eg. coal, charcoal, etc).\n ◇ Requires no coolant.",
   "item.datanessence.data_tablet.pages.traversite_road.name": "Traversite Road",
   "item.datanessence.data_tablet.pages.traversite_road.page1.text": "Infusing common diorite with Essence creates rock painted in subtle blue and pink hues, with a unique property that makes it very suitable for building paths out of: whoever walks on it will find their steps much faster than usual. We found that shaping them into bricks was of aesthetic interest, and the result was the Traversite Road.",
+  "item.datanessence.data_tablet.pages.components.name": "Crafting Components",
+  "item.datanessence.data_tablet.pages.components.page1.text": "Unrefined materials can only go so far, so we devised several more refined crafting components better suited for our work.",
+
 
   "commands.datanessence.reset_learned": "Reset all entries back to their original state",
   "commands.datanessence.set_tier": "Set your tier to %1$s",

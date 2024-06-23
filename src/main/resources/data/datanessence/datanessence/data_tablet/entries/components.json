@@ -1,0 +1,20 @@
+{
+  "icon": {
+    "item": "datanessence:logical_matrix"
+  },
+  "x": -3,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:crafting",
+      "text": "item.datanessence.data_tablet.pages.components.page1.text",
+      "recipes": [
+        "datanessence:crafting/capacitance_panel",
+        "datanessence:crafting/conductance_rod",
+        "datanessence:fabrication/logical_matrix"
+      ]
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.components.name",
+  "parent": "datanessence:fabricator"
+}
