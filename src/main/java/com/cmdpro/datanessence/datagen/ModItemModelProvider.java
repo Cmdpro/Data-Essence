@@ -69,6 +69,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(BlockInit.ANCIENT_ROCK_TILES);
         evenSimplerBlockItem(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN);
 
+        simpleItem(ItemInit.CONDUCTANCE_ROD);
+        simpleItem(ItemInit.CAPACITANCE_PANEL);
+        simpleItem(ItemInit.LOGICAL_MATRIX);
+
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),

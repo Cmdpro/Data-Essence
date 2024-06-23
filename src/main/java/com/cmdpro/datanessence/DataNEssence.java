@@ -89,6 +89,9 @@ public class DataNEssence
             event.accept(ItemInit.LUNAR_ESSENCE_BOMB);
             event.accept(ItemInit.NATURAL_ESSENCE_BOMB);
             event.accept(ItemInit.EXOTIC_ESSENCE_BOMB);
+            event.accept(ItemInit.CAPACITANCE_PANEL);
+            event.accept(ItemInit.CONDUCTANCE_ROD);
+            event.accept(ItemInit.LOGICAL_MATRIX);
         }
         if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
             event.accept(ItemInit.FABRICATOR_ITEM);
