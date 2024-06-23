@@ -67,6 +67,18 @@ public class BlockInit {
     public static final RegistryObject<Block> DECO_ITEM_BUFFER = register("deco_item_buffer",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ESSENCE_BATTERY = register("essence_battery",
+            () -> new EssenceBattery(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> LUNAR_ESSENCE_BATTERY = register("lunar_essence_battery",
+            () -> new LunarEssenceBattery(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> NATURAL_ESSENCE_BATTERY = register("natural_essence_battery",
+            () -> new NaturalEssenceBattery(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> EXOTIC_ESSENCE_BATTERY = register("exotic_essence_battery",
+            () -> new ExoticEssenceBattery(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Ancient Rock
     public static final RegistryObject<Block> ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks",

@@ -62,6 +62,22 @@ public class BlockEntityInit {
             register("data_bank", () ->
                     BlockEntityType.Builder.of(DataBankBlockEntity::new,
                             BlockInit.DATA_BANK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<EssenceBatteryBlockEntity>> ESSENCE_BATTERY =
+            register("essence_battery", () ->
+                    BlockEntityType.Builder.of(EssenceBatteryBlockEntity::new,
+                            BlockInit.ESSENCE_BATTERY.get()).build(null));
+    public static final RegistryObject<BlockEntityType<LunarEssenceBatteryBlockEntity>> LUNAR_ESSENCE_BATTERY =
+            register("lunar_essence_battery", () ->
+                    BlockEntityType.Builder.of(LunarEssenceBatteryBlockEntity::new,
+                            BlockInit.LUNAR_ESSENCE_BATTERY.get()).build(null));
+    public static final RegistryObject<BlockEntityType<NaturalEssenceBatteryBlockEntity>> NATURAL_ESSENCE_BATTERY =
+            register("natural_essence_battery", () ->
+                    BlockEntityType.Builder.of(NaturalEssenceBatteryBlockEntity::new,
+                            BlockInit.NATURAL_ESSENCE_BATTERY.get()).build(null));
+    public static final RegistryObject<BlockEntityType<ExoticEssenceBatteryBlockEntity>> EXOTIC_ESSENCE_BATTERY =
+            register("exotic_essence_battery", () ->
+                    BlockEntityType.Builder.of(ExoticEssenceBatteryBlockEntity::new,
+                            BlockInit.EXOTIC_ESSENCE_BATTERY.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> RegistryObject<T> register(final String name, final Supplier<T> blockentity) {
