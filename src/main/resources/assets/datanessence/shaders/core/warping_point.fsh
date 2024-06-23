@@ -3,8 +3,7 @@
 uniform sampler2D DepthBuffer;
 uniform sampler2D ColorBuffer;
 uniform mat4 ProjMat;
-uniform mat4 ModelViewMat;
-uniform mat4 ViewMat;
+uniform mat4 ModelViewMatrix;
 uniform vec2 ScreenSize;
 uniform vec3 lookVector;
 uniform vec3 CameraPosition;
@@ -79,18 +78,18 @@ void main()
     float screenSpaceScale = 1;
 
     vec2 coord = gl_FragCoord.xy/ScreenSize;
-    vec3 point = worldPos(texture(DepthBuffer, coord).r, coord, inverse(ProjMat), inverse(ViewMat), CameraPosition);
+    vec3 point = worldPos(texture(DepthBuffer, coord).r, coord, inverse(ProjMat), inverse(ModelViewMatrix), CameraPosition);
     float sphereWidth = 6;
     float insidePercentage = 0.5;
     float hit;
     vec3 hitPosition, hitNormal;
-    vec3 pos = worldPos(distance(CameraPosition, ObjectPosition), coord, inverse(ProjMat), inverse(ViewMat), CameraPosition);
+    vec3 pos = worldPos(distance(CameraPosition, ObjectPosition), coord, inverse(ProjMat), inverse(ModelViewMatrix), CameraPosition);
     Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth*insidePercentage, hit, hitPosition, hitNormal);
     float hit2;
     vec3 hitPosition2, hitNormal2;
     Raycast_float(CameraPosition, normalize(pos-CameraPosition), ObjectPosition, sphereWidth, hit2, hitPosition2, hitNormal2);
-    vec2 objScreen = worldToScreen(ObjectPosition-CameraPosition, ProjMat, ViewMat);
-    vec2 posScreen = worldToScreen(pos-CameraPosition, ProjMat, ViewMat);
+    vec2 objScreen = worldToScreen(ObjectPosition-CameraPosition, ProjMat, ModelViewMatrix);
+    vec2 posScreen = worldToScreen(pos-CameraPosition, ProjMat, ModelViewMatrix);
 
     vec2 screenRadius = (vec2(sphereWidth, sphereWidth)/(tan(radians(degrees(FOV)*vec2(0.5, 2)))*(2*distance(ObjectPosition, CameraPosition))))*screenSpaceScale; //Radius of sphere in screen space, or at least a close enough approximation
     vec2 vecToCenter = normalize(posScreen-objScreen)*screenRadius; //Screen Space vector towards center
