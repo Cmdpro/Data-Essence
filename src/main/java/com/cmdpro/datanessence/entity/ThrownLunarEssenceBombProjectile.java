@@ -33,6 +33,7 @@ public class ThrownLunarEssenceBombProjectile extends ThrowableItemProjectile {
         if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(level(), explosion)) return;
         explosion.explode();
         explosion.finalizeExplosion(true);
+        remove(RemovalReason.KILLED);
     }
 
 }
