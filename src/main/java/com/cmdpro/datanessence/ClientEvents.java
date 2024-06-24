@@ -96,7 +96,10 @@ public class ClientEvents {
     }
     @SubscribeEvent
     public static void onClientTick(TickEvent.ClientTickEvent event)
-    {/*
+    {
+        for (ShaderInstance i : ShaderManager.instances) {
+            i.tick();
+        }/*
         Minecraft mc = Minecraft.getInstance();
         if (event.phase == TickEvent.Phase.END && mc.level != null)
         {

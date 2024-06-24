@@ -47,9 +47,6 @@ public abstract class ShaderInstance {
             }
         }
         if (postChain != null) {
-            if (active) {
-                time += Minecraft.getInstance().getDeltaFrameTime() / 20.0;
-            }
             for (PostPass i : passes) {
                 i.getEffect().safeGetUniform("time").set(time);
                 i.getEffect().safeGetUniform("CameraPosition").set(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f());
@@ -62,6 +59,11 @@ public abstract class ShaderInstance {
                 GlStateManager._glBindFramebuffer(GL_DRAW_FRAMEBUFFER, Minecraft.getInstance().getMainRenderTarget().frameBufferId);
                 afterProcess();
             }
+        }
+    }
+    public void tick() {
+        if (active) {
+            time += Minecraft.getInstance().getDeltaFrameTime() / 20.0;
         }
     }
     public void setUniforms(PostPass instance) {}
