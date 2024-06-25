@@ -43,10 +43,6 @@ public class Fabricator extends BaseEntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         FabricatorBlockEntity ent = new FabricatorBlockEntity(pPos, pState);
-        ent.setEssence(1000);
-        ent.setLunarEssence(750);
-        ent.setNaturalEssence(500);
-        ent.setExoticEssence(250);
         return ent;
     }
     @Override

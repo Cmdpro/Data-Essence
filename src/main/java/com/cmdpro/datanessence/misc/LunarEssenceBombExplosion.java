@@ -4,15 +4,21 @@ import com.cmdpro.datanessence.block.EssenceCrystal;
 import com.cmdpro.datanessence.init.BlockInit;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +27,9 @@ import net.minecraft.world.level.EntityBasedExplosionDamageCalculator;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseFireBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
@@ -32,10 +41,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 public class LunarEssenceBombExplosion extends Explosion {
     private static final ExplosionDamageCalculator EXPLOSION_DAMAGE_CALCULATOR = new ExplosionDamageCalculator();
@@ -86,10 +92,12 @@ public class LunarEssenceBombExplosion extends Explosion {
     private ExplosionDamageCalculator makeDamageCalculator(@Nullable Entity pEntity) {
         return (ExplosionDamageCalculator)(pEntity == null ? EXPLOSION_DAMAGE_CALCULATOR : new EntityBasedExplosionDamageCalculator(pEntity));
     }
+    public List<Vec3> crystalPos = new ArrayList<>();
     @Override
     public void explode() {
         this.level.gameEvent(this.source, GameEvent.EXPLODE, new Vec3(this.x, this.y, this.z));
         Set<BlockPos> set = Sets.newHashSet();
+        crystalPos.clear();
         int i = 16;
 
         for(int j = 0; j < 16; ++j) {
@@ -167,25 +175,7 @@ public class LunarEssenceBombExplosion extends Explosion {
                             LivingEntity livingentity = (LivingEntity)entity;
                             d11 = ProtectionEnchantment.getExplosionKnockbackAfterDampener(livingentity, d10);
                             if (livingentity.isDeadOrDying()) {
-                                boolean found = false;
-                                for (int o = 0; o > -5; o--) {
-                                    BlockPos blockPos = livingentity.blockPosition().offset(0, o, 0);
-                                    if (level.getBlockState(blockPos).isAir()) {
-                                        if (level.getBlockState(blockPos.below()).isCollisionShapeFullBlock(level, blockPos.below())) {
-                                            found = true;
-                                            level.setBlockAndUpdate(blockPos, BlockInit.ESSENCE_CRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, Direction.UP).setValue(EssenceCrystal.MODEL, random.nextIntBetweenInclusive(0, 2)));
-                                        } else {
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (!found) {
-                                    LootTable loottable = ((ServerLevel)level).getServer().getLootData().getLootTable(BlockInit.ESSENCE_CRYSTAL.get().getLootTable());
-                                    List<ItemStack> loot = loottable.getRandomItems(new LootParams.Builder((ServerLevel)level).withParameter(LootContextParams.BLOCK_STATE, BlockInit.ESSENCE_CRYSTAL.get().defaultBlockState()).create(LootContextParamSets.BLOCK));
-                                    for (ItemStack o : loot) {
-                                        livingentity.spawnAtLocation(o);
-                                    }
-                                }
+                                crystalPos.add(livingentity.position());
                             }
                         } else {
                             d11 = d10;
@@ -206,5 +196,106 @@ public class LunarEssenceBombExplosion extends Explosion {
                 }
             }
         }
+
+    }
+    @Override
+    public void finalizeExplosion(boolean pSpawnParticles) {
+        if (this.level.isClientSide) {
+            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level.random.nextFloat() - this.level.random.nextFloat()) * 0.2F) * 0.7F, false);
+        }
+
+        boolean flag = this.interactsWithBlocks();
+        if (pSpawnParticles) {
+            if (!(this.radius < 2.0F) && flag) {
+                this.level.addParticle(ParticleTypes.EXPLOSION_EMITTER, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);
+            } else {
+                this.level.addParticle(ParticleTypes.EXPLOSION, this.x, this.y, this.z, 1.0D, 0.0D, 0.0D);
+            }
+        }
+
+        if (flag) {
+            ObjectArrayList<Pair<ItemStack, BlockPos>> objectarraylist = new ObjectArrayList<>();
+            boolean flag1 = this.getIndirectSourceEntity() instanceof Player;
+            Util.shuffle(this.toBlow, this.level.random);
+
+            for(BlockPos blockpos : this.toBlow) {
+                BlockState blockstate = this.level.getBlockState(blockpos);
+                Block block = blockstate.getBlock();
+                if (!blockstate.isAir()) {
+                    BlockPos blockpos1 = blockpos.immutable();
+                    this.level.getProfiler().push("explosion_blocks");
+                    if (blockstate.canDropFromExplosion(this.level, blockpos, this)) {
+                        Level $$9 = this.level;
+                        if ($$9 instanceof ServerLevel) {
+                            ServerLevel serverlevel = (ServerLevel)$$9;
+                            BlockEntity blockentity = blockstate.hasBlockEntity() ? this.level.getBlockEntity(blockpos) : null;
+                            LootParams.Builder lootparams$builder = (new LootParams.Builder(serverlevel)).withParameter(LootContextParams.ORIGIN, Vec3.atCenterOf(blockpos)).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withOptionalParameter(LootContextParams.BLOCK_ENTITY, blockentity).withOptionalParameter(LootContextParams.THIS_ENTITY, this.source);
+                            if (this.blockInteraction == Explosion.BlockInteraction.DESTROY_WITH_DECAY) {
+                                lootparams$builder.withParameter(LootContextParams.EXPLOSION_RADIUS, this.radius);
+                            }
+
+                            blockstate.spawnAfterBreak(serverlevel, blockpos, ItemStack.EMPTY, flag1);
+                            blockstate.getDrops(lootparams$builder).forEach((p_46074_) -> {
+                                addBlockDrops(objectarraylist, p_46074_, blockpos1);
+                            });
+                        }
+                    }
+
+                    blockstate.onBlockExploded(this.level, blockpos, this);
+                    this.level.getProfiler().pop();
+                }
+            }
+
+            for(Pair<ItemStack, BlockPos> pair : objectarraylist) {
+                Block.popResource(this.level, pair.getSecond(), pair.getFirst());
+            }
+        }
+
+        if (this.fire) {
+            for(BlockPos blockpos2 : this.toBlow) {
+                if (this.random.nextInt(3) == 0 && this.level.getBlockState(blockpos2).isAir() && this.level.getBlockState(blockpos2.below()).isSolidRender(this.level, blockpos2.below())) {
+                    this.level.setBlockAndUpdate(blockpos2, BaseFireBlock.getState(this.level, blockpos2));
+                }
+            }
+        }
+        for (Vec3 i : crystalPos) {
+            boolean found = false;
+            for (int o = 0; o > -5; o--) {
+                BlockPos blockPos = BlockPos.containing(i).offset(0, o, 0);
+                if (level.getBlockState(blockPos).canBeReplaced()) {
+                    if (level.getBlockState(blockPos.below()).isCollisionShapeFullBlock(level, blockPos.below())) {
+                        found = true;
+                        level.setBlockAndUpdate(blockPos, BlockInit.ESSENCE_CRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, Direction.UP).setValue(EssenceCrystal.MODEL, random.nextIntBetweenInclusive(0, 2)));
+                    } else {
+                        break;
+                    }
+                }
+            }
+            if (!found) {
+                LootTable loottable = ((ServerLevel)level).getServer().getLootData().getLootTable(BlockInit.ESSENCE_CRYSTAL.get().getLootTable());
+                List<ItemStack> loot = loottable.getRandomItems(new LootParams.Builder((ServerLevel)level).withParameter(LootContextParams.BLOCK_STATE, BlockInit.ESSENCE_CRYSTAL.get().defaultBlockState()).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withParameter(LootContextParams.ORIGIN, position).create(LootContextParamSets.BLOCK));
+                for (ItemStack o : loot) {
+                    ItemEntity entity = new ItemEntity(level, i.x, i.y, i.z, o);
+                    level.addFreshEntity(entity);
+                }
+            }
+        }
+    }
+    private static void addBlockDrops(ObjectArrayList<Pair<ItemStack, BlockPos>> pDropPositionArray, ItemStack pStack, BlockPos pPos) {
+        int i = pDropPositionArray.size();
+
+        for(int j = 0; j < i; ++j) {
+            Pair<ItemStack, BlockPos> pair = pDropPositionArray.get(j);
+            ItemStack itemstack = pair.getFirst();
+            if (ItemEntity.areMergable(itemstack, pStack)) {
+                ItemStack itemstack1 = ItemEntity.merge(itemstack, pStack, 16);
+                pDropPositionArray.set(j, Pair.of(itemstack1, pair.getSecond()));
+                if (pStack.isEmpty()) {
+                    return;
+                }
+            }
+        }
+
+        pDropPositionArray.add(Pair.of(pStack, pPos));
     }
 }
