@@ -2,6 +2,9 @@ package com.cmdpro.datanessence.entity;
 
 import com.cmdpro.datanessence.DataNEssence;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -18,33 +21,33 @@ public class BlackHole extends Entity {
         super(pEntityType, pLevel);
     }
 
+    public static final EntityDataAccessor<Float> SIZE = SynchedEntityData.defineId(BlackHole.class, EntityDataSerializers.FLOAT);
     @Override
     protected void defineSynchedData() {
-
+        this.entityData.define(SIZE, 8f);
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
-
+        entityData.set(SIZE, pCompound.getFloat("size"));
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
-
+        pCompound.putFloat("size", entityData.get(SIZE));
     }
-
     @Override
     public void tick() {
         super.tick();
-        for (Entity i : level().getEntitiesOfClass(Entity.class, AABB.ofSize(getBoundingBox().getCenter(), 20, 20, 20))) {
+        for (Entity i : level().getEntitiesOfClass(Entity.class, AABB.ofSize(getBoundingBox().getCenter(), entityData.get(SIZE)*2.5f, entityData.get(SIZE)*2.5f, entityData.get(SIZE)*2.5f))) {
             if (i != this && !i.getType().is(Tags.EntityTypes.BOSSES)) {
                 if (i instanceof Player) {
                     i.hurtMarked = true;
                 }
-                float mult = Math.clamp(0, 0.5f, 20-i.distanceTo(this));
+                float mult = Math.clamp(0, 0.5f, (entityData.get(SIZE)*2.5f)-i.distanceTo(this));
                 Vec3 add = getBoundingBox().getCenter().subtract(i.position()).normalize().multiply(mult, mult, mult);
                 if (add.length() >= 0.1) {
-                    if (getBoundingBox().getCenter().distanceTo(i.position()) <= 2) {
+                    if (getBoundingBox().getCenter().distanceTo(i.position()) <= entityData.get(SIZE)/4) {
                         i.setDeltaMovement(add);
                     } else {
                         Vec3 movement = i.getDeltaMovement().add(add);
@@ -53,8 +56,12 @@ public class BlackHole extends Entity {
                 }
             }
         }
-        for (Entity i : level().getEntitiesOfClass(Entity.class, AABB.ofSize(getBoundingBox().getCenter(), 4, 4, 4))) {
+        for (Entity i : level().getEntitiesOfClass(Entity.class, AABB.ofSize(getBoundingBox().getCenter(), entityData.get(SIZE), entityData.get(SIZE), entityData.get(SIZE)))) {
             i.hurt(damageSources().source(DataNEssence.blackHole), 10);
+        }
+        entityData.set(SIZE, entityData.get(SIZE) - (1f/20f));
+        if (entityData.get(SIZE) <= 0) {
+            remove(RemovalReason.KILLED);
         }
     }
 }

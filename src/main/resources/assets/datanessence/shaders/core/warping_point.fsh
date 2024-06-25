@@ -9,6 +9,7 @@ uniform vec3 lookVector;
 uniform vec3 CameraPosition;
 uniform vec3 ObjectPosition;
 uniform float FOV;
+uniform float Radius;
 
 in vec4 screenUV;
 out vec4 fragColor;
@@ -79,7 +80,7 @@ void main()
 
     vec2 coord = gl_FragCoord.xy/ScreenSize;
     vec3 point = worldPos(texture(DepthBuffer, coord).r, coord, inverse(ProjMat), inverse(ModelViewMatrix), CameraPosition);
-    float sphereWidth = 6;
+    float sphereWidth = Radius;
     float insidePercentage = 0.5;
     float hit;
     vec3 hitPosition, hitNormal;

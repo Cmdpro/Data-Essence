@@ -12,6 +12,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -58,6 +59,7 @@ public class ClientDataNEssenceUtil {
         ShaderInstance shader = DataNEssenceCoreShaders.WARPINGPOINT.instance;
         shader.safeGetUniform("CameraPosition").set(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f());
         shader.safeGetUniform("ObjectPosition").set(pos.toVector3f());
+        shader.safeGetUniform("Radius").set(Math.abs(radius));
         shader.safeGetUniform("ModelViewMatrix").set(viewStackMatrix);
         shader.safeGetUniform("lookVector").set(Minecraft.getInstance().gameRenderer.getMainCamera().getLookVector());
         shader.safeGetUniform("FOV").set((float)Math.toRadians(Minecraft.getInstance().gameRenderer.getFov(Minecraft.getInstance().gameRenderer.getMainCamera(), Minecraft.getInstance().getFrameTime(), true)));
@@ -100,6 +102,7 @@ public class ClientDataNEssenceUtil {
                         .endVertex();
             }
         }
+        ((MultiBufferSource.BufferSource)source).endLastBatch();
         stack.popPose();
     }
     public static Vector3f parametricSphere(float u, float v, float r) {
