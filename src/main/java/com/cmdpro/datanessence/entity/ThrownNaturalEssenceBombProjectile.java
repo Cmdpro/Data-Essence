@@ -12,12 +12,15 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
 
 public class ThrownNaturalEssenceBombProjectile extends ThrowableItemProjectile {
     public ThrownNaturalEssenceBombProjectile(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
@@ -35,7 +38,7 @@ public class ThrownNaturalEssenceBombProjectile extends ThrowableItemProjectile 
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
         if (!level().isClientSide) {
-            Explosion.BlockInteraction explosion$blockinteraction1 = Explosion.BlockInteraction.KEEP;
+            Explosion.BlockInteraction explosion$blockinteraction1 = level().getGameRules().getBoolean(GameRules.RULE_BLOCK_EXPLOSION_DROP_DECAY) ? Explosion.BlockInteraction.DESTROY_WITH_DECAY : Explosion.BlockInteraction.DESTROY;
 
             Explosion.BlockInteraction explosion$blockinteraction = explosion$blockinteraction1;
             Explosion explosion = new NaturalEssenceBombExplosion(level(), this, null, null, pResult.getLocation().x, pResult.getLocation().y, pResult.getLocation().z, 5, false, explosion$blockinteraction);
