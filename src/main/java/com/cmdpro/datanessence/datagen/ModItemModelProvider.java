@@ -73,6 +73,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemInit.CAPACITANCE_PANEL);
         simpleItem(ItemInit.LOGICAL_MATRIX);
 
+        simpleItemWithSubdirectory(ItemInit.ESSENCE_BOMB, "bombs");
+        simpleItemWithSubdirectory(ItemInit.LUNAR_ESSENCE_BOMB, "bombs");
+        simpleItemWithSubdirectory(ItemInit.NATURAL_ESSENCE_BOMB, "bombs");
+        simpleItemWithSubdirectory(ItemInit.EXOTIC_ESSENCE_BOMB, "bombs");
+
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
         return withExistingParent(item.getId().getPath(),

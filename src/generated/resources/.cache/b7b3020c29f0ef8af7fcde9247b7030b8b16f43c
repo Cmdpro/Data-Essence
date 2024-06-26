@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-22T22:46:33.52870901	Item Models: datanessence
+// 1.20.1	2024-06-25T22:49:46.480432241	Item Models: datanessence
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
@@ -10,10 +10,12 @@ d7143cba0a3221569cc1595af65cd714d785cc89 assets/datanessence/models/item/data_ta
 cc8ad366cb50cc565afd44ec81025784569113c0 assets/datanessence/models/item/deco_fluid_buffer.json
 649ebbd5fb39366d57ca9fdeda86c510f0aa80fa assets/datanessence/models/item/deco_item_buffer.json
 01ca71e378e64e9e02886d014639a6bf22ebad8b assets/datanessence/models/item/energized_ancient_rock_column.json
+75395ee34d545367bd2022bcd2edc19f35483609 assets/datanessence/models/item/essence_bomb.json
 898241b351afa63c618a6f84cd67b7fe3118f6f2 assets/datanessence/models/item/essence_crystal.json
 36db90cffb74cafdf9c6c6fb95da1ad1489e81c2 assets/datanessence/models/item/essence_point.json
 b373f009203404901822d57b9c55e629c6534e1c assets/datanessence/models/item/essence_shard.json
 29859ed5c6878dbae8c38d8ce4c5b33218a3b2e7 assets/datanessence/models/item/essence_wire.json
+6b8f708d916b305e027c88bb21f80121030130bc assets/datanessence/models/item/exotic_essence_bomb.json
 03ee49f7e87fc09d963595077f1fe5aff2eb9ae1 assets/datanessence/models/item/exotic_essence_point.json
 0973a25710a93f8da7bc1c96b160a5219a2f1447 assets/datanessence/models/item/exotic_essence_wire.json
 8482c1dc572a76bcafa6a26a2a944f95ec3211d3 assets/datanessence/models/item/fabricator.json
@@ -22,8 +24,10 @@ f356571ca7c924ca20dabcdac766bc379c05608e assets/datanessence/models/item/fluid_w
 31f900cefbabb6a71f6ff477ec95a84a71e1416f assets/datanessence/models/item/item_point.json
 869463292549ed3104bcbbdcb698a2aa91206892 assets/datanessence/models/item/item_wire.json
 0252cf0b06ad0969651b57bd8705b3995bc34cdb assets/datanessence/models/item/logical_matrix.json
+fe1ce05b004a75716ba9ee13cc445e73c1ae74ff assets/datanessence/models/item/lunar_essence_bomb.json
 e31c5a3caedf2f7dde5359985c3274570af4fb47 assets/datanessence/models/item/lunar_essence_point.json
 3d310e3313629f8d13026f2ae40006f83f86a491 assets/datanessence/models/item/lunar_essence_wire.json
 516f40090f0536a9ec8db35ae129bb768ba5de73 assets/datanessence/models/item/magic_wrench.json
+d2ee51f8a1c9d8336e8e8d1102e25c8e7c4e4b25 assets/datanessence/models/item/natural_essence_bomb.json
 dea3f12c9335d679ae141242896ae3e5dd0c84c8 assets/datanessence/models/item/natural_essence_point.json
 72daa0cb5cd463cd7dd4d1760219c24e210917e4 assets/datanessence/models/item/natural_essence_wire.json
