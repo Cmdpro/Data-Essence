@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-25T22:49:46.480432241	Item Models: datanessence
+// 1.20.1	2024-06-26T01:24:51.006041362	Item Models: datanessence
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
@@ -31,3 +31,4 @@ e31c5a3caedf2f7dde5359985c3274570af4fb47 assets/datanessence/models/item/lunar_e
 d2ee51f8a1c9d8336e8e8d1102e25c8e7c4e4b25 assets/datanessence/models/item/natural_essence_bomb.json
 dea3f12c9335d679ae141242896ae3e5dd0c84c8 assets/datanessence/models/item/natural_essence_point.json
 72daa0cb5cd463cd7dd4d1760219c24e210917e4 assets/datanessence/models/item/natural_essence_wire.json
+de272af4e4feac0b7f325c246f01dbdc0d6ea318 assets/datanessence/models/item/polished_obsidian_column.json

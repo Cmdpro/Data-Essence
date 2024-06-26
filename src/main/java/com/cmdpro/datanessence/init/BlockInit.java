@@ -98,6 +98,12 @@ public class BlockInit {
     public static final RegistryObject<Block> POLISHED_OBSIDIAN = register("polished_obsidian",
             () -> new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> POLISHED_OBSIDIAN_COLUMN = register("polished_obsidian_column",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final RegistryObject<Block> ENGRAVED_POLISHED_OBSIDIAN = register("engraved_polished_obsidian",
+            () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     private static <T extends Block> RegistryObject<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {

@@ -37,6 +37,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         bufferDecoBlock(BlockInit.DECO_FLUID_BUFFER);
 
         decoBlock(BlockInit.POLISHED_OBSIDIAN);
+        pillarDecoBlock(BlockInit.POLISHED_OBSIDIAN_COLUMN);
+        decoBlock(BlockInit.ENGRAVED_POLISHED_OBSIDIAN);
+
         essenceBurner(BlockInit.ESSENCE_BURNER);
 
         blockWithItem(BlockInit.TRAVERSITE_ROAD);
@@ -68,6 +71,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void decoBlock(RegistryObject<Block> blockRegistryObject) {
         ResourceLocation loc = blockRegistryObject.getKey().location();
         simpleBlockWithItem(blockRegistryObject.get(), models().cubeAll(loc.getPath(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath())));
+    }
+    private void pillarDecoBlock(RegistryObject<Block> blockRegistryObject) {
+        ResourceLocation loc = blockRegistryObject.getKey().location();
+        axisBlock((RotatedPillarBlock)blockRegistryObject.get(), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_side"), new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_vertical"));
     }
     private void essenceBurner(RegistryObject<Block> blockRegistryObject) {
         ResourceLocation loc = blockRegistryObject.getKey().location();

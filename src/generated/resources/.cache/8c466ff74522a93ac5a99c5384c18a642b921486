@@ -1,3 +1,3 @@
-// 1.20.1	2024-06-20T11:24:48.5531597	Tags for minecraft:block mod id datanessence
-0455827345a7867bcf72ec0eb1825428fa678e26 data/minecraft/tags/blocks/mineable/pickaxe.json
-aa3eda467bf66ea8b1631b127a0fbb9c6c6560a3 data/minecraft/tags/blocks/needs_diamond_tool.json
+// 1.20.1	2024-06-26T01:47:52.433352311	Tags for minecraft:block mod id datanessence
+c4b05d665830791c0c0da27c70b5a4ad419cc498 data/minecraft/tags/blocks/mineable/pickaxe.json
+8ff934966ff8792e404e271ae6ba7b097a39743d data/minecraft/tags/blocks/needs_diamond_tool.json
