@@ -243,22 +243,4 @@ public class NaturalEssenceBombExplosion extends Explosion {
         }
 
     }
-
-    private static void addBlockDrops(ObjectArrayList<Pair<ItemStack, BlockPos>> pDropPositionArray, ItemStack pStack, BlockPos pPos) {
-        int i = pDropPositionArray.size();
-
-        for(int j = 0; j < i; ++j) {
-            Pair<ItemStack, BlockPos> pair = pDropPositionArray.get(j);
-            ItemStack itemstack = pair.getFirst();
-            if (ItemEntity.areMergable(itemstack, pStack)) {
-                ItemStack itemstack1 = ItemEntity.merge(itemstack, pStack, 16);
-                pDropPositionArray.set(j, Pair.of(itemstack1, pair.getSecond()));
-                if (pStack.isEmpty()) {
-                    return;
-                }
-            }
-        }
-
-        pDropPositionArray.add(Pair.of(pStack, pPos));
-    }
 }

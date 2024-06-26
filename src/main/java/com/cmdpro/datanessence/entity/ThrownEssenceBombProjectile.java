@@ -24,7 +24,9 @@ public class ThrownEssenceBombProjectile extends ThrowableItemProjectile {
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        level().explode(this, pResult.getLocation().x, pResult.getLocation().y, pResult.getLocation().z, 4, Level.ExplosionInteraction.TNT);
-        remove(RemovalReason.KILLED);
+        if (!level().isClientSide) {
+            level().explode(this, pResult.getLocation().x, pResult.getLocation().y, pResult.getLocation().z, 4, Level.ExplosionInteraction.TNT);
+            remove(RemovalReason.KILLED);
+        }
     }
 }

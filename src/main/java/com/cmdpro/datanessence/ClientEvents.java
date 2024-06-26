@@ -58,17 +58,17 @@ public class ClientEvents {
                 event.getPoseStack().popPose();
             }
         }
-        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
+        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_PARTICLES)) {
             copyBuffers();
             DataNEssenceCoreShaders.WARPINGPOINT.instance.setSampler("DepthBuffer", tempRenderTarget.getDepthTextureId());
             DataNEssenceCoreShaders.WARPINGPOINT.instance.setSampler("ColorBuffer", tempRenderTarget.getColorTextureId());
             event.getPoseStack().pushPose();
             event.getPoseStack().translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
             for (Entity i : Minecraft.getInstance().level.entitiesForRendering()) {
-                if (i instanceof BlackHole) {
+                if (i instanceof BlackHole hole) {
                     Vec3 pos = i.getBoundingBox().getCenter();
-                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), 6, 16, 16);
-                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), -6, 16, 16);
+                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), hole.getEntityData().get(BlackHole.SIZE), 16, 16);
+                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), -hole.getEntityData().get(BlackHole.SIZE), 16, 16);
                 }
             }
             event.getPoseStack().popPose();
