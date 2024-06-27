@@ -1,0 +1,18 @@
+{
+  "icon": {
+    "item": "datanessence:data_drive"
+  },
+  "x": -3,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:crafting",
+      "text": "item.datanessence.data_tablet.pages.automation.page1.text",
+      "recipes": [
+        "datanessence:fabrication/data_drive"
+      ]
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.automation.name",
+  "parent": "datanessence:fabricator"
+}

@@ -1,0 +1,22 @@
+{
+  "icon": {
+    "item": "datanessence:infuser"
+  },
+  "x": 0,
+  "y": 1,
+  "pages": [
+    {
+      "type": "datanessence:crafting",
+      "text": "item.datanessence.data_tablet.pages.infuser.page1.text",
+      "recipes": [
+        "datanessence:fabrication/infuser"
+      ]
+    },
+    {
+      "type": "datanessence:text",
+      "text": "item.datanessence.data_tablet.pages.infuser.page2.text"
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.infuser.name",
+  "parent": "datanessence:data_drive"
+}

@@ -78,11 +78,17 @@
   "item.datanessence.data_tablet.pages.essence_crystals.page2.text": "Research was done into the origin of these deposits, and what we found was startlingly grim: creatures native to Phenua long ago were unable to handle their innate Essence, dissolving and crystallizing upon it awakening within them. It would seem most local fauna have evolved to suppress their Essence, as a result.",
   "item.datanessence.data_tablet.pages.essence_burner.name": "Essence Burner",
   "item.datanessence.data_tablet.pages.essence_burner.page1.text": "The simplest form of Essence generation is to apply sufficient heat to raw Essence Shards such that they melt into a gaseous form. As this gas dissipates, it leaves behind usable Essence with which to supply machinery.\n\nThe Burner device does exactly this, featuring a chamber in which to insert Shards and fuel, as well as a grate on the top that harmlessly vents the gas.",
-  "item.datanessence.data_tablet.pages.essence_burner.page2.text": " ◇ Requires: Essence Shards and furnace fuel (eg. coal, charcoal, etc).\n ◇ Requires no coolant.",
+  "item.datanessence.data_tablet.pages.essence_burner.page2.text": " ◇ Requires: Essence Shards and furnace fuel (eg. coal, charcoal, etc).\n ◇ Needs no coolant.",
   "item.datanessence.data_tablet.pages.traversite_road.name": "Traversite Road",
   "item.datanessence.data_tablet.pages.traversite_road.page1.text": "Infusing common diorite with Essence creates rock painted in subtle blue and pink hues, with a unique property that makes it very suitable for building paths out of: whoever walks on it will find their steps much faster than usual. We found that shaping them into bricks was of aesthetic interest, and the result was the Traversite Road.",
   "item.datanessence.data_tablet.pages.components.name": "Crafting Components",
   "item.datanessence.data_tablet.pages.components.page1.text": "Unrefined materials can only go so far, so we devised several more refined crafting components better suited for our work.",
+  "item.datanessence.data_tablet.pages.automation.name": "Automation",
+  "item.datanessence.data_tablet.pages.automation.page1.text": "Many machines are designed to need a template of sorts to properly operate. Such a template is easily stored upon a Data Drive, which can hold one entry from this very Tablet, storing all the recipes it contains within its memory. The Drive can then be slotted into any valid machine.",
+  "item.datanessence.data_tablet.pages.infuser.name": "Infuser",
+  "item.datanessence.data_tablet.pages.infuser.page1.text": "The Fabricator is an ideal worktable for more refined processing, but there are times when what is required is to dump Essence into an object without much finesse. That is where the Infuser device comes in: it is able to infuse blocks and items with Essence, often resulting in something new, or changed.",
+  "item.datanessence.data_tablet.pages.infuser.page2.text": " ◇ Must have a loaded Data Drive inserted to know what to craft.",
+
 
 
   "commands.datanessence.reset_learned": "Reset all entries back to their original state",
