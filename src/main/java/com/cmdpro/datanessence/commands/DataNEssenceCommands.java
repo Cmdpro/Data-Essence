@@ -46,7 +46,31 @@ public class DataNEssenceCommands {
                                     return unlock(command);
                                 })))
                 )
+                .then(Commands.literal("check_entry_overlaps")
+                        .executes(command -> {
+                            return checkoverlaps(command);
+                        })
+                )
         );
+    }
+    private static int checkoverlaps(CommandContext<CommandSourceStack> command) {
+        boolean foundIssues = false;
+        for (Entry i : Entries.entries.values()) {
+            for (Entry o : Entries.entries.values()) {
+                if(i != o && i.x == o.x && i.y == o.y) {
+                    foundIssues = true;
+                    if (command.getSource().isPlayer()) {
+                        command.getSource().getEntity().sendSystemMessage(Component.translatable("commands.datanessence.check_entry_overlaps.found", i.id, o.id));
+                    } else {
+                        DataNEssence.LOGGER.warn("Entry \"" + i.id + "\" is overlapping with entry \"" + o.id + "\"");
+                    }
+                }
+            }
+        }
+        if (!foundIssues) {
+            command.getSource().getEntity().sendSystemMessage(Component.translatable("commands.datanessence.check_entry_overlaps.no_found"));
+        }
+        return Command.SINGLE_SUCCESS;
     }
     private static int settier(CommandContext<CommandSourceStack> command) {
         if(command.getSource().getEntity() instanceof Player) {
