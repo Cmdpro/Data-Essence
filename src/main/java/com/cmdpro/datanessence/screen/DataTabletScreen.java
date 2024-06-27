@@ -17,6 +17,7 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.phys.Vec2;
 
 public class DataTabletScreen extends Screen {
     public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
@@ -188,12 +189,14 @@ public class DataTabletScreen extends Screen {
         for (Entry i : Entries.entries.values()) {
             if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
                 if (i.getParentEntry() != null) {
-                    int x1 = x + ((i.x * 20)) + (int) offsetX;
-                    int y1 = y + ((i.y * 20)) + (int) offsetY;
-                    int x2 = x + ((i.getParentEntry().x * 20)) + (int) offsetX;
-                    int y2 = y + ((i.getParentEntry().y * 20)) + (int) offsetY;
-                    buf.vertex(x1, y1, 0.0D).color(201, 13, 139, 255).normal(x2 - x1, y2 - y1, 0).endVertex();
-                    buf.vertex(x2, y2, 0.0D).color(201, 13, 139, 255).normal(x1 - x2, y1 - y2, 0).endVertex();
+                    int x1 = x + ((i.getParentEntry().x * 20)) + (int) offsetX;
+                    int y1 = y + ((i.getParentEntry().y * 20)) + (int) offsetY;
+                    int x2 = x + ((i.x * 20)) + (int) offsetX;
+                    int y2 = y + ((i.y * 20)) + (int) offsetY;
+                    Vec2 vec1 = new Vec2(x1, y1);
+                    Vec2 vec2 = new Vec2(x2, y2);
+                    buf.vertex(x1, y1, 0.0D).color(201, 13, 139, 255).normal(vec1.x, vec1.y, 0).endVertex();
+                    buf.vertex(x2, y2, 0.0D).color(201, 13, 139, 255).normal(vec2.x, vec2.y, 0).endVertex();
                 }
             }
         }
