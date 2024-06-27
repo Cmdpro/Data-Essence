@@ -89,5 +89,7 @@
   "commands.datanessence.set_tier": "Set your tier to %1$s",
   "commands.datanessence.unlock.unlock_entry": "Unlocked Entry \"%1$s\"",
   "commands.datanessence.unlock.entry_doesnt_exist": "Entry \"%1$s\" does not exist!",
-  "commands.datanessence.unlock.entry_already_unlocked": "Entry \"%1$s\" was already unlocked!"
+  "commands.datanessence.unlock.entry_already_unlocked": "Entry \"%1$s\" was already unlocked!",
+  "commands.datanessence.check_entry_overlaps.found": "Entry \"%1$s\" is overlapping with entry \"%2$s\"",
+  "commands.datanessence.check_entry_overlaps.no_found": "No entry overlaps found"
 }

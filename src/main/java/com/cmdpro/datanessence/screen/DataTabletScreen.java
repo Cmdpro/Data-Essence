@@ -184,20 +184,20 @@ public class DataTabletScreen extends Screen {
         Tesselator tess = RenderSystem.renderThreadTesselator();
         BufferBuilder buf = tess.getBuilder();
         RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
+        buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
         for (Entry i : Entries.entries.values()) {
             if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
                 if (i.getParentEntry() != null) {
-                    int x1 = x + ((i.x * 20) + 1) + (int) offsetX;
-                    int y1 = y + ((i.y * 20) + 1) + (int) offsetY;
-                    int x2 = x + ((i.getParentEntry().x * 20) + 1) + (int) offsetX;
-                    int y2 = y + ((i.getParentEntry().y * 20) + 1) + (int) offsetY;
-                    buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
+                    int x1 = x + ((i.x * 20)) + (int) offsetX;
+                    int y1 = y + ((i.y * 20)) + (int) offsetY;
+                    int x2 = x + ((i.getParentEntry().x * 20)) + (int) offsetX;
+                    int y2 = y + ((i.getParentEntry().y * 20)) + (int) offsetY;
                     buf.vertex(x1, y1, 0.0D).color(201, 13, 139, 255).normal(x2 - x1, y2 - y1, 0).endVertex();
                     buf.vertex(x2, y2, 0.0D).color(201, 13, 139, 255).normal(x1 - x2, y1 - y2, 0).endVertex();
-                    tess.end();
                 }
             }
         }
+        tess.end();
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         GlStateManager._enableCull();
         GlStateManager._depthMask(true);
