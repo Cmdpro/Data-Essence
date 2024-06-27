@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-26T01:47:52.435014625	Block States: datanessence
+// 1.20.1	2024-06-27T13:37:11.167666366	Block States: datanessence
 140490733763a0972275b8ae5fe9924317809834 assets/datanessence/blockstates/ancient_rock_bricks.json
 ce4fbfb54eb2616987f8b0f0a94ec2698c1d0cd7 assets/datanessence/blockstates/ancient_rock_column.json
 65eb7ec6d7eb8a68d62256fec022ab7148aa41c5 assets/datanessence/blockstates/ancient_rock_tiles.json
@@ -11,6 +11,7 @@ de36bf843295e46cbe4063525652cb8723eb7595 assets/datanessence/blockstates/essence
 7b6fe95e73931df96492f64adbee8e7f408b62e6 assets/datanessence/blockstates/essence_burner.json
 7d6cb32d05fc4c27ede7821a095aec9357388fa1 assets/datanessence/blockstates/fluid_buffer.json
 d00b72f016a4a1672dc94c14d423bc06cb486c85 assets/datanessence/blockstates/item_buffer.json
+3b2597ee48b83c877ad6cad2cf8853c8ad5d13fc assets/datanessence/blockstates/patterned_copper.json
 9dcc16ca173cd6b619d48d77a99b924b7812efaf assets/datanessence/blockstates/polished_obsidian.json
 7b2c32f549c198b04f7eea0ceaa04174e1bab461 assets/datanessence/blockstates/polished_obsidian_column.json
 a02d60ed4563ae33705b9375a0709ea8206de7b8 assets/datanessence/blockstates/traversite_road.json
@@ -31,6 +32,7 @@ dcc5797fac2f6da5eec896cfc6a7424b9c61dc1c assets/datanessence/models/block/deco_i
 c8dbb3e84ada0d871b502655ef5804a2ac3d25eb assets/datanessence/models/block/essence_burner.json
 c2046ad27e4aae201cf98ca3d63d41d882fb40f2 assets/datanessence/models/block/fluid_buffer.json
 645e9803aa3e40da29e65873aaad8b975a352229 assets/datanessence/models/block/item_buffer.json
+5fbd9af7f747fc97d078fa31e9bc5d758e52063b assets/datanessence/models/block/patterned_copper.json
 8f2386afc57191aafc32702c551d51d3bc88e05d assets/datanessence/models/block/polished_obsidian.json
 717ffa368353383de45243c30cd8832bfe10e0ec assets/datanessence/models/block/polished_obsidian_column.json
 2b7b7c3f07337680737e52333776b296667ad3be assets/datanessence/models/block/polished_obsidian_column_horizontal.json
@@ -42,5 +44,6 @@ c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient
 ada061668201d88cf47189a90420d3cd4861012a assets/datanessence/models/item/essence_burner.json
 a14e3749f03b6f395206fcccf634f58f8056dfb8 assets/datanessence/models/item/fluid_buffer.json
 6bf24789ead4b0349afc438c078a6a5584c14a27 assets/datanessence/models/item/item_buffer.json
+ccadb6f481b5bf27132dc4d69dac33424af5cd6e assets/datanessence/models/item/patterned_copper.json
 d1962717ef3fbf338b69ed754290f694ad50c92b assets/datanessence/models/item/polished_obsidian.json
 a0d92351947ae42f4c2afa0497445510dc2d77e5 assets/datanessence/models/item/traversite_road.json

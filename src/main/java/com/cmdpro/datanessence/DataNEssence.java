@@ -111,6 +111,7 @@ public class DataNEssence
             event.accept(BlockInit.POLISHED_OBSIDIAN);
             event.accept(BlockInit.POLISHED_OBSIDIAN_COLUMN);
             event.accept(BlockInit.ENGRAVED_POLISHED_OBSIDIAN);
+            event.accept(BlockInit.PATTERNED_COPPER);
             event.accept(BlockInit.ANCIENT_ROCK_COLUMN);
             event.accept(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN);
             event.accept(BlockInit.ANCIENT_ROCK_BRICKS);

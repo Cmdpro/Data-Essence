@@ -107,6 +107,11 @@ public class BlockInit {
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
+    // Copper Deco
+    public static final RegistryObject<Block> PATTERNED_COPPER = register("patterned_copper",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
     private static <T extends Block> RegistryObject<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {
         return BLOCKS.register(name, block);
