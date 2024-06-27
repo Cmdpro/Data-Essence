@@ -19,6 +19,7 @@ import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.Page;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import net.minecraft.client.gui.components.toasts.AdvancementToast;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -138,7 +139,7 @@ public class DataNEssenceUtil {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof ItemBufferBlockEntity buffer) {
-                container.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((resolved) -> {
+                container.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.DOWN).ifPresent((resolved) -> {
                     buffer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((resolved2) -> {
                         boolean movedAnything = false;
                         for (int o = 0; o < resolved2.getSlots(); o++) {

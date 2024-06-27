@@ -1,8 +1,11 @@
 package com.cmdpro.datanessence.screen;
 
-import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
+import com.cmdpro.datanessence.block.entity.EssenceBurnerBlockEntity;
+import com.cmdpro.datanessence.block.entity.InfuserBlockEntity;
 import com.cmdpro.datanessence.init.BlockInit;
 import com.cmdpro.datanessence.init.MenuInit;
+import com.cmdpro.datanessence.screen.slot.DataDriveSlot;
+import com.cmdpro.datanessence.screen.slot.ModResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -15,26 +18,23 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class FabricatorMenu extends AbstractContainerMenu {
-    public final FabricatorBlockEntity blockEntity;
+public class InfuserMenu extends AbstractContainerMenu {
+    public final InfuserBlockEntity blockEntity;
     private final Level level;
-    public FabricatorMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public InfuserMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
-    public FabricatorMenu(int pContainerId, Inventory inv, BlockEntity entity) {
-        super(MenuInit.FABRICATOR_MENU.get(), pContainerId);
+    public InfuserMenu(int pContainerId, Inventory inv, BlockEntity entity) {
+        super(MenuInit.INFUSER_MENU.get(), pContainerId);
         checkContainerSize(inv, 3);
-        blockEntity = ((FabricatorBlockEntity) entity);
+        blockEntity = ((InfuserBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            int i, j;
-            for (i = 0; i < 3; i++) {
-                for (j = 0; j < 3; j++) {
-                    this.addSlot(new SlotItemHandler(handler, j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
-                }
-            }
+            this.addSlot(new DataDriveSlot(handler, 0, 152, 8));
+            this.addSlot(new SlotItemHandler(handler, 1, 62, 34));
+            this.addSlot(new ModResultSlot(handler, 2, 116, 34));
         });
     }
 
@@ -54,7 +54,7 @@ public class FabricatorMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 10;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -91,7 +91,7 @@ public class FabricatorMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, BlockInit.FABRICATOR.get());
+                pPlayer, BlockInit.INFUSER.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

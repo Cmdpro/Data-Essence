@@ -35,7 +35,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockInit.DATA_BANK.get())
                 .add(BlockInit.POLISHED_OBSIDIAN.get())
                 .add(BlockInit.POLISHED_OBSIDIAN_COLUMN.get())
-                .add(BlockInit.ENGRAVED_POLISHED_OBSIDIAN.get());
+                .add(BlockInit.ENGRAVED_POLISHED_OBSIDIAN.get())
+                .add(BlockInit.INFUSER.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockInit.POLISHED_OBSIDIAN.get())
                 .add(BlockInit.POLISHED_OBSIDIAN_COLUMN.get())

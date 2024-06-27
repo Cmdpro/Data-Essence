@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.init.ItemInit;
 import com.cmdpro.datanessence.init.RecipeInit;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
+import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.RecipeType;
@@ -24,21 +25,26 @@ public class JEIDataNEssencePlugin implements IModPlugin {
     }
 
     public static IJeiRuntime runTime;
-    public static final RecipeType FABRICATIONRECIPE = RecipeType.create(DataNEssence.MOD_ID, RecipeInit.FABRICATIONCRAFTING.getId().getPath(), IFabricationRecipe.class);
+    public static final RecipeType FABRICATION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, RecipeInit.FABRICATIONCRAFTING.getId().getPath(), IFabricationRecipe.class);
+    public static final RecipeType INFUSION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, RecipeInit.INFUSION.getId().getPath(), InfusionRecipe.class);
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new FabricatorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new InfuserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     }
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
         List<IFabricationRecipe> recipes = rm.getAllRecipesFor(RecipeInit.FABRICATIONCRAFTING.get());
-        registration.addRecipes(FABRICATIONRECIPE, recipes);
+        registration.addRecipes(FABRICATION_RECIPE, recipes);
+        List<InfusionRecipe> recipes2 = rm.getAllRecipesFor(InfusionRecipe.Type.INSTANCE);
+        registration.addRecipes(INFUSION_RECIPE, recipes2);
     }
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(ItemInit.FABRICATOR_ITEM.get()), FABRICATIONRECIPE);
+        registration.addRecipeCatalyst(new ItemStack(ItemInit.FABRICATOR_ITEM.get()), FABRICATION_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(ItemInit.INFUSER_ITEM.get()), INFUSION_RECIPE);
     }
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {

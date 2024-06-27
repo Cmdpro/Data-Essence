@@ -25,6 +25,8 @@ public class BlockInit {
     public static final DeferredRegister<Item> ITEMS = ItemInit.ITEMS;
     public static final RegistryObject<Block> FABRICATOR = registerBlock("fabricator",
             () -> new Fabricator(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
+    public static final RegistryObject<Block> INFUSER = registerBlock("infuser",
+            () -> new Infuser(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
     public static final RegistryObject<Block> ESSENCE_BUFFER = register("essence_buffer",
             () -> new EssenceBuffer(BlockBehaviour.Properties.copy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

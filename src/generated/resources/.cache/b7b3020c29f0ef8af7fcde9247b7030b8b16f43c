@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-26T01:24:51.006041362	Item Models: datanessence
+// 1.20.1	2024-06-26T22:06:33.3230827	Item Models: datanessence
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
@@ -21,6 +21,7 @@ b373f009203404901822d57b9c55e629c6534e1c assets/datanessence/models/item/essence
 8482c1dc572a76bcafa6a26a2a944f95ec3211d3 assets/datanessence/models/item/fabricator.json
 7864ba5fef6bc31634bb90abc31f31c2f47d1b8f assets/datanessence/models/item/fluid_point.json
 f356571ca7c924ca20dabcdac766bc379c05608e assets/datanessence/models/item/fluid_wire.json
+b104084e816893bbffb15fab452594d5117f6830 assets/datanessence/models/item/infuser.json
 31f900cefbabb6a71f6ff477ec95a84a71e1416f assets/datanessence/models/item/item_point.json
 869463292549ed3104bcbbdcb698a2aa91206892 assets/datanessence/models/item/item_wire.json
 0252cf0b06ad0969651b57bd8705b3995bc34cdb assets/datanessence/models/item/logical_matrix.json

@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.screen.DataDriveScreen;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
+import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -16,6 +17,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.apache.commons.compress.harmony.pack200.CPString;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -37,7 +39,16 @@ public class DataDrive extends Item {
             pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.empty").withStyle(ChatFormatting.GRAY));
         }
     }
-
+    public static Entry getEntry(ItemStack stack) {
+        if (stack != null) {
+            if (stack.hasTag()) {
+                if (stack.getTag().contains("dataId")) {
+                    return Entries.entries.get(ResourceLocation.tryParse(stack.getTag().getString("dataId")));
+                }
+            }
+        }
+        return null;
+    }
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (pLevel.isClientSide) {

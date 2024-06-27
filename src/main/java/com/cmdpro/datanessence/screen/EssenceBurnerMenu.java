@@ -23,7 +23,7 @@ public class EssenceBurnerMenu extends AbstractContainerMenu {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
     public EssenceBurnerMenu(int pContainerId, Inventory inv, BlockEntity entity) {
-        super(MenuInit.ESSENCEBURNERMENU.get(), pContainerId);
+        super(MenuInit.ESSENCE_BURNER_MENU.get(), pContainerId);
         checkContainerSize(inv, 3);
         blockEntity = ((EssenceBurnerBlockEntity) entity);
         this.level = inv.player.level();

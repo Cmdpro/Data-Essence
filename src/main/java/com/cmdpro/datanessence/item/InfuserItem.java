@@ -1,7 +1,5 @@
 package com.cmdpro.datanessence.item;
 
-import com.cmdpro.datanessence.renderers.EssencePointItemRenderer;
-import com.cmdpro.datanessence.renderers.FluidPointItemRenderer;
 import com.cmdpro.datanessence.renderers.InfuserItemRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
@@ -16,22 +14,22 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class FluidPointItem extends BlockItem implements GeoItem {
+public class InfuserItem extends BlockItem implements GeoItem {
     public AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
-    public FluidPointItem(Block block, Properties settings) {
+    public InfuserItem(Block block, Properties settings) {
         super(block, settings);
     }
 
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.essence_point.hand", Animation.LoopType.LOOP));
+        event.getController().setAnimation(RawAnimation.begin().then("animation.infuser.hand", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {
-            private final BlockEntityWithoutLevelRenderer renderer = new FluidPointItemRenderer();
+            private final BlockEntityWithoutLevelRenderer renderer = new InfuserItemRenderer();
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return renderer;

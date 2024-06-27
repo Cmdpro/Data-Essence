@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.init.*;
+import com.cmdpro.datanessence.screen.InfuserScreen;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
 import com.cmdpro.datanessence.renderers.*;
 import com.cmdpro.datanessence.screen.EssenceBurnerScreen;
@@ -33,6 +34,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityInit.EXOTIC_ESSENCE_POINT.get(), ExoticEssencePointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityInit.ITEM_POINT.get(), ItemPointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityInit.FLUID_POINT.get(), FluidPointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityInit.INFUSER.get(), InfuserRenderer::new);
     }
     public static void drawHUD(ForgeGui gui, GuiGraphics guiGraphics, float pt, int width, int height) {
 
@@ -50,8 +52,9 @@ public class ClientModEvents {
         EntityRenderers.register(EntityInit.EXOTIC_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
         EntityRenderers.register(EntityInit.BLACK_HOLE.get(), EmptyEntityRenderer::new);
 
-        MenuScreens.register(MenuInit.FABRICATORMENU.get(), FabricatorScreen::new);
-        MenuScreens.register(MenuInit.ESSENCEBURNERMENU.get(), EssenceBurnerScreen::new);
+        MenuScreens.register(MenuInit.FABRICATOR_MENU.get(), FabricatorScreen::new);
+        MenuScreens.register(MenuInit.ESSENCE_BURNER_MENU.get(), EssenceBurnerScreen::new);
+        MenuScreens.register(MenuInit.INFUSER_MENU.get(), InfuserScreen::new);
         progressionShader = new ProgressionShader();
         ShaderManager.addShader(progressionShader);
     }

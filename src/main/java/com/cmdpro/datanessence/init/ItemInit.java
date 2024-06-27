@@ -40,6 +40,7 @@ public class ItemInit {
     public static final RegistryObject<Item> EXOTIC_ESSENCE_POINT_ITEM = register("exotic_essence_point", () -> new ExoticEssencePointItem(BlockInit.EXOTIC_ESSENCE_POINT.get(), new Item.Properties()));
     public static final RegistryObject<Item> ITEM_POINT_ITEM = register("item_point", () -> new ItemPointItem(BlockInit.ITEM_POINT.get(), new Item.Properties()));
     public static final RegistryObject<Item> FLUID_POINT_ITEM = register("fluid_point", () -> new FluidPointItem(BlockInit.FLUID_POINT.get(), new Item.Properties()));
+    public static final RegistryObject<Item> INFUSER_ITEM = register("infuser", () -> new InfuserItem(BlockInit.INFUSER.get(), new Item.Properties()));
 
     // Bombs
     public static final RegistryObject<Item> ESSENCE_BOMB = register("essence_bomb", () -> new EssenceBombItem(new Item.Properties()));

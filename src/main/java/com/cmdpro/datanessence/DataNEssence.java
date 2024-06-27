@@ -118,6 +118,7 @@ public class DataNEssence
             event.accept(BlockInit.DECO_ESSENCE_BUFFER);
             event.accept(BlockInit.DECO_ITEM_BUFFER);
             event.accept(BlockInit.DECO_FLUID_BUFFER);
+            event.accept(ItemInit.INFUSER_ITEM);
         }
     }
     private void setup(final FMLCommonSetupEvent event)

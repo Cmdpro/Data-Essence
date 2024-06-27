@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.init.ItemInit;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
+import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import mezz.jei.api.constants.VanillaTypes;
@@ -17,7 +18,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -27,49 +27,37 @@ import net.minecraftforge.common.crafting.IShapedRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(DataNEssence.MOD_ID, "fabrication");
+public class InfuserRecipeCategory implements IRecipeCategory<InfusionRecipe> {
+    public static final ResourceLocation UID = new ResourceLocation(DataNEssence.MOD_ID, "infusion");
     public final static ResourceLocation TEXTURE =
             new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
     private final IDrawable background;
     private final IDrawable icon;
-    private final ICraftingGridHelper craftingGridHelper;
 
-    public FabricatorRecipeCategory(IGuiHelper guiHelper) {
-        background = guiHelper.createDrawable(TEXTURE, 10, 196, 123, 60);
-        this.craftingGridHelper = guiHelper.createCraftingGridHelper();
-        icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemInit.FABRICATOR_ITEM.get()));
+    public InfuserRecipeCategory(IGuiHelper guiHelper) {
+        background = guiHelper.createDrawable(TEXTURE, 10, 136, 123, 60);
+        icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemInit.INFUSER_ITEM.get()));
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, IFabricationRecipe recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, InfusionRecipe recipe, IFocusGroup focuses) {
 
         // Initialize recipe output
-        IRecipeSlotBuilder outputSlot = builder.addSlot(RecipeIngredientRole.OUTPUT, 98, 22);
+        IRecipeSlotBuilder outputSlot = builder.addSlot(RecipeIngredientRole.OUTPUT, 82, 22);
         List<ItemStack> outputs = List.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()));
         if (outputs != null) {
             outputSlot.addIngredients(VanillaTypes.ITEM_STACK, outputs);
         }
 
-        // Initialize recipe inputs
-        int width = (recipe instanceof IShapedRecipe<?> shapedRecipe) ? shapedRecipe.getRecipeWidth() : 0;
-        int height = (recipe instanceof IShapedRecipe<?> shapedRecipe) ? shapedRecipe.getRecipeHeight() : 0;
-        List<List<ItemStack>> inputs = recipe.getIngredients().stream().map(ingredient -> List.of(ingredient.getItems())).toList();
-
-        List<IRecipeSlotBuilder> inputSlots = new ArrayList<>();
-        for (int y = 0; y < 3; ++y) {
-            for (int x = 0; x < 3; ++x) {
-                IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.INPUT, x * 17 + 21, y * 17 + 5);
-                inputSlots.add(slot);
-            }
+        IRecipeSlotBuilder inputSlot = builder.addSlot(RecipeIngredientRole.INPUT, 38, 22);
+        if (!recipe.getIngredients().isEmpty()) {
+            inputSlot.addIngredients(recipe.getIngredients().get(0));
         }
-        craftingGridHelper.setInputs(inputSlots, VanillaTypes.ITEM_STACK, inputs, width, height);
     }
 
     @Override
-    public void draw(IFabricationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+    public void draw(InfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         if (recipe.getEssenceCost() > 0) {
             guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 5, 28-(int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)), 6, 224-(int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)));
         }
@@ -82,13 +70,10 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
         if (recipe.getExoticEssenceCost() > 0) {
             guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 13, 54-(int)Math.ceil(22f*(recipe.getExoticEssenceCost()/1000f)), 1, 248-(int)Math.ceil(22f*(recipe.getExoticEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe.getExoticEssenceCost()/1000f)));
         }
-        if (recipe instanceof ShapelessFabricationRecipe) {
-            guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 93, 4, 242, 185, 14, 11);
-        }
     }
 
     @Override
-    public List<Component> getTooltipStrings(IFabricationRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public List<Component> getTooltipStrings(InfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltip = new ArrayList<>();
         if (recipe.getEssenceCost() > 0) {
             if (mouseX >= 5 && mouseY >= (28-22)) {
@@ -142,13 +127,13 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
     }
 
     @Override
-    public RecipeType<IFabricationRecipe> getRecipeType() {
-        return JEIDataNEssencePlugin.FABRICATION_RECIPE;
+    public RecipeType<InfusionRecipe> getRecipeType() {
+        return JEIDataNEssencePlugin.INFUSION_RECIPE;
     }
 
     @Override
     public Component getTitle() {
-        return Component.translatable("block.datanessence.fabricator");
+        return Component.translatable("block.datanessence.infuser");
     }
 
     @Override
