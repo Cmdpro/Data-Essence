@@ -60,11 +60,11 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     public abstract void transfer(BlockEntity other);
     public abstract void take(BlockEntity other);
     public Direction getDirection() {
-        if (getBlockState().getValue(BaseEssencePoint.FACE).equals(AttachFace.CEILING)) {
+        if (getBlockState().getValue(BaseCapabilityPoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;
         }
-        if (getBlockState().getValue(BaseEssencePoint.FACE).equals(AttachFace.WALL)) {
-            return getBlockState().getValue(BaseEssencePoint.FACING);
+        if (getBlockState().getValue(BaseCapabilityPoint.FACE).equals(AttachFace.WALL)) {
+            return getBlockState().getValue(BaseCapabilityPoint.FACING);
         }
         return Direction.UP;
     }

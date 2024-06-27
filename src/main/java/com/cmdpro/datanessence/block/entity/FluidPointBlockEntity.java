@@ -72,7 +72,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
     }
     @Override
     public void transfer(BlockEntity other) {
-        other.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved) -> {
+        other.getCapability(ForgeCapabilities.FLUID_HANDLER, getDirection()).ifPresent((resolved) -> {
             getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved2) -> {
                 for (int o = 0; o < resolved2.getTanks(); o++) {
                     FluidStack copy = resolved2.getFluidInTank(o).copy();
@@ -99,7 +99,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
     @Override
     public void take(BlockEntity other) {
         getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved) -> {
-            other.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved2) -> {
+            other.getCapability(ForgeCapabilities.FLUID_HANDLER, getDirection()).ifPresent((resolved2) -> {
                 for (int o = 0; o < resolved2.getTanks(); o++) {
                     FluidStack copy = resolved2.getFluidInTank(o).copy();
                     if (!copy.isEmpty()) {

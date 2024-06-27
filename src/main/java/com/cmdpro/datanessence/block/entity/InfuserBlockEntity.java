@@ -227,6 +227,7 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
             DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
             DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
             pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0);
+            boolean shouldReset = true;
             Optional<InfusionRecipe> recipe = pLevel.getRecipeManager().getRecipeFor(InfusionRecipe.Type.INSTANCE, pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get();
@@ -257,19 +258,15 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
                                 } else {
                                     pBlockEntity.workTime++;
                                 }
-                            } else {
-                                pBlockEntity.workTime = -1;
+                                shouldReset = false;
                             }
-                        } else {
-                            pBlockEntity.workTime = -1;
                         }
-                    } else {
-                        pBlockEntity.workTime = -1;
                     }
-                } else {
-                    pBlockEntity.workTime = -1;
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
+            }
+            if (shouldReset) {
+                pBlockEntity.workTime = -1;
             }
             pBlockEntity.updateBlock();
         }
@@ -281,9 +278,10 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
     }
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
         if (!item.isEmpty()) {
-            event.getController().setAnimation(RawAnimation.begin().then("animation.infuser.idle", Animation.LoopType.LOOP));
             if (workTime >= 0) {
                 event.getController().setAnimation(RawAnimation.begin().then("animation.infuser.active", Animation.LoopType.LOOP));
+            } else {
+                event.getController().setAnimation(RawAnimation.begin().then("animation.infuser.idle", Animation.LoopType.LOOP));
             }
         } else {
             event.getController().setAnimation(RawAnimation.begin().then("animation.infuser.deactivated", Animation.LoopType.LOOP));

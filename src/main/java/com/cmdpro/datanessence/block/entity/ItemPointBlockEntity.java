@@ -72,7 +72,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
     }
     @Override
     public void transfer(BlockEntity other) {
-        other.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((resolved) -> {
+        other.getCapability(ForgeCapabilities.ITEM_HANDLER, getDirection()).ifPresent((resolved) -> {
             getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((resolved2) -> {
                 boolean movedAnything = false;
                 for (int o = 0; o < resolved2.getSlots(); o++) {
@@ -135,7 +135,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
     @Override
     public void take(BlockEntity other) {
         getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((resolved) -> {
-            other.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((resolved2) -> {
+            other.getCapability(ForgeCapabilities.ITEM_HANDLER, getDirection()).ifPresent((resolved2) -> {
                 boolean movedAnything = false;
                 for (int o = 0; o < resolved2.getSlots(); o++) {
                     ItemStack copy = resolved2.getStackInSlot(o).copy();
