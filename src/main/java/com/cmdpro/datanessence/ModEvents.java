@@ -11,6 +11,7 @@ import com.cmdpro.datanessence.networking.packet.HiddenBlockSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.UnlockedEntrySyncS2CPacket;
 import com.cmdpro.datanessence.screen.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.screen.databank.DataBankTypeManager;
+import com.cmdpro.datanessence.screen.datatablet.DataTabManager;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
 import net.minecraft.client.Minecraft;
@@ -76,6 +77,7 @@ public class ModEvents {
     @SubscribeEvent
     public static void addReloadListenerEvent(AddReloadListenerEvent event) {
         event.addListener(EntryManager.getOrCreateInstance());
+        event.addListener(DataTabManager.getOrCreateInstance());
         event.addListener(DataBankEntryManager.getOrCreateInstance());
         event.addListener(DataBankTypeManager.getOrCreateInstance());
         event.addListener(HiddenBlocksManager.getOrCreateInstance());
@@ -91,7 +93,7 @@ public class ModEvents {
         }
     }
     protected static void syncToPlayer(ServerPlayer player) {
-        ModMessages.sendToPlayer(new EntrySyncS2CPacket(Entries.entries), player);
+        ModMessages.sendToPlayer(new EntrySyncS2CPacket(Entries.entries, Entries.tabs), player);
         ModMessages.sendToPlayer(new HiddenBlockSyncS2CPacket(HiddenBlocksManager.blocks), player);
     }
     @SubscribeEvent

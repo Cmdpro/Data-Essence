@@ -61,6 +61,7 @@
   "item.datanessence.data_tablet.page_type.crafting.fabricator.unknown": "%1$s ???",
   "item.datanessence.data_tablet.critical_data_unlocked": "Critical Data Unlocked",
 
+  "item.datanessence.data_tablet.tabs.test.name": "Test",
   "item.datanessence.data_tablet.pages.test1.name": "Cool Page 1",
   "item.datanessence.data_tablet.pages.test1.page1.text": "This page is cool",
   "item.datanessence.data_tablet.pages.test1.page2.text": "Page 2 works",
@@ -70,6 +71,7 @@
 
   "item.datanessence.data_tablet.tier_upgrade": "You have advanced to",
   "item.datanessence.data_tablet.tier": "Tier %1$s",
+
   "item.datanessence.data_tablet.pages.fabricator.name": "Fabricator",
   "item.datanessence.data_tablet.pages.fabricator.page1.text": "For the purpose of crafting with Essence, we have designed the Fabricator device. Essence is channeled through the lensing crystal in the obsidian base, amplified by the conductive metal frame into the items being worked with. It behaves otherwise as an ordinary workbench.\n\nThe device must be activated with a particular tool for it to craft.",
   "item.datanessence.data_tablet.pages.data_tablet.name": "Data Tablet",

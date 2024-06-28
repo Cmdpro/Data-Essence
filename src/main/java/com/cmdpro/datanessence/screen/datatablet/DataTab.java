@@ -1,0 +1,23 @@
+package com.cmdpro.datanessence.screen.datatablet;
+
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+
+public class DataTab {
+
+    public DataTab(ResourceLocation id, ItemLike icon, Component name) {
+        this.id = id;
+        this.icon = new ItemStack(icon);
+        this.name = name;
+    }
+    public DataTab(ResourceLocation id, ItemStack icon, Component name) {
+        this.id = id;
+        this.icon = icon;
+        this.name = name;
+    }
+    public Component name;
+    public ItemStack icon;
+    public ResourceLocation id;
+}

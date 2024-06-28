@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.screen;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import com.cmdpro.datanessence.screen.datatablet.DataTab;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.Page;
@@ -35,6 +36,7 @@ public class DataTabletScreen extends Screen {
     public Entry clickedEntry;
     public int page;
     public int ticks;
+    public DataTab currentTab;
 
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
@@ -45,7 +47,17 @@ public class DataTabletScreen extends Screen {
         }
         return false;
     }
-
+    public boolean clickEntry(Entry entry) {
+        screenType = 2;
+        clickedEntry = entry;
+        page = 0;
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+        return true;
+    }
+    public boolean clickTab(DataTab tab) {
+        currentTab = tab;
+        return true;
+    }
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         int x = (width - imageWidth) / 2;
@@ -55,11 +67,7 @@ public class DataTabletScreen extends Screen {
                 if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
                     if (pMouseX >= ((i.x * 20) - 10) + offsetX + x && pMouseX <= ((i.x * 20) + 10) + offsetX + x) {
                         if (pMouseY >= ((i.y * 20) - 10) + offsetY + y && pMouseY <= ((i.y * 20) + 10) + offsetY + y) {
-                            screenType = 2;
-                            clickedEntry = i;
-                            page = 0;
-                            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
-                            return true;
+                            return clickEntry(i);
                         }
                     }
                 }
@@ -124,6 +132,12 @@ public class DataTabletScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderBackground(graphics);
+        if (screenType == 0) {
+            // TODO : tabs
+            //for (int i = 0; i < Entries.tabs.size(); i++) {
+
+            //}
+        }
         renderBg(graphics, delta, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;

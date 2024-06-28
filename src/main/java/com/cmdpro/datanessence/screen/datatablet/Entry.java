@@ -7,7 +7,7 @@ import net.minecraft.world.level.ItemLike;
 
 public class Entry {
 
-    public Entry(ResourceLocation id, ItemLike icon, int x, int y, Page[] pages, ResourceLocation parent, Component name, boolean critical) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation parent, Component name, boolean critical) {
         this.id = id;
         this.icon = new ItemStack(icon);
         this.x = x;
@@ -16,8 +16,9 @@ public class Entry {
         this.parent = parent;
         this.name = name;
         this.critical = critical;
+        this.tab = tab;
     }
-    public Entry(ResourceLocation id, ItemStack icon, int x, int y, Page[] pages, ResourceLocation parent, Component name, boolean critical) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation parent, Component name, boolean critical) {
         this.id = id;
         this.icon = icon;
         this.x = x;
@@ -26,7 +27,9 @@ public class Entry {
         this.parent = parent;
         this.name = name;
         this.critical = critical;
+        this.tab = tab;
     }
+    public ResourceLocation tab;
     public Entry getParentEntry() {
         return parentEntry;
     }

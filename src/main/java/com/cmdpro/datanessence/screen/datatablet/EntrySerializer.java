@@ -23,7 +23,7 @@ import java.util.List;
 public class EntrySerializer {
     public Entry read(ResourceLocation entryId, JsonObject json) {
         if (!json.has("icon")) {
-            throw new JsonSyntaxException("Element color missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element icon missing in entry JSON for " + entryId.toString());
         }
         if (!json.has("x")) {
             throw new JsonSyntaxException("Element x missing in entry JSON for " + entryId.toString());
@@ -36,6 +36,9 @@ public class EntrySerializer {
         }
         if (!json.has("pages")) {
             throw new JsonSyntaxException("Element pages missing in entry JSON for " + entryId.toString());
+        }
+        if (!json.has("tab")) {
+            throw new JsonSyntaxException("Element tab missing in entry JSON for " + entryId.toString());
         }
         ItemStack icon = CraftingHelper.getItemStack(json.getAsJsonObject("icon"), true, false);
         int x = json.get("x").getAsInt();
@@ -62,7 +65,8 @@ public class EntrySerializer {
         if (json.has("critical")) {
             critical = json.get("critical").getAsBoolean();
         }
-        Entry entry = new Entry(entryId, icon, x, y, pages.toArray(new Page[0]), parent, name, critical);
+        ResourceLocation tab = ResourceLocation.tryParse(json.get("tab").getAsString());
+        Entry entry = new Entry(entryId, tab, icon, x, y, pages.toArray(new Page[0]), parent, name, critical);
         return entry;
     }
     @Nonnull
@@ -79,7 +83,8 @@ public class EntrySerializer {
             parent = buf.readResourceLocation();
         }
         boolean critical = buf.readBoolean();
-        Entry entry = new Entry(id, icon, x, y, pages, parent, name, critical);
+        ResourceLocation tab = buf.readResourceLocation();
+        Entry entry = new Entry(id, tab, icon, x, y, pages, parent, name, critical);
         return entry;
     }
     public static Page pageFromNetwork(FriendlyByteBuf buf) {
@@ -104,5 +109,6 @@ public class EntrySerializer {
             buf.writeResourceLocation(entry.getParentEntry().id);
         }
         buf.writeBoolean(entry.critical);
+        buf.writeResourceLocation(entry.tab);
     }
 }
