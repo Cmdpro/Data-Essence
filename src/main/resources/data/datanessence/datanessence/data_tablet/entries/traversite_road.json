@@ -15,5 +15,7 @@
     }
   ],
   "name": "item.datanessence.data_tablet.pages.traversite_road.name",
-  "parent": "datanessence:infuser"
+  "parents": [
+    "datanessence:infuser"
+  ]
 }

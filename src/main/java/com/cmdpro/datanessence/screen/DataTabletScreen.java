@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
+import org.joml.Math;
 
 import java.util.Comparator;
 import java.util.List;
@@ -231,33 +232,33 @@ public class DataTabletScreen extends Screen {
         Tesselator tess = RenderSystem.renderThreadTesselator();
         BufferBuilder buf = tess.getBuilder();
         RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
-        buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
         for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
                 if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
-                    if (i.getParentEntry() != null) {
-                        if (i.getParentEntry().tab.equals(currentTab.id)) {
-                            int x1 = x + ((i.getParentEntry().x * 20)) + (int) offsetX;
-                            int y1 = y + ((i.getParentEntry().y * 20)) + (int) offsetY;
+                    for (Entry o : i.getParentEntries()) {
+                        if (o.tab.equals(currentTab.id)) {
+                            buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
+                            int x1 = x + ((o.x * 20)) + (int) offsetX;
+                            int y1 = y + ((o.y * 20)) + (int) offsetY;
                             int x2 = x + ((i.x * 20)) + (int) offsetX;
                             int y2 = y + ((i.y * 20)) + (int) offsetY;
-                            Vec2 vec1 = new Vec2(x1, y1);
-                            Vec2 vec2 = new Vec2(x2, y2);
+                            Vec2 vec1 = new Vec2(x1 >= x2 ? x1 == x2 ? 0 : 1 : -1, y1 >= y2 ? y1 == y2 ? 0 : 1 : -1);
+                            Vec2 vec2 = new Vec2(x2 >= x1 ? x1 == x2 ? 0 : 1 : -1, y2 >= y1 ? y1 == y2 ? 0 : 1 : -1);
                             buf.vertex(x1, y1, 0.0D).color(201, 13, 139, 255).normal(vec1.x, vec1.y, 0).endVertex();
                             buf.vertex(x2, y2, 0.0D).color(201, 13, 139, 255).normal(vec2.x, vec2.y, 0).endVertex();
+                            tess.end();
                         }
                     }
                 }
             }
         }
-        tess.end();
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         GlStateManager._enableCull();
         GlStateManager._depthMask(true);
         RenderSystem.lineWidth(1);
     }
     public List<DataTab> getSortedTabs() {
-        return Entries.tabs.values().stream().sorted(Comparator.comparingInt(a -> a.priority)).toList();
+        return Entries.tabs.values().stream().sorted((a, b) -> Integer.compare(b.priority, a.priority)).toList();
     }
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;

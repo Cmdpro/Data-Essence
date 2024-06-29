@@ -44,9 +44,11 @@ public class EntrySerializer {
         int x = json.get("x").getAsInt();
         int y = json.get("y").getAsInt();
         Component name = Component.translatable(json.get("name").getAsString());
-        ResourceLocation parent = null;
-        if (json.has("parent")) {
-            parent = ResourceLocation.tryParse(json.get("parent").getAsString());
+        List<ResourceLocation> parents = new ArrayList<>();
+        if (json.has("parents")) {
+            for (JsonElement i : json.getAsJsonArray("parents")) {
+                parents.add(ResourceLocation.tryParse(i.getAsString()));
+            }
         }
         List<Page> pages = new ArrayList<>();
         int o = 0;
@@ -66,7 +68,7 @@ public class EntrySerializer {
             critical = json.get("critical").getAsBoolean();
         }
         ResourceLocation tab = ResourceLocation.tryParse(json.get("tab").getAsString());
-        Entry entry = new Entry(entryId, tab, icon, x, y, pages.toArray(new Page[0]), parent, name, critical);
+        Entry entry = new Entry(entryId, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, critical);
         return entry;
     }
     @Nonnull
@@ -77,14 +79,10 @@ public class EntrySerializer {
         int y = buf.readInt();
         Component name = buf.readComponent();
         Page[] pages = buf.readList(EntrySerializer::pageFromNetwork).toArray(new Page[0]);
-        boolean hasParent = buf.readBoolean();
-        ResourceLocation parent = null;
-        if (hasParent) {
-            parent = buf.readResourceLocation();
-        }
+        List<ResourceLocation> parents = buf.readList(FriendlyByteBuf::readResourceLocation);
         boolean critical = buf.readBoolean();
         ResourceLocation tab = buf.readResourceLocation();
-        Entry entry = new Entry(id, tab, icon, x, y, pages, parent, name, critical);
+        Entry entry = new Entry(id, tab, icon, x, y, pages, parents.toArray(new ResourceLocation[0]), name, critical);
         return entry;
     }
     public static Page pageFromNetwork(FriendlyByteBuf buf) {
@@ -104,10 +102,11 @@ public class EntrySerializer {
         buf.writeInt(entry.y);
         buf.writeComponent(entry.name);
         buf.writeCollection(Arrays.stream(entry.pages).toList(), EntrySerializer::pageToNetwork);
-        buf.writeBoolean(entry.getParentEntry() != null);
-        if (entry.getParentEntry() != null) {
-            buf.writeResourceLocation(entry.getParentEntry().id);
+        List<ResourceLocation> parents = new ArrayList<>();
+        for (Entry i : entry.getParentEntries()) {
+            parents.add(i.id);
         }
+        buf.writeCollection(parents, FriendlyByteBuf::writeResourceLocation);
         buf.writeBoolean(entry.critical);
         buf.writeResourceLocation(entry.tab);
     }

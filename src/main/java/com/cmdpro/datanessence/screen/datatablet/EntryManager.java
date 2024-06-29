@@ -52,7 +52,7 @@ public class EntryManager extends SimpleJsonResourceReloadListener {
                     DataNEssence.LOGGER.warn("Entry \"" + i.id + "\" is overlapping with entry \"" + o.id + "\"");
                 }
             }
-            i.updateParentEntry();
+            i.updateParentEntries();
         }
     }
     public static EntrySerializer serializer = new EntrySerializer();

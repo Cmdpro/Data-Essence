@@ -42,7 +42,7 @@ public class EntrySyncS2CPacket {
             Entries.tabs.clear();
             Entries.tabs.putAll(msg.tabs);
             for (Entry i : Entries.entries.values()) {
-                i.updateParentEntry();
+                i.updateParentEntries();
             }
         }
     }

@@ -41,6 +41,9 @@ public class DataBankScreen extends Screen {
     public DataBankEntry clickedEntry;
     public Minigame[] minigames;
     public int minigameProgress;
+    public boolean isUnlocked(Entry entry) {
+        return entry.isUnlockedClient();
+    }
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         int x = (width - imageWidth) / 2;
@@ -54,7 +57,7 @@ public class DataBankScreen extends Screen {
             for (DataBankEntry i : entries) {
                 if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
-                    if (entry == null || !(entry.getParentEntry() == null || ClientPlayerUnlockedEntries.getUnlocked().contains(entry.getParentEntry().id))) {
+                    if (entry == null || !isUnlocked(entry)) {
                         continue;
                     }
                     if (i.tier != currentTier) {
@@ -212,7 +215,7 @@ public class DataBankScreen extends Screen {
             for (DataBankEntry i : entries) {
                 if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
-                    if (entry == null || !(entry.getParentEntry() == null || ClientPlayerUnlockedEntries.getUnlocked().contains(entry.getParentEntry().id))) {
+                    if (entry == null || !isUnlocked(entry)) {
                         continue;
                     }
                     if (i.tier != currentTier) {
@@ -262,7 +265,7 @@ public class DataBankScreen extends Screen {
         for (DataBankEntry i : entries) {
             if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
                 Entry entry = Entries.entries.get(i.entry);
-                if (entry == null || !(entry.getParentEntry() == null || ClientPlayerUnlockedEntries.getUnlocked().contains(entry.getParentEntry().id))) {
+                if (entry == null || !isUnlocked(entry)) {
                     continue;
                 }
                 if (i.tier != currentTier) {

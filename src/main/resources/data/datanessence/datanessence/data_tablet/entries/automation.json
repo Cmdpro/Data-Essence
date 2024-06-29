@@ -15,5 +15,7 @@
     }
   ],
   "name": "item.datanessence.data_tablet.pages.automation.name",
-  "parent": "datanessence:fabricator"
+  "parents": [
+    "datanessence:fabricator"
+  ]
 }

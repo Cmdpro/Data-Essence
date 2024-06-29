@@ -19,5 +19,7 @@
     }
   ],
   "name": "item.datanessence.data_tablet.pages.infuser.name",
-  "parent": "datanessence:automation"
+  "parents": [
+    "datanessence:automation"
+  ]
 }
