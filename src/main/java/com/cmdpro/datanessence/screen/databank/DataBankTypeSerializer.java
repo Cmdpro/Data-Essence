@@ -17,12 +17,20 @@ import java.util.List;
 
 public class DataBankTypeSerializer {
     public ResourceLocation[] read(ResourceLocation entryId, JsonObject json) {
-        if (!json.has("ids")) {
-            throw new JsonSyntaxException("Element ids missing in entry JSON for " + entryId.toString());
-        }
         List<ResourceLocation> ids = new ArrayList<>();
-        for (JsonElement i : json.getAsJsonArray("ids")) {
-            ids.add(ResourceLocation.tryParse(i.getAsString()));
+        if (json.has("add")) {
+            for (JsonElement i : json.getAsJsonArray("add")) {
+                ids.add(ResourceLocation.tryParse(i.getAsString()));
+            }
+        }
+        return ids.toArray(new ResourceLocation[0]);
+    }
+    public ResourceLocation[] readRemovals(ResourceLocation entryId, JsonObject json) {
+        List<ResourceLocation> ids = new ArrayList<>();
+        if (json.has("remove")) {
+            for (JsonElement i : json.getAsJsonArray("remove")) {
+                ids.add(ResourceLocation.tryParse(i.getAsString()));
+            }
         }
         return ids.toArray(new ResourceLocation[0]);
     }

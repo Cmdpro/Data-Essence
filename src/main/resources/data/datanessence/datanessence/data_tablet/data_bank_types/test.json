@@ -1,7 +1,10 @@
 {
-  "ids": [
+  "add": [
     "datanessence:fabricator",
     "datanessence:test1",
     "datanessence:test2"
+  ],
+  "remove":[
+    "datanessence:fabricator"
   ]
 }
