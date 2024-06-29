@@ -55,16 +55,18 @@ public abstract class ShaderInstance {
             }
             beforeProcess();
             if (active) {
-                postChain.process(Minecraft.getInstance().getFrameTime());
-                GlStateManager._glBindFramebuffer(GL_DRAW_FRAMEBUFFER, Minecraft.getInstance().getMainRenderTarget().frameBufferId);
+                time += Minecraft.getInstance().getDeltaFrameTime() / 20.0;
+                processPostChain();
                 afterProcess();
             }
         }
     }
+    public void processPostChain() {
+        postChain.process(Minecraft.getInstance().getFrameTime());
+        GlStateManager._glBindFramebuffer(GL_DRAW_FRAMEBUFFER, Minecraft.getInstance().getMainRenderTarget().frameBufferId);
+    }
     public void tick() {
-        if (active) {
-            time += Minecraft.getInstance().getDeltaFrameTime() / 20.0;
-        }
+
     }
     public void setUniforms(PostPass instance) {}
     public void beforeProcess() {}
