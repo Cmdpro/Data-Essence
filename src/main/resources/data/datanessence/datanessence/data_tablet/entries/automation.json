@@ -2,8 +2,8 @@
   "icon": {
     "item": "datanessence:data_drive"
   },
-  "tab": "datanessence:test",
-  "x": -3,
+  "tab": "datanessence:machinery",
+  "x": 0,
   "y": 0,
   "pages": [
     {

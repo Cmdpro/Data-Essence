@@ -2,7 +2,7 @@
   "icon": {
     "item": "datanessence:traversite_road"
   },
-  "tab": "datanessence:test2",
+  "tab": "datanessence:tools",
   "x": 3,
   "y": 0,
   "pages": [
@@ -14,5 +14,6 @@
       ]
     }
   ],
-  "name": "item.datanessence.data_tablet.pages.traversite_road.name"
+  "name": "item.datanessence.data_tablet.pages.traversite_road.name",
+  "parent": "datanessence:infuser"
 }

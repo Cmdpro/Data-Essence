@@ -2,9 +2,9 @@
   "icon": {
     "item": "datanessence:infuser"
   },
-  "tab": "datanessence:test",
+  "tab": "datanessence:machinery",
   "x": 0,
-  "y": 1,
+  "y": 2,
   "pages": [
     {
       "type": "datanessence:crafting",
@@ -19,5 +19,5 @@
     }
   ],
   "name": "item.datanessence.data_tablet.pages.infuser.name",
-  "parent": "datanessence:data_drive"
+  "parent": "datanessence:automation"
 }

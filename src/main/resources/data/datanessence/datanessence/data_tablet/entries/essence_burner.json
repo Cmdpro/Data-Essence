@@ -2,9 +2,9 @@
   "icon": {
     "item": "datanessence:essence_burner"
   },
-  "tab": "datanessence:test",
-  "x": 2,
-  "y": 1,
+  "tab": "datanessence:generators",
+  "x": 0,
+  "y": 0,
   "pages": [
     {
       "type": "datanessence:text",
