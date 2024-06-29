@@ -1,8 +1,6 @@
 package com.cmdpro.datanessence.block;
 
-import com.cmdpro.datanessence.block.entity.EssenceBatteryBlockEntity;
 import com.cmdpro.datanessence.block.entity.ExoticEssenceBatteryBlockEntity;
-import com.cmdpro.datanessence.init.BlockEntityInit;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.BaseEntityBlock;

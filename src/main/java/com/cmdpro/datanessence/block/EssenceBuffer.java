@@ -1,19 +1,12 @@
 package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.block.entity.EssenceBufferBlockEntity;
-import com.cmdpro.datanessence.block.entity.EssencePointBlockEntity;
-import com.cmdpro.datanessence.init.BlockEntityInit;
-import com.cmdpro.datanessence.init.ItemInit;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;

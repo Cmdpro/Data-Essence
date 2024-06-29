@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.recipe;
 
-import com.cmdpro.datanessence.init.RecipeInit;
+import com.cmdpro.datanessence.registry.RecipeRegistry;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -8,7 +8,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 public interface IFabricationRecipe extends CraftingRecipe, IHasRequiredKnowledge, IHasEssenceCost {
     @Override
     default RecipeType<?> getType() {
-        return RecipeInit.FABRICATIONCRAFTING.get();
+        return RecipeRegistry.FABRICATIONCRAFTING.get();
     }
 
     @Override

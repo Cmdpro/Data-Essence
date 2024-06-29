@@ -2,18 +2,14 @@ package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.EssenceBurner;
-import com.cmdpro.datanessence.init.BlockInit;
+import com.cmdpro.datanessence.registry.BlockRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.function.Function;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -23,27 +19,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
 
-        bufferBlock(BlockInit.ESSENCE_BUFFER);
-        bufferBlock(BlockInit.ITEM_BUFFER);
-        bufferBlock(BlockInit.FLUID_BUFFER);
+        bufferBlock(BlockRegistry.ESSENCE_BUFFER);
+        bufferBlock(BlockRegistry.ITEM_BUFFER);
+        bufferBlock(BlockRegistry.FLUID_BUFFER);
 
-        ancientDecoBlockWithItem(BlockInit.ANCIENT_ROCK_BRICKS);
-        ancientDecoBlockWithItem(BlockInit.ANCIENT_ROCK_TILES);
-        ancientDecoCubeColumn(BlockInit.ANCIENT_ROCK_COLUMN);
-        ancientDecoCubeColumn(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN);
+        ancientDecoBlockWithItem(BlockRegistry.ANCIENT_ROCK_BRICKS);
+        ancientDecoBlockWithItem(BlockRegistry.ANCIENT_ROCK_TILES);
+        ancientDecoCubeColumn(BlockRegistry.ANCIENT_ROCK_COLUMN);
+        ancientDecoCubeColumn(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN);
 
-        bufferDecoBlock(BlockInit.DECO_ESSENCE_BUFFER);
-        bufferDecoBlock(BlockInit.DECO_ITEM_BUFFER);
-        bufferDecoBlock(BlockInit.DECO_FLUID_BUFFER);
+        bufferDecoBlock(BlockRegistry.DECO_ESSENCE_BUFFER);
+        bufferDecoBlock(BlockRegistry.DECO_ITEM_BUFFER);
+        bufferDecoBlock(BlockRegistry.DECO_FLUID_BUFFER);
 
-        decoBlock(BlockInit.POLISHED_OBSIDIAN);
-        pillarDecoBlock(BlockInit.POLISHED_OBSIDIAN_COLUMN);
-        decoBlock(BlockInit.ENGRAVED_POLISHED_OBSIDIAN);
-        decoBlock(BlockInit.PATTERNED_COPPER);
+        decoBlock(BlockRegistry.POLISHED_OBSIDIAN);
+        pillarDecoBlock(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
+        decoBlock(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN);
+        decoBlock(BlockRegistry.PATTERNED_COPPER);
 
-        essenceBurner(BlockInit.ESSENCE_BURNER);
+        essenceBurner(BlockRegistry.ESSENCE_BURNER);
 
-        blockWithItem(BlockInit.TRAVERSITE_ROAD);
+        blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.entity;
 
-import com.cmdpro.datanessence.init.EntityInit;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -16,18 +16,18 @@ public class ThrownExoticEssenceBombProjectile extends ThrowableItemProjectile {
     }
 
     public ThrownExoticEssenceBombProjectile(LivingEntity pShooter, Level pLevel) {
-        super(EntityInit.EXOTIC_ESSENCE_BOMB.get(), pShooter, pLevel);
+        super(EntityRegistry.EXOTIC_ESSENCE_BOMB.get(), pShooter, pLevel);
     }
     @Override
     protected Item getDefaultItem() {
-        return ItemInit.EXOTIC_ESSENCE_BOMB.get();
+        return ItemRegistry.EXOTIC_ESSENCE_BOMB.get();
     }
 
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
         if (!level().isClientSide) {
             level().explode(this, pResult.getLocation().x, pResult.getLocation().y, pResult.getLocation().z, 4, Level.ExplosionInteraction.TNT);
-            BlackHole blackHole = new BlackHole(EntityInit.BLACK_HOLE.get(), level());
+            BlackHole blackHole = new BlackHole(EntityRegistry.BLACK_HOLE.get(), level());
             blackHole.setPos(pResult.getLocation().subtract(0, 2, 0));
             blackHole.getEntityData().set(BlackHole.SIZE, 8f);
             level().addFreshEntity(blackHole);

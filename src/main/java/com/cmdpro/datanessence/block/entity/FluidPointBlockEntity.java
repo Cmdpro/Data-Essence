@@ -2,7 +2,7 @@ package com.cmdpro.datanessence.block.entity;
 
 import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
-import com.cmdpro.datanessence.init.BlockEntityInit;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +28,7 @@ import java.awt.*;
 
 public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implements GeoBlockEntity {
     public FluidPointBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.FLUID_POINT.get(), pos, state);
+        super(BlockEntityRegistry.FLUID_POINT.get(), pos, state);
     }
     private final FluidTank fluidHandler = new FluidTank(DataNEssenceConfig.fluidPointTransfer);
     private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();

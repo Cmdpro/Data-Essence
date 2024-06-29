@@ -4,7 +4,7 @@ import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
-import com.cmdpro.datanessence.init.BlockEntityInit;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
@@ -20,7 +20,7 @@ import java.awt.*;
 
 public class EssencePointBlockEntity extends BaseEssencePointBlockEntity implements GeoBlockEntity {
     public EssencePointBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.ESSENCE_POINT.get(), pos, state);
+        super(BlockEntityRegistry.ESSENCE_POINT.get(), pos, state);
     }
 
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);

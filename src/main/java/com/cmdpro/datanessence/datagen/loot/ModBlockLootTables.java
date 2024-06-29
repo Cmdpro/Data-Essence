@@ -1,25 +1,20 @@
 package com.cmdpro.datanessence.datagen.loot;
 
-import com.cmdpro.datanessence.init.BlockInit;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
-import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
@@ -29,38 +24,38 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        dropSelf(BlockInit.FABRICATOR.get());
-        dropSelf(BlockInit.ESSENCE_POINT.get());
-        dropSelf(BlockInit.LUNAR_ESSENCE_POINT.get());
-        dropSelf(BlockInit.NATURAL_ESSENCE_POINT.get());
-        dropSelf(BlockInit.EXOTIC_ESSENCE_POINT.get());
-        dropSelf(BlockInit.ESSENCE_BUFFER.get());
-        dropSelf(BlockInit.ITEM_BUFFER.get());
-        dropSelf(BlockInit.FLUID_BUFFER.get());
-        dropSelf(BlockInit.ITEM_POINT.get());
-        dropSelf(BlockInit.FLUID_POINT.get());
-        dropSelf(BlockInit.ESSENCE_CRYSTAL.get());
-        dropSelf(BlockInit.ESSENCE_BURNER.get());
-        dropSelf(BlockInit.DECO_ESSENCE_BUFFER.get());
-        dropSelf(BlockInit.DECO_ITEM_BUFFER.get());
-        dropSelf(BlockInit.DECO_FLUID_BUFFER.get());
-        this.add(BlockInit.DATA_BANK.get(),
+        dropSelf(BlockRegistry.FABRICATOR.get());
+        dropSelf(BlockRegistry.ESSENCE_POINT.get());
+        dropSelf(BlockRegistry.LUNAR_ESSENCE_POINT.get());
+        dropSelf(BlockRegistry.NATURAL_ESSENCE_POINT.get());
+        dropSelf(BlockRegistry.EXOTIC_ESSENCE_POINT.get());
+        dropSelf(BlockRegistry.ESSENCE_BUFFER.get());
+        dropSelf(BlockRegistry.ITEM_BUFFER.get());
+        dropSelf(BlockRegistry.FLUID_BUFFER.get());
+        dropSelf(BlockRegistry.ITEM_POINT.get());
+        dropSelf(BlockRegistry.FLUID_POINT.get());
+        dropSelf(BlockRegistry.ESSENCE_CRYSTAL.get());
+        dropSelf(BlockRegistry.ESSENCE_BURNER.get());
+        dropSelf(BlockRegistry.DECO_ESSENCE_BUFFER.get());
+        dropSelf(BlockRegistry.DECO_ITEM_BUFFER.get());
+        dropSelf(BlockRegistry.DECO_FLUID_BUFFER.get());
+        this.add(BlockRegistry.DATA_BANK.get(),
                 block -> noDrop());
-        this.add(BlockInit.ESSENCE_CRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemInit.ESSENCE_SHARD.get()));
-        dropSelf(BlockInit.ANCIENT_ROCK_COLUMN.get());
-        dropSelf(BlockInit.ANCIENT_ROCK_BRICKS.get());
-        dropSelf(BlockInit.ANCIENT_ROCK_TILES.get());
-        dropSelf(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN.get());
-        dropSelf(BlockInit.POLISHED_OBSIDIAN.get());
-        dropSelf(BlockInit.POLISHED_OBSIDIAN_COLUMN.get());
-        dropSelf(BlockInit.ENGRAVED_POLISHED_OBSIDIAN.get());
-        dropSelf(BlockInit.TRAVERSITE_ROAD.get());
-        dropSelf(BlockInit.ESSENCE_BATTERY.get());
-        dropSelf(BlockInit.LUNAR_ESSENCE_BATTERY.get());
-        dropSelf(BlockInit.NATURAL_ESSENCE_BATTERY.get());
-        dropSelf(BlockInit.EXOTIC_ESSENCE_BATTERY.get());
-        dropSelf(BlockInit.INFUSER.get());
-        dropSelf(BlockInit.PATTERNED_COPPER.get());
+        this.add(BlockRegistry.ESSENCE_CRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemRegistry.ESSENCE_SHARD.get()));
+        dropSelf(BlockRegistry.ANCIENT_ROCK_COLUMN.get());
+        dropSelf(BlockRegistry.ANCIENT_ROCK_BRICKS.get());
+        dropSelf(BlockRegistry.ANCIENT_ROCK_TILES.get());
+        dropSelf(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN.get());
+        dropSelf(BlockRegistry.POLISHED_OBSIDIAN.get());
+        dropSelf(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get());
+        dropSelf(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get());
+        dropSelf(BlockRegistry.TRAVERSITE_ROAD.get());
+        dropSelf(BlockRegistry.ESSENCE_BATTERY.get());
+        dropSelf(BlockRegistry.LUNAR_ESSENCE_BATTERY.get());
+        dropSelf(BlockRegistry.NATURAL_ESSENCE_BATTERY.get());
+        dropSelf(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
+        dropSelf(BlockRegistry.INFUSER.get());
+        dropSelf(BlockRegistry.PATTERNED_COPPER.get());
     }
     protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,
@@ -71,7 +66,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     }
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return BlockInit.BLOCKS.getEntries().stream().map(RegistryObject::get).filter((block) -> {
+        return BlockRegistry.BLOCKS.getEntries().stream().map(RegistryObject::get).filter((block) -> {
             if (block instanceof LiquidBlock) {
                 return false;
             }

@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.entity;
 
-import com.cmdpro.datanessence.init.EntityInit;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -14,11 +14,11 @@ public class ThrownEssenceBombProjectile extends ThrowableItemProjectile {
         super(pEntityType, pLevel);
     }
     public ThrownEssenceBombProjectile(LivingEntity pShooter, Level pLevel) {
-        super(EntityInit.ESSENCE_BOMB.get(), pShooter, pLevel);
+        super(EntityRegistry.ESSENCE_BOMB.get(), pShooter, pLevel);
     }
     @Override
     protected Item getDefaultItem() {
-        return ItemInit.ESSENCE_BOMB.get();
+        return ItemRegistry.ESSENCE_BOMB.get();
     }
 
     @Override

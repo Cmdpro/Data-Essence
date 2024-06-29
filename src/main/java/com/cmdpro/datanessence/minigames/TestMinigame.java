@@ -1,17 +1,10 @@
 package com.cmdpro.datanessence.minigames;
 
-import com.cmdpro.datanessence.init.MinigameInit;
 import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.cmdpro.datanessence.screen.databank.Minigame;
-import com.cmdpro.datanessence.screen.databank.MinigameCreator;
 import com.google.common.primitives.Chars;
-import com.sun.jna.platform.KeyboardUtils;
-import net.minecraft.client.KeyboardHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.player.KeyboardInput;
 import org.joml.Vector2i;
-import org.openjdk.nashorn.internal.runtime.regexp.joni.encoding.CharacterType;
 
 public class TestMinigame extends Minigame {
     public Vector2i playerPos;

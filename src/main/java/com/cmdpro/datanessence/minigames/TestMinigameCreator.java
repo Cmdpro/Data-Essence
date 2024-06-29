@@ -1,13 +1,9 @@
 package com.cmdpro.datanessence.minigames;
 
-import com.cmdpro.datanessence.init.MinigameInit;
-import com.cmdpro.datanessence.screen.DataBankScreen;
-import com.cmdpro.datanessence.screen.databank.Minigame;
+import com.cmdpro.datanessence.registry.MinigameRegistry;
 import com.cmdpro.datanessence.screen.databank.MinigameCreator;
 import com.cmdpro.datanessence.screen.databank.MinigameSerializer;
 import com.google.gson.JsonObject;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.FriendlyByteBuf;
 import org.joml.Vector2i;
 
@@ -23,7 +19,7 @@ public class TestMinigameCreator extends MinigameCreator<TestMinigame> {
 
     @Override
     public MinigameSerializer getSerializer() {
-        return MinigameInit.TESTMINIGAME.get();
+        return MinigameRegistry.TESTMINIGAME.get();
     }
 
     public static class TestMinigameSerializer extends MinigameSerializer<TestMinigameCreator> {

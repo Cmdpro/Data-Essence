@@ -1,13 +1,11 @@
 package com.cmdpro.datanessence.block.entity;
 
-import com.cmdpro.datanessence.api.EssenceContainer;
-import com.cmdpro.datanessence.init.BlockEntityInit;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
@@ -18,8 +16,6 @@ import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-
 public class ItemBufferBlockEntity extends BlockEntity {
     private final ItemStackHandler itemHandler = new ItemStackHandler(5) {
         @Override
@@ -29,7 +25,7 @@ public class ItemBufferBlockEntity extends BlockEntity {
 
     };
     public ItemBufferBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(BlockEntityInit.ITEM_BUFFER.get(), pPos, pBlockState);
+        super(BlockEntityRegistry.ITEM_BUFFER.get(), pPos, pBlockState);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
-import com.cmdpro.datanessence.init.BlockInit;
-import com.cmdpro.datanessence.init.MenuInit;
+import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.MenuRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +22,7 @@ public class FabricatorMenu extends AbstractContainerMenu {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
     public FabricatorMenu(int pContainerId, Inventory inv, BlockEntity entity) {
-        super(MenuInit.FABRICATOR_MENU.get(), pContainerId);
+        super(MenuRegistry.FABRICATOR_MENU.get(), pContainerId);
         checkContainerSize(inv, 3);
         blockEntity = ((FabricatorBlockEntity) entity);
         this.level = inv.player.level();
@@ -91,7 +91,7 @@ public class FabricatorMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, BlockInit.FABRICATOR.get());
+                pPlayer, BlockRegistry.FABRICATOR.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

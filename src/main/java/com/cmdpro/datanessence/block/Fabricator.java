@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
-import com.cmdpro.datanessence.init.BlockEntityInit;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -61,7 +61,7 @@ public class Fabricator extends BaseEntityBlock {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof FabricatorBlockEntity ent) {
-                if (pPlayer.isHolding(ItemInit.MAGIC_WRENCH.get())) {
+                if (pPlayer.isHolding(ItemRegistry.MAGIC_WRENCH.get())) {
                     FabricatorBlockEntity.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
                 } else {
                     NetworkHooks.openScreen(((ServerPlayer) pPlayer), (FabricatorBlockEntity) entity, pPos);
@@ -76,7 +76,7 @@ public class Fabricator extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.FABRICATOR.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.FABRICATOR.get(),
                 FabricatorBlockEntity::tick);
     }
 }

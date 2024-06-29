@@ -1,9 +1,7 @@
 package com.cmdpro.datanessence.block;
 
-import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
 import com.cmdpro.datanessence.block.entity.InfuserBlockEntity;
-import com.cmdpro.datanessence.init.BlockEntityInit;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -78,7 +76,7 @@ public class Infuser extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.INFUSER.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.INFUSER.get(),
                 InfuserBlockEntity::tick);
     }
 }

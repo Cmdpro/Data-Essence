@@ -1,16 +1,11 @@
 package com.cmdpro.datanessence.networking.packet;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
-import com.cmdpro.datanessence.screen.databank.DataBankEntries;
-import com.cmdpro.datanessence.screen.databank.DataBankEntry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -40,7 +35,7 @@ public class PlayerChangeDriveDataC2SPacket {
             context.getSender().getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
                 if (data.getUnlocked().contains(entry)) {
                     ItemStack stack = context.getSender().getItemInHand(offhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
-                    if (stack.is(ItemInit.DATA_DRIVE.get())) {
+                    if (stack.is(ItemRegistry.DATA_DRIVE.get())) {
                         stack.getOrCreateTag().putString("dataId", entry.toString());
                     }
                 }

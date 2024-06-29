@@ -1,9 +1,8 @@
 package com.cmdpro.datanessence.screen;
 
-import com.cmdpro.datanessence.block.entity.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.entity.InfuserBlockEntity;
-import com.cmdpro.datanessence.init.BlockInit;
-import com.cmdpro.datanessence.init.MenuInit;
+import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.MenuRegistry;
 import com.cmdpro.datanessence.screen.slot.DataDriveSlot;
 import com.cmdpro.datanessence.screen.slot.ModResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
@@ -25,7 +24,7 @@ public class InfuserMenu extends AbstractContainerMenu {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
     public InfuserMenu(int pContainerId, Inventory inv, BlockEntity entity) {
-        super(MenuInit.INFUSER_MENU.get(), pContainerId);
+        super(MenuRegistry.INFUSER_MENU.get(), pContainerId);
         checkContainerSize(inv, 3);
         blockEntity = ((InfuserBlockEntity) entity);
         this.level = inv.player.level();
@@ -91,7 +90,7 @@ public class InfuserMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, BlockInit.INFUSER.get());
+                pPlayer, BlockRegistry.INFUSER.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

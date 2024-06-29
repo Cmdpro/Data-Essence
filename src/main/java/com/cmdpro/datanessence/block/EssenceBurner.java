@@ -1,9 +1,7 @@
 package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.block.entity.EssenceBurnerBlockEntity;
-import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
-import com.cmdpro.datanessence.init.BlockEntityInit;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -77,7 +75,7 @@ public class EssenceBurner extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.ESSENCE_BURNER.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.ESSENCE_BURNER.get(),
                 EssenceBurnerBlockEntity::tick);
     }
     public BlockState rotate(BlockState pState, Rotation pRotation) {

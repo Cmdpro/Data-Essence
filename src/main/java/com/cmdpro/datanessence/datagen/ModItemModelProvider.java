@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.init.BlockInit;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -39,47 +39,47 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        simpleItem(ItemInit.DATA_TABLET);
-        simpleItem(ItemInit.DATA_DRIVE);
-        simpleItem(ItemInit.ESSENCE_SHARD);
-        simpleItemWithSubdirectory(ItemInit.ESSENCE_WIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.LUNAR_ESSENCE_WIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.NATURAL_ESSENCE_WIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.EXOTIC_ESSENCE_WIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.ITEM_WIRE, "wires");
-        simpleItemWithSubdirectory(ItemInit.FLUID_WIRE, "wires");
+        simpleItem(ItemRegistry.DATA_TABLET);
+        simpleItem(ItemRegistry.DATA_DRIVE);
+        simpleItem(ItemRegistry.ESSENCE_SHARD);
+        simpleItemWithSubdirectory(ItemRegistry.ESSENCE_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemRegistry.LUNAR_ESSENCE_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemRegistry.NATURAL_ESSENCE_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemRegistry.EXOTIC_ESSENCE_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemRegistry.ITEM_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemRegistry.FLUID_WIRE, "wires");
 
-        handheldItem(ItemInit.MAGIC_WRENCH);
+        handheldItem(ItemRegistry.MAGIC_WRENCH);
 
-        evenSimplerBlockItem(BlockInit.FABRICATOR);
-        evenSimplerBlockItem(BlockInit.ESSENCE_POINT);
-        evenSimplerBlockItem(BlockInit.LUNAR_ESSENCE_POINT);
-        evenSimplerBlockItem(BlockInit.NATURAL_ESSENCE_POINT);
-        evenSimplerBlockItem(BlockInit.EXOTIC_ESSENCE_POINT);
-        evenSimplerBlockItem(BlockInit.ITEM_POINT);
-        evenSimplerBlockItem(BlockInit.FLUID_POINT);
-        evenSimplerBlockItem(BlockInit.ESSENCE_CRYSTAL);
-        evenSimplerBlockItem(BlockInit.INFUSER);
+        evenSimplerBlockItem(BlockRegistry.FABRICATOR);
+        evenSimplerBlockItem(BlockRegistry.ESSENCE_POINT);
+        evenSimplerBlockItem(BlockRegistry.LUNAR_ESSENCE_POINT);
+        evenSimplerBlockItem(BlockRegistry.NATURAL_ESSENCE_POINT);
+        evenSimplerBlockItem(BlockRegistry.EXOTIC_ESSENCE_POINT);
+        evenSimplerBlockItem(BlockRegistry.ITEM_POINT);
+        evenSimplerBlockItem(BlockRegistry.FLUID_POINT);
+        evenSimplerBlockItem(BlockRegistry.ESSENCE_CRYSTAL);
+        evenSimplerBlockItem(BlockRegistry.INFUSER);
 
-        evenSimplerBlockItem(BlockInit.DECO_ESSENCE_BUFFER);
-        evenSimplerBlockItem(BlockInit.DECO_ITEM_BUFFER);
-        evenSimplerBlockItem(BlockInit.DECO_FLUID_BUFFER);
+        evenSimplerBlockItem(BlockRegistry.DECO_ESSENCE_BUFFER);
+        evenSimplerBlockItem(BlockRegistry.DECO_ITEM_BUFFER);
+        evenSimplerBlockItem(BlockRegistry.DECO_FLUID_BUFFER);
 
-        evenSimplerBlockItem(BlockInit.ANCIENT_ROCK_COLUMN);
-        evenSimplerBlockItem(BlockInit.ANCIENT_ROCK_BRICKS);
-        evenSimplerBlockItem(BlockInit.ANCIENT_ROCK_TILES);
-        evenSimplerBlockItem(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN);
+        evenSimplerBlockItem(BlockRegistry.ANCIENT_ROCK_COLUMN);
+        evenSimplerBlockItem(BlockRegistry.ANCIENT_ROCK_BRICKS);
+        evenSimplerBlockItem(BlockRegistry.ANCIENT_ROCK_TILES);
+        evenSimplerBlockItem(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN);
 
-        evenSimplerBlockItem(BlockInit.POLISHED_OBSIDIAN_COLUMN);
+        evenSimplerBlockItem(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
 
-        simpleItem(ItemInit.CONDUCTANCE_ROD);
-        simpleItem(ItemInit.CAPACITANCE_PANEL);
-        simpleItem(ItemInit.LOGICAL_MATRIX);
+        simpleItem(ItemRegistry.CONDUCTANCE_ROD);
+        simpleItem(ItemRegistry.CAPACITANCE_PANEL);
+        simpleItem(ItemRegistry.LOGICAL_MATRIX);
 
-        simpleItemWithSubdirectory(ItemInit.ESSENCE_BOMB, "bombs");
-        simpleItemWithSubdirectory(ItemInit.LUNAR_ESSENCE_BOMB, "bombs");
-        simpleItemWithSubdirectory(ItemInit.NATURAL_ESSENCE_BOMB, "bombs");
-        simpleItemWithSubdirectory(ItemInit.EXOTIC_ESSENCE_BOMB, "bombs");
+        simpleItemWithSubdirectory(ItemRegistry.ESSENCE_BOMB, "bombs");
+        simpleItemWithSubdirectory(ItemRegistry.LUNAR_ESSENCE_BOMB, "bombs");
+        simpleItemWithSubdirectory(ItemRegistry.NATURAL_ESSENCE_BOMB, "bombs");
+        simpleItemWithSubdirectory(ItemRegistry.EXOTIC_ESSENCE_BOMB, "bombs");
 
     }
     private ItemModelBuilder simpleItem(RegistryObject<Item> item) {

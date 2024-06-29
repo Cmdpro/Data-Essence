@@ -2,7 +2,7 @@ package com.cmdpro.datanessence.block.entity;
 
 import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
-import com.cmdpro.datanessence.init.BlockEntityInit;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +30,7 @@ import java.awt.*;
 
 public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity implements GeoBlockEntity {
     public ItemPointBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.ITEM_POINT.get(), pos, state);
+        super(BlockEntityRegistry.ITEM_POINT.get(), pos, state);
     }
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override

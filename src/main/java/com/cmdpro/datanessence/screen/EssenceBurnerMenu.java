@@ -1,9 +1,8 @@
 package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.block.entity.EssenceBurnerBlockEntity;
-import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
-import com.cmdpro.datanessence.init.BlockInit;
-import com.cmdpro.datanessence.init.MenuInit;
+import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.MenuRegistry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -23,7 +22,7 @@ public class EssenceBurnerMenu extends AbstractContainerMenu {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
     public EssenceBurnerMenu(int pContainerId, Inventory inv, BlockEntity entity) {
-        super(MenuInit.ESSENCE_BURNER_MENU.get(), pContainerId);
+        super(MenuRegistry.ESSENCE_BURNER_MENU.get(), pContainerId);
         checkContainerSize(inv, 3);
         blockEntity = ((EssenceBurnerBlockEntity) entity);
         this.level = inv.player.level();
@@ -88,7 +87,7 @@ public class EssenceBurnerMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, BlockInit.ESSENCE_BURNER.get());
+                pPlayer, BlockRegistry.ESSENCE_BURNER.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

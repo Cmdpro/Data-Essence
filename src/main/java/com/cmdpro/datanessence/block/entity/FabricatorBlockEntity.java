@@ -1,17 +1,14 @@
 package com.cmdpro.datanessence.block.entity;
 
-import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
-import com.cmdpro.datanessence.init.BlockEntityInit;
-import com.cmdpro.datanessence.init.RecipeInit;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
 import com.cmdpro.datanessence.screen.FabricatorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -90,7 +87,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
     public FabricatorBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityInit.FABRICATOR.get(), pos, state);
+        super(BlockEntityRegistry.FABRICATOR.get(), pos, state);
         item = ItemStack.EMPTY;
     }
     @Nonnull
@@ -211,7 +208,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
-            Optional<IFabricationRecipe> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeInit.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv(), pLevel);
+            Optional<IFabricationRecipe> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get();
                 pBlockEntity.essenceCost = recipe.get().getEssenceCost();

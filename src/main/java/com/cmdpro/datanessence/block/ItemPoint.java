@@ -3,8 +3,8 @@ package com.cmdpro.datanessence.block;
 import com.cmdpro.datanessence.api.BaseCapabilityPoint;
 import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.block.entity.ItemPointBlockEntity;
-import com.cmdpro.datanessence.init.BlockEntityInit;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -22,7 +22,7 @@ public class ItemPoint extends BaseCapabilityPoint {
 
     @Override
     public Item getRequiredWire() {
-        return ItemInit.ITEM_WIRE.get();
+        return ItemRegistry.ITEM_WIRE.get();
     }
 
     @Nullable
@@ -43,7 +43,7 @@ public class ItemPoint extends BaseCapabilityPoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityInit.ITEM_POINT.get(),
+        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.ITEM_POINT.get(),
                 ItemPointBlockEntity::tick);
     }
 }

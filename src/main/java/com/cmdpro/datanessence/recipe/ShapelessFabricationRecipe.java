@@ -2,7 +2,7 @@ package com.cmdpro.datanessence.recipe;
 
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.init.RecipeInit;
+import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
@@ -94,7 +94,7 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeInit.FABRICATIONCRAFTING.get();
+        return RecipeRegistry.FABRICATIONCRAFTING.get();
     }
 
     @Override

@@ -1,20 +1,15 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
-import com.cmdpro.datanessence.init.*;
+import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -53,17 +48,17 @@ public class DataNEssence
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, DataNEssenceConfig.COMMON_SPEC, "datanessence.toml");
-        ItemInit.ITEMS.register(bus);
-        MenuInit.MENUS.register(bus);
-        RecipeInit.RECIPES.register(bus);
-        RecipeInit.RECIPE_TYPES.register(bus);
-        CreativeModeTabInit.CREATIVE_MODE_TABS.register(bus);
-        PageTypeInit.PAGE_TYPES.register(bus);
-        EntityInit.ENTITY_TYPES.register(bus);
-        BlockInit.BLOCKS.register(bus);
-        BlockEntityInit.BLOCK_ENTITIES.register(bus);
-        MinigameInit.MINIGAME_TYPES.register(bus);
-        FeatureInit.FEATURES.register(bus);
+        ItemRegistry.ITEMS.register(bus);
+        MenuRegistry.MENUS.register(bus);
+        RecipeRegistry.RECIPES.register(bus);
+        RecipeRegistry.RECIPE_TYPES.register(bus);
+        CreativeModeTabRegistry.CREATIVE_MODE_TABS.register(bus);
+        PageTypeRegistry.PAGE_TYPES.register(bus);
+        EntityRegistry.ENTITY_TYPES.register(bus);
+        BlockRegistry.BLOCKS.register(bus);
+        BlockEntityRegistry.BLOCK_ENTITIES.register(bus);
+        MinigameRegistry.MINIGAME_TYPES.register(bus);
+        FeatureRegistry.FEATURES.register(bus);
         GeckoLib.initialize();
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -74,52 +69,52 @@ public class DataNEssence
         if(event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 
         }
-        if (event.getTabKey() == CreativeModeTabInit.ITEMS.getKey()) {
-            event.accept(ItemInit.DATA_TABLET);
-            event.accept(ItemInit.ESSENCE_WIRE);
-            event.accept(ItemInit.LUNAR_ESSENCE_WIRE);
-            event.accept(ItemInit.NATURAL_ESSENCE_WIRE);
-            event.accept(ItemInit.EXOTIC_ESSENCE_WIRE);
-            event.accept(ItemInit.ITEM_WIRE);
-            event.accept(ItemInit.FLUID_WIRE);
-            event.accept(ItemInit.MAGIC_WRENCH);
-            event.accept(ItemInit.DATA_DRIVE);
-            event.accept(ItemInit.ESSENCE_SHARD);
-            event.accept(ItemInit.ESSENCE_BOMB);
-            event.accept(ItemInit.LUNAR_ESSENCE_BOMB);
-            event.accept(ItemInit.NATURAL_ESSENCE_BOMB);
-            event.accept(ItemInit.EXOTIC_ESSENCE_BOMB);
-            event.accept(ItemInit.CAPACITANCE_PANEL);
-            event.accept(ItemInit.CONDUCTANCE_ROD);
-            event.accept(ItemInit.LOGICAL_MATRIX);
+        if (event.getTabKey() == CreativeModeTabRegistry.ITEMS.getKey()) {
+            event.accept(ItemRegistry.DATA_TABLET);
+            event.accept(ItemRegistry.ESSENCE_WIRE);
+            event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE);
+            event.accept(ItemRegistry.NATURAL_ESSENCE_WIRE);
+            event.accept(ItemRegistry.EXOTIC_ESSENCE_WIRE);
+            event.accept(ItemRegistry.ITEM_WIRE);
+            event.accept(ItemRegistry.FLUID_WIRE);
+            event.accept(ItemRegistry.MAGIC_WRENCH);
+            event.accept(ItemRegistry.DATA_DRIVE);
+            event.accept(ItemRegistry.ESSENCE_SHARD);
+            event.accept(ItemRegistry.ESSENCE_BOMB);
+            event.accept(ItemRegistry.LUNAR_ESSENCE_BOMB);
+            event.accept(ItemRegistry.NATURAL_ESSENCE_BOMB);
+            event.accept(ItemRegistry.EXOTIC_ESSENCE_BOMB);
+            event.accept(ItemRegistry.CAPACITANCE_PANEL);
+            event.accept(ItemRegistry.CONDUCTANCE_ROD);
+            event.accept(ItemRegistry.LOGICAL_MATRIX);
         }
-        if (event.getTabKey() == CreativeModeTabInit.BLOCKS.getKey()) {
-            event.accept(ItemInit.FABRICATOR_ITEM);
-            event.accept(ItemInit.ESSENCE_POINT_ITEM);
-            event.accept(ItemInit.LUNAR_ESSENCE_POINT_ITEM);
-            event.accept(ItemInit.NATURAL_ESSENCE_POINT_ITEM);
-            event.accept(ItemInit.EXOTIC_ESSENCE_POINT_ITEM);
-            event.accept(ItemInit.ITEM_POINT_ITEM);
-            event.accept(ItemInit.FLUID_POINT_ITEM);
-            event.accept(BlockInit.ESSENCE_BUFFER);
-            event.accept(BlockInit.ITEM_BUFFER);
-            event.accept(BlockInit.FLUID_BUFFER);
-            event.accept(BlockInit.DATA_BANK);
-            event.accept(BlockInit.ESSENCE_CRYSTAL);
-            event.accept(BlockInit.ESSENCE_BURNER);
-            event.accept(BlockInit.TRAVERSITE_ROAD);
-            event.accept(BlockInit.POLISHED_OBSIDIAN);
-            event.accept(BlockInit.POLISHED_OBSIDIAN_COLUMN);
-            event.accept(BlockInit.ENGRAVED_POLISHED_OBSIDIAN);
-            event.accept(BlockInit.PATTERNED_COPPER);
-            event.accept(BlockInit.ANCIENT_ROCK_COLUMN);
-            event.accept(BlockInit.ENERGIZED_ANCIENT_ROCK_COLUMN);
-            event.accept(BlockInit.ANCIENT_ROCK_BRICKS);
-            event.accept(BlockInit.ANCIENT_ROCK_TILES);
-            event.accept(BlockInit.DECO_ESSENCE_BUFFER);
-            event.accept(BlockInit.DECO_ITEM_BUFFER);
-            event.accept(BlockInit.DECO_FLUID_BUFFER);
-            event.accept(ItemInit.INFUSER_ITEM);
+        if (event.getTabKey() == CreativeModeTabRegistry.BLOCKS.getKey()) {
+            event.accept(ItemRegistry.FABRICATOR_ITEM);
+            event.accept(ItemRegistry.ESSENCE_POINT_ITEM);
+            event.accept(ItemRegistry.LUNAR_ESSENCE_POINT_ITEM);
+            event.accept(ItemRegistry.NATURAL_ESSENCE_POINT_ITEM);
+            event.accept(ItemRegistry.EXOTIC_ESSENCE_POINT_ITEM);
+            event.accept(ItemRegistry.ITEM_POINT_ITEM);
+            event.accept(ItemRegistry.FLUID_POINT_ITEM);
+            event.accept(BlockRegistry.ESSENCE_BUFFER);
+            event.accept(BlockRegistry.ITEM_BUFFER);
+            event.accept(BlockRegistry.FLUID_BUFFER);
+            event.accept(BlockRegistry.DATA_BANK);
+            event.accept(BlockRegistry.ESSENCE_CRYSTAL);
+            event.accept(BlockRegistry.ESSENCE_BURNER);
+            event.accept(BlockRegistry.TRAVERSITE_ROAD);
+            event.accept(BlockRegistry.POLISHED_OBSIDIAN);
+            event.accept(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
+            event.accept(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN);
+            event.accept(BlockRegistry.PATTERNED_COPPER);
+            event.accept(BlockRegistry.ANCIENT_ROCK_COLUMN);
+            event.accept(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN);
+            event.accept(BlockRegistry.ANCIENT_ROCK_BRICKS);
+            event.accept(BlockRegistry.ANCIENT_ROCK_TILES);
+            event.accept(BlockRegistry.DECO_ESSENCE_BUFFER);
+            event.accept(BlockRegistry.DECO_ITEM_BUFFER);
+            event.accept(BlockRegistry.DECO_FLUID_BUFFER);
+            event.accept(ItemRegistry.INFUSER_ITEM);
         }
     }
     private void setup(final FMLCommonSetupEvent event)

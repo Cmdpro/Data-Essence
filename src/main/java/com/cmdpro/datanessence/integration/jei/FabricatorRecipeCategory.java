@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.integration.jei;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
@@ -17,7 +17,6 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
@@ -27,7 +26,6 @@ import net.minecraftforge.common.crafting.IShapedRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRecipe> {
     public static final ResourceLocation UID = new ResourceLocation(DataNEssence.MOD_ID, "fabrication");
@@ -40,7 +38,7 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
     public FabricatorRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createDrawable(TEXTURE, 10, 196, 123, 60);
         this.craftingGridHelper = guiHelper.createCraftingGridHelper();
-        icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemInit.FABRICATOR_ITEM.get()));
+        icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.FABRICATOR_ITEM.get()));
     }
 
     @Override

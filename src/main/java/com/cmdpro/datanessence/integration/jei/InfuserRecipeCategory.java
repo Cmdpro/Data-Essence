@@ -1,17 +1,14 @@
 package com.cmdpro.datanessence.integration.jei;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
-import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
-import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -23,7 +20,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.crafting.IShapedRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +33,7 @@ public class InfuserRecipeCategory implements IRecipeCategory<InfusionRecipe> {
 
     public InfuserRecipeCategory(IGuiHelper guiHelper) {
         background = guiHelper.createDrawable(TEXTURE, 10, 136, 123, 60);
-        icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemInit.INFUSER_ITEM.get()));
+        icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ItemRegistry.INFUSER_ITEM.get()));
     }
 
     @Override

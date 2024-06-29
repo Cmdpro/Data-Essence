@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.screen.datatablet.pages.crafting.types;
 
-import com.cmdpro.datanessence.init.ItemInit;
-import com.cmdpro.datanessence.init.RecipeInit;
+import com.cmdpro.datanessence.registry.ItemRegistry;
+import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.ShapedFabricationRecipe;
@@ -12,7 +12,6 @@ import com.cmdpro.datanessence.screen.datatablet.pages.crafting.CraftingType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 
 public class FabricatorType extends CraftingType {
@@ -20,7 +19,7 @@ public class FabricatorType extends CraftingType {
     public void render(CraftingPage page, DataTabletScreen screen, GuiGraphics pGuiGraphics, int xOffset, int x, int yOffset, int y, Recipe recipe, int pMouseX, int pMouseY) {
         if (recipe instanceof IFabricationRecipe recipe2) {
             pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x, yOffset + y, 10, 196, 123, 60);
-            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(ItemInit.FABRICATOR_ITEM.get()), xOffset + x + 98, yOffset + y + 43, pMouseX, pMouseY);
+            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(ItemRegistry.FABRICATOR_ITEM.get()), xOffset + x + 98, yOffset + y + 43, pMouseX, pMouseY);
             if (recipe2.getEssenceCost() > 0) {
                 pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, x+xOffset+5, y+yOffset+28-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 6, 224-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)));
                 if (pMouseX >= x+xOffset+5 && pMouseY >= y+yOffset+(28-22)) {
@@ -103,6 +102,6 @@ public class FabricatorType extends CraftingType {
 
     @Override
     public boolean isRecipeType(Recipe recipe) {
-        return recipe.getType().equals(RecipeInit.FABRICATIONCRAFTING.get());
+        return recipe.getType().equals(RecipeRegistry.FABRICATIONCRAFTING.get());
     }
 }

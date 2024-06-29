@@ -1,12 +1,8 @@
 package com.cmdpro.datanessence.screen.datatablet.pages.crafting.types;
 
-import com.cmdpro.datanessence.init.ItemInit;
-import com.cmdpro.datanessence.init.RecipeInit;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
-import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
-import com.cmdpro.datanessence.recipe.ShapedFabricationRecipe;
-import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.pages.CraftingPage;
 import com.cmdpro.datanessence.screen.datatablet.pages.crafting.CraftingType;
@@ -21,7 +17,7 @@ public class InfuserType extends CraftingType {
     public void render(CraftingPage page, DataTabletScreen screen, GuiGraphics pGuiGraphics, int xOffset, int x, int yOffset, int y, Recipe recipe, int pMouseX, int pMouseY) {
         if (recipe instanceof InfusionRecipe recipe2) {
             pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x, yOffset + y, 10, 136, 123, 60);
-            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(ItemInit.INFUSER_ITEM.get()), xOffset + x + 58, yOffset + y + 4, pMouseX, pMouseY);
+            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(ItemRegistry.INFUSER_ITEM.get()), xOffset + x + 58, yOffset + y + 4, pMouseX, pMouseY);
             if (recipe2.getEssenceCost() > 0) {
                 pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, x+xOffset+5, y+yOffset+28-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 6, 224-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)));
                 if (pMouseX >= x+xOffset+5 && pMouseY >= y+yOffset+(28-22)) {

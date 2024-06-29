@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.worldgen.features;
 
 import com.cmdpro.datanessence.block.EssenceCrystal;
-import com.cmdpro.datanessence.init.BlockInit;
+import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -63,7 +63,7 @@ public class EssenceCrystalFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
             if (foundValid) {
-                setBlock(pContext.level(), pos.offset(xOffset, yOffset, zOffset), BlockInit.ESSENCE_CRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, dir).setValue(EssenceCrystal.MODEL, pContext.random().nextIntBetweenInclusive(0, 2)));
+                setBlock(pContext.level(), pos.offset(xOffset, yOffset, zOffset), BlockRegistry.ESSENCE_CRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, dir).setValue(EssenceCrystal.MODEL, pContext.random().nextIntBetweenInclusive(0, 2)));
             }
         }
         return true;

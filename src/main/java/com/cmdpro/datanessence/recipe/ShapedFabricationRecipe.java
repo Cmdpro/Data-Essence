@@ -2,7 +2,7 @@ package com.cmdpro.datanessence.recipe;
 
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.init.RecipeInit;
+import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -129,7 +129,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeInit.FABRICATIONCRAFTING.get();
+        return RecipeRegistry.FABRICATIONCRAFTING.get();
     }
 
     @Override

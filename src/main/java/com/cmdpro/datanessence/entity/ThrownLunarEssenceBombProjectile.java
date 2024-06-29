@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.entity;
 
-import com.cmdpro.datanessence.init.EntityInit;
-import com.cmdpro.datanessence.init.ItemInit;
+import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.misc.LunarEssenceBombExplosion;
 import net.minecraft.network.protocol.game.ClientboundExplodePacket;
 import net.minecraft.server.level.ServerLevel;
@@ -11,7 +11,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Explosion;
-import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 
@@ -20,11 +19,11 @@ public class ThrownLunarEssenceBombProjectile extends ThrowableItemProjectile {
         super(pEntityType, pLevel);
     }
     public ThrownLunarEssenceBombProjectile(LivingEntity pShooter, Level pLevel) {
-        super(EntityInit.LUNAR_ESSENCE_BOMB.get(), pShooter, pLevel);
+        super(EntityRegistry.LUNAR_ESSENCE_BOMB.get(), pShooter, pLevel);
     }
     @Override
     protected Item getDefaultItem() {
-        return ItemInit.LUNAR_ESSENCE_BOMB.get();
+        return ItemRegistry.LUNAR_ESSENCE_BOMB.get();
     }
     @Override
     protected void onHit(HitResult pResult) {
