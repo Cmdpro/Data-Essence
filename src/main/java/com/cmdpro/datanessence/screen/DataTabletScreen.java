@@ -3,10 +3,7 @@ package com.cmdpro.datanessence.screen;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
-import com.cmdpro.datanessence.screen.datatablet.DataTab;
-import com.cmdpro.datanessence.screen.datatablet.Entries;
-import com.cmdpro.datanessence.screen.datatablet.Entry;
-import com.cmdpro.datanessence.screen.datatablet.Page;
+import com.cmdpro.datanessence.screen.datatablet.*;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -20,6 +17,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
 
+import java.util.Comparator;
+import java.util.List;
+
 public class DataTabletScreen extends Screen {
     public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
     public static final ResourceLocation TEXTURECRAFTING = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
@@ -27,6 +27,7 @@ public class DataTabletScreen extends Screen {
         super(pTitle);
         offsetX = (imageWidth/2);
         offsetY = (imageHeight/2);
+        currentTab = getSortedTabs().get(0);
     }
     public static int imageWidth = 256;
     public static int imageHeight = 166;
@@ -56,6 +57,9 @@ public class DataTabletScreen extends Screen {
     }
     public boolean clickTab(DataTab tab) {
         currentTab = tab;
+        offsetX = (imageWidth/2);
+        offsetY = (imageHeight/2);
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
         return true;
     }
     @Override
@@ -64,13 +68,24 @@ public class DataTabletScreen extends Screen {
         int y = (height - imageHeight) / 2;
         if (pButton == 0 && screenType == 0) {
             for (Entry i : Entries.entries.values()) {
-                if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
-                    if (pMouseX >= ((i.x * 20) - 10) + offsetX + x && pMouseX <= ((i.x * 20) + 10) + offsetX + x) {
-                        if (pMouseY >= ((i.y * 20) - 10) + offsetY + y && pMouseY <= ((i.y * 20) + 10) + offsetY + y) {
-                            return clickEntry(i);
+                if (i.tab.equals(currentTab.id)) {
+                    if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                        if (pMouseX >= ((i.x * 20) - 10) + offsetX + x && pMouseX <= ((i.x * 20) + 10) + offsetX + x) {
+                            if (pMouseY >= ((i.y * 20) - 10) + offsetY + y && pMouseY <= ((i.y * 20) + 10) + offsetY + y) {
+                                return clickEntry(i);
+                            }
                         }
                     }
                 }
+            }
+            int o = 0;
+            for (DataTab i : getSortedTabs()) {
+                int x2 = x+(o >= 6 ? 255 : -21);
+                int y2 = y+8+((o%6)*24);
+                if (pMouseX >= x2 && pMouseY >= y2 && pMouseX <= x2+21 && pMouseY <= y2+20) {
+                    return clickTab(i);
+                }
+                o++;
             }
         }
         if (pButton == 1 && screenType == 2) {
@@ -132,15 +147,17 @@ public class DataTabletScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderBackground(graphics);
-        if (screenType == 0) {
-            // TODO : tabs
-            //for (int i = 0; i < Entries.tabs.size(); i++) {
-
-            //}
-        }
-        renderBg(graphics, delta, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
+        if (screenType == 0) {
+            int o = 0;
+            for (DataTab i : getSortedTabs()) {
+                graphics.blit(TEXTURE, x+(o >= 6 ? 250 : -21), y+8+((o%6)*24), o >= 6 ? 60 : 87, 166, 27, 20);
+                graphics.renderItem(i.icon, x+(o >= 6 ? 258 : -18), y+8+((o%6)*24)+2);
+                o++;
+            }
+        }
+        renderBg(graphics, delta, mouseX, mouseY);
         graphics.enableScissor(x+3, y+3, x+imageWidth-3, y+imageHeight-3);
         if (screenType == 0) {
             drawEntries(graphics, delta, mouseX, mouseY);
@@ -161,15 +178,30 @@ public class DataTabletScreen extends Screen {
         graphics.disableScissor();
         super.render(graphics, mouseX, mouseY, delta);
         if (screenType == 0) {
+            Component tooltip = null;
             for (Entry i : Entries.entries.values()) {
-                if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
-                    if (mouseX >= ((i.x * 20) - 10) + offsetX + x && mouseX <= ((i.x * 20) + 10) + offsetX + x) {
-                        if (mouseY >= ((i.y * 20) - 10) + offsetY + y && mouseY <= ((i.y * 20) + 10) + offsetY + y) {
-                            graphics.renderTooltip(Minecraft.getInstance().font, i.name, mouseX, mouseY);
-                            break;
+                if (i.tab.equals(currentTab.id)) {
+                    if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                        if (mouseX >= ((i.x * 20) - 10) + offsetX + x && mouseX <= ((i.x * 20) + 10) + offsetX + x) {
+                            if (mouseY >= ((i.y * 20) - 10) + offsetY + y && mouseY <= ((i.y * 20) + 10) + offsetY + y) {
+                                tooltip = i.name;
+                                break;
+                            }
                         }
                     }
                 }
+            }
+            int o = 0;
+            for (DataTab i : getSortedTabs()) {
+                int x2 = x+(o >= 6 ? 255 : -21);
+                int y2 = y+8+((o%6)*24);
+                if (mouseX >= x2 && mouseY >= y2 && mouseX <= x2+21 && mouseY <= y2+20) {
+                    tooltip = i.name;
+                }
+                o++;
+            }
+            if (tooltip != null) {
+                graphics.renderTooltip(Minecraft.getInstance().font, tooltip, mouseX, mouseY);
             }
             graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
         } else if (screenType == 2) {
@@ -201,16 +233,20 @@ public class DataTabletScreen extends Screen {
         RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
         buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
         for (Entry i : Entries.entries.values()) {
-            if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
-                if (i.getParentEntry() != null) {
-                    int x1 = x + ((i.getParentEntry().x * 20)) + (int) offsetX;
-                    int y1 = y + ((i.getParentEntry().y * 20)) + (int) offsetY;
-                    int x2 = x + ((i.x * 20)) + (int) offsetX;
-                    int y2 = y + ((i.y * 20)) + (int) offsetY;
-                    Vec2 vec1 = new Vec2(x1, y1);
-                    Vec2 vec2 = new Vec2(x2, y2);
-                    buf.vertex(x1, y1, 0.0D).color(201, 13, 139, 255).normal(vec1.x, vec1.y, 0).endVertex();
-                    buf.vertex(x2, y2, 0.0D).color(201, 13, 139, 255).normal(vec2.x, vec2.y, 0).endVertex();
+            if (i.tab.equals(currentTab.id)) {
+                if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                    if (i.getParentEntry() != null) {
+                        if (i.getParentEntry().tab.equals(currentTab.id)) {
+                            int x1 = x + ((i.getParentEntry().x * 20)) + (int) offsetX;
+                            int y1 = y + ((i.getParentEntry().y * 20)) + (int) offsetY;
+                            int x2 = x + ((i.x * 20)) + (int) offsetX;
+                            int y2 = y + ((i.y * 20)) + (int) offsetY;
+                            Vec2 vec1 = new Vec2(x1, y1);
+                            Vec2 vec2 = new Vec2(x2, y2);
+                            buf.vertex(x1, y1, 0.0D).color(201, 13, 139, 255).normal(vec1.x, vec1.y, 0).endVertex();
+                            buf.vertex(x2, y2, 0.0D).color(201, 13, 139, 255).normal(vec2.x, vec2.y, 0).endVertex();
+                        }
+                    }
                 }
             }
         }
@@ -220,14 +256,19 @@ public class DataTabletScreen extends Screen {
         GlStateManager._depthMask(true);
         RenderSystem.lineWidth(1);
     }
+    public List<DataTab> getSortedTabs() {
+        return Entries.tabs.values().stream().sorted(Comparator.comparingInt(a -> a.priority)).toList();
+    }
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         drawLines(pGuiGraphics, pPartialTick, pMouseX, pMouseY);
         for (Entry i : Entries.entries.values()) {
-            if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
-                pGuiGraphics.blit(TEXTURE, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166, 20, 20);
-                pGuiGraphics.renderItem(i.icon, x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
+            if (i.tab.equals(currentTab.id)) {
+                if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                    pGuiGraphics.blit(TEXTURE, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166, 20, 20);
+                    pGuiGraphics.renderItem(i.icon, x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
+                }
             }
         }
     }

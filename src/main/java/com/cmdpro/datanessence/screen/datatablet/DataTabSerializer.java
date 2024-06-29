@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.screen.datatablet;
 
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
@@ -25,7 +26,11 @@ public class DataTabSerializer {
         }
         ItemStack icon = CraftingHelper.getItemStack(json.getAsJsonObject("icon"), true, false);
         Component name = Component.translatable(json.get("name").getAsString());
-        DataTab entry = new DataTab(entryId, icon, name);
+        int priority = 0;
+        if (json.has("priority")) {
+            priority = json.get("priority").getAsInt();
+        }
+        DataTab entry = new DataTab(entryId, icon, name, priority);
         return entry;
     }
     @Nonnull
@@ -33,12 +38,14 @@ public class DataTabSerializer {
         ResourceLocation id = buf.readResourceLocation();
         ItemStack icon = buf.readItem();
         Component name = buf.readComponent();
-        DataTab entry = new DataTab(id, icon, name);
+        int priority = buf.readInt();
+        DataTab entry = new DataTab(id, icon, name, priority);
         return entry;
     }
     public static void toNetwork(FriendlyByteBuf buf, DataTab entry) {
         buf.writeResourceLocation(entry.id);
         buf.writeItem(entry.icon);
         buf.writeComponent(entry.name);
+        buf.writeInt(entry.priority);
     }
 }

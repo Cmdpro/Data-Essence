@@ -62,6 +62,7 @@
   "item.datanessence.data_tablet.critical_data_unlocked": "Critical Data Unlocked",
 
   "item.datanessence.data_tablet.tabs.test.name": "Test",
+  "item.datanessence.data_tablet.tabs.test2.name": "Test 2",
   "item.datanessence.data_tablet.pages.test1.name": "Cool Page 1",
   "item.datanessence.data_tablet.pages.test1.page1.text": "This page is cool",
   "item.datanessence.data_tablet.pages.test1.page2.text": "Page 2 works",

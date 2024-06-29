@@ -2,6 +2,7 @@
   "icon": {
     "item": "datanessence:logical_matrix"
   },
+  "tab": "datanessence:test",
   "x": -3,
   "y": -2,
   "pages": [

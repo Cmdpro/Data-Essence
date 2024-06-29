@@ -2,6 +2,7 @@
   "icon": {
     "item": "datanessence:infuser"
   },
+  "tab": "datanessence:test",
   "x": 0,
   "y": 1,
   "pages": [
