@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerFinishDataBankMinigameC2SPacket;
 import com.cmdpro.datanessence.screen.databank.*;
+import com.cmdpro.datanessence.screen.datatablet.DataTab;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.Page;
@@ -99,6 +100,20 @@ public class DataBankScreen extends Screen {
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
+        if (screenType == 0) {
+            if (pButton == 0) {
+                offsetX += pDragX;
+                offsetY += pDragY;
+                if (offsetX > 0) {
+                    offsetX = 0;
+                }
+                if (offsetY > 0) {
+                    offsetY = 0;
+                }
+                return true;
+            }
+            return false;
+        }
         if (screenType == 1) {
             if (isMouseInsideMinigame(pMouseX, pMouseY)) {
                 minigames[minigameProgress].mouseDragged(pMouseX - (x + (imageWidth / 4)), pMouseY - (y + (imageHeight / 3)), pButton, pDragX, pDragY);
@@ -285,12 +300,12 @@ public class DataBankScreen extends Screen {
         }
         int o = 1;
         for (Map.Entry<Integer, Integer> i : tiers.entrySet()) {
-            pGuiGraphics.blit(TEXTURE, x+4, y+((32*o)-14), 28, 166, 3, 28);
+            pGuiGraphics.blit(TEXTURE, x+4+(int)offsetX, y+((32*o)-14)+(int)offsetY, 28, 166, 3, 28);
             int width = (i.getValue()*30)+30;
-            pGuiGraphics.blitRepeating(TEXTURE, x+7, y+((32*o)-14), width+13, 28, 30, 166, 1, 28);
-            pGuiGraphics.blit(TEXTURE, x+20+width, y+((32*o)-14), 30, 166, 3, 28);
-            pGuiGraphics.blit(TEXTURE, x+18, y+((32*o)-14), 30, 166, 3, 28);
-            pGuiGraphics.drawCenteredString(Minecraft.getInstance().font, i.getKey().toString(), x+13, y+(32*o)-(Minecraft.getInstance().font.lineHeight/2), 0xFFc90d8b);
+            pGuiGraphics.blitRepeating(TEXTURE, x+7+(int)offsetX, y+((32*o)-14)+(int)offsetY, width+13, 28, 30, 166, 1, 28);
+            pGuiGraphics.blit(TEXTURE, x+20+width+(int)offsetX, y+((32*o)-14)+(int)offsetY, 30, 166, 3, 28);
+            pGuiGraphics.blit(TEXTURE, x+18+(int)offsetX, y+((32*o)-14)+(int)offsetY, 30, 166, 3, 28);
+            pGuiGraphics.drawCenteredString(Minecraft.getInstance().font, i.getKey().toString(), x+13+(int)offsetX, y+(int)offsetY+(32*o)-(Minecraft.getInstance().font.lineHeight/2), 0xFFc90d8b);
             o++;
         }
     }
