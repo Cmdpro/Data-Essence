@@ -152,7 +152,7 @@ public class DataTabletScreen extends Screen {
         if (screenType == 0) {
             int o = 0;
             for (DataTab i : getSortedTabs()) {
-                graphics.blit(TEXTURE, x+(o >= 6 ? 250 : -21), y+8+((o%6)*24), o >= 6 ? 60 : 87, 166, 27, 20);
+                graphics.blit(TEXTURE, x+(o >= 6 ? 256 : -21), y+8+((o%6)*24), o >= 6 ? 66 : 87, 166, 21, 20);
                 graphics.renderItem(i.icon, x+(o >= 6 ? 258 : -18), y+8+((o%6)*24)+2);
                 o++;
             }
