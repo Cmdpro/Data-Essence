@@ -45,7 +45,7 @@ public class DataTabManager extends SimpleJsonResourceReloadListener {
                 DataNEssence.LOGGER.error("Parsing error loading entry {}", location, e);
             }
         }
-        DataNEssence.LOGGER.info("Loaded {} entries", Entries.tabs.size());
+        DataNEssence.LOGGER.info("Loaded {} tabs", Entries.tabs.size());
     }
     public static DataTabSerializer serializer = new DataTabSerializer();
     protected DataTab deserializeTab(ResourceLocation id, JsonObject json) {
