@@ -48,7 +48,7 @@ public class EntryManager extends SimpleJsonResourceReloadListener {
         DataNEssence.LOGGER.info("Loaded {} entries", Entries.entries.size());
         for (Entry i : Entries.entries.values()) {
             for (Entry o : Entries.entries.values()) {
-                if(i != o && i.x == o.x && i.y == o.y) {
+                if(i != o && i.x == o.x && i.y == o.y && i.tab.equals(o.tab)) {
                     DataNEssence.LOGGER.warn("Entry \"" + i.id + "\" is overlapping with entry \"" + o.id + "\"");
                 }
             }

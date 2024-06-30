@@ -57,7 +57,7 @@ public class DataNEssenceCommands {
         boolean foundIssues = false;
         for (Entry i : Entries.entries.values()) {
             for (Entry o : Entries.entries.values()) {
-                if(i != o && i.x == o.x && i.y == o.y) {
+                if(i != o && i.x == o.x && i.y == o.y && i.tab.equals(o.tab)) {
                     foundIssues = true;
                     if (command.getSource().isPlayer()) {
                         command.getSource().getEntity().sendSystemMessage(Component.translatable("commands.datanessence.check_entry_overlaps.found", i.id, o.id));

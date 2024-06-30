@@ -16,8 +16,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
-import org.joml.Math;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -80,13 +80,31 @@ public class DataTabletScreen extends Screen {
                 }
             }
             int o = 0;
-            for (DataTab i : getSortedTabs()) {
+            for (DataTab i : getCurrentTabs()) {
                 int x2 = x+(o >= 6 ? 255 : -21);
                 int y2 = y+8+((o%6)*24);
                 if (pMouseX >= x2 && pMouseY >= y2 && pMouseX <= x2+21 && pMouseY <= y2+20) {
                     return clickTab(i);
                 }
                 o++;
+            }
+            if (pMouseX >= (x+imageWidth)+30 && pMouseX <= (x+imageWidth)+42) {
+                if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
+                    if (this.tabPage+2 < getSortedTabs().size()/6) {
+                        tabPage += 1;
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                        return true;
+                    }
+                }
+            }
+            if (pMouseX >= x-42 && pMouseX <= x-30) {
+                if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
+                    if (tabPage > 0) {
+                        tabPage -= 1;
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                        return true;
+                    }
+                }
             }
         }
         if (pButton == 1 && screenType == 2) {
@@ -144,7 +162,7 @@ public class DataTabletScreen extends Screen {
             screenType = 0;
         }
     }
-
+    public int tabPage = 0;
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         renderBackground(graphics);
@@ -152,7 +170,7 @@ public class DataTabletScreen extends Screen {
         int y = (height - imageHeight) / 2;
         if (screenType == 0) {
             int o = 0;
-            for (DataTab i : getSortedTabs()) {
+            for (DataTab i : getCurrentTabs()) {
                 graphics.blit(TEXTURE, x+(o >= 6 ? 256 : -21), y+8+((o%6)*24), o >= 6 ? 66 : 87, 166, 21, 20);
                 graphics.renderItem(i.icon, x+(o >= 6 ? 258 : -18), y+8+((o%6)*24)+2);
                 o++;
@@ -179,6 +197,15 @@ public class DataTabletScreen extends Screen {
         graphics.disableScissor();
         super.render(graphics, mouseX, mouseY, delta);
         if (screenType == 0) {
+            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
+
+            if (this.tabPage+2 < getSortedTabs().size()/6) {
+                graphics.blit(TEXTURE, (x + imageWidth) + 30, y + ((imageHeight / 2) - 20), 32, 166, 12, 40);
+            }
+            if (this.tabPage > 0) {
+                graphics.blit(TEXTURE, x - 42, y + ((imageHeight / 2) - 20), 20, 166, 12, 40);
+            }
+
             Component tooltip = null;
             for (Entry i : Entries.entries.values()) {
                 if (i.tab.equals(currentTab.id)) {
@@ -193,7 +220,7 @@ public class DataTabletScreen extends Screen {
                 }
             }
             int o = 0;
-            for (DataTab i : getSortedTabs()) {
+            for (DataTab i : getCurrentTabs()) {
                 int x2 = x+(o >= 6 ? 255 : -21);
                 int y2 = y+8+((o%6)*24);
                 if (mouseX >= x2 && mouseY >= y2 && mouseX <= x2+21 && mouseY <= y2+20) {
@@ -204,7 +231,6 @@ public class DataTabletScreen extends Screen {
             if (tooltip != null) {
                 graphics.renderTooltip(Minecraft.getInstance().font, tooltip, mouseX, mouseY);
             }
-            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
         } else if (screenType == 2) {
             graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.name, x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
         }
@@ -259,6 +285,14 @@ public class DataTabletScreen extends Screen {
     }
     public List<DataTab> getSortedTabs() {
         return Entries.tabs.values().stream().sorted((a, b) -> Integer.compare(b.priority, a.priority)).toList();
+    }
+    public List<DataTab> getCurrentTabs() {
+        List<DataTab> tabs = new ArrayList<>();
+        List<DataTab> sorted = getSortedTabs();
+        for (int i = tabPage*6; i < Math.min(sorted.size(), (tabPage*6)+12); i++) {
+            tabs.add(sorted.get(i));
+        }
+        return tabs;
     }
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
