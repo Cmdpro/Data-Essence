@@ -173,6 +173,7 @@ repositories {
     maven {
         url = "https://maven.theillusivec4.top/"
     }
+    maven { url = "https://maven.terraformersmc.com/" }
 }
 dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
@@ -181,17 +182,22 @@ dependencies {
     minecraft 'net.neoforged:forge:1.20.1-47.1.79'
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.4.4')
-    // compile against the JEI API but do not include it at runtime
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}"))
     compileOnly(fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}"))
-    // at runtime, use the full JEI jar
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    compileOnly fg.deobf("dev.emi:emi-forge:${emi_version}:api")
     //compileOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api")
     //runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
     //runtimeOnly fg.deobf("curse.maven:attributefix-280510:4714729")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
     //implementation fg.deobf("team.lodestar.lodestone:lodestone:${mc_version}-${lodestone_version}")
+
+    switch (recipe_viewer.toLowerCase(Locale.ROOT)) {
+        case "jei": runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}"); break
+        case "emi": runtimeOnly fg.deobf("dev.emi:emi-forge:${emi_version}"); break
+        case "disabled": break
+        default: println("Unknown recipe viewer specified: $recipe_viewer. Must be JEI, EMI, or disabled.")
+    }
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
