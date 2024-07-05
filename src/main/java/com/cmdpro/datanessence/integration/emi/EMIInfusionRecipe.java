@@ -72,7 +72,7 @@ public class EMIInfusionRecipe implements EmiRecipe {
         widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 10, 136);
 
         // Input
-        widgetHolder.addSlot(input.get(0), 37, 21).drawBack(false);
+        widgetHolder.addSlot(input.get(0), 37, 21).drawBack(false).drawBack(false);
         // Output
         widgetHolder.addSlot(output.get(0), 81, 21).recipeContext(this).drawBack(false);
 
