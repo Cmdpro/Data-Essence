@@ -1,14 +1,17 @@
 package com.cmdpro.datanessence.integration.emi;
 
-import com.cmdpro.datanessence.recipe.IFabricationRecipe;
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
+
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -46,16 +49,23 @@ public class EMIInfusionRecipe implements EmiRecipe {
 
     @Override
     public int getDisplayWidth() {
-        return 0;
+        return 123;
     }
 
     @Override
     public int getDisplayHeight() {
-        return 0;
+        return 60;
     }
 
     @Override
     public void addWidgets(WidgetHolder widgetHolder) {
+        ResourceLocation background = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
 
+        widgetHolder.addTexture(background, 0, 0, 123, 60, 136, 10);
+
+        // Input
+        widgetHolder.addSlot(input.get(0), 0, 0);
+        // Output
+        widgetHolder.addSlot(output.get(0), 50, 0).recipeContext(this);
     }
 }

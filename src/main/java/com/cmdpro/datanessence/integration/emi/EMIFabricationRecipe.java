@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.integration.emi;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 
 import dev.emi.emi.api.recipe.EmiRecipe;
@@ -49,16 +50,20 @@ public class EMIFabricationRecipe implements EmiRecipe {
 
     @Override
     public int getDisplayWidth() {
-        return 0;
+        return 123;
     }
 
     @Override
     public int getDisplayHeight() {
-        return 0;
+        return 60;
     }
 
     @Override
     public void addWidgets(WidgetHolder widgetHolder) {
+        ResourceLocation background = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
 
+        widgetHolder.addTexture(background, 0, 0, 123, 60, 196, 10);
+
+        // TODO slots
     }
 }
