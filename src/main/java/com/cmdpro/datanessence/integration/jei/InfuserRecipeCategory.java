@@ -55,7 +55,7 @@ public class InfuserRecipeCategory implements IRecipeCategory<InfusionRecipe> {
     @Override
     public void draw(InfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         if (recipe.getEssenceCost() > 0) {
-            guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 5, 28-(int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)), 6, 224-(int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)));
+            guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 5, 6-(int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)), 6, 224-(int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)));
         }
         if (recipe.getLunarEssenceCost() > 0) {
             guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 13, 28-(int)Math.ceil(22f*(recipe.getLunarEssenceCost()/1000f)), 1, 224-(int)Math.ceil(22f*(recipe.getLunarEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe.getLunarEssenceCost()/1000f)));
