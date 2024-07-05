@@ -96,7 +96,8 @@
   "item.datanessence.data_tablet.pages.infuser.page1.text": "The Fabricator is an ideal worktable for more refined processing, but there are times when what is required is to dump Essence into an object without much finesse. That is where the Infuser device comes in: it is able to infuse blocks and items with Essence, often resulting in something new, or changed.",
   "item.datanessence.data_tablet.pages.infuser.page2.text": " ◇ Must have a loaded Data Drive inserted to know what to craft.",
 
-
+  "emi.category.datanessence.fabrication": "Fabrication",
+  "emi.category.datanessence.infusion": "Infusion",
 
   "commands.datanessence.reset_learned": "Reset all entries back to their original state",
   "commands.datanessence.set_tier": "Set your tier to %1$s",

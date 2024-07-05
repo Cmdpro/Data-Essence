@@ -2,27 +2,21 @@ package com.cmdpro.datanessence.integration.emi;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
-
 import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
+
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 
-import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.crafting.IShapedRecipe;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class EMIFabricationRecipe implements EmiRecipe {
@@ -96,7 +90,7 @@ public class EMIFabricationRecipe implements EmiRecipe {
         widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 10, 196);
 
         // Initialize recipe output
-        widgetHolder.addSlot(output, 98, 22).recipeContext(this);
+        widgetHolder.addSlot(output, 97, 21).recipeContext(this).drawBack(false);
 
         int sOff = 0;
         if (!shapeless) {

@@ -21,11 +21,19 @@ public class EMIInfusionRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiStack> output;
+    private final float essenceCost;
+    private final float lunarEssenceCost;
+    private final float naturalEssenceCost;
+    private final float exoticEssenceCost;
 
     public EMIInfusionRecipe(InfusionRecipe recipe) {
         this.id = recipe.getId();
         this.input = List.of(EmiIngredient.of(recipe.getIngredients().stream().map(s -> EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())).toList()));
         this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())));
+        this.essenceCost = recipe.getEssenceCost();
+        this.lunarEssenceCost = recipe.getLunarEssenceCost();
+        this.naturalEssenceCost = recipe.getNaturalEssenceCost();
+        this.exoticEssenceCost = recipe.getExoticEssenceCost();
     }
     @Override
     public EmiRecipeCategory getCategory() {
@@ -61,11 +69,17 @@ public class EMIInfusionRecipe implements EmiRecipe {
     public void addWidgets(WidgetHolder widgetHolder) {
         ResourceLocation background = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
 
-        widgetHolder.addTexture(background, 0, 0, 123, 60, 136, 10);
+        widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 10, 136);
 
         // Input
-        widgetHolder.addSlot(input.get(0), 0, 0);
+        widgetHolder.addSlot(input.get(0), 37, 21).drawBack(false);
         // Output
-        widgetHolder.addSlot(output.get(0), 50, 0).recipeContext(this);
+        widgetHolder.addSlot(output.get(0), 81, 21).recipeContext(this).drawBack(false);
+
+        // Essence bars
+        widgetHolder.add(new EssenceBarWidget(5, 6, 0, essenceCost));
+        widgetHolder.add(new EssenceBarWidget(13, 6, 1, lunarEssenceCost));
+        widgetHolder.add(new EssenceBarWidget(5, 32, 2, naturalEssenceCost));
+        widgetHolder.add(new EssenceBarWidget(13, 32, 3, exoticEssenceCost));
     }
 }
