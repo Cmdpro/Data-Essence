@@ -39,6 +39,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         decoBlock(BlockRegistry.PATTERNED_COPPER);
 
         essenceBurner(BlockRegistry.ESSENCE_BURNER);
+        dataBank(BlockRegistry.DATA_BANK);
 
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
     }
@@ -83,6 +84,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("down", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/polished_obsidian"))
                 .texture("up", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top"))
                 .texture("south", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_back"))
+                .texture("particle", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_front"));
+        simpleBlockItem(blockRegistryObject.get(), model);
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(EssenceBurner.FACING, Direction.EAST).modelForState().modelFile(model).rotationY(90).addModel()
+                .partialState().with(EssenceBurner.FACING, Direction.NORTH).modelForState().modelFile(model).addModel()
+                .partialState().with(EssenceBurner.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).addModel()
+                .partialState().with(EssenceBurner.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).addModel();
+    }
+    private void dataBank(RegistryObject<Block> blockRegistryObject) {
+        ResourceLocation loc = blockRegistryObject.getKey().location();
+        BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/ancient_rock_bricks"))
+                .texture("east", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/ancient_rock_bricks"))
+                .texture("north", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_front"))
+                .texture("down", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/ancient_rock_bricks"))
+                .texture("up", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/ancient_rock_bricks"))
+                .texture("south", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/ancient_rock_bricks"))
                 .texture("particle", new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_front"));
         simpleBlockItem(blockRegistryObject.get(), model);
         getVariantBuilder(blockRegistryObject.get())

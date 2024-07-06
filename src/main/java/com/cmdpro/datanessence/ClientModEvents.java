@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.datanessence.particle.EssenceSparkleParticle;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.InfuserScreen;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
@@ -8,10 +9,12 @@ import com.cmdpro.datanessence.screen.EssenceBurnerScreen;
 import com.cmdpro.datanessence.screen.FabricatorScreen;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
@@ -60,6 +63,7 @@ public class ClientModEvents {
     public static ShaderInstance progressionShader;
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
-
+        Minecraft.getInstance().particleEngine.register(ParticleRegistry.ESSENCE_SPARKLE.get(),
+                EssenceSparkleParticle.Provider::new);
     }
 }

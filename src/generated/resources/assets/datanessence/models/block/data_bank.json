@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "datanessence:block/deco/ancient/ancient_rock_bricks",
+    "east": "datanessence:block/deco/ancient/ancient_rock_bricks",
+    "north": "datanessence:block/data_bank_front",
+    "particle": "datanessence:block/data_bank_front",
+    "south": "datanessence:block/deco/ancient/ancient_rock_bricks",
+    "up": "datanessence:block/deco/ancient/ancient_rock_bricks",
+    "west": "datanessence:block/deco/ancient/ancient_rock_bricks"
+  }
+}

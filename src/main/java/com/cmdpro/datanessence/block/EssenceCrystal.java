@@ -1,11 +1,14 @@
 package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.registry.ParticleRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
@@ -15,8 +18,10 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.apache.commons.lang3.RandomUtils;
 
 import javax.annotation.Nullable;
 
@@ -29,6 +34,8 @@ public class EssenceCrystal extends Block {
     protected final VoxelShape westAabb;
     protected final VoxelShape upAabb;
     protected final VoxelShape downAabb;
+
+
     public EssenceCrystal(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.UP).setValue(MODEL, 0));
@@ -59,6 +66,11 @@ public class EssenceCrystal extends Block {
             default:
                 return this.upAabb;
         }
+    }
+    @Override
+    public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
+        Vec3 offset = new Vec3(RandomUtils.nextFloat(0, 0.8f)-0.4f, RandomUtils.nextFloat(0, 0.8f)-0.4f, RandomUtils.nextFloat(0, 0.8f)-0.4f);
+        pLevel.addParticle(ParticleRegistry.ESSENCE_SPARKLE.get(), pPos.getCenter().x+offset.x, pPos.getCenter().y+offset.y, pPos.getCenter().z+offset.z, 0.0D, 0.0D, 0.0D);
     }
     @Override
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
