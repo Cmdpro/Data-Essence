@@ -1,4 +1,5 @@
-// 1.20.1	2024-06-27T13:37:11.167666366	Block States: datanessence
+// 1.20.1	2024-07-06T12:01:18.772536213	Block States: datanessence
+af8c2eb4489d2c654a869a088de7969af60b1551 assets/datanessence/blockstates/ancient_lantern.json
 140490733763a0972275b8ae5fe9924317809834 assets/datanessence/blockstates/ancient_rock_bricks.json
 ce4fbfb54eb2616987f8b0f0a94ec2698c1d0cd7 assets/datanessence/blockstates/ancient_rock_column.json
 65eb7ec6d7eb8a68d62256fec022ab7148aa41c5 assets/datanessence/blockstates/ancient_rock_tiles.json
@@ -15,6 +16,7 @@ d00b72f016a4a1672dc94c14d423bc06cb486c85 assets/datanessence/blockstates/item_bu
 9dcc16ca173cd6b619d48d77a99b924b7812efaf assets/datanessence/blockstates/polished_obsidian.json
 7b2c32f549c198b04f7eea0ceaa04174e1bab461 assets/datanessence/blockstates/polished_obsidian_column.json
 a02d60ed4563ae33705b9375a0709ea8206de7b8 assets/datanessence/blockstates/traversite_road.json
+07f12f1db5729df97b259095480011b8cb0db466 assets/datanessence/models/block/ancient_lantern.json
 97c9ef368a4b8d38ca1824b03b00a9defcef2f40 assets/datanessence/models/block/ancient_rock_bricks.json
 d51468a841f5a2fc632f08974ca3377d7f22844c assets/datanessence/models/block/ancient_rock_column.json
 f5ee9e3e5da78b12658b736732855417590f4103 assets/datanessence/models/block/ancient_rock_column_horizontal.json
@@ -37,6 +39,7 @@ c2046ad27e4aae201cf98ca3d63d41d882fb40f2 assets/datanessence/models/block/fluid_
 717ffa368353383de45243c30cd8832bfe10e0ec assets/datanessence/models/block/polished_obsidian_column.json
 2b7b7c3f07337680737e52333776b296667ad3be assets/datanessence/models/block/polished_obsidian_column_horizontal.json
 7eb8dc71b433dfbd977ce15391068b33a206a673 assets/datanessence/models/block/traversite_road.json
+42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
 5ca594a44ea4f9e1d7fa2a7a78f8cc86d7b43f08 assets/datanessence/models/item/engraved_polished_obsidian.json

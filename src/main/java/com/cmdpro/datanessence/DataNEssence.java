@@ -109,6 +109,7 @@ public class DataNEssence
             event.accept(BlockRegistry.PATTERNED_COPPER);
             event.accept(BlockRegistry.ANCIENT_ROCK_COLUMN);
             event.accept(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN);
+            event.accept(BlockRegistry.ANCIENT_LANTERN);
             event.accept(BlockRegistry.ANCIENT_ROCK_BRICKS);
             event.accept(BlockRegistry.ANCIENT_ROCK_TILES);
             event.accept(BlockRegistry.DECO_ESSENCE_BUFFER);

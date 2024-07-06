@@ -46,6 +46,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.ANCIENT_ROCK_BRICKS.get());
         dropSelf(BlockRegistry.ANCIENT_ROCK_TILES.get());
         dropSelf(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN.get());
+        dropSelf(BlockRegistry.ANCIENT_LANTERN.get());
         dropSelf(BlockRegistry.POLISHED_OBSIDIAN.get());
         dropSelf(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get());
         dropSelf(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get());

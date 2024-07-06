@@ -27,6 +27,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ancientDecoBlockWithItem(BlockRegistry.ANCIENT_ROCK_TILES);
         ancientDecoCubeColumn(BlockRegistry.ANCIENT_ROCK_COLUMN);
         ancientDecoCubeColumn(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN);
+        ancientDecoBlockWithItem(BlockRegistry.ANCIENT_LANTERN);
 
         bufferDecoBlock(BlockRegistry.DECO_ESSENCE_BUFFER);
         bufferDecoBlock(BlockRegistry.DECO_ITEM_BUFFER);
