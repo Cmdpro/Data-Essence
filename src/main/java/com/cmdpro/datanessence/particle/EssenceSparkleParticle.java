@@ -15,9 +15,11 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.apache.commons.lang3.RandomUtils;
 
 public class EssenceSparkleParticle extends TextureSheetParticle {
     public float startQuadSize;
+    public float rot;
     protected EssenceSparkleParticle(ClientLevel level, double xCoord, double yCoord, double zCoord,
                                      SpriteSet spriteSet, double xd, double yd, double zd) {
         super(level, xCoord, yCoord, zCoord, xd, yd, zd);
@@ -36,12 +38,15 @@ public class EssenceSparkleParticle extends TextureSheetParticle {
         this.bCol = 1f;
         this.alpha = 1f;
         this.hasPhysics = false;
+        rot = RandomUtils.nextFloat(0f, 2f)-1f;
     }
 
     @Override
     public void tick() {
         super.tick();
         fadeOut();
+        this.oRoll = this.roll;
+        roll += rot/20f;
     }
 
     private void fadeOut() {
