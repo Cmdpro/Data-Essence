@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.integration.emi;
+package com.cmdpro.datanessence.integration.emi.widgets;
 
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.screen.DataTabletScreen;

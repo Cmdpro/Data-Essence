@@ -1,11 +1,13 @@
 package com.cmdpro.datanessence.integration.emi;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.integration.emi.recipes.EMIFabricationRecipe;
+import com.cmdpro.datanessence.integration.emi.recipes.EMIInfusionRecipe;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import com.cmdpro.datanessence.registry.ItemRegistry;
-
 import com.cmdpro.datanessence.registry.RecipeRegistry;
+
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
@@ -18,7 +20,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 
 @EmiEntrypoint
 public class EMIDataNEssencePlugin implements EmiPlugin {
-    public static final ResourceLocation EMI_ICONS = new ResourceLocation(DataNEssence.MOD_ID,"textures/gui/emi/emi_icons.png");
+    public static final ResourceLocation EMI_ICONS = new ResourceLocation(DataNEssence.MOD_ID,"textures/gui/emi_icons.png");
 
     public static final EmiStack FABRICATOR_WORKSTATION = EmiStack.of(ItemRegistry.FABRICATOR_ITEM.get());
     public static final EmiStack INFUSER_WORKSTATION = EmiStack.of(ItemRegistry.INFUSER_ITEM.get());

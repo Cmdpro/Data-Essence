@@ -1,6 +1,8 @@
-package com.cmdpro.datanessence.integration.emi;
+package com.cmdpro.datanessence.integration.emi.recipes;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.integration.emi.EMIDataNEssencePlugin;
+import com.cmdpro.datanessence.integration.emi.widgets.EssenceBarWidget;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
 
 import dev.emi.emi.api.recipe.EmiRecipe;

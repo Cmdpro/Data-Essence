@@ -1,6 +1,8 @@
-package com.cmdpro.datanessence.integration.emi;
+package com.cmdpro.datanessence.integration.emi.recipes;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.integration.emi.EMIDataNEssencePlugin;
+import com.cmdpro.datanessence.integration.emi.widgets.EssenceBarWidget;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
@@ -101,6 +103,7 @@ public class EMIFabricationRecipe implements EmiRecipe {
                 sOff -= 3;
             }
         } else {
+            // interestingly, it does never seem to reach here?? don't know WHY
             widgetHolder.addTexture(DataTabletScreen.TEXTURECRAFTING, 93, 4, 14, 11, 242, 185);
         }
         int i = 0;
