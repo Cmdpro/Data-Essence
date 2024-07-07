@@ -103,7 +103,6 @@ public class EMIFabricationRecipe implements EmiRecipe {
                 sOff -= 3;
             }
         } else {
-            // interestingly, it does never seem to reach here?? don't know WHY
             widgetHolder.addTexture(DataTabletScreen.TEXTURECRAFTING, 93, 4, 14, 11, 242, 185);
         }
         int i = 0;
