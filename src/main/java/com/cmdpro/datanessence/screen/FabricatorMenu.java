@@ -12,8 +12,9 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class FabricatorMenu extends AbstractContainerMenu {
     public final FabricatorBlockEntity blockEntity;
@@ -28,14 +29,13 @@ public class FabricatorMenu extends AbstractContainerMenu {
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            int i, j;
-            for (i = 0; i < 3; i++) {
-                for (j = 0; j < 3; j++) {
-                    this.addSlot(new SlotItemHandler(handler, j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
-                }
+        IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity, null);
+        int i, j;
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                this.addSlot(new SlotItemHandler(handler, j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
             }
-        });
+        }
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

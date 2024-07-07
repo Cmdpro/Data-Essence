@@ -49,11 +49,11 @@ public class CraftingPage extends TextPage {
         int y = 4;
         int p = 0;
         for (ResourceLocation i : recipes) {
-            Optional<? extends Recipe<?>> optional = Minecraft.getInstance().level.getRecipeManager().byKey(i);
+            Optional<? extends RecipeHolder<?>> optional = Minecraft.getInstance().level.getRecipeManager().byKey(i);
             if (optional.isPresent()) {
                 for (CraftingType o : CraftingTypes.types) {
-                    if (o.isRecipeType(optional.get())) {
-                        o.render(this, screen, pGuiGraphics, xOffset, x, yOffset, y, optional.get(), pMouseX, pMouseY);
+                    if (o.isRecipeType(optional.get().value())) {
+                        o.render(this, screen, pGuiGraphics, xOffset, x, yOffset, y, optional.get().value(), pMouseX, pMouseY);
                         break;
                     }
                 }

@@ -6,10 +6,12 @@ import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 
 public class TierToast implements Toast {
+    private static final ResourceLocation TEXTURE = new ResourceLocation("toast/advancement");
     public int tier;
     public boolean playedSound;
     public TierToast(int tier) {

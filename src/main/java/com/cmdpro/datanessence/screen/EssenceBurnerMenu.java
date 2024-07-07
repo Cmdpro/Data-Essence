@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.screen;
 import com.cmdpro.datanessence.block.entity.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
+import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,8 +13,9 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class EssenceBurnerMenu extends AbstractContainerMenu {
     public final EssenceBurnerBlockEntity blockEntity;
@@ -28,10 +30,9 @@ public class EssenceBurnerMenu extends AbstractContainerMenu {
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new SlotItemHandler(handler, 0, 80, 17));
-            this.addSlot(new SlotItemHandler(handler, 1, 80, 53));
-        });
+        IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity, null);
+        this.addSlot(new SlotItemHandler(handler, 0, 80, 17));
+        this.addSlot(new SlotItemHandler(handler, 1, 80, 53));
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

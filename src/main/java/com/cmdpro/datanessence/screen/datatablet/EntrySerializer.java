@@ -6,9 +6,11 @@ import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -40,7 +42,7 @@ public class EntrySerializer {
         if (!json.has("tab")) {
             throw new JsonSyntaxException("Element tab missing in entry JSON for " + entryId.toString());
         }
-        ItemStack icon = CraftingHelper.getItemStack(json.getAsJsonObject("icon"), true, false);
+        ItemStack icon = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(GsonHelper.getAsString(json, "icon"))));
         int x = json.get("x").getAsInt();
         int y = json.get("y").getAsInt();
         Component name = Component.translatable(json.get("name").getAsString());
@@ -55,7 +57,7 @@ public class EntrySerializer {
         for (JsonElement i : json.getAsJsonArray("pages")) {
             JsonObject obj = i.getAsJsonObject();
             if (obj.has("type")) {
-                PageSerializer pageSerializer = DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get().getValue(ResourceLocation.tryParse(obj.get("type").getAsString()));
+                PageSerializer pageSerializer = DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get(ResourceLocation.tryParse(obj.get("type").getAsString()));
                 Page page = pageSerializer.fromJson(obj);
                 pages.add(page);
             } else {
@@ -87,12 +89,12 @@ public class EntrySerializer {
     }
     public static Page pageFromNetwork(FriendlyByteBuf buf) {
         ResourceLocation type = buf.readResourceLocation();
-        PageSerializer pageSerializer = DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get().getValue(type);
+        PageSerializer pageSerializer = DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get(type);
         Page page = pageSerializer.fromNetwork(buf);
         return page;
     }
     public static void pageToNetwork(FriendlyByteBuf buf, Page page) {
-        buf.writeResourceLocation(DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get().getKey(page.getSerializer()));
+        buf.writeResourceLocation(DataNEssenceRegistries.PAGE_TYPE_REGISTRY.getKey(page.getSerializer()));
         page.getSerializer().toNetwork(page, buf);
     }
     public static void toNetwork(FriendlyByteBuf buf, Entry entry) {

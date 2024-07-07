@@ -2,12 +2,12 @@ package com.cmdpro.datanessence.toasts;
 
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.advancements.DisplayInfo;
-import net.minecraft.advancements.FrameType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
@@ -15,6 +15,7 @@ import net.minecraft.util.Mth;
 import java.util.List;
 
 public class CriticalDataToast implements Toast {
+    private static final ResourceLocation TEXTURE = new ResourceLocation("toast/advancement");
     public Entry entry;
     public boolean playedSound;
     public CriticalDataToast(Entry entry) {

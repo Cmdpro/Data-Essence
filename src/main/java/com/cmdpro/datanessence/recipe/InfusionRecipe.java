@@ -11,8 +11,6 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, Recipe<SimpleContainer> {
     private final ResourceLocation id;

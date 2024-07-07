@@ -165,7 +165,7 @@ public class DataTabletScreen extends Screen {
     public int tabPage = 0;
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        renderBackground(graphics);
+        renderBackground(graphics, mouseX, mouseY, delta);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         if (screenType == 0) {

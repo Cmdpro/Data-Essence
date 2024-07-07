@@ -10,18 +10,18 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.neoforged.bus.EventBus;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
+import net.neoforged.fml.event.lifecycle.InterModProcessEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
@@ -36,16 +36,15 @@ public class DataNEssence
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
     public static RandomSource random;
-    public DataNEssence()
+    public DataNEssence(IEventBus bus)
     {
         // Register the setup method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        bus.addListener(this::setup);
         // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+        bus.addListener(this::enqueueIMC);
         // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        bus.addListener(this::processIMC);
 
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
         modLoadingContext.registerConfig(ModConfig.Type.COMMON, DataNEssenceConfig.COMMON_SPEC, "datanessence.toml");
         ItemRegistry.ITEMS.register(bus);
@@ -60,9 +59,9 @@ public class DataNEssence
         MinigameRegistry.MINIGAME_TYPES.register(bus);
         FeatureRegistry.FEATURES.register(bus);
         ParticleRegistry.PARTICLE_TYPES.register(bus);
-        GeckoLib.initialize();
+        GeckoLib.initialize(bus);
         // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(this);
         bus.addListener(this::addCreative);
         random = RandomSource.create();
     }
@@ -70,53 +69,53 @@ public class DataNEssence
         if(event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
 
         }
-        if (event.getTabKey() == CreativeModeTabRegistry.ITEMS.getKey()) {
-            event.accept(ItemRegistry.DATA_TABLET);
-            event.accept(ItemRegistry.ESSENCE_WIRE);
-            event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE);
-            event.accept(ItemRegistry.NATURAL_ESSENCE_WIRE);
-            event.accept(ItemRegistry.EXOTIC_ESSENCE_WIRE);
-            event.accept(ItemRegistry.ITEM_WIRE);
-            event.accept(ItemRegistry.FLUID_WIRE);
-            event.accept(ItemRegistry.MAGIC_WRENCH);
-            event.accept(ItemRegistry.DATA_DRIVE);
-            event.accept(ItemRegistry.ESSENCE_SHARD);
-            event.accept(ItemRegistry.ESSENCE_BOMB);
-            event.accept(ItemRegistry.LUNAR_ESSENCE_BOMB);
-            event.accept(ItemRegistry.NATURAL_ESSENCE_BOMB);
-            event.accept(ItemRegistry.EXOTIC_ESSENCE_BOMB);
-            event.accept(ItemRegistry.CAPACITANCE_PANEL);
-            event.accept(ItemRegistry.CONDUCTANCE_ROD);
-            event.accept(ItemRegistry.LOGICAL_MATRIX);
+        if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.ITEMS.get())) {
+            event.accept(ItemRegistry.DATA_TABLET.get());
+            event.accept(ItemRegistry.ESSENCE_WIRE.get());
+            event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE.get());
+            event.accept(ItemRegistry.NATURAL_ESSENCE_WIRE.get());
+            event.accept(ItemRegistry.EXOTIC_ESSENCE_WIRE.get());
+            event.accept(ItemRegistry.ITEM_WIRE.get());
+            event.accept(ItemRegistry.FLUID_WIRE.get());
+            event.accept(ItemRegistry.MAGIC_WRENCH.get());
+            event.accept(ItemRegistry.DATA_DRIVE.get());
+            event.accept(ItemRegistry.ESSENCE_SHARD.get());
+            event.accept(ItemRegistry.ESSENCE_BOMB.get());
+            event.accept(ItemRegistry.LUNAR_ESSENCE_BOMB.get());
+            event.accept(ItemRegistry.NATURAL_ESSENCE_BOMB.get());
+            event.accept(ItemRegistry.EXOTIC_ESSENCE_BOMB.get());
+            event.accept(ItemRegistry.CAPACITANCE_PANEL.get());
+            event.accept(ItemRegistry.CONDUCTANCE_ROD.get());
+            event.accept(ItemRegistry.LOGICAL_MATRIX.get());
         }
-        if (event.getTabKey() == CreativeModeTabRegistry.BLOCKS.getKey()) {
-            event.accept(ItemRegistry.FABRICATOR_ITEM);
-            event.accept(ItemRegistry.ESSENCE_POINT_ITEM);
-            event.accept(ItemRegistry.LUNAR_ESSENCE_POINT_ITEM);
-            event.accept(ItemRegistry.NATURAL_ESSENCE_POINT_ITEM);
-            event.accept(ItemRegistry.EXOTIC_ESSENCE_POINT_ITEM);
-            event.accept(ItemRegistry.ITEM_POINT_ITEM);
-            event.accept(ItemRegistry.FLUID_POINT_ITEM);
-            event.accept(BlockRegistry.ESSENCE_BUFFER);
-            event.accept(BlockRegistry.ITEM_BUFFER);
-            event.accept(BlockRegistry.FLUID_BUFFER);
-            event.accept(BlockRegistry.DATA_BANK);
-            event.accept(BlockRegistry.ESSENCE_CRYSTAL);
-            event.accept(BlockRegistry.ESSENCE_BURNER);
-            event.accept(BlockRegistry.TRAVERSITE_ROAD);
-            event.accept(BlockRegistry.POLISHED_OBSIDIAN);
-            event.accept(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
-            event.accept(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN);
-            event.accept(BlockRegistry.PATTERNED_COPPER);
-            event.accept(BlockRegistry.ANCIENT_ROCK_COLUMN);
-            event.accept(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN);
-            event.accept(BlockRegistry.ANCIENT_LANTERN);
-            event.accept(BlockRegistry.ANCIENT_ROCK_BRICKS);
-            event.accept(BlockRegistry.ANCIENT_ROCK_TILES);
-            event.accept(BlockRegistry.DECO_ESSENCE_BUFFER);
-            event.accept(BlockRegistry.DECO_ITEM_BUFFER);
-            event.accept(BlockRegistry.DECO_FLUID_BUFFER);
-            event.accept(ItemRegistry.INFUSER_ITEM);
+        if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.ITEMS.get())) {
+            event.accept(ItemRegistry.FABRICATOR_ITEM.get());
+            event.accept(ItemRegistry.ESSENCE_POINT_ITEM.get());
+            event.accept(ItemRegistry.LUNAR_ESSENCE_POINT_ITEM.get());
+            event.accept(ItemRegistry.NATURAL_ESSENCE_POINT_ITEM.get());
+            event.accept(ItemRegistry.EXOTIC_ESSENCE_POINT_ITEM.get());
+            event.accept(ItemRegistry.ITEM_POINT_ITEM.get());
+            event.accept(ItemRegistry.FLUID_POINT_ITEM.get());
+            event.accept(BlockRegistry.ESSENCE_BUFFER.get());
+            event.accept(BlockRegistry.ITEM_BUFFER.get());
+            event.accept(BlockRegistry.FLUID_BUFFER.get());
+            event.accept(BlockRegistry.DATA_BANK.get());
+            event.accept(BlockRegistry.ESSENCE_CRYSTAL.get());
+            event.accept(BlockRegistry.ESSENCE_BURNER.get());
+            event.accept(BlockRegistry.TRAVERSITE_ROAD.get());
+            event.accept(BlockRegistry.POLISHED_OBSIDIAN.get());
+            event.accept(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get());
+            event.accept(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get());
+            event.accept(BlockRegistry.PATTERNED_COPPER.get());
+            event.accept(BlockRegistry.ANCIENT_ROCK_COLUMN.get());
+            event.accept(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN.get());
+            event.accept(BlockRegistry.ANCIENT_LANTERN.get());
+            event.accept(BlockRegistry.ANCIENT_ROCK_BRICKS.get());
+            event.accept(BlockRegistry.ANCIENT_ROCK_TILES.get());
+            event.accept(BlockRegistry.DECO_ESSENCE_BUFFER.get());
+            event.accept(BlockRegistry.DECO_ITEM_BUFFER.get());
+            event.accept(BlockRegistry.DECO_FLUID_BUFFER.get());
+            event.accept(ItemRegistry.INFUSER_ITEM.get());
         }
     }
     private void setup(final FMLCommonSetupEvent event)

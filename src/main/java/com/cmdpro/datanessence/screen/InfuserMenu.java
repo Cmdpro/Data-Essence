@@ -14,8 +14,9 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class InfuserMenu extends AbstractContainerMenu {
     public final InfuserBlockEntity blockEntity;
@@ -30,11 +31,10 @@ public class InfuserMenu extends AbstractContainerMenu {
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(handler -> {
-            this.addSlot(new DataDriveSlot(handler, 0, 152, 8));
-            this.addSlot(new SlotItemHandler(handler, 1, 62, 34));
-            this.addSlot(new ModResultSlot(handler, 2, 116, 34));
-        });
+        IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity, null);
+        this.addSlot(new DataDriveSlot(handler, 0, 152, 8));
+        this.addSlot(new SlotItemHandler(handler, 1, 62, 34));
+        this.addSlot(new ModResultSlot(handler, 2, 116, 34));
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

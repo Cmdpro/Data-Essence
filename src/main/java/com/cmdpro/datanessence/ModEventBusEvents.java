@@ -4,17 +4,15 @@ import com.cmdpro.datanessence.api.*;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.screen.databank.MinigameSerializer;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.config.ModConfigEvent;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.NewRegistryEvent;
-import net.minecraftforge.registries.RegisterEvent;
-import net.minecraftforge.registries.RegistryBuilder;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.registries.RegisterEvent;
 
 @Mod.EventBusSubscriber(modid = DataNEssence.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBusEvents {
@@ -28,18 +26,6 @@ public class ModEventBusEvents {
         if (config.getSpec() == DataNEssenceConfig.COMMON_SPEC) {
             DataNEssenceConfig.bake(config);
         }
-    }
-    @SubscribeEvent
-    public static void registerStuff(RegisterEvent event) {
-        event.register(ForgeRegistries.Keys.RECIPE_TYPES, helper -> {
-        });
-    }
-    @SubscribeEvent
-    public static void registerRegistries(NewRegistryEvent event) {
-        DataNEssenceRegistries.PAGE_TYPE_REGISTRY = event.create(new RegistryBuilder<PageSerializer>()
-                .setName(new ResourceLocation(DataNEssence.MOD_ID, "page_types")));
-        DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY = event.create(new RegistryBuilder<MinigameSerializer>()
-                .setName(new ResourceLocation(DataNEssence.MOD_ID, "minigames")));
     }
     @SubscribeEvent
     public static void entitySpawnRestriction(SpawnPlacementRegisterEvent event) {

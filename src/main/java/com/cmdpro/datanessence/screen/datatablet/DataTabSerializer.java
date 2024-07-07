@@ -5,11 +5,14 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.neoforged.neoforge.common.crafting.CraftingHelper;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -24,7 +27,7 @@ public class DataTabSerializer {
         if (!json.has("name")) {
             throw new JsonSyntaxException("Element name missing in entry JSON for " + entryId.toString());
         }
-        ItemStack icon = CraftingHelper.getItemStack(json.getAsJsonObject("icon"), true, false);
+        ItemStack icon = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(GsonHelper.getAsString(json, "icon"))));
         Component name = Component.translatable(json.get("name").getAsString());
         int priority = 0;
         if (json.has("priority")) {
