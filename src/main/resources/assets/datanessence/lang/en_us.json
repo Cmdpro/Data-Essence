@@ -18,6 +18,10 @@
   "item.datanessence.capacitance_panel": "Capacitance Panel",
   "item.datanessence.conductance_rod": "Conductance Rod",
   "item.datanessence.logical_matrix": "Logical Matrix",
+  "item.datanessence.essence_bomb": "Essence Bomb",
+  "item.datanessence.lunar_essence_bomb": "Lunar Essence Bomb",
+  "item.datanessence.natural_essence_bomb": "Natural Essence Bomb",
+  "item.datanessence.exotic_essence_bomb": "Exotic Essence Bomb",
 
   "block.datanessence.essence_point": "Essence Point",
   "block.datanessence.lunar_essence_point": "Lunar Essence Point",
