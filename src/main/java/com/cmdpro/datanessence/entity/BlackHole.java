@@ -1,11 +1,14 @@
 package com.cmdpro.datanessence.entity;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.registry.EntityRegistry;
+import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.tags.EntityTypeTags;
+import net.minecraft.util.datafix.fixes.EntityIdFix;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
@@ -40,7 +43,7 @@ public class BlackHole extends Entity {
     public void tick() {
         super.tick();
         for (Entity i : level().getEntitiesOfClass(Entity.class, AABB.ofSize(getBoundingBox().getCenter(), entityData.get(SIZE)*2.5f, entityData.get(SIZE)*2.5f, entityData.get(SIZE)*2.5f))) {
-            if (i != this && !i.getType().is(Tags.EntityTypes.BOSSES)) {
+            if (i != this && !i.getType().is(Tags.EntityTypes.BOSSES) && !i.getType().equals(EntityRegistry.BLACK_HOLE.get())) {
                 if (i instanceof Player) {
                     i.hurtMarked = true;
                 }
