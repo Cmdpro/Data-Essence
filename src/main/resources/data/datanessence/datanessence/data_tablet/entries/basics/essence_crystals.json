@@ -1,0 +1,13 @@
+{
+  "icon": "datanessence:essence_crystal",
+  "tab": "datanessence:basics",
+  "x": 2,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": "item.datanessence.data_tablet.pages.essence_crystals.page1.text"
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.essence_crystals.name"
+}

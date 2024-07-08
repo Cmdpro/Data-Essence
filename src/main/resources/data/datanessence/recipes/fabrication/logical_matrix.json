@@ -4,7 +4,7 @@
   "lunarEssenceCost": 0,
   "naturalEssenceCost": 0,
   "exoticEssenceCost": 0,
-  "entry": "datanessence:components",
+  "entry": "datanessence:basics/components",
   "pattern": [
     "PP",
     "RP"

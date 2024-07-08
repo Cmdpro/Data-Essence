@@ -1,13 +1,9 @@
 {
   "icon": "datanessence:essence_crystal",
-  "tab": "datanessence:basics",
-  "x": -2,
-  "y": 1,
+  "tab": "datanessence:lore",
+  "x": 0,
+  "y": 0,
   "pages": [
-    {
-      "type": "datanessence:text",
-      "text": "item.datanessence.data_tablet.pages.essence_crystals.page1.text"
-    },
     {
       "type": "datanessence:text",
       "text": "item.datanessence.data_tablet.pages.essence_crystals.page2.text",

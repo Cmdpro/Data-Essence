@@ -1,0 +1,16 @@
+{
+  "icon": "datanessence:essence_bomb",
+  "tab": "datanessence:tools",
+  "x": -3,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:crafting",
+      "text": "item.datanessence.data_tablet.pages.essence_bombs.page1.text",
+      "recipes": [
+        "datanessence:fabrication/essence_bomb"
+      ]
+    }
+  ],
+  "name": "item.datanessence.data_tablet.pages.essence_bombs.name"
+}

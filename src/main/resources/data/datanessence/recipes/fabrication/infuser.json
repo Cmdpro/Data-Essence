@@ -4,7 +4,7 @@
   "lunarEssenceCost": 0,
   "naturalEssenceCost": 0,
   "exoticEssenceCost": 0,
-  "entry": "datanessence:infuser",
+  "entry": "datanessence:machinery/infuser",
   "pattern": [
     "COC",
     "R R",

@@ -4,7 +4,7 @@
   "lunarEssenceCost": 0,
   "naturalEssenceCost": 0,
   "exoticEssenceCost": 0,
-  "entry": "datanessence:essence_burner",
+  "entry": "datanessence:essence_manipulation/essence_burner",
   "pattern": [
     "CCC",
     "O O",
