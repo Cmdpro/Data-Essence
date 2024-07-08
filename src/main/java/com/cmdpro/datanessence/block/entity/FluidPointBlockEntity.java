@@ -8,12 +8,12 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Math;
@@ -31,28 +31,13 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
         super(BlockEntityRegistry.FLUID_POINT.get(), pos, state);
     }
     private final FluidTank fluidHandler = new FluidTank(DataNEssenceConfig.fluidPointTransfer);
-    private LazyOptional<IFluidHandler> lazyFluidHandler = LazyOptional.empty();
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        lazyFluidHandler = LazyOptional.of(() -> fluidHandler);
+    public IFluidHandler getFluidHandler() {
+        return lazyFluidHandler.get();
     }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.FLUID_HANDLER) {
-            return lazyFluidHandler.cast();
-        }
-        return super.getCapability(cap, side);
-    }
+    private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
     @Override
     public Color linkColor() {
         return new Color(0x56bae9);
-    }
-    @Override
-    public void invalidateCaps()  {
-        super.invalidateCaps();
-        lazyFluidHandler.invalidate();
     }
 
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
@@ -72,18 +57,16 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
     }
     @Override
     public void transfer(BlockEntity other) {
-        other.getCapability(ForgeCapabilities.FLUID_HANDLER, getDirection()).ifPresent((resolved) -> {
-            getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved2) -> {
-                for (int o = 0; o < resolved2.getTanks(); o++) {
-                    FluidStack copy = resolved2.getFluidInTank(o).copy();
-                    if (!copy.isEmpty()) {
-                        copy.setAmount(Math.clamp(0, DataNEssenceConfig.fluidPointTransfer, copy.getAmount()));
-                        int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
-                        resolved2.getFluidInTank(o).shrink(filled);
-                    }
-                }
-            });
-        });
+        IFluidHandler resolved = level.getCapability(Capabilities.FluidHandler.BLOCK, other.getBlockPos(), getDirection());
+        IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, getBlockPos(), null);
+        for (int o = 0; o < resolved2.getTanks(); o++) {
+            FluidStack copy = resolved2.getFluidInTank(o).copy();
+            if (!copy.isEmpty()) {
+                copy.setAmount(Math.clamp(0, DataNEssenceConfig.fluidPointTransfer, copy.getAmount()));
+                int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
+                resolved2.getFluidInTank(o).shrink(filled);
+            }
+        }
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
@@ -98,17 +81,15 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
 
     @Override
     public void take(BlockEntity other) {
-        getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved) -> {
-            other.getCapability(ForgeCapabilities.FLUID_HANDLER, getDirection()).ifPresent((resolved2) -> {
-                for (int o = 0; o < resolved2.getTanks(); o++) {
-                    FluidStack copy = resolved2.getFluidInTank(o).copy();
-                    if (!copy.isEmpty()) {
-                        copy.setAmount(Math.clamp(0, DataNEssenceConfig.fluidPointTransfer, copy.getAmount()));
-                        int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
-                        resolved2.getFluidInTank(o).shrink(filled);
-                    }
-                }
-            });
-        });
+        IFluidHandler resolved = level.getCapability(Capabilities.FluidHandler.BLOCK, getBlockPos(), null);
+        IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, other.getBlockPos(), getDirection());
+        for (int o = 0; o < resolved2.getTanks(); o++) {
+            FluidStack copy = resolved2.getFluidInTank(o).copy();
+            if (!copy.isEmpty()) {
+                copy.setAmount(Math.clamp(0, DataNEssenceConfig.fluidPointTransfer, copy.getAmount()));
+                int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
+                resolved2.getFluidInTank(o).shrink(filled);
+            }
+        }
     }
 }

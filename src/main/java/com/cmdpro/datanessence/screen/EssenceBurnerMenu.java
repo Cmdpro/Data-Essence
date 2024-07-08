@@ -30,7 +30,7 @@ public class EssenceBurnerMenu extends AbstractContainerMenu {
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity, null);
+        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
         this.addSlot(new SlotItemHandler(handler, 0, 80, 17));
         this.addSlot(new SlotItemHandler(handler, 1, 80, 53));
     }

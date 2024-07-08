@@ -1,7 +1,5 @@
 {
-  "icon": {
-    "item": "datanessence:infuser"
-  },
+  "icon": "datanessence:infuser",
   "tab": "datanessence:machinery",
   "x": 0,
   "y": 2,

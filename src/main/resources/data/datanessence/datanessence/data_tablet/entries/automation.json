@@ -1,7 +1,5 @@
 {
-  "icon": {
-    "item": "datanessence:data_drive"
-  },
+  "icon": "datanessence:data_drive",
   "tab": "datanessence:machinery",
   "x": 0,
   "y": 0,

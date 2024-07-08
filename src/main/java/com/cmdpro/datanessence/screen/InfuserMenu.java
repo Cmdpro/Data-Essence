@@ -31,7 +31,7 @@ public class InfuserMenu extends AbstractContainerMenu {
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = Capabilities.ItemHandler.BLOCK.getCapability(blockEntity.getLevel(), blockEntity.getBlockPos(), blockEntity.getBlockState(), blockEntity, null);
+        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
         this.addSlot(new DataDriveSlot(handler, 0, 152, 8));
         this.addSlot(new SlotItemHandler(handler, 1, 62, 34));
         this.addSlot(new ModResultSlot(handler, 2, 116, 34));

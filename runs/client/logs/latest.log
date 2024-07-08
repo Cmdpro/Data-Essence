@@ -1,0 +1,169 @@
+[07Jul2024 22:31:01.875] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientuserdev, --version, 20.4.237, --assetIndex, asset-index, --assetsDir, C:\Users\proat\.gradle\caches\minecraft\assets\1.20.4, --gameDir, ., --fml.neoForgeVersion, 20.4.237, --fml.fmlVersion, 2.0.17, --fml.mcVersion, 1.20.4, --fml.neoFormVersion, 20231207.154220]
+[07Jul2024 22:31:01.878] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.9 by Oracle Corporation; OS Windows 10 arch amd64 version 10.0
+[07Jul2024 22:31:01.984] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[07Jul2024 22:31:02.078] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[07Jul2024 22:31:02.304] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[07Jul2024 22:31:02.379] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/proat/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.13.1+mixin.0.8.5/618f4dff860cf2d6b5196073b1a5f5e0a8591acb/sponge-mixin-0.13.1+mixin.0.8.5.jar%23174!/ Service=ModLauncher Env=CLIENT
+[07Jul2024 22:31:02.406] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: AMD Radeon RX 5700 XT GL version 4.6.14800 Core Profile Forward-Compatible Context 22.4.1 30.0.15021.1001, ATI Technologies Inc.
+[07Jul2024 22:31:02.580] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-20.4.237.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.MinecraftLocator@6bb7cce7
+[07Jul2024 22:31:02.580] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "main" of type MOD with provider net.neoforged.fml.loading.moddiscovery.MinecraftLocator@6bb7cce7
+[07Jul2024 22:31:02.580] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "" of type MOD with provider net.neoforged.fml.loading.moddiscovery.MinecraftLocator@6bb7cce7
+[07Jul2024 22:31:02.615] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "geckolib-neoforge-1.20.4-4.4.4.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@7f9e1534
+[07Jul2024 22:31:02.615] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "emi-neoforge-1.1.10+1.20.4.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@7f9e1534
+[07Jul2024 22:31:02.615] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "geckolib-neoforge-1.20.4-4.4.4.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@7f9e1534
+[07Jul2024 22:31:02.615] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "emi-neoforge-1.1.10+1.20.4.jar" of type MOD with provider net.neoforged.fml.loading.moddiscovery.ClasspathLocator@7f9e1534
+[07Jul2024 22:31:02.716] [main/INFO] [net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 2 dependencies adding them to mods collection
+[07Jul2024 22:31:02.716] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "mclib-20.jar" of type GAMELIBRARY with provider net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator@62a8fd44
+[07Jul2024 22:31:02.716] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "mixinextras-neoforge-0.3.5.jar" of type GAMELIBRARY with provider net.neoforged.fml.loading.moddiscovery.JarInJarDependencyLocator@62a8fd44
+[07Jul2024 22:31:03.608] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[07Jul2024 22:31:03.619] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientuserdev' with arguments [--version, 20.4.237, --gameDir, ., --assetsDir, C:\Users\proat\.gradle\caches\minecraft\assets\1.20.4, --assetIndex, asset-index]
+[07Jul2024 22:31:03.858] [main/WARN] [mixin/]: Error loading class: mezz/jei/library/load/PluginCaller (java.lang.ClassNotFoundException: mezz.jei.library.load.PluginCaller)
+[07Jul2024 22:31:03.951] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.5).
+[07Jul2024 22:31:04.807] [main/WARN] [oshi.driver.windows.perfmon.PerfmonDisabled/]: Invalid registry value type detected for PerfOS counters. Should be REG_DWORD. Ignoring: HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\PerfOS\Performance\Disable Performance Counters.
+[07Jul2024 22:31:08.044] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 198 Datafixer optimizations took 140 milliseconds
+[07Jul2024 22:31:10.101] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[07Jul2024 22:31:10.103] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[07Jul2024 22:31:10.105] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[07Jul2024 22:31:10.106] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[07Jul2024 22:31:10.107] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[07Jul2024 22:31:10.250] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/proat/OneDrive/Desktop/MinecraftMods/DataNEssence/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/20.4.237/neoforge-20.4.237.jar%23192!/assets/.mcassetsroot' uses unexpected schema
+[07Jul2024 22:31:10.250] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/proat/OneDrive/Desktop/MinecraftMods/DataNEssence/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/20.4.237/neoforge-20.4.237.jar%23192!/data/.mcassetsroot' uses unexpected schema
+[07Jul2024 22:31:10.274] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[07Jul2024 22:31:10.280] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[07Jul2024 22:31:10.344] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.2+13
+[07Jul2024 22:31:10.573] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 20.4.237, for MC 1.20.4 with MCP 20231207.154220
+[07Jul2024 22:31:11.374] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
+[07Jul2024 22:31:11.661] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: mod_resources, mod:emi, mod:datanessence, mod:geckolib, mod:neoforge, vanilla
+[07Jul2024 22:31:11.839] [Worker-Main-6/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.04.hex, loading
+[07Jul2024 22:31:12.822] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'datanessence:blockstates/essence_battery.json' missing model for variant: 'datanessence:essence_battery#'
+[07Jul2024 22:31:12.823] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'datanessence:blockstates/lunar_essence_battery.json' missing model for variant: 'datanessence:lunar_essence_battery#'
+[07Jul2024 22:31:12.823] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'datanessence:blockstates/natural_essence_battery.json' missing model for variant: 'datanessence:natural_essence_battery#'
+[07Jul2024 22:31:12.823] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Exception loading blockstate definition: 'datanessence:blockstates/exotic_essence_battery.json' missing model for variant: 'datanessence:exotic_essence_battery#'
+[07Jul2024 22:31:12.826] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'datanessence:lunar_essence_battery#inventory' referenced from: datanessence:lunar_essence_battery#inventory: java.io.FileNotFoundException: datanessence:models/item/lunar_essence_battery.json
+[07Jul2024 22:31:12.828] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'datanessence:exotic_essence_battery#inventory' referenced from: datanessence:exotic_essence_battery#inventory: java.io.FileNotFoundException: datanessence:models/item/exotic_essence_battery.json
+[07Jul2024 22:31:12.828] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'datanessence:natural_essence_battery#inventory' referenced from: datanessence:natural_essence_battery#inventory: java.io.FileNotFoundException: datanessence:models/item/natural_essence_battery.json
+[07Jul2024 22:31:12.830] [Worker-Main-15/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'datanessence:essence_battery#inventory' referenced from: datanessence:essence_battery#inventory: java.io.FileNotFoundException: datanessence:models/item/essence_battery.json
+[07Jul2024 22:31:13.531] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[07Jul2024 22:31:13.532] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[07Jul2024 22:31:13.532] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.generic.wind_burst
+[07Jul2024 22:31:13.573] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on Headphones (HyperX Cloud III)
+[07Jul2024 22:31:13.574] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[07Jul2024 22:31:13.672] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[07Jul2024 22:31:13.770] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[07Jul2024 22:31:13.771] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[07Jul2024 22:31:13.773] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[07Jul2024 22:31:13.776] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[07Jul2024 22:31:13.798] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[07Jul2024 22:31:13.800] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[07Jul2024 22:31:13.801] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[07Jul2024 22:31:13.803] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[07Jul2024 22:31:13.895] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[07Jul2024 22:31:13.936] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader datanessence:warping_point could not find uniform named lookVector in the specified shader program.
+[07Jul2024 22:31:13.951] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[07Jul2024 22:31:13.956] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 minecraft:textures/atlas/paintings.png-atlas
+[07Jul2024 22:31:13.958] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[07Jul2024 22:31:13.959] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[07Jul2024 22:31:18.343] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 9 recipes
+[07Jul2024 22:31:18.480] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 1271 advancements
+[07Jul2024 22:31:18.484] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Adding Data and Essence Entries
+[07Jul2024 22:31:18.485] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Loaded 12 entries
+[07Jul2024 22:31:18.486] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Adding Data and Essence Tabs
+[07Jul2024 22:31:18.486] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Loaded 4 tabs
+[07Jul2024 22:31:18.487] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Adding Data and Essence Data Bank Entries
+[07Jul2024 22:31:18.489] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Loaded 3 data bank entries
+[07Jul2024 22:31:18.489] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Adding Data and Essence Data Bank Types
+[07Jul2024 22:31:18.489] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Loaded 6 data bank types
+[07Jul2024 22:31:18.489] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Adding Data and Essence Hidden Blocks
+[07Jul2024 22:31:18.493] [Render thread/INFO] [com.cmdpro.datanessence.DataNEssence/]: Loaded 1 hidden blocks
+[07Jul2024 22:31:18.971] [Render thread/INFO] [EMI/]: [EMI] Recipes synchronized, waiting for tags to reload EMI...
+[07Jul2024 22:31:18.972] [Render thread/INFO] [EMI/]: [EMI] Disconnecting from server, EMI data cleared
+[07Jul2024 22:31:18.974] [Thread-7/INFO] [EMI/]: [EMI] Clearing data
+[07Jul2024 22:31:19.041] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.20.4
+[07Jul2024 22:31:19.041] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[07Jul2024 22:31:19.976] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[07Jul2024 22:31:22.936] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[07Jul2024 22:31:22.936] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[07Jul2024 22:31:22.936] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[07Jul2024 22:31:22.936] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[07Jul2024 22:31:22.937] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[07Jul2024 22:31:22.937] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[07Jul2024 22:31:23.003] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[07Jul2024 22:31:23.486] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 30%
+[07Jul2024 22:31:23.550] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[07Jul2024 22:31:23.556] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 3574 ms
+[07Jul2024 22:31:23.666] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
+[07Jul2024 22:31:23.666] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[07Jul2024 22:31:24.059] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:5626c9c6] logged in with entity id 171 at (-19.780611466061632, 70.0, 23.23818037849372)
+[07Jul2024 22:31:24.073] [Render thread/INFO] [EMI/]: [EMI] Recipes synchronized, waiting for tags to reload EMI...
+[07Jul2024 22:31:24.108] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev joined the game
+[07Jul2024 22:31:24.180] [Render thread/WARN] [net.minecraft.client.ClientRecipeBook/]: Unknown recipe category: [!!!com.mojang.logging.LogUtils$1ToString@15f0e0aa=>java.lang.NullPointerException:Cannot invoke "Object.toString()" because the return value of "java.util.function.Supplier.get()" is null!!!]/datanessence:infusion/traversite_road
+[07Jul2024 22:31:24.293] [Render thread/INFO] [EMI/]: [EMI] Tags synchronized, reloading EMI
+[07Jul2024 22:31:24.293] [Render thread/INFO] [EMI/]: [EMI] Starting Reload
+[07Jul2024 22:31:24.294] [Thread-14/INFO] [EMI/]: [EMI] Starting EMI reload...
+[07Jul2024 22:31:24.294] [Thread-14/INFO] [EMI/]: [EMI] Clearing data
+[07Jul2024 22:31:24.314] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2 advancements
+[07Jul2024 22:31:24.320] [Thread-14/INFO] [EMI/]: [EMI] Initializing plugin from emi
+[07Jul2024 22:31:24.324] [Thread-14/INFO] [EMI/]: [EMI] Initialized plugin from emi in 3ms
+[07Jul2024 22:31:24.324] [Thread-14/INFO] [EMI/]: [EMI] Initializing plugin from datanessence
+[07Jul2024 22:31:24.324] [Thread-14/INFO] [EMI/]: [EMI] Initialized plugin from datanessence in 0ms
+[07Jul2024 22:31:24.325] [Thread-14/INFO] [EMI/]: [EMI] Processing tags
+[07Jul2024 22:31:24.339] [Thread-14/INFO] [EMI/]: [EMI] Constructing index
+[07Jul2024 22:31:24.415] [Thread-14/INFO] [EMI/]: [EMI] Loading plugin from emi
+[07Jul2024 22:31:24.504] [Render thread/WARN] [net.minecraft.client.renderer.EffectInstance/]: Shader datanessence:progression could not find uniform named InSize in the specified shader program.
+[07Jul2024 22:31:24.527] [Thread-14/INFO] [EMI/]: [EMI] Reloaded plugin from emi in 111ms
+[07Jul2024 22:31:24.527] [Thread-14/INFO] [EMI/]: [EMI] Loading plugin from datanessence
+[07Jul2024 22:31:24.529] [Thread-14/INFO] [EMI/]: [EMI] Reloaded plugin from datanessence in 2ms
+[07Jul2024 22:31:24.529] [Thread-14/INFO] [EMI/]: [EMI] Baking index
+[07Jul2024 22:31:24.541] [Thread-14/INFO] [EMI/]: [EMI] Registering late recipes
+[07Jul2024 22:31:24.542] [Thread-14/INFO] [EMI/]: [EMI] Baking recipes
+[07Jul2024 22:31:24.600] [Thread-14/INFO] [EMI/]: [EMI] Baked 3147 recipes in 57ms
+[07Jul2024 22:31:24.602] [Thread-14/INFO] [EMI/]: [EMI] Baking search
+[07Jul2024 22:31:24.646] [Thread-15/INFO] [EMI/]: [EMI] Baked recipes after reload in 46ms
+[07Jul2024 22:31:24.680] [Thread-14/INFO] [EMI/]: [EMI] Finishing up
+[07Jul2024 22:31:24.699] [Thread-14/INFO] [EMI/]: [EMI] Reloaded EMI in 405ms
+[07Jul2024 22:31:26.585] [Render thread/ERROR] [net.minecraft.client.Minecraft/FATAL]: Unreported exception thrown!
+java.lang.ArrayIndexOutOfBoundsException: Index 0 out of bounds for length 0
+	at java.util.ImmutableCollections$ListN.get(ImmutableCollections.java:680) ~[?:?]
+	at com.cmdpro.datanessence.screen.DataTabletScreen.<init>(DataTabletScreen.java:31) ~[main/:?]
+	at com.cmdpro.datanessence.item.DataTablet$Client.openScreen(DataTablet.java:36) ~[main/:?]
+	at com.cmdpro.datanessence.item.DataTablet.use(DataTablet.java:24) ~[main/:?]
+	at net.minecraft.world.item.ItemStack.use(ItemStack.java:338) ~[neoforge-20.4.237.jar:?]
+	at net.minecraft.client.multiplayer.MultiPlayerGameMode.lambda$useItem$5(MultiPlayerGameMode.java:401) ~[neoforge-20.4.237.jar:?]
+	at net.minecraft.client.multiplayer.MultiPlayerGameMode.startPrediction(MultiPlayerGameMode.java:275) ~[neoforge-20.4.237.jar:?]
+	at net.minecraft.client.multiplayer.MultiPlayerGameMode.useItem(MultiPlayerGameMode.java:389) ~[neoforge-20.4.237.jar:?]
+	at net.minecraft.client.Minecraft.startUseItem(Minecraft.java:1884) ~[neoforge-20.4.237.jar:?]
+	at net.minecraft.client.Minecraft.handleKeybinds(Minecraft.java:2143) ~[neoforge-20.4.237.jar:?]
+	at net.minecraft.client.Minecraft.tick(Minecraft.java:1963) ~[neoforge-20.4.237.jar:?]
+	at net.minecraft.client.Minecraft.runTick(Minecraft.java:1250) ~[neoforge-20.4.237.jar:?]
+	at net.minecraft.client.Minecraft.run(Minecraft.java:824) ~[neoforge-20.4.237.jar:?]
+	at net.minecraft.client.main.Main.main(Main.java:244) ~[neoforge-20.4.237.jar:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+	at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+	at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+	at java.lang.reflect.Method.invoke(Method.java:568) ~[?:?]
+	at net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-2.0.17.jar:2.0]
+	at net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-2.0.17.jar:2.0]
+	at net.neoforged.fml.loading.targets.ForgeClientUserdevLaunchHandler.runService(ForgeClientUserdevLaunchHandler.java:19) ~[loader-2.0.17.jar:2.0]
+	at net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-2.0.17.jar:2.0]
+	at cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.Launcher.run(Launcher.java:108) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.Launcher.main(Launcher.java:78) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) ~[modlauncher-10.0.9.jar:?]
+	at cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141) ~[bootstraplauncher-1.1.2.jar:?]
+[07Jul2024 22:31:27.532] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[07Jul2024 22:31:27.536] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[07Jul2024 22:31:27.565] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[07Jul2024 22:31:28.205] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[07Jul2024 22:31:28.726] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[07Jul2024 22:31:28.731] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[07Jul2024 22:31:28.741] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (New World): All chunks are saved
+[07Jul2024 22:31:28.741] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[07Jul2024 22:31:28.741] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[07Jul2024 22:31:28.741] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[07Jul2024 22:31:28.773] [Render thread/INFO] [EMI/]: [EMI] Disconnecting from server, EMI data cleared
+[07Jul2024 22:31:28.773] [Thread-20/INFO] [EMI/]: [EMI] Clearing data
+[07Jul2024 22:31:29.375] [Render thread/FATAL] [net.neoforged.neoforge.common.NeoForgeMod/]: Preparing crash report with UUID 6e10e86b-dd8e-4386-8943-66e95ec783c5
+[07Jul2024 22:31:29.387] [Render thread/FATAL] [net.neoforged.neoforge.common.NeoForgeMod/]: Preparing crash report with UUID 8d0e8072-e70b-4a4b-956d-3407d4dac8cd

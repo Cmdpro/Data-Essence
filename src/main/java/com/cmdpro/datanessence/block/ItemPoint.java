@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block;
 import com.cmdpro.datanessence.api.BaseCapabilityPoint;
 import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.block.entity.ItemPointBlockEntity;
+import com.cmdpro.datanessence.block.entity.NaturalEssencePointBlockEntity;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
@@ -43,7 +44,10 @@ public class ItemPoint extends BaseCapabilityPoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.ITEM_POINT.get(),
-                ItemPointBlockEntity::tick);
+        return (lvl, pos, st, blockEntity) -> {
+            if (blockEntity instanceof ItemPointBlockEntity ent) {
+                ItemPointBlockEntity.tick(lvl, pos, st, ent);
+            }
+        };
     }
 }

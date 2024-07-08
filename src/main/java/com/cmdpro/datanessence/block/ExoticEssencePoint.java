@@ -2,6 +2,8 @@ package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.api.BaseEssencePoint;
 import com.cmdpro.datanessence.block.entity.ExoticEssencePointBlockEntity;
+import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
+import com.cmdpro.datanessence.block.entity.FluidPointBlockEntity;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
@@ -32,7 +34,10 @@ public class ExoticEssencePoint extends BaseEssencePoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.EXOTIC_ESSENCE_POINT.get(),
-                ExoticEssencePointBlockEntity::tick);
+        return (lvl, pos, st, blockEntity) -> {
+            if (blockEntity instanceof FabricatorBlockEntity ent) {
+                FabricatorBlockEntity.tick(lvl, pos, st, ent);
+            }
+        };
     }
 }

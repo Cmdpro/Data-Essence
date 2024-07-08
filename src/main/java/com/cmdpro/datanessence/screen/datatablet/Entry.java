@@ -1,8 +1,7 @@
 package com.cmdpro.datanessence.screen.datatablet;
 
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
-import com.cmdpro.datanessence.moddata.PlayerModData;
-import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -47,13 +46,10 @@ public class Entry {
         return unlocked;
     }
     public boolean isUnlockedServer(Player player) {
-        if (!player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).isPresent()) {
-            return false;
-        }
-        PlayerModData data = player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get();
+        List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
         boolean unlocked = true;
         for (Entry i : getParentEntries()) {
-            if (!data.getUnlocked().contains(i.id)) {
+            if (!unlockedEntries.contains(i.id)) {
                 unlocked = false;
                 break;
             }

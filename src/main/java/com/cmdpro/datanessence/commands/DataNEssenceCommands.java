@@ -2,24 +2,24 @@ package com.cmdpro.datanessence.commands;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.moddata.PlayerModData;
-import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.commands.CommandRuntimeException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.commands.GiveCommand;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.common.util.LazyOptional;
+
+import java.util.List;
 
 public class DataNEssenceCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher){
@@ -86,13 +86,12 @@ public class DataNEssenceCommands {
     private static int resetlearned(CommandContext<CommandSourceStack> command){
         if(command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();
-            player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent(data -> {
-                data.getUnlocked().clear();
-                data.updateUnlockedEntries(player);
-                command.getSource().sendSuccess(() -> {
-                    return Component.translatable("commands.datanessence.reset_learned");
-                }, true);
-            });
+            List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
+            unlockedEntries.clear();
+            DataNEssenceUtil.PlayerDataUtil.updateUnlockedEntries((ServerPlayer)player);
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.datanessence.reset_learned");
+            }, true);
         }
         return Command.SINGLE_SUCCESS;
     }
@@ -101,18 +100,19 @@ public class DataNEssenceCommands {
             Player player = (Player) command.getSource().getEntity();
             ResourceLocation entry = command.getArgument("id", ResourceLocation.class);
             if (Entries.entries.containsKey(entry)) {
-                player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
-                    if (!data.getUnlocked().contains(entry)) {
-                        DataNEssenceUtil.DataTabletUtil.unlockEntryAndParents(player, entry);
-                        command.getSource().sendSuccess(() -> {
-                            return Component.translatable("commands.datanessence.unlock.unlock_entry", entry);
-                        }, true);
-                    } else {
-                        throw new CommandRuntimeException(Component.translatable("commands.datanessence.unlock.entry_already_unlocked", entry));
-                    }
-                });
+                List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
+                if (!unlockedEntries.contains(entry)) {
+                    DataNEssenceUtil.DataTabletUtil.unlockEntryAndParents(player, entry);
+                    command.getSource().sendSuccess(() -> {
+                        return Component.translatable("commands.datanessence.unlock.unlock_entry", entry);
+                    }, true);
+                } else {
+                    command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_already_unlocked", entry));
+                    return 0;
+                }
             } else {
-                throw new CommandRuntimeException(Component.translatable("commands.datanessence.unlock.entry_doesnt_exist", entry));
+                command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_doesnt_exist", entry));
+                return 0;
             }
         }
         return Command.SINGLE_SUCCESS;

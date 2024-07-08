@@ -1,7 +1,5 @@
 {
-  "icon": {
-    "item": "datanessence:fabricator"
-  },
+  "icon": "datanessence:fabricator",
   "tier": 1,
   "minigames": [
     {

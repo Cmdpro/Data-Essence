@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.api.BaseCapabilityPoint;
 import com.cmdpro.datanessence.block.entity.FluidPointBlockEntity;
+import com.cmdpro.datanessence.block.entity.NaturalEssencePointBlockEntity;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
@@ -32,7 +33,10 @@ public class FluidPoint extends BaseCapabilityPoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.FLUID_POINT.get(),
-                FluidPointBlockEntity::tick);
+        return (lvl, pos, st, blockEntity) -> {
+            if (blockEntity instanceof FluidPointBlockEntity ent) {
+                FluidPointBlockEntity.tick(lvl, pos, st, ent);
+            }
+        };
     }
 }

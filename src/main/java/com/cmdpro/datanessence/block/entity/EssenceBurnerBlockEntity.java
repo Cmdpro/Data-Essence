@@ -18,12 +18,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +41,7 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
                 return stack.getItem() instanceof EssenceShard;
             }
             if (slot == 1) {
-                return ForgeHooks.getBurnTime(stack, RecipeType.SMELTING) > 0;
+                return CommonHooks.getBurnTime(stack, RecipeType.SMELTING) > 0;
             }
             return super.isItemValid(slot, stack);
         }
@@ -73,19 +71,14 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
 
     public EssenceBurnerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ESSENCE_BURNER.get(), pos, state);
         maxBurnTime = 1;
     }
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
-        return super.getCapability(cap);
+    public IItemHandler getItemHandler() {
+        return lazyItemHandler.get();
     }
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
@@ -144,16 +137,6 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
         }
         return inventory;
     }
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
-    }
-    @Override
-    public void invalidateCaps()  {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
-    }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceBurnerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
@@ -164,9 +147,9 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
                             pBlockEntity.getLunarEssence()+shard.lunarEssenceAmount <= pBlockEntity.getMaxLunarEssence() &&
                             pBlockEntity.getNaturalEssence()+shard.naturalEssenceAmount <= pBlockEntity.getMaxNaturalEssence() &&
                             pBlockEntity.getExoticEssence()+shard.exoticEssenceAmount <= pBlockEntity.getMaxExoticEssence()) {
-                        if (ForgeHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING) > 0) {
+                        if (CommonHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING) > 0) {
                             pBlockEntity.itemHandler.extractItem(1, 1, false);
-                            pBlockEntity.maxBurnTime = ForgeHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING);
+                            pBlockEntity.maxBurnTime = CommonHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING);
                             pBlockEntity.burnTime = pBlockEntity.maxBurnTime;
                         }
                     }

@@ -1,18 +1,21 @@
 package com.cmdpro.datanessence.networking.packet;
 
+import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.networking.Message;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
-import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.network.NetworkEvent;
 
-import java.util.function.Supplier;
+import java.util.List;
 
-public class PlayerChangeDriveDataC2SPacket {
-    private final ResourceLocation entry;
-    private final boolean offhand;
+public class PlayerChangeDriveDataC2SPacket implements Message {
+    private ResourceLocation entry;
+    private boolean offhand;
 
     public PlayerChangeDriveDataC2SPacket(ResourceLocation entry, boolean offhand) {
         this.entry = entry;
@@ -20,27 +23,35 @@ public class PlayerChangeDriveDataC2SPacket {
     }
 
     public PlayerChangeDriveDataC2SPacket(FriendlyByteBuf buf) {
+        read(buf);
+    }
+
+    @Override
+    public void handleServer(MinecraftServer server, ServerPlayer player) {
+        List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+        if (unlocked.contains(entry)) {
+            ItemStack stack = player.getItemInHand(offhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+            if (stack.is(ItemRegistry.DATA_DRIVE.get())) {
+                stack.getOrCreateTag().putString("dataId", entry.toString());
+            }
+        }
+    }
+
+    @Override
+    public void read(FriendlyByteBuf buf) {
         this.entry = buf.readResourceLocation();
         this.offhand = buf.readBoolean();
     }
 
-    public void toBytes(FriendlyByteBuf buf) {
+    @Override
+    public void write(FriendlyByteBuf buf) {
         buf.writeResourceLocation(entry);
         buf.writeBoolean(offhand);
     }
 
-    public void handle(Supplier<NetworkEvent.Context> supplier) {
-        NetworkEvent.Context context = supplier.get();
-        context.enqueueWork(() -> {
-            context.getSender().getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
-                if (data.getUnlocked().contains(entry)) {
-                    ItemStack stack = context.getSender().getItemInHand(offhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
-                    if (stack.is(ItemRegistry.DATA_DRIVE.get())) {
-                        stack.getOrCreateTag().putString("dataId", entry.toString());
-                    }
-                }
-            });
-        });
-        context.setPacketHandled(true);
+    public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "player_change_data_drive_data");
+    @Override
+    public ResourceLocation id() {
+        return ID;
     }
 }

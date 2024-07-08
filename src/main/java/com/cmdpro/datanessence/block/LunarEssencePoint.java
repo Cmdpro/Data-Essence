@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.api.BaseEssencePoint;
 import com.cmdpro.datanessence.block.entity.LunarEssencePointBlockEntity;
+import com.cmdpro.datanessence.block.entity.NaturalEssencePointBlockEntity;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
@@ -32,7 +33,10 @@ public class LunarEssencePoint extends BaseEssencePoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.LUNAR_ESSENCE_POINT.get(),
-                LunarEssencePointBlockEntity::tick);
+        return (lvl, pos, st, blockEntity) -> {
+            if (blockEntity instanceof LunarEssencePointBlockEntity ent) {
+                LunarEssencePointBlockEntity.tick(lvl, pos, st, ent);
+            }
+        };
     }
 }

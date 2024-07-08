@@ -2,10 +2,7 @@ package com.cmdpro.datanessence.item;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
-import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
-import com.cmdpro.datanessence.screen.databank.DataBankEntries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;

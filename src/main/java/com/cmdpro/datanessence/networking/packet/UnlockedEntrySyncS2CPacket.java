@@ -1,48 +1,49 @@
 package com.cmdpro.datanessence.networking.packet;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import com.cmdpro.datanessence.networking.Message;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraft.world.entity.player.Player;
 
 import java.awt.*;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class UnlockedEntrySyncS2CPacket {
-    private final List<ResourceLocation> unlocked;
+public class UnlockedEntrySyncS2CPacket implements Message {
+    private List<ResourceLocation> unlocked;
 
     public UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked) {
         this.unlocked = unlocked;
     }
 
     public UnlockedEntrySyncS2CPacket(FriendlyByteBuf buf) {
-        unlocked = buf.readList(FriendlyByteBuf::readResourceLocation);
+        read(buf);
     }
 
-    public void toBytes(FriendlyByteBuf buf) {
+    public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "unlocked_entry_sync");
+    @Override
+    public ResourceLocation id() {
+        return ID;
+    }
+
+    public void write(FriendlyByteBuf buf) {
         buf.writeCollection(unlocked, FriendlyByteBuf::writeResourceLocation);
     }
 
-    public void handle(Supplier<NetworkEvent.Context> supplier) {
-        NetworkEvent.Context context = supplier.get();
-        context.enqueueWork(() -> {
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientPacketHandler.handlePacket(this, supplier));
-        });
-        context.setPacketHandled(true);
+    @Override
+    public void handleClient(Minecraft minecraft, Player player) {
+        ClientPlayerUnlockedEntries.set(unlocked);
+        ClientDataNEssenceUtil.updateWorld();
     }
 
-    public static class ClientPacketHandler {
-        public static void handlePacket(UnlockedEntrySyncS2CPacket msg, Supplier<NetworkEvent.Context> supplier) {
-            ClientPlayerUnlockedEntries.set(msg.unlocked);
-            ClientDataNEssenceUtil.updateWorld();
-        }
+    @Override
+    public void read(FriendlyByteBuf buf) {
+        unlocked = buf.readList(FriendlyByteBuf::readResourceLocation);
     }
 }

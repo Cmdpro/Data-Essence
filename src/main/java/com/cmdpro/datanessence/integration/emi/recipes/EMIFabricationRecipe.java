@@ -31,8 +31,8 @@ public class EMIFabricationRecipe implements EmiRecipe {
     private final float naturalEssenceCost;
     private final float exoticEssenceCost;
 
-    public EMIFabricationRecipe(IFabricationRecipe recipe) {
-        this.id = recipe.getId();
+    public EMIFabricationRecipe(ResourceLocation id, IFabricationRecipe recipe) {
+        this.id = id;
         this.shapeless = recipe instanceof ShapelessFabricationRecipe;
         this.input = recipe.getIngredients().stream().map(EmiIngredient::of).toList();
         this.output = EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()));

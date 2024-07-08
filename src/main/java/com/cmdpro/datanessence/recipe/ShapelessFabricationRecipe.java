@@ -6,9 +6,13 @@ import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -23,14 +27,12 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
     private final float lunarEssenceCost;
     private final float naturalEssenceCost;
     private final float exoticEssenceCost;
-    private final ResourceLocation id;
-    private final String entry;
+    private final ResourceLocation entry;
     final ItemStack result;
     final NonNullList<Ingredient> ingredients;
     private final boolean isSimple;
 
-    public ShapelessFabricationRecipe(ResourceLocation id, ItemStack result, NonNullList<Ingredient> ingredients, String entry, float essenceCost, float lunarEssenceCost, float naturalEssenceCost, float exoticEssenceCost) {
-        this.id = id;
+    public ShapelessFabricationRecipe(ItemStack result, NonNullList<Ingredient> ingredients, ResourceLocation entry, float essenceCost, float lunarEssenceCost, float naturalEssenceCost, float exoticEssenceCost) {
         this.entry = entry;
         this.essenceCost = essenceCost;
         this.lunarEssenceCost = lunarEssenceCost;
@@ -52,7 +54,6 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
         return this.ingredients;
     }
 
-    @Override
     public boolean matches(CraftingContainer pInv, Level pLevel) {
         StackedContents stackedcontents = new StackedContents();
         java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
@@ -68,23 +69,16 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
             }
         }
 
-        return i == this.ingredients.size() && (isSimple ? stackedcontents.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.ingredients) != null);
+        return i == this.ingredients.size() && (isSimple ? stackedcontents.canCraft(this, null) : net.neoforged.neoforge.common.util.RecipeMatcher.findMatches(inputs,  this.ingredients) != null);
     }
 
-    @Override
     public ItemStack assemble(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
-        return result.copy();
+        return this.result.copy();
     }
 
     @Override
     public boolean canCraftInDimensions(int pWidth, int pHeight) {
-        return true;
-    }
-
-
-    @Override
-    public ResourceLocation getId() {
-        return this.id;
+        return pWidth * pHeight >= this.ingredients.size();
     }
 
     @Override
@@ -98,7 +92,7 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
     }
 
     @Override
-    public String getEntry() {
+    public ResourceLocation getEntry() {
         return entry;
     }
     @Override
@@ -119,78 +113,48 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
         return exoticEssenceCost;
     }
     public static class Serializer implements RecipeSerializer<ShapelessFabricationRecipe> {
-        public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID =
-                new ResourceLocation(DataNEssence.MOD_ID,"shapeless_runic_recipe");
+        public static final Codec<ShapelessFabricationRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(p_301142_ -> p_301142_.result),
+                Ingredient.CODEC_NONEMPTY
+                        .listOf()
+                        .fieldOf("ingredients")
+                        .flatXmap(
+                                p_301021_ -> {
+                                    Ingredient[] aingredient = p_301021_
+                                            .toArray(Ingredient[]::new); //Forge skip the empty check and immediatly create the array.
+                                    if (aingredient.length == 0) {
+                                        return DataResult.error(() -> "No ingredients for shapeless recipe");
+                                    } else {
+                                        return aingredient.length > ShapedRecipePattern.getMaxHeight() * ShapedRecipePattern.getMaxWidth()
+                                                ? DataResult.error(() -> "Too many ingredients for shapeless recipe. The maximum is: %s".formatted(ShapedRecipePattern.getMaxHeight() * ShapedRecipePattern.getMaxWidth()))
+                                                : DataResult.success(NonNullList.of(Ingredient.EMPTY, aingredient));
+                                    }
+                                },
+                                DataResult::success
+                        )
+                        .forGetter(p_300975_ -> p_300975_.ingredients),
+                ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
+                Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
+                Codec.FLOAT.optionalFieldOf("lunarEssenceCost", 0f).forGetter(r -> r.lunarEssenceCost),
+                Codec.FLOAT.optionalFieldOf("naturalEssenceCost", 0f).forGetter(r -> r.naturalEssenceCost),
+                Codec.FLOAT.optionalFieldOf("exoticEssenceCost", 0f).forGetter(r -> r.exoticEssenceCost)
+        ).apply(instance, (result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost) -> new ShapelessFabricationRecipe(result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost)));
+        public static final ShapelessFabricationRecipe.Serializer INSTANCE = new ShapelessFabricationRecipe.Serializer();
 
         @Override
-        public ShapelessFabricationRecipe fromJson(ResourceLocation id, JsonObject json) {
-            String entry = GsonHelper.getAsString(json, "entry");
-            float essenceCost = GsonHelper.getAsFloat(json, "essenceCost", 0);
-            float lunarEssenceCost = GsonHelper.getAsFloat(json, "lunarEssenceCost", 0);
-            float naturalEssenceCost = GsonHelper.getAsFloat(json, "naturalEssenceCost", 0);
-            float exoticEssenceCost = GsonHelper.getAsFloat(json, "exoticEssenceCost", 0);
-            NonNullList<Ingredient> nonnulllist = itemsFromJson(GsonHelper.getAsJsonArray(json, "ingredients"));
-            if (nonnulllist.isEmpty()) {
-                throw new JsonParseException("No ingredients for shapeless recipe");
-            } else if (nonnulllist.size() > ShapedFabricationRecipe.MAX_WIDTH * ShapedFabricationRecipe.MAX_HEIGHT) {
-                throw new JsonParseException("Too many ingredients for shapeless recipe. The maximum is " + (ShapedFabricationRecipe.MAX_WIDTH * ShapedFabricationRecipe.MAX_HEIGHT));
-            } else {
-                ItemStack itemstack = ShapedFabricationRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-                return new ShapelessFabricationRecipe(id, itemstack, nonnulllist, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
-            }
-        }
-
-        private static NonNullList<Ingredient> itemsFromJson(JsonArray pIngredientArray) {
-            NonNullList<Ingredient> nonnulllist = NonNullList.create();
-
-            for(int i = 0; i < pIngredientArray.size(); ++i) {
-                Ingredient ingredient = Ingredient.fromJson(pIngredientArray.get(i), false);
-                if (true || !ingredient.isEmpty()) { // FORGE: Skip checking if an ingredient is empty during shapeless recipe deserialization to prevent complex ingredients from caching tags too early. Can not be done using a config value due to sync issues.
-                    nonnulllist.add(ingredient);
-                }
-            }
-
-            return nonnulllist;
+        public Codec<ShapelessFabricationRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public ShapelessFabricationRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            int i = buf.readVarInt();
-            NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i, Ingredient.EMPTY);
-
-            for(int j = 0; j < nonnulllist.size(); ++j) {
-                nonnulllist.set(j, Ingredient.fromNetwork(buf));
-            }
-
-            ItemStack itemstack = buf.readItem();
-            String entry = buf.readUtf();
-            float essenceCost = buf.readFloat();
-            float lunarEssenceCost = buf.readFloat();
-            float naturalEssenceCost = buf.readFloat();
-            float exoticEssenceCost = buf.readFloat();
-            return new ShapelessFabricationRecipe(id, itemstack, nonnulllist, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
+        public ShapelessFabricationRecipe fromNetwork(FriendlyByteBuf pBuffer) {
+            //noinspection deprecation
+            return pBuffer.readWithCodecTrusted(NbtOps.INSTANCE, CODEC);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, ShapelessFabricationRecipe recipe) {
-            buf.writeVarInt(recipe.ingredients.size());
-
-            for(Ingredient ingredient : recipe.ingredients) {
-                ingredient.toNetwork(buf);
-            }
-
-            buf.writeItem(recipe.result);
-            buf.writeUtf(recipe.entry);
-            buf.writeFloat(recipe.essenceCost);
-            buf.writeFloat(recipe.lunarEssenceCost);
-            buf.writeFloat(recipe.naturalEssenceCost);
-            buf.writeFloat(recipe.exoticEssenceCost);
-        }
-
-        @SuppressWarnings("unchecked") // Need this wrapper, because generics
-        private static <G> Class<G> castClass(Class<?> cls) {
-            return (Class<G>)cls;
+        public void toNetwork(FriendlyByteBuf pBuffer, ShapelessFabricationRecipe pRecipe) {
+            pBuffer.writeWithCodec(NbtOps.INSTANCE, CODEC, pRecipe);
         }
     }
 }

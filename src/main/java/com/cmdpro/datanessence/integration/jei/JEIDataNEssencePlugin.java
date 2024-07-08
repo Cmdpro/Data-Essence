@@ -11,8 +11,10 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 
 import java.util.*;
@@ -25,8 +27,8 @@ public class JEIDataNEssencePlugin implements IModPlugin {
     }
 
     public static IJeiRuntime runTime;
-    public static final RecipeType FABRICATION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, RecipeRegistry.FABRICATIONCRAFTING.getId().getPath(), IFabricationRecipe.class);
-    public static final RecipeType INFUSION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, RecipeRegistry.INFUSION.getId().getPath(), InfusionRecipe.class);
+    public static final RecipeType FABRICATION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, BuiltInRegistries.RECIPE_TYPE.getKey(RecipeRegistry.FABRICATIONCRAFTING.get()).getPath(), IFabricationRecipe.class);
+    public static final RecipeType INFUSION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, InfusionRecipe.Type.ID, InfusionRecipe.class);
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new FabricatorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
@@ -35,9 +37,9 @@ public class JEIDataNEssencePlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
-        List<IFabricationRecipe> recipes = rm.getAllRecipesFor(RecipeRegistry.FABRICATIONCRAFTING.get());
+        List<RecipeHolder<IFabricationRecipe>> recipes = rm.getAllRecipesFor(RecipeRegistry.FABRICATIONCRAFTING.get());
         registration.addRecipes(FABRICATION_RECIPE, recipes);
-        List<InfusionRecipe> recipes2 = rm.getAllRecipesFor(InfusionRecipe.Type.INSTANCE);
+        List<RecipeHolder<InfusionRecipe>> recipes2 = rm.getAllRecipesFor(InfusionRecipe.Type.INSTANCE);
         registration.addRecipes(INFUSION_RECIPE, recipes2);
     }
 

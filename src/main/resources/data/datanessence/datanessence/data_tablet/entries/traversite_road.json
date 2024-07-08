@@ -1,7 +1,5 @@
 {
-  "icon": {
-    "item": "datanessence:traversite_road"
-  },
+  "icon": "datanessence:traversite_road",
   "tab": "datanessence:tools",
   "x": 3,
   "y": 0,

@@ -14,7 +14,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class HiddenBlocksSerializer {
         }
         ResourceLocation entry = ResourceLocation.tryParse(json.get("entry").getAsString());
         BlockState hiddenAs = null;
-        Block originalBlock = ForgeRegistries.BLOCKS.getValue(ResourceLocation.tryParse(json.get("originalBlock").getAsString()));
+        Block originalBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(json.get("originalBlock").getAsString()));
         try {
             hiddenAs = BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), json.get("hiddenAs").getAsString(), false).blockState();
         } catch (Exception e) {
@@ -49,7 +48,7 @@ public class HiddenBlocksSerializer {
         BlockState hiddenAs = null;
         String originalBlockString = buf.readUtf();
         String hiddenAsString = buf.readUtf();
-        Block originalBlock = ForgeRegistries.BLOCKS.getValue(ResourceLocation.tryParse(originalBlockString));
+        Block originalBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(originalBlockString));
         try {
             hiddenAs = BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), hiddenAsString, false).blockState();
         } catch (Exception e) {
@@ -59,7 +58,7 @@ public class HiddenBlocksSerializer {
     }
     public static void toNetwork(FriendlyByteBuf buf, HiddenBlock block) {
         buf.writeResourceLocation(block.entry);
-        buf.writeResourceLocation(ForgeRegistries.BLOCKS.getKey(block.originalBlock));
+        buf.writeResourceLocation(BuiltInRegistries.BLOCK.getKey(block.originalBlock));
         buf.writeUtf(BlockStateParser.serialize(block.hiddenAs));
     }
 }

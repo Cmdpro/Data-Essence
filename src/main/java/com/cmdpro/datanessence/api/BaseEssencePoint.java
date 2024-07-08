@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.api;
 
-import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -26,7 +26,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public abstract class BaseEssencePoint extends BaseEntityBlock {
+import java.util.Optional;
+
+public abstract class BaseEssencePoint extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final EnumProperty<AttachFace> FACE = BlockStateProperties.ATTACH_FACE;
     protected static final VoxelShape NORTH_AABB = Block.box(4.0D, 4.0D, 12.0D, 12.0D, 12.0D, 16.0D);
@@ -119,26 +121,25 @@ public abstract class BaseEssencePoint extends BaseEntityBlock {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof BaseEssencePointBlockEntity ent) {
                 if (pPlayer.isHolding(getRequiredWire())) {
-                    pPlayer.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
-                        if (data.getLinkFrom() == null) {
-                            if (ent.link == null) {
-                                data.setLinkFrom(ent);
-                                DataNEssenceUtil.updatePlayerData(pPlayer);
-                            }
-                        } else {
-                            if (data.getLinkFrom().getBlockState().getBlock() instanceof BaseEssencePoint other) {
-                                if (other.getRequiredWire() == getRequiredWire() && ent != data.getLinkFrom() && (ent.link == null || !ent.link.equals(data.getLinkFrom().getBlockPos()))) {
-                                    if (data.getLinkFrom() instanceof BaseEssencePointBlockEntity linkFrom) {
-                                        linkFrom.link = pPos;
-                                        linkFrom.updateBlock();
-                                        data.setLinkFrom(null);
-                                        DataNEssenceUtil.updatePlayerData(pPlayer);
-                                        pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
-                                    }
+                    Optional<BlockEntity> linkFrom = pPlayer.getData(AttachmentTypeRegistry.LINK_FROM);
+                    if (!linkFrom.isPresent()) {
+                        if (ent.link == null) {
+                            pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
+                            DataNEssenceUtil.updatePlayerData(pPlayer);
+                        }
+                    } else {
+                        if (linkFrom.get().getBlockState().getBlock() instanceof BaseEssencePoint other) {
+                            if (other.getRequiredWire() == getRequiredWire() && ent != linkFrom.get() && (ent.link == null || !ent.link.equals(linkFrom.get().getBlockPos()))) {
+                                if (linkFrom.get() instanceof BaseEssencePointBlockEntity linkFrom2) {
+                                    linkFrom2.link = pPos;
+                                    linkFrom2.updateBlock();
+                                    pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, null);
+                                    DataNEssenceUtil.updatePlayerData(pPlayer);
+                                    pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
                                 }
                             }
                         }
-                    });
+                    }
                 } else if (pPlayer.isShiftKeyDown()) {
                     if (ent.link != null) {
                         ent.link = null;

@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.block.entity.EssenceBurnerBlockEntity;
+import com.cmdpro.datanessence.block.entity.EssencePointBlockEntity;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,10 +22,9 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class EssenceBurner extends BaseEntityBlock {
+public class EssenceBurner extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public EssenceBurner(Properties properties) {
         super(properties);
@@ -64,7 +64,7 @@ public class EssenceBurner extends BaseEntityBlock {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof EssenceBurnerBlockEntity ent) {
-                NetworkHooks.openScreen(((ServerPlayer) pPlayer), ent, pPos);
+                pPlayer.openMenu(ent, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
@@ -75,8 +75,11 @@ public class EssenceBurner extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.ESSENCE_BURNER.get(),
-                EssenceBurnerBlockEntity::tick);
+        return (lvl, pos, st, blockEntity) -> {
+            if (blockEntity instanceof EssenceBurnerBlockEntity ent) {
+                EssenceBurnerBlockEntity.tick(lvl, pos, st, ent);
+            }
+        };
     }
     public BlockState rotate(BlockState pState, Rotation pRotation) {
         return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));

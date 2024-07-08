@@ -12,7 +12,9 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.neoforge.common.extensions.ILevelExtension;
 
 public class ThrownLunarEssenceBombProjectile extends ThrowableItemProjectile {
     public ThrownLunarEssenceBombProjectile(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
@@ -33,12 +35,12 @@ public class ThrownLunarEssenceBombProjectile extends ThrowableItemProjectile {
 
             Explosion.BlockInteraction explosion$blockinteraction = explosion$blockinteraction1;
             Explosion explosion = new LunarEssenceBombExplosion(level(), this, null, null, pResult.getLocation().x, pResult.getLocation().y, pResult.getLocation().z, 5, false, explosion$blockinteraction);
-            if (net.minecraftforge.event.ForgeEventFactory.onExplosionStart(level(), explosion)) return;
+            if (net.neoforged.neoforge.event.EventHooks.onExplosionStart(level(), explosion)) return;
             explosion.explode();
             explosion.finalizeExplosion(true);
             for (ServerPlayer serverplayer : ((ServerLevel) level()).players()) {
                 if (serverplayer.distanceToSqr(pResult.getLocation().x, pResult.getLocation().y, pResult.getLocation().z) < 4096.0D) {
-                    serverplayer.connection.send(new ClientboundExplodePacket(pResult.getLocation().x, pResult.getLocation().y, pResult.getLocation().z, 5, explosion.getToBlow(), explosion.getHitPlayers().get(serverplayer)));
+                    serverplayer.connection.send(new ClientboundExplodePacket(pResult.getLocation().x, pResult.getLocation().y, pResult.getLocation().z, 5, explosion.getToBlow(), explosion.getHitPlayers().get(serverplayer), explosion.getBlockInteraction(), explosion.getSmallExplosionParticles(), explosion.getLargeExplosionParticles(), explosion.getExplosionSound()));
                 }
             }
             remove(RemovalReason.KILLED);

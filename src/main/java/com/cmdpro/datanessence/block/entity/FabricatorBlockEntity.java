@@ -22,16 +22,15 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -61,6 +60,9 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
             return super.isItemValid(slot, stack);
         }
     };
+    public IItemHandler getItemHandler() {
+        return lazyItemHandler.get();
+    }
 
     @Override
     public float getMaxEssence() {
@@ -84,19 +86,11 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
 
     public FabricatorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FABRICATOR.get(), pos, state);
         item = ItemStack.EMPTY;
-    }
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
-        return super.getCapability(cap);
     }
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
@@ -189,16 +183,6 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
-    }
-    @Override
-    public void invalidateCaps()  {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
-    }
     public CraftingRecipe recipe;
     public boolean enoughEssence;
     public float essenceCost;
@@ -208,14 +192,14 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
-            Optional<IFabricationRecipe> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv(), pLevel);
+            Optional<RecipeHolder<IFabricationRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {
-                pBlockEntity.recipe = recipe.get();
-                pBlockEntity.essenceCost = recipe.get().getEssenceCost();
-                pBlockEntity.lunarEssenceCost = recipe.get().getLunarEssenceCost();
-                pBlockEntity.naturalEssenceCost = recipe.get().getNaturalEssenceCost();
-                pBlockEntity.exoticEssenceCost = recipe.get().getExoticEssenceCost();
-                pBlockEntity.item = recipe.get().getResultItem(pLevel.registryAccess());
+                pBlockEntity.recipe = recipe.get().value();
+                pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
+                pBlockEntity.lunarEssenceCost = recipe.get().value().getLunarEssenceCost();
+                pBlockEntity.naturalEssenceCost = recipe.get().value().getNaturalEssenceCost();
+                pBlockEntity.exoticEssenceCost = recipe.get().value().getExoticEssenceCost();
+                pBlockEntity.item = recipe.get().value().getResultItem(pLevel.registryAccess());
                 boolean enoughEssence = false;
                 if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost &&
                         pBlockEntity.getLunarEssence() >= pBlockEntity.lunarEssenceCost &&
@@ -225,10 +209,10 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
             } else {
-                Optional<CraftingRecipe> recipe2 = pLevel.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pBlockEntity.getCraftingInv(), pLevel);
+                Optional<RecipeHolder<CraftingRecipe>> recipe2 = pLevel.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pBlockEntity.getCraftingInv(), pLevel);
                 if (recipe2.isPresent()) {
-                    pBlockEntity.recipe = recipe2.get();
-                    pBlockEntity.item = recipe2.get().getResultItem(pLevel.registryAccess());
+                    pBlockEntity.recipe = recipe2.get().value();
+                    pBlockEntity.item = recipe2.get().value().getResultItem(pLevel.registryAccess());
                     pBlockEntity.enoughEssence = true;
                     pBlockEntity.essenceCost = 0;
                     pBlockEntity.lunarEssenceCost = 0;

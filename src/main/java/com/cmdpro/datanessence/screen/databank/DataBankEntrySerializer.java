@@ -8,11 +8,12 @@ import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.crafting.CraftingHelper;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class DataBankEntrySerializer {
         if (!json.has("entry")) {
             throw new JsonSyntaxException("Element entry missing in entry JSON for " + entryId.toString());
         }
-        ItemStack icon = CraftingHelper.getItemStack(json.getAsJsonObject("icon"), true, false);
+        ItemStack icon = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(GsonHelper.getAsString(json, "icon"))));
         int tier = json.get("tier").getAsInt();
         Component name = Component.translatable(json.get("name").getAsString());
         List<MinigameCreator> minigames = new ArrayList<>();
@@ -44,7 +45,7 @@ public class DataBankEntrySerializer {
         for (JsonElement i : json.getAsJsonArray("minigames")) {
             JsonObject obj = i.getAsJsonObject();
             if (obj.has("type")) {
-                MinigameSerializer minigameSerializer = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get().getValue(ResourceLocation.tryParse(obj.get("type").getAsString()));
+                MinigameSerializer minigameSerializer = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get(ResourceLocation.tryParse(obj.get("type").getAsString()));
                 MinigameCreator minigame = minigameSerializer.fromJson(obj);
                 minigames.add(minigame);
             } else {
@@ -68,12 +69,12 @@ public class DataBankEntrySerializer {
     }
     public static MinigameCreator minigameFromNetwork(FriendlyByteBuf buf) {
         ResourceLocation type = buf.readResourceLocation();
-        MinigameSerializer minigameSerializer = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get().getValue(type);
+        MinigameSerializer minigameSerializer = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get(type);
         MinigameCreator minigame = minigameSerializer.fromNetwork(buf);
         return minigame;
     }
     public static void minigameToNetwork(FriendlyByteBuf buf, MinigameCreator creator) {
-        buf.writeResourceLocation(DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.get().getKey(creator.getSerializer()));
+        buf.writeResourceLocation(DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.getKey(creator.getSerializer()));
         creator.getSerializer().toNetwork(creator, buf);
     }
     public static void toNetwork(FriendlyByteBuf buf, DataBankEntry entry) {

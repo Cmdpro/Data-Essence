@@ -16,6 +16,7 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiStack;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 
 @EmiEntrypoint
@@ -38,11 +39,11 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
 
         RecipeManager manager = emiRegistry.getRecipeManager();
 
-        for (IFabricationRecipe recipe : manager.getAllRecipesFor(RecipeRegistry.FABRICATIONCRAFTING.get())) {
-            emiRegistry.addRecipe(new EMIFabricationRecipe(recipe));
+        for (RecipeHolder<IFabricationRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.FABRICATIONCRAFTING.get())) {
+            emiRegistry.addRecipe(new EMIFabricationRecipe(recipe.id(), recipe.value()));
         }
-        for (InfusionRecipe recipe : manager.getAllRecipesFor(InfusionRecipe.Type.INSTANCE)) {
-            emiRegistry.addRecipe(new EMIInfusionRecipe(recipe));
+        for (RecipeHolder<InfusionRecipe> recipe : manager.getAllRecipesFor(InfusionRecipe.Type.INSTANCE)) {
+            emiRegistry.addRecipe(new EMIInfusionRecipe(recipe.id(), recipe.value()));
         }
     }
 }

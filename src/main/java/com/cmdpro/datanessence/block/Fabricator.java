@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
+import com.cmdpro.datanessence.block.entity.FluidPointBlockEntity;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -20,10 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class Fabricator extends BaseEntityBlock {
+public class Fabricator extends Block implements EntityBlock {
     public Fabricator(Properties properties) {
         super(properties);
     }
@@ -64,7 +65,7 @@ public class Fabricator extends BaseEntityBlock {
                 if (pPlayer.isHolding(ItemRegistry.MAGIC_WRENCH.get())) {
                     FabricatorBlockEntity.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
                 } else {
-                    NetworkHooks.openScreen(((ServerPlayer) pPlayer), (FabricatorBlockEntity) entity, pPos);
+                    pPlayer.openMenu(ent, pPos);
                 }
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
@@ -76,7 +77,10 @@ public class Fabricator extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.FABRICATOR.get(),
-                FabricatorBlockEntity::tick);
+        return (lvl, pos, st, blockEntity) -> {
+            if (blockEntity instanceof FabricatorBlockEntity ent) {
+                FabricatorBlockEntity.tick(lvl, pos, st, ent);
+            }
+        };
     }
 }

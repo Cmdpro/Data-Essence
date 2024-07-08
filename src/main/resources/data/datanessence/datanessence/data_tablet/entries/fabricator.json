@@ -1,7 +1,5 @@
 {
-  "icon": {
-    "item": "datanessence:fabricator"
-  },
+  "icon": "datanessence:fabricator",
   "tab": "datanessence:basics",
   "x": 0,
   "y": 0,

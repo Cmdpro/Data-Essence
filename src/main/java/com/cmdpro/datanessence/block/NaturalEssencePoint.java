@@ -32,7 +32,10 @@ public class NaturalEssencePoint extends BaseEssencePoint {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.NATURAL_ESSENCE_POINT.get(),
-                NaturalEssencePointBlockEntity::tick);
+        return (lvl, pos, st, blockEntity) -> {
+            if (blockEntity instanceof NaturalEssencePointBlockEntity ent) {
+                NaturalEssencePointBlockEntity.tick(lvl, pos, st, ent);
+            }
+        };
     }
 }

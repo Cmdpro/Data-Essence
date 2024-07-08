@@ -1,7 +1,5 @@
 {
-  "icon": {
-    "item": "datanessence:essence_crystal"
-  },
+  "icon": "datanessence:essence_crystal",
   "tab": "datanessence:basics",
   "x": -2,
   "y": 1,

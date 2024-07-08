@@ -1,7 +1,5 @@
 {
-  "icon": {
-    "item": "datanessence:data_tablet"
-  },
+  "icon": "datanessence:data_tablet",
   "tier": 2,
   "minigames": [
     {

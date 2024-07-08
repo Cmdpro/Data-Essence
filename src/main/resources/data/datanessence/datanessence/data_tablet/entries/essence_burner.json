@@ -1,7 +1,5 @@
 {
-  "icon": {
-    "item": "datanessence:essence_burner"
-  },
+  "icon": "datanessence:essence_burner",
   "tab": "datanessence:generators",
   "x": 0,
   "y": 0,

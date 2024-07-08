@@ -8,11 +8,9 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,14 +24,6 @@ public class ItemBufferBlockEntity extends BlockEntity {
     };
     public ItemBufferBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(BlockEntityRegistry.ITEM_BUFFER.get(), pPos, pBlockState);
-    }
-
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            return lazyItemHandler.cast();
-        }
-        return super.getCapability(cap, side);
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag) {
@@ -50,16 +40,10 @@ public class ItemBufferBlockEntity extends BlockEntity {
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
+    public IItemHandler getItemHandler() {
+        return lazyItemHandler.get();
     }
-    @Override
-    public void invalidateCaps()  {
-        super.invalidateCaps();
-        lazyItemHandler.invalidate();
-    }
+    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
@@ -67,5 +51,4 @@ public class ItemBufferBlockEntity extends BlockEntity {
         }
         return inventory;
     }
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 }

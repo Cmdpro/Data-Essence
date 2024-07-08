@@ -20,14 +20,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
@@ -90,29 +89,28 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private LazyOptional<IItemHandler> lazyDataDriveHandler = LazyOptional.empty();
-    private LazyOptional<IItemHandler> lazyOutputHandler = LazyOptional.empty();
-    private LazyOptional<IItemHandler> lazyCombinedHandler = LazyOptional.empty();
+    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    private Lazy<IItemHandler> lazyDataDriveHandler = Lazy.of(() -> dataDriveHandler);
+    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
+    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(dataDriveHandler, itemHandler, outputItemHandler));
 
+    public IItemHandler getItemHandler() {
+        return lazyItemHandler.get();
+    }
+    public IItemHandler getDataDriveHandler() {
+        return lazyDataDriveHandler.get();
+    }
+    public IItemHandler getOutputHandler() {
+        return lazyOutputHandler.get();
+    }
+    public IItemHandler getCombinedHandler() {
+        return lazyCombinedHandler.get();
+    }
     public InfuserBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.INFUSER.get(), pos, state);
         item = ItemStack.EMPTY;
     }
 
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.ITEM_HANDLER) {
-            if (side == null) {
-                return lazyCombinedHandler.cast();
-            }
-            if (side == Direction.DOWN) {
-                return lazyItemHandler.cast();
-            }
-            return lazyOutputHandler.cast();
-        }
-        return super.getCapability(cap, side);
-    }
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
@@ -183,24 +181,6 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
         return inventory;
     }
     public int workTime;
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        lazyDataDriveHandler = LazyOptional.of(() -> dataDriveHandler);
-        lazyItemHandler = LazyOptional.of(() -> itemHandler);
-        lazyOutputHandler = LazyOptional.of(() -> outputItemHandler);
-        lazyCombinedHandler = LazyOptional.of( () -> new CombinedInvWrapper(dataDriveHandler, itemHandler, outputItemHandler) {
-
-        });
-    }
-    @Override
-    public void invalidateCaps()  {
-        super.invalidateCaps();
-        lazyDataDriveHandler.invalidate();
-        lazyItemHandler.invalidate();
-        lazyOutputHandler.invalidate();
-        lazyCombinedHandler.invalidate();
-    }
     public InfusionRecipe recipe;
     public boolean enoughEssence;
     public float essenceCost;
@@ -213,13 +193,13 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
             DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
             pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0);
             boolean shouldReset = true;
-            Optional<InfusionRecipe> recipe = pLevel.getRecipeManager().getRecipeFor(InfusionRecipe.Type.INSTANCE, pBlockEntity.getCraftingInv(), pLevel);
+            Optional<RecipeHolder<InfusionRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(InfusionRecipe.Type.INSTANCE, pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {
-                pBlockEntity.recipe = recipe.get();
-                pBlockEntity.essenceCost = recipe.get().getEssenceCost();
-                pBlockEntity.lunarEssenceCost = recipe.get().getLunarEssenceCost();
-                pBlockEntity.naturalEssenceCost = recipe.get().getNaturalEssenceCost();
-                pBlockEntity.exoticEssenceCost = recipe.get().getExoticEssenceCost();
+                pBlockEntity.recipe = recipe.get().value();
+                pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
+                pBlockEntity.lunarEssenceCost = recipe.get().value().getLunarEssenceCost();
+                pBlockEntity.naturalEssenceCost = recipe.get().value().getNaturalEssenceCost();
+                pBlockEntity.exoticEssenceCost = recipe.get().value().getExoticEssenceCost();
                 boolean enoughEssence = false;
                 if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost &&
                         pBlockEntity.getLunarEssence() >= pBlockEntity.lunarEssenceCost &&

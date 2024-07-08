@@ -5,20 +5,14 @@ import com.cmdpro.datanessence.block.entity.FluidBufferBlockEntity;
 import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
-import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
-import com.cmdpro.datanessence.moddata.PlayerModData;
-import com.cmdpro.datanessence.moddata.PlayerModDataProvider;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.DataBankEntrySyncS2CPacket;
-import com.cmdpro.datanessence.networking.packet.PlayerTierSyncS2CPacket;
-import com.cmdpro.datanessence.networking.packet.UnlockedEntrySyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.*;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.screen.databank.DataBankEntries;
 import com.cmdpro.datanessence.screen.databank.DataBankEntry;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
-import com.cmdpro.datanessence.screen.datatablet.Page;
-import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
-import net.minecraft.client.gui.components.toasts.AdvancementToast;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
@@ -26,30 +20,57 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.capability.IFluidHandler;
-import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.joml.Math;
 
+import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
-import java.util.function.Supplier;
 
 public class DataNEssenceUtil {
+    public static class PlayerDataUtil {
+        public static void updateData(ServerPlayer player) {
+            Color linkColor = new Color(0, 0, 0, 0);
+            Optional<BlockEntity> linkFromEntity = player.getData(AttachmentTypeRegistry.LINK_FROM);
+            BlockPos linkFrom = null;
+            if (linkFromEntity.isPresent()) {
+                linkFrom = linkFromEntity.get().getBlockPos();
+                if (linkFromEntity.get() instanceof BaseEssencePointBlockEntity linkFrom2) {
+                    linkColor = linkFrom2.linkColor();
+                } else if (linkFromEntity.get() instanceof BaseCapabilityPointBlockEntity linkFrom2) {
+                    linkColor = linkFrom2.linkColor();
+                }
+            }
+            ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(getUnlockedEssences(player), linkFrom, linkColor), (player));
+        }
+        public static void updateUnlockedEntries(ServerPlayer player) {
+            ModMessages.sendToPlayer(new UnlockedEntrySyncS2CPacket(player.getData(AttachmentTypeRegistry.UNLOCKED)), (player));
+        }
+        public static void unlockEntry(ServerPlayer player, ResourceLocation entry) {
+            ModMessages.sendToPlayer(new UnlockEntryS2CPacket(entry), (player));
+        }
+        public static void sendTier(ServerPlayer player, boolean showIndicator) {
+            ModMessages.sendToPlayer(new PlayerTierSyncS2CPacket(player.getData(AttachmentTypeRegistry.TIER), showIndicator), player);
+        }
+        public static boolean[] getUnlockedEssences(ServerPlayer player) {
+            return new boolean[] {
+                    player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCE),
+                    player.getData(AttachmentTypeRegistry.UNLOCKED_LUNAR_ESSENCE),
+                    player.getData(AttachmentTypeRegistry.UNLOCKED_NATURAL_ESSENCE),
+                    player.getData(AttachmentTypeRegistry.UNLOCKED_EXOTIC_ESSENCE)
+            };
+        }
+    }
     public static class DataBankUtil {
         public static void sendDataBankEntries(ServerPlayer player, ResourceLocation[] ids) {
             Map<ResourceLocation, DataBankEntry> entries = new HashMap<>();
@@ -64,55 +85,49 @@ public class DataNEssenceUtil {
     }
     public static class DataTabletUtil {
         public static void unlockEntry(Player player, ResourceLocation entry) {
-            player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
-                Entry entry2 = Entries.entries.get(entry);
-                if (entry2 != null && entry2.isUnlockedServer(player) && !data.getUnlocked().contains(entry)) {
-                    data.getUnlocked().add(entry);
-                    data.unlockEntry(player, entry);
-                }
-            });
+            Entry entry2 = Entries.entries.get(entry);
+            List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+            if (entry2 != null && entry2.isUnlockedServer(player) && !unlocked.contains(entry)) {
+                unlocked.add(entry);
+                PlayerDataUtil.unlockEntry((ServerPlayer)player, entry);
+            }
         }
         public static void unlockEntryAndParents(Player player, ResourceLocation entry) {
-            player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
-                Entry entry2 = Entries.entries.get(entry);
-                if (entry2 != null && !data.getUnlocked().contains(entry)) {
-                    data.getUnlocked().add(entry);
-                    data.unlockEntry(player, entry);
-                    for (Entry i : entry2.getParentEntries()) {
-                        unlockEntryAndParents(player, i.id);
-                    }
+            List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+            Entry entry2 = Entries.entries.get(entry);
+            if (entry2 != null && !unlocked.contains(entry)) {
+                unlocked.add(entry);
+                PlayerDataUtil.unlockEntry((ServerPlayer)player, entry);
+                for (Entry i : entry2.getParentEntries()) {
+                    unlockEntryAndParents(player, i.id);
                 }
-            });
+            }
         }
-        public static boolean playerHasEntry(Player player, String entry) {
+        public static boolean playerHasEntry(Player player, ResourceLocation entry) {
             if (entry != null) {
-                return player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get().getUnlocked().contains(ResourceLocation.tryParse(entry));
+                return player.getData(AttachmentTypeRegistry.UNLOCKED).contains(entry);
             }
             return false;
         }
         public static int getTier(Player player) {
-            return player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get().getTier();
+            return player.getData(AttachmentTypeRegistry.TIER);
         }
         public static void setTier(Player player, int tier) {
-            player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent((data) -> {
-                data.setTier(tier);
-                data.sendTier(player, true);
-            });
+            player.setData(AttachmentTypeRegistry.TIER, tier);
+            PlayerDataUtil.sendTier((ServerPlayer)player, true);
         }
     }
     public static BlockState getHiddenBlock(Block block, Player player) {
-        if (player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).isPresent()) {
-            PlayerModData data = player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).resolve().get();
-            for (HiddenBlock i : HiddenBlocksManager.blocks.values()) {
-                if (i.originalBlock == null || i.hiddenAs == null || i.entry == null) {
-                    continue;
+        List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+        for (HiddenBlock i : HiddenBlocksManager.blocks.values()) {
+            if (i.originalBlock == null || i.hiddenAs == null || i.entry == null) {
+                continue;
+            }
+            if (i.originalBlock.equals(block)) {
+                if (!unlocked.contains(i.entry)) {
+                    return i.hiddenAs;
                 }
-                if (i.originalBlock.equals(block)) {
-                    if (!data.getUnlocked().contains(i.entry)) {
-                        return i.hiddenAs;
-                    }
-                    break;
-                }
+                break;
             }
         }
         return null;
@@ -134,35 +149,33 @@ public class DataNEssenceUtil {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof ItemBufferBlockEntity buffer) {
-                container.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.DOWN).ifPresent((resolved) -> {
-                    buffer.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent((resolved2) -> {
-                        boolean movedAnything = false;
-                        for (int o = 0; o < resolved2.getSlots(); o++) {
-                            ItemStack copy = resolved2.getStackInSlot(o).copy();
-                            if (!copy.isEmpty()) {
-                                copy.setCount(Math.clamp(0, 16, copy.getCount()));
-                                ItemStack copy2 = copy.copy();
-                                int p = 0;
-                                while (p < resolved.getSlots()) {
-                                    ItemStack copyCopy = copy.copy();
-                                    int remove = resolved.insertItem(p, copyCopy, false).getCount();
-                                    if (remove < copyCopy.getCount()) {
-                                        movedAnything = true;
-                                    }
-                                    copy.setCount(remove);
-                                    if (remove <= 0) {
-                                        break;
-                                    }
-                                    p++;
-                                }
-                                if (movedAnything) {
-                                    resolved2.extractItem(o, copy2.getCount()-copy.getCount(), false);
-                                    break;
-                                }
+                IItemHandler resolved = container.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, container.getBlockPos(), Direction.DOWN);
+                IItemHandler resolved2 = container.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, buffer.getBlockPos(), null);
+                boolean movedAnything = false;
+                for (int o = 0; o < resolved2.getSlots(); o++) {
+                    ItemStack copy = resolved2.getStackInSlot(o).copy();
+                    if (!copy.isEmpty()) {
+                        copy.setCount(Math.clamp(0, 16, copy.getCount()));
+                        ItemStack copy2 = copy.copy();
+                        int p = 0;
+                        while (p < resolved.getSlots()) {
+                            ItemStack copyCopy = copy.copy();
+                            int remove = resolved.insertItem(p, copyCopy, false).getCount();
+                            if (remove < copyCopy.getCount()) {
+                                movedAnything = true;
                             }
+                            copy.setCount(remove);
+                            if (remove <= 0) {
+                                break;
+                            }
+                            p++;
                         }
-                    });
-                });
+                        if (movedAnything) {
+                            resolved2.extractItem(o, copy2.getCount() - copy.getCount(), false);
+                            break;
+                        }
+                    }
+                }
             } else if (!(ent instanceof EssenceBufferBlockEntity || ent instanceof FluidBufferBlockEntity)) {
                 break;
             }
@@ -172,18 +185,16 @@ public class DataNEssenceUtil {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof FluidBufferBlockEntity buffer) {
-                container.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved) -> {
-                    buffer.getCapability(ForgeCapabilities.FLUID_HANDLER).ifPresent((resolved2) -> {
-                        for (int o = 0; o < resolved2.getTanks(); o++) {
-                            FluidStack copy = resolved2.getFluidInTank(o).copy();
-                            if (!copy.isEmpty()) {
-                                copy.setAmount(Math.clamp(0, 4000, copy.getAmount()));
-                                int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
-                                resolved2.getFluidInTank(o).shrink(filled);
-                            }
-                        }
-                    });
-                });
+                IFluidHandler resolved = container.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, container.getBlockPos(), Direction.DOWN);
+                IFluidHandler resolved2 = container.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, buffer.getBlockPos(), null);
+                for (int o = 0; o < resolved2.getTanks(); o++) {
+                    FluidStack copy = resolved2.getFluidInTank(o).copy();
+                    if (!copy.isEmpty()) {
+                        copy.setAmount(Math.clamp(0, 4000, copy.getAmount()));
+                        int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
+                        resolved2.getFluidInTank(o).shrink(filled);
+                    }
+                }
             } else if (!(ent instanceof EssenceBufferBlockEntity || ent instanceof ItemBufferBlockEntity)) {
                 break;
             }
@@ -199,9 +210,7 @@ public class DataNEssenceUtil {
         }
     }
     public static void updatePlayerData(Player player) {
-        player.getCapability(PlayerModDataProvider.PLAYER_MODDATA).ifPresent(data -> {
-            data.updateData((ServerPlayer)player);
-        });
+        PlayerDataUtil.updateData((ServerPlayer)player);
     }
     public static void transferEssence(EssenceContainer from, EssenceContainer to, float amount) {
         if (from.getMaxEssence() > 0 && to.getMaxEssence() > 0) {

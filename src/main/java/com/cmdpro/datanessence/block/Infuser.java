@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.block.entity.InfuserBlockEntity;
+import com.cmdpro.datanessence.block.entity.NaturalEssencePointBlockEntity;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -20,10 +22,10 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.jetbrains.annotations.Nullable;
 
-public class Infuser extends BaseEntityBlock {
+public class Infuser extends Block implements EntityBlock {
     public Infuser(Properties properties) {
         super(properties);
     }
@@ -65,7 +67,7 @@ public class Infuser extends BaseEntityBlock {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof InfuserBlockEntity ent) {
-                NetworkHooks.openScreen(((ServerPlayer) pPlayer), (InfuserBlockEntity) entity, pPos);
+                pPlayer.openMenu(ent, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
@@ -76,7 +78,10 @@ public class Infuser extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createTickerHelper(pBlockEntityType, BlockEntityRegistry.INFUSER.get(),
-                InfuserBlockEntity::tick);
+        return (lvl, pos, st, blockEntity) -> {
+            if (blockEntity instanceof InfuserBlockEntity ent) {
+                InfuserBlockEntity.tick(lvl, pos, st, ent);
+            }
+        };
     }
 }

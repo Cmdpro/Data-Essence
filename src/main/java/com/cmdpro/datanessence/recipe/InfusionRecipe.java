@@ -2,8 +2,11 @@ package com.cmdpro.datanessence.recipe;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -12,19 +15,19 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
+import java.util.Optional;
+
 public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, Recipe<SimpleContainer> {
-    private final ResourceLocation id;
     private final ItemStack output;
     private final Ingredient input;
-    private final String entry;
+    private final ResourceLocation entry;
     private final float essenceCost;
     private final float lunarEssenceCost;
     private final float naturalEssenceCost;
     private final float exoticEssenceCost;
 
-    public InfusionRecipe(ResourceLocation id, ItemStack output,
-                          Ingredient input, String entry, float essenceCost, float lunarEssenceCost, float naturalEssenceCost, float exoticEssenceCost) {
-        this.id = id;
+    public InfusionRecipe(ItemStack output,
+                          Ingredient input, ResourceLocation entry, float essenceCost, float lunarEssenceCost, float naturalEssenceCost, float exoticEssenceCost) {
         this.output = output;
         this.input = input;
         this.entry = entry;
@@ -76,10 +79,6 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
     public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
         return output.copy();
     }
-    @Override
-    public ResourceLocation getId() {
-        return id;
-    }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
@@ -91,7 +90,7 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
         return Type.INSTANCE;
     }
     @Override
-    public String getEntry() {
+    public ResourceLocation getEntry() {
         return entry;
     }
 
@@ -102,48 +101,30 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
     }
 
     public static class Serializer implements RecipeSerializer<InfusionRecipe> {
+        public static final Codec<InfusionRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+                ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(r -> r.output),
+                Ingredient.CODEC.fieldOf("input").forGetter(r -> r.input),
+                ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
+                Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
+                Codec.FLOAT.optionalFieldOf("lunarEssenceCost", 0f).forGetter(r -> r.lunarEssenceCost),
+                Codec.FLOAT.optionalFieldOf("naturalEssenceCost", 0f).forGetter(r -> r.naturalEssenceCost),
+                Codec.FLOAT.optionalFieldOf("exoticEssenceCost", 0f).forGetter(r -> r.exoticEssenceCost)
+        ).apply(instance, (result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost) -> new InfusionRecipe(result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost)));
         public static final Serializer INSTANCE = new Serializer();
-        public static final ResourceLocation ID =
-                new ResourceLocation(DataNEssence.MOD_ID,"infusion");
 
         @Override
-        public InfusionRecipe fromJson(ResourceLocation id, JsonObject json) {
-            ItemStack output = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
-            Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "input"));
-            String entry = GsonHelper.getAsString(json, "entry");
-            float essenceCost = GsonHelper.getAsFloat(json, "essenceCost", 0);
-            float lunarEssenceCost = GsonHelper.getAsFloat(json, "lunarEssenceCost", 0);
-            float naturalEssenceCost = GsonHelper.getAsFloat(json, "naturalEssenceCost", 0);
-            float exoticEssenceCost = GsonHelper.getAsFloat(json, "exoticEssenceCost", 0);
-            return new InfusionRecipe(id, output, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
+        public Codec<InfusionRecipe> codec() {
+            return CODEC;
         }
 
         @Override
-        public InfusionRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-            Ingredient input = Ingredient.fromNetwork(buf);
-            ItemStack output = buf.readItem();
-            String entry = buf.readUtf();
-            float essenceCost = buf.readFloat();
-            float lunarEssenceCost = buf.readFloat();
-            float naturalEssenceCost = buf.readFloat();
-            float exoticEssenceCost = buf.readFloat();
-            return new InfusionRecipe(id, output, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
+        public InfusionRecipe fromNetwork(FriendlyByteBuf pBuffer) {
+            return pBuffer.readWithCodecTrusted(NbtOps.INSTANCE, CODEC);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, InfusionRecipe recipe) {
-            recipe.input.toNetwork(buf);
-            buf.writeItemStack(recipe.getResultItem(RegistryAccess.EMPTY), false);
-            buf.writeUtf(recipe.entry);
-            buf.writeFloat(recipe.essenceCost);
-            buf.writeFloat(recipe.lunarEssenceCost);
-            buf.writeFloat(recipe.naturalEssenceCost);
-            buf.writeFloat(recipe.exoticEssenceCost);
-        }
-
-        @SuppressWarnings("unchecked") // Need this wrapper, because generics
-        private static <G> Class<G> castClass(Class<?> cls) {
-            return (Class<G>)cls;
+        public void toNetwork(FriendlyByteBuf pBuffer, InfusionRecipe pRecipe) {
+            pBuffer.writeWithCodec(NbtOps.INSTANCE, CODEC, pRecipe);
         }
     }
 }

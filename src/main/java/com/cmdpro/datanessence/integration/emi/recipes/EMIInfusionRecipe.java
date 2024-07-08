@@ -28,8 +28,8 @@ public class EMIInfusionRecipe implements EmiRecipe {
     private final float naturalEssenceCost;
     private final float exoticEssenceCost;
 
-    public EMIInfusionRecipe(InfusionRecipe recipe) {
-        this.id = recipe.getId();
+    public EMIInfusionRecipe(ResourceLocation id, InfusionRecipe recipe) {
+        this.id = id;
         this.input = List.of(EmiIngredient.of(recipe.getIngredients().stream().map(s -> EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())).toList()));
         this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())));
         this.essenceCost = recipe.getEssenceCost();

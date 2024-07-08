@@ -1,7 +1,5 @@
 {
-  "icon": {
-    "item": "datanessence:logical_matrix"
-  },
+  "icon": "datanessence:logical_matrix",
   "tab": "datanessence:basics",
   "x": -3,
   "y": -2,
