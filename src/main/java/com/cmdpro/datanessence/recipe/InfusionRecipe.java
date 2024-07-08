@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.recipe;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -87,17 +88,11 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
 
     @Override
     public RecipeType<?> getType() {
-        return Type.INSTANCE;
+        return RecipeRegistry.INFUSION_TYPE.get();
     }
     @Override
     public ResourceLocation getEntry() {
         return entry;
-    }
-
-    public static class Type implements RecipeType<InfusionRecipe> {
-        private Type() { }
-        public static final Type INSTANCE = new Type();
-        public static final String ID = "infusion";
     }
 
     public static class Serializer implements RecipeSerializer<InfusionRecipe> {

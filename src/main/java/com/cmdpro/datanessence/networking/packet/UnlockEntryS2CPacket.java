@@ -18,15 +18,7 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class UnlockEntryS2CPacket implements Message {
-    private ResourceLocation unlocked;
-
-    public UnlockEntryS2CPacket(ResourceLocation unlocked) {
-        this.unlocked = unlocked;
-    }
-    public UnlockEntryS2CPacket(FriendlyByteBuf buf) {
-        read(buf);
-    }
+public record UnlockEntryS2CPacket(ResourceLocation unlocked) implements Message {
     @Override
     public void handleClient(Minecraft minecraft, Player player) {
         Entry entry = Entries.entries.get(unlocked);
@@ -51,8 +43,8 @@ public class UnlockEntryS2CPacket implements Message {
         return ID;
     }
 
-    @Override
-    public void read(FriendlyByteBuf buf) {
-        unlocked = buf.readResourceLocation();
+    public static UnlockEntryS2CPacket read(FriendlyByteBuf buf) {
+        ResourceLocation unlocked = buf.readResourceLocation();
+        return new UnlockEntryS2CPacket(unlocked);
     }
 }

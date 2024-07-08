@@ -15,9 +15,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 public class AttachmentTypeRegistry {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES,
@@ -35,8 +37,9 @@ public class AttachmentTypeRegistry {
             register("unlocked_natural_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
     public static final Supplier<AttachmentType<Boolean>> UNLOCKED_EXOTIC_ESSENCE =
             register("unlocked_exotic_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
-    public static final Supplier<AttachmentType<List<ResourceLocation>>> UNLOCKED =
-            register("unlocked", () -> AttachmentType.builder(() -> (List<ResourceLocation>)new ArrayList<ResourceLocation>()).serialize(ResourceLocation.CODEC.listOf()).copyOnDeath().build());
+    public static final Supplier<AttachmentType<ArrayList<ResourceLocation>>> UNLOCKED =
+            register("unlocked", () -> AttachmentType.builder(() -> new ArrayList<ResourceLocation>()).serialize(
+                    ResourceLocation.CODEC.listOf().xmap(ArrayList::new, (a) -> a.stream().toList())).copyOnDeath().build());
 
     private static <T extends AttachmentType<?>> Supplier<T> register(final String name, final Supplier<T> attachment) {
         return ATTACHMENT_TYPES.register(name, attachment);

@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.screen.datatablet.pages.crafting.types;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
+import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.pages.CraftingPage;
 import com.cmdpro.datanessence.screen.datatablet.pages.crafting.CraftingType;
@@ -81,6 +82,6 @@ public class InfuserType extends CraftingType {
 
     @Override
     public boolean isRecipeType(Recipe recipe) {
-        return recipe.getType().equals(InfusionRecipe.Type.INSTANCE);
+        return recipe.getType().equals(RecipeRegistry.INFUSION_TYPE.get());
     }
 }

@@ -13,20 +13,11 @@ import net.minecraft.server.level.ServerPlayer;
 
 import java.util.List;
 
-public class PlayerFinishDataBankMinigameC2SPacket implements Message {
-    private ResourceLocation entry;
+public record PlayerFinishDataBankMinigameC2SPacket(ResourceLocation entry) implements Message {
 
-    public PlayerFinishDataBankMinigameC2SPacket(ResourceLocation entry) {
-        this.entry = entry;
-    }
-
-    public PlayerFinishDataBankMinigameC2SPacket(FriendlyByteBuf buf) {
-        read(buf);
-    }
-
-    @Override
-    public void read(FriendlyByteBuf buf) {
-        this.entry = buf.readResourceLocation();
+    public static PlayerFinishDataBankMinigameC2SPacket read(FriendlyByteBuf buf) {
+        ResourceLocation entry = buf.readResourceLocation();
+        return new PlayerFinishDataBankMinigameC2SPacket(entry);
     }
 
     @Override

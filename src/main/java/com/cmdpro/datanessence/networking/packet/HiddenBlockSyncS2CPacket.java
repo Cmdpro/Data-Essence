@@ -22,16 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class HiddenBlockSyncS2CPacket implements Message {
-    private Map<ResourceLocation, HiddenBlock> blocks;
-
-    public HiddenBlockSyncS2CPacket(Map<ResourceLocation, HiddenBlock> blocks) {
-        this.blocks = blocks;
-    }
-
-    public HiddenBlockSyncS2CPacket(FriendlyByteBuf buf) {
-        read(buf);
-    }
+public record HiddenBlockSyncS2CPacket(Map<ResourceLocation, HiddenBlock> blocks) implements Message {
     @Override
     public void write(FriendlyByteBuf buf) {
         buf.writeMap(blocks, FriendlyByteBuf::writeResourceLocation, HiddenBlocksSerializer::toNetwork);
@@ -43,9 +34,9 @@ public class HiddenBlockSyncS2CPacket implements Message {
         return ID;
     }
 
-    @Override
-    public void read(FriendlyByteBuf buf) {
-        this.blocks = buf.readMap(FriendlyByteBuf::readResourceLocation, HiddenBlocksSerializer::fromNetwork);
+    public static HiddenBlockSyncS2CPacket read(FriendlyByteBuf buf) {
+        Map<ResourceLocation, HiddenBlock> blocks = buf.readMap(FriendlyByteBuf::readResourceLocation, HiddenBlocksSerializer::fromNetwork);
+        return new HiddenBlockSyncS2CPacket(blocks);
     }
 
     @Override

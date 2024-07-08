@@ -15,16 +15,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class UnlockedEntrySyncS2CPacket implements Message {
-    private List<ResourceLocation> unlocked;
-
-    public UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked) {
-        this.unlocked = unlocked;
-    }
-
-    public UnlockedEntrySyncS2CPacket(FriendlyByteBuf buf) {
-        read(buf);
-    }
+public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked) implements Message {
 
     public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "unlocked_entry_sync");
     @Override
@@ -42,8 +33,8 @@ public class UnlockedEntrySyncS2CPacket implements Message {
         ClientDataNEssenceUtil.updateWorld();
     }
 
-    @Override
-    public void read(FriendlyByteBuf buf) {
-        unlocked = buf.readList(FriendlyByteBuf::readResourceLocation);
+    public static UnlockedEntrySyncS2CPacket read(FriendlyByteBuf buf) {
+        List<ResourceLocation> unlocked = buf.readList(FriendlyByteBuf::readResourceLocation);
+        return new UnlockedEntrySyncS2CPacket(unlocked);
     }
 }

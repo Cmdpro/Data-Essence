@@ -133,7 +133,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                                 if (linkFrom.get() instanceof BaseEssencePointBlockEntity linkFrom2) {
                                     linkFrom2.link = pPos;
                                     linkFrom2.updateBlock();
-                                    pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, null);
+                                    pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     DataNEssenceUtil.updatePlayerData(pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
                                 }

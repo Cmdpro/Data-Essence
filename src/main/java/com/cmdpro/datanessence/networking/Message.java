@@ -8,7 +8,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 public interface Message extends CustomPacketPayload {
-    void read(FriendlyByteBuf buf);
     default void handleClient(Minecraft minecraft, Player player) {
 
     }

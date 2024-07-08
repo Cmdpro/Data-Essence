@@ -17,19 +17,7 @@ import net.minecraft.world.entity.player.Player;
 import java.awt.*;
 import java.util.function.Supplier;
 
-public class PlayerTierSyncS2CPacket implements Message {
-    private int tier;
-    private boolean showIndicator;
-
-    public PlayerTierSyncS2CPacket(int tier, boolean showIndicator) {
-        this.tier = tier;
-        this.showIndicator = showIndicator;
-    }
-
-    public PlayerTierSyncS2CPacket(FriendlyByteBuf buf) {
-        read(buf);
-    }
-
+public record PlayerTierSyncS2CPacket(int tier, boolean showIndicator) implements Message {
 
     public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "player_tier_sync");
     @Override
@@ -42,11 +30,10 @@ public class PlayerTierSyncS2CPacket implements Message {
         pBuffer.writeBoolean(showIndicator);
     }
 
-
-    @Override
-    public void read(FriendlyByteBuf buf) {
-        tier = buf.readInt();
-        showIndicator = buf.readBoolean();
+    public static PlayerTierSyncS2CPacket read(FriendlyByteBuf buf) {
+        int tier = buf.readInt();
+        boolean showIndicator = buf.readBoolean();
+        return new PlayerTierSyncS2CPacket(tier, showIndicator);
     }
 
     @Override

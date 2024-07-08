@@ -13,10 +13,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class PlayerDataSyncS2CPacket implements Message {
-    private boolean[] unlockedEssences;
-    private BlockPos linkPos;
-    private Color linkColor;
+public record PlayerDataSyncS2CPacket(boolean[] unlockedEssences, BlockPos linkPos, Color linkColor) implements Message {
 
     public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "player_data_sync");
 
@@ -56,34 +53,23 @@ public class PlayerDataSyncS2CPacket implements Message {
     public ResourceLocation id() {
         return ID;
     }
-    public PlayerDataSyncS2CPacket(boolean[] unlockedEssences, BlockPos linkPos, Color linkColor) {
-        this.unlockedEssences = unlockedEssences;
-        this.linkPos = linkPos;
-        this.linkColor = linkColor;
-    }
-
-    public PlayerDataSyncS2CPacket(FriendlyByteBuf buf) {
-        read(buf);
-    }
-
-    @Override
-    public void read(FriendlyByteBuf buf) {
+    public static PlayerDataSyncS2CPacket read(FriendlyByteBuf buf) {
         boolean essence = buf.readBoolean();
         boolean lunar = buf.readBoolean();
         boolean natural = buf.readBoolean();
         boolean exotic = buf.readBoolean();
-        unlockedEssences = new boolean[]{essence, lunar, natural, exotic};
+        boolean[] unlockedEssences = new boolean[]{essence, lunar, natural, exotic};
         boolean hasLinkPos = buf.readBoolean();
+        BlockPos linkPos = null;
         if (hasLinkPos) {
             linkPos = buf.readBlockPos();
-        } else {
-            linkPos = null;
         }
         int r = buf.readInt();
         int g = buf.readInt();
         int b = buf.readInt();
         int a = buf.readInt();
-        linkColor = new Color(r, g, b, a);
+        Color linkColor = new Color(r, g, b, a);
+        return new PlayerDataSyncS2CPacket(unlockedEssences, linkPos, linkColor);
     }
 
     @Override

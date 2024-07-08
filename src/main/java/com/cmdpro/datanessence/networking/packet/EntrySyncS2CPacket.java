@@ -12,22 +12,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class EntrySyncS2CPacket implements Message {
-    private Map<ResourceLocation, Entry> entries;
-    private Map<ResourceLocation, DataTab> tabs;
-
-    public EntrySyncS2CPacket(HashMap<ResourceLocation, Entry> entries, HashMap<ResourceLocation, DataTab> tabs) {
-        this.entries = entries;
-        this.tabs = tabs;
-    }
-
-    public EntrySyncS2CPacket(FriendlyByteBuf buf) {
-        read(buf);
-    }
-    @Override
-    public void read(FriendlyByteBuf buf) {
-        this.entries = buf.readMap(FriendlyByteBuf::readResourceLocation, EntrySerializer::fromNetwork);
-        this.tabs = buf.readMap(FriendlyByteBuf::readResourceLocation, DataTabSerializer::fromNetwork);
+public record EntrySyncS2CPacket(Map<ResourceLocation, Entry> entries, Map<ResourceLocation, DataTab> tabs) implements Message {
+    public static EntrySyncS2CPacket read(FriendlyByteBuf buf) {
+        Map<ResourceLocation, Entry> entries = buf.readMap(FriendlyByteBuf::readResourceLocation, EntrySerializer::fromNetwork);
+        Map<ResourceLocation, DataTab> tabs = buf.readMap(FriendlyByteBuf::readResourceLocation, DataTabSerializer::fromNetwork);
+        return new EntrySyncS2CPacket(entries, tabs);
     }
 
     @Override

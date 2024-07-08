@@ -13,18 +13,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class PlayerChangeDriveDataC2SPacket implements Message {
-    private ResourceLocation entry;
-    private boolean offhand;
-
-    public PlayerChangeDriveDataC2SPacket(ResourceLocation entry, boolean offhand) {
-        this.entry = entry;
-        this.offhand = offhand;
-    }
-
-    public PlayerChangeDriveDataC2SPacket(FriendlyByteBuf buf) {
-        read(buf);
-    }
+public record PlayerChangeDriveDataC2SPacket(ResourceLocation entry, boolean offhand) implements Message {
 
     @Override
     public void handleServer(MinecraftServer server, ServerPlayer player) {
@@ -37,10 +26,10 @@ public class PlayerChangeDriveDataC2SPacket implements Message {
         }
     }
 
-    @Override
-    public void read(FriendlyByteBuf buf) {
-        this.entry = buf.readResourceLocation();
-        this.offhand = buf.readBoolean();
+    public static PlayerChangeDriveDataC2SPacket read(FriendlyByteBuf buf) {
+        ResourceLocation entry = buf.readResourceLocation();
+        boolean offhand = buf.readBoolean();
+        return new PlayerChangeDriveDataC2SPacket(entry, offhand);
     }
 
     @Override

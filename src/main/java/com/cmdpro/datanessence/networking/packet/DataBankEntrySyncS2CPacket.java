@@ -24,20 +24,10 @@ import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class DataBankEntrySyncS2CPacket implements Message {
-    private Map<ResourceLocation, DataBankEntry> entries;
-
-    public DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> entries) {
-        this.entries = entries;
-    }
-
-    public DataBankEntrySyncS2CPacket(FriendlyByteBuf buf) {
-        read(buf);
-    }
-
-    @Override
-    public void read(FriendlyByteBuf buf) {
-        this.entries = buf.readMap(FriendlyByteBuf::readResourceLocation, DataBankEntrySerializer::fromNetwork);
+public record DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> entries) implements Message {
+    public static DataBankEntrySyncS2CPacket read(FriendlyByteBuf buf) {
+        Map<ResourceLocation, DataBankEntry> entries = buf.readMap(FriendlyByteBuf::readResourceLocation, DataBankEntrySerializer::fromNetwork);
+        return  new DataBankEntrySyncS2CPacket(entries);
     }
 
     @Override

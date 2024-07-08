@@ -198,7 +198,7 @@ public class DataBankScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
-        renderBackground(graphics, mouseX, mouseY, delta);
+        super.render(graphics, mouseX, mouseY, delta);
         renderBg(graphics, delta, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -219,7 +219,6 @@ public class DataBankScreen extends Screen {
             graphics.renderItem(clickedEntry.icon, x+(imageWidth/2)-8, y+32-8);
         }
         graphics.disableScissor();
-        super.render(graphics, mouseX, mouseY, delta);
         if (screenType == 0) {
             int currentTier = -1;
             int y2 = 0;
@@ -301,7 +300,9 @@ public class DataBankScreen extends Screen {
         for (Map.Entry<Integer, Integer> i : tiers.entrySet()) {
             pGuiGraphics.blit(TEXTURE, x+4+(int)offsetX, y+((32*o)-14)+(int)offsetY, 28, 166, 3, 28);
             int width = (i.getValue()*30)+30;
-            pGuiGraphics.blit(TEXTURE, x+7+(int)offsetX, y+((32*o)-14)+(int)offsetY, width+13, 28, 30, 166, 1, 28);
+            for (int p = 0; p < width+13; p++) {
+                pGuiGraphics.blit(TEXTURE, x + 7 + p + (int) offsetX, y + ((32 * o) - 14) + (int) offsetY, 30, 166, 1, 28);
+            }
             pGuiGraphics.blit(TEXTURE, x+20+width+(int)offsetX, y+((32*o)-14)+(int)offsetY, 30, 166, 3, 28);
             pGuiGraphics.blit(TEXTURE, x+18+(int)offsetX, y+((32*o)-14)+(int)offsetY, 30, 166, 3, 28);
             pGuiGraphics.drawCenteredString(Minecraft.getInstance().font, i.getKey().toString(), x+13+(int)offsetX, y+(int)offsetY+(32*o)-(Minecraft.getInstance().font.lineHeight/2), 0xFFc90d8b);

@@ -117,7 +117,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if (entity instanceof BaseEssencePointBlockEntity ent) {
+            if (entity instanceof BaseCapabilityPointBlockEntity ent) {
                 if (pPlayer.isHolding(getRequiredWire())) {
                     Optional<BlockEntity> linkFrom = pPlayer.getData(AttachmentTypeRegistry.LINK_FROM);
                     if (!linkFrom.isPresent()) {
@@ -126,12 +126,12 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                             DataNEssenceUtil.updatePlayerData(pPlayer);
                         }
                     } else {
-                        if (linkFrom.get().getBlockState().getBlock() instanceof BaseEssencePoint other) {
+                        if (linkFrom.get().getBlockState().getBlock() instanceof BaseCapabilityPoint other) {
                             if (other.getRequiredWire() == getRequiredWire() && ent != linkFrom.get() && (ent.link == null || !ent.link.equals(linkFrom.get().getBlockPos()))) {
-                                if (linkFrom.get() instanceof BaseEssencePointBlockEntity linkFrom2) {
+                                if (linkFrom.get() instanceof BaseCapabilityPointBlockEntity linkFrom2) {
                                     linkFrom2.link = pPos;
                                     linkFrom2.updateBlock();
-                                    pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, null);
+                                    pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     DataNEssenceUtil.updatePlayerData(pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
                                 }

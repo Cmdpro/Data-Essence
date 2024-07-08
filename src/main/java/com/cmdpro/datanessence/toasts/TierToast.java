@@ -19,7 +19,7 @@ public class TierToast implements Toast {
     }
     @Override
     public Visibility render(GuiGraphics pGuiGraphics, ToastComponent pToastComponent, long pTimeSinceLastVisible) {
-        pGuiGraphics.blit(TEXTURE, 0, 0, 0, 0, this.width(), this.height());
+        pGuiGraphics.blitSprite(TEXTURE, 0, 0, this.width(), this.height());
         int i = 16776960;
         pGuiGraphics.drawString(pToastComponent.getMinecraft().font, Component.translatable("item.datanessence.data_tablet.tier_upgrade"), 30, 7, i | -16777216, false);
         pGuiGraphics.drawString(pToastComponent.getMinecraft().font, Component.translatable("item.datanessence.data_tablet.tier", tier), 30, 18, i | -16777216, false);

@@ -42,7 +42,7 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
         for (RecipeHolder<IFabricationRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.FABRICATIONCRAFTING.get())) {
             emiRegistry.addRecipe(new EMIFabricationRecipe(recipe.id(), recipe.value()));
         }
-        for (RecipeHolder<InfusionRecipe> recipe : manager.getAllRecipesFor(InfusionRecipe.Type.INSTANCE)) {
+        for (RecipeHolder<InfusionRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.INFUSION_TYPE.get())) {
             emiRegistry.addRecipe(new EMIInfusionRecipe(recipe.id(), recipe.value()));
         }
     }

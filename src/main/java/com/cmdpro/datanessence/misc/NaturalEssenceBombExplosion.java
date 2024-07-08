@@ -209,7 +209,7 @@ public class NaturalEssenceBombExplosion extends Explosion {
             for(BlockPos blockpos : this.toBlow) {
                 BlockState blockstate = this.level.getBlockState(blockpos);
                 Block block = blockstate.getBlock();
-                if (!blockstate.isAir()) {
+                if (!blockstate.isAir() && !blockstate.hasBlockEntity()) {
                     BlockPos blockpos1 = blockpos.immutable();
                     this.level.getProfiler().push("explosion_blocks");
                     FallingBlockEntity fallingBlock = FallingBlockEntity.fall(level, blockpos, blockstate);

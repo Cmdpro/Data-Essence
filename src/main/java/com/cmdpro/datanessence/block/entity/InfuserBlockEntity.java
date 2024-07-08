@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
+import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.InfuserMenu;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.core.BlockPos;
@@ -193,7 +194,7 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
             DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
             pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0);
             boolean shouldReset = true;
-            Optional<RecipeHolder<InfusionRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(InfusionRecipe.Type.INSTANCE, pBlockEntity.getCraftingInv(), pLevel);
+            Optional<RecipeHolder<InfusionRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.INFUSION_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get().value();
                 pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
@@ -208,7 +209,7 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
                     enoughEssence = true;
                     Entry entry = DataDrive.getEntry(pBlockEntity.dataDriveHandler.getStackInSlot(0));
                     if (entry != null) {
-                        if (pBlockEntity.recipe == null || pBlockEntity.recipe.getEntry().equals(entry.id.toString())) {
+                        if (pBlockEntity.recipe == null || pBlockEntity.recipe.getEntry().equals(entry.id)) {
                             if (hasNotReachedStackLimit(pBlockEntity, pBlockEntity.recipe.getResultItem(pLevel.registryAccess()))) {
                                 if (pBlockEntity.workTime >= 50) {
                                     ItemStack stack = pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()).copy();
@@ -276,7 +277,6 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
     private static boolean hasNotReachedStackLimit(InfuserBlockEntity entity, ItemStack toAdd) {
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
             return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
-        }
-        return true;
+        } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();
     }
 }

@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.toasts;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.toasts.AdvancementToast;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -23,7 +24,7 @@ public class CriticalDataToast implements Toast {
     }
     @Override
     public Visibility render(GuiGraphics pGuiGraphics, ToastComponent pToastComponent, long pTimeSinceLastVisible) {
-        pGuiGraphics.blit(TEXTURE, 0, 0, 0, 0, this.width(), this.height());
+        pGuiGraphics.blitSprite(TEXTURE, 0, 0, this.width(), this.height());
         List<FormattedCharSequence> list = pToastComponent.getMinecraft().font.split(entry.name, 125);
         int i = 16776960;
         if (list.size() == 1) {
