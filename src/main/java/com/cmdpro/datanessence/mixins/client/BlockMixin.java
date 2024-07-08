@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Block.class)
 public class BlockMixin {
-    @Inject(method = "getName", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "getName", at = @At(value = "HEAD"), cancellable = true, remap = false)
     public void getName(CallbackInfoReturnable<MutableComponent> cir) {
         BlockState state = ClientDataNEssenceUtil.getHiddenBlock((Block)(Object)this);
         if (state != null) {

@@ -26,7 +26,7 @@ import static com.mojang.blaze3d.systems.RenderSystem.getProjectionMatrix;
 
 @Mixin(GameRenderer.class)
 public abstract class GameRendererMixin {
-    @Inject(method = "resize", at = @At(value = "TAIL"))
+    @Inject(method = "resize", at = @At(value = "TAIL"), remap = false)
     private void resize(int pWidth, int pHeight, CallbackInfo ci) {
         for (ShaderInstance i : ShaderManager.instances) {
             i.resize(pWidth, pHeight);

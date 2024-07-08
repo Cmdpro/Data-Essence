@@ -22,9 +22,9 @@ import java.util.List;
 @Mixin(BlockBehaviour.class)
 public abstract class BlockBehaviourMixin {
 
-    @Shadow protected abstract Block asBlock();
+    @Shadow(remap = false) protected abstract Block asBlock();
 
-    @Inject(method = "getDrops", at = @At(value = "HEAD"), cancellable = true)
+    @Inject(method = "getDrops", at = @At(value = "HEAD"), cancellable = true, remap = false)
     public void getDrops(BlockState pState, LootParams.Builder pParams, CallbackInfoReturnable<List<ItemStack>> cir) {
         if (pParams.getOptionalParameter(LootContextParams.THIS_ENTITY) instanceof Player player) {
             BlockState state = DataNEssenceUtil.getHiddenBlock(this.asBlock(), player);

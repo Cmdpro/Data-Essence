@@ -34,7 +34,7 @@ import java.util.Queue;
 @Mixin(LevelRenderer.class)
 public abstract class LevelRendererMixin {
 
-    @Inject(method = "renderLevel", at = @At(value = "HEAD"))
+    @Inject(method = "renderLevel", at = @At(value = "HEAD"), remap = false)
     private void renderLevel(PoseStack pPoseStack, float pPartialTick, long pFinishNanoTime, boolean pRenderBlockOutline, Camera pCamera, GameRenderer pGameRenderer, LightTexture pLightTexture, Matrix4f pProjectionMatrix, CallbackInfo ci) {
         PoseStack stack = RenderSystem.getModelViewStack();
         stack.pushPose();
