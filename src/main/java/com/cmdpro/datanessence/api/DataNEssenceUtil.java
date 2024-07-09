@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.api;
 import com.cmdpro.datanessence.block.entity.EssenceBufferBlockEntity;
 import com.cmdpro.datanessence.block.entity.FluidBufferBlockEntity;
 import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
+import com.cmdpro.datanessence.computers.ComputerData;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.networking.ModMessages;
@@ -81,6 +82,14 @@ public class DataNEssenceUtil {
         }
         public static void sendDataBankEntries(Player player, ResourceLocation[] ids) {
             sendDataBankEntries((ServerPlayer)player, ids);
+        }
+    }
+    public static class ComputerUtil {
+        public static void openComputer(ServerPlayer player, ComputerData data) {
+
+        }
+        public static void openComputer(Player player, ComputerData data) {
+            openComputer((ServerPlayer)player, data);
         }
     }
     public static class DataTabletUtil {

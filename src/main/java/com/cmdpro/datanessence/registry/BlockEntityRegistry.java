@@ -11,6 +11,10 @@ import java.util.function.Supplier;
 public class BlockEntityRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, DataNEssence.MOD_ID);
+    public static final Supplier<BlockEntityType<ComputerBlockEntity>> COMPUTER =
+            register("computer", () ->
+                    BlockEntityType.Builder.of(ComputerBlockEntity::new,
+                            BlockRegistry.COMPUTER.get()).build(null));
     public static final Supplier<BlockEntityType<FabricatorBlockEntity>> FABRICATOR =
             register("fabricator", () ->
                     BlockEntityType.Builder.of(FabricatorBlockEntity::new,

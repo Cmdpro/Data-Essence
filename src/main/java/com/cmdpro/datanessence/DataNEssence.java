@@ -58,6 +58,7 @@ public class DataNEssence
         FeatureRegistry.FEATURES.register(bus);
         ParticleRegistry.PARTICLE_TYPES.register(bus);
         AttachmentTypeRegistry.ATTACHMENT_TYPES.register(bus);
+        ComputerFileTypeRegistry.COMPUTER_FILE_TYPES.register(bus);
         GeckoLib.initialize(bus);
         random = RandomSource.create();
     }

@@ -90,6 +90,9 @@ public class BlockRegistry {
     public static final Supplier<Block> DATA_BANK = register("data_bank",
             () -> new DataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f).lightLevel((blockState) -> { return 4;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> COMPUTER = register("computer",
+            () -> new Computer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f).lightLevel((blockState) -> { return 4;})),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> TRAVERSITE_ROAD = register("traversite_road",
             () -> new TraversiteRoad(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().strength(2.0f), 2),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
