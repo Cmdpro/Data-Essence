@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.networking;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.computers.ComputerData;
 import com.cmdpro.datanessence.networking.packet.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -53,6 +54,7 @@ public class ModMessages {
         registrar.play(PlayerTierSyncS2CPacket.ID, PlayerTierSyncS2CPacket::read, Handler::handle);
         registrar.play(PlayerDataSyncS2CPacket.ID, PlayerDataSyncS2CPacket::read, Handler::handle);
         registrar.play(DataBankEntrySyncS2CPacket.ID, DataBankEntrySyncS2CPacket::read, Handler::handle);
+        registrar.play(ComputerDataSyncS2CPacket.ID, ComputerDataSyncS2CPacket::read, Handler::handle);
         //C2S
         registrar.play(PlayerFinishDataBankMinigameC2SPacket.ID, PlayerFinishDataBankMinigameC2SPacket::read, Handler::handle);
         registrar.play(PlayerChangeDriveDataC2SPacket.ID, PlayerChangeDriveDataC2SPacket::read, Handler::handle);

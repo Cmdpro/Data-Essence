@@ -15,7 +15,7 @@ public abstract class Minigame {
     public void mouseReleased(double pMouseX, double pMouseY, int pButton) {}
     public void mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {}
     public void tick() {}
-    public abstract boolean isFinished();
     public void keyPressed(int pKeyCode, int pScanCode, int pModifiers) {}
     public void keyReleased(int pKeyCode, int pScanCode, int pModifiers) {}
+    public abstract boolean isFinished();
 }
