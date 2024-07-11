@@ -92,7 +92,7 @@ public class ComputerScreen extends Screen {
             int y2 = 0;
             for (ComputerFile i : ClientComputerData.clientComputerData.files) {
                 ComputerFileType.ComputerFileIcon icon = i.getType().getIcon(i);
-                pGuiGraphics.blit(icon.location, x2, y2, );
+                pGuiGraphics.blit(icon.location, x2, y2, icon.u, icon.v, icon.width, icon.height);
             }
         }
     }

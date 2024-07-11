@@ -30,6 +30,11 @@ public class TextFileType extends ComputerFileType<TextFile> {
     }
 
     @Override
+    public ComputerFileType<TextFile>.ComputerFileIcon getIcon(TextFile file) {
+        return null;
+    }
+
+    @Override
     public void renderScreen(TextFile file, GuiGraphics graphics, double mouseX, double mouseY, float delta, int xOffset, int yOffset) {
 
     }
