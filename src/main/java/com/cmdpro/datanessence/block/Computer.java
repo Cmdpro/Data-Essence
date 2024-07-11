@@ -34,7 +34,7 @@ public class Computer extends Block implements EntityBlock {
     @Override
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (!pLevel.isClientSide) {
-            if (pLevel.getBlockEntity(pPos) instanceof DataBankBlockEntity ent) {
+            if (pLevel.getBlockEntity(pPos) instanceof ComputerBlockEntity ent) {
                 if (ent.type != null) {
                     DataNEssenceUtil.ComputerUtil.openComputer(pPlayer, ComputerTypeManager.types.get(ent.type));
                 }

@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.api.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.BaseEssencePoint;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.block.TraversiteRoad;
+import com.cmdpro.datanessence.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
@@ -84,6 +85,7 @@ public class ModEvents {
         event.addListener(DataBankEntryManager.getOrCreateInstance());
         event.addListener(DataBankTypeManager.getOrCreateInstance());
         event.addListener(HiddenBlocksManager.getOrCreateInstance());
+        event.addListener(ComputerTypeManager.getOrCreateInstance());
     }
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {
