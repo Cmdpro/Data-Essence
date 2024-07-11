@@ -133,6 +133,7 @@ public class DataNEssence
             event.accept(BlockRegistry.DECO_ITEM_BUFFER.get());
             event.accept(BlockRegistry.DECO_FLUID_BUFFER.get());
             event.accept(ItemRegistry.INFUSER_ITEM.get());
+            event.accept(BlockRegistry.COMPUTER.get());
         }
     }
 }
