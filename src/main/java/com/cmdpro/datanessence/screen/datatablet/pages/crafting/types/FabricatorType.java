@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.screen.datatablet.pages.crafting.types;
 
+import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
@@ -20,62 +21,33 @@ public class FabricatorType extends CraftingType {
         if (recipe instanceof IFabricationRecipe recipe2) {
             pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x, yOffset + y, 10, 196, 123, 60);
             page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(ItemRegistry.FABRICATOR_ITEM.get()), xOffset + x + 98, yOffset + y + 43, pMouseX, pMouseY);
-            if (recipe2.getEssenceCost() > 0) {
-                pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, x+xOffset+5, y+yOffset+28-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 6, 224-(int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe2.getEssenceCost()/1000f)));
-                if (pMouseX >= x+xOffset+5 && pMouseY >= y+yOffset+(28-22)) {
-                    if (pMouseX <= x+xOffset+8 && pMouseY <= y+yOffset+28) {
-                        page.showTooltip = true;
-                        page.tooltipToShow.clear();
-                        if (ClientPlayerData.getUnlockedEssences()[0]) {
-                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.essence", recipe2.getEssenceCost()).getVisualOrderText());
-                        } else {
-                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.unknown", recipe2.getEssenceCost()).getVisualOrderText());
-                        }
-                    }
-                }
+
+            ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(pGuiGraphics, 5, 28-22, 0, recipe2.getEssenceCost(), 1000);
+            ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(pGuiGraphics, 13, 28-22, 1, recipe2.getLunarEssenceCost(), 1000);
+            ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(pGuiGraphics, 5, 54-22, 2, recipe2.getNaturalEssenceCost(), 1000);
+            ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(pGuiGraphics, 13, 54-22, 3, recipe2.getExoticEssenceCost(), 1000);
+
+            Component essence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(pMouseX, pMouseY, 5, 28-22, 0, recipe2.getEssenceCost());
+            if (essence != null) {
+                page.tooltipToShow.clear();
+                page.tooltipToShow.add(essence.getVisualOrderText());
             }
-            if (recipe2.getLunarEssenceCost() > 0) {
-                pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, x+xOffset+13, y+yOffset+28-(int)Math.ceil(22f*(recipe2.getLunarEssenceCost()/1000f)), 1, 224-(int)Math.ceil(22f*(recipe2.getLunarEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe2.getLunarEssenceCost()/1000f)));
-                if (pMouseX >= x+xOffset+13 && pMouseY >= y+yOffset+(28-22)) {
-                    if (pMouseX <= x+xOffset+16 && pMouseY <= y+yOffset+28) {
-                        page.showTooltip = true;
-                        page.tooltipToShow.clear();
-                        if (ClientPlayerData.getUnlockedEssences()[1]) {
-                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.lunar_essence", recipe2.getLunarEssenceCost()).getVisualOrderText());
-                        } else {
-                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.unknown", recipe2.getLunarEssenceCost()).getVisualOrderText());
-                        }
-                    }
-                }
+            Component lunarEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(pMouseX, pMouseY, 13, 28-22, 1, recipe2.getLunarEssenceCost());
+            if (lunarEssence != null) {
+                page.tooltipToShow.clear();
+                page.tooltipToShow.add(lunarEssence.getVisualOrderText());
             }
-            if (recipe2.getNaturalEssenceCost() > 0) {
-                pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, x+xOffset+5, y+yOffset+54-(int)Math.ceil(22f*(recipe2.getNaturalEssenceCost()/1000f)), 6, 248-(int)Math.ceil(22f*(recipe2.getNaturalEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe2.getNaturalEssenceCost()/1000f)));
-                if (pMouseX >= x+xOffset+5 && pMouseY >= y+yOffset+(54-22)) {
-                    if (pMouseX <= x+xOffset+8 && pMouseY <= y+yOffset+54) {
-                        page.showTooltip = true;
-                        page.tooltipToShow.clear();
-                        if (ClientPlayerData.getUnlockedEssences()[2]) {
-                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.natural_essence", recipe2.getNaturalEssenceCost()).getVisualOrderText());
-                        } else {
-                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.unknown", recipe2.getNaturalEssenceCost()).getVisualOrderText());
-                        }
-                    }
-                }
+            Component naturalEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(pMouseX, pMouseY, 5, 54-22, 2, recipe2.getNaturalEssenceCost());
+            if (naturalEssence != null) {
+                page.tooltipToShow.clear();
+                page.tooltipToShow.add(naturalEssence.getVisualOrderText());
             }
-            if (recipe2.getExoticEssenceCost() > 0) {
-                pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, x+xOffset+13, y+yOffset+54-(int)Math.ceil(22f*(recipe2.getExoticEssenceCost()/1000f)), 1, 248-(int)Math.ceil(22f*(recipe2.getExoticEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe2.getExoticEssenceCost()/1000f)));
-                if (pMouseX >= x+xOffset+13 && pMouseY >= y+yOffset+(54-22)) {
-                    if (pMouseX <= x+xOffset+16 && pMouseY <= y+yOffset+54) {
-                        page.showTooltip = true;
-                        page.tooltipToShow.clear();
-                        if (ClientPlayerData.getUnlockedEssences()[3]) {
-                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.exotic_essence", recipe2.getExoticEssenceCost()).getVisualOrderText());
-                        } else {
-                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.unknown", recipe2.getExoticEssenceCost()).getVisualOrderText());
-                        }
-                    }
-                }
+            Component exoticEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(pMouseX, pMouseY, 13, 54-22, 3, recipe2.getExoticEssenceCost());
+            if (exoticEssence != null) {
+                page.tooltipToShow.clear();
+                page.tooltipToShow.add(exoticEssence.getVisualOrderText());
             }
+
             page.renderItemWithTooltip(pGuiGraphics, recipe.getResultItem(RegistryAccess.EMPTY), xOffset + x + 98, yOffset + y + 22, pMouseX, pMouseY);
             if (recipe2 instanceof ShapelessFabricationRecipe) {
                 pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x + 93, yOffset + y + 4, 242, 185, 14, 11);

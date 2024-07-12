@@ -3,7 +3,9 @@ package com.cmdpro.datanessence.api;
 import com.cmdpro.datanessence.ClientModEvents;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
+import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
@@ -15,13 +17,17 @@ import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.chunk.SectionRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -34,9 +40,32 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import java.awt.*;
+import java.util.List;
 import java.util.Map;
 
 public class ClientDataNEssenceUtil {
+    public static class EssenceBarRendering {
+        public static void drawEssenceBarTiny(GuiGraphics graphics, int x, int y, int type, float amount, float full) {
+            ResourceLocation fill = DataTabletScreen.TEXTURECRAFTING;
+            int u = type == 0 || type == 2 ? 6 : 1;
+            int v = type == 0 || type == 1 ? 202 : 226;
+            if (amount > 0) {
+                graphics.blit(fill, x, y+22 - (int) Math.ceil(22f * (amount / full)), u, v + 22 - (int) Math.ceil(22f * (amount / full)), 3, (int) Math.ceil(22f * (amount / full)));
+            }
+        }
+        public static Component getEssenceBarTooltipTiny(double mouseX, double mouseY, int x, int y, int type, float amount) {
+            if (amount > 0) {
+                if (mouseX <= x+3 && mouseY <= y+22 && mouseX >= x && mouseY >= y) {
+                    if (ClientPlayerData.getUnlockedEssences()[type]) {
+                        return net.minecraft.network.chat.Component.translatable("gui.essence_bar." + (type == 0 ? "essence" : type == 1 ? "lunar_essence" : type == 2 ? "natural_essence" : "exotic_essence"), amount);
+                    } else {
+                        return Component.translatable("gui.essence_bar.unknown", amount);
+                    }
+                }
+            }
+            return null;
+        }
+    }
     public static BlockState getHiddenBlock(Block block) {
         for (HiddenBlock i : HiddenBlocksManager.blocks.values()) {
             if (i.originalBlock == null || i.hiddenAs == null || i.entry == null) {

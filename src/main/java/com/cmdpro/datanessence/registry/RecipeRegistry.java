@@ -23,7 +23,7 @@ public class RecipeRegistry {
     public static final Supplier<RecipeType<InfusionRecipe>> INFUSION_TYPE =
             registerBasicRecipeType("infusion");
     public static final Supplier<RecipeType<IFabricationRecipe>> FABRICATIONCRAFTING =
-            registerType("fabrication_recipe", () -> RecipeType.simple(new ResourceLocation(DataNEssence.MOD_ID, "fabrication_recipe")));
+            registerBasicRecipeType("fabrication_recipe");
 
     private static <T extends RecipeType<?>> Supplier<T> registerType(final String name, final Supplier<T> recipe) {
         return RECIPE_TYPES.register(name, recipe);

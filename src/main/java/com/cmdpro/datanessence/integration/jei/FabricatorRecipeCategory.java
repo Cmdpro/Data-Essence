@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.integration.jei;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
@@ -68,18 +69,10 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
 
     @Override
     public void draw(IFabricationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        if (recipe.getEssenceCost() > 0) {
-            guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 5, 28-(int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)), 6, 224-(int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe.getEssenceCost()/1000f)));
-        }
-        if (recipe.getLunarEssenceCost() > 0) {
-            guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 13, 28-(int)Math.ceil(22f*(recipe.getLunarEssenceCost()/1000f)), 1, 224-(int)Math.ceil(22f*(recipe.getLunarEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe.getLunarEssenceCost()/1000f)));
-        }
-        if (recipe.getNaturalEssenceCost() > 0) {
-            guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 5, 54-(int)Math.ceil(22f*(recipe.getNaturalEssenceCost()/1000f)), 6, 248-(int)Math.ceil(22f*(recipe.getNaturalEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe.getNaturalEssenceCost()/1000f)));
-        }
-        if (recipe.getExoticEssenceCost() > 0) {
-            guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 13, 54-(int)Math.ceil(22f*(recipe.getExoticEssenceCost()/1000f)), 1, 248-(int)Math.ceil(22f*(recipe.getExoticEssenceCost()/1000f)), 3, (int)Math.ceil(22f*(recipe.getExoticEssenceCost()/1000f)));
-        }
+        ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(guiGraphics, 5, 6, 0, recipe.getEssenceCost(), 1000);
+        ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(guiGraphics, 13, 6, 1, recipe.getLunarEssenceCost(), 1000);
+        ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(guiGraphics, 5, 32, 2, recipe.getNaturalEssenceCost(), 1000);
+        ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(guiGraphics, 13, 32, 3, recipe.getExoticEssenceCost(), 1000);
         if (recipe instanceof ShapelessFabricationRecipe) {
             guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 93, 4, 242, 185, 14, 11);
         }
@@ -88,53 +81,25 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
     @Override
     public List<Component> getTooltipStrings(IFabricationRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltip = new ArrayList<>();
-        if (recipe.getEssenceCost() > 0) {
-            if (mouseX >= 5 && mouseY >= (28-22)) {
-                if (mouseX <= 8 && mouseY <= 28) {
-                    tooltip.clear();
-                    if (ClientPlayerData.getUnlockedEssences()[0]) {
-                        tooltip.add(Component.translatable("gui.essence_bar.essence", recipe.getEssenceCost()));
-                    } else {
-                        tooltip.add(Component.translatable("gui.essence_bar.unknown", recipe.getEssenceCost()));
-                    }
-                }
-            }
+        Component essence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 28-22, 0, recipe.getEssenceCost());
+        if (essence != null) {
+            tooltip.clear();
+            tooltip.add(essence);
         }
-        if (recipe.getLunarEssenceCost() > 0) {
-            if (mouseX >= 13 && mouseY >= (28-22)) {
-                if (mouseX <= 16 && mouseY <= 28) {
-                    tooltip.clear();
-                    if (ClientPlayerData.getUnlockedEssences()[1]) {
-                        tooltip.add(Component.translatable("gui.essence_bar.lunar_essence", recipe.getLunarEssenceCost()));
-                    } else {
-                        tooltip.add(Component.translatable("gui.essence_bar.unknown", recipe.getLunarEssenceCost()));
-                    }
-                }
-            }
+        Component lunarEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 28-22, 1, recipe.getLunarEssenceCost());
+        if (lunarEssence != null) {
+            tooltip.clear();
+            tooltip.add(lunarEssence);
         }
-        if (recipe.getNaturalEssenceCost() > 0) {
-            if (mouseX >= 5 && mouseY >= (54-22)) {
-                if (mouseX <= 8 && mouseY <= 54) {
-                    tooltip.clear();
-                    if (ClientPlayerData.getUnlockedEssences()[2]) {
-                        tooltip.add(Component.translatable("gui.essence_bar.natural_essence", recipe.getNaturalEssenceCost()));
-                    } else {
-                        tooltip.add(Component.translatable("gui.essence_bar.unknown", recipe.getNaturalEssenceCost()));
-                    }
-                }
-            }
+        Component naturalEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 54-22, 2, recipe.getNaturalEssenceCost());
+        if (naturalEssence != null) {
+            tooltip.clear();
+            tooltip.add(naturalEssence);
         }
-        if (recipe.getExoticEssenceCost() > 0) {
-            if (mouseX >= 13 && mouseY >= (54-22)) {
-                if (mouseX <= 16 && mouseY <= 54) {
-                    tooltip.clear();
-                    if (ClientPlayerData.getUnlockedEssences()[3]) {
-                        tooltip.add(Component.translatable("gui.essence_bar.exotic_essence", recipe.getExoticEssenceCost()));
-                    } else {
-                        tooltip.add(Component.translatable("gui.essence_bar.unknown", recipe.getExoticEssenceCost()));
-                    }
-                }
-            }
+        Component exoticEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 54-22, 3, recipe.getExoticEssenceCost());
+        if (exoticEssence != null) {
+            tooltip.clear();
+            tooltip.add(exoticEssence);
         }
         return tooltip;
     }

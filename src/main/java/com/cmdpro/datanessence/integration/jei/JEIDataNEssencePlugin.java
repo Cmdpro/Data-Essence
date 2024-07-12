@@ -27,8 +27,8 @@ public class JEIDataNEssencePlugin implements IModPlugin {
     }
 
     public static IJeiRuntime runTime;
-    public static final RecipeType FABRICATION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, BuiltInRegistries.RECIPE_TYPE.getKey(RecipeRegistry.FABRICATIONCRAFTING.get()).getPath(), IFabricationRecipe.class);
-    public static final RecipeType INFUSION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, BuiltInRegistries.RECIPE_TYPE.getKey(RecipeRegistry.INFUSION_TYPE.get()).getPath(), InfusionRecipe.class);
+    public static final RecipeType FABRICATION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, "fabrication_recipe", IFabricationRecipe.class);
+    public static final RecipeType INFUSION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, "infusion", InfusionRecipe.class);
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new FabricatorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
@@ -37,9 +37,9 @@ public class JEIDataNEssencePlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         RecipeManager rm = Objects.requireNonNull(Minecraft.getInstance().level).getRecipeManager();
-        List<RecipeHolder<IFabricationRecipe>> recipes = rm.getAllRecipesFor(RecipeRegistry.FABRICATIONCRAFTING.get());
+        List<IFabricationRecipe> recipes = rm.getAllRecipesFor(RecipeRegistry.FABRICATIONCRAFTING.get()).stream().map((a) -> a.value()).toList();
         registration.addRecipes(FABRICATION_RECIPE, recipes);
-        List<RecipeHolder<InfusionRecipe>> recipes2 = rm.getAllRecipesFor(RecipeRegistry.INFUSION_TYPE.get());
+        List<InfusionRecipe> recipes2 = rm.getAllRecipesFor(RecipeRegistry.INFUSION_TYPE.get()).stream().map((a) -> a.value()).toList();
         registration.addRecipes(INFUSION_RECIPE, recipes2);
     }
 
