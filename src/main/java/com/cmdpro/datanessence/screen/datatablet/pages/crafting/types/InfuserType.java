@@ -26,9 +26,9 @@ public class InfuserType extends CraftingType {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         if (ClientPlayerData.getUnlockedEssences()[0]) {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.essence", recipe2.getEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.essence", recipe2.getEssenceCost()).getVisualOrderText());
                         } else {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe2.getEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.unknown", recipe2.getEssenceCost()).getVisualOrderText());
                         }
                     }
                 }
@@ -40,9 +40,9 @@ public class InfuserType extends CraftingType {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         if (ClientPlayerData.getUnlockedEssences()[1]) {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.lunar_essence", recipe2.getLunarEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.lunar_essence", recipe2.getLunarEssenceCost()).getVisualOrderText());
                         } else {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe2.getLunarEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.unknown", recipe2.getLunarEssenceCost()).getVisualOrderText());
                         }
                     }
                 }
@@ -54,9 +54,9 @@ public class InfuserType extends CraftingType {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         if (ClientPlayerData.getUnlockedEssences()[2]) {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.natural_essence", recipe2.getNaturalEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.natural_essence", recipe2.getNaturalEssenceCost()).getVisualOrderText());
                         } else {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe2.getNaturalEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.unknown", recipe2.getNaturalEssenceCost()).getVisualOrderText());
                         }
                     }
                 }
@@ -68,9 +68,9 @@ public class InfuserType extends CraftingType {
                         page.showTooltip = true;
                         page.tooltipToShow.clear();
                         if (ClientPlayerData.getUnlockedEssences()[3]) {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.exotic_essence", recipe2.getExoticEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.exotic_essence", recipe2.getExoticEssenceCost()).getVisualOrderText());
                         } else {
-                            page.tooltipToShow.add(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", recipe2.getExoticEssenceCost()).getVisualOrderText());
+                            page.tooltipToShow.add(Component.translatable("gui.essence_bar.unknown", recipe2.getExoticEssenceCost()).getVisualOrderText());
                         }
                     }
                 }

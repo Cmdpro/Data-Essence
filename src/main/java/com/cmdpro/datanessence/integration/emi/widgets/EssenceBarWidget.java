@@ -42,9 +42,9 @@ public class EssenceBarWidget extends Widget {
         if (cost > 0) {
             if (getBounds().contains(mouseX, mouseY)) {
                 if (ClientPlayerData.getUnlockedEssences()[type]) {
-                    return List.of(ClientTooltipComponent.create(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator." + (type == 0 ? "essence" : type == 1 ? "lunar_essence" : type == 2 ? "natural_essence" : "exotic_essence"), cost).getVisualOrderText()));
+                    return List.of(ClientTooltipComponent.create(Component.translatable("gui.essence_bar." + (type == 0 ? "essence" : type == 1 ? "lunar_essence" : type == 2 ? "natural_essence" : "exotic_essence"), cost).getVisualOrderText()));
                 } else {
-                    return List.of(ClientTooltipComponent.create(Component.translatable("item.datanessence.data_tablet.page_type.crafting.fabricator.unknown", cost).getVisualOrderText()));
+                    return List.of(ClientTooltipComponent.create(Component.translatable("gui.essence_bar.unknown", cost).getVisualOrderText()));
                 }
             }
         }
