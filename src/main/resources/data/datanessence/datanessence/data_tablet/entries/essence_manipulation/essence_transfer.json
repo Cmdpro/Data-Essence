@@ -6,16 +6,16 @@
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "item.datanessence.data_tablet.pages.essence_transfer.page1.text"
+      "text": "data_tablet.pages.essence_transfer.page1.text"
     },
     {
       "type": "datanessence:crafting",
-      "text": "item.datanessence.data_tablet.pages.essence_transfer.page2.text",
+      "text": "data_tablet.pages.essence_transfer.page2.text",
       "recipes": [
         "datanessence:fabrication/essence_point",
         "datanessence:fabrication/essence_wire"
       ]
     }
   ],
-  "name": "item.datanessence.data_tablet.pages.essence_transfer.name"
+  "name": "data_tablet.pages.essence_transfer.name"
 }

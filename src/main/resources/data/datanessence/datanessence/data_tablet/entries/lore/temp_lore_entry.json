@@ -6,9 +6,9 @@
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "item.datanessence.data_tablet.pages.essence_crystals.page2.text",
+      "text": "data_tablet.pages.essence_crystals.page2.text",
       "font": "datanessence:ancient"
     }
   ],
-  "name": "item.datanessence.data_tablet.pages.essence_crystals.name"
+  "name": "data_tablet.pages.essence_crystals.name"
 }

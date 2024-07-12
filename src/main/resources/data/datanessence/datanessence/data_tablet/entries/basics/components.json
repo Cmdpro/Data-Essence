@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "datanessence:crafting",
-      "text": "item.datanessence.data_tablet.pages.components.page1.text",
+      "text": "data_tablet.pages.components.page1.text",
       "recipes": [
         "datanessence:crafting/capacitance_panel",
         "datanessence:crafting/conductance_rod",
@@ -14,7 +14,7 @@
       ]
     }
   ],
-  "name": "item.datanessence.data_tablet.pages.components.name",
+  "name": "data_tablet.pages.components.name",
   "parents": [
     "datanessence:fabricator"
   ]

@@ -6,13 +6,13 @@
   "pages": [
     {
       "type": "datanessence:crafting",
-      "text": "item.datanessence.data_tablet.pages.traversite_road.page1.text",
+      "text": "data_tablet.pages.traversite_road.page1.text",
       "recipes": [
         "datanessence:infusion/traversite_road"
       ]
     }
   ],
-  "name": "item.datanessence.data_tablet.pages.traversite_road.name",
+  "name": "data_tablet.pages.traversite_road.name",
   "parents": [
     "datanessence:infuser"
   ]

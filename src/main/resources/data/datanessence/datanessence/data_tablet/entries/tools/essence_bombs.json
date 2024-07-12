@@ -6,11 +6,11 @@
   "pages": [
     {
       "type": "datanessence:crafting",
-      "text": "item.datanessence.data_tablet.pages.essence_bombs.page1.text",
+      "text": "data_tablet.pages.essence_bombs.page1.text",
       "recipes": [
         "datanessence:fabrication/essence_bomb"
       ]
     }
   ],
-  "name": "item.datanessence.data_tablet.pages.essence_bombs.name"
+  "name": "data_tablet.pages.essence_bombs.name"
 }

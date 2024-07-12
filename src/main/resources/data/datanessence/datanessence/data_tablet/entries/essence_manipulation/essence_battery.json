@@ -6,15 +6,15 @@
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "item.datanessence.data_tablet.pages.essence_battery.page1.text"
+      "text": "data_tablet.pages.essence_battery.page1.text"
     },
     {
       "type": "datanessence:crafting",
-      "text": "item.datanessence.data_tablet.pages.essence_battery.page2.text",
+      "text": "data_tablet.pages.essence_battery.page2.text",
       "recipes": [
         "datanessence:fabrication/essence_battery"
       ]
     }
   ],
-  "name": "item.datanessence.data_tablet.pages.essence_battery.name"
+  "name": "data_tablet.pages.essence_battery.name"
 }

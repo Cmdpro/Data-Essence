@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "datanessence:crafting",
-      "text": "item.datanessence.data_tablet.pages.test2.page1.text",
+      "text": "data_tablet.pages.test2.page1.text",
       "recipes": [
         "datanessence:test_recipe",
         "minecraft:ender_eye",
@@ -17,5 +17,5 @@
   "parents": [
     "datanessence:test1"
   ],
-  "name": "item.datanessence.data_tablet.pages.test2.name"
+  "name": "data_tablet.pages.test2.name"
 }

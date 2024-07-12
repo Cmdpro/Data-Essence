@@ -6,17 +6,17 @@
   "pages": [
     {
       "type": "datanessence:crafting",
-      "text": "item.datanessence.data_tablet.pages.infuser.page1.text",
+      "text": "data_tablet.pages.infuser.page1.text",
       "recipes": [
         "datanessence:fabrication/infuser"
       ]
     },
     {
       "type": "datanessence:text",
-      "text": "item.datanessence.data_tablet.pages.infuser.page2.text"
+      "text": "data_tablet.pages.infuser.page2.text"
     }
   ],
-  "name": "item.datanessence.data_tablet.pages.infuser.name",
+  "name": "data_tablet.pages.infuser.name",
   "parents": [
     "datanessence:automation"
   ]

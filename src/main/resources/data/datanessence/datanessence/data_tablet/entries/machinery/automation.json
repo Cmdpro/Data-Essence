@@ -6,13 +6,13 @@
   "pages": [
     {
       "type": "datanessence:crafting",
-      "text": "item.datanessence.data_tablet.pages.automation.page1.text",
+      "text": "data_tablet.pages.automation.page1.text",
       "recipes": [
         "datanessence:fabrication/data_drive"
       ]
     }
   ],
-  "name": "item.datanessence.data_tablet.pages.automation.name",
+  "name": "data_tablet.pages.automation.name",
   "parents": [
     "datanessence:fabricator"
   ]
