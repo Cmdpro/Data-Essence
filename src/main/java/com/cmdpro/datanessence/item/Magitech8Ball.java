@@ -86,6 +86,7 @@ public class Magitech8Ball extends Item {
             this.add(Component.translatable("item.datanessence.magitech_8_ball.result10"));
         }
     };
+    public Component additionalPylons = Component.translatable("item.datanessence.magitech_8_ball.result11");
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         pPlayer.startUsingItem(pHand);
@@ -106,7 +107,11 @@ public class Magitech8Ball extends Item {
         if (!pLevel.isClientSide) {
             pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS);
             if (pLivingEntity instanceof Player player) {
-                player.sendSystemMessage(results.get(RandomUtils.nextInt(0, results.size())));
+                Component msg = results.get(RandomUtils.nextInt(0, results.size()));
+                if (RandomUtils.nextInt(0, 25) == 0) {
+                    msg = additionalPylons;
+                }
+                player.sendSystemMessage(msg);
                 player.getCooldowns().addCooldown(this, 20);
             }
         }
