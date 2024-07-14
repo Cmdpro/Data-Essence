@@ -30,6 +30,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class Magitech8Ball extends Item {
+    int textColor = 0x9c26c7; // the color messages display in
+
     public Magitech8Ball(Properties pProperties) {
         super(pProperties);
     }
@@ -78,19 +80,19 @@ public class Magitech8Ball extends Item {
     }
     public List<Component> results = new ArrayList<>() {
         {
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result1"));
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result2"));
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result3"));
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result4"));
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result5"));
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result6"));
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result7"));
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result8"));
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result9"));
-            this.add(Component.translatable("item.datanessence.magitech_8_ball.result10"));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result1").withStyle(Style.EMPTY.withColor(textColor)));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result2").withStyle(Style.EMPTY.withColor(textColor)));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result3").withStyle(Style.EMPTY.withColor(textColor)));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result4").withStyle(Style.EMPTY.withColor(textColor)));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result5").withStyle(Style.EMPTY.withColor(textColor)));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result6").withStyle(Style.EMPTY.withColor(textColor)));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result7").withStyle(Style.EMPTY.withColor(textColor)));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result8").withStyle(Style.EMPTY.withColor(textColor)));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result9").withStyle(Style.EMPTY.withColor(textColor)));
+            this.add(Component.translatable("item.datanessence.magitech_8_ball.result10").withStyle(Style.EMPTY.withColor(textColor)));
         }
     };
-    public Component additionalPylons = Component.translatable("item.datanessence.magitech_8_ball.result11").withStyle(Style.EMPTY.withFont(new ResourceLocation(DataNEssence.MOD_ID, "ancient")));
+    public Component additionalPylons = Component.translatable("item.datanessence.magitech_8_ball.result11").withStyle(Style.EMPTY.withFont(new ResourceLocation(DataNEssence.MOD_ID, "ancient")).withColor(textColor));
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         pPlayer.startUsingItem(pHand);
