@@ -1,14 +1,12 @@
 package com.cmdpro.datanessence.item;
 
-import com.cmdpro.datanessence.ClientModEvents;
-import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.CommonVariables;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -22,7 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
 import java.util.ArrayList;
@@ -92,7 +89,7 @@ public class Magitech8Ball extends Item {
             this.add(Component.translatable("item.datanessence.magitech_8_ball.result10").withStyle(Style.EMPTY.withColor(textColor)));
         }
     };
-    public Component additionalPylons = Component.translatable("item.datanessence.magitech_8_ball.result11").withStyle(Style.EMPTY.withFont(new ResourceLocation(DataNEssence.MOD_ID, "ancient")).withColor(textColor));
+    public Component additionalPylons = Component.translatable("item.datanessence.magitech_8_ball.result11").withStyle(Style.EMPTY.withFont(CommonVariables.ANCIENT_FONT).withColor(textColor));
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         pPlayer.startUsingItem(pHand);
