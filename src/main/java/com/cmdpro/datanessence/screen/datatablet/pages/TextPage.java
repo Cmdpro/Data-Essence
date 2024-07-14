@@ -34,7 +34,7 @@ public class TextPage extends Page {
         for (FormattedCharSequence i : text) {
             int x = xOffset + 4;
             if (rtl) {
-                x = xOffset+((DataTabletScreen.imageWidth - 8)-Minecraft.getInstance().font.width(i));
+                x = xOffset+((DataTabletScreen.imageWidth - 4)-Minecraft.getInstance().font.width(i));
             }
             pGuiGraphics.drawString(Minecraft.getInstance().font, i, x, yOffset + 4 + offsetY + textYOffset(), 0xFFFFFFFF);
             offsetY += Minecraft.getInstance().font.lineHeight+2;
