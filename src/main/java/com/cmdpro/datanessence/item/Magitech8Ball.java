@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class Magitech8Ball extends Item {
-    int textColor = 0x9c26c7; // the color messages display in
+    final int textColor = 0x9c26c7; // the color messages display in
 
     public Magitech8Ball(Properties pProperties) {
         super(pProperties);
