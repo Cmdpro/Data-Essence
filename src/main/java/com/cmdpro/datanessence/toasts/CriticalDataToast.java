@@ -28,14 +28,14 @@ public class CriticalDataToast implements Toast {
         List<FormattedCharSequence> list = pToastComponent.getMinecraft().font.split(entry.name, 125);
         int i = 16776960;
         if (list.size() == 1) {
-            pGuiGraphics.drawString(pToastComponent.getMinecraft().font, Component.translatable("item.datanessence.data_tablet.critical_data_unlocked"), 30, 7, i | -16777216, false);
+            pGuiGraphics.drawString(pToastComponent.getMinecraft().font, Component.translatable("data_tablet.critical_data_unlocked"), 30, 7, i | -16777216, false);
             pGuiGraphics.drawString(pToastComponent.getMinecraft().font, list.get(0), 30, 18, -1, false);
         } else {
             int j = 1500;
             float f = 300.0F;
             if (pTimeSinceLastVisible < 1500L) {
                 int k = Mth.floor(Mth.clamp((float)(1500L - pTimeSinceLastVisible) / 300.0F, 0.0F, 1.0F) * 255.0F) << 24 | 67108864;
-                pGuiGraphics.drawString(pToastComponent.getMinecraft().font, Component.translatable("item.datanessence.data_tablet.critical_data_unlocked"), 30, 11, i | k, false);
+                pGuiGraphics.drawString(pToastComponent.getMinecraft().font, Component.translatable("data_tablet.critical_data_unlocked"), 30, 11, i | k, false);
             } else {
                 int i1 = Mth.floor(Mth.clamp((float)(pTimeSinceLastVisible - 1500L) / 300.0F, 0.0F, 1.0F) * 252.0F) << 24 | 67108864;
                 int l = this.height() / 2 - list.size() * 9 / 2;

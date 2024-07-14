@@ -11,7 +11,8 @@
     {
       "type": "datanessence:text",
       "text": "data_tablet.pages.test1.page2.text",
-      "font": "datanessence:ancient"
+      "font": "datanessence:ancient",
+      "rtl": true
     },
     {
       "type": "datanessence:text",

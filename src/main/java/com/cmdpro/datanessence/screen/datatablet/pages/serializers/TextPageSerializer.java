@@ -17,17 +17,20 @@ public class TextPageSerializer extends PageSerializer<TextPage> {
         ResourceLocation font = json.has("font") ? ResourceLocation.tryParse(json.get("font").getAsString()) : Minecraft.DEFAULT_FONT;
         MutableComponent text = Component.translatable(json.get("text").getAsString());
         text = text.withStyle(text.getStyle().withFont(font));
-        return new TextPage(text);
+        boolean rtl = json.has("rtl") ? json.get("rtl").getAsBoolean() : false;
+        return new TextPage(text, rtl);
     }
 
     @Override
     public TextPage fromNetwork(FriendlyByteBuf buf) {
         Component text = buf.readComponent();
-        return new TextPage(text);
+        boolean rtl = buf.readBoolean();
+        return new TextPage(text, rtl);
     }
 
     @Override
     public void toNetwork(TextPage page, FriendlyByteBuf buf) {
         buf.writeComponent(page.text);
+        buf.writeBoolean(page.rtl);
     }
 }

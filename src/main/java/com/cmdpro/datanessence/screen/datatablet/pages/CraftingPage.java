@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class CraftingPage extends TextPage {
-    public CraftingPage(Component text, ResourceLocation[] recipes) {
-        super(text);
+    public CraftingPage(Component text, boolean rtl, ResourceLocation[] recipes) {
+        super(text, rtl);
         this.recipes = recipes;
     }
     public ResourceLocation[] recipes;

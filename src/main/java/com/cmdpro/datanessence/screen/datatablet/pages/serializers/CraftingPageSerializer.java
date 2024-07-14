@@ -21,23 +21,26 @@ public class CraftingPageSerializer extends PageSerializer<CraftingPage> {
         ResourceLocation font = json.has("font") ? ResourceLocation.tryParse(json.get("font").getAsString()) : Minecraft.DEFAULT_FONT;
         MutableComponent text = Component.translatable(json.get("text").getAsString());
         text = text.withStyle(text.getStyle().withFont(font));
+        boolean rtl = json.has("rtl") ? json.get("rtl").getAsBoolean() : false;
         ArrayList<ResourceLocation> recipes = new ArrayList<>();
         for (JsonElement i : json.get("recipes").getAsJsonArray()) {
             recipes.add(ResourceLocation.tryParse(i.getAsString()));
         }
-        return new CraftingPage(text, recipes.toArray(new ResourceLocation[0]));
+        return new CraftingPage(text, rtl, recipes.toArray(new ResourceLocation[0]));
     }
 
     @Override
     public CraftingPage fromNetwork(FriendlyByteBuf buf) {
         Component text = buf.readComponent();
+        boolean rtl = buf.readBoolean();
         List<ResourceLocation> recipes = buf.readList(FriendlyByteBuf::readResourceLocation);
-        return new CraftingPage(text, recipes.toArray(new ResourceLocation[0]));
+        return new CraftingPage(text, rtl, recipes.toArray(new ResourceLocation[0]));
     }
 
     @Override
     public void toNetwork(CraftingPage page, FriendlyByteBuf buf) {
         buf.writeComponent(page.text);
+        buf.writeBoolean(page.rtl);
         buf.writeCollection(Arrays.stream(page.recipes).toList(), FriendlyByteBuf::writeResourceLocation);
     }
 }

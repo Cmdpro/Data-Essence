@@ -196,7 +196,7 @@ public class DataTabletScreen extends Screen {
         }
         graphics.disableScissor();
         if (screenType == 0) {
-            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
+            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
 
             if (this.tabPage+2 < getSortedTabs().size()/6) {
                 graphics.blit(TEXTURE, (x + imageWidth) + 30, y + ((imageHeight / 2) - 20), 32, 166, 12, 40);
