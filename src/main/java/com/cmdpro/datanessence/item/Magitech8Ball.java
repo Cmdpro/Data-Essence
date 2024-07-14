@@ -1,10 +1,14 @@
 package com.cmdpro.datanessence.item;
 
+import com.cmdpro.datanessence.ClientModEvents;
+import com.cmdpro.datanessence.DataNEssence;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -86,7 +90,7 @@ public class Magitech8Ball extends Item {
             this.add(Component.translatable("item.datanessence.magitech_8_ball.result10"));
         }
     };
-    public Component additionalPylons = Component.translatable("item.datanessence.magitech_8_ball.result11");
+    public Component additionalPylons = Component.translatable("item.datanessence.magitech_8_ball.result11").withStyle(Style.EMPTY.withFont(new ResourceLocation(DataNEssence.MOD_ID, "ancient")));
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         pPlayer.startUsingItem(pHand);
