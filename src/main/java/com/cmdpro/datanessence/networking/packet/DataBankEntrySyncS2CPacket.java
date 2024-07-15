@@ -13,7 +13,9 @@ import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.EntrySerializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
@@ -25,7 +27,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public record DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> entries) implements Message {
-    public static DataBankEntrySyncS2CPacket read(FriendlyByteBuf buf) {
+    public static DataBankEntrySyncS2CPacket read(RegistryFriendlyByteBuf buf) {
         Map<ResourceLocation, DataBankEntry> entries = buf.readMap(FriendlyByteBuf::readResourceLocation, DataBankEntrySerializer::fromNetwork);
         return  new DataBankEntrySyncS2CPacket(entries);
     }
@@ -37,13 +39,12 @@ public record DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> en
         Minecraft.getInstance().setScreen(new DataBankScreen(Component.empty()));
     }
 
-    @Override
-    public void write(FriendlyByteBuf buf) {
-        buf.writeMap(entries, FriendlyByteBuf::writeResourceLocation, DataBankEntrySerializer::toNetwork);
+    public static void write(RegistryFriendlyByteBuf buf, DataBankEntrySyncS2CPacket obj) {
+        buf.writeMap(obj.entries, ResourceLocation.STREAM_CODEC, DataBankEntrySerializer::toNetwork);
     }
-    public static ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "data_bank_entry_sync");
     @Override
-    public ResourceLocation id() {
-        return ID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
+    public static final Type<DataBankEntrySyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "data_bank_entry_sync"));
 }

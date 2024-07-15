@@ -53,8 +53,8 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
         }
 
         // Initialize recipe inputs
-        int width = (recipe instanceof IShapedRecipe<?> shapedRecipe) ? shapedRecipe.getRecipeWidth() : 0;
-        int height = (recipe instanceof IShapedRecipe<?> shapedRecipe) ? shapedRecipe.getRecipeHeight() : 0;
+        int width = (recipe instanceof IShapedRecipe<?> shapedRecipe) ? shapedRecipe.getWidth() : 0;
+        int height = (recipe instanceof IShapedRecipe<?> shapedRecipe) ? shapedRecipe.getHeight() : 0;
         List<List<ItemStack>> inputs = recipe.getIngredients().stream().map(ingredient -> List.of(ingredient.getItems())).toList();
 
         List<IRecipeSlotBuilder> inputSlots = new ArrayList<>();

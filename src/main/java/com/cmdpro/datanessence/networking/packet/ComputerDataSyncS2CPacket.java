@@ -11,14 +11,16 @@ import com.cmdpro.datanessence.screen.databank.DataBankEntry;
 import com.cmdpro.datanessence.screen.databank.DataBankEntrySerializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.Map;
 
 public record ComputerDataSyncS2CPacket(ComputerData data) implements Message {
-    public static ComputerDataSyncS2CPacket read(FriendlyByteBuf buf) {
+    public static ComputerDataSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
         ComputerData data = ComputerData.fromNetwork(buf);
         return new ComputerDataSyncS2CPacket(data);
     }
@@ -29,13 +31,12 @@ public record ComputerDataSyncS2CPacket(ComputerData data) implements Message {
         Minecraft.getInstance().setScreen(new ComputerScreen(Component.empty()));
     }
 
-    @Override
-    public void write(FriendlyByteBuf buf) {
-        ComputerData.toNetwork(buf, data);
+    public static void write(RegistryFriendlyByteBuf buf, ComputerDataSyncS2CPacket obj) {
+        ComputerData.toNetwork(buf, obj.data);
     }
-    public static ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "computer_data_sync");
     @Override
-    public ResourceLocation id() {
-        return ID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
+    public static final Type<ComputerDataSyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "computer_data_sync"));
 }

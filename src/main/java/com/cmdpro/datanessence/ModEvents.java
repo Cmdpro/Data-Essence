@@ -25,53 +25,57 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.LogicalSide;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
-import net.neoforged.neoforge.event.TickEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.Optional;
 
-@Mod.EventBusSubscriber(modid = DataNEssence.MOD_ID)
+@EventBusSubscriber(modid = DataNEssence.MOD_ID)
 public class ModEvents {
     @SubscribeEvent
-    public static void onLivingEntityTick(LivingEvent.LivingTickEvent event) {
-        if (event.getEntity().getBlockStateOn().getBlock() instanceof TraversiteRoad road) {
-            if (event.getEntity().getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID) == null) {
-                event.getEntity().getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, "Traversite Road Speed", road.boost, AttributeModifier.Operation.MULTIPLY_BASE));
-            } else {
-                if (event.getEntity().getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID).getAmount() != road.boost) {
-                    event.getEntity().getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
-                    event.getEntity().getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, "Traversite Road Speed", road.boost, AttributeModifier.Operation.MULTIPLY_BASE));
+    public static void onLivingEntityTick(EntityTickEvent event) {
+        if (event.getEntity() instanceof LivingEntity ent) {
+            if (event.getEntity().getBlockStateOn().getBlock() instanceof TraversiteRoad road) {
+                if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID) == null) {
+                    ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, "Traversite Road Speed", road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                } else {
+                    if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID).amount() != road.boost) {
+                        ent.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
+                        ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, "Traversite Road Speed", road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                    }
                 }
+            } else {
+                ent.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
             }
-        } else {
-            event.getEntity().getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
         }
     }
     @SubscribeEvent
-    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
-        if (event.side == LogicalSide.SERVER) {
-            Optional<BlockEntity> ent = event.player.getData(AttachmentTypeRegistry.LINK_FROM);
+    public static void onPlayerTick(PlayerTickEvent event) {
+        if (!event.getEntity().level().isClientSide) {
+            Optional<BlockEntity> ent = event.getEntity().getData(AttachmentTypeRegistry.LINK_FROM);
             if (ent.isPresent()) {
-                if (ent.get().getBlockPos().getCenter().distanceTo(event.player.getBoundingBox().getCenter()) > 20) {
-                    event.player.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                    DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer)event.player);
+                if (ent.get().getBlockPos().getCenter().distanceTo(event.getEntity().getBoundingBox().getCenter()) > 20) {
+                    event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                    DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer)event.getEntity());
                 } else {
                     if (ent.get().getBlockState().getBlock() instanceof BaseEssencePoint block) {
-                        if (!event.player.isHolding(block.getRequiredWire())) {
-                            event.player.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer) event.player);
+                        if (!event.getEntity().isHolding(block.getRequiredWire())) {
+                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                            DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                         }
                     }
                     if (ent.get().getBlockState().getBlock() instanceof BaseCapabilityPoint block) {
-                        if (!event.player.isHolding(block.getRequiredWire())) {
-                            event.player.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer) event.player);
+                        if (!event.getEntity().isHolding(block.getRequiredWire())) {
+                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                            DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                         }
                     }
                 }

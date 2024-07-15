@@ -26,8 +26,8 @@ public class BlackHole extends Entity {
 
     public static final EntityDataAccessor<Float> SIZE = SynchedEntityData.defineId(BlackHole.class, EntityDataSerializers.FLOAT);
     @Override
-    protected void defineSynchedData() {
-        this.entityData.define(SIZE, 8f);
+    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
+        pBuilder.define(SIZE, 8f);
     }
 
     @Override

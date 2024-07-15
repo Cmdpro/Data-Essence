@@ -6,6 +6,8 @@ import com.cmdpro.datanessence.networking.Message;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
@@ -15,45 +17,43 @@ import java.util.function.Supplier;
 
 public record PlayerDataSyncS2CPacket(boolean[] unlockedEssences, BlockPos linkPos, Color linkColor) implements Message {
 
-    public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "player_data_sync");
-
     @Override
-    public void write(FriendlyByteBuf buf) {
-        if (unlockedEssences.length >= 1) {
-            buf.writeBoolean(unlockedEssences[0]);
-        } else {
-            buf.writeBoolean(false);
-        }
-        if (unlockedEssences.length >= 2) {
-            buf.writeBoolean(unlockedEssences[1]);
-        } else {
-            buf.writeBoolean(false);
-        }
-        if (unlockedEssences.length >= 3) {
-            buf.writeBoolean(unlockedEssences[2]);
-        } else {
-            buf.writeBoolean(false);
-        }
-        if (unlockedEssences.length >= 4) {
-            buf.writeBoolean(unlockedEssences[3]);
-        } else {
-            buf.writeBoolean(false);
-        }
-        buf.writeBoolean(linkPos != null);
-        if (linkPos != null) {
-            buf.writeBlockPos(linkPos);
-        }
-        buf.writeInt(linkColor.getRed());
-        buf.writeInt(linkColor.getGreen());
-        buf.writeInt(linkColor.getBlue());
-        buf.writeInt(linkColor.getAlpha());
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
+    public static final Type<PlayerDataSyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "player_data_sync"));
 
-    @Override
-    public ResourceLocation id() {
-        return ID;
+    public static void write(RegistryFriendlyByteBuf buf, PlayerDataSyncS2CPacket obj) {
+        if (obj.unlockedEssences.length >= 1) {
+            buf.writeBoolean(obj.unlockedEssences[0]);
+        } else {
+            buf.writeBoolean(false);
+        }
+        if (obj.unlockedEssences.length >= 2) {
+            buf.writeBoolean(obj.unlockedEssences[1]);
+        } else {
+            buf.writeBoolean(false);
+        }
+        if (obj.unlockedEssences.length >= 3) {
+            buf.writeBoolean(obj.unlockedEssences[2]);
+        } else {
+            buf.writeBoolean(false);
+        }
+        if (obj.unlockedEssences.length >= 4) {
+            buf.writeBoolean(obj.unlockedEssences[3]);
+        } else {
+            buf.writeBoolean(false);
+        }
+        buf.writeBoolean(obj.linkPos != null);
+        if (obj.linkPos != null) {
+            buf.writeBlockPos(obj.linkPos);
+        }
+        buf.writeInt(obj.linkColor.getRed());
+        buf.writeInt(obj.linkColor.getGreen());
+        buf.writeInt(obj.linkColor.getBlue());
+        buf.writeInt(obj.linkColor.getAlpha());
     }
-    public static PlayerDataSyncS2CPacket read(FriendlyByteBuf buf) {
+    public static PlayerDataSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
         boolean essence = buf.readBoolean();
         boolean lunar = buf.readBoolean();
         boolean natural = buf.readBoolean();

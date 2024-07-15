@@ -3,8 +3,11 @@ package com.cmdpro.datanessence.networking.packet;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -21,26 +24,24 @@ public record PlayerChangeDriveDataC2SPacket(ResourceLocation entry, boolean off
         if (unlocked.contains(entry)) {
             ItemStack stack = player.getItemInHand(offhand ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
             if (stack.is(ItemRegistry.DATA_DRIVE.get())) {
-                stack.getOrCreateTag().putString("dataId", entry.toString());
+                stack.set(DataComponentRegistry.DATA_ID, entry);
             }
         }
     }
 
-    public static PlayerChangeDriveDataC2SPacket read(FriendlyByteBuf buf) {
+    public static PlayerChangeDriveDataC2SPacket read(RegistryFriendlyByteBuf buf) {
         ResourceLocation entry = buf.readResourceLocation();
         boolean offhand = buf.readBoolean();
         return new PlayerChangeDriveDataC2SPacket(entry, offhand);
     }
-
-    @Override
-    public void write(FriendlyByteBuf buf) {
-        buf.writeResourceLocation(entry);
-        buf.writeBoolean(offhand);
+    public static void write(RegistryFriendlyByteBuf buf, PlayerChangeDriveDataC2SPacket obj) {
+        buf.writeResourceLocation(obj.entry);
+        buf.writeBoolean(obj.offhand);
     }
 
-    public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "player_change_data_drive_data");
     @Override
-    public ResourceLocation id() {
-        return ID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
+    public static final Type<PlayerChangeDriveDataC2SPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "player_change_data_drive_data"));
 }

@@ -1,12 +1,15 @@
 package com.cmdpro.datanessence.screen.datatablet.pages.serializers;
 
+import com.cmdpro.datanessence.computers.files.TextFile;
 import com.cmdpro.datanessence.screen.datatablet.Page;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import com.cmdpro.datanessence.screen.datatablet.pages.TextPage;
 import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 
@@ -20,17 +23,16 @@ public class TextPageSerializer extends PageSerializer<TextPage> {
         boolean rtl = json.has("rtl") ? json.get("rtl").getAsBoolean() : false;
         return new TextPage(text, rtl);
     }
-
     @Override
     public TextPage fromNetwork(FriendlyByteBuf buf) {
-        Component text = buf.readComponent();
+        Component text = buf.readWithCodecTrusted(NbtOps.INSTANCE, ComponentSerialization.CODEC);
         boolean rtl = buf.readBoolean();
         return new TextPage(text, rtl);
     }
 
     @Override
     public void toNetwork(TextPage page, FriendlyByteBuf buf) {
-        buf.writeComponent(page.text);
+        buf.writeWithCodec(NbtOps.INSTANCE, ComponentSerialization.CODEC, page.text);
         buf.writeBoolean(page.rtl);
     }
 }

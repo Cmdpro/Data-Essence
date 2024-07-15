@@ -11,12 +11,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.GsonHelper;
@@ -50,7 +54,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
         return this.result;
     }
 
@@ -74,7 +78,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
         return this.pattern.matches(pInv);
     }
 
-    public ItemStack assemble(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(CraftingContainer pContainer, HolderLookup.Provider pRegistryAccess) {
         return this.getResultItem(pRegistryAccess).copy();
     }
 
@@ -89,7 +93,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
     @Override
     public boolean isIncomplete() {
         NonNullList<Ingredient> nonnulllist = this.getIngredients();
-        return nonnulllist.isEmpty() || nonnulllist.stream().filter(p_151277_ -> !p_151277_.isEmpty()).anyMatch(net.neoforged.neoforge.common.CommonHooks::hasNoElements);
+        return nonnulllist.isEmpty() || nonnulllist.stream().filter(p_151277_ -> !p_151277_.isEmpty()).anyMatch(Ingredient::hasNoItems);
     }
 
     @Override
@@ -127,31 +131,47 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
     }
 
     public static class Serializer implements RecipeSerializer<ShapedFabricationRecipe> {
-        public static final Codec<ShapedFabricationRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
+        public static final MapCodec<ShapedFabricationRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 ShapedRecipePattern.MAP_CODEC.forGetter(p_311733_ -> p_311733_.pattern),
-                ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(p_311730_ -> p_311730_.result),
+                ItemStack.SIMPLE_ITEM_CODEC.fieldOf("result").forGetter(p_311730_ -> p_311730_.result),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
                 Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
                 Codec.FLOAT.optionalFieldOf("lunarEssenceCost", 0f).forGetter(r -> r.lunarEssenceCost),
                 Codec.FLOAT.optionalFieldOf("naturalEssenceCost", 0f).forGetter(r -> r.naturalEssenceCost),
                 Codec.FLOAT.optionalFieldOf("exoticEssenceCost", 0f).forGetter(r -> r.exoticEssenceCost)
         ).apply(instance, (pattern, result, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost) -> new ShapedFabricationRecipe(pattern, result, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost)));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, ShapedFabricationRecipe> STREAM_CODEC = StreamCodec.of(
+                (buf, obj) -> {
+                    ShapedRecipePattern.STREAM_CODEC.encode(buf, obj.pattern);
+                    ItemStack.STREAM_CODEC.encode(buf, obj.result);
+                    buf.writeResourceLocation(obj.entry);
+                    buf.writeFloat(obj.essenceCost);
+                    buf.writeFloat(obj.lunarEssenceCost);
+                    buf.writeFloat(obj.naturalEssenceCost);
+                    buf.writeFloat(obj.exoticEssenceCost);
+                },
+                (buf) -> {
+                    ShapedRecipePattern shapedrecipepattern = ShapedRecipePattern.STREAM_CODEC.decode(buf);
+                    ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buf);
+                    ResourceLocation entry = buf.readResourceLocation();
+                    float essenceCost = buf.readFloat();
+                    float lunarEssenceCost = buf.readFloat();
+                    float naturalEssenceCost = buf.readFloat();
+                    float exoticEssenceCost = buf.readFloat();
+                    return new ShapedFabricationRecipe(shapedrecipepattern, itemstack, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
+                }
+        );
         public static final Serializer INSTANCE = new Serializer();
 
         @Override
-        public Codec<ShapedFabricationRecipe> codec() {
+        public MapCodec<ShapedFabricationRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public ShapedFabricationRecipe fromNetwork(FriendlyByteBuf pBuffer) {
-            //noinspection deprecation
-            return pBuffer.readWithCodecTrusted(NbtOps.INSTANCE, CODEC);
-        }
-
-        @Override
-        public void toNetwork(FriendlyByteBuf pBuffer, ShapedFabricationRecipe pRecipe) {
-            pBuffer.writeWithCodec(NbtOps.INSTANCE, CODEC, pRecipe);
+        public StreamCodec<RegistryFriendlyByteBuf, ShapedFabricationRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

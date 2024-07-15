@@ -9,7 +9,9 @@ import com.cmdpro.datanessence.toasts.TierToast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.commands.TitleCommand;
 import net.minecraft.world.entity.player.Player;
@@ -19,18 +21,18 @@ import java.util.function.Supplier;
 
 public record PlayerTierSyncS2CPacket(int tier, boolean showIndicator) implements Message {
 
-    public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "player_tier_sync");
     @Override
-    public ResourceLocation id() {
-        return ID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
-    @Override
-    public void write(FriendlyByteBuf pBuffer) {
-        pBuffer.writeInt(tier);
-        pBuffer.writeBoolean(showIndicator);
+    public static final Type<PlayerTierSyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "player_tier_sync"));
+
+    public static void write(RegistryFriendlyByteBuf pBuffer, PlayerTierSyncS2CPacket obj) {
+        pBuffer.writeInt(obj.tier);
+        pBuffer.writeBoolean(obj.showIndicator);
     }
 
-    public static PlayerTierSyncS2CPacket read(FriendlyByteBuf buf) {
+    public static PlayerTierSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
         int tier = buf.readInt();
         boolean showIndicator = buf.readBoolean();
         return new PlayerTierSyncS2CPacket(tier, showIndicator);

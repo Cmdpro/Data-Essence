@@ -14,7 +14,9 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.bus.EventBus;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -30,9 +32,9 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import software.bernie.geckolib.GeckoLib;
 
-// The value here should match an entry in the META-INF/mods.toml file
+// The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod("datanessence")
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = DataNEssence.MOD_ID)
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = DataNEssence.MOD_ID)
 public class DataNEssence
 {
     public static final ResourceKey<DamageType> magicProjectile = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "magic_projectile"));
@@ -44,7 +46,7 @@ public class DataNEssence
     public DataNEssence(IEventBus bus)
     {
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
-        modLoadingContext.registerConfig(ModConfig.Type.COMMON, DataNEssenceConfig.COMMON_SPEC, "datanessence.toml");
+        modLoadingContext.getActiveContainer().registerConfig(ModConfig.Type.COMMON, DataNEssenceConfig.COMMON_SPEC, "datanessence.toml");
         ItemRegistry.ITEMS.register(bus);
         MenuRegistry.MENUS.register(bus);
         RecipeRegistry.RECIPES.register(bus);
@@ -59,7 +61,6 @@ public class DataNEssence
         ParticleRegistry.PARTICLE_TYPES.register(bus);
         AttachmentTypeRegistry.ATTACHMENT_TYPES.register(bus);
         ComputerFileTypeRegistry.COMPUTER_FILE_TYPES.register(bus);
-        GeckoLib.initialize(bus);
         random = RandomSource.create();
     }
     @SubscribeEvent

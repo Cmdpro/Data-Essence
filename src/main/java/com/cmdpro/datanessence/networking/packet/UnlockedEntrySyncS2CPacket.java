@@ -8,6 +8,8 @@ import com.cmdpro.datanessence.networking.Message;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
@@ -17,14 +19,14 @@ import java.util.function.Supplier;
 
 public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked) implements Message {
 
-    public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "unlocked_entry_sync");
     @Override
-    public ResourceLocation id() {
-        return ID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
+    public static final Type<UnlockedEntrySyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "unlocked_entry_sync"));
 
-    public void write(FriendlyByteBuf buf) {
-        buf.writeCollection(unlocked, FriendlyByteBuf::writeResourceLocation);
+    public static void write(RegistryFriendlyByteBuf buf, UnlockedEntrySyncS2CPacket obj) {
+        buf.writeCollection(obj.unlocked, FriendlyByteBuf::writeResourceLocation);
     }
 
     @Override
@@ -33,8 +35,8 @@ public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked) implem
         ClientDataNEssenceUtil.updateWorld();
     }
 
-    public static UnlockedEntrySyncS2CPacket read(FriendlyByteBuf buf) {
-        List<ResourceLocation> unlocked = buf.readList(FriendlyByteBuf::readResourceLocation);
+    public static UnlockedEntrySyncS2CPacket read(RegistryFriendlyByteBuf buf) {
+        List<ResourceLocation> unlocked = buf.readList(ResourceLocation.STREAM_CODEC);
         return new UnlockedEntrySyncS2CPacket(unlocked);
     }
 }

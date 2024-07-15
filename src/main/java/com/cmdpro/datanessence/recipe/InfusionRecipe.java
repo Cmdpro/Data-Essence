@@ -4,11 +4,16 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
@@ -67,7 +72,7 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(SimpleContainer pContainer, HolderLookup.Provider pRegistryAccess) {
         return output;
     }
 
@@ -76,8 +81,9 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
         return true;
     }
 
+
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
         return output.copy();
     }
 
@@ -96,8 +102,8 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
     }
 
     public static class Serializer implements RecipeSerializer<InfusionRecipe> {
-        public static final Codec<InfusionRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(r -> r.output),
+        public static final MapCodec<InfusionRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                ItemStack.SIMPLE_ITEM_CODEC.fieldOf("result").forGetter(r -> r.output),
                 Ingredient.CODEC.fieldOf("input").forGetter(r -> r.input),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
                 Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
@@ -105,21 +111,39 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
                 Codec.FLOAT.optionalFieldOf("naturalEssenceCost", 0f).forGetter(r -> r.naturalEssenceCost),
                 Codec.FLOAT.optionalFieldOf("exoticEssenceCost", 0f).forGetter(r -> r.exoticEssenceCost)
         ).apply(instance, (result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost) -> new InfusionRecipe(result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost)));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, InfusionRecipe> STREAM_CODEC = StreamCodec.of(
+                (buf, obj) -> {
+                    ItemStack.STREAM_CODEC.encode(buf, obj.output);
+                    Ingredient.CONTENTS_STREAM_CODEC.encode(buf, obj.input);
+                    buf.writeResourceLocation(obj.entry);
+                    buf.writeFloat(obj.essenceCost);
+                    buf.writeFloat(obj.lunarEssenceCost);
+                    buf.writeFloat(obj.naturalEssenceCost);
+                    buf.writeFloat(obj.exoticEssenceCost);
+                },
+                (buf) -> {
+                    ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
+                    Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
+                    ResourceLocation entry = buf.readResourceLocation();
+                    float essenceCost = buf.readFloat();
+                    float lunarEssenceCost = buf.readFloat();
+                    float naturalEssenceCost = buf.readFloat();
+                    float exoticEssenceCost = buf.readFloat();
+                    return new InfusionRecipe(output, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
+                }
+        );
+
         public static final Serializer INSTANCE = new Serializer();
 
         @Override
-        public Codec<InfusionRecipe> codec() {
+        public MapCodec<InfusionRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public InfusionRecipe fromNetwork(FriendlyByteBuf pBuffer) {
-            return pBuffer.readWithCodecTrusted(NbtOps.INSTANCE, CODEC);
-        }
-
-        @Override
-        public void toNetwork(FriendlyByteBuf pBuffer, InfusionRecipe pRecipe) {
-            pBuffer.writeWithCodec(NbtOps.INSTANCE, CODEC, pRecipe);
+        public StreamCodec<RegistryFriendlyByteBuf, InfusionRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

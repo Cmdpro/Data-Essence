@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.item;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.screen.DataDriveScreen;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
@@ -28,12 +29,10 @@ public class DataDrive extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltipComponents, TooltipFlag pIsAdvanced) {
-        super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
-        if (pStack.hasTag()) {
-            if (pStack.getTag().contains("dataId")) {
-                pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.loaded", Entries.entries.get(ResourceLocation.tryParse(pStack.getTag().getString("dataId"))).name).withStyle(ChatFormatting.GRAY));
-            }
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+        if (pStack.has(DataComponentRegistry.DATA_ID)) {
+            pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.loaded", Entries.entries.get(pStack.get(DataComponentRegistry.DATA_ID)).name).withStyle(ChatFormatting.GRAY));
         }
         else {
             pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.empty").withStyle(ChatFormatting.GRAY));
@@ -41,10 +40,8 @@ public class DataDrive extends Item {
     }
     public static Entry getEntry(ItemStack stack) {
         if (stack != null) {
-            if (stack.hasTag()) {
-                if (stack.getTag().contains("dataId")) {
-                    return Entries.entries.get(ResourceLocation.tryParse(stack.getTag().getString("dataId")));
-                }
+            if (stack.has(DataComponentRegistry.DATA_ID)) {
+                return Entries.entries.get(stack.get(DataComponentRegistry.DATA_ID));
             }
         }
         return null;

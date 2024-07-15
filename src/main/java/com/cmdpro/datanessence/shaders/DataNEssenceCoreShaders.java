@@ -13,6 +13,7 @@ import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.server.packs.resources.ResourceProvider;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.RegisterShadersEvent;
 
@@ -23,7 +24,7 @@ import java.util.List;
 import static com.mojang.blaze3d.vertex.DefaultVertexFormat.ELEMENT_NORMAL;
 import static com.mojang.blaze3d.vertex.DefaultVertexFormat.ELEMENT_POSITION;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataNEssenceCoreShaders implements ResourceManagerReloadListener {
     public static List<ShaderHolder> SHADERS = new ArrayList<>();
 

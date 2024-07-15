@@ -7,6 +7,8 @@ import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.screen.databank.DataBankEntries;
 import com.cmdpro.datanessence.screen.databank.DataBankEntry;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,7 +17,7 @@ import java.util.List;
 
 public record PlayerFinishDataBankMinigameC2SPacket(ResourceLocation entry) implements Message {
 
-    public static PlayerFinishDataBankMinigameC2SPacket read(FriendlyByteBuf buf) {
+    public static PlayerFinishDataBankMinigameC2SPacket read(RegistryFriendlyByteBuf buf) {
         ResourceLocation entry = buf.readResourceLocation();
         return new PlayerFinishDataBankMinigameC2SPacket(entry);
     }
@@ -30,14 +32,13 @@ public record PlayerFinishDataBankMinigameC2SPacket(ResourceLocation entry) impl
         }
     }
 
-    @Override
-    public void write(FriendlyByteBuf buf) {
-        buf.writeResourceLocation(entry);
+    public static void write(RegistryFriendlyByteBuf buf, PlayerFinishDataBankMinigameC2SPacket obj) {
+        buf.writeResourceLocation(obj.entry);
     }
 
-    public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "player_finish_data_bank_minigame");
     @Override
-    public ResourceLocation id() {
-        return ID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
+    public static final Type<PlayerFinishDataBankMinigameC2SPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "player_finish_data_bank_minigame"));
 }

@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
@@ -33,18 +34,18 @@ public record UnlockEntryS2CPacket(ResourceLocation unlocked) implements Message
         }
     }
 
-    @Override
-    public void write(FriendlyByteBuf pBuffer) {
-        pBuffer.writeResourceLocation(unlocked);
+    public static void write(RegistryFriendlyByteBuf pBuffer, UnlockEntryS2CPacket obj) {
+        pBuffer.writeResourceLocation(obj.unlocked);
     }
-    public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "unlock_entry");
     @Override
-    public ResourceLocation id() {
-        return ID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
+    public static final Type<UnlockEntryS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "unlock_entry"));
 
-    public static UnlockEntryS2CPacket read(FriendlyByteBuf buf) {
+    public static UnlockEntryS2CPacket read(RegistryFriendlyByteBuf buf) {
         ResourceLocation unlocked = buf.readResourceLocation();
         return new UnlockEntryS2CPacket(unlocked);
     }
+
 }

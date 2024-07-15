@@ -9,6 +9,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.ConnectionProtocol;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -23,12 +24,12 @@ import java.util.List;
 public class TextFileType extends ComputerFileType<TextFile> {
     @Override
     public void toNetwork(FriendlyByteBuf buf, TextFile data) {
-        buf.writeComponent(data.text);
+        buf.writeWithCodec(NbtOps.INSTANCE, ComponentSerialization.CODEC, data.text);
     }
 
     @Override
     public TextFile fromNetwork(FriendlyByteBuf buf) {
-        Component text = buf.readComponent();
+        Component text = buf.readWithCodecTrusted(NbtOps.INSTANCE, ComponentSerialization.CODEC);
         return new TextFile(text);
     }
     @Override

@@ -201,7 +201,7 @@ public class LunarEssenceBombExplosion extends Explosion {
     @Override
     public void finalizeExplosion(boolean pSpawnParticles) {
         if (this.level.isClientSide) {
-            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.GENERIC_EXPLODE, SoundSource.BLOCKS, 4.0F, (1.0F + (this.level.random.nextFloat() - this.level.random.nextFloat()) * 0.2F) * 0.7F, false);
+            this.level.playLocalSound(this.x, this.y, this.z, SoundEvents.GENERIC_EXPLODE.value(), SoundSource.BLOCKS, 4.0F, (1.0F + (this.level.random.nextFloat() - this.level.random.nextFloat()) * 0.2F) * 0.7F, false);
         }
 
         boolean flag = this.interactsWithBlocks();
@@ -272,7 +272,7 @@ public class LunarEssenceBombExplosion extends Explosion {
                 }
             }
             if (!found) {
-                LootTable loottable = ((ServerLevel)level).getServer().getLootData().getLootTable(BlockRegistry.ESSENCE_CRYSTAL.get().getLootTable());
+                LootTable loottable = ((ServerLevel)level).getServer().reloadableRegistries().getLootTable(BlockRegistry.ESSENCE_CRYSTAL.get().getLootTable());
                 List<ItemStack> loot = loottable.getRandomItems(new LootParams.Builder((ServerLevel)level).withParameter(LootContextParams.BLOCK_STATE, BlockRegistry.ESSENCE_CRYSTAL.get().defaultBlockState()).withParameter(LootContextParams.TOOL, ItemStack.EMPTY).withParameter(LootContextParams.ORIGIN, position).create(LootContextParamSets.BLOCK));
                 for (ItemStack o : loot) {
                     ItemEntity entity = new ItemEntity(level, i.x, i.y, i.z, o);

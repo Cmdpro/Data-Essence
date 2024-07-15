@@ -14,6 +14,8 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
@@ -23,19 +25,19 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public record HiddenBlockSyncS2CPacket(Map<ResourceLocation, HiddenBlock> blocks) implements Message {
-    @Override
-    public void write(FriendlyByteBuf buf) {
-        buf.writeMap(blocks, FriendlyByteBuf::writeResourceLocation, HiddenBlocksSerializer::toNetwork);
+
+    public static void write(RegistryFriendlyByteBuf buf, HiddenBlockSyncS2CPacket obj) {
+        buf.writeMap(obj.blocks, ResourceLocation.STREAM_CODEC, HiddenBlocksSerializer::toNetwork);
     }
 
-    public static final ResourceLocation ID = new ResourceLocation(DataNEssence.MOD_ID, "hidden_block_sync");
     @Override
-    public ResourceLocation id() {
-        return ID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
+    public static final Type<HiddenBlockSyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "hidden_block_sync"));
 
-    public static HiddenBlockSyncS2CPacket read(FriendlyByteBuf buf) {
-        Map<ResourceLocation, HiddenBlock> blocks = buf.readMap(FriendlyByteBuf::readResourceLocation, HiddenBlocksSerializer::fromNetwork);
+    public static HiddenBlockSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
+        Map<ResourceLocation, HiddenBlock> blocks = buf.readMap(ResourceLocation.STREAM_CODEC, HiddenBlocksSerializer::fromNetwork);
         return new HiddenBlockSyncS2CPacket(blocks);
     }
 

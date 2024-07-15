@@ -8,12 +8,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
+import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import it.unimi.dsi.fastutil.ints.IntList;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.player.StackedContents;
@@ -45,7 +49,7 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
 
 
     @Override
-    public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+    public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
         return this.result;
     }
 
@@ -72,7 +76,7 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
         return i == this.ingredients.size() && (isSimple ? stackedcontents.canCraft(this, null) : net.neoforged.neoforge.common.util.RecipeMatcher.findMatches(inputs,  this.ingredients) != null);
     }
 
-    public ItemStack assemble(CraftingContainer pContainer, RegistryAccess pRegistryAccess) {
+    public ItemStack assemble(CraftingContainer pContainer, HolderLookup.Provider pRegistryAccess) {
         return this.result.copy();
     }
 
@@ -113,8 +117,8 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
         return exoticEssenceCost;
     }
     public static class Serializer implements RecipeSerializer<ShapelessFabricationRecipe> {
-        public static final Codec<ShapelessFabricationRecipe> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-                ItemStack.ITEM_WITH_COUNT_CODEC.fieldOf("result").forGetter(p_301142_ -> p_301142_.result),
+        public static final MapCodec<ShapelessFabricationRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                ItemStack.SIMPLE_ITEM_CODEC.fieldOf("result").forGetter(p_301142_ -> p_301142_.result),
                 Ingredient.CODEC_NONEMPTY
                         .listOf()
                         .fieldOf("ingredients")
@@ -139,22 +143,46 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
                 Codec.FLOAT.optionalFieldOf("naturalEssenceCost", 0f).forGetter(r -> r.naturalEssenceCost),
                 Codec.FLOAT.optionalFieldOf("exoticEssenceCost", 0f).forGetter(r -> r.exoticEssenceCost)
         ).apply(instance, (result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost) -> new ShapelessFabricationRecipe(result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost)));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, ShapelessFabricationRecipe> STREAM_CODEC = StreamCodec.of(
+                (buf, obj) -> {
+                    buf.writeVarInt(obj.ingredients.size());
+
+                    for (Ingredient ingredient : obj.ingredients) {
+                        Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ingredient);
+                    }
+
+                    ItemStack.STREAM_CODEC.encode(buf, obj.result);
+                    buf.writeResourceLocation(obj.entry);
+                    buf.writeFloat(obj.essenceCost);
+                    buf.writeFloat(obj.lunarEssenceCost);
+                    buf.writeFloat(obj.naturalEssenceCost);
+                    buf.writeFloat(obj.exoticEssenceCost);
+                },
+                (buf) -> {
+                    int i = buf.readVarInt();
+                    NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i, Ingredient.EMPTY);
+                    nonnulllist.replaceAll(p_319735_ -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
+                    ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buf);
+                    ResourceLocation entry = buf.readResourceLocation();
+                    float essenceCost = buf.readFloat();
+                    float lunarEssenceCost = buf.readFloat();
+                    float naturalEssenceCost = buf.readFloat();
+                    float exoticEssenceCost = buf.readFloat();
+                    return new ShapelessFabricationRecipe(itemstack, nonnulllist, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
+                }
+        );
+
         public static final ShapelessFabricationRecipe.Serializer INSTANCE = new ShapelessFabricationRecipe.Serializer();
 
         @Override
-        public Codec<ShapelessFabricationRecipe> codec() {
+        public MapCodec<ShapelessFabricationRecipe> codec() {
             return CODEC;
         }
 
         @Override
-        public ShapelessFabricationRecipe fromNetwork(FriendlyByteBuf pBuffer) {
-            //noinspection deprecation
-            return pBuffer.readWithCodecTrusted(NbtOps.INSTANCE, CODEC);
-        }
-
-        @Override
-        public void toNetwork(FriendlyByteBuf pBuffer, ShapelessFabricationRecipe pRecipe) {
-            pBuffer.writeWithCodec(NbtOps.INSTANCE, CODEC, pRecipe);
+        public StreamCodec<RegistryFriendlyByteBuf, ShapelessFabricationRecipe> streamCodec() {
+            return STREAM_CODEC;
         }
     }
 }
