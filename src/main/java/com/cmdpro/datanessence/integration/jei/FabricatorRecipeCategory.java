@@ -81,22 +81,22 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
     @Override
     public List<Component> getTooltipStrings(IFabricationRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltip = new ArrayList<>();
-        Component essence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 28-22, 0, recipe.getEssenceCost());
+        Component essence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 6, 0, recipe.getEssenceCost());
         if (essence != null) {
             tooltip.clear();
             tooltip.add(essence);
         }
-        Component lunarEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 28-22, 1, recipe.getLunarEssenceCost());
+        Component lunarEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 6, 1, recipe.getLunarEssenceCost());
         if (lunarEssence != null) {
             tooltip.clear();
             tooltip.add(lunarEssence);
         }
-        Component naturalEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 54-22, 2, recipe.getNaturalEssenceCost());
+        Component naturalEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 32, 2, recipe.getNaturalEssenceCost());
         if (naturalEssence != null) {
             tooltip.clear();
             tooltip.add(naturalEssence);
         }
-        Component exoticEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 54-22, 3, recipe.getExoticEssenceCost());
+        Component exoticEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 32, 3, recipe.getExoticEssenceCost());
         if (exoticEssence != null) {
             tooltip.clear();
             tooltip.add(exoticEssence);
