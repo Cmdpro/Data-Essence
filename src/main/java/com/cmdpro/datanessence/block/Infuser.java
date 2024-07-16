@@ -10,10 +10,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -61,9 +58,9 @@ public class Infuser extends Block implements EntityBlock {
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
+
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                 Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof InfuserBlockEntity ent) {

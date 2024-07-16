@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.Containers;
 import net.minecraft.world.SimpleContainer;
@@ -21,11 +22,10 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Math;
+import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
@@ -95,14 +95,14 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
         }
     }
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        tag.put("inventory", itemHandler.serializeNBT());
-        super.saveAdditional(tag);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
+        tag.put("inventory", itemHandler.serializeNBT(pRegistries));
+        super.saveAdditional(tag, pRegistries);
     }
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(nbt, pRegistries);
+        itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
     }
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());

@@ -10,6 +10,7 @@ import com.cmdpro.datanessence.screen.InfuserMenu;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -30,11 +31,10 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Optional;
@@ -117,45 +117,45 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
         return ClientboundBlockEntityDataPacket.create(this);
     }
     @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt){
+    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
         setEssence(tag.getFloat("essence"));
         setLunarEssence(tag.getFloat("lunarEssence"));
         setNaturalEssence(tag.getFloat("naturalEssence"));
         setExoticEssence(tag.getFloat("exoticEssence"));
         workTime = tag.getInt("workTime");
-        item = ItemStack.of(tag.getCompound("item"));
+        item = ItemStack.parse(pRegistries, tag.getCompound("item")).get();
     }
     @Override
-    public CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("essence", getEssence());
         tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
         tag.putFloat("exoticEssence", getExoticEssence());
         tag.putInt("workTime", workTime);
-        tag.put("item", item.save(new CompoundTag()));
+        tag.put("item", item.save(pRegistries, new CompoundTag()));
         return tag;
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        tag.put("input", itemHandler.serializeNBT());
-        tag.put("dataDrive", dataDriveHandler.serializeNBT());
-        tag.put("output", outputItemHandler.serializeNBT());
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
+        tag.put("input", itemHandler.serializeNBT(pRegistries));
+        tag.put("dataDrive", dataDriveHandler.serializeNBT(pRegistries));
+        tag.put("output", outputItemHandler.serializeNBT(pRegistries));
         tag.putFloat("essence", getEssence());
         tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
         tag.putFloat("exoticEssence", getExoticEssence());
         tag.putInt("workTime", workTime);
-        super.saveAdditional(tag);
+        super.saveAdditional(tag, pRegistries);
     }
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        itemHandler.deserializeNBT(nbt.getCompound("input"));
-        dataDriveHandler.deserializeNBT(nbt.getCompound("dataDrive"));
-        outputItemHandler.deserializeNBT(nbt.getCompound("output"));
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(nbt, pRegistries);
+        itemHandler.deserializeNBT(pRegistries, nbt.getCompound("input"));
+        dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("dataDrive"));
+        outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
         setEssence(nbt.getFloat("essence"));
         setLunarEssence(nbt.getFloat("lunarEssence"));
         setNaturalEssence(nbt.getFloat("naturalEssence"));

@@ -29,7 +29,7 @@ public abstract class BlockBehaviourMixin {
         if (pParams.getOptionalParameter(LootContextParams.THIS_ENTITY) instanceof Player player) {
             BlockState state = DataNEssenceUtil.getHiddenBlock(this.asBlock(), player);
             if (state != null) {
-                cir.setReturnValue(state.getBlock().getDrops(pState, pParams));
+                cir.setReturnValue(state.getDrops(pParams));
             }
         }
     }

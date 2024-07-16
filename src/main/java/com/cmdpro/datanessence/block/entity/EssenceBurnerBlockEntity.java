@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.api.EssenceShard;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.screen.EssenceBurnerMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -41,7 +42,7 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
                 return stack.getItem() instanceof EssenceShard;
             }
             if (slot == 1) {
-                return CommonHooks.getBurnTime(stack, RecipeType.SMELTING) > 0;
+                return stack.getBurnTime(RecipeType.SMELTING) > 0;
             }
             return super.isItemValid(slot, stack);
         }
@@ -85,7 +86,7 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
         return ClientboundBlockEntityDataPacket.create(this);
     }
     @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt){
+    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
         setEssence(tag.getFloat("essence"));
         setLunarEssence(tag.getFloat("lunarEssence"));
@@ -95,7 +96,7 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
         burnTime = tag.getFloat("burnTime");
     }
     @Override
-    public CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("essence", getEssence());
         tag.putFloat("lunarEssence", getLunarEssence());
@@ -107,8 +108,8 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        tag.put("inventory", itemHandler.serializeNBT());
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
+        tag.put("inventory", itemHandler.serializeNBT(pRegistries));
         tag.putFloat("essence", getEssence());
         tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
@@ -116,12 +117,12 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
         tag.putFloat("maxBurnTime", maxBurnTime);
         tag.putFloat("burnTime", burnTime);
         tag.putFloat("essenceBurnCooldown", essenceBurnCooldown);
-        super.saveAdditional(tag);
+        super.saveAdditional(tag, pRegistries);
     }
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(nbt, pRegistries);
+        itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
         setEssence(nbt.getFloat("essence"));
         setLunarEssence(nbt.getFloat("lunarEssence"));
         setNaturalEssence(nbt.getFloat("naturalEssence"));
@@ -147,9 +148,9 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
                             pBlockEntity.getLunarEssence()+shard.lunarEssenceAmount <= pBlockEntity.getMaxLunarEssence() &&
                             pBlockEntity.getNaturalEssence()+shard.naturalEssenceAmount <= pBlockEntity.getMaxNaturalEssence() &&
                             pBlockEntity.getExoticEssence()+shard.exoticEssenceAmount <= pBlockEntity.getMaxExoticEssence()) {
-                        if (CommonHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING) > 0) {
+                        if (pBlockEntity.itemHandler.getStackInSlot(1).getBurnTime(RecipeType.SMELTING) > 0) {
                             pBlockEntity.itemHandler.extractItem(1, 1, false);
-                            pBlockEntity.maxBurnTime = CommonHooks.getBurnTime(pBlockEntity.itemHandler.getStackInSlot(1), RecipeType.SMELTING);
+                            pBlockEntity.maxBurnTime = pBlockEntity.itemHandler.getStackInSlot(1).getBurnTime(RecipeType.SMELTING);
                             pBlockEntity.burnTime = pBlockEntity.maxBurnTime;
                         }
                     }

@@ -8,7 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -57,16 +59,11 @@ public class Fabricator extends Block implements EntityBlock {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                 Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof FabricatorBlockEntity ent) {
-                if (pPlayer.isHolding(ItemRegistry.MAGIC_WRENCH.get())) {
-                    FabricatorBlockEntity.use(pState, pLevel, pPos, pPlayer, pHand, pHit);
-                } else {
-                    pPlayer.openMenu(ent, pPos);
-                }
+                pPlayer.openMenu(ent, pPos);
             } else {
                 throw new IllegalStateException("Our Container provider is missing!");
             }
@@ -74,6 +71,15 @@ public class Fabricator extends Block implements EntityBlock {
 
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
+        if (pPlayer.isHolding(ItemRegistry.MAGIC_WRENCH.get())) {
+            FabricatorBlockEntity.use(pState, pLevel, pPos, pPlayer, pHand, pHitResult);
+        }
+        return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
+    }
+
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {

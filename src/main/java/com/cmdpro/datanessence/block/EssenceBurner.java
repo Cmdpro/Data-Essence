@@ -59,8 +59,7 @@ public class EssenceBurner extends Block implements EntityBlock {
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                 Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if(entity instanceof EssenceBurnerBlockEntity ent) {

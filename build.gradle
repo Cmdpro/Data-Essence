@@ -20,7 +20,11 @@ base {
 // Mojang ships Java 21 to end users starting in 1.20.5, so mods should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
+minecraft {
+    accessTransformers {
+        file('src/main/resources/META-INF/accesstransformer.cfg')
+    }
+}
 
 // Default run configurations.
 // These can be tweaked, removed, or duplicated as needed.
@@ -122,7 +126,6 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
     implementation "com.eliotlash.mclib:mclib:20"
     compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")

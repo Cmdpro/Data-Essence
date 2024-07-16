@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,13 +23,13 @@ public class ExoticEssenceBatteryBlockEntity extends EssenceContainer {
         return DataNEssenceConfig.essenceBatteryMax;
     }
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
+        super.saveAdditional(tag, pRegistries);
         tag.putFloat("exoticEssence", getExoticEssence());
     }
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(nbt, pRegistries);
         setExoticEssence(nbt.getFloat("exoticEssence"));
     }
 }

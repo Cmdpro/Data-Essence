@@ -32,7 +32,7 @@ public class Computer extends Block implements EntityBlock {
     private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
 
     @Override
-    public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof ComputerBlockEntity ent) {
                 if (ent.type != null) {

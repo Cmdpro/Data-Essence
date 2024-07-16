@@ -8,6 +8,7 @@ import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
 import com.cmdpro.datanessence.screen.FabricatorMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -33,11 +34,10 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import javax.annotation.Nonnull;
@@ -97,39 +97,39 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         return ClientboundBlockEntityDataPacket.create(this);
     }
     @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt){
+    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
         setEssence(tag.getFloat("essence"));
         setLunarEssence(tag.getFloat("lunarEssence"));
         setNaturalEssence(tag.getFloat("naturalEssence"));
         setExoticEssence(tag.getFloat("exoticEssence"));
 
-        item = ItemStack.of(tag.getCompound("item"));
+        item = ItemStack.parse(pRegistries, tag.get("item")).get();
     }
     @Override
-    public CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("essence", getEssence());
         tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
         tag.putFloat("exoticEssence", getExoticEssence());
-        tag.put("item", item.save(new CompoundTag()));
+        tag.put("item", item.save(pRegistries));
         return tag;
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        tag.put("inventory", itemHandler.serializeNBT());
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
+        tag.put("inventory", itemHandler.serializeNBT(pRegistries));
         tag.putFloat("essence", getEssence());
         tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
         tag.putFloat("exoticEssence", getExoticEssence());
-        super.saveAdditional(tag);
+        super.saveAdditional(tag, pRegistries);
     }
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(nbt, pRegistries);
+        itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
         setEssence(nbt.getFloat("essence"));
         setLunarEssence(nbt.getFloat("lunarEssence"));
         setNaturalEssence(nbt.getFloat("naturalEssence"));

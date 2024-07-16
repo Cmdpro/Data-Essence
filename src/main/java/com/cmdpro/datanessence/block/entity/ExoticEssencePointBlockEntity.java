@@ -6,14 +6,14 @@ import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
+import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.awt.*;
@@ -49,13 +49,13 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity i
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
-        super.saveAdditional(tag);
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
+        super.saveAdditional(tag, pRegistries);
         tag.putFloat("exoticEssence", getExoticEssence());
     }
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(nbt, pRegistries);
         setExoticEssence(nbt.getFloat("exoticEssence"));
     }
 

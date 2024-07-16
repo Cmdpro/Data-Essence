@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.entity;
 import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -12,16 +13,16 @@ public class EssenceBufferBlockEntity extends EssenceContainer {
         super(BlockEntityRegistry.ESSENCE_BUFFER.get(), pPos, pBlockState);
     }
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag) {
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.putFloat("essence", getEssence());
         tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
         tag.putFloat("exoticEssence", getExoticEssence());
-        super.saveAdditional(tag);
+        super.saveAdditional(tag, pRegistries);
     }
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
+    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(nbt, pRegistries);
         setEssence(nbt.getFloat("essence"));
         setLunarEssence(nbt.getFloat("lunarEssence"));
         setNaturalEssence(nbt.getFloat("naturalEssence"));
