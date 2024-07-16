@@ -8,5 +8,5 @@
   "key": {
     "C": { "item": "datanessence:capacitance_panel" }
   },
-  "result": { "item": "datanessence:conductance_rod", "count": 2 }
+  "result": { "id": "datanessence:conductance_rod", "count": 2 }
 }

@@ -133,7 +133,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
     public static class Serializer implements RecipeSerializer<ShapedFabricationRecipe> {
         public static final MapCodec<ShapedFabricationRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 ShapedRecipePattern.MAP_CODEC.forGetter(p_311733_ -> p_311733_.pattern),
-                ItemStack.SIMPLE_ITEM_CODEC.fieldOf("result").forGetter(p_311730_ -> p_311730_.result),
+                ItemStack.CODEC.fieldOf("result").forGetter(p_311730_ -> p_311730_.result),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
                 Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
                 Codec.FLOAT.optionalFieldOf("lunarEssenceCost", 0f).forGetter(r -> r.lunarEssenceCost),

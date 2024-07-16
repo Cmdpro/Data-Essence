@@ -13,5 +13,5 @@
     "P": { "item": "datanessence:capacitance_panel" },
     "R": { "item": "datanessence:conductance_rod" }
   },
-  "result": { "item": "datanessence:logical_matrix" }
+  "result": { "id": "datanessence:logical_matrix" }
 }

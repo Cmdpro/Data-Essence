@@ -13,5 +13,5 @@
     "L": { "item": "datanessence:logical_matrix" },
     "C": { "item": "datanessence:capacitance_panel" }
   },
-  "result": { "item": "datanessence:data_drive" }
+  "result": { "id": "datanessence:data_drive" }
 }

@@ -103,8 +103,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         setLunarEssence(tag.getFloat("lunarEssence"));
         setNaturalEssence(tag.getFloat("naturalEssence"));
         setExoticEssence(tag.getFloat("exoticEssence"));
-
-        item = ItemStack.parse(pRegistries, tag.get("item")).get();
+        item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -113,7 +112,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
         tag.putFloat("exoticEssence", getExoticEssence());
-        tag.put("item", item.save(pRegistries));
+        tag.put("item", item.saveOptional(pRegistries));
         return tag;
     }
 

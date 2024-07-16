@@ -8,5 +8,5 @@
   "key": {
     "C": { "item": "minecraft:copper_ingot" }
   },
-  "result": { "item": "datanessence:capacitance_panel", "count": 2 }
+  "result": { "id": "datanessence:capacitance_panel", "count": 2 }
 }

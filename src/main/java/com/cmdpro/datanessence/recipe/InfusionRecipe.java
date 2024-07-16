@@ -103,7 +103,7 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
 
     public static class Serializer implements RecipeSerializer<InfusionRecipe> {
         public static final MapCodec<InfusionRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                ItemStack.SIMPLE_ITEM_CODEC.fieldOf("result").forGetter(r -> r.output),
+                ItemStack.CODEC.fieldOf("result").forGetter(r -> r.output),
                 Ingredient.CODEC.fieldOf("input").forGetter(r -> r.input),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
                 Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),

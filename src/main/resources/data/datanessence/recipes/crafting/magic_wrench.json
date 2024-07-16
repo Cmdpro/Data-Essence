@@ -10,5 +10,5 @@
     "A": { "item": "minecraft:amethyst_shard" },
     "O": { "item": "minecraft:obsidian" }
   },
-  "result": { "item": "datanessence:magic_wrench" }
+  "result": { "id": "datanessence:magic_wrench" }
 }

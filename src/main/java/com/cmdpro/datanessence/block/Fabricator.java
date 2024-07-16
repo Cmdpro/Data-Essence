@@ -76,8 +76,9 @@ public class Fabricator extends Block implements EntityBlock {
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
         if (pPlayer.isHolding(ItemRegistry.MAGIC_WRENCH.get())) {
             FabricatorBlockEntity.use(pState, pLevel, pPos, pPlayer, pHand, pHitResult);
+            return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
         }
-        return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
+        return super.useItemOn(pStack, pState, pLevel, pPos, pPlayer, pHand, pHitResult);
     }
 
     @Nullable

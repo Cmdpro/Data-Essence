@@ -6,8 +6,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
@@ -38,16 +40,16 @@ public class DataTabSerializer {
     @Nonnull
     public static DataTab fromNetwork(FriendlyByteBuf buf) {
         ResourceLocation id = buf.readResourceLocation();
-        ItemStack icon = buf.readItem();
-        Component name = buf.readComponent();
+        ItemStack icon = buf.readWithCodecTrusted(NbtOps.INSTANCE, ItemStack.CODEC);
+        Component name = buf.readWithCodecTrusted(NbtOps.INSTANCE, ComponentSerialization.CODEC);
         int priority = buf.readInt();
         DataTab entry = new DataTab(id, icon, name, priority);
         return entry;
     }
     public static void toNetwork(FriendlyByteBuf buf, DataTab entry) {
         buf.writeResourceLocation(entry.id);
-        buf.writeItem(entry.icon);
-        buf.writeComponent(entry.name);
+        buf.writeWithCodec(NbtOps.INSTANCE, ItemStack.CODEC, entry.icon);
+        buf.writeWithCodec(NbtOps.INSTANCE, ComponentSerialization.CODEC, entry.name);
         buf.writeInt(entry.priority);
     }
 }

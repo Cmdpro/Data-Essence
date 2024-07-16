@@ -14,5 +14,5 @@
     "C": { "item": "minecraft:copper_ingot" },
     "O": { "item": "minecraft:obsidian" }
   },
-  "result": { "item": "datanessence:essence_burner" }
+  "result": { "id": "datanessence:essence_burner" }
 }

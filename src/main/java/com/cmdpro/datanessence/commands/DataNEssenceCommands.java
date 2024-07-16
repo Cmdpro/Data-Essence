@@ -60,9 +60,9 @@ public class DataNEssenceCommands {
                 if(i != o && i.x == o.x && i.y == o.y && i.tab.equals(o.tab)) {
                     foundIssues = true;
                     if (command.getSource().isPlayer()) {
-                        command.getSource().getEntity().sendSystemMessage(Component.translatable("commands.datanessence.check_entry_overlaps.found", i.id, o.id));
+                        command.getSource().getEntity().sendSystemMessage(Component.translatable("commands.datanessence.check_entry_overlaps.found", i.id.toString(), o.id.toString()));
                     } else {
-                        DataNEssence.LOGGER.warn("Entry \"" + i.id + "\" is overlapping with entry \"" + o.id + "\"");
+                        DataNEssence.LOGGER.warn("Entry \"" + i.id.toString() + "\" is overlapping with entry \"" + o.id.toString() + "\"");
                     }
                 }
             }
@@ -104,14 +104,14 @@ public class DataNEssenceCommands {
                 if (!unlockedEntries.contains(entry)) {
                     DataNEssenceUtil.DataTabletUtil.unlockEntryAndParents(player, entry);
                     command.getSource().sendSuccess(() -> {
-                        return Component.translatable("commands.datanessence.unlock.unlock_entry", entry);
+                        return Component.translatable("commands.datanessence.unlock.unlock_entry", entry.toString());
                     }, true);
                 } else {
-                    command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_already_unlocked", entry));
+                    command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_already_unlocked", entry.toString()));
                     return 0;
                 }
             } else {
-                command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_doesnt_exist", entry));
+                command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_doesnt_exist", entry.toString()));
                 return 0;
             }
         }

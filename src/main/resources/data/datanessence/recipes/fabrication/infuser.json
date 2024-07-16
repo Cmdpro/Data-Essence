@@ -15,5 +15,5 @@
     "R": { "item": "datanessence:conductance_rod" },
     "O": { "item": "datanessence:polished_obsidian" }
   },
-  "result": { "item": "datanessence:infuser" }
+  "result": { "id": "datanessence:infuser" }
 }

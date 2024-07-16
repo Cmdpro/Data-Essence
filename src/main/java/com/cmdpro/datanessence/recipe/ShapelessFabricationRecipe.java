@@ -118,7 +118,7 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
     }
     public static class Serializer implements RecipeSerializer<ShapelessFabricationRecipe> {
         public static final MapCodec<ShapelessFabricationRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                ItemStack.SIMPLE_ITEM_CODEC.fieldOf("result").forGetter(p_301142_ -> p_301142_.result),
+                ItemStack.CODEC.fieldOf("result").forGetter(p_301142_ -> p_301142_.result),
                 Ingredient.CODEC_NONEMPTY
                         .listOf()
                         .fieldOf("ingredients")

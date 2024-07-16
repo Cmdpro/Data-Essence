@@ -41,7 +41,7 @@ import java.util.Optional;
 @EventBusSubscriber(modid = DataNEssence.MOD_ID)
 public class ModEvents {
     @SubscribeEvent
-    public static void onLivingEntityTick(EntityTickEvent event) {
+    public static void onLivingEntityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity ent) {
             if (event.getEntity().getBlockStateOn().getBlock() instanceof TraversiteRoad road) {
                 if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID) == null) {
@@ -58,7 +58,7 @@ public class ModEvents {
         }
     }
     @SubscribeEvent
-    public static void onPlayerTick(PlayerTickEvent event) {
+    public static void onPlayerTick(PlayerTickEvent.Pre event) {
         if (!event.getEntity().level().isClientSide) {
             Optional<BlockEntity> ent = event.getEntity().getData(AttachmentTypeRegistry.LINK_FROM);
             if (ent.isPresent()) {

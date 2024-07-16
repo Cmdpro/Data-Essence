@@ -13,13 +13,11 @@ uniform int FogShape;
 
 uniform mat4 InvViewMat;
 
-out float vertexDistance;
 out vec4 screenUV;
 
 void main() {
-    vec4 clipSpacePosition = ProjMat * ModelViewMat * vec4(Position, 1.0);
+    vec3 pos = Position + ChunkOffset;
+    vec4 clipSpacePosition = ProjMat * ModelViewMat * vec4(pos, 1.0);
     gl_Position = clipSpacePosition;
     screenUV = projection_from_position(clipSpacePosition);
-
-    vertexDistance = fog_distance(ModelViewMat, Position, FogShape);
 }

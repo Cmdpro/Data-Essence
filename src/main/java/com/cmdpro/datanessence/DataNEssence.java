@@ -61,6 +61,7 @@ public class DataNEssence
         ParticleRegistry.PARTICLE_TYPES.register(bus);
         AttachmentTypeRegistry.ATTACHMENT_TYPES.register(bus);
         ComputerFileTypeRegistry.COMPUTER_FILE_TYPES.register(bus);
+        DataComponentRegistry.DATA_COMPONENTS.register(bus);
         random = RandomSource.create();
     }
     @SubscribeEvent

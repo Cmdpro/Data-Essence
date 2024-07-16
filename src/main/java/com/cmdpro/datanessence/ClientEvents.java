@@ -83,11 +83,16 @@ public class ClientEvents {
         GlStateManager._glBindFramebuffer(GlConst.GL_FRAMEBUFFER, 0);
     }
     @SubscribeEvent
-    public static void onClientTick(ClientTickEvent event)
+    public static void onClientTickPre(ClientTickEvent.Pre event)
     {
         for (ShaderInstance i : ShaderManager.instances) {
             i.tick();
-        }/*
+        }
+    }
+    @SubscribeEvent
+    public static void onClientTickPost(ClientTickEvent.Post event)
+    {
+        /*
         Minecraft mc = Minecraft.getInstance();
         if (event.phase == TickEvent.Phase.END && mc.level != null)
         {

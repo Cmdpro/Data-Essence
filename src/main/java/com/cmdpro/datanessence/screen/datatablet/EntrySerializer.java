@@ -7,8 +7,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
@@ -74,10 +76,10 @@ public class EntrySerializer {
     @Nonnull
     public static Entry fromNetwork(FriendlyByteBuf buf) {
         ResourceLocation id = buf.readResourceLocation();
-        ItemStack icon = buf.readItem();
         int x = buf.readInt();
         int y = buf.readInt();
-        Component name = buf.readComponent();
+        ItemStack icon = buf.readWithCodecTrusted(NbtOps.INSTANCE, ItemStack.CODEC);
+        Component name = buf.readWithCodecTrusted(NbtOps.INSTANCE, ComponentSerialization.CODEC);
         Page[] pages = buf.readList(EntrySerializer::pageFromNetwork).toArray(new Page[0]);
         List<ResourceLocation> parents = buf.readList(FriendlyByteBuf::readResourceLocation);
         boolean critical = buf.readBoolean();
@@ -97,10 +99,10 @@ public class EntrySerializer {
     }
     public static void toNetwork(FriendlyByteBuf buf, Entry entry) {
         buf.writeResourceLocation(entry.id);
-        buf.writeItem(entry.icon);
         buf.writeInt(entry.x);
         buf.writeInt(entry.y);
-        buf.writeComponent(entry.name);
+        buf.writeWithCodec(NbtOps.INSTANCE, ItemStack.CODEC, entry.icon);
+        buf.writeWithCodec(NbtOps.INSTANCE, ComponentSerialization.CODEC, entry.name);
         buf.writeCollection(Arrays.stream(entry.pages).toList(), EntrySerializer::pageToNetwork);
         List<ResourceLocation> parents = new ArrayList<>();
         for (Entry i : entry.getParentEntries()) {

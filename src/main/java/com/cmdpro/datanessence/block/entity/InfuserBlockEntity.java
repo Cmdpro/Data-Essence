@@ -124,7 +124,7 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
         setNaturalEssence(tag.getFloat("naturalEssence"));
         setExoticEssence(tag.getFloat("exoticEssence"));
         workTime = tag.getInt("workTime");
-        item = ItemStack.parse(pRegistries, tag.getCompound("item")).get();
+        item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -134,7 +134,7 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
         tag.putFloat("naturalEssence", getNaturalEssence());
         tag.putFloat("exoticEssence", getExoticEssence());
         tag.putInt("workTime", workTime);
-        tag.put("item", item.save(pRegistries, new CompoundTag()));
+        tag.put("item", item.saveOptional(pRegistries));
         return tag;
     }
 
