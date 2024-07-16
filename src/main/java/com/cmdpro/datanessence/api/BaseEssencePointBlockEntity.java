@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.api;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -22,9 +23,10 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
     }
     public abstract Color linkColor();
 
+
     @Override
-    protected void saveAdditional(CompoundTag pTag) {
-        super.saveAdditional(pTag);
+    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        super.saveAdditional(pTag, pRegistries);
         pTag.putBoolean("hasLink", link != null);
         if (link != null) {
             pTag.putInt("linkX", link.getX());
@@ -70,8 +72,9 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
     }
+
     @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt) {
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
         CompoundTag tag = pkt.getTag();
         if (tag.getBoolean("hasLink")) {
             link = new BlockPos(tag.getInt("linkX"), tag.getInt("linkY"), tag.getInt("linkZ"));
@@ -79,8 +82,9 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
             link = null;
         }
     }
+
     @Override
-    public CompoundTag getUpdateTag() {
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.putBoolean("hasLink", link != null);
         if (link != null) {
@@ -95,9 +99,10 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
+
     @Override
-    public void load(CompoundTag pTag) {
-        super.load(pTag);
+    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(pTag, pRegistries);
         if (pTag.getBoolean("hasLink")) {
             link = new BlockPos(pTag.getInt("linkX"), pTag.getInt("linkY"), pTag.getInt("linkZ"));
         }

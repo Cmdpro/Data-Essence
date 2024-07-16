@@ -34,7 +34,7 @@ public class TextFileType extends ComputerFileType<TextFile> {
     }
     @Override
     public TextFile fromJson(JsonObject obj) {
-        return new TextFile(ComponentSerialization.CODEC.parse(JsonOps.INSTANCE, obj.get("text")).get().left().get());
+        return new TextFile(ComponentSerialization.CODEC.parse(JsonOps.INSTANCE, obj.get("text")).result().get());
     }
 
     @Override
