@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.renderers.block.*;
 import com.cmdpro.datanessence.renderers.entity.AncientSentinelRenderer;
 import com.cmdpro.datanessence.renderers.entity.EmptyEntityRenderer;
 import com.cmdpro.datanessence.renderers.layer.HornsLayer;
+import com.cmdpro.datanessence.renderers.layer.TailLayer;
 import com.cmdpro.datanessence.renderers.layer.WingsLayer;
 import com.cmdpro.datanessence.screen.InfuserScreen;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
@@ -47,6 +48,7 @@ public class ClientModEvents {
             LivingEntityRenderer skin = event.getSkin(i);
             skin.addLayer(new WingsLayer(skin, event.getEntityModels()));
             skin.addLayer(new HornsLayer(skin, event.getEntityModels()));
+            skin.addLayer(new TailLayer(skin, event.getEntityModels()));
         }
     }
     @SubscribeEvent
@@ -61,6 +63,7 @@ public class ClientModEvents {
         event.enqueueWork(() -> {
             ClientHooks.registerLayerDefinition(WingsLayer.wingsLocation, WingsLayer.WingsModel::createLayer);
             ClientHooks.registerLayerDefinition(HornsLayer.hornsLocation, HornsLayer.HornsModel::createLayer);
+            ClientHooks.registerLayerDefinition(TailLayer.tailLocation, TailLayer.TailModel::createLayer);
         });
 
         progressionShader = new ProgressionShader();
