@@ -6,6 +6,8 @@ import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.renderers.block.*;
 import com.cmdpro.datanessence.renderers.entity.AncientSentinelRenderer;
 import com.cmdpro.datanessence.renderers.entity.EmptyEntityRenderer;
+import com.cmdpro.datanessence.renderers.layer.HornsLayer;
+import com.cmdpro.datanessence.renderers.layer.WingsLayer;
 import com.cmdpro.datanessence.screen.InfuserScreen;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
 import com.cmdpro.datanessence.screen.EssenceBurnerScreen;
@@ -14,11 +16,14 @@ import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.resources.PlayerSkin;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
@@ -37,6 +42,14 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.INFUSER.get(), InfuserRenderer::new);
     }
     @SubscribeEvent
+    public static void addLayers(EntityRenderersEvent.AddLayers event) {
+        for (PlayerSkin.Model i : event.getSkins()) {
+            LivingEntityRenderer skin = event.getSkin(i);
+            skin.addLayer(new WingsLayer(skin, event.getEntityModels()));
+            skin.addLayer(new HornsLayer(skin, event.getEntityModels()));
+        }
+    }
+    @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
         EntityRenderers.register(EntityRegistry.ESSENCE_BOMB.get(), ThrownItemRenderer::new);
         EntityRenderers.register(EntityRegistry.LUNAR_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
@@ -45,8 +58,15 @@ public class ClientModEvents {
         EntityRenderers.register(EntityRegistry.BLACK_HOLE.get(), EmptyEntityRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL.get(), AncientSentinelRenderer::new);
 
+        event.enqueueWork(() -> {
+            ClientHooks.registerLayerDefinition(WingsLayer.wingsLocation, WingsLayer.WingsModel::createLayer);
+            ClientHooks.registerLayerDefinition(HornsLayer.hornsLocation, HornsLayer.HornsModel::createLayer);
+        });
+
         progressionShader = new ProgressionShader();
         ShaderManager.addShader(progressionShader);
+
+
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {

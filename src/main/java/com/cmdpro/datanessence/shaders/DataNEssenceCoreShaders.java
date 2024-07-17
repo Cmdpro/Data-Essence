@@ -21,8 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mojang.blaze3d.vertex.DefaultVertexFormat.ELEMENT_NORMAL;
-import static com.mojang.blaze3d.vertex.DefaultVertexFormat.ELEMENT_POSITION;
+import static com.mojang.blaze3d.vertex.DefaultVertexFormat.*;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataNEssenceCoreShaders implements ResourceManagerReloadListener {

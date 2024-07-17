@@ -17,4 +17,11 @@ public class DataNEssenceRenderTypes extends RenderType {
             false,
             false,
             RenderType.CompositeState.builder().setShaderState(DataNEssenceCoreShaders.WARPINGPOINT.shard).createCompositeState(false));
+    public static final RenderType TRANSPARENT = create("transparent",
+            DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
+            VertexFormat.Mode.QUADS,
+            256,
+            false,
+            false,
+            RenderType.CompositeState.builder().setShaderState(RenderStateShard.POSITION_COLOR_TEX_LIGHTMAP_SHADER).createCompositeState(false));
 }
