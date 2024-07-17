@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "datanessence:block/fluid_spiller_down"
+    },
+    "facing=east": {
+      "model": "datanessence:block/fluid_spiller_east"
+    },
+    "facing=north": {
+      "model": "datanessence:block/fluid_spiller_north"
+    },
+    "facing=south": {
+      "model": "datanessence:block/fluid_spiller_south"
+    },
+    "facing=up": {
+      "model": "datanessence:block/fluid_spiller_up"
+    },
+    "facing=west": {
+      "model": "datanessence:block/fluid_spiller_west"
+    }
+  }
+}

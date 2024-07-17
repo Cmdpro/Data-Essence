@@ -59,6 +59,9 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
     public void transfer(BlockEntity other) {
         IFluidHandler resolved = level.getCapability(Capabilities.FluidHandler.BLOCK, other.getBlockPos(), getDirection());
         IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, getBlockPos(), null);
+        if (resolved == null || resolved2 == null) {
+            return;
+        }
         for (int o = 0; o < resolved2.getTanks(); o++) {
             FluidStack copy = resolved2.getFluidInTank(o).copy();
             if (!copy.isEmpty()) {
@@ -83,6 +86,9 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
     public void take(BlockEntity other) {
         IFluidHandler resolved = level.getCapability(Capabilities.FluidHandler.BLOCK, getBlockPos(), null);
         IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, other.getBlockPos(), getDirection());
+        if (resolved == null || resolved2 == null) {
+            return;
+        }
         for (int o = 0; o < resolved2.getTanks(); o++) {
             FluidStack copy = resolved2.getFluidInTank(o).copy();
             if (!copy.isEmpty()) {

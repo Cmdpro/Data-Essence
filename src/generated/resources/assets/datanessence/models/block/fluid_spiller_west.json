@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "datanessence:block/fluid_spiller_bottom",
+    "east": "datanessence:block/fluid_spiller_side",
+    "north": "datanessence:block/fluid_spiller_side",
+    "particle": "datanessence:block/fluid_spiller_side",
+    "south": "datanessence:block/fluid_spiller_side",
+    "up": "datanessence:block/fluid_spiller_top",
+    "west": "datanessence:block/fluid_spiller_pump"
+  }
+}

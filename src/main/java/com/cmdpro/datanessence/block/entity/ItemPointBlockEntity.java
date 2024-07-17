@@ -68,6 +68,9 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
     public void transfer(BlockEntity other) {
         IItemHandler resolved = level.getCapability(Capabilities.ItemHandler.BLOCK, other.getBlockPos(), getDirection());
         IItemHandler resolved2 = level.getCapability(Capabilities.ItemHandler.BLOCK, getBlockPos(), null);
+        if (resolved == null || resolved2 == null) {
+            return;
+        }
         boolean movedAnything = false;
         for (int o = 0; o < resolved2.getSlots(); o++) {
             ItemStack copy = resolved2.getStackInSlot(o).copy();
@@ -120,6 +123,9 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
     public void take(BlockEntity other) {
         IItemHandler resolved = level.getCapability(Capabilities.ItemHandler.BLOCK, getBlockPos(), null);
         IItemHandler resolved2 = level.getCapability(Capabilities.ItemHandler.BLOCK, other.getBlockPos(), getDirection());
+        if (resolved == null || resolved2 == null) {
+            return;
+        }
         boolean movedAnything = false;
         for (int o = 0; o < resolved2.getSlots(); o++) {
             ItemStack copy = resolved2.getStackInSlot(o).copy();

@@ -47,6 +47,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         essenceBurner(BlockRegistry.ESSENCE_BURNER);
         dataBank(BlockRegistry.DATA_BANK);
         fluidCollector(BlockRegistry.FLUID_COLLECTOR);
+        fluidCollector(BlockRegistry.FLUID_SPILLER);
 
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
     }
