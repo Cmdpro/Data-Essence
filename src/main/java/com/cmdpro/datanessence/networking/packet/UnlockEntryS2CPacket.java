@@ -19,23 +19,31 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import java.util.List;
 import java.util.function.Supplier;
 
-public record UnlockEntryS2CPacket(ResourceLocation unlocked) implements Message {
+public record UnlockEntryS2CPacket(ResourceLocation unlocked, boolean incomplete) implements Message {
     @Override
     public void handleClient(Minecraft minecraft, Player player) {
         Entry entry = Entries.entries.get(unlocked);
         if (entry != null) {
-            if (!ClientPlayerUnlockedEntries.getUnlocked().contains(unlocked)) {
-                ClientPlayerUnlockedEntries.getUnlocked().add(unlocked);
+            if (incomplete) {
+                if (!ClientPlayerUnlockedEntries.getIncomplete().contains(unlocked)) {
+                    ClientPlayerUnlockedEntries.getIncomplete().add(unlocked);
+                }
+            } else {
+                ClientPlayerUnlockedEntries.getIncomplete().remove(unlocked);
+                if (!ClientPlayerUnlockedEntries.getUnlocked().contains(unlocked)) {
+                    ClientPlayerUnlockedEntries.getUnlocked().add(unlocked);
+                }
+                if (entry.critical) {
+                    ClientDataNEssenceUtil.unlockedCriticalData(entry);
+                }
+                ClientDataNEssenceUtil.updateWorld();
             }
-            if (entry.critical) {
-                ClientDataNEssenceUtil.unlockedCriticalData(entry);
-            }
-            ClientDataNEssenceUtil.updateWorld();
         }
     }
 
     public static void write(RegistryFriendlyByteBuf pBuffer, UnlockEntryS2CPacket obj) {
         pBuffer.writeResourceLocation(obj.unlocked);
+        pBuffer.writeBoolean(obj.incomplete);
     }
     @Override
     public Type<? extends CustomPacketPayload> type() {
@@ -45,7 +53,8 @@ public record UnlockEntryS2CPacket(ResourceLocation unlocked) implements Message
 
     public static UnlockEntryS2CPacket read(RegistryFriendlyByteBuf buf) {
         ResourceLocation unlocked = buf.readResourceLocation();
-        return new UnlockEntryS2CPacket(unlocked);
+        boolean incomplete = buf.readBoolean();
+        return new UnlockEntryS2CPacket(unlocked, incomplete);
     }
 
 }

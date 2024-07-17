@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
@@ -42,9 +43,10 @@ public class DataNEssenceCommands {
                                 .suggests((stack, builder) -> {
                                     return SharedSuggestionProvider.suggest(Entries.entries.keySet().stream().map(ResourceLocation::toString), builder);
                                 })
+                                .then(Commands.argument("incomplete", BoolArgumentType.bool())
                                 .executes((command -> {
                                     return unlock(command);
-                                })))
+                                }))))
                 )
                 .then(Commands.literal("check_entry_overlaps")
                         .executes(command -> {
@@ -88,6 +90,8 @@ public class DataNEssenceCommands {
             Player player = (Player) command.getSource().getEntity();
             List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
             unlockedEntries.clear();
+            List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
+            incompleteEntries.clear();
             DataNEssenceUtil.PlayerDataUtil.updateUnlockedEntries((ServerPlayer)player);
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.reset_learned");
@@ -99,10 +103,11 @@ public class DataNEssenceCommands {
         if(command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();
             ResourceLocation entry = command.getArgument("id", ResourceLocation.class);
+            boolean incomplete = command.getArgument("incomplete", Boolean.class);
             if (Entries.entries.containsKey(entry)) {
                 List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
                 if (!unlockedEntries.contains(entry)) {
-                    DataNEssenceUtil.DataTabletUtil.unlockEntryAndParents(player, entry);
+                    DataNEssenceUtil.DataTabletUtil.unlockEntryAndParents(player, entry, incomplete);
                     command.getSource().sendSuccess(() -> {
                         return Component.translatable("commands.datanessence.unlock.unlock_entry", entry.toString());
                     }, true);

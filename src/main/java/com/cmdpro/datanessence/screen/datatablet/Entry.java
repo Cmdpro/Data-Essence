@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Entry {
 
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical, boolean incomplete, Page[] incompletePages) {
         this.id = id;
         this.icon = new ItemStack(icon);
         this.x = x;
@@ -23,8 +23,10 @@ public class Entry {
         this.name = name;
         this.critical = critical;
         this.tab = tab;
+        this.incomplete = incomplete;
+        this.incompletePages = incompletePages;
     }
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical, boolean incomplete, Page[] incompletePages) {
         this.id = id;
         this.icon = icon;
         this.x = x;
@@ -34,6 +36,17 @@ public class Entry {
         this.name = name;
         this.critical = critical;
         this.tab = tab;
+        this.incomplete = incomplete;
+        this.incompletePages = incompletePages;
+    }
+    public Page[] getPagesClient() {
+        return isIncompleteClient() ? incompletePages : pages;
+    }
+    public boolean isIncompleteClient() {
+        return ClientPlayerUnlockedEntries.getIncomplete().contains(id);
+    }
+    public boolean isVisibleClient() {
+        return isUnlockedClient() && (ClientPlayerUnlockedEntries.getUnlocked().contains(id) || ClientPlayerUnlockedEntries.getIncomplete().contains(id));
     }
     public boolean isUnlockedClient() {
         boolean unlocked = true;
@@ -83,4 +96,6 @@ public class Entry {
     public Page[] pages;
     private ResourceLocation[] parents;
     private Entry[] parentEntries;
+    public boolean incomplete;
+    public Page[] incompletePages;
 }

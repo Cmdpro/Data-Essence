@@ -70,7 +70,7 @@ public class DataTabletScreen extends Screen {
         if (pButton == 0 && screenType == 0) {
             for (Entry i : Entries.entries.values()) {
                 if (i.tab.equals(currentTab.id)) {
-                    if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                    if (i.isVisibleClient()) {
                         if (pMouseX >= ((i.x * 20) - 10) + offsetX + x && pMouseX <= ((i.x * 20) + 10) + offsetX + x) {
                             if (pMouseY >= ((i.y * 20) - 10) + offsetY + y && pMouseY <= ((i.y * 20) + 10) + offsetY + y) {
                                 return clickEntry(i);
@@ -114,7 +114,7 @@ public class DataTabletScreen extends Screen {
         if (pButton == 0 && screenType == 2) {
             if (pMouseX >= (x+imageWidth)+6 && pMouseX <= (x+imageWidth)+18) {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
-                    if (clickedEntry.pages.length > page+1) {
+                    if (clickedEntry.getPagesClient().length > page+1) {
                         page += 1;
                         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
                         return true;
@@ -190,8 +190,8 @@ public class DataTabletScreen extends Screen {
         } else if (screenType == 1) {
 
         } else if (screenType == 2) {
-            if (clickedEntry.pages.length > 0) {
-                drawPage(clickedEntry.pages[page], graphics, delta, mouseX, mouseY);
+            if (clickedEntry.getPagesClient().length > 0) {
+                drawPage(clickedEntry.getPagesClient()[page], graphics, delta, mouseX, mouseY);
             }
         }
         graphics.disableScissor();
@@ -208,7 +208,7 @@ public class DataTabletScreen extends Screen {
             Component tooltip = null;
             for (Entry i : Entries.entries.values()) {
                 if (i.tab.equals(currentTab.id)) {
-                    if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                    if (i.isVisibleClient()) {
                         if (mouseX >= ((i.x * 20) - 10) + offsetX + x && mouseX <= ((i.x * 20) + 10) + offsetX + x) {
                             if (mouseY >= ((i.y * 20) - 10) + offsetY + y && mouseY <= ((i.y * 20) + 10) + offsetY + y) {
                                 tooltip = i.name;
@@ -239,7 +239,7 @@ public class DataTabletScreen extends Screen {
         int y = (height - imageHeight) / 2;
         page.render(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         pGuiGraphics.disableScissor();
-        if (this.page+1 < clickedEntry.pages.length) {
+        if (this.page+1 < clickedEntry.getPagesClient().length) {
             pGuiGraphics.blit(TEXTURE, (x + imageWidth) + 6, y + ((imageHeight / 2) - 20), 32, 166, 12, 40);
         }
         if (this.page > 0) {
@@ -259,7 +259,7 @@ public class DataTabletScreen extends Screen {
         RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
         for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
-                if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                if (i.isVisibleClient()) {
                     for (Entry o : i.getParentEntries()) {
                         if (o.tab.equals(currentTab.id)) {
                             buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
@@ -299,7 +299,7 @@ public class DataTabletScreen extends Screen {
         drawLines(pGuiGraphics, pPartialTick, pMouseX, pMouseY);
         for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
-                if (ClientPlayerUnlockedEntries.getUnlocked().contains(i.id)) {
+                if (i.isVisibleClient()) {
                     pGuiGraphics.blit(TEXTURE, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166, 20, 20);
                     pGuiGraphics.renderItem(i.icon, x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
                 }

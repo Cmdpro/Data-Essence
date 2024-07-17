@@ -55,10 +55,10 @@ public class DataNEssenceUtil {
             ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(getUnlockedEssences(player), linkFrom, linkColor), (player));
         }
         public static void updateUnlockedEntries(ServerPlayer player) {
-            ModMessages.sendToPlayer(new UnlockedEntrySyncS2CPacket(player.getData(AttachmentTypeRegistry.UNLOCKED)), (player));
+            ModMessages.sendToPlayer(new UnlockedEntrySyncS2CPacket(player.getData(AttachmentTypeRegistry.UNLOCKED), player.getData(AttachmentTypeRegistry.INCOMPLETE)), (player));
         }
-        public static void unlockEntry(ServerPlayer player, ResourceLocation entry) {
-            ModMessages.sendToPlayer(new UnlockEntryS2CPacket(entry), (player));
+        public static void unlockEntry(ServerPlayer player, ResourceLocation entry, boolean incomplete) {
+            ModMessages.sendToPlayer(new UnlockEntryS2CPacket(entry, incomplete), (player));
         }
         public static void sendTier(ServerPlayer player, boolean showIndicator) {
             ModMessages.sendToPlayer(new PlayerTierSyncS2CPacket(player.getData(AttachmentTypeRegistry.TIER), showIndicator), player);
@@ -93,22 +93,36 @@ public class DataNEssenceUtil {
         }
     }
     public static class DataTabletUtil {
-        public static void unlockEntry(Player player, ResourceLocation entry) {
+        public static void unlockEntry(Player player, ResourceLocation entry, boolean incomplete) {
             Entry entry2 = Entries.entries.get(entry);
+            List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
             List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+            if (incomplete) {
+                unlocked = incompleteEntries;
+            }
             if (entry2 != null && entry2.isUnlockedServer(player) && !unlocked.contains(entry)) {
+                if (!incomplete) {
+                    incompleteEntries.remove(entry);
+                }
                 unlocked.add(entry);
-                PlayerDataUtil.unlockEntry((ServerPlayer)player, entry);
+                PlayerDataUtil.unlockEntry((ServerPlayer)player, entry, incomplete);
             }
         }
-        public static void unlockEntryAndParents(Player player, ResourceLocation entry) {
+        public static void unlockEntryAndParents(Player player, ResourceLocation entry, boolean incomplete) {
+            List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
             List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+            if (incomplete) {
+                unlocked = incompleteEntries;
+            }
             Entry entry2 = Entries.entries.get(entry);
             if (entry2 != null && !unlocked.contains(entry)) {
+                if (!incomplete) {
+                    incompleteEntries.remove(entry);
+                }
                 unlocked.add(entry);
-                PlayerDataUtil.unlockEntry((ServerPlayer)player, entry);
+                PlayerDataUtil.unlockEntry((ServerPlayer)player, entry, incomplete);
                 for (Entry i : entry2.getParentEntries()) {
-                    unlockEntryAndParents(player, i.id);
+                    unlockEntryAndParents(player, i.id, i.incomplete);
                 }
             }
         }

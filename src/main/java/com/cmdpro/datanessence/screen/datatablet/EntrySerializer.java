@@ -70,7 +70,26 @@ public class EntrySerializer {
             critical = json.get("critical").getAsBoolean();
         }
         ResourceLocation tab = ResourceLocation.tryParse(json.get("tab").getAsString());
-        Entry entry = new Entry(entryId, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, critical);
+        boolean incomplete = false;
+
+        List<Page> incompletePages = new ArrayList<>();
+        if (json.has("incomplete")) {
+            incomplete = json.get("incomplete").getAsBoolean();
+            int p = 0;
+            for (JsonElement i : json.getAsJsonArray("incompletePages")) {
+                JsonObject obj = i.getAsJsonObject();
+                if (obj.has("type")) {
+                    PageSerializer pageSerializer = DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get(ResourceLocation.tryParse(obj.get("type").getAsString()));
+                    Page page = pageSerializer.fromJson(obj);
+                    incompletePages.add(page);
+                } else {
+                    throw new JsonSyntaxException("Page type missing in entry JSON for " + entryId.toString() + " in page " + p);
+                }
+                p++;
+            }
+        }
+
+        Entry entry = new Entry(entryId, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, critical, incomplete, incompletePages.toArray(new Page[0]));
         return entry;
     }
     @Nonnull
@@ -84,7 +103,9 @@ public class EntrySerializer {
         List<ResourceLocation> parents = buf.readList(FriendlyByteBuf::readResourceLocation);
         boolean critical = buf.readBoolean();
         ResourceLocation tab = buf.readResourceLocation();
-        Entry entry = new Entry(id, tab, icon, x, y, pages, parents.toArray(new ResourceLocation[0]), name, critical);
+        boolean incomplete = buf.readBoolean();
+        Page[] incompletePages = buf.readList(EntrySerializer::pageFromNetwork).toArray(new Page[0]);
+        Entry entry = new Entry(id, tab, icon, x, y, pages, parents.toArray(new ResourceLocation[0]), name, critical, incomplete, incompletePages);
         return entry;
     }
     public static Page pageFromNetwork(FriendlyByteBuf buf) {
@@ -111,5 +132,7 @@ public class EntrySerializer {
         buf.writeCollection(parents, FriendlyByteBuf::writeResourceLocation);
         buf.writeBoolean(entry.critical);
         buf.writeResourceLocation(entry.tab);
+        buf.writeBoolean(entry.incomplete);
+        buf.writeCollection(Arrays.stream(entry.incompletePages).toList(), EntrySerializer::pageToNetwork);
     }
 }
