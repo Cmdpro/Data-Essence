@@ -17,7 +17,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.function.Supplier;
 
-public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked) implements Message {
+public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked, List<ResourceLocation> incomplete) implements Message {
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
@@ -27,16 +27,18 @@ public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked) implem
 
     public static void write(RegistryFriendlyByteBuf buf, UnlockedEntrySyncS2CPacket obj) {
         buf.writeCollection(obj.unlocked, FriendlyByteBuf::writeResourceLocation);
+        buf.writeCollection(obj.incomplete, FriendlyByteBuf::writeResourceLocation);
     }
 
     @Override
     public void handleClient(Minecraft minecraft, Player player) {
-        ClientPlayerUnlockedEntries.set(unlocked);
+        ClientPlayerUnlockedEntries.set(unlocked, incomplete);
         ClientDataNEssenceUtil.updateWorld();
     }
 
     public static UnlockedEntrySyncS2CPacket read(RegistryFriendlyByteBuf buf) {
         List<ResourceLocation> unlocked = buf.readList(ResourceLocation.STREAM_CODEC);
-        return new UnlockedEntrySyncS2CPacket(unlocked);
+        List<ResourceLocation> incomplete = buf.readList(ResourceLocation.STREAM_CODEC);
+        return new UnlockedEntrySyncS2CPacket(unlocked, incomplete);
     }
 }

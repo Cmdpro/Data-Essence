@@ -20,5 +20,26 @@
     }
   ],
   "name": "data_tablet.pages.test1.name",
-  "critical": true
+  "critical": true,
+  "incomplete": true,
+  "incompletePages": [
+    {
+      "type": "datanessence:text",
+      "text": "data_tablet.pages.test1.page1.text",
+      "font": "datanessence:ancient",
+      "rtl": true
+    },
+    {
+      "type": "datanessence:text",
+      "text": "data_tablet.pages.test1.page2.text",
+      "font": "datanessence:ancient",
+      "rtl": true
+    },
+    {
+      "type": "datanessence:text",
+      "text": "data_tablet.pages.test1.page3.text",
+      "font": "datanessence:ancient",
+      "rtl": true
+    }
+  ]
 }

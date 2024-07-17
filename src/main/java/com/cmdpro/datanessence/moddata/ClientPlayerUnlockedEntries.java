@@ -9,10 +9,15 @@ import java.util.List;
 
 public class ClientPlayerUnlockedEntries {
     private static List<ResourceLocation> unlocked = new ArrayList<>();
-    public static void set(List<ResourceLocation> unlocked) {
+    private static List<ResourceLocation> incomplete = new ArrayList<>();
+    public static void set(List<ResourceLocation> unlocked, List<ResourceLocation> incomplete) {
         ClientPlayerUnlockedEntries.unlocked = unlocked;
+        ClientPlayerUnlockedEntries.incomplete = incomplete;
     }
     public static List<ResourceLocation> getUnlocked() {
         return unlocked;
+    }
+    public static List<ResourceLocation> getIncomplete() {
+        return incomplete;
     }
 }
