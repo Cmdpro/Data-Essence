@@ -1,29 +1,23 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.datanessence.entity.AncientSentinel;
 import com.cmdpro.datanessence.particle.EssenceSparkleParticle;
 import com.cmdpro.datanessence.registry.*;
+import com.cmdpro.datanessence.renderers.block.*;
+import com.cmdpro.datanessence.renderers.entity.AncientSentinelRenderer;
+import com.cmdpro.datanessence.renderers.entity.EmptyEntityRenderer;
 import com.cmdpro.datanessence.screen.InfuserScreen;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
-import com.cmdpro.datanessence.renderers.*;
 import com.cmdpro.datanessence.screen.EssenceBurnerScreen;
 import com.cmdpro.datanessence.screen.FabricatorScreen;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
@@ -49,6 +43,7 @@ public class ClientModEvents {
         EntityRenderers.register(EntityRegistry.NATURAL_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
         EntityRenderers.register(EntityRegistry.EXOTIC_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
         EntityRenderers.register(EntityRegistry.BLACK_HOLE.get(), EmptyEntityRenderer::new);
+        EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL.get(), AncientSentinelRenderer::new);
 
         progressionShader = new ProgressionShader();
         ShaderManager.addShader(progressionShader);

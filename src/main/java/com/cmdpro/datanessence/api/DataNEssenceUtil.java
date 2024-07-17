@@ -141,6 +141,17 @@ public class DataNEssenceUtil {
         }
         return null;
     }
+    public static BlockState getHiddenBlock(Block block) {
+        for (HiddenBlock i : HiddenBlocksManager.blocks.values()) {
+            if (i.originalBlock == null || i.hiddenAs == null || i.entry == null) {
+                continue;
+            }
+            if (i.originalBlock.equals(block)) {
+                return i.hiddenAs;
+            }
+        }
+        return null;
+    }
     public static void getEssenceFromBuffersBelow(EssenceContainer container) {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));

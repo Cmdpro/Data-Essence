@@ -16,6 +16,7 @@ public class EntityRegistry {
     public static final Supplier<EntityType<ThrownNaturalEssenceBombProjectile>> NATURAL_ESSENCE_BOMB = register("natural_essence_bomb", () -> EntityType.Builder.of((EntityType.EntityFactory<ThrownNaturalEssenceBombProjectile>) ThrownNaturalEssenceBombProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).build(DataNEssence.MOD_ID + ":" + "natural_essence_bomb"));
     public static final Supplier<EntityType<ThrownExoticEssenceBombProjectile>> EXOTIC_ESSENCE_BOMB = register("exotic_essence_bomb", () -> EntityType.Builder.of((EntityType.EntityFactory<ThrownExoticEssenceBombProjectile>) ThrownExoticEssenceBombProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).build(DataNEssence.MOD_ID + ":" + "exotic_essence_bomb"));
     public static final Supplier<EntityType<BlackHole>> BLACK_HOLE = register("black_hole", () -> EntityType.Builder.of((EntityType.EntityFactory<BlackHole>) BlackHole::new, MobCategory.MISC).sized(4F, 4F).build(DataNEssence.MOD_ID + ":" + "black_hole"));
+    public static final Supplier<EntityType<AncientSentinel>> ANCIENT_SENTINEL = register("ancient_sentinel", () -> EntityType.Builder.of((EntityType.EntityFactory<AncientSentinel>) AncientSentinel::new, MobCategory.MONSTER).sized(1.25F, 1.875F).build(DataNEssence.MOD_ID + ":" + "ancient_sentinel"));
 
     private static <T extends EntityType<?>> Supplier<T> register(final String name, final Supplier<T> entity) {
         return ENTITY_TYPES.register(name, entity);

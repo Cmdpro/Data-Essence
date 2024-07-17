@@ -31,6 +31,11 @@ public abstract class BlockBehaviourMixin {
             if (state != null) {
                 cir.setReturnValue(state.getDrops(pParams));
             }
+        } else {
+            BlockState state = DataNEssenceUtil.getHiddenBlock(this.asBlock());
+            if (state != null) {
+                cir.setReturnValue(state.getDrops(pParams));
+            }
         }
     }
 }

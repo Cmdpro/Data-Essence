@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.EssenceBurner;
+import com.cmdpro.datanessence.block.FluidCollector;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.block.*;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
 import net.neoforged.neoforge.client.model.generators.ModelProvider;
+import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.function.Supplier;
@@ -44,6 +46,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         essenceBurner(BlockRegistry.ESSENCE_BURNER);
         dataBank(BlockRegistry.DATA_BANK);
+        fluidCollector(BlockRegistry.FLUID_COLLECTOR);
 
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
     }
@@ -112,5 +115,35 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .partialState().with(EssenceBurner.FACING, Direction.NORTH).modelForState().modelFile(model).addModel()
                 .partialState().with(EssenceBurner.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).addModel()
                 .partialState().with(EssenceBurner.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).addModel();
+    }
+    private void fluidCollector(Supplier<Block> blockRegistryObject) {
+        VariantBlockStateBuilder builder = getVariantBuilder(blockRegistryObject.get());
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ResourceLocation side = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side");
+        ResourceLocation bottom = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_bottom");
+        ResourceLocation top = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top");
+        ResourceLocation pump = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_pump");
+        ResourceLocation pumpTop = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_pump_top");
+        ResourceLocation pumpBottom = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_pump_bottom");
+        for (Direction i : Direction.values()) {
+            BlockModelBuilder model = models().withExistingParent(loc.getPath() + "_" + i.getName().toLowerCase(), ModelProvider.BLOCK_FOLDER + "/cube")
+                    .texture("west", i == Direction.WEST ? pump : side)
+                    .texture("east", i == Direction.EAST ? pump : side)
+                    .texture("north", i == Direction.NORTH ? pump : side)
+                    .texture("south", i == Direction.SOUTH ? pump : side)
+                    .texture("down", i == Direction.DOWN ? pumpBottom : bottom)
+                    .texture("up", i == Direction.UP ? pumpTop : top)
+                    .texture("particle", side);
+            builder.partialState().with(FluidCollector.FACING, i).modelForState().modelFile(model).addModel();
+        }
+        BlockModelBuilder model = models().withExistingParent(loc.getPath() + "_hand", ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", side)
+                .texture("east", side)
+                .texture("north", side)
+                .texture("south", side)
+                .texture("down", pumpBottom)
+                .texture("up", top)
+                .texture("particle", side);
+        simpleBlockItem(blockRegistryObject.get(), model);
     }
 }

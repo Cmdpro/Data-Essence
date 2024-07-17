@@ -1,7 +1,6 @@
-package com.cmdpro.datanessence.renderers;
+package com.cmdpro.datanessence.renderers.block;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.entity.FluidPointBlockEntity;
 import com.cmdpro.datanessence.block.entity.ItemPointBlockEntity;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;

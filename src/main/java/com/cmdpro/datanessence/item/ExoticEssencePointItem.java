@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.item;
 
-import com.cmdpro.datanessence.renderers.ExoticEssencePointItemRenderer;
-import com.cmdpro.datanessence.renderers.NaturalEssencePointItemRenderer;
+import com.cmdpro.datanessence.renderers.item.ExoticEssencePointItemRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;

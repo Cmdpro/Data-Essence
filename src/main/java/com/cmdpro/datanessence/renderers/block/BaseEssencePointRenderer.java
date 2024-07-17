@@ -1,10 +1,9 @@
-package com.cmdpro.datanessence.renderers;
+package com.cmdpro.datanessence.renderers.block;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.block.EssencePoint;
-import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -14,7 +13,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Quaternionf;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
@@ -24,9 +22,9 @@ import software.bernie.geckolib.renderer.layer.AutoGlowingGeoLayer;
 import java.awt.*;
 
 
-public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointBlockEntity & GeoAnimatable> extends GeoBlockRenderer<T> {
+public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEntity & GeoAnimatable> extends GeoBlockRenderer<T> {
 
-    public BaseCapabilityPointRenderer(GeoModel<T> model) {
+    public BaseEssencePointRenderer(GeoModel<T> model) {
         super(model);
     }
 

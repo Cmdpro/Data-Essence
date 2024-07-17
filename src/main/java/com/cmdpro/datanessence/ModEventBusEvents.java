@@ -2,6 +2,8 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.*;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
+import com.cmdpro.datanessence.entity.AncientSentinel;
+import com.cmdpro.datanessence.registry.EntityRegistry;
 import com.cmdpro.datanessence.screen.databank.MinigameSerializer;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -19,7 +21,7 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 public class ModEventBusEvents {
     @SubscribeEvent
     public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
-
+        event.put(EntityRegistry.ANCIENT_SENTINEL.get(), AncientSentinel.setAttributes());
     }
     @SubscribeEvent
     public static void onModConfigEvent(ModConfigEvent event) {

@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.renderers;
+package com.cmdpro.datanessence.renderers.item;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.item.EssencePointItem;

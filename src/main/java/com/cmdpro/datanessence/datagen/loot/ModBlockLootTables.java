@@ -41,6 +41,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.DECO_FLUID_BUFFER.get());
         this.add(BlockRegistry.DATA_BANK.get(),
                 block -> noDrop());
+        this.add(BlockRegistry.COMPUTER.get(),
+                block -> noDrop());
         this.add(BlockRegistry.ESSENCE_CRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemRegistry.ESSENCE_SHARD.get()));
         dropSelf(BlockRegistry.ANCIENT_ROCK_COLUMN.get());
         dropSelf(BlockRegistry.ANCIENT_ROCK_BRICKS.get());
@@ -57,6 +59,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
         dropSelf(BlockRegistry.INFUSER.get());
         dropSelf(BlockRegistry.PATTERNED_COPPER.get());
+        dropSelf(BlockRegistry.FLUID_COLLECTOR.get());
     }
     protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,

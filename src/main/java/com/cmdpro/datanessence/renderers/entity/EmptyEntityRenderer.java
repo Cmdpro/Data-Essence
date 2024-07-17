@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.renderers;
+package com.cmdpro.datanessence.renderers.entity;
 
 import com.cmdpro.datanessence.DataNEssence;
 import net.minecraft.client.renderer.entity.ArrowRenderer;
