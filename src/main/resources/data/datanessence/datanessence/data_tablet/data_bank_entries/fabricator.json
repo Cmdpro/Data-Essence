@@ -9,5 +9,5 @@
     }
   ],
   "name": "data_tablet.pages.fabricator.name",
-  "entry": "datanessence:fabricator"
+  "entry": "datanessence:basics/fabricator"
 }

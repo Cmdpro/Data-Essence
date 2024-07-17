@@ -126,6 +126,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                         if (ent.link == null) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
                             DataNEssenceUtil.updatePlayerData(pPlayer);
+                            return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
                         }
                     } else {
                         if (linkFrom.get().getBlockState().getBlock() instanceof BaseCapabilityPoint other) {
@@ -136,6 +137,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     DataNEssenceUtil.updatePlayerData(pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
+                                    return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
                                 }
                             }
                         }
@@ -143,7 +145,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                 }
             }
         }
-        return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
+        return super.useItemOn(pStack, pState, pLevel, pPos, pPlayer, pHand, pHitResult);
     }
 
     @Override

@@ -128,6 +128,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                         if (ent.link == null) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
                             DataNEssenceUtil.updatePlayerData(pPlayer);
+                            return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
                         }
                     } else {
                         if (linkFrom.get().getBlockState().getBlock() instanceof BaseEssencePoint other) {
@@ -138,6 +139,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     DataNEssenceUtil.updatePlayerData(pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
+                                    return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
                                 }
                             }
                         }
@@ -145,13 +147,13 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                 }
             }
         }
-        return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
+        return super.useItemOn(pStack, pState, pLevel, pPos, pPlayer, pHand, pHitResult);
     }
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if (entity instanceof BaseCapabilityPointBlockEntity ent) {
+            if (entity instanceof BaseEssencePointBlockEntity ent) {
                 if (pPlayer.isShiftKeyDown()) {
                     if (ent.link != null) {
                         ent.link = null;

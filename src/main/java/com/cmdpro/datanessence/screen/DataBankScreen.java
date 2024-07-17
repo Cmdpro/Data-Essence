@@ -207,7 +207,7 @@ public class DataBankScreen extends Screen {
             drawEntries(graphics, delta, mouseX, mouseY);
             graphics.pose().pushPose();
             graphics.pose().translate(0, 0, 399);
-            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("item.datanessence.data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y+8, 0xFFc90d8b);
+            graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y+8, 0xFFc90d8b);
             graphics.blit(TEXTURE, x+3, y+3, 20, 166, 4, 4);
             graphics.blit(TEXTURE, x+3, y+imageHeight-7, 20, 170, 4, 4);
             graphics.blit(TEXTURE, x+imageWidth-7, y+3, 24, 166, 4, 4);

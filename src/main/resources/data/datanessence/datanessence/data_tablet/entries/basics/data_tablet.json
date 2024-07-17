@@ -6,8 +6,7 @@
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "data_tablet.pages.data_tablet.page1.text",
-      "rtl": true
+      "text": "data_tablet.pages.data_tablet.page1.text"
     }
   ],
   "name": "data_tablet.pages.data_tablet.name"

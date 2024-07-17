@@ -35,32 +35,31 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             Vec3 pos = animatable.getBlockPos().getCenter();
             poseStack.pushPose();
             poseStack.translate(-pos.x, -pos.y, -pos.z);
-            poseStack.translate(0.5, 0.5, 0.5);
+            poseStack.translate(0, 0.5, 0);
             ClientDataNEssenceUtil.renderBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0f, animatable.getLevel().getGameTime(), animatable.getBlockPos().getCenter(), animatable.link.getCenter(), animatable.linkColor(), 0.025f, 0.03f);
             poseStack.popPose();
         }
         bufferSource.getBuffer(getRenderType(animatable, getTextureLocation(animatable), bufferSource, partialTick));
-        poseStack.translate(0.5, 0.5, 0.5);
         AttachFace face = animatable.getBlockState().getValue(EssencePoint.FACE);
         Direction facing = animatable.getBlockState().getValue(EssencePoint.FACING);
+        Vec3 rotateAround = new Vec3(0, 0.5, 0);
         if (face.equals(AttachFace.CEILING)) {
-            poseStack.mulPose(Axis.XP.rotationDegrees(180));
+            poseStack.rotateAround(Axis.XP.rotationDegrees(180), (float)rotateAround.x, (float)rotateAround.y, (float)rotateAround.z);
         }
         if (face.equals(AttachFace.WALL)) {
             if (facing.equals(Direction.NORTH)) {
-                poseStack.mulPose(Axis.XP.rotationDegrees(-90));
+                poseStack.rotateAround(Axis.XP.rotationDegrees(-90), (float)rotateAround.x, (float)rotateAround.y, (float)rotateAround.z);
             }
             if (facing.equals(Direction.SOUTH)) {
-                poseStack.mulPose(Axis.XP.rotationDegrees(90));
+                poseStack.rotateAround(Axis.XP.rotationDegrees(90), (float)rotateAround.x, (float)rotateAround.y, (float)rotateAround.z);
             }
             if (facing.equals(Direction.EAST)) {
-                poseStack.mulPose(Axis.ZP.rotationDegrees(-90));
+                poseStack.rotateAround(Axis.ZP.rotationDegrees(-90), (float)rotateAround.x, (float)rotateAround.y, (float)rotateAround.z);
             }
             if (facing.equals(Direction.WEST)) {
-                poseStack.mulPose(Axis.ZP.rotationDegrees(90));
+                poseStack.rotateAround(Axis.ZP.rotationDegrees(90), (float)rotateAround.x, (float)rotateAround.y, (float)rotateAround.z);
             }
         }
-        poseStack.translate(-0.5, -0.5, -0.5);
     }
     public static class Model<T extends GeoAnimatable> extends GeoModel<T> {
         public Model(ResourceLocation texture) {
