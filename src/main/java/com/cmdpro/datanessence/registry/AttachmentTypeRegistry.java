@@ -37,6 +37,12 @@ public class AttachmentTypeRegistry {
             register("unlocked_natural_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
     public static final Supplier<AttachmentType<Boolean>> UNLOCKED_EXOTIC_ESSENCE =
             register("unlocked_exotic_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
+    public static final Supplier<AttachmentType<Boolean>> HAS_HORNS =
+            register("has_horns", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
+    public static final Supplier<AttachmentType<Boolean>> HAS_TAIL =
+            register("has_tail", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
+    public static final Supplier<AttachmentType<Boolean>> HAS_WINGS =
+            register("has_wings", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
     public static final Supplier<AttachmentType<ArrayList<ResourceLocation>>> UNLOCKED =
             register("unlocked", () -> AttachmentType.builder(() -> new ArrayList<ResourceLocation>()).serialize(
                     ResourceLocation.CODEC.listOf().xmap(ArrayList::new, (a) -> a.stream().toList())).copyOnDeath().build());

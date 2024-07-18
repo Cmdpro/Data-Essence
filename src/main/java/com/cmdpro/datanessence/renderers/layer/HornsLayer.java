@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.renderers.layer;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.animation.AnimationChannel;
@@ -36,14 +37,16 @@ public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
 
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        pPoseStack.pushPose();
-        this.hornsModel.root.copyFrom(this.getParentModel().head);
-        this.hornsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
-        VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
-                pBuffer, RenderType.armorCutoutNoCull(hornsTexture), false, false
-        );
-        this.hornsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-        pPoseStack.popPose();
+        if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_HORNS) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_HORNS)) {
+            pPoseStack.pushPose();
+            this.hornsModel.root.copyFrom(this.getParentModel().head);
+            this.hornsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+            VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
+                    pBuffer, RenderType.armorCutoutNoCull(hornsTexture), false, false
+            );
+            this.hornsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            pPoseStack.popPose();
+        }
     }
     public class HornsModel<T extends Player> extends HierarchicalModel<T> {
         private final ModelPart root;

@@ -126,5 +126,6 @@
   "commands.datanessence.unlock.entry_doesnt_exist": "Entry \"%1$s\" does not exist!",
   "commands.datanessence.unlock.entry_already_unlocked": "Entry \"%1$s\" was already unlocked!",
   "commands.datanessence.check_entry_overlaps.found": "Entry \"%1$s\" is overlapping with entry \"%2$s\"",
-  "commands.datanessence.check_entry_overlaps.no_found": "No entry overlaps found"
+  "commands.datanessence.check_entry_overlaps.no_found": "No entry overlaps found",
+  "commands.datanessence.give_dragon_part": "Given the \"%1$s\" Dragon Part"
 }

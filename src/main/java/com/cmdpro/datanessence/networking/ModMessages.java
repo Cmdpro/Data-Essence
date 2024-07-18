@@ -69,6 +69,7 @@ public class ModMessages {
         registrar.playToClient(ComputerDataSyncS2CPacket.TYPE, getNetworkCodec(ComputerDataSyncS2CPacket::read, ComputerDataSyncS2CPacket::write), Handler::handle);
         registrar.playToClient(HiddenBlockSyncS2CPacket.TYPE, getNetworkCodec(HiddenBlockSyncS2CPacket::read, HiddenBlockSyncS2CPacket::write), Handler::handle);
         registrar.playToClient(EntrySyncS2CPacket.TYPE, getNetworkCodec(EntrySyncS2CPacket::read, EntrySyncS2CPacket::write), Handler::handle);
+        registrar.playToClient(DragonPartsSyncS2CPacket.TYPE, getNetworkCodec(DragonPartsSyncS2CPacket::read, DragonPartsSyncS2CPacket::write), Handler::handle);
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigameC2SPacket.TYPE, getNetworkCodec(PlayerFinishDataBankMinigameC2SPacket::read, PlayerFinishDataBankMinigameC2SPacket::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveDataC2SPacket.TYPE, getNetworkCodec(PlayerChangeDriveDataC2SPacket::read, PlayerChangeDriveDataC2SPacket::write), Handler::handle);
@@ -84,5 +85,8 @@ public class ModMessages {
 
     public static <T extends Message> void sendToPlayer(T message, ServerPlayer player) {
         PacketDistributor.sendToPlayer(player, message);
+    }
+    public static <T extends Message> void sendToPlayersTrackingEntityAndSelf(T message, ServerPlayer player) {
+        PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, message);
     }
 }

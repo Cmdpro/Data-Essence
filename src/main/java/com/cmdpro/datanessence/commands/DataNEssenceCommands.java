@@ -2,6 +2,8 @@ package com.cmdpro.datanessence.commands;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.networking.ModMessages;
+import com.cmdpro.datanessence.networking.packet.DragonPartsSyncS2CPacket;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
@@ -9,6 +11,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -53,6 +56,13 @@ public class DataNEssenceCommands {
                             return checkoverlaps(command);
                         })
                 )
+                .then(Commands.literal("give_dragon_part")
+                        .then(Commands.argument("part", StringArgumentType.string()).suggests((stack, builder) -> {
+                            return SharedSuggestionProvider.suggest(new String[] { "horns", "tail", "wings" }, builder);
+                        }).executes(command -> {
+                            return givedragonpart(command);
+                        }))
+                )
         );
     }
     private static int checkoverlaps(CommandContext<CommandSourceStack> command) {
@@ -71,6 +81,24 @@ public class DataNEssenceCommands {
         }
         if (!foundIssues) {
             command.getSource().getEntity().sendSystemMessage(Component.translatable("commands.datanessence.check_entry_overlaps.no_found"));
+        }
+        return Command.SINGLE_SUCCESS;
+    }
+    private static int givedragonpart(CommandContext<CommandSourceStack> command) {
+        if(command.getSource().getEntity() instanceof Player) {
+            Player player = (Player) command.getSource().getEntity();
+            String part = command.getArgument("part", String.class);
+            if (part.equals("horns")) {
+                player.setData(AttachmentTypeRegistry.HAS_HORNS, true);
+            } else if (part.equals("tail")) {
+                player.setData(AttachmentTypeRegistry.HAS_TAIL, true);
+            } else if (part.equals("wings")) {
+                player.setData(AttachmentTypeRegistry.HAS_WINGS, true);
+            }
+            ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), (ServerPlayer)player);
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.datanessence.give_dragon_part", part);
+            }, true);
         }
         return Command.SINGLE_SUCCESS;
     }

@@ -36,7 +36,7 @@ public record DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> en
     public void handleClient(Minecraft minecraft, Player player) {
         DataBankEntries.clientEntries.clear();
         DataBankEntries.clientEntries.putAll(entries);
-        Minecraft.getInstance().setScreen(new DataBankScreen(Component.empty()));
+        ClientHandler.openScreen();
     }
 
     public static void write(RegistryFriendlyByteBuf buf, DataBankEntrySyncS2CPacket obj) {
@@ -47,4 +47,9 @@ public record DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> en
         return TYPE;
     }
     public static final Type<DataBankEntrySyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "data_bank_entry_sync"));
+    public static class ClientHandler {
+        public static void openScreen() {
+            Minecraft.getInstance().setScreen(new DataBankScreen(Component.empty()));
+        }
+    }
 }

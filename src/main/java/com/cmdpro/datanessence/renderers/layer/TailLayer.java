@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.renderers.layer;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.animation.AnimationChannel;
@@ -36,15 +37,17 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
 
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        pPoseStack.pushPose();
-        this.tailModel.root().getAllParts().forEach(ModelPart::resetPose);
-        this.tailModel.root.copyFrom(this.getParentModel().body);
-        this.tailModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
-        VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
-                pBuffer, RenderType.armorCutoutNoCull(tailTexture), false, false
-        );
-        this.tailModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-        pPoseStack.popPose();
+        if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_TAIL) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_TAIL)) {
+            pPoseStack.pushPose();
+            this.tailModel.root().getAllParts().forEach(ModelPart::resetPose);
+            this.tailModel.root.copyFrom(this.getParentModel().body);
+            this.tailModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+            VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
+                    pBuffer, RenderType.armorCutoutNoCull(tailTexture), false, false
+            );
+            this.tailModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            pPoseStack.popPose();
+        }
     }
     public class TailModel<T extends Player> extends HierarchicalModel<T> {
         public static final AnimationDefinition idle = AnimationDefinition.Builder.withLength(2.0F).looping()

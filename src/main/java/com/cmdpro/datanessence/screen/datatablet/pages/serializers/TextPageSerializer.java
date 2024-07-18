@@ -17,7 +17,7 @@ public class TextPageSerializer extends PageSerializer<TextPage> {
     public static final TextPageSerializer INSTANCE = new TextPageSerializer();
     @Override
     public TextPage fromJson(JsonObject json) {
-        ResourceLocation font = json.has("font") ? ResourceLocation.tryParse(json.get("font").getAsString()) : Minecraft.DEFAULT_FONT;
+        ResourceLocation font = json.has("font") ? ResourceLocation.tryParse(json.get("font").getAsString()) : new ResourceLocation("default");
         MutableComponent text = Component.translatable(json.get("text").getAsString());
         text = text.withStyle(text.getStyle().withFont(font));
         boolean rtl = json.has("rtl") ? json.get("rtl").getAsBoolean() : false;

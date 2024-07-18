@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.renderers.layer;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -42,15 +43,17 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
 
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-        pPoseStack.pushPose();
-        this.wingsModel.root().getAllParts().forEach(ModelPart::resetPose);
-        this.wingsModel.root.copyFrom(this.getParentModel().body);
-        this.wingsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
-        VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
-                pBuffer, RenderType.armorCutoutNoCull(wingsTexture), false, false
-        );
-        this.wingsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-        pPoseStack.popPose();
+        if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_WINGS) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_WINGS)) {
+            pPoseStack.pushPose();
+            this.wingsModel.root().getAllParts().forEach(ModelPart::resetPose);
+            this.wingsModel.root.copyFrom(this.getParentModel().body);
+            this.wingsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
+            VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
+                    pBuffer, RenderType.armorCutoutNoCull(wingsTexture), false, false
+            );
+            this.wingsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            pPoseStack.popPose();
+        }
     }
     public class WingsModel<T extends Player> extends HierarchicalModel<T> {
         public static final AnimationDefinition idle = AnimationDefinition.Builder.withLength(2.0F).looping()

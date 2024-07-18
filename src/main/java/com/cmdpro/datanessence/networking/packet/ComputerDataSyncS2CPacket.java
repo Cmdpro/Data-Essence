@@ -28,7 +28,7 @@ public record ComputerDataSyncS2CPacket(ComputerData data) implements Message {
     @Override
     public void handleClient(Minecraft minecraft, Player player) {
         ClientComputerData.clientComputerData = data;
-        Minecraft.getInstance().setScreen(new ComputerScreen(Component.empty()));
+        ClientHandler.openScreen();
     }
 
     public static void write(RegistryFriendlyByteBuf buf, ComputerDataSyncS2CPacket obj) {
@@ -39,4 +39,9 @@ public record ComputerDataSyncS2CPacket(ComputerData data) implements Message {
         return TYPE;
     }
     public static final Type<ComputerDataSyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "computer_data_sync"));
+    public static class ClientHandler {
+        public static void openScreen() {
+            Minecraft.getInstance().setScreen(new ComputerScreen(Component.empty()));
+        }
+    }
 }

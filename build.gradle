@@ -49,11 +49,11 @@ runs {
     client {
         // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
+        programArguments.addAll('--username', '####')
     }
 
     server {
         systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
-        programArgument '--nogui'
     }
 
     // This run config launches GameTestServer and runs all registered gametests, then exits.
