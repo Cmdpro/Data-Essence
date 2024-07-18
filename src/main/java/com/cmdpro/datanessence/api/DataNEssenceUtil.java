@@ -17,6 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -98,7 +99,11 @@ public class DataNEssenceUtil {
             List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
             List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
             if (incomplete) {
-                unlocked = incompleteEntries;
+                if (!((ServerPlayer)player).getAdvancements().getOrStartProgress(player.getServer().getAdvancements().get(entry2.completionAdvancement)).isDone()) {
+                    unlocked = incompleteEntries;
+                } else {
+                    incompleteEntries.remove(entry);
+                }
             }
             if (entry2 != null && entry2.isUnlockedServer(player) && !unlocked.contains(entry)) {
                 if (!incomplete) {
@@ -109,12 +114,16 @@ public class DataNEssenceUtil {
             }
         }
         public static void unlockEntryAndParents(Player player, ResourceLocation entry, boolean incomplete) {
+            Entry entry2 = Entries.entries.get(entry);
             List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
             List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
             if (incomplete) {
-                unlocked = incompleteEntries;
+                if (!((ServerPlayer)player).getAdvancements().getOrStartProgress(player.getServer().getAdvancements().get(entry2.completionAdvancement)).isDone()) {
+                    unlocked = incompleteEntries;
+                } else {
+                    incompleteEntries.remove(entry);
+                }
             }
-            Entry entry2 = Entries.entries.get(entry);
             if (entry2 != null && !unlocked.contains(entry)) {
                 if (!incomplete) {
                     incompleteEntries.remove(entry);

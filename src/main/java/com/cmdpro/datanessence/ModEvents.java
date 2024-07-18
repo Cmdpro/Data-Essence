@@ -2,6 +2,7 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.BaseEssencePoint;
+import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.computers.ComputerTypeManager;
@@ -15,6 +16,7 @@ import com.cmdpro.datanessence.screen.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.screen.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.screen.datatablet.DataTabManager;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
+import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -33,10 +35,13 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
+import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @EventBusSubscriber(modid = DataNEssence.MOD_ID)
@@ -126,6 +131,19 @@ public class ModEvents {
                 DataNEssenceUtil.PlayerDataUtil.updateUnlockedEntries(player);
                 DataNEssenceUtil.PlayerDataUtil.sendTier(player, false);
             }
+        }
+    }
+    @SubscribeEvent
+    public static void onPlayerAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
+        List<ResourceLocation> entries = new ArrayList<>();
+        for (ResourceLocation i : event.getEntity().getData(AttachmentTypeRegistry.INCOMPLETE)) {
+            Entry entry = Entries.entries.get(i);
+            if (entry.completionAdvancement.equals(event.getAdvancement().id())) {
+                entries.add(i);
+            }
+        }
+        for (ResourceLocation i : entries) {
+            DataNEssenceUtil.DataTabletUtil.unlockEntry(event.getEntity(), i, false);
         }
     }
 }

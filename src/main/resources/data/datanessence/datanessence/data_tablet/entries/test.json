@@ -41,5 +41,6 @@
       "font": "datanessence:ancient",
       "rtl": true
     }
-  ]
+  ],
+  "completionAdvancement": "minecraft:nether/summon_wither"
 }

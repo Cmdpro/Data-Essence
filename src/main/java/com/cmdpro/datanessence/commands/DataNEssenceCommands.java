@@ -133,6 +133,11 @@ public class DataNEssenceCommands {
             ResourceLocation entry = command.getArgument("id", ResourceLocation.class);
             boolean incomplete = command.getArgument("incomplete", Boolean.class);
             if (Entries.entries.containsKey(entry)) {
+                Entry entry2 = Entries.entries.get(entry);
+                if (!entry2.incomplete && incomplete) {
+                    command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_has_no_incomplete", entry.toString()));
+                    return 0;
+                }
                 List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
                 if (!unlockedEntries.contains(entry)) {
                     DataNEssenceUtil.DataTabletUtil.unlockEntryAndParents(player, entry, incomplete);

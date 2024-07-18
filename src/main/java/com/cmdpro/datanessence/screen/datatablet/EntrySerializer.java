@@ -71,7 +71,7 @@ public class EntrySerializer {
         }
         ResourceLocation tab = ResourceLocation.tryParse(json.get("tab").getAsString());
         boolean incomplete = false;
-
+        ResourceLocation completionAdvancement = new ResourceLocation("", "");
         List<Page> incompletePages = new ArrayList<>();
         if (json.has("incomplete")) {
             incomplete = json.get("incomplete").getAsBoolean();
@@ -87,9 +87,10 @@ public class EntrySerializer {
                 }
                 p++;
             }
+            completionAdvancement = ResourceLocation.tryParse(json.get("completionAdvancement").getAsString());
         }
 
-        Entry entry = new Entry(entryId, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, critical, incomplete, incompletePages.toArray(new Page[0]));
+        Entry entry = new Entry(entryId, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, critical, incomplete, incompletePages.toArray(new Page[0]), completionAdvancement);
         return entry;
     }
     @Nonnull
@@ -105,7 +106,8 @@ public class EntrySerializer {
         ResourceLocation tab = buf.readResourceLocation();
         boolean incomplete = buf.readBoolean();
         Page[] incompletePages = buf.readList(EntrySerializer::pageFromNetwork).toArray(new Page[0]);
-        Entry entry = new Entry(id, tab, icon, x, y, pages, parents.toArray(new ResourceLocation[0]), name, critical, incomplete, incompletePages);
+        ResourceLocation completionAdvancement = buf.readResourceLocation();
+        Entry entry = new Entry(id, tab, icon, x, y, pages, parents.toArray(new ResourceLocation[0]), name, critical, incomplete, incompletePages, completionAdvancement);
         return entry;
     }
     public static Page pageFromNetwork(FriendlyByteBuf buf) {
@@ -134,5 +136,6 @@ public class EntrySerializer {
         buf.writeResourceLocation(entry.tab);
         buf.writeBoolean(entry.incomplete);
         buf.writeCollection(Arrays.stream(entry.incompletePages).toList(), EntrySerializer::pageToNetwork);
+        buf.writeResourceLocation(entry.completionAdvancement);
     }
 }

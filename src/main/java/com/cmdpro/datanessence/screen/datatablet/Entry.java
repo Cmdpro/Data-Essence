@@ -13,7 +13,7 @@ import java.util.List;
 
 public class Entry {
 
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical, boolean incomplete, Page[] incompletePages) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
         this.id = id;
         this.icon = new ItemStack(icon);
         this.x = x;
@@ -25,8 +25,9 @@ public class Entry {
         this.tab = tab;
         this.incomplete = incomplete;
         this.incompletePages = incompletePages;
+        this.completionAdvancement = completionAdvancement;
     }
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical, boolean incomplete, Page[] incompletePages) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
         this.id = id;
         this.icon = icon;
         this.x = x;
@@ -38,6 +39,7 @@ public class Entry {
         this.tab = tab;
         this.incomplete = incomplete;
         this.incompletePages = incompletePages;
+        this.completionAdvancement = completionAdvancement;
     }
     public Page[] getPagesClient() {
         return isIncompleteClient() ? incompletePages : pages;
@@ -98,4 +100,5 @@ public class Entry {
     private Entry[] parentEntries;
     public boolean incomplete;
     public Page[] incompletePages;
+    public ResourceLocation completionAdvancement;
 }
