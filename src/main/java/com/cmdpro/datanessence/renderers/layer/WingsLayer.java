@@ -43,7 +43,7 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         pPoseStack.pushPose();
-        pPoseStack.translate(0.0F, -1.25F, 0.125F);
+        this.wingsModel.root().getAllParts().forEach(ModelPart::resetPose);
         this.wingsModel.root.copyFrom(this.getParentModel().body);
         this.wingsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
@@ -80,13 +80,15 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
                 .build();
         public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
+        private final ModelPart wings;
         private final ModelPart right_wing;
         private final ModelPart left_wing;
 
         public WingsModel(ModelPart pRoot) {
             this.root = pRoot.getChild("root");
-            this.right_wing = root.getChild("right_wing");
-            this.left_wing = root.getChild("left_wing");
+            this.wings = root.getChild("wings");
+            this.left_wing = wings.getChild("left_wing");
+            this.right_wing = wings.getChild("right_wing");
         }
 
         public static LayerDefinition createLayer() {
@@ -95,14 +97,15 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
 
             PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-            PartDefinition right_wing = root.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(0, 11).addBox(-10.0F, -6.0F, 0.0F, 10.0F, 10.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+            PartDefinition wings = root.addOrReplaceChild("wings", CubeListBuilder.create(), PartPose.offset(0.0F, 3.0F, 2.0F));
 
-            PartDefinition left_wing = root.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, 0.0F, 10.0F, 10.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+            PartDefinition left_wing = wings.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -5.0F, -1.0F, 10.0F, 10.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 1.0F));
+
+            PartDefinition right_wing = wings.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(0, 11).addBox(-10.0F, -5.0F, -1.0F, 10.0F, 10.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 1.0F));
 
             return LayerDefinition.create(meshdefinition, 32, 32);
         }
         public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-            this.root().getAllParts().forEach(ModelPart::resetPose);
             animState.startIfStopped(pEntity.tickCount);
             if (pEntity.getAbilities().flying) {
                 this.animate(animState, fly, pAgeInTicks, 1.0f);

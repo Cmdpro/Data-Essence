@@ -37,7 +37,7 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         pPoseStack.pushPose();
-        pPoseStack.translate(0.0F, -0.85F, 0.125F);
+        this.tailModel.root().getAllParts().forEach(ModelPart::resetPose);
         this.tailModel.root.copyFrom(this.getParentModel().body);
         this.tailModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
@@ -66,12 +66,14 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
                 .build();
         public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
+        private final ModelPart tail;
         private final ModelPart part1;
         private final ModelPart part2;
 
         public TailModel(ModelPart pRoot) {
             this.root = pRoot.getChild("root");
-            this.part1 = root.getChild("part1");
+            this.tail = root.getChild("tail");
+            this.part1 = tail.getChild("part1");
             this.part2 = part1.getChild("part2");
         }
 
@@ -79,16 +81,17 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
             MeshDefinition meshdefinition = new MeshDefinition();
             PartDefinition partdefinition = meshdefinition.getRoot();
 
-            PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
+            PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-            PartDefinition part1 = root.addOrReplaceChild("part1", CubeListBuilder.create().texOffs(0, 11).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 5.0F));
+            PartDefinition tail = root.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 9.0F, 3.0F));
+
+            PartDefinition part1 = tail.addOrReplaceChild("part1", CubeListBuilder.create().texOffs(0, 11).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 5.0F));
 
             PartDefinition part2 = part1.addOrReplaceChild("part2", CubeListBuilder.create().texOffs(12, 14).addBox(-1.5F, -0.5F, 0.0F, 2.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, -0.5F, 6.0F));
 
             return LayerDefinition.create(meshdefinition, 32, 32);
         }
         public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-            this.root().getAllParts().forEach(ModelPart::resetPose);
             animState.startIfStopped(pEntity.tickCount);
             this.animate(animState, idle, pAgeInTicks, 1.0f);
         }

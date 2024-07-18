@@ -37,7 +37,6 @@ public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         pPoseStack.pushPose();
-        pPoseStack.translate(0F, 0f, 0F);
         this.hornsModel.root.copyFrom(this.getParentModel().head);
         this.hornsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
         VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(

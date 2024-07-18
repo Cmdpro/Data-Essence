@@ -7,13 +7,15 @@ public class wings<T extends Player> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "wings"), "main");
 	private final ModelPart root;
-	private final ModelPart right_wing;
+	private final ModelPart wings;
 	private final ModelPart left_wing;
+	private final ModelPart right_wing;
 
 	public wings(ModelPart root) {
 		this.root = root.getChild("root");
-		this.right_wing = root.getChild("right_wing");
+		this.wings = root.getChild("wings");
 		this.left_wing = root.getChild("left_wing");
+		this.right_wing = root.getChild("right_wing");
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -22,9 +24,11 @@ public class wings<T extends Player> extends EntityModel<T> {
 
 		PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition right_wing = root.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(0, 11).addBox(-10.0F, -6.0F, -0.5F, 10.0F, 10.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition wings = root.addOrReplaceChild("wings", CubeListBuilder.create(), PartPose.offset(0.0F, 3.0F, 2.0F));
 
-		PartDefinition left_wing = root.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -6.0F, -0.5F, 10.0F, 10.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+		PartDefinition left_wing = wings.addOrReplaceChild("left_wing", CubeListBuilder.create().texOffs(0, 0).addBox(0.0F, -5.0F, -1.0F, 10.0F, 10.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 1.0F));
+
+		PartDefinition right_wing = wings.addOrReplaceChild("right_wing", CubeListBuilder.create().texOffs(0, 11).addBox(-10.0F, -5.0F, -1.0F, 10.0F, 10.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 1.0F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}
