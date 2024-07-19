@@ -91,12 +91,13 @@
   "data_tablet.tabs.lore.name":                 "Ancient History",
 
   "data_tablet.pages.fabricator.name": "Fabricator",
-  "data_tablet.pages.fabricator.page1.text": "For the purpose of crafting with Essence, we have designed the Fabricator device. Essence is channeled through the lensing crystal in the obsidian base, amplified by the conductive metal frame into the items being worked with. It behaves otherwise as an ordinary workbench.\n\nThe device must be activated with a particular tool for it to craft.",
+  "data_tablet.pages.fabricator.page1.text": "For the purpose of crafting with Essence, we have designed the Fabricator device. Essence is channeled through the lensing crystal in the obsidian base, amplified by the conductive metal frame into the items being worked with. It behaves otherwise as an ordinary workbench.",
+  "data_tablet.pages.fabricator.page2.text": " ◇ Must be activated with the Essence Redirector to start crafting.",
+
   "data_tablet.pages.data_tablet.name": "Data Tablet",
   "data_tablet.pages.data_tablet.page1.text": "Every researcher is given a personal Data Tablet on which the data of our discoveries, inventions, and knowledge is stored. Its contents may be added to by visiting any active research center and copying data from its Data Bank, assuming sufficient credentials.\n\nThe Data Tablet contains security mechanisms which prevent a Tablet from accepting data of a higher tier than itself, as well as requiring specific, highly-encrypted critical data and authorization from higher-ranked peers to rise in tier. This is to ensure our gathered knowledge of Essence does not fall into the wrong hands.",
   "data_tablet.pages.essence_crystals.name": "Essence Crystals",
-  "data_tablet.pages.essence_crystals.page1.text": "Deposits of raw Essence Crystal form inside caves. When mined, a whole Crystal shatters into several smaller Shards, themselves useful for many, many applications.",
-  "data_tablet.pages.essence_crystals.page2.text": "Research was done into the origin of these deposits, and what we found was startlingly grim: creatures native to Phenua long ago were unable to handle their innate Essence, dissolving and crystallizing upon it awakening within them. It would seem most local fauna have evolved to suppress their Essence, as a result.",
+  "data_tablet.pages.essence_crystals.page1.text": "Deposits of raw Essence Crystal appear inside caves. At time of data upload, their origins are unclear, but we suspect whatever formed them was once a natural process. Regardless, when mined, a whole Crystal shatters into several smaller Shards, proving immeasurably helpful for the first step into working with Essence.",
   "data_tablet.pages.essence_burner.name": "Essence Burner",
   "data_tablet.pages.essence_burner.page1.text": "The simplest form of Essence generation is to apply sufficient heat to raw Essence Shards such that they melt into a gaseous form. As this gas dissipates, it leaves behind usable Essence with which to supply machinery.\n\nThe Burner device does exactly this, featuring a chamber in which to insert Shards and fuel, as well as a grate on the top that harmlessly vents the gas.",
   "data_tablet.pages.essence_burner.page2.text": " ◇ Requires: Essence Shards and furnace fuel (eg. coal, charcoal, etc).\n ◇ Needs no coolant.",

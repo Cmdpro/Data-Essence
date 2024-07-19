@@ -5,8 +5,12 @@
   "y": 0,
   "pages": [
     {
+      "type": "datanessence:text",
+      "text": "data_tablet.pages.fabricator.page1.text"
+    },
+    {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.fabricator.page1.text",
+      "text": "data_tablet.pages.fabricator.page2.text",
       "recipes": [
         "datanessence:crafting/fabricator",
         "datanessence:crafting/magic_wrench"
