@@ -31,6 +31,10 @@ public class BlockEntityRegistry {
             register("infuser", () ->
                     BlockEntityType.Builder.of(InfuserBlockEntity::new,
                             BlockRegistry.INFUSER.get()).build(null));
+    public static final Supplier<BlockEntityType<ChargerBlockEntity>> CHARGER =
+            register("charger", () ->
+                    BlockEntityType.Builder.of(ChargerBlockEntity::new,
+                            BlockRegistry.CHARGER.get()).build(null));
     public static final Supplier<BlockEntityType<EssenceBurnerBlockEntity>> ESSENCE_BURNER =
             register("essence_burner", () ->
                     BlockEntityType.Builder.of(EssenceBurnerBlockEntity::new,

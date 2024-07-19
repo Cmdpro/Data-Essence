@@ -1,8 +1,9 @@
-// 1.20.6	2024-07-17T10:42:59.0751717	Loot Tables
+// 1.20.6	2024-07-19T16:03:48.7970054	Loot Tables
 bbbe51e74edfcc54136678857699b9b14569a089 data/datanessence/loot_tables/blocks/ancient_lantern.json
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_tables/blocks/ancient_rock_bricks.json
 6540cac2211b8a360d5bbebd6d8ecce140f3d3cb data/datanessence/loot_tables/blocks/ancient_rock_column.json
 56b95cac73dc52cf9672428b3a4720b45303f3a8 data/datanessence/loot_tables/blocks/ancient_rock_tiles.json
+ea5364fdf6f40dd1dc50b2354226d4977911b8b1 data/datanessence/loot_tables/blocks/charger.json
 d84e5950a8f59623f762d05a19464f398db0fccd data/datanessence/loot_tables/blocks/computer.json
 3c25019c5f00da2256a65bfc3d58cecfe83e604f data/datanessence/loot_tables/blocks/data_bank.json
 8f6c8cd8d11552fd4c14a8d37ed68faaf224129f data/datanessence/loot_tables/blocks/deco_essence_buffer.json

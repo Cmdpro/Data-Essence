@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.*;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.screen.databank.DataBankEntries;
 import com.cmdpro.datanessence.screen.databank.DataBankEntry;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
@@ -40,6 +41,86 @@ import java.util.Map;
 import java.util.Optional;
 
 public class DataNEssenceUtil {
+    public static class ItemUtil {
+        public static class EssenceChargeableItemUtil {
+            public static float getEssence(ItemStack stack) {
+                return stack.getOrDefault(DataComponentRegistry.ESSENCE, 0f);
+            }
+            public static void setEssence(ItemStack stack, float amount) {
+                stack.set(DataComponentRegistry.ESSENCE, amount);
+            }
+            public static float getLunarEssence(ItemStack stack) {
+                return stack.getOrDefault(DataComponentRegistry.LUNAR_ESSENCE, 0f);
+            }
+            public static void setLunarEssence(ItemStack stack, float amount) {
+                stack.set(DataComponentRegistry.LUNAR_ESSENCE, amount);
+            }
+            public static float getNaturalEssence(ItemStack stack) {
+                return stack.getOrDefault(DataComponentRegistry.NATURAL_ESSENCE, 0f);
+            }
+            public static void setNaturalEssence(ItemStack stack, float amount) {
+                stack.set(DataComponentRegistry.NATURAL_ESSENCE, amount);
+            }
+            public static float getExoticEssence(ItemStack stack) {
+                return stack.getOrDefault(DataComponentRegistry.EXOTIC_ESSENCE, 0f);
+            }
+            public static void setExoticEssence(ItemStack stack, float amount) {
+                stack.set(DataComponentRegistry.EXOTIC_ESSENCE, amount);
+            }
+
+            public static float getMaxEssence(ItemStack stack) {
+                return stack.getOrDefault(DataComponentRegistry.MAX_ESSENCE, 0f);
+            }
+
+            public static float getMaxLunarEssence(ItemStack stack) {
+                return stack.getOrDefault(DataComponentRegistry.MAX_LUNAR_ESSENCE, 0f);
+            }
+
+            public static float getMaxNaturalEssence(ItemStack stack) {
+                return stack.getOrDefault(DataComponentRegistry.MAX_NATURAL_ESSENCE, 0f);
+            }
+
+            public static float getMaxExoticEssence(ItemStack stack) {
+                return stack.getOrDefault(DataComponentRegistry.MAX_EXOTIC_ESSENCE, 0f);
+            }
+            public static boolean hasEssence(ItemStack stack, float amount) {
+                return getEssence(stack) >= amount;
+            }
+            public static boolean hasLunarEssence(ItemStack stack, float amount) {
+                return getLunarEssence(stack) >= amount;
+            }
+            public static boolean hasNaturalEssence(ItemStack stack, float amount) {
+                return getNaturalEssence(stack) >= amount;
+            }
+            public static boolean hasExoticEssence(ItemStack stack, float amount) {
+                return getExoticEssence(stack) >= amount;
+            }
+            public static void drainEssence(ItemStack stack, float amount) {
+                setEssence(stack, Math.clamp(0f, getMaxEssence(stack), getEssence(stack)-amount));
+            }
+            public static void drainLunarEssence(ItemStack stack, float amount) {
+                setLunarEssence(stack, Math.clamp(0f, getMaxLunarEssence(stack), getLunarEssence(stack)-amount));
+            }
+            public static void drainNaturalEssence(ItemStack stack, float amount) {
+                setNaturalEssence(stack, Math.clamp(0f, getMaxNaturalEssence(stack), getNaturalEssence(stack)-amount));
+            }
+            public static void drainExoticEssence(ItemStack stack, float amount) {
+                setExoticEssence(stack, Math.clamp(0f, getMaxExoticEssence(stack), getExoticEssence(stack)-amount));
+            }
+            public static void fillEssence(ItemStack stack, float amount) {
+                setEssence(stack, Math.clamp(0f, getMaxEssence(stack), getEssence(stack)+amount));
+            }
+            public static void fillLunarEssence(ItemStack stack, float amount) {
+                setLunarEssence(stack, Math.clamp(0f, getMaxLunarEssence(stack), getLunarEssence(stack)+amount));
+            }
+            public static void fillNaturalEssence(ItemStack stack, float amount) {
+                setNaturalEssence(stack, Math.clamp(0f, getMaxNaturalEssence(stack), getNaturalEssence(stack)+amount));
+            }
+            public static void fillExoticEssence(ItemStack stack, float amount) {
+                setExoticEssence(stack, Math.clamp(0f, getMaxExoticEssence(stack), getExoticEssence(stack)+amount));
+            }
+        }
+    }
     public static class PlayerDataUtil {
         public static void updateData(ServerPlayer player) {
             Color linkColor = new Color(0, 0, 0, 0);

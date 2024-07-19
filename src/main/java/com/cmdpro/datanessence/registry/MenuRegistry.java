@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.screen.ChargerMenu;
 import com.cmdpro.datanessence.screen.EssenceBurnerMenu;
 import com.cmdpro.datanessence.screen.FabricatorMenu;
 import com.cmdpro.datanessence.screen.InfuserMenu;
@@ -19,6 +20,7 @@ public class MenuRegistry {
     public static final Supplier<MenuType<FabricatorMenu>> FABRICATOR_MENU = register(FabricatorMenu::new, "fabricator");
     public static final Supplier<MenuType<EssenceBurnerMenu>> ESSENCE_BURNER_MENU = register(EssenceBurnerMenu::new, "essence_burner");
     public static final Supplier<MenuType<InfuserMenu>> INFUSER_MENU = register(InfuserMenu::new, "infuser");
+    public static final Supplier<MenuType<ChargerMenu>> CHARGER_MENU = register(ChargerMenu::new, "charger");
     private static <T extends AbstractContainerMenu> Supplier<MenuType<T>> register(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));
     }

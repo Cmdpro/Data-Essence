@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.renderers.entity.EmptyEntityRenderer;
 import com.cmdpro.datanessence.renderers.layer.HornsLayer;
 import com.cmdpro.datanessence.renderers.layer.TailLayer;
 import com.cmdpro.datanessence.renderers.layer.WingsLayer;
+import com.cmdpro.datanessence.screen.ChargerScreen;
 import com.cmdpro.datanessence.screen.InfuserScreen;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
 import com.cmdpro.datanessence.screen.EssenceBurnerScreen;
@@ -41,6 +42,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.ITEM_POINT.get(), ItemPointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.FLUID_POINT.get(), FluidPointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.INFUSER.get(), InfuserRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.CHARGER.get(), ChargerRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -76,6 +78,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.FABRICATOR_MENU.get(), FabricatorScreen::new);
         event.register(MenuRegistry.ESSENCE_BURNER_MENU.get(), EssenceBurnerScreen::new);
         event.register(MenuRegistry.INFUSER_MENU.get(), InfuserScreen::new);
+        event.register(MenuRegistry.CHARGER_MENU.get(), ChargerScreen::new);
     }
     public static ShaderInstance progressionShader;
     @SubscribeEvent

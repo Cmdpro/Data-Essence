@@ -23,4 +23,44 @@ public class DataComponentRegistry {
             .networkSynchronized(ResourceLocation.STREAM_CODEC)
             .cacheEncoding()
     );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> ESSENCE = DATA_COMPONENTS.registerComponentType("essence", builder -> builder
+            .persistent(Codec.FLOAT)
+            .networkSynchronized(ByteBufCodecs.FLOAT)
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> LUNAR_ESSENCE = DATA_COMPONENTS.registerComponentType("lunar_essence", builder -> builder
+            .persistent(Codec.FLOAT)
+            .networkSynchronized(ByteBufCodecs.FLOAT)
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> NATURAL_ESSENCE = DATA_COMPONENTS.registerComponentType("natural_essence", builder -> builder
+            .persistent(Codec.FLOAT)
+            .networkSynchronized(ByteBufCodecs.FLOAT)
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> EXOTIC_ESSENCE = DATA_COMPONENTS.registerComponentType("exotic_essence", builder -> builder
+            .persistent(Codec.FLOAT)
+            .networkSynchronized(ByteBufCodecs.FLOAT)
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MAX_ESSENCE = DATA_COMPONENTS.registerComponentType("max_essence", builder -> builder
+            .persistent(Codec.FLOAT)
+            .networkSynchronized(ByteBufCodecs.FLOAT)
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MAX_LUNAR_ESSENCE = DATA_COMPONENTS.registerComponentType("max_lunar_essence", builder -> builder
+            .persistent(Codec.FLOAT)
+            .networkSynchronized(ByteBufCodecs.FLOAT)
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MAX_NATURAL_ESSENCE = DATA_COMPONENTS.registerComponentType("max_natural_essence", builder -> builder
+            .persistent(Codec.FLOAT)
+            .networkSynchronized(ByteBufCodecs.FLOAT)
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MAX_EXOTIC_ESSENCE = DATA_COMPONENTS.registerComponentType("max_exotic_essence", builder -> builder
+            .persistent(Codec.FLOAT)
+            .networkSynchronized(ByteBufCodecs.FLOAT)
+            .cacheEncoding()
+    );
 }

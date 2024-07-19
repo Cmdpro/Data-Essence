@@ -1,9 +1,10 @@
-// 1.20.6	2024-07-17T09:52:14.4233682	Item Models: datanessence
+// 1.20.6	2024-07-19T16:03:48.7954884	Item Models: datanessence
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
 48e6929230c9c5e72e805a935c1d0bc8592dfd7d assets/datanessence/models/item/capacitance_panel.json
+2025d76489225ed4d8ecc1f763463f60fbf8a969 assets/datanessence/models/item/charger.json
 88c5b68db5d677718279da08e10e0abc4f5f6499 assets/datanessence/models/item/conductance_rod.json
 d1b94c9c04798703c014833bebc4d726319a86db assets/datanessence/models/item/data_drive.json
 d7143cba0a3221569cc1595af65cd714d785cc89 assets/datanessence/models/item/data_tablet.json
