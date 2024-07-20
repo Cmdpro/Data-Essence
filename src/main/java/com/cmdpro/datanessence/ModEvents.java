@@ -2,11 +2,9 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.BaseEssencePoint;
-import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.block.StructureController;
 import com.cmdpro.datanessence.block.TraversiteRoad;
-import com.cmdpro.datanessence.block.entity.StructureControllerBlockEntity;
+import com.cmdpro.datanessence.block.entity.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.networking.ModMessages;
@@ -21,11 +19,9 @@ import com.cmdpro.datanessence.screen.datatablet.DataTabManager;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -34,14 +30,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.LogicalSide;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
-import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -100,8 +92,8 @@ public class ModEvents {
             if (!event.getLevel().getBlockState(event.getPos()).is(BlockRegistry.STRUCTURE_PROTECTOR.get())) {
                 if (!event.getLevel().isClientSide()) {
                     if (((Level) event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
-                        List<StructureControllerBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
-                        for (StructureControllerBlockEntity i : ents) {
+                        List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
+                        for (StructureProtectorBlockEntity i : ents) {
                             AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
                             if (aabb.intersects(AABB.encapsulatingFullBlocks(event.getPos(), event.getPos()))) {
                                 event.setCanceled(true);
@@ -124,8 +116,8 @@ public class ModEvents {
         if (!creative) {
             if (!event.getLevel().isClientSide()) {
                 if (((Level)event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
-                    List<StructureControllerBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
-                    for (StructureControllerBlockEntity i : ents) {
+                    List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
+                    for (StructureProtectorBlockEntity i : ents) {
                         AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
                         if (aabb.intersects(AABB.encapsulatingFullBlocks(i.getBlockPos(), i.getBlockPos()))) {
                             event.setCanceled(true);

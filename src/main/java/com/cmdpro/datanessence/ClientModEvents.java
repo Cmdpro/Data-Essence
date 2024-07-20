@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.entity.AncientSentinel;
+import com.cmdpro.datanessence.particle.CircleParticle;
+import com.cmdpro.datanessence.particle.CircleParticleAdditive;
 import com.cmdpro.datanessence.particle.EssenceSparkleParticle;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.renderers.block.*;
@@ -84,5 +86,9 @@ public class ClientModEvents {
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.ESSENCE_SPARKLE.get(),
                 EssenceSparkleParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(ParticleRegistry.CIRCLE.get(),
+                CircleParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(ParticleRegistry.CIRCLE_ADDITIVE.get(),
+                CircleParticleAdditive.Provider::new);
     }
 }

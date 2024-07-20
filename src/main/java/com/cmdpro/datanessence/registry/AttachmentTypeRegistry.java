@@ -1,26 +1,17 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.EssenceShard;
-import com.cmdpro.datanessence.block.entity.StructureControllerBlockEntity;
-import com.cmdpro.datanessence.item.*;
+import com.cmdpro.datanessence.block.entity.StructureProtectorBlockEntity;
 import com.mojang.serialization.Codec;
-import net.minecraft.core.particles.ParticleType;
-import net.minecraft.core.particles.SimpleParticleType;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 public class AttachmentTypeRegistry {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES,
@@ -29,10 +20,10 @@ public class AttachmentTypeRegistry {
             register("tier", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build());
     public static final Supplier<AttachmentType<Optional<BlockEntity>>> LINK_FROM =
             register("link_from", () -> AttachmentType.builder(() -> Optional.ofNullable((BlockEntity)null)).build());
-    public static final Supplier<AttachmentType<ArrayList<StructureControllerBlockEntity>>> STRUCTURE_CONTROLLERS =
-            register("structure_controllers", () -> AttachmentType.builder(() -> new ArrayList<StructureControllerBlockEntity>()).build());
-    public static final Supplier<AttachmentType<Optional<StructureControllerBlockEntity>>> BINDING_STRUCTURE_CONTROLLER =
-            register("binding_structure_controller", () -> AttachmentType.builder(() -> Optional.ofNullable((StructureControllerBlockEntity)null)).build());
+    public static final Supplier<AttachmentType<ArrayList<StructureProtectorBlockEntity>>> STRUCTURE_CONTROLLERS =
+            register("structure_controllers", () -> AttachmentType.builder(() -> new ArrayList<StructureProtectorBlockEntity>()).build());
+    public static final Supplier<AttachmentType<Optional<StructureProtectorBlockEntity>>> BINDING_STRUCTURE_CONTROLLER =
+            register("binding_structure_controller", () -> AttachmentType.builder(() -> Optional.ofNullable((StructureProtectorBlockEntity)null)).build());
 
     public static final Supplier<AttachmentType<Boolean>> UNLOCKED_ESSENCE =
             register("unlocked_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());

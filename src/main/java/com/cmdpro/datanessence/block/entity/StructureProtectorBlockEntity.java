@@ -1,27 +1,24 @@
 package com.cmdpro.datanessence.block.entity;
 
-import com.cmdpro.datanessence.api.EssenceContainer;
-import com.cmdpro.datanessence.block.FluidCollector;
+import com.cmdpro.datanessence.particle.CircleParticleOptions;
+import com.cmdpro.datanessence.particle.CircleParticleOptionsAdditive;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.util.Lazy;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class StructureControllerBlockEntity extends BlockEntity {
-    public StructureControllerBlockEntity(BlockPos pos, BlockState state) {
+import java.awt.*;
+
+public class StructureProtectorBlockEntity extends BlockEntity {
+    public StructureProtectorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.STRUCTURE_PROTECTOR.get(), pos, state);
         offsetCorner1 = pos;
         offsetCorner2 = pos;
@@ -55,5 +52,15 @@ public class StructureControllerBlockEntity extends BlockEntity {
         super.loadAdditional(nbt, pRegistries);
         offsetCorner1 = new BlockPos(nbt.getInt("offsetCorner1X"), nbt.getInt("offsetCorner1Y"), nbt.getInt("offsetCorner1Z"));
         offsetCorner2 = new BlockPos(nbt.getInt("offsetCorner2X"), nbt.getInt("offsetCorner2Y"), nbt.getInt("offsetCorner2Z"));
+    }
+
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, StructureProtectorBlockEntity pBlockEntity) {
+        if (pLevel.isClientSide) {
+            for (int i = 0; i < 5; i++) {
+                Vec3 dir = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.1f, 0.1f, 0.1f);
+                Vec3 offset = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.1f, 0.1f, 0.1f);
+                pLevel.addParticle(new CircleParticleOptionsAdditive(Color.getHSBColor((float) (pLevel.getGameTime() % 100) / 100f, 1f, 1f)), pPos.getCenter().x + offset.x, pPos.getCenter().y + offset.y, pPos.getCenter().z + offset.z, dir.x, dir.y, dir.z);
+            }
+        }
     }
 }
