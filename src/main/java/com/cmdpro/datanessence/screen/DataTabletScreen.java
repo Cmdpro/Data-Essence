@@ -24,6 +24,7 @@ import java.util.List;
 public class DataTabletScreen extends Screen {
     public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
     public static final ResourceLocation TEXTURECRAFTING = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
+    public static final ResourceLocation TEXTUREMISC = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_misc.png");
     public DataTabletScreen(Component pTitle) {
         super(pTitle);
         offsetX = (imageWidth/2);
