@@ -1,8 +1,10 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
+import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
@@ -14,6 +16,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
@@ -23,6 +26,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
@@ -30,6 +34,25 @@ import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 public class ClientEvents {
     public static RenderTarget tempRenderTarget;
     public static SimpleSoundInstance music;
+    @SubscribeEvent
+    public static void itemTooltip(ItemTooltipEvent event) {
+        float maxExoticEssence = DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getMaxExoticEssence(event.getItemStack());
+        if (maxExoticEssence > 0) {
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.exotic_essence_with_max", DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getExoticEssence(event.getItemStack()), maxExoticEssence));
+        }
+        float maxNaturalEssence = DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getMaxNaturalEssence(event.getItemStack());
+        if (maxNaturalEssence > 0) {
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.natural_essence_with_max", DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getNaturalEssence(event.getItemStack()), maxNaturalEssence));
+        }
+        float maxLunarEssence = DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getMaxLunarEssence(event.getItemStack());
+        if (maxLunarEssence > 0) {
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.lunar_essence_with_max", DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getLunarEssence(event.getItemStack()), maxLunarEssence));
+        }
+        float maxEssence = DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getMaxEssence(event.getItemStack());
+        if (maxEssence > 0) {
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.essence_with_max", DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getEssence(event.getItemStack()), maxEssence));
+        }
+    }
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (tempRenderTarget == null) {
