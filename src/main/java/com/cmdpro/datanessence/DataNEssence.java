@@ -65,6 +65,7 @@ public class DataNEssence
         AttachmentTypeRegistry.ATTACHMENT_TYPES.register(bus);
         ComputerFileTypeRegistry.COMPUTER_FILE_TYPES.register(bus);
         DataComponentRegistry.DATA_COMPONENTS.register(bus);
+        ArmorMaterialRegistry.ARMOR_MATERIALS.register(bus);
         random = RandomSource.create();
     }
     @SubscribeEvent
@@ -118,6 +119,7 @@ public class DataNEssence
             event.accept(ItemRegistry.ACCELERATION_LENS.get());
             event.accept(ItemRegistry.BURNING_LENS.get());
             event.accept(ItemRegistry.PRECISION_LENS.get());
+            event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());
