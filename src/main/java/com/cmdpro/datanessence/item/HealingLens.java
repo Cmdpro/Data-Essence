@@ -1,0 +1,18 @@
+package com.cmdpro.datanessence.item;
+
+import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.ILaserEmitterModule;
+import com.cmdpro.datanessence.block.entity.LaserEmitterBlockEntity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+
+public class HealingLens extends Item implements ILaserEmitterModule {
+    public HealingLens(Properties pProperties) {
+        super(pProperties);
+    }
+
+    @Override
+    public void applyToMob(LaserEmitterBlockEntity ent, LivingEntity entity) {
+        entity.heal(0.1f);
+    }
+}

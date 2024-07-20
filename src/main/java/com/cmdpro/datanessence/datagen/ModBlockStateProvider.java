@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.datagen;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.EssenceBurner;
 import com.cmdpro.datanessence.block.FluidCollector;
+import com.cmdpro.datanessence.block.LaserEmitter;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -48,6 +49,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         dataBank(BlockRegistry.DATA_BANK);
         fluidCollector(BlockRegistry.FLUID_COLLECTOR);
         fluidCollector(BlockRegistry.FLUID_SPILLER);
+        laserEmitter(BlockRegistry.LASER_EMITTER);
 
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
     }
@@ -146,5 +148,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("up", top)
                 .texture("particle", side);
         simpleBlockItem(blockRegistryObject.get(), model);
+    }
+    private void laserEmitter(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ResourceLocation side = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side");
+        ResourceLocation back = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_back");
+        ResourceLocation front = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_front");
+        BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", side)
+                .texture("east", side)
+                .texture("north", side)
+                .texture("down", back)
+                .texture("up", front)
+                .texture("south", side)
+                .texture("particle", side);
+        simpleBlockItem(blockRegistryObject.get(), model);
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(LaserEmitter.FACING, Direction.EAST).modelForState().modelFile(model).rotationY(90).rotationX(90).addModel()
+                .partialState().with(LaserEmitter.FACING, Direction.NORTH).modelForState().modelFile(model).rotationX(90).addModel()
+                .partialState().with(LaserEmitter.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).rotationX(90).addModel()
+                .partialState().with(LaserEmitter.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).rotationX(90).addModel()
+                .partialState().with(LaserEmitter.FACING, Direction.UP).modelForState().modelFile(model).addModel()
+                .partialState().with(LaserEmitter.FACING, Direction.DOWN).modelForState().modelFile(model).rotationX(180).addModel();
     }
 }

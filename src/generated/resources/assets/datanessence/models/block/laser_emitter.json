@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "datanessence:block/laser_emitter_back",
+    "east": "datanessence:block/laser_emitter_side",
+    "north": "datanessence:block/laser_emitter_side",
+    "particle": "datanessence:block/laser_emitter_side",
+    "south": "datanessence:block/laser_emitter_side",
+    "up": "datanessence:block/laser_emitter_front",
+    "west": "datanessence:block/laser_emitter_side"
+  }
+}

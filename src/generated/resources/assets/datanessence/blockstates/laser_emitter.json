@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "datanessence:block/laser_emitter",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "datanessence:block/laser_emitter",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "datanessence:block/laser_emitter",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "datanessence:block/laser_emitter",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "datanessence:block/laser_emitter"
+    },
+    "facing=west": {
+      "model": "datanessence:block/laser_emitter",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

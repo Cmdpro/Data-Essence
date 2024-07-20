@@ -40,6 +40,7 @@ import software.bernie.geckolib.GeckoLib;
 public class DataNEssence
 {
     public static final ResourceKey<DamageType> magicProjectile = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "magic_projectile"));
+    public static final ResourceKey<DamageType> laser = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "laser"));
     public static final ResourceKey<DamageType> blackHole = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "black_hole"));
     public static final String MOD_ID = "datanessence";
     // Directly reference a slf4j logger
@@ -86,6 +87,7 @@ public class DataNEssence
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_COLLECTOR.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_SPILLER.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.CHARGER.get(), (o, direction) -> o.getItemHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.LASER_EMITTER.get(), (o, direction) -> o.getItemHandler());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -111,6 +113,11 @@ public class DataNEssence
             event.accept(ItemRegistry.CONDUCTANCE_ROD.get());
             event.accept(ItemRegistry.LOGICAL_MATRIX.get());
             event.accept(ItemRegistry.MAGITECH_8_BALL.get());
+            event.accept(ItemRegistry.HARMING_LENS.get());
+            event.accept(ItemRegistry.HEALING_LENS.get());
+            event.accept(ItemRegistry.ACCELERATION_LENS.get());
+            event.accept(ItemRegistry.BURNING_LENS.get());
+            event.accept(ItemRegistry.PRECISION_LENS.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());
@@ -143,6 +150,8 @@ public class DataNEssence
             event.accept(BlockRegistry.COMPUTER.get());
             event.accept(BlockRegistry.FLUID_COLLECTOR.get());
             event.accept(BlockRegistry.FLUID_SPILLER.get());
+            event.accept(BlockRegistry.CHARGER.get());
+            event.accept(BlockRegistry.LASER_EMITTER.get());
         }
     }
 }

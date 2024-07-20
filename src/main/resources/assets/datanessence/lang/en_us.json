@@ -73,6 +73,9 @@
   "death.attack.black_hole": "%1$s was spaghettified",
   "death.attack.black_hole.player": "%2$s made %1$s get spaghettified",
   "death.attack.black_hole.item": "%2$s used %3$s to make %1$s get spaghettified",
+  "death.attack.laser": "%1$s was hit by a deadly laser",
+  "death.attack.laser.player": "%2$s made %1$s get hit by a deadly laser",
+  "death.attack.laser.item": "%2$s used %3$s to make %1$s get hit by a deadly laser",
 
   "gui.essence_bar.essence":         "%1$s Essence",
   "gui.essence_bar.lunar_essence":   "%1$s Lunar Essence",

@@ -9,11 +9,8 @@ import com.cmdpro.datanessence.renderers.entity.EmptyEntityRenderer;
 import com.cmdpro.datanessence.renderers.layer.HornsLayer;
 import com.cmdpro.datanessence.renderers.layer.TailLayer;
 import com.cmdpro.datanessence.renderers.layer.WingsLayer;
-import com.cmdpro.datanessence.screen.ChargerScreen;
-import com.cmdpro.datanessence.screen.InfuserScreen;
+import com.cmdpro.datanessence.screen.*;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
-import com.cmdpro.datanessence.screen.EssenceBurnerScreen;
-import com.cmdpro.datanessence.screen.FabricatorScreen;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
 import net.minecraft.client.Minecraft;
@@ -43,6 +40,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.FLUID_POINT.get(), FluidPointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.INFUSER.get(), InfuserRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.CHARGER.get(), ChargerRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.LASER_EMITTER.get(), LaserEmitterRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -79,6 +77,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.ESSENCE_BURNER_MENU.get(), EssenceBurnerScreen::new);
         event.register(MenuRegistry.INFUSER_MENU.get(), InfuserScreen::new);
         event.register(MenuRegistry.CHARGER_MENU.get(), ChargerScreen::new);
+        event.register(MenuRegistry.LASER_EMITTER_MENU.get(), LaserEmitterScreen::new);
     }
     public static ShaderInstance progressionShader;
     @SubscribeEvent

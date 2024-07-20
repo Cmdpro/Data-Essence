@@ -11,6 +11,10 @@ import java.util.function.Supplier;
 public class BlockEntityRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, DataNEssence.MOD_ID);
+    public static final Supplier<BlockEntityType<LaserEmitterBlockEntity>> LASER_EMITTER =
+            register("laser_emitter", () ->
+                    BlockEntityType.Builder.of(LaserEmitterBlockEntity::new,
+                            BlockRegistry.LASER_EMITTER.get()).build(null));
     public static final Supplier<BlockEntityType<FluidSpillerBlockEntity>> FLUID_SPILLER =
             register("fluid_spiller", () ->
                     BlockEntityType.Builder.of(FluidSpillerBlockEntity::new,

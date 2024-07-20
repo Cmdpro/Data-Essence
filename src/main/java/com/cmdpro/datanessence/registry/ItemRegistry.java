@@ -11,9 +11,15 @@ import java.util.function.Supplier;
 
 public class ItemRegistry {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, DataNEssence.MOD_ID);
+    // Lenses
+    public static final Supplier<Item> HARMING_LENS = register("harming_lens", () -> new HarmingLens(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> HEALING_LENS = register("healing_lens", () -> new HealingLens(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ACCELERATION_LENS = register("acceleration_lens", () -> new AccelerationLens(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> BURNING_LENS = register("burning_lens", () -> new BurningLens(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> PRECISION_LENS = register("precision_lens", () -> new PrecisionLens(new Item.Properties().stacksTo(1)));
 
     // Tools
-    public static final Supplier<Item> MAGIC_WRENCH = register("magic_wrench", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> MAGIC_WRENCH = register("magic_wrench", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> DATA_DRIVE = register("data_drive", () -> new DataDrive(new Item.Properties()));
 
     // Essence Shards
