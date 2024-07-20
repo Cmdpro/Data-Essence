@@ -22,6 +22,9 @@ public class ItemRegistry {
     public static final Supplier<Item> MAGIC_WRENCH = register("magic_wrench", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> DATA_DRIVE = register("data_drive", () -> new DataDrive(new Item.Properties()));
 
+    // Equipment
+    public static final Supplier<Item> PRIMITIVE_ANTI_GRAVITY_PACK = register("primitive_anti_gravity_pack", () -> new PrimitiveAntiGravityPack(new Item.Properties().stacksTo(1)));
+
     // Essence Shards
     public static final Supplier<Item> ESSENCE_SHARD = register("essence_shard", () -> new EssenceShard(new Item.Properties(), 100, 0, 0, 0));
 
