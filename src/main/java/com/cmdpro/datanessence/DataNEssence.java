@@ -89,6 +89,7 @@ public class DataNEssence
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_SPILLER.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.CHARGER.get(), (o, direction) -> o.getItemHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.LASER_EMITTER.get(), (o, direction) -> o.getItemHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.VACUUM.get(), (o, direction) -> o.getItemHandler());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -154,6 +155,7 @@ public class DataNEssence
             event.accept(BlockRegistry.FLUID_SPILLER.get());
             event.accept(BlockRegistry.CHARGER.get());
             event.accept(BlockRegistry.LASER_EMITTER.get());
+            event.accept(BlockRegistry.VACUUM.get());
         }
     }
 }
