@@ -3,7 +3,7 @@
     {
       "type": "datanessence:text",
       "text": {
-        "translate": "block.datanessence.computer.types.test.files.0",
+        "translate": "computer.types.test.files.0",
         "font": "datanessence:ancient"
       }
     }

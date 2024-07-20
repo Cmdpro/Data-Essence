@@ -4,7 +4,9 @@ import com.cmdpro.datanessence.api.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.BaseEssencePoint;
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.block.StructureController;
 import com.cmdpro.datanessence.block.TraversiteRoad;
+import com.cmdpro.datanessence.block.entity.StructureControllerBlockEntity;
 import com.cmdpro.datanessence.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.networking.ModMessages;
@@ -12,6 +14,7 @@ import com.cmdpro.datanessence.networking.packet.DragonPartsSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.HiddenBlockSyncS2CPacket;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
+import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.screen.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.screen.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.screen.datatablet.DataTabManager;
@@ -19,13 +22,17 @@ import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.LogicalSide;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -37,6 +44,8 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -60,6 +69,70 @@ public class ModEvents {
                 }
             } else {
                 ent.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void onRightClick(PlayerInteractEvent.RightClickBlock event) {
+        if (!event.getLevel().isClientSide()) {
+            if (!event.getLevel().getBlockState(event.getPos()).is(BlockRegistry.STRUCTURE_PROTECTOR.get())) {
+                event.getEntity().getData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER).ifPresent((binding) -> {
+                    if (binding.bindProcess == 1) {
+                        event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_controller.select_pos_2"));
+                        binding.offsetCorner1 = event.getPos().offset(binding.getBlockPos().multiply(-1));
+                        binding.bindProcess = 2;
+                    } else if (binding.bindProcess == 2) {
+                        if (!binding.offsetCorner1.offset(binding.getBlockPos()).equals(event.getPos())) {
+                            binding.offsetCorner2 = event.getPos().offset(binding.getBlockPos().multiply(-1));
+                            binding.bindProcess = 0;
+                            event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_controller.finished"));
+                            event.getEntity().removeData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER);
+                        }
+                    }
+                });
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void onBlockBreak(BlockEvent.BreakEvent event) {
+        boolean creative = event.getPlayer().isCreative();
+        if (!creative) {
+            if (!event.getLevel().getBlockState(event.getPos()).is(BlockRegistry.STRUCTURE_PROTECTOR.get())) {
+                if (!event.getLevel().isClientSide()) {
+                    if (((Level) event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
+                        List<StructureControllerBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
+                        for (StructureControllerBlockEntity i : ents) {
+                            AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
+                            if (aabb.intersects(AABB.encapsulatingFullBlocks(event.getPos(), event.getPos()))) {
+                                event.setCanceled(true);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
+        boolean creative = false;
+        if (event.getEntity() instanceof Player player) {
+            if (player.isCreative()) {
+                creative = true;
+            }
+        }
+        if (!creative) {
+            if (!event.getLevel().isClientSide()) {
+                if (((Level)event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
+                    List<StructureControllerBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
+                    for (StructureControllerBlockEntity i : ents) {
+                        AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
+                        if (aabb.intersects(AABB.encapsulatingFullBlocks(i.getBlockPos(), i.getBlockPos()))) {
+                            event.setCanceled(true);
+                            break;
+                        }
+                    }
+                }
             }
         }
     }

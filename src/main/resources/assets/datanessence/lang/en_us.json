@@ -65,7 +65,12 @@
   "item.datanessence.magitech_8_ball.result10": "Why not.",
   "item.datanessence.magitech_8_ball.result11": ".lfgsnh sqfgozorrq zexkzlfge zlxd xgN",
   "block.datanessence.computer": "Computer",
-  "block.datanessence.computer.types.test.files.0": "Very cool testing computer text file, yes very cool, indeed, uh I need more text uh uh uh uh uh uh uh yea",
+  "block.datanessence.structure_controller": "Structure Controller",
+  "block.datanessence.structure_controller.select_pos_1": "Select Corner 1",
+  "block.datanessence.structure_controller.select_pos_2": "Select Corner 2",
+  "block.datanessence.structure_controller.finished": "Successfully set the bounds of the structure controller!",
+
+  "computer.types.test.files.0": "Very cool testing computer text file, yes very cool, indeed, uh I need more text uh uh uh uh uh uh uh yea",
 
   "death.attack.magicprojectile": "%1$s was killed by %2$s using magic",
   "death.attack.magicprojectile.player": "%1$s was killed by %2$s using magic",

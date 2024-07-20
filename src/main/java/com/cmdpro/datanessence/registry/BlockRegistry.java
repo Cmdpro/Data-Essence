@@ -43,6 +43,9 @@ public class BlockRegistry {
     public static final Supplier<Block> VACUUM = register("vacuum",
             () -> new Vacuum(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> STRUCTURE_PROTECTOR = register("structure_protector",
+            () -> new StructureController(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).noOcclusion().instabreak()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LASER_EMITTER = register("laser_emitter",
             () -> new LaserEmitter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

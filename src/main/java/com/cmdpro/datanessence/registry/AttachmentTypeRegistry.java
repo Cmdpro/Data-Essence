@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.EssenceShard;
+import com.cmdpro.datanessence.block.entity.StructureControllerBlockEntity;
 import com.cmdpro.datanessence.item.*;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.particles.ParticleType;
@@ -28,6 +29,10 @@ public class AttachmentTypeRegistry {
             register("tier", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build());
     public static final Supplier<AttachmentType<Optional<BlockEntity>>> LINK_FROM =
             register("link_from", () -> AttachmentType.builder(() -> Optional.ofNullable((BlockEntity)null)).build());
+    public static final Supplier<AttachmentType<ArrayList<StructureControllerBlockEntity>>> STRUCTURE_CONTROLLERS =
+            register("structure_controllers", () -> AttachmentType.builder(() -> new ArrayList<StructureControllerBlockEntity>()).build());
+    public static final Supplier<AttachmentType<Optional<StructureControllerBlockEntity>>> BINDING_STRUCTURE_CONTROLLER =
+            register("binding_structure_controller", () -> AttachmentType.builder(() -> Optional.ofNullable((StructureControllerBlockEntity)null)).build());
 
     public static final Supplier<AttachmentType<Boolean>> UNLOCKED_ESSENCE =
             register("unlocked_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
