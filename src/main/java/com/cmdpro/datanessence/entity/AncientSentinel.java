@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.entity;
 
+import com.cmdpro.datanessence.registry.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -19,6 +20,7 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
@@ -81,20 +83,13 @@ public class AncientSentinel extends Monster implements GeoEntity, RangedAttackM
 
     @Override
     public void performRangedAttack(LivingEntity pTarget, float pVelocity) {
-        ItemStack weapon = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof net.minecraft.world.item.BowItem));
-        ItemStack itemstack = this.getProjectile(weapon);
-        AbstractArrow abstractarrow = this.getArrow(itemstack, pVelocity);
-        if (weapon.getItem() instanceof net.minecraft.world.item.ProjectileWeaponItem weaponItem)
-            abstractarrow = weaponItem.customArrow(abstractarrow, itemstack);
+        AncientSentinelProjectile projectile = new AncientSentinelProjectile(EntityRegistry.ANCIENT_SENTINEL_PROJECTILE.get(), this, level());
         double d0 = pTarget.getX() - this.getX();
-        double d1 = pTarget.getY(0.3333333333333333) - abstractarrow.getY();
+        double d1 = (pTarget.getEyeY() - 0.1F) - projectile.getY();
         double d2 = pTarget.getZ() - this.getZ();
-        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-        abstractarrow.shoot(d0, d1 + d3 * 0.2F, d2, 1.6F, (float)(14 - this.level().getDifficulty().getId() * 4));
-        this.playSound(SoundEvents.SKELETON_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
-        this.level().addFreshEntity(abstractarrow);
-    }
-    protected AbstractArrow getArrow(ItemStack pArrowStack, float pVelocity) {
-        return ProjectileUtil.getMobArrow(this, pArrowStack, pVelocity);
+        Vec3 vec = new Vec3(d0, d1, d2).normalize();
+        projectile.setDeltaMovement(vec.multiply(0.5f, 0.5f, 0.5f));
+        this.playSound(SoundEvents.BLAZE_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.level().addFreshEntity(projectile);
     }
 }
