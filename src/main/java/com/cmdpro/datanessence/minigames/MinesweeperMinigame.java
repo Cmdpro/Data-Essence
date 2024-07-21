@@ -114,6 +114,7 @@ public class MinesweeperMinigame extends Minigame {
     public Tile getTile(Vector2i pos) {
         return tiles.get(pos);
     }
+    public int gameOver = -1;
     @Override
     public void render(DataBankScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
         for (Tile i : tiles.values()) {
@@ -134,15 +135,39 @@ public class MinesweeperMinigame extends Minigame {
                 }
             }
         }
+        if (gameOver >= 0) {
+            pGuiGraphics.pose().pushPose();
+            pGuiGraphics.pose().translate(0, 0, 399);
+            pGuiGraphics.fill(x, y, x+150, y+(int)(75f*((float)gameOver/50f)), 0xFF000000);
+            pGuiGraphics.fill(x, y+150-(int)(75f*((float)gameOver/50f)), x+150, y+150, 0xFF000000);
+            pGuiGraphics.pose().popPose();
+        }
     }
+
+    @Override
+    public void tick() {
+        if (gameOver >= 0) {
+            gameOver++;
+            if (gameOver >= 50) {
+                gameOver = -1;
+                randomizeBombs(bombCount);
+            }
+        }
+    }
+
     @Override
     public void mouseClicked(double pMouseX, double pMouseY, int pButton) {
         super.mouseClicked(pMouseX, pMouseY, pButton);
-        for (Tile i : tiles.values()) {
-            if (!i.cleared) {
-                if (pMouseX >= (i.pos.x * 10) && pMouseY >= (i.pos.y * 10) && pMouseX <= (i.pos.x * 10) + 9 && pMouseY <= (i.pos.y * 10) + 9) {
-                    i.cleared = true;
-                    break;
+        if (gameOver == -1) {
+            for (Tile i : tiles.values()) {
+                if (!i.cleared) {
+                    if (pMouseX >= (i.pos.x * 10) && pMouseY >= (i.pos.y * 10) && pMouseX <= (i.pos.x * 10) + 9 && pMouseY <= (i.pos.y * 10) + 9) {
+                        i.cleared = true;
+                        if (i.isBomb) {
+                            gameOver = 0;
+                        }
+                        break;
+                    }
                 }
             }
         }
