@@ -19,6 +19,7 @@ import com.cmdpro.datanessence.screen.datatablet.DataTabManager;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,10 +35,12 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDestroyBlockEvent;
 import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
+import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -117,6 +120,48 @@ public class ModEvents {
             if (!event.getLevel().isClientSide()) {
                 if (((Level)event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                     List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
+                    for (StructureProtectorBlockEntity i : ents) {
+                        AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
+                        if (aabb.contains(event.getPos().getCenter())) {
+                            event.setCanceled(true);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void onExplosion(ExplosionEvent.Detonate event) {
+        if (!event.getLevel().isClientSide()) {
+            if (((Level)event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
+                List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
+                List<BlockPos> toRemove = new ArrayList<>();
+                for (BlockPos i : event.getExplosion().getToBlow()) {
+                    for (StructureProtectorBlockEntity o : ents) {
+                        AABB aabb = AABB.encapsulatingFullBlocks(o.offsetCorner1.offset(o.getBlockPos()), o.offsetCorner2.offset(o.getBlockPos()));
+                        if (aabb.contains(i.getCenter())) {
+                            toRemove.add(i);
+                            break;
+                        }
+                    }
+                }
+                event.getExplosion().getToBlow().removeAll(toRemove);
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void onBlockDestroy(LivingDestroyBlockEvent event) {
+        boolean creative = false;
+        if (event.getEntity() instanceof Player player) {
+            if (player.isCreative()) {
+                creative = true;
+            }
+        }
+        if (!creative) {
+            if (!event.getEntity().level().isClientSide()) {
+                if (((Level)event.getEntity().level()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
+                    List<StructureProtectorBlockEntity> ents = ((Level) event.getEntity().level()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                     for (StructureProtectorBlockEntity i : ents) {
                         AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
                         if (aabb.contains(event.getPos().getCenter())) {
