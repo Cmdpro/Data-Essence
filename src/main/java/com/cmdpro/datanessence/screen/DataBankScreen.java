@@ -85,7 +85,9 @@ public class DataBankScreen extends Screen {
         }
         if (screenType == 1) {
             if (isMouseInsideMinigame(pMouseX, pMouseY)) {
-                minigames[minigameProgress].mouseClicked(pMouseX - (x + (imageWidth / 4)), pMouseY - (y + (imageHeight / 3)), pButton);
+                double mouseX = pMouseX-(x+(imageWidth/2)-75);
+                double mouseY = pMouseY-(y+(imageHeight/2)-75);
+                minigames[minigameProgress].mouseClicked(mouseX, mouseY, pButton);
                 return true;
             }
         }
@@ -114,8 +116,10 @@ public class DataBankScreen extends Screen {
             return false;
         }
         if (screenType == 1) {
-            if (isMouseInsideMinigame(pMouseX, pMouseY)) {
-                minigames[minigameProgress].mouseDragged(pMouseX - (x + (imageWidth / 4)), pMouseY - (y + (imageHeight / 3)), pButton, pDragX, pDragY);
+            if (isMouseInsideMinigame(pMouseX, pMouseY) && isMouseInsideMinigame(pMouseX+pDragX, pMouseY+pDragY)) {
+                double mouseX = pMouseX-(x+(imageWidth/2)-75);
+                double mouseY = pMouseY-(y+(imageHeight/2)-75);
+                minigames[minigameProgress].mouseDragged(mouseX, mouseY, pButton, pDragX, pDragY);
                 return true;
             }
         }
@@ -128,7 +132,9 @@ public class DataBankScreen extends Screen {
         int y = (height - imageHeight) / 2;
         if (screenType == 1) {
             if (isMouseInsideMinigame(pMouseX, pMouseY)) {
-                minigames[minigameProgress].mouseReleased(pMouseX - (x + (imageWidth / 4)), pMouseY - (y + (imageHeight / 3)), pButton);
+                double mouseX = pMouseX-(x+(imageWidth/2)-75);
+                double mouseY = pMouseY-(y+(imageHeight/2)-75);
+                minigames[minigameProgress].mouseReleased(mouseX, mouseY, pButton);
                 return true;
             }
         }
@@ -139,7 +145,6 @@ public class DataBankScreen extends Screen {
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         if (screenType == 1) {
             minigames[minigameProgress].keyPressed(pKeyCode, pScanCode, pModifiers);
-            return true;
         }
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);
     }
@@ -147,7 +152,6 @@ public class DataBankScreen extends Screen {
     public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers) {
         if (screenType == 1) {
             minigames[minigameProgress].keyReleased(pKeyCode, pScanCode, pModifiers);
-            return true;
         }
         return super.keyReleased(pKeyCode, pScanCode, pModifiers);
     }
@@ -222,8 +226,8 @@ public class DataBankScreen extends Screen {
             graphics.pose().popPose();
         } else if (screenType == 1) {
             drawMinigame(minigames[minigameProgress], graphics, delta, mouseX, mouseY);
-            graphics.blit(TEXTURE, x+(imageWidth/2)-10, y+32-10, 0, 166, 20, 20);
-            graphics.renderItem(clickedEntry.icon, x+(imageWidth/2)-8, y+32-8);
+            graphics.blit(TEXTURE, x+26-10, y+26-10, 0, 166, 20, 20);
+            graphics.renderItem(clickedEntry.icon, x+26-8, y+26-8);
         }
         graphics.disableScissor();
         if (screenType == 0) {
@@ -255,7 +259,7 @@ public class DataBankScreen extends Screen {
         } else if (screenType == 1) {
             if (isMouseInsideMinigame(mouseX, mouseY)) {
                 graphics.renderTooltip(Minecraft.getInstance().font, minigames[minigameProgress].getTooltip(), mouseX, mouseY);
-            } else if (mouseX >= x+(imageWidth/2)-10 && mouseY >=  y+32-10 && mouseX <= x+(imageWidth/2)+10 && mouseY <=  y+32+10) {
+            } else if (mouseX >= x+26-10 && mouseY >= y+26-10 && mouseX <= x+26+10 && mouseY <= y+26+10) {
                 graphics.renderTooltip(Minecraft.getInstance().font, clickedEntry.name, mouseX, mouseY);
             }
         }
@@ -263,14 +267,14 @@ public class DataBankScreen extends Screen {
     public boolean isMouseInsideMinigame(double pMouseX, double pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        return pMouseX >= x+(imageWidth/4) && pMouseY >= y+(imageHeight/3) && pMouseX <= x+((imageWidth/4)*3) && pMouseY <= y+((imageHeight/5)*4);
+        return pMouseX >= x+(imageWidth/2)-75 && pMouseY >= y+(imageHeight/2)-75 && pMouseX <= x+(imageWidth/2)+75 && pMouseY <= y+(imageHeight/2)+75;
     }
     public void drawMinigame(Minigame minigame, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        pGuiGraphics.fill(x+(imageWidth/4), y+(imageHeight/3), x+((imageWidth/4)*3), y+((imageHeight/5)*4), 0xFF000000);
-        pGuiGraphics.enableScissor(x+(imageWidth/4), y+(imageHeight/3), x+((imageWidth/4)*3), y+((imageHeight/5)*4));
-        minigame.render(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x+(imageWidth/4), y+(imageHeight/3));
+        pGuiGraphics.fill(x+(imageWidth/2)-75, y+(imageHeight/2)-75, x+(imageWidth/2)+75, y+(imageHeight/2)+75, 0xFF000000);
+        pGuiGraphics.enableScissor(x+(imageWidth/2)-75, y+(imageHeight/2)-75, x+(imageWidth/2)+75, y+(imageHeight/2)+75);
+        minigame.render(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x+(imageWidth/2)-75, y+(imageHeight/2)-75);
         pGuiGraphics.disableScissor();
     }
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {

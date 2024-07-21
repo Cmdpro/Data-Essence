@@ -3,9 +3,9 @@
   "tier": 2,
   "minigames": [
     {
-      "type": "datanessence:test",
-      "playerX": 50,
-      "playerY": 25
+      "type": "datanessence:minesweeper",
+      "bombs": 30,
+      "size": 7
     }
   ],
   "name": "data_tablet.pages.test2.name",

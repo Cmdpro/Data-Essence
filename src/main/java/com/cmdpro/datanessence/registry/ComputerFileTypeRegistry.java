@@ -3,8 +3,6 @@ package com.cmdpro.datanessence.registry;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.computers.ComputerFileType;
 import com.cmdpro.datanessence.computers.files.types.TextFileType;
-import com.cmdpro.datanessence.minigames.TestMinigameCreator;
-import com.cmdpro.datanessence.screen.databank.MinigameSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
