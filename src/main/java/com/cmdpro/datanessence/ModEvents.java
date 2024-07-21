@@ -73,14 +73,14 @@ public class ModEvents {
             if (!event.getLevel().getBlockState(event.getPos()).is(BlockRegistry.STRUCTURE_PROTECTOR.get())) {
                 event.getEntity().getData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER).ifPresent((binding) -> {
                     if (binding.bindProcess == 1) {
-                        event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_controller.select_pos_2"));
+                        event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.select_pos_2"));
                         binding.offsetCorner1 = event.getPos().offset(binding.getBlockPos().multiply(-1));
                         binding.bindProcess = 2;
                     } else if (binding.bindProcess == 2) {
                         if (!binding.offsetCorner1.offset(binding.getBlockPos()).equals(event.getPos())) {
                             binding.offsetCorner2 = event.getPos().offset(binding.getBlockPos().multiply(-1));
                             binding.bindProcess = 0;
-                            event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_controller.finished"));
+                            event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.finished"));
                             event.getEntity().removeData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER);
                         }
                     }

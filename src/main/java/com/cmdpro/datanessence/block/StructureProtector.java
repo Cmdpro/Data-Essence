@@ -32,7 +32,7 @@ public class StructureProtector extends Block implements EntityBlock {
             if (pPlayer.isCreative()) {
                 if (!pLevel.isClientSide()) {
                     ent.bindProcess = 1;
-                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.structure_controller.select_pos_1"));
+                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.structure_protector.select_pos_1"));
                     pPlayer.setData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER, Optional.of(ent));
                     return InteractionResult.sidedSuccess(pLevel.isClientSide());
                 }
