@@ -1,4 +1,4 @@
-// 1.20.6	2024-07-19T23:01:32.9263263	Loot Tables
+// 1.20.6	2024-07-20T21:18:51.505022	Loot Tables
 bbbe51e74edfcc54136678857699b9b14569a089 data/datanessence/loot_tables/blocks/ancient_lantern.json
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_tables/blocks/ancient_rock_bricks.json
 6540cac2211b8a360d5bbebd6d8ecce140f3d3cb data/datanessence/loot_tables/blocks/ancient_rock_column.json
@@ -34,4 +34,6 @@ ff5225d48bc03882f1128c09f6e168b96a3db300 data/datanessence/loot_tables/blocks/la
 919c920dcdeff0098f7d510970e6b0320924e0f3 data/datanessence/loot_tables/blocks/patterned_copper.json
 612f96b09f9dd5c05c4105bbf22280578325c299 data/datanessence/loot_tables/blocks/polished_obsidian.json
 aca436e4c49a253ff47202ccea5ec753aec5a73d data/datanessence/loot_tables/blocks/polished_obsidian_column.json
+551d36c40595eabcbf647193dbc5537770278255 data/datanessence/loot_tables/blocks/structure_protector.json
 dbb37b98d7b947a9b52acc93133a797f6831bbea data/datanessence/loot_tables/blocks/traversite_road.json
+79520676cdef899226b1394203ad881f5c962d41 data/datanessence/loot_tables/blocks/vacuum.json

@@ -51,6 +51,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         fluidCollector(BlockRegistry.FLUID_SPILLER);
         laserEmitter(BlockRegistry.LASER_EMITTER);
 
+        nothing(BlockRegistry.STRUCTURE_PROTECTOR);
+
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
     }
 
@@ -170,5 +172,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .partialState().with(LaserEmitter.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).rotationX(90).addModel()
                 .partialState().with(LaserEmitter.FACING, Direction.UP).modelForState().modelFile(model).addModel()
                 .partialState().with(LaserEmitter.FACING, Direction.DOWN).modelForState().modelFile(model).rotationX(180).addModel();
+    }
+    private void nothing(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ResourceLocation particle = new ResourceLocation(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + "nothing");
+        BlockModelBuilder model = models().getBuilder(loc.getPath())
+                .texture("particle", particle);
+        simpleBlock(blockRegistryObject.get(), model);
     }
 }

@@ -95,7 +95,7 @@ public class ModEvents {
                         List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                         for (StructureProtectorBlockEntity i : ents) {
                             AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
-                            if (aabb.intersects(AABB.encapsulatingFullBlocks(event.getPos(), event.getPos()))) {
+                            if (aabb.contains(event.getPos().getCenter())) {
                                 event.setCanceled(true);
                                 break;
                             }
@@ -119,7 +119,7 @@ public class ModEvents {
                     List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                     for (StructureProtectorBlockEntity i : ents) {
                         AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
-                        if (aabb.intersects(AABB.encapsulatingFullBlocks(i.getBlockPos(), i.getBlockPos()))) {
+                        if (aabb.contains(event.getPos().getCenter())) {
                             event.setCanceled(true);
                             break;
                         }
