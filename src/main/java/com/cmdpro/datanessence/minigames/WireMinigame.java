@@ -123,11 +123,11 @@ public class WireMinigame extends Minigame {
                 if (i.essence == 3) {
                     color = 0xFFe7fcf9;
                 }
-                drawLine(new Vector2d(x+(i.pos.x*10)+5.5, y+(i.pos.y*10)+5.5), new Vector2d(x+(i.connectedTo.x*10)+5.5, y+(i.connectedTo.y*10)+5.5), color);
+                drawLine(new Vector2d(x+((double)i.pos.x*10d)+6d, y+((double)i.pos.y*10d)+6d), new Vector2d(x+((double)i.connectedTo.x*10d)+6d, y+((double)i.connectedTo.y*10d)+6d), color);
             }
         }
         if (startLine != null && endLine != null) {
-            drawLine(new Vector2d(startLine.x+0.5+(double)x, startLine.y+0.5+(double)y), new Vector2d(endLine.x+0.5+(double)x, endLine.y+0.5+(double)y), lineColor);
+            drawLine(new Vector2d(startLine.x+1d+(double)x, startLine.y+1d+(double)y), new Vector2d(endLine.x+1d+(double)x, endLine.y+1d+(double)y), lineColor);
         }
     }
     public Vector2d startLine;
@@ -157,7 +157,7 @@ public class WireMinigame extends Minigame {
                             Line2D line = new Line2D.Double((start.pos.x * 10) + 5, (start.pos.y * 10) + 5, (end.pos.x * 10) + 5, (end.pos.y * 10) + 5);
                             for (Tile i : tiles.values()) {
                                 if (i.connectedTo != null) {
-                                    if (!i.connectedTo.equals(start.pos)) {
+                                    if (!i.connectedTo.equals(start.pos) && !i.pos.equals(end.pos)) {
                                         Line2D line2 = new Line2D.Double((i.pos.x * 10) + 5, (i.pos.y * 10) + 5, (i.connectedTo.x * 10) + 5, (i.connectedTo.y * 10) + 5);
                                         if (line.intersectsLine(line2)) {
                                             invalid = true;
