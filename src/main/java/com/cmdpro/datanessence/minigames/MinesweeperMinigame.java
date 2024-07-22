@@ -5,12 +5,15 @@ import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.cmdpro.datanessence.screen.databank.Minigame;
 import com.google.common.primitives.Chars;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.MouseHandler;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.event.InputEvent;
 import org.apache.commons.lang3.RandomUtils;
 import org.joml.Vector2d;
 import org.joml.Vector2i;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -120,9 +123,9 @@ public class MinesweeperMinigame extends Minigame {
         for (Tile i : tiles.values()) {
             if (!i.cleared) {
                 if (pMouseX >= x + (i.pos.x * 10) && pMouseY >= y + (i.pos.y * 10) && pMouseX <= x + (i.pos.x * 10) + 9 && pMouseY <= y + (i.pos.y * 10) + 9) {
-                    pGuiGraphics.blit(TEXTURE, x + (i.pos.x * 10), y + (i.pos.y * 10), 11, 0, 10, 10);
+                    pGuiGraphics.blit(TEXTURE, x + (i.pos.x * 10), y + (i.pos.y * 10), 11, i.isMarked ? 11 : 0, 10, 10);
                 } else {
-                    pGuiGraphics.blit(TEXTURE, x + (i.pos.x * 10), y + (i.pos.y * 10), 0, 0, 10, 10);
+                    pGuiGraphics.blit(TEXTURE, x + (i.pos.x * 10), y + (i.pos.y * 10), 0, i.isMarked ? 11 : 0, 10, 10);
                 }
             } else {
                 if (i.isBomb) {
@@ -162,9 +165,14 @@ public class MinesweeperMinigame extends Minigame {
             for (Tile i : tiles.values()) {
                 if (!i.cleared) {
                     if (pMouseX >= (i.pos.x * 10) && pMouseY >= (i.pos.y * 10) && pMouseX <= (i.pos.x * 10) + 9 && pMouseY <= (i.pos.y * 10) + 9) {
-                        i.cleared = true;
-                        if (i.isBomb) {
-                            gameOver = 0;
+                        if (pButton == 0) {
+                            i.cleared = true;
+                            i.isMarked = false;
+                            if (i.isBomb) {
+                                gameOver = 0;
+                            }
+                        } else {
+                            i.isMarked = !i.isMarked;
                         }
                         break;
                     }
@@ -177,5 +185,6 @@ public class MinesweeperMinigame extends Minigame {
         public Vector2i pos;
         public int nearbyBombs;
         public boolean isBomb;
+        public boolean isMarked;
     }
 }
