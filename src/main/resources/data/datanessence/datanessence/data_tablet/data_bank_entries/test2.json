@@ -3,9 +3,45 @@
   "tier": 2,
   "minigames": [
     {
-      "type": "datanessence:minesweeper",
-      "bombs": 30,
-      "size": 7
+      "type": "datanessence:wire",
+      "tiles": [
+        {
+          "x": 7,
+          "y": 7,
+          "type": 1,
+          "essence": 0
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "type": 3,
+          "essence": 0
+        },
+        {
+          "x": 9,
+          "y": 9,
+          "type": 2,
+          "essence": 0
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "type": 1,
+          "essence": 1
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "type": 3,
+          "essence": 1
+        },
+        {
+          "x": 7,
+          "y": 9,
+          "type": 2,
+          "essence": 1
+        }
+      ]
     }
   ],
   "name": "data_tablet.pages.test2.name",

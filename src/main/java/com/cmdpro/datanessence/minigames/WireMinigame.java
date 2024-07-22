@@ -3,25 +3,46 @@ package com.cmdpro.datanessence.minigames;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.cmdpro.datanessence.screen.databank.Minigame;
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.phys.Vec2;
 import org.apache.commons.lang3.RandomUtils;
 import org.joml.Vector2d;
 import org.joml.Vector2f;
 import org.joml.Vector2i;
 
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class WireMinigame extends Minigame {
     public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");
-    public WireMinigame(int bombCount, int size) {
-
+    public WireMinigame(Map<Vector2i, Tile> tiles) {
+        setupTiles();
+        this.tiles.putAll(tiles);
+    }
+    public void setupTiles() {
+        this.tiles = new HashMap<>();
+        for (int i = 0; i < 150/10; i++) {
+            for (int o = 0; o < 150 / 10; o++) {
+                Tile tile = new Tile();
+                Vector2i pos = new Vector2i(i, o);
+                tile.pos = pos;
+                tiles.put(pos, tile);
+            }
+        }
     }
     @Override
     public boolean isFinished() {
@@ -55,6 +76,9 @@ public class WireMinigame extends Minigame {
     public Tile getTile(Vector2i pos) {
         return tiles.get(pos);
     }
+    public Tile getTile(Vector2d pos) {
+        return tiles.get(new Vector2i((int)Math.floor(pos.x/10d), (int)Math.floor(pos.y/10d)));
+    }
     @Override
     public void render(DataBankScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
         for (Tile i : tiles.values()) {
@@ -84,44 +108,131 @@ public class WireMinigame extends Minigame {
                 }
             }
         }
+        for (Tile i : tiles.values()) {
+            if (i.connectedTo != null) {
+                int color = 0x00000000;
+                if (i.essence == 0) {
+                    color = 0xFFe236ef;
+                }
+                if (i.essence == 1) {
+                    color = 0xFFf5fbc0;
+                }
+                if (i.essence == 2) {
+                    color = 0xFF57f36c;
+                }
+                if (i.essence == 3) {
+                    color = 0xFFe7fcf9;
+                }
+                drawLine(new Vector2d(x+(i.pos.x*10)+5.5, y+(i.pos.y*10)+5.5), new Vector2d(x+(i.connectedTo.x*10)+5.5, y+(i.connectedTo.y*10)+5.5), color);
+            }
+        }
+        if (startLine != null && endLine != null) {
+            drawLine(new Vector2d(startLine.x+0.5+(double)x, startLine.y+0.5+(double)y), new Vector2d(endLine.x+0.5+(double)x, endLine.y+0.5+(double)y), lineColor);
+        }
     }
     public Vector2d startLine;
     public Vector2d endLine;
+    public int lineColor;
     @Override
     public void mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
         super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
-        for (Tile i : tiles.values()) {
-            if (i.type == 1) {
-                if (pMouseX >= (i.pos.x * 10) && pMouseY >= (i.pos.y * 10) && pMouseX <= (i.pos.x * 10) + 9 && pMouseY <= (i.pos.y * 10) + 9) {
-                    if (pButton == 0) {
-                        startLine = new Vector2d((i.pos.x*10)+5, (i.pos.y*10)+5);
-                        endLine = new Vector2d((i.pos.x*10)+5+pDragX, (i.pos.y*10)+5+pDragY);
-                    }
-                    break;
-                }
+        if (pButton == 0) {
+            if (endLine != null) {
+                endLine.add(pDragX, pDragY);
             }
         }
     }
 
     @Override
     public void mouseReleased(double pMouseX, double pMouseY, int pButton) {
-        startLine = null;
-        endLine = null;
+        if (pButton == 0) {
+            endLine = new Vector2d(pMouseX, pMouseY);
+            if (startLine != null) {
+                Tile start = getTile(startLine);
+                Tile end = getTile(endLine);
+                if (start != end) {
+                    if (start != null && end != null) {
+                        if (start.essence == end.essence) {
+                            boolean invalid = false;
+                            Line2D line = new Line2D.Double((start.pos.x * 10) + 5, (start.pos.y * 10) + 5, (end.pos.x * 10) + 5, (end.pos.y * 10) + 5);
+                            for (Tile i : tiles.values()) {
+                                if (i.connectedTo != null) {
+                                    if (!i.connectedTo.equals(start.pos)) {
+                                        Line2D line2 = new Line2D.Double((i.pos.x * 10) + 5, (i.pos.y * 10) + 5, (i.connectedTo.x * 10) + 5, (i.connectedTo.y * 10) + 5);
+                                        if (line.intersectsLine(line2)) {
+                                            invalid = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            if (!invalid) {
+                                if (start.connectedTo == null) {
+                                    if (end.type == 3 || end.type == 2) {
+                                        start.connectedTo = end.pos;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            startLine = null;
+            endLine = null;
+        }
+    }
+    public void drawLine(Vector2d start, Vector2d end, int color) {
+        GlStateManager._depthMask(false);
+        GlStateManager._disableCull();
+        RenderSystem.setShader(GameRenderer::getRendertypeLinesShader);
+        Tesselator tess = RenderSystem.renderThreadTesselator();
+        BufferBuilder buf = tess.getBuilder();
+        RenderSystem.lineWidth(1f*(float)Minecraft.getInstance().getWindow().getGuiScale());
+        buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
+        double x1 = start.x;
+        double y1 = start.y;
+        double x2 = end.x;
+        double y2 = end.y;
+        Vec2 vec1 = new Vec2(x1 >= x2 ? x1 == x2 ? 0 : 1 : -1, y1 >= y2 ? y1 == y2 ? 0 : 1 : -1);
+        Vec2 vec2 = new Vec2(x2 >= x1 ? x1 == x2 ? 0 : 1 : -1, y2 >= y1 ? y1 == y2 ? 0 : 1 : -1);
+        buf.vertex(x1, y1, 0.0D).color(color).normal(vec1.x, vec1.y, 0).endVertex();
+        buf.vertex(x2, y2, 0.0D).color(color).normal(vec2.x, vec2.y, 0).endVertex();
+        tess.end();
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        GlStateManager._enableCull();
+        GlStateManager._depthMask(true);
+        RenderSystem.lineWidth(1);
     }
 
     @Override
     public void mouseClicked(double pMouseX, double pMouseY, int pButton) {
         super.mouseClicked(pMouseX, pMouseY, pButton);
-        for (Tile i : tiles.values()) {
-            if (pMouseX >= (i.pos.x * 10) && pMouseY >= (i.pos.y * 10) && pMouseX <= (i.pos.x * 10) + 9 && pMouseY <= (i.pos.y * 10) + 9) {
-                if (i.type == 0 || i.type == 3) {
-                    i.connectedTo = null;
+        if (pButton == 0) {
+            for (Tile i : tiles.values()) {
+                if (pMouseX >= (i.pos.x * 10) && pMouseY >= (i.pos.y * 10) && pMouseX <= (i.pos.x * 10) + 9 && pMouseY <= (i.pos.y * 10) + 9) {
+                    if (i.type == 1 || i.type == 3) {
+                        i.connectedTo = null;
+                        if (i.essence == 0) {
+                            lineColor = 0xFFe236ef;
+                        }
+                        if (i.essence == 1) {
+                            lineColor = 0xFFf5fbc0;
+                        }
+                        if (i.essence == 2) {
+                            lineColor = 0xFF57f36c;
+                        }
+                        if (i.essence == 3) {
+                            lineColor = 0xFFe7fcf9;
+                        }
+                        startLine = new Vector2d((i.pos.x * 10) + 5, (i.pos.y * 10) + 5);
+                        endLine = new Vector2d(pMouseX, pMouseY);
+                    }
+                    break;
                 }
-                break;
             }
         }
     }
-    public class Tile {
+    public static class Tile {
         public Vector2i pos;
         public int type;
         public int essence;
