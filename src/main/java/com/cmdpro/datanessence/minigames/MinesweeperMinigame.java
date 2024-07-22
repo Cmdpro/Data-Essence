@@ -7,7 +7,10 @@ import com.google.common.primitives.Chars;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.MouseHandler;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.neoforged.neoforge.client.event.InputEvent;
 import org.apache.commons.lang3.RandomUtils;
 import org.joml.Vector2d;
@@ -168,10 +171,17 @@ public class MinesweeperMinigame extends Minigame {
                         if (pButton == 0) {
                             i.cleared = true;
                             i.isMarked = false;
+                            Client.breakTile();
                             if (i.isBomb) {
+                                Client.explode();
                                 gameOver = 0;
                             }
                         } else {
+                            if (!i.isMarked) {
+                                Client.placeFlag();
+                            } else {
+                                Client.removeFlag();
+                            }
                             i.isMarked = !i.isMarked;
                         }
                         break;
@@ -186,5 +196,19 @@ public class MinesweeperMinigame extends Minigame {
         public int nearbyBombs;
         public boolean isBomb;
         public boolean isMarked;
+    }
+    public class Client {
+        public static void placeFlag() {
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.WOOL_PLACE, 1f, 1f));
+        }
+        public static void removeFlag() {
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.WOOL_BREAK, 1f, 1f));
+        }
+        public static void breakTile() {
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.STONE_BREAK, 1f, 1f));
+        }
+        public static void explode() {
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.GENERIC_EXPLODE.value(), 1f, 1f));
+        }
     }
 }
