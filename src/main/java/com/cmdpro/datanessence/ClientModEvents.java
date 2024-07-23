@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.entity.AncientSentinel;
+import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.particle.CircleParticle;
 import com.cmdpro.datanessence.particle.CircleParticleAdditive;
 import com.cmdpro.datanessence.particle.EssenceSparkleParticle;
@@ -8,6 +9,7 @@ import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.renderers.block.*;
 import com.cmdpro.datanessence.renderers.entity.AncientSentinelRenderer;
 import com.cmdpro.datanessence.renderers.entity.EmptyEntityRenderer;
+import com.cmdpro.datanessence.renderers.entity.EssenceSlashRenderer;
 import com.cmdpro.datanessence.renderers.layer.HornsLayer;
 import com.cmdpro.datanessence.renderers.layer.TailLayer;
 import com.cmdpro.datanessence.renderers.layer.WingsLayer;
@@ -62,6 +64,7 @@ public class ClientModEvents {
         EntityRenderers.register(EntityRegistry.BLACK_HOLE.get(), EmptyEntityRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL.get(), AncientSentinelRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL_PROJECTILE.get(), EmptyEntityRenderer::new);
+        EntityRenderers.register(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), EssenceSlashRenderer::new);
 
         event.enqueueWork(() -> {
             ClientHooks.registerLayerDefinition(WingsLayer.wingsLocation, WingsLayer.WingsModel::createLayer);
