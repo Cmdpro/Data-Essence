@@ -5,12 +5,16 @@ import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EntityRegistry;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.common.Tags;
 
@@ -30,13 +34,14 @@ public class EssenceSword extends SwordItem {
     }
 
     @Override
-    public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         if (DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getEssence(stack) >= 10) {
             DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.drainEssence(stack, 10);
-            EssenceSlashProjectile slash = new EssenceSlashProjectile(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), entity, entity.level());
-            entity.level().addFreshEntity(slash);
-            return true;
+            EssenceSlashProjectile slash = new EssenceSlashProjectile(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), pPlayer, pLevel);
+            slash.setPos(slash.position().offsetRandom(pPlayer.getRandom(), 0.25f));
+            pLevel.addFreshEntity(slash);
         }
-        return super.onEntitySwing(stack, entity);
+        return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
     }
 }
