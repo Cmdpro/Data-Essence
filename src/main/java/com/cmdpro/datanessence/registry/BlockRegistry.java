@@ -43,6 +43,9 @@ public class BlockRegistry {
     public static final Supplier<Block> VACUUM = register("vacuum",
             () -> new Vacuum(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ESSENCE_LEECH = register("essence_leech",
+            () -> new EssenceLeech(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> STRUCTURE_PROTECTOR = register("structure_protector",
             () -> new StructureProtector(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE).noOcclusion().instabreak().noCollission()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

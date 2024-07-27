@@ -81,6 +81,9 @@
   "death.attack.laser": "%1$s was hit by a deadly laser",
   "death.attack.laser.player": "%2$s made %1$s get hit by a deadly laser",
   "death.attack.laser.item": "%2$s used %3$s to make %1$s get hit by a deadly laser",
+  "death.attack.essence_siphoned": "%1$s had their essence siphoned out",
+  "death.attack.essence_siphoned.player": "%2$s made %1$s have their essence siphoned out",
+  "death.attack.essence_siphoned.item": "%2$s used %3$s to make %1$s have their essence siphoned out",
 
   "gui.essence_bar.essence_with_max":         "%1$s/%2$s Essence",
   "gui.essence_bar.lunar_essence_with_max":   "%1$s/%2$s Lunar Essence",

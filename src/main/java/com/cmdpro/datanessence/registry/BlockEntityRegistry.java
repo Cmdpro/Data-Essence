@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.block.EssenceLeech;
 import com.cmdpro.datanessence.block.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -19,6 +20,10 @@ public class BlockEntityRegistry {
             register("vacuum", () ->
                     BlockEntityType.Builder.of(VacuumBlockEntity::new,
                             BlockRegistry.VACUUM.get()).build(null));
+    public static final Supplier<BlockEntityType<EssenceLeechBlockEntity>> ESSENCE_LEECH =
+            register("essence_leech", () ->
+                    BlockEntityType.Builder.of(EssenceLeechBlockEntity::new,
+                            BlockRegistry.ESSENCE_LEECH.get()).build(null));
     public static final Supplier<BlockEntityType<LaserEmitterBlockEntity>> LASER_EMITTER =
             register("laser_emitter", () ->
                     BlockEntityType.Builder.of(LaserEmitterBlockEntity::new,

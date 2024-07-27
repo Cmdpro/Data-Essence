@@ -61,6 +61,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(BlockRegistry.ESSENCE_CRYSTAL);
         evenSimplerBlockItem(BlockRegistry.INFUSER);
         evenSimplerBlockItem(BlockRegistry.CHARGER);
+        evenSimplerBlockItem(BlockRegistry.ESSENCE_LEECH);
 
         evenSimplerBlockItem(BlockRegistry.DECO_ESSENCE_BUFFER);
         evenSimplerBlockItem(BlockRegistry.DECO_ITEM_BUFFER);

@@ -42,6 +42,7 @@ public class DataNEssence
     public static final ResourceKey<DamageType> magicProjectile = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "magic_projectile"));
     public static final ResourceKey<DamageType> laser = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "laser"));
     public static final ResourceKey<DamageType> blackHole = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "black_hole"));
+    public static final ResourceKey<DamageType> essenceSiphoned = ResourceKey.create(Registries.DAMAGE_TYPE, new ResourceLocation(DataNEssence.MOD_ID, "essence_siphoned"));
     public static final String MOD_ID = "datanessence";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -156,6 +157,11 @@ public class DataNEssence
             event.accept(BlockRegistry.CHARGER.get());
             event.accept(BlockRegistry.LASER_EMITTER.get());
             event.accept(BlockRegistry.VACUUM.get());
+            event.accept(BlockRegistry.ESSENCE_LEECH.get());
+            event.accept(BlockRegistry.ESSENCE_BATTERY.get());
+            event.accept(BlockRegistry.LUNAR_ESSENCE_BATTERY.get());
+            event.accept(BlockRegistry.NATURAL_ESSENCE_BATTERY.get());
+            event.accept(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
         }
     }
 }
