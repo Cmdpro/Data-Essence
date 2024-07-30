@@ -13,6 +13,8 @@ import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.NotNull;
 
 public class EssenceLeechBlockEntity extends EssenceContainer {
+    public int cooldown;
+
     public EssenceLeechBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ESSENCE_LEECH.get(), pos, state);
     }
@@ -20,11 +22,13 @@ public class EssenceLeechBlockEntity extends EssenceContainer {
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         super.saveAdditional(tag, pRegistries);
         tag.putFloat("essence", getEssence());
+        tag.putInt("cooldown", cooldown);
     }
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         setEssence(nbt.getFloat("essence"));
+        cooldown = nbt.getInt("cooldown");
     }
     @Override
     public float getMaxEssence() {
@@ -33,7 +37,7 @@ public class EssenceLeechBlockEntity extends EssenceContainer {
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceLeechBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide) {
-            if (pBlockEntity.getEssence() < pBlockEntity.getMaxEssence()) {
+            if (pBlockEntity.getEssence() < pBlockEntity.getMaxEssence() && pBlockEntity.cooldown <= 0) {
                 for (LivingEntity i : pLevel.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pPos.getCenter().add(0, 2, 0), 3, 3, 3))) {
                     if (i.isAlive()) {
                         i.hurt(i.damageSources().source(DataNEssence.essenceSiphoned), 5);
@@ -42,6 +46,9 @@ public class EssenceLeechBlockEntity extends EssenceContainer {
                         }
                     }
                 }
+                pBlockEntity.cooldown = 10;
+            } else {
+                pBlockEntity.cooldown -= 1;
             }
         }
     }
