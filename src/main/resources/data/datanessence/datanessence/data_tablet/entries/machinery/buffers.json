@@ -1,0 +1,25 @@
+{
+  "icon": "datanessence:item_buffer",
+  "tab": "datanessence:machinery",
+  "x": -2,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": "data_tablet.pages.buffers.page1.text"
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": " ",
+      "recipes": [
+        "datanessence:fabrication/essence_buffer",
+        "datanessence:fabrication/item_buffer",
+        "datanessence:fabrication/fluid_buffer"
+      ]
+    }
+  ],
+  "name": "data_tablet.pages.buffers.name",
+  "parents": [
+    "datanessence:automation"
+  ]
+}

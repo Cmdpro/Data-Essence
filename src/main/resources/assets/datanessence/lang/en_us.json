@@ -117,6 +117,8 @@
   "data_tablet.pages.essence_crystals.page1.text": "Deposits of raw Essence Crystal appear inside caves. At time of data upload, their origins are unclear, but we suspect whatever formed them was once a natural process. Regardless, when mined, a whole Crystal shatters into several smaller Shards, proving immeasurably helpful for the first step into working with Essence.",
   "data_tablet.pages.components.name":             "Basic Crafting Components",
   "data_tablet.pages.components.page1.text":       "Unrefined materials can only go so far, so we devised several more refined crafting components better suited for our work.",
+  "data_tablet.pages.lensing_crystals.name":       "Lensing Crystals",
+  "data_tablet.pages.lensing_crystals.page1.text": "Near-invisible to the untrained eye, these crystals occur in small, rhombus-shaped geodes underground. They possess incredible precision and efficacy when used to focus energy or as a lens, owing them their name.",
 
   "_comment.data_tablet_pages.essence_manipulation": "Essence Manipulation category texts.",
   "data_tablet.pages.essence_burner.name":         "Essence Burner",
@@ -134,12 +136,14 @@
   "_comment.data_tablet_pages.machinery": "Machinery and Processing category texts.",
   "data_tablet.pages.automation.name":          "Automation",
   "data_tablet.pages.automation.page1.text":    "Many machines are designed to need a template of sorts to properly operate. Such a template is easily stored upon a Data Drive, which can hold one entry from this very Tablet, storing all the recipes it contains within its memory. The Drive can then be slotted into any valid machine.",
+  "data_tablet.pages.buffers.name":              "Buffers",
+  "data_tablet.pages.buffers.page1.text":        "Machines often need more than one input, and there are so many sides to a given machine - less so when they are particularly shaped. To that end, we devised a series of Buffers, which, when stacked, funnel items, fluids, and Essence upwards to the machine placed above. They accept inputs from all sides.",
   "data_tablet.pages.infuser.name":             "Infuser",
   "data_tablet.pages.infuser.page1.text":       "The Fabricator is an ideal worktable for more refined processing, but there are times when what is required is to dump Essence into an object without much finesse. That is where the Infuser device comes in: it is able to infuse blocks and items with Essence, often resulting in something new, or changed.",
   "data_tablet.pages.infuser.page2.text":       " ◇ Must have a loaded Data Drive inserted to know what to craft.",
   "data_tablet.pages.laser_emitter.name":       "Essence Lasers",
   "data_tablet.pages.laser_emitter.page1.text": "Focusing Essence into a concentrated beam provides interesting results. We devised a special device to do this very thing, with the added benefit that it may be given one of several Lenses to alter the effect of the emitted beam.",
-  "data_tablet.pages.laser_emitter.page2.text": " ◇ No Lens: When the beam touches entities, the Emitter will send a redstone signal.\n ◇ Acceleration Lens: Mobs are forced to move in the direction of the beam. ◇ Burning Lens: Mobs are ignited. ◇ Harming Lens: The beam hurts mobs it touches. ◇ Healing Lens: The beam heals mobs it touches. ◇ Precision Lens: The Emitter emits redstone correspondent to the number of mobs the beam intersects with.",
+  "data_tablet.pages.laser_emitter.page2.text": " ◇ No Lens: The Emitter produces a redstone signal when mobs touch the beam.\n ◇ Acceleration Lens: Mobs are forced to move in the direction of the beam.\n ◇ Burning Lens: Mobs are ignited.\n ◇ Harming Lens: Mobs are damaged.\n ◇ Healing Lens: Mobs are healed.\n ◇ Precision Lens: The Emitter emits redstone correspondent to the number of mobs the beam intersects with.",
 
   "_comment.data_tablet_pages.tools": "Tools and Utilities category texts.",
   "data_tablet.pages.traversite_road.name":       "Traversite Road",
@@ -152,6 +156,7 @@
 
   "commands.datanessence.reset_learned": "Reset all entries back to their original state",
   "commands.datanessence.set_tier": "Set your tier to %1$s",
+  "commands.datanessence.unlock_all": "Unlocked all entries",
   "commands.datanessence.unlock.unlock_entry": "Unlocked Entry \"%1$s\"",
   "commands.datanessence.unlock.entry_has_no_incomplete": "Entry \"%1$s\" does not have an incomplete form!",
   "commands.datanessence.unlock.entry_doesnt_exist": "Entry \"%1$s\" does not exist!",

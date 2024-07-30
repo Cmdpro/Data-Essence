@@ -1,0 +1,38 @@
+{
+  "icon": "datanessence:laser_emitter",
+  "tab": "datanessence:machinery",
+  "x": 0,
+  "y": 4,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": "data_tablet.pages.laser_emitter.page1.text"
+    },
+    {
+      "type": "datanessence:text",
+      "text": "data_tablet.pages.laser_emitter.page2.text"
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": " ",
+      "recipes": [
+        "datanessence:fabrication/laser_emitter",
+        "datanessence:synthesis/lens_acceleration",
+        "datanessence:synthesis/lens_burning",
+        "datanessence:synthesis/lens_harming"
+      ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": " ",
+      "recipes": [
+        "datanessence:synthesis/lens_healing",
+        "datanessence:synthesis/lens_precision"
+      ]
+    }
+  ],
+  "name": "data_tablet.pages.laser_emitter.name",
+  "parents": [
+
+  ]
+}

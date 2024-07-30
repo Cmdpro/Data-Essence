@@ -1,0 +1,13 @@
+{
+  "type": "datanessence:infusion",
+  "essenceCost": 200,
+  "entry": "datanessence:basics/components",
+  "input": {
+    "item": "minecraft:glass",
+    "count": 1
+  },
+  "result": {
+    "id": "datanessence:lens",
+    "count": 1
+  }
+}

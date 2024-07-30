@@ -62,6 +62,8 @@ public class ItemRegistry {
     public static final Supplier<Item> CONDUCTANCE_ROD = register("conductance_rod", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> CAPACITANCE_PANEL = register("capacitance_panel", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> LOGICAL_MATRIX = register("logical_matrix", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> LENSING_CRYSTAL = register("lensing_crystal", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> LENS = register("lens", () -> new Item(new Item.Properties()));
 
     // Misc
     public static final Supplier<Item> MAGITECH_8_BALL = register("magitech_8_ball", () -> new Magitech8Ball(new Item.Properties().stacksTo(1)));

@@ -1,0 +1,23 @@
+{
+  "icon": "datanessence:essence_leech",
+  "tab": "datanessence:essence_manipulation",
+  "x": 0,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": "data_tablet.pages.essence_leech.page1.text"
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": "data_tablet.pages.essence_leech.page2.text",
+      "recipes": [
+        "datanessence:fabrication/essence_leech"
+      ]
+    }
+  ],
+  "name": "data_tablet.pages.essence_leech.name",
+  "parents": [
+    "datanessence:essence_manipulation/essence_burner"
+  ]
+}

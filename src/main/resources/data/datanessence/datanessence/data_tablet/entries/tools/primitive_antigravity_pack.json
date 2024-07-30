@@ -1,0 +1,24 @@
+{
+  "icon": "datanessence:primitive_antigravity_pack",
+  "tab": "datanessence:tools",
+  "x": -3,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": "datanessence:primitive_antigravity_pack",
+      "text": "data_tablet.pages.primitive_antigravity_pack.page1.text"
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": "data_tablet.pages.primitive_antigravity_pack.page2.text",
+      "recipes": [
+        "datanessence:fabrication/primitive_antigravity_pack"
+      ]
+    }
+  ],
+  "name": "data_tablet.pages.primitive_antigravity_pack.name",
+  "parents": [
+    "datanessence:infuser"
+  ]
+}
