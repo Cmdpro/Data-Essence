@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.renderers.block;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.entity.ExoticEssencePointBlockEntity;
+import com.cmdpro.datanessence.block.transmission.ExoticEssencePointBlockEntity;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;

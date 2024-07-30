@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.screen;
 
-import com.cmdpro.datanessence.block.entity.ChargerBlockEntity;
-import com.cmdpro.datanessence.block.entity.LaserEmitterBlockEntity;
+import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
 import net.minecraft.network.FriendlyByteBuf;

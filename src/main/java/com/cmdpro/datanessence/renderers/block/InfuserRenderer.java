@@ -1,8 +1,7 @@
 package com.cmdpro.datanessence.renderers.block;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
-import com.cmdpro.datanessence.block.entity.InfuserBlockEntity;
+import com.cmdpro.datanessence.block.processing.InfuserBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;

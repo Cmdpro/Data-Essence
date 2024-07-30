@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence.api;
 
-import com.cmdpro.datanessence.block.entity.EssenceBufferBlockEntity;
-import com.cmdpro.datanessence.block.entity.FluidBufferBlockEntity;
-import com.cmdpro.datanessence.block.entity.ItemBufferBlockEntity;
+import com.cmdpro.datanessence.block.transmission.EssenceBufferBlockEntity;
+import com.cmdpro.datanessence.block.transmission.FluidBufferBlockEntity;
+import com.cmdpro.datanessence.block.transmission.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.computers.ComputerData;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
@@ -18,7 +18,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;

@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.misc;
 
-import com.cmdpro.datanessence.block.EssenceCrystal;
+import com.cmdpro.datanessence.block.world.EssenceCrystal;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;

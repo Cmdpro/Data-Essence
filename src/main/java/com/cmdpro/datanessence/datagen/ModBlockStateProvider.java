@@ -1,9 +1,9 @@
 package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.EssenceBurner;
-import com.cmdpro.datanessence.block.FluidCollector;
-import com.cmdpro.datanessence.block.LaserEmitter;
+import com.cmdpro.datanessence.block.generation.EssenceBurner;
+import com.cmdpro.datanessence.block.production.FluidCollector;
+import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;

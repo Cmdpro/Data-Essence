@@ -1,9 +1,8 @@
 package com.cmdpro.datanessence.screen;
 
-import com.cmdpro.datanessence.block.entity.EssenceBurnerBlockEntity;
+import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
-import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

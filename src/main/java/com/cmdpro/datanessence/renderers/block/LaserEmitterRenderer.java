@@ -1,9 +1,7 @@
 package com.cmdpro.datanessence.renderers.block;
 
-import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
-import com.cmdpro.datanessence.block.LaserEmitter;
-import com.cmdpro.datanessence.block.entity.LaserEmitterBlockEntity;
+import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
@@ -11,7 +9,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 

@@ -1,8 +1,23 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.EssenceLeech;
-import com.cmdpro.datanessence.block.entity.*;
+import com.cmdpro.datanessence.block.auxiliary.ChargerBlockEntity;
+import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
+import com.cmdpro.datanessence.block.auxiliary.VacuumBlockEntity;
+import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
+import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
+import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
+import com.cmdpro.datanessence.block.processing.InfuserBlockEntity;
+import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
+import com.cmdpro.datanessence.block.production.FluidSpillerBlockEntity;
+import com.cmdpro.datanessence.block.storage.EssenceBatteryBlockEntity;
+import com.cmdpro.datanessence.block.storage.ExoticEssenceBatteryBlockEntity;
+import com.cmdpro.datanessence.block.storage.LunarEssenceBatteryBlockEntity;
+import com.cmdpro.datanessence.block.storage.NaturalEssenceBatteryBlockEntity;
+import com.cmdpro.datanessence.block.technical.ComputerBlockEntity;
+import com.cmdpro.datanessence.block.technical.DataBankBlockEntity;
+import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
+import com.cmdpro.datanessence.block.transmission.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;

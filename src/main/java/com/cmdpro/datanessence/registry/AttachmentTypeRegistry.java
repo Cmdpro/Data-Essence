@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.entity.StructureProtectorBlockEntity;
+import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.mojang.serialization.Codec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;

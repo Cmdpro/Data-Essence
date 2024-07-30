@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.screen;
 
-import com.cmdpro.datanessence.block.entity.FabricatorBlockEntity;
+import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
 import net.minecraft.network.FriendlyByteBuf;

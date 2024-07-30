@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.screen;
 
-import com.cmdpro.datanessence.block.entity.InfuserBlockEntity;
+import com.cmdpro.datanessence.block.processing.InfuserBlockEntity;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
 import com.cmdpro.datanessence.screen.slot.DataDriveSlot;

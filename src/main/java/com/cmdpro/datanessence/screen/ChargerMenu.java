@@ -1,11 +1,8 @@
 package com.cmdpro.datanessence.screen;
 
-import com.cmdpro.datanessence.block.entity.ChargerBlockEntity;
-import com.cmdpro.datanessence.block.entity.InfuserBlockEntity;
+import com.cmdpro.datanessence.block.auxiliary.ChargerBlockEntity;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
-import com.cmdpro.datanessence.screen.slot.DataDriveSlot;
-import com.cmdpro.datanessence.screen.slot.ModResultSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.worldgen.features;
 
-import com.cmdpro.datanessence.block.EssenceCrystal;
+import com.cmdpro.datanessence.block.world.EssenceCrystal;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;

@@ -1,8 +1,6 @@
 package com.cmdpro.datanessence.renderers.item;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.NaturalEssencePoint;
-import com.cmdpro.datanessence.item.LunarEssencePointItem;
 import com.cmdpro.datanessence.item.NaturalEssencePointItem;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
