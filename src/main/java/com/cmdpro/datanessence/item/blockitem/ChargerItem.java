@@ -1,6 +1,6 @@
-package com.cmdpro.datanessence.item;
+package com.cmdpro.datanessence.item.blockitem;
 
-import com.cmdpro.datanessence.renderers.item.EssencePointItemRenderer;
+import com.cmdpro.datanessence.renderers.item.ChargerItemRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -13,22 +13,24 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class EssencePointItem extends BlockItem implements GeoItem {
+public class ChargerItem extends BlockItem implements GeoItem {
     public AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
-    public EssencePointItem(Block block, Properties settings) {
+    public ChargerItem(Block block, Properties settings) {
         super(block, settings);
     }
 
     private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.essence_point.hand", Animation.LoopType.LOOP));
+        event.getController().setAnimation(RawAnimation.begin().then("animation.charger.hand", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
+
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {
-            private final BlockEntityWithoutLevelRenderer renderer = new EssencePointItemRenderer();
+            private final BlockEntityWithoutLevelRenderer renderer = new ChargerItemRenderer();
+
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
                 return renderer;

@@ -1,8 +1,7 @@
 package com.cmdpro.datanessence.renderers.item;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.item.EssencePointItem;
-import com.cmdpro.datanessence.item.FluidPointItem;
+import com.cmdpro.datanessence.item.blockitem.FluidPointItem;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;

@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.item;
+package com.cmdpro.datanessence.item.lens;
 
 import com.cmdpro.datanessence.api.ILaserEmitterModule;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;

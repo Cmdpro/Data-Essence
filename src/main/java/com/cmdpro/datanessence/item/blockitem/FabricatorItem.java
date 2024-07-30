@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.item;
+package com.cmdpro.datanessence.item.blockitem;
 
 import com.cmdpro.datanessence.renderers.item.FabricatorItemRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;

@@ -1,19 +1,18 @@
-package com.cmdpro.datanessence.item;
+package com.cmdpro.datanessence.item.equipment;
 
-import com.cmdpro.datanessence.entity.ThrownEssenceBombProjectile;
+import com.cmdpro.datanessence.entity.ThrownLunarEssenceBombProjectile;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.ThrownEgg;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class EssenceBombItem extends Item {
-    public EssenceBombItem(Properties pProperties) {
+public class LunarEssenceBombItem extends Item {
+    public LunarEssenceBombItem(Properties pProperties) {
         super(pProperties);
     }
 
@@ -21,7 +20,7 @@ public class EssenceBombItem extends Item {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
         pLevel.playSound((Player)null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!pLevel.isClientSide) {
-            ThrownEssenceBombProjectile bomb = new ThrownEssenceBombProjectile(pPlayer, pLevel);
+            ThrownLunarEssenceBombProjectile bomb = new ThrownLunarEssenceBombProjectile(pPlayer, pLevel);
             bomb.setItem(itemstack);
             bomb.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
             pLevel.addFreshEntity(bomb);
