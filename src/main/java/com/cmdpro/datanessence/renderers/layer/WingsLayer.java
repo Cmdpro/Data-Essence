@@ -150,9 +150,9 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
             MeshDefinition meshdefinition = new MeshDefinition();
             PartDefinition partdefinition = meshdefinition.getRoot();
 
-            PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(1.0F, 23.0F, 2.0F));
+            PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 21.5F, 2.0F));
 
-            PartDefinition wings = root.addOrReplaceChild("wings", CubeListBuilder.create(), PartPose.offset(-2.0F, 0.0F, 0.0F));
+            PartDefinition wings = root.addOrReplaceChild("wings", CubeListBuilder.create(), PartPose.offset(-1.0F, 1.5F, 1.5F));
 
             PartDefinition left_wing = wings.addOrReplaceChild("left_wing", CubeListBuilder.create(), PartPose.offset(2.0F, 0.0F, 0.0F));
 
