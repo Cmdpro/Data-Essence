@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "datanessence:item/components/conductance_rod"
+    "layer0": "datanessence:item/components/lens"
   }
 }

@@ -42,6 +42,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.DATA_TABLET);
         simpleItem(ItemRegistry.DATA_DRIVE);
         simpleItem(ItemRegistry.ESSENCE_SHARD);
+        simpleItem(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK);
+
         simpleItemWithSubdirectory(ItemRegistry.ESSENCE_WIRE, "wires");
         simpleItemWithSubdirectory(ItemRegistry.LUNAR_ESSENCE_WIRE, "wires");
         simpleItemWithSubdirectory(ItemRegistry.NATURAL_ESSENCE_WIRE, "wires");
@@ -75,9 +77,10 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         evenSimplerBlockItem(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
 
-        simpleItem(ItemRegistry.CONDUCTANCE_ROD);
-        simpleItem(ItemRegistry.CAPACITANCE_PANEL);
-        simpleItem(ItemRegistry.LOGICAL_MATRIX);
+        simpleItemWithSubdirectory(ItemRegistry.CONDUCTANCE_ROD, "components");
+        simpleItemWithSubdirectory(ItemRegistry.CAPACITANCE_PANEL, "components");
+        simpleItemWithSubdirectory(ItemRegistry.LOGICAL_MATRIX, "components");
+        simpleItemWithSubdirectory(ItemRegistry.LENS, "components");
 
         simpleItemWithSubdirectory(ItemRegistry.ESSENCE_BOMB, "bombs");
         simpleItemWithSubdirectory(ItemRegistry.LUNAR_ESSENCE_BOMB, "bombs");

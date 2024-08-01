@@ -66,6 +66,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.VACUUM.get());
         this.add(BlockRegistry.STRUCTURE_PROTECTOR.get(),
                 block -> noDrop());
+        dropSelf(BlockRegistry.ESSENCE_LEECH.get());
     }
     protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,

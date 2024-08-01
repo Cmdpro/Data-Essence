@@ -146,10 +146,14 @@
   "data_tablet.pages.laser_emitter.page2.text": " ◇ No Lens: The Emitter produces a redstone signal when mobs touch the beam.\n ◇ Acceleration Lens: Mobs are forced to move in the direction of the beam.\n ◇ Burning Lens: Mobs are ignited.\n ◇ Harming Lens: Mobs are damaged.\n ◇ Healing Lens: Mobs are healed.\n ◇ Precision Lens: The Emitter emits redstone correspondent to the number of mobs the beam intersects with.",
 
   "_comment.data_tablet_pages.tools": "Tools and Utilities category texts.",
-  "data_tablet.pages.traversite_road.name":       "Traversite Road",
-  "data_tablet.pages.traversite_road.page1.text": "Infusing common diorite with Essence creates rock painted in subtle blue and pink hues, with a unique property that makes it very suitable for building paths out of: whoever walks on it will find their steps much faster than usual. We found that shaping them into bricks was of aesthetic interest, and the result was the Traversite Road.",
-  "data_tablet.pages.essence_bombs.name":         "Explosives",
-  "data_tablet.pages.essence_bombs.page1.text":   "By packing Essence into a tightly-enclosed spherical shell along with some unstable matter, we found ourselves with a form of explosive artillery. It was suggested that we strictly regulate their manufacture, but there's little point: the formula is decently simple.\n\nThe basic Essence Bomb is simply a projectile that causes a nice explosion where it lands.",
+  "data_tablet.pages.traversite_road.name":                  "Traversite Road",
+  "data_tablet.pages.traversite_road.page1.text":            "Infusing common diorite with Essence creates rock painted in subtle blue and pink hues, with a unique property that makes it very suitable for building paths out of: whoever walks on it will find their steps much faster than usual. We found that shaping them into bricks was of aesthetic interest, and the result was the Traversite Road.",
+  "data_tablet.pages.essence_bombs.name":                    "Explosives",
+  "data_tablet.pages.essence_bombs.page1.text":              "By packing Essence into a tightly-enclosed spherical shell along with some unstable matter, we found ourselves with a form of explosive artillery. It was suggested that we strictly regulate their manufacture, but there's little point: the formula is decently simple.\n\nThe basic Essence Bomb is simply a projectile that causes a nice explosion where it lands.",
+  "data_tablet.pages.primitive_antigravity_pack.name":       "Antigravity Pack",
+  "data_tablet.pages.primitive_antigravity_pack.page1.text": "As travel between research centers often involves crossing uneven terrain, such as cliffs or mountains, some measure of protection from lethal falls is desirable. Our first developments into the matter led us to the Primitive Antigravity Pack, which is able to provide some measure of grace during falls when charged up with Essence.",
+  "data_tablet.pages.charger.name":                          "Charging Equipment",
+  "data_tablet.pages.charger.page1.text":                    "A device may be constructed that channels Essence along a pair of exciters into an item, thereby charging it with Essence. This charger is therefore invaluable in the fuelling of tools and equipment - instead of having to carry an entire Essence Battery around and somehow connect the item to it, which would be, in this researcher's opinion, asinine.",
 
   "emi.category.datanessence.fabrication": "Fabrication",
   "emi.category.datanessence.infusion": "Infusion",

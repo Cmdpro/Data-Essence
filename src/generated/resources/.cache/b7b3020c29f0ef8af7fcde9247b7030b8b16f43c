@@ -1,11 +1,11 @@
-// 1.20.6	2024-07-19T16:03:48.7954884	Item Models: datanessence
+// 1.20.6	2024-08-01T18:07:29.177071598	Item Models: datanessence
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
-48e6929230c9c5e72e805a935c1d0bc8592dfd7d assets/datanessence/models/item/capacitance_panel.json
+c8dbba411053dd980e2d72300e7f2583278c1071 assets/datanessence/models/item/capacitance_panel.json
 2025d76489225ed4d8ecc1f763463f60fbf8a969 assets/datanessence/models/item/charger.json
-88c5b68db5d677718279da08e10e0abc4f5f6499 assets/datanessence/models/item/conductance_rod.json
+b6c82037e00eab08aae76abb6beed0dba346f6f1 assets/datanessence/models/item/conductance_rod.json
 d1b94c9c04798703c014833bebc4d726319a86db assets/datanessence/models/item/data_drive.json
 d7143cba0a3221569cc1595af65cd714d785cc89 assets/datanessence/models/item/data_tablet.json
 9c86125ac8b01972d681c33887c863cdb165f52a assets/datanessence/models/item/deco_essence_buffer.json
@@ -14,6 +14,7 @@ cc8ad366cb50cc565afd44ec81025784569113c0 assets/datanessence/models/item/deco_fl
 01ca71e378e64e9e02886d014639a6bf22ebad8b assets/datanessence/models/item/energized_ancient_rock_column.json
 75395ee34d545367bd2022bcd2edc19f35483609 assets/datanessence/models/item/essence_bomb.json
 898241b351afa63c618a6f84cd67b7fe3118f6f2 assets/datanessence/models/item/essence_crystal.json
+7ee5ba34ce52390849a5cda85f2134f7083a61cc assets/datanessence/models/item/essence_leech.json
 36db90cffb74cafdf9c6c6fb95da1ad1489e81c2 assets/datanessence/models/item/essence_point.json
 b373f009203404901822d57b9c55e629c6534e1c assets/datanessence/models/item/essence_shard.json
 29859ed5c6878dbae8c38d8ce4c5b33218a3b2e7 assets/datanessence/models/item/essence_wire.json
@@ -26,7 +27,8 @@ f356571ca7c924ca20dabcdac766bc379c05608e assets/datanessence/models/item/fluid_w
 b104084e816893bbffb15fab452594d5117f6830 assets/datanessence/models/item/infuser.json
 31f900cefbabb6a71f6ff477ec95a84a71e1416f assets/datanessence/models/item/item_point.json
 869463292549ed3104bcbbdcb698a2aa91206892 assets/datanessence/models/item/item_wire.json
-0252cf0b06ad0969651b57bd8705b3995bc34cdb assets/datanessence/models/item/logical_matrix.json
+75ea606ceed228526a2b04991b5eee2b52311b7c assets/datanessence/models/item/lens.json
+dc6b5004a06b5a6d174a99991c44a9c625c7fed5 assets/datanessence/models/item/logical_matrix.json
 fe1ce05b004a75716ba9ee13cc445e73c1ae74ff assets/datanessence/models/item/lunar_essence_bomb.json
 e31c5a3caedf2f7dde5359985c3274570af4fb47 assets/datanessence/models/item/lunar_essence_point.json
 3d310e3313629f8d13026f2ae40006f83f86a491 assets/datanessence/models/item/lunar_essence_wire.json
@@ -35,3 +37,4 @@ d2ee51f8a1c9d8336e8e8d1102e25c8e7c4e4b25 assets/datanessence/models/item/natural
 dea3f12c9335d679ae141242896ae3e5dd0c84c8 assets/datanessence/models/item/natural_essence_point.json
 72daa0cb5cd463cd7dd4d1760219c24e210917e4 assets/datanessence/models/item/natural_essence_wire.json
 de272af4e4feac0b7f325c246f01dbdc0d6ea318 assets/datanessence/models/item/polished_obsidian_column.json
+c21e404c80d50f53fca78d073b54c48763738238 assets/datanessence/models/item/primitive_anti_gravity_pack.json

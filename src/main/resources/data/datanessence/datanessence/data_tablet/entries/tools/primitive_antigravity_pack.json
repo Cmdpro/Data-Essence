@@ -1,8 +1,8 @@
 {
   "icon": "datanessence:primitive_anti_gravity_pack",
   "tab": "datanessence:tools",
-  "x": -3,
-  "y": 0,
+  "x": -2,
+  "y": 1,
   "pages": [
     {
       "type": "datanessence:item",
@@ -19,6 +19,6 @@
   ],
   "name": "data_tablet.pages.primitive_antigravity_pack.name",
   "parents": [
-    "datanessence:infuser"
+    "datanessence:tools/charger"
   ]
 }

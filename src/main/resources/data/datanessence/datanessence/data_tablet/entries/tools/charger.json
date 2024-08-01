@@ -1,0 +1,24 @@
+{
+  "icon": "datanessence:charger",
+  "tab": "datanessence:tools",
+  "x": 0,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": "datanessence:charger",
+      "text": "data_tablet.pages.charger.page1.text"
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": "data_tablet.pages.charger.page2.text",
+      "recipes": [
+        "datanessence:fabrication/charger"
+      ]
+    }
+  ],
+  "name": "data_tablet.pages.charger.name",
+  "parents": [
+    "datanessence:essence_manipulation/essence_transfer"
+  ]
+}

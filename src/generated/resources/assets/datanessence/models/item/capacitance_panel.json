@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "datanessence:item/capacitance_panel"
+    "layer0": "datanessence:item/components/capacitance_panel"
   }
 }

@@ -1,4 +1,4 @@
-// 1.20.6	2024-07-20T21:18:51.505022	Loot Tables
+// 1.20.6	2024-08-01T17:48:13.539868927	Loot Tables
 bbbe51e74edfcc54136678857699b9b14569a089 data/datanessence/loot_tables/blocks/ancient_lantern.json
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_tables/blocks/ancient_rock_bricks.json
 6540cac2211b8a360d5bbebd6d8ecce140f3d3cb data/datanessence/loot_tables/blocks/ancient_rock_column.json
@@ -15,6 +15,7 @@ efab1d253d12155b53529f816a5df8e374047f49 data/datanessence/loot_tables/blocks/es
 c996e8f671e37b19ca6756e1c080759fc1be75b7 data/datanessence/loot_tables/blocks/essence_buffer.json
 adf2742d3d9f5464a2f1d87f21c26c5165febddd data/datanessence/loot_tables/blocks/essence_burner.json
 0a7ed67bf434ca3ced919dff383cdb6db8b88221 data/datanessence/loot_tables/blocks/essence_crystal.json
+f3c7304956c1cfbcc07dd3ee7303a7cec61f2ea4 data/datanessence/loot_tables/blocks/essence_leech.json
 22a582779cf9f042617e52c10c6ee28b4e60f631 data/datanessence/loot_tables/blocks/essence_point.json
 3b776b2d30cb9c0fb7ade18c7f7bf11acd280c89 data/datanessence/loot_tables/blocks/exotic_essence_battery.json
 e872ba657276f7b578577d7f6f39c9a5112a6898 data/datanessence/loot_tables/blocks/exotic_essence_point.json
