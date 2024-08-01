@@ -1,12 +1,12 @@
 {
-  "icon": "datanessence:primitive_antigravity_pack",
+  "icon": "datanessence:primitive_anti_gravity_pack",
   "tab": "datanessence:tools",
   "x": -3,
   "y": 0,
   "pages": [
     {
       "type": "datanessence:item",
-      "item": "datanessence:primitive_antigravity_pack",
+      "item": "datanessence:primitive_anti_gravity_pack",
       "text": "data_tablet.pages.primitive_antigravity_pack.page1.text"
     },
     {
