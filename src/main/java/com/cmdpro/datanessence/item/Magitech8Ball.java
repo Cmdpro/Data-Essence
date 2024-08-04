@@ -21,6 +21,7 @@ import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.apache.commons.lang3.RandomUtils;
+import org.joml.Math;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Magitech8Ball extends Item {
 
     @Override
     public int getUseDuration(ItemStack pStack) {
-        return 20;
+        return 38;
     }
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
@@ -43,27 +44,13 @@ public class Magitech8Ball extends Item {
             @Override
             public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
                 if (player.getUseItem() == itemInHand && player.isUsingItem()) {
-                    applyEatTransform(poseStack, partialTick, arm, itemInHand);
+                    float f = (((float)itemInHand.getUseDuration()-(float)player.getUseItemRemainingTicks()) + partialTick);
+                    poseStack.mulPose(Axis.XP.rotationDegrees((float) Math.sin(Math.toRadians(Math.clamp(0f, 36f, f) * (360f / 12f))) * 25f));
                     applyItemArmTransform(poseStack, arm, equipProcess);
                     return true;
                 } else {
                     return false;
                 }
-            }
-            private void applyEatTransform(PoseStack pPoseStack, float pPartialTicks, HumanoidArm pHand, ItemStack pStack) {
-                float f = (float) Minecraft.getInstance().player.getUseItemRemainingTicks() - pPartialTicks + 1.0F;
-                float f1 = f / (float)pStack.getUseDuration();
-                if (f1 < 0.8F) {
-                    float f2 = Mth.abs(Mth.cos(f / 4.0F * (float) Math.PI) * 0.1F);
-                    pPoseStack.translate(0.0F, f2, 0.0F);
-                }
-
-                float f3 = 1.0F - (float)Math.pow((double)f1, 27.0);
-                int i = pHand == HumanoidArm.RIGHT ? 1 : -1;
-                pPoseStack.translate(f3 * 0.6F * (float)i, f3 * -0.5F, f3 * 0.0F);
-                pPoseStack.mulPose(Axis.YP.rotationDegrees((float)i * f3 * 90.0F));
-                pPoseStack.mulPose(Axis.XP.rotationDegrees(f3 * 10.0F));
-                pPoseStack.mulPose(Axis.ZP.rotationDegrees((float)i * f3 * 30.0F));
             }
             private void applyItemArmTransform(PoseStack pPoseStack, HumanoidArm pHand, float pEquippedProg) {
                 int i = pHand == HumanoidArm.RIGHT ? 1 : -1;
@@ -99,7 +86,7 @@ public class Magitech8Ball extends Item {
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
         super.onUseTick(pLevel, pLivingEntity, pStack, pRemainingUseDuration);
         if (!pLevel.isClientSide) {
-            if (pRemainingUseDuration % 4 == 0) {
+            if (pRemainingUseDuration % 6 == 0) {
                 pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.STONE_BREAK, SoundSource.PLAYERS);
             }
         }
