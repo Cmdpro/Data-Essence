@@ -5,7 +5,7 @@
 
 public class wings<T extends Player> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "wings"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath("modid", "wings"), "main");
 	private final ModelPart root;
 	private final ModelPart wings;
 	private final ModelPart left_wing;

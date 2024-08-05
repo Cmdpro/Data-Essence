@@ -90,17 +90,17 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
     private ItemModelBuilder simpleItem(Supplier<Item> item) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
     }
     private ItemModelBuilder simpleItemWithSubdirectory(Supplier<Item> item, String subdirectory) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(DataNEssence.MOD_ID,"item/" + subdirectory + "/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + subdirectory + "/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
     }
     private ItemModelBuilder flatBlockItemWithTexture(Supplier<Block> item, ResourceLocation texture) {
         return withExistingParent(BuiltInRegistries.BLOCK.getKey(item.get()).getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
                 texture);
     }
 
@@ -110,24 +110,24 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
     public void wallItem(Supplier<Block> block, Supplier<Block> baseBlock) {
         this.withExistingParent(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
-                .texture("wall",  new ResourceLocation(DataNEssence.MOD_ID, "block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
+                .texture("wall",  ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
     }
 
     private ItemModelBuilder handheldItem(Supplier<Item> item) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
-                new ResourceLocation("item/handheld")).texture("layer0",
-                new ResourceLocation(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
+                ResourceLocation.withDefaultNamespace("item/handheld")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
     }
 
     private ItemModelBuilder simpleBlockItem(Supplier<Block> item) {
         return withExistingParent(BuiltInRegistries.BLOCK.getKey(item.get()).getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.BLOCK.getKey(item.get()).getPath()));
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.BLOCK.getKey(item.get()).getPath()));
     }
 
     private ItemModelBuilder simpleBlockItemBlockTexture(Supplier<Block> item) {
         return withExistingParent(BuiltInRegistries.BLOCK.getKey(item.get()).getPath(),
-                new ResourceLocation("item/generated")).texture("layer0",
-                new ResourceLocation(DataNEssence.MOD_ID,"block/" + BuiltInRegistries.BLOCK.getKey(item.get()).getPath()));
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"block/" + BuiltInRegistries.BLOCK.getKey(item.get()).getPath()));
     }
 }

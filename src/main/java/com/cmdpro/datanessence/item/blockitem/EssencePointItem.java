@@ -25,6 +25,7 @@ public class EssencePointItem extends BlockItem implements GeoItem {
         return PlayState.CONTINUE;
     }
     @Override
+    @SuppressWarnings("removal")
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {

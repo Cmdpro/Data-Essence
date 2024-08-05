@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 import java.util.List;
 
 public class CriticalDataToast implements Toast {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("toast/advancement");
+    private static final ResourceLocation TEXTURE = ResourceLocation.withDefaultNamespace("toast/advancement");
     public Entry entry;
     public boolean playedSound;
     public CriticalDataToast(Entry entry) {

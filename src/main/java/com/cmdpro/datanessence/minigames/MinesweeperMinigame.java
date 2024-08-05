@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class MinesweeperMinigame extends Minigame {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");
     public MinesweeperMinigame(int bombCount, int size) {
         this.bombCount = bombCount;
         this.size = size;

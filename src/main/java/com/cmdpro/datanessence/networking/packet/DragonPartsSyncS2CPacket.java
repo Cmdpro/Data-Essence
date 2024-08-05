@@ -33,7 +33,7 @@ public record DragonPartsSyncS2CPacket(int id, boolean horns, boolean tail, bool
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<DragonPartsSyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "dragon_parts_sync"));
+    public static final Type<DragonPartsSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "dragon_parts_sync"));
 
     public static DragonPartsSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
         int id = buf.readInt();

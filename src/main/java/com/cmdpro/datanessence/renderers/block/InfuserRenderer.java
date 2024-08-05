@@ -27,9 +27,10 @@ public class InfuserRenderer extends GeoBlockRenderer<InfuserBlockEntity> {
     public RenderType getRenderType(InfuserBlockEntity animatable, ResourceLocation texture, @Nullable MultiBufferSource bufferSource, float partialTick) {
         return super.getRenderType(animatable, texture, bufferSource, partialTick);
     }
+
     @Override
-    public void postRender(PoseStack poseStack, InfuserBlockEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+    public void postRender(PoseStack poseStack, InfuserBlockEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
+        super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
         poseStack.pushPose();
         poseStack.translate(0D, 0.5D, 0D);
         poseStack.mulPose(Axis.YP.rotationDegrees(animatable.getLevel().getLevelData().getGameTime() % 360));
@@ -40,17 +41,17 @@ public class InfuserRenderer extends GeoBlockRenderer<InfuserBlockEntity> {
     public static class Model extends GeoModel<InfuserBlockEntity> {
         @Override
         public ResourceLocation getModelResource(InfuserBlockEntity object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/infuser.geo.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "geo/infuser.geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(InfuserBlockEntity object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "textures/block/infuser.png");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/infuser.png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(InfuserBlockEntity animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/infuser.animation.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "animations/infuser.animation.json");
         }
     }
 }

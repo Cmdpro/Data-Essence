@@ -49,7 +49,7 @@ public record UnlockEntryS2CPacket(ResourceLocation unlocked, boolean incomplete
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<UnlockEntryS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "unlock_entry"));
+    public static final Type<UnlockEntryS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "unlock_entry"));
 
     public static UnlockEntryS2CPacket read(RegistryFriendlyByteBuf buf) {
         ResourceLocation unlocked = buf.readResourceLocation();

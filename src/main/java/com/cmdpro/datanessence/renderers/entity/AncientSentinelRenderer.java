@@ -18,22 +18,22 @@ public class AncientSentinelRenderer extends GeoEntityRenderer<AncientSentinel> 
     }
     @Override
     public ResourceLocation getTextureLocation(AncientSentinel instance) {
-        return new ResourceLocation(DataNEssence.MOD_ID, "textures/entity/ancient_sentinel.png");
+        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/entity/ancient_sentinel.png");
     }
     public static class Model extends GeoModel<AncientSentinel> {
         @Override
         public ResourceLocation getModelResource(AncientSentinel object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/ancient_sentinel.geo.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "geo/ancient_sentinel.geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(AncientSentinel object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "textures/entity/ancient_sentinel.png");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/entity/ancient_sentinel.png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(AncientSentinel animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/ancient_sentinel.animation.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "animations/ancient_sentinel.animation.json");
         }
     }
 }

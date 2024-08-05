@@ -13,17 +13,17 @@ public class FluidPointItemRenderer extends GeoItemRenderer<FluidPointItem> {
     public static class Model extends GeoModel<FluidPointItem> {
         @Override
         public ResourceLocation getModelResource(FluidPointItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/essence_point.geo.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "geo/essence_point.geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(FluidPointItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "textures/block/fluid_point.png");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/fluid_point.png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(FluidPointItem animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/essence_point.animation.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "animations/essence_point.animation.json");
         }
     }
 }

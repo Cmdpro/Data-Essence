@@ -11,7 +11,7 @@ public class EssencePointRenderer extends BaseEssencePointRenderer<EssencePointB
     EntityRenderDispatcher renderDispatcher;
 
     public EssencePointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(new ResourceLocation(DataNEssence.MOD_ID, "textures/block/essence_point.png")));
+        super(new Model(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/essence_point.png")));
         renderDispatcher = rendererProvider.getEntityRenderer();
     }
 }

@@ -29,7 +29,7 @@ import net.minecraft.sounds.SoundEvents;
 import java.util.*;
 
 public class DataBankScreen extends Screen {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_bank.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank.png");
     public DataBankScreen(Component pTitle) {
         super(pTitle);
     }

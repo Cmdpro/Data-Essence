@@ -11,7 +11,7 @@ public class ExoticEssencePointRenderer extends BaseEssencePointRenderer<ExoticE
     EntityRenderDispatcher renderDispatcher;
 
     public ExoticEssencePointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(new ResourceLocation(DataNEssence.MOD_ID, "textures/block/exotic_essence_point.png")));
+        super(new Model(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/exotic_essence_point.png")));
         renderDispatcher = rendererProvider.getEntityRenderer();
     }
 }

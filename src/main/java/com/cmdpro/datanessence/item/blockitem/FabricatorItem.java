@@ -26,6 +26,7 @@ public class FabricatorItem extends BlockItem implements GeoItem {
     }
 
     @Override
+    @SuppressWarnings("removal")
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {

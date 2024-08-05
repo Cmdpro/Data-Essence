@@ -26,9 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InfuserRecipeCategory implements IRecipeCategory<InfusionRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(DataNEssence.MOD_ID, "infusion");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "infusion");
     public final static ResourceLocation TEXTURE =
-            new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
+            ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
     private final IDrawable background;
     private final IDrawable icon;
 

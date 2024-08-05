@@ -9,6 +9,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.Util;
 import net.minecraft.client.Camera;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
@@ -36,18 +37,11 @@ import java.util.Queue;
 public abstract class LevelRendererMixin {
 
     @Inject(method = "renderLevel", at = @At(value = "HEAD"), remap = false)
-    private void renderLevel(float pPartialTick,
-                             long pNanoTime,
-                             boolean pRenderBlockOutline,
-                             Camera pCamera,
-                             GameRenderer pGameRenderer,
-                             LightTexture pLightTexture,
-                             Matrix4f pFrustumMatrix,
-                             Matrix4f pProjectionMatrix, CallbackInfo ci) {
+    private void renderLevel(DeltaTracker tracker, boolean pRenderBlockOutline, Camera pCamera, GameRenderer pGameRenderer, LightTexture pLightTexture, Matrix4f pFrustumMatrix, Matrix4f pProjectionMatrix, CallbackInfo ci) {
         Matrix4fStack stack = RenderSystem.getModelViewStack();
         stack.pushMatrix();
         if (Minecraft.getInstance().options.bobView().get()) {
-            unbobView(stack, pPartialTick);
+            unbobView(stack, tracker.getGameTimeDeltaPartialTick(true));
         }
         stack.mul(pFrustumMatrix);
         ClientDataNEssenceUtil.viewStackMatrix = new Matrix4f(stack);

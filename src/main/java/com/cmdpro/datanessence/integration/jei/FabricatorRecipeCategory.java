@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.integration.jei;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
+import com.cmdpro.datanessence.recipe.ShapedFabricationRecipe;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
@@ -23,15 +24,14 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.crafting.IShapedRecipe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRecipe> {
-    public static final ResourceLocation UID = new ResourceLocation(DataNEssence.MOD_ID, "fabrication");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fabrication");
     public final static ResourceLocation TEXTURE =
-            new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
+            ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
     private final IDrawable background;
     private final IDrawable icon;
     private final ICraftingGridHelper craftingGridHelper;
@@ -53,8 +53,8 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
         }
 
         // Initialize recipe inputs
-        int width = (recipe instanceof IShapedRecipe<?> shapedRecipe) ? shapedRecipe.getWidth() : 0;
-        int height = (recipe instanceof IShapedRecipe<?> shapedRecipe) ? shapedRecipe.getHeight() : 0;
+        int width = (recipe instanceof ShapedFabricationRecipe shapedRecipe) ? shapedRecipe.getWidth() : 0;
+        int height = (recipe instanceof ShapedFabricationRecipe shapedRecipe) ? shapedRecipe.getHeight() : 0;
         List<List<ItemStack>> inputs = recipe.getIngredients().stream().map(ingredient -> List.of(ingredient.getItems())).toList();
 
         List<IRecipeSlotBuilder> inputSlots = new ArrayList<>();

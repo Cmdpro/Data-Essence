@@ -71,7 +71,7 @@ public class EntrySerializer {
         }
         ResourceLocation tab = ResourceLocation.tryParse(json.get("tab").getAsString());
         boolean incomplete = false;
-        ResourceLocation completionAdvancement = new ResourceLocation("", "");
+        ResourceLocation completionAdvancement = ResourceLocation.fromNamespaceAndPath("", "");
         List<Page> incompletePages = new ArrayList<>();
         if (json.has("incomplete")) {
             incomplete = json.get("incomplete").getAsBoolean();

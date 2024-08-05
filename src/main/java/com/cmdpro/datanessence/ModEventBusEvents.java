@@ -14,7 +14,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.event.entity.SpawnPlacementRegisterEvent;
+import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 @EventBusSubscriber(modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
@@ -31,6 +31,6 @@ public class ModEventBusEvents {
         }
     }
     @SubscribeEvent
-    public static void entitySpawnRestriction(SpawnPlacementRegisterEvent event) {
+    public static void entitySpawnRestriction(RegisterSpawnPlacementsEvent event) {
     }
 }

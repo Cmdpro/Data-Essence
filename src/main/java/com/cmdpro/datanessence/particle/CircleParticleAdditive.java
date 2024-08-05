@@ -11,6 +11,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
+import org.jetbrains.annotations.Nullable;
 
 public class CircleParticleAdditive extends TextureSheetParticle {
     public float startQuadSize;
@@ -50,8 +51,9 @@ public class CircleParticleAdditive extends TextureSheetParticle {
         return ADDITIVE;
     }
     public static final ParticleRenderType ADDITIVE = new ParticleRenderType() {
+        @Nullable
         @Override
-        public void begin(BufferBuilder pBuilder, TextureManager pTextureManager) {
+        public BufferBuilder begin(Tesselator pBuilder, TextureManager pTextureManager) {
             Minecraft.getInstance().gameRenderer.lightTexture().turnOnLightLayer();
             RenderSystem.enableBlend();
             RenderSystem.enableCull();
@@ -59,12 +61,7 @@ public class CircleParticleAdditive extends TextureSheetParticle {
             RenderSystem.enableDepthTest();
             RenderSystem.depthMask(false);
             RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA.value, GlStateManager.DestFactor.ONE.value);
-            pBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
-        }
-
-        @Override
-        public void end(Tesselator pTesselator) {
-            pTesselator.end();
+            return pBuilder.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.PARTICLE);
         }
 
         @Override

@@ -27,9 +27,10 @@ public class ChargerRenderer extends GeoBlockRenderer<ChargerBlockEntity> {
     public RenderType getRenderType(ChargerBlockEntity animatable, ResourceLocation texture, @Nullable MultiBufferSource bufferSource, float partialTick) {
         return super.getRenderType(animatable, texture, bufferSource, partialTick);
     }
+
     @Override
-    public void postRender(PoseStack poseStack, ChargerBlockEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+    public void postRender(PoseStack poseStack, ChargerBlockEntity animatable, BakedGeoModel model, MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
+        super.postRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
         poseStack.pushPose();
         poseStack.translate(0D, 0.5D, 0D);
         poseStack.mulPose(Axis.YP.rotationDegrees(animatable.getLevel().getLevelData().getGameTime() % 360));
@@ -37,20 +38,21 @@ public class ChargerRenderer extends GeoBlockRenderer<ChargerBlockEntity> {
         Minecraft.getInstance().getItemRenderer().renderStatic(animatable.item, ItemDisplayContext.GUI, packedLight, packedOverlay, poseStack, bufferSource, animatable.getLevel(), 0);
         poseStack.popPose();
     }
+
     public static class Model extends GeoModel<ChargerBlockEntity> {
         @Override
         public ResourceLocation getModelResource(ChargerBlockEntity object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/charger.geo.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "geo/charger.geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(ChargerBlockEntity object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "textures/block/charger.png");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/charger.png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(ChargerBlockEntity animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/charger.animation.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "animations/charger.animation.json");
         }
     }
 }

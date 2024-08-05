@@ -55,11 +55,11 @@ public class ModEvents {
         if (event.getEntity() instanceof LivingEntity ent) {
             if (event.getEntity().getBlockStateOn().getBlock() instanceof TraversiteRoad road) {
                 if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID) == null) {
-                    ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, "Traversite Road Speed", road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                    ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
                 } else {
                     if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID).amount() != road.boost) {
                         ent.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
-                        ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, "Traversite Road Speed", road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                        ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
                     }
                 }
             } else {

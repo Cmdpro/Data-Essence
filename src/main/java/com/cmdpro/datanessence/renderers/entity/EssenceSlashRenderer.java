@@ -47,13 +47,12 @@ public class EssenceSlashRenderer extends EntityRenderer<EssenceSlashProjectile>
     }
 
     private static void vertex(VertexConsumer pConsumer, PoseStack.Pose pPose, int pPackedLight, float pX, int pY, int pU, int pV) {
-        pConsumer.vertex(pPose, pX - 0.5F, (float)pY - 0.25F, 0.0F)
-                .color(255, 255, 255, 255)
-                .uv((float)pU, (float)pV)
-                .overlayCoords(OverlayTexture.NO_OVERLAY)
-                .uv2(pPackedLight)
-                .normal(pPose, 0.0F, 1.0F, 0.0F)
-                .endVertex();
+        pConsumer.addVertex(pPose, pX - 0.5F, (float)pY - 0.25F, 0.0F)
+                .setColor(255, 255, 255, 255)
+                .setUv((float)pU, (float)pV)
+                .setOverlay(OverlayTexture.NO_OVERLAY)
+                .setLight(pPackedLight)
+                .setNormal(pPose, 0.0F, 1.0F, 0.0F);
     }
     public Vec2 calculateRotationVector(Vec3 pVec, Vec3 pTarget) {
         double d0 = pTarget.x - pVec.x;
@@ -66,6 +65,6 @@ public class EssenceSlashRenderer extends EntityRenderer<EssenceSlashProjectile>
         );
     }
     public ResourceLocation getTextureLocation(EssenceSlashProjectile pEntity) {
-        return new ResourceLocation(DataNEssence.MOD_ID, "textures/entity/essence_slash.png");
+        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/entity/essence_slash.png");
     }
 }

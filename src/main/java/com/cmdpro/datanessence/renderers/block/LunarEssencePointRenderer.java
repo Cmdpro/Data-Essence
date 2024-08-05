@@ -11,7 +11,7 @@ public class LunarEssencePointRenderer extends BaseEssencePointRenderer<LunarEss
     EntityRenderDispatcher renderDispatcher;
 
     public LunarEssencePointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(new ResourceLocation(DataNEssence.MOD_ID, "textures/block/lunar_essence_point.png")));
+        super(new Model(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/lunar_essence_point.png")));
         renderDispatcher = rendererProvider.getEntityRenderer();
     }
 }

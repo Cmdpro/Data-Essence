@@ -21,7 +21,7 @@ public record PlayerDataSyncS2CPacket(boolean[] unlockedEssences, BlockPos linkP
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerDataSyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "player_data_sync"));
+    public static final Type<PlayerDataSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_data_sync"));
 
     public static void write(RegistryFriendlyByteBuf buf, PlayerDataSyncS2CPacket obj) {
         if (obj.unlockedEssences.length >= 1) {

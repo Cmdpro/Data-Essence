@@ -62,10 +62,10 @@ public class ClientEvents {
             if (ClientPlayerData.getLinkPos() != null) {
                 Vec3 pos = event.getCamera().getPosition();
                 Vec3 pos1 = ClientPlayerData.getLinkPos().getCenter();
-                Vec3 pos2 = Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick());
+                Vec3 pos2 = Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                 event.getPoseStack().pushPose();
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                ClientDataNEssenceUtil.renderBeam(event.getPoseStack(), Minecraft.getInstance().renderBuffers().bufferSource(), BeaconRenderer.BEAM_LOCATION, event.getPartialTick(), 1.0f, Minecraft.getInstance().level.getGameTime(), pos1, pos2, ClientPlayerData.getLinkColor(), 0.025f, 0.03f);
+                ClientDataNEssenceUtil.renderBeam(event.getPoseStack(), Minecraft.getInstance().renderBuffers().bufferSource(), BeaconRenderer.BEAM_LOCATION, event.getPartialTick().getGameTimeDeltaPartialTick(true), 1.0f, Minecraft.getInstance().level.getGameTime(), pos1, pos2, ClientPlayerData.getLinkColor(), 0.025f, 0.03f);
                 event.getPoseStack().popPose();
             }
         }

@@ -23,7 +23,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.Optional;
 
-public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, Recipe<SimpleContainer> {
+public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, Recipe<RecipeInput> {
     private final ItemStack output;
     private final Ingredient input;
     private final ResourceLocation entry;
@@ -67,12 +67,12 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
         return list;
     }
     @Override
-    public boolean matches(SimpleContainer pContainer, Level pLevel) {
+    public boolean matches(RecipeInput pContainer, Level pLevel) {
         return input.test(pContainer.getItem(0));
     }
 
     @Override
-    public ItemStack assemble(SimpleContainer pContainer, HolderLookup.Provider pRegistryAccess) {
+    public ItemStack assemble(RecipeInput pContainer, HolderLookup.Provider pRegistryAccess) {
         return output;
     }
 

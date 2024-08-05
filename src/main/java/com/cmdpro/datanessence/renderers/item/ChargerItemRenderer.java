@@ -13,17 +13,17 @@ public class ChargerItemRenderer extends GeoItemRenderer<ChargerItem> {
     public static class Model extends GeoModel<ChargerItem> {
         @Override
         public ResourceLocation getModelResource(ChargerItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/charger.geo.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "geo/charger.geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(ChargerItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "textures/block/charger.png");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/charger.png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(ChargerItem animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/charger.animation.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "animations/charger.animation.json");
         }
     }
 }

@@ -34,7 +34,7 @@ public record HiddenBlockSyncS2CPacket(Map<ResourceLocation, HiddenBlock> blocks
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<HiddenBlockSyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "hidden_block_sync"));
+    public static final Type<HiddenBlockSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "hidden_block_sync"));
 
     public static HiddenBlockSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
         Map<ResourceLocation, HiddenBlock> blocks = buf.readMap(ResourceLocation.STREAM_CODEC, HiddenBlocksSerializer::fromNetwork);

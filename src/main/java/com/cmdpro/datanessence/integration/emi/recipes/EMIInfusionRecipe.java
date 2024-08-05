@@ -69,7 +69,7 @@ public class EMIInfusionRecipe implements EmiRecipe {
 
     @Override
     public void addWidgets(WidgetHolder widgetHolder) {
-        ResourceLocation background = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
+        ResourceLocation background = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
 
         widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 10, 136);
 

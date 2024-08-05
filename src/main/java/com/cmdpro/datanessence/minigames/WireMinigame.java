@@ -5,10 +5,7 @@ import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.cmdpro.datanessence.screen.databank.Minigame;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.BufferBuilder;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.Tesselator;
-import com.mojang.blaze3d.vertex.VertexFormat;
+import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.GameRenderer;
@@ -28,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 public class WireMinigame extends Minigame {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");
     public WireMinigame(Map<Vector2i, Tile> tiles) {
         setupTiles();
         this.tiles.putAll(tiles);
@@ -186,18 +183,17 @@ public class WireMinigame extends Minigame {
         GlStateManager._disableCull();
         RenderSystem.setShader(GameRenderer::getRendertypeLinesShader);
         Tesselator tess = RenderSystem.renderThreadTesselator();
-        BufferBuilder buf = tess.getBuilder();
         RenderSystem.lineWidth(1f*(float)Minecraft.getInstance().getWindow().getGuiScale());
-        buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
-        double x1 = start.x;
-        double y1 = start.y;
-        double x2 = end.x;
-        double y2 = end.y;
+        BufferBuilder buf = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
+        float x1 = (float)start.x;
+        float y1 = (float)start.y;
+        float x2 = (float)end.x;
+        float y2 = (float)end.y;
         Vec2 vec1 = new Vec2(x1 >= x2 ? x1 == x2 ? 0 : 1 : -1, y1 >= y2 ? y1 == y2 ? 0 : 1 : -1);
         Vec2 vec2 = new Vec2(x2 >= x1 ? x1 == x2 ? 0 : 1 : -1, y2 >= y1 ? y1 == y2 ? 0 : 1 : -1);
-        buf.vertex(x1, y1, 0.0D).color(color).normal(vec1.x, vec1.y, 0).endVertex();
-        buf.vertex(x2, y2, 0.0D).color(color).normal(vec2.x, vec2.y, 0).endVertex();
-        tess.end();
+        buf.addVertex(x1, y1, 0.0f).setColor(color).setNormal(vec1.x, vec1.y, 0);
+        buf.addVertex(x2, y2, 0.0f).setColor(color).setNormal(vec2.x, vec2.y, 0);
+        BufferUploader.drawWithShader(buf.buildOrThrow());
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         GlStateManager._enableCull();
         GlStateManager._depthMask(true);

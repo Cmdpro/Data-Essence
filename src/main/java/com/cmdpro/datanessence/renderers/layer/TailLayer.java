@@ -27,8 +27,8 @@ import net.minecraft.world.entity.player.Player;
 import org.joml.Vector3f;
 
 public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
-    public static final ModelLayerLocation tailLocation = new ModelLayerLocation(new ResourceLocation(DataNEssence.MOD_ID, "tail"), "main");
-    public static final ResourceLocation tailTexture = new ResourceLocation(DataNEssence.MOD_ID, "textures/entity/tail.png");
+    public static final ModelLayerLocation tailLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "tail"), "main");
+    public static final ResourceLocation tailTexture = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/entity/tail.png");
     private final TailModel<T> tailModel;
     public TailLayer(RenderLayerParent<T, M> pRenderer, EntityModelSet pModelSet) {
         super(pRenderer);
@@ -43,9 +43,9 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
             this.tailModel.root.copyFrom(this.getParentModel().body);
             this.tailModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
             VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
-                    pBuffer, RenderType.armorCutoutNoCull(tailTexture), false, false
+                    pBuffer, RenderType.armorCutoutNoCull(tailTexture), false
             );
-            this.tailModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            this.tailModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY);
             pPoseStack.popPose();
         }
     }

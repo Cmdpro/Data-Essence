@@ -14,11 +14,11 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.PrimedTnt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.ProtectionEnchantment;
 import net.minecraft.world.level.EntityBasedExplosionDamageCalculator;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.ExplosionDamageCalculator;
@@ -86,15 +86,14 @@ public class NaturalEssenceBombExplosion extends Explosion {
     private ExplosionDamageCalculator makeDamageCalculator(@Nullable Entity pEntity) {
         return (ExplosionDamageCalculator)(pEntity == null ? EXPLOSION_DAMAGE_CALCULATOR : new EntityBasedExplosionDamageCalculator(pEntity));
     }
-    @Override
     public void explode() {
         this.level.gameEvent(this.source, GameEvent.EXPLODE, new Vec3(this.x, this.y, this.z));
         Set<BlockPos> set = Sets.newHashSet();
         int i = 16;
 
-        for(int j = 0; j < 16; ++j) {
-            for(int k = 0; k < 16; ++k) {
-                for(int l = 0; l < 16; ++l) {
+        for (int j = 0; j < 16; j++) {
+            for (int k = 0; k < 16; k++) {
+                for (int l = 0; l < 16; l++) {
                     if (j == 0 || j == 15 || k == 0 || k == 15 || l == 0 || l == 15) {
                         double d0 = (double)((float)j / 15.0F * 2.0F - 1.0F);
                         double d1 = (double)((float)k / 15.0F * 2.0F - 1.0F);
@@ -108,7 +107,7 @@ public class NaturalEssenceBombExplosion extends Explosion {
                         double d6 = this.y;
                         double d8 = this.z;
 
-                        for(float f1 = 0.3F; f > 0.0F; f -= 0.22500001F) {
+                        for (float f1 = 0.3F; f > 0.0F; f -= 0.22500001F) {
                             BlockPos blockpos = BlockPos.containing(d4, d6, d8);
                             BlockState blockstate = this.level.getBlockState(blockpos);
                             FluidState fluidstate = this.level.getFluidState(blockpos);
@@ -125,9 +124,9 @@ public class NaturalEssenceBombExplosion extends Explosion {
                                 set.add(blockpos);
                             }
 
-                            d4 += d0 * (double)0.3F;
-                            d6 += d1 * (double)0.3F;
-                            d8 += d2 * (double)0.3F;
+                            d4 += d0 * 0.3F;
+                            d6 += d1 * 0.3F;
+                            d8 += d2 * 0.3F;
                         }
                     }
                 }
@@ -136,44 +135,45 @@ public class NaturalEssenceBombExplosion extends Explosion {
 
         this.toBlow.addAll(set);
         float f2 = this.radius * 2.0F;
-        int k1 = Mth.floor(this.x - (double)f2 - 1.0D);
-        int l1 = Mth.floor(this.x + (double)f2 + 1.0D);
-        int i2 = Mth.floor(this.y - (double)f2 - 1.0D);
-        int i1 = Mth.floor(this.y + (double)f2 + 1.0D);
-        int j2 = Mth.floor(this.z - (double)f2 - 1.0D);
-        int j1 = Mth.floor(this.z + (double)f2 + 1.0D);
+        int k1 = Mth.floor(this.x - (double)f2 - 1.0);
+        int l1 = Mth.floor(this.x + (double)f2 + 1.0);
+        int i2 = Mth.floor(this.y - (double)f2 - 1.0);
+        int i1 = Mth.floor(this.y + (double)f2 + 1.0);
+        int j2 = Mth.floor(this.z - (double)f2 - 1.0);
+        int j1 = Mth.floor(this.z + (double)f2 + 1.0);
         List<Entity> list = this.level.getEntities(this.source, new AABB((double)k1, (double)i2, (double)j2, (double)l1, (double)i1, (double)j1));
         net.neoforged.neoforge.event.EventHooks.onExplosionDetonate(this.level, this, list, f2);
         Vec3 vec3 = new Vec3(this.x, this.y, this.z);
 
-        for(int k2 = 0; k2 < list.size(); ++k2) {
-            Entity entity = list.get(k2);
+        for (Entity entity : list) {
             if (!entity.ignoreExplosion(this)) {
-                double d12 = Math.sqrt(entity.distanceToSqr(vec3)) / (double)f2;
-                if (d12 <= 1.0D) {
+                double d11 = Math.sqrt(entity.distanceToSqr(vec3)) / (double)f2;
+                if (d11 <= 1.0) {
                     double d5 = entity.getX() - this.x;
                     double d7 = (entity instanceof PrimedTnt ? entity.getY() : entity.getEyeY()) - this.y;
                     double d9 = entity.getZ() - this.z;
-                    double d13 = Math.sqrt(d5 * d5 + d7 * d7 + d9 * d9);
-                    if (d13 != 0.0D) {
-                        d5 /= d13;
-                        d7 /= d13;
-                        d9 /= d13;
-                        double d14 = (double)getSeenPercent(vec3, entity);
-                        double d10 = (1.0D - d12) * d14;
-                        entity.hurt(this.damageSource, (float)((int)((d10 * d10 + d10) / 2.0D * 7.0D * (double)f2 + 1.0D)));
-                        double d11;
-                        if (entity instanceof LivingEntity) {
-                            LivingEntity livingentity = (LivingEntity)entity;
-                            d11 = ProtectionEnchantment.getExplosionKnockbackAfterDampener(livingentity, d10);
-                        } else {
-                            d11 = d10;
+                    double d12 = Math.sqrt(d5 * d5 + d7 * d7 + d9 * d9);
+                    if (d12 != 0.0) {
+                        d5 /= d12;
+                        d7 /= d12;
+                        d9 /= d12;
+                        if (this.damageCalculator.shouldDamageEntity(this, entity)) {
+                            entity.hurt(this.damageSource, this.damageCalculator.getEntityDamageAmount(this, entity));
                         }
 
-                        d5 *= d11;
-                        d7 *= d11;
-                        d9 *= d11;
+                        double d13 = (1.0 - d11) * (double)getSeenPercent(vec3, entity) * (double)this.damageCalculator.getKnockbackMultiplier(entity);
+                        double d10;
+                        if (entity instanceof LivingEntity livingentity) {
+                            d10 = d13 * (1.0 - livingentity.getAttributeValue(Attributes.EXPLOSION_KNOCKBACK_RESISTANCE));
+                        } else {
+                            d10 = d13;
+                        }
+
+                        d5 *= d10;
+                        d7 *= d10;
+                        d9 *= d10;
                         Vec3 vec31 = new Vec3(d5, d7, d9);
+                        vec31 = net.neoforged.neoforge.event.EventHooks.getExplosionKnockback(this.level, this, entity, vec31);
                         entity.setDeltaMovement(entity.getDeltaMovement().add(vec31));
                         if (entity instanceof Player) {
                             Player player = (Player)entity;
@@ -181,6 +181,8 @@ public class NaturalEssenceBombExplosion extends Explosion {
                                 this.hitPlayers.put(player, vec31);
                             }
                         }
+
+                        entity.onExplosionHit(this.source);
                     }
                 }
             }

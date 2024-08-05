@@ -13,17 +13,17 @@ public class InfuserItemRenderer extends GeoItemRenderer<InfuserItem> {
     public static class Model extends GeoModel<InfuserItem> {
         @Override
         public ResourceLocation getModelResource(InfuserItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/infuser.geo.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "geo/infuser.geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(InfuserItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "textures/block/infuser.png");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/infuser.png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(InfuserItem animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/infuser.animation.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "animations/infuser.animation.json");
         }
     }
 }

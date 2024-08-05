@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 public class ProgressionShader extends ShaderInstance {
     @Override
     public ResourceLocation getShaderLocation() {
-        return new ResourceLocation(DataNEssence.MOD_ID, "shaders/post/progression.json");
+        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "shaders/post/progression.json");
     }
 
     @Override

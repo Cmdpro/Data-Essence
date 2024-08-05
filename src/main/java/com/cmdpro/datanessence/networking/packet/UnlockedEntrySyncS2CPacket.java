@@ -23,7 +23,7 @@ public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked, List<R
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<UnlockedEntrySyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "unlocked_entry_sync"));
+    public static final Type<UnlockedEntrySyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "unlocked_entry_sync"));
 
     public static void write(RegistryFriendlyByteBuf buf, UnlockedEntrySyncS2CPacket obj) {
         buf.writeCollection(obj.unlocked, FriendlyByteBuf::writeResourceLocation);

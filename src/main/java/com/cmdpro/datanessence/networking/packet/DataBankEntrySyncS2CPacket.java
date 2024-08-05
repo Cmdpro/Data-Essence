@@ -46,7 +46,7 @@ public record DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> en
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<DataBankEntrySyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "data_bank_entry_sync"));
+    public static final Type<DataBankEntrySyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "data_bank_entry_sync"));
     public static class ClientHandler {
         public static void openScreen() {
             Minecraft.getInstance().setScreen(new DataBankScreen(Component.empty()));

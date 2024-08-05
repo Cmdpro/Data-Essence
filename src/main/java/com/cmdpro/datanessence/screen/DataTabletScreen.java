@@ -22,9 +22,9 @@ import java.util.Comparator;
 import java.util.List;
 
 public class DataTabletScreen extends Screen {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
-    public static final ResourceLocation TEXTURECRAFTING = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
-    public static final ResourceLocation TEXTUREMISC = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/data_tablet_misc.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
+    public static final ResourceLocation TEXTURECRAFTING = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
+    public static final ResourceLocation TEXTUREMISC = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_misc.png");
     public DataTabletScreen(Component pTitle) {
         super(pTitle);
         offsetX = (imageWidth/2);
@@ -256,23 +256,22 @@ public class DataTabletScreen extends Screen {
         GlStateManager._disableCull();
         RenderSystem.setShader(GameRenderer::getRendertypeLinesShader);
         Tesselator tess = RenderSystem.renderThreadTesselator();
-        BufferBuilder buf = tess.getBuilder();
         RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
         for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
                 if (i.isVisibleClient()) {
                     for (Entry o : i.getParentEntries()) {
                         if (o.tab.equals(currentTab.id)) {
-                            buf.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
+                            BufferBuilder buf = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
                             int x1 = x + ((o.x * 20)) + (int) offsetX;
                             int y1 = y + ((o.y * 20)) + (int) offsetY;
                             int x2 = x + ((i.x * 20)) + (int) offsetX;
                             int y2 = y + ((i.y * 20)) + (int) offsetY;
                             Vec2 vec1 = new Vec2(x1 >= x2 ? x1 == x2 ? 0 : 1 : -1, y1 >= y2 ? y1 == y2 ? 0 : 1 : -1);
                             Vec2 vec2 = new Vec2(x2 >= x1 ? x1 == x2 ? 0 : 1 : -1, y2 >= y1 ? y1 == y2 ? 0 : 1 : -1);
-                            buf.vertex(x1, y1, 0.0D).color(201, 13, 139, 255).normal(vec1.x, vec1.y, 0).endVertex();
-                            buf.vertex(x2, y2, 0.0D).color(201, 13, 139, 255).normal(vec2.x, vec2.y, 0).endVertex();
-                            tess.end();
+                            buf.addVertex(x1, y1, 0.0F).setColor(201, 13, 139, 255).setNormal(vec1.x, vec1.y, 0);
+                            buf.addVertex(x2, y2, 0.0F).setColor(201, 13, 139, 255).setNormal(vec2.x, vec2.y, 0);
+                            BufferUploader.drawWithShader(buf.buildOrThrow());
                         }
                     }
                 }

@@ -22,6 +22,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
@@ -175,9 +177,8 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
         }
         return inventory;
     }
-    public SimpleContainer getCraftingInv() {
-        SimpleContainer inventory = new SimpleContainer(1);
-        inventory.setItem(0, itemHandler.getStackInSlot(0));
+    public RecipeInput getCraftingInv() {
+        RecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
         return inventory;
     }
     public int workTime;

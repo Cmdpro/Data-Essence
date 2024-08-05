@@ -31,7 +31,7 @@ public class ArmorMaterialRegistry {
             SoundEvents.ARMOR_EQUIP_GENERIC,
             () -> Ingredient.of(Tags.Items.INGOTS_COPPER), List.of(
                     new ArmorMaterial.Layer(
-                            new ResourceLocation(DataNEssence.MOD_ID, "primitive_anti_gravity_pack")
+                            ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "primitive_anti_gravity_pack")
                     )
             ),
             0,

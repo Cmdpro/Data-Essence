@@ -58,12 +58,14 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
         return this.ingredients;
     }
 
-    public boolean matches(CraftingContainer pInv, Level pLevel) {
+
+    @Override
+    public boolean matches(CraftingInput pInv, Level pLevel) {
         StackedContents stackedcontents = new StackedContents();
         java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
         int i = 0;
 
-        for(int j = 0; j < pInv.getContainerSize(); ++j) {
+        for(int j = 0; j < pInv.size(); ++j) {
             ItemStack itemstack = pInv.getItem(j);
             if (!itemstack.isEmpty()) {
                 ++i;
@@ -76,7 +78,8 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
         return i == this.ingredients.size() && (isSimple ? stackedcontents.canCraft(this, null) : net.neoforged.neoforge.common.util.RecipeMatcher.findMatches(inputs,  this.ingredients) != null);
     }
 
-    public ItemStack assemble(CraftingContainer pContainer, HolderLookup.Provider pRegistryAccess) {
+    @Override
+    public ItemStack assemble(CraftingInput p_345149_, HolderLookup.Provider p_346030_) {
         return this.result.copy();
     }
 

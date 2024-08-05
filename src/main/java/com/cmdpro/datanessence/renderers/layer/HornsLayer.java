@@ -27,8 +27,8 @@ import net.minecraft.world.entity.player.Player;
 import org.joml.Vector3f;
 
 public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
-    public static final ModelLayerLocation hornsLocation = new ModelLayerLocation(new ResourceLocation(DataNEssence.MOD_ID, "horns"), "main");
-    public static final ResourceLocation hornsTexture = new ResourceLocation(DataNEssence.MOD_ID, "textures/entity/horns.png");
+    public static final ModelLayerLocation hornsLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "horns"), "main");
+    public static final ResourceLocation hornsTexture = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/entity/horns.png");
     private final HornsModel<T> hornsModel;
     public HornsLayer(RenderLayerParent<T, M> pRenderer, EntityModelSet pModelSet) {
         super(pRenderer);
@@ -42,9 +42,9 @@ public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
             this.hornsModel.root.copyFrom(this.getParentModel().head);
             this.hornsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
             VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
-                    pBuffer, RenderType.armorCutoutNoCull(hornsTexture), false, false
+                    pBuffer, RenderType.armorCutoutNoCull(hornsTexture), false
             );
-            this.hornsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            this.hornsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY);
             pPoseStack.popPose();
         }
     }

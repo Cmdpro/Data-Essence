@@ -11,7 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 
 public class TierToast implements Toast {
-    private static final ResourceLocation TEXTURE = new ResourceLocation("toast/advancement");
+    private static final ResourceLocation TEXTURE = ResourceLocation.withDefaultNamespace("toast/advancement");
     public int tier;
     public boolean playedSound;
     public TierToast(int tier) {

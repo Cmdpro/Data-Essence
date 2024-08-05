@@ -160,7 +160,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                         fabricationRecipe = (IFabricationRecipe)ent.recipe;
                     }
                     if (fabricationRecipe == null || DataNEssenceUtil.DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry())) {
-                        ItemStack stack = ent.recipe.assemble(ent.getCraftingInv(), pLevel.registryAccess()).copy();
+                        ItemStack stack = ent.recipe.assemble(ent.getCraftingInv().asCraftInput(), pLevel.registryAccess()).copy();
                         for (int i = 0; i < 9; i++) {
                             ent.itemHandler.extractItem(i, 1, false);
                         }
@@ -190,7 +190,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
-            Optional<RecipeHolder<IFabricationRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv(), pLevel);
+            Optional<RecipeHolder<IFabricationRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv().asCraftInput(), pLevel);
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get().value();
                 pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
@@ -207,7 +207,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
             } else {
-                Optional<RecipeHolder<CraftingRecipe>> recipe2 = pLevel.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pBlockEntity.getCraftingInv(), pLevel);
+                Optional<RecipeHolder<CraftingRecipe>> recipe2 = pLevel.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pBlockEntity.getCraftingInv().asCraftInput(), pLevel);
                 if (recipe2.isPresent()) {
                     pBlockEntity.recipe = recipe2.get().value();
                     pBlockEntity.item = recipe2.get().value().getResultItem(pLevel.registryAccess());

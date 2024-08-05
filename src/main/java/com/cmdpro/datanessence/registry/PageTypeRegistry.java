@@ -11,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class PageTypeRegistry {
-    public static final DeferredRegister<PageSerializer> PAGE_TYPES = DeferredRegister.create(new ResourceLocation(DataNEssence.MOD_ID, "page_types"), DataNEssence.MOD_ID);
+    public static final DeferredRegister<PageSerializer> PAGE_TYPES = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "page_types"), DataNEssence.MOD_ID);
 
     public static final Supplier<CraftingPageSerializer> CRAFTINGPAGE = register("crafting", () -> CraftingPageSerializer.INSTANCE);
     public static final Supplier<TextPageSerializer> TEXTPAGE = register("text", () -> TextPageSerializer.INSTANCE);

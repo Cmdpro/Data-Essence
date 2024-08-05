@@ -18,7 +18,7 @@ public class ItemPageSerializer extends PageSerializer<ItemPage> {
     public static final ItemPageSerializer INSTANCE = new ItemPageSerializer();
     @Override
     public ItemPage fromJson(JsonObject json) {
-        ResourceLocation font = json.has("font") ? ResourceLocation.tryParse(json.get("font").getAsString()) : new ResourceLocation("default");
+        ResourceLocation font = json.has("font") ? ResourceLocation.tryParse(json.get("font").getAsString()) : ResourceLocation.withDefaultNamespace("default");
         MutableComponent text = json.has("text") ? Component.translatable(json.get("text").getAsString()) : Component.empty();
         text = text.withStyle(text.getStyle().withFont(font));
         boolean rtl = json.has("rtl") ? json.get("rtl").getAsBoolean() : false;

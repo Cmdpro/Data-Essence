@@ -43,5 +43,5 @@ public record PlayerFinishDataBankMinigameC2SPacket(ResourceLocation entry) impl
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerFinishDataBankMinigameC2SPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "player_finish_data_bank_minigame"));
+    public static final Type<PlayerFinishDataBankMinigameC2SPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_finish_data_bank_minigame"));
 }

@@ -35,16 +35,17 @@ public class Magitech8Ball extends Item {
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack) {
+    public int getUseDuration(ItemStack pStack, LivingEntity p_344979_) {
         return 38;
     }
     @Override
+    @SuppressWarnings("removal")
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
             @Override
             public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
                 if (player.getUseItem() == itemInHand && player.isUsingItem()) {
-                    float f = (((float)itemInHand.getUseDuration()-(float)player.getUseItemRemainingTicks()) + partialTick);
+                    float f = (((float)itemInHand.getUseDuration(player)-(float)player.getUseItemRemainingTicks()) + partialTick);
                     poseStack.mulPose(Axis.XP.rotationDegrees((float) Math.sin(Math.toRadians(Math.clamp(0f, 36f, f) * (360f / 12f))) * 25f));
                     applyItemArmTransform(poseStack, arm, equipProcess);
                     return true;

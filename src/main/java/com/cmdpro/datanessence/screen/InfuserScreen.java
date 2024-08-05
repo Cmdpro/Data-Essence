@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InfuserScreen extends AbstractContainerScreen<InfuserMenu> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/infuser.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/infuser.png");
     public InfuserScreen(InfuserMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

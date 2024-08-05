@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LaserEmitterScreen extends AbstractContainerScreen<LaserEmitterMenu> {
-    public static final ResourceLocation TEXTURE = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/laser_emitter.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/laser_emitter.png");
     public LaserEmitterScreen(LaserEmitterMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

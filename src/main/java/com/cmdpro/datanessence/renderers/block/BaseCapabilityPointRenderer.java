@@ -13,6 +13,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.model.GeoModel;
@@ -26,8 +27,8 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
     }
 
     @Override
-    public void preRender(PoseStack poseStack, T animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
+    public void preRender(PoseStack poseStack, T animatable, BakedGeoModel model, @Nullable MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, int colour) {
+        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, colour);
         if (animatable.link != null) {
             Vec3 pos = animatable.getBlockPos().getCenter();
             poseStack.pushPose();
@@ -65,7 +66,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         public ResourceLocation texture;
         @Override
         public ResourceLocation getModelResource(T object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/essence_point.geo.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "geo/essence_point.geo.json");
         }
 
         @Override
@@ -75,7 +76,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
 
         @Override
         public ResourceLocation getAnimationResource(T animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/essence_point.animation.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "animations/essence_point.animation.json");
         }
     }
 }

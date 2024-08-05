@@ -13,17 +13,17 @@ public class FabricatorItemRenderer extends GeoItemRenderer<FabricatorItem> {
     public static class Model extends GeoModel<FabricatorItem> {
         @Override
         public ResourceLocation getModelResource(FabricatorItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/fabricator.geo.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "geo/fabricator.geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(FabricatorItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "textures/block/fabricator.png");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/fabricator.png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(FabricatorItem animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/fabricator.animation.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "animations/fabricator.animation.json");
         }
     }
 }

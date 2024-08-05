@@ -40,5 +40,5 @@ public record EntrySyncS2CPacket(Map<ResourceLocation, Entry> entries, Map<Resou
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<EntrySyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "entry_sync"));
+    public static final Type<EntrySyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry_sync"));
 }

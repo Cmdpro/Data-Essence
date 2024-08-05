@@ -25,7 +25,7 @@ public record PlayerTierSyncS2CPacket(int tier, boolean showIndicator) implement
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerTierSyncS2CPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "player_tier_sync"));
+    public static final Type<PlayerTierSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_tier_sync"));
 
     public static void write(RegistryFriendlyByteBuf pBuffer, PlayerTierSyncS2CPacket obj) {
         pBuffer.writeInt(obj.tier);

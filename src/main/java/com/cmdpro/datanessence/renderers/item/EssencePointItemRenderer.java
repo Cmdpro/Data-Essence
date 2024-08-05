@@ -13,17 +13,17 @@ public class EssencePointItemRenderer extends GeoItemRenderer<EssencePointItem> 
     public static class Model extends GeoModel<EssencePointItem> {
         @Override
         public ResourceLocation getModelResource(EssencePointItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "geo/essence_point.geo.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "geo/essence_point.geo.json");
         }
 
         @Override
         public ResourceLocation getTextureResource(EssencePointItem object) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "textures/block/essence_point.png");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/essence_point.png");
         }
 
         @Override
         public ResourceLocation getAnimationResource(EssencePointItem animatable) {
-            return new ResourceLocation(DataNEssence.MOD_ID, "animations/essence_point.animation.json");
+            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "animations/essence_point.animation.json");
         }
     }
 }

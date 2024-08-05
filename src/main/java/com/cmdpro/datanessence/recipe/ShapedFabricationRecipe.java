@@ -71,14 +71,12 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
         return pWidth >= this.pattern.width() && pHeight >= this.pattern.height();
     }
 
-    /**
-     * Used to check if a recipe matches current crafting inventory
-     */
-    public boolean matches(CraftingContainer pInv, Level pLevel) {
+    @Override
+    public boolean matches(CraftingInput pInv, Level pLevel) {
         return this.pattern.matches(pInv);
     }
 
-    public ItemStack assemble(CraftingContainer pContainer, HolderLookup.Provider pRegistryAccess) {
+    public ItemStack assemble(CraftingInput pContainer, HolderLookup.Provider pRegistryAccess) {
         return this.getResultItem(pRegistryAccess).copy();
     }
 

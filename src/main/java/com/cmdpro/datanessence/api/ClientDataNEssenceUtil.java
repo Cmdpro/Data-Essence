@@ -70,7 +70,7 @@ public class ClientDataNEssenceUtil {
 
         public static void drawEssenceBar(GuiGraphics graphics, int x, int y, int type, float amount, float full) {
             if (amount > 0) {
-                ResourceLocation fill = new ResourceLocation(DataNEssence.MOD_ID, "textures/gui/essence_bars.png");
+                ResourceLocation fill = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/essence_bars.png");
                 int u = type*11;
                 int v = 0;
                 graphics.blit(fill, x, y + 52 - (int) Math.ceil(52f * (amount / full)), u, v+52 - (int) Math.ceil(52f * (amount / full)), 7, (int) Math.ceil(52f * (amount / full)));
@@ -116,7 +116,7 @@ public class ClientDataNEssenceUtil {
         shader.safeGetUniform("Radius").set(Math.abs(radius));
         shader.safeGetUniform("ModelViewMatrix").set(viewStackMatrix);
         shader.safeGetUniform("lookVector").set(Minecraft.getInstance().gameRenderer.getMainCamera().getLookVector());
-        shader.safeGetUniform("FOV").set((float)Math.toRadians(Minecraft.getInstance().gameRenderer.getFov(Minecraft.getInstance().gameRenderer.getMainCamera(), Minecraft.getInstance().getFrameTime(), true)));
+        shader.safeGetUniform("FOV").set((float)Math.toRadians(Minecraft.getInstance().gameRenderer.getFov(Minecraft.getInstance().gameRenderer.getMainCamera(), Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true), true)));
         VertexConsumer consumer = source.getBuffer(DataNEssenceRenderTypes.WARPING_POINT);
         float startU = 0;
         float startV = 0;
@@ -137,23 +137,15 @@ public class ClientDataNEssenceUtil {
                 Vector3f p2 = parametricSphere(un, v, radius);
                 Vector3f p3 = parametricSphere(un, vn, radius);
 
-                consumer.vertex(last, p0.x(), p0.y(), p0.z())
-                        .endVertex();
-                consumer.vertex(last, p2.x(), p2.y(), p2.z())
-                        .endVertex();
-                consumer.vertex(last, p1.x(), p1.y(), p1.z())
-                        .endVertex();
-                consumer.vertex(last, p1.x(), p1.y(), p1.z())
-                        .endVertex();
+                consumer.addVertex(last, p0.x(), p0.y(), p0.z());
+                consumer.addVertex(last, p2.x(), p2.y(), p2.z());
+                consumer.addVertex(last, p1.x(), p1.y(), p1.z());
+                consumer.addVertex(last, p1.x(), p1.y(), p1.z());
 
-                consumer.vertex(last, p3.x(), p3.y(), p3.z())
-                        .endVertex();
-                consumer.vertex(last, p1.x(), p1.y(), p1.z())
-                        .endVertex();
-                consumer.vertex(last, p2.x(), p2.y(), p2.z())
-                        .endVertex();
-                consumer.vertex(last, p2.x(), p2.y(), p2.z())
-                        .endVertex();
+                consumer.addVertex(last, p3.x(), p3.y(), p3.z());
+                consumer.addVertex(last, p1.x(), p1.y(), p1.z());
+                consumer.addVertex(last, p2.x(), p2.y(), p2.z());
+                consumer.addVertex(last, p2.x(), p2.y(), p2.z());
             }
         }
         ((MultiBufferSource.BufferSource)source).endLastBatch();
@@ -233,7 +225,7 @@ public class ClientDataNEssenceUtil {
     }
 
     public static void addVertex(PoseStack.Pose pose, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, float pY, float pX, float pZ, float pU, float pV) {
-        pConsumer.vertex(pose, pX, (float)pY, pZ).color(pRed, pGreen, pBlue, pAlpha).uv(pU, pV).overlayCoords(OverlayTexture.NO_OVERLAY).uv2(15728880).normal(pose, 0.0F, 1.0F, 0.0F).endVertex();
+        pConsumer.addVertex(pose, pX, (float)pY, pZ).setColor(pRed, pGreen, pBlue, pAlpha).setUv(pU, pV).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(pose, 0.0F, 1.0F, 0.0F);
     }
     public static void drawLine(ParticleOptions particle, Vec3 point1, Vec3 point2, Level level, double space) {
         double distance = point1.distanceTo(point2);

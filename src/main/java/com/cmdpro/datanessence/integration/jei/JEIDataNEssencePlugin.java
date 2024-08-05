@@ -23,7 +23,7 @@ import java.util.*;
 public class JEIDataNEssencePlugin implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
-        return new ResourceLocation(DataNEssence.MOD_ID, "jei_plugin");
+        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "jei_plugin");
     }
 
     public static IJeiRuntime runTime;

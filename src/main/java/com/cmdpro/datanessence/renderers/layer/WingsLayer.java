@@ -33,8 +33,8 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
-    public static final ModelLayerLocation wingsLocation = new ModelLayerLocation(new ResourceLocation(DataNEssence.MOD_ID, "wings"), "main");
-    public static final ResourceLocation wingsTexture = new ResourceLocation(DataNEssence.MOD_ID, "textures/entity/wings.png");
+    public static final ModelLayerLocation wingsLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "wings"), "main");
+    public static final ResourceLocation wingsTexture = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/entity/wings.png");
     private final WingsModel<T> wingsModel;
     public WingsLayer(RenderLayerParent<T, M> pRenderer, EntityModelSet pModelSet) {
         super(pRenderer);
@@ -49,9 +49,9 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
             this.wingsModel.root.copyFrom(this.getParentModel().body);
             this.wingsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
             VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
-                    pBuffer, RenderType.armorCutoutNoCull(wingsTexture), false, false
+                    pBuffer, RenderType.armorCutoutNoCull(wingsTexture), false
             );
-            this.wingsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+            this.wingsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY);
             pPoseStack.popPose();
         }
     }

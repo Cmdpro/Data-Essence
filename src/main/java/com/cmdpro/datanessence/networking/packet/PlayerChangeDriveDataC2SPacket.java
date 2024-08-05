@@ -43,5 +43,5 @@ public record PlayerChangeDriveDataC2SPacket(ResourceLocation entry, boolean off
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerChangeDriveDataC2SPacket> TYPE = new Type<>(new ResourceLocation(DataNEssence.MOD_ID, "player_change_data_drive_data"));
+    public static final Type<PlayerChangeDriveDataC2SPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_change_data_drive_data"));
 }
