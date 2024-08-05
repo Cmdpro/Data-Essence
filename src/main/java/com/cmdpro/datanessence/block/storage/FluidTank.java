@@ -14,9 +14,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.fluids.FluidStack;
 import org.jetbrains.annotations.Nullable;
 
-public class ExoticEssenceBattery extends Block implements EntityBlock {
+public class FluidTank extends Block implements EntityBlock {
     private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
 
     @Override
@@ -27,20 +28,24 @@ public class ExoticEssenceBattery extends Block implements EntityBlock {
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
-    public ExoticEssenceBattery(Properties pProperties) {
+    public FluidTank(Properties pProperties) {
         super(pProperties);
     }
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ExoticEssenceBatteryBlockEntity(pPos, pState);
+        return new FluidTankBlockEntity(pPos, pState);
     }
-
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
-        if (pLevel.getBlockEntity(pPos) instanceof ExoticEssenceBatteryBlockEntity ent) {
+        if (pLevel.getBlockEntity(pPos) instanceof FluidTankBlockEntity ent) {
             if (!pLevel.isClientSide) {
-                pPlayer.sendSystemMessage(Component.translatable("block.datanessence.exotic_essence_battery.amount", ent.getExoticEssence(), ent.getMaxExoticEssence()));
+                FluidStack fluid = ent.getFluidHandler().getFluidInTank(0);
+                if (fluid.getAmount() > 0) {
+                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fluid_tank.amount", fluid.getAmount(), ent.getFluidHandler().getTankCapacity(0), fluid.getHoverName()));
+                } else {
+                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fluid_tank.nothing"));
+                }
             }
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
         }

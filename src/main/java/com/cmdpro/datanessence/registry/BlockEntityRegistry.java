@@ -10,10 +10,7 @@ import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
 import com.cmdpro.datanessence.block.processing.InfuserBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidSpillerBlockEntity;
-import com.cmdpro.datanessence.block.storage.EssenceBatteryBlockEntity;
-import com.cmdpro.datanessence.block.storage.ExoticEssenceBatteryBlockEntity;
-import com.cmdpro.datanessence.block.storage.LunarEssenceBatteryBlockEntity;
-import com.cmdpro.datanessence.block.storage.NaturalEssenceBatteryBlockEntity;
+import com.cmdpro.datanessence.block.storage.*;
 import com.cmdpro.datanessence.block.technical.ComputerBlockEntity;
 import com.cmdpro.datanessence.block.technical.DataBankBlockEntity;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
@@ -127,6 +124,10 @@ public class BlockEntityRegistry {
             register("exotic_essence_battery", () ->
                     BlockEntityType.Builder.of(ExoticEssenceBatteryBlockEntity::new,
                             BlockRegistry.EXOTIC_ESSENCE_BATTERY.get()).build(null));
+    public static final Supplier<BlockEntityType<FluidTankBlockEntity>> FLUID_TANK =
+            register("fluid_tank", () ->
+                    BlockEntityType.Builder.of(FluidTankBlockEntity::new,
+                            BlockRegistry.FLUID_TANK.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

@@ -12,10 +12,7 @@ import com.cmdpro.datanessence.block.processing.Fabricator;
 import com.cmdpro.datanessence.block.processing.Infuser;
 import com.cmdpro.datanessence.block.production.FluidCollector;
 import com.cmdpro.datanessence.block.production.FluidSpiller;
-import com.cmdpro.datanessence.block.storage.EssenceBattery;
-import com.cmdpro.datanessence.block.storage.ExoticEssenceBattery;
-import com.cmdpro.datanessence.block.storage.LunarEssenceBattery;
-import com.cmdpro.datanessence.block.storage.NaturalEssenceBattery;
+import com.cmdpro.datanessence.block.storage.*;
 import com.cmdpro.datanessence.block.technical.Computer;
 import com.cmdpro.datanessence.block.technical.DataBank;
 import com.cmdpro.datanessence.block.technical.StructureProtector;
@@ -117,7 +114,7 @@ public class BlockRegistry {
     public static final Supplier<Block> ITEM_POINT = registerBlock("item_point",
             () -> new ItemPoint(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
 
-    // Batteries
+    // Storage
     public static final Supplier<Block> ESSENCE_BATTERY = register("essence_battery",
             () -> new EssenceBattery(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -129,6 +126,9 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> EXOTIC_ESSENCE_BATTERY = register("exotic_essence_battery",
             () -> new ExoticEssenceBattery(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> FLUID_TANK = register("fluid_tank",
+            () -> new FluidTank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // these need categorization.

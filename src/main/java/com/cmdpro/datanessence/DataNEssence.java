@@ -91,6 +91,7 @@ public class DataNEssence
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.CHARGER.get(), (o, direction) -> o.getItemHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.LASER_EMITTER.get(), (o, direction) -> o.getItemHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.VACUUM.get(), (o, direction) -> o.getItemHandler());
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_TANK.get(), (o, direction) -> o.getFluidHandler());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -164,6 +165,7 @@ public class DataNEssence
             event.accept(BlockRegistry.LUNAR_ESSENCE_BATTERY.get());
             event.accept(BlockRegistry.NATURAL_ESSENCE_BATTERY.get());
             event.accept(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
+            event.accept(BlockRegistry.FLUID_TANK.get());
             event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
         }
     }

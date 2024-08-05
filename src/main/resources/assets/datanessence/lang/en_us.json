@@ -69,6 +69,17 @@
   "block.datanessence.structure_protector.select_pos_1": "Select Corner 1",
   "block.datanessence.structure_protector.select_pos_2": "Select Corner 2",
   "block.datanessence.structure_protector.finished": "Successfully set the bounds of the structure protector!",
+  "block.datanessence.essence_battery": "Essence Battery",
+  "block.datanessence.essence_battery.amount": "%1$s/%2$s Essence",
+  "block.datanessence.lunar_essence_battery": "Lunar Essence Battery",
+  "block.datanessence.lunar_essence_battery.amount": "%1$s/%2$s Lunar Essence",
+  "block.datanessence.natural_essence_battery": "Natural Essence Battery",
+  "block.datanessence.natural_essence_battery.amount": "%1$s/%2$s Natural Essence",
+  "block.datanessence.exotic_essence_battery": "Exotic Essence Battery",
+  "block.datanessence.exotic_essence_battery.amount": "%1$s/%2$s Exotic Essence",
+  "block.datanessence.fluid_tank": "Fluid Tank",
+  "block.datanessence.fluid_tank.amount": "%1$s/%2$s %3$s",
+  "block.datanessence.fluid_tank.nothing": "Nothing",
 
   "computer.types.test.files.0": "Very cool testing computer text file, yes very cool, indeed, uh I need more text uh uh uh uh uh uh uh yea",
 
