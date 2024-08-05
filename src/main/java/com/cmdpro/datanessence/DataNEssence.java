@@ -164,6 +164,7 @@ public class DataNEssence
             event.accept(BlockRegistry.LUNAR_ESSENCE_BATTERY.get());
             event.accept(BlockRegistry.NATURAL_ESSENCE_BATTERY.get());
             event.accept(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
+            event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
         }
     }
 }

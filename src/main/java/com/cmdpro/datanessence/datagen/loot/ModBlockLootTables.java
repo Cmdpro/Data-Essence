@@ -68,12 +68,20 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(BlockRegistry.STRUCTURE_PROTECTOR.get(),
                 block -> noDrop());
         dropSelf(BlockRegistry.ESSENCE_LEECH.get());
+        this.add(BlockRegistry.LENSING_CRYSTAL_ORE.get(), block -> createLensingCrystalDrops(block, ItemRegistry.LENSING_CRYSTAL.get()));
     }
     protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,
                 this.applyExplosionDecay(pBlock,
                         LootItem.lootTableItem(item)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+                                .apply(ApplyBonusCount.addOreBonusCount(this.registries.holderOrThrow(Enchantments.FORTUNE)))));
+    }
+    protected LootTable.Builder createLensingCrystalDrops(Block pBlock, Item item) {
+        return createSilkTouchDispatchTable(pBlock,
+                this.applyExplosionDecay(pBlock,
+                        LootItem.lootTableItem(item)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 4.0F)))
                                 .apply(ApplyBonusCount.addOreBonusCount(this.registries.holderOrThrow(Enchantments.FORTUNE)))));
     }
     @Override

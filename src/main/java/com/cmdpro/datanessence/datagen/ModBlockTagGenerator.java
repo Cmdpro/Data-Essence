@@ -33,10 +33,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get())
-                .add(BlockRegistry.INFUSER.get());
+                .add(BlockRegistry.INFUSER.get())
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
-                .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get());
+                .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get())
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
     }
 }
