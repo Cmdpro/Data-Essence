@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.auxiliary.ChargerBlockEntity;
+import com.cmdpro.datanessence.block.auxiliary.FluidBottlerBlockEntity;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import com.cmdpro.datanessence.block.auxiliary.VacuumBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
@@ -33,6 +34,10 @@ public class BlockEntityRegistry {
             register("vacuum", () ->
                     BlockEntityType.Builder.of(VacuumBlockEntity::new,
                             BlockRegistry.VACUUM.get()).build(null));
+    public static final Supplier<BlockEntityType<FluidBottlerBlockEntity>> FLUID_BOTTLER =
+            register("fluid_bottler", () ->
+                    BlockEntityType.Builder.of(FluidBottlerBlockEntity::new,
+                            BlockRegistry.FLUID_BOTTLER.get()).build(null));
     public static final Supplier<BlockEntityType<EssenceLeechBlockEntity>> ESSENCE_LEECH =
             register("essence_leech", () ->
                     BlockEntityType.Builder.of(EssenceLeechBlockEntity::new,

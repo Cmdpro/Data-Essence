@@ -96,6 +96,8 @@
   "death.attack.essence_siphoned.player": "%2$s made %1$s have their essence siphoned out",
   "death.attack.essence_siphoned.item": "%2$s used %3$s to make %1$s have their essence siphoned out",
 
+  "gui.widget.fluid":  "%1$s/%2$s %3$s",
+
   "gui.essence_bar.essence_with_max":         "%1$s/%2$s Essence",
   "gui.essence_bar.lunar_essence_with_max":   "%1$s/%2$s Lunar Essence",
   "gui.essence_bar.natural_essence_with_max": "%1$s/%2$s Natural Essence",

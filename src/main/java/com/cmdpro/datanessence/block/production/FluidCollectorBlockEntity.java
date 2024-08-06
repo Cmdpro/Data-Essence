@@ -21,10 +21,10 @@ public class FluidCollectorBlockEntity extends EssenceContainer {
         return 1000;
     }
     public int cooldown;
-    private final FluidTank fluidHandler = new FluidTank(4000);
     public FluidCollectorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_COLLECTOR.get(), pos, state);
     }
+    private final FluidTank fluidHandler = new FluidTank(4000);
     public IFluidHandler getFluidHandler() {
         return lazyFluidHandler.get();
     }

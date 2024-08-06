@@ -176,9 +176,15 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
     }
     public ItemStack item;
     public SimpleContainer getInv() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots()+outputItemHandler.getSlots()+dataDriveHandler.getSlots());
+        for (int i = 0; i < dataDriveHandler.getSlots(); i++) {
+            inventory.setItem(i, dataDriveHandler.getStackInSlot(i));
+        }
         for (int i = 0; i < itemHandler.getSlots(); i++) {
-            inventory.setItem(i, itemHandler.getStackInSlot(i));
+            inventory.setItem(i+dataDriveHandler.getSlots(), itemHandler.getStackInSlot(i));
+        }
+        for (int i = 0; i < outputItemHandler.getSlots(); i++) {
+            inventory.setItem(i+dataDriveHandler.getSlots()+itemHandler.getSlots(), outputItemHandler.getStackInSlot(i));
         }
         return inventory;
     }
