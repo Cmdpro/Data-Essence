@@ -155,6 +155,9 @@
   "data_tablet.pages.laser_emitter.name":       "Essence Lasers",
   "data_tablet.pages.laser_emitter.page1.text": "Focusing Essence into a concentrated beam provides interesting results. We devised a special device to do this very thing, with the added benefit that it may be given one of several Lenses to alter the effect of the emitted beam.",
   "data_tablet.pages.laser_emitter.page2.text": " ◇ No Lens: The Emitter produces a redstone signal when mobs touch the beam.\n ◇ Acceleration Lens: Mobs are forced to move in the direction of the beam.\n ◇ Burning Lens: Mobs are ignited.\n ◇ Harming Lens: Mobs are damaged.\n ◇ Healing Lens: Mobs are healed.\n ◇ Precision Lens: The Emitter emits redstone correspondent to the number of mobs the beam intersects with.",
+  "data_tablet.pages.fluidworks.name":          "Fluidworks",
+  "data_tablet.pages.fluidworks.page1.text":    "Collecting, storing, transferring, placing, and otherwise working with fluids is an important facet of our work. The Collector and Spiller are two machines that form the basis of this. Along with Fluid Points and Wires, they can be used to manipulate fluids in the world around us.\n\nThe Collector gathers fluids from the world; the Spiller places them; and the Points do what one might expect.",
+  "data_tablet.pages.fluidworks.page2.text":    " ◇ Collectors and Spillers must have their pickup/placement side set with the Redirector.",
 
   "_comment.data_tablet_pages.tools": "Tools and Utilities category texts.",
   "data_tablet.pages.traversite_road.name":                  "Traversite Road",

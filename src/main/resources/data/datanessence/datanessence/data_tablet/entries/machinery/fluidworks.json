@@ -5,11 +5,18 @@
   "y": 1,
   "pages": [
     {
+      "type": "datanessence:item",
+      "item": "datanessence:fluid_collector",
+      "text": "data_tablet.pages.fluidworks.page1.text"
+    },
+    {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.fluidworks.page1.text",
+      "text": "data_tablet.pages.fluidworks.page2.text",
       "recipes": [
-        "datanessence:fabrication/fluid_collector",
-        "datanessence:fabrication/fluid_spiller"
+        "datanessence:fabrication/machines/fluid_collector",
+        "datanessence:fabrication/machines/fluid_spiller",
+        "datanessence:fabrication/points/fluid_point",
+        "datanessence:fabrication/wires/fluid_wire"
       ]
     }
   ],
