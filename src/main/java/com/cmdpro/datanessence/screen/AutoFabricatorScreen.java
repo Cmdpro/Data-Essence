@@ -28,6 +28,7 @@ public class AutoFabricatorScreen extends AbstractContainerScreen<AutoFabricator
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+        pGuiGraphics.blit(TEXTURE, x+111, y+34, 221, 0, (int)(22f*((float)menu.blockEntity.craftingProgress/50f)), 17);
         ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBar(pGuiGraphics, x+8, y+17, 0, menu.blockEntity.getEssence(), menu.blockEntity.getMaxEssence());
         ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBar(pGuiGraphics, x+19, y+17, 1, menu.blockEntity.getLunarEssence(), menu.blockEntity.getMaxLunarEssence());
         ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBar(pGuiGraphics, x+30, y+17, 2, menu.blockEntity.getNaturalEssence(), menu.blockEntity.getMaxNaturalEssence());

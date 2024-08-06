@@ -216,8 +216,8 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
         return true;
     }
     public boolean tryCraft() {
-        if (recipe instanceof IFabricationRecipe recipe) {
-            if (recipe.getEntry().equals(DataDrive.getEntry(dataDriveHandler.getStackInSlot(0)))) {
+        if (recipe instanceof IHasRequiredKnowledge recipe) {
+            if (!recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))) {
                 return false;
             }
         }
@@ -257,7 +257,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
         }
         return level.getRecipeManager().getAllRecipesFor(type).stream().filter(a -> {
             if (a.value() instanceof IHasRequiredKnowledge recipe) {
-                if (recipe.getEntry().equals(DataDrive.getEntry(dataDriveHandler.getStackInSlot(0)))) {
+                if (!recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))) {
                     return false;
                 }
             }

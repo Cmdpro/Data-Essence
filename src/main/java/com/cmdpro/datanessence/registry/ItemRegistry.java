@@ -51,7 +51,7 @@ public class ItemRegistry {
     public static final Supplier<Item> FLUID_POINT_ITEM = register("fluid_point", () -> new FluidPointItem(BlockRegistry.FLUID_POINT.get(), new Item.Properties()));
     public static final Supplier<Item> INFUSER_ITEM = register("infuser", () -> new InfuserItem(BlockRegistry.INFUSER.get(), new Item.Properties()));
     public static final Supplier<Item> CHARGER_ITEM = register("charger", () -> new ChargerItem(BlockRegistry.CHARGER.get(), new Item.Properties()));
-    public static final Supplier<Item> AUTO_FABRICATOR_ITEM = register("auto-fabricator", () -> new ChargerItem(BlockRegistry.AUTO_FABRICATOR.get(), new Item.Properties()));
+    public static final Supplier<Item> AUTO_FABRICATOR_ITEM = register("auto-fabricator", () -> new AutoFabricatorItem(BlockRegistry.AUTO_FABRICATOR.get(), new Item.Properties()));
 
     // Bombs
     public static final Supplier<Item> ESSENCE_BOMB = register("essence_bomb", () -> new EssenceBombItem(new Item.Properties()));

@@ -46,6 +46,14 @@ public class DataDrive extends Item {
         }
         return null;
     }
+    public static ResourceLocation getEntryId(ItemStack stack) {
+        if (stack != null) {
+            if (stack.has(DataComponentRegistry.DATA_ID)) {
+                return Entries.entries.get(stack.get(DataComponentRegistry.DATA_ID)).id;
+            }
+        }
+        return null;
+    }
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (pLevel.isClientSide) {
