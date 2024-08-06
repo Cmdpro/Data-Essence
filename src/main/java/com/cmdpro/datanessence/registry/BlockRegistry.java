@@ -10,6 +10,7 @@ import com.cmdpro.datanessence.block.auxiliary.Vacuum;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
 import com.cmdpro.datanessence.block.processing.AutoFabricator;
+import com.cmdpro.datanessence.block.processing.EntropicProcessor;
 import com.cmdpro.datanessence.block.processing.Fabricator;
 import com.cmdpro.datanessence.block.processing.Infuser;
 import com.cmdpro.datanessence.block.production.FluidCollector;
@@ -80,6 +81,9 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_BOTTLER = register("fluid_bottler",
             () -> new FluidBottler(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ENTROPIC_PROCESSOR = register("entropic_processor",
+            () -> new EntropicProcessor(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_SPILLER = register("fluid_spiller",
             () -> new FluidSpiller(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),

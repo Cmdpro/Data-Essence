@@ -19,7 +19,11 @@ public class RecipeRegistry {
     public static final Supplier<RecipeSerializer<ShapedFabricationRecipe>> SHAPEDFABRICATIONRECIPE = registerSerializer("shaped_fabrication_recipe", () -> ShapedFabricationRecipe.Serializer.INSTANCE);
     public static final Supplier<RecipeSerializer<InfusionRecipe>> INFUSION =
             registerSerializer("infusion", () -> InfusionRecipe.Serializer.INSTANCE);
+    public static final Supplier<RecipeSerializer<EntropicProcessingRecipe>> ENTROPIC_PROCESSING =
+            registerSerializer("entropic_processing", () -> EntropicProcessingRecipe.Serializer.INSTANCE);
 
+    public static final Supplier<RecipeType<EntropicProcessingRecipe>> ENTROPIC_PROCESSING_TYPE =
+            registerBasicRecipeType("entropic_processing");
     public static final Supplier<RecipeType<InfusionRecipe>> INFUSION_TYPE =
             registerBasicRecipeType("infusion");
     public static final Supplier<RecipeType<IFabricationRecipe>> FABRICATIONCRAFTING =

@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.screen.datatablet.pages.crafting;
 
 import com.cmdpro.datanessence.screen.datatablet.pages.crafting.types.CraftingTableType;
+import com.cmdpro.datanessence.screen.datatablet.pages.crafting.types.EntropicProcessorType;
 import com.cmdpro.datanessence.screen.datatablet.pages.crafting.types.FabricatorType;
 import com.cmdpro.datanessence.screen.datatablet.pages.crafting.types.InfuserType;
 
@@ -13,5 +14,6 @@ public class CraftingTypes {
         types.add(new CraftingTableType());
         types.add(new FabricatorType());
         types.add(new InfuserType());
+        types.add(new EntropicProcessorType());
     }
 }

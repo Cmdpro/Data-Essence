@@ -16,7 +16,7 @@ public class CraftingTableType extends CraftingType {
             page.renderItemWithTooltip(pGuiGraphics, recipe.getResultItem(RegistryAccess.EMPTY), xOffset + x + 92, yOffset + y + 22, pMouseX, pMouseY);
             page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(Items.CRAFTING_TABLE), xOffset + x + 92, yOffset + y + 43, pMouseX, pMouseY);
             if (recipe2 instanceof ShapelessRecipe) {
-                pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x + 93, yOffset + y + 4, 242, 185, 14, 11);
+                pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x + 93, yOffset + y + 4, 0, 0, 14, 11);
             }
             int x2 = 1;
             int y2 = 1;

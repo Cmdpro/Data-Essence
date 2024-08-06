@@ -8,6 +8,7 @@ import com.cmdpro.datanessence.block.auxiliary.VacuumBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.processing.AutoFabricatorBlockEntity;
+import com.cmdpro.datanessence.block.processing.EntropicProcessorBlockEntity;
 import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
 import com.cmdpro.datanessence.block.processing.InfuserBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
@@ -38,6 +39,10 @@ public class BlockEntityRegistry {
             register("fluid_bottler", () ->
                     BlockEntityType.Builder.of(FluidBottlerBlockEntity::new,
                             BlockRegistry.FLUID_BOTTLER.get()).build(null));
+    public static final Supplier<BlockEntityType<EntropicProcessorBlockEntity>> ENTROPIC_PROCESSOR =
+            register("entropic_processor", () ->
+                    BlockEntityType.Builder.of(EntropicProcessorBlockEntity::new,
+                            BlockRegistry.ENTROPIC_PROCESSOR.get()).build(null));
     public static final Supplier<BlockEntityType<EssenceLeechBlockEntity>> ESSENCE_LEECH =
             register("essence_leech", () ->
                     BlockEntityType.Builder.of(EssenceLeechBlockEntity::new,

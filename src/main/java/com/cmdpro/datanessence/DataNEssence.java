@@ -111,6 +111,15 @@ public class DataNEssence
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_BOTTLER.get(), (o, direction) -> o.getFluidHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedHandler();
+            }
+            if (direction == Direction.DOWN) {
+                return o.getItemHandler();
+            }
+            return o.getOutputHandler();
+        });
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -189,6 +198,7 @@ public class DataNEssence
             event.accept(ItemRegistry.AUTO_FABRICATOR_ITEM.get());
             event.accept(ItemRegistry.CHARGER_ITEM.get());
             event.accept(BlockRegistry.FLUID_BOTTLER.get());
+            event.accept(BlockRegistry.ENTROPIC_PROCESSOR.get());
         }
     }
 }

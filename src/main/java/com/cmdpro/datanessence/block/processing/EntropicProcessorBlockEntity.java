@@ -1,15 +1,13 @@
-package com.cmdpro.datanessence.block.auxiliary;
+package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
-import com.cmdpro.datanessence.item.DataDrive;
+import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
-import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
+import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
 import com.cmdpro.datanessence.screen.FluidBottlerMenu;
-import com.cmdpro.datanessence.screen.InfuserMenu;
-import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -18,16 +16,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.BottleItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
@@ -37,7 +32,6 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -47,15 +41,10 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.Optional;
 
-public class FluidBottlerBlockEntity extends EssenceContainer implements MenuProvider {
+public class EntropicProcessorBlockEntity extends EssenceContainer implements MenuProvider {
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -69,7 +58,6 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
             setChanged();
         }
     };
-    private final FluidTank fluidHandler = new FluidTank(4000);
 
     @Override
     public float getMaxEssence() {
@@ -83,12 +71,8 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
     }
     private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
     private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
     private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, outputItemHandler));
 
-    public IFluidHandler getFluidHandler() {
-        return lazyFluidHandler.get();
-    }
     public IItemHandler getItemHandler() {
         return lazyItemHandler.get();
     }
@@ -98,8 +82,8 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
     public IItemHandler getCombinedHandler() {
         return lazyCombinedHandler.get();
     }
-    public FluidBottlerBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityRegistry.FLUID_BOTTLER.get(), pos, state);
+    public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
         item = ItemStack.EMPTY;
     }
 
@@ -112,16 +96,12 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
         CompoundTag tag = pkt.getTag();
         setEssence(tag.getFloat("essence"));
         workTime = tag.getInt("workTime");
-        item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
-        fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluid"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("essence", getEssence());
         tag.putInt("workTime", workTime);
-        tag.put("item", item.saveOptional(pRegistries));
-        tag.put("fluid", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         return tag;
     }
 
@@ -131,7 +111,6 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
         tag.put("output", outputItemHandler.serializeNBT(pRegistries));
         tag.putFloat("essence", getEssence());
         tag.putInt("workTime", workTime);
-        tag.put("fluid", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         super.saveAdditional(tag, pRegistries);
     }
     @Override
@@ -141,7 +120,6 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
         setEssence(nbt.getFloat("essence"));
         workTime = nbt.getInt("workTime");
-        fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluid"));
     }
     public ItemStack item;
     public SimpleContainer getInv() {
@@ -159,50 +137,39 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
         return inventory;
     }
     public int workTime;
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidBottlerBlockEntity pBlockEntity) {
+    public EntropicProcessingRecipe recipe;
+    public float essenceCost;
+    public float lunarEssenceCost;
+    public float naturalEssenceCost;
+    public float exoticEssenceCost;
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EntropicProcessorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
             DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
-            DataNEssenceUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             if (pBlockEntity.getEssence() >= 50) {
-                ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0);
-                if (stack.is(Items.BUCKET)) {
-                    if (pBlockEntity.fluidHandler.getFluid().getAmount() >= 1000) {
-                        ItemStack bucket = FluidUtil.getFilledBucket(pBlockEntity.fluidHandler.getFluid());
-                        if (pBlockEntity.outputItemHandler.insertItem(0, bucket, true).isEmpty()) {
-                            pBlockEntity.workTime++;
-                            resetWorkTime = false;
-                            if (pBlockEntity.workTime >= 20) {
-                                pBlockEntity.itemHandler.extractItem(0, 1, false);
-                                pBlockEntity.outputItemHandler.insertItem(0, bucket, false);
-                                pBlockEntity.fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE);
-                                pBlockEntity.setEssence(pBlockEntity.getEssence()-50);
-                                pBlockEntity.workTime = 0;
-                                pLevel.playSound(null, pPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
-                            }
+                Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
+                if (recipe.isPresent()) {
+                    if (recipe.get().value().equals(pBlockEntity.recipe)) {
+                        pBlockEntity.workTime = 0;
+                    }
+                    pBlockEntity.recipe = recipe.get().value();
+                    ItemStack result = recipe.get().value().getResultItem(pLevel.registryAccess());
+                    if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
+                        resetWorkTime = false;
+                        pBlockEntity.workTime++;
+                        if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
+                            pBlockEntity.setEssence(pBlockEntity.getEssence()-50);
+                            pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
+                            pBlockEntity.itemHandler.extractItem(0, 1, false);
+                            pBlockEntity.workTime = 0;
                         }
                     }
+                } else {
+                    pBlockEntity.recipe = null;
                 }
-                if (stack.is(Items.GLASS_BOTTLE)) {
-                    if (pBlockEntity.fluidHandler.getFluid().getAmount() >= 250) {
-                        if (pBlockEntity.fluidHandler.getFluid().is(Fluids.WATER)) {
-                            ItemStack bottle = PotionContents.createItemStack(Items.POTION, Potions.WATER);
-                            if (pBlockEntity.outputItemHandler.insertItem(0, bottle, true).isEmpty()) {
-                                pBlockEntity.workTime++;
-                                resetWorkTime = false;
-                                if (pBlockEntity.workTime >= 20) {
-                                    pBlockEntity.itemHandler.extractItem(0, 1, false);
-                                    pBlockEntity.outputItemHandler.insertItem(0, bottle, false);
-                                    pBlockEntity.fluidHandler.drain(250, IFluidHandler.FluidAction.EXECUTE);
-                                    pBlockEntity.setEssence(pBlockEntity.getEssence() - 50);
-                                    pBlockEntity.workTime = 0;
-                                    pLevel.playSound(null, pPos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
-                                }
-                            }
-                        }
-                    }
-                }
+            } else {
+                pBlockEntity.recipe = null;
             }
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;
@@ -223,9 +190,9 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return new FluidBottlerMenu(pContainerId, pInventory, this);
+        return new EntropicProcessorMenu(pContainerId, pInventory, this);
     }
-    private static boolean hasNotReachedStackLimit(FluidBottlerBlockEntity entity, ItemStack toAdd) {
+    private static boolean hasNotReachedStackLimit(EntropicProcessorBlockEntity entity, ItemStack toAdd) {
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
             return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
         } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();
