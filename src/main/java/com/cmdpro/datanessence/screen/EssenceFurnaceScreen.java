@@ -15,9 +15,9 @@ import net.minecraft.world.entity.player.Inventory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EntropicProcessorScreen extends AbstractContainerScreen<EntropicProcessorMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/entropic_processor.png");
-    public EntropicProcessorScreen(EntropicProcessorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+public class EssenceFurnaceScreen extends AbstractContainerScreen<EssenceFurnaceMenu> {
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/essence_furnace.png");
+    public EssenceFurnaceScreen(EssenceFurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
     @Override
@@ -28,7 +28,7 @@ public class EntropicProcessorScreen extends AbstractContainerScreen<EntropicPro
         int y = (height - imageHeight) / 2;
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
         if (menu.blockEntity.workTime >= 0) {
-            pGuiGraphics.blit(TEXTURE, x + 82, y + 33, 188, 0, (int) Math.ceil(22f * ((float)menu.blockEntity.workTime / menu.blockEntity.recipe.getTime())), 17);
+            pGuiGraphics.blit(TEXTURE, x + 82, y + 33, 188, 0, (int) Math.ceil(22f * ((float)menu.blockEntity.workTime / menu.blockEntity.recipe.getCookingTime())), 17);
         }
         ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBar(pGuiGraphics, x+8, y+17, 0, menu.blockEntity.getEssence(), menu.blockEntity.getMaxEssence());
         if (ClientPlayerData.getUnlockedEssences()[0]) {

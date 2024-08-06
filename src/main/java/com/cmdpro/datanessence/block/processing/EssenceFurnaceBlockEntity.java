@@ -3,19 +3,16 @@ package com.cmdpro.datanessence.block.processing;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
-import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
-import com.cmdpro.datanessence.screen.FluidBottlerMenu;
+import com.cmdpro.datanessence.screen.EssenceFurnaceMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -23,19 +20,10 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionContents;
-import net.minecraft.world.item.alchemy.Potions;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeInput;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.util.Lazy;
-import net.neoforged.neoforge.fluids.FluidUtil;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
-import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
@@ -44,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class EntropicProcessorBlockEntity extends EssenceContainer implements MenuProvider {
+public class EssenceFurnaceBlockEntity extends EssenceContainer implements MenuProvider {
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -82,8 +70,8 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
     public IItemHandler getCombinedHandler() {
         return lazyCombinedHandler.get();
     }
-    public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
+    public EssenceFurnaceBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockEntityRegistry.ESSENCE_FURNACE.get(), pos, state);
         item = ItemStack.EMPTY;
     }
 
@@ -132,23 +120,23 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
         }
         return inventory;
     }
-    public RecipeInput getCraftingInv() {
-        RecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
+    public SingleRecipeInput getCraftingInv() {
+        SingleRecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
         return inventory;
     }
     public int workTime;
-    public EntropicProcessingRecipe recipe;
+    public SmeltingRecipe recipe;
     public float essenceCost;
     public float lunarEssenceCost;
     public float naturalEssenceCost;
     public float exoticEssenceCost;
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EntropicProcessorBlockEntity pBlockEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceFurnaceBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
             DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             if (pBlockEntity.getEssence() >= 50) {
-                Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
+                Optional<RecipeHolder<SmeltingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeType.SMELTING, pBlockEntity.getCraftingInv(), pLevel);
                 if (recipe.isPresent()) {
                     if (!recipe.get().value().equals(pBlockEntity.recipe)) {
                         pBlockEntity.workTime = 0;
@@ -158,11 +146,11 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
                     if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
-                        if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                            pBlockEntity.setEssence(pBlockEntity.getEssence()-50);
+                        if (pBlockEntity.workTime >= recipe.get().value().getCookingTime()) {
                             pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
+                            pBlockEntity.setEssence(pBlockEntity.getEssence()-50);
                         }
                     }
                 } else {
@@ -176,7 +164,7 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
             }
             pBlockEntity.updateBlock();
         } else {
-            Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
+            Optional<RecipeHolder<SmeltingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeType.SMELTING, pBlockEntity.getCraftingInv(), pLevel);
             recipe.ifPresent(entropicProcessingRecipeRecipeHolder -> pBlockEntity.recipe = entropicProcessingRecipeRecipeHolder.value());
         }
     }
@@ -193,9 +181,9 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return new EntropicProcessorMenu(pContainerId, pInventory, this);
+        return new EssenceFurnaceMenu(pContainerId, pInventory, this);
     }
-    private static boolean hasNotReachedStackLimit(EntropicProcessorBlockEntity entity, ItemStack toAdd) {
+    private static boolean hasNotReachedStackLimit(EssenceFurnaceBlockEntity entity, ItemStack toAdd) {
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
             return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
         } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();

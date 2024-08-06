@@ -7,10 +7,7 @@ import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import com.cmdpro.datanessence.block.auxiliary.VacuumBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
-import com.cmdpro.datanessence.block.processing.AutoFabricatorBlockEntity;
-import com.cmdpro.datanessence.block.processing.EntropicProcessorBlockEntity;
-import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
-import com.cmdpro.datanessence.block.processing.InfuserBlockEntity;
+import com.cmdpro.datanessence.block.processing.*;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidSpillerBlockEntity;
 import com.cmdpro.datanessence.block.storage.*;
@@ -43,6 +40,10 @@ public class BlockEntityRegistry {
             register("entropic_processor", () ->
                     BlockEntityType.Builder.of(EntropicProcessorBlockEntity::new,
                             BlockRegistry.ENTROPIC_PROCESSOR.get()).build(null));
+    public static final Supplier<BlockEntityType<EssenceFurnaceBlockEntity>> ESSENCE_FURNACE =
+            register("essence_furnace", () ->
+                    BlockEntityType.Builder.of(EssenceFurnaceBlockEntity::new,
+                            BlockRegistry.ESSENCE_FURNACE.get()).build(null));
     public static final Supplier<BlockEntityType<EssenceLeechBlockEntity>> ESSENCE_LEECH =
             register("essence_leech", () ->
                     BlockEntityType.Builder.of(EssenceLeechBlockEntity::new,
