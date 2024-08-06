@@ -1,8 +1,9 @@
-// 1.21	2024-08-05T12:59:55.8558486	Loot Tables
+// 1.21	2024-08-05T21:34:05.1243267	Loot Tables
 bbbe51e74edfcc54136678857699b9b14569a089 data/datanessence/loot_table/blocks/ancient_lantern.json
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_table/blocks/ancient_rock_bricks.json
 6540cac2211b8a360d5bbebd6d8ecce140f3d3cb data/datanessence/loot_table/blocks/ancient_rock_column.json
 56b95cac73dc52cf9672428b3a4720b45303f3a8 data/datanessence/loot_table/blocks/ancient_rock_tiles.json
+6c75f698c678f430658ac40cbf4955f45e52655c data/datanessence/loot_table/blocks/auto-fabricator.json
 ea5364fdf6f40dd1dc50b2354226d4977911b8b1 data/datanessence/loot_table/blocks/charger.json
 d84e5950a8f59623f762d05a19464f398db0fccd data/datanessence/loot_table/blocks/computer.json
 3c25019c5f00da2256a65bfc3d58cecfe83e604f data/datanessence/loot_table/blocks/data_bank.json
@@ -24,6 +25,7 @@ cc264d7f4e88e760ab31df3690efb2e3342c0a44 data/datanessence/loot_table/blocks/fab
 0519c7bd1877f649a5a8a95eb1c592f96ab49c70 data/datanessence/loot_table/blocks/fluid_collector.json
 f2a29214b3a71ca945068d1c8409c2bced4dcaec data/datanessence/loot_table/blocks/fluid_point.json
 fcbdf81a9730cd95fb91e6786a932853ae148da5 data/datanessence/loot_table/blocks/fluid_spiller.json
+a63c22d76b677d9f5d4b6212d1011f4d3f31c962 data/datanessence/loot_table/blocks/fluid_tank.json
 b8d2fa9097bae3a836da7acd662de09e9d889ee9 data/datanessence/loot_table/blocks/infuser.json
 26c69dcff1defc45669115decebc18f32b791f08 data/datanessence/loot_table/blocks/item_buffer.json
 ef9d3be9f05eaba2865a62ce63165bdc9f414942 data/datanessence/loot_table/blocks/item_point.json
