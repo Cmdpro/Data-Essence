@@ -82,6 +82,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.CAPACITANCE_PANEL, "components");
         simpleItemWithSubdirectory(ItemRegistry.LOGICAL_MATRIX, "components");
         simpleItemWithSubdirectory(ItemRegistry.LENS, "components");
+        simpleItemWithSubdirectory(ItemRegistry.PROPELLER, "components");
 
         simpleItemWithSubdirectory(ItemRegistry.ESSENCE_BOMB, "bombs");
         simpleItemWithSubdirectory(ItemRegistry.LUNAR_ESSENCE_BOMB, "bombs");

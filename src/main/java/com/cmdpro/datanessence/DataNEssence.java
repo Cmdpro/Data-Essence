@@ -125,6 +125,7 @@ public class DataNEssence
             event.accept(ItemRegistry.CAPACITANCE_PANEL.get());
             event.accept(ItemRegistry.CONDUCTANCE_ROD.get());
             event.accept(ItemRegistry.LOGICAL_MATRIX.get());
+            event.accept(ItemRegistry.PROPELLER.get());
             event.accept(ItemRegistry.LENSING_CRYSTAL.get());
             event.accept(ItemRegistry.LENS.get());
             event.accept(ItemRegistry.MAGITECH_8_BALL.get());
