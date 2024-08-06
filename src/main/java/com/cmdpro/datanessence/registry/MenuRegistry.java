@@ -20,6 +20,7 @@ public class MenuRegistry {
     public static final Supplier<MenuType<ChargerMenu>> CHARGER_MENU = register(ChargerMenu::new, "charger");
     public static final Supplier<MenuType<LaserEmitterMenu>> LASER_EMITTER_MENU = register(LaserEmitterMenu::new, "laser_emitter");
     public static final Supplier<MenuType<AutoFabricatorMenu>> AUTO_FABRICATOR_MENU = register(AutoFabricatorMenu::new, "auto_fabricator");
+    public static final Supplier<MenuType<FluidBottlerMenu>> FLUID_BOTTLER_MENU = register(FluidBottlerMenu::new, "fluid_bottler");
     private static <T extends AbstractContainerMenu> Supplier<MenuType<T>> register(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));
     }

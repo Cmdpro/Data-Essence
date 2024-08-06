@@ -86,6 +86,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.CHARGER_MENU.get(), ChargerScreen::new);
         event.register(MenuRegistry.LASER_EMITTER_MENU.get(), LaserEmitterScreen::new);
         event.register(MenuRegistry.AUTO_FABRICATOR_MENU.get(), AutoFabricatorScreen::new);
+        event.register(MenuRegistry.FLUID_BOTTLER_MENU.get(), FluidBottlerScreen::new);
     }
     public static ShaderInstance progressionShader;
     @SubscribeEvent

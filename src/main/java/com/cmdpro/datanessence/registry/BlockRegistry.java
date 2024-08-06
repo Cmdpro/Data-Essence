@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.*;
 
 import com.cmdpro.datanessence.block.auxiliary.Charger;
+import com.cmdpro.datanessence.block.auxiliary.FluidBottler;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
 import com.cmdpro.datanessence.block.auxiliary.Vacuum;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
@@ -76,6 +77,9 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LASER_EMITTER = register("laser_emitter",
             () -> new LaserEmitter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> FLUID_BOTTLER = register("fluid_bottler",
+            () -> new FluidBottler(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_SPILLER = register("fluid_spiller",
             () -> new FluidSpiller(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),

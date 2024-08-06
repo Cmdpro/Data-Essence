@@ -63,6 +63,7 @@ public class CraftingPage extends TextPage {
             if (p >= 2) {
                 x = 4;
                 y += 64;
+                p = 0;
             }
         }
     }
