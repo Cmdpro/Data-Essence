@@ -82,6 +82,15 @@ public class DataNEssence
             }
             return o.getOutputHandler();
         });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.AUTO_FABRICATOR.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedHandler();
+            }
+            if (direction == Direction.DOWN) {
+                return o.getItemHandler();
+            }
+            return o.getOutputHandler();
+        });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_BUFFER.get(), (o, direction) -> o.getItemHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_POINT.get(), (o, direction) -> o.getItemHandler());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_BUFFER.get(), (o, direction) -> o.getFluidHandler());
@@ -157,7 +166,6 @@ public class DataNEssence
             event.accept(BlockRegistry.COMPUTER.get());
             event.accept(BlockRegistry.FLUID_COLLECTOR.get());
             event.accept(BlockRegistry.FLUID_SPILLER.get());
-            event.accept(BlockRegistry.CHARGER.get());
             event.accept(BlockRegistry.LASER_EMITTER.get());
             event.accept(BlockRegistry.VACUUM.get());
             event.accept(BlockRegistry.ESSENCE_LEECH.get());
@@ -167,6 +175,8 @@ public class DataNEssence
             event.accept(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
             event.accept(BlockRegistry.FLUID_TANK.get());
             event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+            event.accept(ItemRegistry.AUTO_FABRICATOR_ITEM.get());
+            event.accept(ItemRegistry.CHARGER_ITEM.get());
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.screen;
 
+import com.cmdpro.datanessence.block.processing.AutoFabricatorBlockEntity;
 import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
@@ -16,16 +17,16 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class FabricatorMenu extends AbstractContainerMenu {
-    public final FabricatorBlockEntity blockEntity;
+public class AutoFabricatorMenu extends AbstractContainerMenu {
+    public final AutoFabricatorBlockEntity blockEntity;
     private final Level level;
-    public FabricatorMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public AutoFabricatorMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
-    public FabricatorMenu(int pContainerId, Inventory inv, BlockEntity entity) {
-        super(MenuRegistry.FABRICATOR_MENU.get(), pContainerId);
-        checkContainerSize(inv, 9);
-        blockEntity = ((FabricatorBlockEntity) entity);
+    public AutoFabricatorMenu(int pContainerId, Inventory inv, BlockEntity entity) {
+        super(MenuRegistry.AUTO_FABRICATOR_MENU.get(), pContainerId);
+        checkContainerSize(inv, 11);
+        blockEntity = ((AutoFabricatorBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
@@ -36,6 +37,8 @@ public class FabricatorMenu extends AbstractContainerMenu {
                 this.addSlot(new SlotItemHandler(handler, j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
             }
         }
+        this.addSlot(new SlotItemHandler(handler, 9, 145, 35));
+        this.addSlot(new SlotItemHandler(handler, 10, 152, 8));
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -54,7 +57,7 @@ public class FabricatorMenu extends AbstractContainerMenu {
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 10;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 11;  // must be the number of slots you have!
 
     @Override
     public ItemStack quickMoveStack(Player playerIn, int index) {
@@ -91,7 +94,7 @@ public class FabricatorMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, BlockRegistry.FABRICATOR.get());
+                pPlayer, BlockRegistry.AUTO_FABRICATOR.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

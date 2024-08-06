@@ -8,6 +8,7 @@ import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
 import com.cmdpro.datanessence.block.auxiliary.Vacuum;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
+import com.cmdpro.datanessence.block.processing.AutoFabricator;
 import com.cmdpro.datanessence.block.processing.Fabricator;
 import com.cmdpro.datanessence.block.processing.Infuser;
 import com.cmdpro.datanessence.block.production.FluidCollector;
@@ -79,6 +80,8 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CHARGER = registerBlock("charger",
             () -> new Charger(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
+    public static final Supplier<Block> AUTO_FABRICATOR = registerBlock("auto-fabricator",
+            () -> new AutoFabricator(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
 
     // Buffers
     public static final Supplier<Block> ESSENCE_BUFFER = register("essence_buffer",

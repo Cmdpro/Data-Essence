@@ -5,9 +5,6 @@
     64,
     64
   ],
-  "textures": {
-    "particle": "datanessence:block/charger"
-  },
   "display": {
     "thirdperson_righthand": {
       "rotation": [

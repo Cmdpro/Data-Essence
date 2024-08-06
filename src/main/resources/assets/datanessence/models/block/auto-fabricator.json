@@ -6,7 +6,7 @@
     64
   ],
   "textures": {
-    "particle": "datanessence:block/charger"
+    "particle": "datanessence:block/auto-fabricator"
   },
   "display": {
     "thirdperson_righthand": {

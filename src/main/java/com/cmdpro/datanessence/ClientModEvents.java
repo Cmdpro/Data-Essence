@@ -45,6 +45,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.INFUSER.get(), InfuserRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.CHARGER.get(), ChargerRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.LASER_EMITTER.get(), LaserEmitterRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.AUTO_FABRICATOR.get(), AutoFabricatorRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -84,6 +85,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.INFUSER_MENU.get(), InfuserScreen::new);
         event.register(MenuRegistry.CHARGER_MENU.get(), ChargerScreen::new);
         event.register(MenuRegistry.LASER_EMITTER_MENU.get(), LaserEmitterScreen::new);
+        event.register(MenuRegistry.AUTO_FABRICATOR_MENU.get(), AutoFabricatorScreen::new);
     }
     public static ShaderInstance progressionShader;
     @SubscribeEvent

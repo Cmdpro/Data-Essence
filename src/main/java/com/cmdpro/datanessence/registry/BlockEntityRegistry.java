@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import com.cmdpro.datanessence.block.auxiliary.VacuumBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
+import com.cmdpro.datanessence.block.processing.AutoFabricatorBlockEntity;
 import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
 import com.cmdpro.datanessence.block.processing.InfuserBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
@@ -128,6 +129,10 @@ public class BlockEntityRegistry {
             register("fluid_tank", () ->
                     BlockEntityType.Builder.of(FluidTankBlockEntity::new,
                             BlockRegistry.FLUID_TANK.get()).build(null));
+    public static final Supplier<BlockEntityType<AutoFabricatorBlockEntity>> AUTO_FABRICATOR =
+            register("auto-fabricator", () ->
+                    BlockEntityType.Builder.of(AutoFabricatorBlockEntity::new,
+                            BlockRegistry.AUTO_FABRICATOR.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {
