@@ -27,10 +27,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Math;
 
 import java.awt.*;
@@ -38,6 +40,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class DataNEssenceUtil {
     public static class ItemUtil {
@@ -227,6 +230,31 @@ public class DataNEssenceUtil {
         public static void setTier(Player player, int tier) {
             player.setData(AttachmentTypeRegistry.TIER, tier);
             PlayerDataUtil.sendTier((ServerPlayer)player, true);
+            Supplier<AttachmentType<Boolean>> essenceType = getUnlockedTypeForTier(tier);
+            if (essenceType != null) {
+                if (!player.getData(essenceType)) {
+                    player.setData(essenceType, true);
+                    DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer) player);
+                }
+            }
+        }
+
+        @Nullable
+        private static Supplier<AttachmentType<Boolean>> getUnlockedTypeForTier(int tier) {
+            Supplier<AttachmentType<Boolean>> essenceType = null;
+            if (tier >= 1) {
+                essenceType = AttachmentTypeRegistry.UNLOCKED_ESSENCE;
+            }
+            if (tier >= 3) {
+                essenceType = AttachmentTypeRegistry.UNLOCKED_LUNAR_ESSENCE;
+            }
+            if (tier >= 5) {
+                essenceType = AttachmentTypeRegistry.UNLOCKED_NATURAL_ESSENCE;
+            }
+            if (tier >= 7) {
+                essenceType = AttachmentTypeRegistry.UNLOCKED_EXOTIC_ESSENCE;
+            }
+            return essenceType;
         }
     }
     public static BlockState getHiddenBlock(Block block, Player player) {
