@@ -303,18 +303,17 @@ public class DataNEssenceUtil {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof ItemBufferBlockEntity buffer) {
-                IItemHandler resolved = handler;
-                IItemHandler resolved2 = container.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, buffer.getBlockPos(), null);
+                IItemHandler resolved = container.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, buffer.getBlockPos(), null);
                 boolean movedAnything = false;
-                for (int o = 0; o < resolved2.getSlots(); o++) {
-                    ItemStack copy = resolved2.getStackInSlot(o).copy();
+                for (int o = 0; o < resolved.getSlots(); o++) {
+                    ItemStack copy = resolved.getStackInSlot(o).copy();
                     if (!copy.isEmpty()) {
                         copy.setCount(Math.clamp(0, 16, copy.getCount()));
                         ItemStack copy2 = copy.copy();
                         int p = 0;
-                        while (p < resolved.getSlots()) {
+                        while (p < handler.getSlots()) {
                             ItemStack copyCopy = copy.copy();
-                            int remove = resolved.insertItem(p, copyCopy, false).getCount();
+                            int remove = handler.insertItem(p, copyCopy, false).getCount();
                             if (remove < copyCopy.getCount()) {
                                 movedAnything = true;
                             }
@@ -325,7 +324,7 @@ public class DataNEssenceUtil {
                             p++;
                         }
                         if (movedAnything) {
-                            resolved2.extractItem(o, copy2.getCount() - copy.getCount(), false);
+                            resolved.extractItem(o, copy2.getCount() - copy.getCount(), false);
                             break;
                         }
                     }
@@ -342,14 +341,13 @@ public class DataNEssenceUtil {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof FluidBufferBlockEntity buffer) {
-                IFluidHandler resolved = handler;
-                IFluidHandler resolved2 = container.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, buffer.getBlockPos(), null);
-                for (int o = 0; o < resolved2.getTanks(); o++) {
-                    FluidStack copy = resolved2.getFluidInTank(o).copy();
+                IFluidHandler resolved = container.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, buffer.getBlockPos(), null);
+                for (int o = 0; o < resolved.getTanks(); o++) {
+                    FluidStack copy = resolved.getFluidInTank(o).copy();
                     if (!copy.isEmpty()) {
                         copy.setAmount(Math.clamp(0, 4000, copy.getAmount()));
-                        int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
-                        resolved2.getFluidInTank(o).shrink(filled);
+                        int filled = handler.fill(copy, IFluidHandler.FluidAction.EXECUTE);
+                        resolved.getFluidInTank(o).shrink(filled);
                     }
                 }
             } else if (!(ent instanceof EssenceBufferBlockEntity || ent instanceof ItemBufferBlockEntity)) {
