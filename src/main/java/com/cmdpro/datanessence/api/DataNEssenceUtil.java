@@ -297,10 +297,13 @@ public class DataNEssenceUtil {
         }
     }
     public static void getItemsFromBuffersBelow(BlockEntity container) {
+        getItemsFromBuffersBelow(container, container.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, container.getBlockPos(), Direction.DOWN));
+    }
+    public static void getItemsFromBuffersBelow(BlockEntity container, IItemHandler handler) {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof ItemBufferBlockEntity buffer) {
-                IItemHandler resolved = container.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, container.getBlockPos(), Direction.DOWN);
+                IItemHandler resolved = handler;
                 IItemHandler resolved2 = container.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, buffer.getBlockPos(), null);
                 boolean movedAnything = false;
                 for (int o = 0; o < resolved2.getSlots(); o++) {
@@ -333,10 +336,13 @@ public class DataNEssenceUtil {
         }
     }
     public static void getFluidsFromBuffersBelow(BlockEntity container) {
+        getFluidsFromBuffersBelow(container, container.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, container.getBlockPos(), Direction.DOWN));
+    }
+    public static void getFluidsFromBuffersBelow(BlockEntity container, IFluidHandler handler) {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof FluidBufferBlockEntity buffer) {
-                IFluidHandler resolved = container.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, container.getBlockPos(), Direction.DOWN);
+                IFluidHandler resolved = handler;
                 IFluidHandler resolved2 = container.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, buffer.getBlockPos(), null);
                 for (int o = 0; o < resolved2.getTanks(); o++) {
                     FluidStack copy = resolved2.getFluidInTank(o).copy();
@@ -349,15 +355,6 @@ public class DataNEssenceUtil {
             } else if (!(ent instanceof EssenceBufferBlockEntity || ent instanceof ItemBufferBlockEntity)) {
                 break;
             }
-        }
-    }
-    public static void drawLine(ParticleOptions particle, Vec3 point1, Vec3 point2, Level level, double space) {
-        double distance = point1.distanceTo(point2);
-        Vec3 vector = point2.subtract(point1).normalize().multiply(space, space, space);
-        double length = 0;
-        for (Vec3 point = point1; length < distance; point = point.add(vector)) {
-            ((ServerLevel)level).sendParticles(particle, point.x, point.y, point.z, 1, 0, 0, 0, 0);
-            length += space;
         }
     }
     public static void updatePlayerData(Player player) {
