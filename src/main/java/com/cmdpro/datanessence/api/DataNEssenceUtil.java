@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.block.transmission.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.computers.ComputerData;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
+import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.*;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
@@ -313,13 +314,19 @@ public class DataNEssenceUtil {
                         int p = 0;
                         while (p < handler.getSlots()) {
                             ItemStack copyCopy = copy.copy();
-                            int remove = handler.insertItem(p, copyCopy, false).getCount();
-                            if (remove < copyCopy.getCount()) {
-                                movedAnything = true;
+                            boolean canInsert = true;
+                            if (resolved instanceof LockableItemHandler lockable) {
+                                canInsert = lockable.canInsertFromBuffer(p, copyCopy);
                             }
-                            copy.setCount(remove);
-                            if (remove <= 0) {
-                                break;
+                            if (canInsert) {
+                                int remove = handler.insertItem(p, copyCopy, false).getCount();
+                                if (remove < copyCopy.getCount()) {
+                                    movedAnything = true;
+                                }
+                                copy.setCount(remove);
+                                if (remove <= 0) {
+                                    break;
+                                }
                             }
                             p++;
                         }
