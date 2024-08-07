@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class LockableItemHandler extends ItemStackHandler {
     public HashMap<Integer, ItemStack> lockedSlots = new HashMap<>();
-
+    public boolean locked;
     @Override
     public CompoundTag serializeNBT(HolderLookup.Provider provider) {
         CompoundTag tag = super.serializeNBT(provider);
@@ -25,16 +25,30 @@ public class LockableItemHandler extends ItemStackHandler {
             locked.add(tag2);
         }
         tag.put("locked", locked);
+        tag.putBoolean("isLocked", this.locked);
         return tag;
     }
-
+    public void setLockedSlots() {
+        int o = 0;
+        for (ItemStack i : stacks) {
+            if (!i.isEmpty()) {
+                lockedSlots.put(o, i);
+            }
+            o++;
+        }
+    }
+    public void clearLockedSlots() {
+        lockedSlots.clear();
+    }
     public boolean canInsertFromBuffer(int slot, ItemStack stack) {
-        if (lockedSlots.containsKey(slot)) {
-            ItemStack locked = lockedSlots.get(slot);
-            if (ItemStack.isSameItem(stack, locked)) {
-                return super.isItemValid(slot, stack);
-            } else {
-                return false;
+        if (locked) {
+            if (lockedSlots.containsKey(slot)) {
+                ItemStack locked = lockedSlots.get(slot);
+                if (ItemStack.isSameItem(stack, locked)) {
+                    return super.isItemValid(slot, stack);
+                } else {
+                    return false;
+                }
             }
         }
         return super.isItemValid(slot, stack);
@@ -49,5 +63,6 @@ public class LockableItemHandler extends ItemStackHandler {
             CompoundTag tag = (CompoundTag)i;
             lockedSlots.put(tag.getInt("key"), ItemStack.parseOptional(provider, tag.getCompound("value")));
         }
+        this.locked = nbt.getBoolean("isLocked");
     }
 }
