@@ -82,6 +82,9 @@ public class BlockRegistry {
     public static final Supplier<Block> ENTROPIC_PROCESSOR = register("entropic_processor",
             () -> new EntropicProcessor(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SYNTHESIS_CHAMBER = register("synthesis_chamber",
+            () -> new SynthesisChamber(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_FURNACE = register("essence_furnace",
             () -> new EssenceFurnace(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

@@ -40,6 +40,10 @@ public class BlockEntityRegistry {
             register("entropic_processor", () ->
                     BlockEntityType.Builder.of(EntropicProcessorBlockEntity::new,
                             BlockRegistry.ENTROPIC_PROCESSOR.get()).build(null));
+    public static final Supplier<BlockEntityType<SynthesisChamberBlockEntity>> SYNTHESIS_CHAMBER =
+            register("synthesis_chamber", () ->
+                    BlockEntityType.Builder.of(SynthesisChamberBlockEntity::new,
+                            BlockRegistry.SYNTHESIS_CHAMBER.get()).build(null));
     public static final Supplier<BlockEntityType<EssenceFurnaceBlockEntity>> ESSENCE_FURNACE =
             register("essence_furnace", () ->
                     BlockEntityType.Builder.of(EssenceFurnaceBlockEntity::new,

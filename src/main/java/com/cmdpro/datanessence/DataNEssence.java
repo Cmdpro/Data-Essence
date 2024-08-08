@@ -129,6 +129,16 @@ public class DataNEssence
             }
             return o.getOutputHandler();
         });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.SYNTHESIS_CHAMBER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedHandler();
+            }
+            if (direction == Direction.DOWN) {
+                return o.getItemHandler();
+            }
+            return o.getOutputHandler();
+        });
+
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {

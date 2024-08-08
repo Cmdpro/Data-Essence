@@ -111,9 +111,9 @@ public class ClientDataNEssenceUtil {
     }
     public static void renderLockedSlotBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y, NonNullList<Slot> slots) {
         for (Slot i : slots) {
-            if (i.getItem().isEmpty()) {
-                if (i instanceof SlotItemHandler handlerSlot) {
-                    if (handlerSlot.getItemHandler() instanceof LockableItemHandler lockable) {
+            if (i instanceof SlotItemHandler handlerSlot) {
+                if (handlerSlot.getItemHandler() instanceof LockableItemHandler lockable) {
+                    if (i.getItem().isEmpty()) {
                         if (lockable.lockedSlots.containsKey(i.getContainerSlot())) {
                             pGuiGraphics.pose().pushPose();
                             pGuiGraphics.pose().scale(0.5f, 0.5f, 0.5f);

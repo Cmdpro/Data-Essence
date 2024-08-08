@@ -21,7 +21,11 @@ public class RecipeRegistry {
             registerSerializer("infusion", () -> InfusionRecipe.Serializer.INSTANCE);
     public static final Supplier<RecipeSerializer<EntropicProcessingRecipe>> ENTROPIC_PROCESSING =
             registerSerializer("entropic_processing", () -> EntropicProcessingRecipe.Serializer.INSTANCE);
+    public static final Supplier<RecipeSerializer<SynthesisRecipe>> SYNTHESIS =
+            registerSerializer("synthesis", () -> SynthesisRecipe.Serializer.INSTANCE);
 
+    public static final Supplier<RecipeType<SynthesisRecipe>> SYNTHESIS_TYPE =
+            registerBasicRecipeType("synthesis");
     public static final Supplier<RecipeType<EntropicProcessingRecipe>> ENTROPIC_PROCESSING_TYPE =
             registerBasicRecipeType("entropic_processing");
     public static final Supplier<RecipeType<InfusionRecipe>> INFUSION_TYPE =
