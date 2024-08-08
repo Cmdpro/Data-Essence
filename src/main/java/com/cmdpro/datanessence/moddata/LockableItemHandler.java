@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.moddata;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -14,6 +15,14 @@ import java.util.Map;
 public class LockableItemHandler extends ItemStackHandler {
     public HashMap<Integer, ItemStack> lockedSlots = new HashMap<>();
     public boolean locked;
+    public LockableItemHandler(int size) {
+        super(size);
+    }
+
+    public LockableItemHandler(NonNullList<ItemStack> stacks) {
+        super(stacks);
+    }
+
     @Override
     public CompoundTag serializeNBT(HolderLookup.Provider provider) {
         CompoundTag tag = super.serializeNBT(provider);
@@ -32,7 +41,7 @@ public class LockableItemHandler extends ItemStackHandler {
         int o = 0;
         for (ItemStack i : stacks) {
             if (!i.isEmpty()) {
-                lockedSlots.put(o, i);
+                lockedSlots.put(o, i.copy());
             }
             o++;
         }
@@ -53,16 +62,23 @@ public class LockableItemHandler extends ItemStackHandler {
         }
         return super.isItemValid(slot, stack);
     }
+    public void setLocked(boolean locked) {
+        this.locked = locked;
+    }
 
     @Override
     public void deserializeNBT(HolderLookup.Provider provider, CompoundTag nbt) {
         super.deserializeNBT(provider, nbt);
         lockedSlots.clear();
-        ListTag locked = (ListTag)nbt.get("locked");
-        for (Tag i : locked) {
-            CompoundTag tag = (CompoundTag)i;
-            lockedSlots.put(tag.getInt("key"), ItemStack.parseOptional(provider, tag.getCompound("value")));
+        if (nbt.contains("locked")) {
+            ListTag locked = (ListTag) nbt.get("locked");
+            for (Tag i : locked) {
+                CompoundTag tag = (CompoundTag) i;
+                lockedSlots.put(tag.getInt("key"), ItemStack.parseOptional(provider, tag.getCompound("value")));
+            }
         }
-        this.locked = nbt.getBoolean("isLocked");
+        if (nbt.contains("isLocked")) {
+            this.locked = nbt.getBoolean("isLocked");
+        }
     }
 }

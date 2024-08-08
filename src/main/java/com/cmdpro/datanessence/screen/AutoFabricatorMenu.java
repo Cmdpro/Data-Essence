@@ -2,13 +2,17 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.block.processing.AutoFabricatorBlockEntity;
 import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
+import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
+import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -16,6 +20,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AutoFabricatorMenu extends AbstractContainerMenu {
     public final AutoFabricatorBlockEntity blockEntity;
@@ -31,14 +38,20 @@ public class AutoFabricatorMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
         IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
+        LockableItemHandler handler2 = (LockableItemHandler)blockEntity.getItemHandler();
         int i, j;
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 3; j++) {
-                this.addSlot(new SlotItemHandler(handler, j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
+                this.addSlot(new SlotItemHandler(handler2, j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
             }
         }
         this.addSlot(new SlotItemHandler(handler, 9, 145, 35));
         this.addSlot(new SlotItemHandler(handler, 10, 152, 8));
+    }
+
+    @Override
+    public void slotsChanged(Container pContainer) {
+        super.slotsChanged(pContainer);
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

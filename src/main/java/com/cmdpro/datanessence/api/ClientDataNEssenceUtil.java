@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
@@ -26,16 +27,19 @@ import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.renderer.chunk.SectionRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.items.SlotItemHandler;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
@@ -104,6 +108,22 @@ public class ClientDataNEssenceUtil {
             }
         }
         return null;
+    }
+    public static void renderLockedSlotBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y, NonNullList<Slot> slots) {
+        for (Slot i : slots) {
+            if (i.getItem().isEmpty()) {
+                if (i instanceof SlotItemHandler handlerSlot) {
+                    if (handlerSlot.getItemHandler() instanceof LockableItemHandler lockable) {
+                        if (lockable.lockedSlots.containsKey(i.getContainerSlot())) {
+                            pGuiGraphics.pose().pushPose();
+                            pGuiGraphics.pose().scale(0.5f, 0.5f, 0.5f);
+                            pGuiGraphics.renderFakeItem(lockable.lockedSlots.get(i.getContainerSlot()), (int)((x + i.x)/0.5f), (int)((y + i.y)/0.5f));
+                            pGuiGraphics.pose().popPose();
+                        }
+                    }
+                }
+            }
+        }
     }
     public static Matrix4f viewStackMatrix;
     public static void renderBlackHole(PoseStack stack, Vec3 pos, MultiBufferSource source, float radius, int longs, int lats) {

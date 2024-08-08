@@ -73,6 +73,7 @@ public class ModMessages {
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigameC2SPacket.TYPE, getNetworkCodec(PlayerFinishDataBankMinigameC2SPacket::read, PlayerFinishDataBankMinigameC2SPacket::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveDataC2SPacket.TYPE, getNetworkCodec(PlayerChangeDriveDataC2SPacket::read, PlayerChangeDriveDataC2SPacket::write), Handler::handle);
+        registrar.playToServer(PlayerSetItemHandlerLockedC2SPacket.TYPE, getNetworkCodec(PlayerSetItemHandlerLockedC2SPacket::read, PlayerSetItemHandlerLockedC2SPacket::write), Handler::handle);
     }
 
     public static <T extends Message> StreamCodec<RegistryFriendlyByteBuf, T> getNetworkCodec(Handler.Reader<T> reader, Handler.Writer<T> writer) {

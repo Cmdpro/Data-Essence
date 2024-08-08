@@ -315,7 +315,7 @@ public class DataNEssenceUtil {
                         while (p < handler.getSlots()) {
                             ItemStack copyCopy = copy.copy();
                             boolean canInsert = true;
-                            if (resolved instanceof LockableItemHandler lockable) {
+                            if (handler instanceof LockableItemHandler lockable) {
                                 canInsert = lockable.canInsertFromBuffer(p, copyCopy);
                             }
                             if (canInsert) {

@@ -2,7 +2,9 @@ package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.api.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
+import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.IHasRequiredKnowledge;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
@@ -46,12 +48,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuProvider, GeoBlockEntity {
+public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuProvider, GeoBlockEntity, ILockableContainer {
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(9) {
+    private final LockableItemHandler itemHandler = new LockableItemHandler(9) {
         @Override
         protected void onContentsChanged(int slot) {
+            setChanged();
+        }
+
+        @Override
+        public void setLockedSlots() {
+            super.setLockedSlots();
+            setChanged();
+        }
+
+        @Override
+        public void setLocked(boolean locked) {
+            super.setLocked(locked);
             setChanged();
         }
 
@@ -67,10 +81,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
         }
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            if (slot == 0) {
-                return stack.getItem() instanceof DataDrive;
-            }
-            return super.isItemValid(slot, stack);
+            return stack.getItem() instanceof DataDrive;
         }
     };
     private final ItemStackHandler outputItemHandler = new ItemStackHandler(1) {
@@ -137,6 +148,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
         setExoticEssence(tag.getFloat("exoticEssence"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         craftingProgress = tag.getInt("craftingProgress");
+        itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -147,6 +159,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
         tag.putFloat("exoticEssence", getExoticEssence());
         tag.put("item", item.saveOptional(pRegistries));
         tag.putInt("craftingProgress", craftingProgress);
+        tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
         return tag;
     }
 
@@ -273,6 +286,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, AutoFabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
             Optional<RecipeHolder<IFabricationRecipe>> recipe = pBlockEntity.getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pLevel);
             if (recipe.isPresent() && hasNotReachedStackLimit(pBlockEntity, recipe.get().value().getResultItem(pLevel.registryAccess()))) {
                 pBlockEntity.recipe = recipe.get().value();
@@ -347,5 +361,10 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new AutoFabricatorMenu(pContainerId, pInventory, this);
+    }
+
+    @Override
+    public List<LockableItemHandler> getLockable() {
+        return List.of(itemHandler);
     }
 }
