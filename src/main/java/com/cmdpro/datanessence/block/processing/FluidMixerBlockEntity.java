@@ -5,10 +5,12 @@ import com.cmdpro.datanessence.api.EssenceContainer;
 import com.cmdpro.datanessence.api.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
-import com.cmdpro.datanessence.recipe.*;
+import com.cmdpro.datanessence.moddata.MultiFluidTank;
+import com.cmdpro.datanessence.recipe.FluidMixingRecipe;
+import com.cmdpro.datanessence.recipe.RecipeInputWithFluid;
+import com.cmdpro.datanessence.recipe.SynthesisRecipe;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
-import com.cmdpro.datanessence.screen.AutoFabricatorMenu;
 import com.cmdpro.datanessence.screen.SynthesisChamberMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -16,20 +18,23 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.IFluidTank;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
@@ -37,11 +42,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class SynthesisChamberBlockEntity extends EssenceContainer implements MenuProvider, ILockableContainer {
-    private final LockableItemHandler itemHandler = new LockableItemHandler(2) {
+public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvider, ILockableContainer {
+    private final LockableItemHandler itemHandler = new LockableItemHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -81,20 +87,13 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         }
     };
 
+    private final MultiFluidTank fluidHandler = new MultiFluidTank(List.of(new FluidTank(1000), new FluidTank(1000)));
+    public IFluidHandler getFluidHandler() {
+        return lazyFluidHandler.get();
+    }
+    private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
     @Override
     public float getMaxEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxLunarEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxNaturalEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxExoticEssence() {
         return 1000;
     }
 
@@ -121,7 +120,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         return lazyCombinedHandler.get();
     }
 
-    public SynthesisChamberBlockEntity(BlockPos pos, BlockState state) {
+    public FluidMixerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.SYNTHESIS_CHAMBER.get(), pos, state);
         item = ItemStack.EMPTY;
     }
@@ -139,6 +138,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
+        fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluidHandler"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -150,6 +150,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         tag.put("item", item.saveOptional(pRegistries));
         tag.putInt("craftingProgress", craftingProgress);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
+        tag.put("fluidHandler", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         return tag;
     }
 
@@ -158,6 +159,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
         tag.put("inventoryOutput", outputItemHandler.serializeNBT(pRegistries));
         tag.put("inventoryDrive", dataDriveHandler.serializeNBT(pRegistries));
+        tag.put("fluids", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.putFloat("essence", getEssence());
         tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
@@ -171,6 +173,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryOutput"));
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryDrive"));
+        fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluids"));
         setEssence(nbt.getFloat("essence"));
         setLunarEssence(nbt.getFloat("lunarEssence"));
         setNaturalEssence(nbt.getFloat("naturalEssence"));
@@ -191,11 +194,15 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         }
         return inventory;
     }
-    public RecipeInput getCraftingInv() {
+    public RecipeInputWithFluid getCraftingInv() {
         RecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
-        return inventory;
+        List<FluidStack> fluids = new ArrayList<>();
+        for (int i = 0; i < fluidHandler.getTanks(); i++) {
+            fluids.add(fluidHandler.getFluidInTank(i));
+        }
+        return new RecipeInputWithFluid(inventory, fluids);
     }
-    public SynthesisRecipe recipe;
+    public FluidMixingRecipe recipe;
     public boolean enoughEssence;
     public float essenceCost;
     public float lunarEssenceCost;
@@ -203,12 +210,12 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
     public float exoticEssenceCost;
     public int craftingProgress;
     public int workTime;
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SynthesisChamberBlockEntity pBlockEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidMixerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
             DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            Optional<RecipeHolder<SynthesisRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.SYNTHESIS_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
+            Optional<RecipeHolder<FluidMixingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FLUID_MIXING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {
                 if (!recipe.get().value().equals(pBlockEntity.recipe)) {
                     pBlockEntity.workTime = 0;
@@ -239,7 +246,8 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
                                 pBlockEntity.setExoticEssence(pBlockEntity.getEssence() - pBlockEntity.exoticEssenceCost);
                                 pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
-                                pBlockEntity.itemHandler.extractItem(1, 1, false);
+                                pBlockEntity.fluidHandler.drain(Arrays.stream(recipe.get().value().getInput1().getStacks()).filter((stack) -> FluidStack.isSameFluidSameComponents(stack, pBlockEntity.fluidHandler.getFluidInTank(0))).findFirst().get(), IFluidHandler.FluidAction.EXECUTE);
+                                pBlockEntity.fluidHandler.drain(Arrays.stream(recipe.get().value().getInput2().getStacks()).filter((stack) -> FluidStack.isSameFluidSameComponents(stack, pBlockEntity.fluidHandler.getFluidInTank(1))).findFirst().get(), IFluidHandler.FluidAction.EXECUTE);
                                 pBlockEntity.workTime = 0;
                             }
                         }
@@ -255,7 +263,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
             }
             pBlockEntity.updateBlock();
         } else {
-            Optional<RecipeHolder<SynthesisRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.SYNTHESIS_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
+            Optional<RecipeHolder<FluidMixingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FLUID_MIXING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
             recipe.ifPresentOrElse(recipeHolder -> pBlockEntity.recipe = recipeHolder.value(), () -> pBlockEntity.recipe = null);
         }
     }
@@ -264,7 +272,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
-    private static boolean hasNotReachedStackLimit(SynthesisChamberBlockEntity entity, ItemStack toAdd) {
+    private static boolean hasNotReachedStackLimit(FluidMixerBlockEntity entity, ItemStack toAdd) {
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
             return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
         } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();

@@ -23,7 +23,11 @@ public class RecipeRegistry {
             registerSerializer("entropic_processing", () -> EntropicProcessingRecipe.Serializer.INSTANCE);
     public static final Supplier<RecipeSerializer<SynthesisRecipe>> SYNTHESIS =
             registerSerializer("synthesis", () -> SynthesisRecipe.Serializer.INSTANCE);
+    public static final Supplier<RecipeSerializer<FluidMixingRecipe>> FLUID_MIXING =
+            registerSerializer("fluid_mixing", () -> FluidMixingRecipe.Serializer.INSTANCE);
 
+    public static final Supplier<RecipeType<FluidMixingRecipe>> FLUID_MIXING_TYPE =
+            registerBasicRecipeType("fluid_mixing");
     public static final Supplier<RecipeType<SynthesisRecipe>> SYNTHESIS_TYPE =
             registerBasicRecipeType("synthesis");
     public static final Supplier<RecipeType<EntropicProcessingRecipe>> ENTROPIC_PROCESSING_TYPE =

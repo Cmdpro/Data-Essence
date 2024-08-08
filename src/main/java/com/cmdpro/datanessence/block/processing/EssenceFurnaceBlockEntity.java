@@ -165,7 +165,7 @@ public class EssenceFurnaceBlockEntity extends EssenceContainer implements MenuP
             pBlockEntity.updateBlock();
         } else {
             Optional<RecipeHolder<SmeltingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeType.SMELTING, pBlockEntity.getCraftingInv(), pLevel);
-            recipe.ifPresent(entropicProcessingRecipeRecipeHolder -> pBlockEntity.recipe = entropicProcessingRecipeRecipeHolder.value());
+            recipe.ifPresentOrElse(recipeHolder -> pBlockEntity.recipe = recipeHolder.value(), () -> pBlockEntity.recipe = null);
         }
     }
     protected void updateBlock() {

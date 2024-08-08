@@ -177,7 +177,7 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
             pBlockEntity.updateBlock();
         } else {
             Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
-            recipe.ifPresent(entropicProcessingRecipeRecipeHolder -> pBlockEntity.recipe = entropicProcessingRecipeRecipeHolder.value());
+            recipe.ifPresentOrElse(recipeHolder -> pBlockEntity.recipe = recipeHolder.value(), () -> pBlockEntity.recipe = null);
         }
     }
     protected void updateBlock() {
