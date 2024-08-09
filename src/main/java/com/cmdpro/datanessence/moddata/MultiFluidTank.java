@@ -76,7 +76,7 @@ public class MultiFluidTank implements IFluidHandler {
         for (FluidTank i : tanks) {
             tag.add(i.writeToNBT(lookupProvider, new CompoundTag()));
         }
-        nbt.put("tanks", tag)
+        nbt.put("tanks", tag);
         return nbt;
     }
     @Override

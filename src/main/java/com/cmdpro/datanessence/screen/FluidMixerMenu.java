@@ -33,7 +33,7 @@ public class FluidMixerMenu extends AbstractContainerMenu {
         addPlayerHotbar(inv);
         IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
         this.addSlot(new SlotItemHandler(handler, 0, 62, 33));
-        this.addSlot(new ModResultSlot(handler, 1, 116, 34));
+        this.addSlot(new SlotItemHandler(handler, 1, 152, 8));
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons

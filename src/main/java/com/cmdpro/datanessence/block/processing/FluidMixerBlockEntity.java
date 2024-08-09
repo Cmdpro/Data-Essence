@@ -80,14 +80,9 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
             return stack.getItem() instanceof DataDrive;
         }
     };
-    private final ItemStackHandler outputItemHandler = new ItemStackHandler(1) {
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-        }
-    };
 
     private final MultiFluidTank fluidHandler = new MultiFluidTank(List.of(new FluidTank(1000), new FluidTank(1000)));
+    private final FluidTank outputFluidHandler = new FluidTank(1000);
     public IFluidHandler getFluidHandler() {
         return lazyFluidHandler.get();
     }
@@ -104,8 +99,8 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     }
     private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
     private Lazy<IItemHandler> lazyDataDriveHandler = Lazy.of(() -> dataDriveHandler);
-    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, outputItemHandler, dataDriveHandler));
+    private Lazy<IFluidHandler> lazyOutputFluidHandler = Lazy.of(() -> outputFluidHandler);
+    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, dataDriveHandler));
 
     public IItemHandler getItemHandler() {
         return lazyItemHandler.get();
@@ -113,8 +108,8 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     public IItemHandler getDataDriveHandler() {
         return lazyDataDriveHandler.get();
     }
-    public IItemHandler getOutputHandler() {
-        return lazyOutputHandler.get();
+    public IFluidHandler getOutputHandler() {
+        return lazyOutputFluidHandler.get();
     }
     public IItemHandler getCombinedHandler() {
         return lazyCombinedHandler.get();
@@ -139,6 +134,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluidHandler"));
+        outputFluidHandler.readFromNBT(pRegistries, tag.getCompound("outputFluidHandler"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -151,6 +147,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         tag.putInt("craftingProgress", craftingProgress);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
         tag.put("fluidHandler", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
+        tag.put("outputFluidHandler", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         return tag;
     }
 
@@ -160,6 +157,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         tag.put("inventoryOutput", outputItemHandler.serializeNBT(pRegistries));
         tag.put("inventoryDrive", dataDriveHandler.serializeNBT(pRegistries));
         tag.put("fluids", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
+        tag.put("outputFluid", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.putFloat("essence", getEssence());
         tag.putFloat("lunarEssence", getLunarEssence());
         tag.putFloat("naturalEssence", getNaturalEssence());
@@ -174,6 +172,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryOutput"));
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryDrive"));
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluids"));
+        outputFluidHandler.readFromNBT(pRegistries, nbt.getCompound("outputFluid"));
         setEssence(nbt.getFloat("essence"));
         setLunarEssence(nbt.getFloat("lunarEssence"));
         setNaturalEssence(nbt.getFloat("naturalEssence"));
