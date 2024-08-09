@@ -24,6 +24,10 @@ import java.util.function.Supplier;
 public class BlockEntityRegistry {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, DataNEssence.MOD_ID);
+    public static final Supplier<BlockEntityType<FluidMixerBlockEntity>> FLUID_MIXER =
+            register("fluid_mixer", () ->
+                    BlockEntityType.Builder.of(FluidMixerBlockEntity::new,
+                            BlockRegistry.FLUID_MIXER.get()).build(null));
     public static final Supplier<BlockEntityType<StructureProtectorBlockEntity>> STRUCTURE_PROTECTOR =
             register("structure_protector", () ->
                     BlockEntityType.Builder.of(StructureProtectorBlockEntity::new,

@@ -138,6 +138,18 @@ public class DataNEssence
             }
             return o.getOutputHandler();
         });
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_MIXER.get(), (o, direction) -> {
+            if (direction == Direction.DOWN) {
+                return o.getFluidHandler();
+            }
+            return o.getOutputHandler();
+        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FLUID_MIXER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedHandler();
+            }
+            return o.getItemHandler();
+        });
 
     }
     @SubscribeEvent
@@ -219,6 +231,7 @@ public class DataNEssence
             event.accept(BlockRegistry.FLUID_BOTTLER.get());
             event.accept(BlockRegistry.ENTROPIC_PROCESSOR.get());
             event.accept(BlockRegistry.ESSENCE_FURNACE.get());
+            event.accept(BlockRegistry.FLUID_MIXER.get());
         }
     }
 }

@@ -116,8 +116,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     }
 
     public FluidMixerBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityRegistry.SYNTHESIS_CHAMBER.get(), pos, state);
-        item = ItemStack.EMPTY;
+        super(BlockEntityRegistry.FLUID_MIXER.get(), pos, state);
     }
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
@@ -127,10 +126,6 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
         setEssence(tag.getFloat("essence"));
-        setLunarEssence(tag.getFloat("lunarEssence"));
-        setNaturalEssence(tag.getFloat("naturalEssence"));
-        setExoticEssence(tag.getFloat("exoticEssence"));
-        item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluidHandler"));
@@ -140,10 +135,6 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
-        tag.put("item", item.saveOptional(pRegistries));
         tag.putInt("craftingProgress", craftingProgress);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
         tag.put("fluidHandler", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
@@ -154,14 +145,10 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        tag.put("inventoryOutput", outputItemHandler.serializeNBT(pRegistries));
         tag.put("inventoryDrive", dataDriveHandler.serializeNBT(pRegistries));
         tag.put("fluids", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("outputFluid", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
         tag.putInt("craftingProgress", craftingProgress);
         super.saveAdditional(tag, pRegistries);
     }
@@ -169,27 +156,20 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
-        outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryOutput"));
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryDrive"));
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluids"));
         outputFluidHandler.readFromNBT(pRegistries, nbt.getCompound("outputFluid"));
         setEssence(nbt.getFloat("essence"));
-        setLunarEssence(nbt.getFloat("lunarEssence"));
-        setNaturalEssence(nbt.getFloat("naturalEssence"));
-        setExoticEssence(nbt.getFloat("exoticEssence"));
         craftingProgress = nbt.getInt("craftingProgress");
     }
     public ItemStack item;
     public SimpleContainer getInv() {
-        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots()+outputItemHandler.getSlots()+dataDriveHandler.getSlots());
+        SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots()+dataDriveHandler.getSlots());
         for (int i = 0; i < dataDriveHandler.getSlots(); i++) {
             inventory.setItem(i, dataDriveHandler.getStackInSlot(i));
         }
         for (int i = 0; i < itemHandler.getSlots(); i++) {
             inventory.setItem(i+dataDriveHandler.getSlots(), itemHandler.getStackInSlot(i));
-        }
-        for (int i = 0; i < outputItemHandler.getSlots(); i++) {
-            inventory.setItem(i+dataDriveHandler.getSlots()+itemHandler.getSlots(), outputItemHandler.getStackInSlot(i));
         }
         return inventory;
     }
@@ -204,9 +184,6 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     public FluidMixingRecipe recipe;
     public boolean enoughEssence;
     public float essenceCost;
-    public float lunarEssenceCost;
-    public float naturalEssenceCost;
-    public float exoticEssenceCost;
     public int craftingProgress;
     public int workTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidMixerBlockEntity pBlockEntity) {
@@ -222,28 +199,19 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
                 if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))) {
                     pBlockEntity.recipe = recipe.get().value();
                     pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
-                    pBlockEntity.lunarEssenceCost = recipe.get().value().getLunarEssenceCost();
-                    pBlockEntity.naturalEssenceCost = recipe.get().value().getNaturalEssenceCost();
-                    pBlockEntity.exoticEssenceCost = recipe.get().value().getExoticEssenceCost();
                     boolean enoughEssence = false;
-                    if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost &&
-                            pBlockEntity.getLunarEssence() >= pBlockEntity.lunarEssenceCost &&
-                            pBlockEntity.getNaturalEssence() >= pBlockEntity.naturalEssenceCost &&
-                            pBlockEntity.getExoticEssence() >= pBlockEntity.exoticEssenceCost) {
+                    if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost) {
                         enoughEssence = true;
                     }
                     pBlockEntity.enoughEssence = enoughEssence;
                     if (enoughEssence) {
-                        ItemStack result = recipe.get().value().getResultItem(pLevel.registryAccess());
-                        if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
+                        FluidStack result = recipe.get().value().getOutput();
+                        if (pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE) <= 0) {
                             resetWorkTime = false;
                             pBlockEntity.workTime++;
                             if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
                                 pBlockEntity.setEssence(pBlockEntity.getEssence() - pBlockEntity.essenceCost);
-                                pBlockEntity.setLunarEssence(pBlockEntity.getEssence() - pBlockEntity.lunarEssenceCost);
-                                pBlockEntity.setNaturalEssence(pBlockEntity.getEssence() - pBlockEntity.naturalEssenceCost);
-                                pBlockEntity.setExoticEssence(pBlockEntity.getEssence() - pBlockEntity.exoticEssenceCost);
-                                pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
+                                pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE);
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
                                 pBlockEntity.fluidHandler.drain(Arrays.stream(recipe.get().value().getInput1().getStacks()).filter((stack) -> FluidStack.isSameFluidSameComponents(stack, pBlockEntity.fluidHandler.getFluidInTank(0))).findFirst().get(), IFluidHandler.FluidAction.EXECUTE);
                                 pBlockEntity.fluidHandler.drain(Arrays.stream(recipe.get().value().getInput2().getStacks()).filter((stack) -> FluidStack.isSameFluidSameComponents(stack, pBlockEntity.fluidHandler.getFluidInTank(1))).findFirst().get(), IFluidHandler.FluidAction.EXECUTE);
@@ -270,11 +238,6 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
-    }
-    private static boolean hasNotReachedStackLimit(FluidMixerBlockEntity entity, ItemStack toAdd) {
-        if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
-            return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
-        } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();
     }
     @Override
     public Component getDisplayName() {

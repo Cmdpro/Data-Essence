@@ -12,10 +12,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasEssenceCost, IHasRequiredKnowledge {
-    private final ItemStack output;
+    private final FluidStack output;
     private final FluidIngredient input;
     private final FluidIngredient input2;
     private final Ingredient input3;
@@ -26,7 +27,7 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasEsse
     private final float exoticEssenceCost;
     private final ResourceLocation entry;
 
-    public FluidMixingRecipe(ItemStack output,
+    public FluidMixingRecipe(FluidStack output,
                              FluidIngredient input, FluidIngredient input2, Ingredient input3, int time, float essenceCost, float lunarEssenceCost, float naturalEssenceCost, float exoticEssenceCost, ResourceLocation entry) {
         this.output = output;
         this.input = input;
@@ -78,9 +79,11 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasEsse
 
     @Override
     public ItemStack assemble(RecipeInputWithFluid pContainer, HolderLookup.Provider pRegistryAccess) {
+        return ItemStack.EMPTY;
+    }
+    public FluidStack getOutput() {
         return output;
     }
-
     @Override
     public boolean canCraftInDimensions(int pWidth, int pHeight) {
         return true;
@@ -89,7 +92,7 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasEsse
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
-        return output.copy();
+        return ItemStack.EMPTY;
     }
 
     @Override
@@ -109,7 +112,7 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasEsse
 
     public static class Serializer implements RecipeSerializer<FluidMixingRecipe> {
         public static final MapCodec<FluidMixingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                ItemStack.CODEC.fieldOf("result").forGetter(r -> r.output),
+                FluidStack.CODEC.fieldOf("result").forGetter(r -> r.output),
                 FluidIngredient.CODEC.fieldOf("input").forGetter(r -> r.input),
                 FluidIngredient.CODEC.fieldOf("input2").forGetter(r -> r.input2),
                 Ingredient.CODEC.fieldOf("input2").forGetter(r -> r.input3),
@@ -123,7 +126,7 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasEsse
 
         public static final StreamCodec<RegistryFriendlyByteBuf, FluidMixingRecipe> STREAM_CODEC = StreamCodec.of(
                 (buf, obj) -> {
-                    ItemStack.STREAM_CODEC.encode(buf, obj.output);
+                    FluidStack.STREAM_CODEC.encode(buf, obj.output);
                     FluidIngredient.STREAM_CODEC.encode(buf, obj.input);
                     FluidIngredient.STREAM_CODEC.encode(buf, obj.input2);
                     Ingredient.CONTENTS_STREAM_CODEC.encode(buf, obj.input3);
@@ -135,7 +138,7 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasEsse
                     buf.writeResourceLocation(obj.entry);
                 },
                 (buf) -> {
-                    ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
+                    FluidStack output = FluidStack.STREAM_CODEC.decode(buf);
                     FluidIngredient input = FluidIngredient.STREAM_CODEC.decode(buf);
                     FluidIngredient input2 = FluidIngredient.STREAM_CODEC.decode(buf);
                     Ingredient input3 = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);

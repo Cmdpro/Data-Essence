@@ -90,6 +90,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.ENTROPIC_PROCESSOR_MENU.get(), EntropicProcessorScreen::new);
         event.register(MenuRegistry.ESSENCE_FURNACE_MENU.get(), EssenceFurnaceScreen::new);
         event.register(MenuRegistry.SYNTHESIS_CHAMBER_MENU.get(), SynthesisChamberScreen::new);
+        event.register(MenuRegistry.FLUID_MIXER_MENU.get(), FluidMixerScreen::new);
     }
     public static ShaderInstance progressionShader;
     @SubscribeEvent
