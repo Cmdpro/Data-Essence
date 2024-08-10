@@ -6,11 +6,13 @@ import com.cmdpro.datanessence.api.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.moddata.MultiFluidTank;
+import com.cmdpro.datanessence.moddata.MultiFluidTankNoDuplicateFluids;
 import com.cmdpro.datanessence.recipe.FluidMixingRecipe;
 import com.cmdpro.datanessence.recipe.RecipeInputWithFluid;
 import com.cmdpro.datanessence.recipe.SynthesisRecipe;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
+import com.cmdpro.datanessence.screen.FluidMixerMenu;
 import com.cmdpro.datanessence.screen.SynthesisChamberMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -81,7 +83,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         }
     };
 
-    private final MultiFluidTank fluidHandler = new MultiFluidTank(List.of(new FluidTank(1000), new FluidTank(1000)));
+    private final MultiFluidTank fluidHandler = new MultiFluidTankNoDuplicateFluids(List.of(new FluidTank(1000), new FluidTank(1000)));
     private final FluidTank outputFluidHandler = new FluidTank(1000);
     public IFluidHandler getFluidHandler() {
         return lazyFluidHandler.get();
@@ -190,6 +192,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         if (!pLevel.isClientSide()) {
             DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
             DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
+            DataNEssenceUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             Optional<RecipeHolder<FluidMixingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FLUID_MIXING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {
@@ -247,7 +250,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return new SynthesisChamberMenu(pContainerId, pInventory, this);
+        return new FluidMixerMenu(pContainerId, pInventory, this);
     }
 
     @Override

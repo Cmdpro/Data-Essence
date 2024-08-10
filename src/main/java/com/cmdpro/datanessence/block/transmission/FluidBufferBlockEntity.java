@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.transmission;
 
+import com.cmdpro.datanessence.moddata.MultiFluidTank;
+import com.cmdpro.datanessence.moddata.MultiFluidTankNoDuplicateFluids;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -11,8 +13,10 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class FluidBufferBlockEntity extends BlockEntity {
-    private final FluidTank fluidHandler = new FluidTank(1000);
+    private final MultiFluidTankNoDuplicateFluids fluidHandler = new MultiFluidTankNoDuplicateFluids(List.of(new FluidTank(1000), new FluidTank(1000), new FluidTank(1000), new FluidTank(1000), new FluidTank(1000), new FluidTank(1000)));
     public FluidBufferBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(BlockEntityRegistry.FLUID_BUFFER.get(), pPos, pBlockState);
     }

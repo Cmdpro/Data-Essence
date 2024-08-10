@@ -32,7 +32,7 @@ public class FluidMixerMenu extends AbstractContainerMenu {
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
         IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
-        this.addSlot(new SlotItemHandler(handler, 0, 62, 33));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 62, 33));
         this.addSlot(new SlotItemHandler(handler, 1, 152, 8));
     }
 
@@ -89,7 +89,7 @@ public class FluidMixerMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, BlockRegistry.FLUID_BOTTLER.get());
+                pPlayer, BlockRegistry.FLUID_MIXER.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {

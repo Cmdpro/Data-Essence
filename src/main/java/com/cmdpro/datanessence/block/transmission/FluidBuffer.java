@@ -29,6 +29,6 @@ public class FluidBuffer extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new ItemBufferBlockEntity(pPos, pState);
+        return new FluidBufferBlockEntity(pPos, pState);
     }
 }

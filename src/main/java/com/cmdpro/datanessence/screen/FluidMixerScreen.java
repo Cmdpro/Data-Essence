@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FluidMixerScreen extends AbstractContainerScreen<FluidMixerMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/fluid_bottler.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/fluid_mixer.png");
     public FluidMixerScreen(FluidMixerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
@@ -29,10 +29,10 @@ public class FluidMixerScreen extends AbstractContainerScreen<FluidMixerMenu> {
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        addRenderableWidget(new FluidWidget(x+39, y+45, menu.blockEntity.getFluidHandler(), 0));
-        addRenderableWidget(new FluidWidget(x+39, y+22, menu.blockEntity.getFluidHandler(), 1));
+        addRenderableWidget(new FluidWidget(x+39, y+22, menu.blockEntity.getFluidHandler(), 0));
+        addRenderableWidget(new FluidWidget(x+39, y+45, menu.blockEntity.getFluidHandler(), 1));
         addRenderableWidget(new FluidWidget(x+116, y+34, menu.blockEntity.getOutputHandler(), 0));
-        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+113, y+52));
+        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+84, y+52));
     }
 
     @Override

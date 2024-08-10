@@ -64,7 +64,7 @@ public class MultiFluidTank implements IFluidHandler {
 
     public MultiFluidTank readFromNBT(HolderLookup.Provider lookupProvider, CompoundTag nbt) {
         int o = 0;
-        for (Tag i : (ListTag)nbt.get("tanks")) {
+        for (Tag i : nbt.getList("tanks", Tag.TAG_COMPOUND)) {
             tanks.get(o).readFromNBT(lookupProvider, (CompoundTag)i);
             o++;
         }
