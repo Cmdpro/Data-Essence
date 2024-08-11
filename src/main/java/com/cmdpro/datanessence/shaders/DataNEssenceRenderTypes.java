@@ -17,6 +17,17 @@ public class DataNEssenceRenderTypes extends RenderType {
             false,
             false,
             RenderType.CompositeState.builder().setShaderState(DataNEssenceCoreShaders.WARPINGPOINT.shard).createCompositeState(false));
+    public static final RenderType HOLOGRAM_BLOCK = create("hologram_block",
+            DefaultVertexFormat.BLOCK,
+            VertexFormat.Mode.QUADS,
+            4194304,
+            true,
+            false,
+            RenderType.CompositeState.builder()
+                    .setLightmapState(LIGHTMAP)
+                    .setShaderState(DataNEssenceCoreShaders.HOLOGRAM_BLOCK.shard)
+                    .setTextureState(BLOCK_SHEET_MIPPED)
+                    .createCompositeState(true));
     public static final RenderType TRANSPARENT = create("transparent",
             DefaultVertexFormat.POSITION_COLOR_TEX_LIGHTMAP,
             VertexFormat.Mode.QUADS,

@@ -6,18 +6,33 @@ import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
+import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
+import com.eliotlash.mclib.math.functions.limit.Min;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
@@ -26,6 +41,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
@@ -70,6 +86,7 @@ public class ClientEvents {
             }
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_PARTICLES)) {
+            MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
             copyBuffers();
             DataNEssenceCoreShaders.WARPINGPOINT.instance.setSampler("DepthBuffer", tempRenderTarget.getDepthTextureId());
             DataNEssenceCoreShaders.WARPINGPOINT.instance.setSampler("ColorBuffer", tempRenderTarget.getColorTextureId());
@@ -78,10 +95,29 @@ public class ClientEvents {
             for (Entity i : Minecraft.getInstance().level.entitiesForRendering()) {
                 if (i instanceof BlackHole hole) {
                     Vec3 pos = i.getBoundingBox().getCenter();
-                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), hole.getEntityData().get(BlackHole.SIZE), 16, 16);
-                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, Minecraft.getInstance().renderBuffers().bufferSource(), -hole.getEntityData().get(BlackHole.SIZE), 16, 16);
+                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, hole.getEntityData().get(BlackHole.SIZE), 16, 16);
+                    ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, -hole.getEntityData().get(BlackHole.SIZE), 16, 16);
                 }
             }
+
+            BlockState block = Blocks.AMETHYST_BLOCK.defaultBlockState();
+            BlockPos pos = new BlockPos(0, 0, 0);
+/*
+            BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
+            FluidState fluidState = block.getFluidState();
+            if (!fluidState.isEmpty()) {
+                RenderType layer = ItemBlockRenderTypes.getRenderLayer(fluidState);
+                VertexConsumer buffer = VertexMultiConsumer.create(bufferSource.getBuffer(layer), bufferSource.getBuffer(DataNEssenceRenderTypes.HOLOGRAM_BLOCK));
+                blockRenderer.renderLiquid(pos, Minecraft.getInstance().level, buffer, block, fluidState);
+            }
+            if (block.getRenderShape() != RenderShape.INVISIBLE) {
+                BakedModel model = blockRenderer.getBlockModel(block);
+                for (RenderType i : model.getRenderTypes(block, Minecraft.getInstance().level.random, ModelData.EMPTY)) {
+                    VertexConsumer hologramConsumer = VertexMultiConsumer.create(bufferSource.getBuffer(i), bufferSource.getBuffer(DataNEssenceRenderTypes.HOLOGRAM_BLOCK));
+                    blockRenderer.renderBatched(block, pos, Minecraft.getInstance().level, event.getPoseStack(), hologramConsumer, false, Minecraft.getInstance().level.random, ModelData.EMPTY, i);
+                }
+            }
+            bufferSource.endBatch();*/
             event.getPoseStack().popPose();
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
