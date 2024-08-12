@@ -107,12 +107,10 @@ public class ClientEvents {
                 }
             }
 
-            BlockState block = Blocks.AMETHYST_BLOCK.defaultBlockState();
             BlockPos pos = new BlockPos(0, 0, 0);
 
-            MultiblockRenderer.renderBlock(block, pos, event.getPoseStack());
+            MultiblockRenderer.renderMultiblock(MultiblockRenderer.testMultiblock, pos, event.getPoseStack(), event.getPartialTick());
 
-            bufferSource.endBatch();
             event.getPoseStack().popPose();
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {

@@ -28,7 +28,6 @@ public class DataNEssenceCoreShaders implements ResourceManagerReloadListener {
 
     public static final VertexFormat POSITION_NORMAL = VertexFormat.builder().add("Position", VertexFormatElement.POSITION).add("Normal", VertexFormatElement.NORMAL).build();
     public static ShaderHolder WARPINGPOINT = createShader("warping_point", POSITION_NORMAL);
-    public static ShaderHolder HOLOGRAM_BLOCK = createShader("hologram_block", DefaultVertexFormat.BLOCK);
     @Override
     public void onResourceManagerReload(ResourceManager pResourceManager) {
 
