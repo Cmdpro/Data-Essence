@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
+import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
@@ -15,8 +16,10 @@ import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.blaze3d.vertex.VertexMultiConsumer;
+import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -43,6 +46,10 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+
+import java.util.IdentityHashMap;
+import java.util.Map;
+import java.util.SequencedMap;
 
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
@@ -102,22 +109,10 @@ public class ClientEvents {
 
             BlockState block = Blocks.AMETHYST_BLOCK.defaultBlockState();
             BlockPos pos = new BlockPos(0, 0, 0);
-/*
-            BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-            FluidState fluidState = block.getFluidState();
-            if (!fluidState.isEmpty()) {
-                RenderType layer = ItemBlockRenderTypes.getRenderLayer(fluidState);
-                VertexConsumer buffer = VertexMultiConsumer.create(bufferSource.getBuffer(layer), bufferSource.getBuffer(DataNEssenceRenderTypes.HOLOGRAM_BLOCK));
-                blockRenderer.renderLiquid(pos, Minecraft.getInstance().level, buffer, block, fluidState);
-            }
-            if (block.getRenderShape() != RenderShape.INVISIBLE) {
-                BakedModel model = blockRenderer.getBlockModel(block);
-                for (RenderType i : model.getRenderTypes(block, Minecraft.getInstance().level.random, ModelData.EMPTY)) {
-                    VertexConsumer hologramConsumer = VertexMultiConsumer.create(bufferSource.getBuffer(i), bufferSource.getBuffer(DataNEssenceRenderTypes.HOLOGRAM_BLOCK));
-                    blockRenderer.renderBatched(block, pos, Minecraft.getInstance().level, event.getPoseStack(), hologramConsumer, false, Minecraft.getInstance().level.random, ModelData.EMPTY, i);
-                }
-            }
-            bufferSource.endBatch();*/
+
+            MultiblockRenderer.renderBlock(block, pos, event.getPoseStack());
+
+            bufferSource.endBatch();
             event.getPoseStack().popPose();
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
