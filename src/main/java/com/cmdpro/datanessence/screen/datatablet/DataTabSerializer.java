@@ -23,10 +23,10 @@ import java.util.List;
 public class DataTabSerializer {
     public DataTab read(ResourceLocation entryId, JsonObject json) {
         if (!json.has("icon")) {
-            throw new JsonSyntaxException("Element color missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element color missing in tab JSON for " + entryId.toString());
         }
         if (!json.has("name")) {
-            throw new JsonSyntaxException("Element name missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element name missing in tab JSON for " + entryId.toString());
         }
         ItemStack icon = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(GsonHelper.getAsString(json, "icon"))));
         Component name = Component.translatable(json.get("name").getAsString());

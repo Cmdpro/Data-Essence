@@ -33,29 +33,6 @@ import net.neoforged.neoforge.client.model.data.ModelData;
 import java.util.*;
 
 public class MultiblockRenderer {
-    public static Multiblock testMultiblock = new Multiblock(new String[][] {
-            new String[] {
-                    "aAa",
-                    "AaA",
-                    "aAa"
-            },
-            new String[] {
-                    "aba",
-                    "AaA",
-                    "aAa"
-            },
-            new String[] {
-                    "aAa",
-                    "AaA",
-                    "aAa"
-            }
-    }, new HashMap<>() {
-        {
-            this.put('a', Blocks.GOLD_BLOCK.defaultBlockState());
-            this.put('A', Blocks.IRON_BLOCK.defaultBlockState());
-            this.put('b', Blocks.DIAMOND_BLOCK.defaultBlockState());
-        }
-    }, new BlockPos(-1, -1, -1));
     public static MultiBufferSource.BufferSource buffers;
     private static Map<BlockPos, BlockEntity> blockEntityCache = new Object2ObjectOpenHashMap<>();
     private static Set<BlockEntity> erroredBlockEntities = Collections.newSetFromMap(new WeakHashMap<>());
@@ -101,8 +78,6 @@ public class MultiblockRenderer {
                 // fake cached state in case the renderer checks it as we don't want to query the actual world
                 be.setBlockState(block);
 
-                stack.pushPose();
-                stack.translate(pos.getX(), pos.getY(), pos.getZ());
 
                 try {
                     BlockEntityRenderer<BlockEntity> renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher().getRenderer(be);
@@ -113,7 +88,6 @@ public class MultiblockRenderer {
                     erroredBlockEntities.add(be);
                     DataNEssence.LOGGER.error("Error rendering block entity", e);
                 }
-                stack.popPose();
             }
         }
         stack.popPose();

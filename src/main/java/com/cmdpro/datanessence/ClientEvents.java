@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.multiblock.MultiblockManager;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
@@ -31,6 +32,7 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -109,7 +111,7 @@ public class ClientEvents {
 
             BlockPos pos = new BlockPos(0, 0, 0);
 
-            MultiblockRenderer.renderMultiblock(MultiblockRenderer.testMultiblock, pos, event.getPoseStack(), event.getPartialTick());
+            MultiblockRenderer.renderMultiblock(MultiblockManager.multiblocks.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "test")), pos, event.getPoseStack(), event.getPartialTick());
 
             event.getPoseStack().popPose();
         }

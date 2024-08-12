@@ -24,13 +24,13 @@ import java.util.Map;
 public class HiddenBlocksSerializer {
     public HiddenBlock read(ResourceLocation entryId, JsonObject json) {
         if (!json.has("entry")) {
-            throw new JsonSyntaxException("Element entry missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element entry missing in hidden block JSON for " + entryId.toString());
         }
         if (!json.has("hiddenAs")) {
-            throw new JsonSyntaxException("Element hiddenAs missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element hiddenAs missing in hidden block JSON for " + entryId.toString());
         }
         if (!json.has("originalBlock")) {
-            throw new JsonSyntaxException("Element originalBlock missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element originalBlock missing in hidden block JSON for " + entryId.toString());
         }
         ResourceLocation entry = ResourceLocation.tryParse(json.get("entry").getAsString());
         BlockState hiddenAs = null;

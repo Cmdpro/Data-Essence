@@ -7,10 +7,12 @@ import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
+import com.cmdpro.datanessence.multiblock.MultiblockManager;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.DragonPartsSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.HiddenBlockSyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.MultiblockSyncS2CPacket;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.screen.databank.DataBankEntryManager;
@@ -215,6 +217,7 @@ public class ModEvents {
         event.addListener(DataBankTypeManager.getOrCreateInstance());
         event.addListener(HiddenBlocksManager.getOrCreateInstance());
         event.addListener(ComputerTypeManager.getOrCreateInstance());
+        event.addListener(MultiblockManager.getOrCreateInstance());
     }
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {
@@ -231,6 +234,7 @@ public class ModEvents {
     protected static void syncToPlayer(ServerPlayer player) {
         ModMessages.sendToPlayer(new EntrySyncS2CPacket(Entries.entries, Entries.tabs), player);
         ModMessages.sendToPlayer(new HiddenBlockSyncS2CPacket(HiddenBlocksManager.blocks), player);
+        ModMessages.sendToPlayer(new MultiblockSyncS2CPacket(MultiblockManager.multiblocks), player);
     }
     @SubscribeEvent
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {

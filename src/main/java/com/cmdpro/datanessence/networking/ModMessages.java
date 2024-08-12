@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.networking;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.computers.ComputerData;
+import com.cmdpro.datanessence.multiblock.MultiblockSerializer;
 import com.cmdpro.datanessence.networking.packet.*;
 import com.cmdpro.datanessence.recipe.ShapedFabricationRecipe;
 import net.minecraft.client.Minecraft;
@@ -70,6 +71,7 @@ public class ModMessages {
         registrar.playToClient(HiddenBlockSyncS2CPacket.TYPE, getNetworkCodec(HiddenBlockSyncS2CPacket::read, HiddenBlockSyncS2CPacket::write), Handler::handle);
         registrar.playToClient(EntrySyncS2CPacket.TYPE, getNetworkCodec(EntrySyncS2CPacket::read, EntrySyncS2CPacket::write), Handler::handle);
         registrar.playToClient(DragonPartsSyncS2CPacket.TYPE, getNetworkCodec(DragonPartsSyncS2CPacket::read, DragonPartsSyncS2CPacket::write), Handler::handle);
+        registrar.playToClient(MultiblockSyncS2CPacket.TYPE, getNetworkCodec(MultiblockSyncS2CPacket::read, MultiblockSyncS2CPacket::write), Handler::handle);
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigameC2SPacket.TYPE, getNetworkCodec(PlayerFinishDataBankMinigameC2SPacket::read, PlayerFinishDataBankMinigameC2SPacket::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveDataC2SPacket.TYPE, getNetworkCodec(PlayerChangeDriveDataC2SPacket::read, PlayerChangeDriveDataC2SPacket::write), Handler::handle);

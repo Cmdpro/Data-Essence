@@ -25,19 +25,19 @@ import java.util.List;
 public class DataBankEntrySerializer {
     public DataBankEntry read(ResourceLocation entryId, JsonObject json) {
         if (!json.has("icon")) {
-            throw new JsonSyntaxException("Element color missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element color missing in data bank entry JSON for " + entryId.toString());
         }
         if (!json.has("tier")) {
-            throw new JsonSyntaxException("Element tier missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element tier missing in data bank entry JSON for " + entryId.toString());
         }
         if (!json.has("name")) {
-            throw new JsonSyntaxException("Element name missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element name missing in data bank entry JSON for " + entryId.toString());
         }
         if (!json.has("minigames")) {
-            throw new JsonSyntaxException("Element minigames missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element minigames missing in data bank entry JSON for " + entryId.toString());
         }
         if (!json.has("entry")) {
-            throw new JsonSyntaxException("Element entry missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element entry missing in data bank entry JSON for " + entryId.toString());
         }
         ItemStack icon = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.tryParse(GsonHelper.getAsString(json, "icon"))));
         int tier = json.get("tier").getAsInt();

@@ -15,7 +15,7 @@ import java.util.List;
 public class ComputerTypeSerializer {
     public ComputerData read(ResourceLocation entryId, JsonObject json) {
         if (!json.has("files")) {
-            throw new JsonSyntaxException("Element files missing in entry JSON for " + entryId.toString());
+            throw new JsonSyntaxException("Element files missing in computer type JSON for " + entryId.toString());
         }
         List<ComputerFile> files = new ArrayList<>();
         for (JsonElement i : json.getAsJsonArray("files")) {

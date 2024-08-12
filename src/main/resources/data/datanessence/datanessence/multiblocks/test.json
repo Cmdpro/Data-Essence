@@ -1,0 +1,29 @@
+{
+  "key": {
+    "a": "minecraft:gold_block",
+    "A": "minecraft:iron_block",
+    "b": "minecraft:chest"
+  },
+  "layers": [
+    [
+      "aAa",
+      "AaA",
+      "aAa"
+    ],
+    [
+      "AbA",
+      "aAa",
+      "AaA"
+    ],
+    [
+      "aAa",
+      "AaA",
+      "aAa"
+    ]
+  ],
+  "offset": {
+    "x": -1,
+    "y": -1,
+    "z": -1
+  }
+}
