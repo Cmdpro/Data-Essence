@@ -1,0 +1,12 @@
+{
+  "type": "datanessence:synthesis",
+  "essenceCost": 100,
+  "lunarEssenceCost": 0,
+  "naturalEssenceCost": 0,
+  "exoticEssenceCost": 0,
+  "input": { "item": "datanessence:lens" },
+  "input2": { "item": "minecraft:blaze_powder" },
+  "time": 100,
+  "result": { "id": "datanessence:burning_lens", "count": 1 },
+  "entry": "datanessence:machinery/laser_emitter"
+}

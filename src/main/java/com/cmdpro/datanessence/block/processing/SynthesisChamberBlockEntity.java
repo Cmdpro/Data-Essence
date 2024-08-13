@@ -191,6 +191,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         }
         return inventory;
     }
+    // TODO FIX: this quite probably results in a crash because the recipe expects two inputs, not one ~Eset
     public RecipeInput getCraftingInv() {
         RecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
         return inventory;
