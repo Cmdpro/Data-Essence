@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.multiblock;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
+import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
 import com.google.gson.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -44,6 +45,7 @@ public class MultiblockManager extends SimpleJsonResourceReloadListener {
             }
         }
         DataNEssence.LOGGER.info("Loaded {} multiblocks", multiblocks.size());
+        MultiblockRenderer.multiblock = MultiblockManager.multiblocks.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "test"));
     }
     public static MultiblockSerializer serializer = new MultiblockSerializer();
 }

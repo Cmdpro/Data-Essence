@@ -108,11 +108,7 @@ public class ClientEvents {
                     ClientDataNEssenceUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, -hole.getEntityData().get(BlackHole.SIZE), 16, 16);
                 }
             }
-
-            BlockPos pos = new BlockPos(0, 0, 0);
-
-            MultiblockRenderer.renderMultiblock(MultiblockManager.multiblocks.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "test")), pos, event.getPoseStack(), event.getPartialTick());
-
+            MultiblockRenderer.renderCurrentMultiblock(event.getPoseStack(), event.getPartialTick());
             event.getPoseStack().popPose();
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
@@ -146,8 +142,16 @@ public class ClientEvents {
     @SubscribeEvent
     public static void onClientTickPost(ClientTickEvent.Post event)
     {
-        /*
         Minecraft mc = Minecraft.getInstance();
+        if (MultiblockRenderer.multiblock != null) {
+            if (MultiblockRenderer.multiblockPos != null) {
+                if (MultiblockRenderer.multiblock.checkMultiblock(mc.level, MultiblockRenderer.multiblockPos)) {
+                    MultiblockRenderer.multiblock = null;
+                    MultiblockRenderer.multiblockPos = null;
+                }
+            }
+        }
+        /*
         if (event.phase == TickEvent.Phase.END && mc.level != null)
         {
             boolean playMusic = false;

@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.mixins.client.BufferSourceMixin;
 import com.cmdpro.datanessence.multiblock.Multiblock;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
+import com.eliotlash.mclib.math.functions.limit.Min;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -22,17 +23,26 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.client.model.data.ModelData;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
 public class MultiblockRenderer {
+    public static Rotation multiblockRotation;
+    public static BlockPos multiblockPos;
+    public static Multiblock multiblock;
+
     public static MultiBufferSource.BufferSource buffers;
     private static Map<BlockPos, BlockEntity> blockEntityCache = new Object2ObjectOpenHashMap<>();
     private static Set<BlockEntity> erroredBlockEntities = Collections.newSetFromMap(new WeakHashMap<>());
@@ -42,16 +52,74 @@ public class MultiblockRenderer {
         }
         renderBlock(block, pos, stack, partialTick, buffers);
     }
+    public static void renderCurrentMultiblock(PoseStack stack, DeltaTracker partialTick) {
+        if (multiblock != null) {
+            if (multiblockPos == null) {
+                if (Minecraft.getInstance().hitResult instanceof BlockHitResult result) {
+                    renderMultiblock(multiblock, result.getBlockPos().relative(result.getDirection()), stack, partialTick, getRotation());
+                }
+            } else {
+                renderMultiblock(multiblock, multiblockPos, stack, partialTick, multiblockRotation);
+            }
+        }
+    }
+
+    @NotNull
+    public static Rotation getRotation() {
+        Rotation rot = Rotation.NONE;
+        if (Minecraft.getInstance().player.getDirection().equals(Direction.EAST)) {
+            rot = Rotation.CLOCKWISE_90;
+        }
+        if (Minecraft.getInstance().player.getDirection().equals(Direction.SOUTH)) {
+            rot = Rotation.CLOCKWISE_180;
+        }
+        if (Minecraft.getInstance().player.getDirection().equals(Direction.WEST)) {
+            rot = Rotation.COUNTERCLOCKWISE_90;
+        }
+        return rot;
+    }
     public static void renderMultiblock(Multiblock multiblock, BlockPos pos, PoseStack stack, DeltaTracker partialTick) {
+        renderMultiblock(multiblock, pos, stack, partialTick, Rotation.NONE);
+    }
+    public static void renderMultiblock(Multiblock multiblock, BlockPos pos, PoseStack stack, DeltaTracker partialTick, Rotation rotation) {
         if (buffers == null) {
             buffers = initBuffers(Minecraft.getInstance().renderBuffers().bufferSource());
         }
+        renderMultiblock(multiblock, pos, stack, partialTick, rotation, buffers);
+    }
+    public static void renderMultiblock(Multiblock multiblock, BlockPos pos, PoseStack stack, DeltaTracker partialTick, Rotation rotation, MultiBufferSource.BufferSource bufferSource) {
+        BlockPos blockpos = pos;
+        if (blockpos == null) {
+            blockpos = new BlockPos(0, 0, 0);
+        }
         for (List<Multiblock.StateAndPos> i : multiblock.getStates()) {
             for (Multiblock.StateAndPos o : i) {
-                renderBlock(o.state, o.offset, stack, partialTick, buffers);
+                boolean stateMatches = false;
+                if (pos != null) {
+                    stateMatches = true;
+                    BlockState state = Minecraft.getInstance().level.getBlockState(o.offset.offset(blockpos));
+                    if (state.is(o.state.getBlock())) {
+                        for (Property<?> p : o.state.getProperties()) {
+                            if (state.hasProperty(p)) {
+                                if (!state.getValue(p).equals(o.state.getValue(p))) {
+                                    stateMatches = false;
+                                    break;
+                                }
+                            } else {
+                                stateMatches = false;
+                                break;
+                            }
+                        }
+                    } else {
+                        stateMatches = false;
+                    }
+                }
+                if (!stateMatches) {
+                    renderBlock(o.state, o.offset.rotate(rotation).offset(blockpos), stack, partialTick, bufferSource);
+                }
             }
         }
-        MultiblockRenderer.buffers.endBatch();
+        bufferSource.endBatch();
     }
     public static void renderBlock(BlockState block, BlockPos pos, PoseStack stack, DeltaTracker partialTick, MultiBufferSource.BufferSource bufferSource) {
         stack.pushPose();

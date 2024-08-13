@@ -15,6 +15,7 @@ import com.cmdpro.datanessence.networking.packet.HiddenBlockSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.MultiblockSyncS2CPacket;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
 import com.cmdpro.datanessence.screen.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.screen.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.screen.datatablet.DataTabManager;
@@ -87,6 +88,13 @@ public class ModEvents {
                         }
                     }
                 });
+            }
+        } else {
+            if (MultiblockRenderer.multiblock != null) {
+                if (MultiblockRenderer.multiblockPos == null) {
+                    MultiblockRenderer.multiblockPos = event.getHitVec().getBlockPos().relative(event.getHitVec().getDirection());
+                    MultiblockRenderer.multiblockRotation = MultiblockRenderer.getRotation();
+                }
             }
         }
     }
