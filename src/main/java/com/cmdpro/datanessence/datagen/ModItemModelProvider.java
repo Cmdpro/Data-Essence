@@ -41,6 +41,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         simpleItem(ItemRegistry.DATA_TABLET);
         simpleItem(ItemRegistry.DATA_DRIVE);
+        simpleItem(ItemRegistry.COGNIZANT_CUBE);
         simpleItem(ItemRegistry.ESSENCE_SHARD);
         simpleItem(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK);
 

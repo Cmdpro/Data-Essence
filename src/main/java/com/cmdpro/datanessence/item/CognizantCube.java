@@ -3,13 +3,11 @@ package com.cmdpro.datanessence.item;
 import com.cmdpro.datanessence.api.CommonVariables;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.HumanoidArm;
@@ -27,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class Magitech8Ball extends Item {
+public class CognizantCube extends Item {
     final int textColor = 0x9c26c7; // the color messages display in
 
-    public Magitech8Ball(Properties pProperties) {
+    public CognizantCube(Properties pProperties) {
         super(pProperties);
     }
 

@@ -2,37 +2,24 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.*;
-import com.cmdpro.datanessence.networking.ModMessages;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.protocol.game.ClientboundPlayerPositionPacket;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTabs;
-import net.neoforged.bus.EventBus;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModLoadingContext;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
-import net.neoforged.fml.event.lifecycle.InterModProcessEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
-import software.bernie.geckolib.GeckoLib;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod("datanessence")
@@ -178,7 +165,7 @@ public class DataNEssence
             event.accept(ItemRegistry.PROPELLER.get());
             event.accept(ItemRegistry.LENSING_CRYSTAL.get());
             event.accept(ItemRegistry.LENS.get());
-            event.accept(ItemRegistry.MAGITECH_8_BALL.get());
+            event.accept(ItemRegistry.COGNIZANT_CUBE.get());
             event.accept(ItemRegistry.HARMING_LENS.get());
             event.accept(ItemRegistry.HEALING_LENS.get());
             event.accept(ItemRegistry.ACCELERATION_LENS.get());

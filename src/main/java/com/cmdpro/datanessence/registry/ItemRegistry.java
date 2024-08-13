@@ -68,7 +68,7 @@ public class ItemRegistry {
     public static final Supplier<Item> PROPELLER = register("propeller", () -> new Item(new Item.Properties()));
 
     // Misc
-    public static final Supplier<Item> MAGITECH_8_BALL = register("magitech_8_ball", () -> new Magitech8Ball(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> COGNIZANT_CUBE = register("cognizant_cube", () -> new CognizantCube(new Item.Properties().stacksTo(1)));
 
     private static <T extends Item> Supplier<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);
