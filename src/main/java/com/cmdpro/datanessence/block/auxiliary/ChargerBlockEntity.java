@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.block.auxiliary;
 
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.screen.ChargerMenu;
 import net.minecraft.core.BlockPos;
@@ -27,8 +28,6 @@ import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
-
-import static com.cmdpro.datanessence.api.util.EssenceUtil.ItemUtil.EssenceChargeableItemUtil;
 
 public class ChargerBlockEntity extends EssenceContainer implements MenuProvider, GeoBlockEntity {
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);

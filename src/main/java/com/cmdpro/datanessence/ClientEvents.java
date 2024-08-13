@@ -2,6 +2,7 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.api.util.EssenceUtil;
+import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
@@ -36,21 +37,21 @@ public class ClientEvents {
     public static SimpleSoundInstance music;
     @SubscribeEvent
     public static void itemTooltip(ItemTooltipEvent event) {
-        float maxExoticEssence = EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getMaxExoticEssence(event.getItemStack());
+        float maxExoticEssence = EssenceChargeableItemUtil.getMaxExoticEssence(event.getItemStack());
         if (maxExoticEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.exotic_essence_with_max", EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getExoticEssence(event.getItemStack()), maxExoticEssence));
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.exotic_essence_with_max", EssenceChargeableItemUtil.getExoticEssence(event.getItemStack()), maxExoticEssence));
         }
-        float maxNaturalEssence = EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getMaxNaturalEssence(event.getItemStack());
+        float maxNaturalEssence = EssenceChargeableItemUtil.getMaxNaturalEssence(event.getItemStack());
         if (maxNaturalEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.natural_essence_with_max", EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getNaturalEssence(event.getItemStack()), maxNaturalEssence));
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.natural_essence_with_max", EssenceChargeableItemUtil.getNaturalEssence(event.getItemStack()), maxNaturalEssence));
         }
-        float maxLunarEssence = EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getMaxLunarEssence(event.getItemStack());
+        float maxLunarEssence = EssenceChargeableItemUtil.getMaxLunarEssence(event.getItemStack());
         if (maxLunarEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.lunar_essence_with_max", EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getLunarEssence(event.getItemStack()), maxLunarEssence));
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.lunar_essence_with_max", EssenceChargeableItemUtil.getLunarEssence(event.getItemStack()), maxLunarEssence));
         }
-        float maxEssence = EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getMaxEssence(event.getItemStack());
+        float maxEssence = EssenceChargeableItemUtil.getMaxEssence(event.getItemStack());
         if (maxEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.essence_with_max", EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getEssence(event.getItemStack()), maxEssence));
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.essence_with_max", EssenceChargeableItemUtil.getEssence(event.getItemStack()), maxEssence));
         }
     }
     @SubscribeEvent(priority = EventPriority.LOWEST)

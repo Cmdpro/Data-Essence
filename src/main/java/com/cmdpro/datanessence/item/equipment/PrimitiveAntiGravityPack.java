@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.item.equipment;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.EssenceUtil;
+import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.registry.ArmorMaterialRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlotGroup;
@@ -27,7 +28,7 @@ public class PrimitiveAntiGravityPack extends ArmorItem {
         for (ItemAttributeModifiers.Entry i : super.getDefaultAttributeModifiers(stack).modifiers()) {
             builder.add(i.attribute(), i.modifier(), i.slot());
         }
-        if (EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getEssence(stack) >= 1) {
+        if (EssenceChargeableItemUtil.getEssence(stack) >= 1) {
             builder.add(Attributes.GRAVITY, GRAVITY_MODIFIER, EquipmentSlotGroup.CHEST);
             builder.add(Attributes.SAFE_FALL_DISTANCE, FALL_HEIGHT_MODIFIER, EquipmentSlotGroup.CHEST);
         }

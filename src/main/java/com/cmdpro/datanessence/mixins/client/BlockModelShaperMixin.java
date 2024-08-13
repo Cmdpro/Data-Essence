@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.mixins.client;
 
+import com.cmdpro.datanessence.api.util.client.ClientHiddenBlockUtil;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.resources.model.BakedModel;
@@ -18,7 +19,7 @@ public class BlockModelShaperMixin {
     private Map<BlockState, BakedModel> modelByStateCache;
     @Inject(method = "getBlockModel", at = @At(value = "HEAD"), cancellable = true, remap = false)
     public void getBlockModel(BlockState pState, CallbackInfoReturnable<BakedModel> cir) {
-        BlockState state = ClientRenderingUtil.getHiddenBlock(pState.getBlock());
+        BlockState state = ClientHiddenBlockUtil.getHiddenBlock(pState.getBlock());
         if (state != null) {
             cir.setReturnValue(modelByStateCache.get(state));
         }
