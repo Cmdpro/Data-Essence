@@ -29,29 +29,39 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
+import java.text.DecimalFormat;
+
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID)
 public class ClientEvents {
     public static RenderTarget tempRenderTarget;
     public static SimpleSoundInstance music;
+    private static String format(float number) {
+        DecimalFormat format = new DecimalFormat("#.0");
+        String num = format.format(number);
+        if (num.charAt(0) == '.') {
+            num = "0" + num;
+        }
+        return num;
+    }
     @SubscribeEvent
     public static void itemTooltip(ItemTooltipEvent event) {
         float maxExoticEssence = EssenceChargeableItemUtil.getMaxExoticEssence(event.getItemStack());
         if (maxExoticEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.exotic_essence_with_max", EssenceChargeableItemUtil.getExoticEssence(event.getItemStack()), maxExoticEssence));
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.exotic_essence_with_max", format(EssenceChargeableItemUtil.getExoticEssence(event.getItemStack())), format(maxExoticEssence)));
         }
         float maxNaturalEssence = EssenceChargeableItemUtil.getMaxNaturalEssence(event.getItemStack());
         if (maxNaturalEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.natural_essence_with_max", EssenceChargeableItemUtil.getNaturalEssence(event.getItemStack()), maxNaturalEssence));
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.natural_essence_with_max", format(EssenceChargeableItemUtil.getNaturalEssence(event.getItemStack())), format(maxNaturalEssence)));
         }
         float maxLunarEssence = EssenceChargeableItemUtil.getMaxLunarEssence(event.getItemStack());
         if (maxLunarEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.lunar_essence_with_max", EssenceChargeableItemUtil.getLunarEssence(event.getItemStack()), maxLunarEssence));
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.lunar_essence_with_max", format(EssenceChargeableItemUtil.getLunarEssence(event.getItemStack())), format(maxLunarEssence)));
         }
         float maxEssence = EssenceChargeableItemUtil.getMaxEssence(event.getItemStack());
         if (maxEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.essence_with_max", EssenceChargeableItemUtil.getEssence(event.getItemStack()), maxEssence));
+            event.getToolTip().add(1, Component.translatable("gui.essence_bar.essence_with_max", format(EssenceChargeableItemUtil.getEssence(event.getItemStack())), format(maxEssence)));
         }
     }
     @SubscribeEvent(priority = EventPriority.LOWEST)

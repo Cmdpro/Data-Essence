@@ -219,6 +219,7 @@ public class DataNEssence
             event.accept(BlockRegistry.ENTROPIC_PROCESSOR.get());
             event.accept(BlockRegistry.ESSENCE_FURNACE.get());
             event.accept(BlockRegistry.FLUID_MIXER.get());
+            event.accept(BlockRegistry.SYNTHESIS_CHAMBER.get());
         }
     }
 }
