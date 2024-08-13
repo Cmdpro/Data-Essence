@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.api.item.ILaserEmitterModule;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
@@ -95,7 +95,7 @@ public class LaserEmitterBlockEntity extends EssenceContainer implements MenuPro
         int oldRedstoneLevel = pBlockEntity.redstoneLevel;
         boolean updated = false;
         if (!pLevel.isClientSide) {
-            DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
         }
         if (pBlockEntity.getEssence() >= 0.5f) {
             float dist = 0;

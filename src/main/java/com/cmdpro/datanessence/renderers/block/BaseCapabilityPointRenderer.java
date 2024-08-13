@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.renderers.block;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -34,7 +34,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             poseStack.pushPose();
             poseStack.translate(-pos.x, -pos.y, -pos.z);
             poseStack.translate(0, 0.5, 0);
-            ClientDataNEssenceUtil.renderBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0f, animatable.getLevel().getGameTime(), animatable.getBlockPos().getCenter(), animatable.link.getCenter(), animatable.linkColor(), 0.025f, 0.03f);
+            ClientRenderingUtil.renderBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0f, animatable.getLevel().getGameTime(), animatable.getBlockPos().getCenter(), animatable.link.getCenter(), animatable.linkColor(), 0.025f, 0.03f);
             poseStack.popPose();
         }
         bufferSource.getBuffer(getRenderType(animatable, getTextureLocation(animatable), bufferSource, partialTick));

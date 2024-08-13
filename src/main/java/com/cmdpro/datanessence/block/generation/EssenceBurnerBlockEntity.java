@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.generation;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.api.item.EssenceShard;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
@@ -137,7 +137,7 @@ public class EssenceBurnerBlockEntity extends EssenceContainer implements MenuPr
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceBurnerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             if (pBlockEntity.burnTime <= 0) {
                 pBlockEntity.essenceBurnCooldown = 0;
                 if (pBlockEntity.itemHandler.getStackInSlot(0).getItem() instanceof EssenceShard shard) {

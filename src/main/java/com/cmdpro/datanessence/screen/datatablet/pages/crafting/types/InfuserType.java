@@ -1,8 +1,7 @@
 package com.cmdpro.datanessence.screen.datatablet.pages.crafting.types;
 
-import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.registry.ItemRegistry;
-import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
@@ -21,30 +20,30 @@ public class InfuserType extends CraftingType {
             pGuiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, xOffset + x, yOffset + y, 10, 136, 123, 60);
             page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(ItemRegistry.INFUSER_ITEM.get()), xOffset + x + 58, yOffset + y + 4, pMouseX, pMouseY);
 
-            ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(pGuiGraphics, xOffset + x+5, yOffset + y+6, 0, recipe2.getEssenceCost(), 1000);
-            ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(pGuiGraphics, xOffset + x+13, yOffset + y+6, 1, recipe2.getLunarEssenceCost(), 1000);
-            ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(pGuiGraphics, xOffset + x+5, yOffset + y+32, 2, recipe2.getNaturalEssenceCost(), 1000);
-            ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(pGuiGraphics, xOffset + x+13, yOffset + y+32, 3, recipe2.getExoticEssenceCost(), 1000);
+            ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x+5, yOffset + y+6, 0, recipe2.getEssenceCost(), 1000);
+            ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x+13, yOffset + y+6, 1, recipe2.getLunarEssenceCost(), 1000);
+            ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x+5, yOffset + y+32, 2, recipe2.getNaturalEssenceCost(), 1000);
+            ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x+13, yOffset + y+32, 3, recipe2.getExoticEssenceCost(), 1000);
 
-            Component essence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+5, yOffset + y+6, 0, recipe2.getEssenceCost());
+            Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+5, yOffset + y+6, 0, recipe2.getEssenceCost());
             if (essence != null) {
                 page.tooltipToShow.clear();
                 page.showTooltip = true;
                 page.tooltipToShow.add(essence.getVisualOrderText());
             }
-            Component lunarEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+13, yOffset + y+6, 1, recipe2.getLunarEssenceCost());
+            Component lunarEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+13, yOffset + y+6, 1, recipe2.getLunarEssenceCost());
             if (lunarEssence != null) {
                 page.tooltipToShow.clear();
                 page.showTooltip = true;
                 page.tooltipToShow.add(lunarEssence.getVisualOrderText());
             }
-            Component naturalEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+5, yOffset + y+32, 2, recipe2.getNaturalEssenceCost());
+            Component naturalEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+5, yOffset + y+32, 2, recipe2.getNaturalEssenceCost());
             if (naturalEssence != null) {
                 page.tooltipToShow.clear();
                 page.showTooltip = true;
                 page.tooltipToShow.add(naturalEssence.getVisualOrderText());
             }
-            Component exoticEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+13, yOffset + y+32, 3, recipe2.getExoticEssenceCost());
+            Component exoticEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+13, yOffset + y+32, 3, recipe2.getExoticEssenceCost());
             if (exoticEssence != null) {
                 page.tooltipToShow.clear();
                 page.showTooltip = true;

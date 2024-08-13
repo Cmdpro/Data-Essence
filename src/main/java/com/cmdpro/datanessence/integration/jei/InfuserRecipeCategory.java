@@ -1,11 +1,9 @@
 package com.cmdpro.datanessence.integration.jei;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.registry.ItemRegistry;
-import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
-import com.cmdpro.datanessence.screen.DataTabletScreen;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
@@ -55,31 +53,31 @@ public class InfuserRecipeCategory implements IRecipeCategory<InfusionRecipe> {
 
     @Override
     public void draw(InfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(guiGraphics, 5, 28-22, 0, recipe.getEssenceCost(), 1000);
-        ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(guiGraphics, 13, 28-22, 1, recipe.getLunarEssenceCost(), 1000);
-        ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(guiGraphics, 5, 54-22, 2, recipe.getNaturalEssenceCost(), 1000);
-        ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBarTiny(guiGraphics, 13, 54-22, 3, recipe.getExoticEssenceCost(), 1000);
+        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 5, 28-22, 0, recipe.getEssenceCost(), 1000);
+        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 13, 28-22, 1, recipe.getLunarEssenceCost(), 1000);
+        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 5, 54-22, 2, recipe.getNaturalEssenceCost(), 1000);
+        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 13, 54-22, 3, recipe.getExoticEssenceCost(), 1000);
     }
 
     @Override
     public List<Component> getTooltipStrings(InfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltip = new ArrayList<>();
-        Component essence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 6, 0, recipe.getEssenceCost());
+        Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 6, 0, recipe.getEssenceCost());
         if (essence != null) {
             tooltip.clear();
             tooltip.add(essence);
         }
-        Component lunarEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 6, 1, recipe.getLunarEssenceCost());
+        Component lunarEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 6, 1, recipe.getLunarEssenceCost());
         if (lunarEssence != null) {
             tooltip.clear();
             tooltip.add(lunarEssence);
         }
-        Component naturalEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 32, 2, recipe.getNaturalEssenceCost());
+        Component naturalEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 32, 2, recipe.getNaturalEssenceCost());
         if (naturalEssence != null) {
             tooltip.clear();
             tooltip.add(naturalEssence);
         }
-        Component exoticEssence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 32, 3, recipe.getExoticEssenceCost());
+        Component exoticEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 32, 3, recipe.getExoticEssenceCost());
         if (exoticEssence != null) {
             tooltip.clear();
             tooltip.add(exoticEssence);

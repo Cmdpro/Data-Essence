@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.item.equipment;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.EssenceUtil;
 import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EntityRegistry;
@@ -34,8 +34,8 @@ public class EssenceSword extends SwordItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-        if (DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.getEssence(stack) >= 10) {
-            DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil.drainEssence(stack, 10);
+        if (EssenceUtil.ItemUtil.EssenceChargeableItemUtil.getEssence(stack) >= 10) {
+            EssenceUtil.ItemUtil.EssenceChargeableItemUtil.drainEssence(stack, 10);
             EssenceSlashProjectile slash = new EssenceSlashProjectile(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), pPlayer, pLevel);
             slash.setPos(slash.position().offsetRandom(pPlayer.getRandom(), 0.25f));
             pLevel.addFreshEntity(slash);

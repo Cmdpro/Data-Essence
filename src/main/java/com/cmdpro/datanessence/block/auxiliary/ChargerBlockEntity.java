@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.screen.ChargerMenu;
@@ -28,7 +28,7 @@ import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-import static com.cmdpro.datanessence.api.DataNEssenceUtil.ItemUtil.EssenceChargeableItemUtil;
+import static com.cmdpro.datanessence.api.util.EssenceUtil.ItemUtil.EssenceChargeableItemUtil;
 
 public class ChargerBlockEntity extends EssenceContainer implements MenuProvider, GeoBlockEntity {
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
@@ -131,7 +131,7 @@ public class ChargerBlockEntity extends EssenceContainer implements MenuProvider
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ChargerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             pBlockEntity.charging = false;
-            DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
             ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0).copy();
             pBlockEntity.item = stack;
             float maxEssence = EssenceChargeableItemUtil.getMaxEssence(stack);

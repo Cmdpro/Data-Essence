@@ -1,8 +1,6 @@
 package com.cmdpro.datanessence.screen.datatablet.pages.crafting.types;
 
-import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
-import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
@@ -10,7 +8,6 @@ import com.cmdpro.datanessence.screen.datatablet.pages.CraftingPage;
 import com.cmdpro.datanessence.screen.datatablet.pages.crafting.CraftingType;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 

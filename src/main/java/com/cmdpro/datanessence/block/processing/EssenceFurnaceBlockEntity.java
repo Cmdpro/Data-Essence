@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.processing;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.screen.EssenceFurnaceMenu;
@@ -129,8 +129,8 @@ public class EssenceFurnaceBlockEntity extends EssenceContainer implements MenuP
     public float exoticEssenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceFurnaceBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
-            DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             if (pBlockEntity.getEssence() >= 50) {
                 Optional<RecipeHolder<SmeltingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeType.SMELTING, pBlockEntity.getCraftingInv(), pLevel);

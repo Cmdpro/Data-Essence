@@ -1,9 +1,6 @@
 package com.cmdpro.datanessence.mixins;
 
-import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import com.cmdpro.datanessence.api.util.HiddenBlockUtil;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -27,12 +24,12 @@ public abstract class BlockBehaviourMixin {
     @Inject(method = "getDrops", at = @At(value = "HEAD"), cancellable = true, remap = false)
     public void getDrops(BlockState pState, LootParams.Builder pParams, CallbackInfoReturnable<List<ItemStack>> cir) {
         if (pParams.getOptionalParameter(LootContextParams.THIS_ENTITY) instanceof Player player) {
-            BlockState state = DataNEssenceUtil.getHiddenBlock(this.asBlock(), player);
+            BlockState state = HiddenBlockUtil.getHiddenBlock(this.asBlock(), player);
             if (state != null) {
                 cir.setReturnValue(state.getDrops(pParams));
             }
         } else {
-            BlockState state = DataNEssenceUtil.getHiddenBlock(this.asBlock());
+            BlockState state = HiddenBlockUtil.getHiddenBlock(this.asBlock());
             if (state != null) {
                 cir.setReturnValue(state.getDrops(pParams));
             }

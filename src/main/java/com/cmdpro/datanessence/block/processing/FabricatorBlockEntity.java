@@ -1,7 +1,8 @@
 package com.cmdpro.datanessence.block.processing;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
@@ -159,7 +160,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                     if (ent.recipe instanceof IFabricationRecipe) {
                         fabricationRecipe = (IFabricationRecipe)ent.recipe;
                     }
-                    if (fabricationRecipe == null || DataNEssenceUtil.DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry())) {
+                    if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry())) {
                         ItemStack stack = ent.recipe.assemble(ent.getCraftingInv().asCraftInput(), pLevel.registryAccess()).copy();
                         for (int i = 0; i < 9; i++) {
                             ent.itemHandler.extractItem(i, 1, false);
@@ -189,7 +190,7 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     public float exoticEssenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
             Optional<RecipeHolder<IFabricationRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv().asCraftInput(), pLevel);
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get().value();

@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block.transmission;
 
 import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.EssenceUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
@@ -40,7 +40,7 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity i
     }
     @Override
     public void transfer(EssenceContainer other) {
-        DataNEssenceUtil.transferExoticEssence(this, other, DataNEssenceConfig.essencePointTransfer);
+        EssenceUtil.transferExoticEssence(this, other, DataNEssenceConfig.essencePointTransfer);
     }
 
     @Override
@@ -66,6 +66,6 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity i
 
     @Override
     public void take(EssenceContainer other) {
-        DataNEssenceUtil.transferExoticEssence(other, this, DataNEssenceConfig.essencePointTransfer);
+        EssenceUtil.transferExoticEssence(other, this, DataNEssenceConfig.essencePointTransfer);
     }
 }

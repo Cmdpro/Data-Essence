@@ -2,7 +2,8 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.block.BaseEssencePoint;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.DataTabletUtil;
+import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.computers.ComputerTypeManager;
@@ -199,18 +200,18 @@ public class ModEvents {
             if (ent.isPresent()) {
                 if (ent.get().getBlockPos().getCenter().distanceTo(event.getEntity().getBoundingBox().getCenter()) > 20) {
                     event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                    DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer)event.getEntity());
+                    PlayerDataUtil.updateData((ServerPlayer)event.getEntity());
                 } else {
                     if (ent.get().getBlockState().getBlock() instanceof BaseEssencePoint block) {
                         if (!event.getEntity().isHolding(block.getRequiredWire())) {
                             event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
+                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                         }
                     }
                     if (ent.get().getBlockState().getBlock() instanceof BaseCapabilityPoint block) {
                         if (!event.getEntity().isHolding(block.getRequiredWire())) {
                             event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            DataNEssenceUtil.PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
+                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                         }
                     }
                 }
@@ -249,9 +250,9 @@ public class ModEvents {
         if(!event.getLevel().isClientSide()) {
             if(event.getEntity() instanceof ServerPlayer player) {
                 ModMessages.sendToPlayer(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), player);
-                DataNEssenceUtil.PlayerDataUtil.updateData(player);
-                DataNEssenceUtil.PlayerDataUtil.updateUnlockedEntries(player);
-                DataNEssenceUtil.PlayerDataUtil.sendTier(player, false);
+                PlayerDataUtil.updateData(player);
+                PlayerDataUtil.updateUnlockedEntries(player);
+                PlayerDataUtil.sendTier(player, false);
             }
         }
     }
@@ -265,7 +266,7 @@ public class ModEvents {
             }
         }
         for (ResourceLocation i : entries) {
-            DataNEssenceUtil.DataTabletUtil.unlockEntry(event.getEntity(), i, false);
+            DataTabletUtil.unlockEntry(event.getEntity(), i, false);
         }
     }
 }

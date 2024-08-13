@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.processing;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
@@ -187,9 +187,9 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     public int workTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidMixerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
-            DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
-            DataNEssenceUtil.getFluidsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             Optional<RecipeHolder<FluidMixingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FLUID_MIXING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {

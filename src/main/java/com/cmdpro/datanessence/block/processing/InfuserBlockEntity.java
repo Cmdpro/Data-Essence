@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.processing;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.item.DataDrive;
@@ -190,8 +190,8 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
     public float exoticEssenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, InfuserBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
-            DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0);
             boolean shouldReset = true;
             Optional<RecipeHolder<InfusionRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.INFUSION_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);

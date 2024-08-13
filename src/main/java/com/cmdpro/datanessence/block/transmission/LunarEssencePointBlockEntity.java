@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block.transmission;
 
+import com.cmdpro.datanessence.api.util.EssenceUtil;
 import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
@@ -44,7 +44,7 @@ public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity im
     }
     @Override
     public void transfer(EssenceContainer other) {
-        DataNEssenceUtil.transferLunarEssence(this, other, DataNEssenceConfig.essencePointTransfer);
+        EssenceUtil.transferLunarEssence(this, other, DataNEssenceConfig.essencePointTransfer);
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
@@ -64,6 +64,6 @@ public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity im
 
     @Override
     public void take(EssenceContainer other) {
-        DataNEssenceUtil.transferLunarEssence(other, this, DataNEssenceConfig.essencePointTransfer);
+        EssenceUtil.transferLunarEssence(other, this, DataNEssenceConfig.essencePointTransfer);
     }
 }

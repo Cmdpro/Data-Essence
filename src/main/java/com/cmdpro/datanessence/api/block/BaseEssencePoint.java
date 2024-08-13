@@ -1,9 +1,10 @@
 package com.cmdpro.datanessence.api.block;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -128,7 +129,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                     if (!linkFrom.isPresent()) {
                         if (ent.link == null) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
-                            DataNEssenceUtil.updatePlayerData(pPlayer);
+                            PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                             return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
                         }
                     } else {
@@ -138,7 +139,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                                     linkFrom2.link = pPos;
                                     linkFrom2.updateBlock();
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                                    DataNEssenceUtil.updatePlayerData(pPlayer);
+                                    PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
                                     return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
                                 }

@@ -1,15 +1,9 @@
 package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.networking.Message;
-import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
-import com.cmdpro.datanessence.screen.databank.DataBankEntries;
-import com.cmdpro.datanessence.screen.databank.DataBankEntry;
-import com.cmdpro.datanessence.screen.datatablet.Entries;
-import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.screen.FluidBottlerMenu;
@@ -143,9 +143,9 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
     public int workTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidBottlerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            DataNEssenceUtil.getEssenceFromBuffersBelow(pBlockEntity);
-            DataNEssenceUtil.getItemsFromBuffersBelow(pBlockEntity);
-            DataNEssenceUtil.getFluidsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             if (pBlockEntity.getEssence() >= 50) {
                 ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0);

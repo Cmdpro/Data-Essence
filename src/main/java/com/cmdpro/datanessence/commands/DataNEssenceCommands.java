@@ -1,7 +1,8 @@
 package com.cmdpro.datanessence.commands;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.DataTabletUtil;
+import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.DragonPartsSyncS2CPacket;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
@@ -19,7 +20,6 @@ import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.commands.GiveCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
@@ -111,7 +111,7 @@ public class DataNEssenceCommands {
         if(command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();
             int tier = command.getArgument("tier", int.class);
-            DataNEssenceUtil.DataTabletUtil.setTier(player, tier);
+            DataTabletUtil.setTier(player, tier);
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.set_tier", tier);
             }, true);
@@ -125,7 +125,7 @@ public class DataNEssenceCommands {
             unlockedEntries.clear();
             List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
             incompleteEntries.clear();
-            DataNEssenceUtil.PlayerDataUtil.updateUnlockedEntries((ServerPlayer)player);
+            PlayerDataUtil.updateUnlockedEntries((ServerPlayer)player);
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.reset_learned");
             }, true);
@@ -145,7 +145,7 @@ public class DataNEssenceCommands {
                 }
                 List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
                 if (!unlockedEntries.contains(entry)) {
-                    DataNEssenceUtil.DataTabletUtil.unlockEntryAndParents(player, entry, incomplete);
+                    DataTabletUtil.unlockEntryAndParents(player, entry, incomplete);
                     command.getSource().sendSuccess(() -> {
                         return Component.translatable("commands.datanessence.unlock.unlock_entry", entry.toString());
                     }, true);
@@ -164,7 +164,7 @@ public class DataNEssenceCommands {
         if(command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();
             for (Entry i : Entries.entries.values()) {
-                DataNEssenceUtil.DataTabletUtil.unlockEntry(player, i.id, false);
+                DataTabletUtil.unlockEntry(player, i.id, false);
             }
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.unlock_all");

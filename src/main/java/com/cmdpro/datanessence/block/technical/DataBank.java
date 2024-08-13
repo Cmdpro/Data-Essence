@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.technical;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.EssenceUtil;
 import com.cmdpro.datanessence.screen.databank.DataBankTypeManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,7 +32,7 @@ public class DataBank extends Block implements EntityBlock {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof DataBankBlockEntity ent) {
                 if (ent.type != null) {
-                    DataNEssenceUtil.DataBankUtil.sendDataBankEntries(pPlayer, DataBankTypeManager.types.get(ent.type));
+                    EssenceUtil.DataBankUtil.sendDataBankEntries(pPlayer, DataBankTypeManager.types.get(ent.type));
                 }
             }
         }

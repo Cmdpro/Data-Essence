@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
@@ -27,7 +27,7 @@ public class LaserEmitterScreen extends AbstractContainerScreen<LaserEmitterMenu
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
-        ClientDataNEssenceUtil.EssenceBarRendering.drawEssenceBar(pGuiGraphics, x+8, y+17, 0, menu.blockEntity.getEssence(), menu.blockEntity.getMaxEssence());
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, 0, menu.blockEntity.getEssence(), menu.blockEntity.getMaxEssence());
         if (ClientPlayerData.getUnlockedEssences()[0]) {
             pGuiGraphics.blit(TEXTURE, x+7, y+6, 177, 0, 9, 9);
         }
@@ -41,7 +41,7 @@ public class LaserEmitterScreen extends AbstractContainerScreen<LaserEmitterMenu
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         List<FormattedCharSequence> component = new ArrayList<>();
-        Component essence = ClientDataNEssenceUtil.EssenceBarRendering.getEssenceBarTooltip(pMouseX, pMouseY, x+8, y+17, 0, menu.blockEntity.getEssence());
+        Component essence = ClientEssenceBarUtil.getEssenceBarTooltip(pMouseX, pMouseY, x+8, y+17, 0, menu.blockEntity.getEssence());
         if (essence != null) {
             component.clear();
             component.add(essence.getVisualOrderText());

@@ -1,10 +1,7 @@
 package com.cmdpro.datanessence.item;
 
-import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.screen.DataDriveScreen;
-import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.ChatFormatting;
@@ -18,8 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import org.apache.commons.compress.harmony.pack200.CPString;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 

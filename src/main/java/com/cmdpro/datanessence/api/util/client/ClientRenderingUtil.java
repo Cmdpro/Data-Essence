@@ -1,114 +1,31 @@
-package com.cmdpro.datanessence.api;
+package com.cmdpro.datanessence.api.util.client;
 
-import com.cmdpro.datanessence.ClientModEvents;
-import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
-import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
-import com.cmdpro.datanessence.moddata.ClientPlayerData;
-import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
-import com.cmdpro.datanessence.screen.DataTabletScreen;
-import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
-import com.cmdpro.datanessence.toasts.CriticalDataToast;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexFormat;
-import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShaderInstance;
-import net.minecraft.client.renderer.blockentity.BeaconRenderer;
-import net.minecraft.client.renderer.chunk.SectionRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.SlotItemHandler;
-import org.joml.Matrix3f;
 import org.joml.Matrix4f;
-import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import java.awt.*;
-import java.util.List;
-import java.util.Map;
 
-public class ClientDataNEssenceUtil {
-    public static class EssenceBarRendering {
-        public static void drawEssenceBarTiny(GuiGraphics graphics, int x, int y, int type, float amount, float full) {
-            ResourceLocation fill = DataTabletScreen.TEXTURECRAFTING;
-            int u = type == 0 || type == 2 ? 6 : 1;
-            int v = type == 0 || type == 1 ? 202 : 226;
-            if (amount > 0) {
-                graphics.blit(fill, x, y+22 - (int) Math.ceil(22f * (amount / full)), u, v + 22 - (int) Math.ceil(22f * (amount / full)), 3, (int) Math.ceil(22f * (amount / full)));
-            }
-        }
-        public static Component getEssenceBarTooltipTiny(double mouseX, double mouseY, int x, int y, int type, float amount) {
-            if (amount > 0) {
-                if (mouseX <= x+3 && mouseY <= y+22 && mouseX >= x && mouseY >= y) {
-                    if (ClientPlayerData.getUnlockedEssences()[type]) {
-                        return Component.translatable("gui.essence_bar." + (type == 0 ? "essence" : type == 1 ? "lunar_essence" : type == 2 ? "natural_essence" : "exotic_essence"), amount);
-                    } else {
-                        return Component.translatable("gui.essence_bar.unknown", amount);
-                    }
-                }
-            }
-            return null;
-        }
-
-        public static void drawEssenceBar(GuiGraphics graphics, int x, int y, int type, float amount, float full) {
-            if (amount > 0) {
-                ResourceLocation fill = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/essence_bars.png");
-                int u = type*11;
-                int v = 0;
-                graphics.blit(fill, x, y + 52 - (int) Math.ceil(52f * (amount / full)), u, v+52 - (int) Math.ceil(52f * (amount / full)), 7, (int) Math.ceil(52f * (amount / full)));
-            }
-        }
-        public static Component getEssenceBarTooltip(double mouseX, double mouseY, int x, int y, int type, float amount) {
-            if (amount > 0) {
-                if (mouseX >= x && mouseY >= y) {
-                    if (mouseX <= x+7 && mouseY <= y + 52) {
-                        if (ClientPlayerData.getUnlockedEssences()[type]) {
-                            return Component.translatable("gui.essence_bar." + (type == 0 ? "essence" : type == 1 ? "lunar_essence" : type == 2 ? "natural_essence" : "exotic_essence"), amount);
-                        } else {
-                            return Component.translatable("gui.essence_bar.unknown", amount);
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-    }
-    public static BlockState getHiddenBlock(Block block) {
-        for (HiddenBlock i : HiddenBlocksManager.blocks.values()) {
-            if (i.originalBlock == null || i.hiddenAs == null || i.entry == null) {
-                continue;
-            }
-            if (i.originalBlock.equals(block)) {
-                if (!ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
-                    return i.hiddenAs;
-                }
-                break;
-            }
-        }
-        return null;
-    }
+public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client.ClientProgressionUtil {
     public static void renderLockedSlotBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y, NonNullList<Slot> slots) {
         for (Slot i : slots) {
             if (i instanceof SlotItemHandler handlerSlot) {
@@ -254,19 +171,6 @@ public class ClientDataNEssenceUtil {
         for (Vec3 point = point1; length < distance; point = point.add(vector)) {
             level.addParticle(particle, point.x, point.y, point.z, 0, 0, 0);
             length += space;
-        }
-    }
-    public static void unlockedCriticalData(Entry entry) {
-        Minecraft.getInstance().getToasts().addToast(new CriticalDataToast(entry));
-        progressionShader();
-    }
-    public static void progressionShader() {
-        ClientModEvents.progressionShader.time = 0;
-        ClientModEvents.progressionShader.setActive(true);
-    }
-    public static void updateWorld() {
-        for (SectionRenderDispatcher.RenderSection i : Minecraft.getInstance().levelRenderer.viewArea.sections) {
-            i.setDirty(false);
         }
     }
 }

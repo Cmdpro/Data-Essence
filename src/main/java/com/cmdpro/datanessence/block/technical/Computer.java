@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.technical;
 
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.ComputerUtil;
 import com.cmdpro.datanessence.computers.ComputerTypeManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,7 +32,7 @@ public class Computer extends Block implements EntityBlock {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof ComputerBlockEntity ent) {
                 if (ent.type != null) {
-                    DataNEssenceUtil.ComputerUtil.openComputer(pPlayer, ComputerTypeManager.types.get(ent.type));
+                    ComputerUtil.openComputer(pPlayer, ComputerTypeManager.types.get(ent.type));
                 }
             }
         }

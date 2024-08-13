@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.renderers.block;
 
-import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -22,7 +22,7 @@ public class LaserEmitterRenderer implements BlockEntityRenderer<LaserEmitterBlo
             pPoseStack.pushPose();
             pPoseStack.translate(-pos.x, -pos.y, -pos.z);
             pPoseStack.translate(0.5, 0.5, 0.5);
-            ClientDataNEssenceUtil.renderBeam(pPoseStack, pBuffer, BeaconRenderer.BEAM_LOCATION, pPartialTick, 1.0f, pBlockEntity.getLevel().getGameTime(), pBlockEntity.getBlockPos().getCenter(), pBlockEntity.end, new Color(0xe236ef), 0.25f, 0.3f);
+            ClientRenderingUtil.renderBeam(pPoseStack, pBuffer, BeaconRenderer.BEAM_LOCATION, pPartialTick, 1.0f, pBlockEntity.getLevel().getGameTime(), pBlockEntity.getBlockPos().getCenter(), pBlockEntity.end, new Color(0xe236ef), 0.25f, 0.3f);
             pPoseStack.popPose();
         }
     }

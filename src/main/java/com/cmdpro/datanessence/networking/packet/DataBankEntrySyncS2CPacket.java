@@ -1,16 +1,11 @@
 package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.cmdpro.datanessence.screen.databank.DataBankEntries;
 import com.cmdpro.datanessence.screen.databank.DataBankEntry;
 import com.cmdpro.datanessence.screen.databank.DataBankEntrySerializer;
-import com.cmdpro.datanessence.screen.datatablet.Entries;
-import com.cmdpro.datanessence.screen.datatablet.Entry;
-import com.cmdpro.datanessence.screen.datatablet.EntrySerializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -19,12 +14,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 public record DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> entries) implements Message {
     public static DataBankEntrySyncS2CPacket read(RegistryFriendlyByteBuf buf) {

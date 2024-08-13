@@ -1,21 +1,17 @@
 package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
-import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.networking.Message;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-import java.awt.*;
 import java.util.List;
-import java.util.function.Supplier;
 
 public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked, List<ResourceLocation> incomplete) implements Message {
 
@@ -33,7 +29,7 @@ public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked, List<R
     @Override
     public void handleClient(Minecraft minecraft, Player player) {
         ClientPlayerUnlockedEntries.set(unlocked, incomplete);
-        ClientDataNEssenceUtil.updateWorld();
+        ClientRenderingUtil.updateWorld();
     }
 
     public static UnlockedEntrySyncS2CPacket read(RegistryFriendlyByteBuf buf) {

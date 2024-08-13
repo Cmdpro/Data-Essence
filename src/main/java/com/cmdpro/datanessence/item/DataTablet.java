@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.item;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.DataNEssenceUtil;
+import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -23,11 +23,11 @@ public class DataTablet extends Item {
         if (pLevel.isClientSide) {
             Client.openScreen();
         } else {
-            if (DataNEssenceUtil.DataTabletUtil.getTier(pPlayer) <= 0) {
-                DataNEssenceUtil.DataTabletUtil.setTier(pPlayer, 1);
+            if (DataTabletUtil.getTier(pPlayer) <= 0) {
+                DataTabletUtil.setTier(pPlayer, 1);
             }
-            DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "basics/fabricator"), false);
-            DataNEssenceUtil.DataTabletUtil.unlockEntry(pPlayer, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "basics/data_tablet"), false);
+            DataTabletUtil.unlockEntry(pPlayer, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "basics/fabricator"), false);
+            DataTabletUtil.unlockEntry(pPlayer, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "basics/data_tablet"), false);
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
     }
