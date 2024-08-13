@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.screen.ChargerMenu;
 import net.minecraft.core.BlockPos;

@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.item.lens;
 
-import com.cmdpro.datanessence.api.ILaserEmitterModule;
+import com.cmdpro.datanessence.api.item.ILaserEmitterModule;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import net.minecraft.world.entity.LivingEntity;

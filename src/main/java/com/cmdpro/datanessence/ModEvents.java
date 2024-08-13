@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence;
 
-import com.cmdpro.datanessence.api.BaseCapabilityPoint;
-import com.cmdpro.datanessence.api.BaseEssencePoint;
+import com.cmdpro.datanessence.api.block.BaseCapabilityPoint;
+import com.cmdpro.datanessence.api.block.BaseEssencePoint;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;

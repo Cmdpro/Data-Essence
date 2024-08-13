@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.api;
+package com.cmdpro.datanessence.api.item;
 
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import net.minecraft.world.entity.LivingEntity;

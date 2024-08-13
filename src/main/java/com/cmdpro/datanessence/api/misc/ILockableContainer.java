@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.api;
+package com.cmdpro.datanessence.api.misc;
 
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
 

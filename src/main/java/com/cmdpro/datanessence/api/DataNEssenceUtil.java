@@ -1,5 +1,8 @@
 package com.cmdpro.datanessence.api;
 
+import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
+import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.block.transmission.EssenceBufferBlockEntity;
 import com.cmdpro.datanessence.block.transmission.FluidBufferBlockEntity;
 import com.cmdpro.datanessence.block.transmission.ItemBufferBlockEntity;

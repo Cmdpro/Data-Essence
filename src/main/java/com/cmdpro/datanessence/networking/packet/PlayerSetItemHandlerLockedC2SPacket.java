@@ -2,7 +2,7 @@ package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.api.ILockableContainer;
+import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;

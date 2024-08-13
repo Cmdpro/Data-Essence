@@ -3,7 +3,7 @@ package com.cmdpro.datanessence.renderers.block;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.ClientDataNEssenceUtil;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
-import com.cmdpro.datanessence.api.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;

@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence.block.generation;
 
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.api.EssenceContainer;
-import com.cmdpro.datanessence.api.EssenceShard;
+import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.item.EssenceShard;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.screen.EssenceBurnerMenu;
 import net.minecraft.core.BlockPos;

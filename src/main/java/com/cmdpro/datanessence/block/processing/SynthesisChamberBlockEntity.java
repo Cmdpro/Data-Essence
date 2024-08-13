@@ -1,14 +1,13 @@
 package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.api.EssenceContainer;
-import com.cmdpro.datanessence.api.ILockableContainer;
+import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.recipe.*;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
-import com.cmdpro.datanessence.screen.AutoFabricatorMenu;
 import com.cmdpro.datanessence.screen.SynthesisChamberMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -16,15 +15,12 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -36,7 +32,6 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

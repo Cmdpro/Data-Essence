@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
-import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;

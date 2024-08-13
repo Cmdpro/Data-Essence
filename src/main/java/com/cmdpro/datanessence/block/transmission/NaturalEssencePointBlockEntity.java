@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence.block.transmission;
 
-import com.cmdpro.datanessence.api.BaseEssencePointBlockEntity;
+import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;

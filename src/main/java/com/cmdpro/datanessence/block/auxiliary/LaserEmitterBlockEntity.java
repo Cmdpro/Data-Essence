@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.api.EssenceContainer;
-import com.cmdpro.datanessence.api.ILaserEmitterModule;
+import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.item.ILaserEmitterModule;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.screen.LaserEmitterMenu;
 import net.minecraft.core.BlockPos;

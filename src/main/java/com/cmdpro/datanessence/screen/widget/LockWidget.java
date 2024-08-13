@@ -1,12 +1,10 @@
 package com.cmdpro.datanessence.screen.widget;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.ILockableContainer;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerSetItemHandlerLockedC2SPacket;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractContainerWidget;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;

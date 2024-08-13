@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.datanessence.api.DataNEssenceUtil;
-import com.cmdpro.datanessence.api.EssenceContainer;
+import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;

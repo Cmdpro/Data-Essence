@@ -1,5 +1,6 @@
-package com.cmdpro.datanessence.api;
+package com.cmdpro.datanessence.api.block;
 
+import com.cmdpro.datanessence.api.DataNEssenceUtil;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

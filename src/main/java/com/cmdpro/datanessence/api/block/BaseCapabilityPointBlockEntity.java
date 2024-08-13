@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.api;
+package com.cmdpro.datanessence.api.block;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -9,21 +9,20 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 
 import java.awt.*;
 
-public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
+public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     public BlockPos link;
 
-    public BaseEssencePointBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
+    public BaseCapabilityPointBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
     public abstract Color linkColor();
-
-
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.saveAdditional(pTag, pRegistries);
@@ -34,9 +33,10 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
             pTag.putInt("linkZ", link.getZ());
         }
     }
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseEssencePointBlockEntity pBlockEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseCapabilityPointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            if (pLevel.getBlockEntity(pPos.relative(pBlockEntity.getDirection().getOpposite())) instanceof EssenceContainer ent) {
+            BlockEntity ent = pLevel.getBlockEntity(pPos.relative(pBlockEntity.getDirection().getOpposite()));
+            if (ent != null) {
                 if (pBlockEntity.link == null) {
                     pBlockEntity.transfer(ent);
                 } else {
@@ -44,12 +44,13 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
                 }
             }
             if (pBlockEntity.link != null) {
-                if (pLevel.getBlockEntity(pBlockEntity.link) instanceof EssenceContainer ent) {
-                    pBlockEntity.transfer(ent);
+                BlockEntity ent2 = pLevel.getBlockEntity(pBlockEntity.link);
+                if (ent2 != null) {
+                    pBlockEntity.transfer(ent2);
                 } else {
                     pBlockEntity.link = null;
                     pBlockEntity.updateBlock();
-                    if (pState.getBlock() instanceof BaseEssencePoint block) {
+                    if (pState.getBlock() instanceof BaseCapabilityPoint block) {
                         ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(block.getRequiredWire()));
                         pLevel.addFreshEntity(item);
                     }
@@ -57,14 +58,14 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
             }
         }
     }
-    public abstract void transfer(EssenceContainer other);
-    public abstract void take(EssenceContainer other);
+    public abstract void transfer(BlockEntity other);
+    public abstract void take(BlockEntity other);
     public Direction getDirection() {
-        if (getBlockState().getValue(BaseEssencePoint.FACE).equals(AttachFace.CEILING)) {
+        if (getBlockState().getValue(BaseCapabilityPoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;
         }
-        if (getBlockState().getValue(BaseEssencePoint.FACE).equals(AttachFace.WALL)) {
-            return getBlockState().getValue(BaseEssencePoint.FACING);
+        if (getBlockState().getValue(BaseCapabilityPoint.FACE).equals(AttachFace.WALL)) {
+            return getBlockState().getValue(BaseCapabilityPoint.FACING);
         }
         return Direction.UP;
     }
@@ -72,9 +73,8 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
     }
-
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider) {
+    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries) {
         CompoundTag tag = pkt.getTag();
         if (tag.getBoolean("hasLink")) {
             link = new BlockPos(tag.getInt("linkX"), tag.getInt("linkY"), tag.getInt("linkZ"));
@@ -82,7 +82,6 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
             link = null;
         }
     }
-
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
@@ -99,9 +98,8 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
-
     @Override
-    protected void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
+    public void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
         if (pTag.getBoolean("hasLink")) {
             link = new BlockPos(pTag.getInt("linkX"), pTag.getInt("linkY"), pTag.getInt("linkZ"));

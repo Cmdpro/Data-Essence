@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.*;
+import com.cmdpro.datanessence.api.item.EssenceShard;
 import com.cmdpro.datanessence.item.*;
 import com.cmdpro.datanessence.item.blockitem.*;
 import com.cmdpro.datanessence.item.equipment.*;

@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.api;
+package com.cmdpro.datanessence.api.item;
 
 import net.minecraft.world.item.Item;
 
