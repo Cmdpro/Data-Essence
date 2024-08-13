@@ -45,7 +45,6 @@ public class MultiblockManager extends SimpleJsonResourceReloadListener {
             }
         }
         DataNEssence.LOGGER.info("Loaded {} multiblocks", multiblocks.size());
-        MultiblockRenderer.multiblock = MultiblockManager.multiblocks.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "test"));
     }
     public static MultiblockSerializer serializer = new MultiblockSerializer();
 }
