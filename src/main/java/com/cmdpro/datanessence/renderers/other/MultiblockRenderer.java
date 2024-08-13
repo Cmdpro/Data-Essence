@@ -24,6 +24,11 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.ColorResolver;
+import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -31,10 +36,13 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.lighting.LevelLightEngine;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -88,16 +96,11 @@ public class MultiblockRenderer {
         renderMultiblock(multiblock, pos, stack, partialTick, rotation, buffers);
     }
     public static void renderMultiblock(Multiblock multiblock, BlockPos pos, PoseStack stack, DeltaTracker partialTick, Rotation rotation, MultiBufferSource.BufferSource bufferSource) {
-        BlockPos blockpos = pos;
-        if (blockpos == null) {
-            blockpos = new BlockPos(0, 0, 0);
-        }
         for (List<Multiblock.StateAndPos> i : multiblock.getStates()) {
             for (Multiblock.StateAndPos o : i) {
-                boolean stateMatches = false;
                 if (pos != null) {
-                    stateMatches = true;
-                    BlockState state = Minecraft.getInstance().level.getBlockState(o.offset.offset(blockpos));
+                    boolean stateMatches = true;
+                    BlockState state = Minecraft.getInstance().level.getBlockState(o.offset.offset(pos));
                     if (state.is(o.state.getBlock())) {
                         for (Property<?> p : o.state.getProperties()) {
                             if (state.hasProperty(p)) {
@@ -113,14 +116,76 @@ public class MultiblockRenderer {
                     } else {
                         stateMatches = false;
                     }
-                }
-                if (!stateMatches) {
-                    renderBlock(o.state, o.offset.rotate(rotation).offset(blockpos), stack, partialTick, bufferSource);
+                    if (!stateMatches) {
+                        renderBlock(o.state, o.offset.rotate(rotation).offset(pos), stack, partialTick, bufferSource);
+                    }
+                } else {
+                    renderBlock(o.state, o.offset.rotate(rotation), stack, partialTick, bufferSource);
                 }
             }
         }
         bufferSource.endBatch();
     }
+    private static BlockAndTintGetter blockAndTintGetter = new BlockAndTintGetter() {
+
+        @Nullable
+        @Override
+        public BlockEntity getBlockEntity(BlockPos pos) {
+            BlockState state = this.getBlockState(pos);
+            if (state.getBlock() instanceof EntityBlock eb) {
+                return MultiblockRenderer.blockEntityCache.computeIfAbsent(pos.immutable(), p -> eb.newBlockEntity(p, state));
+            }
+            return null;
+        }
+
+        @Override
+        public BlockState getBlockState(BlockPos p_45571_) {
+            return Minecraft.getInstance().level.getBlockState(p_45571_);
+        }
+
+        @Override
+        public FluidState getFluidState(BlockPos pos) {
+            return Fluids.EMPTY.defaultFluidState();
+        }
+
+        @Override
+        public float getShade(Direction direction, boolean shaded) {
+            return 1.0F;
+        }
+
+        @Override
+        public LevelLightEngine getLightEngine() {
+            return null;
+        }
+
+        @Override
+        public int getBlockTint(BlockPos pos, ColorResolver color) {
+            var plains = Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.BIOME)
+                    .getOrThrow(Biomes.PLAINS);
+            return color.getColor(plains, pos.getX(), pos.getZ());
+        }
+
+        @Override
+        public int getBrightness(LightLayer type, BlockPos pos) {
+            return 15;
+        }
+
+        @Override
+        public int getRawBrightness(BlockPos pos, int ambientDarkening) {
+            return 15 - ambientDarkening;
+        }
+
+        // These heights were assumed based being derivative of old behavior, but it may be ideal to change
+        @Override
+        public int getHeight() {
+            return Minecraft.getInstance().level.getHeight();
+        }
+
+        @Override
+        public int getMinBuildHeight() {
+            return Minecraft.getInstance().level.getMinBuildHeight();
+        }
+    };
     public static void renderBlock(BlockState block, BlockPos pos, PoseStack stack, DeltaTracker partialTick, MultiBufferSource.BufferSource bufferSource) {
         stack.pushPose();
         stack.translate(pos.getX(), pos.getY(), pos.getZ());
@@ -129,13 +194,13 @@ public class MultiblockRenderer {
         if (!fluidState.isEmpty()) {
             RenderType layer = ItemBlockRenderTypes.getRenderLayer(fluidState);
             VertexConsumer buffer = bufferSource.getBuffer(layer);
-            blockRenderer.renderLiquid(pos, Minecraft.getInstance().level, buffer, block, fluidState);
+            blockRenderer.renderLiquid(pos, blockAndTintGetter, buffer, block, fluidState);
         }
         if (block.getRenderShape() != RenderShape.INVISIBLE) {
             BakedModel model = blockRenderer.getBlockModel(block);
             for (RenderType i : model.getRenderTypes(block, Minecraft.getInstance().level.random, ModelData.EMPTY)) {
                 VertexConsumer hologramConsumer = bufferSource.getBuffer(i);
-                blockRenderer.renderBatched(block, pos, Minecraft.getInstance().level, stack, hologramConsumer, false, Minecraft.getInstance().level.random, ModelData.EMPTY, i);
+                blockRenderer.renderBatched(block, pos, blockAndTintGetter, stack, hologramConsumer, false, Minecraft.getInstance().level.random, ModelData.EMPTY, i);
             }
         }
         if (block.getBlock() instanceof EntityBlock entityBlock) {
@@ -150,7 +215,7 @@ public class MultiblockRenderer {
                 try {
                     BlockEntityRenderer<BlockEntity> renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher().getRenderer(be);
                     if (renderer != null) {
-                        renderer.render(be, partialTick.getGameTimeDeltaTicks(), stack, buffers, 0xF000F0, OverlayTexture.NO_OVERLAY);
+                        renderer.render(be, partialTick.getGameTimeDeltaTicks(), stack, bufferSource, 0xF000F0, OverlayTexture.NO_OVERLAY);
                     }
                 } catch (Exception e) {
                     erroredBlockEntities.add(be);

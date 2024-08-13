@@ -131,6 +131,11 @@ public class DataTabletScreen extends Screen {
                     }
                 }
             }
+            if (pMouseX >= x+1 && pMouseX <= x+imageWidth-1) {
+                if (pMouseY >= y + 1 && pMouseY <= y + imageHeight - 1) {
+                    return clickedEntry.pages[page].onClick(this, pMouseX, pMouseY, pButton, x, y);
+                }
+            }
         }
         return false;
     }

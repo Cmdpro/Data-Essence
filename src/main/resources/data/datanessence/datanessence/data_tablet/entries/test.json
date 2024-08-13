@@ -22,6 +22,10 @@
     {
       "type": "datanessence:item",
       "item": "datanessence:data_tablet"
+    },
+    {
+      "type": "datanessence:multiblock",
+      "multiblock": "datanessence:test"
     }
   ],
   "name": "data_tablet.pages.test1.name",
