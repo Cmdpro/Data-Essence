@@ -71,6 +71,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(BlockRegistry.LENSING_CRYSTAL_ORE.get(), block -> createLensingCrystalDrops(block, ItemRegistry.LENSING_CRYSTAL.get()));
         dropSelf(BlockRegistry.AUTO_FABRICATOR.get());
         dropSelf(BlockRegistry.FLUID_TANK.get());
+        dropSelf(BlockRegistry.FLUID_MIXER.get());
+        dropSelf(BlockRegistry.SYNTHESIS_CHAMBER.get());
+        dropSelf(BlockRegistry.FLUID_BOTTLER.get());
+        dropSelf(BlockRegistry.ENTROPIC_PROCESSOR.get());
+        dropSelf(BlockRegistry.ESSENCE_FURNACE.get());
     }
     protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,

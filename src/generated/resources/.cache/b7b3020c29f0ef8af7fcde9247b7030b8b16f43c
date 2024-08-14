@@ -1,4 +1,4 @@
-// 1.21	2024-08-05T23:50:28.372848346	Item Models: datanessence
+// 1.21	2024-08-13T22:20:59.7340924	Item Models: datanessence
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
@@ -6,6 +6,7 @@ c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient
 ea5aab23265d305e8b808c6b73fa1312d63572c0 assets/datanessence/models/item/auto-fabricator.json
 c8dbba411053dd980e2d72300e7f2583278c1071 assets/datanessence/models/item/capacitance_panel.json
 2025d76489225ed4d8ecc1f763463f60fbf8a969 assets/datanessence/models/item/charger.json
+8b9e2c57a53dcbd1e4739dbc91816f453a28034e assets/datanessence/models/item/cognizant_cube.json
 b6c82037e00eab08aae76abb6beed0dba346f6f1 assets/datanessence/models/item/conductance_rod.json
 d1b94c9c04798703c014833bebc4d726319a86db assets/datanessence/models/item/data_drive.json
 d7143cba0a3221569cc1595af65cd714d785cc89 assets/datanessence/models/item/data_tablet.json
