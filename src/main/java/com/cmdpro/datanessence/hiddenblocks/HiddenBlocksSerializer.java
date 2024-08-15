@@ -10,6 +10,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,7 +41,8 @@ public class HiddenBlocksSerializer {
         } catch (Exception e) {
             DataNEssence.LOGGER.error(e.getMessage());
         }
-        return new HiddenBlock(entry, originalBlock, hiddenAs);
+        boolean completionRequired = GsonHelper.getAsBoolean(json, "completionRequired", true);
+        return new HiddenBlock(entry, originalBlock, hiddenAs, completionRequired);
     }
     @Nonnull
     public static HiddenBlock fromNetwork(FriendlyByteBuf buf) {
@@ -54,11 +56,13 @@ public class HiddenBlocksSerializer {
         } catch (Exception e) {
             DataNEssence.LOGGER.error(e.getMessage());
         }
-        return new HiddenBlock(entry, originalBlock, hiddenAs);
+        boolean completionRequired = buf.readBoolean();
+        return new HiddenBlock(entry, originalBlock, hiddenAs, completionRequired);
     }
     public static void toNetwork(FriendlyByteBuf buf, HiddenBlock block) {
         buf.writeResourceLocation(block.entry);
         buf.writeResourceLocation(BuiltInRegistries.BLOCK.getKey(block.originalBlock));
         buf.writeUtf(BlockStateParser.serialize(block.hiddenAs));
+        buf.writeBoolean(block.completionRequired);
     }
 }

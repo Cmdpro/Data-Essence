@@ -13,8 +13,17 @@ public class ClientHiddenBlockUtil {
                 continue;
             }
             if (i.originalBlock.equals(block)) {
-                if (!ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
-                    return i.hiddenAs;
+                if (i.completionRequired) {
+                    if (ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry)) {
+                        return i.hiddenAs;
+                    }
+                    if (!ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
+                        return i.hiddenAs;
+                    }
+                } else {
+                    if (!ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry) && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry)) {
+                        return i.hiddenAs;
+                    }
                 }
                 break;
             }

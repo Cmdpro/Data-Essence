@@ -13,13 +13,23 @@ import java.util.List;
 public class HiddenBlockUtil {
     public static BlockState getHiddenBlock(Block block, Player player) {
         List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+        List<ResourceLocation> incomplete = player.getData(AttachmentTypeRegistry.INCOMPLETE);
         for (HiddenBlock i : HiddenBlocksManager.blocks.values()) {
             if (i.originalBlock == null || i.hiddenAs == null || i.entry == null) {
                 continue;
             }
             if (i.originalBlock.equals(block)) {
-                if (!unlocked.contains(i.entry)) {
-                    return i.hiddenAs;
+                if (i.completionRequired) {
+                    if (incomplete.contains(i.entry)) {
+                        return i.hiddenAs;
+                    }
+                    if (!unlocked.contains(i.entry)) {
+                        return i.hiddenAs;
+                    }
+                } else {
+                    if (!incomplete.contains(i.entry) && !unlocked.contains(i.entry)) {
+                        return i.hiddenAs;
+                    }
                 }
                 break;
             }

@@ -29,8 +29,8 @@ public record UnlockEntryS2CPacket(ResourceLocation unlocked, boolean incomplete
                 if (entry.critical) {
                     ClientRenderingUtil.unlockedCriticalData(entry);
                 }
-                ClientRenderingUtil.updateWorld();
             }
+            ClientRenderingUtil.updateWorld();
         }
     }
 
