@@ -23,6 +23,7 @@ import java.util.List;
 
 public class DataTabletScreen extends Screen {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
+    public static final ResourceLocation TEXTURE_PAGE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_page.png");
     public static final ResourceLocation TEXTURECRAFTING = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
     public static final ResourceLocation TEXTUREMISC = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_misc.png");
     public DataTabletScreen(Component pTitle) {
@@ -152,7 +153,7 @@ public class DataTabletScreen extends Screen {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+        pGuiGraphics.blit(getTextureToUse(), x, y, 0, 0, imageWidth, imageHeight);
     }
 
     @Override
@@ -168,6 +169,13 @@ public class DataTabletScreen extends Screen {
             screenType = 0;
         }
     }
+    public ResourceLocation getTextureToUse() {
+        if (screenType == 2) {
+            return TEXTURE_PAGE;
+        } else {
+            return TEXTURE;
+        }
+    }
     public int tabPage = 0;
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
@@ -177,7 +185,7 @@ public class DataTabletScreen extends Screen {
         if (screenType == 0) {
             int o = 0;
             for (DataTab i : getCurrentTabs()) {
-                graphics.blit(TEXTURE, x+(o >= 6 ? 256 : -21), y+8+((o%6)*24), o >= 6 ? 66 : 87, 166, 21, 20);
+                graphics.blit(getTextureToUse(), x+(o >= 6 ? 256 : -21), y+8+((o%6)*24), o >= 6 ? 66 : 87, 166, 21, 20);
                 graphics.renderItem(i.icon, x+(o >= 6 ? 258 : -18), y+8+((o%6)*24)+2);
                 o++;
             }
@@ -188,10 +196,10 @@ public class DataTabletScreen extends Screen {
             drawEntries(graphics, delta, mouseX, mouseY);
             graphics.pose().pushPose();
             graphics.pose().translate(0, 0, 399);
-            graphics.blit(TEXTURE, x+3, y+3, 48, 166, 4, 4);
-            graphics.blit(TEXTURE, x+3, y+imageHeight-7, 48, 170, 4, 4);
-            graphics.blit(TEXTURE, x+imageWidth-7, y+3, 52, 166, 4, 4);
-            graphics.blit(TEXTURE, x+imageWidth-7, y+imageHeight-7, 52, 170, 4, 4);
+            graphics.blit(getTextureToUse(), x+3, y+3, 48, 166, 4, 4);
+            graphics.blit(getTextureToUse(), x+3, y+imageHeight-7, 48, 170, 4, 4);
+            graphics.blit(getTextureToUse(), x+imageWidth-7, y+3, 52, 166, 4, 4);
+            graphics.blit(getTextureToUse(), x+imageWidth-7, y+imageHeight-7, 52, 170, 4, 4);
             graphics.pose().popPose();
         } else if (screenType == 1) {
 
@@ -205,10 +213,10 @@ public class DataTabletScreen extends Screen {
             graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
 
             if (this.tabPage+2 < getSortedTabs().size()/6) {
-                graphics.blit(TEXTURE, (x + imageWidth) + 30, y + ((imageHeight / 2) - 20), 32, 166, 12, 40);
+                graphics.blit(getTextureToUse(), (x + imageWidth) + 30, y + ((imageHeight / 2) - 20), 32, 166, 12, 40);
             }
             if (this.tabPage > 0) {
-                graphics.blit(TEXTURE, x - 42, y + ((imageHeight / 2) - 20), 20, 166, 12, 40);
+                graphics.blit(getTextureToUse(), x - 42, y + ((imageHeight / 2) - 20), 20, 166, 12, 40);
             }
 
             Component tooltip = null;
@@ -246,10 +254,10 @@ public class DataTabletScreen extends Screen {
         page.render(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         pGuiGraphics.disableScissor();
         if (this.page+1 < clickedEntry.getPagesClient().length) {
-            pGuiGraphics.blit(TEXTURE, (x + imageWidth) + 6, y + ((imageHeight / 2) - 20), 32, 166, 12, 40);
+            pGuiGraphics.blit(getTextureToUse(), (x + imageWidth) + 6, y + ((imageHeight / 2) - 20), 12, 166, 12, 40);
         }
         if (this.page > 0) {
-            pGuiGraphics.blit(TEXTURE, x - 18, y + ((imageHeight / 2) - 20), 20, 166, 12, 40);
+            pGuiGraphics.blit(getTextureToUse(), x - 18, y + ((imageHeight / 2) - 20), 0, 166, 12, 40);
         }
         page.renderPost(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         pGuiGraphics.enableScissor(x+1, y+1, x+imageWidth-1, y+imageHeight-1);
