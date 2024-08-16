@@ -1,10 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.auxiliary.ChargerBlockEntity;
-import com.cmdpro.datanessence.block.auxiliary.FluidBottlerBlockEntity;
-import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
-import com.cmdpro.datanessence.block.auxiliary.VacuumBlockEntity;
+import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.processing.*;
@@ -152,6 +149,10 @@ public class BlockEntityRegistry {
             register("auto-fabricator", () ->
                     BlockEntityType.Builder.of(AutoFabricatorBlockEntity::new,
                             BlockRegistry.AUTO_FABRICATOR.get()).build(null));
+    public static final Supplier<BlockEntityType<EnticingLureBlockEntity>> ENTICING_LURE =
+            register("enticing_lure", () ->
+                    BlockEntityType.Builder.of(EnticingLureBlockEntity::new,
+                            BlockRegistry.ENTICING_LURE.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

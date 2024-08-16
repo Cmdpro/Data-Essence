@@ -3,10 +3,7 @@ package com.cmdpro.datanessence.registry;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.*;
 
-import com.cmdpro.datanessence.block.auxiliary.Charger;
-import com.cmdpro.datanessence.block.auxiliary.FluidBottler;
-import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
-import com.cmdpro.datanessence.block.auxiliary.Vacuum;
+import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
 import com.cmdpro.datanessence.block.processing.*;
@@ -98,6 +95,9 @@ public class BlockRegistry {
             () -> new Charger(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
     public static final Supplier<Block> AUTO_FABRICATOR = registerBlock("auto-fabricator",
             () -> new AutoFabricator(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)));
+    public static final Supplier<Block> ENTICING_LURE = register("enticing_lure",
+            () -> new EnticingLure(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers
     public static final Supplier<Block> ESSENCE_BUFFER = register("essence_buffer",

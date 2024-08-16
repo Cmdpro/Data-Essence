@@ -91,6 +91,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.ESSENCE_FURNACE_MENU.get(), EssenceFurnaceScreen::new);
         event.register(MenuRegistry.SYNTHESIS_CHAMBER_MENU.get(), SynthesisChamberScreen::new);
         event.register(MenuRegistry.FLUID_MIXER_MENU.get(), FluidMixerScreen::new);
+        event.register(MenuRegistry.ENTICING_LURE_MENU.get(), EnticingLureScreen::new);
     }
     public static ShaderInstance progressionShader;
     @SubscribeEvent

@@ -20,7 +20,7 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 public class FabricatorMenu extends AbstractContainerMenu implements IDataNEssenceMenuHelper {
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
-        return guiHelperQuickMoveStack(player, index, 4, this);
+        return guiHelperQuickMoveStack(player, index, 9, this);
     }
     @Override
     public boolean guiHelperMoveItemStackTo(ItemStack pStack, int pStartIndex, int pEndIndex, boolean pReverseDirection) {

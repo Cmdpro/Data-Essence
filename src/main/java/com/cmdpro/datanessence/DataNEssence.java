@@ -137,7 +137,7 @@ public class DataNEssence
             }
             return o.getItemHandler();
         });
-
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTICING_LURE.get(), (o, direction) -> o.getItemHandler());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -220,6 +220,7 @@ public class DataNEssence
             event.accept(BlockRegistry.ESSENCE_FURNACE.get());
             event.accept(BlockRegistry.FLUID_MIXER.get());
             event.accept(BlockRegistry.SYNTHESIS_CHAMBER.get());
+            event.accept(BlockRegistry.ENTICING_LURE.get());
         }
     }
 }

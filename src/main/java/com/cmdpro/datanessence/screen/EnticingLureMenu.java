@@ -1,9 +1,10 @@
 package com.cmdpro.datanessence.screen;
 
-import com.cmdpro.datanessence.util.IDataNEssenceMenuHelper;
-import com.cmdpro.datanessence.block.auxiliary.ChargerBlockEntity;
+import com.cmdpro.datanessence.block.auxiliary.EnticingLureBlockEntity;
+import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
+import com.cmdpro.datanessence.util.IDataNEssenceMenuHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +18,7 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-public class ChargerMenu extends AbstractContainerMenu implements IDataNEssenceMenuHelper {
+public class EnticingLureMenu extends AbstractContainerMenu implements IDataNEssenceMenuHelper {
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
         return guiHelperQuickMoveStack(player, index, 1, this);
@@ -26,26 +27,26 @@ public class ChargerMenu extends AbstractContainerMenu implements IDataNEssenceM
     public boolean guiHelperMoveItemStackTo(ItemStack pStack, int pStartIndex, int pEndIndex, boolean pReverseDirection) {
         return moveItemStackTo(pStack, pStartIndex, pEndIndex, pReverseDirection);
     }
-    public final ChargerBlockEntity blockEntity;
+    public final EnticingLureBlockEntity blockEntity;
     private final Level level;
-    public ChargerMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+    public EnticingLureMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
     }
-    public ChargerMenu(int pContainerId, Inventory inv, BlockEntity entity) {
-        super(MenuRegistry.CHARGER_MENU.get(), pContainerId);
+    public EnticingLureMenu(int pContainerId, Inventory inv, BlockEntity entity) {
+        super(MenuRegistry.ENTICING_LURE_MENU.get(), pContainerId);
         checkContainerSize(inv, 1);
-        blockEntity = ((ChargerBlockEntity) entity);
+        blockEntity = ((EnticingLureBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
         IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
-        this.addSlot(new SlotItemHandler(handler, 0, 98, 34));
+        this.addSlot(new SlotItemHandler(handler, 0, 80, 34));
     }
 
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, BlockRegistry.CHARGER.get());
+                pPlayer, BlockRegistry.ENTICING_LURE.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
