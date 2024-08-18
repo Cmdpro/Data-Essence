@@ -1,0 +1,41 @@
+package com.cmdpro.datanessence.multiblock.predicates;
+
+import com.cmdpro.datanessence.multiblock.MultiblockPredicate;
+import com.cmdpro.datanessence.multiblock.MultiblockPredicateSerializer;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.Property;
+
+public class BlockstateMultiblockPredicate extends MultiblockPredicate {
+    public BlockstateMultiblockPredicate(BlockState self) {
+        this.self = self;
+    }
+    public BlockState self;
+    @Override
+    public boolean isSame(BlockState other) {
+        if (other.is(self.getBlock())) {
+            boolean stateMatches = true;
+            for (Property<?> p : self.getProperties()) {
+                if (other.hasProperty(p)) {
+                    if (!other.getValue(p).equals(self.getValue(p))) {
+                        stateMatches = false;
+                        break;
+                    }
+                } else {
+                    stateMatches = false;
+                    break;
+                }
+            }
+            if (!stateMatches) {
+                return false;
+            }
+        } else {
+            return false;
+        }
+        return false;
+    }
+
+    @Override
+    public MultiblockPredicateSerializer getSerializer() {
+        return null;
+    }
+}

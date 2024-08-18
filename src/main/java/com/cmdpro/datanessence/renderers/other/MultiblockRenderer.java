@@ -3,14 +3,10 @@ package com.cmdpro.datanessence.renderers.other;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.mixins.client.BufferSourceMixin;
 import com.cmdpro.datanessence.multiblock.Multiblock;
-import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
-import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
-import com.eliotlash.mclib.math.functions.limit.Min;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.ByteBufferBuilder;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.DeltaTracker;
@@ -29,7 +25,6 @@ import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ColorResolver;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
@@ -96,8 +91,8 @@ public class MultiblockRenderer {
         renderMultiblock(multiblock, pos, stack, partialTick, rotation, buffers);
     }
     public static void renderMultiblock(Multiblock multiblock, BlockPos pos, PoseStack stack, DeltaTracker partialTick, Rotation rotation, MultiBufferSource.BufferSource bufferSource) {
-        for (List<Multiblock.StateAndPos> i : multiblock.getStates()) {
-            for (Multiblock.StateAndPos o : i) {
+        for (List<Multiblock.PredicateAndPos> i : multiblock.getStates()) {
+            for (Multiblock.PredicateAndPos o : i) {
                 if (pos != null) {
                     boolean stateMatches = true;
                     BlockState state = Minecraft.getInstance().level.getBlockState(o.offset.offset(pos));
