@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.multiblock;
 
+import com.cmdpro.datanessence.multiblock.predicates.BlockstateMultiblockPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -13,12 +14,12 @@ import java.util.List;
 
 public class Multiblock {
     public String[][] multiblockLayers;
-    public HashMap<Character, BlockState> key;
+    public HashMap<Character, MultiblockPredicate> key;
     public BlockPos offset;
     private List<List<PredicateAndPos>> states;
-    public Multiblock(String[][] multiblockLayers, HashMap<Character, BlockState> key, BlockPos offset) {
+    public Multiblock(String[][] multiblockLayers, HashMap<Character, MultiblockPredicate> key, BlockPos offset) {
         this.multiblockLayers = multiblockLayers;
-        key.put(' ', Blocks.AIR.defaultBlockState());
+        key.put(' ', new BlockstateMultiblockPredicate(Blocks.AIR.defaultBlockState()));
         this.key = key;
         this.offset = offset;
     }
@@ -62,17 +63,19 @@ public class Multiblock {
                 }
                 BlockPos blockPos = o.offset.rotate(rotation).offset(pos.getX(), pos.getY(), pos.getZ());
                 BlockState state = level.getBlockState(blockPos);
-
+                if (!o.predicate.isSame(state)) {
+                    return false;
+                }
             }
         }
         return true;
     }
     public static class PredicateAndPos {
-        public PredicateAndPos(BlockStatePredicate predicate, BlockPos offset) {
+        public PredicateAndPos(MultiblockPredicate predicate, BlockPos offset) {
             this.predicate = predicate;
             this.offset = offset;
         }
-        public BlockStatePredicate predicate;
+        public MultiblockPredicate predicate;
         public BlockPos offset;
     }
 }

@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.multiblock;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -32,10 +33,12 @@ public class MultiblockSerializer {
         if (!json.has("offset")) {
             throw new JsonSyntaxException("Element offset missing in multiblock JSON for " + entryId.toString());
         }
-        HashMap<Character, BlockState> key = new HashMap<>();
+        HashMap<Character, MultiblockPredicate> key = new HashMap<>();
         try {
             for (Map.Entry<String, JsonElement> i : json.getAsJsonObject("key").asMap().entrySet()) {
-                key.put(i.getKey().charAt(0), BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), i.getValue().getAsString(), false).blockState());
+                JsonObject obj = i.getValue().getAsJsonObject();
+                MultiblockPredicate predicate = DataNEssenceRegistries.MULTIBLOCK_PREDICATE_REGISTRY.get(ResourceLocation.tryParse(obj.get("type").getAsString())).fromJson(obj);
+                key.put(i.getKey().charAt(0), predicate);
             }
         } catch (Exception e) {
             DataNEssence.LOGGER.error(e.getMessage());
@@ -58,13 +61,9 @@ public class MultiblockSerializer {
     }
     @Nonnull
     public static Multiblock fromNetwork(FriendlyByteBuf buf) {
-        HashMap<Character, BlockState> key = new HashMap<>(buf.readMap((a) -> a.readChar(), (a) -> {
-            try {
-                return BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), a.readUtf(), false).blockState();
-            } catch (Exception e) {
-                DataNEssence.LOGGER.error(e.getMessage());
-                return Blocks.AIR.defaultBlockState();
-            }
+        HashMap<Character, MultiblockPredicate> key = new HashMap<>(buf.readMap((a) -> a.readChar(), (a) -> {
+            MultiblockPredicateSerializer serializer = DataNEssenceRegistries.MULTIBLOCK_PREDICATE_REGISTRY.get(a.readResourceLocation());
+            return serializer.fromNetwork(a);
         }));
         BlockPos offset = buf.readBlockPos();
         List<String[]> layers = buf.readList((a) -> a.readList(FriendlyByteBuf::readUtf).toArray(new String[0]));
@@ -72,7 +71,8 @@ public class MultiblockSerializer {
     }
     public static void toNetwork(FriendlyByteBuf buf, Multiblock multiblock) {
         buf.writeMap(multiblock.key, (a, b) -> a.writeChar(b), (a, b) -> {
-            buf.writeUtf(BlockStateParser.serialize(b));
+            buf.writeResourceLocation(DataNEssenceRegistries.MULTIBLOCK_PREDICATE_REGISTRY.getKey(b.getSerializer()));
+            b.getSerializer().toNetwork(a, b);
         });
         buf.writeBlockPos(multiblock.offset);
         List<List<String>> layers = new ArrayList<>();

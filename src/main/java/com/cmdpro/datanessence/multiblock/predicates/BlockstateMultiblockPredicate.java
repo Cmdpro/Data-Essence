@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.multiblock.predicates;
 
 import com.cmdpro.datanessence.multiblock.MultiblockPredicate;
 import com.cmdpro.datanessence.multiblock.MultiblockPredicateSerializer;
+import com.cmdpro.datanessence.registry.MultiblockPredicateRegistry;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Property;
 
@@ -25,17 +26,19 @@ public class BlockstateMultiblockPredicate extends MultiblockPredicate {
                     break;
                 }
             }
-            if (!stateMatches) {
-                return false;
-            }
+            return stateMatches;
         } else {
             return false;
         }
-        return false;
     }
 
     @Override
     public MultiblockPredicateSerializer getSerializer() {
-        return null;
+        return MultiblockPredicateRegistry.BLOCKSTATE.get();
+    }
+
+    @Override
+    public BlockState getVisual() {
+        return self;
     }
 }

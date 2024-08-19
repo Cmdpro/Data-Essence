@@ -1,8 +1,17 @@
 {
   "key": {
-    "a": "minecraft:gold_block",
-    "A": "minecraft:iron_block",
-    "b": "minecraft:chest"
+    "a": {
+      "type": "datanessence:blockstate",
+      "state": "minecraft:gold_block"
+    },
+    "A": {
+      "type": "datanessence:tag",
+      "tag": "c:cobblestones"
+    },
+    "b": {
+      "type": "datanessence:blockstate",
+      "state": "minecraft:chest"
+    }
   },
   "layers": [
     [
