@@ -52,8 +52,26 @@ public class Multiblock {
             return this.states;
         }
     }
+    public Rotation getMultiblockRotation(Level level, BlockPos pos) {
+        if (checkMultiblock(level, pos, Rotation.NONE)) {
+            return Rotation.NONE;
+        }
+        if (checkMultiblock(level, pos, Rotation.COUNTERCLOCKWISE_90)) {
+            return Rotation.COUNTERCLOCKWISE_90;
+        }
+        if (checkMultiblock(level, pos, Rotation.CLOCKWISE_180)) {
+            return Rotation.CLOCKWISE_180;
+        }
+        if (checkMultiblock(level, pos, Rotation.CLOCKWISE_90)) {
+            return Rotation.CLOCKWISE_90;
+        }
+        return null;
+    }
     public boolean checkMultiblock(Level level, BlockPos pos) {
         return checkMultiblock(level, pos, Rotation.NONE);
+    }
+    public boolean checkMultiblockAll(Level level, BlockPos pos) {
+        return checkMultiblock(level, pos, Rotation.NONE) || checkMultiblock(level, pos, Rotation.CLOCKWISE_90) || checkMultiblock(level, pos, Rotation.CLOCKWISE_180) || checkMultiblock(level, pos, Rotation.COUNTERCLOCKWISE_90);
     }
     public boolean checkMultiblock(Level level, BlockPos pos, Rotation rotation) {
         for (List<PredicateAndPos> i : getStates()) {
@@ -63,7 +81,7 @@ public class Multiblock {
                 }
                 BlockPos blockPos = o.offset.rotate(rotation).offset(pos.getX(), pos.getY(), pos.getZ());
                 BlockState state = level.getBlockState(blockPos);
-                if (!o.predicate.isSame(state)) {
+                if (!o.predicate.isSame(state, rotation)) {
                     return false;
                 }
             }

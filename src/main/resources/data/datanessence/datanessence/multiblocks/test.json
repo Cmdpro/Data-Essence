@@ -10,7 +10,7 @@
     },
     "b": {
       "type": "datanessence:blockstate",
-      "state": "minecraft:chest"
+      "state": "minecraft:chest[facing=north]"
     }
   },
   "layers": [

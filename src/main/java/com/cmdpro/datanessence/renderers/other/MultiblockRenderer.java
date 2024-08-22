@@ -95,12 +95,12 @@ public class MultiblockRenderer {
             for (Multiblock.PredicateAndPos o : i) {
                 if (pos != null) {
                     BlockState state = Minecraft.getInstance().level.getBlockState(o.offset.rotate(rotation).offset(pos));
-                    boolean stateMatches = o.predicate.isSame(state);
+                    boolean stateMatches = o.predicate.isSame(state, rotation);
                     if (!stateMatches) {
-                        renderBlock(o.predicate.getVisual(), o.offset.rotate(rotation).offset(pos), stack, partialTick, bufferSource);
+                        renderBlock(o.predicate.getVisual().rotate(rotation), o.offset.rotate(rotation).offset(pos), stack, partialTick, bufferSource);
                     }
                 } else {
-                    renderBlock(o.predicate.getVisual(), o.offset.rotate(rotation), stack, partialTick, bufferSource);
+                    renderBlock(o.predicate.getVisual().rotate(rotation), o.offset.rotate(rotation), stack, partialTick, bufferSource);
                 }
             }
         }

@@ -131,7 +131,7 @@ public class ClientEvents {
         Minecraft mc = Minecraft.getInstance();
         if (MultiblockRenderer.multiblock != null) {
             if (MultiblockRenderer.multiblockPos != null) {
-                if (MultiblockRenderer.multiblock.checkMultiblock(mc.level, MultiblockRenderer.multiblockPos)) {
+                if (MultiblockRenderer.multiblock.checkMultiblock(mc.level, MultiblockRenderer.multiblockPos, MultiblockRenderer.multiblockRotation)) {
                     MultiblockRenderer.multiblock = null;
                     MultiblockRenderer.multiblockPos = null;
                 }
