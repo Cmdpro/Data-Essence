@@ -55,7 +55,11 @@ public class MultiblockPage extends Page {
         pGuiGraphics.pose().popPose();
         pGuiGraphics.pose().pushPose();
         pGuiGraphics.pose().translate(0, 0, 200);
-        pGuiGraphics.blit(DataTabletScreen.TEXTUREMISC, xOffset+120, yOffset+142, 0, 38, 16, 16);
+        if (pMouseX >= xOffset+120 && pMouseX <= xOffset+120+16 && pMouseY >= yOffset + 142 && pMouseY <= yOffset + 142 + 16) {
+            pGuiGraphics.blit(DataTabletScreen.TEXTUREMISC, xOffset+120, yOffset+142, 0, 54, 16, 16);
+        } else {
+            pGuiGraphics.blit(DataTabletScreen.TEXTUREMISC, xOffset+120, yOffset+142, 0, 38, 16, 16);
+        }
         pGuiGraphics.pose().popPose();
     }
 
