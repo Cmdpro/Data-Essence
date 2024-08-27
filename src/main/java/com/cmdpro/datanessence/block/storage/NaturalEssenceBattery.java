@@ -39,7 +39,7 @@ public class NaturalEssenceBattery extends Block implements EntityBlock {
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (pLevel.getBlockEntity(pPos) instanceof NaturalEssenceBatteryBlockEntity ent) {
             if (!pLevel.isClientSide) {
-                pPlayer.sendSystemMessage(Component.translatable("block.datanessence.natural_essence_battery.amount", ent.getNaturalEssence(), ent.getMaxNaturalEssence()));
+                pPlayer.displayClientMessage(Component.translatable("block.datanessence.natural_essence_battery.amount", ent.getNaturalEssence(), ent.getMaxNaturalEssence()), true);
             }
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
         }

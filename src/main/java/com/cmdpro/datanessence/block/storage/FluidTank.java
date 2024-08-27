@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.BedBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
@@ -40,9 +41,9 @@ public class FluidTank extends TransparentBlock implements EntityBlock {
             if (!pLevel.isClientSide) {
                 FluidStack fluid = ent.getFluidHandler().getFluidInTank(0);
                 if (fluid.getAmount() > 0) {
-                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fluid_tank.amount", fluid.getAmount(), ent.getFluidHandler().getTankCapacity(0), fluid.getHoverName()));
+                    pPlayer.displayClientMessage(Component.translatable("block.datanessence.fluid_tank.amount", fluid.getAmount(), ent.getFluidHandler().getTankCapacity(0), fluid.getHoverName()), true);
                 } else {
-                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fluid_tank.nothing"));
+                    pPlayer.displayClientMessage(Component.translatable("block.datanessence.fluid_tank.nothing"), true);
                 }
             }
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
