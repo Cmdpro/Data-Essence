@@ -1,4 +1,4 @@
-// 1.21	2024-08-13T22:20:59.7350922	Loot Tables
+// 1.21	2024-08-27T11:22:35.9767282	Loot Tables
 bbbe51e74edfcc54136678857699b9b14569a089 data/datanessence/loot_table/blocks/ancient_lantern.json
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_table/blocks/ancient_rock_bricks.json
 6540cac2211b8a360d5bbebd6d8ecce140f3d3cb data/datanessence/loot_table/blocks/ancient_rock_column.json
@@ -12,6 +12,7 @@ d84e5950a8f59623f762d05a19464f398db0fccd data/datanessence/loot_table/blocks/com
 d780424182f390bb85712d7baf184b36886bae45 data/datanessence/loot_table/blocks/deco_item_buffer.json
 29cf93937134563596a438a411dbb8811fa8cc92 data/datanessence/loot_table/blocks/energized_ancient_rock_column.json
 b4e06af3b19028f6e283a59c3f045a5cf5d3020d data/datanessence/loot_table/blocks/engraved_polished_obsidian.json
+b5cfbe5adbc39553904bbf0be1a5cf945eb66357 data/datanessence/loot_table/blocks/enticing_lure.json
 b3924faa21b885f135cf8df29e663f3f40701cba data/datanessence/loot_table/blocks/entropic_processor.json
 efab1d253d12155b53529f816a5df8e374047f49 data/datanessence/loot_table/blocks/essence_battery.json
 c996e8f671e37b19ca6756e1c080759fc1be75b7 data/datanessence/loot_table/blocks/essence_buffer.json

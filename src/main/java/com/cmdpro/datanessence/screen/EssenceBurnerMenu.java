@@ -20,7 +20,7 @@ import net.neoforged.neoforge.items.SlotItemHandler;
 public class EssenceBurnerMenu extends AbstractContainerMenu implements IDataNEssenceMenuHelper {
     @Override
     public ItemStack quickMoveStack(Player player, int index) {
-        return guiHelperQuickMoveStack(player, index, 3, this);
+        return guiHelperQuickMoveStack(player, index, 2, this);
     }
     @Override
     public boolean guiHelperMoveItemStackTo(ItemStack pStack, int pStartIndex, int pEndIndex, boolean pReverseDirection) {
@@ -33,7 +33,7 @@ public class EssenceBurnerMenu extends AbstractContainerMenu implements IDataNEs
     }
     public EssenceBurnerMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.ESSENCE_BURNER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 3);
+        checkContainerSize(inv, 2);
         blockEntity = ((EssenceBurnerBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

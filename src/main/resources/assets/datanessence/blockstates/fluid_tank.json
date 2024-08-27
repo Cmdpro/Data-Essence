@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "datanessence:block/fluid_tank"
+    }
+  }
+}

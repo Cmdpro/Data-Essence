@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.production.FluidCollector;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
 import com.cmdpro.datanessence.registry.BlockRegistry;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -62,7 +63,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void cubeColumn(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
-        simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "horizontal"), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath())));
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_horizontal"), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath())));
     }
     private void ancientDecoBlockWithItem(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());

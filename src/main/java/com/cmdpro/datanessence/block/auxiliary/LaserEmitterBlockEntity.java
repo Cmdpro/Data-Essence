@@ -94,10 +94,14 @@ public class LaserEmitterBlockEntity extends EssenceContainer implements MenuPro
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, LaserEmitterBlockEntity pBlockEntity) {
         int oldRedstoneLevel = pBlockEntity.redstoneLevel;
         boolean updated = false;
+        boolean drainsEssence = true;
+        if (!(pBlockEntity.itemHandler.getStackInSlot(0).getItem() instanceof ILaserEmitterModule)) {
+            drainsEssence = false;
+        }
         if (!pLevel.isClientSide) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
         }
-        if (pBlockEntity.getEssence() >= 0.5f) {
+        if (pBlockEntity.getEssence() >= 0.5f || !drainsEssence) {
             float dist = 0;
             for (int i = 1; i <= 10; i++) {
                 BlockPos pos = pPos.relative(pState.getValue(LaserEmitter.FACING), i);
@@ -109,7 +113,9 @@ public class LaserEmitterBlockEntity extends EssenceContainer implements MenuPro
             if (dist > 0) {
                 pBlockEntity.end = pPos.getCenter().relative(pState.getValue(LaserEmitter.FACING), dist);
                 if (!pLevel.isClientSide) {
-                    pBlockEntity.setEssence(pBlockEntity.getEssence()-0.5f);
+                    if (drainsEssence) {
+                        pBlockEntity.setEssence(pBlockEntity.getEssence() - 0.5f);
+                    }
                     pBlockEntity.updateBlock();
                     updated = true;
                     AABB bounds = AABB.encapsulatingFullBlocks(pPos, pPos.relative(pState.getValue(LaserEmitter.FACING), (int) (dist - 0.5f)));
