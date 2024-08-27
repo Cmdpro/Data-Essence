@@ -78,8 +78,8 @@
   "block.datanessence.exotic_essence_battery": "Exotic Essence Battery",
   "block.datanessence.exotic_essence_battery.amount": "%1$s/%2$s Exotic Essence",
   "block.datanessence.fluid_tank": "Fluid Tank",
-  "block.datanessence.fluid_tank.amount": "%1$s/%2$s %3$s",
-  "block.datanessence.fluid_tank.nothing": "Nothing",
+  "block.datanessence.fluid_tank.amount": " ◇ Tank contains %1$smB/%2$smB of %3$s.",
+  "block.datanessence.fluid_tank.nothing": " ◇ This tank is empty.",
 
   "computer.types.test.files.0": "Very cool testing computer text file, yes very cool, indeed, uh I need more text uh uh uh uh uh uh uh yea",
 
