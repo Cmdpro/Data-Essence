@@ -51,6 +51,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         fluidCollector(BlockRegistry.FLUID_COLLECTOR);
         fluidCollector(BlockRegistry.FLUID_SPILLER);
         laserEmitter(BlockRegistry.LASER_EMITTER);
+        essenceBattery(BlockRegistry.ESSENCE_BATTERY);
 
         nothing(BlockRegistry.STRUCTURE_PROTECTOR);
 
@@ -63,7 +64,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void cubeColumn(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
-        simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_horizontal"), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath())));
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side"), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath())));
+    }
+    private void essenceBattery(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side"), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_end")));
     }
     private void ancientDecoBlockWithItem(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
