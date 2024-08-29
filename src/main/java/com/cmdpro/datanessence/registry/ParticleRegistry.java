@@ -1,8 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.particle.CircleParticleOptions;
-import com.cmdpro.datanessence.particle.CircleParticleOptionsAdditive;
+import com.cmdpro.datanessence.particle.*;
 import com.cmdpro.datanessence.worldgen.features.EssenceCrystalFeature;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -46,6 +45,45 @@ public class ParticleRegistry {
                 @Override
                 public StreamCodec<? super RegistryFriendlyByteBuf, CircleParticleOptionsAdditive> streamCodec() {
                     return CircleParticleOptionsAdditive.STREAM_CODEC;
+                }
+            });
+    public static final Supplier<ParticleType> RHOMBUS =
+            register("rhombus", () -> new ParticleType<RhombusParticleOptions>(false) {
+
+                @Override
+                public MapCodec<RhombusParticleOptions> codec() {
+                    return RhombusParticleOptions.CODEC;
+                }
+
+                @Override
+                public StreamCodec<? super RegistryFriendlyByteBuf, RhombusParticleOptions> streamCodec() {
+                    return RhombusParticleOptions.STREAM_CODEC;
+                }
+            });
+    public static final Supplier<ParticleType> MOTE =
+            register("mote", () -> new ParticleType<MoteParticleOptions>(false) {
+
+                @Override
+                public MapCodec<MoteParticleOptions> codec() {
+                    return MoteParticleOptions.CODEC;
+                }
+
+                @Override
+                public StreamCodec<? super RegistryFriendlyByteBuf, MoteParticleOptions> streamCodec() {
+                    return MoteParticleOptions.STREAM_CODEC;
+                }
+            });
+    public static final Supplier<ParticleType> SMALL_CIRCLE =
+            register("small_circle", () -> new ParticleType<SmallCircleParticleOptions>(false) {
+
+                @Override
+                public MapCodec<SmallCircleParticleOptions> codec() {
+                    return SmallCircleParticleOptions.CODEC;
+                }
+
+                @Override
+                public StreamCodec<? super RegistryFriendlyByteBuf, SmallCircleParticleOptions> streamCodec() {
+                    return SmallCircleParticleOptions.STREAM_CODEC;
                 }
             });
 

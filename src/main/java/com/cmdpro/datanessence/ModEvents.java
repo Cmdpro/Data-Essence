@@ -14,6 +14,9 @@ import com.cmdpro.datanessence.networking.packet.DragonPartsSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.HiddenBlockSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.MultiblockSyncS2CPacket;
+import com.cmdpro.datanessence.particle.MoteParticleOptions;
+import com.cmdpro.datanessence.particle.RhombusParticleOptions;
+import com.cmdpro.datanessence.particle.SmallCircleParticleOptions;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
@@ -23,6 +26,7 @@ import com.cmdpro.datanessence.screen.datatablet.DataTabManager;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
+import com.ibm.icu.util.CodePointTrie;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -48,6 +52,7 @@ import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,16 +63,24 @@ public class ModEvents {
     public static void onLivingEntityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity ent) {
             if (event.getEntity().getBlockStateOn().getBlock() instanceof TraversiteRoad road) {
-                if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID) == null) {
-                    ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-                } else {
-                    if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID).amount() != road.boost) {
-                        ent.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
+                if (!ent.level().isClientSide) {
+                    if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID) == null) {
                         ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                    } else {
+                        if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID).amount() != road.boost) {
+                            ent.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
+                            ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                        }
                     }
+                } else {
+                    ent.level().addParticle(new RhombusParticleOptions(new Color(0xff6ab3fc)), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
+                    ent.level().addParticle(new MoteParticleOptions(new Color(0xffffffff)), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
+                    ent.level().addParticle(new SmallCircleParticleOptions(new Color(0xfffc92bb)), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
                 }
             } else {
-                ent.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
+                if (!ent.level().isClientSide) {
+                    ent.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
+                }
             }
         }
     }

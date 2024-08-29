@@ -2,9 +2,7 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.entity.AncientSentinel;
 import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
-import com.cmdpro.datanessence.particle.CircleParticle;
-import com.cmdpro.datanessence.particle.CircleParticleAdditive;
-import com.cmdpro.datanessence.particle.EssenceSparkleParticle;
+import com.cmdpro.datanessence.particle.*;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.renderers.block.*;
 import com.cmdpro.datanessence.renderers.entity.AncientSentinelRenderer;
@@ -105,5 +103,11 @@ public class ClientModEvents {
                 CircleParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.CIRCLE_ADDITIVE.get(),
                 CircleParticleAdditive.Provider::new);
+        Minecraft.getInstance().particleEngine.register(ParticleRegistry.RHOMBUS.get(),
+                RhombusParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(ParticleRegistry.SMALL_CIRCLE.get(),
+                SmallCircleParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(ParticleRegistry.MOTE.get(),
+                MoteParticle.Provider::new);
     }
 }
