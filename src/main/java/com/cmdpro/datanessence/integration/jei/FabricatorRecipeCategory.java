@@ -10,6 +10,7 @@ import com.cmdpro.datanessence.screen.DataTabletScreen;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -76,9 +77,8 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
             guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 93, 4, 242, 185, 14, 11);
         }
     }
-
     @Override
-    public List<Component> getTooltipStrings(IFabricationRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public void getTooltip(ITooltipBuilder builder, IFabricationRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltip = new ArrayList<>();
         Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 6, 0, recipe.getEssenceCost());
         if (essence != null) {
@@ -100,7 +100,7 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
             tooltip.clear();
             tooltip.add(exoticEssence);
         }
-        return tooltip;
+        builder.addAll(tooltip);
     }
 
     @Override

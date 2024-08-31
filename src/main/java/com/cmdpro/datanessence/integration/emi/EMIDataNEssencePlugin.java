@@ -24,6 +24,7 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
     public static final ResourceLocation EMI_ICONS = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"textures/gui/emi_icons.png");
 
     public static final EmiStack FABRICATOR_WORKSTATION = EmiStack.of(ItemRegistry.FABRICATOR_ITEM.get());
+    public static final EmiStack AUTO_FABRICATOR_WORKSTATION = EmiStack.of(ItemRegistry.AUTO_FABRICATOR_ITEM.get());
     public static final EmiStack INFUSER_WORKSTATION = EmiStack.of(ItemRegistry.INFUSER_ITEM.get());
 
     public static final EmiRecipeCategory FABRICATION = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"fabrication"), FABRICATOR_WORKSTATION, new EmiTexture(EMI_ICONS, 0, 0, 16, 16));
@@ -35,6 +36,7 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
         emiRegistry.addCategory(INFUSION);
 
         emiRegistry.addWorkstation(FABRICATION, FABRICATOR_WORKSTATION);
+        emiRegistry.addWorkstation(FABRICATION, AUTO_FABRICATOR_WORKSTATION);
         emiRegistry.addWorkstation(INFUSION, INFUSER_WORKSTATION);
 
         RecipeManager manager = emiRegistry.getRecipeManager();

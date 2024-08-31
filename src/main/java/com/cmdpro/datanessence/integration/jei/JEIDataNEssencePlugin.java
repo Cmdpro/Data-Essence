@@ -46,6 +46,7 @@ public class JEIDataNEssencePlugin implements IModPlugin {
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.FABRICATOR_ITEM.get()), FABRICATION_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(ItemRegistry.AUTO_FABRICATOR_ITEM.get()), FABRICATION_RECIPE);
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.INFUSER_ITEM.get()), INFUSION_RECIPE);
     }
     @Override

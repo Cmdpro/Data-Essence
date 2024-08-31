@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -60,7 +61,7 @@ public class InfuserRecipeCategory implements IRecipeCategory<InfusionRecipe> {
     }
 
     @Override
-    public List<Component> getTooltipStrings(InfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public void getTooltip(ITooltipBuilder builder, InfusionRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltip = new ArrayList<>();
         Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 6, 0, recipe.getEssenceCost());
         if (essence != null) {
@@ -82,7 +83,7 @@ public class InfuserRecipeCategory implements IRecipeCategory<InfusionRecipe> {
             tooltip.clear();
             tooltip.add(exoticEssence);
         }
-        return tooltip;
+        builder.addAll(tooltip);
     }
 
     @Override
