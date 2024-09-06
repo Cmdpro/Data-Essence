@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.api.block;
 
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -16,8 +17,9 @@ import net.minecraft.world.level.block.state.properties.AttachFace;
 
 import java.awt.*;
 
-public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
+public abstract class BaseEssencePointBlockEntity extends BlockEntity {
     public BlockPos link;
+    public SingleEssenceContainer storage;
 
     public BaseEssencePointBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);

@@ -1,12 +1,10 @@
 package com.cmdpro.datanessence.item.equipment;
 
-import com.cmdpro.datanessence.api.util.EssenceUtil;
 import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EntityRegistry;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

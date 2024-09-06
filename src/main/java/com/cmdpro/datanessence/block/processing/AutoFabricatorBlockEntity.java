@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;

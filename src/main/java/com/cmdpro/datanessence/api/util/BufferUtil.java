@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.api.util;
 
-import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.block.transmission.EssenceBufferBlockEntity;
 import com.cmdpro.datanessence.block.transmission.FluidBufferBlockEntity;
 import com.cmdpro.datanessence.block.transmission.ItemBufferBlockEntity;
@@ -15,16 +16,11 @@ import net.neoforged.neoforge.items.IItemHandler;
 import org.joml.Math;
 
 public class BufferUtil {
-    public static void getEssenceFromBuffersBelow(EssenceContainer container) {
+    public static void getEssenceFromBuffersBelow(BlockEntity container, EssenceType type) {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof EssenceBufferBlockEntity buffer) {
-                EssenceUtil.transferEssence(buffer, container, buffer.getMaxEssence());
-                EssenceUtil.transferLunarEssence(buffer, container, buffer.getMaxLunarEssence());
-                EssenceUtil.transferNaturalEssence(buffer, container, buffer.getMaxNaturalEssence());
-                EssenceUtil.transferExoticEssence(buffer, container, buffer.getMaxExoticEssence());
-            } else if (!(ent instanceof ItemBufferBlockEntity || ent instanceof FluidBufferBlockEntity)) {
-                break;
+                EssenceStorage.transferEssence(buffer, container, type, buffer.getMaxEssence());
             }
         }
     }
@@ -69,8 +65,6 @@ public class BufferUtil {
                         }
                     }
                 }
-            } else if (!(ent instanceof EssenceBufferBlockEntity || ent instanceof FluidBufferBlockEntity)) {
-                break;
             }
         }
     }
@@ -92,8 +86,6 @@ public class BufferUtil {
                         resolved.getFluidInTank(o).shrink(filled);
                     }
                 }
-            } else if (!(ent instanceof EssenceBufferBlockEntity || ent instanceof ItemBufferBlockEntity)) {
-                break;
             }
         }
     }

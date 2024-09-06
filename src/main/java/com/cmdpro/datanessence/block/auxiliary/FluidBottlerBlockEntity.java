@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.screen.FluidBottlerMenu;
 import net.minecraft.core.BlockPos;

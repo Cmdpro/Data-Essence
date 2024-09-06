@@ -2,6 +2,11 @@
   "creativemodetab.datanessence_blocks": "Data & Essence Blocks",
   "creativemodetab.datanessence_items": "Data & Essence Items",
 
+  "datanessence.essence_types.essence":         "Essence",
+  "datanessence.essence_types.lunar_essence":   "Lunar Essence",
+  "datanessence.essence_types.natural_essence": "Natural Essence",
+  "datanessence.essence_types.exotic_essence":  "Exotic Essence",
+
   "item.datanessence.data_tablet": "Data Tablet",
   "item.datanessence.data_drive": "Data Drive",
   "item.datanessence.data_drive.empty": " ◇ Contains no data",
