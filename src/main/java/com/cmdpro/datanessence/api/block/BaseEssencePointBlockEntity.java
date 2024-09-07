@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.api.block;
 
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -68,8 +69,8 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
             }
         }
     }
-    public abstract void transfer(EssenceContainer other);
-    public abstract void take(EssenceContainer other);
+    public abstract void transfer(EssenceStorage other);
+    public abstract void take(EssenceStorage other);
     public Direction getDirection() {
         if (getBlockState().getValue(BaseEssencePoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;

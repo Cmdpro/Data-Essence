@@ -15,6 +15,8 @@ public class MultiEssenceContainer implements EssenceStorage {
     protected final Map<EssenceType, Float> storedEssence = new Object2FloatArrayMap<>(); // current Essence stored here
     protected final float totalEssence; // maximum capacity for all types
 
+    // TODO Nbt
+
     // To define a container that can store every type
     public MultiEssenceContainer(float totalEssence) {
         this(List.of(EssenceType.essences), 0f);
@@ -53,6 +55,11 @@ public class MultiEssenceContainer implements EssenceStorage {
     @Override
     public float getMaxEssence() {
         return totalEssence;
+    }
+
+    @Override
+    public EssenceStorage getStorage() {
+        return this;
     }
 
     public Set<EssenceType> getSupportedEssenceTypes() {

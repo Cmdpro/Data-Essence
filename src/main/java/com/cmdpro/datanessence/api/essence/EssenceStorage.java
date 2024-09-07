@@ -53,4 +53,10 @@ public interface EssenceStorage {
      * @return total capacity
      */
     float getMaxEssence();
+
+    /**
+     * Gets an instance of the storage.
+     * @return storage
+     */
+    EssenceStorage getStorage();
 }

@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block.transmission;
 
 import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
@@ -52,7 +53,7 @@ public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity 
     }
     @Override
     public Color linkColor() {
-        return new Color(0x57f36c);
+        return new Color(EssenceType.NATURAL_ESSENCE.getColor());
     }
 
     @Override

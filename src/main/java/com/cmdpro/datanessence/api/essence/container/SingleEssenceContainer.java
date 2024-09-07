@@ -63,6 +63,11 @@ public class SingleEssenceContainer implements EssenceStorage {
         return totalStorage;
     }
 
+    @Override
+    public EssenceStorage getStorage() {
+        return this;
+    }
+
     /**
      * Transforms the container data into a NBT compound.
      * @return NBT compound of the storage

@@ -1,11 +1,14 @@
 package com.cmdpro.datanessence.block.transmission;
 
 import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoAnimatable;
@@ -17,6 +20,8 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.awt.*;
 
 public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity implements GeoBlockEntity {
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceType.EXOTIC_ESSENCE, DataNEssenceConfig.essencePointTransfer);
+
     public ExoticEssencePointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.EXOTIC_ESSENCE_POINT.get(), pos, state);
     }
@@ -37,13 +42,13 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity i
         return this.factory;
     }
     @Override
-    public void transfer(EssenceContainer other) {
-        EssenceUtil.transferExoticEssence(this, other, DataNEssenceConfig.essencePointTransfer);
+    public void transfer(BlockEntity other) {
+        storage.transferEssence(this, other, EssenceType.EXOTIC_ESSENCE, DataNEssenceConfig.essencePointTransfer);
     }
 
     @Override
     public Color linkColor() {
-        return new Color(0xe7fcf9);
+        return new Color(EssenceType.EXOTIC_ESSENCE.getColor());
     }
 
     @Override
@@ -58,7 +63,7 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity i
     }
 
     @Override
-    public float getMaxExoticEssence() {
+    public float getMaxEssence() {
         return DataNEssenceConfig.essencePointTransfer;
     }
 
