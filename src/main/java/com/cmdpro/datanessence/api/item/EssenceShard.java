@@ -1,17 +1,16 @@
 package com.cmdpro.datanessence.api.item;
 
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
+import java.util.Map;
+import java.util.function.Supplier;
+
 public class EssenceShard extends Item {
-    public float essenceAmount;
-    public float lunarEssenceAmount;
-    public float naturalEssenceAmount;
-    public float exoticEssenceAmount;
-    public EssenceShard(Properties pProperties, float essenceAmount, float lunarEssenceAmount, float naturalEssenceAmount, float exoticEssenceAmount) {
+    public Map<Supplier<EssenceType>, Float> essence;
+    public EssenceShard(Properties pProperties, Map<Supplier<EssenceType>, Float> essence) {
         super(pProperties);
-        this.essenceAmount = essenceAmount;
-        this.lunarEssenceAmount = lunarEssenceAmount;
-        this.naturalEssenceAmount = naturalEssenceAmount;
-        this.exoticEssenceAmount = exoticEssenceAmount;
+        this.essence = essence;
     }
 }

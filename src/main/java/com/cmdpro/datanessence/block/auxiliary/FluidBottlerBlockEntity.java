@@ -1,10 +1,12 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.FluidBottlerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -40,8 +42,12 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider {
-    public SingleEssenceContainer storage;
+public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -82,7 +88,6 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
 
     public FluidBottlerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_BOTTLER.get(), pos, state);
-        this.storage = new SingleEssenceContainer(EssenceType.ESSENCE, 1000);
         item = ItemStack.EMPTY;
     }
 
@@ -144,11 +149,11 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
     public int workTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidBottlerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            if (pBlockEntity.getEssence() >= 50) {
+            if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 50) {
                 ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0);
                 if (stack.is(Items.BUCKET)) {
                     if (pBlockEntity.fluidHandler.getFluid().getAmount() >= 1000) {
@@ -160,7 +165,7 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
                                 pBlockEntity.outputItemHandler.insertItem(0, bucket, false);
                                 pBlockEntity.fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE);
-                                pBlockEntity.setEssence(pBlockEntity.getEssence()-50);
+                                pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
                                 pBlockEntity.workTime = 0;
                                 pLevel.playSound(null, pPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
                             }
@@ -178,7 +183,7 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
                                     pBlockEntity.itemHandler.extractItem(0, 1, false);
                                     pBlockEntity.outputItemHandler.insertItem(0, bottle, false);
                                     pBlockEntity.fluidHandler.drain(250, IFluidHandler.FluidAction.EXECUTE);
-                                    pBlockEntity.setEssence(pBlockEntity.getEssence() - 50);
+                                    pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
                                     pBlockEntity.workTime = 0;
                                     pLevel.playSound(null, pPos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
                                 }

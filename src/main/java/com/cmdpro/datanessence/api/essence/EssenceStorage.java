@@ -31,7 +31,9 @@ public interface EssenceStorage {
      * @param type the Essence type to query
      * @return stored amount
      */
-    float getEssence(EssenceType type);
+    default float getEssence(EssenceType type) {
+        return getStorage().getEssence(type);
+    }
 
     /**
      * Adds Essence of the given type.
@@ -39,20 +41,26 @@ public interface EssenceStorage {
      * @param type   the Essence type to operate on
      * @param amount the amount of that type to add
      */
-    void addEssence(EssenceType type, float amount);
+    default void addEssence(EssenceType type, float amount) {
+        getStorage().addEssence(type, amount);
+    }
 
     /**
      * Removes Essence of the given type.
      * @param type the Essence type to operate on
      * @param amount the amount of that type to remove
      */
-    void removeEssence(EssenceType type, float amount);
+    default void removeEssence(EssenceType type, float amount) {
+        getStorage().removeEssence(type, amount);
+    }
 
     /**
      * Gets the total maximum capacity.
      * @return total capacity
      */
-    float getMaxEssence();
+    default float getMaxEssence() {
+        return getStorage().getMaxEssence();
+    }
 
     /**
      * Gets an instance of the storage.

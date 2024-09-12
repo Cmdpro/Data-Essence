@@ -1,8 +1,13 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.ChargerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -16,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -28,7 +34,14 @@ import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ChargerBlockEntity extends EssenceContainer implements MenuProvider, GeoBlockEntity {
+import java.util.List;
+
+public class ChargerBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, EssenceBlockEntity {
+    public static MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
@@ -39,23 +52,6 @@ public class ChargerBlockEntity extends EssenceContainer implements MenuProvider
     };
     public IItemHandler getItemHandler() {
         return lazyItemHandler.get();
-    }
-
-    @Override
-    public float getMaxEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxLunarEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxNaturalEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxExoticEssence() {
-        return 1000;
     }
 
     public void drops() {
@@ -76,20 +72,14 @@ public class ChargerBlockEntity extends EssenceContainer implements MenuProvider
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        setEssence(tag.getFloat("essence"));
-        setLunarEssence(tag.getFloat("lunarEssence"));
-        setNaturalEssence(tag.getFloat("naturalEssence"));
-        setExoticEssence(tag.getFloat("exoticEssence"));
+        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         charging = tag.getBoolean("charging");
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.put("item", item.saveOptional(pRegistries));
         tag.putBoolean("charging", charging);
         return tag;
@@ -98,20 +88,14 @@ public class ChargerBlockEntity extends EssenceContainer implements MenuProvider
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         super.saveAdditional(tag, pRegistries);
     }
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
-        setEssence(nbt.getFloat("essence"));
-        setLunarEssence(nbt.getFloat("lunarEssence"));
-        setNaturalEssence(nbt.getFloat("naturalEssence"));
-        setExoticEssence(nbt.getFloat("exoticEssence"));
+        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
     }
     public ItemStack item;
     public SimpleContainer getInv() {
@@ -129,17 +113,20 @@ public class ChargerBlockEntity extends EssenceContainer implements MenuProvider
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ChargerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             pBlockEntity.charging = false;
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.LUNAR_ESSENCE.get());
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.NATURAL_ESSENCE.get());
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.EXOTIC_ESSENCE.get());
             ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0).copy();
             pBlockEntity.item = stack;
             float maxEssence = EssenceChargeableItemUtil.getMaxEssence(stack);
             if (maxEssence > 0) {
                 float essence = EssenceChargeableItemUtil.getEssence(stack);
                 if (essence < maxEssence) {
-                    float fill = Math.min(maxEssence-essence, Math.min(5f, pBlockEntity.getEssence()));
+                    float fill = Math.min(maxEssence-essence, Math.min(5f, pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get())));
                     if (fill > 0) {
                         EssenceChargeableItemUtil.fillEssence(stack, fill);
-                        pBlockEntity.setEssence(pBlockEntity.getEssence() - fill);
+                        pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), fill);
                         pBlockEntity.charging = true;
                     }
                 }
@@ -148,10 +135,10 @@ public class ChargerBlockEntity extends EssenceContainer implements MenuProvider
             if (maxLunarEssence > 0) {
                 float essence = EssenceChargeableItemUtil.getLunarEssence(stack);
                 if (essence < maxLunarEssence) {
-                    float fill = Math.min(maxLunarEssence-essence, Math.min(5f, pBlockEntity.getLunarEssence()));
+                    float fill = Math.min(maxLunarEssence-essence, Math.min(5f, pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get())));
                     if (fill > 0) {
                         EssenceChargeableItemUtil.fillLunarEssence(stack, fill);
-                        pBlockEntity.setLunarEssence(pBlockEntity.getLunarEssence() - fill);
+                        pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.LUNAR_ESSENCE.get(), fill);
                         pBlockEntity.charging = true;
                     }
                 }
@@ -160,10 +147,10 @@ public class ChargerBlockEntity extends EssenceContainer implements MenuProvider
             if (maxNaturalEssence > 0) {
                 float essence = EssenceChargeableItemUtil.getNaturalEssence(stack);
                 if (essence < maxNaturalEssence) {
-                    float fill = Math.min(maxNaturalEssence-essence, Math.min(5f, pBlockEntity.getNaturalEssence()));
+                    float fill = Math.min(maxNaturalEssence-essence, Math.min(5f, pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get())));
                     if (fill > 0) {
                         EssenceChargeableItemUtil.fillNaturalEssence(stack, fill);
-                        pBlockEntity.setNaturalEssence(pBlockEntity.getNaturalEssence() - fill);
+                        pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get(), fill);
                         pBlockEntity.charging = true;
                     }
                 }
@@ -172,10 +159,10 @@ public class ChargerBlockEntity extends EssenceContainer implements MenuProvider
             if (maxExoticEssence > 0) {
                 float essence = EssenceChargeableItemUtil.getExoticEssence(stack);
                 if (essence < maxExoticEssence) {
-                    float fill = Math.min(maxExoticEssence-essence, Math.min(5f, pBlockEntity.getExoticEssence()));
+                    float fill = Math.min(maxExoticEssence-essence, Math.min(5f, pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.EXOTIC_ESSENCE.get())));
                     if (fill > 0) {
                         EssenceChargeableItemUtil.fillExoticEssence(stack, fill);
-                        pBlockEntity.setExoticEssence(pBlockEntity.getExoticEssence()-fill);
+                        pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.EXOTIC_ESSENCE.get(), fill);
                         pBlockEntity.charging = true;
                     }
                 }

@@ -1,10 +1,13 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.item.ILaserEmitterModule;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.LaserEmitterMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -32,9 +35,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider {
-    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceType.ESSENCE, 1000);
-
+public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -96,9 +102,9 @@ public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider
             drainsEssence = false;
         }
         if (!pLevel.isClientSide) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceType.ESSENCE);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
         }
-        if (storage.getEssence(EssenceType.ESSENCE) >= 0.5f || !drainsEssence) {
+        if (storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 0.5f || !drainsEssence) {
             float dist = 0;
             for (int i = 1; i <= 10; i++) {
                 BlockPos pos = pPos.relative(pState.getValue(LaserEmitter.FACING), i);
@@ -111,7 +117,7 @@ public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider
                 pBlockEntity.end = pPos.getCenter().relative(pState.getValue(LaserEmitter.FACING), dist);
                 if (!pLevel.isClientSide) {
                     if (drainsEssence) {
-                        storage.removeEssence(EssenceType.ESSENCE, 0.5f);
+                        storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), 0.5f);
                     }
                     pBlockEntity.updateBlock();
                     updated = true;

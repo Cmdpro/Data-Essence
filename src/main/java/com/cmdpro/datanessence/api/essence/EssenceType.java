@@ -1,21 +1,26 @@
 package com.cmdpro.datanessence.api.essence;
 
+import com.cmdpro.datanessence.DataNEssence;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 
-public enum EssenceType {
-    ESSENCE(Component.translatable("datanessence.essence_types.essence"), 0xe236ef), // Artifice, industry, electricity
-    LUNAR_ESSENCE(Component.translatable("datanessence.essence_types.lunar_essence"), 0xf5fbc0), // Transformation, the moon, rule-bending
-    NATURAL_ESSENCE(Component.translatable("datanessence.essence_types.natural_essence"), 0x57f36c), // Nature, life, the world
-    EXOTIC_ESSENCE(Component.translatable("datanessence.essence_types.exotic_essence"), 0xe7fcf9); // Stars, space, dreams
-    // How *strange*. It feels like something's missing.
+public class EssenceType {
+    public static final ResourceLocation ESSENCE_BAR_LOCATION = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/essence_bars.png");
 
-    public static final EssenceType[] essences = values();
     public final Component name;
     public final int color;
+    public final EssenceBarSpriteLocation tinyBarSprite, bigBarSprite;
 
-    EssenceType(Component name, int color) {
+    public EssenceType(Component name, int color, EssenceBarSpriteLocation tinyBarSprite, EssenceBarSpriteLocation bigBarSprite) {
         this.name = name;
         this.color = color;
+        this.tinyBarSprite = tinyBarSprite;
+        this.bigBarSprite = bigBarSprite;
+    }
+    public static EssenceBarSpriteLocation createLocation(ResourceLocation location, int x, int y) {
+        return new EssenceBarSpriteLocation(location, x, y);
     }
 
     public Component getName() {
@@ -24,5 +29,22 @@ public enum EssenceType {
 
     public int getColor() {
         return color;
+    }
+    public EssenceBarSpriteLocation getTinyBarSprite() {
+        return tinyBarSprite;
+    }
+
+    public EssenceBarSpriteLocation getBigBarSprite() {
+        return bigBarSprite;
+    }
+    private static class EssenceBarSpriteLocation {
+        public EssenceBarSpriteLocation(ResourceLocation texture, int x, int y) {
+            this.texture = texture;
+            this.x = x;
+            this.y = y;
+        }
+        public ResourceLocation texture;
+        public int x;
+        public int y;
     }
 }

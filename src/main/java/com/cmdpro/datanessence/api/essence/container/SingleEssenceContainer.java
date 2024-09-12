@@ -1,8 +1,10 @@
 package com.cmdpro.datanessence.api.essence.container;
 
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -47,14 +49,14 @@ public class SingleEssenceContainer implements EssenceStorage {
     @Override
     public void addEssence(EssenceType type, float amount) {
         if (type == storedType) {
-            this.storedEssence += amount; // TODO clamp this
+            this.storedEssence = Math.clamp(this.storedEssence + amount, 0, getMaxEssence());
         }
     }
 
     @Override
     public void removeEssence(EssenceType type, float amount) {
         if (type == storedType) {
-            this.storedEssence -= amount; // TODO also clamp this
+            this.storedEssence = Math.clamp(this.storedEssence - amount, 0, getMaxEssence());
         }
     }
 
@@ -75,7 +77,7 @@ public class SingleEssenceContainer implements EssenceStorage {
     public CompoundTag toNbt() {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("Amount", this.storedEssence);
-        tag.putInt("Type", this.storedType.ordinal());
+        tag.putString("Type", DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(storedType).toString());
         tag.putFloat("Capacity", this.totalStorage);
         return tag;
     }
@@ -86,7 +88,7 @@ public class SingleEssenceContainer implements EssenceStorage {
      * @return a new SingleEssenceContainer with the given data
      */
     public SingleEssenceContainer fromNbt(@NotNull CompoundTag tag) {
-        EssenceType storedType = EssenceType.essences[tag.getInt("Type")];
+        EssenceType storedType = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(ResourceLocation.tryParse(tag.getString("Type")));
         float storedAmount = tag.getFloat("Amount");
         float totalCapacity = tag.getFloat("Capacity");
         return new SingleEssenceContainer(storedType, totalCapacity, storedAmount);
