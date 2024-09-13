@@ -50,7 +50,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.*;
 
 public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, EssenceBlockEntity {
-    public static MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -93,7 +93,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
     }
     @Override
@@ -107,14 +107,14 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
+        tag.put("EssenceStorage", storage.toNbt());
         super.saveAdditional(tag, pRegistries);
     }
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
-        nbt.put("EssenceStorage", storage.toNbt());
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
     }
     public ItemStack item;
     public SimpleContainer getInv() {
@@ -149,7 +149,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
                         }
                         for (Map.Entry<ResourceLocation, Float> i : ent.essenceCost.entrySet()) {
                             EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                            storage.removeEssence(type, i.getValue());
+                            ent.storage.removeEssence(type, i.getValue());
                         }
                         ItemEntity entity = new ItemEntity(pLevel, (float) pPos.getX() + 0.5f, (float) pPos.getY() + 1f, (float) pPos.getZ() + 0.5f, stack);
                         pLevel.addFreshEntity(entity);
@@ -178,7 +178,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
                 boolean enoughEssence = true;
                 for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                     EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                    if (storage.getEssence(type) < i.getValue()) {
+                    if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
                         enoughEssence = false;
                     }
                 }

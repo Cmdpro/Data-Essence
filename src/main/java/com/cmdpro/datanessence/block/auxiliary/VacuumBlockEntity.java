@@ -25,7 +25,7 @@ import java.util.List;
 
 public class VacuumBlockEntity extends BlockEntity implements EssenceBlockEntity {
 
-    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(5) {
         @Override
@@ -47,7 +47,7 @@ public class VacuumBlockEntity extends BlockEntity implements EssenceBlockEntity
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
     }
     public void drops() {
         SimpleContainer inventory = getInv();
@@ -67,14 +67,14 @@ public class VacuumBlockEntity extends BlockEntity implements EssenceBlockEntity
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, VacuumBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide) {
-            if (storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
+            if (pBlockEntity.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
                 List<ItemEntity> ents = pLevel.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(pPos.getCenter(), 20, 20, 20));
                 for (ItemEntity i : ents) {
                     i.setDeltaMovement(pPos.getCenter().subtract(i.position()).normalize().multiply(0.2, 0.2, 0.2));
                     i.hasImpulse = true;
                 }
                 if (!ents.isEmpty()) {
-                    storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
+                    pBlockEntity.storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
                 }
                 List<ItemEntity> ents2 = pLevel.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(pPos.getCenter(), 3, 3, 3));
                 for (ItemEntity i : ents2) {

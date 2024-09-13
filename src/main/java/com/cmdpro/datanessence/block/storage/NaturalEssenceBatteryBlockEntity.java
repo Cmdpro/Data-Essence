@@ -32,7 +32,7 @@ public class NaturalEssenceBatteryBlockEntity extends BlockEntity implements Ess
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(tag, pRegistries);
-        storage = storage.fromNbt(tag);
+        storage.fromNbt(tag);
     }
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
@@ -40,7 +40,7 @@ public class NaturalEssenceBatteryBlockEntity extends BlockEntity implements Ess
     }
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
-        storage = storage.fromNbt(pkt.getTag());
+        storage.fromNbt(pkt.getTag());
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {

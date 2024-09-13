@@ -37,7 +37,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 import java.util.List;
 
 public class ChargerBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, EssenceBlockEntity {
-    public static MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -72,7 +72,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Geo
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         charging = tag.getBoolean("charging");
     }
@@ -95,7 +95,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Geo
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
     }
     public ItemStack item;
     public SimpleContainer getInv() {

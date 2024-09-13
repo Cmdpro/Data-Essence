@@ -77,8 +77,6 @@ public class SingleEssenceContainer implements EssenceStorage {
     public CompoundTag toNbt() {
         CompoundTag tag = new CompoundTag();
         tag.putFloat("Amount", this.storedEssence);
-        tag.putString("Type", DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(storedType).toString());
-        tag.putFloat("Capacity", this.totalStorage);
         return tag;
     }
 
@@ -87,10 +85,8 @@ public class SingleEssenceContainer implements EssenceStorage {
      * @param tag a compound containing EssenceType (int), stored amount (float), and total capacity (float)
      * @return a new SingleEssenceContainer with the given data
      */
-    public SingleEssenceContainer fromNbt(@NotNull CompoundTag tag) {
-        EssenceType storedType = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(ResourceLocation.tryParse(tag.getString("Type")));
+    public void fromNbt(@NotNull CompoundTag tag) {
         float storedAmount = tag.getFloat("Amount");
-        float totalCapacity = tag.getFloat("Capacity");
-        return new SingleEssenceContainer(storedType, totalCapacity, storedAmount);
+        this.storedEssence = storedAmount;
     }
 }

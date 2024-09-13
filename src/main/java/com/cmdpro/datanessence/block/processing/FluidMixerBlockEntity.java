@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
-    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -130,7 +130,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluidHandler"));
@@ -164,7 +164,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryDrive"));
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluids"));
         outputFluidHandler.readFromNBT(pRegistries, nbt.getCompound("outputFluid"));
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         craftingProgress = nbt.getInt("craftingProgress");
     }
     public ItemStack item;

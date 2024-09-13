@@ -43,7 +43,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
-    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -98,7 +98,7 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluid"));
@@ -127,7 +127,7 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("input"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluid"));
     }

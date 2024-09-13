@@ -34,7 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
-    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -83,7 +83,7 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
     }
     @Override
@@ -107,7 +107,7 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("input"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
     }
     public ItemStack item;

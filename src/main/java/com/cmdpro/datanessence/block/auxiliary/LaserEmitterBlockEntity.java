@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
-    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -88,7 +88,7 @@ public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
     }
 
@@ -104,7 +104,7 @@ public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider
         if (!pLevel.isClientSide) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
         }
-        if (storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 0.5f || !drainsEssence) {
+        if (pBlockEntity.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 0.5f || !drainsEssence) {
             float dist = 0;
             for (int i = 1; i <= 10; i++) {
                 BlockPos pos = pPos.relative(pState.getValue(LaserEmitter.FACING), i);
@@ -117,7 +117,7 @@ public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider
                 pBlockEntity.end = pPos.getCenter().relative(pState.getValue(LaserEmitter.FACING), dist);
                 if (!pLevel.isClientSide) {
                     if (drainsEssence) {
-                        storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), 0.5f);
+                        pBlockEntity.storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), 0.5f);
                     }
                     pBlockEntity.updateBlock();
                     updated = true;

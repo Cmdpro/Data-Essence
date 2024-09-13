@@ -19,7 +19,7 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 
 public class FluidSpillerBlockEntity extends BlockEntity implements EssenceBlockEntity {
-    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -44,7 +44,7 @@ public class FluidSpillerBlockEntity extends BlockEntity implements EssenceBlock
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluid"));
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         cooldown = nbt.getInt("cooldown");
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidSpillerBlockEntity pBlockEntity) {

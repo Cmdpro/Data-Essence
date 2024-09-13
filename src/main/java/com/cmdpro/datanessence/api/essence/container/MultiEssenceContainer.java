@@ -32,7 +32,6 @@ public class MultiEssenceContainer implements EssenceStorage {
             tag3.putFloat("Amount", i.getValue());
             tag2.add(tag3);
         }
-        tag.putFloat("Capacity", totalEssence);
         tag.put("Essence", tag2);
         return tag;
     }
@@ -42,14 +41,14 @@ public class MultiEssenceContainer implements EssenceStorage {
      * @param tag a compound containing EssenceType (int), stored amount (float), and total capacity (float)
      * @return a new SingleEssenceContainer with the given data
      */
-    public MultiEssenceContainer fromNbt(@NotNull CompoundTag tag) {
+    public void fromNbt(@NotNull CompoundTag tag) {
         Map<EssenceType, Float> types = new HashMap<>();
         for (Tag i : (ListTag)tag.get("Essence")) {
             CompoundTag tag2 = (CompoundTag)i;
             types.put(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(ResourceLocation.tryParse(tag2.getString("Type"))), tag2.getFloat("Amount"));
         }
-        float totalCapacity = tag.getFloat("Capacity");
-        return new MultiEssenceContainer(types, totalCapacity);
+        this.storedEssence.clear();
+        this.storedEssence.putAll(types);
     }
 
     // To define a container that can store every type

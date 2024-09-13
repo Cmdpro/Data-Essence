@@ -50,7 +50,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class InfuserBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, EssenceBlockEntity {
-    public static MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -117,7 +117,7 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Geo
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
     }
@@ -145,7 +145,7 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Geo
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("input"));
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("dataDrive"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
     }
     public ItemStack item;
@@ -183,7 +183,7 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Geo
                 boolean enoughEssence = true;
                 for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                     EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                    if (storage.getEssence(type) < i.getValue()) {
+                    if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
                         enoughEssence = false;
                     }
                 }
@@ -198,7 +198,7 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Geo
                                     pBlockEntity.itemHandler.extractItem(0, 1, false);
                                     for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                                         EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                                        storage.removeEssence(type, i.getValue());
+                                        pBlockEntity.storage.removeEssence(type, i.getValue());
                                     }
                                     pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
                                     pBlockEntity.workTime = 0;

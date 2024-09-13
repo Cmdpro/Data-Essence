@@ -129,7 +129,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
@@ -159,7 +159,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryOutput"));
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryDrive"));
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         craftingProgress = nbt.getInt("craftingProgress");
     }
     public ItemStack item;
@@ -267,7 +267,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                 boolean enoughEssence = true;
                 for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                     EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                    if (storage.getEssence(type) < i.getValue()) {
+                    if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
                         enoughEssence = false;
                     }
                 }
@@ -334,7 +334,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         return List.of(itemHandler);
     }
 
-    public static MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;

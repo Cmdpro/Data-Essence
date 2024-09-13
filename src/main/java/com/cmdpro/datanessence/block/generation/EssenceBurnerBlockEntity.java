@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.generation;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
@@ -35,7 +36,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
-    public static MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -83,7 +84,7 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         maxBurnTime = tag.getFloat("maxBurnTime");
         burnTime = tag.getFloat("burnTime");
     }
@@ -109,7 +110,7 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
-        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         maxBurnTime = nbt.getFloat("maxBurnTime");
         burnTime = nbt.getFloat("burnTime");
         essenceBurnCooldown = nbt.getFloat("essenceBurnCooldown");
@@ -127,7 +128,7 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
             if (pBlockEntity.itemHandler.getStackInSlot(0).getItem() instanceof EssenceShard shard) {
                 boolean canFit = true;
                 for (Map.Entry<Supplier<EssenceType>, Float> i : shard.essence.entrySet()) {
-                    if (storage.getEssence(i.getKey().get())+i.getValue() > storage.getMaxEssence()) {
+                    if (pBlockEntity.storage.getEssence(i.getKey().get())+i.getValue() > pBlockEntity.storage.getMaxEssence()) {
                         canFit = false;
                         break;
                     }
@@ -148,7 +149,7 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
                         if (canFit) {
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             for (Map.Entry<Supplier<EssenceType>, Float> i : shard.essence.entrySet()) {
-                                storage.addEssence(i.getKey().get(), i.getValue());
+                                pBlockEntity.storage.addEssence(i.getKey().get(), i.getValue());
                             }
                             pBlockEntity.essenceBurnCooldown = 50;
                         }
