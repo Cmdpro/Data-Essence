@@ -136,8 +136,8 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
                     pBlockEntity.essenceBurnCooldown = 0;
                     if (canFit) {
                         if (pBlockEntity.itemHandler.getStackInSlot(1).getBurnTime(RecipeType.SMELTING) > 0) {
-                            pBlockEntity.itemHandler.extractItem(1, 1, false);
                             pBlockEntity.maxBurnTime = pBlockEntity.itemHandler.getStackInSlot(1).getBurnTime(RecipeType.SMELTING);
+                            pBlockEntity.itemHandler.extractItem(1, 1, false);
                             pBlockEntity.burnTime = pBlockEntity.maxBurnTime;
                         }
                     }
