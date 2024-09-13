@@ -1,9 +1,11 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
-  "essenceCost": 1000,
-  "lunarEssenceCost": 750,
-  "naturalEssenceCost": 500,
-  "exoticEssenceCost": 250,
+  "essenceCost": {
+    "datanessence:essence": 1000,
+    "datanessence:lunar_essence": 750,
+    "datanessence:natural_essence": 500,
+    "datanessence:exotic_essence": 250
+  },
   "entry": "datanessence:test2",
   "pattern": [
     "aaa",

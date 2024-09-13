@@ -1,11 +1,17 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.recipe.*;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.SynthesisChamberMenu;
 import net.minecraft.core.BlockPos;
@@ -14,6 +20,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -23,6 +30,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -32,9 +40,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public class SynthesisChamberBlockEntity extends EssenceContainer implements MenuProvider, ILockableContainer {
+public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
+    public static MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
     private final LockableItemHandler itemHandler = new LockableItemHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -75,23 +89,6 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         }
     };
 
-    @Override
-    public float getMaxEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxLunarEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxNaturalEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxExoticEssence() {
-        return 1000;
-    }
-
     public void drops() {
         SimpleContainer inventory = getInv();
 
@@ -126,10 +123,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        setEssence(tag.getFloat("essence"));
-        setLunarEssence(tag.getFloat("lunarEssence"));
-        setNaturalEssence(tag.getFloat("naturalEssence"));
-        setExoticEssence(tag.getFloat("exoticEssence"));
+        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
@@ -137,10 +131,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.put("item", item.saveOptional(pRegistries));
         tag.putInt("craftingProgress", craftingProgress);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
@@ -152,10 +143,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
         tag.put("inventoryOutput", outputItemHandler.serializeNBT(pRegistries));
         tag.put("inventoryDrive", dataDriveHandler.serializeNBT(pRegistries));
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("craftingProgress", craftingProgress);
         super.saveAdditional(tag, pRegistries);
     }
@@ -165,10 +153,7 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryOutput"));
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryDrive"));
-        setEssence(nbt.getFloat("essence"));
-        setLunarEssence(nbt.getFloat("lunarEssence"));
-        setNaturalEssence(nbt.getFloat("naturalEssence"));
-        setExoticEssence(nbt.getFloat("exoticEssence"));
+        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
         craftingProgress = nbt.getInt("craftingProgress");
     }
     public ItemStack item;
@@ -201,15 +186,12 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
     }
     public SynthesisRecipe recipe;
     public boolean enoughEssence;
-    public float essenceCost;
-    public float lunarEssenceCost;
-    public float naturalEssenceCost;
-    public float exoticEssenceCost;
+    public Map<ResourceLocation, Float> essenceCost;
     public int craftingProgress;
     public int workTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SynthesisChamberBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             Optional<RecipeHolder<SynthesisRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.SYNTHESIS_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
@@ -220,15 +202,12 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
                 if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))) {
                     pBlockEntity.recipe = recipe.get().value();
                     pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
-                    pBlockEntity.lunarEssenceCost = recipe.get().value().getLunarEssenceCost();
-                    pBlockEntity.naturalEssenceCost = recipe.get().value().getNaturalEssenceCost();
-                    pBlockEntity.exoticEssenceCost = recipe.get().value().getExoticEssenceCost();
-                    boolean enoughEssence = false;
-                    if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost &&
-                            pBlockEntity.getLunarEssence() >= pBlockEntity.lunarEssenceCost &&
-                            pBlockEntity.getNaturalEssence() >= pBlockEntity.naturalEssenceCost &&
-                            pBlockEntity.getExoticEssence() >= pBlockEntity.exoticEssenceCost) {
-                        enoughEssence = true;
+                    boolean enoughEssence = true;
+                    for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                        EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                        if (storage.getEssence(type) < i.getValue()) {
+                            enoughEssence = false;
+                        }
                     }
                     pBlockEntity.enoughEssence = enoughEssence;
                     if (enoughEssence) {
@@ -237,10 +216,10 @@ public class SynthesisChamberBlockEntity extends EssenceContainer implements Men
                             resetWorkTime = false;
                             pBlockEntity.workTime++;
                             if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                                pBlockEntity.setEssence(pBlockEntity.getEssence() - pBlockEntity.essenceCost);
-                                pBlockEntity.setLunarEssence(pBlockEntity.getEssence() - pBlockEntity.lunarEssenceCost);
-                                pBlockEntity.setNaturalEssence(pBlockEntity.getEssence() - pBlockEntity.naturalEssenceCost);
-                                pBlockEntity.setExoticEssence(pBlockEntity.getEssence() - pBlockEntity.exoticEssenceCost);
+                                for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                                    storage.removeEssence(type, i.getValue());
+                                }
                                 pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
                                 pBlockEntity.itemHandler.extractItem(1, 1, false);

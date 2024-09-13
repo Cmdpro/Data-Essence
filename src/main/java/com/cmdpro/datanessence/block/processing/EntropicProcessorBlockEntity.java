@@ -1,8 +1,12 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
 import net.minecraft.core.BlockPos;
@@ -22,6 +26,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -32,7 +37,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class EntropicProcessorBlockEntity extends EssenceContainer implements MenuProvider {
+public class EntropicProcessorBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -46,11 +56,6 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
             setChanged();
         }
     };
-
-    @Override
-    public float getMaxEssence() {
-        return 1000;
-    }
 
     public void drops() {
         SimpleContainer inventory = getInv();
@@ -82,13 +87,13 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        setEssence(tag.getFloat("essence"));
+        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
-        tag.putFloat("essence", getEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
         return tag;
     }
@@ -97,7 +102,7 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("input", itemHandler.serializeNBT(pRegistries));
         tag.put("output", outputItemHandler.serializeNBT(pRegistries));
-        tag.putFloat("essence", getEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
         super.saveAdditional(tag, pRegistries);
     }
@@ -106,7 +111,7 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("input"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
-        setEssence(nbt.getFloat("essence"));
+        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
     }
     public ItemStack item;
@@ -132,10 +137,10 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
     public float exoticEssenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EntropicProcessorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            if (pBlockEntity.getEssence() >= 50) {
+            if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 50) {
                 Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
                 if (recipe.isPresent()) {
                     if (!recipe.get().value().equals(pBlockEntity.recipe)) {
@@ -147,7 +152,7 @@ public class EntropicProcessorBlockEntity extends EssenceContainer implements Me
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
                         if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                            pBlockEntity.setEssence(pBlockEntity.getEssence()-50);
+                            pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
                             pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;

@@ -113,10 +113,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Geo
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, ChargerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             pBlockEntity.charging = false;
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.LUNAR_ESSENCE.get());
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.NATURAL_ESSENCE.get());
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.EXOTIC_ESSENCE.get());
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0).copy();
             pBlockEntity.item = stack;
             float maxEssence = EssenceChargeableItemUtil.getMaxEssence(stack);

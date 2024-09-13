@@ -1,9 +1,6 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
-  "essenceCost": 0,
-  "lunarEssenceCost": 0,
-  "naturalEssenceCost": 0,
-  "exoticEssenceCost": 0,
+  "essenceCost": {},
   "entry": "datanessence:essence_manipulation/essence_burner",
   "pattern": [
     "CCC",

@@ -1,5 +1,9 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
@@ -9,6 +13,7 @@ import com.cmdpro.datanessence.moddata.MultiFluidTankNoDuplicateFluids;
 import com.cmdpro.datanessence.recipe.FluidMixingRecipe;
 import com.cmdpro.datanessence.recipe.RecipeInputWithFluid;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.FluidMixerMenu;
 import net.minecraft.core.BlockPos;
@@ -28,6 +33,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -44,7 +50,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvider, ILockableContainer {
+public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
+    public static SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
     private final LockableItemHandler itemHandler = new LockableItemHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -85,10 +96,6 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         return lazyFluidHandler.get();
     }
     private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
-    @Override
-    public float getMaxEssence() {
-        return 1000;
-    }
 
     public void drops() {
         SimpleContainer inventory = getInv();
@@ -123,7 +130,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        setEssence(tag.getFloat("essence"));
+        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluidHandler"));
@@ -132,7 +139,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
-        tag.putFloat("essence", getEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("craftingProgress", craftingProgress);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
         tag.put("fluidHandler", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
@@ -146,7 +153,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         tag.put("inventoryDrive", dataDriveHandler.serializeNBT(pRegistries));
         tag.put("fluids", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("outputFluid", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
-        tag.putFloat("essence", getEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("craftingProgress", craftingProgress);
         super.saveAdditional(tag, pRegistries);
     }
@@ -157,7 +164,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryDrive"));
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluids"));
         outputFluidHandler.readFromNBT(pRegistries, nbt.getCompound("outputFluid"));
-        setEssence(nbt.getFloat("essence"));
+        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
         craftingProgress = nbt.getInt("craftingProgress");
     }
     public ItemStack item;
@@ -186,7 +193,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
     public int workTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidMixerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
@@ -199,7 +206,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
                     pBlockEntity.recipe = recipe.get().value();
                     pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
                     boolean enoughEssence = false;
-                    if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost) {
+                    if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= pBlockEntity.essenceCost) {
                         enoughEssence = true;
                     }
                     pBlockEntity.enoughEssence = enoughEssence;
@@ -209,7 +216,7 @@ public class FluidMixerBlockEntity extends EssenceContainer implements MenuProvi
                             resetWorkTime = false;
                             pBlockEntity.workTime++;
                             if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                                pBlockEntity.setEssence(pBlockEntity.getEssence() - pBlockEntity.essenceCost);
+                                pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), pBlockEntity.essenceCost);
                                 pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE);
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
                                 pBlockEntity.fluidHandler.drain(Arrays.stream(recipe.get().value().getInput1().getStacks()).filter((stack) -> FluidStack.isSameFluidSameComponents(stack, pBlockEntity.fluidHandler.getFluidInTank(0))).findFirst().get(), IFluidHandler.FluidAction.EXECUTE);

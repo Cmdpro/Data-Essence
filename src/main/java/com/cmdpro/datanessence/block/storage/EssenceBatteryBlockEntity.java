@@ -1,9 +1,12 @@
 package com.cmdpro.datanessence.block.storage;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -13,9 +16,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class EssenceBatteryBlockEntity extends BlockEntity {
-    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceType.ESSENCE, DataNEssenceConfig.essenceBatteryMax);
-
+public class EssenceBatteryBlockEntity extends BlockEntity implements EssenceBlockEntity {
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), DataNEssenceConfig.essenceBatteryMax);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
     public EssenceBatteryBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ESSENCE_BATTERY.get(), pos, state);
     }
@@ -40,4 +46,5 @@ public class EssenceBatteryBlockEntity extends BlockEntity {
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         return storage.toNbt();
     }
+
 }

@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.renderers.block;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.storage.EssenceBatteryBlockEntity;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -34,7 +35,7 @@ public class EssenceBatteryRenderer implements BlockEntityRenderer<EssenceBatter
 
         VertexConsumer builder = pBuffer.getBuffer(RenderType.TRANSLUCENT);
 
-        Color color = new Color(1.0f, 1.0f, 1.0f, pBlockEntity.getEssence()/pBlockEntity.getMaxEssence());
+        Color color = new Color(1.0f, 1.0f, 1.0f, pBlockEntity.storage.getEssence(EssenceTypeRegistry.ESSENCE.get())/pBlockEntity.storage.getMaxEssence());
 
         renderQuad(pBlockEntity, Direction.SOUTH, builder, pPoseStack, 0.5f, -0.5f, 0.5f, -0.5f, 0.5f, 0.5f, u0, v0, u1, v1, pPackedLight, color.getRGB());
         renderQuad(pBlockEntity, Direction.NORTH, builder, pPoseStack, -0.5f, -0.5f, -0.5f, 0.5f, 0.5f, -0.5f, u0, v0, u1, v1, pPackedLight, color.getRGB());

@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.api.util;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.block.transmission.EssenceBufferBlockEntity;
@@ -20,7 +21,17 @@ public class BufferUtil {
         for (int i = 1; i <= 5; i++) {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof EssenceBufferBlockEntity buffer) {
-                EssenceStorage.transferEssence(buffer, container, type, buffer.getMaxEssence());
+                EssenceStorage.transferEssence(buffer.getStorage(), ((EssenceBlockEntity)container).getStorage(), type, buffer.getStorage().getMaxEssence());
+            }
+        }
+    }
+    public static void getEssenceFromBuffersBelow(BlockEntity container, Iterable<EssenceType> types) {
+        for (int i = 1; i <= 5; i++) {
+            BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
+            if (ent instanceof EssenceBufferBlockEntity buffer) {
+                for (EssenceType o : types) {
+                    EssenceStorage.transferEssence(buffer.getStorage(), ((EssenceBlockEntity)container).getStorage(), o, buffer.getStorage().getMaxEssence());
+                }
             }
         }
     }

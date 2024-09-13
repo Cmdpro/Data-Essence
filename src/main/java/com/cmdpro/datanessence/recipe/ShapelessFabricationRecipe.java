@@ -26,22 +26,18 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
+import java.util.Map;
+
 public class ShapelessFabricationRecipe implements IFabricationRecipe {
-    private final float essenceCost;
-    private final float lunarEssenceCost;
-    private final float naturalEssenceCost;
-    private final float exoticEssenceCost;
+    private final Map<ResourceLocation, Float> essenceCost;
     private final ResourceLocation entry;
     final ItemStack result;
     final NonNullList<Ingredient> ingredients;
     private final boolean isSimple;
 
-    public ShapelessFabricationRecipe(ItemStack result, NonNullList<Ingredient> ingredients, ResourceLocation entry, float essenceCost, float lunarEssenceCost, float naturalEssenceCost, float exoticEssenceCost) {
+    public ShapelessFabricationRecipe(ItemStack result, NonNullList<Ingredient> ingredients, ResourceLocation entry, Map<ResourceLocation, Float> essenceCost) {
         this.entry = entry;
         this.essenceCost = essenceCost;
-        this.lunarEssenceCost = lunarEssenceCost;
-        this.naturalEssenceCost = naturalEssenceCost;
-        this.exoticEssenceCost = exoticEssenceCost;
         this.result = result;
         this.ingredients = ingredients;
         this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple);
@@ -102,22 +98,10 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
     public ResourceLocation getEntry() {
         return entry;
     }
-    @Override
-    public float getEssenceCost() {
-        return essenceCost;
-    }
-    @Override
-    public float getLunarEssenceCost() {
-        return lunarEssenceCost;
-    }
 
     @Override
-    public float getNaturalEssenceCost() {
-        return naturalEssenceCost;
-    }
-    @Override
-    public float getExoticEssenceCost() {
-        return exoticEssenceCost;
+    public Map<ResourceLocation, Float> getEssenceCost() {
+        return essenceCost;
     }
     public static class Serializer implements RecipeSerializer<ShapelessFabricationRecipe> {
         public static final MapCodec<ShapelessFabricationRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
@@ -141,11 +125,8 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
                         )
                         .forGetter(p_300975_ -> p_300975_.ingredients),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
-                Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
-                Codec.FLOAT.optionalFieldOf("lunarEssenceCost", 0f).forGetter(r -> r.lunarEssenceCost),
-                Codec.FLOAT.optionalFieldOf("naturalEssenceCost", 0f).forGetter(r -> r.naturalEssenceCost),
-                Codec.FLOAT.optionalFieldOf("exoticEssenceCost", 0f).forGetter(r -> r.exoticEssenceCost)
-        ).apply(instance, (result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost) -> new ShapelessFabricationRecipe(result, input, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost)));
+                Codec.unboundedMap(ResourceLocation.CODEC, Codec.FLOAT).fieldOf("essenceCost").forGetter(r -> r.essenceCost)
+        ).apply(instance, (result, input, entry, essenceCost) -> new ShapelessFabricationRecipe(result, input, entry, essenceCost)));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, ShapelessFabricationRecipe> STREAM_CODEC = StreamCodec.of(
                 (buf, obj) -> {
@@ -157,10 +138,7 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
 
                     ItemStack.STREAM_CODEC.encode(buf, obj.result);
                     buf.writeResourceLocation(obj.entry);
-                    buf.writeFloat(obj.essenceCost);
-                    buf.writeFloat(obj.lunarEssenceCost);
-                    buf.writeFloat(obj.naturalEssenceCost);
-                    buf.writeFloat(obj.exoticEssenceCost);
+                    buf.writeMap(obj.essenceCost, FriendlyByteBuf::writeResourceLocation, FriendlyByteBuf::writeFloat);
                 },
                 (buf) -> {
                     int i = buf.readVarInt();
@@ -168,11 +146,8 @@ public class ShapelessFabricationRecipe implements IFabricationRecipe {
                     nonnulllist.replaceAll(p_319735_ -> Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
                     ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buf);
                     ResourceLocation entry = buf.readResourceLocation();
-                    float essenceCost = buf.readFloat();
-                    float lunarEssenceCost = buf.readFloat();
-                    float naturalEssenceCost = buf.readFloat();
-                    float exoticEssenceCost = buf.readFloat();
-                    return new ShapelessFabricationRecipe(itemstack, nonnulllist, entry, essenceCost, lunarEssenceCost, naturalEssenceCost, exoticEssenceCost);
+                    Map<ResourceLocation, Float> essenceCost = buf.readMap(FriendlyByteBuf::readResourceLocation, FriendlyByteBuf::readFloat);
+                    return new ShapelessFabricationRecipe(itemstack, nonnulllist, entry, essenceCost);
                 }
         );
 

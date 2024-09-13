@@ -1,6 +1,8 @@
 {
   "type": "datanessence:infusion",
-  "essenceCost": 200,
+  "essenceCost": {
+    "datanessence:essence": 200
+  },
   "entry": "datanessence:basics/components",
   "input": {
     "item": "minecraft:glass",

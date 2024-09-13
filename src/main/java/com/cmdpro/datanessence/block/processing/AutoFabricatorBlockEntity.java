@@ -1,5 +1,10 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
@@ -8,6 +13,7 @@ import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.IHasRequiredKnowledge;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.AutoFabricatorMenu;
 import net.minecraft.core.BlockPos;
@@ -16,6 +22,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
@@ -26,6 +33,7 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -41,9 +49,10 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuProvider, GeoBlockEntity, ILockableContainer {
+public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, ILockableContainer, EssenceBlockEntity {
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
     private final LockableItemHandler itemHandler = new LockableItemHandler(9) {
@@ -86,23 +95,6 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
         }
     };
 
-    @Override
-    public float getMaxEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxLunarEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxNaturalEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxExoticEssence() {
-        return 1000;
-    }
-
     public void drops() {
         SimpleContainer inventory = getInv();
 
@@ -137,10 +129,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        setEssence(tag.getFloat("essence"));
-        setLunarEssence(tag.getFloat("lunarEssence"));
-        setNaturalEssence(tag.getFloat("naturalEssence"));
-        setExoticEssence(tag.getFloat("exoticEssence"));
+        storage = storage.fromNbt(tag.getCompound("EssenceStorage"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
@@ -148,10 +137,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.put("item", item.saveOptional(pRegistries));
         tag.putInt("craftingProgress", craftingProgress);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
@@ -163,10 +149,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
         tag.put("inventoryOutput", outputItemHandler.serializeNBT(pRegistries));
         tag.put("inventoryDrive", dataDriveHandler.serializeNBT(pRegistries));
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("craftingProgress", craftingProgress);
         super.saveAdditional(tag, pRegistries);
     }
@@ -176,10 +159,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryOutput"));
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryDrive"));
-        setEssence(nbt.getFloat("essence"));
-        setLunarEssence(nbt.getFloat("lunarEssence"));
-        setNaturalEssence(nbt.getFloat("naturalEssence"));
-        setExoticEssence(nbt.getFloat("exoticEssence"));
+        storage = storage.fromNbt(nbt.getCompound("EssenceStorage"));
         craftingProgress = nbt.getInt("craftingProgress");
     }
     public ItemStack item;
@@ -248,20 +228,17 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
                 }
             }
         }
-        setEssence(getEssence()-essenceCost);
-        setLunarEssence(getLunarEssence()-lunarEssenceCost);
-        setNaturalEssence(getNaturalEssence()-naturalEssenceCost);
-        setExoticEssence(getExoticEssence()-exoticEssenceCost);
+        for (Map.Entry<ResourceLocation, Float> i : essenceCost.entrySet()) {
+            EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+            storage.removeEssence(type, i.getValue());
+        }
         outputItemHandler.insertItem(0, stack, false);
         level.playSound(null, worldPosition, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
         return true;
     }
     public CraftingRecipe recipe;
     public boolean enoughEssence;
-    public float essenceCost;
-    public float lunarEssenceCost;
-    public float naturalEssenceCost;
-    public float exoticEssenceCost;
+    public Map<ResourceLocation, Float> essenceCost;
     public int craftingProgress;
     public <I extends RecipeInput, T extends Recipe<I>> Optional<RecipeHolder<T>> getRecipeFor(
             RecipeType<T> type, Level level
@@ -280,22 +257,19 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, AutoFabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             Optional<RecipeHolder<IFabricationRecipe>> recipe = pBlockEntity.getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pLevel);
             if (recipe.isPresent() && hasNotReachedStackLimit(pBlockEntity, recipe.get().value().getResultItem(pLevel.registryAccess()))) {
                 pBlockEntity.recipe = recipe.get().value();
                 pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
-                pBlockEntity.lunarEssenceCost = recipe.get().value().getLunarEssenceCost();
-                pBlockEntity.naturalEssenceCost = recipe.get().value().getNaturalEssenceCost();
-                pBlockEntity.exoticEssenceCost = recipe.get().value().getExoticEssenceCost();
                 pBlockEntity.item = recipe.get().value().getResultItem(pLevel.registryAccess());
-                boolean enoughEssence = false;
-                if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost &&
-                        pBlockEntity.getLunarEssence() >= pBlockEntity.lunarEssenceCost &&
-                        pBlockEntity.getNaturalEssence() >= pBlockEntity.naturalEssenceCost &&
-                        pBlockEntity.getExoticEssence() >= pBlockEntity.exoticEssenceCost) {
-                    enoughEssence = true;
+                boolean enoughEssence = true;
+                for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                    if (storage.getEssence(type) < i.getValue()) {
+                        enoughEssence = false;
+                    }
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
                 if (pBlockEntity.hasIngredients(recipe.get().value().getIngredients())) {
@@ -305,10 +279,7 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
                 }
             } else {
                 pBlockEntity.recipe = null;
-                pBlockEntity.essenceCost = 0;
-                pBlockEntity.lunarEssenceCost = 0;
-                pBlockEntity.naturalEssenceCost = 0;
-                pBlockEntity.exoticEssenceCost = 0;
+                pBlockEntity.essenceCost = null;
                 pBlockEntity.item = ItemStack.EMPTY;
                 pBlockEntity.craftingProgress = -1;
             }
@@ -362,4 +333,9 @@ public class AutoFabricatorBlockEntity extends EssenceContainer implements MenuP
     public List<LockableItemHandler> getLockable() {
         return List.of(itemHandler);
     }
-}
+
+    public static MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }}

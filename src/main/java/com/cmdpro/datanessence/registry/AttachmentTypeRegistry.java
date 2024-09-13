@@ -10,6 +10,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -25,14 +27,8 @@ public class AttachmentTypeRegistry {
     public static final Supplier<AttachmentType<Optional<StructureProtectorBlockEntity>>> BINDING_STRUCTURE_CONTROLLER =
             register("binding_structure_controller", () -> AttachmentType.builder(() -> Optional.ofNullable((StructureProtectorBlockEntity)null)).build());
 
-    public static final Supplier<AttachmentType<Boolean>> UNLOCKED_ESSENCE =
-            register("unlocked_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
-    public static final Supplier<AttachmentType<Boolean>> UNLOCKED_LUNAR_ESSENCE =
-            register("unlocked_lunar_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
-    public static final Supplier<AttachmentType<Boolean>> UNLOCKED_NATURAL_ESSENCE =
-            register("unlocked_natural_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
-    public static final Supplier<AttachmentType<Boolean>> UNLOCKED_EXOTIC_ESSENCE =
-            register("unlocked_exotic_essence", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
+    public static final Supplier<AttachmentType<HashMap<ResourceLocation, Boolean>>> UNLOCKED_ESSENCES =
+            register("unlocked_essences", () -> AttachmentType.builder(() -> new HashMap<ResourceLocation, Boolean>()).serialize(Codec.unboundedMap(ResourceLocation.CODEC, Codec.BOOL).xmap(HashMap::new, HashMap::new)).copyOnDeath().build());
     public static final Supplier<AttachmentType<Boolean>> HAS_HORNS =
             register("has_horns", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).copyOnDeath().build());
     public static final Supplier<AttachmentType<Boolean>> HAS_TAIL =

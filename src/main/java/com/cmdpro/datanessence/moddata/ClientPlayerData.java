@@ -6,10 +6,11 @@ import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 public class ClientPlayerData {
-    private static boolean[] unlockedEssences = new boolean[] { false, false, false, false };
-    public static void set(boolean[] unlockedEssences, BlockPos linkPos, Color linkColor) {
+    private static Map<ResourceLocation, Boolean> unlockedEssences;
+    public static void set(Map<ResourceLocation, Boolean> unlockedEssences, BlockPos linkPos, Color linkColor) {
         ClientPlayerData.unlockedEssences = unlockedEssences;
         ClientPlayerData.linkPos = linkPos;
         ClientPlayerData.linkColor = linkColor;
@@ -17,7 +18,7 @@ public class ClientPlayerData {
     public static void setTier(int tier) {
         ClientPlayerData.tier = tier;
     }
-    public static boolean[] getUnlockedEssences() {
+    public static Map<ResourceLocation, Boolean> getUnlockedEssences() {
         return unlockedEssences;
     }
     public static BlockPos getLinkPos() {

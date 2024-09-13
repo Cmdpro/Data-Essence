@@ -12,17 +12,22 @@ public class EssenceType {
     public final Component name;
     public final int color;
     public final EssenceBarSpriteLocation tinyBarSprite, bigBarSprite;
+    public final String tooltipKey;
 
-    public EssenceType(Component name, int color, EssenceBarSpriteLocation tinyBarSprite, EssenceBarSpriteLocation bigBarSprite) {
+    public EssenceType(Component name, int color, String tooltipKey, EssenceBarSpriteLocation tinyBarSprite, EssenceBarSpriteLocation bigBarSprite) {
         this.name = name;
         this.color = color;
         this.tinyBarSprite = tinyBarSprite;
         this.bigBarSprite = bigBarSprite;
+        this.tooltipKey = tooltipKey;
     }
     public static EssenceBarSpriteLocation createLocation(ResourceLocation location, int x, int y) {
         return new EssenceBarSpriteLocation(location, x, y);
     }
 
+    public String getTooltipKey() {
+        return tooltipKey;
+    }
     public Component getName() {
         return name;
     }
@@ -37,7 +42,7 @@ public class EssenceType {
     public EssenceBarSpriteLocation getBigBarSprite() {
         return bigBarSprite;
     }
-    private static class EssenceBarSpriteLocation {
+    public static class EssenceBarSpriteLocation {
         public EssenceBarSpriteLocation(ResourceLocation texture, int x, int y) {
             this.texture = texture;
             this.x = x;
