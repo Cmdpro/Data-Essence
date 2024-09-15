@@ -193,6 +193,9 @@ public class BlockRegistry {
     public static final Supplier<Block> PATTERNED_COPPER = register("patterned_copper",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> FLUIDIC_GLASS = register("fluidic_glass",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     private static <T extends Block> Supplier<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {

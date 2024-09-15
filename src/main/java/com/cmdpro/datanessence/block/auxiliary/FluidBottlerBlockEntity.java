@@ -1,8 +1,12 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.FluidBottlerMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -25,6 +29,7 @@ import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.util.Lazy;
@@ -37,7 +42,12 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class FluidBottlerBlockEntity extends EssenceContainer implements MenuProvider {
+public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -52,11 +62,6 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
         }
     };
     private final FluidTank fluidHandler = new FluidTank(4000);
-
-    @Override
-    public float getMaxEssence() {
-        return 1000;
-    }
 
     public void drops() {
         SimpleContainer inventory = getInv();
@@ -80,6 +85,7 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
     public IItemHandler getCombinedHandler() {
         return lazyCombinedHandler.get();
     }
+
     public FluidBottlerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_BOTTLER.get(), pos, state);
         item = ItemStack.EMPTY;
@@ -92,7 +98,7 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        setEssence(tag.getFloat("essence"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluid"));
@@ -100,7 +106,7 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
-        tag.putFloat("essence", getEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
         tag.put("item", item.saveOptional(pRegistries));
         tag.put("fluid", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
@@ -111,7 +117,7 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("input", itemHandler.serializeNBT(pRegistries));
         tag.put("output", outputItemHandler.serializeNBT(pRegistries));
-        tag.putFloat("essence", getEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
         tag.put("fluid", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         super.saveAdditional(tag, pRegistries);
@@ -121,7 +127,7 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("input"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
-        setEssence(nbt.getFloat("essence"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluid"));
     }
@@ -143,11 +149,11 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
     public int workTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidBottlerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            if (pBlockEntity.getEssence() >= 50) {
+            if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 50) {
                 ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0);
                 if (stack.is(Items.BUCKET)) {
                     if (pBlockEntity.fluidHandler.getFluid().getAmount() >= 1000) {
@@ -159,7 +165,7 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
                                 pBlockEntity.outputItemHandler.insertItem(0, bucket, false);
                                 pBlockEntity.fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE);
-                                pBlockEntity.setEssence(pBlockEntity.getEssence()-50);
+                                pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
                                 pBlockEntity.workTime = 0;
                                 pLevel.playSound(null, pPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
                             }
@@ -177,7 +183,7 @@ public class FluidBottlerBlockEntity extends EssenceContainer implements MenuPro
                                     pBlockEntity.itemHandler.extractItem(0, 1, false);
                                     pBlockEntity.outputItemHandler.insertItem(0, bottle, false);
                                     pBlockEntity.fluidHandler.drain(250, IFluidHandler.FluidAction.EXECUTE);
-                                    pBlockEntity.setEssence(pBlockEntity.getEssence() - 50);
+                                    pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
                                     pBlockEntity.workTime = 0;
                                     pLevel.playSound(null, pPos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
                                 }

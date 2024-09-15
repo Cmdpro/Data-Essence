@@ -1,9 +1,8 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
-  "essenceCost": 25,
-  "lunarEssenceCost": 0,
-  "naturalEssenceCost": 0,
-  "exoticEssenceCost": 0,
+  "essenceCost": {
+    "datanessence:essence": 25
+  },
   "entry": "datanessence:machinery/automation",
   "pattern": [
     "RLC"

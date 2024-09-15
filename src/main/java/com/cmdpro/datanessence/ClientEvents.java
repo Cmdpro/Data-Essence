@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
-import com.cmdpro.datanessence.api.util.EssenceUtil;
 import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;

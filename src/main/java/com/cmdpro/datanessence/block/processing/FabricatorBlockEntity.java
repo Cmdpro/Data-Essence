@@ -1,9 +1,14 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
@@ -14,6 +19,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
@@ -43,7 +49,12 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.*;
 
-public class FabricatorBlockEntity extends EssenceContainer implements MenuProvider, GeoBlockEntity {
+public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, EssenceBlockEntity {
+    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(9) {
@@ -64,23 +75,6 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
         return lazyItemHandler.get();
     }
 
-    @Override
-    public float getMaxEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxLunarEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxNaturalEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxExoticEssence() {
-        return 1000;
-    }
-
     public void drops() {
         SimpleContainer inventory = getInv();
 
@@ -99,19 +93,13 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        setEssence(tag.getFloat("essence"));
-        setLunarEssence(tag.getFloat("lunarEssence"));
-        setNaturalEssence(tag.getFloat("naturalEssence"));
-        setExoticEssence(tag.getFloat("exoticEssence"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.put("item", item.saveOptional(pRegistries));
         return tag;
     }
@@ -119,20 +107,14 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         super.saveAdditional(tag, pRegistries);
     }
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
-        setEssence(nbt.getFloat("essence"));
-        setLunarEssence(nbt.getFloat("lunarEssence"));
-        setNaturalEssence(nbt.getFloat("naturalEssence"));
-        setExoticEssence(nbt.getFloat("exoticEssence"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
     }
     public ItemStack item;
     public SimpleContainer getInv() {
@@ -165,10 +147,10 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                         for (int i = 0; i < 9; i++) {
                             ent.itemHandler.extractItem(i, 1, false);
                         }
-                        ent.setEssence(ent.getEssence()-ent.essenceCost);
-                        ent.setLunarEssence(ent.getLunarEssence()-ent.lunarEssenceCost);
-                        ent.setNaturalEssence(ent.getNaturalEssence()-ent.naturalEssenceCost);
-                        ent.setExoticEssence(ent.getExoticEssence()-ent.exoticEssenceCost);
+                        for (Map.Entry<ResourceLocation, Float> i : ent.essenceCost.entrySet()) {
+                            EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                            ent.storage.removeEssence(type, i.getValue());
+                        }
                         ItemEntity entity = new ItemEntity(pLevel, (float) pPos.getX() + 0.5f, (float) pPos.getY() + 1f, (float) pPos.getZ() + 0.5f, stack);
                         pLevel.addFreshEntity(entity);
                         pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
@@ -184,27 +166,21 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
     }
     public CraftingRecipe recipe;
     public boolean enoughEssence;
-    public float essenceCost;
-    public float lunarEssenceCost;
-    public float naturalEssenceCost;
-    public float exoticEssenceCost;
+    public Map<ResourceLocation, Float> essenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             Optional<RecipeHolder<IFabricationRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv().asCraftInput(), pLevel);
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get().value();
                 pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
-                pBlockEntity.lunarEssenceCost = recipe.get().value().getLunarEssenceCost();
-                pBlockEntity.naturalEssenceCost = recipe.get().value().getNaturalEssenceCost();
-                pBlockEntity.exoticEssenceCost = recipe.get().value().getExoticEssenceCost();
                 pBlockEntity.item = recipe.get().value().getResultItem(pLevel.registryAccess());
-                boolean enoughEssence = false;
-                if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost &&
-                        pBlockEntity.getLunarEssence() >= pBlockEntity.lunarEssenceCost &&
-                        pBlockEntity.getNaturalEssence() >= pBlockEntity.naturalEssenceCost &&
-                        pBlockEntity.getExoticEssence() >= pBlockEntity.exoticEssenceCost) {
-                    enoughEssence = true;
+                boolean enoughEssence = true;
+                for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                    if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
+                        enoughEssence = false;
+                    }
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
             } else {
@@ -213,16 +189,10 @@ public class FabricatorBlockEntity extends EssenceContainer implements MenuProvi
                     pBlockEntity.recipe = recipe2.get().value();
                     pBlockEntity.item = recipe2.get().value().getResultItem(pLevel.registryAccess());
                     pBlockEntity.enoughEssence = true;
-                    pBlockEntity.essenceCost = 0;
-                    pBlockEntity.lunarEssenceCost = 0;
-                    pBlockEntity.naturalEssenceCost = 0;
-                    pBlockEntity.exoticEssenceCost = 0;
+                    pBlockEntity.essenceCost = null;
                 } else {
                     pBlockEntity.recipe = null;
-                    pBlockEntity.essenceCost = 0;
-                    pBlockEntity.lunarEssenceCost = 0;
-                    pBlockEntity.naturalEssenceCost = 0;
-                    pBlockEntity.exoticEssenceCost = 0;
+                    pBlockEntity.essenceCost = null;
                     pBlockEntity.item = ItemStack.EMPTY;
                 }
             }

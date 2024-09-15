@@ -1,10 +1,12 @@
 package com.cmdpro.datanessence.block.transmission;
 
-import com.cmdpro.datanessence.api.util.EssenceUtil;
 import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
-import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -21,6 +23,7 @@ import java.awt.*;
 public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity implements GeoBlockEntity {
     public NaturalEssencePointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.NATURAL_ESSENCE_POINT.get(), pos, state);
+        storage = new SingleEssenceContainer(EssenceTypeRegistry.NATURAL_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
 
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
@@ -39,31 +42,16 @@ public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity 
         return this.factory;
     }
     @Override
-    public void transfer(EssenceContainer other) {
-        EssenceUtil.transferNaturalEssence(this, other, DataNEssenceConfig.essencePointTransfer);
-    }
-    @Override
-    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        super.saveAdditional(tag, pRegistries);
-        tag.putFloat("naturalEssence", getNaturalEssence());
-    }
-    @Override
-    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(nbt, pRegistries);
-        setNaturalEssence(nbt.getFloat("naturalEssence"));
-    }
-    @Override
     public Color linkColor() {
-        return new Color(0x57f36c);
+        return new Color(EssenceTypeRegistry.NATURAL_ESSENCE.get().getColor());
     }
 
     @Override
-    public float getMaxNaturalEssence() {
-        return DataNEssenceConfig.essencePointTransfer;
+    public void transfer(EssenceStorage other) {
+        EssenceStorage.transferEssence(storage, other, EssenceTypeRegistry.NATURAL_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
-
     @Override
-    public void take(EssenceContainer other) {
-        EssenceUtil.transferNaturalEssence(other, this, DataNEssenceConfig.essencePointTransfer);
+    public void take(EssenceStorage other) {
+        EssenceStorage.transferEssence(other, storage, EssenceTypeRegistry.NATURAL_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
 }

@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.storage;
 
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -39,7 +40,7 @@ public class NaturalEssenceBattery extends Block implements EntityBlock {
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (pLevel.getBlockEntity(pPos) instanceof NaturalEssenceBatteryBlockEntity ent) {
             if (!pLevel.isClientSide) {
-                pPlayer.displayClientMessage(Component.translatable("block.datanessence.natural_essence_battery.amount", ent.getNaturalEssence(), ent.getMaxNaturalEssence()), true);
+                pPlayer.displayClientMessage(Component.translatable("block.datanessence.natural_essence_battery.amount", ent.storage.getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()), ent.storage.getMaxEssence()), true);
             }
             return InteractionResult.sidedSuccess(pLevel.isClientSide);
         }

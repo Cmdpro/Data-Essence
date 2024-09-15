@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
@@ -55,6 +56,7 @@ public class DataNEssence
         DataComponentRegistry.DATA_COMPONENTS.register(bus);
         ArmorMaterialRegistry.ARMOR_MATERIALS.register(bus);
         MultiblockPredicateRegistry.MULTIBLOCK_PREDICATE_TYPES.register(bus);
+        EssenceTypeRegistry.ESSENCE_TYPES.register(bus);
         random = RandomSource.create();
     }
     @SubscribeEvent

@@ -1,10 +1,13 @@
 package com.cmdpro.datanessence.integration.emi.recipes;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.integration.emi.EMIDataNEssencePlugin;
 import com.cmdpro.datanessence.integration.emi.widgets.EssenceBarWidget;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
 
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -17,25 +20,24 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EMIInfusionRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiStack> output;
-    private final float essenceCost;
-    private final float lunarEssenceCost;
-    private final float naturalEssenceCost;
-    private final float exoticEssenceCost;
+    private final Map<EssenceType, Float> essenceCost;
 
     public EMIInfusionRecipe(ResourceLocation id, InfusionRecipe recipe) {
         this.id = id;
         this.input = List.of(EmiIngredient.of(recipe.getIngredients().stream().map(s -> EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())).toList()));
         this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())));
-        this.essenceCost = recipe.getEssenceCost();
-        this.lunarEssenceCost = recipe.getLunarEssenceCost();
-        this.naturalEssenceCost = recipe.getNaturalEssenceCost();
-        this.exoticEssenceCost = recipe.getExoticEssenceCost();
+        this.essenceCost = new HashMap<>();
+        for (Map.Entry<ResourceLocation, Float> i : recipe.getEssenceCost().entrySet()) {
+            this.essenceCost.put(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey()), i.getValue());
+        }
     }
     @Override
     public EmiRecipeCategory getCategory() {
@@ -79,9 +81,9 @@ public class EMIInfusionRecipe implements EmiRecipe {
         widgetHolder.addSlot(output.get(0), 81, 21).recipeContext(this).drawBack(false);
 
         // Essence bars
-        widgetHolder.add(new EssenceBarWidget(5, 6, 0, essenceCost));
-        widgetHolder.add(new EssenceBarWidget(13, 6, 1, lunarEssenceCost));
-        widgetHolder.add(new EssenceBarWidget(5, 32, 2, naturalEssenceCost));
-        widgetHolder.add(new EssenceBarWidget(13, 32, 3, exoticEssenceCost));
+        widgetHolder.add(new EssenceBarWidget(5, 6, EssenceTypeRegistry.ESSENCE.get(), essenceCost.get(EssenceTypeRegistry.ESSENCE.get())));
+        widgetHolder.add(new EssenceBarWidget(13, 6, EssenceTypeRegistry.LUNAR_ESSENCE.get(), essenceCost.get(EssenceTypeRegistry.LUNAR_ESSENCE.get())));
+        widgetHolder.add(new EssenceBarWidget(5, 32, EssenceTypeRegistry.NATURAL_ESSENCE.get(), essenceCost.get(EssenceTypeRegistry.NATURAL_ESSENCE.get())));
+        widgetHolder.add(new EssenceBarWidget(13, 32, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), essenceCost.get(EssenceTypeRegistry.EXOTIC_ESSENCE.get())));
     }
 }

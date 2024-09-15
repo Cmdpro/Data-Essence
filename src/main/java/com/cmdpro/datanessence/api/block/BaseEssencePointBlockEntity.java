@@ -1,5 +1,8 @@
 package com.cmdpro.datanessence.api.block;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -16,8 +19,14 @@ import net.minecraft.world.level.block.state.properties.AttachFace;
 
 import java.awt.*;
 
-public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
+public abstract class BaseEssencePointBlockEntity extends BlockEntity implements EssenceBlockEntity {
     public BlockPos link;
+    public SingleEssenceContainer storage;
+
+    @Override
+    public SingleEssenceContainer getStorage() {
+        return storage;
+    }
 
     public BaseEssencePointBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
@@ -34,6 +43,7 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
             pTag.putInt("linkY", link.getY());
             pTag.putInt("linkZ", link.getZ());
         }
+        pTag.put("EssenceStorage", storage.toNbt());
     }
     public static void updateBlock(BlockEntity ent) {
         BlockState blockState = ent.getLevel().getBlockState(ent.getBlockPos());
@@ -42,19 +52,21 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseEssencePointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            if (pLevel.getBlockEntity(pPos.relative(pBlockEntity.getDirection().getOpposite())) instanceof EssenceContainer ent) {
+            BlockEntity ent1 = pLevel.getBlockEntity(pPos.relative(pBlockEntity.getDirection().getOpposite()));
+            if (ent1 instanceof EssenceBlockEntity ent) {
                 if (pBlockEntity.link == null) {
-                    pBlockEntity.transfer(ent);
-                    updateBlock(ent);
+                    pBlockEntity.transfer(ent.getStorage());
+                    updateBlock(ent1);
                 } else {
-                    pBlockEntity.take(ent);
-                    updateBlock(ent);
+                    pBlockEntity.take(ent.getStorage());
+                    updateBlock(ent1);
                 }
             }
             if (pBlockEntity.link != null) {
-                if (pLevel.getBlockEntity(pBlockEntity.link) instanceof EssenceContainer ent) {
-                    pBlockEntity.transfer(ent);
-                    updateBlock(ent);
+                BlockEntity ent2 = pLevel.getBlockEntity(pBlockEntity.link);
+                if (pLevel.getBlockEntity(pBlockEntity.link) instanceof EssenceBlockEntity ent) {
+                    pBlockEntity.transfer(ent.getStorage());
+                    updateBlock(ent2);
                 } else {
                     pBlockEntity.link = null;
                     pBlockEntity.updateBlock();
@@ -66,8 +78,8 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
             }
         }
     }
-    public abstract void transfer(EssenceContainer other);
-    public abstract void take(EssenceContainer other);
+    public abstract void transfer(EssenceStorage other);
+    public abstract void take(EssenceStorage other);
     public Direction getDirection() {
         if (getBlockState().getValue(BaseEssencePoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;
@@ -115,6 +127,7 @@ public abstract class BaseEssencePointBlockEntity extends EssenceContainer {
         if (pTag.getBoolean("hasLink")) {
             link = new BlockPos(pTag.getInt("linkX"), pTag.getInt("linkY"), pTag.getInt("linkZ"));
         }
+        storage.fromNbt(pTag.getCompound("EssenceStorage"));
     }
 
 }

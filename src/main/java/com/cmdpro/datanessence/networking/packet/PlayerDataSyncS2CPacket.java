@@ -13,9 +13,10 @@ import net.minecraft.world.entity.player.Player;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
-public record PlayerDataSyncS2CPacket(boolean[] unlockedEssences, BlockPos linkPos, Color linkColor) implements Message {
+public record PlayerDataSyncS2CPacket(Map<ResourceLocation, Boolean> unlockedEssences, BlockPos linkPos, Color linkColor) implements Message {
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
@@ -24,26 +25,7 @@ public record PlayerDataSyncS2CPacket(boolean[] unlockedEssences, BlockPos linkP
     public static final Type<PlayerDataSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_data_sync"));
 
     public static void write(RegistryFriendlyByteBuf buf, PlayerDataSyncS2CPacket obj) {
-        if (obj.unlockedEssences.length >= 1) {
-            buf.writeBoolean(obj.unlockedEssences[0]);
-        } else {
-            buf.writeBoolean(false);
-        }
-        if (obj.unlockedEssences.length >= 2) {
-            buf.writeBoolean(obj.unlockedEssences[1]);
-        } else {
-            buf.writeBoolean(false);
-        }
-        if (obj.unlockedEssences.length >= 3) {
-            buf.writeBoolean(obj.unlockedEssences[2]);
-        } else {
-            buf.writeBoolean(false);
-        }
-        if (obj.unlockedEssences.length >= 4) {
-            buf.writeBoolean(obj.unlockedEssences[3]);
-        } else {
-            buf.writeBoolean(false);
-        }
+        buf.writeMap(obj.unlockedEssences, FriendlyByteBuf::writeResourceLocation, FriendlyByteBuf::writeBoolean);
         buf.writeBoolean(obj.linkPos != null);
         if (obj.linkPos != null) {
             buf.writeBlockPos(obj.linkPos);
@@ -54,11 +36,7 @@ public record PlayerDataSyncS2CPacket(boolean[] unlockedEssences, BlockPos linkP
         buf.writeInt(obj.linkColor.getAlpha());
     }
     public static PlayerDataSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
-        boolean essence = buf.readBoolean();
-        boolean lunar = buf.readBoolean();
-        boolean natural = buf.readBoolean();
-        boolean exotic = buf.readBoolean();
-        boolean[] unlockedEssences = new boolean[]{essence, lunar, natural, exotic};
+        Map<ResourceLocation, Boolean> unlockedEssences = buf.readMap(FriendlyByteBuf::readResourceLocation, FriendlyByteBuf::readBoolean);
         boolean hasLinkPos = buf.readBoolean();
         BlockPos linkPos = null;
         if (hasLinkPos) {

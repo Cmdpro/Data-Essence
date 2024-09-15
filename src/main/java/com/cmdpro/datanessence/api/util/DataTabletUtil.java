@@ -1,6 +1,9 @@
 package com.cmdpro.datanessence.api.util;
 
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import net.minecraft.resources.ResourceLocation;
@@ -70,29 +73,29 @@ public class DataTabletUtil {
     public static void setTier(Player player, int tier) {
         player.setData(AttachmentTypeRegistry.TIER, tier);
         PlayerDataUtil.sendTier((ServerPlayer) player, true);
-        Supplier<AttachmentType<Boolean>> essenceType = DataTabletUtil.getUnlockedTypeForTier(tier);
+        EssenceType essenceType = DataTabletUtil.getUnlockedTypeForTier(tier);
         if (essenceType != null) {
-            if (!player.getData(essenceType)) {
-                player.setData(essenceType, true);
+            if (!player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCES).getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(essenceType), false)) {
+                player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCES).put(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(essenceType), true);
                 PlayerDataUtil.updateData((ServerPlayer) player);
             }
         }
     }
 
     @Nullable
-    private static Supplier<AttachmentType<Boolean>> getUnlockedTypeForTier(int tier) {
-        Supplier<AttachmentType<Boolean>> essenceType = null;
+    private static EssenceType getUnlockedTypeForTier(int tier) {
+        EssenceType essenceType = null;
         if (tier >= 1) {
-            essenceType = AttachmentTypeRegistry.UNLOCKED_ESSENCE;
+            essenceType = EssenceTypeRegistry.ESSENCE.get();
         }
         if (tier >= 3) {
-            essenceType = AttachmentTypeRegistry.UNLOCKED_LUNAR_ESSENCE;
+            essenceType = EssenceTypeRegistry.LUNAR_ESSENCE.get();
         }
         if (tier >= 5) {
-            essenceType = AttachmentTypeRegistry.UNLOCKED_NATURAL_ESSENCE;
+            essenceType = EssenceTypeRegistry.NATURAL_ESSENCE.get();
         }
         if (tier >= 7) {
-            essenceType = AttachmentTypeRegistry.UNLOCKED_EXOTIC_ESSENCE;
+            essenceType = EssenceTypeRegistry.EXOTIC_ESSENCE.get();
         }
         return essenceType;
     }

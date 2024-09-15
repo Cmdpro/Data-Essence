@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.item.equipment;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.util.EssenceUtil;
 import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.registry.ArmorMaterialRegistry;
 import net.minecraft.resources.ResourceLocation;
@@ -12,8 +11,6 @@ import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.npc.InventoryCarrier;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemAttributeModifiers;

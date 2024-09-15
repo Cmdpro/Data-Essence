@@ -1,10 +1,12 @@
 package com.cmdpro.datanessence.block.transmission;
 
-import com.cmdpro.datanessence.api.util.EssenceUtil;
 import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
-import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -21,6 +23,7 @@ import java.awt.*;
 public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity implements GeoBlockEntity {
     public LunarEssencePointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.LUNAR_ESSENCE_POINT.get(), pos, state);
+        storage = new SingleEssenceContainer(EssenceTypeRegistry.LUNAR_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
 
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
@@ -30,7 +33,7 @@ public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity im
     }
     @Override
     public Color linkColor() {
-        return new Color(0xf5fbc0);
+        return new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().getColor());
     }
 
     @Override
@@ -42,28 +45,13 @@ public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity im
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.factory;
     }
-    @Override
-    public void transfer(EssenceContainer other) {
-        EssenceUtil.transferLunarEssence(this, other, DataNEssenceConfig.essencePointTransfer);
-    }
-    @Override
-    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        super.saveAdditional(tag, pRegistries);
-        tag.putFloat("lunarEssence", getLunarEssence());
-    }
-    @Override
-    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(nbt, pRegistries);
-        setLunarEssence(nbt.getFloat("lunarEssence"));
-    }
 
     @Override
-    public float getMaxLunarEssence() {
-        return DataNEssenceConfig.essencePointTransfer;
+    public void transfer(EssenceStorage other) {
+        EssenceStorage.transferEssence(storage, other, EssenceTypeRegistry.LUNAR_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
-
     @Override
-    public void take(EssenceContainer other) {
-        EssenceUtil.transferLunarEssence(other, this, DataNEssenceConfig.essencePointTransfer);
+    public void take(EssenceStorage other) {
+        EssenceStorage.transferEssence(other, storage, EssenceTypeRegistry.LUNAR_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
 }

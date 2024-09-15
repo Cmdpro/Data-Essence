@@ -1,9 +1,13 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.api.item.ILaserEmitterModule;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.LaserEmitterMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -19,6 +23,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -30,7 +35,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class LaserEmitterBlockEntity extends EssenceContainer implements MenuProvider {
+public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -63,32 +73,25 @@ public class LaserEmitterBlockEntity extends EssenceContainer implements MenuPro
     }
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
-        CompoundTag tag = pkt.getTag();
-        setEssence(tag.getFloat("essence"));
+        storage.fromNbt(pkt.getTag());
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        CompoundTag tag = new CompoundTag();
-        tag.putFloat("essence", getEssence());
-        return tag;
+        return storage.toNbt();
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        tag.putFloat("essence", getEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
         super.saveAdditional(tag, pRegistries);
     }
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
-        setEssence(nbt.getFloat("essence"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
     }
 
-    @Override
-    public float getMaxEssence() {
-        return 1000;
-    }
     public Vec3 end;
     public int redstoneLevel;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, LaserEmitterBlockEntity pBlockEntity) {
@@ -99,9 +102,9 @@ public class LaserEmitterBlockEntity extends EssenceContainer implements MenuPro
             drainsEssence = false;
         }
         if (!pLevel.isClientSide) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
         }
-        if (pBlockEntity.getEssence() >= 0.5f || !drainsEssence) {
+        if (pBlockEntity.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 0.5f || !drainsEssence) {
             float dist = 0;
             for (int i = 1; i <= 10; i++) {
                 BlockPos pos = pPos.relative(pState.getValue(LaserEmitter.FACING), i);
@@ -114,7 +117,7 @@ public class LaserEmitterBlockEntity extends EssenceContainer implements MenuPro
                 pBlockEntity.end = pPos.getCenter().relative(pState.getValue(LaserEmitter.FACING), dist);
                 if (!pLevel.isClientSide) {
                     if (drainsEssence) {
-                        pBlockEntity.setEssence(pBlockEntity.getEssence() - 0.5f);
+                        pBlockEntity.storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), 0.5f);
                     }
                     pBlockEntity.updateBlock();
                     updated = true;

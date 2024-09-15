@@ -1,12 +1,16 @@
 package com.cmdpro.datanessence.block.production;
 
-import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.common.util.Lazy;
@@ -15,10 +19,11 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 
-public class FluidCollectorBlockEntity extends EssenceContainer {
+public class FluidCollectorBlockEntity extends BlockEntity implements EssenceBlockEntity {
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
-    public float getMaxEssence() {
-        return 1000;
+    public EssenceStorage getStorage() {
+        return storage;
     }
     public int cooldown;
     public FluidCollectorBlockEntity(BlockPos pos, BlockState state) {
@@ -31,7 +36,7 @@ public class FluidCollectorBlockEntity extends EssenceContainer {
     private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        tag.putFloat("essence", getEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.put("fluid", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.putInt("cooldown", cooldown);
         super.saveAdditional(tag, pRegistries);
@@ -40,13 +45,13 @@ public class FluidCollectorBlockEntity extends EssenceContainer {
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluid"));
-        setEssence(nbt.getFloat("essence"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         cooldown = nbt.getInt("cooldown");
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidCollectorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             if (pBlockEntity.cooldown <= 0) {
-                if (pBlockEntity.getEssence() >= 25) {
+                if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 25) {
                     BlockPos pos = pPos.relative(pState.getValue(FluidCollector.FACING));
                     FluidState state = pLevel.getFluidState(pos);
                     if (!state.isEmpty() && state.isSource()) {
@@ -54,7 +59,7 @@ public class FluidCollectorBlockEntity extends EssenceContainer {
                         if (pBlockEntity.fluidHandler.fill(stack, IFluidHandler.FluidAction.SIMULATE) > 0) {
                             pBlockEntity.fluidHandler.fill(stack, IFluidHandler.FluidAction.EXECUTE);
                             pLevel.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-                            pBlockEntity.setEssence(pBlockEntity.getEssence() - 25);
+                            pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 25);
                             pBlockEntity.cooldown = 20;
                         }
                     }

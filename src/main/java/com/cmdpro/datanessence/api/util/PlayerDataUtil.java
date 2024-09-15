@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.awt.*;
+import java.util.Map;
 import java.util.Optional;
 
 public class PlayerDataUtil {
@@ -44,12 +45,7 @@ public class PlayerDataUtil {
         ModMessages.sendToPlayer(new PlayerTierSyncS2CPacket(player.getData(AttachmentTypeRegistry.TIER), showIndicator), player);
     }
 
-    public static boolean[] getUnlockedEssences(ServerPlayer player) {
-        return new boolean[]{
-                player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCE),
-                player.getData(AttachmentTypeRegistry.UNLOCKED_LUNAR_ESSENCE),
-                player.getData(AttachmentTypeRegistry.UNLOCKED_NATURAL_ESSENCE),
-                player.getData(AttachmentTypeRegistry.UNLOCKED_EXOTIC_ESSENCE)
-        };
+    public static Map<ResourceLocation, Boolean> getUnlockedEssences(ServerPlayer player) {
+        return player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCES);
     }
 }

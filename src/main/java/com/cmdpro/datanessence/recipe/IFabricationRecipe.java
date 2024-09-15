@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence.recipe;
 
+import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -16,10 +18,10 @@ public interface IFabricationRecipe extends CraftingRecipe, IHasRequiredKnowledg
         return true;
     }
 
-    //@Override
-    //default ItemStack getToastSymbol() {
-    //    return new ItemStack(BlockInit.RUNICWORKBENCH.get());
-    //}
+    @Override
+    default ItemStack getToastSymbol() {
+        return new ItemStack(BlockRegistry.FABRICATOR.get());
+    }
 
     @Override
     default CraftingBookCategory category() {

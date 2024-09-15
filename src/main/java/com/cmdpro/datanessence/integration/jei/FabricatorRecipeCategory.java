@@ -1,8 +1,10 @@
 package com.cmdpro.datanessence.integration.jei;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.recipe.ShapedFabricationRecipe;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
@@ -69,10 +71,10 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
 
     @Override
     public void draw(IFabricationRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
-        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 5, 6, 0, recipe.getEssenceCost(), 1000);
-        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 13, 6, 1, recipe.getLunarEssenceCost(), 1000);
-        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 5, 32, 2, recipe.getNaturalEssenceCost(), 1000);
-        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 13, 32, 3, recipe.getExoticEssenceCost(), 1000);
+        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 5, 6, EssenceTypeRegistry.ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), 0f), 1000);
+        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 13, 6, EssenceTypeRegistry.LUNAR_ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get()), 0f), 1000);
+        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 5, 32, EssenceTypeRegistry.NATURAL_ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.NATURAL_ESSENCE.get()), 0f), 1000);
+        ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 13, 32, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 0f), 1000);
         if (recipe instanceof ShapelessFabricationRecipe) {
             guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 93, 4, 242, 185, 14, 11);
         }
@@ -80,22 +82,22 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
     @Override
     public void getTooltip(ITooltipBuilder builder, IFabricationRecipe recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         List<Component> tooltip = new ArrayList<>();
-        Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 6, 0, recipe.getEssenceCost());
+        Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 6, EssenceTypeRegistry.ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), 0f));
         if (essence != null) {
             tooltip.clear();
             tooltip.add(essence);
         }
-        Component lunarEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 6, 1, recipe.getLunarEssenceCost());
+        Component lunarEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 6, EssenceTypeRegistry.LUNAR_ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get()), 0f));
         if (lunarEssence != null) {
             tooltip.clear();
             tooltip.add(lunarEssence);
         }
-        Component naturalEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 32, 2, recipe.getNaturalEssenceCost());
+        Component naturalEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 5, 32, EssenceTypeRegistry.NATURAL_ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.NATURAL_ESSENCE.get()), 0f));
         if (naturalEssence != null) {
             tooltip.clear();
             tooltip.add(naturalEssence);
         }
-        Component exoticEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 32, 3, recipe.getExoticEssenceCost());
+        Component exoticEssence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(mouseX, mouseY, 13, 32, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 0f));
         if (exoticEssence != null) {
             tooltip.clear();
             tooltip.add(exoticEssence);

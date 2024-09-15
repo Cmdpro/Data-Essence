@@ -1,6 +1,8 @@
 {
   "type": "datanessence:infusion",
-  "essenceCost": 100,
+  "essenceCost": {
+    "datanessence:essence": 100
+  },
   "entry": "datanessence:basics/lensing_crystals",
   "input": {
     "item": "datanessence:lensing_crystal",

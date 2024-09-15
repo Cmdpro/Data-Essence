@@ -1,10 +1,15 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.api.block.EssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.InfuserMenu;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
@@ -14,6 +19,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
@@ -25,6 +31,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -38,9 +45,16 @@ import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-public class InfuserBlockEntity extends EssenceContainer implements MenuProvider, GeoBlockEntity {
+public class InfuserBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, EssenceBlockEntity {
+    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    @Override
+    public EssenceStorage getStorage() {
+        return storage;
+    }
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
@@ -68,23 +82,6 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
             setChanged();
         }
     };
-
-    @Override
-    public float getMaxEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxLunarEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxNaturalEssence() {
-        return 1000;
-    }
-    @Override
-    public float getMaxExoticEssence() {
-        return 1000;
-    }
 
     public void drops() {
         SimpleContainer inventory = getInv();
@@ -120,20 +117,14 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
-        setEssence(tag.getFloat("essence"));
-        setLunarEssence(tag.getFloat("lunarEssence"));
-        setNaturalEssence(tag.getFloat("naturalEssence"));
-        setExoticEssence(tag.getFloat("exoticEssence"));
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
+        tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
         tag.put("item", item.saveOptional(pRegistries));
         return tag;
@@ -144,11 +135,8 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
         tag.put("input", itemHandler.serializeNBT(pRegistries));
         tag.put("dataDrive", dataDriveHandler.serializeNBT(pRegistries));
         tag.put("output", outputItemHandler.serializeNBT(pRegistries));
-        tag.putFloat("essence", getEssence());
-        tag.putFloat("lunarEssence", getLunarEssence());
-        tag.putFloat("naturalEssence", getNaturalEssence());
-        tag.putFloat("exoticEssence", getExoticEssence());
         tag.putInt("workTime", workTime);
+        tag.put("EssenceStorage", storage.toNbt());
         super.saveAdditional(tag, pRegistries);
     }
     @Override
@@ -157,10 +145,7 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("input"));
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("dataDrive"));
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
-        setEssence(nbt.getFloat("essence"));
-        setLunarEssence(nbt.getFloat("lunarEssence"));
-        setNaturalEssence(nbt.getFloat("naturalEssence"));
-        setExoticEssence(nbt.getFloat("exoticEssence"));
+        storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
     }
     public ItemStack item;
@@ -184,13 +169,10 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
     public int workTime;
     public InfusionRecipe recipe;
     public boolean enoughEssence;
-    public float essenceCost;
-    public float lunarEssenceCost;
-    public float naturalEssenceCost;
-    public float exoticEssenceCost;
+    public Map<ResourceLocation, Float> essenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, InfuserBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity);
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0);
             boolean shouldReset = true;
@@ -198,15 +180,14 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get().value();
                 pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
-                pBlockEntity.lunarEssenceCost = recipe.get().value().getLunarEssenceCost();
-                pBlockEntity.naturalEssenceCost = recipe.get().value().getNaturalEssenceCost();
-                pBlockEntity.exoticEssenceCost = recipe.get().value().getExoticEssenceCost();
-                boolean enoughEssence = false;
-                if (pBlockEntity.getEssence() >= pBlockEntity.essenceCost &&
-                        pBlockEntity.getLunarEssence() >= pBlockEntity.lunarEssenceCost &&
-                        pBlockEntity.getNaturalEssence() >= pBlockEntity.naturalEssenceCost &&
-                        pBlockEntity.getExoticEssence() >= pBlockEntity.exoticEssenceCost) {
-                    enoughEssence = true;
+                boolean enoughEssence = true;
+                for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                    if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
+                        enoughEssence = false;
+                    }
+                }
+                if (enoughEssence) {
                     Entry entry = DataDrive.getEntry(pBlockEntity.dataDriveHandler.getStackInSlot(0));
                     if (entry != null) {
                         if (pBlockEntity.recipe == null || pBlockEntity.recipe.getEntry().equals(entry.id)) {
@@ -215,10 +196,10 @@ public class InfuserBlockEntity extends EssenceContainer implements MenuProvider
                                     ItemStack stack = pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()).copy();
                                     pBlockEntity.outputItemHandler.insertItem(0, stack, false);
                                     pBlockEntity.itemHandler.extractItem(0, 1, false);
-                                    pBlockEntity.setEssence(pBlockEntity.getEssence() - pBlockEntity.essenceCost);
-                                    pBlockEntity.setLunarEssence(pBlockEntity.getLunarEssence() - pBlockEntity.lunarEssenceCost);
-                                    pBlockEntity.setNaturalEssence(pBlockEntity.getNaturalEssence() - pBlockEntity.naturalEssenceCost);
-                                    pBlockEntity.setExoticEssence(pBlockEntity.getExoticEssence() - pBlockEntity.exoticEssenceCost);
+                                    for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                                        EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                                        pBlockEntity.storage.removeEssence(type, i.getValue());
+                                    }
                                     pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
                                     pBlockEntity.workTime = 0;
                                 } else {

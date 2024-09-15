@@ -1,13 +1,16 @@
 package com.cmdpro.datanessence.block.transmission;
 
 import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
-import com.cmdpro.datanessence.api.util.EssenceUtil;
-import com.cmdpro.datanessence.api.block.EssenceContainer;
+import com.cmdpro.datanessence.api.essence.EssenceStorage;
+import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoAnimatable;
@@ -21,6 +24,7 @@ import java.awt.*;
 public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity implements GeoBlockEntity {
     public ExoticEssencePointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.EXOTIC_ESSENCE_POINT.get(), pos, state);
+        storage = new SingleEssenceContainer(EssenceTypeRegistry.EXOTIC_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
 
     private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
@@ -38,34 +42,18 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity i
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.factory;
     }
-    @Override
-    public void transfer(EssenceContainer other) {
-        EssenceUtil.transferExoticEssence(this, other, DataNEssenceConfig.essencePointTransfer);
-    }
 
     @Override
     public Color linkColor() {
-        return new Color(0xe7fcf9);
+        return new Color(EssenceTypeRegistry.EXOTIC_ESSENCE.get().getColor());
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        super.saveAdditional(tag, pRegistries);
-        tag.putFloat("exoticEssence", getExoticEssence());
+    public void transfer(EssenceStorage other) {
+        EssenceStorage.transferEssence(storage, other, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
     @Override
-    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(nbt, pRegistries);
-        setExoticEssence(nbt.getFloat("exoticEssence"));
-    }
-
-    @Override
-    public float getMaxExoticEssence() {
-        return DataNEssenceConfig.essencePointTransfer;
-    }
-
-    @Override
-    public void take(EssenceContainer other) {
-        EssenceUtil.transferExoticEssence(other, this, DataNEssenceConfig.essencePointTransfer);
+    public void take(EssenceStorage other) {
+        EssenceStorage.transferEssence(other, storage, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
 }

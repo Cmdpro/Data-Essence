@@ -1,9 +1,8 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
-  "essenceCost": 500,
-  "lunarEssenceCost": 0,
-  "naturalEssenceCost": 0,
-  "exoticEssenceCost": 0,
+  "essenceCost": {
+    "datanessence:essence": 500
+  },
   "entry": "datanessence:tools/primitive_antigravity_pack",
   "pattern": [
     "CRC",
