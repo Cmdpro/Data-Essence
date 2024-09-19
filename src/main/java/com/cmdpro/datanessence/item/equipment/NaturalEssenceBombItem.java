@@ -1,6 +1,10 @@
 package com.cmdpro.datanessence.item.equipment;
 
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.entity.ThrownNaturalEssenceBombProjectile;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -9,7 +13,10 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
 
 public class NaturalEssenceBombItem extends Item {
     public NaturalEssenceBombItem(Properties pProperties) {
@@ -32,5 +39,11 @@ public class NaturalEssenceBombItem extends Item {
         }
 
         return InteractionResultHolder.sidedSuccess(itemstack, pLevel.isClientSide());
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag flag) {
+        super.appendHoverText(stack, context, components, flag);
+        components.add(Component.translatable("item.datanessence.natural_essence_bomb.info").withStyle(Style.EMPTY.withColor(EssenceTypeRegistry.NATURAL_ESSENCE.get().getColor())));
     }
 }

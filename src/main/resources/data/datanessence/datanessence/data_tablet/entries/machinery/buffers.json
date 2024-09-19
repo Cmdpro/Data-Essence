@@ -1,8 +1,8 @@
 {
   "icon": "datanessence:item_buffer",
   "tab": "datanessence:machinery",
-  "x": -2,
-  "y": 2,
+  "x": 0,
+  "y": -2,
   "pages": [
     {
       "type": "datanessence:text",
@@ -20,6 +20,8 @@
   ],
   "name": "data_tablet.pages.buffers.name",
   "parents": [
-    "datanessence:automation"
+    "datanessence:machinery/automation",
+    "datanessence:machinery/itemworks",
+    "datanessence:machinery/fluidworks"
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "icon": "datanessence:essence_point",
+  "icon": "datanessence:essence_wire",
   "tab": "datanessence:essence_manipulation",
   "x": 2,
   "y": 0,
@@ -12,8 +12,8 @@
       "type": "datanessence:crafting",
       "text": "data_tablet.pages.essence_transfer.page2.text",
       "recipes": [
-        "datanessence:fabrication/essence_point",
-        "datanessence:fabrication/essence_wire"
+        "datanessence:fabrication/points/essence_point",
+        "datanessence:fabrication/wires/essence_wire"
       ]
     }
   ],

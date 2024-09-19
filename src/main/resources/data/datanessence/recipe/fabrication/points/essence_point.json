@@ -1,0 +1,17 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 0
+  },
+  "entry": "datanessence:essence_manipulation/essence_transfer",
+  "pattern": [
+    "RAR",
+    " O "
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "R": { "item": "datanessence:conductance_rod" },
+    "O": { "item": "datanessence:polished_obsidian" }
+  },
+  "result": { "id": "datanessence:essence_point", "count": 2 }
+}

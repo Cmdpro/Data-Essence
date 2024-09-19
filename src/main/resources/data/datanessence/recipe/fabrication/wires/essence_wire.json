@@ -1,0 +1,18 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 0
+  },
+  "entry": "datanessence:essence_manipulation/essence_transfer",
+  "pattern": [
+    " C ",
+    "ARA",
+    " C "
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "R": { "item": "datanessence:conductance_rod" },
+    "C": { "item": "minecraft:copper_ingot" }
+  },
+  "result": { "id": "datanessence:essence_wire", "count": 2 }
+}

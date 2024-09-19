@@ -1,0 +1,27 @@
+{
+  "icon": "datanessence:item_wire",
+  "tab": "datanessence:machinery",
+  "x": -2,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": "datanessence:item_point",
+      "text": "data_tablet.pages.itemworks.page1.text"
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": "data_tablet.pages.itemworks.page2.text",
+      "recipes": [
+        "datanessence:fabrication/points/item_point",
+        "datanessence:fabrication/wires/item_wire"
+      ]
+    }
+  ],
+  "name": "data_tablet.pages.itemworks.name",
+  "parents": [
+    "datanessence:basics/fabricator",
+    "datanessence:essence_manipulation/essence_transfer",
+    "datanessence:machinery/automation"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 0
+  },
+  "entry": "datanessence:machinery/fluidworks",
+  "pattern": [
+    " C ",
+    "LRL",
+    " C "
+  ],
+  "key": {
+    "L": { "item": "minecraft:lapis_lazuli" },
+    "R": { "item": "datanessence:conductance_rod" },
+    "C": { "item": "minecraft:copper_ingot" }
+  },
+  "result": { "id": "datanessence:fluid_wire", "count": 2 }
+}

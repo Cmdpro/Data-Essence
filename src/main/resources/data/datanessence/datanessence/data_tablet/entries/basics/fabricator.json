@@ -1,21 +1,24 @@
 {
   "icon": "datanessence:fabricator",
   "tab": "datanessence:basics",
-  "x": 0,
+  "x": -1,
   "y": 0,
   "pages": [
     {
-      "type": "datanessence:text",
+      "type": "datanessence:item",
+      "item": "datanessence:fabricator",
       "text": "data_tablet.pages.fabricator.page1.text"
     },
     {
       "type": "datanessence:crafting",
       "text": "data_tablet.pages.fabricator.page2.text",
       "recipes": [
-        "datanessence:crafting/fabricator",
-        "datanessence:crafting/magic_wrench"
+        "datanessence:crafting/fabricator"
       ]
     }
   ],
-  "name": "data_tablet.pages.fabricator.name"
+  "name": "data_tablet.pages.fabricator.name",
+  "parents": [
+    "datanessence:basics/data_tablet"
+  ]
 }

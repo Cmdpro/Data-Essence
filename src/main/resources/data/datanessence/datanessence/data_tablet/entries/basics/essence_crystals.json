@@ -5,7 +5,8 @@
   "y": 0,
   "pages": [
     {
-      "type": "datanessence:text",
+      "type": "datanessence:item",
+      "item": "datanessence:essence_shard",
       "text": "data_tablet.pages.essence_crystals.page1.text"
     }
   ],
