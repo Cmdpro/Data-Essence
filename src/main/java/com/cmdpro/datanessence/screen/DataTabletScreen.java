@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
+import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -280,10 +281,9 @@ public class DataTabletScreen extends Screen {
                             int y1 = y + ((o.y * 20)) + (int) offsetY;
                             int x2 = x + ((i.x * 20)) + (int) offsetX;
                             int y2 = y + ((i.y * 20)) + (int) offsetY;
-                            Vec2 vec1 = new Vec2(x1 >= x2 ? x1 == x2 ? 0 : 1 : -1, y1 >= y2 ? y1 == y2 ? 0 : 1 : -1);
-                            Vec2 vec2 = new Vec2(x2 >= x1 ? x1 == x2 ? 0 : 1 : -1, y2 >= y1 ? y1 == y2 ? 0 : 1 : -1);
-                            buf.addVertex(x1, y1, 0.0F).setColor(201, 13, 139, 255).setNormal(vec1.x, vec1.y, 0);
-                            buf.addVertex(x2, y2, 0.0F).setColor(201, 13, 139, 255).setNormal(vec2.x, vec2.y, 0);
+                            Vec2 vec = new Vec2(x1-x2, y1-y2).normalized();
+                            buf.addVertex(x1, y1, 0.0F).setColor(201, 13, 139, 255).setNormal(vec.x, vec.y, 0);
+                            buf.addVertex(x2, y2, 0.0F).setColor(201, 13, 139, 255).setNormal(vec.x, vec.y, 0);
                             BufferUploader.drawWithShader(buf.buildOrThrow());
                         }
                     }
