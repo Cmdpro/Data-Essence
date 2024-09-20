@@ -76,7 +76,7 @@ public class FabricatorRecipeCategory implements IRecipeCategory<IFabricationRec
         ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 5, 32, EssenceTypeRegistry.NATURAL_ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.NATURAL_ESSENCE.get()), 0f), 1000);
         ClientEssenceBarUtil.drawEssenceBarTiny(guiGraphics, 13, 32, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), recipe.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 0f), 1000);
         if (recipe instanceof ShapelessFabricationRecipe) {
-            guiGraphics.blit(DataTabletScreen.TEXTURECRAFTING, 93, 4, 242, 185, 14, 11);
+            guiGraphics.blit(DataTabletScreen.TEXTURE_CRAFTING, 93, 4, 242, 185, 14, 11);
         }
     }
     @Override

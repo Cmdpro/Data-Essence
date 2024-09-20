@@ -2,7 +2,6 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
-import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.screen.datatablet.*;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -15,24 +14,18 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.phys.Vec2;
-import org.lwjgl.opengl.GL11;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix4f;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class DataTabletScreen extends Screen {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
+    public static final ResourceLocation TEXTURE_MAIN = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
     public static final ResourceLocation TEXTURE_PAGE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_page.png");
-    public static final ResourceLocation TEXTURECRAFTING = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
-    public static final ResourceLocation TEXTUREMISC = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_misc.png");
-    public DataTabletScreen(Component pTitle) {
-        super(pTitle);
-        offsetX = (imageWidth/2);
-        offsetY = (imageHeight/2);
-        currentTab = getSortedTabs().get(0);
-    }
+    public static final ResourceLocation TEXTURE_CRAFTING = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
+    public static final ResourceLocation TEXTURE_MISC = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_misc.png");
+
     public static int imageWidth = 256;
     public static int imageHeight = 166;
     public double offsetX;
@@ -43,6 +36,13 @@ public class DataTabletScreen extends Screen {
     public int ticks;
     public DataTab currentTab;
 
+    public DataTabletScreen(Component pTitle) {
+        super(pTitle);
+        offsetX = (imageWidth/2);
+        offsetY = (imageHeight/2);
+        currentTab = getSortedTabs().get(0);
+    }
+
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
         if (pButton == 0 && (screenType == 0 || screenType == 1)) {
@@ -52,6 +52,7 @@ public class DataTabletScreen extends Screen {
         }
         return false;
     }
+
     public boolean clickEntry(Entry entry) {
         screenType = 2;
         clickedEntry = entry;
@@ -59,6 +60,7 @@ public class DataTabletScreen extends Screen {
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
         return true;
     }
+
     public boolean clickTab(DataTab tab) {
         currentTab = tab;
         offsetX = (imageWidth/2);
@@ -66,28 +68,27 @@ public class DataTabletScreen extends Screen {
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
         return true;
     }
+
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         if (pButton == 0 && screenType == 0) {
-            for (Entry i : Entries.entries.values()) {
-                if (i.tab.equals(currentTab.id)) {
-                    if (i.isVisibleClient()) {
-                        if (pMouseX >= ((i.x * 20) - 10) + offsetX + x && pMouseX <= ((i.x * 20) + 10) + offsetX + x) {
-                            if (pMouseY >= ((i.y * 20) - 10) + offsetY + y && pMouseY <= ((i.y * 20) + 10) + offsetY + y) {
-                                return clickEntry(i);
-                            }
+            for (Entry entry : Entries.entries.values()) {
+                if (entry.tab.equals(currentTab.id) && entry.isVisibleClient()) {
+                    if (pMouseX >= ((entry.x * 20) - 10) + offsetX + x && pMouseX <= ((entry.x * 20) + 10) + offsetX + x) {
+                        if (pMouseY >= ((entry.y * 20) - 10) + offsetY + y && pMouseY <= ((entry.y * 20) + 10) + offsetY + y) {
+                            return clickEntry(entry);
                         }
                     }
                 }
             }
             int o = 0;
-            for (DataTab i : getCurrentTabs()) {
+            for (DataTab tab : getCurrentTabs()) {
                 int x2 = x+(o >= 6 ? 255 : -21);
                 int y2 = y+8+((o%6)*24);
                 if (pMouseX >= x2 && pMouseY >= y2 && pMouseX <= x2+21 && pMouseY <= y2+20) {
-                    return clickTab(i);
+                    return clickTab(tab);
                 }
                 o++;
             }
@@ -170,14 +171,17 @@ public class DataTabletScreen extends Screen {
             screenType = 0;
         }
     }
+
     public ResourceLocation getTextureToUse() {
         if (screenType == 2) {
             return TEXTURE_PAGE;
         } else {
-            return TEXTURE;
+            return TEXTURE_MAIN;
         }
     }
+
     public int tabPage = 0;
+
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         super.render(graphics, mouseX, mouseY, delta);
@@ -249,6 +253,7 @@ public class DataTabletScreen extends Screen {
             graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.name, x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
         }
     }
+
     public void drawPage(Page page, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -263,6 +268,7 @@ public class DataTabletScreen extends Screen {
         page.renderPost(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         pGuiGraphics.enableScissor(x+1, y+1, x+imageWidth-1, y+imageHeight-1);
     }
+
     public void drawLines(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -271,7 +277,8 @@ public class DataTabletScreen extends Screen {
         RenderSystem.setShader(GameRenderer::getRendertypeLinesShader);
         Tesselator tess = RenderSystem.renderThreadTesselator();
         RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
-        for (Entry i : Entries.entries.values()) {
+        long time = System.currentTimeMillis() / 50;
+        /* for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
                 if (i.isVisibleClient()) {
                     for (Entry o : i.getParentEntries()) {
@@ -289,7 +296,41 @@ public class DataTabletScreen extends Screen {
                     }
                 }
             }
+        } */
+        for (Entry destinationEntry : Entries.entries.values()) {
+            if (destinationEntry.tab.equals(currentTab.id) && destinationEntry.isVisibleClient()) {
+                for (Entry sourceEntry : destinationEntry.getParentEntries()) {
+                    if (sourceEntry.tab.equals(currentTab.id)) {
+                        int sourceX = x + (sourceEntry.x * 20) + (int) offsetX;
+                        int sourceY = y + (sourceEntry.y * 20) + (int) offsetY;
+                        int destinationX = x + (destinationEntry.x * 20) + (int) offsetX;
+                        int destinationY = y + (destinationEntry.y * 20) + (int) offsetY;
+
+                        Vec3 origin = new Vec3(sourceX, sourceY, 0);
+                        Vec3 line = new Vec3(origin.x - destinationX, origin.y - destinationY, 0);
+                        int lineSegments = (int) Math.ceil(line.length() / 1);
+                        int activeSegment = (int) (time % lineSegments);
+                        Vec3 segmentIteration = new Vec3(line.x / lineSegments, line.y / lineSegments, line.z / lineSegments);
+
+                        for (int i = lineSegments; i >= 0; i--) {
+                            double lx = origin.x();
+                            double ly = origin.y();
+                            origin.add(segmentIteration);
+
+                            int color = i == activeSegment ? 0x000000 : 0xffffff;
+
+                            Matrix4f offset = pGuiGraphics.pose().last().pose();
+
+                            BufferBuilder builder = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
+                            builder.addVertex(offset, (float) lx, (float) ly, 0).setColor(color).setNormal((float) origin.x, (float) origin.y, 0);
+                            builder.addVertex(offset, (float) origin.x, (float) origin.y, 0).setColor(color).setNormal((float) origin.x, (float) origin.y, 0);
+                            BufferUploader.drawWithShader(builder.buildOrThrow());
+                        }
+                    }
+                }
+            }
         }
+
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         GlStateManager._enableCull();
         GlStateManager._depthMask(true);
@@ -313,7 +354,7 @@ public class DataTabletScreen extends Screen {
         for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
                 if (i.isVisibleClient()) {
-                    pGuiGraphics.blit(TEXTURE, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166, 20, 20);
+                    pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166, 20, 20);
                     pGuiGraphics.renderItem(i.icon, x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
                 }
             }

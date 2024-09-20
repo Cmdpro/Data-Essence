@@ -5,7 +5,6 @@ import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.integration.emi.EMIDataNEssencePlugin;
 import com.cmdpro.datanessence.integration.emi.widgets.EssenceBarWidget;
-import com.cmdpro.datanessence.recipe.FluidMixingRecipe;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -106,7 +105,7 @@ public class EMIFabricationRecipe implements EmiRecipe {
                 sOff -= 3;
             }
         } else {
-            widgetHolder.addTexture(DataTabletScreen.TEXTURECRAFTING, 93, 4, 14, 11, 242, 185);
+            widgetHolder.addTexture(DataTabletScreen.TEXTURE_CRAFTING, 93, 4, 14, 11, 242, 185);
         }
         int i = 0;
         for (int y = 0; y < 3; ++y) {

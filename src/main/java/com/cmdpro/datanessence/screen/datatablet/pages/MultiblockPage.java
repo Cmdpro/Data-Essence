@@ -7,20 +7,13 @@ import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.Page;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
 import com.cmdpro.datanessence.screen.datatablet.pages.serializers.MultiblockPageSerializer;
-import com.cmdpro.datanessence.screen.datatablet.pages.serializers.TextPageSerializer;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.level.block.Rotation;
-
-import java.util.List;
 
 public class MultiblockPage extends Page {
     public MultiblockPage(ResourceLocation multiblock) {
@@ -56,9 +49,9 @@ public class MultiblockPage extends Page {
         pGuiGraphics.pose().pushPose();
         pGuiGraphics.pose().translate(0, 0, 200);
         if (pMouseX >= xOffset+120 && pMouseX <= xOffset+120+16 && pMouseY >= yOffset + 142 && pMouseY <= yOffset + 142 + 16) {
-            pGuiGraphics.blit(DataTabletScreen.TEXTUREMISC, xOffset+120, yOffset+142, 0, 54, 16, 16);
+            pGuiGraphics.blit(DataTabletScreen.TEXTURE_MISC, xOffset+120, yOffset+142, 0, 54, 16, 16);
         } else {
-            pGuiGraphics.blit(DataTabletScreen.TEXTUREMISC, xOffset+120, yOffset+142, 0, 38, 16, 16);
+            pGuiGraphics.blit(DataTabletScreen.TEXTURE_MISC, xOffset+120, yOffset+142, 0, 38, 16, 16);
         }
         pGuiGraphics.pose().popPose();
     }

@@ -2,7 +2,6 @@ package com.cmdpro.datanessence.screen.datatablet.pages;
 
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
-import com.cmdpro.datanessence.screen.datatablet.pages.serializers.CraftingPageSerializer;
 import com.cmdpro.datanessence.screen.datatablet.pages.serializers.ItemPageSerializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -26,7 +25,7 @@ public class ItemPage extends TextPage {
     @Override
     public void render(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset) {
         super.render(screen, pGuiGraphics, pPartialTick, pMouseX, pMouseY, xOffset, yOffset);
-        pGuiGraphics.blit(DataTabletScreen.TEXTUREMISC, xOffset + ((DataTabletScreen.imageWidth/2)-19), yOffset + 4, 0, 0, 38, 38);
+        pGuiGraphics.blit(DataTabletScreen.TEXTURE_MISC, xOffset + ((DataTabletScreen.imageWidth/2)-19), yOffset + 4, 0, 0, 38, 38);
         renderItemWithTooltip(pGuiGraphics, item, xOffset + ((DataTabletScreen.imageWidth/2)-19)+11, yOffset + 15, pMouseX, pMouseY);
     }
     @Override

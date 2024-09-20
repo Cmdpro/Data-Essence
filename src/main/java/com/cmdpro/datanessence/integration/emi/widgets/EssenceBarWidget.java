@@ -31,7 +31,7 @@ public class EssenceBarWidget extends Widget {
 
     @Override
     public void render(GuiGraphics draw, int mouseX, int mouseY, float delta) {
-        ResourceLocation fill = DataTabletScreen.TEXTURECRAFTING;
+        ResourceLocation fill = DataTabletScreen.TEXTURE_CRAFTING;
         int u = type.getTinyBarSprite().x;
         int v = type.getTinyBarSprite().y;
         if (cost > 0) {
