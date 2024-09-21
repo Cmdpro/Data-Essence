@@ -14,9 +14,15 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ColorRGBA;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+import org.jline.utils.Colors;
+import org.joml.Math;
 import org.joml.Matrix4f;
+import org.joml.Vector4f;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -278,7 +284,7 @@ public class DataTabletScreen extends Screen {
         Tesselator tess = RenderSystem.renderThreadTesselator();
         RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
         long time = System.currentTimeMillis() / 50;
-        /* for (Entry i : Entries.entries.values()) {
+        for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
                 if (i.isVisibleClient()) {
                     for (Entry o : i.getParentEntries()) {
@@ -296,7 +302,7 @@ public class DataTabletScreen extends Screen {
                     }
                 }
             }
-        } */
+        }
         for (Entry destinationEntry : Entries.entries.values()) {
             if (destinationEntry.tab.equals(currentTab.id) && destinationEntry.isVisibleClient()) {
                 for (Entry sourceEntry : destinationEntry.getParentEntries()) {
@@ -309,21 +315,21 @@ public class DataTabletScreen extends Screen {
                         Vec3 origin = new Vec3(sourceX, sourceY, 0);
                         Vec3 line = new Vec3(origin.x - destinationX, origin.y - destinationY, 0);
                         int lineSegments = (int) Math.ceil(line.length() / 1);
-                        int activeSegment = (int) (time % lineSegments);
+                        int activeSegment = lineSegments-(int)(time % lineSegments);
                         Vec3 segmentIteration = new Vec3(line.x / lineSegments, line.y / lineSegments, line.z / lineSegments);
 
                         for (int i = lineSegments; i >= 0; i--) {
                             double lx = origin.x();
                             double ly = origin.y();
-                            origin.add(segmentIteration);
-
-                            int color = i == activeSegment ? 0x000000 : 0xffffff;
-
-                            Matrix4f offset = pGuiGraphics.pose().last().pose();
+                            origin = origin.subtract(segmentIteration);
+                            Vec2 normal = new Vec2((float) (origin.x - lx), (float) (origin.y - ly)).normalized();
+                            float blendSize = 10;
+                            float blend = Math.clamp(0f, 1f, (blendSize-Math.abs((float)i-(float)activeSegment))/blendSize);
+                            int color = blendColors(new Color(0f, 0f, 0f), new Color(1f, 1f, 1f), blend).getRGB();
 
                             BufferBuilder builder = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
-                            builder.addVertex(offset, (float) lx, (float) ly, 0).setColor(color).setNormal((float) origin.x, (float) origin.y, 0);
-                            builder.addVertex(offset, (float) origin.x, (float) origin.y, 0).setColor(color).setNormal((float) origin.x, (float) origin.y, 0);
+                            builder.addVertex((float) lx, (float) ly, 0).setColor(color).setNormal(normal.x, normal.y, 0);
+                            builder.addVertex((float) origin.x, (float) origin.y, 0).setColor(color).setNormal(normal.x, normal.y, 0);
                             BufferUploader.drawWithShader(builder.buildOrThrow());
                         }
                     }
@@ -335,6 +341,12 @@ public class DataTabletScreen extends Screen {
         GlStateManager._enableCull();
         GlStateManager._depthMask(true);
         RenderSystem.lineWidth(1);
+    }
+    private Color blendColors(Color color1, Color color2, float blend) {
+        Vector4f vec4Color1 = new Vector4f(color1.getRed(), color1.getBlue(), color1.getGreen(), color1.getAlpha());
+        Vector4f vec4Color2 = new Vector4f(color2.getRed(), color2.getBlue(), color2.getGreen(), color1.getAlpha());
+        Vector4f vec4Blended = vec4Color1.lerp(vec4Color2, blend);
+        return new Color((int)vec4Blended.x, (int)vec4Blended.y, (int)vec4Blended.z, (int)vec4Blended.w);
     }
     public List<DataTab> getSortedTabs() {
         return Entries.tabs.values().stream().sorted((a, b) -> Integer.compare(b.priority, a.priority)).toList();
