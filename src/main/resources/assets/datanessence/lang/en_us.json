@@ -109,6 +109,9 @@
   "death.attack.essence_siphoned.player": "%2$s made %1$s have their essence siphoned out",
   "death.attack.essence_siphoned.item": "%2$s used %3$s to make %1$s have their essence siphoned out",
 
+  "effect.datanessence.gender_euphoria": "Gender Euphoria",
+  "effect.datanessence.gender_euphoria.description": "You feel a rush of pure joy about your gender!",
+
   "gui.widget.fluid":  "%1$s/%2$s %3$s",
 
   "gui.essence_bar.essence_with_max":         "%1$s/%2$s Essence",
