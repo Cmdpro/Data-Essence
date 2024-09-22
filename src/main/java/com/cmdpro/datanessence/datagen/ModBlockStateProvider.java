@@ -45,6 +45,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         pillarDecoBlock(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
         decoBlock(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN);
         decoBlock(BlockRegistry.PATTERNED_COPPER);
+        decoBlock(BlockRegistry.FLUIDIC_GLASS);
 
         essenceBurner(BlockRegistry.ESSENCE_BURNER);
         dataBank(BlockRegistry.DATA_BANK);

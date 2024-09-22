@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "minecraft:cobblestone" },
+  "time": 100,
+  "result": { "id": "minecraft:gravel", "count": 1 }
+}

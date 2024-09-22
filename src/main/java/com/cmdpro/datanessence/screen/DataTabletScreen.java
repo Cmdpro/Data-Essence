@@ -325,7 +325,7 @@ public class DataTabletScreen extends Screen {
                             Vec2 normal = new Vec2((float) (origin.x - lx), (float) (origin.y - ly)).normalized();
                             float blendSize = 10;
                             float blend = Math.clamp(0f, 1f, (blendSize-Math.abs((float)i-(float)activeSegment))/blendSize);
-                            int color = blendColors(new Color(0f, 0f, 0f), new Color(1f, 1f, 1f), blend).getRGB();
+                            int color = blendColors(new Color(45, 6, 61), new Color(255, 120, 201), blend).getRGB();
 
                             BufferBuilder builder = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
                             builder.addVertex((float) lx, (float) ly, 0).setColor(color).setNormal(normal.x, normal.y, 0);

@@ -1,4 +1,4 @@
-// 1.21	2024-08-27T11:22:35.9767282	Loot Tables
+// 1.21.1	2024-09-22T02:35:48.620816448	Loot Tables
 bbbe51e74edfcc54136678857699b9b14569a089 data/datanessence/loot_table/blocks/ancient_lantern.json
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_table/blocks/ancient_rock_bricks.json
 6540cac2211b8a360d5bbebd6d8ecce140f3d3cb data/datanessence/loot_table/blocks/ancient_rock_column.json
@@ -31,6 +31,7 @@ e1c242131171262fc09d6b3a382070f06850d4c9 data/datanessence/loot_table/blocks/flu
 f2a29214b3a71ca945068d1c8409c2bced4dcaec data/datanessence/loot_table/blocks/fluid_point.json
 fcbdf81a9730cd95fb91e6786a932853ae148da5 data/datanessence/loot_table/blocks/fluid_spiller.json
 a63c22d76b677d9f5d4b6212d1011f4d3f31c962 data/datanessence/loot_table/blocks/fluid_tank.json
+351474a0ce3cb81331aa54fdfd5c70575c10d690 data/datanessence/loot_table/blocks/fluidic_glass.json
 b8d2fa9097bae3a836da7acd662de09e9d889ee9 data/datanessence/loot_table/blocks/infuser.json
 26c69dcff1defc45669115decebc18f32b791f08 data/datanessence/loot_table/blocks/item_buffer.json
 ef9d3be9f05eaba2865a62ce63165bdc9f414942 data/datanessence/loot_table/blocks/item_point.json

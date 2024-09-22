@@ -1,0 +1,11 @@
+{
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 50
+  },
+  "input": { "item": "datanessence:wire_spool" },
+  "input2": { "item": "minecraft:lapis_lazuli" },
+  "time": 100,
+  "result": { "id": "datanessence:fluid_wire", "count": 4 },
+  "entry": "datanessence:machinery/synthesis_chamber"
+}

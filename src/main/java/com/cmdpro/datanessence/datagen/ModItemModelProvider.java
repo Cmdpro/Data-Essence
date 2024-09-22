@@ -44,6 +44,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.COGNIZANT_CUBE);
         simpleItem(ItemRegistry.ESSENCE_SHARD);
         simpleItem(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK);
+        simpleItem(ItemRegistry.TRAVERSITE_ROAD_CHUNK);
 
         simpleItemWithSubdirectory(ItemRegistry.ESSENCE_WIRE, "wires");
         simpleItemWithSubdirectory(ItemRegistry.LUNAR_ESSENCE_WIRE, "wires");

@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "datanessence:traversite_road" },
+  "time": 400,
+  "result": { "id": "datanessence:traversite_road_chunk", "count": 2 }
+}

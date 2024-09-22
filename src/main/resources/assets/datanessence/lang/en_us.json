@@ -31,6 +31,7 @@
   "item.datanessence.natural_essence_bomb.info": " ◇ Volatile! Makes the earth collapse in on itself.",
   "item.datanessence.exotic_essence_bomb": "Exotic Essence Bomb",
   "item.datanessence.exotic_essence_bomb.info": " ◇ Volatile! Incites the creation of a black hole.",
+  "item.datanessence.traversite_road_chunk": "Traversite Road Chunk",
 
   "block.datanessence.essence_point": "Essence Point",
   "block.datanessence.lunar_essence_point": "Lunar Essence Point",
@@ -89,6 +90,9 @@
   "block.datanessence.fluid_tank": "Fluid Tank",
   "block.datanessence.fluid_tank.amount": " ◇ Tank contains %1$smB/%2$smB of %3$s.",
   "block.datanessence.fluid_tank.nothing": " ◇ This tank is empty.",
+  "block.datanessence.fluidic_glass": "Fluidic Glass",
+  "block.datanessence.entropic_processor": "Entropic Processor",
+  "block.datanessence.charger": "Charger",
 
   "computer.types.test.files.0": "Very cool testing computer text file, yes very cool, indeed, uh I need more text uh uh uh uh uh uh uh yea",
 
