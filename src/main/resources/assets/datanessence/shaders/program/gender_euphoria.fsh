@@ -5,6 +5,7 @@ uniform sampler2D DiffuseDepthSampler;
 uniform float colorOffset;
 uniform mat4 invViewMat;
 uniform mat4 invProjMat;
+uniform vec3 CameraPosition;
 
 in vec2 texCoord;
 in vec2 oneTexel;
@@ -13,9 +14,8 @@ out vec4 fragColor;
 const float near = 1.0;
 const float far = 100.0;
 
-float linearDepth(vec2 uv) {
-    float depth = texture(DiffuseDepthSampler, uv).r;
-    return (2.0 * near * far) / (far + near - depth * (far - near));
+float linearizeDepth(float depth) {
+    return (2.0 * near) / (far + near - depth * (far - near));
 }
 
 vec3 reconstructPosition(vec2 uv, float z, mat4 invProjectionMatrix) {
@@ -33,9 +33,9 @@ vec3 calculateNormal(vec2 uv0) {
     vec2 uv1 = uv0 + vec2(1.0, 0.0) / depthDimensions;
     vec2 uv2 = uv0 + vec2(0.0, 1.0) / depthDimensions;
 
-    float depth0 = linearDepth(uv0);
-    float depth1 = linearDepth(uv1);
-    float depth2 = linearDepth(uv2);
+    float depth0 = linearizeDepth(texture2D(DiffuseDepthSampler, uv0).r);
+    float depth1 = linearizeDepth(texture2D(DiffuseDepthSampler, uv1).r);
+    float depth2 = linearizeDepth(texture2D(DiffuseDepthSampler, uv2).r);
 
     vec3 p0 = reconstructPosition(uv0, depth0, invProj);
     vec3 p1 = reconstructPosition(uv1, depth1, invProj);
@@ -43,6 +43,15 @@ vec3 calculateNormal(vec2 uv0) {
 
     vec3 normal = normalize(cross(p2-p0, p1-p0));
     return normal;
+}
+vec3 worldPos(float depth) {
+    float z = depth * 2.0 - 1.0;
+    vec4 clipSpacePosition = vec4(texCoord * 2.0 - 1.0, z, 1.0);
+    vec4 viewSpacePosition = invProjMat * clipSpacePosition;
+    viewSpacePosition /= viewSpacePosition.w;
+    vec4 worldSpacePosition = invViewMat * viewSpacePosition;
+
+    return CameraPosition + worldSpacePosition.xyz;
 }
 vec4 sobel() {
     float kernel[9] = float[](1, 2, 1, 0, 0, 0, -1, -2, -1);
@@ -92,5 +101,7 @@ void main() {
     }
     vec3 color = mix(vec3(252.0/255.0, 146.0/255.0, 186.0/255.0), vec3(105.0/255.0, 179.0/255.0, 252.0/255.0), coord*2);
     float blend = sobel().a;
+    vec3 world = worldPos(texture2D(DiffuseDepthSampler, texCoord).r);
+    blend *= 1-clamp(distance(world, CameraPosition)/50, 0, 1);
     fragColor = mix(texture2D(DiffuseSampler, texCoord), vec4(color, 1), blend);
 }
