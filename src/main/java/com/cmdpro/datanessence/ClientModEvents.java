@@ -12,6 +12,7 @@ import com.cmdpro.datanessence.renderers.layer.HornsLayer;
 import com.cmdpro.datanessence.renderers.layer.TailLayer;
 import com.cmdpro.datanessence.renderers.layer.WingsLayer;
 import com.cmdpro.datanessence.screen.*;
+import com.cmdpro.datanessence.shaders.GenderEuphoriaShader;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import com.cmdpro.datanessence.shaders.system.ShaderManager;
@@ -76,8 +77,8 @@ public class ClientModEvents {
 
         progressionShader = new ProgressionShader();
         ShaderManager.addShader(progressionShader);
-
-
+        genderEuphoriaShader = new GenderEuphoriaShader();
+        ShaderManager.addShader(genderEuphoriaShader);
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
@@ -95,6 +96,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.ENTICING_LURE_MENU.get(), EnticingLureScreen::new);
     }
     public static ShaderInstance progressionShader;
+    public static ShaderInstance genderEuphoriaShader;
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.ESSENCE_SPARKLE.get(),

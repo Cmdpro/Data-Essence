@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.shaders.system;
 
+import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -51,6 +52,8 @@ public abstract class ShaderInstance {
                 i.getEffect().safeGetUniform("time").set(time);
                 i.getEffect().safeGetUniform("CameraPosition").set(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f());
                 i.getEffect().safeGetUniform("ModelViewMat").set(RenderSystem.getModelViewMatrix());
+                i.getEffect().safeGetUniform("invViewMat").set(new Matrix4f(ClientRenderingUtil.viewStackMatrix).invert());
+                i.getEffect().safeGetUniform("invProjMat").set(new Matrix4f(RenderSystem.getProjectionMatrix()).invert());
                 setUniforms(i);
             }
             beforeProcess();

@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.registry.MobEffectRegistry;
 import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.shaders.system.ShaderInstance;
@@ -97,6 +98,9 @@ public class ClientEvents {
             event.getPoseStack().popPose();
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
+            if (Minecraft.getInstance().player != null) {
+                ClientModEvents.genderEuphoriaShader.setActive(Minecraft.getInstance().player.hasEffect(MobEffectRegistry.GENDER_EUPHORIA));
+            }
             for (ShaderInstance i : ShaderManager.instances) {
                 i.process();
             }

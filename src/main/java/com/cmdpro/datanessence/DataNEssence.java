@@ -57,6 +57,7 @@ public class DataNEssence
         ArmorMaterialRegistry.ARMOR_MATERIALS.register(bus);
         MultiblockPredicateRegistry.MULTIBLOCK_PREDICATE_TYPES.register(bus);
         EssenceTypeRegistry.ESSENCE_TYPES.register(bus);
+        MobEffectRegistry.MOB_EFFECTS.register(bus);
         random = RandomSource.create();
     }
     @SubscribeEvent
@@ -175,6 +176,7 @@ public class DataNEssence
             event.accept(ItemRegistry.BURNING_LENS.get());
             event.accept(ItemRegistry.PRECISION_LENS.get());
             event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
+            event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());

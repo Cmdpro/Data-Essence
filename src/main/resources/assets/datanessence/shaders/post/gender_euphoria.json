@@ -1,0 +1,26 @@
+{
+  "targets": [
+    "final"
+  ],
+  "passes": [
+    {
+      "name": "datanessence:gender_euphoria",
+      "intarget": "minecraft:main",
+      "outtarget": "final",
+      "auxtargets": [
+        {
+          "name": "DiffuseDepthSampler",
+          "id": "minecraft:main:depth"
+        }
+      ],
+      "uniforms": [
+      ]
+    },
+    {
+      "name": "blit",
+      "intarget": "final",
+      "outtarget": "minecraft:main"
+    }
+  ]
+}
+
