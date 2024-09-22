@@ -3,6 +3,7 @@
 uniform sampler2D DiffuseSampler;
 uniform sampler2D DiffuseDepthSampler;
 uniform float colorOffset;
+uniform float fade;
 uniform mat4 invViewMat;
 uniform mat4 invProjMat;
 uniform vec3 CameraPosition;
@@ -103,5 +104,7 @@ void main() {
     float blend = sobel().a;
     vec3 world = worldPos(texture2D(DiffuseDepthSampler, texCoord).r);
     blend *= 1-clamp(distance(world, CameraPosition)/50, 0, 1);
+    float actualFade = sin(radians(fade*(360/5)));
+    blend *= (actualFade*0.25)+0.75;
     fragColor = mix(texture2D(DiffuseSampler, texCoord), vec4(color, 1), blend);
 }
