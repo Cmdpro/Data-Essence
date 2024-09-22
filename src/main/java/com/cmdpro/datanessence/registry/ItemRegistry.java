@@ -71,7 +71,7 @@ public class ItemRegistry {
 
     // Misc
     public static final Supplier<Item> COGNIZANT_CUBE = register("cognizant_cube", () -> new CognizantCube(new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> TRAVERSITE_ROAD_CHUNK = register("traversite_road_chunk", () -> new TraversiteRoadChunk(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> TRAVERSITE_ROAD_CHUNK = register("traversite_road_chunk", () -> new TraversiteRoadChunk(new Item.Properties()));
 
     private static <T extends Item> Supplier<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);

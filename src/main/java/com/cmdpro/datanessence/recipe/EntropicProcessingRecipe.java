@@ -40,7 +40,7 @@ public class EntropicProcessingRecipe implements Recipe<RecipeInput> {
 
     @Override
     public ItemStack assemble(RecipeInput pContainer, HolderLookup.Provider pRegistryAccess) {
-        return output;
+        return output.copy();
     }
 
     @Override
@@ -61,7 +61,7 @@ public class EntropicProcessingRecipe implements Recipe<RecipeInput> {
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeRegistry.INFUSION_TYPE.get();
+        return RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get();
     }
 
     public static class Serializer implements RecipeSerializer<EntropicProcessingRecipe> {

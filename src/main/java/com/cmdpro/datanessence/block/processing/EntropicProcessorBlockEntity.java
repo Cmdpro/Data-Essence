@@ -89,12 +89,14 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         CompoundTag tag = pkt.getTag();
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
+        maxTime = tag.getInt("maxTime");
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
+        tag.putInt("maxTime", recipe == null ? -1 : recipe.getTime());
         return tag;
     }
 
@@ -106,6 +108,7 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         tag.putInt("workTime", workTime);
         super.saveAdditional(tag, pRegistries);
     }
+    public float maxTime;
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
@@ -132,9 +135,6 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     public int workTime;
     public EntropicProcessingRecipe recipe;
     public float essenceCost;
-    public float lunarEssenceCost;
-    public float naturalEssenceCost;
-    public float exoticEssenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EntropicProcessorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
@@ -147,13 +147,13 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
                         pBlockEntity.workTime = 0;
                     }
                     pBlockEntity.recipe = recipe.get().value();
-                    ItemStack result = recipe.get().value().getResultItem(pLevel.registryAccess());
-                    if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
+                    ItemStack assembled = recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
+                    if (pBlockEntity.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
                         if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
                             pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
-                            pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
+                            pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
                         }
@@ -168,9 +168,6 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
                 pBlockEntity.workTime = -1;
             }
             pBlockEntity.updateBlock();
-        } else {
-            Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
-            recipe.ifPresentOrElse(recipeHolder -> pBlockEntity.recipe = recipeHolder.value(), () -> pBlockEntity.recipe = null);
         }
     }
     protected void updateBlock() {
