@@ -21,6 +21,7 @@ import org.jline.utils.Colors;
 import org.joml.Math;
 import org.joml.Matrix4f;
 import org.joml.Vector4f;
+import org.joml.Vector4i;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -80,11 +81,13 @@ public class DataTabletScreen extends Screen {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         if (pButton == 0 && screenType == 0) {
-            for (Entry entry : Entries.entries.values()) {
-                if (entry.tab.equals(currentTab.id) && entry.isVisibleClient()) {
-                    if (pMouseX >= ((entry.x * 20) - 10) + offsetX + x && pMouseX <= ((entry.x * 20) + 10) + offsetX + x) {
-                        if (pMouseY >= ((entry.y * 20) - 10) + offsetY + y && pMouseY <= ((entry.y * 20) + 10) + offsetY + y) {
-                            return clickEntry(entry);
+            if (pMouseX >= x && pMouseY >= y && pMouseX <= x+imageWidth && pMouseY <= y+imageHeight) {
+                for (Entry entry : Entries.entries.values()) {
+                    if (entry.tab.equals(currentTab.id) && entry.isVisibleClient()) {
+                        if (pMouseX >= ((entry.x * 20) - 10) + offsetX + x && pMouseX <= ((entry.x * 20) + 10) + offsetX + x) {
+                            if (pMouseY >= ((entry.y * 20) - 10) + offsetY + y && pMouseY <= ((entry.y * 20) + 10) + offsetY + y) {
+                                return clickEntry(entry);
+                            }
                         }
                     }
                 }
@@ -231,13 +234,15 @@ public class DataTabletScreen extends Screen {
             }
 
             Component tooltip = null;
-            for (Entry i : Entries.entries.values()) {
-                if (i.tab.equals(currentTab.id)) {
-                    if (i.isVisibleClient()) {
-                        if (mouseX >= ((i.x * 20) - 10) + offsetX + x && mouseX <= ((i.x * 20) + 10) + offsetX + x) {
-                            if (mouseY >= ((i.y * 20) - 10) + offsetY + y && mouseY <= ((i.y * 20) + 10) + offsetY + y) {
-                                tooltip = i.name;
-                                break;
+            if (mouseX >= x && mouseY >= y && mouseX <= x+imageWidth && mouseY <= y+imageHeight) {
+                for (Entry i : Entries.entries.values()) {
+                    if (i.tab.equals(currentTab.id)) {
+                        if (i.isVisibleClient()) {
+                            if (mouseX >= ((i.x * 20) - 10) + offsetX + x && mouseX <= ((i.x * 20) + 10) + offsetX + x) {
+                                if (mouseY >= ((i.y * 20) - 10) + offsetY + y && mouseY <= ((i.y * 20) + 10) + offsetY + y) {
+                                    tooltip = i.name;
+                                    break;
+                                }
                             }
                         }
                     }
@@ -325,8 +330,7 @@ public class DataTabletScreen extends Screen {
                             Vec2 normal = new Vec2((float) (origin.x - lx), (float) (origin.y - ly)).normalized();
                             float blendSize = 10;
                             float blend = Math.clamp(0f, 1f, (blendSize-Math.abs((float)i-(float)activeSegment))/blendSize);
-                            int color = blendColors(new Color(45, 6, 61), new Color(255, 120, 201), blend).getRGB();
-
+                            int color = blendColors(new Color(45, 6, 61, 255), new Color(255, 120, 201, 255), blend).getRGB();
                             BufferBuilder builder = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
                             builder.addVertex((float) lx, (float) ly, 0).setColor(color).setNormal(normal.x, normal.y, 0);
                             builder.addVertex((float) origin.x, (float) origin.y, 0).setColor(color).setNormal(normal.x, normal.y, 0);
@@ -343,10 +347,12 @@ public class DataTabletScreen extends Screen {
         RenderSystem.lineWidth(1);
     }
     private Color blendColors(Color color1, Color color2, float blend) {
-        Vector4f vec4Color1 = new Vector4f(color1.getRed(), color1.getBlue(), color1.getGreen(), color1.getAlpha());
-        Vector4f vec4Color2 = new Vector4f(color2.getRed(), color2.getBlue(), color2.getGreen(), color1.getAlpha());
-        Vector4f vec4Blended = vec4Color1.lerp(vec4Color2, blend);
-        return new Color((int)vec4Blended.x, (int)vec4Blended.y, (int)vec4Blended.z, (int)vec4Blended.w);
+        return new Color(
+                Math.lerp(color1.getRed()/255f, color2.getRed()/255f, blend),
+                Math.lerp(color1.getGreen()/255f, color2.getGreen()/255f, blend),
+                Math.lerp(color1.getBlue()/255f, color2.getBlue()/255f, blend),
+                Math.lerp(color1.getAlpha()/255f, color2.getAlpha()/255f, blend)
+        );
     }
     public List<DataTab> getSortedTabs() {
         return Entries.tabs.values().stream().sorted((a, b) -> Integer.compare(b.priority, a.priority)).toList();
