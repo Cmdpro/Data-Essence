@@ -39,6 +39,7 @@ public class EssenceSword extends SwordItem {
             EssenceSlashProjectile slash = new EssenceSlashProjectile(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), pPlayer, pLevel);
             slash.setPos(slash.position().offsetRandom(pPlayer.getRandom(), 0.25f));
             pLevel.addFreshEntity(slash);
+            pPlayer.getCooldowns().addCooldown(pPlayer.getItemInHand(pUsedHand).getItem(), 20);
         }
         return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
     }

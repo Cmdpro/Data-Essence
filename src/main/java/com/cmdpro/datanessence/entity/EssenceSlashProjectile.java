@@ -23,6 +23,7 @@ public class EssenceSlashProjectile extends Projectile {
     public int time;
     public EssenceSlashProjectile(EntityType<EssenceSlashProjectile> entityType, Level world) {
         super(entityType, world);
+        rotation = random.nextIntBetweenInclusive(-20, 20);
     }
     protected EssenceSlashProjectile(EntityType<EssenceSlashProjectile> entityType, double x, double y, double z, Level world) {
         this(entityType, world);
@@ -33,6 +34,7 @@ public class EssenceSlashProjectile extends Projectile {
         this.setOwner(shooter);
         this.setDeltaMovement(shooter.getLookAngle().multiply(0.5, 0.5, 0.5));
     }
+    public int rotation;
     @Override
     protected void onHitBlock(BlockHitResult hit) {
         remove(RemovalReason.KILLED);

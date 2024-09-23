@@ -37,6 +37,7 @@ public class EssenceSlashRenderer extends EntityRenderer<EssenceSlashProjectile>
         Vec2 rot = calculateRotationVector(new Vec3(0, 0, 0), pEntity.getDeltaMovement());
         pPoseStack.mulPose(Axis.YP.rotation((-rot.y-90) * Mth.DEG_TO_RAD));
         pPoseStack.mulPose(Axis.ZP.rotation(-rot.x * Mth.DEG_TO_RAD));
+        pPoseStack.mulPose(Axis.XP.rotation(pEntity.rotation * Mth.DEG_TO_RAD));
         PoseStack.Pose posestack$pose = pPoseStack.last();
         VertexConsumer vertexconsumer = pBuffer.getBuffer(RenderType.entityTranslucent(getTextureLocation(pEntity)));
         vertex(vertexconsumer, posestack$pose, pPackedLight, 0.0F, 0, 0, 1);
