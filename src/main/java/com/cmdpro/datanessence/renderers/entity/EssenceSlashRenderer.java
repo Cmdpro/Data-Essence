@@ -33,7 +33,7 @@ public class EssenceSlashRenderer extends EntityRenderer<EssenceSlashProjectile>
     public void render(EssenceSlashProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
         super.render(pEntity, pEntityYaw, pPartialTick, pPoseStack, pBuffer, pPackedLight);
         pPoseStack.pushPose();
-        pPoseStack.translate(0, 0.8, 0);
+        pPoseStack.translate(0, 0.5f, 0);
         Vec2 rot = calculateRotationVector(new Vec3(0, 0, 0), pEntity.getDeltaMovement());
         pPoseStack.mulPose(Axis.YP.rotation((-rot.y-90) * Mth.DEG_TO_RAD));
         pPoseStack.mulPose(Axis.ZP.rotation(-rot.x * Mth.DEG_TO_RAD));
@@ -48,7 +48,7 @@ public class EssenceSlashRenderer extends EntityRenderer<EssenceSlashProjectile>
     }
 
     private static void vertex(VertexConsumer pConsumer, PoseStack.Pose pPose, int pPackedLight, float pX, int pY, int pU, int pV) {
-        pConsumer.addVertex(pPose, pX - 0.5F, (float)pY - 0.25F, 0.0F)
+        pConsumer.addVertex(pPose, pX - 0.5F, (float)pY - 0.5f, 0.0F)
                 .setColor(255, 255, 255, 255)
                 .setUv((float)pU, (float)pV)
                 .setOverlay(OverlayTexture.NO_OVERLAY)

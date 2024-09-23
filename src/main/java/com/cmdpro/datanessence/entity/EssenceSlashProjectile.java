@@ -30,7 +30,7 @@ public class EssenceSlashProjectile extends Projectile {
         this.setPos(x, y, z);
     }
     public EssenceSlashProjectile(EntityType<EssenceSlashProjectile> entityType, LivingEntity shooter, Level world) {
-        this(entityType, shooter.getX(), (shooter.getEyeY() - (double)0.1F) - 0.8f, shooter.getZ(), world);
+        this(entityType, shooter.getX(), shooter.getEyeY()-0.5f, shooter.getZ(), world);
         this.setOwner(shooter);
         this.setDeltaMovement(shooter.getLookAngle().multiply(0.5, 0.5, 0.5));
     }
