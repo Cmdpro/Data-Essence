@@ -15,9 +15,9 @@ public class ColorHelper {
      */
     public static Color blendColors(Color color1, Color color2, float blend) {
         return new Color(
-                org.joml.Math.lerp(color1.getRed()/255f, color2.getRed()/255f, blend),
-                org.joml.Math.lerp(color1.getGreen()/255f, color2.getGreen()/255f, blend),
-                org.joml.Math.lerp(color1.getBlue()/255f, color2.getBlue()/255f, blend),
+                Math.lerp(color1.getRed()/255f, color2.getRed()/255f, blend),
+                Math.lerp(color1.getGreen()/255f, color2.getGreen()/255f, blend),
+                Math.lerp(color1.getBlue()/255f, color2.getBlue()/255f, blend),
                 Math.lerp(color1.getAlpha()/255f, color2.getAlpha()/255f, blend)
         );
     }
