@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataTabletScreen extends Screen {
+    public static final ResourceLocation TEXTURE_FRAME = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_frame.png");
     public static final ResourceLocation TEXTURE_MAIN = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
     public static final ResourceLocation TEXTURE_PAGE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_page.png");
     public static final ResourceLocation TEXTURE_CRAFTING = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
@@ -205,6 +206,12 @@ public class DataTabletScreen extends Screen {
                 o++;
             }
         }
+        // this is done with four, as both the top and bottom halves of the frame differ in color, and the "handle" needs to be of reasonable length.
+        // handles need to be fixed, the rendering is wack
+        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32, 0, 0, 340, 55, 72, 29, 9); // top half
+        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32+55, 0, 30, 340, 25, 72, 5, 9); // top handle
+        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32+80, 0, 35, 340, 25, 72, 5, 9); // bottom handle
+        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32+105, 0, 39, 340, 105, 72, 29, 9); // bottom half
         renderBg(graphics, delta, mouseX, mouseY);
         graphics.enableScissor(x+3, y+3, x+imageWidth-3, y+imageHeight-3);
         if (screenType == 0) {
