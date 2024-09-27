@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.screen.datatablet;
+package com.cmdpro.datanessence.api.datatablet;
 
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import net.minecraft.client.gui.GuiGraphics;

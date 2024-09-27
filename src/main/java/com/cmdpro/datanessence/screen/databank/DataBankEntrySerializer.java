@@ -1,10 +1,8 @@
 package com.cmdpro.datanessence.screen.databank;
 
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
-import com.cmdpro.datanessence.screen.DataBankScreen;
-import com.cmdpro.datanessence.screen.datatablet.Entry;
-import com.cmdpro.datanessence.screen.datatablet.Page;
-import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
+import com.cmdpro.datanessence.api.databank.MinigameCreator;
+import com.cmdpro.datanessence.api.databank.MinigameSerializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;

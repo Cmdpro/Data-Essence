@@ -1,15 +1,14 @@
 package com.cmdpro.datanessence.computers;
 
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.computer.ComputerFile;
+import com.cmdpro.datanessence.api.computer.ComputerFileType;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
-import javax.annotation.Nonnull;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ComputerTypeSerializer {

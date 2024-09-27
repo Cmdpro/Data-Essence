@@ -2,18 +2,14 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.computers.ClientComputerData;
-import com.cmdpro.datanessence.computers.ComputerFile;
-import com.cmdpro.datanessence.computers.ComputerFileType;
-import com.cmdpro.datanessence.screen.datatablet.Page;
-import com.google.common.base.Ascii;
-import com.ibm.icu.impl.SortedSetRelation;
+import com.cmdpro.datanessence.api.computer.ComputerFile;
+import com.cmdpro.datanessence.api.computer.ComputerFileType;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforgespi.Environment;
 
 public class ComputerScreen extends Screen {
     public ComputerScreen(Component pTitle) {

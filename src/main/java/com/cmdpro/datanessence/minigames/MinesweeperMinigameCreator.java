@@ -1,18 +1,17 @@
 package com.cmdpro.datanessence.minigames;
 
 import com.cmdpro.datanessence.registry.MinigameRegistry;
-import com.cmdpro.datanessence.screen.databank.MinigameCreator;
-import com.cmdpro.datanessence.screen.databank.MinigameSerializer;
-import com.google.gson.JsonElement;
+import com.cmdpro.datanessence.api.databank.MinigameCreator;
+import com.cmdpro.datanessence.api.databank.MinigameSerializer;
+import com.cmdpro.datanessence.screen.datatablet.pages.MultiblockPage;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
-import org.apache.commons.lang3.RandomUtils;
-import org.joml.Vector2d;
-import org.joml.Vector2i;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MinesweeperMinigameCreator extends MinigameCreator<MinesweeperMinigame> {
     public int bombs;
@@ -32,24 +31,26 @@ public class MinesweeperMinigameCreator extends MinigameCreator<MinesweeperMinig
     }
 
     public static class MinesweeperMinigameSerializer extends MinigameSerializer<MinesweeperMinigameCreator> {
-        @Override
-        public MinesweeperMinigameCreator fromJson(JsonObject json) {
-            int bombs = json.get("bombs").getAsInt();
-            int size = json.get("size").getAsInt();
+        public static final StreamCodec<RegistryFriendlyByteBuf, MinesweeperMinigameCreator> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+            pBuffer.writeInt(pValue.bombs);
+            pBuffer.writeInt(pValue.size);
+        }, (pBuffer) -> {
+            int bombs = pBuffer.readInt();
+            int size = pBuffer.readInt();
             return new MinesweeperMinigameCreator(bombs, size);
+        });
+        public static final MapCodec<MinesweeperMinigameCreator> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+                Codec.INT.fieldOf("bombs").forGetter(minigame -> minigame.bombs),
+                Codec.INT.fieldOf("size").forGetter(minigame -> minigame.size)
+        ).apply(instance, MinesweeperMinigameCreator::new));
+        @Override
+        public Codec<MinesweeperMinigameCreator> getCodec() {
+            return CODEC.codec();
         }
 
         @Override
-        public MinesweeperMinigameCreator fromNetwork(FriendlyByteBuf buf) {
-            int bombs = buf.readInt();
-            int size = buf.readInt();
-            return new MinesweeperMinigameCreator(bombs, size);
-        }
-
-        @Override
-        public void toNetwork(MinesweeperMinigameCreator creator, FriendlyByteBuf buf) {
-            buf.writeInt(creator.bombs);
-            buf.writeInt(creator.size);
+        public StreamCodec<RegistryFriendlyByteBuf, MinesweeperMinigameCreator> getStreamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

@@ -1,7 +1,4 @@
-package com.cmdpro.datanessence.screen.databank;
-
-import com.google.gson.JsonObject;
-import net.minecraft.network.FriendlyByteBuf;
+package com.cmdpro.datanessence.api.databank;
 
 public abstract class MinigameCreator<T extends Minigame> {
     public abstract T createMinigame();

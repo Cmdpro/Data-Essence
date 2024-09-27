@@ -1,9 +1,15 @@
 package com.cmdpro.datanessence.screen.datatablet;
 
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.datatablet.Page;
+import com.cmdpro.datanessence.api.datatablet.PageSerializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.DataResult;
+import com.mojang.serialization.Dynamic;
+import com.mojang.serialization.DynamicOps;
+import com.mojang.serialization.JsonOps;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
@@ -54,8 +60,8 @@ public class EntrySerializer {
             JsonObject obj = i.getAsJsonObject();
             if (obj.has("type")) {
                 PageSerializer pageSerializer = DataNEssenceRegistries.PAGE_TYPE_REGISTRY.get(ResourceLocation.tryParse(obj.get("type").getAsString()));
-                Page page = pageSerializer.fromJson(obj);
-                pages.add(page);
+                DataResult<Page> page = pageSerializer.getCodec().parse(JsonOps.INSTANCE, obj);
+                pages.add(page.getOrThrow());
             } else {
                 throw new JsonSyntaxException("Page type missing in entry JSON for " + entryId.toString() + " in page " + o);
             }

@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.screen.datatablet.pages;
 
 import com.cmdpro.datanessence.screen.DataTabletScreen;
-import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
+import com.cmdpro.datanessence.api.datatablet.PageSerializer;
 import com.cmdpro.datanessence.screen.datatablet.pages.serializers.ItemPageSerializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

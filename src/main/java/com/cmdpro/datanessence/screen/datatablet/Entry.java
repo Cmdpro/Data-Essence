@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.screen.datatablet;
 
+import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.network.chat.Component;

@@ -1,38 +1,43 @@
 package com.cmdpro.datanessence.screen.datatablet.pages.serializers;
 
-import com.cmdpro.datanessence.computers.files.TextFile;
-import com.cmdpro.datanessence.screen.datatablet.Page;
-import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
+import com.cmdpro.datanessence.api.datatablet.PageSerializer;
+import com.cmdpro.datanessence.screen.datatablet.pages.ItemPage;
 import com.cmdpro.datanessence.screen.datatablet.pages.TextPage;
 import com.google.gson.JsonObject;
-import net.minecraft.client.Minecraft;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 public class TextPageSerializer extends PageSerializer<TextPage> {
     public static final TextPageSerializer INSTANCE = new TextPageSerializer();
-    @Override
-    public TextPage fromJson(JsonObject json) {
-        ResourceLocation font = json.has("font") ? ResourceLocation.tryParse(json.get("font").getAsString()) : ResourceLocation.withDefaultNamespace("default");
-        MutableComponent text = Component.translatable(json.get("text").getAsString());
-        text = text.withStyle(text.getStyle().withFont(font));
-        boolean rtl = json.has("rtl") ? json.get("rtl").getAsBoolean() : false;
+    public static final StreamCodec<RegistryFriendlyByteBuf, TextPage> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+        ComponentSerialization.STREAM_CODEC.encode(pBuffer, pValue.text);
+        pBuffer.writeBoolean(pValue.rtl);
+    }, (pBuffer) -> {
+        Component text = ComponentSerialization.STREAM_CODEC.decode(pBuffer);
+        boolean rtl = pBuffer.readBoolean();
         return new TextPage(text, rtl);
-    }
+    });
+    public static final MapCodec<TextPage> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            ComponentSerialization.CODEC.fieldOf("text").forGetter(page -> page.text),
+            Codec.BOOL.fieldOf("rtl").forGetter(page -> page.rtl)
+    ).apply(instance, TextPage::new));
     @Override
-    public TextPage fromNetwork(FriendlyByteBuf buf) {
-        Component text = buf.readWithCodecTrusted(NbtOps.INSTANCE, ComponentSerialization.CODEC);
-        boolean rtl = buf.readBoolean();
-        return new TextPage(text, rtl);
+    public Codec<TextPage> getCodec() {
+        return CODEC.codec();
     }
 
     @Override
-    public void toNetwork(TextPage page, FriendlyByteBuf buf) {
-        buf.writeWithCodec(NbtOps.INSTANCE, ComponentSerialization.CODEC, page.text);
-        buf.writeBoolean(page.rtl);
+    public StreamCodec<RegistryFriendlyByteBuf, TextPage> getStreamCodec() {
+        return STREAM_CODEC;
     }
 }

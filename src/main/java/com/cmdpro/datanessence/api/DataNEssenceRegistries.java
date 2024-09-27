@@ -2,26 +2,17 @@ package com.cmdpro.datanessence.api;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.essence.EssenceType;
-import com.cmdpro.datanessence.computers.ComputerFileType;
-import com.cmdpro.datanessence.multiblock.MultiblockPredicate;
+import com.cmdpro.datanessence.api.computer.ComputerFileType;
 import com.cmdpro.datanessence.multiblock.MultiblockPredicateSerializer;
-import com.cmdpro.datanessence.screen.databank.Minigame;
-import com.cmdpro.datanessence.screen.databank.MinigameCreator;
-import com.cmdpro.datanessence.screen.databank.MinigameSerializer;
-import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
-import com.google.common.eventbus.EventBus;
-import com.mojang.datafixers.kinds.IdF;
+import com.cmdpro.datanessence.api.databank.MinigameSerializer;
+import com.cmdpro.datanessence.api.datatablet.PageSerializer;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.RegistryBuilder;
-
-import java.util.function.Supplier;
 
 @EventBusSubscriber(modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataNEssenceRegistries {

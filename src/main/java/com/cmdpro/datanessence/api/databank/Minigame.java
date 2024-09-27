@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.screen.databank;
+package com.cmdpro.datanessence.api.databank;
 
 import com.cmdpro.datanessence.screen.DataBankScreen;
 import net.minecraft.client.gui.GuiGraphics;
