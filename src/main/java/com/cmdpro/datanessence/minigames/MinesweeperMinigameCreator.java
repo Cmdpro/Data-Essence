@@ -44,8 +44,8 @@ public class MinesweeperMinigameCreator extends MinigameCreator<MinesweeperMinig
                 Codec.INT.fieldOf("size").forGetter(minigame -> minigame.size)
         ).apply(instance, MinesweeperMinigameCreator::new));
         @Override
-        public Codec<MinesweeperMinigameCreator> getCodec() {
-            return CODEC.codec();
+        public MapCodec<MinesweeperMinigameCreator> getCodec() {
+            return CODEC;
         }
 
         @Override

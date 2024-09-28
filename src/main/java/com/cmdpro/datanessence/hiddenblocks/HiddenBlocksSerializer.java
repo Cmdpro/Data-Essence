@@ -1,16 +1,27 @@
 package com.cmdpro.datanessence.hiddenblocks;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.datatablet.Page;
+import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,45 +35,31 @@ import java.util.Map;
 
 public class HiddenBlocksSerializer {
     public HiddenBlock read(ResourceLocation entryId, JsonObject json) {
-        if (!json.has("entry")) {
-            throw new JsonSyntaxException("Element entry missing in hidden block JSON for " + entryId.toString());
-        }
-        if (!json.has("hiddenAs")) {
-            throw new JsonSyntaxException("Element hiddenAs missing in hidden block JSON for " + entryId.toString());
-        }
-        if (!json.has("originalBlock")) {
-            throw new JsonSyntaxException("Element originalBlock missing in hidden block JSON for " + entryId.toString());
-        }
-        ResourceLocation entry = ResourceLocation.tryParse(json.get("entry").getAsString());
-        BlockState hiddenAs = null;
-        Block originalBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(json.get("originalBlock").getAsString()));
-        try {
-            hiddenAs = BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), json.get("hiddenAs").getAsString(), false).blockState();
-        } catch (Exception e) {
-            DataNEssence.LOGGER.error(e.getMessage());
-        }
-        boolean completionRequired = GsonHelper.getAsBoolean(json, "completionRequired", true);
-        return new HiddenBlock(entry, originalBlock, hiddenAs, completionRequired);
+        return CODEC.codec().parse(JsonOps.INSTANCE, json).getOrThrow();
     }
-    @Nonnull
-    public static HiddenBlock fromNetwork(FriendlyByteBuf buf) {
-        ResourceLocation entry = buf.readResourceLocation();
+    public static final MapCodec<HiddenBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            ResourceLocation.CODEC.fieldOf("entry").forGetter(hiddenBlock -> hiddenBlock.entry),
+            Block.CODEC.fieldOf("originalBlock").forGetter(hiddenBlock -> hiddenBlock.originalBlock),
+            BlockState.CODEC.fieldOf("hiddenAs").forGetter(hiddenBlock -> hiddenBlock.hiddenAs),
+            Codec.BOOL.optionalFieldOf("completionRequired", true).forGetter(hiddenBlock -> hiddenBlock.completionRequired)
+    ).apply(instance, HiddenBlock::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, HiddenBlock> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+        pBuffer.writeResourceLocation(pValue.entry);
+        pBuffer.writeResourceLocation(BuiltInRegistries.BLOCK.getKey(pValue.originalBlock));
+        pBuffer.writeUtf(BlockStateParser.serialize(pValue.hiddenAs));
+        pBuffer.writeBoolean(pValue.completionRequired);
+    }, pBuffer -> {
+        ResourceLocation entry = pBuffer.readResourceLocation();
         BlockState hiddenAs = null;
-        String originalBlockString = buf.readUtf();
-        String hiddenAsString = buf.readUtf();
+        String originalBlockString = pBuffer.readUtf();
+        String hiddenAsString = pBuffer.readUtf();
         Block originalBlock = BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(originalBlockString));
         try {
             hiddenAs = BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), hiddenAsString, false).blockState();
         } catch (Exception e) {
             DataNEssence.LOGGER.error(e.getMessage());
         }
-        boolean completionRequired = buf.readBoolean();
+        boolean completionRequired = pBuffer.readBoolean();
         return new HiddenBlock(entry, originalBlock, hiddenAs, completionRequired);
-    }
-    public static void toNetwork(FriendlyByteBuf buf, HiddenBlock block) {
-        buf.writeResourceLocation(block.entry);
-        buf.writeResourceLocation(BuiltInRegistries.BLOCK.getKey(block.originalBlock));
-        buf.writeUtf(BlockStateParser.serialize(block.hiddenAs));
-        buf.writeBoolean(block.completionRequired);
-    }
+    });
 }

@@ -97,7 +97,7 @@ public class Entry {
     public int x;
     public int y;
     public Page[] pages;
-    private ResourceLocation[] parents;
+    public ResourceLocation[] parents;
     private Entry[] parentEntries;
     public boolean incomplete;
     public Page[] incompletePages;

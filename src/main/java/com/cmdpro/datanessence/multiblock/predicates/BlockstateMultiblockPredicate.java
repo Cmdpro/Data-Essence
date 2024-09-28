@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.multiblock.predicates;
 
-import com.cmdpro.datanessence.multiblock.MultiblockPredicate;
-import com.cmdpro.datanessence.multiblock.MultiblockPredicateSerializer;
+import com.cmdpro.datanessence.api.multiblock.MultiblockPredicate;
+import com.cmdpro.datanessence.api.multiblock.MultiblockPredicateSerializer;
 import com.cmdpro.datanessence.registry.MultiblockPredicateRegistry;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;

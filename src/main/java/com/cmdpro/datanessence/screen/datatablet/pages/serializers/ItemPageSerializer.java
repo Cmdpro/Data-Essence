@@ -39,8 +39,8 @@ public class ItemPageSerializer extends PageSerializer<ItemPage> {
             ItemStack.CODEC.fieldOf("item").forGetter(page -> page.item)
     ).apply(instance, ItemPage::new));
     @Override
-    public Codec<ItemPage> getCodec() {
-        return CODEC.codec();
+    public MapCodec<ItemPage> getCodec() {
+        return CODEC;
     }
 
     @Override

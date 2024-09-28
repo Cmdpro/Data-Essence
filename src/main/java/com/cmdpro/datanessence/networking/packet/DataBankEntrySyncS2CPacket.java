@@ -18,7 +18,7 @@ import java.util.Map;
 
 public record DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> entries) implements Message {
     public static DataBankEntrySyncS2CPacket read(RegistryFriendlyByteBuf buf) {
-        Map<ResourceLocation, DataBankEntry> entries = buf.readMap(FriendlyByteBuf::readResourceLocation, DataBankEntrySerializer::fromNetwork);
+        Map<ResourceLocation, DataBankEntry> entries = buf.readMap(FriendlyByteBuf::readResourceLocation, (pBuffer) -> DataBankEntrySerializer.STREAM_CODEC.decode((RegistryFriendlyByteBuf)pBuffer));
         return  new DataBankEntrySyncS2CPacket(entries);
     }
 
@@ -30,7 +30,7 @@ public record DataBankEntrySyncS2CPacket(Map<ResourceLocation, DataBankEntry> en
     }
 
     public static void write(RegistryFriendlyByteBuf buf, DataBankEntrySyncS2CPacket obj) {
-        buf.writeMap(obj.entries, ResourceLocation.STREAM_CODEC, DataBankEntrySerializer::toNetwork);
+        buf.writeMap(obj.entries, ResourceLocation.STREAM_CODEC, (pBuffer, pValue) -> DataBankEntrySerializer.STREAM_CODEC.encode((RegistryFriendlyByteBuf)pBuffer, pValue));
     }
     @Override
     public Type<? extends CustomPacketPayload> type() {

@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.multiblock.MultiblockPredicateSerializer;
+import com.cmdpro.datanessence.api.multiblock.MultiblockPredicateSerializer;
 import com.cmdpro.datanessence.multiblock.predicates.serializers.BlockstateMultiblockPredicateSerializer;
 import com.cmdpro.datanessence.multiblock.predicates.serializers.TagMultiblockPredicateSerializer;
 import net.minecraft.resources.ResourceLocation;

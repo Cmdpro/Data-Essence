@@ -81,8 +81,8 @@ public class WireMinigameCreator extends MinigameCreator<WireMinigame> {
                 }, (a) -> a.values().stream().toList()).forGetter(minigame -> minigame.tiles)
         ).apply(instance, WireMinigameCreator::new));
         @Override
-        public Codec<WireMinigameCreator> getCodec() {
-            return CODEC.codec();
+        public MapCodec<WireMinigameCreator> getCodec() {
+            return CODEC;
         }
 
         @Override

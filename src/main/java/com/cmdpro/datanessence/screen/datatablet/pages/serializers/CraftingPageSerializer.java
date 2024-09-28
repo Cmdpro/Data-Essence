@@ -38,8 +38,8 @@ public class CraftingPageSerializer extends PageSerializer<CraftingPage> {
             ResourceLocation.CODEC.listOf().fieldOf("recipes").forGetter(page -> page.recipes)
     ).apply(instance, CraftingPage::new));
     @Override
-    public Codec<CraftingPage> getCodec() {
-        return CODEC.codec();
+    public MapCodec<CraftingPage> getCodec() {
+        return CODEC;
     }
 
     @Override

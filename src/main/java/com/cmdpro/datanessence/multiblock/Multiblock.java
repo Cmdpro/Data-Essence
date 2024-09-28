@@ -1,12 +1,12 @@
 package com.cmdpro.datanessence.multiblock;
 
+import com.cmdpro.datanessence.api.multiblock.MultiblockPredicate;
 import com.cmdpro.datanessence.multiblock.predicates.BlockstateMultiblockPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 
 import java.util.ArrayList;
 import java.util.HashMap;

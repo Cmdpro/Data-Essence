@@ -1,24 +1,24 @@
 package com.cmdpro.datanessence.multiblock.predicates.serializers;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.multiblock.MultiblockPredicate;
-import com.cmdpro.datanessence.multiblock.MultiblockPredicateSerializer;
+import com.cmdpro.datanessence.api.multiblock.MultiblockPredicateSerializer;
 import com.cmdpro.datanessence.multiblock.predicates.BlockstateMultiblockPredicate;
+import com.cmdpro.datanessence.screen.datatablet.pages.MultiblockPage;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockstateMultiblockPredicateSerializer extends MultiblockPredicateSerializer<BlockstateMultiblockPredicate> {
-    @Override
-    public BlockstateMultiblockPredicate fromNetwork(FriendlyByteBuf buf) {
-        BlockState state = getBlockStateFromBuf(buf);
-        return new BlockstateMultiblockPredicate(state);
-    }
 
-    public BlockState getBlockStateFromBuf(FriendlyByteBuf buf) {
+    public static BlockState getBlockStateFromBuf(FriendlyByteBuf buf) {
         try {
             return BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), buf.readUtf(), false).blockState();
         } catch (Exception e) {
@@ -26,18 +26,22 @@ public class BlockstateMultiblockPredicateSerializer extends MultiblockPredicate
             return Blocks.AIR.defaultBlockState();
         }
     }
-
+    public static final StreamCodec<RegistryFriendlyByteBuf, BlockstateMultiblockPredicate> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+        pBuffer.writeUtf(BlockStateParser.serialize(pValue.self));
+    }, (pBuffer) -> {
+        BlockState state = getBlockStateFromBuf(pBuffer);
+        return new BlockstateMultiblockPredicate(state);
+    });
+    public static final MapCodec<BlockstateMultiblockPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            BlockState.CODEC.fieldOf("state").forGetter(page -> page.self)
+    ).apply(instance, BlockstateMultiblockPredicate::new));
     @Override
-    public void toNetwork(FriendlyByteBuf buf, BlockstateMultiblockPredicate predicate) {
-        buf.writeUtf(BlockStateParser.serialize(predicate.self));
+    public MapCodec<BlockstateMultiblockPredicate> getCodec() {
+        return CODEC;
     }
 
     @Override
-    public BlockstateMultiblockPredicate fromJson(JsonObject obj) {
-        try {
-            return new BlockstateMultiblockPredicate(BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), obj.get("state").getAsString(), false).blockState());
-        } catch (Exception e) {
-            return new BlockstateMultiblockPredicate(Blocks.AIR.defaultBlockState());
-        }
+    public StreamCodec<RegistryFriendlyByteBuf, BlockstateMultiblockPredicate> getStreamCodec() {
+        return STREAM_CODEC;
     }
 }

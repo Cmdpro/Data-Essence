@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.multiblock;
+package com.cmdpro.datanessence.api.multiblock;
 
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;

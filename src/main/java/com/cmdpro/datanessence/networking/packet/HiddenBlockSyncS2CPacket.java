@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksSerializer;
 import com.cmdpro.datanessence.networking.Message;
+import com.cmdpro.datanessence.screen.databank.DataBankEntrySerializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -17,7 +18,7 @@ import java.util.Map;
 public record HiddenBlockSyncS2CPacket(Map<ResourceLocation, HiddenBlock> blocks) implements Message {
 
     public static void write(RegistryFriendlyByteBuf buf, HiddenBlockSyncS2CPacket obj) {
-        buf.writeMap(obj.blocks, ResourceLocation.STREAM_CODEC, HiddenBlocksSerializer::toNetwork);
+        buf.writeMap(obj.blocks, ResourceLocation.STREAM_CODEC, (pBuffer, pValue) -> HiddenBlocksSerializer.STREAM_CODEC.encode((RegistryFriendlyByteBuf)pBuffer, pValue));
     }
 
     @Override
@@ -27,7 +28,7 @@ public record HiddenBlockSyncS2CPacket(Map<ResourceLocation, HiddenBlock> blocks
     public static final Type<HiddenBlockSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "hidden_block_sync"));
 
     public static HiddenBlockSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
-        Map<ResourceLocation, HiddenBlock> blocks = buf.readMap(ResourceLocation.STREAM_CODEC, HiddenBlocksSerializer::fromNetwork);
+        Map<ResourceLocation, HiddenBlock> blocks = buf.readMap(ResourceLocation.STREAM_CODEC, (pBuffer) -> HiddenBlocksSerializer.STREAM_CODEC.decode((RegistryFriendlyByteBuf)pBuffer));
         return new HiddenBlockSyncS2CPacket(blocks);
     }
 

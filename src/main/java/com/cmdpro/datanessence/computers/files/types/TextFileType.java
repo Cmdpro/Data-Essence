@@ -31,8 +31,8 @@ public class TextFileType extends ComputerFileType<TextFile> {
     });
 
     @Override
-    public Codec<TextFile> getCodec() {
-        return CODEC.codec();
+    public MapCodec<TextFile> getCodec() {
+        return CODEC;
     }
 
     @Override

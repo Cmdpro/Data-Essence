@@ -28,8 +28,8 @@ public class MultiblockPageSerializer extends PageSerializer<MultiblockPage> {
             ResourceLocation.CODEC.fieldOf("multiblock").forGetter(page -> page.multiblock)
     ).apply(instance, MultiblockPage::new));
     @Override
-    public Codec<MultiblockPage> getCodec() {
-        return CODEC.codec();
+    public MapCodec<MultiblockPage> getCodec() {
+        return CODEC;
     }
 
     @Override

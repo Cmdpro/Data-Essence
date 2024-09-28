@@ -32,8 +32,8 @@ public class TextPageSerializer extends PageSerializer<TextPage> {
             Codec.BOOL.fieldOf("rtl").forGetter(page -> page.rtl)
     ).apply(instance, TextPage::new));
     @Override
-    public Codec<TextPage> getCodec() {
-        return CODEC.codec();
+    public MapCodec<TextPage> getCodec() {
+        return CODEC;
     }
 
     @Override
