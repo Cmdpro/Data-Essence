@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.api.util;
 
+import com.cmdpro.databank.DatabankUtils;
 import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.networking.ModMessages;
@@ -35,10 +36,12 @@ public class PlayerDataUtil {
 
     public static void updateUnlockedEntries(ServerPlayer player) {
         ModMessages.sendToPlayer(new UnlockedEntrySyncS2CPacket(player.getData(AttachmentTypeRegistry.UNLOCKED), player.getData(AttachmentTypeRegistry.INCOMPLETE)), (player));
+        DatabankUtils.updateHiddenBlocks(player);
     }
 
     public static void unlockEntry(ServerPlayer player, ResourceLocation entry, boolean incomplete) {
         ModMessages.sendToPlayer(new UnlockEntryS2CPacket(entry, incomplete), (player));
+        DatabankUtils.updateHiddenBlocks(player);
     }
 
     public static void sendTier(ServerPlayer player, boolean showIndicator) {

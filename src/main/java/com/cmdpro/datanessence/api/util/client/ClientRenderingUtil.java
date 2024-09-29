@@ -47,7 +47,7 @@ public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client
         stack.pushPose();
         stack.translate(pos.x, pos.y, pos.z);
         Matrix4f last = stack.last().pose();
-        ShaderInstance shader = DataNEssenceCoreShaders.WARPINGPOINT.instance;
+        ShaderInstance shader = DataNEssenceCoreShaders.WARPING_POINT;
         shader.safeGetUniform("CameraPosition").set(new Vector3f(0, 0, 0));
         shader.safeGetUniform("ObjectPosition").set(pos.toVector3f().sub(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f()));
         shader.safeGetUniform("Radius").set(Math.abs(radius));

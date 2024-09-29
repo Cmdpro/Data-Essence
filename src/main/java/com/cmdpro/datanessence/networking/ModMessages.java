@@ -68,7 +68,6 @@ public class ModMessages {
         registrar.playToClient(PlayerDataSyncS2CPacket.TYPE, getNetworkCodec(PlayerDataSyncS2CPacket::read, PlayerDataSyncS2CPacket::write), Handler::handle);
         registrar.playToClient(DataBankEntrySyncS2CPacket.TYPE, getNetworkCodec(DataBankEntrySyncS2CPacket::read, DataBankEntrySyncS2CPacket::write), Handler::handle);
         registrar.playToClient(ComputerDataSyncS2CPacket.TYPE, getNetworkCodec(ComputerDataSyncS2CPacket::read, ComputerDataSyncS2CPacket::write), Handler::handle);
-        registrar.playToClient(HiddenBlockSyncS2CPacket.TYPE, getNetworkCodec(HiddenBlockSyncS2CPacket::read, HiddenBlockSyncS2CPacket::write), Handler::handle);
         registrar.playToClient(EntrySyncS2CPacket.TYPE, getNetworkCodec(EntrySyncS2CPacket::read, EntrySyncS2CPacket::write), Handler::handle);
         registrar.playToClient(DragonPartsSyncS2CPacket.TYPE, getNetworkCodec(DragonPartsSyncS2CPacket::read, DragonPartsSyncS2CPacket::write), Handler::handle);
         registrar.playToClient(MultiblockSyncS2CPacket.TYPE, getNetworkCodec(MultiblockSyncS2CPacket::read, MultiblockSyncS2CPacket::write), Handler::handle);

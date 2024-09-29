@@ -1,8 +1,6 @@
 package com.cmdpro.datanessence.multiblock;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.hiddenblocks.HiddenBlock;
-import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
 import com.google.gson.*;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;

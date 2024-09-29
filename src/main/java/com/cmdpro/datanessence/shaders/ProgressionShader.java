@@ -1,10 +1,10 @@
 package com.cmdpro.datanessence.shaders;
 
+import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import net.minecraft.resources.ResourceLocation;
 
-public class ProgressionShader extends ShaderInstance {
+public class ProgressionShader extends PostShaderInstance {
     @Override
     public ResourceLocation getShaderLocation() {
         return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "shaders/post/progression.json");

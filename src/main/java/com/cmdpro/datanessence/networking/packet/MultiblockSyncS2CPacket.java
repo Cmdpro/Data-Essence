@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksSerializer;
 import com.cmdpro.datanessence.multiblock.Multiblock;
 import com.cmdpro.datanessence.multiblock.MultiblockManager;
 import com.cmdpro.datanessence.multiblock.MultiblockSerializer;

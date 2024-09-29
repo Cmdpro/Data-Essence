@@ -1,5 +1,9 @@
 package com.cmdpro.datanessence.particle;
 
+import com.cmdpro.databank.rendering.RenderHandler;
+import com.cmdpro.databank.rendering.RenderTypeHandler;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
@@ -25,6 +29,11 @@ public class MoteParticle extends TextureSheetParticle {
         this.alpha = (float)options.color.getAlpha()/255f;
         this.hasPhysics = true;
         this.options = options;
+    }
+
+    @Override
+    public void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
+        super.render(RenderHandler.createBufferSource().getBuffer(RenderTypeHandler.ADDITIVE_PARTICLE), pRenderInfo, pPartialTicks);
     }
     @Override
     public void tick() {

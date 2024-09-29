@@ -7,8 +7,6 @@ import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.MobEffectRegistry;
 import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
-import com.cmdpro.datanessence.shaders.system.ShaderInstance;
-import com.cmdpro.datanessence.shaders.system.ShaderManager;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlConst;
@@ -36,7 +34,6 @@ import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID)
 public class ClientEvents {
     public static RenderTarget tempRenderTarget;
-    public static SimpleSoundInstance music;
     private static String format(float number) {
         DecimalFormat format = new DecimalFormat("#.0");
         String num = format.format(number);
@@ -83,8 +80,8 @@ public class ClientEvents {
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_PARTICLES)) {
             MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
             copyBuffers();
-            DataNEssenceCoreShaders.WARPINGPOINT.instance.setSampler("DepthBuffer", tempRenderTarget.getDepthTextureId());
-            DataNEssenceCoreShaders.WARPINGPOINT.instance.setSampler("ColorBuffer", tempRenderTarget.getColorTextureId());
+            DataNEssenceCoreShaders.WARPING_POINT.setSampler("DepthBuffer", tempRenderTarget.getDepthTextureId());
+            DataNEssenceCoreShaders.WARPING_POINT.setSampler("ColorBuffer", tempRenderTarget.getColorTextureId());
             event.getPoseStack().pushPose();
             event.getPoseStack().translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
             for (Entity i : Minecraft.getInstance().level.entitiesForRendering()) {
@@ -100,9 +97,6 @@ public class ClientEvents {
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
             if (Minecraft.getInstance().player != null) {
                 ClientModEvents.genderEuphoriaShader.setActive(Minecraft.getInstance().player.hasEffect(MobEffectRegistry.GENDER_EUPHORIA));
-            }
-            for (ShaderInstance i : ShaderManager.instances) {
-                i.process();
             }
         }
     }
@@ -122,13 +116,6 @@ public class ClientEvents {
         GlStateManager._glBindFramebuffer(GlConst.GL_FRAMEBUFFER, 0);
     }
     @SubscribeEvent
-    public static void onClientTickPre(ClientTickEvent.Pre event)
-    {
-        for (ShaderInstance i : ShaderManager.instances) {
-            i.tick();
-        }
-    }
-    @SubscribeEvent
     public static void onClientTickPost(ClientTickEvent.Post event)
     {
         Minecraft mc = Minecraft.getInstance();
@@ -140,37 +127,5 @@ public class ClientEvents {
                 }
             }
         }
-        /*
-        if (event.phase == TickEvent.Phase.END && mc.level != null)
-        {
-            boolean playMusic = false;
-            SoundEvent mus = SoundInit.RUNICOVERSEER.get();
-            for (Entity i : mc.level.entitiesForRendering()) {
-                if (i instanceof RunicOverseer overseer) {
-                    playMusic = true;
-                    mus = SoundInit.RUNICOVERSEER.get();
-                    if (overseer.getEntityData().get(RunicOverseer.INTRO)) {
-                        mus = SoundInit.RUNICOVERSEERINTRO.get();
-                    }
-                }
-            }
-            SoundManager manager = mc.getSoundManager();
-            if (manager.isActive(music))
-            {
-                mc.getMusicManager().stopPlaying();
-                if (!playMusic)
-                {
-                    manager.stop(music);
-                }
-                if (!music.getLocation().equals(mus.getLocation())) {
-                    manager.stop(music);
-                }
-            }
-            if (!manager.isActive(music) && playMusic)
-            {
-                music = SimpleSoundInstance.forMusic(mus);
-                manager.play(music);
-            }
-        }*/
     }
 }

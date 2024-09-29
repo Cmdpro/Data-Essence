@@ -1,5 +1,9 @@
 package com.cmdpro.datanessence.particle;
 
+import com.cmdpro.databank.rendering.RenderHandler;
+import com.cmdpro.databank.rendering.RenderTypeHandler;
+import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
@@ -30,6 +34,11 @@ public class CircleParticle extends TextureSheetParticle {
     public void tick() {
         super.tick();
         fadeOut();
+    }
+
+    @Override
+    public void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
+        super.render(RenderHandler.createBufferSource().getBuffer(RenderTypeHandler.TRANSPARENT_PARTICLE), pRenderInfo, pPartialTicks);
     }
 
     private void fadeOut() {

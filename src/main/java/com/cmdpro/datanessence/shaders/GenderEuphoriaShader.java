@@ -1,13 +1,13 @@
 package com.cmdpro.datanessence.shaders;
 
+import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.MobEffectRegistry;
-import com.cmdpro.datanessence.shaders.system.ShaderInstance;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.PostPass;
 import net.minecraft.resources.ResourceLocation;
 
-public class GenderEuphoriaShader extends ShaderInstance {
+public class GenderEuphoriaShader extends PostShaderInstance {
     @Override
     public ResourceLocation getShaderLocation() {
         return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "shaders/post/gender_euphoria.json");

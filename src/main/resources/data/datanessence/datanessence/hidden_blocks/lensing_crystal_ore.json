@@ -1,7 +1,0 @@
-{
-  "entry": "datanessence:test",
-  "hiddenAs": {
-    "Name": "minecraft:stone"
-  },
-  "originalBlock": "datanessence:lensing_crystal_ore"
-}

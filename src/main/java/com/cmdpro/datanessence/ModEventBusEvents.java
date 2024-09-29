@@ -1,12 +1,18 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.databank.Databank;
+import com.cmdpro.databank.hiddenblock.HiddenBlockConditions;
+import com.cmdpro.databank.hiddenblock.conditions.AdvancementCondition;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.entity.AncientSentinel;
+import com.cmdpro.datanessence.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.EntityRegistry;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.config.ModConfigEvent;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 

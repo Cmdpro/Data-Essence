@@ -7,12 +7,10 @@ import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.computers.ComputerTypeManager;
-import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksManager;
 import com.cmdpro.datanessence.multiblock.MultiblockManager;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.DragonPartsSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
-import com.cmdpro.datanessence.networking.packet.HiddenBlockSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.MultiblockSyncS2CPacket;
 import com.cmdpro.datanessence.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.particle.RhombusParticleOptions;
@@ -26,7 +24,6 @@ import com.cmdpro.datanessence.screen.datatablet.DataTabManager;
 import com.cmdpro.datanessence.screen.datatablet.Entries;
 import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.cmdpro.datanessence.screen.datatablet.EntryManager;
-import com.ibm.icu.util.CodePointTrie;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -237,7 +234,6 @@ public class ModEvents {
         event.addListener(DataTabManager.getOrCreateInstance());
         event.addListener(DataBankEntryManager.getOrCreateInstance());
         event.addListener(DataBankTypeManager.getOrCreateInstance());
-        event.addListener(HiddenBlocksManager.getOrCreateInstance());
         event.addListener(ComputerTypeManager.getOrCreateInstance());
         event.addListener(MultiblockManager.getOrCreateInstance());
     }
@@ -255,7 +251,6 @@ public class ModEvents {
     }
     protected static void syncToPlayer(ServerPlayer player) {
         ModMessages.sendToPlayer(new EntrySyncS2CPacket(Entries.entries, Entries.tabs), player);
-        ModMessages.sendToPlayer(new HiddenBlockSyncS2CPacket(HiddenBlocksManager.blocks), player);
         ModMessages.sendToPlayer(new MultiblockSyncS2CPacket(MultiblockManager.multiblocks), player);
     }
     @SubscribeEvent

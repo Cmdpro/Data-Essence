@@ -4,12 +4,8 @@
   "compatibilityLevel": "JAVA_21",
   "minVersion": "0.8",
   "mixins": [
-    "BlockBehaviourMixin"
   ],
   "client": [
-    "client.BlockModelShaperMixin",
-    "client.GameRendererMixin",
-    "client.LevelRendererMixin",
     "client.BufferSourceMixin"
   ]
 }

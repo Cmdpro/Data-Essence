@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.databank.shaders.PostShaderInstance;
+import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.entity.AncientSentinel;
 import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.particle.*;
@@ -14,8 +16,6 @@ import com.cmdpro.datanessence.renderers.layer.WingsLayer;
 import com.cmdpro.datanessence.screen.*;
 import com.cmdpro.datanessence.shaders.GenderEuphoriaShader;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
-import com.cmdpro.datanessence.shaders.system.ShaderInstance;
-import com.cmdpro.datanessence.shaders.system.ShaderManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -76,9 +76,9 @@ public class ClientModEvents {
         });
 
         progressionShader = new ProgressionShader();
-        ShaderManager.addShader(progressionShader);
+        PostShaderManager.addShader(progressionShader);
         genderEuphoriaShader = new GenderEuphoriaShader();
-        ShaderManager.addShader(genderEuphoriaShader);
+        PostShaderManager.addShader(genderEuphoriaShader);
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
@@ -95,8 +95,8 @@ public class ClientModEvents {
         event.register(MenuRegistry.FLUID_MIXER_MENU.get(), FluidMixerScreen::new);
         event.register(MenuRegistry.ENTICING_LURE_MENU.get(), EnticingLureScreen::new);
     }
-    public static ShaderInstance progressionShader;
-    public static ShaderInstance genderEuphoriaShader;
+    public static PostShaderInstance progressionShader;
+    public static PostShaderInstance genderEuphoriaShader;
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.ESSENCE_SPARKLE.get(),

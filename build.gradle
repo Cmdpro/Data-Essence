@@ -136,6 +136,7 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+    implementation "blank:databank-1.0.0"
     implementation "com.eliotlash.mclib:mclib:20"
     compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
     compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
