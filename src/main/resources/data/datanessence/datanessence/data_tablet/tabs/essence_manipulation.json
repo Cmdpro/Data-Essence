@@ -1,5 +1,9 @@
 {
-  "icon": "datanessence:essence_burner",
-  "name": "data_tablet.tabs.essence_manipulation.name",
+  "icon": {
+    "id": "datanessence:essence_burner"
+  },
+  "name": {
+    "translate": "data_tablet.tabs.essence_manipulation.name"
+  },
   "priority": 3
 }

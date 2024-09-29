@@ -1,23 +1,33 @@
 {
-  "icon": "datanessence:fabricator",
+  "icon": {
+    "id": "datanessence:fabricator"
+  },
   "tab": "datanessence:basics",
   "x": -1,
   "y": 0,
   "pages": [
     {
       "type": "datanessence:item",
-      "item": "datanessence:fabricator",
-      "text": "data_tablet.pages.fabricator.page1.text"
+      "item": {
+        "id": "datanessence:fabricator"
+      },
+      "text": {
+        "translate": "data_tablet.pages.fabricator.page1.text"
+      }
     },
     {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.fabricator.page2.text",
+      "text": {
+        "translate": "data_tablet.pages.fabricator.page2.text"
+      },
       "recipes": [
         "datanessence:crafting/fabricator"
       ]
     }
   ],
-  "name": "data_tablet.pages.fabricator.name",
+  "name": {
+    "translate": "data_tablet.pages.fabricator.name"
+  },
   "parents": [
     "datanessence:basics/data_tablet"
   ]

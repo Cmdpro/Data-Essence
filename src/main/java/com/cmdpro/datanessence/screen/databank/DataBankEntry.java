@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.screen.databank;
 
+import com.cmdpro.datanessence.api.databank.MinigameCreator;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;

@@ -1,21 +1,29 @@
 {
-  "icon": "datanessence:essence_wire",
+  "icon": {
+    "id": "datanessence:essence_wire"
+  },
   "tab": "datanessence:essence_manipulation",
   "x": 2,
   "y": 0,
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "data_tablet.pages.essence_transfer.page1.text"
+      "text": {
+        "translate": "data_tablet.pages.essence_transfer.page1.text"
+      }
     },
     {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.essence_transfer.page2.text",
+      "text": {
+        "translate": "data_tablet.pages.essence_transfer.page2.text"
+      },
       "recipes": [
         "datanessence:fabrication/points/essence_point",
         "datanessence:fabrication/wires/essence_wire"
       ]
     }
   ],
-  "name": "data_tablet.pages.essence_transfer.name"
+  "name": {
+    "translate": "data_tablet.pages.essence_transfer.name"
+  }
 }

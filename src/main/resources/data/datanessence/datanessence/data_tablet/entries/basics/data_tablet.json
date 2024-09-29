@@ -1,13 +1,19 @@
 {
-  "icon":"datanessence:data_tablet",
+  "icon": {
+    "id": "datanessence:data_tablet"
+  },
   "tab": "datanessence:basics",
   "x": 0,
   "y": -2,
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "data_tablet.pages.data_tablet.page1.text"
+      "text": {
+        "translate": "data_tablet.pages.data_tablet.page1.text"
+      }
     }
   ],
-  "name": "data_tablet.pages.data_tablet.name"
+  "name": {
+    "translate": "data_tablet.pages.data_tablet.name"
+  }
 }

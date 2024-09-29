@@ -1,5 +1,9 @@
 {
-  "icon": "datanessence:data_tablet",
-  "name": "data_tablet.tabs.basics.name",
+  "icon": {
+    "id": "datanessence:data_tablet"
+  },
+  "name": {
+    "translate": "data_tablet.tabs.basics.name"
+  },
   "priority": 4
 }

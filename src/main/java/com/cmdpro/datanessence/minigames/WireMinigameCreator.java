@@ -1,23 +1,29 @@
 package com.cmdpro.datanessence.minigames;
 
+import com.cmdpro.datanessence.api.databank.Minigame;
 import com.cmdpro.datanessence.registry.MinigameRegistry;
-import com.cmdpro.datanessence.screen.databank.MinigameCreator;
-import com.cmdpro.datanessence.screen.databank.MinigameSerializer;
+import com.cmdpro.datanessence.api.databank.MinigameCreator;
+import com.cmdpro.datanessence.api.databank.MinigameSerializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import org.joml.Vector2i;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class WireMinigameCreator extends MinigameCreator<WireMinigame> {
+public class WireMinigameCreator extends MinigameCreator {
     public Map<Vector2i, WireMinigame.Tile> tiles;
     public WireMinigameCreator(Map<Vector2i, WireMinigame.Tile> tiles) {
         this.tiles = tiles;
     }
     @Override
-    public WireMinigame createMinigame() {
+    public Minigame createMinigame() {
         return new WireMinigame(tiles);
     }
 
@@ -27,56 +33,62 @@ public class WireMinigameCreator extends MinigameCreator<WireMinigame> {
     }
 
     public static class WireMinigameSerializer extends MinigameSerializer<WireMinigameCreator> {
-        @Override
-        public WireMinigameCreator fromJson(JsonObject json) {
-            HashMap<Vector2i, WireMinigame.Tile> tiles = new HashMap<>();
-            for (JsonElement i : json.get("tiles").getAsJsonArray()) {
-                JsonObject obj = i.getAsJsonObject();
-                Vector2i pos = new Vector2i(obj.get("x").getAsInt(), obj.get("y").getAsInt());
-                WireMinigame.Tile tile = new WireMinigame.Tile();
-                tile.pos = pos;
-                int essence = obj.get("essence").getAsInt();
-                tile.essence = essence;
-                int type = obj.get("type").getAsInt();
-                tile.type = type;
-                tiles.put(pos, tile);
-            }
-            return new WireMinigameCreator(tiles);
-        }
-
-        @Override
-        public WireMinigameCreator fromNetwork(FriendlyByteBuf buf) {
-            Map<Vector2i, WireMinigame.Tile> tiles = buf.readMap(WireMinigameSerializer::readVector2i, WireMinigameSerializer::readTile);
-            return new WireMinigameCreator(tiles);
-        }
-
-        @Override
-        public void toNetwork(WireMinigameCreator creator, FriendlyByteBuf buf) {
-            buf.writeMap(creator.tiles, WireMinigameSerializer::writeVector2i, WireMinigameSerializer::writeTile);
-        }
-        public static void writeTile(FriendlyByteBuf buf, WireMinigame.Tile tile) {
-            buf.writeInt(tile.pos.x);
-            buf.writeInt(tile.pos.y);
-            buf.writeInt(tile.essence);
-            buf.writeInt(tile.type);
-        }
-        public static WireMinigame.Tile readTile(FriendlyByteBuf buf) {
+        public static final MapCodec<WireMinigame.Tile> TILE_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+                Codec.INT.fieldOf("x").forGetter((obj) -> obj.pos.x),
+                Codec.INT.fieldOf("y").forGetter((obj) -> obj.pos.y),
+                Codec.INT.fieldOf("essence").forGetter((obj) -> obj.essence),
+                Codec.INT.fieldOf("type").forGetter((obj) -> obj.type)
+        ).apply(instance, (x, y, essence, type) ->  {
             WireMinigame.Tile tile = new WireMinigame.Tile();
-            int x = buf.readInt();
-            int y = buf.readInt();
             tile.pos = new Vector2i(x, y);
-            tile.essence = buf.readInt();
-            tile.type = buf.readInt();
+            tile.essence = essence;
+            tile.type = type;
             return tile;
+        }));
+        public static final StreamCodec<RegistryFriendlyByteBuf, WireMinigame.Tile> TILE_STREAM_CODEC = StreamCodec.of((pBuffer, pValue) ->  {
+            pBuffer.writeInt(pValue.pos.x);
+            pBuffer.writeInt(pValue.pos.y);
+            pBuffer.writeInt(pValue.essence);
+            pBuffer.writeInt(pValue.type);
+        }, pBuffer -> {
+            WireMinigame.Tile tile = new WireMinigame.Tile();
+            int x = pBuffer.readInt();
+            int y = pBuffer.readInt();
+            tile.pos = new Vector2i(x, y);
+            tile.essence = pBuffer.readInt();
+            tile.type = pBuffer.readInt();
+            return tile;
+        });
+        public static final StreamCodec<RegistryFriendlyByteBuf, WireMinigameCreator> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+            pBuffer.writeMap(pValue.tiles, (pBuffer2, pValue2) -> {
+                pBuffer2.writeInt(pValue2.x);
+                pBuffer2.writeInt(pValue2.y);
+            }, (pBuffer2, pValue2) -> TILE_STREAM_CODEC.encode((RegistryFriendlyByteBuf)pBuffer2, pValue2));
+        }, (pBuffer) -> {
+            Map<Vector2i, WireMinigame.Tile> tiles = pBuffer.readMap((pBuffer2) -> {
+                int x = pBuffer2.readInt();
+                int y = pBuffer2.readInt();
+                return new Vector2i(x, y);
+            }, (pBuffer2) -> TILE_STREAM_CODEC.decode((RegistryFriendlyByteBuf)pBuffer2));
+            return new WireMinigameCreator(tiles);
+        });
+        public static final MapCodec<WireMinigameCreator> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+                TILE_CODEC.codec().listOf().fieldOf("tiles").xmap((a) -> {
+                    Map<Vector2i, WireMinigame.Tile> map = new HashMap<>();
+                    for (WireMinigame.Tile i : a) {
+                        map.put(i.pos, i);
+                    }
+                    return map;
+                }, (a) -> a.values().stream().toList()).forGetter(minigame -> minigame.tiles)
+        ).apply(instance, WireMinigameCreator::new));
+        @Override
+        public MapCodec<WireMinigameCreator> getCodec() {
+            return CODEC;
         }
-        public static void writeVector2i(FriendlyByteBuf buf, Vector2i pos) {
-            buf.writeInt(pos.x);
-            buf.writeInt(pos.y);
-        }
-        public static Vector2i readVector2i(FriendlyByteBuf buf) {
-            int x = buf.readInt();
-            int y = buf.readInt();
-            return new Vector2i(x, y);
+
+        @Override
+        public StreamCodec<RegistryFriendlyByteBuf, WireMinigameCreator> getStreamCodec() {
+            return STREAM_CODEC;
         }
     }
 }

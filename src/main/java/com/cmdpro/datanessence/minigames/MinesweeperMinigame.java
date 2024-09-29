@@ -2,25 +2,18 @@ package com.cmdpro.datanessence.minigames;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.screen.DataBankScreen;
-import com.cmdpro.datanessence.screen.databank.Minigame;
-import com.google.common.primitives.Chars;
+import com.cmdpro.datanessence.api.databank.Minigame;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.MouseHandler;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.neoforged.neoforge.client.event.InputEvent;
 import org.apache.commons.lang3.RandomUtils;
-import org.joml.Vector2d;
 import org.joml.Vector2i;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
 
 public class MinesweeperMinigame extends Minigame {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");

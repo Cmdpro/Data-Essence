@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.networking.packet;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.computers.ClientComputerData;
 import com.cmdpro.datanessence.computers.ComputerData;
+import com.cmdpro.datanessence.computers.ComputerTypeSerializer;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.screen.ComputerScreen;
 import com.cmdpro.datanessence.screen.DataBankScreen;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 public record ComputerDataSyncS2CPacket(ComputerData data) implements Message {
     public static ComputerDataSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
-        ComputerData data = ComputerData.fromNetwork(buf);
+        ComputerData data = ComputerTypeSerializer.STREAM_CODEC.decode(buf);
         return new ComputerDataSyncS2CPacket(data);
     }
 
@@ -32,7 +33,7 @@ public record ComputerDataSyncS2CPacket(ComputerData data) implements Message {
     }
 
     public static void write(RegistryFriendlyByteBuf buf, ComputerDataSyncS2CPacket obj) {
-        ComputerData.toNetwork(buf, obj.data);
+        ComputerTypeSerializer.STREAM_CODEC.encode(buf, obj.data);
     }
     @Override
     public Type<? extends CustomPacketPayload> type() {

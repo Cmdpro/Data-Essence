@@ -1,5 +1,9 @@
 {
-  "icon": "datanessence:infuser",
-  "name": "data_tablet.tabs.machinery.name",
+  "icon": {
+    "id": "datanessence:infuser"
+  },
+  "name": {
+    "translate": "data_tablet.tabs.machinery.name"
+  },
   "priority": 2
 }

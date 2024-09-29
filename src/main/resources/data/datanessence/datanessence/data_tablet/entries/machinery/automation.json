@@ -1,18 +1,24 @@
 {
-  "icon": "datanessence:data_drive",
+  "icon": {
+    "id": "datanessence:data_drive"
+  },
   "tab": "datanessence:machinery",
   "x": 0,
   "y": 0,
   "pages": [
     {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.automation.page1.text",
+      "text": {
+        "translate": "data_tablet.pages.automation.page1.text"
+      },
       "recipes": [
         "datanessence:fabrication/data_drive"
       ]
     }
   ],
-  "name": "data_tablet.pages.automation.name",
+  "name": {
+    "translate": "data_tablet.pages.automation.name"
+  },
   "parents": [
     "datanessence:fabricator"
   ]

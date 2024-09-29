@@ -1,5 +1,7 @@
 {
-  "icon": "datanessence:fabricator",
+  "icon": {
+    "id": "datanessence:fabricator"
+  },
   "tier": 1,
   "minigames": [
     {
@@ -8,6 +10,8 @@
       "size": 5
     }
   ],
-  "name": "data_tablet.pages.fabricator.name",
+  "name": {
+    "translate": "data_tablet.pages.fabricator.name"
+  },
   "entry": "datanessence:basics/fabricator"
 }

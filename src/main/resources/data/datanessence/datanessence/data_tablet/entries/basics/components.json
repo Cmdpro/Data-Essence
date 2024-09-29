@@ -1,16 +1,22 @@
 {
-  "icon": "datanessence:logical_matrix",
+  "icon": {
+    "id": "datanessence:logical_matrix"
+  },
   "tab": "datanessence:basics",
   "x": -2,
   "y": 0,
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "data_tablet.pages.components.page1.text"
+      "text": {
+        "translate": "data_tablet.pages.components.page1.text"
+      }
     },
     {
       "type": "datanessence:crafting",
-      "text": "",
+      "text": {
+        "translate": ""
+      },
       "recipes": [
         "datanessence:crafting/capacitance_panel",
         "datanessence:crafting/conductance_rod",
@@ -19,7 +25,9 @@
       ]
     }
   ],
-  "name": "data_tablet.pages.components.name",
+  "name": {
+    "translate": "data_tablet.pages.components.name"
+  },
   "parents": [
     "datanessence:basics/fabricator"
   ]

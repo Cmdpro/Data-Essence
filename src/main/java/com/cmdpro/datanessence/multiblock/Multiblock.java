@@ -1,23 +1,21 @@
 package com.cmdpro.datanessence.multiblock;
 
+import com.cmdpro.datanessence.api.multiblock.MultiblockPredicate;
 import com.cmdpro.datanessence.multiblock.predicates.BlockstateMultiblockPredicate;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.predicate.BlockStatePredicate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Multiblock {
     public String[][] multiblockLayers;
-    public HashMap<Character, MultiblockPredicate> key;
+    public Map<Character, MultiblockPredicate> key;
     public BlockPos offset;
     private List<List<PredicateAndPos>> states;
-    public Multiblock(String[][] multiblockLayers, HashMap<Character, MultiblockPredicate> key, BlockPos offset) {
+    public Multiblock(String[][] multiblockLayers, Map<Character, MultiblockPredicate> key, BlockPos offset) {
         this.multiblockLayers = multiblockLayers;
         key.put(' ', new BlockstateMultiblockPredicate(Blocks.AIR.defaultBlockState()));
         this.key = key;
@@ -87,6 +85,9 @@ public class Multiblock {
             }
         }
         return true;
+    }
+    public List<List<String>> getMultiblockLayersList() {
+        return Arrays.stream(multiblockLayers).map((a) -> Arrays.stream(a).toList()).toList();
     }
     public static class PredicateAndPos {
         public PredicateAndPos(MultiblockPredicate predicate, BlockPos offset) {

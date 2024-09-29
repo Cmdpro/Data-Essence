@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.screen.datatablet;
 
+import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.network.chat.Component;
@@ -96,7 +97,7 @@ public class Entry {
     public int x;
     public int y;
     public Page[] pages;
-    private ResourceLocation[] parents;
+    public ResourceLocation[] parents;
     private Entry[] parentEntries;
     public boolean incomplete;
     public Page[] incompletePages;

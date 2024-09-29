@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.computers.files;
 
-import com.cmdpro.datanessence.computers.ComputerFile;
-import com.cmdpro.datanessence.computers.ComputerFileType;
+import com.cmdpro.datanessence.api.computer.ComputerFile;
+import com.cmdpro.datanessence.api.computer.ComputerFileType;
 import com.cmdpro.datanessence.registry.ComputerFileTypeRegistry;
 import net.minecraft.network.chat.Component;
 

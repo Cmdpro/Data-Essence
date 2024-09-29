@@ -2,7 +2,7 @@ package com.cmdpro.datanessence.minigames;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.screen.DataBankScreen;
-import com.cmdpro.datanessence.screen.databank.Minigame;
+import com.cmdpro.datanessence.api.databank.Minigame;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -13,15 +13,11 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.phys.Vec2;
-import org.apache.commons.lang3.RandomUtils;
 import org.joml.Vector2d;
-import org.joml.Vector2f;
 import org.joml.Vector2i;
 
 import java.awt.geom.Line2D;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WireMinigame extends Minigame {

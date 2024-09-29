@@ -1,14 +1,13 @@
 package com.cmdpro.datanessence.screen.datatablet.pages;
 
 import com.cmdpro.datanessence.screen.DataTabletScreen;
-import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
+import com.cmdpro.datanessence.api.datatablet.PageSerializer;
 import com.cmdpro.datanessence.screen.datatablet.pages.crafting.CraftingType;
 import com.cmdpro.datanessence.screen.datatablet.pages.crafting.CraftingTypes;
 import com.cmdpro.datanessence.screen.datatablet.pages.serializers.CraftingPageSerializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
@@ -20,11 +19,11 @@ import java.util.List;
 import java.util.Optional;
 
 public class CraftingPage extends TextPage {
-    public CraftingPage(Component text, boolean rtl, ResourceLocation[] recipes) {
+    public CraftingPage(Component text, boolean rtl, List<ResourceLocation> recipes) {
         super(text, rtl);
         this.recipes = recipes;
     }
-    public ResourceLocation[] recipes;
+    public List<ResourceLocation> recipes;
     @Override
     public int textYOffset() {
         int x = 4;

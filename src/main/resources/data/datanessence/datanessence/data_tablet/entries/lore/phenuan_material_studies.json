@@ -1,24 +1,40 @@
 {
-  "icon": "minecraft:copper_ingot",
+  "icon": {
+    "id": "minecraft:copper_ingot"
+  },
   "tab": "datanessence:lore",
   "x": 0,
   "y": -1,
   "pages": [
     {
       "type": "datanessence:item",
-      "item": "minecraft:copper_ingot",
-      "text": "data_tablet.pages.phenuan_material_studies.page1.text"
+      "item": {
+        "id": "minecraft:copper_ingot"
+      },
+      "text": {
+        "translate": "data_tablet.pages.phenuan_material_studies.page1.text"
+      }
     },
     {
       "type": "datanessence:item",
-      "item": "minecraft:amethyst_shard",
-      "text": "data_tablet.pages.phenuan_material_studies.page2.text"
+      "item": {
+        "id": "minecraft:amethyst_shard"
+      },
+      "text": {
+        "translate": "data_tablet.pages.phenuan_material_studies.page2.text"
+      }
     },
     {
       "type": "datanessence:item",
-      "item": "minecraft:obsidian",
-      "text": "data_tablet.pages.phenuan_material_studies.page3.text"
+      "item": {
+        "id": "minecraft:obsidian"
+      },
+      "text": {
+        "translate": "data_tablet.pages.phenuan_material_studies.page3.text"
+      }
     }
   ],
-  "name": "data_tablet.pages.phenuan_material_studies.name"
+  "name": {
+    "translate": "data_tablet.pages.phenuan_material_studies.name"
+  }
 }

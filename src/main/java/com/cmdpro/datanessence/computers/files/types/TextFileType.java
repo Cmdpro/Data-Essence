@@ -1,40 +1,43 @@
 package com.cmdpro.datanessence.computers.files.types;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.computers.ComputerFileType;
+import com.cmdpro.datanessence.api.computer.ComputerFileType;
 import com.cmdpro.datanessence.computers.files.TextFile;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.network.ConnectionProtocol;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.util.GsonHelper;
 
 import java.util.List;
 
 public class TextFileType extends ComputerFileType<TextFile> {
+    public static final MapCodec<TextFile> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            ComponentSerialization.CODEC.fieldOf("text").forGetter((file) -> file.text)
+    ).apply(instance, TextFile::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, TextFile> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+        ComponentSerialization.STREAM_CODEC.encode(pBuffer, pValue.text);
+    }, pBuffer -> {
+        Component text = ComponentSerialization.STREAM_CODEC.decode(pBuffer);
+        return new TextFile(text);
+    });
+
     @Override
-    public void toNetwork(FriendlyByteBuf buf, TextFile data) {
-        buf.writeWithCodec(NbtOps.INSTANCE, ComponentSerialization.CODEC, data.text);
+    public MapCodec<TextFile> getCodec() {
+        return CODEC;
     }
 
     @Override
-    public TextFile fromNetwork(FriendlyByteBuf buf) {
-        Component text = buf.readWithCodecTrusted(NbtOps.INSTANCE, ComponentSerialization.CODEC);
-        return new TextFile(text);
-    }
-    @Override
-    public TextFile fromJson(JsonObject obj) {
-        return new TextFile(ComponentSerialization.CODEC.parse(JsonOps.INSTANCE, obj.get("text")).result().get());
+    public StreamCodec<RegistryFriendlyByteBuf, TextFile> getStreamCodec() {
+        return STREAM_CODEC;
     }
 
     @Override

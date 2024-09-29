@@ -1,22 +1,30 @@
 {
-  "icon": "datanessence:lensing_crystal",
+  "icon": {
+    "id": "datanessence:lensing_crystal"
+  },
   "tab": "datanessence:basics",
   "x": 2,
   "y": 2,
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "data_tablet.pages.lensing_crystals.page1.text"
+      "text": {
+        "translate": "data_tablet.pages.lensing_crystals.page1.text"
+      }
     },
     {
       "type": "datanessence:crafting",
-      "text": "",
+      "text": {
+        "translate": ""
+      },
       "recipes": [
         "datanessence:infusion/lens_from_lensing_crystal"
       ]
     }
   ],
-  "name": "data_tablet.pages.lensing_crystals.name",
+  "name": {
+    "translate": "data_tablet.pages.lensing_crystals.name"
+  },
   "parents": [
     "datanessence:machinery/infuser"
   ]

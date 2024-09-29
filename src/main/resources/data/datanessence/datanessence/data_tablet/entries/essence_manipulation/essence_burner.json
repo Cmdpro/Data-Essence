@@ -1,20 +1,28 @@
 {
-  "icon": "datanessence:essence_burner",
+  "icon": {
+    "id": "datanessence:essence_burner"
+  },
   "tab": "datanessence:essence_manipulation",
   "x": 0,
   "y": 0,
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "data_tablet.pages.essence_burner.page1.text"
+      "text": {
+        "translate": "data_tablet.pages.essence_burner.page1.text"
+      }
     },
     {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.essence_burner.page2.text",
+      "text": {
+        "translate": "data_tablet.pages.essence_burner.page2.text"
+      },
       "recipes": [
         "datanessence:fabrication/essence_burner"
       ]
     }
   ],
-  "name": "data_tablet.pages.essence_burner.name"
+  "name": {
+    "translate": "data_tablet.pages.essence_burner.name"
+  }
 }

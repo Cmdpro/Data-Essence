@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.screen.datatablet.PageSerializer;
+import com.cmdpro.datanessence.api.datatablet.PageSerializer;
 import com.cmdpro.datanessence.screen.datatablet.pages.serializers.CraftingPageSerializer;
 import com.cmdpro.datanessence.screen.datatablet.pages.serializers.ItemPageSerializer;
 import com.cmdpro.datanessence.screen.datatablet.pages.serializers.MultiblockPageSerializer;

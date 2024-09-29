@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.screen.datatablet.*;
 import com.cmdpro.datanessence.util.ColorHelper;
@@ -15,14 +16,9 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.ColorRGBA;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import org.jline.utils.Colors;
 import org.joml.Math;
-import org.joml.Matrix4f;
-import org.joml.Vector4f;
-import org.joml.Vector4i;
 
 import java.awt.*;
 import java.util.ArrayList;
