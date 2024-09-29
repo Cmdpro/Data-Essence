@@ -1,16 +1,22 @@
 {
-  "icon": "datanessence:item_buffer",
+  "icon": {
+    "id": "datanessence:item_buffer"
+  },
   "tab": "datanessence:machinery",
   "x": 0,
   "y": -2,
   "pages": [
     {
       "type": "datanessence:text",
-      "text": "data_tablet.pages.buffers.page1.text"
+      "text": {
+        "translate": "data_tablet.pages.buffers.page1.text"
+      }
     },
     {
       "type": "datanessence:crafting",
-      "text": " ",
+      "text": {
+        "translate": " "
+      },
       "recipes": [
         "datanessence:fabrication/essence_buffer",
         "datanessence:fabrication/item_buffer",
@@ -18,7 +24,9 @@
       ]
     }
   ],
-  "name": "data_tablet.pages.buffers.name",
+  "name": {
+    "translate": "data_tablet.pages.buffers.name"
+  },
   "parents": [
     "datanessence:machinery/automation",
     "datanessence:machinery/itemworks",

@@ -1,5 +1,7 @@
 {
-  "icon": "datanessence:data_tablet",
+  "icon": {
+    "id": "datanessence:data_tablet"
+  },
   "tier": 2,
   "minigames": [
     {
@@ -44,6 +46,8 @@
       ]
     }
   ],
-  "name": "data_tablet.pages.test2.name",
+  "name": {
+    "translate": "data_tablet.pages.test2.name"
+  },
   "entry": "datanessence:test2"
 }

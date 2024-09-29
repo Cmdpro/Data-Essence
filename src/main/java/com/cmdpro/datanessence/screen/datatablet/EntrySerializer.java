@@ -52,7 +52,7 @@ public class EntrySerializer {
             ResourceLocation.CODEC.fieldOf("tab").forGetter((entry) -> entry.tab),
             Codec.BOOL.optionalFieldOf("incomplete", false).forGetter((entry) -> entry.incomplete),
             PAGE_CODEC.listOf().optionalFieldOf("incompletePages", new ArrayList<>()).forGetter((entry) -> Arrays.stream(entry.incompletePages).toList()),
-            ResourceLocation.CODEC.fieldOf("completionAdvancement").forGetter((entry) -> entry.completionAdvancement)
+            ResourceLocation.CODEC.optionalFieldOf("completionAdvancement", ResourceLocation.fromNamespaceAndPath("", "")).forGetter((entry) -> entry.completionAdvancement)
     ).apply(instance, (icon, x, y, name, parents, pages, critical, tab, incomplete, incompletePages, completionAdvancement) -> new Entry(null, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, critical, incomplete, incompletePages.toArray(new Page[0]), completionAdvancement)));
     public static final StreamCodec<RegistryFriendlyByteBuf, Entry> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
         pBuffer.writeResourceLocation(pValue.id);

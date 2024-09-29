@@ -1,5 +1,9 @@
 {
-  "icon": "datanessence:traversite_road",
-  "name": "data_tablet.tabs.tools.name",
+  "icon": {
+    "id": "datanessence:traversite_road"
+  },
+  "name": {
+    "translate": "data_tablet.tabs.tools.name"
+  },
   "priority": 1
 }

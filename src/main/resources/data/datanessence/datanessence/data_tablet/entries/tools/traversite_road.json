@@ -1,18 +1,24 @@
 {
-  "icon": "datanessence:traversite_road",
+  "icon": {
+    "id": "datanessence:traversite_road"
+  },
   "tab": "datanessence:tools",
   "x": 3,
   "y": 0,
   "pages": [
     {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.traversite_road.page1.text",
+      "text": {
+        "translate": "data_tablet.pages.traversite_road.page1.text"
+      },
       "recipes": [
         "datanessence:infusion/traversite_road"
       ]
     }
   ],
-  "name": "data_tablet.pages.traversite_road.name",
+  "name": {
+    "translate": "data_tablet.pages.traversite_road.name"
+  },
   "parents": [
     "datanessence:infuser"
   ]

@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.minigames;
 
+import com.cmdpro.datanessence.api.databank.Minigame;
 import com.cmdpro.datanessence.registry.MinigameRegistry;
 import com.cmdpro.datanessence.api.databank.MinigameCreator;
 import com.cmdpro.datanessence.api.databank.MinigameSerializer;
@@ -16,13 +17,13 @@ import org.joml.Vector2i;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WireMinigameCreator extends MinigameCreator<WireMinigame> {
+public class WireMinigameCreator extends MinigameCreator {
     public Map<Vector2i, WireMinigame.Tile> tiles;
     public WireMinigameCreator(Map<Vector2i, WireMinigame.Tile> tiles) {
         this.tiles = tiles;
     }
     @Override
-    public WireMinigame createMinigame() {
+    public Minigame createMinigame() {
         return new WireMinigame(tiles);
     }
 

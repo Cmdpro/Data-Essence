@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.hiddenblocks.HiddenBlocksSerializer;
 import com.cmdpro.datanessence.multiblock.Multiblock;
 import com.cmdpro.datanessence.multiblock.MultiblockManager;
 import com.cmdpro.datanessence.multiblock.MultiblockSerializer;
@@ -16,7 +17,7 @@ import java.util.Map;
 public record MultiblockSyncS2CPacket(Map<ResourceLocation, Multiblock> multiblocks) implements Message {
 
     public static void write(RegistryFriendlyByteBuf buf, MultiblockSyncS2CPacket obj) {
-        buf.writeMap(obj.multiblocks, ResourceLocation.STREAM_CODEC, MultiblockSerializer::toNetwork);
+        buf.writeMap(obj.multiblocks, ResourceLocation.STREAM_CODEC, (pBuffer, pValue) -> MultiblockSerializer.STREAM_CODEC.encode((RegistryFriendlyByteBuf)pBuffer, pValue));
     }
 
     @Override
@@ -26,7 +27,7 @@ public record MultiblockSyncS2CPacket(Map<ResourceLocation, Multiblock> multiblo
     public static final Type<MultiblockSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "multiblock_sync"));
 
     public static MultiblockSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
-        Map<ResourceLocation, Multiblock> multiblocks = buf.readMap(ResourceLocation.STREAM_CODEC, MultiblockSerializer::fromNetwork);
+        Map<ResourceLocation, Multiblock> multiblocks = buf.readMap(ResourceLocation.STREAM_CODEC, (pBuffer) -> MultiblockSerializer.STREAM_CODEC.decode((RegistryFriendlyByteBuf)pBuffer));
         return new MultiblockSyncS2CPacket(multiblocks);
     }
 

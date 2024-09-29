@@ -1,23 +1,33 @@
 {
-  "icon": "datanessence:primitive_anti_gravity_pack",
+  "icon": {
+    "id": "datanessence:primitive_anti_gravity_pack"
+  },
   "tab": "datanessence:tools",
   "x": -2,
   "y": 1,
   "pages": [
     {
       "type": "datanessence:item",
-      "item": "datanessence:primitive_anti_gravity_pack",
-      "text": "data_tablet.pages.primitive_antigravity_pack.page1.text"
+      "item": {
+        "id": "datanessence:primitive_anti_gravity_pack"
+      },
+      "text": {
+        "translate": "data_tablet.pages.primitive_antigravity_pack.page1.text"
+      }
     },
     {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.primitive_antigravity_pack.page2.text",
+      "text": {
+        "translate": "data_tablet.pages.primitive_antigravity_pack.page2.text"
+      },
       "recipes": [
         "datanessence:fabrication/primitive_antigravity_pack"
       ]
     }
   ],
-  "name": "data_tablet.pages.primitive_antigravity_pack.name",
+  "name": {
+    "translate": "data_tablet.pages.primitive_antigravity_pack.name"
+  },
   "parents": [
     "datanessence:tools/charger"
   ]

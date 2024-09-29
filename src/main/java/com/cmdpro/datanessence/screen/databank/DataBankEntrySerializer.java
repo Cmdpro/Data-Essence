@@ -35,7 +35,7 @@ public class DataBankEntrySerializer {
         entry.id = entryId;
         return entry;
     }
-    public static final Codec<MinigameCreator> MINIGAME_CODEC = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.byNameCodec().dispatch(MinigameCreator::getSerializer, minigameSerializer -> minigameSerializer.getCodec());
+    public static final Codec<MinigameCreator> MINIGAME_CODEC = DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.byNameCodec().dispatch(MinigameCreator::getSerializer, MinigameSerializer::getCodec);
     public static final StreamCodec<RegistryFriendlyByteBuf, MinigameCreator> MINIGAME_STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
         pBuffer.writeResourceLocation(DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY.getKey(pValue.getSerializer()));
         pValue.getSerializer().getStreamCodec().encode(pBuffer, pValue);
@@ -54,15 +54,15 @@ public class DataBankEntrySerializer {
     ).apply(instance, (icon, tier, name, minigames, entry) -> new DataBankEntry(null, icon, tier, minigames.toArray(new MinigameCreator[0]), name, entry)));
     public static final StreamCodec<RegistryFriendlyByteBuf, DataBankEntry> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
         pBuffer.writeResourceLocation(pValue.id);
-        pBuffer.writeWithCodec(NbtOps.INSTANCE, ItemStack.CODEC, pValue.icon);
-        pBuffer.writeWithCodec(NbtOps.INSTANCE, ComponentSerialization.CODEC, pValue.name);
+        ItemStack.STREAM_CODEC.encode(pBuffer, pValue.icon);
+        ComponentSerialization.STREAM_CODEC.encode(pBuffer, pValue.name);
         pBuffer.writeInt(pValue.tier);
         pBuffer.writeCollection(Arrays.stream(pValue.minigames).toList(), (pBuffer1, pValue1) -> MINIGAME_STREAM_CODEC.encode((RegistryFriendlyByteBuf)pBuffer1, pValue1));
         pBuffer.writeResourceLocation(pValue.entry);
     }, pBuffer -> {
         ResourceLocation id = pBuffer.readResourceLocation();
-        ItemStack icon = pBuffer.readWithCodecTrusted(NbtOps.INSTANCE, ItemStack.CODEC);
-        Component name = pBuffer.readWithCodecTrusted(NbtOps.INSTANCE, ComponentSerialization.CODEC);
+        ItemStack icon = ItemStack.STREAM_CODEC.decode(pBuffer);
+        Component name = ComponentSerialization.STREAM_CODEC.decode(pBuffer);
         int tier = pBuffer.readInt();
         MinigameCreator[] minigames = pBuffer.readList((pBuffer1) -> MINIGAME_STREAM_CODEC.decode((RegistryFriendlyByteBuf)pBuffer1)).toArray(new MinigameCreator[0]);
         ResourceLocation entry2 = pBuffer.readResourceLocation();

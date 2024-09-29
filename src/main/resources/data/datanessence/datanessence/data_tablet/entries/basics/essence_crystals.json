@@ -1,14 +1,22 @@
 {
-  "icon": "datanessence:essence_crystal",
+  "icon": {
+    "id": "datanessence:essence_crystal"
+  },
   "tab": "datanessence:basics",
   "x": 2,
   "y": 0,
   "pages": [
     {
       "type": "datanessence:item",
-      "item": "datanessence:essence_shard",
-      "text": "data_tablet.pages.essence_crystals.page1.text"
+      "item": {
+        "id": "datanessence:essence_shard"
+      },
+      "text": {
+        "translate": "data_tablet.pages.essence_crystals.page1.text"
+      }
     }
   ],
-  "name": "data_tablet.pages.essence_crystals.name"
+  "name": {
+    "translate": "data_tablet.pages.essence_crystals.name"
+  }
 }

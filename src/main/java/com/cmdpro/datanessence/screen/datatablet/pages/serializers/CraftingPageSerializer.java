@@ -33,8 +33,8 @@ public class CraftingPageSerializer extends PageSerializer<CraftingPage> {
         return new CraftingPage(text, rtl, recipes);
     });
     public static final MapCodec<CraftingPage> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            ComponentSerialization.CODEC.fieldOf("text").forGetter(page -> page.text),
-            Codec.BOOL.fieldOf("rtl").forGetter(page -> page.rtl),
+            ComponentSerialization.CODEC.optionalFieldOf("text", Component.empty()).forGetter(page -> page.text),
+            Codec.BOOL.optionalFieldOf("rtl", false).forGetter(page -> page.rtl),
             ResourceLocation.CODEC.listOf().fieldOf("recipes").forGetter(page -> page.recipes)
     ).apply(instance, CraftingPage::new));
     @Override

@@ -1,23 +1,33 @@
 {
-  "icon": "datanessence:magic_wrench",
+  "icon": {
+    "id": "datanessence:magic_wrench"
+  },
   "tab": "datanessence:basics",
   "x": 1,
   "y": 0,
   "pages": [
     {
       "type": "datanessence:item",
-      "item": "datanessence:magic_wrench",
-      "text": "data_tablet.pages.essence_redirector.page1.text"
+      "item": {
+        "id": "datanessence:magic_wrench"
+      },
+      "text": {
+        "translate": "data_tablet.pages.essence_redirector.page1.text"
+      }
     },
     {
       "type": "datanessence:crafting",
-      "text": " ",
+      "text": {
+        "translate": " "
+      },
       "recipes": [
         "datanessence:crafting/magic_wrench"
       ]
     }
   ],
-  "name": "data_tablet.pages.essence_redirector.name",
+  "name": {
+    "translate": "data_tablet.pages.essence_redirector.name"
+  },
   "parents": [
     "datanessence:basics/data_tablet"
   ]

@@ -1,24 +1,34 @@
 {
-  "icon": "datanessence:fluid_wire",
+  "icon": {
+    "id": "datanessence:fluid_wire"
+  },
   "tab": "datanessence:machinery",
   "x": 2,
   "y": -2,
   "pages": [
     {
       "type": "datanessence:item",
-      "item": "datanessence:fluid_point",
-      "text": "data_tablet.pages.fluidworks.page1.text"
+      "item": {
+        "id": "datanessence:fluid_point"
+      },
+      "text": {
+        "translate": "data_tablet.pages.fluidworks.page1.text"
+      }
     },
     {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.fluidworks.page2.text",
+      "text": {
+        "translate": "data_tablet.pages.fluidworks.page2.text"
+      },
       "recipes": [
         "datanessence:fabrication/points/fluid_point",
         "datanessence:fabrication/wires/fluid_wire"
       ]
     }
   ],
-  "name": "data_tablet.pages.fluidworks.name",
+  "name": {
+    "translate": "data_tablet.pages.fluidworks.name"
+  },
   "parents": [
     "datanessence:basics/fabricator",
     "datanessence:essence_manipulation/essence_transfer",

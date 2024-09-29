@@ -39,10 +39,10 @@ public class HiddenBlocksSerializer {
     }
     public static final MapCodec<HiddenBlock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             ResourceLocation.CODEC.fieldOf("entry").forGetter(hiddenBlock -> hiddenBlock.entry),
-            Block.CODEC.fieldOf("originalBlock").forGetter(hiddenBlock -> hiddenBlock.originalBlock),
+            ResourceLocation.CODEC.fieldOf("originalBlock").forGetter(hiddenBlock -> BuiltInRegistries.BLOCK.getKey(hiddenBlock.originalBlock)),
             BlockState.CODEC.fieldOf("hiddenAs").forGetter(hiddenBlock -> hiddenBlock.hiddenAs),
             Codec.BOOL.optionalFieldOf("completionRequired", true).forGetter(hiddenBlock -> hiddenBlock.completionRequired)
-    ).apply(instance, HiddenBlock::new));
+    ).apply(instance, (entry, originalBlock, hiddenAs, completionRequired) -> new HiddenBlock(entry, BuiltInRegistries.BLOCK.get(originalBlock), hiddenAs, completionRequired)));
     public static final StreamCodec<RegistryFriendlyByteBuf, HiddenBlock> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
         pBuffer.writeResourceLocation(pValue.entry);
         pBuffer.writeResourceLocation(BuiltInRegistries.BLOCK.getKey(pValue.originalBlock));

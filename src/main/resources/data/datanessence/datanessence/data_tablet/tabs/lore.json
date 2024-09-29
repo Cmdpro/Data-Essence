@@ -1,5 +1,9 @@
 {
-  "icon": "datanessence:data_bank",
-  "name": "data_tablet.tabs.lore.name",
+  "icon": {
+    "id": "datanessence:data_bank"
+  },
+  "name": {
+    "translate": "data_tablet.tabs.lore.name"
+  },
   "priority": 0
 }

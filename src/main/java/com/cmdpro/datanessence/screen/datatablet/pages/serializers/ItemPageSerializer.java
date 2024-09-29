@@ -34,8 +34,8 @@ public class ItemPageSerializer extends PageSerializer<ItemPage> {
         return new ItemPage(text, rtl, item);
     });
     public static final MapCodec<ItemPage> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            ComponentSerialization.CODEC.fieldOf("text").forGetter(page -> page.text),
-            Codec.BOOL.fieldOf("rtl").forGetter(page -> page.rtl),
+            ComponentSerialization.CODEC.optionalFieldOf("text", Component.empty()).forGetter(page -> page.text),
+            Codec.BOOL.optionalFieldOf("rtl", false).forGetter(page -> page.rtl),
             ItemStack.CODEC.fieldOf("item").forGetter(page -> page.item)
     ).apply(instance, ItemPage::new));
     @Override

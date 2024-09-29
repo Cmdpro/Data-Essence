@@ -2,80 +2,76 @@ package com.cmdpro.datanessence.multiblock;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.databank.MinigameCreator;
+import com.cmdpro.datanessence.api.datatablet.Page;
+import com.cmdpro.datanessence.api.datatablet.PageSerializer;
 import com.cmdpro.datanessence.api.multiblock.MultiblockPredicate;
 import com.cmdpro.datanessence.api.multiblock.MultiblockPredicateSerializer;
+import com.cmdpro.datanessence.screen.databank.DataBankEntry;
+import com.cmdpro.datanessence.screen.datatablet.Entry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.JsonOps;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.item.ItemStack;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MultiblockSerializer {
     public Multiblock read(ResourceLocation entryId, JsonObject json) {
-        if (!json.has("key")) {
-            throw new JsonSyntaxException("Element key missing in multiblock JSON for " + entryId.toString());
-        }
-        if (!json.has("layers")) {
-            throw new JsonSyntaxException("Element multiblockLayers missing in multiblock JSON for " + entryId.toString());
-        }
-        if (!json.has("offset")) {
-            throw new JsonSyntaxException("Element offset missing in multiblock JSON for " + entryId.toString());
-        }
-        HashMap<Character, MultiblockPredicate> key = new HashMap<>();
-        try {
-            for (Map.Entry<String, JsonElement> i : json.getAsJsonObject("key").asMap().entrySet()) {
-                JsonObject obj = i.getValue().getAsJsonObject();
-                MultiblockPredicate predicate = DataNEssenceRegistries.MULTIBLOCK_PREDICATE_REGISTRY.get(ResourceLocation.tryParse(obj.get("type").getAsString())).fromJson(obj);
-                key.put(i.getKey().charAt(0), predicate);
-            }
-        } catch (Exception e) {
-            DataNEssence.LOGGER.error(e.getMessage());
-        }
-        List<String[]> layers = new ArrayList<>();
-        for (JsonElement i : json.getAsJsonArray("layers")) {
-            List<String> layer = new ArrayList<>();
-            for (JsonElement o : i.getAsJsonArray()) {
-                layer.add(o.getAsString());
-            }
-            layers.add(layer.toArray(new String[0]));
-        }
-        String[][] multiblockLayers = layers.toArray(new String[0][]);
-        BlockPos offset = new BlockPos(
-                json.getAsJsonObject("offset").get("x").getAsInt(),
-                json.getAsJsonObject("offset").get("y").getAsInt(),
-                json.getAsJsonObject("offset").get("z").getAsInt()
-        );
-        return new Multiblock(multiblockLayers, key, offset);
+        Multiblock multiblock = CODEC.codec().parse(JsonOps.INSTANCE, json).getOrThrow();
+        return multiblock;
     }
-    @Nonnull
-    public static Multiblock fromNetwork(FriendlyByteBuf buf) {
-        HashMap<Character, MultiblockPredicate> key = new HashMap<>(buf.readMap((a) -> a.readChar(), (a) -> {
-            MultiblockPredicateSerializer serializer = DataNEssenceRegistries.MULTIBLOCK_PREDICATE_REGISTRY.get(a.readResourceLocation());
-            return serializer.fromNetwork(a);
-        }));
-        BlockPos offset = buf.readBlockPos();
-        List<String[]> layers = buf.readList((a) -> a.readList(FriendlyByteBuf::readUtf).toArray(new String[0]));
-        return new Multiblock(layers.toArray(new String[0][]), key, offset);
-    }
-    public static void toNetwork(FriendlyByteBuf buf, Multiblock multiblock) {
-        buf.writeMap(multiblock.key, (a, b) -> a.writeChar(b), (a, b) -> {
-            buf.writeResourceLocation(DataNEssenceRegistries.MULTIBLOCK_PREDICATE_REGISTRY.getKey(b.getSerializer()));
-            b.getSerializer().toNetwork(a, b);
-        });
-        buf.writeBlockPos(multiblock.offset);
+    public static final Codec<MultiblockPredicate> PREDICATE_CODEC = DataNEssenceRegistries.MULTIBLOCK_PREDICATE_REGISTRY.byNameCodec().dispatch(MultiblockPredicate::getSerializer, pageSerializer -> pageSerializer.getCodec());
+    public static final StreamCodec<RegistryFriendlyByteBuf, MultiblockPredicate> PREDICATE_STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+        pBuffer.writeResourceLocation(DataNEssenceRegistries.MULTIBLOCK_PREDICATE_REGISTRY.getKey(pValue.getSerializer()));
+        pValue.getSerializer().getStreamCodec().encode(pBuffer, pValue);
+    }, pBuffer -> {
+        ResourceLocation type = pBuffer.readResourceLocation();
+        MultiblockPredicateSerializer pageSerializer = DataNEssenceRegistries.MULTIBLOCK_PREDICATE_REGISTRY.get(type);
+        MultiblockPredicate predicate = (MultiblockPredicate)pageSerializer.getStreamCodec().decode(pBuffer);
+        return predicate;
+    });
+    public static final MapCodec<Multiblock> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+            Codec.unboundedMap(Codec.STRING, PREDICATE_CODEC).fieldOf("key").forGetter((multiblock) -> {
+                Map<String, MultiblockPredicate> map = multiblock.key.entrySet().stream().map((a) -> Map.entry(a.getKey().toString(), a.getValue())).collect(Collectors.toMap((a) -> a.getKey(), (a) -> a.getValue()));
+                return map;
+            }),
+            Codec.STRING.listOf().listOf().fieldOf("layers").forGetter((multiblock) -> multiblock.getMultiblockLayersList()),
+            BlockPos.CODEC.fieldOf("offset").forGetter((multiblock) -> multiblock.offset)
+    ).apply(instance, (key, layers, offset) -> {
+        Map<Character, MultiblockPredicate> key2 = key.entrySet().stream().map((a) -> Map.entry(a.getKey().charAt(0), a.getValue())).collect(Collectors.toMap((a) -> a.getKey(), (a) -> a.getValue()));
+        return new Multiblock(layers.stream().map((a) -> a.toArray(new String[0])).toList().toArray(new String[0][]), key2, offset);
+    }));
+    public static final StreamCodec<RegistryFriendlyByteBuf, Multiblock> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+        pBuffer.writeMap(pValue.key, (a, b) -> a.writeChar(b), (a, b) -> PREDICATE_STREAM_CODEC.encode((RegistryFriendlyByteBuf) a, b));
+        pBuffer.writeBlockPos(pValue.offset);
         List<List<String>> layers = new ArrayList<>();
-        for (String[] i : multiblock.multiblockLayers) {
+        for (String[] i : pValue.multiblockLayers) {
             layers.add(List.of(i));
         }
-        buf.writeCollection(layers, (a, b) -> {
+        pBuffer.writeCollection(layers, (a, b) -> {
             a.writeCollection(b, FriendlyByteBuf::writeUtf);
         });
-    }
+    }, pBuffer -> {
+        HashMap<Character, MultiblockPredicate> key = new HashMap<>(pBuffer.readMap((a) -> a.readChar(), (a) -> PREDICATE_STREAM_CODEC.decode(pBuffer)));
+        BlockPos offset = pBuffer.readBlockPos();
+        List<String[]> layers = pBuffer.readList((a) -> a.readList(FriendlyByteBuf::readUtf).toArray(new String[0]));
+        return new Multiblock(layers.toArray(new String[0][]), key, offset);
+    });
 }

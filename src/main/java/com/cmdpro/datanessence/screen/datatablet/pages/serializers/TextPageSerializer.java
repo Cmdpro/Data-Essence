@@ -29,7 +29,7 @@ public class TextPageSerializer extends PageSerializer<TextPage> {
     });
     public static final MapCodec<TextPage> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             ComponentSerialization.CODEC.fieldOf("text").forGetter(page -> page.text),
-            Codec.BOOL.fieldOf("rtl").forGetter(page -> page.rtl)
+            Codec.BOOL.optionalFieldOf("rtl", false).forGetter(page -> page.rtl)
     ).apply(instance, TextPage::new));
     @Override
     public MapCodec<TextPage> getCodec() {

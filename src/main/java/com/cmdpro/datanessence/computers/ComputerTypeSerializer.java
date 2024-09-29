@@ -33,6 +33,13 @@ public class ComputerTypeSerializer {
     public static final MapCodec<ComputerData> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             FILE_CODEC.listOf().fieldOf("files").forGetter((data) -> data.files)
     ).apply(instance, ComputerData::new));
+    public static final StreamCodec<RegistryFriendlyByteBuf, ComputerData> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+        pBuffer.writeCollection(pValue.files, (buf, val) -> FILE_STREAM_CODEC.encode((RegistryFriendlyByteBuf)buf, val));
+    }, pBuffer -> {
+        List<ComputerFile> files = pBuffer.readList((buf) -> FILE_STREAM_CODEC.decode((RegistryFriendlyByteBuf)buf));
+        ComputerData data = new ComputerData(files);
+        return data;
+    });
     public ComputerData read(ResourceLocation entryId, JsonObject json) {
         ComputerData data = CODEC.codec().parse(JsonOps.INSTANCE, json).getOrThrow();
         return data;

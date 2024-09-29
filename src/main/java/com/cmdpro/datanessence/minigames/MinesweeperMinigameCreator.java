@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.minigames;
 
+import com.cmdpro.datanessence.api.databank.Minigame;
 import com.cmdpro.datanessence.registry.MinigameRegistry;
 import com.cmdpro.datanessence.api.databank.MinigameCreator;
 import com.cmdpro.datanessence.api.databank.MinigameSerializer;
@@ -13,7 +14,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 
-public class MinesweeperMinigameCreator extends MinigameCreator<MinesweeperMinigame> {
+public class MinesweeperMinigameCreator extends MinigameCreator {
     public int bombs;
     public int size;
     public MinesweeperMinigameCreator(int bombs, int size) {
@@ -21,7 +22,7 @@ public class MinesweeperMinigameCreator extends MinigameCreator<MinesweeperMinig
         this.size = size;
     }
     @Override
-    public MinesweeperMinigame createMinigame() {
+    public Minigame createMinigame() {
         return new MinesweeperMinigame(bombs, size);
     }
 

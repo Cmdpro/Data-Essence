@@ -1,12 +1,16 @@
 {
-  "icon": "datanessence:data_tablet",
+  "icon": {
+    "id": "datanessence:data_tablet"
+  },
   "tab": "datanessence:basics",
   "x": 0,
   "y": 4,
   "pages": [
     {
       "type": "datanessence:crafting",
-      "text": "data_tablet.pages.test2.page1.text",
+      "text": {
+        "translate": "data_tablet.pages.test2.page1.text"
+      },
       "recipes": [
         "datanessence:test_recipe",
         "minecraft:ender_eye",
@@ -17,5 +21,7 @@
   "parents": [
     "datanessence:test1"
   ],
-  "name": "data_tablet.pages.test2.name"
+  "name": {
+    "translate": "data_tablet.pages.test2.name"
+  }
 }

@@ -5,6 +5,8 @@ import com.cmdpro.datanessence.api.multiblock.MultiblockPredicateSerializer;
 import com.cmdpro.datanessence.multiblock.predicates.BlockstateMultiblockPredicate;
 import com.cmdpro.datanessence.screen.datatablet.pages.MultiblockPage;
 import com.google.gson.JsonObject;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.commands.arguments.blocks.BlockStateParser;
@@ -33,8 +35,14 @@ public class BlockstateMultiblockPredicateSerializer extends MultiblockPredicate
         return new BlockstateMultiblockPredicate(state);
     });
     public static final MapCodec<BlockstateMultiblockPredicate> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-            BlockState.CODEC.fieldOf("state").forGetter(page -> page.self)
-    ).apply(instance, BlockstateMultiblockPredicate::new));
+            Codec.STRING.fieldOf("state").forGetter(page -> BlockStateParser.serialize(page.self))
+    ).apply(instance, (state) -> {
+        try {
+            return new BlockstateMultiblockPredicate(BlockStateParser.parseForBlock(BuiltInRegistries.BLOCK.asLookup(), state, false).blockState());
+        } catch (CommandSyntaxException e) {
+            throw new RuntimeException(e);
+        }
+    }));
     @Override
     public MapCodec<BlockstateMultiblockPredicate> getCodec() {
         return CODEC;
