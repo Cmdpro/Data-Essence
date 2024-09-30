@@ -74,6 +74,7 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(WingsLayer.wingsLocation, WingsLayer.WingsModel::createLayer);
             ClientHooks.registerLayerDefinition(HornsLayer.hornsLocation, HornsLayer.HornsModel::createLayer);
             ClientHooks.registerLayerDefinition(TailLayer.tailLocation, TailLayer.TailModel::createLayer);
+            ClientHooks.registerLayerDefinition(AncientSentinelRenderer.ancientSentinelLocation, AncientSentinelRenderer.Model::createLayer);
         });
 
         progressionShader = new ProgressionShader();

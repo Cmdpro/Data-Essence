@@ -28,9 +28,7 @@ import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 
-public class AncientSentinel extends Monster implements GeoEntity, RangedAttackMob {
-
-    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
+public class AncientSentinel extends Monster implements RangedAttackMob {
     public AncientSentinel(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }
@@ -41,24 +39,12 @@ public class AncientSentinel extends Monster implements GeoEntity, RangedAttackM
                 .add(Attributes.ATTACK_SPEED, 0f)
                 .add(Attributes.MOVEMENT_SPEED, 0f).build();
     }
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.ancient_sentinel.idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-    }
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 30, 15));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(7, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
-    }
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController(this, "controller", 0, this::predicate));
-    }
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.factory;
     }
 
 
