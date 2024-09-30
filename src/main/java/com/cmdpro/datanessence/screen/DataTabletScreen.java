@@ -1,10 +1,10 @@
 package com.cmdpro.datanessence.screen;
 
+import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.screen.datatablet.*;
-import com.cmdpro.datanessence.util.ColorHelper;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -334,7 +334,7 @@ public class DataTabletScreen extends Screen {
                             Vec2 normal = new Vec2((float) (origin.x - lx), (float) (origin.y - ly)).normalized();
                             float blendSize = 8;
                             float blend = Math.clamp(0f, 1f, (blendSize-Math.abs((float)i-(float)activeSegment))/blendSize);
-                            int color = ColorHelper.blendColors(new Color(45, 6, 61, 255), new Color(255, 120, 201, 255), blend).getRGB();
+                            int color = ColorUtil.blendColors(new Color(45, 6, 61, 255), new Color(255, 120, 201, 255), blend).getRGB();
                             BufferBuilder builder = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
                             builder.addVertex((float) lx, (float) ly, 0).setColor(color).setNormal(normal.x, normal.y, 0);
                             builder.addVertex((float) origin.x, (float) origin.y, 0).setColor(color).setNormal(normal.x, normal.y, 0);
