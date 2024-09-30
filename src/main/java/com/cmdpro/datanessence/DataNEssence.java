@@ -1,11 +1,13 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.databank.hiddenblock.HiddenBlockConditions;
+import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.entity.SnifferRenderer;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -63,6 +65,7 @@ public class DataNEssence
         random = RandomSource.create();
         HiddenBlockConditions.conditions.put(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
     }
+
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ESSENCE_BURNER.get(), (o, direction) -> o.getItemHandler());

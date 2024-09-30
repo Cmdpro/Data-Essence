@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.renderers.layer;
 
+import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -50,49 +52,24 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
         }
     }
     public class TailModel<T extends Player> extends HierarchicalModel<T> {
-        public static final AnimationDefinition idle = AnimationDefinition.Builder.withLength(2.0F).looping()
-                .addAnimation("root", new AnimationChannel(AnimationChannel.Targets.ROTATION,
-                        new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 15.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-                        new Keyframe(1.0F, KeyframeAnimations.degreeVec(0.0F, -15.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-                        new Keyframe(2.0F, KeyframeAnimations.degreeVec(0.0F, 15.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
-                ))
-                .addAnimation("part1", new AnimationChannel(AnimationChannel.Targets.ROTATION,
-                        new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 15.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-                        new Keyframe(1.0F, KeyframeAnimations.degreeVec(0.0F, -15.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-                        new Keyframe(2.0F, KeyframeAnimations.degreeVec(0.0F, 15.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
-                ))
-                .addAnimation("part2", new AnimationChannel(AnimationChannel.Targets.ROTATION,
-                        new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 15.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-                        new Keyframe(1.0F, KeyframeAnimations.degreeVec(0.0F, -15.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM),
-                        new Keyframe(2.0F, KeyframeAnimations.degreeVec(0.0F, 15.0F, 0.0F), AnimationChannel.Interpolations.CATMULLROM)
-                ))
-                .build();
+        public static AnimationDefinition idle;
         public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
-        private final ModelPart tail;
-        private final ModelPart part1;
-        private final ModelPart part2;
 
         public TailModel(ModelPart pRoot) {
             this.root = pRoot.getChild("root");
-            this.tail = root.getChild("tail");
-            this.part1 = tail.getChild("part1");
-            this.part2 = part1.getChild("part2");
+        }
+        public static DatabankEntityModel model;
+        public static DatabankEntityModel getModel() {
+            if (model == null) {
+                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "tail"));
+                idle = model.animations.get("idle").createAnimationDefinition();
+            }
+            return model;
         }
 
         public static LayerDefinition createLayer() {
-            MeshDefinition meshdefinition = new MeshDefinition();
-            PartDefinition partdefinition = meshdefinition.getRoot();
-
-            PartDefinition root = partdefinition.addOrReplaceChild("root", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
-
-            PartDefinition tail = root.addOrReplaceChild("tail", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.0F, -2.0F, 4.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 9.0F, 3.0F));
-
-            PartDefinition part1 = tail.addOrReplaceChild("part1", CubeListBuilder.create().texOffs(0, 11).addBox(-1.5F, -1.5F, 0.0F, 3.0F, 3.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 5.0F));
-
-            PartDefinition part2 = part1.addOrReplaceChild("part2", CubeListBuilder.create().texOffs(12, 14).addBox(-1.5F, -0.5F, 0.0F, 2.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, -0.5F, 6.0F));
-
-            return LayerDefinition.create(meshdefinition, 32, 32);
+            return getModel().createLayerDefinition();
         }
         public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
             animState.startIfStopped(pEntity.tickCount);
