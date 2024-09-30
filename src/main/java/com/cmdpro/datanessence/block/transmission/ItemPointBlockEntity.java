@@ -17,15 +17,10 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Math;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.awt.*;
 
-public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity implements GeoBlockEntity {
+public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
     public ItemPointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ITEM_POINT.get(), pos, state);
     }
@@ -39,24 +34,9 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity impleme
         return lazyItemHandler.get();
     }
     private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.essence_point.idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-    }
     @Override
     public Color linkColor() {
         return new Color(0xef4d3d);
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController(this, "controller", 0, this::predicate));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.factory;
     }
     @Override
     public void transfer(BlockEntity other) {

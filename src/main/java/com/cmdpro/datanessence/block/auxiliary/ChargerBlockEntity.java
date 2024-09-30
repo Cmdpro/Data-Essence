@@ -28,21 +28,15 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class ChargerBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, EssenceBlockEntity {
+public class ChargerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
     }
-    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -173,59 +167,6 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Geo
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
-    private RawAnimation orb_spin = RawAnimation.begin().then("animation.charger.orb_spin", Animation.LoopType.LOOP);
-    private RawAnimation orb_rise = RawAnimation.begin().then("animation.charger.orb_rise", Animation.LoopType.HOLD_ON_LAST_FRAME);
-    private RawAnimation orb_fall = RawAnimation.begin().then("animation.charger.orb_fall", Animation.LoopType.HOLD_ON_LAST_FRAME);
-    private RawAnimation idle_exciters_out = RawAnimation.begin().then("animation.charger.idle_exciters_out", Animation.LoopType.LOOP);
-    private RawAnimation extend_exciters = RawAnimation.begin().then("animation.charger.extend_exciters", Animation.LoopType.HOLD_ON_LAST_FRAME);
-    private RawAnimation retract_exciters = RawAnimation.begin().then("animation.charger.retract_exciters", Animation.LoopType.HOLD_ON_LAST_FRAME);
-    private RawAnimation idle_empty = RawAnimation.begin().then("animation.charger.idle_empty", Animation.LoopType.LOOP);
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        if (!item.isEmpty()) {
-            if (event.isCurrentAnimation(idle_empty)) {
-                event.setAnimation(extend_exciters);
-            }
-            if (event.isCurrentAnimation(extend_exciters) && event.getController().getAnimationState().equals(AnimationController.State.PAUSED)) {
-                event.setAnimation(idle_exciters_out);
-            }
-            if (charging) {
-                if (event.isCurrentAnimation(idle_exciters_out)) {
-                    event.setAnimation(orb_rise);
-                }
-                if (event.isCurrentAnimation(orb_rise) && event.getController().getAnimationState().equals(AnimationController.State.PAUSED)) {
-                    event.setAnimation(orb_spin);
-                }
-            } else {
-                if (event.isCurrentAnimation(orb_spin) || event.isCurrentAnimation(orb_rise)) {
-                    event.setAnimation(orb_fall);
-                }
-                if (event.isCurrentAnimation(orb_fall) && event.getController().getAnimationState().equals(AnimationController.State.PAUSED)) {
-                    event.setAnimation(idle_exciters_out);
-                }
-            }
-        } else {
-            if (event.isCurrentAnimation(orb_spin) || event.isCurrentAnimation(orb_rise)) {
-                event.setAnimation(orb_fall);
-            }
-            if (event.isCurrentAnimation(idle_exciters_out) || event.isCurrentAnimation(extend_exciters) || (event.isCurrentAnimation(orb_fall) && event.getController().getAnimationState().equals(AnimationController.State.PAUSED))) {
-                event.setAnimation(retract_exciters);
-            }
-            if ((!event.isCurrentAnimation(retract_exciters) && !event.isCurrentAnimation(orb_fall)) || event.getController().getAnimationState().equals(AnimationController.State.PAUSED)) {
-                event.getController().setAnimation(idle_empty);
-            }
-        }
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController(this, "controller", 0, this::predicate));
-    }
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.factory;
-    }
-
     @Override
     public Component getDisplayName() {
         return Component.empty();

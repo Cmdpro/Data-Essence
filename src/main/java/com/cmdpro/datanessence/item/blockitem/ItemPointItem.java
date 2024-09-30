@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence.item.blockitem;
 
+import com.cmdpro.datanessence.renderers.item.EssencePointItemRenderer;
 import com.cmdpro.datanessence.renderers.item.ItemPointItemRenderer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -13,38 +15,25 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.function.Consumer;
 
-public class ItemPointItem extends BlockItem implements GeoItem {
-    public AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
-
+public class ItemPointItem extends BlockItem {
     public ItemPointItem(Block block, Properties settings) {
         super(block, settings);
     }
 
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.essence_point.hand", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-    }
     @Override
     @SuppressWarnings("removal")
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         super.initializeClient(consumer);
         consumer.accept(new IClientItemExtensions() {
-            private final BlockEntityWithoutLevelRenderer renderer = new ItemPointItemRenderer();
+            private BlockEntityWithoutLevelRenderer renderer;
+
             @Override
             public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (renderer == null) {
+                    renderer = new ItemPointItemRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+                }
                 return renderer;
             }
         });
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController(this, "controller",
-                0, this::predicate));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return factory;
     }
 }

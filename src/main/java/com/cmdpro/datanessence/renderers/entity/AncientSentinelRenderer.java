@@ -66,16 +66,10 @@ public class AncientSentinelRenderer extends MobRenderer<AncientSentinel, Ancien
             animState.startIfStopped(pEntity.tickCount);
             this.animate(animState, idle, pAgeInTicks, 1.0f);
         }
-        private static final Vector3f ANIMATION_VECTOR_CACHE = new Vector3f();
 
         @Override
         public ModelPart root() {
             return root;
-        }
-
-        protected void animate(AnimationState pAnimationState, AnimationDefinition pAnimationDefinition, float pAgeInTicks, float pSpeed) {
-            pAnimationState.updateTime(pAgeInTicks, pSpeed);
-            pAnimationState.ifStarted(p_233392_ -> KeyframeAnimations.animate(this, pAnimationDefinition, p_233392_.getAccumulatedTime(), 1.0F, ANIMATION_VECTOR_CACHE));
         }
     }
 }

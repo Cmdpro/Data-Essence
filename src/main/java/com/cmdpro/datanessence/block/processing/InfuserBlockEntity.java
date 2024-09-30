@@ -39,23 +39,17 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class InfuserBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, EssenceBlockEntity {
+public class InfuserBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
     }
-    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -223,28 +217,6 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Geo
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        if (!item.isEmpty()) {
-            if (workTime >= 0) {
-                event.getController().setAnimation(RawAnimation.begin().then("animation.infuser.active", Animation.LoopType.LOOP));
-            } else {
-                event.getController().setAnimation(RawAnimation.begin().then("animation.infuser.idle", Animation.LoopType.LOOP));
-            }
-        } else {
-            event.getController().setAnimation(RawAnimation.begin().then("animation.infuser.deactivated", Animation.LoopType.LOOP));
-        }
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController(this, "controller", 0, this::predicate));
-    }
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.factory;
-    }
-
     @Override
     public Component getDisplayName() {
         return Component.empty();

@@ -41,20 +41,13 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, ILockableContainer, EssenceBlockEntity {
-    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
-
+public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
     private final LockableItemHandler itemHandler = new LockableItemHandler(9) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -299,23 +292,6 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
             return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
         } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();
-    }
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        if (craftingProgress >= 0) {
-            event.getController().setAnimation(RawAnimation.begin().then("animation.auto-fabricator.crafting", Animation.LoopType.LOOP));
-        } else {
-            event.getController().setAnimation(RawAnimation.begin().then("animation.auto-fabricator.idle", Animation.LoopType.LOOP));
-        }
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController(this, "controller", 0, this::predicate));
-    }
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.factory;
     }
 
     @Override

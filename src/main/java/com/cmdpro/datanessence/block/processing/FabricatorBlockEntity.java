@@ -41,21 +41,15 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.*;
 
-public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, GeoBlockEntity, EssenceBlockEntity {
+public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
     }
-    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(9) {
         @Override
@@ -204,24 +198,6 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        if (!item.isEmpty()) {
-            event.getController().setAnimation(RawAnimation.begin().then("animation.fabricator.ready", Animation.LoopType.LOOP));
-        } else {
-            event.getController().setAnimation(RawAnimation.begin().then("animation.fabricator.idle", Animation.LoopType.LOOP));
-        }
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController(this, "controller", 0, this::predicate));
-    }
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.factory;
-    }
-
     @Override
     public Component getDisplayName() {
         return Component.empty();

@@ -15,15 +15,10 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Math;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.animatable.GeoBlockEntity;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.animation.*;
-import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.awt.*;
 
-public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implements GeoBlockEntity {
+public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
     public FluidPointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_POINT.get(), pos, state);
     }
@@ -35,22 +30,6 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity implem
     @Override
     public Color linkColor() {
         return new Color(0x56bae9);
-    }
-
-    private AnimatableInstanceCache factory = GeckoLibUtil.createInstanceCache(this);
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState event) {
-        event.getController().setAnimation(RawAnimation.begin().then("animation.essence_point.idle", Animation.LoopType.LOOP));
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController(this, "controller", 0, this::predicate));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.factory;
     }
     @Override
     public void transfer(BlockEntity other) {
