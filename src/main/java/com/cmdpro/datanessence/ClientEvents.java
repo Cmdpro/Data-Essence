@@ -5,7 +5,6 @@ import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.MobEffectRegistry;
-import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
@@ -91,7 +90,6 @@ public class ClientEvents {
                     ClientRenderingUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, -hole.getEntityData().get(BlackHole.SIZE), 16, 16);
                 }
             }
-            MultiblockRenderer.renderCurrentMultiblock(event.getPoseStack(), event.getPartialTick());
             event.getPoseStack().popPose();
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
@@ -114,18 +112,5 @@ public class ClientEvents {
         GlStateManager._glBindFramebuffer(GL_DRAW_FRAMEBUFFER, tempRenderTarget.frameBufferId);
         GlStateManager._glBlitFrameBuffer(0, 0, renderTarget.width, renderTarget.height, 0, 0, tempRenderTarget.width, tempRenderTarget.height, GlConst.GL_COLOR_BUFFER_BIT, GlConst.GL_NEAREST);
         GlStateManager._glBindFramebuffer(GlConst.GL_FRAMEBUFFER, 0);
-    }
-    @SubscribeEvent
-    public static void onClientTickPost(ClientTickEvent.Post event)
-    {
-        Minecraft mc = Minecraft.getInstance();
-        if (MultiblockRenderer.multiblock != null) {
-            if (MultiblockRenderer.multiblockPos != null) {
-                if (MultiblockRenderer.multiblock.checkMultiblock(mc.level, MultiblockRenderer.multiblockPos, MultiblockRenderer.multiblockRotation)) {
-                    MultiblockRenderer.multiblock = null;
-                    MultiblockRenderer.multiblockPos = null;
-                }
-            }
-        }
     }
 }

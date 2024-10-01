@@ -1,15 +1,15 @@
 {
   "key": {
     "a": {
-      "type": "datanessence:blockstate",
+      "type": "databank:blockstate",
       "state": "minecraft:gold_block"
     },
     "A": {
-      "type": "datanessence:tag",
+      "type": "databank:tag",
       "tag": "c:cobblestones"
     },
     "b": {
-      "type": "datanessence:blockstate",
+      "type": "databank:blockstate",
       "state": "minecraft:chest[facing=north]"
     }
   },

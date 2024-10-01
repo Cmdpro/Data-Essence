@@ -59,7 +59,6 @@ public class DataNEssence
         ComputerFileTypeRegistry.COMPUTER_FILE_TYPES.register(bus);
         DataComponentRegistry.DATA_COMPONENTS.register(bus);
         ArmorMaterialRegistry.ARMOR_MATERIALS.register(bus);
-        MultiblockPredicateRegistry.MULTIBLOCK_PREDICATE_TYPES.register(bus);
         EssenceTypeRegistry.ESSENCE_TYPES.register(bus);
         MobEffectRegistry.MOB_EFFECTS.register(bus);
         random = RandomSource.create();

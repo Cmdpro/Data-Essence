@@ -7,17 +7,14 @@ import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.computers.ComputerTypeManager;
-import com.cmdpro.datanessence.multiblock.MultiblockManager;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.DragonPartsSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
-import com.cmdpro.datanessence.networking.packet.MultiblockSyncS2CPacket;
 import com.cmdpro.datanessence.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.particle.RhombusParticleOptions;
 import com.cmdpro.datanessence.particle.SmallCircleParticleOptions;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockRegistry;
-import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
 import com.cmdpro.datanessence.screen.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.screen.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.screen.datatablet.DataTabManager;
@@ -99,13 +96,6 @@ public class ModEvents {
                         }
                     }
                 });
-            }
-        } else {
-            if (MultiblockRenderer.multiblock != null) {
-                if (MultiblockRenderer.multiblockPos == null) {
-                    MultiblockRenderer.multiblockPos = event.getHitVec().getBlockPos().relative(event.getHitVec().getDirection());
-                    MultiblockRenderer.multiblockRotation = MultiblockRenderer.getRotation();
-                }
             }
         }
     }
@@ -235,7 +225,6 @@ public class ModEvents {
         event.addListener(DataBankEntryManager.getOrCreateInstance());
         event.addListener(DataBankTypeManager.getOrCreateInstance());
         event.addListener(ComputerTypeManager.getOrCreateInstance());
-        event.addListener(MultiblockManager.getOrCreateInstance());
     }
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {
@@ -251,7 +240,6 @@ public class ModEvents {
     }
     protected static void syncToPlayer(ServerPlayer player) {
         ModMessages.sendToPlayer(new EntrySyncS2CPacket(Entries.entries, Entries.tabs), player);
-        ModMessages.sendToPlayer(new MultiblockSyncS2CPacket(MultiblockManager.multiblocks), player);
     }
     @SubscribeEvent
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {

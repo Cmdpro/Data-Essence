@@ -17,8 +17,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemStack;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoItemRenderer;
 
 public class AutoFabricatorItemRenderer extends DatabankItemRenderer<AutoFabricatorItem> {
     public static final ModelLayerLocation autoFabricatorLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "auto-fabricator_item"), "main");

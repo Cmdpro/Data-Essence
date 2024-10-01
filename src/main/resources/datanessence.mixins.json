@@ -6,6 +6,5 @@
   "mixins": [
   ],
   "client": [
-    "client.BufferSourceMixin"
   ]
 }

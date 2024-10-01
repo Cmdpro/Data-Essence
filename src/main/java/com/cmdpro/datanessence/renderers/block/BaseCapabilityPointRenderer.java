@@ -23,10 +23,6 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoAnimatable;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.model.GeoModel;
-import software.bernie.geckolib.renderer.GeoBlockRenderer;
 
 
 public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointBlockEntity> extends DatabankBlockEntityRenderer<T> {

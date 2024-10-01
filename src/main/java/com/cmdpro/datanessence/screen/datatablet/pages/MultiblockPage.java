@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence.screen.datatablet.pages;
 
-import com.cmdpro.datanessence.multiblock.Multiblock;
-import com.cmdpro.datanessence.multiblock.MultiblockManager;
-import com.cmdpro.datanessence.renderers.other.MultiblockRenderer;
+import com.cmdpro.databank.multiblock.Multiblock;
+import com.cmdpro.databank.multiblock.MultiblockManager;
+import com.cmdpro.databank.multiblock.MultiblockRenderer;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.api.datatablet.PageSerializer;
