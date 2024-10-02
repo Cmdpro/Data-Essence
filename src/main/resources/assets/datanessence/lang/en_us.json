@@ -108,6 +108,9 @@
   "death.attack.essence_siphoned": "%1$s had their essence siphoned out",
   "death.attack.essence_siphoned.player": "%2$s made %1$s have their essence siphoned out",
   "death.attack.essence_siphoned.item": "%2$s used %3$s to make %1$s have their essence siphoned out",
+  "death.attack.crushed": "%1$s had a crush on death",
+  "death.attack.crushed.player": "%2$s got %1$s into a body-crushing relationship",
+  "death.attack.crushed.item": "%1$s was coerced by %2$s's %3$s to pursue the crush of their life",
 
   "effect.datanessence.gender_euphoria": "Gender Euphoria",
   "effect.datanessence.gender_euphoria.description": "You feel a rush of pure joy about your gender!",

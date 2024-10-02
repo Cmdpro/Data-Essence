@@ -35,6 +35,7 @@ public class DataNEssence
     public static final ResourceKey<DamageType> laser = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "laser"));
     public static final ResourceKey<DamageType> blackHole = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "black_hole"));
     public static final ResourceKey<DamageType> essenceSiphoned = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "essence_siphoned"));
+    public static final ResourceKey<DamageType> crushed = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "crushed"));
     public static final String MOD_ID = "datanessence";
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
