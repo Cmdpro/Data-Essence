@@ -221,10 +221,6 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                 }
             }
         }
-        for (Map.Entry<ResourceLocation, Float> i : essenceCost.entrySet()) {
-            EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-            storage.removeEssence(type, i.getValue());
-        }
         outputItemHandler.insertItem(0, stack, false);
         level.playSound(null, worldPosition, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
         return true;
@@ -267,6 +263,10 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                 pBlockEntity.enoughEssence = enoughEssence;
                 if (pBlockEntity.hasIngredients(recipe.get().value().getIngredients())) {
                     pBlockEntity.craftingProgress++;
+                    for (Map.Entry<ResourceLocation, Float> i : recipe.get().value().getEssenceCost().entrySet()) {
+                        EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                        pBlockEntity.storage.removeEssence(type, i.getValue()/50f);
+                    }
                 } else {
                     pBlockEntity.craftingProgress = -1;
                 }

@@ -215,8 +215,8 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
                         if (pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE) <= 0) {
                             resetWorkTime = false;
                             pBlockEntity.workTime++;
+                            pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), pBlockEntity.essenceCost/recipe.get().value().getTime());
                             if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                                pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), pBlockEntity.essenceCost);
                                 pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE);
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
                                 pBlockEntity.fluidHandler.drain(Arrays.stream(recipe.get().value().getInput1().getStacks()).filter((stack) -> FluidStack.isSameFluidSameComponents(stack, pBlockEntity.fluidHandler.getFluidInTank(0))).findFirst().get(), IFluidHandler.FluidAction.EXECUTE);

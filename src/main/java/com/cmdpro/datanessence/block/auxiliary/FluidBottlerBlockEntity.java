@@ -161,11 +161,11 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
                         if (pBlockEntity.outputItemHandler.insertItem(0, bucket, true).isEmpty()) {
                             pBlockEntity.workTime++;
                             resetWorkTime = false;
+                            pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), (float)50/20);
                             if (pBlockEntity.workTime >= 20) {
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
                                 pBlockEntity.outputItemHandler.insertItem(0, bucket, false);
                                 pBlockEntity.fluidHandler.drain(1000, IFluidHandler.FluidAction.EXECUTE);
-                                pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
                                 pBlockEntity.workTime = 0;
                                 pLevel.playSound(null, pPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
                             }
@@ -179,11 +179,11 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
                             if (pBlockEntity.outputItemHandler.insertItem(0, bottle, true).isEmpty()) {
                                 pBlockEntity.workTime++;
                                 resetWorkTime = false;
+                                pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), (float)50/20);
                                 if (pBlockEntity.workTime >= 20) {
                                     pBlockEntity.itemHandler.extractItem(0, 1, false);
                                     pBlockEntity.outputItemHandler.insertItem(0, bottle, false);
                                     pBlockEntity.fluidHandler.drain(250, IFluidHandler.FluidAction.EXECUTE);
-                                    pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
                                     pBlockEntity.workTime = 0;
                                     pLevel.playSound(null, pPos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0f, 1.0f);
                                 }

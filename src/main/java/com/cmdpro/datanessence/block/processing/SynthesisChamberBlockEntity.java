@@ -215,11 +215,11 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
                         if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
                             resetWorkTime = false;
                             pBlockEntity.workTime++;
+                            for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                                EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                                pBlockEntity.storage.removeEssence(type, i.getValue()/recipe.get().value().getTime());
+                            }
                             if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                                for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
-                                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                                    pBlockEntity.storage.removeEssence(type, i.getValue());
-                                }
                                 pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
                                 pBlockEntity.itemHandler.extractItem(1, 1, false);

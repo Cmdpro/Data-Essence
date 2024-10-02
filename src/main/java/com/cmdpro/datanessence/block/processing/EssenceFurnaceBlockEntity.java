@@ -147,11 +147,11 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
                     if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
+                        pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
                         if (pBlockEntity.workTime >= recipe.get().value().getCookingTime()) {
                             pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
-                            pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
                         }
                     }
                 } else {

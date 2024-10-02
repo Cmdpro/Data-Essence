@@ -186,14 +186,14 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
                     if (entry != null) {
                         if (pBlockEntity.recipe == null || pBlockEntity.recipe.getEntry().equals(entry.id)) {
                             if (hasNotReachedStackLimit(pBlockEntity, pBlockEntity.recipe.getResultItem(pLevel.registryAccess()))) {
+                                for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                                    pBlockEntity.storage.removeEssence(type, i.getValue()/50f);
+                                }
                                 if (pBlockEntity.workTime >= 50) {
                                     ItemStack stack = pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()).copy();
                                     pBlockEntity.outputItemHandler.insertItem(0, stack, false);
                                     pBlockEntity.itemHandler.extractItem(0, 1, false);
-                                    for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
-                                        EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                                        pBlockEntity.storage.removeEssence(type, i.getValue());
-                                    }
                                     pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
                                     pBlockEntity.workTime = 0;
                                 } else {

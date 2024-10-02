@@ -151,8 +151,8 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
                     if (pBlockEntity.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
+                        pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
                         if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                            pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 50);
                             pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
