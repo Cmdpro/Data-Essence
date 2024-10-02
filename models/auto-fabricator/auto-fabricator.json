@@ -1,99 +1,1043 @@
 {
-  "credit": "Made with Blockbench",
-  "parent": "builtin/entity",
-  "texture_size": [
-    64,
-    64
-  ],
-  "display": {
-    "thirdperson_righthand": {
-      "rotation": [
-        75,
-        45,
-        0
-      ],
-      "translation": [
-        0,
-        2.5,
-        0
-      ],
-      "scale": [
-        0.375,
-        0.375,
-        0.375
+  "animations": {
+    "idle": {
+      "length": 2,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "arm3pt2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                142.5
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2pt2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -142.5
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1pt2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -142.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm4pt2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                142.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
       ]
     },
-    "thirdperson_lefthand": {
-      "rotation": [
-        75,
-        45,
-        0
-      ],
-      "translation": [
-        0,
-        2.5,
-        0
-      ],
-      "scale": [
-        0.375,
-        0.375,
-        0.375
+    "crafting": {
+      "length": 0.75,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "arm1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                2.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                -2.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                2.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                2.5
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                -2.5
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                2.5
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm3",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -2.5
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                2.5
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                -2.5
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm3pt2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -115
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                4.5335920257743965,
+                2.1108878070290302,
+                -114.91643379440438
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                4.533592025774197,
+                2.1108878070289028,
+                -109.91643379440431
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                -115
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2pt2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                115
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                -6.804231425768194,
+                3.162198011703822,
+                114.81196607778702
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                -6.804231425768012,
+                3.1621980117039676,
+                119.81196607778708
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                115
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1pt2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                115,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                120,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                120,
+                5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                115,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm4",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -2.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                2.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                -2.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm4pt2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -115,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                -107.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                -107.5,
+                -5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                -115,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
       ]
     },
-    "firstperson_righthand": {
-      "rotation": [
-        0,
-        45,
-        0
-      ],
-      "scale": [
-        0.4,
-        0.4,
-        0.4
-      ]
-    },
-    "firstperson_lefthand": {
-      "rotation": [
-        0,
-        225,
-        0
-      ],
-      "scale": [
-        0.4,
-        0.4,
-        0.4
-      ]
-    },
-    "ground": {
-      "translation": [
-        0,
-        3,
-        0
-      ],
-      "scale": [
-        0.25,
-        0.25,
-        0.25
-      ]
-    },
-    "gui": {
-      "rotation": [
-        30,
-        225,
-        0
-      ],
-      "scale": [
-        0.625,
-        0.625,
-        0.625
-      ]
-    },
-    "fixed": {
-      "scale": [
-        0.5,
-        0.5,
-        0.5
+    "hand": {
+      "length": 4.083333333333333,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "root",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
       ]
     }
-  }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        24,
+        0
+      ],
+      "isCube": false,
+      "children": [
+        {
+          "name": "output",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            -15,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "cube",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                14,
+                -7
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                20
+              ],
+              "mirror": false,
+              "origin": [
+                -8,
+                -15,
+                -1
+              ],
+              "dimensions": [
+                16,
+                2,
+                16
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "cube1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                6,
+                3,
+                -6
+              ],
+              "isCube": true,
+              "texOffset": [
+                12,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2,
+                -1
+              ],
+              "dimensions": [
+                1,
+                11,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "cube2",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -7,
+                3,
+                -6
+              ],
+              "isCube": true,
+              "texOffset": [
+                8,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2,
+                -1
+              ],
+              "dimensions": [
+                1,
+                11,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "cube3",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                6,
+                3,
+                7
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2,
+                -1
+              ],
+              "dimensions": [
+                1,
+                11,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "cube4",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -7,
+                3,
+                7
+              ],
+              "isCube": true,
+              "texOffset": [
+                4,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2,
+                -1
+              ],
+              "dimensions": [
+                1,
+                11,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "cube5",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                3,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                30,
+                38
+              ],
+              "mirror": false,
+              "origin": [
+                -3,
+                0,
+                -3
+              ],
+              "dimensions": [
+                6,
+                2,
+                6
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "cube6",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                3,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                38
+              ],
+              "mirror": false,
+              "origin": [
+                -5,
+                -2,
+                -5
+              ],
+              "dimensions": [
+                10,
+                2,
+                10
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "name": "arm4",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            -4,
+            -6
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "cube7",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                38
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -4,
+                -1
+              ],
+              "dimensions": [
+                2,
+                4,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "arm4pt2",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -3.9000000000000004,
+                0
+              ],
+              "isCube": false,
+              "children": [
+                {
+                  "name": "cube8",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": true,
+                  "texOffset": [
+                    0,
+                    20
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    -5,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    5,
+                    2
+                  ],
+                  "inflate": -0.1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm3",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            6,
+            -4,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "cube9",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                40,
+                46
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -4,
+                -1
+              ],
+              "dimensions": [
+                2,
+                4,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "arm3pt2",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -3.9000000000000004,
+                0
+              ],
+              "isCube": false,
+              "children": [
+                {
+                  "name": "cube10",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": true,
+                  "texOffset": [
+                    8,
+                    27
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    -5,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    5,
+                    2
+                  ],
+                  "inflate": -0.1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm2",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -6,
+            -4,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "cube11",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                48,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -4,
+                -1
+              ],
+              "dimensions": [
+                2,
+                4,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "arm2pt2",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -3.9000000000000004,
+                0
+              ],
+              "isCube": false,
+              "children": [
+                {
+                  "name": "cube12",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": true,
+                  "texOffset": [
+                    0,
+                    27
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    -5,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    5,
+                    2
+                  ],
+                  "inflate": -0.1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm1",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            -4,
+            6
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "cube13",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                48,
+                6
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -4,
+                -1
+              ],
+              "dimensions": [
+                2,
+                4,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "arm1pt2",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -3.9000000000000004,
+                0
+              ],
+              "isCube": false,
+              "children": [
+                {
+                  "name": "cube14",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": true,
+                  "texOffset": [
+                    8,
+                    20
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    -5,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    5,
+                    2
+                  ],
+                  "inflate": -0.1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "cube15",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": true,
+          "texOffset": [
+            0,
+            0
+          ],
+          "mirror": false,
+          "origin": [
+            -8,
+            -4,
+            -8
+          ],
+          "dimensions": [
+            16,
+            4,
+            16
+          ],
+          "inflate": 0
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    64,
+    64
+  ]
 }

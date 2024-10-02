@@ -28,17 +28,6 @@ public class EntropicProcessorRenderer extends DatabankBlockEntityRenderer<Entro
     }
 
     @Override
-    public void render(EntropicProcessorBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
-        super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
-        pPoseStack.pushPose();
-        pPoseStack.translate(0.5D, 1.5D, 0.5D);
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(pBlockEntity.getLevel().getLevelData().getGameTime() % 360));
-        pPoseStack.scale(0.75F, 0.75F, 0.75F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(pBlockEntity.item, ItemDisplayContext.GUI, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 0);
-        pPoseStack.popPose();
-    }
-
-    @Override
     public ResourceLocation getTextureLocation() {
         return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/entropic_processor.png");
     }

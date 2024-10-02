@@ -55,19 +55,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         handheldItem(ItemRegistry.MAGIC_WRENCH);
 
-        evenSimplerBlockItem(BlockRegistry.FABRICATOR);
-        evenSimplerBlockItem(BlockRegistry.ESSENCE_POINT);
-        evenSimplerBlockItem(BlockRegistry.LUNAR_ESSENCE_POINT);
-        evenSimplerBlockItem(BlockRegistry.NATURAL_ESSENCE_POINT);
-        evenSimplerBlockItem(BlockRegistry.EXOTIC_ESSENCE_POINT);
-        evenSimplerBlockItem(BlockRegistry.ITEM_POINT);
-        evenSimplerBlockItem(BlockRegistry.FLUID_POINT);
         evenSimplerBlockItem(BlockRegistry.ESSENCE_CRYSTAL);
-        evenSimplerBlockItem(BlockRegistry.INFUSER);
-        evenSimplerBlockItem(BlockRegistry.CHARGER);
         evenSimplerBlockItem(BlockRegistry.ESSENCE_LEECH);
-        evenSimplerBlockItem(BlockRegistry.AUTO_FABRICATOR);
-        evenSimplerBlockItem(BlockRegistry.ENTROPIC_PROCESSOR);
 
         evenSimplerBlockItem(BlockRegistry.DECO_ESSENCE_BUFFER);
         evenSimplerBlockItem(BlockRegistry.DECO_ITEM_BUFFER);
@@ -92,6 +81,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.NATURAL_ESSENCE_BOMB, "bombs");
         simpleItemWithSubdirectory(ItemRegistry.EXOTIC_ESSENCE_BOMB, "bombs");
 
+        essencePoint(ItemRegistry.LUNAR_ESSENCE_POINT_ITEM);
+        essencePoint(ItemRegistry.NATURAL_ESSENCE_POINT_ITEM);
+        essencePoint(ItemRegistry.EXOTIC_ESSENCE_POINT_ITEM);
+        essencePoint(ItemRegistry.ITEM_POINT_ITEM);
+        essencePoint(ItemRegistry.FLUID_POINT_ITEM);
+
     }
     private ItemModelBuilder simpleItem(Supplier<Item> item) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
@@ -112,6 +107,10 @@ public class ModItemModelProvider extends ItemModelProvider {
     public void evenSimplerBlockItem(Supplier<Block> block) {
         this.withExistingParent(DataNEssence.MOD_ID + ":" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath(),
                 modLoc("block/" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath()));
+    }
+    public void essencePoint(Supplier<Item> item) {
+        this.withExistingParent(DataNEssence.MOD_ID + ":" + BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
+                modLoc("item/essence_point"));
     }
     public void wallItem(Supplier<Block> block, Supplier<Block> baseBlock) {
         this.withExistingParent(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))

@@ -77,7 +77,6 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     }
     public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
-        item = ItemStack.EMPTY;
     }
 
     @Override
@@ -117,7 +116,6 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
     }
-    public ItemStack item;
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots()+outputItemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {
