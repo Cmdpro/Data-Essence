@@ -1,0 +1,16 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 250 },
+  "entry": "datanessence:machines/entropic_processor",
+  "pattern": [
+    "CDC",
+    "OCO",
+    "OOO"
+  ],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "D": { "item": "minecraft:diamond" },
+    "O": { "item": "datanessence:polished_obsidian" }
+  },
+  "result": { "id": "datanessence:entropic_processor" }
+}

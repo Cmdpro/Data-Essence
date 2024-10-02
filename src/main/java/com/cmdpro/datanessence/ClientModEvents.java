@@ -51,6 +51,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.AUTO_FABRICATOR.get(), AutoFabricatorRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.FLUID_TANK.get(), FluidTankRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_BATTERY.get(), EssenceBatteryRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), EntropicProcessorRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -97,6 +98,8 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(FabricatorRenderer.modelLocation, FabricatorRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(InfuserItemRenderer.modelLocation, InfuserItemRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(InfuserRenderer.modelLocation, InfuserRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EntropicProcessorRenderer.modelLocation, EntropicProcessorRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EntropicProcessorItemRenderer.modelLocation, EntropicProcessorItemRenderer.Model::createLayer);
         });
 
         progressionShader = new ProgressionShader();

@@ -184,6 +184,8 @@
   "data_tablet.pages.mineral_enrichment_chamber.name":          "Mineral Enrichment Chamber",
   "data_tablet.pages.mineral_enrichment_chamber.page1.text":    "Enhancing the yield of ore and mineral processing is one of the more important pursuits of our research: factories and laboratories do not pay for themselves. The Mineral Enrichment Chamber is the first result of our developments here. It, when given a water supply and ore in some form, will wash that ore with water, cleansing it of impurity and producing anywhere between none and a full ingot's worth of extra nuggets of material.",
   "data_tablet.pages.mineral_enrichment_chamber.page2.text":    " ◇ Accepts ore blocks, raw ores, and <T2 Ore Processing Yield>.",
+  "data_tablet.pages.entropic_processor.name": "Entropic Processor",
+  "data_tablet.pages.entropic_processor.page1.text": "Diamonds are one of the hardest materials in the world. It is only sensible to utilize that hardness for raw cutting power, and the Entropic Processor is the result. This machine has three sets of eight diamond grinding wheels that are able to crush, grind, macerate, and pulverize whatever runs through it.",
 
   "_comment.data_tablet_pages.tools": "Tools and Utilities category texts.",
   "data_tablet.pages.traversite_road.name":                  "Traversite Road",

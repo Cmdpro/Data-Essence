@@ -1,0 +1,1281 @@
+{
+  "animations": {
+    "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "root",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "working": {
+      "length": 2,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "grinder_left",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                -90
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                -180
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                0,
+                0,
+                -270
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                0,
+                -360
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "grinder_right",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                90
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                180
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                0,
+                0,
+                270
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                0,
+                360
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "grinder_bottom",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                90
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                180
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                0,
+                0,
+                270
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                0,
+                360
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "idle": {
+      "length": 0,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "grinder_left",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "grinder_right",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "grinder_bottom",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        24,
+        0
+      ],
+      "isCube": false,
+      "children": [
+        {
+          "name": "casing",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "base",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -8,
+                -10,
+                -8
+              ],
+              "dimensions": [
+                16,
+                10,
+                16
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "south_rim",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -7,
+                -10,
+                7
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                60
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -6,
+                -1
+              ],
+              "dimensions": [
+                14,
+                6,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "west_rim",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                7,
+                -10,
+                7
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                26
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -6,
+                -13
+              ],
+              "dimensions": [
+                2,
+                6,
+                14
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "north_rim",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -5,
+                -10,
+                -7
+              ],
+              "isCube": true,
+              "texOffset": [
+                32,
+                60
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -6,
+                -1
+              ],
+              "dimensions": [
+                14,
+                6,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "east_rim",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -7,
+                -10,
+                5
+              ],
+              "isCube": true,
+              "texOffset": [
+                32,
+                26
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -6,
+                -13
+              ],
+              "dimensions": [
+                2,
+                6,
+                14
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "name": "grinder_left",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            3.057637862659306,
+            -13.5,
+            -0.00251652343093668
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "axle_left",
+              "rotation": [
+                0,
+                0.08726646259971647,
+                0
+              ],
+              "offset": [
+                -0.05763786265930593,
+                1.5,
+                5.502516523430937
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                46
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2,
+                -12
+              ],
+              "dimensions": [
+                1,
+                1,
+                13
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_left_0",
+              "rotation": [
+                0,
+                0,
+                0.08726646259971647
+              ],
+              "offset": [
+                0.4423621373406941,
+                0,
+                5.252516523430937
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_left_1",
+              "rotation": [
+                0,
+                0,
+                -0.04363323129985824
+              ],
+              "offset": [
+                0.4423621373406941,
+                0,
+                3.752516523430937
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                5
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_left_2",
+              "rotation": [
+                0,
+                0,
+                -0.17453292519943295
+              ],
+              "offset": [
+                0.19236213734069407,
+                0,
+                2.252516523430937
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                10
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_left_3",
+              "rotation": [
+                0,
+                0,
+                -0.30543261909900765
+              ],
+              "offset": [
+                0.19236213734069407,
+                0,
+                0.7525165234309367
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                15
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_left_4",
+              "rotation": [
+                0,
+                0,
+                -0.4363323129985824
+              ],
+              "offset": [
+                -0.05763786265930593,
+                0,
+                -0.7474834765690633
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                20
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_left_5",
+              "rotation": [
+                0,
+                0,
+                -0.5672320068981571
+              ],
+              "offset": [
+                -0.3076378626593059,
+                0,
+                -2.247483476569063
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                25
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_left_6",
+              "rotation": [
+                0,
+                0,
+                -0.6981317007977318
+              ],
+              "offset": [
+                -0.3076378626593059,
+                0,
+                -3.747483476569063
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                30
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_left_7",
+              "rotation": [
+                0,
+                0,
+                -0.8290313946973066
+              ],
+              "offset": [
+                -0.5576378626593059,
+                0,
+                -5.247483476569063
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                35
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "name": "grinder_right",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -3.057637862659306,
+            -13.5,
+            -0.00251652343093668
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "axle_right",
+              "rotation": [
+                0,
+                -0.08726646259971647,
+                0
+              ],
+              "offset": [
+                0.05763786265930593,
+                1.5,
+                5.502516523430937
+              ],
+              "isCube": true,
+              "texOffset": [
+                28,
+                46
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -2,
+                -12
+              ],
+              "dimensions": [
+                1,
+                1,
+                13
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_right_0",
+              "rotation": [
+                0,
+                0,
+                -0.08726646259971647
+              ],
+              "offset": [
+                -0.4423621373406941,
+                0,
+                5.252516523430937
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                40
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_right_1",
+              "rotation": [
+                0,
+                0,
+                0.04363323129985824
+              ],
+              "offset": [
+                -0.4423621373406941,
+                0,
+                3.752516523430937
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                60
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_right_2",
+              "rotation": [
+                0,
+                0,
+                0.17453292519943295
+              ],
+              "offset": [
+                -0.19236213734069407,
+                0,
+                2.252516523430937
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                65
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_right_3",
+              "rotation": [
+                0,
+                0,
+                0.30543261909900765
+              ],
+              "offset": [
+                -0.19236213734069407,
+                0,
+                0.7525165234309367
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                68
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_right_4",
+              "rotation": [
+                0,
+                0,
+                0.4363323129985824
+              ],
+              "offset": [
+                0.05763786265930593,
+                0,
+                -0.7474834765690633
+              ],
+              "isCube": true,
+              "texOffset": [
+                10,
+                68
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_right_5",
+              "rotation": [
+                0,
+                0,
+                0.5672320068981571
+              ],
+              "offset": [
+                0.3076378626593059,
+                0,
+                -2.247483476569063
+              ],
+              "isCube": true,
+              "texOffset": [
+                20,
+                68
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_right_6",
+              "rotation": [
+                0,
+                0,
+                0.6981317007977318
+              ],
+              "offset": [
+                0.3076378626593059,
+                0,
+                -3.747483476569063
+              ],
+              "isCube": true,
+              "texOffset": [
+                30,
+                68
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_right_7",
+              "rotation": [
+                0,
+                0,
+                0.8290313946973066
+              ],
+              "offset": [
+                0.5576378626593059,
+                0,
+                -5.247483476569063
+              ],
+              "isCube": true,
+              "texOffset": [
+                40,
+                68
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -2,
+                -0.5
+              ],
+              "dimensions": [
+                4,
+                4,
+                1
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "name": "grinder_bottom",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -0.25,
+            -12,
+            0.19444444444444442
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "axle_bottom",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0.5,
+                0.5,
+                2.0555555555555554
+              ],
+              "isCube": true,
+              "texOffset": [
+                56,
+                46
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -1,
+                -9
+              ],
+              "dimensions": [
+                1,
+                1,
+                13
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_bottom_0",
+              "rotation": [
+                0,
+                0,
+                -0.1308996938995747
+              ],
+              "offset": [
+                0,
+                0,
+                5.305555555555555
+              ],
+              "isCube": true,
+              "texOffset": [
+                50,
+                68
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -1.5,
+                -0.5
+              ],
+              "dimensions": [
+                3,
+                3,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_bottom_1",
+              "rotation": [
+                0,
+                0,
+                -0.2617993877991494
+              ],
+              "offset": [
+                0,
+                0,
+                3.8055555555555554
+              ],
+              "isCube": true,
+              "texOffset": [
+                58,
+                70
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -1.5,
+                -0.5
+              ],
+              "dimensions": [
+                3,
+                3,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_bottom_2",
+              "rotation": [
+                0,
+                0,
+                -0.39269908169872414
+              ],
+              "offset": [
+                0,
+                0,
+                2.3055555555555554
+              ],
+              "isCube": true,
+              "texOffset": [
+                66,
+                70
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -1.5,
+                -0.5
+              ],
+              "dimensions": [
+                3,
+                3,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_bottom_3",
+              "rotation": [
+                0,
+                0,
+                -0.5672320068981571
+              ],
+              "offset": [
+                0,
+                0,
+                0.8055555555555556
+              ],
+              "isCube": true,
+              "texOffset": [
+                50,
+                72
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -1.5,
+                -0.5
+              ],
+              "dimensions": [
+                3,
+                3,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_bottom_4",
+              "rotation": [
+                0,
+                0,
+                -0.7853981633974483
+              ],
+              "offset": [
+                0,
+                0,
+                -0.6944444444444444
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                73
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -1.5,
+                -0.5
+              ],
+              "dimensions": [
+                3,
+                3,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_bottom_5",
+              "rotation": [
+                0,
+                0,
+                -0.9162978572970231
+              ],
+              "offset": [
+                0,
+                0,
+                -2.1944444444444446
+              ],
+              "isCube": true,
+              "texOffset": [
+                8,
+                73
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -1.5,
+                -0.5
+              ],
+              "dimensions": [
+                3,
+                3,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_bottom_6",
+              "rotation": [
+                0,
+                0,
+                -1.1780972450961724
+              ],
+              "offset": [
+                0,
+                0,
+                -3.6944444444444446
+              ],
+              "isCube": true,
+              "texOffset": [
+                16,
+                73
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -1.5,
+                -0.5
+              ],
+              "dimensions": [
+                3,
+                3,
+                1
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "wheel_bottom_7",
+              "rotation": [
+                0,
+                0,
+                -1.3962634015954636
+              ],
+              "offset": [
+                0,
+                0,
+                -5.194444444444445
+              ],
+              "isCube": true,
+              "texOffset": [
+                24,
+                73
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -1.5,
+                -0.5
+              ],
+              "dimensions": [
+                3,
+                3,
+                1
+              ],
+              "inflate": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    128,
+    128
+  ]
+}

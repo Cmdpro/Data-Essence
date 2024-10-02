@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "id": "datanessence:entropic_processor"
+  },
+  "tab": "datanessence:machinery",
+  "x": 1,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:entropic_processor" },
+      "text": {
+        "translate": "data_tablet.pages.entropic_processor.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": " "
+      },
+      "recipes": [
+        "datanessence:fabrication/machines/entropic_processor"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.entropic_processor.name"
+  },
+  "parents": [
+    "datanessence:machinery/automation"
+  ]
+}
