@@ -99,4 +99,9 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             return root;
         }
     }
+
+    @Override
+    public boolean shouldRenderOffScreen(BaseEssencePointBlockEntity pBlockEntity) {
+        return true;
+    }
 }
