@@ -5,7 +5,7 @@ import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
-import com.cmdpro.datanessence.moddata.LockableItemHandler;
+import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.widget.LockWidget;
 import com.mojang.blaze3d.systems.RenderSystem;

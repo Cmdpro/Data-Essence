@@ -2,14 +2,13 @@ package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
-import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
-import com.cmdpro.datanessence.moddata.LockableItemHandler;
-import com.cmdpro.datanessence.moddata.MultiFluidTank;
-import com.cmdpro.datanessence.moddata.MultiFluidTankNoDuplicateFluids;
+import com.cmdpro.datanessence.api.LockableItemHandler;
+import com.cmdpro.datanessence.api.MultiFluidTank;
+import com.cmdpro.datanessence.api.MultiFluidTankNoDuplicateFluids;
 import com.cmdpro.datanessence.recipe.FluidMixingRecipe;
 import com.cmdpro.datanessence.recipe.RecipeInputWithFluid;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;

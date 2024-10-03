@@ -2,7 +2,7 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.util.IDataNEssenceMenuHelper;
 import com.cmdpro.datanessence.block.processing.SynthesisChamberBlockEntity;
-import com.cmdpro.datanessence.moddata.LockableItemHandler;
+import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
 import com.cmdpro.datanessence.screen.slot.DataDriveSlot;

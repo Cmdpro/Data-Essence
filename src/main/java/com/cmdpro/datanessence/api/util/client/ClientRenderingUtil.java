@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.api.util.client;
 
 import com.cmdpro.databank.shaders.PostShaderManager;
-import com.cmdpro.datanessence.moddata.LockableItemHandler;
+import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.vertex.PoseStack;

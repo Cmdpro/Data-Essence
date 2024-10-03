@@ -8,7 +8,7 @@ import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
-import com.cmdpro.datanessence.moddata.LockableItemHandler;
+import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.IHasRequiredKnowledge;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;

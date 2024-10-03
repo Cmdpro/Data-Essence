@@ -2,7 +2,7 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.util.IDataNEssenceMenuHelper;
 import com.cmdpro.datanessence.block.processing.AutoFabricatorBlockEntity;
-import com.cmdpro.datanessence.moddata.LockableItemHandler;
+import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
 import net.minecraft.network.FriendlyByteBuf;

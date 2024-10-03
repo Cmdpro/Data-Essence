@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.screen.widget;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.moddata.LockableItemHandler;
+import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerSetItemHandlerLockedC2SPacket;
 import net.minecraft.client.gui.GuiGraphics;

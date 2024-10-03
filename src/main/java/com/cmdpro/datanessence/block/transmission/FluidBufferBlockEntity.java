@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.block.transmission;
 
-import com.cmdpro.datanessence.moddata.MultiFluidTank;
-import com.cmdpro.datanessence.moddata.MultiFluidTankNoDuplicateFluids;
+import com.cmdpro.datanessence.api.MultiFluidTankNoDuplicateFluids;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
