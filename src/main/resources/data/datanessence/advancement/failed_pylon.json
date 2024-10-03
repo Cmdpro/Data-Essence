@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:aether_rune"
+    },
+    "title": {
+      "translate": "advancements.datanessence.failed_pylon.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.failed_pylon.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:datanessence",
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "location": {
+            "structures": "datanessence:failed_pylon"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:data_tablet"
+    },
+    "title": {
+      "translate": "advancements.datanessence.datanessence.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.datanessence.description"
+    },
+    "background": "datanessence:textures/block/deco/polished_obsidian.png"
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "datanessence:data_tablet"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

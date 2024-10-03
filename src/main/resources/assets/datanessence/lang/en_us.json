@@ -219,5 +219,10 @@
   "commands.datanessence.unlock.entry_already_unlocked": "Entry \"%1$s\" was already unlocked!",
   "commands.datanessence.check_entry_overlaps.found": "Entry \"%1$s\" is overlapping with entry \"%2$s\"",
   "commands.datanessence.check_entry_overlaps.no_found": "No entry overlaps found",
-  "commands.datanessence.give_dragon_part": "Given the \"%1$s\" Dragon Part"
+  "commands.datanessence.give_dragon_part": "Given the \"%1$s\" Dragon Part",
+
+  "advancements.datanessence.datanessence.title": "Data & Essence",
+  "advancements.datanessence.datanessence.description": "The advancements for Data & Essence",
+  "advancements.datanessence.failed_pylon.title": "A Less Than Honorable Attempt",
+  "advancements.datanessence.failed_pylon.description": "Find a Failed Pylon"
 }
