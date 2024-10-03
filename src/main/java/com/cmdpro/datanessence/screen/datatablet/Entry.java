@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Entry {
 
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, Component flavor, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
         this.id = id;
         this.icon = new ItemStack(icon);
         this.x = x;
@@ -22,13 +22,14 @@ public class Entry {
         this.pages = pages;
         this.parents = parents;
         this.name = name;
+        this.flavor = flavor;
         this.critical = critical;
         this.tab = tab;
         this.incomplete = incomplete;
         this.incompletePages = incompletePages;
         this.completionAdvancement = completionAdvancement;
     }
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, Component flavor, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
         this.id = id;
         this.icon = icon;
         this.x = x;
@@ -36,6 +37,7 @@ public class Entry {
         this.pages = pages;
         this.parents = parents;
         this.name = name;
+        this.flavor = flavor;
         this.critical = critical;
         this.tab = tab;
         this.incomplete = incomplete;
@@ -92,6 +94,7 @@ public class Entry {
     }
     public boolean critical;
     public Component name;
+    public Component flavor;
     public ItemStack icon;
     public ResourceLocation id;
     public int x;

@@ -15,5 +15,8 @@
   ],
   "name": {
     "translate": "data_tablet.pages.data_tablet.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.data_tablet.flavor"
   }
 }

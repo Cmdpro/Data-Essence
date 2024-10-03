@@ -142,6 +142,7 @@
   "_comment.data_tablet_pages": "Data Tablet Page texts.",
   "_comment.data_tablet_pages.basics": "Basic Information category texts.",
   "data_tablet.pages.data_tablet.name":              "Data Tablet",
+  "data_tablet.pages.data_tablet.flavor": " ◇ Ancient lexicon",
   "data_tablet.pages.data_tablet.page1.text":        "Every researcher is given a personal Data Tablet intended to store the data of our discoveries, inventions, and knowledge. Its contents may be added to by visiting any active research center and copying from its Data Bank, assuming sufficient credentials.\n\nThe Data Tablet contains security mechanisms which prevent a Tablet from accepting data of a higher tier than itself, as well as requiring specific, highly-encrypted critical data and authorization from higher-ranked peers to rise in tier. This is to ensure our gathered knowledge does not fall into the wrong hands.",
   "data_tablet.pages.essence_redirector.name":       "Essence Redirector",
   "data_tablet.pages.essence_redirector.page1.text": "The Essence Redirector is a finely-tuned manipulation tool designed to interface with Essence and associated mechanisms. It is primarily used in the activation and configuration of devices and machines and, where applicable, such is noted in the given machine's entry.\n\nThe tool may also be capable of simple interaction in other fields of technology, owing to its allegedly \"wrench-like\" appearance and behavior.",

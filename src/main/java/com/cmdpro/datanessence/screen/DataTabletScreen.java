@@ -4,18 +4,22 @@ import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.datatablet.*;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Math;
@@ -237,14 +241,16 @@ public class DataTabletScreen extends Screen {
                 graphics.blit(getTextureToUse(), x - 42, y + ((imageHeight / 2) - 20), 20, 166, 12, 40);
             }
 
-            Component tooltip = null;
+            List<FormattedCharSequence> tooltip = null;
             if (mouseX >= x && mouseY >= y && mouseX <= x+imageWidth && mouseY <= y+imageHeight) {
-                for (Entry i : Entries.entries.values()) {
-                    if (i.tab.equals(currentTab.id)) {
-                        if (i.isVisibleClient()) {
-                            if (mouseX >= ((i.x * 20) - 10) + offsetX + x && mouseX <= ((i.x * 20) + 10) + offsetX + x) {
-                                if (mouseY >= ((i.y * 20) - 10) + offsetY + y && mouseY <= ((i.y * 20) + 10) + offsetY + y) {
-                                    tooltip = i.name;
+                for (Entry entry : Entries.entries.values()) {
+                    if (entry.tab.equals(currentTab.id)) {
+                        if (entry.isVisibleClient()) {
+                            if (mouseX >= ((entry.x * 20) - 10) + offsetX + x && mouseX <= ((entry.x * 20) + 10) + offsetX + x) {
+                                if (mouseY >= ((entry.y * 20) - 10) + offsetY + y && mouseY <= ((entry.y * 20) + 10) + offsetY + y) {
+                                    tooltip = entry.flavor.equals(Component.empty())
+                                            ? List.of(entry.name.getVisualOrderText())
+                                            : List.of(entry.name.getVisualOrderText(), entry.flavor.copy().withStyle(ChatFormatting.ITALIC).withColor(EssenceTypeRegistry.ESSENCE.get().getColor()).getVisualOrderText());
                                     break;
                                 }
                             }
@@ -257,7 +263,7 @@ public class DataTabletScreen extends Screen {
                 int x2 = x+(o >= 6 ? 255 : -21);
                 int y2 = y+8+((o%6)*24);
                 if (mouseX >= x2 && mouseY >= y2 && mouseX <= x2+21 && mouseY <= y2+20) {
-                    tooltip = i.name;
+                    tooltip = List.of(i.name.getVisualOrderText());
                 }
                 o++;
             }

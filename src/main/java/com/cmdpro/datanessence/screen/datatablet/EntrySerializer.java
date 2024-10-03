@@ -46,6 +46,7 @@ public class EntrySerializer {
             Codec.INT.fieldOf("x").forGetter((entry) -> entry.x),
             Codec.INT.fieldOf("y").forGetter((entry) -> entry.y),
             ComponentSerialization.CODEC.fieldOf("name").forGetter((entry) -> entry.name),
+            ComponentSerialization.CODEC.optionalFieldOf("flavor", Component.empty()).forGetter((entry -> entry.flavor)),
             ResourceLocation.CODEC.listOf().optionalFieldOf("parents", new ArrayList<>()).forGetter((entry) -> Arrays.stream(entry.parents).toList()),
             PAGE_CODEC.listOf().fieldOf("pages").forGetter((entry) -> List.of(entry.pages)),
             Codec.BOOL.optionalFieldOf("critical", false).forGetter((entry) -> entry.critical),
@@ -53,13 +54,14 @@ public class EntrySerializer {
             Codec.BOOL.optionalFieldOf("incomplete", false).forGetter((entry) -> entry.incomplete),
             PAGE_CODEC.listOf().optionalFieldOf("incompletePages", new ArrayList<>()).forGetter((entry) -> Arrays.stream(entry.incompletePages).toList()),
             ResourceLocation.CODEC.optionalFieldOf("completionAdvancement", ResourceLocation.fromNamespaceAndPath("", "")).forGetter((entry) -> entry.completionAdvancement)
-    ).apply(instance, (icon, x, y, name, parents, pages, critical, tab, incomplete, incompletePages, completionAdvancement) -> new Entry(null, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, critical, incomplete, incompletePages.toArray(new Page[0]), completionAdvancement)));
+    ).apply(instance, (icon, x, y, name, flavor, parents, pages, critical, tab, incomplete, incompletePages, completionAdvancement) -> new Entry(null, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, flavor, critical, incomplete, incompletePages.toArray(new Page[0]), completionAdvancement)));
     public static final StreamCodec<RegistryFriendlyByteBuf, Entry> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
         pBuffer.writeResourceLocation(pValue.id);
         pBuffer.writeInt(pValue.x);
         pBuffer.writeInt(pValue.y);
         ItemStack.STREAM_CODEC.encode(pBuffer, pValue.icon);
         ComponentSerialization.STREAM_CODEC.encode(pBuffer, pValue.name);
+        ComponentSerialization.STREAM_CODEC.encode(pBuffer, pValue.flavor);
         pBuffer.writeCollection(Arrays.stream(pValue.pages).toList(), (pBuffer1, pValue1) -> PAGE_STREAM_CODEC.encode((RegistryFriendlyByteBuf)pBuffer1, pValue1));
         List<ResourceLocation> parents = new ArrayList<>();
         for (Entry i : pValue.getParentEntries()) {
@@ -77,6 +79,7 @@ public class EntrySerializer {
         int y = pBuffer.readInt();
         ItemStack icon = ItemStack.STREAM_CODEC.decode(pBuffer);
         Component name = ComponentSerialization.STREAM_CODEC.decode(pBuffer);
+        Component flavor = ComponentSerialization.STREAM_CODEC.decode(pBuffer);
         Page[] pages = pBuffer.readList((pBuffer1) -> PAGE_STREAM_CODEC.decode((RegistryFriendlyByteBuf)pBuffer1)).toArray(new Page[0]);
         List<ResourceLocation> parents = pBuffer.readList(FriendlyByteBuf::readResourceLocation);
         boolean critical = pBuffer.readBoolean();
@@ -84,7 +87,6 @@ public class EntrySerializer {
         boolean incomplete = pBuffer.readBoolean();
         Page[] incompletePages = pBuffer.readList((pBuffer1) -> PAGE_STREAM_CODEC.decode((RegistryFriendlyByteBuf)pBuffer1)).toArray(new Page[0]);
         ResourceLocation completionAdvancement = pBuffer.readResourceLocation();
-        Entry entry = new Entry(id, tab, icon, x, y, pages, parents.toArray(new ResourceLocation[0]), name, critical, incomplete, incompletePages, completionAdvancement);
-        return entry;
+        return new Entry(id, tab, icon, x, y, pages, parents.toArray(new ResourceLocation[0]), name, flavor, critical, incomplete, incompletePages, completionAdvancement);
     });
 }
