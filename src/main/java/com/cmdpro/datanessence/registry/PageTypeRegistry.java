@@ -2,10 +2,10 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.datatablet.PageSerializer;
-import com.cmdpro.datanessence.screen.datatablet.pages.serializers.CraftingPageSerializer;
-import com.cmdpro.datanessence.screen.datatablet.pages.serializers.ItemPageSerializer;
-import com.cmdpro.datanessence.screen.datatablet.pages.serializers.MultiblockPageSerializer;
-import com.cmdpro.datanessence.screen.datatablet.pages.serializers.TextPageSerializer;
+import com.cmdpro.datanessence.datatablet.pages.serializers.CraftingPageSerializer;
+import com.cmdpro.datanessence.datatablet.pages.serializers.ItemPageSerializer;
+import com.cmdpro.datanessence.datatablet.pages.serializers.MultiblockPageSerializer;
+import com.cmdpro.datanessence.datatablet.pages.serializers.TextPageSerializer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredRegister;
 

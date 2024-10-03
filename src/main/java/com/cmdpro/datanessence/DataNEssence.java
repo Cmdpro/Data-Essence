@@ -148,6 +148,16 @@ public class DataNEssence
             return o.getItemHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTICING_LURE.get(), (o, direction) -> o.getItemHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedHandler();
+            }
+            if (direction == Direction.DOWN) {
+                return o.getItemHandler();
+            }
+            return o.getOutputHandler();
+        });
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), (o, direction) -> o.getWaterHandler());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {

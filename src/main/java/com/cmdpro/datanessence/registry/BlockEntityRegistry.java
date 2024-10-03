@@ -37,6 +37,10 @@ public class BlockEntityRegistry {
             register("fluid_bottler", () ->
                     BlockEntityType.Builder.of(FluidBottlerBlockEntity::new,
                             BlockRegistry.FLUID_BOTTLER.get()).build(null));
+    public static final Supplier<BlockEntityType<MineralPurificationChamberBlockEntity>> MINERAL_PURIFICATION_CHAMBER =
+            register("mineral_purification_chamber", () ->
+                    BlockEntityType.Builder.of(MineralPurificationChamberBlockEntity::new,
+                            BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get()).build(null));
     public static final Supplier<BlockEntityType<EntropicProcessorBlockEntity>> ENTROPIC_PROCESSOR =
             register("entropic_processor", () ->
                     BlockEntityType.Builder.of(EntropicProcessorBlockEntity::new,

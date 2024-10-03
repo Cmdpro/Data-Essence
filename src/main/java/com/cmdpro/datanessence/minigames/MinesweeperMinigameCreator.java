@@ -4,15 +4,11 @@ import com.cmdpro.datanessence.api.databank.Minigame;
 import com.cmdpro.datanessence.registry.MinigameRegistry;
 import com.cmdpro.datanessence.api.databank.MinigameCreator;
 import com.cmdpro.datanessence.api.databank.MinigameSerializer;
-import com.cmdpro.datanessence.screen.datatablet.pages.MultiblockPage;
-import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 
 public class MinesweeperMinigameCreator extends MinigameCreator {
     public int bombs;

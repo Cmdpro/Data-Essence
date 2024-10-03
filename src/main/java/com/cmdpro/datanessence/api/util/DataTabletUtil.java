@@ -1,20 +1,17 @@
 package com.cmdpro.datanessence.api.util;
 
-import com.cmdpro.databank.DatabankUtils;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
-import com.cmdpro.datanessence.screen.datatablet.Entries;
-import com.cmdpro.datanessence.screen.datatablet.Entry;
+import com.cmdpro.datanessence.datatablet.Entries;
+import com.cmdpro.datanessence.datatablet.Entry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.attachment.AttachmentType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.function.Supplier;
 
 public class DataTabletUtil {
     public static void unlockEntry(Player player, ResourceLocation entry, boolean incomplete) {

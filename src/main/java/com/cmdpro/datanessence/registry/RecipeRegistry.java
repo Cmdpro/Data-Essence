@@ -25,6 +25,8 @@ public class RecipeRegistry {
             registerSerializer("synthesis", () -> SynthesisRecipe.Serializer.INSTANCE);
     public static final Supplier<RecipeSerializer<FluidMixingRecipe>> FLUID_MIXING =
             registerSerializer("fluid_mixing", () -> FluidMixingRecipe.Serializer.INSTANCE);
+    public static final Supplier<RecipeSerializer<MineralPurificationRecipe>> MINERAL_PURIFICATION =
+            registerSerializer("mineral_purification", () -> MineralPurificationRecipe.Serializer.INSTANCE);
 
     public static final Supplier<RecipeType<FluidMixingRecipe>> FLUID_MIXING_TYPE =
             registerBasicRecipeType("fluid_mixing");
@@ -34,6 +36,8 @@ public class RecipeRegistry {
             registerBasicRecipeType("entropic_processing");
     public static final Supplier<RecipeType<InfusionRecipe>> INFUSION_TYPE =
             registerBasicRecipeType("infusion");
+    public static final Supplier<RecipeType<MineralPurificationRecipe>> MINERAL_PURIFICATION_TYPE =
+            registerBasicRecipeType("mineral_purification");
     public static final Supplier<RecipeType<IFabricationRecipe>> FABRICATIONCRAFTING =
             registerBasicRecipeType("fabrication_recipe");
 

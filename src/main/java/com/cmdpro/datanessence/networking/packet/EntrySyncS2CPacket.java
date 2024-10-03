@@ -1,9 +1,8 @@
 package com.cmdpro.datanessence.networking.packet;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.datatablet.*;
 import com.cmdpro.datanessence.networking.Message;
-import com.cmdpro.datanessence.screen.databank.DataBankEntrySerializer;
-import com.cmdpro.datanessence.screen.datatablet.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -11,9 +10,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public record EntrySyncS2CPacket(Map<ResourceLocation, Entry> entries, Map<ResourceLocation, DataTab> tabs) implements Message {
     public static EntrySyncS2CPacket read(FriendlyByteBuf buf) {
