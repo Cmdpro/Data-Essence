@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.api.util.client;
 
+import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.moddata.LockableItemHandler;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
@@ -42,7 +43,6 @@ public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client
             }
         }
     }
-    public static Matrix4f viewStackMatrix;
     public static void renderBlackHole(PoseStack stack, Vec3 pos, MultiBufferSource source, float radius, int longs, int lats) {
         stack.pushPose();
         stack.translate(pos.x, pos.y, pos.z);
@@ -51,7 +51,7 @@ public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client
         shader.safeGetUniform("CameraPosition").set(new Vector3f(0, 0, 0));
         shader.safeGetUniform("ObjectPosition").set(pos.toVector3f().sub(Minecraft.getInstance().gameRenderer.getMainCamera().getPosition().toVector3f()));
         shader.safeGetUniform("Radius").set(Math.abs(radius));
-        shader.safeGetUniform("ModelViewMatrix").set(viewStackMatrix);
+        shader.safeGetUniform("ModelViewMatrix").set(PostShaderManager.viewStackMatrix);
         shader.safeGetUniform("lookVector").set(Minecraft.getInstance().gameRenderer.getMainCamera().getLookVector());
         shader.safeGetUniform("FOV").set((float)Math.toRadians(Minecraft.getInstance().gameRenderer.getFov(Minecraft.getInstance().gameRenderer.getMainCamera(), Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true), true)));
         VertexConsumer consumer = source.getBuffer(DataNEssenceRenderTypes.WARPING_POINT);
