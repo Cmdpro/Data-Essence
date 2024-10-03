@@ -202,6 +202,7 @@ public class DataNEssence
             event.accept(BlockRegistry.POLISHED_OBSIDIAN.get());
             event.accept(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get());
             event.accept(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get());
+            event.accept(BlockRegistry.AETHER_RUNE.get());
             event.accept(BlockRegistry.PATTERNED_COPPER.get());
             event.accept(BlockRegistry.ANCIENT_ROCK_COLUMN.get());
             event.accept(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN.get());
