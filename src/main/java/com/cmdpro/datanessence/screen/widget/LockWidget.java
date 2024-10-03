@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerSetItemHandlerLockedC2SPacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -35,6 +36,7 @@ public class LockWidget extends AbstractWidget {
             } else {
                 pGuiGraphics.blit(TEXTURE, getX(), getY(), 18, 0, 18, 18);
             }
+            this.setTooltip(Tooltip.create(Component.translatable("tooltip.datanessence.toggle_lock")));
         }
     }
 
@@ -47,4 +49,5 @@ public class LockWidget extends AbstractWidget {
     protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
 
     }
+
 }

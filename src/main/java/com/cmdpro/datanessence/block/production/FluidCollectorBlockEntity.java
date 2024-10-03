@@ -8,6 +8,8 @@ import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -59,6 +61,7 @@ public class FluidCollectorBlockEntity extends BlockEntity implements EssenceBlo
                         if (pBlockEntity.fluidHandler.fill(stack, IFluidHandler.FluidAction.SIMULATE) > 0) {
                             pBlockEntity.fluidHandler.fill(stack, IFluidHandler.FluidAction.EXECUTE);
                             pLevel.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                            pLevel.playSound(null, pPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 2, 1);
                             pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 25);
                             pBlockEntity.cooldown = 20;
                         }

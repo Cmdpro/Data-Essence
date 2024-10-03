@@ -1,0 +1,19 @@
+{
+  "icon": {
+    "id": "datanessence:essence_wire"
+  },
+  "tab": "datanessence:lore",
+  "x": 0,
+  "y": 1,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.essence.page1.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.essence.name"
+  }
+}
