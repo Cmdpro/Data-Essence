@@ -1,9 +1,7 @@
 package com.cmdpro.datanessence.toasts;
 
-import com.cmdpro.datanessence.screen.datatablet.Entry;
-import net.minecraft.advancements.DisplayInfo;
+import com.cmdpro.datanessence.datatablet.Entry;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.toasts.AdvancementToast;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;

@@ -65,7 +65,7 @@ public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IH
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
-        return output.copy();
+        return output;
     }
 
     @Override

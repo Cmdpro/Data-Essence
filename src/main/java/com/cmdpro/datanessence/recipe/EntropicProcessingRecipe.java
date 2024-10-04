@@ -51,7 +51,7 @@ public class EntropicProcessingRecipe implements Recipe<RecipeInput> {
 
     @Override
     public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
-        return output.copy();
+        return output;
     }
 
     @Override

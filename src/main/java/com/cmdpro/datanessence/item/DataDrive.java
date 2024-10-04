@@ -2,8 +2,8 @@ package com.cmdpro.datanessence.item;
 
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.screen.DataDriveScreen;
-import com.cmdpro.datanessence.screen.datatablet.Entries;
-import com.cmdpro.datanessence.screen.datatablet.Entry;
+import com.cmdpro.datanessence.datatablet.Entries;
+import com.cmdpro.datanessence.datatablet.Entry;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;

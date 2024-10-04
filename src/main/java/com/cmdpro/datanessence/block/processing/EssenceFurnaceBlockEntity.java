@@ -136,7 +136,7 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 50) {
+            if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
                 Optional<RecipeHolder<SmeltingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeType.SMELTING, pBlockEntity.getCraftingInv(), pLevel);
                 if (recipe.isPresent()) {
                     if (!recipe.get().value().equals(pBlockEntity.recipe)) {

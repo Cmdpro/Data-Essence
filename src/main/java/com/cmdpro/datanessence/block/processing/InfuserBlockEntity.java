@@ -12,7 +12,7 @@ import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.InfuserMenu;
-import com.cmdpro.datanessence.screen.datatablet.Entry;
+import com.cmdpro.datanessence.datatablet.Entry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;

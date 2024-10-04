@@ -29,7 +29,7 @@ public class ThrownExoticEssenceBombProjectile extends ThrowableItemProjectile {
             level().explode(this, pResult.getLocation().x, pResult.getLocation().y, pResult.getLocation().z, 4, Level.ExplosionInteraction.TNT);
             BlackHole blackHole = new BlackHole(EntityRegistry.BLACK_HOLE.get(), level());
             blackHole.setPos(pResult.getLocation().subtract(0, 2, 0));
-            blackHole.getEntityData().set(BlackHole.SIZE, 8f);
+            blackHole.size = 8;
             level().addFreshEntity(blackHole);
             remove(RemovalReason.KILLED);
         }
