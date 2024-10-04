@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.integration.jei;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
@@ -29,10 +30,12 @@ public class JEIDataNEssencePlugin implements IModPlugin {
     public static IJeiRuntime runTime;
     public static final RecipeType FABRICATION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, "fabrication_recipe", IFabricationRecipe.class);
     public static final RecipeType INFUSION_RECIPE = RecipeType.create(DataNEssence.MOD_ID, "infusion", InfusionRecipe.class);
+    public static final RecipeType ENTROPIC_PROCESSING_RECIPE = RecipeType.create(DataNEssence.MOD_ID, "entropic_processing", EntropicProcessingRecipe.class);
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration) {
         registration.addRecipeCategories(new FabricatorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
         registration.addRecipeCategories(new InfuserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new EntropicProcessorCategory(registration.getJeiHelpers().getGuiHelper()));
     }
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
@@ -41,6 +44,8 @@ public class JEIDataNEssencePlugin implements IModPlugin {
         registration.addRecipes(FABRICATION_RECIPE, recipes);
         List<InfusionRecipe> recipes2 = rm.getAllRecipesFor(RecipeRegistry.INFUSION_TYPE.get()).stream().map((a) -> a.value()).toList();
         registration.addRecipes(INFUSION_RECIPE, recipes2);
+        List<EntropicProcessingRecipe> recipes3 = rm.getAllRecipesFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get()).stream().map((a) -> a.value()).toList();
+        registration.addRecipes(ENTROPIC_PROCESSING_RECIPE, recipes3);
     }
 
     @Override
@@ -48,6 +53,7 @@ public class JEIDataNEssencePlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.FABRICATOR_ITEM.get()), FABRICATION_RECIPE);
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.AUTO_FABRICATOR_ITEM.get()), FABRICATION_RECIPE);
         registration.addRecipeCatalyst(new ItemStack(ItemRegistry.INFUSER_ITEM.get()), INFUSION_RECIPE);
+        registration.addRecipeCatalyst(new ItemStack(ItemRegistry.ENTROPIC_PROCESSOR_ITEM.get()), ENTROPIC_PROCESSING_RECIPE);
     }
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {

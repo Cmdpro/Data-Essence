@@ -125,15 +125,17 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         CompoundTag tag = pkt.getTag();
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
-        craftingProgress = tag.getInt("craftingProgress");
+        workTime = tag.getInt("workTime");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
+        maxWorkTime = tag.getInt("maxWorkTime");
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.put("EssenceStorage", storage.toNbt());
         tag.put("item", item.saveOptional(pRegistries));
-        tag.putInt("craftingProgress", craftingProgress);
+        tag.putInt("workTime", workTime);
+        tag.putInt("maxWorkTime", recipe == null ? -1 : recipe.getTime());
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
         return tag;
     }
@@ -144,7 +146,7 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         tag.put("inventoryOutput", outputItemHandler.serializeNBT(pRegistries));
         tag.put("inventoryDrive", dataDriveHandler.serializeNBT(pRegistries));
         tag.put("EssenceStorage", storage.toNbt());
-        tag.putInt("craftingProgress", craftingProgress);
+        tag.putInt("workTime", workTime);
         super.saveAdditional(tag, pRegistries);
     }
     @Override
@@ -154,7 +156,7 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryOutput"));
         dataDriveHandler.deserializeNBT(pRegistries, nbt.getCompound("inventoryDrive"));
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
-        craftingProgress = nbt.getInt("craftingProgress");
+        workTime = nbt.getInt("workTime");
     }
     public ItemStack item;
     public SimpleContainer getInv() {
@@ -187,8 +189,8 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
     public SynthesisRecipe recipe;
     public boolean enoughEssence;
     public Map<ResourceLocation, Float> essenceCost;
-    public int craftingProgress;
     public int workTime;
+    public int maxWorkTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SynthesisChamberBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
