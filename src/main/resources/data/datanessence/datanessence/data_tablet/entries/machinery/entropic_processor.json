@@ -26,6 +26,9 @@
   "name": {
     "translate": "data_tablet.pages.entropic_processor.name"
   },
+  "flavor": {
+    "translate": "data_tablet.pages.entropic_processor.flavor"
+  },
   "parents": [
     "datanessence:machinery/automation"
   ]
