@@ -16,6 +16,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
+import org.jline.reader.Widget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,9 +47,7 @@ public class MineralPurificationChamberScreen extends AbstractContainerScreen<Mi
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        FluidWidget fluid = new FluidWidget(x+26, y+28, menu.blockEntity.getWaterHandler(), 0);
-        fluid.setSize(16, 28);
-        addRenderableWidget(fluid);
+        addRenderableWidget(new FluidWidget(x+26, y+28, 16, 28, menu.blockEntity.getWaterHandler(), 0));
     }
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
@@ -63,7 +62,7 @@ public class MineralPurificationChamberScreen extends AbstractContainerScreen<Mi
             component.clear();
             component.add(essence.getVisualOrderText());
         }
-        if (component != null) {
+        if (!component.isEmpty()) {
             pGuiGraphics.renderTooltip(font, component, pMouseX, pMouseY);
         }
     }

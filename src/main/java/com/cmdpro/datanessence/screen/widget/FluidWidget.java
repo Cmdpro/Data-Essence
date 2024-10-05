@@ -19,7 +19,10 @@ public class FluidWidget extends AbstractWidget {
     public IFluidHandler handler;
     public int slot;
     public FluidWidget(int pX, int pY, IFluidHandler handler, int slot) {
-        super(pX, pY, 16, 16, Component.empty());
+        this(pX, pY, 16, 16, handler, slot);
+    }
+    public FluidWidget(int pX, int pY, int pWidth, int pHeight, IFluidHandler handler, int slot) {
+        super(pX, pY, pWidth, pHeight, Component.empty());
         this.handler = handler;
         this.slot = slot;
     }
@@ -44,12 +47,10 @@ public class FluidWidget extends AbstractWidget {
             pGuiGraphics.fill(getX(), getY(), getX()+getWidth(), getY()+getHeight(), 0x7fFFFFFF);
         }
     }
-
     @Override
     protected boolean clicked(double pMouseX, double pMouseY) {
         return false;
     }
-
     @Override
     protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
 
