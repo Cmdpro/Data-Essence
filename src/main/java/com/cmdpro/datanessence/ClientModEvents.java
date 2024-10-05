@@ -121,6 +121,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.SYNTHESIS_CHAMBER_MENU.get(), SynthesisChamberScreen::new);
         event.register(MenuRegistry.FLUID_MIXER_MENU.get(), FluidMixerScreen::new);
         event.register(MenuRegistry.ENTICING_LURE_MENU.get(), EnticingLureScreen::new);
+        event.register(MenuRegistry.MINERAL_PURIFICATION_CHAMBER_MENU.get(), MineralPurificationChamberScreen::new);
     }
     public static PostShaderInstance progressionShader;
     public static PostShaderInstance genderEuphoriaShader;

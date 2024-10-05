@@ -11,6 +11,7 @@ import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
+import com.cmdpro.datanessence.screen.MineralPurificationChamberMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -207,6 +208,6 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return new EntropicProcessorMenu(pContainerId, pInventory, this);
+        return new MineralPurificationChamberMenu(pContainerId, pInventory, this);
     }
 }
