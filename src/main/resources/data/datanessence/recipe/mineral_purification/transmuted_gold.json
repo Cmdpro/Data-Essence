@@ -1,0 +1,7 @@
+{
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "datanessence:transmuted_gold" },
+    "time": 100,
+    "result": { "id": "minecraft:gold_ingot" },
+    "nuggetResult": { "id": "minecraft:gold_nugget", "count": 1 }
+}

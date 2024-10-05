@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ddd",
+    "ddd",
+    "ddd"
+  ],
+  "key": {
+    "d": { "item": "datanessence:diamond_shard" }
+  },
+  "result": { "id": "minecraft:diamond" }
+}

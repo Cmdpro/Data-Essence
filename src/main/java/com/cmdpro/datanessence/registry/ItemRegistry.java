@@ -69,6 +69,14 @@ public class ItemRegistry {
     public static final Supplier<Item> LENSING_CRYSTAL = register("lensing_crystal", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> LENS = register("lens", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> PROPELLER = register("propeller", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> WIRE_SPOOL = register("wire_spool", () -> new Item(new Item.Properties()));
+
+    // Ore Processing Intermediates and Nuggets
+    public static final Supplier<Item> COPPER_NUGGET = register("copper_nugget", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> DIAMOND_SHARD = register("diamond_shard", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> EMERALD_SHARD = register("emerald_shard", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> LAPIS_SHARD = register("lapis_shard", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> COAL_LUMP = register("coal_lump", () -> new Item(new Item.Properties()));
 
     // Misc
     public static final Supplier<Item> COGNIZANT_CUBE = register("cognizant_cube", () -> new CognizantCube(new Item.Properties().stacksTo(1)));

@@ -1,0 +1,7 @@
+{
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:ores/diamond" },
+    "time": 400,
+    "result": { "id": "minecraft:diamond" },
+    "nuggetResult": { "id": "datanessence:diamond_shard", "count": 2 }
+}

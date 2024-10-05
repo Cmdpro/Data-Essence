@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": { "item": "datanessence:copper_nugget" }
+  },
+  "result": { "id": "minecraft:copper_ingot" }
+}

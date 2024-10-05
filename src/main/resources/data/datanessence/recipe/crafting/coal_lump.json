@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": { "minecraft:coal" },
+  "result": { "id": "datanessence:coal_lump", "count": 9 }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {},
+  "entry": "datanessence:machinery/synthesis_chamber",
+  "pattern": [
+    " C ",
+    " R ",
+    " C "
+  ],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "R": { "item": "datanessence:conductance_rod" }
+  },
+  "result": { "id": "datanessence:wire_spool" }
+}

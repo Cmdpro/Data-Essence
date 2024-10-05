@@ -1,0 +1,7 @@
+{
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "datanessence:transmuted_iron" },
+    "time": 100,
+    "result": { "id": "minecraft:iron_ingot" },
+    "nuggetResult": { "id": "minecraft:iron_nugget", "count": 1 }
+}

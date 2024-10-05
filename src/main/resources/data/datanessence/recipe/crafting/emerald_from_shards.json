@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "eee",
+    "eee",
+    "eee"
+  ],
+  "key": {
+    "e": { "item": "datanessence:emerald_shard" }
+  },
+  "result": { "id": "minecraft:emerald" }
+}

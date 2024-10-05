@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": { "minecraft:emerald" },
+  "result": { "id": "datanessence:emerald_shard", "count": 9 }
+}

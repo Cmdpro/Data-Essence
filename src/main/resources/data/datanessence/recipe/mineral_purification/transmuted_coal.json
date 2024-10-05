@@ -1,0 +1,7 @@
+{
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "datanessence:transmuted_coal" },
+    "time": 100,
+    "result": { "id": "minecraft:coal" },
+    "nuggetResult": { "id": "datanessence:coal_lump", "count": 1 }
+}

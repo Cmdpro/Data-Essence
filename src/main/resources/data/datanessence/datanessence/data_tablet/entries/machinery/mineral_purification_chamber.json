@@ -1,0 +1,36 @@
+{
+  "icon": {
+    "id": "datanessence:mineral_purification_chamber"
+  },
+  "tab": "datanessence:machinery",
+  "x": 3,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:mineral_purification_chamber" },
+      "text": {
+        "translate": "data_tablet.pages.mineral_purification_chamber.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.mineral_purification_chamber.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/machines/mineral_purification_chamber"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.mineral_purification_chamber.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.mineral_purification_chamber.flavor"
+  },
+  "parents": [
+    "datanessence:machinery/automation",
+    "datanessence:machinery/fluidworks"
+  ]
+}

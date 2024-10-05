@@ -19,6 +19,8 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -180,6 +182,8 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
                             pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.outputItemHandler.insertItem(1, assembled2, false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
+                            pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1, 1);
+                            pLevel.playSound(null, pPos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 2, 3);
                             pBlockEntity.workTime = 0;
                         }
                     }

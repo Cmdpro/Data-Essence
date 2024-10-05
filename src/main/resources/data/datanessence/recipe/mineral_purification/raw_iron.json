@@ -1,0 +1,7 @@
+{
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:raw_materials/iron" },
+    "time": 200,
+    "result": { "id": "minecraft:iron_ingot" },
+    "nuggetResult": { "id": "minecraft:iron_nugget", "count": 1 }
+}

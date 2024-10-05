@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": { "item": "datanessence:coal_lump" }
+  },
+  "result": { "id": "minecraft:coal" }
+}

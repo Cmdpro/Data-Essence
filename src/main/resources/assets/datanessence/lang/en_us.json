@@ -32,6 +32,12 @@
   "item.datanessence.exotic_essence_bomb": "Exotic Essence Bomb",
   "item.datanessence.exotic_essence_bomb.info": " ◇ Volatile! Incites the creation of a black hole.",
   "item.datanessence.traversite_road_chunk": "Traversite Road Chunk",
+  "item.datanessence.wire_spool": "Wire Spool",
+  "item.datanessence.copper_nugget": "Copper Nugget",
+  "item.datanessence.diamond_shard": "Diamond Shard",
+  "item.datanessence.emerald_shard": "Emerald Shard",
+  "item.datanessence.lapis_shard": "Lapis Lazuli Shard",
+  "item.datanessence.coal_lump": "Coal Lump",
 
   "block.datanessence.essence_point": "Essence Point",
   "block.datanessence.lunar_essence_point": "Lunar Essence Point",
@@ -94,6 +100,7 @@
   "block.datanessence.entropic_processor": "Entropic Processor",
   "block.datanessence.charger": "Charger",
   "block.datanessence.aether_rune": "Aether Rune",
+  "block.datanessence.mineral_purification_chamber": "Mineral Purification Chamber",
 
   "computer.types.test.files.0": "Very cool testing computer text file, yes very cool, indeed, uh I need more text uh uh uh uh uh uh uh yea",
 
@@ -116,7 +123,7 @@
   "effect.datanessence.gender_euphoria": "Gender Euphoria",
   "effect.datanessence.gender_euphoria.description": "You feel a rush of pure joy about your gender!",
 
-  "gui.widget.fluid":  "%1$s/%2$s %3$s",
+  "gui.widget.fluid":  "%3$s: %1$s/%2$smB",
   "gui.widget.fluid.without_max": "%1$s %2$s",
 
   "gui.essence_bar.essence_with_max":         "%1$s/%2$s Essence",
@@ -189,9 +196,10 @@
   "data_tablet.pages.itemworks.name":           "Item Transfer",
   "data_tablet.pages.itemworks.page1.text":     "The transfer and routing of items is perhaps the most important aspect of running an Essence-driven factory, second only to Essence itself. To facilitate that, we have made Item Points and associated Wire that can transfer items wherever we require, building on existing designs.",
   "data_tablet.pages.itemworks.page2.text":     "  ◇ The linking order of points controls the direction of flow - sender to receiver.",
-  "data_tablet.pages.mineral_enrichment_chamber.name":          "Mineral Enrichment Chamber",
-  "data_tablet.pages.mineral_enrichment_chamber.page1.text":    "Enhancing the yield of ore and mineral processing is one of the more important pursuits of our research: factories and laboratories do not pay for themselves. The Mineral Enrichment Chamber is the first result of our developments here. It, when given a water supply and ore in some form, will wash that ore with water, cleansing it of impurity and producing anywhere between none and a full ingot's worth of extra nuggets of material.",
-  "data_tablet.pages.mineral_enrichment_chamber.page2.text":    " ◇ Accepts ore blocks, raw ores, and <T2 Ore Processing Yield>.",
+  "data_tablet.pages.mineral_purification_chamber.name":          "Mineral Purification Chamber",
+  "data_tablet.pages.mineral_purification_chamber.flavor": " ◇ Giving your ores a bath",
+  "data_tablet.pages.mineral_purification_chamber.page1.text":    "Enhancing the yield of ore and mineral processing is one of the more important pursuits of our research: factories and laboratories do not pay for themselves. The Mineral Purification Chamber is the first result of our developments here. It, when given a water supply and ore in some form, will wash that ore with water, cleansing it of impurity and producing anywhere between none and a full ingot's worth of extra material - though ores which naturally have higher yields may result in more.",
+  "data_tablet.pages.mineral_purification_chamber.page2.text":    " ◇ Accepts ore blocks, raw ores, and transmuted minerals. Uses 250mB of Water per operation.",
   "data_tablet.pages.entropic_processor.name": "Entropic Processor",
   "data_tablet.pages.entropic_processor.flavor": " ◇ 24-wheeled grinding champion",
   "data_tablet.pages.entropic_processor.page1.text": "Diamonds are one of the hardest materials in the world. It is only sensible to utilize that hardness for raw cutting power, and the Entropic Processor is the result. This machine has three sets of eight diamond grinding wheels that are able to crush, grind, macerate, and pulverize whatever runs through it.",

@@ -1,0 +1,7 @@
+{
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "datanessence:transmuted_redstone" },
+    "time": 100,
+    "result": { "id": "minecraft:redstone" },
+    "nuggetResult": { "id": "minecraft:redstone", "count": 1 }
+}

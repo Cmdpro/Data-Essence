@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": { "minecraft:copper_ingot" },
+  "result": { "id": "datanessence:copper_nugget", "count": 9 }
+}

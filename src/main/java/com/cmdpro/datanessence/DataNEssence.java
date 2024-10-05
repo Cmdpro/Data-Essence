@@ -166,13 +166,14 @@ public class DataNEssence
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.ITEMS.get())) {
             event.accept(ItemRegistry.DATA_TABLET.get());
+            event.accept(ItemRegistry.MAGIC_WRENCH.get());
+            event.accept(ItemRegistry.WIRE_SPOOL.get());
             event.accept(ItemRegistry.ESSENCE_WIRE.get());
             event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE.get());
             event.accept(ItemRegistry.NATURAL_ESSENCE_WIRE.get());
             event.accept(ItemRegistry.EXOTIC_ESSENCE_WIRE.get());
             event.accept(ItemRegistry.ITEM_WIRE.get());
             event.accept(ItemRegistry.FLUID_WIRE.get());
-            event.accept(ItemRegistry.MAGIC_WRENCH.get());
             event.accept(ItemRegistry.DATA_DRIVE.get());
             event.accept(ItemRegistry.ESSENCE_SHARD.get());
             event.accept(ItemRegistry.ESSENCE_BOMB.get());
@@ -193,6 +194,11 @@ public class DataNEssence
             event.accept(ItemRegistry.PRECISION_LENS.get());
             event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
             event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
+            event.accept(ItemRegistry.COPPER_NUGGET.get());
+            event.accept(ItemRegistry.DIAMOND_SHARD.get());
+            event.accept(ItemRegistry.EMERALD_SHARD.get());
+            event.accept(ItemRegistry.LAPIS_SHARD.get());
+            event.accept(ItemRegistry.COAL_LUMP.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());
@@ -243,6 +249,7 @@ public class DataNEssence
             event.accept(BlockRegistry.FLUID_MIXER.get());
             event.accept(BlockRegistry.SYNTHESIS_CHAMBER.get());
             event.accept(BlockRegistry.ENTICING_LURE.get());
+            event.accept(BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get());
         }
     }
 }

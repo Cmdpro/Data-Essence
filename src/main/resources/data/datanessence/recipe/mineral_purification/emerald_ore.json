@@ -1,0 +1,7 @@
+{
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:ores/emerald" },
+    "time": 400,
+    "result": { "id": "minecraft:emerald" },
+    "nuggetResult": { "id": "datanessence:emerald_shard", "count": 2 }
+}
