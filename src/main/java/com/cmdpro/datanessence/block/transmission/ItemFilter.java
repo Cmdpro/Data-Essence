@@ -22,19 +22,20 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.apache.commons.lang3.IntegerRange;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 
 public class ItemFilter extends Block implements EntityBlock {
-    public HashMap<Direction, Integer> directions = new HashMap<>() {
+    public static final HashMap<Direction, IntegerRange> DIRECTIONS = new HashMap<>() {
         {
-            put(Direction.UP, 0);
-            put(Direction.DOWN, 9);
-            put(Direction.NORTH, 9*2);
-            put(Direction.SOUTH, 9*3);
-            put(Direction.EAST, 9*4);
-            put(Direction.WEST, 9*5);
+            put(Direction.UP, IntegerRange.of(0, 8));
+            put(Direction.DOWN, IntegerRange.of(9, (9*2)-1));
+            put(Direction.NORTH, IntegerRange.of(9*2, (9*3)-1));
+            put(Direction.SOUTH, IntegerRange.of(9*3, (9*4)-1));
+            put(Direction.EAST, IntegerRange.of(9*4, (9*5)-1));
+            put(Direction.WEST, IntegerRange.of(9*5, (9*6)-1));
         }
     };
     public ItemFilter(Properties pProperties) {

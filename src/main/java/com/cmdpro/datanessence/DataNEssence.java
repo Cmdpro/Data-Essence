@@ -158,6 +158,7 @@ public class DataNEssence
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), (o, direction) -> o.getWaterHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_FILTER.get(), (o, direction) -> o.getItemHandler());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -199,6 +200,7 @@ public class DataNEssence
             event.accept(ItemRegistry.EMERALD_SHARD.get());
             event.accept(ItemRegistry.LAPIS_SHARD.get());
             event.accept(ItemRegistry.COAL_LUMP.get());
+            event.accept(ItemRegistry.ESSENCE_SWORD.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());
@@ -250,6 +252,7 @@ public class DataNEssence
             event.accept(BlockRegistry.SYNTHESIS_CHAMBER.get());
             event.accept(BlockRegistry.ENTICING_LURE.get());
             event.accept(BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get());
+            event.accept(BlockRegistry.ITEM_FILTER.get());
         }
     }
 }
