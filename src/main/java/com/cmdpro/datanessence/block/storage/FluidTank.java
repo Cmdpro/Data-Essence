@@ -6,6 +6,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -59,10 +60,9 @@ public class FluidTank extends TransparentBlock implements EntityBlock {
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
         if (pLevel.getBlockEntity(pPos) instanceof FluidTankBlockEntity ent) {
-            if (!pLevel.isClientSide) {
-                FluidUtil.interactWithFluidHandler(pPlayer, pHand, ent.getFluidHandler());
+            if (FluidUtil.interactWithFluidHandler(pPlayer, pHand, ent.getFluidHandler())) {
+                return ItemInteractionResult.sidedSuccess(pLevel.isClientSide);
             }
-            return ItemInteractionResult.sidedSuccess(pLevel.isClientSide);
         }
         return super.useItemOn(pStack, pState, pLevel, pPos, pPlayer, pHand, pHitResult);
     }
