@@ -68,8 +68,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN);
         evenSimplerBlockItem(BlockRegistry.ANCIENT_LANTERN);
 
-        evenSimplerBlockItem(BlockRegistry.FLUID_TANK);
-
         evenSimplerBlockItem(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
 
         simpleItemWithSubdirectory(ItemRegistry.CONDUCTANCE_ROD, "components");
