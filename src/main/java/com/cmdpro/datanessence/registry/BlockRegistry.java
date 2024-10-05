@@ -100,6 +100,9 @@ public class BlockRegistry {
     public static final Supplier<Block> ENTICING_LURE = register("enticing_lure",
             () -> new EnticingLure(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ITEM_FILTER = register("item_filter",
+            () -> new ItemFilter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers
     public static final Supplier<Block> ESSENCE_BUFFER = register("essence_buffer",
