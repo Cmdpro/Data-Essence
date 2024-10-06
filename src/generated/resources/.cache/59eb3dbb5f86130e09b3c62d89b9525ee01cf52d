@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-04T22:07:49.711121	Loot Tables
+// 1.21.1	2024-10-05T19:02:29.3046636	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 bbbe51e74edfcc54136678857699b9b14569a089 data/datanessence/loot_table/blocks/ancient_lantern.json
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_table/blocks/ancient_rock_bricks.json
@@ -35,6 +35,7 @@ fcbdf81a9730cd95fb91e6786a932853ae148da5 data/datanessence/loot_table/blocks/flu
 a63c22d76b677d9f5d4b6212d1011f4d3f31c962 data/datanessence/loot_table/blocks/fluid_tank.json
 b8d2fa9097bae3a836da7acd662de09e9d889ee9 data/datanessence/loot_table/blocks/infuser.json
 26c69dcff1defc45669115decebc18f32b791f08 data/datanessence/loot_table/blocks/item_buffer.json
+9f7a1089e29f8234d1e8a879c96c0acff90fd122 data/datanessence/loot_table/blocks/item_filter.json
 ef9d3be9f05eaba2865a62ce63165bdc9f414942 data/datanessence/loot_table/blocks/item_point.json
 ff5225d48bc03882f1128c09f6e168b96a3db300 data/datanessence/loot_table/blocks/laser_emitter.json
 cfa965b97908bb81593914643c4325f7191186cd data/datanessence/loot_table/blocks/lensing_crystal_ore.json

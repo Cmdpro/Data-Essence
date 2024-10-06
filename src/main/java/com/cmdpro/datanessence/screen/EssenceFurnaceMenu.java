@@ -34,7 +34,6 @@ public class EssenceFurnaceMenu extends AbstractContainerMenu implements IDataNE
     }
     public EssenceFurnaceMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.ESSENCE_FURNACE_MENU.get(), pContainerId);
-        checkContainerSize(inv, 2);
         blockEntity = ((EssenceFurnaceBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

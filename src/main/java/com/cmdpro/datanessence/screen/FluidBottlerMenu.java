@@ -34,7 +34,6 @@ public class FluidBottlerMenu extends AbstractContainerMenu implements IDataNEss
     }
     public FluidBottlerMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.FLUID_BOTTLER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 2);
         blockEntity = ((FluidBottlerBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

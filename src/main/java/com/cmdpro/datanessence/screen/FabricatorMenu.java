@@ -33,7 +33,6 @@ public class FabricatorMenu extends AbstractContainerMenu implements IDataNEssen
     }
     public FabricatorMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.FABRICATOR_MENU.get(), pContainerId);
-        checkContainerSize(inv, 9);
         blockEntity = ((FabricatorBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

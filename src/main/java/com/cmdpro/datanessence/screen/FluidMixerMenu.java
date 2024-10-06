@@ -33,7 +33,6 @@ public class FluidMixerMenu extends AbstractContainerMenu implements IDataNEssen
     }
     public FluidMixerMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.FLUID_MIXER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 2);
         blockEntity = ((FluidMixerBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

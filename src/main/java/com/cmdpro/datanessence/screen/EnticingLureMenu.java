@@ -34,7 +34,6 @@ public class EnticingLureMenu extends AbstractContainerMenu implements IDataNEss
     }
     public EnticingLureMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.ENTICING_LURE_MENU.get(), pContainerId);
-        checkContainerSize(inv, 1);
         blockEntity = ((EnticingLureBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

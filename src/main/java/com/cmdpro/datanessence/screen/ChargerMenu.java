@@ -33,7 +33,6 @@ public class ChargerMenu extends AbstractContainerMenu implements IDataNEssenceM
     }
     public ChargerMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.CHARGER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 1);
         blockEntity = ((ChargerBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "datanessence:block/item_filter_bottom",
+    "east": "datanessence:block/item_filter_east",
+    "north": "datanessence:block/item_filter_north",
+    "particle": "datanessence:block/item_filter_top",
+    "south": "datanessence:block/item_filter_south",
+    "up": "datanessence:block/item_filter_top",
+    "west": "datanessence:block/item_filter_west"
+  }
+}

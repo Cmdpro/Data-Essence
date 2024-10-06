@@ -1,9 +1,12 @@
 package com.cmdpro.datanessence.block.transmission;
 
+import com.cmdpro.datanessence.block.processing.EntropicProcessorBlockEntity;
+import com.cmdpro.datanessence.block.processing.SynthesisChamberBlockEntity;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -44,6 +47,19 @@ public class ItemFilter extends Block implements EntityBlock {
     private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
 
     @Override
+    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+        if (!pLevel.isClientSide()) {
+            BlockEntity entity = pLevel.getBlockEntity(pPos);
+            if(entity instanceof ItemFilterBlockEntity ent) {
+                pPlayer.openMenu(ent, pPos);
+            } else {
+                throw new IllegalStateException("Our Container provider is missing!");
+            }
+        }
+
+        return InteractionResult.sidedSuccess(pLevel.isClientSide());
+    }
+    @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
     }
@@ -56,6 +72,16 @@ public class ItemFilter extends Block implements EntityBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new ItemFilterBlockEntity(pPos, pState);
+    }
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof ItemFilterBlockEntity) {
+                ((ItemFilterBlockEntity) blockEntity).drops();
+            }
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
     @Nullable
     @Override

@@ -33,7 +33,6 @@ public class EssenceBurnerMenu extends AbstractContainerMenu implements IDataNEs
     }
     public EssenceBurnerMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.ESSENCE_BURNER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 2);
         blockEntity = ((EssenceBurnerBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

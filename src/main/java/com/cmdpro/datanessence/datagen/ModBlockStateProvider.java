@@ -54,6 +54,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         fluidCollector(BlockRegistry.FLUID_SPILLER);
         laserEmitter(BlockRegistry.LASER_EMITTER);
         essenceBattery(BlockRegistry.ESSENCE_BATTERY);
+        itemFilter(BlockRegistry.ITEM_FILTER);
 
         nothing(BlockRegistry.STRUCTURE_PROTECTOR);
 
@@ -112,6 +113,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .partialState().with(EssenceBurner.FACING, Direction.NORTH).modelForState().modelFile(model).addModel()
                 .partialState().with(EssenceBurner.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).addModel()
                 .partialState().with(EssenceBurner.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).addModel();
+    }
+    private void itemFilter(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_west"))
+                .texture("east", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_east"))
+                .texture("north", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_north"))
+                .texture("down", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_bottom"))
+                .texture("up", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top"))
+                .texture("south", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_south"))
+                .texture("particle", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top"));
+        simpleBlockWithItem(blockRegistryObject.get(), model);
     }
     private void dataBank(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());

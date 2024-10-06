@@ -1,8 +1,11 @@
 package com.cmdpro.datanessence.block.transmission;
 
 import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.api.misc.ICustomEssencePointBehaviour;
+import com.cmdpro.datanessence.api.misc.ICustomFluidPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -38,6 +41,11 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
         if (resolved == null || resolved2 == null) {
             return;
         }
+        if (other instanceof ICustomFluidPointBehaviour behaviour) {
+            if (!behaviour.canInsertFluid(resolved, resolved2)) {
+                return;
+            }
+        }
         for (int o = 0; o < resolved2.getTanks(); o++) {
             FluidStack copy = resolved2.getFluidInTank(o).copy();
             if (!copy.isEmpty()) {
@@ -64,6 +72,11 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
         IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, other.getBlockPos(), getDirection());
         if (resolved == null || resolved2 == null) {
             return;
+        }
+        if (other instanceof ICustomFluidPointBehaviour behaviour) {
+            if (!behaviour.canExtractFluid(resolved2, resolved)) {
+                return;
+            }
         }
         for (int o = 0; o < resolved2.getTanks(); o++) {
             FluidStack copy = resolved2.getFluidInTank(o).copy();

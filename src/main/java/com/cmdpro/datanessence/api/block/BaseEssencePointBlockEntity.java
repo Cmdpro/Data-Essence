@@ -55,17 +55,17 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
             BlockEntity ent1 = pLevel.getBlockEntity(pPos.relative(pBlockEntity.getDirection().getOpposite()));
             if (ent1 instanceof EssenceBlockEntity ent) {
                 if (pBlockEntity.link == null) {
-                    pBlockEntity.transfer(ent.getStorage());
+                    pBlockEntity.transfer(ent1, ent.getStorage());
                     updateBlock(ent1);
                 } else {
-                    pBlockEntity.take(ent.getStorage());
+                    pBlockEntity.take(ent1, ent.getStorage());
                     updateBlock(ent1);
                 }
             }
             if (pBlockEntity.link != null) {
                 BlockEntity ent2 = pLevel.getBlockEntity(pBlockEntity.link);
-                if (pLevel.getBlockEntity(pBlockEntity.link) instanceof EssenceBlockEntity ent) {
-                    pBlockEntity.transfer(ent.getStorage());
+                if (ent2 instanceof EssenceBlockEntity ent) {
+                    pBlockEntity.transfer(ent2, ent.getStorage());
                     updateBlock(ent2);
                 } else {
                     pBlockEntity.link = null;
@@ -78,8 +78,8 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
             }
         }
     }
-    public abstract void transfer(EssenceStorage other);
-    public abstract void take(EssenceStorage other);
+    public abstract void transfer(BlockEntity otherEntity, EssenceStorage other);
+    public abstract void take(BlockEntity otherEntity, EssenceStorage other);
     public Direction getDirection() {
         if (getBlockState().getValue(BaseEssencePoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;

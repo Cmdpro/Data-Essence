@@ -35,7 +35,6 @@ public class MineralPurificationChamberMenu extends AbstractContainerMenu implem
     }
     public MineralPurificationChamberMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.MINERAL_PURIFICATION_CHAMBER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 3);
         blockEntity = ((MineralPurificationChamberBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

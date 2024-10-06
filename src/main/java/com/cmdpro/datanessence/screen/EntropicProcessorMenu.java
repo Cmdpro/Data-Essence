@@ -34,7 +34,6 @@ public class EntropicProcessorMenu extends AbstractContainerMenu implements IDat
     }
     public EntropicProcessorMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.ENTROPIC_PROCESSOR_MENU.get(), pContainerId);
-        checkContainerSize(inv, 2);
         blockEntity = ((EntropicProcessorBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

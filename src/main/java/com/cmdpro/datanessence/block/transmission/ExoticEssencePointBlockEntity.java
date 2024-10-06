@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
+import com.cmdpro.datanessence.api.misc.ICustomEssencePointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -28,11 +29,21 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity {
     }
 
     @Override
-    public void transfer(EssenceStorage other) {
+    public void transfer(BlockEntity otherEntity, EssenceStorage other) {
+        if (otherEntity instanceof ICustomEssencePointBehaviour behaviour) {
+            if (!behaviour.canInsertEssence(other, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer)) {
+                return;
+            }
+        }
         EssenceStorage.transferEssence(storage, other, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
     @Override
-    public void take(EssenceStorage other) {
+    public void take(BlockEntity otherEntity, EssenceStorage other) {
+        if (otherEntity instanceof ICustomEssencePointBehaviour behaviour) {
+            if (!behaviour.canInsertEssence(other, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer)) {
+                return;
+            }
+        }
         EssenceStorage.transferEssence(other, storage, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), DataNEssenceConfig.essencePointTransfer);
     }
 }

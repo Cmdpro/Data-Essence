@@ -37,7 +37,6 @@ public class SynthesisChamberMenu extends AbstractContainerMenu implements IData
     }
     public SynthesisChamberMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.SYNTHESIS_CHAMBER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 3);
         blockEntity = ((SynthesisChamberBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);

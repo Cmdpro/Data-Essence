@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence.block.transmission;
 
 import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.api.misc.ICustomFluidPointBehaviour;
+import com.cmdpro.datanessence.api.misc.ICustomItemPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
@@ -44,6 +46,11 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
         IItemHandler resolved2 = level.getCapability(Capabilities.ItemHandler.BLOCK, getBlockPos(), null);
         if (resolved == null || resolved2 == null) {
             return;
+        }
+        if (other instanceof ICustomItemPointBehaviour behaviour) {
+            if (!behaviour.canInsertItem(resolved, resolved2)) {
+                return;
+            }
         }
         boolean movedAnything = false;
         for (int o = 0; o < resolved2.getSlots(); o++) {
@@ -99,6 +106,11 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
         IItemHandler resolved2 = level.getCapability(Capabilities.ItemHandler.BLOCK, other.getBlockPos(), getDirection());
         if (resolved == null || resolved2 == null) {
             return;
+        }
+        if (other instanceof ICustomItemPointBehaviour behaviour) {
+            if (!behaviour.canExtractItem(resolved2, resolved)) {
+                return;
+            }
         }
         boolean movedAnything = false;
         for (int o = 0; o < resolved2.getSlots(); o++) {

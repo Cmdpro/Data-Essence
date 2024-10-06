@@ -35,7 +35,6 @@ public class InfuserMenu extends AbstractContainerMenu implements IDataNEssenceM
     }
     public InfuserMenu(int pContainerId, Inventory inv, BlockEntity entity) {
         super(MenuRegistry.INFUSER_MENU.get(), pContainerId);
-        checkContainerSize(inv, 3);
         blockEntity = ((InfuserBlockEntity) entity);
         this.level = inv.player.level();
         addPlayerInventory(inv);
