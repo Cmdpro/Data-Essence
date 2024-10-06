@@ -3,11 +3,14 @@ package com.cmdpro.datanessence;
 import com.cmdpro.databank.hiddenblock.HiddenBlockConditions;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.block.transmission.ItemFilter;
+import com.cmdpro.datanessence.block.transmission.ItemFilterBlockEntity;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.SnifferRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -24,6 +27,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import org.apache.commons.lang3.IntegerRange;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -158,7 +162,19 @@ public class DataNEssence
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), (o, direction) -> o.getWaterHandler());
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_FILTER.get(), (o, direction) -> o.getItemHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_FILTER.get(), (o, direction) -> {
+            IntegerRange range = ItemFilter.DIRECTIONS.get(direction);
+            boolean canInsert = true;
+            for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
+                if (!o.getFilterHandler().getStackInSlot(i).isEmpty()) {
+                    canInsert = false;
+                }
+            }
+            if (canInsert) {
+                return o.getItemHandler();
+            }
+            return null;
+        });
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
