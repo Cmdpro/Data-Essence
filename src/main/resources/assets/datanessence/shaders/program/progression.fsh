@@ -8,17 +8,27 @@ in vec2 oneTexel;
 out vec4 fragColor;
 
 void main() {
-    float max = 5.0;
-    float speed = 0.02;
-    float waveyAmount = clamp(time, 0.0, 1.0);
-    speed = time*4;
-    if (time >= max/2) {
-        speed = (max/2)-time;
-        waveyAmount = clamp(max-time, 0.0, 1.0);
+    float levels = 2.0;
+    if (time <= 0.5) {
+        levels = ((1.0-(time/0.5))*45.0)+2.0;
+    } else {
+        float time2 = time-0.5;
+        levels = ((time2/14.5)*45.0)+2.0;
     }
-    vec2 cp = -1.0 + 2.0 * texCoord;
-    float cl = length(cp);
-    vec2 uv = texCoord + (cp / cl) * cos(cl * 12.0 - time * 4.0) * (0.02*(waveyAmount));
-    vec3 col = texture(DiffuseSampler, uv).xyz;
-    fragColor = vec4(col, 1.0);
+    vec4 color = texture(DiffuseSampler, texCoord);
+    vec4 origColor = color;
+    float grayscale = max(color.r, max(color.g, color.b));
+
+    float lower = floor(grayscale * levels) / levels;
+    float lowerDiff = abs(grayscale - lower);
+    float upper = ceil(grayscale * levels) / levels;
+    float upperDiff = abs(upper - grayscale);
+    float level = lowerDiff <= upperDiff ? lower : upper;
+    float adjustment = level / grayscale;
+    color.rgb *= adjustment;
+    if (time >= 14.0) {
+        fragColor = mix(color, origColor, 1.0-(time-14.0));
+    } else {
+        fragColor = color;
+    }
 }

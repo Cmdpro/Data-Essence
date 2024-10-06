@@ -12,7 +12,7 @@ public class ProgressionShader extends PostShaderInstance {
 
     @Override
     public void afterProcess() {
-        if (time >= 5f) {
+        if (time >= 15f) {
             setActive(false);
         }
     }
