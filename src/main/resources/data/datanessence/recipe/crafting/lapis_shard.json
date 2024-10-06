@@ -1,5 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "ingredients": { "minecraft:lapis_lazuli" },
+  "ingredients": [{ "item": "minecraft:lapis_lazuli" }],
   "result": { "id": "datanessence:lapis_shard", "count": 9 }
 }
