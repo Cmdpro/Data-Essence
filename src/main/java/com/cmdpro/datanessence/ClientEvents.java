@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.MobEffectRegistry;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
+import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlConst;
@@ -72,7 +73,7 @@ public class ClientEvents {
                 Vec3 pos2 = Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                 event.getPoseStack().pushPose();
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                ClientRenderingUtil.renderBeam(event.getPoseStack(), Minecraft.getInstance().renderBuffers().bufferSource(), BeaconRenderer.BEAM_LOCATION, event.getPartialTick().getGameTimeDeltaPartialTick(true), 1.0f, Minecraft.getInstance().level.getGameTime(), pos1, pos2, ClientPlayerData.getLinkColor(), 0.025f, 0.03f);
+                ClientRenderingUtil.renderLine(Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, ClientPlayerData.getLinkColor());
                 event.getPoseStack().popPose();
             }
         }

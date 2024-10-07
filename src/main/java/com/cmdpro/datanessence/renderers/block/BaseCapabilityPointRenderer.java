@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -24,6 +25,9 @@ import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointBlockEntity> extends DatabankBlockEntityRenderer<T> {
     public BaseCapabilityPointRenderer(DatabankBlockEntityModel<T> model) {
@@ -37,7 +41,10 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             pPoseStack.pushPose();
             pPoseStack.translate(-pos.x, -pos.y, -pos.z);
             pPoseStack.translate(0.5, 0.5, 0.5);
-            ClientRenderingUtil.renderBeam(pPoseStack, pBufferSource, BeaconRenderer.BEAM_LOCATION, pPartialTick, 1.0f, pBlockEntity.getLevel().getGameTime(), pBlockEntity.getBlockPos().getCenter(), pBlockEntity.link.getCenter(), pBlockEntity.linkColor(), 0.025f, 0.03f);
+            Vec3 origin = pBlockEntity.getBlockPos().getCenter();
+            Vec3 target = pBlockEntity.link.getCenter();
+            VertexConsumer vertexConsumer = pBufferSource.getBuffer(DataNEssenceRenderTypes.WIRES);
+            ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, pBlockEntity.linkColor());
             pPoseStack.popPose();
         }
         pBufferSource.getBuffer(getModel().renderType.apply(getTextureLocation()));
@@ -63,7 +70,13 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         }
         super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
     }
+    public static double getFractionalLerp(int current, int max) {
+        return (double) current / (double) max;
+    }
 
+    public static double getYLerp(double lerp, double dY) {
+        return Math.pow(lerp, Math.log(Math.abs(dY) + 3));
+    }
     public static class Model<T extends BaseCapabilityPointBlockEntity> extends DatabankBlockEntityModel<T> {
         public static AnimationDefinition idle;
         public static final AnimationState animState = new AnimationState();

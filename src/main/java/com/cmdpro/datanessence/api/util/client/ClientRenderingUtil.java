@@ -25,6 +25,8 @@ import org.joml.Matrix4f;
 import org.joml.Vector3f;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client.ClientProgressionUtil {
     public static void renderLockedSlotBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y, NonNullList<Slot> slots) {
@@ -87,6 +89,38 @@ public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client
         }
         ((MultiBufferSource.BufferSource)source).endLastBatch();
         stack.popPose();
+    }
+    public static double getFractionalLerp(int current, int max) {
+        return (double) current / (double) max;
+    }
+
+    public static double getYLerp(double lerp, double dY) {
+        return Math.pow(lerp, Math.log(Math.abs(dY) + 3));
+    }
+    public static void renderLine(VertexConsumer consumer, PoseStack stack, Vec3 pointA, Vec3 pointB, Color color) {
+        int segmentCount = 32;
+        List<Vec3> segments = new ArrayList<>();
+        double sag = 0.3;
+        Vec3 sagOrigin = pointA.y < pointB.y ? pointA : pointB;
+        Vec3 sagTarget = pointA.y < pointB.y ? pointB : pointA;
+        Vec3 diff = sagTarget.subtract(sagOrigin);
+        for (int i = 0; i < segmentCount; i++) {
+            double startLerp = getFractionalLerp(i, segmentCount - 1);
+            double startYLerp = getYLerp(startLerp, diff.y);
+            double sagFactor = sag * (1 - (4 * Math.pow(startLerp - 0.5, 2)));
+            double y = diff.y != 0 ? (startYLerp - sagFactor) * diff.y : -sagFactor;
+            segments.add(new Vec3(startLerp * diff.x, y, startLerp * diff.z).add(sagOrigin));
+        }
+        if (!segments.isEmpty()) {
+            Vec3 currentPos = segments.get(0);
+            for (int i = 1; i < segments.size(); i++) {
+                Vec3 targetPos = segments.get(i);
+                Vec3 normal = currentPos.subtract(targetPos).normalize();
+                consumer.addVertex(stack.last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(color.getRGB()).setNormal(stack.last(), (float) normal.x, (float) normal.y, (float) normal.z);
+                currentPos = targetPos;
+                consumer.addVertex(stack.last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(color.getRGB()).setNormal(stack.last(), (float) normal.x, (float) normal.y, (float) normal.z);
+            }
+        }
     }
     public static Vector3f parametricSphere(float u, float v, float r) {
         return new Vector3f(Mth.cos(u) * Mth.sin(v) * r, Mth.cos(v) * r, Mth.sin(u) * Mth.sin(v) * r);
@@ -163,14 +197,5 @@ public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client
 
     public static void addVertex(PoseStack.Pose pose, VertexConsumer pConsumer, float pRed, float pGreen, float pBlue, float pAlpha, float pY, float pX, float pZ, float pU, float pV) {
         pConsumer.addVertex(pose, pX, (float)pY, pZ).setColor(pRed, pGreen, pBlue, pAlpha).setUv(pU, pV).setOverlay(OverlayTexture.NO_OVERLAY).setLight(15728880).setNormal(pose, 0.0F, 1.0F, 0.0F);
-    }
-    public static void drawLine(ParticleOptions particle, Vec3 point1, Vec3 point2, Level level, double space) {
-        double distance = point1.distanceTo(point2);
-        Vec3 vector = point2.subtract(point1).normalize().multiply(space, space, space);
-        double length = 0;
-        for (Vec3 point = point1; length < distance; point = point.add(vector)) {
-            level.addParticle(particle, point.x, point.y, point.z, 0, 0, 0);
-            length += space;
-        }
     }
 }
