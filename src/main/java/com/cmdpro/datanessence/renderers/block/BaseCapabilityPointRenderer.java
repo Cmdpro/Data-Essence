@@ -22,6 +22,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
@@ -70,6 +71,11 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         }
         super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
     }
+    @Override
+    public AABB getRenderBoundingBox(T blockEntity) {
+        return AABB.INFINITE;
+    }
+
     public static double getFractionalLerp(int current, int max) {
         return (double) current / (double) max;
     }
