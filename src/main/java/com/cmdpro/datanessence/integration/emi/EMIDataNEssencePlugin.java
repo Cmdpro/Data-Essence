@@ -1,8 +1,10 @@
 package com.cmdpro.datanessence.integration.emi;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.integration.emi.recipes.EMIEntropicProcessingRecipe;
 import com.cmdpro.datanessence.integration.emi.recipes.EMIFabricationRecipe;
 import com.cmdpro.datanessence.integration.emi.recipes.EMIInfusionRecipe;
+import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
 import com.cmdpro.datanessence.registry.ItemRegistry;
@@ -26,18 +28,22 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
     public static final EmiStack FABRICATOR_WORKSTATION = EmiStack.of(ItemRegistry.FABRICATOR_ITEM.get());
     public static final EmiStack AUTO_FABRICATOR_WORKSTATION = EmiStack.of(ItemRegistry.AUTO_FABRICATOR_ITEM.get());
     public static final EmiStack INFUSER_WORKSTATION = EmiStack.of(ItemRegistry.INFUSER_ITEM.get());
+    public static final EmiStack ENTROPIC_PROCESSER_WORKSTATION = EmiStack.of(ItemRegistry.ENTROPIC_PROCESSOR_ITEM.get());
 
     public static final EmiRecipeCategory FABRICATION = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"fabrication"), FABRICATOR_WORKSTATION, new EmiTexture(EMI_ICONS, 0, 0, 16, 16));
     public static final EmiRecipeCategory INFUSION = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "infusion"), INFUSER_WORKSTATION, new EmiTexture(EMI_ICONS, 16, 0, 16, 16));
+    public static final EmiRecipeCategory ENTROPIC_PROCESSING = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entropic_processing"), ENTROPIC_PROCESSER_WORKSTATION, new EmiTexture(EMI_ICONS, 32, 0, 16, 16));
 
     @Override
     public void register(EmiRegistry emiRegistry) {
         emiRegistry.addCategory(FABRICATION);
         emiRegistry.addCategory(INFUSION);
+        emiRegistry.addCategory(ENTROPIC_PROCESSING);
 
         emiRegistry.addWorkstation(FABRICATION, FABRICATOR_WORKSTATION);
         emiRegistry.addWorkstation(FABRICATION, AUTO_FABRICATOR_WORKSTATION);
         emiRegistry.addWorkstation(INFUSION, INFUSER_WORKSTATION);
+        emiRegistry.addWorkstation(ENTROPIC_PROCESSING, ENTROPIC_PROCESSER_WORKSTATION);
 
         RecipeManager manager = emiRegistry.getRecipeManager();
 
@@ -46,6 +52,9 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
         }
         for (RecipeHolder<InfusionRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.INFUSION_TYPE.get())) {
             emiRegistry.addRecipe(new EMIInfusionRecipe(recipe.id(), recipe.value()));
+        }
+        for (RecipeHolder<EntropicProcessingRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get())) {
+            emiRegistry.addRecipe(new EMIEntropicProcessingRecipe(recipe.id(), recipe.value()));
         }
     }
 }
