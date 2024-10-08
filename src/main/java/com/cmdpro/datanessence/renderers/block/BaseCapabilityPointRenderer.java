@@ -75,14 +75,6 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
     public AABB getRenderBoundingBox(T blockEntity) {
         return AABB.INFINITE;
     }
-
-    public static double getFractionalLerp(int current, int max) {
-        return (double) current / (double) max;
-    }
-
-    public static double getYLerp(double lerp, double dY) {
-        return Math.pow(lerp, Math.log(Math.abs(dY) + 3));
-    }
     public static class Model<T extends BaseCapabilityPointBlockEntity> extends DatabankBlockEntityModel<T> {
         public static AnimationDefinition idle;
         public static final AnimationState animState = new AnimationState();
