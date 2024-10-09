@@ -137,16 +137,8 @@ dependencies {
 
     implementation "blank:databank-1.0.0"
     implementation "com.eliotlash.mclib:mclib:20"
-    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
-    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-
-    switch (recipe_viewer.toLowerCase(Locale.ROOT)) {
-        case "jei": localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"; break
-        case "emi": localRuntime "dev.emi:emi-neoforge:${emi_version}"; break
-        case "disabled": break
-        default: println("Unknown recipe viewer specified: $recipe_viewer. Must be JEI, EMI, or disabled.")
-    }
+    localRuntime "dev.emi:emi-neoforge:${emi_version}"
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"

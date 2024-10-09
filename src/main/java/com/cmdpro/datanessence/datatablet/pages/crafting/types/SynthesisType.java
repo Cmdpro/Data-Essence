@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.datatablet.CraftingType;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.datatablet.pages.CraftingPage;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
+import com.cmdpro.datanessence.recipe.SynthesisRecipe;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
@@ -19,9 +20,9 @@ import net.minecraft.world.item.crafting.Recipe;
 public class SynthesisType extends CraftingType {
     @Override
     public void render(CraftingPage page, DataTabletScreen screen, GuiGraphics pGuiGraphics, int xOffset, int x, int yOffset, int y, Recipe recipe, int pMouseX, int pMouseY) {
-        if (recipe instanceof InfusionRecipe recipe2) {
-            pGuiGraphics.blit(DataTabletScreen.TEXTURE_CRAFTING, xOffset + x, yOffset + y, 10, 136, 123, 60);
-            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(BlockRegistry.SYNTHESIS_CHAMBER.get()), xOffset + x + 58, yOffset + y + 4, pMouseX, pMouseY);
+        if (recipe instanceof SynthesisRecipe recipe2) {
+            pGuiGraphics.blit(DataTabletScreen.TEXTURE_CRAFTING, xOffset + x, yOffset + y, 133, 76, 123, 60);
+            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(BlockRegistry.SYNTHESIS_CHAMBER.get()), xOffset + x + 82, yOffset + y + 43, pMouseX, pMouseY);
 
             ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x+5, yOffset + y+6, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), 0f), 1000);
             ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x+13, yOffset + y+6, EssenceTypeRegistry.LUNAR_ESSENCE.get(), recipe2.getEssenceCost().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get()), 0f), 1000);

@@ -6,17 +6,16 @@ import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.integration.emi.EMIDataNEssencePlugin;
 import com.cmdpro.datanessence.integration.emi.widgets.EssenceBarWidget;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
-
+import com.cmdpro.datanessence.recipe.SynthesisRecipe;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -24,13 +23,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EMIInfusionRecipe implements EmiRecipe {
+public class EMISynthesisRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiStack> output;
     private final Map<EssenceType, Float> essenceCost;
 
-    public EMIInfusionRecipe(ResourceLocation id, InfusionRecipe recipe) {
+    public EMISynthesisRecipe(ResourceLocation id, SynthesisRecipe recipe) {
         this.id = id;
         this.input = recipe.getIngredients().stream().map(s -> EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())).toList();
         this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())));
@@ -41,7 +40,7 @@ public class EMIInfusionRecipe implements EmiRecipe {
     }
     @Override
     public EmiRecipeCategory getCategory() {
-        return EMIDataNEssencePlugin.INFUSION;
+        return EMIDataNEssencePlugin.SYNTHESIS;
     }
 
     @Override
@@ -76,7 +75,8 @@ public class EMIInfusionRecipe implements EmiRecipe {
         widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 133, 76);
 
         // Input
-        widgetHolder.addSlot(input.get(0), 37, 21).drawBack(false);
+        widgetHolder.addSlot(input.get(0), 37, 10).drawBack(false);
+        widgetHolder.addSlot(input.get(1), 37, 32).drawBack(false);
         // Output
         widgetHolder.addSlot(output.get(0), 81, 21).recipeContext(this).drawBack(false);
 
