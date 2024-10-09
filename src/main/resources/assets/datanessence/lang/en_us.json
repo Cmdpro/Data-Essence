@@ -253,6 +253,8 @@
   "emi.category.datanessence.fabrication": "Fabrication",
   "emi.category.datanessence.infusion": "Infusion",
   "emi.category.datanessence.entropic_processing": "Entropic Processing",
+  "emi.category.datanessence.fluid_mixing": "Fluid Mixing",
+  "emi.category.datanessence.synthesis": "Synthesis",
 
   "commands.datanessence.reset_learned": "Reset all entries back to their original state",
   "commands.datanessence.set_tier": "Set your tier to %1$s",

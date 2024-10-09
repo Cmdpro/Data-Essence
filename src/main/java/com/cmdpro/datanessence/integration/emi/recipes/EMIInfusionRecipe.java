@@ -32,7 +32,7 @@ public class EMIInfusionRecipe implements EmiRecipe {
 
     public EMIInfusionRecipe(ResourceLocation id, InfusionRecipe recipe) {
         this.id = id;
-        this.input = List.of(EmiIngredient.of(recipe.getIngredients().stream().map(s -> EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())).toList()));
+        this.input = recipe.getIngredients().stream().map(s -> EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())).toList();
         this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())));
         this.essenceCost = new HashMap<>();
         for (Map.Entry<ResourceLocation, Float> i : recipe.getEssenceCost().entrySet()) {
@@ -73,7 +73,7 @@ public class EMIInfusionRecipe implements EmiRecipe {
     public void addWidgets(WidgetHolder widgetHolder) {
         ResourceLocation background = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
 
-        widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 10, 136);
+        widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 133, 76);
 
         // Input
         widgetHolder.addSlot(input.get(0), 37, 21).drawBack(false);

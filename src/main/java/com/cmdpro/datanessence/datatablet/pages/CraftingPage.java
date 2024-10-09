@@ -40,7 +40,7 @@ public class CraftingPage extends TextPage {
             x += 125;
             if (o >= 2) {
                 x = 4;
-                y += 64;
+                y += 62;
             }
             o++;
         }
@@ -68,7 +68,7 @@ public class CraftingPage extends TextPage {
             p++;
             if (p >= 2) {
                 x = 4;
-                y += 64;
+                y += 62;
                 p = 0;
             }
         }

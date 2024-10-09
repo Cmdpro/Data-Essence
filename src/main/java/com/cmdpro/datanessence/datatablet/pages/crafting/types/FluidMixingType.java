@@ -22,7 +22,7 @@ public class FluidMixingType extends CraftingType {
     public void render(CraftingPage page, DataTabletScreen screen, GuiGraphics pGuiGraphics, int xOffset, int x, int yOffset, int y, Recipe recipe, int pMouseX, int pMouseY) {
         if (recipe instanceof FluidMixingRecipe recipe2) {
             pGuiGraphics.blit(DataTabletScreen.TEXTURE_CRAFTING, xOffset + x, yOffset + y, 10, 76, 123, 60);
-            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(BlockRegistry.FLUID_MIXER.get()), xOffset + x + 58, yOffset + y + 4, pMouseX, pMouseY);
+            page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(BlockRegistry.FLUID_MIXER.get()), xOffset + x + 78, yOffset + y + 43, pMouseX, pMouseY);
 
             ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x+5, yOffset + y+19, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost(), 1000);
             Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+5, yOffset + y+19, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost());
@@ -33,8 +33,9 @@ public class FluidMixingType extends CraftingType {
             }
 
             page.renderFluidWithTooltip(pGuiGraphics, recipe2.getOutput(), xOffset + x + 78, yOffset + y + 22, pMouseX, pMouseY);
-            page.renderFluidIngredientWithTooltip(screen, pGuiGraphics, recipe2.getInput1(), xOffset + x + 34, yOffset + y + 12, pMouseX, pMouseY);
-            page.renderFluidIngredientWithTooltip(screen, pGuiGraphics, recipe2.getInput2(), xOffset + x + 34, yOffset + y + 34, pMouseX, pMouseY);
+            page.renderFluidIngredientWithTooltip(screen, pGuiGraphics, recipe2.getInput1(), xOffset + x + 24, yOffset + y + 12, pMouseX, pMouseY);
+            page.renderFluidIngredientWithTooltip(screen, pGuiGraphics, recipe2.getInput2(), xOffset + x + 24, yOffset + y + 34, pMouseX, pMouseY);
+            page.renderIngredientWithTooltip(screen, pGuiGraphics, recipe2.getIngredients().get(0), xOffset + x + 35, yOffset + y + 22, pMouseX, pMouseY);
         }
     }
 
