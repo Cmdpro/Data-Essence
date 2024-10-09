@@ -38,6 +38,8 @@ public class DataTabletScreen extends Screen {
 
     public static int imageWidth = 256;
     public static int imageHeight = 166;
+    public static ResourceLocation savedEntry;
+    public static int savedPage;
     public double offsetX;
     public double offsetY;
     public int screenType;
@@ -51,6 +53,16 @@ public class DataTabletScreen extends Screen {
         offsetX = (imageWidth/2);
         offsetY = (imageHeight/2);
         currentTab = getSortedTabs().get(0);
+        if (savedEntry != null) {
+            for (Entry i : Entries.entries.values()) {
+                if (i.id.equals(savedEntry)) {
+                    clickedEntry = i;
+                    screenType = 2;
+                    page = savedPage;
+                    break;
+                }
+            }
+        }
     }
 
     @Override
@@ -64,10 +76,10 @@ public class DataTabletScreen extends Screen {
     }
 
     public boolean clickEntry(Entry entry) {
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
         screenType = 2;
         clickedEntry = entry;
         page = 0;
-        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
         return true;
     }
 
@@ -151,6 +163,13 @@ public class DataTabletScreen extends Screen {
                     return clickedEntry.pages[page].onClick(this, pMouseX, pMouseY, pButton, x, y);
                 }
             }
+            if (pMouseX >= x+imageWidth && pMouseX <= x+imageWidth+17 && pMouseY >= y+10 && pMouseY <= y+10+21) {
+                savedEntry = clickedEntry.id;
+                savedPage = page;
+                Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                super.onClose();
+                return true;
+            }
         }
         return false;
     }
@@ -202,7 +221,13 @@ public class DataTabletScreen extends Screen {
         if (screenType == 0) {
             int o = 0;
             for (DataTab i : getCurrentTabs()) {
-                graphics.blit(getTextureToUse(), x+(o >= 6 ? 256 : -21), y+8+((o%6)*24), o >= 6 ? 66 : 87, 166, 21, 20);
+                int shift = 0;
+                int x2 = x+(o >= 6 ? 255 : -21);
+                int y2 = y+8+((o%6)*24);
+                if (mouseX >= x2 && mouseY >= y2 && mouseX <= x2+21 && mouseY <= y2+20) {
+                    shift = 40;
+                }
+                graphics.blit(getTextureToUse(), x+(o >= 6 ? 256 : -21), y+8+((o%6)*24), o >= 6 ? 66 : 87, 166+shift, 21, 20);
                 graphics.renderItem(i.icon, x+(o >= 6 ? 258 : -18), y+8+((o%6)*24)+2);
                 o++;
             }
@@ -236,10 +261,22 @@ public class DataTabletScreen extends Screen {
             graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
 
             if (this.tabPage+2 < getSortedTabs().size()/6) {
-                graphics.blit(getTextureToUse(), (x + imageWidth) + 30, y + ((imageHeight / 2) - 20), 32, 166, 12, 40);
+                int shift = 0;
+                if (mouseX >= (x+imageWidth)+6 && mouseX <= (x+imageWidth)+18) {
+                    if (mouseY >= y + ((imageHeight / 2) - 20) && mouseY <= y + ((imageHeight / 2) + 20)) {
+                        shift = 40;
+                    }
+                }
+                graphics.blit(getTextureToUse(), (x + imageWidth) + 30, y + ((imageHeight / 2) - 20), 32, 166+shift, 12, 40);
             }
             if (this.tabPage > 0) {
-                graphics.blit(getTextureToUse(), x - 42, y + ((imageHeight / 2) - 20), 20, 166, 12, 40);
+                int shift = 0;
+                if (mouseX >= x-18 && mouseX <= x-6) {
+                    if (mouseY >= y+((imageHeight/2)-20) && mouseY <= y+((imageHeight/2)+20)) {
+                        shift = 40;
+                    }
+                }
+                graphics.blit(getTextureToUse(), x - 42, y + ((imageHeight / 2) - 20), 20, 166, 12+shift, 40);
             }
 
             List<FormattedCharSequence> tooltip = null;
@@ -273,6 +310,11 @@ public class DataTabletScreen extends Screen {
             }
         } else if (screenType == 2) {
             graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.name, x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
+            if (mouseX >= x+imageWidth && mouseX <= x+imageWidth+17 && mouseY >= y+10 && mouseY <= y+10+21) {
+                graphics.blit(TEXTURE_MISC, x + imageWidth, y + 10, 38, 21, 17, 21);
+            } else {
+                graphics.blit(TEXTURE_MISC, x + imageWidth, y + 10, 38, 0, 17, 21);
+            }
         }
     }
 
@@ -282,10 +324,22 @@ public class DataTabletScreen extends Screen {
         page.render(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         pGuiGraphics.disableScissor();
         if (this.page+1 < clickedEntry.getPagesClient().length) {
-            pGuiGraphics.blit(getTextureToUse(), (x + imageWidth) + 6, y + ((imageHeight / 2) - 20), 12, 166, 12, 40);
+            int shift = 0;
+            if (pMouseX >= (x+imageWidth)+6 && pMouseX <= (x+imageWidth)+18) {
+                if (pMouseY >= y + ((imageHeight / 2) - 20) && pMouseY <= y + ((imageHeight / 2) + 20)) {
+                    shift = 40;
+                }
+            }
+            pGuiGraphics.blit(getTextureToUse(), (x + imageWidth) + 6, y + ((imageHeight / 2) - 20), 12, 166+shift, 12, 40);
         }
         if (this.page > 0) {
-            pGuiGraphics.blit(getTextureToUse(), x - 18, y + ((imageHeight / 2) - 20), 0, 166, 12, 40);
+            int shift = 0;
+            if (pMouseX >= x-18 && pMouseX <= x-6) {
+                if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
+                    shift = 40;
+                }
+            }
+            pGuiGraphics.blit(getTextureToUse(), x - 18, y + ((imageHeight / 2) - 20), 0, 166+shift, 12, 40);
         }
         page.renderPost(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
         pGuiGraphics.enableScissor(x+1, y+1, x+imageWidth-1, y+imageHeight-1);
@@ -376,7 +430,15 @@ public class DataTabletScreen extends Screen {
         for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
                 if (i.isVisibleClient()) {
-                    pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166, 20, 20);
+                    int shift = 0;
+                    if (pMouseX >= x && pMouseY >= y && pMouseX <= x+imageWidth && pMouseY <= y+imageHeight) {
+                        if (pMouseX >= ((i.x * 20) - 10) + offsetX + x && pMouseX <= ((i.x * 20) + 10) + offsetX + x) {
+                            if (pMouseY >= ((i.y * 20) - 10) + offsetY + y && pMouseY <= ((i.y * 20) + 10) + offsetY + y) {
+                                shift = 40;
+                            }
+                        }
+                    }
+                    pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166+shift, 20, 20);
                     pGuiGraphics.renderItem(i.icon, x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
                 }
             }

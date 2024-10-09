@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.networking.packet;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.datatablet.*;
 import com.cmdpro.datanessence.networking.Message;
+import com.cmdpro.datanessence.screen.DataTabletScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -25,13 +26,7 @@ public record EntrySyncS2CPacket(Map<ResourceLocation, Entry> entries, Map<Resou
     }
     @Override
     public void handleClient(Minecraft minecraft, Player player) {
-        Entries.entries.clear();
-        Entries.entries.putAll(entries);
-        Entries.tabs.clear();
-        Entries.tabs.putAll(tabs);
-        for (Entry i : Entries.entries.values()) {
-            i.updateParentEntries();
-        }
+        ClientHandler.handle(this);
     }
 
     @Override
@@ -39,4 +34,17 @@ public record EntrySyncS2CPacket(Map<ResourceLocation, Entry> entries, Map<Resou
         return TYPE;
     }
     public static final Type<EntrySyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry_sync"));
+
+    public static class ClientHandler {
+        public static void handle(EntrySyncS2CPacket packet) {
+            Entries.entries.clear();
+            Entries.entries.putAll(packet.entries);
+            Entries.tabs.clear();
+            Entries.tabs.putAll(packet.tabs);
+            for (Entry i : Entries.entries.values()) {
+                i.updateParentEntries();
+            }
+            DataTabletScreen.savedEntry = null;
+        }
+    }
 }
