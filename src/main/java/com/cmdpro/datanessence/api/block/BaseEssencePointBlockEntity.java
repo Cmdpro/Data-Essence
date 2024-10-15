@@ -3,12 +3,14 @@ package com.cmdpro.datanessence.api.block;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
+import com.cmdpro.datanessence.api.item.INodeUpgrade;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -16,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
 import java.awt.*;
 
@@ -23,6 +26,28 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
     public BlockPos link;
     public SingleEssenceContainer storage;
 
+    public final ItemStackHandler universalUpgrade = new ItemStackHandler(1) {
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+        }
+    };
+    public final ItemStackHandler uniqueUpgrade = new ItemStackHandler(1) {
+        @Override
+        protected void onContentsChanged(int slot) {
+            setChanged();
+        }
+    };
+    public <T> T getValue(ResourceLocation id, T defaultValue) {
+        T value = defaultValue;
+        if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            value = upgrade.getValue(id, value, this);
+        }
+        if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            value = upgrade.getValue(id, value, this);
+        }
+        return value;
+    }
     @Override
     public SingleEssenceContainer getStorage() {
         return storage;
