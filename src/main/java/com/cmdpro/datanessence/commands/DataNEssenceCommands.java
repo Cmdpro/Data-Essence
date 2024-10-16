@@ -58,7 +58,7 @@ public class DataNEssenceCommands {
                 )
                 .then(Commands.literal("give_dragon_part")
                         .then(Commands.argument("part", StringArgumentType.string()).suggests((stack, builder) -> {
-                            return SharedSuggestionProvider.suggest(new String[] { "horns", "tail", "wings" }, builder);
+                            return SharedSuggestionProvider.suggest(new String[] { "horns", "tail", "wings", "all" }, builder);
                         }).executes(command -> {
                             return givedragonpart(command);
                         }))
@@ -103,11 +103,21 @@ public class DataNEssenceCommands {
                 player.setData(AttachmentTypeRegistry.HAS_TAIL, true);
             } else if (part.equals("wings")) {
                 player.setData(AttachmentTypeRegistry.HAS_WINGS, true);
+            } else if (part.equals("all")) {
+                player.setData(AttachmentTypeRegistry.HAS_HORNS, true);
+                player.setData(AttachmentTypeRegistry.HAS_TAIL, true);
+                player.setData(AttachmentTypeRegistry.HAS_WINGS, true);
             }
             ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), (ServerPlayer)player);
-            command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.datanessence.give_dragon_part", part, player.getName());
-            }, true);
+            if (part.equals("all")) {
+                command.getSource().sendSuccess(() -> {
+                    return Component.translatable("commands.datanessence.give_all_dragon_parts", part, player.getName());
+                }, true);
+            } else {
+                command.getSource().sendSuccess(() -> {
+                    return Component.translatable("commands.datanessence.give_dragon_part", part, player.getName());
+                }, true);
+            }
         }
         return Command.SINGLE_SUCCESS;
     }

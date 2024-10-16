@@ -201,6 +201,8 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         if (pTag.getBoolean("hasLink")) {
             link = new BlockPos(pTag.getInt("linkX"), pTag.getInt("linkY"), pTag.getInt("linkZ"));
         }
+        uniqueUpgrade.deserializeNBT(pRegistries, pTag.getCompound("uniqueUpgrade"));
+        universalUpgrade.deserializeNBT(pRegistries, pTag.getCompound("universalUpgrade"));
     }
 
 }

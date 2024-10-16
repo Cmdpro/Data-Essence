@@ -120,6 +120,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
+        boolean success = pPlayer.getItemInHand(pHand).is(getRequiredWire()) || pPlayer.getItemInHand(pHand).getItem() instanceof INodeUpgrade;
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof BaseCapabilityPointBlockEntity ent) {
@@ -161,7 +162,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                 }
             }
         }
-        if (pPlayer.getItemInHand(pHand).is(getRequiredWire()) || pPlayer.getItemInHand(pHand).getItem() instanceof INodeUpgrade) {
+        if (success) {
             return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
         }
         return super.useItemOn(pStack, pState, pLevel, pPos, pPlayer, pHand, pHitResult);
@@ -180,13 +181,13 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                         pLevel.addFreshEntity(item);
                     }
                 } else {
-                    if (!ent.uniqueUpgrade.getStackInSlot(0).isEmpty()) {
-                        pPlayer.getInventory().add(ent.uniqueUpgrade.getStackInSlot(0));
-                        ent.uniqueUpgrade.setStackInSlot(0, ItemStack.EMPTY);
-                        ent.updateBlock();
-                    } else if (!ent.universalUpgrade.getStackInSlot(0).isEmpty()) {
+                    if (!ent.universalUpgrade.getStackInSlot(0).isEmpty()) {
                         pPlayer.getInventory().add(ent.universalUpgrade.getStackInSlot(0));
                         ent.universalUpgrade.setStackInSlot(0, ItemStack.EMPTY);
+                        ent.updateBlock();
+                    } else if (!ent.uniqueUpgrade.getStackInSlot(0).isEmpty()) {
+                        pPlayer.getInventory().add(ent.uniqueUpgrade.getStackInSlot(0));
+                        ent.uniqueUpgrade.setStackInSlot(0, ItemStack.EMPTY);
                         ent.updateBlock();
                     }
                 }
