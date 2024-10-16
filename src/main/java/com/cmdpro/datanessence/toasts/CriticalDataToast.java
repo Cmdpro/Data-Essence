@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.toasts;
 
 import com.cmdpro.datanessence.datatablet.Entry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
@@ -45,7 +46,7 @@ public class CriticalDataToast implements Toast {
         }
         if (!this.playedSound && pTimeSinceLastVisible > 0L) {
             this.playedSound = true;
-            pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F));
+            pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.CRITICAL_DATA_UNLOCKED.get(), 1.0F, 1.0F));
         }
 
         pGuiGraphics.renderFakeItem(entry.icon, 8, 8);

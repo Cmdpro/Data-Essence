@@ -66,6 +66,7 @@ public class DataNEssence
         ArmorMaterialRegistry.ARMOR_MATERIALS.register(bus);
         EssenceTypeRegistry.ESSENCE_TYPES.register(bus);
         MobEffectRegistry.MOB_EFFECTS.register(bus);
+        SoundRegistry.SOUND_EVENTS.register(bus);
         random = RandomSource.create();
         HiddenBlockConditions.conditions.put(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
     }

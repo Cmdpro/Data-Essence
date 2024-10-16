@@ -1,2 +1,7 @@
 {
+    "critical_data_unlocked": {
+        "sounds": [
+            "datanessence:critical_data_unlocked"
+        ]
+    }
 }
