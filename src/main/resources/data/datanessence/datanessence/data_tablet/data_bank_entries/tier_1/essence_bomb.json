@@ -1,0 +1,17 @@
+{
+  "icon": {
+    "id": "datanessence:essence_bomb"
+  },
+  "tier": 1,
+  "minigames": [
+    {
+      "type": "datanessence:minesweeper",
+      "bombs": 10,
+      "size": 5
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.essence_bomb.name"
+  },
+  "entry": "datanessence:tools/essence_bomb"
+}

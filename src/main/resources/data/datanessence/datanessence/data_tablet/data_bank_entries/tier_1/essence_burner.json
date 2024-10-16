@@ -1,8 +1,8 @@
 {
   "icon": {
-    "id": "datanessence:data_tablet"
+    "id": "datanessence:essence_burner"
   },
-  "tier": 2,
+  "tier": 1,
   "minigames": [
     {
       "type": "datanessence:wire",
@@ -29,25 +29,25 @@
           "x": 7,
           "y": 5,
           "type": 1,
-          "essence": 1
+          "essence": 0
         },
         {
           "x": 5,
           "y": 7,
           "type": 3,
-          "essence": 1
+          "essence": 0
         },
         {
           "x": 7,
           "y": 9,
           "type": 2,
-          "essence": 1
+          "essence": 0
         }
       ]
     }
   ],
   "name": {
-    "translate": "data_tablet.pages.test2.name"
+    "translate": "data_tablet.pages.essence_burner.name"
   },
-  "entry": "datanessence:test2"
+  "entry": "datanessence:essence_manipulation/essence_burner"
 }

@@ -1,8 +1,7 @@
 {
   "add": [
-    "datanessence:fabricator",
-    "datanessence:test1",
-    "datanessence:test2"
+    "datanessence:tier_1/essence_burner",
+    "datanessence:tier_1/essence_bomb"
   ],
   "remove":[
     "datanessence:fabricator"
