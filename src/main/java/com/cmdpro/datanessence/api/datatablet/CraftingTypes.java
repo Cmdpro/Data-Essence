@@ -14,5 +14,6 @@ public class CraftingTypes {
         types.add(new EntropicProcessorType());
         types.add(new FluidMixingType());
         types.add(new SynthesisType());
+        types.add(new SmeltingType());
     }
 }

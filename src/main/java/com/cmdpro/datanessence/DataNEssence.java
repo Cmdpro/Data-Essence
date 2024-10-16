@@ -184,7 +184,6 @@ public class DataNEssence
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.ITEMS.get())) {
             event.accept(ItemRegistry.DATA_TABLET.get());
             event.accept(ItemRegistry.MAGIC_WRENCH.get());
-            event.accept(ItemRegistry.WIRE_SPOOL.get());
             event.accept(ItemRegistry.ESSENCE_WIRE.get());
             event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE.get());
             event.accept(ItemRegistry.NATURAL_ESSENCE_WIRE.get());
@@ -199,10 +198,16 @@ public class DataNEssence
             event.accept(ItemRegistry.EXOTIC_ESSENCE_BOMB.get());
             event.accept(ItemRegistry.CAPACITANCE_PANEL.get());
             event.accept(ItemRegistry.CONDUCTANCE_ROD.get());
+            event.accept(ItemRegistry.WIRE_SPOOL.get());
             event.accept(ItemRegistry.LOGICAL_MATRIX.get());
             event.accept(ItemRegistry.PROPELLER.get());
             event.accept(ItemRegistry.LENSING_CRYSTAL.get());
             event.accept(ItemRegistry.LENS.get());
+            event.accept(ItemRegistry.COPPER_NUGGET.get());
+            event.accept(ItemRegistry.DIAMOND_SHARD.get());
+            event.accept(ItemRegistry.EMERALD_SHARD.get());
+            event.accept(ItemRegistry.LAPIS_SHARD.get());
+            event.accept(ItemRegistry.COAL_LUMP.get());
             event.accept(ItemRegistry.COGNIZANT_CUBE.get());
             event.accept(ItemRegistry.HARMING_LENS.get());
             event.accept(ItemRegistry.HEALING_LENS.get());
@@ -211,11 +216,6 @@ public class DataNEssence
             event.accept(ItemRegistry.PRECISION_LENS.get());
             event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
             event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
-            event.accept(ItemRegistry.COPPER_NUGGET.get());
-            event.accept(ItemRegistry.DIAMOND_SHARD.get());
-            event.accept(ItemRegistry.EMERALD_SHARD.get());
-            event.accept(ItemRegistry.LAPIS_SHARD.get());
-            event.accept(ItemRegistry.COAL_LUMP.get());
             event.accept(ItemRegistry.ESSENCE_SWORD.get());
             event.accept(ItemRegistry.SPEED_UPGRADE.get());
             event.accept(ItemRegistry.LIMITER_UPGRADE.get());

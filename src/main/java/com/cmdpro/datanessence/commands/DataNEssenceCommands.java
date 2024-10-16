@@ -68,6 +68,10 @@ public class DataNEssenceCommands {
                             return unlockall(command);
                         })
                 )
+                .then(Commands.literal("maximize")
+                        .executes(command -> {
+                            return maximize(command);
+                        }))
         );
     }
     private static int checkoverlaps(CommandContext<CommandSourceStack> command) {
@@ -102,7 +106,7 @@ public class DataNEssenceCommands {
             }
             ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), (ServerPlayer)player);
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.datanessence.give_dragon_part", part);
+                return Component.translatable("commands.datanessence.give_dragon_part", part, player.getName());
             }, true);
         }
         return Command.SINGLE_SUCCESS;
@@ -113,7 +117,7 @@ public class DataNEssenceCommands {
             int tier = command.getArgument("tier", int.class);
             DataTabletUtil.setTier(player, tier);
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.datanessence.set_tier", tier);
+                return Component.translatable("commands.datanessence.set_tier", tier, player.getName());
             }, true);
         }
         return Command.SINGLE_SUCCESS;
@@ -147,10 +151,10 @@ public class DataNEssenceCommands {
                 if (!unlockedEntries.contains(entry)) {
                     DataTabletUtil.unlockEntryAndParents(player, entry, incomplete);
                     command.getSource().sendSuccess(() -> {
-                        return Component.translatable("commands.datanessence.unlock.unlock_entry", entry.toString());
+                        return Component.translatable("commands.datanessence.unlock.unlock_entry", entry.toString(), player.getName());
                     }, true);
                 } else {
-                    command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_already_unlocked", entry.toString()));
+                    command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_already_unlocked", entry.toString(), player.getName()));
                     return 0;
                 }
             } else {
@@ -168,6 +172,33 @@ public class DataNEssenceCommands {
             }
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.unlock_all");
+            }, true);
+        }
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int maximize(CommandContext<CommandSourceStack> command) {
+        if (command.getSource().getEntity() instanceof Player) {
+            Player player = (Player) command.getSource().getEntity();
+
+            for (Entry entry : Entries.entries.values()) {
+                DataTabletUtil.unlockEntry(player, entry.id, false);
+            }
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.datanessence.unlock_all", player.getName());
+            }, true);
+
+            DataTabletUtil.setTier(player, 8);
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.datanessence.set_tier", 8, player.getName());
+            }, true);
+
+            player.setData(AttachmentTypeRegistry.HAS_HORNS, true);
+            player.setData(AttachmentTypeRegistry.HAS_TAIL, true);
+            player.setData(AttachmentTypeRegistry.HAS_WINGS, true);
+            ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), (ServerPlayer)player);
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.datanessence.give_all_dragon_parts", player.getName());
             }, true);
         }
         return Command.SINGLE_SUCCESS;

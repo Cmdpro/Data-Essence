@@ -1,4 +1,4 @@
-// 1.21.1	2024-10-15T22:42:45.6558641	Item Models: datanessence
+// 1.21.1	2024-10-16T02:20:28.87466739	Item Models: datanessence
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
@@ -24,6 +24,7 @@ b373f009203404901822d57b9c55e629c6534e1c assets/datanessence/models/item/essence
 6b8f708d916b305e027c88bb21f80121030130bc assets/datanessence/models/item/exotic_essence_bomb.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/exotic_essence_point.json
 0973a25710a93f8da7bc1c96b160a5219a2f1447 assets/datanessence/models/item/exotic_essence_wire.json
+d747ed713b2de5e004d4e19bfe914756bf68d6a3 assets/datanessence/models/item/filter_upgrade.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/fluid_point.json
 f356571ca7c924ca20dabcdac766bc379c05608e assets/datanessence/models/item/fluid_wire.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/item_point.json

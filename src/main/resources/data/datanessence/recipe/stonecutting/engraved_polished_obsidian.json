@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": { "item": "datanessence:polished_obsidian" },
+  "result": { "id": "datanessence:engraved_polished_obsidian", "count": 1 }
+}

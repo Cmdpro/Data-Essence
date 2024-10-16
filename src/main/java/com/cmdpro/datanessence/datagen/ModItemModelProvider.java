@@ -90,6 +90,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItemWithSubdirectory(ItemRegistry.SPEED_UPGRADE, "sigils");
         simpleItemWithSubdirectory(ItemRegistry.LIMITER_UPGRADE, "sigils");
+        simpleItemWithSubdirectory(ItemRegistry.FILTER_UPGRADE, "sigils");
 
         essencePoint(ItemRegistry.LUNAR_ESSENCE_POINT_ITEM);
         essencePoint(ItemRegistry.NATURAL_ESSENCE_POINT_ITEM);
