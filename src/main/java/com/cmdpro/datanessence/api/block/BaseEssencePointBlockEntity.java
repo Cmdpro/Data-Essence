@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.api.block;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
@@ -38,15 +39,69 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
             setChanged();
         }
     };
+    @SuppressWarnings("unchecked")
     public <T> T getValue(ResourceLocation id, T defaultValue) {
         T value = defaultValue;
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            value = upgrade.getValue(id, value, this);
+            Object modified = upgrade.getValue(id, value, this);
+            if (modified != null) {
+                value = (T)modified;
+            }
         }
         if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            value = upgrade.getValue(id, value, this);
+            Object modified = upgrade.getValue(id, value, this);
+            if (modified != null) {
+                value = (T)modified;
+            }
         }
         return value;
+    }
+    public boolean preTransferHooks(BlockEntity other) {
+        boolean cancel = false;
+        if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            if (upgrade.preTransfer(this, other, cancel)) {
+                cancel = true;
+            }
+        }
+        if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            if (upgrade.preTransfer(this, other, cancel)) {
+                cancel = true;
+            }
+        }
+        return cancel;
+    }
+    public void postTransferHooks(BlockEntity other) {
+        if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            upgrade.postTransfer(this, other);
+        }
+        if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            upgrade.postTransfer(this, other);
+        }
+    }
+    public boolean preTakeHooks(BlockEntity other) {
+        boolean cancel = false;
+        if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            if (upgrade.preTake(this, other, cancel)) {
+                cancel = true;
+            }
+        }
+        if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            if (upgrade.preTake(this, other, cancel)) {
+                cancel = true;
+            }
+        }
+        return cancel;
+    }
+    public void postTakeHooks(BlockEntity other) {
+        if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            upgrade.postTake(this, other);
+        }
+        if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            upgrade.postTake(this, other);
+        }
+    }
+    public float getFinalSpeed(float value) {
+        return value*getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "speed_multiplier"), 1f);
     }
     @Override
     public SingleEssenceContainer getStorage() {
@@ -69,6 +124,8 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
             pTag.putInt("linkZ", link.getZ());
         }
         pTag.put("EssenceStorage", storage.toNbt());
+        pTag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
+        pTag.put("universalUpgrade", universalUpgrade.serializeNBT(pRegistries));
     }
     public static void updateBlock(BlockEntity ent) {
         BlockState blockState = ent.getLevel().getBlockState(ent.getBlockPos());
@@ -80,17 +137,23 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
             BlockEntity ent1 = pLevel.getBlockEntity(pPos.relative(pBlockEntity.getDirection().getOpposite()));
             if (ent1 instanceof EssenceBlockEntity ent) {
                 if (pBlockEntity.link == null) {
-                    pBlockEntity.transfer(ent1, ent.getStorage());
+                    pBlockEntity.preTransferHooks(ent1);
+                    pBlockEntity.deposit(ent1, ent.getStorage());
+                    pBlockEntity.postTransferHooks(ent1);
                     updateBlock(ent1);
                 } else {
+                    pBlockEntity.preTakeHooks(ent1);
                     pBlockEntity.take(ent1, ent.getStorage());
+                    pBlockEntity.postTakeHooks(ent1);
                     updateBlock(ent1);
                 }
             }
             if (pBlockEntity.link != null) {
                 BlockEntity ent2 = pLevel.getBlockEntity(pBlockEntity.link);
                 if (ent2 instanceof EssenceBlockEntity ent) {
+                    pBlockEntity.preTransferHooks(ent2);
                     pBlockEntity.transfer(ent2, ent.getStorage());
+                    pBlockEntity.postTransferHooks(ent2);
                     updateBlock(ent2);
                 } else {
                     pBlockEntity.link = null;
@@ -103,6 +166,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
             }
         }
     }
+    public abstract void deposit(BlockEntity otherEntity, EssenceStorage other);
     public abstract void transfer(BlockEntity otherEntity, EssenceStorage other);
     public abstract void take(BlockEntity otherEntity, EssenceStorage other);
     public Direction getDirection() {
@@ -127,6 +191,8 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
         } else {
             link = null;
         }
+        uniqueUpgrade.deserializeNBT(lookupProvider, tag.getCompound("uniqueUpgrade"));
+        universalUpgrade.deserializeNBT(lookupProvider, tag.getCompound("universalUpgrade"));
     }
 
     @Override
@@ -138,6 +204,8 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
             tag.putInt("linkY", link.getY());
             tag.putInt("linkZ", link.getZ());
         }
+        tag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
+        tag.put("universalUpgrade", universalUpgrade.serializeNBT(pRegistries));
         return tag;
     }
     public void updateBlock() {
@@ -153,6 +221,8 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
             link = new BlockPos(pTag.getInt("linkX"), pTag.getInt("linkY"), pTag.getInt("linkZ"));
         }
         storage.fromNbt(pTag.getCompound("EssenceStorage"));
+        uniqueUpgrade.deserializeNBT(pRegistries, pTag.getCompound("uniqueUpgrade"));
+        universalUpgrade.deserializeNBT(pRegistries, pTag.getCompound("universalUpgrade"));
     }
 
 }

@@ -129,7 +129,6 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                         if (ent.link == null) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
                             PlayerDataUtil.updateData((ServerPlayer) pPlayer);
-                            return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
                         }
                     } else {
                         if (linkFrom.get().getBlockState().getBlock() instanceof BaseCapabilityPoint other) {
@@ -140,7 +139,6 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
-                                    return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
                                 }
                             }
                         }
@@ -151,14 +149,19 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                         copy.setCount(1);
                         ent.universalUpgrade.setStackInSlot(0, copy);
                         pPlayer.getItemInHand(pHand).shrink(1);
+                        ent.updateBlock();
                     } else if (ent.uniqueUpgrade.getStackInSlot(0).isEmpty() && upgrade.getType().equals(INodeUpgrade.Type.UNIQUE)) {
                         ItemStack copy = pPlayer.getItemInHand(pHand).copy();
                         copy.setCount(1);
                         ent.uniqueUpgrade.setStackInSlot(0, copy);
                         pPlayer.getItemInHand(pHand).shrink(1);
+                        ent.updateBlock();
                     }
                 }
             }
+        }
+        if (pPlayer.isHolding(getRequiredWire()) || pPlayer.getItemInHand(pHand).getItem() instanceof INodeUpgrade) {
+            return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
         }
         return super.useItemOn(pStack, pState, pLevel, pPos, pPlayer, pHand, pHitResult);
     }

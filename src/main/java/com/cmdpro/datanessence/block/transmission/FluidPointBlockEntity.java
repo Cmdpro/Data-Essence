@@ -25,7 +25,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
     public FluidPointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_POINT.get(), pos, state);
     }
-    private final FluidTank fluidHandler = new FluidTank(DataNEssenceConfig.fluidPointTransfer);
+    private final FluidTank fluidHandler = new FluidTank(Integer.MAX_VALUE);
     public IFluidHandler getFluidHandler() {
         return lazyFluidHandler.get();
     }
@@ -36,6 +36,23 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
     }
     @Override
     public void transfer(BlockEntity other) {
+        IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, getBlockPos(), null);
+        if (resolved2 == null) {
+            return;
+        }
+        if (resolved2.getFluidInTank(0).getAmount() > 0) {
+            return;
+        }
+        deposit(other);
+    }
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
+        tag.put("fluid", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
+        super.saveAdditional(tag, pRegistries);
+    }
+
+    @Override
+    public void deposit(BlockEntity other) {
         IFluidHandler resolved = level.getCapability(Capabilities.FluidHandler.BLOCK, other.getBlockPos(), getDirection());
         IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, getBlockPos(), null);
         if (resolved == null || resolved2 == null) {
@@ -55,11 +72,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
             }
         }
     }
-    @Override
-    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        tag.put("fluid", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
-        super.saveAdditional(tag, pRegistries);
-    }
+
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
@@ -71,6 +84,9 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
         IFluidHandler resolved = level.getCapability(Capabilities.FluidHandler.BLOCK, getBlockPos(), null);
         IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, other.getBlockPos(), getDirection());
         if (resolved == null || resolved2 == null) {
+            return;
+        }
+        if (resolved.getFluidInTank(0).getAmount() > 0) {
             return;
         }
         if (other instanceof ICustomFluidPointBehaviour behaviour) {

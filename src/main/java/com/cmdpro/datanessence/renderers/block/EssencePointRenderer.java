@@ -1,12 +1,11 @@
 package com.cmdpro.datanessence.renderers.block;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.renderers.block.BaseEssencePointRenderer;
 import com.cmdpro.datanessence.block.transmission.EssencePointBlockEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.Resource;
 
 
 public class EssencePointRenderer extends BaseEssencePointRenderer<EssencePointBlockEntity> {

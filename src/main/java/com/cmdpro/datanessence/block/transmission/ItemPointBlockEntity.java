@@ -42,6 +42,23 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
     }
     @Override
     public void transfer(BlockEntity other) {
+        IItemHandler resolved2 = level.getCapability(Capabilities.ItemHandler.BLOCK, other.getBlockPos(), getDirection());
+        if (resolved2 == null) {
+            return;
+        }
+        if (resolved2.getStackInSlot(0).getCount() > 0) {
+            return;
+        }
+        deposit(other);
+    }
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
+        tag.put("inventory", itemHandler.serializeNBT(pRegistries));
+        super.saveAdditional(tag, pRegistries);
+    }
+
+    @Override
+    public void deposit(BlockEntity other) {
         IItemHandler resolved = level.getCapability(Capabilities.ItemHandler.BLOCK, other.getBlockPos(), getDirection());
         IItemHandler resolved2 = level.getCapability(Capabilities.ItemHandler.BLOCK, getBlockPos(), null);
         if (resolved == null || resolved2 == null) {
@@ -78,11 +95,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
             }
         }
     }
-    @Override
-    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        tag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        super.saveAdditional(tag, pRegistries);
-    }
+
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
@@ -105,6 +118,9 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
         IItemHandler resolved = level.getCapability(Capabilities.ItemHandler.BLOCK, getBlockPos(), null);
         IItemHandler resolved2 = level.getCapability(Capabilities.ItemHandler.BLOCK, other.getBlockPos(), getDirection());
         if (resolved == null || resolved2 == null) {
+            return;
+        }
+        if (resolved.getStackInSlot(0).getCount() > 0) {
             return;
         }
         if (other instanceof ICustomItemPointBehaviour behaviour) {

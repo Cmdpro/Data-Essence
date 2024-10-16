@@ -88,6 +88,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.NATURAL_ESSENCE_BOMB, "bombs");
         simpleItemWithSubdirectory(ItemRegistry.EXOTIC_ESSENCE_BOMB, "bombs");
 
+        simpleItemWithSubdirectory(ItemRegistry.SPEED_UPGRADE, "sigils");
+        simpleItemWithSubdirectory(ItemRegistry.LIMITER_UPGRADE, "sigils");
+
         essencePoint(ItemRegistry.LUNAR_ESSENCE_POINT_ITEM);
         essencePoint(ItemRegistry.NATURAL_ESSENCE_POINT_ITEM);
         essencePoint(ItemRegistry.EXOTIC_ESSENCE_POINT_ITEM);

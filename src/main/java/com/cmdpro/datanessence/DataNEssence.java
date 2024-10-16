@@ -217,6 +217,9 @@ public class DataNEssence
             event.accept(ItemRegistry.LAPIS_SHARD.get());
             event.accept(ItemRegistry.COAL_LUMP.get());
             event.accept(ItemRegistry.ESSENCE_SWORD.get());
+            event.accept(ItemRegistry.SPEED_UPGRADE.get());
+            event.accept(ItemRegistry.LIMITER_UPGRADE.get());
+            event.accept(ItemRegistry.FILTER_UPGRADE.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());

@@ -82,6 +82,11 @@ public class ItemRegistry {
     public static final Supplier<Item> COGNIZANT_CUBE = register("cognizant_cube", () -> new CognizantCube(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> TRAVERSITE_ROAD_CHUNK = register("traversite_road_chunk", () -> new TraversiteRoadChunk(new Item.Properties()));
 
+    // Node Upgrades
+    public static final Supplier<Item> SPEED_UPGRADE = register("speed_upgrade", () -> new SpeedNodeUpgrade(new Item.Properties(), 1));
+    public static final Supplier<Item> FILTER_UPGRADE = register("filter_upgrade", () -> new FilterNodeUpgrade(new Item.Properties()));
+    public static final Supplier<Item> LIMITER_UPGRADE = register("limiter_upgrade", () -> new LimiterNodeUpgrade(new Item.Properties()));
+
     private static <T extends Item> Supplier<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);
     }

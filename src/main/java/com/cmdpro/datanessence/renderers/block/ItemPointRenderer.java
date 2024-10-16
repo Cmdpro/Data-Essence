@@ -1,11 +1,10 @@
 package com.cmdpro.datanessence.renderers.block;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.transmission.FluidPointBlockEntity;
+import com.cmdpro.datanessence.api.renderers.block.BaseCapabilityPointRenderer;
 import com.cmdpro.datanessence.block.transmission.ItemPointBlockEntity;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
 
 
