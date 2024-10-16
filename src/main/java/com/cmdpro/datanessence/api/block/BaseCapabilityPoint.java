@@ -123,7 +123,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof BaseCapabilityPointBlockEntity ent) {
-                if (pPlayer.isHolding(getRequiredWire())) {
+                if (pPlayer.getItemInHand(pHand).is(getRequiredWire())) {
                     Optional<BlockEntity> linkFrom = pPlayer.getData(AttachmentTypeRegistry.LINK_FROM);
                     if (!linkFrom.isPresent()) {
                         if (ent.link == null) {
@@ -143,7 +143,8 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                             }
                         }
                     }
-                } else if (pPlayer.getItemInHand(pHand).getItem() instanceof INodeUpgrade upgrade) {
+                }
+                if (pPlayer.getItemInHand(pHand).getItem() instanceof INodeUpgrade upgrade) {
                     if (ent.universalUpgrade.getStackInSlot(0).isEmpty() && upgrade.getType().equals(INodeUpgrade.Type.UNIVERSAL)) {
                         ItemStack copy = pPlayer.getItemInHand(pHand).copy();
                         copy.setCount(1);
@@ -160,7 +161,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                 }
             }
         }
-        if (pPlayer.isHolding(getRequiredWire()) || pPlayer.getItemInHand(pHand).getItem() instanceof INodeUpgrade) {
+        if (pPlayer.getItemInHand(pHand).is(getRequiredWire()) || pPlayer.getItemInHand(pHand).getItem() instanceof INodeUpgrade) {
             return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
         }
         return super.useItemOn(pStack, pState, pLevel, pPos, pPlayer, pHand, pHitResult);
@@ -182,9 +183,11 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                     if (!ent.uniqueUpgrade.getStackInSlot(0).isEmpty()) {
                         pPlayer.getInventory().add(ent.uniqueUpgrade.getStackInSlot(0));
                         ent.uniqueUpgrade.setStackInSlot(0, ItemStack.EMPTY);
+                        ent.updateBlock();
                     } else if (!ent.universalUpgrade.getStackInSlot(0).isEmpty()) {
                         pPlayer.getInventory().add(ent.universalUpgrade.getStackInSlot(0));
                         ent.universalUpgrade.setStackInSlot(0, ItemStack.EMPTY);
+                        ent.updateBlock();
                     }
                 }
             }
