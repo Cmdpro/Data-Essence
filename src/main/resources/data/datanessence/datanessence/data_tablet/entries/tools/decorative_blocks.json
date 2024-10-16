@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "id": "datanessence:polished_obsidian"
+  },
+  "tab": "datanessence:tools",
+  "x": 0,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.decorative_blocks.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/decoration/polished_obsidian",
+        "datanessence:smelting/polished_obsidian"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.decorative_blocks.page2.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.decorative_blocks.name"
+  },
+  "parents": [
+    "datanessence:basics/fabricator"
+  ]
+}

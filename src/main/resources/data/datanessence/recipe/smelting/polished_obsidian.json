@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "ingredient": { "tag": "datanessence:shaped_polished_obsidian_blocks" },
+  "result": { "id": "datanessence:polished_obsidian" },
+  "experience": 0.1
+}

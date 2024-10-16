@@ -79,7 +79,7 @@
   "item.datanessence.magitech_8_ball.result8": "Go ahead. See what happens.",
   "item.datanessence.magitech_8_ball.result9": "That sounds funny, do it.",
   "item.datanessence.magitech_8_ball.result10": "Why not.",
-  "item.datanessence.magitech_8_ball.result11": ".lfgsnh sqfgozorrq zexkzlfge zlxd xgN",
+  "item.datanessence.magitech_8_ball.result11": ".ukvyxi yokvagallo gfnbgukvf gune nvX",
   "block.datanessence.computer": "Computer",
   "block.datanessence.structure_protector": "Structure Protector",
   "block.datanessence.structure_protector.select_pos_1": "Select Corner 1",
@@ -241,6 +241,10 @@
   "data_tablet.pages.primitive_antigravity_pack.page1.text": "As travel between research centers often involves crossing uneven terrain, such as cliffs or mountains, some measure of protection from lethal falls is desirable. Our first developments into the matter led us to the Primitive Antigravity Pack, which is able to provide some measure of grace during falls when charged up with Essence.",
   "data_tablet.pages.charger.name":                          "Charging Equipment",
   "data_tablet.pages.charger.page1.text":                    "A device may be constructed that channels Essence along a pair of exciters into an item, thereby charging it with Essence. This charger is therefore invaluable in the fuelling of tools and equipment - instead of having to carry an entire Essence Battery around and somehow connect the item to it, which would be, in this researcher's opinion, asinine.",
+  "data_tablet.pages.decorative_blocks.name": "Decorative Blocks",
+  "data_tablet.pages.decorative_blocks.flavor": " ◇ A satisfying factory game",
+  "data_tablet.pages.decorative_blocks.page1.text": "Given Obsidian and Copper are used throughout our work, we have decided to polish, cut, and otherwise shape these materials into forms with more aesthetic appeal. In some cases this has resulted in enhanced utility: Polished Obsidian especially serves as a more receptive basic material than the mundane form.",
+  "data_tablet.pages.decorative_blocks.page2.text": "Variants of Polished Obsidian are made in the Stonecutter. The application of heat - such as in a furnace - makes them ready to be shaped anew.",
 
   "_comment.data_tablet.pages.lore": "Ancient History category texts.",
   "data_tablet.pages.essence.name": "What is Essence?",
@@ -272,5 +276,11 @@
   "advancements.datanessence.failed_pylon.title": "A Less Than Honorable Attempt",
   "advancements.datanessence.failed_pylon.description": "Stumble across a Failed Pylon.",
 
-  "tooltip.datanessence.toggle_lock": "Toggle Slot Locking"
+  "tooltip.datanessence.toggle_lock": "Toggle Slot Locking",
+
+  "tag.item.datanessence.polished_obsidian_blocks": "Polished Obsidian Blocks",
+  "tag.item.datanessence.shaped_polished_obsidian_blocks": "Shaped Polished Obsidian Blocks",
+
+  "emi.info.datanessence.ancient_items_are_loot_only": "This is an Ancient item. It cannot be crafted, and must instead be found.\nTry searching inside structures built from an obsidian-esque rock.",
+  "emi.info.datanessence.makutuin_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found."
 }

@@ -1,0 +1,8 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:datanessence:data_tablet",
+    "item:datanessence:cognizant_cube"
+  ],
+  "text": "emi.info.datanessence.ancient_items_are_loot_only"
+}
