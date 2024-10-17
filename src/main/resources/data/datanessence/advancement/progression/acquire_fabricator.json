@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:fabricator"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_fabricator.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_fabricator.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:datanessence",
+  "criteria": {
+    "has_fabricator": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ "datanessence:fabricator" ] }
+    },
+    "has_redirector": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ "datanessence:magic_wrench" ] }
+    }
+  }
+}
