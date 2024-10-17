@@ -8,6 +8,7 @@ import com.cmdpro.datanessence.datatablet.Entries;
 import com.cmdpro.datanessence.datatablet.Entry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -19,7 +20,6 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
@@ -76,7 +76,7 @@ public class DataTabletScreen extends Screen {
     }
 
     public boolean clickEntry(Entry entry) {
-        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
         screenType = 2;
         clickedEntry = entry;
         page = 0;
@@ -87,7 +87,7 @@ public class DataTabletScreen extends Screen {
         currentTab = tab;
         offsetX = (imageWidth/2);
         offsetY = (imageHeight/2);
-        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
         return true;
     }
 
@@ -120,7 +120,7 @@ public class DataTabletScreen extends Screen {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
                     if (this.tabPage+2 < getSortedTabs().size()/6) {
                         tabPage += 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
                         return true;
                     }
                 }
@@ -129,7 +129,7 @@ public class DataTabletScreen extends Screen {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
                     if (tabPage > 0) {
                         tabPage -= 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
                         return true;
                     }
                 }
@@ -144,7 +144,7 @@ public class DataTabletScreen extends Screen {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
                     if (clickedEntry.getPagesClient().length > page+1) {
                         page += 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
                         return true;
                     }
                 }
@@ -153,7 +153,7 @@ public class DataTabletScreen extends Screen {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
                     if (page > 0) {
                         page -= 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
                         return true;
                     }
                 }
@@ -166,7 +166,7 @@ public class DataTabletScreen extends Screen {
             if (pMouseX >= x+imageWidth && pMouseX <= x+imageWidth+17 && pMouseY >= y+10 && pMouseY <= y+10+21) {
                 savedEntry = clickedEntry.id;
                 savedPage = page;
-                Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
                 super.onClose();
                 return true;
             }

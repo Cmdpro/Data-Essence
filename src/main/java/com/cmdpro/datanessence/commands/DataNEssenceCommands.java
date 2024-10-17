@@ -109,15 +109,9 @@ public class DataNEssenceCommands {
                 player.setData(AttachmentTypeRegistry.HAS_WINGS, true);
             }
             ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), (ServerPlayer)player);
-            if (part.equals("all")) {
-                command.getSource().sendSuccess(() -> {
-                    return Component.translatable("commands.datanessence.give_all_dragon_parts", part, player.getName());
-                }, true);
-            } else {
-                command.getSource().sendSuccess(() -> {
-                    return Component.translatable("commands.datanessence.give_dragon_part", part, player.getName());
-                }, true);
-            }
+            command.getSource().sendSuccess(() -> {
+                return part.equals("all") ? Component.translatable("commands.datanessence.give_all_dragon_parts", player.getName()) : Component.translatable("commands.datanessence.give_dragon_part", part, player.getName());
+            }, true);
         }
         return Command.SINGLE_SUCCESS;
     }
@@ -141,7 +135,7 @@ public class DataNEssenceCommands {
             incompleteEntries.clear();
             PlayerDataUtil.updateUnlockedEntries((ServerPlayer)player);
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.datanessence.reset_learned", player.getName());
+                return Component.translatable("commands.datanessence.reset_learned");
             }, true);
         }
         return Command.SINGLE_SUCCESS;
@@ -181,7 +175,7 @@ public class DataNEssenceCommands {
                 DataTabletUtil.unlockEntry(player, i.id, false);
             }
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.datanessence.unlock_all", player.getName());
+                return Component.translatable("commands.datanessence.unlock_all");
             }, true);
         }
         return Command.SINGLE_SUCCESS;
@@ -190,6 +184,10 @@ public class DataNEssenceCommands {
     private static int maximize(CommandContext<CommandSourceStack> command) {
         if (command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();
+
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.datanessence.maximize", player.getName());
+            }, true);
 
             for (Entry entry : Entries.entries.values()) {
                 DataTabletUtil.unlockEntry(player, entry.id, false);

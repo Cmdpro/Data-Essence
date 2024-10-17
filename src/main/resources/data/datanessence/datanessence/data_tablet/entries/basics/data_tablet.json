@@ -11,6 +11,18 @@
       "text": {
         "translate": "data_tablet.pages.data_tablet.page1.text"
       }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.data_tablet.page2.text"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.data_tablet.page3.text"
+      }
     }
   ],
   "name": {

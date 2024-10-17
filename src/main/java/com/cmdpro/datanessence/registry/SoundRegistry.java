@@ -13,4 +13,6 @@ public class SoundRegistry {
 
     public static final Supplier<SoundEvent> CRITICAL_DATA_UNLOCKED = SOUND_EVENTS.register("critical_data_unlocked",
             () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "critical_data_unlocked")));
+    public static final Supplier<SoundEvent> UI_CLICK = SOUND_EVENTS.register("ui_click",
+            () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "ui_click")));
 }
