@@ -15,9 +15,6 @@
     },
     {
       "type": "datanessence:crafting",
-      "text": {
-        "translate": " "
-      },
       "recipes": [
         "datanessence:fabrication/equipment/essence_bomb"
       ]

@@ -15,8 +15,7 @@
       "type": "datanessence:crafting",
       "recipes": [
         "datanessence:fabrication/data_drive"
-      ],
-      "text": { "translate": " " }
+      ]
     }
   ],
   "name": {

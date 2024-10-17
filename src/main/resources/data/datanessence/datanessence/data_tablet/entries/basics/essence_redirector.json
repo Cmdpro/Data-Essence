@@ -17,9 +17,6 @@
     },
     {
       "type": "datanessence:crafting",
-      "text": {
-        "translate": " "
-      },
       "recipes": [
         "datanessence:crafting/magic_wrench"
       ]

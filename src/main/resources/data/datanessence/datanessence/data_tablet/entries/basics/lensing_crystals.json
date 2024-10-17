@@ -14,9 +14,6 @@
     },
     {
       "type": "datanessence:crafting",
-      "text": {
-        "translate": ""
-      },
       "recipes": [
         "datanessence:infusion/lens_from_lensing_crystal"
       ]

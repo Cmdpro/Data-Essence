@@ -20,9 +20,6 @@
     },
     {
       "type": "datanessence:crafting",
-      "text": {
-        "translate": " "
-      },
       "recipes": [
         "datanessence:fabrication/laser_emitter",
         "datanessence:synthesis/lens_acceleration",
@@ -32,9 +29,6 @@
     },
     {
       "type": "datanessence:crafting",
-      "text": {
-        "translate": " "
-      },
       "recipes": [
         "datanessence:synthesis/lens_healing",
         "datanessence:synthesis/lens_precision"
