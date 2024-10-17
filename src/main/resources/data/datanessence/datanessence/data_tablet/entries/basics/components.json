@@ -21,6 +21,15 @@
         "datanessence:crafting/capacitance_panel",
         "datanessence:crafting/conductance_rod",
         "datanessence:fabrication/logical_matrix",
+        "datanessence:fabrication/wire_spool"
+      ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": ""
+      },
+      "recipes": [
         "datanessence:infusion/lens_from_glass"
       ]
     }

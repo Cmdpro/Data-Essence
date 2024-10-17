@@ -16,10 +16,13 @@
     {
       "type": "datanessence:crafting",
       "text": {
-        "translate": " "
+        "translate": "data_tablet.pages.entropic_processor.page2.text"
       },
       "recipes": [
-        "datanessence:fabrication/machines/entropic_processor"
+        "datanessence:fabrication/machines/entropic_processor",
+        "datanessence:entropic_processing/stone_to_cobble",
+        "datanessence:entropic_processing/cobble_to_gravel",
+        "datanessence:entropic_processing/gravel_to_sand"
       ]
     }
   ],

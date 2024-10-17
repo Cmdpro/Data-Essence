@@ -1,0 +1,17 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 100
+  },
+  "entry": "datanessence:tools/essence_bomb",
+  "pattern": [
+    " C ",
+    "CGC",
+    " C "
+  ],
+  "key": {
+    "C": { "item": "datanessence:capacitance_panel" },
+    "G": { "tag": "datanessence:explosive_material" }
+  },
+  "result": { "id": "datanessence:essence_bomb", "count": 4 }
+}

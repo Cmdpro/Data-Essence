@@ -21,7 +21,7 @@
         "translate": "data_tablet.pages.primitive_antigravity_pack.page2.text"
       },
       "recipes": [
-        "datanessence:fabrication/primitive_antigravity_pack"
+        "datanessence:fabrication/equipment/primitive_antigravity_pack"
       ]
     }
   ],

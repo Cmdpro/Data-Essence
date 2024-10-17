@@ -7,16 +7,16 @@
   "y": 2,
   "pages": [
     {
-      "type": "datanessence:crafting",
+      "type": "datanessence:text",
       "text": {
         "translate": "data_tablet.pages.infuser.page1.text"
-      },
-      "recipes": [
-        "datanessence:fabrication/infuser"
-      ]
+      }
     },
     {
-      "type": "datanessence:text",
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/machines/infuser"
+      ],
       "text": {
         "translate": "data_tablet.pages.infuser.page2.text"
       }

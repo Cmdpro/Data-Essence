@@ -232,6 +232,7 @@
   "data_tablet.pages.entropic_processor.name": "Entropic Processor",
   "data_tablet.pages.entropic_processor.flavor": " ◇ 24-wheeled grinding champion",
   "data_tablet.pages.entropic_processor.page1.text": "Diamonds are one of the hardest materials in the world. It is only sensible to utilize that hardness for raw cutting power, and the Entropic Processor is the result. This machine has three sets of eight diamond grinding wheels that are able to crush, grind, macerate, and pulverize whatever runs through it.",
+  "data_tablet.pages.entropic_processor.page2.text": " ◇ It is generally advised to avoid contacting the grinding wheels while they are spinning.",
   "data_tablet.pages.item_filter.name": "Sorting Items",
   "data_tablet.pages.item_filter.flavor": " ◇ Not a diamond pipe",
   "data_tablet.pages.item_filter.page1.text": "Item Nodes, while excellent at actually transferring items, were not designed with filtration and sorting in mind. So, often, actually dealing with a factory's outputs can get... tedious. A box with six color-coded ports, and an internal logic unit to sort items across them according to settings we input, is the solution to this problem.",
@@ -289,6 +290,7 @@
 
   "tag.item.datanessence.polished_obsidian_blocks": "Polished Obsidian Blocks",
   "tag.item.datanessence.shaped_polished_obsidian_blocks": "Shaped Polished Obsidian Blocks",
+  "tag.item.datanessence.explosive_material": "Explosive Material",
 
   "emi.info.datanessence.ancient_items_are_loot_only": "This is an Ancient item. It cannot be crafted, and must instead be found.\nTry searching inside structures built from an obsidian-esque rock.",
   "emi.info.datanessence.makutuin_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found."

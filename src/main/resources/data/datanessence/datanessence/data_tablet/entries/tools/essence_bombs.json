@@ -7,12 +7,19 @@
   "y": 0,
   "pages": [
     {
-      "type": "datanessence:crafting",
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:essence_bomb" },
       "text": {
         "translate": "data_tablet.pages.essence_bombs.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": " "
       },
       "recipes": [
-        "datanessence:fabrication/essence_bomb"
+        "datanessence:fabrication/equipment/essence_bomb"
       ]
     }
   ],

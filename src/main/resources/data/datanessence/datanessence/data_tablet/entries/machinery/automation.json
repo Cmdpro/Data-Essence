@@ -7,13 +7,16 @@
   "y": 0,
   "pages": [
     {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:data_drive" },
+      "text": { "translate": "data_tablet.pages.automation.page1.text" }
+    },
+    {
       "type": "datanessence:crafting",
-      "text": {
-        "translate": "data_tablet.pages.automation.page1.text"
-      },
       "recipes": [
         "datanessence:fabrication/data_drive"
-      ]
+      ],
+      "text": { "translate": " " }
     }
   ],
   "name": {

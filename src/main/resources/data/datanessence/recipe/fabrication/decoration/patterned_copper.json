@@ -1,0 +1,14 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 10 },
+  "entry": "datanessence:tools/decorative_blocks",
+  "pattern": [
+    " C ",
+    "CCC",
+    " C "
+  ],
+  "key": {
+    "C": { "item": "minecraft:copper_block" }
+  },
+  "result": { "id": "datanessence:patterned_copper", "count":10 }
+}
