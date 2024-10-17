@@ -3,5 +3,10 @@
         "sounds": [
             "datanessence:critical_data_unlocked"
         ]
+    },
+    "ui_click": {
+        "sounds": [
+            "datanessence:ui_click"
+        ]
     }
 }
