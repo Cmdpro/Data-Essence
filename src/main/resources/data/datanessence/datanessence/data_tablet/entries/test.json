@@ -15,9 +15,9 @@
     {
       "type": "datanessence:text",
       "text": {
-        "translate": "data_tablet.pages.test1.page2.text"
+        "translate": "data_tablet.pages.test1.page2.text",
+        "font": "datanessence:ancient"
       },
-      "font": "datanessence:ancient",
       "rtl": true
     },
     {
@@ -49,25 +49,25 @@
     {
       "type": "datanessence:text",
       "text": {
-        "translate": "data_tablet.pages.test1.page1.text"
+        "translate": "data_tablet.pages.test1.page1.text",
+        "font": "datanessence:ancient"
       },
-      "font": "datanessence:ancient",
       "rtl": true
     },
     {
       "type": "datanessence:text",
       "text": {
-        "translate": "data_tablet.pages.test1.page2.text"
+        "translate": "data_tablet.pages.test1.page2.text",
+        "font": "datanessence:ancient"
       },
-      "font": "datanessence:ancient",
       "rtl": true
     },
     {
       "type": "datanessence:text",
       "text": {
-        "translate": "data_tablet.pages.test1.page3.text"
+        "translate": "data_tablet.pages.test1.page3.text",
+        "font": "datanessence:ancient"
       },
-      "font": "datanessence:ancient",
       "rtl": true
     }
   ],

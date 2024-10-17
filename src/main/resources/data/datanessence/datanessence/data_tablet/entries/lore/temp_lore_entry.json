@@ -9,9 +9,9 @@
     {
       "type": "datanessence:text",
       "text": {
-        "translate": "data_tablet.pages.essence_crystals.page2.text"
+        "translate": "data_tablet.pages.essence_crystals.page2.text",
+        "font": "datanessence:ancient"
       },
-      "font": "datanessence:ancient"
     }
   ],
   "name": {

@@ -4,14 +4,12 @@ import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.api.datatablet.PageSerializer;
 import com.cmdpro.datanessence.datatablet.pages.serializers.TextPageSerializer;
+import com.ibm.icu.lang.UCharacter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.language.FormattedBidiReorder;
 import net.minecraft.locale.Language;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.FormattedText;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.*;
 import net.minecraft.util.FormattedCharSequence;
 
 import java.util.List;
@@ -33,14 +31,13 @@ public class TextPage extends Page {
         int offsetY = 0;
         for (FormattedText i : text) {
             int x = xOffset + 4;
+            FormattedCharSequence formattedCharSequence = FormattedBidiReorder.reorder(i, Language.getInstance().isDefaultRightToLeft());
             if (rtl) {
                 x = xOffset+((DataTabletScreen.imageWidth - 4)-Minecraft.getInstance().font.width(i));
+                SubStringSource substr = SubStringSource.create(i, UCharacter::getMirror, (str) -> str);
+                formattedCharSequence = FormattedCharSequence.composite(substr.substring(0, substr.getPlainText().length(), true));
             }
-            boolean shouldRtl = true;
-            if (!rtl) {
-                shouldRtl = Language.getInstance().isDefaultRightToLeft();
-            }
-            pGuiGraphics.drawString(Minecraft.getInstance().font, FormattedBidiReorder.reorder(i, shouldRtl), x, yOffset + 4 + offsetY + textYOffset(), 0xFFFFFFFF);
+            pGuiGraphics.drawString(Minecraft.getInstance().font, formattedCharSequence, x, yOffset + 4 + offsetY + textYOffset(), 0xFFFFFFFF);
             offsetY += Minecraft.getInstance().font.lineHeight+2;
         }
     }
