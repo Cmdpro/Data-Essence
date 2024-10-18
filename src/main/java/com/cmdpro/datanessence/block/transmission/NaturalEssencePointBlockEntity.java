@@ -40,14 +40,14 @@ public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity 
 
     @Override
     public void transfer(BlockEntity otherEntity, EssenceStorage other) {
-        if (other.getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()) > 0) {
+        if (other.getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()) >= getFinalSpeed(DataNEssenceConfig.essencePointTransfer)) {
             return;
         }
         deposit(otherEntity, other);
     }
     @Override
     public void take(BlockEntity otherEntity, EssenceStorage other) {
-        if (storage.getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()) > 0) {
+        if (storage.getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()) >= getFinalSpeed(DataNEssenceConfig.essencePointTransfer)) {
             return;
         }
         if (otherEntity instanceof ICustomEssencePointBehaviour behaviour) {

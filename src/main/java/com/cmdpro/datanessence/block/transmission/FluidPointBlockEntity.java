@@ -40,7 +40,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
         if (resolved2 == null) {
             return;
         }
-        if (resolved2.getFluidInTank(0).getAmount() > 0) {
+        if (resolved2.getFluidInTank(0).getAmount() >= getFinalSpeed(DataNEssenceConfig.fluidPointTransfer)) {
             return;
         }
         deposit(other);
@@ -86,7 +86,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
         if (resolved == null || resolved2 == null) {
             return;
         }
-        if (resolved.getFluidInTank(0).getAmount() > 0) {
+        if (resolved.getFluidInTank(0).getAmount() >= getFinalSpeed(DataNEssenceConfig.fluidPointTransfer)) {
             return;
         }
         if (other instanceof ICustomFluidPointBehaviour behaviour) {

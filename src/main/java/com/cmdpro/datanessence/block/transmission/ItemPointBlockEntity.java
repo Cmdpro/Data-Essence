@@ -46,7 +46,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
         if (resolved2 == null) {
             return;
         }
-        if (resolved2.getStackInSlot(0).getCount() > 0) {
+        if (resolved2.getStackInSlot(0).getCount() >= getFinalSpeed(DataNEssenceConfig.itemPointTransfer)) {
             return;
         }
         deposit(other);
@@ -120,7 +120,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
         if (resolved == null || resolved2 == null) {
             return;
         }
-        if (resolved.getStackInSlot(0).getCount() > 0) {
+        if (resolved.getStackInSlot(0).getCount() >= getFinalSpeed(DataNEssenceConfig.itemPointTransfer)) {
             return;
         }
         if (other instanceof ICustomItemPointBehaviour behaviour) {
