@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.api.block;
 import com.cmdpro.datanessence.api.item.INodeUpgrade;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -162,6 +163,17 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                         ent.updateBlock();
                     }
                 }
+                if (pPlayer.getItemInHand(pHand).is(ItemRegistry.MAGIC_WRENCH.get())) {
+                    if (!ent.universalUpgrade.getStackInSlot(0).isEmpty()) {
+                        pPlayer.getInventory().add(ent.universalUpgrade.getStackInSlot(0));
+                        ent.universalUpgrade.setStackInSlot(0, ItemStack.EMPTY);
+                        ent.updateBlock();
+                    } else if (!ent.uniqueUpgrade.getStackInSlot(0).isEmpty()) {
+                        pPlayer.getInventory().add(ent.uniqueUpgrade.getStackInSlot(0));
+                        ent.uniqueUpgrade.setStackInSlot(0, ItemStack.EMPTY);
+                        ent.updateBlock();
+                    }
+                }
             }
         }
         if (success) {
@@ -180,16 +192,6 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                         ent.updateBlock();
                         ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
                         pLevel.addFreshEntity(item);
-                    }
-                } else {
-                    if (!ent.universalUpgrade.getStackInSlot(0).isEmpty()) {
-                        pPlayer.getInventory().add(ent.universalUpgrade.getStackInSlot(0));
-                        ent.universalUpgrade.setStackInSlot(0, ItemStack.EMPTY);
-                        ent.updateBlock();
-                    } else if (!ent.uniqueUpgrade.getStackInSlot(0).isEmpty()) {
-                        pPlayer.getInventory().add(ent.uniqueUpgrade.getStackInSlot(0));
-                        ent.uniqueUpgrade.setStackInSlot(0, ItemStack.EMPTY);
-                        ent.updateBlock();
                     }
                 }
             }
