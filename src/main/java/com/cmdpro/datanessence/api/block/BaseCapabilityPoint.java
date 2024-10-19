@@ -102,6 +102,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                 if (pLevel.getBlockEntity(i) instanceof BaseCapabilityPointBlockEntity ent2) {
                     ent2.link.remove(pPos);
                     CapabilityNodePath.updatePaths(ent2);
+                    ent2.updateBlock();
                 }
             }
         }
