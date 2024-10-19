@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
@@ -51,9 +52,11 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             pPoseStack.translate(-pos.x, -pos.y, -pos.z);
             pPoseStack.translate(0.5, 0.5, 0.5);
             Vec3 origin = pBlockEntity.getBlockPos().getCenter();
-            Vec3 target = pBlockEntity.link.getCenter();
-            VertexConsumer vertexConsumer = pBufferSource.getBuffer(DataNEssenceRenderTypes.WIRES);
-            ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, pBlockEntity.linkColor());
+            for (BlockPos i : pBlockEntity.link) {
+                Vec3 target = i.getCenter();
+                VertexConsumer vertexConsumer = pBufferSource.getBuffer(DataNEssenceRenderTypes.WIRES);
+                ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, pBlockEntity.linkColor());
+            }
             pPoseStack.popPose();
         }
         Color color = pBlockEntity.linkColor();

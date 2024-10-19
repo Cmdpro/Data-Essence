@@ -27,16 +27,6 @@ public class ItemPoint extends BaseCapabilityPoint {
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new ItemPointBlockEntity(pPos, pState);
     }
-    @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (pState.getBlock() != pNewState.getBlock()) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof ItemBufferBlockEntity buffer) {
-                buffer.drops();
-            }
-        }
-        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-    }
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {

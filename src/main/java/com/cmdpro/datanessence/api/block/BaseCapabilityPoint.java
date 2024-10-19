@@ -1,7 +1,9 @@
 package com.cmdpro.datanessence.api.block;
 
 import com.cmdpro.datanessence.api.item.INodeUpgrade;
+import com.cmdpro.datanessence.api.misc.CapabilityNodePath;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
+import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
@@ -92,9 +94,15 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (pLevel.getBlockEntity(pPos) instanceof BaseCapabilityPointBlockEntity ent) {
-            if (ent.link != null) {
+            for (BlockPos i : ent.link) {
                 ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
                 pLevel.addFreshEntity(item);
+            }
+            for (BlockPos i : ent.linkFrom) {
+                if (pLevel.getBlockEntity(i) instanceof BaseCapabilityPointBlockEntity ent2) {
+                    ent2.link.remove(pPos);
+                    CapabilityNodePath.updatePaths(ent2);
+                }
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
@@ -118,7 +126,6 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
         return pReader.getBlockState(blockpos).isFaceSturdy(pReader, blockpos, pDirection.getOpposite());
     }
     public abstract Item getRequiredWire();
-
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
         boolean success = pPlayer.getItemInHand(pHand).is(getRequiredWire()) || pPlayer.getItemInHand(pHand).getItem() instanceof INodeUpgrade;
@@ -128,15 +135,21 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                 if (pPlayer.getItemInHand(pHand).is(getRequiredWire())) {
                     Optional<BlockEntity> linkFrom = pPlayer.getData(AttachmentTypeRegistry.LINK_FROM);
                     if (!linkFrom.isPresent()) {
-                        if (ent.link == null) {
+                        if (ent.link.size() <= DataNEssenceConfig.maxNodeWires) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
                             PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                         }
                     } else {
                         if (linkFrom.get().getBlockState().getBlock() instanceof BaseCapabilityPoint other) {
-                            if (other.getRequiredWire() == getRequiredWire() && ent != linkFrom.get() && (ent.link == null || !ent.link.equals(linkFrom.get().getBlockPos()))) {
+                            if (other.getRequiredWire() == getRequiredWire() && ent != linkFrom.get() && (ent.link.isEmpty() || !ent.link.contains(linkFrom.get().getBlockPos()))) {
                                 if (linkFrom.get() instanceof BaseCapabilityPointBlockEntity linkFrom2) {
-                                    linkFrom2.link = pPos;
+                                    if (!linkFrom2.link.contains(pPos)) {
+                                        linkFrom2.link.add(pPos);
+                                        CapabilityNodePath.updatePaths(linkFrom2);
+                                        if (pLevel.getBlockEntity(pPos) instanceof BaseCapabilityPointBlockEntity linkTo) {
+                                            linkTo.linkFrom.add(linkFrom2.getBlockPos());
+                                        }
+                                    }
                                     linkFrom2.updateBlock();
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
@@ -186,11 +199,19 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof BaseCapabilityPointBlockEntity ent) {
                 if (pPlayer.isShiftKeyDown()) {
-                    if (ent.link != null) {
-                        ent.link = null;
+                    if (!ent.link.isEmpty()) {
+                        for (BlockPos i : ent.link) {
+                            if (pLevel.getBlockEntity(i) instanceof BaseCapabilityPointBlockEntity linkTo) {
+                                linkTo.linkFrom.remove(ent.getBlockPos());
+                            }
+                        }
+                        for (BlockPos i : ent.link) {
+                            ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
+                            pLevel.addFreshEntity(item);
+                        }
+                        ent.link.clear();
+                        CapabilityNodePath.updatePaths(ent);
                         ent.updateBlock();
-                        ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
-                        pLevel.addFreshEntity(item);
                     }
                 }
             }

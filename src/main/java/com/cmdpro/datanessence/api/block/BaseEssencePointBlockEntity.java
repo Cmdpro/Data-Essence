@@ -58,6 +58,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
     }
     public boolean preTransferHooks(BlockEntity other) {
         boolean cancel = false;
+        /*
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             if (upgrade.preTransfer(this, other, cancel)) {
                 cancel = true;
@@ -67,19 +68,22 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
             if (upgrade.preTransfer(this, other, cancel)) {
                 cancel = true;
             }
-        }
+        }*/
         return cancel;
     }
     public void postTransferHooks(BlockEntity other) {
+        /*
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             upgrade.postTransfer(this, other);
         }
         if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             upgrade.postTransfer(this, other);
         }
+         */
     }
     public boolean preTakeHooks(BlockEntity other) {
         boolean cancel = false;
+        /*
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             if (upgrade.preTake(this, other, cancel)) {
                 cancel = true;
@@ -90,15 +94,18 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity implements
                 cancel = true;
             }
         }
+         */
         return cancel;
     }
     public void postTakeHooks(BlockEntity other) {
+        /*
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             upgrade.postTake(this, other);
         }
         if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             upgrade.postTake(this, other);
         }
+         */
     }
     public float getFinalSpeed(float value) {
         return value*getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "speed_multiplier"), 1f);
