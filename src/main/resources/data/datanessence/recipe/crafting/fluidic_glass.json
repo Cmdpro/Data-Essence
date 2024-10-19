@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "blocks",
+  "pattern": [
+    "LOL",
+    "CGC",
+    "LOL"
+  ],
+  "key": {
+    "C": { "item": "datanessence:capacitance_panel" },
+    "O": { "item": "datanessence:polished_obsidian" },
+    "L": { "item": "minecraft:lapis_lazuli" },
+    "G": { "item": "minecraft:glass" }
+  },
+  "result": { "id": "datanessence:fluidic_glass", "count": 8 }
+}

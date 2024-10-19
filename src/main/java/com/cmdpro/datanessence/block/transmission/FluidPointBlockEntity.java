@@ -25,7 +25,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
     public FluidPointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_POINT.get(), pos, state);
     }
-    private final FluidTank fluidHandler = new FluidTank(Integer.MAX_VALUE);
+    private final FluidTank fluidHandler = new FluidTank(2000);
     public IFluidHandler getFluidHandler() {
         return lazyFluidHandler.get();
     }

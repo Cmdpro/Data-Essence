@@ -237,6 +237,13 @@
   "data_tablet.pages.item_filter.flavor": " ◇ Not a diamond pipe",
   "data_tablet.pages.item_filter.page1.text": "Item Nodes, while excellent at actually transferring items, were not designed with filtration and sorting in mind. So, often, actually dealing with a factory's outputs can get... tedious. A box with six color-coded ports, and an internal logic unit to sort items across them according to settings we input, is the solution to this problem.",
   "data_tablet.pages.item_filter.page2.text": " ◇ Only accepts items it has filters set for.\n ◇ Does not accept inputs from filtered sides.",
+  "data_tablet.pages.fluid_acquisition.name": "Fluid Acquisition",
+  "data_tablet.pages.fluid_acquisition.flavor": " ◇ 100% Absorbency",
+  "data_tablet.pages.fluid_acquisition.page1.text": "To actually acquire fluids to be transferred into machines, Essence can be used to actuate a pump that will collect one bucket of whatever liquid it is facing. Naturally, it is quite easy to reverse this process to make a sibling machine that spills fluids back into the world.",
+  "data_tablet.pages.fluid_acquisition.page2.text": " ◇ A \"pump\" face must be chosen with the Redirector.",
+  "data_tablet.pages.fluid_tank.name": "Fluid Storage",
+  "data_tablet.pages.fluid_tank.flavor": " ◇ Rainy-day reserves",
+  "data_tablet.pages.fluid_tank.page1.text": "This specially constructed tank serves as a simple way to store a decent amount of fluid in a reasonable amount of space.",
 
   "_comment.data_tablet_pages.tools": "Tools and Utilities category texts.",
   "data_tablet.pages.traversite_road.name":                  "Traversite Road",
@@ -285,6 +292,8 @@
   "advancements.datanessence.acquire_fabricator.description": "Obtain a Fabricator and an Essence Redirector.",
   "advancements.datanessence.failed_pylon.title": "A Less Than Honorable Attempt",
   "advancements.datanessence.failed_pylon.description": "Stumble across a Failed Pylon.",
+  "advancements.datanessence.use_fluid_collector.title": "Pumped",
+  "advancements.datanessence.use_fluid_collector.description": "Use a Fluid Collector to gather liquid.",
 
   "tooltip.datanessence.toggle_lock": "Toggle Slot Locking",
 

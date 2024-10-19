@@ -1,0 +1,18 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 100
+  },
+  "entry": "datanessence:machinery/fluidworks",
+  "pattern": [
+    "PBP",
+    "GBG",
+    "PBP"
+  ],
+  "key": {
+    "P": { "item": "datanessence:capacitance_panel" },
+    "G": { "item": "datanessence:fluidic_glass" },
+    "B": { "item": "minecraft:bucket" }
+  },
+  "result": { "id": "datanessence:fluid_tank" }
+}

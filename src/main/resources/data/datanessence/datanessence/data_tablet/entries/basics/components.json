@@ -24,7 +24,8 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:infusion/lens_from_glass"
+        "datanessence:infusion/lens_from_glass",
+        "datanessence:crafting/propeller"
       ]
     }
   ],

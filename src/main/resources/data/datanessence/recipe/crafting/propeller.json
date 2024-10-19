@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C C",
+    " R ",
+    " C "
+  ],
+  "key": {
+    "C": { "item": "datanessence:capacitance_panel" },
+    "R": { "item": "datanessence:conductance_rod" }
+  },
+  "result": { "id": "datanessence:propeller", "count": 1 }
+}

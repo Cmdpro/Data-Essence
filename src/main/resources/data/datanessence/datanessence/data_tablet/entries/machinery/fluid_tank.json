@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "id": "datanessence:fluid_tank"
+  },
+  "tab": "datanessence:machinery",
+  "x": 3,
+  "y": -4,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:fluid_tank"
+      },
+      "text": {
+        "translate": "data_tablet.pages.fluid_tank.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/fluid_tank"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.fluid_tank.name"
+  },
+  "flavor": { "translate": "data_tablet.pages.fluid_tank.flavor" },
+  "parents": [
+    "datanessence:machinery/fluidworks"
+  ]
+}

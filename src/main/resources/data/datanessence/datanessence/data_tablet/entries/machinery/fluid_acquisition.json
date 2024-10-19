@@ -1,0 +1,36 @@
+{
+  "icon": {
+    "id": "datanessence:fluid_collector"
+  },
+  "tab": "datanessence:machinery",
+  "x": 1,
+  "y": -4,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:fluid_collector"
+      },
+      "text": {
+        "translate": "data_tablet.pages.fluid_acquisition.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.fluid_acquisition.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/machines/fluid_collector",
+        "datanessence:fabrication/machines/fluid_spiller"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.fluid_acquisition.name"
+  },
+  "flavor": { "translate": "data_tablet.pages.fluid_acquisition.flavor" },
+  "parents": [
+    "datanessence:machinery/fluidworks"
+  ]
+}

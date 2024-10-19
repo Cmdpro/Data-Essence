@@ -17,7 +17,8 @@
       "recipes": [
         "datanessence:fabrication/decoration/polished_obsidian",
         "datanessence:smelting/polished_obsidian",
-        "datanessence:fabrication/decoration/patterned_copper"
+        "datanessence:fabrication/decoration/patterned_copper",
+        "datanessence:crafting/fluidic_glass"
       ],
       "text": {
         "translate": "data_tablet.pages.decorative_blocks.page2.text"
