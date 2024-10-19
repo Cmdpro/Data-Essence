@@ -185,17 +185,21 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     @Override
     public void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
-        ListTag list = (ListTag)pTag.get("link");
         link.clear();
-        for (Tag i : list) {
-            CompoundTag blockpos = (CompoundTag)i;
-            link.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
+        if (pTag.contains("link")) {
+            ListTag list = (ListTag) pTag.get("link");
+            for (Tag i : list) {
+                CompoundTag blockpos = (CompoundTag) i;
+                link.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
+            }
         }
-        ListTag list2 = (ListTag)pTag.get("linkFrom");
         linkFrom.clear();
-        for (Tag i : list2) {
-            CompoundTag blockpos = (CompoundTag)i;
-            linkFrom.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
+        if (pTag.contains("linkFrom")) {
+            ListTag list2 = (ListTag) pTag.get("linkFrom");
+            for (Tag i : list2) {
+                CompoundTag blockpos = (CompoundTag) i;
+                linkFrom.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
+            }
         }
         uniqueUpgrade.deserializeNBT(pRegistries, pTag.getCompound("uniqueUpgrade"));
         universalUpgrade.deserializeNBT(pRegistries, pTag.getCompound("universalUpgrade"));
