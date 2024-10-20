@@ -14,6 +14,9 @@ public class ThrownExoticEssenceBombProjectile extends ThrowableItemProjectile {
     public ThrownExoticEssenceBombProjectile(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
+    public ThrownExoticEssenceBombProjectile(Level pLevel, double pX, double pY, double pZ) {
+        super(EntityRegistry.EXOTIC_ESSENCE_BOMB.get(), pX, pY, pZ, pLevel);
+    }
 
     public ThrownExoticEssenceBombProjectile(LivingEntity pShooter, Level pLevel) {
         super(EntityRegistry.EXOTIC_ESSENCE_BOMB.get(), pShooter, pLevel);

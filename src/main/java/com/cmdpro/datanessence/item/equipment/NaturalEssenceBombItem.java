@@ -1,8 +1,11 @@
 package com.cmdpro.datanessence.item.equipment;
 
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.entity.ThrownExoticEssenceBombProjectile;
 import com.cmdpro.datanessence.entity.ThrownNaturalEssenceBombProjectile;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.sounds.SoundEvents;
@@ -11,14 +14,28 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class NaturalEssenceBombItem extends Item {
+public class NaturalEssenceBombItem extends Item implements ProjectileItem {
+    @Override
+    public Projectile asProjectile(Level pLevel, Position pPos, ItemStack pStack, Direction pDirection) {
+        return new ThrownNaturalEssenceBombProjectile(pLevel, pPos.x(), pPos.y(), pPos.z());
+    }
+
+    @Override
+    public ProjectileItem.DispenseConfig createDispenseConfig() {
+        return ProjectileItem.DispenseConfig.builder()
+                .uncertainty(ProjectileItem.DispenseConfig.DEFAULT.uncertainty() * 0.5F)
+                .power(ProjectileItem.DispenseConfig.DEFAULT.power() * 1.25F)
+                .build();
+    }
     public NaturalEssenceBombItem(Properties pProperties) {
         super(pProperties);
     }
