@@ -1,8 +1,8 @@
 package com.cmdpro.datanessence.api.util;
 
 import com.cmdpro.databank.DatabankUtils;
-import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
-import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
+import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerDataSyncS2CPacket;
 import com.cmdpro.datanessence.networking.packet.PlayerTierSyncS2CPacket;

@@ -1,6 +1,6 @@
-package com.cmdpro.datanessence.api.misc;
+package com.cmdpro.datanessence.api.node;
 
-import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
+import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import net.minecraft.core.BlockPos;
 
 import java.util.ArrayList;

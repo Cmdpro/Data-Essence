@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.item;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.item.INodeUpgrade;
+import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntity;

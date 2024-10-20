@@ -1,7 +1,7 @@
-package com.cmdpro.datanessence.api.block;
+package com.cmdpro.datanessence.api.node.block;
 
-import com.cmdpro.datanessence.api.item.INodeUpgrade;
-import com.cmdpro.datanessence.api.misc.CapabilityNodePath;
+import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
+import com.cmdpro.datanessence.api.node.CapabilityNodePath;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;

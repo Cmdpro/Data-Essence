@@ -1,52 +1,32 @@
-package com.cmdpro.datanessence.api.renderers.block;
+package com.cmdpro.datanessence.api.node.renderers;
 
 import com.cmdpro.databank.ClientDatabankUtils;
 import com.cmdpro.databank.model.DatabankEntityModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
-import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
-import com.cmdpro.datanessence.block.processing.AutoFabricatorBlockEntity;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
-import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
-import com.cmdpro.datanessence.block.transmission.EssencePointBlockEntity;
+import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.animation.AnimationDefinition;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BeaconRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.FishingHookRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ColorRGBA;
-import net.minecraft.util.FastColor;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import org.apache.logging.log4j.core.pattern.AbstractStyleNameConverter;
-import org.jetbrains.annotations.Nullable;
-import org.jline.utils.Colors;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEntity> extends DatabankBlockEntityRenderer<T> {
@@ -61,9 +41,11 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             pPoseStack.translate(-pos.x, -pos.y, -pos.z);
             pPoseStack.translate(0.5, 0.5, 0.5);
             Vec3 origin = pBlockEntity.getBlockPos().getCenter();
-            Vec3 target = pBlockEntity.link.getCenter();
-            VertexConsumer vertexConsumer = pBufferSource.getBuffer(DataNEssenceRenderTypes.WIRES);
-            ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, pBlockEntity.linkColor());
+            for (BlockPos i : pBlockEntity.link) {
+                Vec3 target = i.getCenter();
+                VertexConsumer vertexConsumer = pBufferSource.getBuffer(DataNEssenceRenderTypes.WIRES);
+                ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, pBlockEntity.linkColor());
+            }
             pPoseStack.popPose();
         }
         Color color = pBlockEntity.linkColor();

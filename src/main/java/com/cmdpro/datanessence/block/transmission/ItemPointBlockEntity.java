@@ -1,24 +1,14 @@
 package com.cmdpro.datanessence.block.transmission;
 
-import com.cmdpro.datanessence.api.block.BaseCapabilityPointBlockEntity;
-import com.cmdpro.datanessence.api.misc.ICustomFluidPointBehaviour;
+import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.misc.ICustomItemPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.Containers;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.common.util.Lazy;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
 import org.joml.Math;
 
 import java.awt.*;

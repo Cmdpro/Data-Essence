@@ -1,27 +1,23 @@
 package com.cmdpro.datanessence.block.transmission;
 
-import com.cmdpro.datanessence.api.block.BaseEssencePointBlockEntity;
+import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
-import com.cmdpro.datanessence.api.essence.EssenceType;
-import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.misc.ICustomEssencePointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.network.IContainerFactory;
-import org.jetbrains.annotations.NotNull;
+import org.joml.Math;
 
 import java.awt.*;
+import java.util.List;
 
 public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity {
     public NaturalEssencePointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.NATURAL_ESSENCE_POINT.get(), pos, state);
-        storage = new SingleEssenceContainer(EssenceTypeRegistry.NATURAL_ESSENCE.get(), Float.MAX_VALUE);
     }
     @Override
     public Color linkColor() {
@@ -29,32 +25,19 @@ public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity 
     }
 
     @Override
-    public void deposit(BlockEntity otherEntity, EssenceStorage other) {
-        if (otherEntity instanceof ICustomEssencePointBehaviour behaviour) {
-            if (!behaviour.canInsertEssence(other, EssenceTypeRegistry.NATURAL_ESSENCE.get(), getFinalSpeed(DataNEssenceConfig.essencePointTransfer))) {
-                return;
+    public void transfer(BaseEssencePointBlockEntity from, List<BaseEssencePointBlockEntity> other) {
+        int transferAmount = (int) Math.floor((float)getFinalSpeed(DataNEssenceConfig.essencePointTransfer)/(float)other.size());
+        for (BaseEssencePointBlockEntity i : other) {
+            BlockEntity fromEnt = from.getLevel().getBlockEntity(from.getBlockPos().relative(from.getDirection().getOpposite()));
+            BlockEntity toEnt = i.getLevel().getBlockEntity(i.getBlockPos().relative(i.getDirection().getOpposite()));
+            if (fromEnt instanceof EssenceBlockEntity fromStorage && toEnt instanceof EssenceBlockEntity toStorage) {
+                if (toEnt instanceof ICustomEssencePointBehaviour behaviour) {
+                    if (!behaviour.canInsertEssence(toStorage.getStorage(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), transferAmount)) {
+                        return;
+                    }
+                }
+                EssenceStorage.transferEssence(fromStorage.getStorage(), toStorage.getStorage(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), transferAmount);
             }
         }
-        EssenceStorage.transferEssence(storage, other, EssenceTypeRegistry.NATURAL_ESSENCE.get(), getFinalSpeed(DataNEssenceConfig.essencePointTransfer));
-    }
-
-    @Override
-    public void transfer(BlockEntity otherEntity, EssenceStorage other) {
-        if (other.getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()) >= getFinalSpeed(DataNEssenceConfig.essencePointTransfer)) {
-            return;
-        }
-        deposit(otherEntity, other);
-    }
-    @Override
-    public void take(BlockEntity otherEntity, EssenceStorage other) {
-        if (storage.getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()) >= getFinalSpeed(DataNEssenceConfig.essencePointTransfer)) {
-            return;
-        }
-        if (otherEntity instanceof ICustomEssencePointBehaviour behaviour) {
-            if (!behaviour.canExtractEssence(other, EssenceTypeRegistry.NATURAL_ESSENCE.get(), getFinalSpeed(DataNEssenceConfig.essencePointTransfer))) {
-                return;
-            }
-        }
-        EssenceStorage.transferEssence(other, storage, EssenceTypeRegistry.NATURAL_ESSENCE.get(), getFinalSpeed(DataNEssenceConfig.essencePointTransfer));
     }
 }

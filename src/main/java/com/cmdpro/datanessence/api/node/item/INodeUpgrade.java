@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.api.item;
+package com.cmdpro.datanessence.api.node.item;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;

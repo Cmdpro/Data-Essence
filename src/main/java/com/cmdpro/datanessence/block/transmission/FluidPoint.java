@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.transmission;
 
-import com.cmdpro.datanessence.api.block.BaseCapabilityPoint;
+import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;

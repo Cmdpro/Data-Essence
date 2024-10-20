@@ -1,9 +1,8 @@
-package com.cmdpro.datanessence.api.block;
+package com.cmdpro.datanessence.api.node.block;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.datatablet.Page;
-import com.cmdpro.datanessence.api.item.INodeUpgrade;
-import com.cmdpro.datanessence.api.misc.CapabilityNodePath;
+import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
+import com.cmdpro.datanessence.api.node.EssenceNodePath;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -13,8 +12,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -27,10 +24,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
+public abstract class BaseEssencePointBlockEntity extends BlockEntity {
     public List<BlockPos> link = new ArrayList<>();
     public List<BlockPos> linkFrom = new ArrayList<>();
-    public CapabilityNodePath path;
+    public EssenceNodePath path;
     public final ItemStackHandler universalUpgrade = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -68,14 +65,14 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         return (int)(value*getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "speed_multiplier"), 1f));
     }
 
-    public BaseCapabilityPointBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
+    public BaseEssencePointBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
 
     @Override
     public void onLoad() {
         super.onLoad();
-        path = CapabilityNodePath.calculate(this);
+        path = EssenceNodePath.calculate(this);
     }
     public abstract Color linkColor();
     @Override
@@ -102,11 +99,11 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         pTag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
         pTag.put("universalUpgrade", universalUpgrade.serializeNBT(pRegistries));
     }
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseCapabilityPointBlockEntity pBlockEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseEssencePointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             if (pBlockEntity.linkFrom.isEmpty()) {
-                List<BaseCapabilityPointBlockEntity> ends = Arrays.stream(pBlockEntity.path.ends).toList();
-                List<BlockEntity> endsBlockEntity = Arrays.stream(pBlockEntity.path.ends).map((i) -> (BlockEntity)i).toList();
+                java.util.List<BaseEssencePointBlockEntity> ends = Arrays.stream(pBlockEntity.path.ends).toList();
+                java.util.List<BlockEntity> endsBlockEntity = Arrays.stream(pBlockEntity.path.ends).map((i) -> (BlockEntity)i).toList();
                 pBlockEntity.preTransferHooks(pBlockEntity, endsBlockEntity);
                 pBlockEntity.transfer(pBlockEntity, ends);
                 pBlockEntity.postTransferHooks(pBlockEntity, endsBlockEntity);
@@ -135,7 +132,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
             upgrade.postTransfer(from, other);
         }
     }
-    public abstract void transfer(BaseCapabilityPointBlockEntity from, List<BaseCapabilityPointBlockEntity> other);
+    public abstract void transfer(BaseEssencePointBlockEntity from, List<BaseEssencePointBlockEntity> other);
     public Direction getDirection() {
         if (getBlockState().getValue(BaseCapabilityPoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;
@@ -182,6 +179,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
+
     @Override
     public void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
