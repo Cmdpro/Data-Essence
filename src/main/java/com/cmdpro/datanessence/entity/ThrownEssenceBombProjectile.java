@@ -16,6 +16,9 @@ public class ThrownEssenceBombProjectile extends ThrowableItemProjectile {
     public ThrownEssenceBombProjectile(LivingEntity pShooter, Level pLevel) {
         super(EntityRegistry.ESSENCE_BOMB.get(), pShooter, pLevel);
     }
+    public ThrownEssenceBombProjectile(Level pLevel, double pX, double pY, double pZ) {
+        super(EntityRegistry.ESSENCE_BOMB.get(), pX, pY, pZ, pLevel);
+    }
     @Override
     protected Item getDefaultItem() {
         return ItemRegistry.ESSENCE_BOMB.get();

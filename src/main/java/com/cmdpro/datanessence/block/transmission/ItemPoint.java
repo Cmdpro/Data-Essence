@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.transmission;
 
-import com.cmdpro.datanessence.api.block.BaseCapabilityPoint;
+import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
@@ -26,16 +26,6 @@ public class ItemPoint extends BaseCapabilityPoint {
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
         return new ItemPointBlockEntity(pPos, pState);
-    }
-    @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (pState.getBlock() != pNewState.getBlock()) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof ItemBufferBlockEntity buffer) {
-                buffer.drops();
-            }
-        }
-        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
     @Nullable
     @Override

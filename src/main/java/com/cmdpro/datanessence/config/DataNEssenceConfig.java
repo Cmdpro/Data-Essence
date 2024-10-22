@@ -18,10 +18,11 @@ public class DataNEssenceConfig {
     }
     public DataNEssenceConfig(ModConfigSpec.Builder builder) {
         builder.push("balancing");
-        fluidPointTransferValue = buildInteger(builder, "fluidPointTransfer", "all", 50, 1, 1000000, "How much should a fluid point transfer?");
-        essencePointTransferValue = buildInteger(builder, "essencePointTransfer", "all", 50, 1, 1000000, "How much should an essence point transfer? (Applies to all essence point types)");
-        itemPointTransferValue = buildInteger(builder, "itemPointTransfer", "all", 4, 1, 64, "How much should an item point transfer?");
-        essenceBatteryMaxValue = buildInteger(builder, "essenceBatteryMax", "all", 10000, 1, 1000000, "How much should an essence battery hold? (Applies to all essence point types)");
+        fluidPointTransferValue = buildInteger(builder, "fluidNodeTransfer", "all", 50, 1, 1000000, "How much should a fluid node transfer?");
+        essencePointTransferValue = buildInteger(builder, "essenceNodeTransfer", "all", 50, 1, 1000000, "How much should an essence node transfer? (Applies to all essence node types)");
+        itemPointTransferValue = buildInteger(builder, "itemNodeTransfer", "all", 4, 1, 64, "How much should an item node transfer?");
+        essenceBatteryMaxValue = buildInteger(builder, "essenceBatteryMax", "all", 10000, 1, 1000000, "How much should an essence battery hold? (Applies to all essence battery types)");
+        maxNodeWiresValue = buildInteger(builder, "maxNodeWires", "all", 4, 1, 50, "How much wires should nodes be able to have? (Applies to all nodes)");
     }
     private static ModConfigSpec.BooleanValue buildBoolean(ModConfigSpec.Builder builder, String name, String category, boolean defaultValue, String comment) {
         return builder.comment(comment).translation(name).define(name, defaultValue);
@@ -33,16 +34,19 @@ public class DataNEssenceConfig {
     public static int essencePointTransfer = 50;
     public static int itemPointTransfer = 4;
     public static int essenceBatteryMax = 50;
+    public static int maxNodeWires = 4;
     public final ModConfigSpec.IntValue fluidPointTransferValue;
     public final ModConfigSpec.IntValue essencePointTransferValue;
     public final ModConfigSpec.IntValue itemPointTransferValue;
     public final ModConfigSpec.IntValue essenceBatteryMaxValue;
+    public final ModConfigSpec.IntValue maxNodeWiresValue;
     public static void bake(ModConfig config) {
         try {
             fluidPointTransfer = COMMON.fluidPointTransferValue.get();
             essencePointTransfer = COMMON.essencePointTransferValue.get();
             itemPointTransfer = COMMON.itemPointTransferValue.get();
             essenceBatteryMax = COMMON.essenceBatteryMaxValue.get();
+            maxNodeWires = COMMON.maxNodeWiresValue.get();
         } catch (Exception e) {
             DataNEssence.LOGGER.warn("Failed to load DataNEssence config");
             e.printStackTrace();

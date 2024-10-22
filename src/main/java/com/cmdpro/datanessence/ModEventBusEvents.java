@@ -7,7 +7,9 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.entity.AncientSentinel;
 import com.cmdpro.datanessence.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.config.ModConfig;
@@ -31,5 +33,15 @@ public class ModEventBusEvents {
     }
     @SubscribeEvent
     public static void entitySpawnRestriction(RegisterSpawnPlacementsEvent event) {
+
+    }
+    @SubscribeEvent
+    public static void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            DispenserBlock.registerProjectileBehavior(ItemRegistry.ESSENCE_BOMB.get());
+            DispenserBlock.registerProjectileBehavior(ItemRegistry.LUNAR_ESSENCE_BOMB.get());
+            DispenserBlock.registerProjectileBehavior(ItemRegistry.NATURAL_ESSENCE_BOMB.get());
+            DispenserBlock.registerProjectileBehavior(ItemRegistry.EXOTIC_ESSENCE_BOMB.get());
+        });
     }
 }

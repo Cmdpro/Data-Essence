@@ -1,7 +1,9 @@
-package com.cmdpro.datanessence.api.block;
+package com.cmdpro.datanessence.api.node.block;
 
-import com.cmdpro.datanessence.api.item.INodeUpgrade;
+import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
+import com.cmdpro.datanessence.api.node.EssenceNodePath;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
+import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
@@ -89,6 +91,24 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
         return null;
     }
 
+    @Override
+    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
+        if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity ent) {
+            for (BlockPos i : ent.link) {
+                ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
+                pLevel.addFreshEntity(item);
+            }
+            for (BlockPos i : ent.linkFrom) {
+                if (pLevel.getBlockEntity(i) instanceof BaseEssencePointBlockEntity ent2) {
+                    ent2.link.remove(pPos);
+                    EssenceNodePath.updatePaths(ent2);
+                    ent2.updateBlock();
+                }
+            }
+        }
+        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
+    }
+
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         return canAttach(pLevel, pPos, getConnectedDirection(pState).getOpposite());
     }
@@ -106,21 +126,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
         BlockPos blockpos = pPos.relative(pDirection);
         return pReader.getBlockState(blockpos).isFaceSturdy(pReader, blockpos, pDirection.getOpposite());
     }
-    @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
-        if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity ent) {
-            if (ent.link != null) {
-                ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
-                pLevel.addFreshEntity(item);
-            }
-        }
-        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
-    }
-    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
-        return getConnectedDirection(pState).getOpposite() == pFacing && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
-    }
     public abstract Item getRequiredWire();
-
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
         boolean success = pPlayer.getItemInHand(pHand).is(getRequiredWire()) || pPlayer.getItemInHand(pHand).getItem() instanceof INodeUpgrade;
@@ -130,15 +136,21 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                 if (pPlayer.getItemInHand(pHand).is(getRequiredWire())) {
                     Optional<BlockEntity> linkFrom = pPlayer.getData(AttachmentTypeRegistry.LINK_FROM);
                     if (!linkFrom.isPresent()) {
-                        if (ent.link == null) {
+                        if (ent.link.size() <= DataNEssenceConfig.maxNodeWires) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
                             PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                         }
                     } else {
                         if (linkFrom.get().getBlockState().getBlock() instanceof BaseEssencePoint other) {
-                            if (other.getRequiredWire() == getRequiredWire() && ent != linkFrom.get() && (ent.link == null || !ent.link.equals(linkFrom.get().getBlockPos()))) {
+                            if (other.getRequiredWire() == getRequiredWire() && ent != linkFrom.get() && (ent.link.isEmpty() || !ent.link.contains(linkFrom.get().getBlockPos()))) {
                                 if (linkFrom.get() instanceof BaseEssencePointBlockEntity linkFrom2) {
-                                    linkFrom2.link = pPos;
+                                    if (!linkFrom2.link.contains(pPos)) {
+                                        linkFrom2.link.add(pPos);
+                                        EssenceNodePath.updatePaths(linkFrom2);
+                                        if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity linkTo) {
+                                            linkTo.linkFrom.add(linkFrom2.getBlockPos());
+                                        }
+                                    }
                                     linkFrom2.updateBlock();
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
@@ -181,21 +193,34 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
         }
         return super.useItemOn(pStack, pState, pLevel, pPos, pPlayer, pHand, pHitResult);
     }
+
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof BaseEssencePointBlockEntity ent) {
                 if (pPlayer.isShiftKeyDown()) {
-                    if (ent.link != null) {
-                        ent.link = null;
+                    if (!ent.link.isEmpty()) {
+                        for (BlockPos i : ent.link) {
+                            if (pLevel.getBlockEntity(i) instanceof BaseEssencePointBlockEntity linkTo) {
+                                linkTo.linkFrom.remove(ent.getBlockPos());
+                            }
+                        }
+                        for (BlockPos i : ent.link) {
+                            ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
+                            pLevel.addFreshEntity(item);
+                        }
+                        ent.link.clear();
+                        EssenceNodePath.updatePaths(ent);
                         ent.updateBlock();
-                        ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
-                        pLevel.addFreshEntity(item);
                     }
                 }
             }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
+    }
+
+    public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
+        return getConnectedDirection(pState).getOpposite() == pFacing && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
 }

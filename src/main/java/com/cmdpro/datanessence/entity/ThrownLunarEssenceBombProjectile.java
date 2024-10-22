@@ -23,6 +23,9 @@ public class ThrownLunarEssenceBombProjectile extends ThrowableItemProjectile {
     public ThrownLunarEssenceBombProjectile(LivingEntity pShooter, Level pLevel) {
         super(EntityRegistry.LUNAR_ESSENCE_BOMB.get(), pShooter, pLevel);
     }
+    public ThrownLunarEssenceBombProjectile(Level pLevel, double pX, double pY, double pZ) {
+        super(EntityRegistry.LUNAR_ESSENCE_BOMB.get(), pX, pY, pZ, pLevel);
+    }
     @Override
     protected Item getDefaultItem() {
         return ItemRegistry.LUNAR_ESSENCE_BOMB.get();

@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence;
 
-import com.cmdpro.datanessence.api.block.BaseCapabilityPoint;
-import com.cmdpro.datanessence.api.block.BaseEssencePoint;
+import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
+import com.cmdpro.datanessence.api.node.block.BaseEssencePoint;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.block.TraversiteRoad;
