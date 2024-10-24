@@ -10,6 +10,7 @@ public interface INodeUpgrade {
     default Object getValue(ResourceLocation id, Object originalValue, BlockEntity node) { return null; };
     default boolean preTransfer(BlockEntity from, List<BlockEntity> other, boolean canceled) { return canceled; }
     default void postTransfer(BlockEntity from, List<BlockEntity> other) {}
+    default boolean blocksPath(BlockEntity from, BlockEntity other) { return false; }
     Type getType();
     enum Type {
         UNIQUE,

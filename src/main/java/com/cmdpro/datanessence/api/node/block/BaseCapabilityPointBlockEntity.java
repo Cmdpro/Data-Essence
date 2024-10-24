@@ -74,6 +74,20 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         super.onLoad();
         path = CapabilityNodePath.calculate(this);
     }
+    public boolean blocksPath(BlockEntity from, BlockEntity other) {
+        boolean cancel = false;
+        if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            if (upgrade.blocksPath(from, other)) {
+                cancel = true;
+            }
+        }
+        if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            if (upgrade.blocksPath(from, other)) {
+                cancel = true;
+            }
+        }
+        return cancel;
+    }
     public abstract Color linkColor();
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {

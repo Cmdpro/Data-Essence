@@ -110,6 +110,20 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
             }
         }
     }
+    public boolean blocksPath(BlockEntity from, BlockEntity other) {
+        boolean cancel = false;
+        if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            if (upgrade.blocksPath(from, other)) {
+                cancel = true;
+            }
+        }
+        if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
+            if (upgrade.blocksPath(from, other)) {
+                cancel = true;
+            }
+        }
+        return cancel;
+    }
     public boolean preTransferHooks(BlockEntity from, List<BlockEntity> other) {
         boolean cancel = false;
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
