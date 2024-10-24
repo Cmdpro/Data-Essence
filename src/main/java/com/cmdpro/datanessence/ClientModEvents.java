@@ -129,30 +129,6 @@ public class ClientModEvents {
             public int getPriority() {
                 return 9999;
             }
-/*
-            @Override
-            public SoundEvent getMusic() {
-                if (Minecraft.getInstance().player != null) {
-                    for (int index = 0; index < Minecraft.getInstance().player.getInventory().getContainerSize(); index++) {
-                        ItemStack slot = Minecraft.getInstance().player.getInventory().getItem(index);
-                        if (slot.is(ItemRegistry.MUSIC_DISC_PLAYER.get())) {
-                            ItemContainerContents handler = slot.get(DataComponents.CONTAINER);
-                            if (handler != null) {
-                                if (handler.getSlots() > 0) {
-                                    JukeboxPlayable playable = handler.getStackInSlot(0).get(DataComponents.JUKEBOX_PLAYABLE);
-                                    if (playable != null) {
-                                        JukeboxSong song = Minecraft.getInstance().level.registryAccess().registry(Registries.JUKEBOX_SONG).get().get(playable.song().key());
-                                        if (song != null) {
-                                            return song.soundEvent().value();
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                return null;
-            }*/
             @Override
             public SoundEvent getMusic() {
                 if (Minecraft.getInstance().player != null) {
