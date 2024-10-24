@@ -123,6 +123,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.ENTICING_LURE_MENU.get(), EnticingLureScreen::new);
         event.register(MenuRegistry.MINERAL_PURIFICATION_CHAMBER_MENU.get(), MineralPurificationChamberScreen::new);
         event.register(MenuRegistry.ITEM_FILTER_MENU.get(), ItemFilterScreen::new);
+        event.register(MenuRegistry.MUSIC_DISC_PLAYER_MENU.get(), MusicDiscPlayerScreen::new);
     }
     public static PostShaderInstance progressionShader;
     public static PostShaderInstance genderEuphoriaShader;

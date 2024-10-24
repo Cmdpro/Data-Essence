@@ -12,6 +12,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.SnifferRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -29,6 +30,8 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.items.ComponentItemHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import org.apache.commons.lang3.IntegerRange;
 import org.slf4j.Logger;
 
@@ -176,6 +179,7 @@ public class DataNEssence
             }
             return null;
         });
+        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -221,6 +225,7 @@ public class DataNEssence
             event.accept(ItemRegistry.SPEED_UPGRADE.get());
             event.accept(ItemRegistry.LIMITER_UPGRADE.get());
             event.accept(ItemRegistry.FILTER_UPGRADE.get());
+            event.accept(ItemRegistry.MUSIC_DISC_PLAYER.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());
