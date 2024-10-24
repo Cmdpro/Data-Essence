@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.databank.music.MusicController;
+import com.cmdpro.databank.music.MusicSystem;
 import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.entity.AncientSentinel;
@@ -24,6 +26,18 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.PlayerSkin;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.JukeboxPlayable;
+import net.minecraft.world.item.JukeboxSong;
+import net.minecraft.world.item.JukeboxSongs;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -33,6 +47,10 @@ import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.items.ComponentItemHandler;
+import net.neoforged.neoforge.items.IItemHandler;
+
+import java.util.Optional;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ClientModEvents {
@@ -106,6 +124,54 @@ public class ClientModEvents {
         PostShaderManager.addShader(progressionShader);
         genderEuphoriaShader = new GenderEuphoriaShader();
         PostShaderManager.addShader(genderEuphoriaShader);
+        MusicSystem.musicControllers.add(new MusicController() {
+            @Override
+            public int getPriority() {
+                return 9999;
+            }
+/*
+            @Override
+            public SoundEvent getMusic() {
+                if (Minecraft.getInstance().player != null) {
+                    for (int index = 0; index < Minecraft.getInstance().player.getInventory().getContainerSize(); index++) {
+                        ItemStack slot = Minecraft.getInstance().player.getInventory().getItem(index);
+                        if (slot.is(ItemRegistry.MUSIC_DISC_PLAYER.get())) {
+                            ItemContainerContents handler = slot.get(DataComponents.CONTAINER);
+                            if (handler != null) {
+                                if (handler.getSlots() > 0) {
+                                    JukeboxPlayable playable = handler.getStackInSlot(0).get(DataComponents.JUKEBOX_PLAYABLE);
+                                    if (playable != null) {
+                                        JukeboxSong song = Minecraft.getInstance().level.registryAccess().registry(Registries.JUKEBOX_SONG).get().get(playable.song().key());
+                                        if (song != null) {
+                                            return song.soundEvent().value();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return null;
+            }*/
+            @Override
+            public SoundEvent getMusic() {
+                if (Minecraft.getInstance().player != null) {
+                    for (int index = 0; index < Minecraft.getInstance().player.getInventory().getContainerSize(); index++) {
+                        ItemStack slot = Minecraft.getInstance().player.getInventory().getItem(index);
+                        if (slot.is(ItemRegistry.MUSIC_DISC_PLAYER.get())) {
+                            ResourceKey<SoundEvent> key = slot.get(DataComponentRegistry.PLAYING_MUSIC);
+                            if (key != null) {
+                                SoundEvent sound = BuiltInRegistries.SOUND_EVENT.get(key);
+                                if (sound != null) {
+                                    return sound;
+                                }
+                            }
+                        }
+                    }
+                }
+                return null;
+            }
+        });
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {

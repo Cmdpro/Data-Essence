@@ -12,14 +12,16 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.client.renderer.entity.SnifferRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -34,6 +36,8 @@ import net.neoforged.neoforge.items.ComponentItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.apache.commons.lang3.IntegerRange;
 import org.slf4j.Logger;
+
+import java.util.Optional;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod("datanessence")

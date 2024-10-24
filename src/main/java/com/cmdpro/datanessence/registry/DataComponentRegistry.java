@@ -3,8 +3,11 @@ package com.cmdpro.datanessence.registry;
 import com.cmdpro.datanessence.DataNEssence;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -61,6 +64,11 @@ public class DataComponentRegistry {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MAX_EXOTIC_ESSENCE = DATA_COMPONENTS.registerComponentType("max_exotic_essence", builder -> builder
             .persistent(Codec.FLOAT)
             .networkSynchronized(ByteBufCodecs.FLOAT)
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceKey<SoundEvent>>> PLAYING_MUSIC = DATA_COMPONENTS.registerComponentType("playing_sound", builder -> builder
+            .persistent(ResourceKey.codec(Registries.SOUND_EVENT))
+            .networkSynchronized(ResourceKey.streamCodec(Registries.SOUND_EVENT))
             .cacheEncoding()
     );
 }
