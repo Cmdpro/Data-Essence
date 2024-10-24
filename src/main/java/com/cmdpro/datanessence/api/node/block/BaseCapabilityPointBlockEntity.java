@@ -74,15 +74,15 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         super.onLoad();
         path = CapabilityNodePath.calculate(this);
     }
-    public boolean blocksPath(BlockEntity from, BlockEntity other) {
+    public boolean blocksPath(BlockEntity start, BlockEntity other) {
         boolean cancel = false;
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            if (upgrade.blocksPath(from, other)) {
+            if (upgrade.blocksPath(start, other)) {
                 cancel = true;
             }
         }
         if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            if (upgrade.blocksPath(from, other)) {
+            if (upgrade.blocksPath(start, other)) {
                 cancel = true;
             }
         }

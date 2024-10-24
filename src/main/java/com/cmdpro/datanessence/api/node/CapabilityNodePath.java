@@ -41,9 +41,7 @@ public class CapabilityNodePath {
                     if (ent.link.isEmpty()) {
                         ends.add(ent);
                     } else {
-                        if (!ent.blocksPath(node, ent)) {
-                            ends.addAll(getEnds(ent, alreadyVisited));
-                        }
+                        ends.addAll(getEnds(ent, alreadyVisited));
                     }
                 } else {
                     break;
