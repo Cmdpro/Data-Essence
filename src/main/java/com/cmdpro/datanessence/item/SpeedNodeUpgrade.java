@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class SpeedNodeUpgrade extends Item implements INodeUpgrade {
@@ -14,7 +15,7 @@ public class SpeedNodeUpgrade extends Item implements INodeUpgrade {
     }
 
     @Override
-    public Object getValue(ResourceLocation id, Object originalValue, BlockEntity node) {
+    public Object getValue(ItemStack upgrade, ResourceLocation id, Object originalValue, BlockEntity node) {
         if (id.equals(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "speed_multiplier"))) {
             return ((float)originalValue)+multiplierAddition;
         }

@@ -30,6 +30,7 @@ public class MenuRegistry {
     public static final Supplier<MenuType<MineralPurificationChamberMenu>> MINERAL_PURIFICATION_CHAMBER_MENU = register(MineralPurificationChamberMenu::new, "mineral_purification_chamber");
     public static final Supplier<MenuType<ItemFilterMenu>> ITEM_FILTER_MENU = register(ItemFilterMenu::new, "item_filter");
     public static final Supplier<MenuType<MusicDiscPlayerMenu>> MUSIC_DISC_PLAYER_MENU = register(MusicDiscPlayerMenu::new, "music_disc_player");
+    public static final Supplier<MenuType<FilterNodeUpgradeMenu>> FILTER_NODE_UPGRADE_MENU = register(FilterNodeUpgradeMenu::new, "filter_node_upgrade");
     private static <T extends AbstractContainerMenu> Supplier<MenuType<T>> register(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));
     }

@@ -46,13 +46,13 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
     public <T> T getValue(ResourceLocation id, T defaultValue) {
         T value = defaultValue;
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            Object modified = upgrade.getValue(id, value, this);
+            Object modified = upgrade.getValue(universalUpgrade.getStackInSlot(0), id, value, this);
             if (modified != null) {
                 value = (T)modified;
             }
         }
         if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            Object modified = upgrade.getValue(id, value, this);
+            Object modified = upgrade.getValue(uniqueUpgrade.getStackInSlot(0), id, value, this);
             if (modified != null) {
                 value = (T)modified;
             }
@@ -113,12 +113,12 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
     public boolean preTransferHooks(BlockEntity from, List<NodePathEnd> other) {
         boolean cancel = false;
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            if (upgrade.preTransfer(from, other, cancel)) {
+            if (upgrade.preTransfer(universalUpgrade.getStackInSlot(0), from, other, cancel)) {
                 cancel = true;
             }
         }
         if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            if (upgrade.preTransfer(from, other, cancel)) {
+            if (upgrade.preTransfer(uniqueUpgrade.getStackInSlot(0), from, other, cancel)) {
                 cancel = true;
             }
         }
@@ -126,10 +126,10 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
     }
     public void postTransferHooks(BlockEntity from, List<NodePathEnd> other) {
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            upgrade.postTransfer(from, other);
+            upgrade.postTransfer(universalUpgrade.getStackInSlot(0), from, other);
         }
         if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            upgrade.postTransfer(from, other);
+            upgrade.postTransfer(uniqueUpgrade.getStackInSlot(0), from, other);
         }
     }
     public abstract void transfer(BaseEssencePointBlockEntity from, List<NodePathEnd> other);

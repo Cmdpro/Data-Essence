@@ -87,7 +87,7 @@ public class ItemRegistry {
 
     // Node Upgrades
     public static final Supplier<Item> SPEED_UPGRADE = register("speed_upgrade", () -> new SpeedNodeUpgrade(new Item.Properties(), 1));
-    public static final Supplier<Item> FILTER_UPGRADE = register("filter_upgrade", () -> new FilterNodeUpgrade(new Item.Properties()));
+    public static final Supplier<Item> FILTER_UPGRADE = register("filter_upgrade", () -> new FilterNodeUpgrade(new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
     public static final Supplier<Item> LIMITER_UPGRADE = register("limiter_upgrade", () -> new LimiterNodeUpgrade(new Item.Properties()));
 
     private static <T extends Item> Supplier<T> register(final String name, final Supplier<T> item) {
