@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.transmission;
 
+import com.cmdpro.datanessence.api.node.NodePathEnd;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.misc.ICustomItemPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
@@ -23,10 +24,11 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
         return new Color(0xef4d3d);
     }
     @Override
-    public void transfer(BaseCapabilityPointBlockEntity from, List<BaseCapabilityPointBlockEntity> other) {
+    public void transfer(BaseCapabilityPointBlockEntity from, List<NodePathEnd> other) {
         int transferAmount = (int)Math.floor((float)getFinalSpeed(DataNEssenceConfig.itemPointTransfer)/(float)other.size());
-        for (BaseCapabilityPointBlockEntity i : other) {
-            IItemHandler resolved = level.getCapability(Capabilities.ItemHandler.BLOCK, i.getBlockPos().relative(i.getDirection().getOpposite()), i.getDirection());
+        for (NodePathEnd i : other) {
+            BaseCapabilityPointBlockEntity ent = (BaseCapabilityPointBlockEntity)i.entity;
+            IItemHandler resolved = level.getCapability(Capabilities.ItemHandler.BLOCK, i.entity.getBlockPos().relative(ent.getDirection().getOpposite()), ent.getDirection());
             IItemHandler resolved2 = level.getCapability(Capabilities.ItemHandler.BLOCK, from.getBlockPos().relative(from.getDirection().getOpposite()), from.getDirection());
             if (resolved == null || resolved2 == null) {
                 continue;

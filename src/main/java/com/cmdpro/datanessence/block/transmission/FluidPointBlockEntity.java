@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.transmission;
 
+import com.cmdpro.datanessence.api.node.NodePathEnd;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.misc.ICustomFluidPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
@@ -9,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 import org.joml.Math;
 
 import java.awt.*;
@@ -23,10 +25,11 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
         return new Color(0x56bae9);
     }
     @Override
-    public void transfer(BaseCapabilityPointBlockEntity from, List<BaseCapabilityPointBlockEntity> other) {
+    public void transfer(BaseCapabilityPointBlockEntity from, List<NodePathEnd> other) {
         int transferAmount = (int)Math.floor((float)getFinalSpeed(DataNEssenceConfig.fluidPointTransfer)/(float)other.size());
-        for (BaseCapabilityPointBlockEntity i : other) {
-            IFluidHandler resolved = level.getCapability(Capabilities.FluidHandler.BLOCK, i.getBlockPos().relative(i.getDirection().getOpposite()), i.getDirection());
+        for (NodePathEnd i : other) {
+            BaseCapabilityPointBlockEntity ent = (BaseCapabilityPointBlockEntity)i.entity;
+            IFluidHandler resolved = level.getCapability(Capabilities.FluidHandler.BLOCK, i.entity.getBlockPos().relative(ent.getDirection().getOpposite()), ent.getDirection());
             IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, from.getBlockPos().relative(from.getDirection().getOpposite()), from.getDirection());
             if (resolved == null || resolved2 == null) {
                 continue;

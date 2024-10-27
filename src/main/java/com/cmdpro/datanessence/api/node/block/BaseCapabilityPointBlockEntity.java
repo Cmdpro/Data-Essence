@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.api.node.block;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.node.NodePathEnd;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
 import com.cmdpro.datanessence.api.node.CapabilityNodePath;
 import net.minecraft.core.BlockPos;
@@ -74,20 +75,6 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         super.onLoad();
         path = CapabilityNodePath.calculate(this);
     }
-    public boolean blocksPath(BlockEntity start, BlockEntity other) {
-        boolean cancel = false;
-        if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            if (upgrade.blocksPath(start, other)) {
-                cancel = true;
-            }
-        }
-        if (uniqueUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
-            if (upgrade.blocksPath(start, other)) {
-                cancel = true;
-            }
-        }
-        return cancel;
-    }
     public abstract Color linkColor();
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
@@ -116,15 +103,14 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseCapabilityPointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             if (pBlockEntity.linkFrom.isEmpty()) {
-                List<BaseCapabilityPointBlockEntity> ends = Arrays.stream(pBlockEntity.path.ends).toList();
-                List<BlockEntity> endsBlockEntity = Arrays.stream(pBlockEntity.path.ends).map((i) -> (BlockEntity)i).toList();
-                pBlockEntity.preTransferHooks(pBlockEntity, endsBlockEntity);
+                List<NodePathEnd> ends = Arrays.stream(pBlockEntity.path.ends).toList();
+                pBlockEntity.preTransferHooks(pBlockEntity, ends);
                 pBlockEntity.transfer(pBlockEntity, ends);
-                pBlockEntity.postTransferHooks(pBlockEntity, endsBlockEntity);
+                pBlockEntity.postTransferHooks(pBlockEntity, ends);
             }
         }
     }
-    public boolean preTransferHooks(BlockEntity from, List<BlockEntity> other) {
+    public boolean preTransferHooks(BlockEntity from, List<NodePathEnd> other) {
         boolean cancel = false;
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             if (upgrade.preTransfer(from, other, cancel)) {
@@ -138,7 +124,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         }
         return cancel;
     }
-    public void postTransferHooks(BlockEntity from, List<BlockEntity> other) {
+    public void postTransferHooks(BlockEntity from, List<NodePathEnd> other) {
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             upgrade.postTransfer(from, other);
         }
@@ -146,7 +132,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
             upgrade.postTransfer(from, other);
         }
     }
-    public abstract void transfer(BaseCapabilityPointBlockEntity from, List<BaseCapabilityPointBlockEntity> other);
+    public abstract void transfer(BaseCapabilityPointBlockEntity from, List<NodePathEnd> other);
     public Direction getDirection() {
         if (getBlockState().getValue(BaseCapabilityPoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;

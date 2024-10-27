@@ -8,8 +8,8 @@ import java.util.List;
 
 public class EssenceNodePath {
     public BaseEssencePointBlockEntity start;
-    public BaseEssencePointBlockEntity[] ends;
-    public EssenceNodePath(BaseEssencePointBlockEntity start, BaseEssencePointBlockEntity[] ends) {
+    public NodePathEnd[] ends;
+    public EssenceNodePath(BaseEssencePointBlockEntity start, NodePathEnd[] ends) {
         this.start = start;
         this.ends = ends;
     }
@@ -28,18 +28,18 @@ public class EssenceNodePath {
         List<BaseEssencePointBlockEntity> alreadyVisited = new ArrayList<>();
         BaseEssencePointBlockEntity node = start;
         alreadyVisited.add(node);
-        List<BaseEssencePointBlockEntity> ends = getEnds(node, alreadyVisited);
-        EssenceNodePath path = new EssenceNodePath(start, ends.toArray(new BaseEssencePointBlockEntity[0]));
+        List<NodePathEnd> ends = getEnds(node, alreadyVisited);
+        EssenceNodePath path = new EssenceNodePath(start, ends.toArray(new NodePathEnd[0]));
         return path;
     }
-    public static List<BaseEssencePointBlockEntity> getEnds(BaseEssencePointBlockEntity node, List<BaseEssencePointBlockEntity> alreadyVisited) {
-        List<BaseEssencePointBlockEntity> ends = new ArrayList<>();
+    public static List<NodePathEnd> getEnds(BaseEssencePointBlockEntity node, List<BaseEssencePointBlockEntity> alreadyVisited) {
+        List<NodePathEnd> ends = new ArrayList<>();
         for (BlockPos i : node.link) {
             if (node.getLevel().getBlockEntity(i) instanceof BaseEssencePointBlockEntity ent) {
                 if (!alreadyVisited.contains(ent)) {
                     alreadyVisited.add(ent);
                     if (ent.link.isEmpty()) {
-                        ends.add(ent);
+                        ends.add(new NodePathEnd(ent, alreadyVisited.toArray(new BaseEssencePointBlockEntity[0])));
                     } else {
                         ends.addAll(getEnds(ent, alreadyVisited));
                     }

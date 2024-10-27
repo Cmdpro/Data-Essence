@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.transmission;
 
+import com.cmdpro.datanessence.api.node.NodePathEnd;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
@@ -25,11 +26,11 @@ public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity 
     }
 
     @Override
-    public void transfer(BaseEssencePointBlockEntity from, List<BaseEssencePointBlockEntity> other) {
+    public void transfer(BaseEssencePointBlockEntity from, List<NodePathEnd> other) {
         int transferAmount = (int) Math.floor((float)getFinalSpeed(DataNEssenceConfig.essencePointTransfer)/(float)other.size());
-        for (BaseEssencePointBlockEntity i : other) {
+        for (NodePathEnd i : other) {
             BlockEntity fromEnt = from.getLevel().getBlockEntity(from.getBlockPos().relative(from.getDirection().getOpposite()));
-            BlockEntity toEnt = i.getLevel().getBlockEntity(i.getBlockPos().relative(i.getDirection().getOpposite()));
+            BlockEntity toEnt = i.entity.getLevel().getBlockEntity(i.entity.getBlockPos().relative(((BaseEssencePointBlockEntity)i.entity).getDirection().getOpposite()));
             if (fromEnt instanceof EssenceBlockEntity fromStorage && toEnt instanceof EssenceBlockEntity toStorage) {
                 if (toEnt instanceof ICustomEssencePointBehaviour behaviour) {
                     if (!behaviour.canInsertEssence(toStorage.getStorage(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), transferAmount)) {
