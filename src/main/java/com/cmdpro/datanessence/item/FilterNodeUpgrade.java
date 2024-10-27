@@ -20,9 +20,12 @@ import net.minecraft.world.item.JukeboxPlayable;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidUtil;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class FilterNodeUpgrade extends Item implements INodeUpgrade {
     public FilterNodeUpgrade(Properties pProperties) {
@@ -59,6 +62,21 @@ public class FilterNodeUpgrade extends Item implements INodeUpgrade {
                         return originalValue;
                     } else {
                         return List.of(handler.getStackInSlot(0));
+                    }
+                }
+            }
+        }
+        if (id.equals(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "allowed_fluidstacks"))) {
+            ItemContainerContents handler = upgrade.get(DataComponents.CONTAINER);
+            if (handler != null) {
+                if (handler.getSlots() > 0) {
+                    if (handler.getStackInSlot(0).isEmpty()) {
+                        return originalValue;
+                    } else {
+                        Optional<FluidStack> fluid = FluidUtil.getFluidContained(handler.getStackInSlot(0));
+                        if (fluid.isPresent()) {
+                            return List.of(fluid.get());
+                        }
                     }
                 }
             }

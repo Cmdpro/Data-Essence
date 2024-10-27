@@ -1,11 +1,15 @@
 package com.cmdpro.datanessence.block.transmission;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.node.NodePathEnd;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.misc.ICustomFluidPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -29,6 +33,16 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
         int transferAmount = (int)Math.floor((float)getFinalSpeed(DataNEssenceConfig.fluidPointTransfer)/(float)other.size());
         for (NodePathEnd i : other) {
             BaseCapabilityPointBlockEntity ent = (BaseCapabilityPointBlockEntity)i.entity;
+            List<FluidStack> allowedFluidstacks = null;
+            for (BlockEntity j : i.path) {
+                BaseCapabilityPointBlockEntity ent2 = (BaseCapabilityPointBlockEntity)j;
+                List<FluidStack> value = ent2.getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "allowed_fluidstacks"), null);
+                if (allowedFluidstacks == null) {
+                    allowedFluidstacks = value;
+                } else if (value != null) {
+                    allowedFluidstacks = allowedFluidstacks.stream().filter((stack1) -> value.stream().anyMatch((stack2) -> FluidStack.isSameFluid(stack1, stack2))).toList();
+                }
+            }
             IFluidHandler resolved = level.getCapability(Capabilities.FluidHandler.BLOCK, i.entity.getBlockPos().relative(ent.getDirection().getOpposite()), ent.getDirection());
             IFluidHandler resolved2 = level.getCapability(Capabilities.FluidHandler.BLOCK, from.getBlockPos().relative(from.getDirection().getOpposite()), from.getDirection());
             if (resolved == null || resolved2 == null) {
@@ -41,10 +55,13 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
             }
             for (int o = 0; o < resolved2.getTanks(); o++) {
                 FluidStack copy = resolved2.getFluidInTank(o).copy();
+                if (allowedFluidstacks != null && allowedFluidstacks.stream().noneMatch((stack) -> FluidStack.isSameFluid(stack, copy))) {
+                    continue;
+                }
                 if (!copy.isEmpty()) {
                     copy.setAmount(Math.clamp(0, transferAmount, copy.getAmount()));
                     int filled = resolved.fill(copy, IFluidHandler.FluidAction.EXECUTE);
-                    resolved2.getFluidInTank(o).shrink(filled);
+                    resolved2.drain(new FluidStack(copy.getFluid(), filled), IFluidHandler.FluidAction.EXECUTE);
                 }
             }
         }
