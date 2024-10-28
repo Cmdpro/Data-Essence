@@ -111,6 +111,9 @@ public class BlockRegistry {
     public static final Supplier<Block> ITEM_BUFFER = register("item_buffer",
             () -> new ItemBuffer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> LIMITED_ITEM_BUFFER = register("limited_item_buffer",
+            () -> new LimitedItemBuffer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_BUFFER = register("fluid_buffer",
             () -> new FluidBuffer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

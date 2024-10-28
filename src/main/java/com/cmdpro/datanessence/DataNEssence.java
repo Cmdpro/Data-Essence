@@ -103,6 +103,7 @@ public class DataNEssence
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_BUFFER.get(), (o, direction) -> o.getItemHandler());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.LIMITED_ITEM_BUFFER.get(), (o, direction) -> o.getItemHandler());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_BUFFER.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_COLLECTOR.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_SPILLER.get(), (o, direction) -> o.getFluidHandler());
@@ -228,7 +229,6 @@ public class DataNEssence
             event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
             event.accept(ItemRegistry.ESSENCE_SWORD.get());
             event.accept(ItemRegistry.SPEED_UPGRADE.get());
-            event.accept(ItemRegistry.LIMITER_UPGRADE.get());
             event.accept(ItemRegistry.FILTER_UPGRADE.get());
             event.accept(ItemRegistry.MUSIC_DISC_PLAYER.get());
         }
@@ -283,6 +283,7 @@ public class DataNEssence
             event.accept(BlockRegistry.ENTICING_LURE.get());
             event.accept(BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get());
             event.accept(BlockRegistry.ITEM_FILTER.get());
+            event.accept(BlockRegistry.LIMITED_ITEM_BUFFER.get());
         }
     }
 }

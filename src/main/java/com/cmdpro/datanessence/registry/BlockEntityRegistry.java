@@ -125,6 +125,10 @@ public class BlockEntityRegistry {
             register("item_buffer", () ->
                     BlockEntityType.Builder.of(ItemBufferBlockEntity::new,
                             BlockRegistry.ITEM_BUFFER.get()).build(null));
+    public static final Supplier<BlockEntityType<LimitedItemBufferBlockEntity>> LIMITED_ITEM_BUFFER =
+            register("limited_item_buffer", () ->
+                    BlockEntityType.Builder.of(LimitedItemBufferBlockEntity::new,
+                            BlockRegistry.LIMITED_ITEM_BUFFER.get()).build(null));
     public static final Supplier<BlockEntityType<FluidBufferBlockEntity>> FLUID_BUFFER =
             register("fluid_buffer", () ->
                     BlockEntityType.Builder.of(FluidBufferBlockEntity::new,
