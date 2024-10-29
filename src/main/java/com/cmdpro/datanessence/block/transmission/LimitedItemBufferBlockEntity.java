@@ -20,6 +20,30 @@ public class LimitedItemBufferBlockEntity extends ItemBufferBlockEntity {
     public LimitedItemBufferBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(BlockEntityRegistry.LIMITED_ITEM_BUFFER.get(), pPos, pBlockState);
     }
+
+    @Override
+    public ItemStackHandler createItemHandler() {
+        return new ItemStackHandler(15) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+            }
+
+            @Override
+            public boolean isItemValid(int slot, ItemStack stack) {
+                for (int i = 0; i < getSlots(); i++) {
+                    if (i == slot) {
+                        continue;
+                    }
+                    if (ItemStack.isSameItemSameComponents(getStackInSlot(slot), stack)) {
+                        return false;
+                    }
+                }
+                return super.isItemValid(slot, stack);
+            }
+        };
+    }
+
     @Override
     public void transfer(IItemHandler handler) {
         IItemHandler resolved = getItemHandler();
@@ -34,6 +58,7 @@ public class LimitedItemBufferBlockEntity extends ItemBufferBlockEntity {
                     ItemStack copyCopy = copy.copy();
                     int limit = 2-handler.getStackInSlot(p).getCount();
                     if (limit <= 0) {
+                        p++;
                         continue;
                     }
                     copyCopy.setCount(Math.clamp(0, limit, copyCopy.getCount()));
@@ -42,8 +67,8 @@ public class LimitedItemBufferBlockEntity extends ItemBufferBlockEntity {
                         canInsert = lockable.canInsertFromBuffer(p, copyCopy);
                     }
                     if (canInsert) {
-                        int remove = handler.insertItem(p, copyCopy, false).getCount();
-                        if (remove < copyCopy.getCount()) {
+                        int remove = handler.insertItem(p, copyCopy, false).getCount()+(copy.getCount()-copyCopy.getCount());
+                        if (remove < copy.getCount()) {
                             movedAnything = true;
                         }
                         copy.setCount(remove);

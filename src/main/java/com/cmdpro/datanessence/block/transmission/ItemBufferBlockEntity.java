@@ -19,13 +19,15 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Math;
 
 public class ItemBufferBlockEntity extends BlockEntity {
-    private final ItemStackHandler itemHandler = new ItemStackHandler(5) {
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-        }
-
-    };
+    private final ItemStackHandler itemHandler = createItemHandler();
+    public ItemStackHandler createItemHandler() {
+        return new ItemStackHandler(5) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                setChanged();
+            }
+        };
+    }
     public ItemBufferBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(BlockEntityRegistry.ITEM_BUFFER.get(), pPos, pBlockState);
     }
