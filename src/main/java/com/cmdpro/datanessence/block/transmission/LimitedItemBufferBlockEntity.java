@@ -33,9 +33,12 @@ public class LimitedItemBufferBlockEntity extends ItemBufferBlockEntity {
             public boolean isItemValid(int slot, ItemStack stack) {
                 for (int i = 0; i < getSlots(); i++) {
                     if (i == slot) {
+                        if (ItemStack.isSameItemSameComponents(getStackInSlot(slot), stack)) {
+                            return super.isItemValid(slot, stack);
+                        }
                         continue;
                     }
-                    if (ItemStack.isSameItemSameComponents(getStackInSlot(slot), stack)) {
+                    if (ItemStack.isSameItemSameComponents(getStackInSlot(i), stack)) {
                         return false;
                     }
                 }
