@@ -22,32 +22,6 @@ public class LimitedItemBufferBlockEntity extends ItemBufferBlockEntity {
     }
 
     @Override
-    public ItemStackHandler createItemHandler() {
-        return new ItemStackHandler(15) {
-            @Override
-            protected void onContentsChanged(int slot) {
-                setChanged();
-            }
-
-            @Override
-            public boolean isItemValid(int slot, ItemStack stack) {
-                for (int i = 0; i < getSlots(); i++) {
-                    if (i == slot) {
-                        if (ItemStack.isSameItemSameComponents(getStackInSlot(slot), stack)) {
-                            return super.isItemValid(slot, stack);
-                        }
-                        continue;
-                    }
-                    if (ItemStack.isSameItemSameComponents(getStackInSlot(i), stack)) {
-                        return false;
-                    }
-                }
-                return super.isItemValid(slot, stack);
-            }
-        };
-    }
-
-    @Override
     public void transfer(IItemHandler handler) {
         IItemHandler resolved = getItemHandler();
         boolean movedAnything = false;
