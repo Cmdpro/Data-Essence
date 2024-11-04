@@ -284,6 +284,7 @@ public class DataNEssence
             event.accept(BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get());
             event.accept(BlockRegistry.ITEM_FILTER.get());
             event.accept(BlockRegistry.LIMITED_ITEM_BUFFER.get());
+            event.accept(BlockRegistry.ESSENCE_BREAKER.get());
         }
     }
 }

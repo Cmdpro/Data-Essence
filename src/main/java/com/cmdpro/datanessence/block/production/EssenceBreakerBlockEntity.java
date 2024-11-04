@@ -11,6 +11,8 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -37,14 +39,19 @@ public class EssenceBreakerBlockEntity extends BlockEntity implements EssenceBlo
             if (tile.interval <= 0) {
                 if (!world.hasNeighborSignal(pos) && tile.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= tile.breakCost) {
                     BlockPos breakPos = pos.relative(state.getValue(EssenceBreaker.FACING));
-
-                    world.destroyBlock(breakPos, true);
-                    world.addParticle(ParticleTypes.EXPLOSION, breakPos.getX(), breakPos.getY(), breakPos.getZ(), 1.0, 1.0, 1.0);
-
-                    tile.interval = 20;
+                    BlockState breakState = world.getBlockState(breakPos);
+                    if ((breakState.is(BlockTags.MINEABLE_WITH_PICKAXE) ||
+                            breakState.is(BlockTags.MINEABLE_WITH_AXE) ||
+                            breakState.is(BlockTags.MINEABLE_WITH_HOE) ||
+                            breakState.is(BlockTags.MINEABLE_WITH_SHOVEL)) &&
+                            !breakState.is(BlockTags.INCORRECT_FOR_DIAMOND_TOOL)
+                    ) {
+                        world.destroyBlock(breakPos, true);
+                        ((ServerLevel) world).sendParticles(ParticleTypes.EXPLOSION, breakPos.getCenter().x, breakPos.getCenter().y, breakPos.getCenter().z, 1, 0, 0, 0, 0);
+                        tile.interval = 20;
+                    }
                 }
-            }
-            else {
+            } else {
                 tile.interval--;
             }
         }

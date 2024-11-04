@@ -56,7 +56,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ItemRegistry.MAGIC_WRENCH);
 
         evenSimplerBlockItem(BlockRegistry.ESSENCE_CRYSTAL);
-        evenSimplerBlockItem(BlockRegistry.ESSENCE_LEECH);
 
         evenSimplerBlockItem(BlockRegistry.DECO_ESSENCE_BUFFER);
         evenSimplerBlockItem(BlockRegistry.DECO_ITEM_BUFFER);

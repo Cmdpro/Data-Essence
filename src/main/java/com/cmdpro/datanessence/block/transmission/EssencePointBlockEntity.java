@@ -39,7 +39,15 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity {
                     }
                 }
                 EssenceStorage.transferEssence(fromStorage.getStorage(), toStorage.getStorage(), EssenceTypeRegistry.ESSENCE.get(), transferAmount);
+                updateBlock(fromEnt);
+                updateBlock(toEnt);
             }
         }
+    }
+
+    public void updateBlock(BlockEntity ent) {
+        BlockState blockState = level.getBlockState(ent.getBlockPos());
+        this.level.sendBlockUpdated(ent.getBlockPos(), blockState, blockState, 3);
+        this.setChanged();
     }
 }

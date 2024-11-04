@@ -24,26 +24,28 @@ public class NaturalEssenceBatteryBlockEntity extends BlockEntity implements Ess
     public NaturalEssenceBatteryBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.NATURAL_ESSENCE_BATTERY.get(), pos, state);
     }
-
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        super.saveAdditional(storage.toNbt(), pRegistries);
+        super.saveAdditional(tag, pRegistries);
+        tag.put("EssenceStorage", storage.toNbt());
     }
     @Override
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(tag, pRegistries);
-        storage.fromNbt(tag);
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
+    }
+    @Override
+    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
+        storage.fromNbt(pkt.getTag().getCompound("EssenceStorage"));
+    }
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        CompoundTag tag = new CompoundTag();
+        tag.put("EssenceStorage", storage.toNbt());
+        return tag;
     }
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
-    }
-    @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
-        storage.fromNbt(pkt.getTag());
-    }
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        return storage.toNbt();
     }
 }
