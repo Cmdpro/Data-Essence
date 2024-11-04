@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
 import com.cmdpro.datanessence.block.processing.*;
+import com.cmdpro.datanessence.block.production.EssenceBreaker;
 import com.cmdpro.datanessence.block.production.FluidCollector;
 import com.cmdpro.datanessence.block.production.FluidSpiller;
 import com.cmdpro.datanessence.block.storage.*;
@@ -52,6 +53,9 @@ public class BlockRegistry {
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",
             () -> new EssenceBurner(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ESSENCE_LEECH = register("essence_leech",
+            () -> new EssenceLeech(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Machines
     public static final Supplier<Block> FABRICATOR = registerBlock("fabricator",
@@ -69,9 +73,6 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> VACUUM = register("vacuum",
             () -> new Vacuum(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> ESSENCE_LEECH = register("essence_leech",
-            () -> new EssenceLeech(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> STRUCTURE_PROTECTOR = register("structure_protector",
             () -> new StructureProtector(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().instabreak().noCollission()),
@@ -102,6 +103,9 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ITEM_FILTER = register("item_filter",
             () -> new ItemFilter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ESSENCE_BREAKER = register("essence_breaker",
+            () -> new EssenceBreaker(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers

@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.processing.*;
+import com.cmdpro.datanessence.block.production.EssenceBreakerBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidSpillerBlockEntity;
 import com.cmdpro.datanessence.block.storage.*;
@@ -165,6 +166,10 @@ public class BlockEntityRegistry {
             register("enticing_lure", () ->
                     BlockEntityType.Builder.of(EnticingLureBlockEntity::new,
                             BlockRegistry.ENTICING_LURE.get()).build(null));
+    public static final Supplier<BlockEntityType<EssenceBreakerBlockEntity>> ESSENCE_BREAKER =
+            register("essence_breaker", () ->
+                    BlockEntityType.Builder.of(EssenceBreakerBlockEntity::new,
+                            BlockRegistry.ESSENCE_BREAKER.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

@@ -128,6 +128,7 @@
   "item.datanessence.filter_upgrade": "Unique Upgrade Sigil: Filter",
   "item.datanessence.limiter_upgrade": "Unique Upgrade Sigil: Limit",
   "item.datanessence.speed_upgrade": "Universal Upgrade Sigil: Speed",
+  "block.datanessence.essence_breaker": "Essence Breaker",
 
   "computer.types.test.files.0": "Very cool testing computer text file, yes very cool, indeed, uh I need more text uh uh uh uh uh uh uh yea",
 
@@ -288,9 +289,13 @@
 
   "advancements.datanessence.datanessence.title": "Data & Essence",
   "advancements.datanessence.datanessence.description": "At once, our greatest triumph and our most guarded secret...",
+  "advancements.datanessence.acquire_essence_burner.title": "Gaseous Topic",
+  "advancements.datanessence.acquire_essence_burner.description": "Obtain an Essence Burner.",
   "advancements.datanessence.acquire_fabricator.title": "As if from a Dream",
   "advancements.datanessence.acquire_fabricator.description": "Obtain a Fabricator and an Essence Redirector.",
-  "advancements.datanessence.failed_pylon.title": "A Less Than Honorable Attempt",
+  "advancements.datanessence.connect_nodes.title": "Point to Point",
+  "advancements.datanessence.connect_nodes.description": "Link two nodes together with some wire.",
+  "advancements.datanessence.failed_pylon.title": "A... Less than Honorable Attempt",
   "advancements.datanessence.failed_pylon.description": "Stumble across a Failed Pylon.",
   "advancements.datanessence.use_fluid_collector.title": "Pumped",
   "advancements.datanessence.use_fluid_collector.description": "Use a Fluid Collector to gather liquid.",
