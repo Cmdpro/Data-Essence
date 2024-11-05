@@ -8,5 +8,11 @@
         "sounds": [
             "datanessence:ui_click"
         ]
+    },
+    "under_the_sky": {
+        "sounds": [
+            "datanessence:under_the_sky"
+        ],
+        "stream": true
     }
 }
