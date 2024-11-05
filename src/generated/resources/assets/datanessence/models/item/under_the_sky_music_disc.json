@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "datanessence:item/under_the_sky_music_disc"
+  }
+}

@@ -40,6 +40,7 @@ public class EssenceBreakerBlockEntity extends BlockEntity implements EssenceBlo
                 if (!world.hasNeighborSignal(pos) && tile.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= tile.breakCost) {
                     BlockPos breakPos = pos.relative(state.getValue(EssenceBreaker.FACING));
                     BlockState breakState = world.getBlockState(breakPos);
+
                     if ((breakState.is(BlockTags.MINEABLE_WITH_PICKAXE) ||
                             breakState.is(BlockTags.MINEABLE_WITH_AXE) ||
                             breakState.is(BlockTags.MINEABLE_WITH_HOE) ||

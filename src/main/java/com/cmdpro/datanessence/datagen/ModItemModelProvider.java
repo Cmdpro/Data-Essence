@@ -42,6 +42,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.DATA_TABLET);
         simpleItem(ItemRegistry.DATA_DRIVE);
         simpleItem(ItemRegistry.COGNIZANT_CUBE);
+        simpleItem(ItemRegistry.MUSIC_DISC_PLAYER);
+        simpleItem(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC);
         simpleItem(ItemRegistry.ESSENCE_SHARD);
         simpleItem(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK);
         simpleItem(ItemRegistry.TRAVERSITE_ROAD_CHUNK);
