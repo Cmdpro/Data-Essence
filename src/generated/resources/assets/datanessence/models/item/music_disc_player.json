@@ -1,5 +1,13 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "datanessence:item/music_disc_player_on",
+      "predicate": {
+        "datanessence:playing": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "datanessence:item/music_disc_player"
   }

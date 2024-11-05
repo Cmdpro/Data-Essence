@@ -25,12 +25,14 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.JukeboxPlayable;
@@ -118,6 +120,15 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(InfuserRenderer.modelLocation, InfuserRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(EntropicProcessorRenderer.modelLocation, EntropicProcessorRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(EntropicProcessorItemRenderer.modelLocation, EntropicProcessorItemRenderer.Model::createLayer);
+        });
+
+        event.enqueueWork(() -> {
+            ItemProperties.register(ItemRegistry.MUSIC_DISC_PLAYER.get(), ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "playing"), (stack, level, entity, seed) -> {
+                if (stack.has(DataComponentRegistry.PLAYING_MUSIC)) {
+                    return 1;
+                }
+                return 0;
+            });
         });
 
         progressionShader = new ProgressionShader();

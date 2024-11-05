@@ -42,7 +42,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.DATA_TABLET);
         simpleItem(ItemRegistry.DATA_DRIVE);
         simpleItem(ItemRegistry.COGNIZANT_CUBE);
-        simpleItem(ItemRegistry.MUSIC_DISC_PLAYER);
         simpleItem(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC);
         simpleItem(ItemRegistry.ESSENCE_SHARD);
         simpleItem(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK);
@@ -98,6 +97,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         essencePoint(ItemRegistry.ITEM_POINT_ITEM);
         essencePoint(ItemRegistry.FLUID_POINT_ITEM);
 
+        musicDiscPlayer(ItemRegistry.MUSIC_DISC_PLAYER);
+
+    }
+    private ItemModelBuilder musicDiscPlayer(Supplier<Item> item) {
+        withExistingParent("music_disc_player_on", ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0", ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/music_disc_player_on"));
+        return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                        ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/music_disc_player"))
+                .override().predicate(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "playing"), 1).
+                model(getExistingFile(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "music_disc_player_on"))).end();
     }
     private ItemModelBuilder simpleItem(Supplier<Item> item) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
