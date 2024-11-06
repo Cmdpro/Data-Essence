@@ -6,6 +6,7 @@ import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.entity.AncientSentinel;
 import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
+import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.item.blockitem.NaturalEssencePointItem;
 import com.cmdpro.datanessence.particle.*;
 import com.cmdpro.datanessence.registry.*;
@@ -49,6 +50,7 @@ import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 
@@ -159,6 +161,10 @@ public class ClientModEvents {
                 return null;
             }
         });
+    }
+    @SubscribeEvent
+    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerFluidType(Genderfluid.EXTENSIONS, FluidRegistry.GENDERFLUID_TYPE.get());
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {

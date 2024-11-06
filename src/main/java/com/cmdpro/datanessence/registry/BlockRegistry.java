@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.*;
 
 import com.cmdpro.datanessence.block.auxiliary.*;
+import com.cmdpro.datanessence.block.fluid.GenderfluidBlock;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
 import com.cmdpro.datanessence.block.processing.*;
@@ -24,6 +25,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -211,6 +213,8 @@ public class BlockRegistry {
     public static final Supplier<Block> FLUIDIC_GLASS = register("fluidic_glass",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    // Fluids
+    public static final Supplier<LiquidBlock> GENDERFLUID = registerBlock("genderfluid", () -> new GenderfluidBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(DyeColor.BLACK)));
 
     private static <T extends Block> Supplier<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {

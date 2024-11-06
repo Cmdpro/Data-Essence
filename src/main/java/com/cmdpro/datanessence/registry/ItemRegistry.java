@@ -95,6 +95,8 @@ public class ItemRegistry {
     // Music Discs
     public static final Supplier<Item> UNDER_THE_SKY_MUSIC_DISC = register("under_the_sky_music_disc", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(JukeboxSongRegistry.UNDER_THE_SKY)));
 
+    // Buckets
+    public static final Supplier<Item> GENDERFLUID_BUCKET = register("genderfluid_bucket", () -> new BucketItem(FluidRegistry.GENDERFLUID.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     private static <T extends Item> Supplier<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);
     }

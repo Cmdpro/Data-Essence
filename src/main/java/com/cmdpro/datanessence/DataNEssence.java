@@ -76,6 +76,8 @@ public class DataNEssence
         EssenceTypeRegistry.ESSENCE_TYPES.register(bus);
         MobEffectRegistry.MOB_EFFECTS.register(bus);
         SoundRegistry.SOUND_EVENTS.register(bus);
+        FluidRegistry.FLUID_TYPES.register(bus);
+        FluidRegistry.FLUIDS.register(bus);
         random = RandomSource.create();
         HiddenBlockConditions.conditions.put(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
     }
@@ -232,6 +234,7 @@ public class DataNEssence
             event.accept(ItemRegistry.FILTER_UPGRADE.get());
             event.accept(ItemRegistry.MUSIC_DISC_PLAYER.get());
             event.accept(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC.get());
+            event.accept(ItemRegistry.GENDERFLUID_BUCKET.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());
