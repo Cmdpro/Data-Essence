@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.item.blockitem;
 
+import com.cmdpro.datanessence.renderers.item.FabricatorItemRenderer;
 import com.cmdpro.datanessence.renderers.item.FluidPointItemRenderer;
 import com.cmdpro.datanessence.renderers.item.InfuserItemRenderer;
 import net.minecraft.client.Minecraft;
@@ -16,11 +17,8 @@ public class InfuserItem extends BlockItem {
         super(block, settings);
     }
 
-    @Override
-    @SuppressWarnings("removal")
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        super.initializeClient(consumer);
-        consumer.accept(new IClientItemExtensions() {
+    public static IClientItemExtensions extensions() {
+        return new IClientItemExtensions() {
             private BlockEntityWithoutLevelRenderer renderer;
 
             @Override
@@ -30,6 +28,6 @@ public class InfuserItem extends BlockItem {
                 }
                 return renderer;
             }
-        });
+        };
     }
 }

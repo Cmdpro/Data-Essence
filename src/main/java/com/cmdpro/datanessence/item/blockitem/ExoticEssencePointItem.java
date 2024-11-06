@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.item.blockitem;
 
 import com.cmdpro.datanessence.renderers.item.EssencePointItemRenderer;
 import com.cmdpro.datanessence.renderers.item.ExoticEssencePointItemRenderer;
+import com.cmdpro.datanessence.renderers.item.FabricatorItemRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
@@ -15,11 +16,8 @@ public class ExoticEssencePointItem extends BlockItem {
     public ExoticEssencePointItem(Block block, Properties settings) {
         super(block, settings);
     }
-    @Override
-    @SuppressWarnings("removal")
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        super.initializeClient(consumer);
-        consumer.accept(new IClientItemExtensions() {
+    public static IClientItemExtensions extensions() {
+        return new IClientItemExtensions() {
             private BlockEntityWithoutLevelRenderer renderer;
 
             @Override
@@ -29,6 +27,6 @@ public class ExoticEssencePointItem extends BlockItem {
                 }
                 return renderer;
             }
-        });
+        };
     }
 }

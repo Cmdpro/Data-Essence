@@ -15,11 +15,8 @@ public class FabricatorItem extends BlockItem {
     public FabricatorItem(Block block, Properties settings) {
         super(block, settings);
     }
-    @Override
-    @SuppressWarnings("removal")
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        super.initializeClient(consumer);
-        consumer.accept(new IClientItemExtensions() {
+    public static IClientItemExtensions extensions() {
+        return new IClientItemExtensions() {
             private BlockEntityWithoutLevelRenderer renderer;
 
             @Override
@@ -29,6 +26,6 @@ public class FabricatorItem extends BlockItem {
                 }
                 return renderer;
             }
-        });
+        };
     }
 }

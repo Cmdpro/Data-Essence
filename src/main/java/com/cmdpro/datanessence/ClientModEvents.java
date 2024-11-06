@@ -7,7 +7,7 @@ import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.entity.AncientSentinel;
 import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.fluid.Genderfluid;
-import com.cmdpro.datanessence.item.blockitem.NaturalEssencePointItem;
+import com.cmdpro.datanessence.item.blockitem.*;
 import com.cmdpro.datanessence.particle.*;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.renderers.block.*;
@@ -165,6 +165,18 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(Genderfluid.EXTENSIONS, FluidRegistry.GENDERFLUID_TYPE.get());
+
+        event.registerItem(AutoFabricatorItem.extensions(), ItemRegistry.AUTO_FABRICATOR_ITEM.get());
+        event.registerItem(ChargerItem.extensions(), ItemRegistry.CHARGER_ITEM.get());
+        event.registerItem(EntropicProcessorItem.extensions(), ItemRegistry.ENTROPIC_PROCESSOR_ITEM.get());
+        event.registerItem(EssencePointItem.extensions(), ItemRegistry.ESSENCE_POINT_ITEM.get());
+        event.registerItem(ExoticEssencePointItem.extensions(), ItemRegistry.EXOTIC_ESSENCE_POINT_ITEM.get());
+        event.registerItem(FabricatorItem.extensions(), ItemRegistry.FABRICATOR_ITEM.get());
+        event.registerItem(FluidPointItem.extensions(), ItemRegistry.FLUID_POINT_ITEM.get());
+        event.registerItem(InfuserItem.extensions(), ItemRegistry.INFUSER_ITEM.get());
+        event.registerItem(ItemPointItem.extensions(), ItemRegistry.ITEM_POINT_ITEM.get());
+        event.registerItem(LunarEssencePointItem.extensions(), ItemRegistry.LUNAR_ESSENCE_POINT_ITEM.get());
+        event.registerItem(NaturalEssencePointItem.extensions(), ItemRegistry.NATURAL_ESSENCE_POINT_ITEM.get());
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
