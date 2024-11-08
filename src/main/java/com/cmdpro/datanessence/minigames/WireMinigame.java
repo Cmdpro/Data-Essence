@@ -120,7 +120,26 @@ public class WireMinigame extends Minigame {
             }
         }
         if (startLine != null && endLine != null) {
-            drawLine(new Vector2d(startLine.x+1d+(double)x, startLine.y+1d+(double)y), new Vector2d(endLine.x+1d+(double)x, endLine.y+1d+(double)y), lineColor);
+            Tile start = getTile(startLine);
+            Tile end = getTile(endLine);
+            boolean invalid = false;
+            Line2D line = new Line2D.Double((start.pos.x * 10) + 5, (start.pos.y * 10) + 5, (end.pos.x * 10) + 5, (end.pos.y * 10) + 5);
+            for (Tile i : tiles.values()) {
+                if (i.connectedTo != null) {
+                    if (!i.connectedTo.equals(start.pos) && !i.pos.equals(end.pos)) {
+                        Line2D line2 = new Line2D.Double((i.pos.x * 10) + 5, (i.pos.y * 10) + 5, (i.connectedTo.x * 10) + 5, (i.connectedTo.y * 10) + 5);
+                        if (line.intersectsLine(line2)) {
+                            invalid = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            int color = lineColor;
+            if (invalid) {
+                color = 0xFF0000;
+            }
+            drawLine(new Vector2d(startLine.x+1d+(double)x, startLine.y+1d+(double)y), new Vector2d(endLine.x+1d+(double)x, endLine.y+1d+(double)y), color);
         }
     }
     public Vector2d startLine;
@@ -181,14 +200,9 @@ public class WireMinigame extends Minigame {
         Tesselator tess = RenderSystem.renderThreadTesselator();
         RenderSystem.lineWidth(1f*(float)Minecraft.getInstance().getWindow().getGuiScale());
         BufferBuilder buf = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
-        float x1 = (float)start.x;
-        float y1 = (float)start.y;
-        float x2 = (float)end.x;
-        float y2 = (float)end.y;
-        Vec2 vec1 = new Vec2(x1 >= x2 ? x1 == x2 ? 0 : 1 : -1, y1 >= y2 ? y1 == y2 ? 0 : 1 : -1);
-        Vec2 vec2 = new Vec2(x2 >= x1 ? x1 == x2 ? 0 : 1 : -1, y2 >= y1 ? y1 == y2 ? 0 : 1 : -1);
-        buf.addVertex(x1, y1, 0.0f).setColor(color).setNormal(vec1.x, vec1.y, 0);
-        buf.addVertex(x2, y2, 0.0f).setColor(color).setNormal(vec2.x, vec2.y, 0);
+        Vec2 vec = new Vec2((float)start.x-(float)end.x, (float)start.y-(float)end.y).normalized();
+        buf.addVertex((float)start.x, (float)start.y, 0.0F).setColor(color).setNormal(vec.x, vec.y, 0);
+        buf.addVertex((float)end.x, (float)end.y, 0.0F).setColor(color).setNormal(vec.x, vec.y, 0);
         BufferUploader.drawWithShader(buf.buildOrThrow());
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         GlStateManager._enableCull();
@@ -231,17 +245,6 @@ public class WireMinigame extends Minigame {
         public Vector2i connectedTo;
     }
     public class Client {
-        public static void placeFlag() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.WOOL_PLACE, 1f, 1f));
-        }
-        public static void removeFlag() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.WOOL_BREAK, 1f, 1f));
-        }
-        public static void breakTile() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.STONE_BREAK, 1f, 1f));
-        }
-        public static void explode() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.GENERIC_EXPLODE.value(), 1f, 1f));
-        }
+
     }
 }

@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.minigames.MinesweeperMinigameCreator;
+import com.cmdpro.datanessence.minigames.TracesMinigameCreator;
 import com.cmdpro.datanessence.minigames.WireMinigameCreator;
 import com.cmdpro.datanessence.api.databank.MinigameSerializer;
 import net.minecraft.resources.ResourceLocation;
@@ -14,6 +15,7 @@ public class MinigameRegistry {
 
     public static final Supplier<MinigameSerializer> MINESWEEPER = register("minesweeper", () -> new MinesweeperMinigameCreator.MinesweeperMinigameSerializer());
     public static final Supplier<MinigameSerializer> WIRE = register("wire", () -> new WireMinigameCreator.WireMinigameSerializer());
+    public static final Supplier<MinigameSerializer> TRACES = register("traces", () -> new TracesMinigameCreator.TracesMinigameSerializer());
     private static <T extends MinigameSerializer> Supplier<T> register(final String name, final Supplier<T> item) {
         return MINIGAME_TYPES.register(name, item);
     }
