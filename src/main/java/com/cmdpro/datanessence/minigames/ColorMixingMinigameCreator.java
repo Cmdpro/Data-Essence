@@ -37,6 +37,31 @@ public class ColorMixingMinigameCreator extends MinigameCreator {
     }
 
     public static class ColorMixingMinigameSerializer extends MinigameSerializer<ColorMixingMinigameCreator> {
+        public static final Codec<ColorManipulation> COLOR_MANIPULATION_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+                        Codec.INT.fieldOf("maxIntensity").forGetter(colorManipulation -> colorManipulation.maxIntensity),
+                        Codec.INT.fieldOf("intensity").forGetter(colorManipulation -> colorManipulation.intensity),
+                        Codec.INT.listOf().comapFlatMap(
+                                integer -> Util.fixedSize(integer, 3)
+                                        .map(integers -> new Color(integers.get(0), integers.get(1), integers.get(2))),
+                                color -> List.of(color.getRed(), color.getGreen(), color.getBlue())).fieldOf("color").forGetter(colorManipulation -> colorManipulation.color)
+
+                ).apply(instance, ColorManipulation::new)
+        );
+        public static final StreamCodec<RegistryFriendlyByteBuf, ColorManipulation> COLOR_MANIPULATION_STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
+            pBuffer.writeInt(pValue.maxIntensity);
+            pBuffer.writeInt(pValue.intensity);
+            pBuffer.writeInt(pValue.color.getRed());
+            pBuffer.writeInt(pValue.color.getGreen());
+            pBuffer.writeInt(pValue.color.getBlue());
+        }, (pBuffer) -> {
+            int maxIntensity = pBuffer.readInt();
+            int intensity = pBuffer.readInt();
+            int R = pBuffer.readInt();
+            int G = pBuffer.readInt();
+            int B = pBuffer.readInt();
+            Color color = new Color(R, G, B);
+            return new ColorManipulation(maxIntensity, intensity, color);
+        });
         public static final StreamCodec<RegistryFriendlyByteBuf, ColorMixingMinigameCreator> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
             pBuffer.writeCollection(pValue.manipulations, (buf, value) -> ColorMixingMinigameCreator.ColorMixingMinigameSerializer.COLOR_MANIPULATION_STREAM_CODEC.encode(((RegistryFriendlyByteBuf)buf), value));
             pBuffer.writeInt(pValue.startColor.getRed());
@@ -72,31 +97,6 @@ public class ColorMixingMinigameCreator extends MinigameCreator {
         public StreamCodec<RegistryFriendlyByteBuf, ColorMixingMinigameCreator> getStreamCodec() {
             return STREAM_CODEC;
         }
-        public static final Codec<ColorManipulation> COLOR_MANIPULATION_CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-                        Codec.INT.fieldOf("maxIntensity").forGetter(colorManipulation -> colorManipulation.maxIntensity),
-                        Codec.INT.fieldOf("intensity").forGetter(colorManipulation -> colorManipulation.intensity),
-                        Codec.INT.listOf().comapFlatMap(
-                                integer -> Util.fixedSize(integer, 3)
-                                        .map(integers -> new Color(integers.get(0), integers.get(1), integers.get(2))),
-                                color -> List.of(color.getRed(), color.getGreen(), color.getBlue())).fieldOf("color").forGetter(colorManipulation -> colorManipulation.color)
-
-                ).apply(instance, ColorManipulation::new)
-        );
-        public static final StreamCodec<RegistryFriendlyByteBuf, ColorManipulation> COLOR_MANIPULATION_STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
-            pBuffer.writeInt(pValue.maxIntensity);
-            pBuffer.writeInt(pValue.intensity);
-            pBuffer.writeInt(pValue.color.getRed());
-            pBuffer.writeInt(pValue.color.getGreen());
-            pBuffer.writeInt(pValue.color.getBlue());
-        }, (pBuffer) -> {
-            int maxIntensity = pBuffer.readInt();
-            int intensity = pBuffer.readInt();
-            int R = pBuffer.readInt();
-            int G = pBuffer.readInt();
-            int B = pBuffer.readInt();
-            Color color = new Color(R, G, B);
-            return new ColorManipulation(maxIntensity, intensity, color);
-        });
         public static class ColorManipulation {
             public ColorManipulation(int maxIntensity, int intensity, Color color) {
                 this.maxIntensity = maxIntensity;
@@ -106,8 +106,8 @@ public class ColorMixingMinigameCreator extends MinigameCreator {
             public int maxIntensity;
             public int intensity;
             public Color color;
-            public Color getColor() {
-                return ColorUtil.blendColors(color, Color.BLACK, 1f-(((float)intensity)/((float)maxIntensity)));
+            public float getIntensity() {
+                return ((float)intensity)/((float)maxIntensity);
             }
         }
     }

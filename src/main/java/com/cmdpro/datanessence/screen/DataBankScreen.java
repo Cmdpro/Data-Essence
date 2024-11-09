@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.screen;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.databank.Minigame;
 import com.cmdpro.datanessence.api.databank.MinigameCreator;
+import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.databank.DataBankEntries;
 import com.cmdpro.datanessence.databank.DataBankEntry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
@@ -11,6 +12,7 @@ import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerFinishDataBankMinigameC2SPacket;
 import com.cmdpro.datanessence.datatablet.Entries;
 import com.cmdpro.datanessence.datatablet.Entry;
+import com.eliotlash.mclib.math.functions.limit.Min;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,12 +23,15 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class DataBankScreen extends Screen {
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank.png");
     public DataBankScreen(Component pTitle) {
         super(pTitle);
+        minigameCompletionWait = -1;
     }
     public static int imageWidth = 256;
     public static int imageHeight = 166;
@@ -36,6 +41,7 @@ public class DataBankScreen extends Screen {
     public DataBankEntry clickedEntry;
     public Minigame[] minigames;
     public int minigameProgress;
+    public int minigameCompletionWait;
     public boolean isUnlocked(Entry entry) {
         return entry.isUnlockedClient();
     }
@@ -79,11 +85,13 @@ public class DataBankScreen extends Screen {
             }
         }
         if (screenType == 1) {
-            if (isMouseInsideMinigame(pMouseX, pMouseY)) {
-                double mouseX = pMouseX-(x+(imageWidth/2)-75);
-                double mouseY = pMouseY-(y+(imageHeight/2)-75);
-                minigames[minigameProgress].mouseClicked(mouseX, mouseY, pButton);
-                return true;
+            if (minigameCompletionWait == -1) {
+                if (isMouseInsideMinigame(pMouseX, pMouseY)) {
+                    double mouseX = pMouseX - (x + (imageWidth / 2) - 75);
+                    double mouseY = pMouseY - (y + (imageHeight / 2) - 75);
+                    minigames[minigameProgress].mouseClicked(mouseX, mouseY, pButton);
+                    return true;
+                }
             }
         }
         if (pButton == 1 && screenType == 1) {
@@ -111,11 +119,13 @@ public class DataBankScreen extends Screen {
             return false;
         }
         if (screenType == 1) {
-            if (isMouseInsideMinigame(pMouseX, pMouseY) && isMouseInsideMinigame(pMouseX+pDragX, pMouseY+pDragY)) {
-                double mouseX = pMouseX-(x+(imageWidth/2)-75);
-                double mouseY = pMouseY-(y+(imageHeight/2)-75);
-                minigames[minigameProgress].mouseDragged(mouseX, mouseY, pButton, pDragX, pDragY);
-                return true;
+            if (minigameCompletionWait == -1) {
+                if (isMouseInsideMinigame(pMouseX, pMouseY) && isMouseInsideMinigame(pMouseX + pDragX, pMouseY + pDragY)) {
+                    double mouseX = pMouseX - (x + (imageWidth / 2) - 75);
+                    double mouseY = pMouseY - (y + (imageHeight / 2) - 75);
+                    minigames[minigameProgress].mouseDragged(mouseX, mouseY, pButton, pDragX, pDragY);
+                    return true;
+                }
             }
         }
         return false;
@@ -126,11 +136,13 @@ public class DataBankScreen extends Screen {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         if (screenType == 1) {
-            if (isMouseInsideMinigame(pMouseX, pMouseY)) {
-                double mouseX = pMouseX-(x+(imageWidth/2)-75);
-                double mouseY = pMouseY-(y+(imageHeight/2)-75);
-                minigames[minigameProgress].mouseReleased(mouseX, mouseY, pButton);
-                return true;
+            if (minigameCompletionWait == -1) {
+                if (isMouseInsideMinigame(pMouseX, pMouseY)) {
+                    double mouseX = pMouseX - (x + (imageWidth / 2) - 75);
+                    double mouseY = pMouseY - (y + (imageHeight / 2) - 75);
+                    minigames[minigameProgress].mouseReleased(mouseX, mouseY, pButton);
+                    return true;
+                }
             }
         }
         return false;
@@ -139,14 +151,18 @@ public class DataBankScreen extends Screen {
     @Override
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         if (screenType == 1) {
-            minigames[minigameProgress].keyPressed(pKeyCode, pScanCode, pModifiers);
+            if (minigameCompletionWait == -1) {
+                minigames[minigameProgress].keyPressed(pKeyCode, pScanCode, pModifiers);
+            }
         }
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);
     }
     @Override
     public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers) {
         if (screenType == 1) {
-            minigames[minigameProgress].keyReleased(pKeyCode, pScanCode, pModifiers);
+            if (minigameCompletionWait == -1) {
+                minigames[minigameProgress].keyReleased(pKeyCode, pScanCode, pModifiers);
+            }
         }
         return super.keyReleased(pKeyCode, pScanCode, pModifiers);
     }
@@ -156,8 +172,15 @@ public class DataBankScreen extends Screen {
         super.tick();
         if (screenType == 1) {
             minigames[minigameProgress].tick();
-            if (screenType == 1) {
-                if (minigames[minigameProgress].isFinished()) {
+            if (minigames[minigameProgress].isFinished()) {
+                if (minigameCompletionWait == -1) {
+                    minigameCompletionWait = 40;
+                }
+            }
+            if (minigameCompletionWait > 0) {
+                minigameCompletionWait--;
+                if (minigameCompletionWait <= 0) {
+                    minigameCompletionWait = -1;
                     minigameProgress++;
                     if (minigameProgress >= minigames.length) {
                         Entry entry = Entries.entries.get(clickedEntry.entry);
@@ -175,6 +198,9 @@ public class DataBankScreen extends Screen {
                     }
                 }
             }
+        } else {
+            minigameCompletionWait = -1;
+            minigames = null;
         }
     }
 
@@ -223,6 +249,15 @@ public class DataBankScreen extends Screen {
             drawMinigame(minigames[minigameProgress], graphics, delta, mouseX, mouseY);
             graphics.blit(TEXTURE, x+26-10, y+26-10, 0, 166, 20, 20);
             graphics.renderItem(clickedEntry.icon, x+26-8, y+26-8);
+            if (minigameCompletionWait > 0) {
+                Color fade = new Color(1f, 1f, 1f, 1f-((float)minigameCompletionWait/40f));
+                Color fade2 = new Color(0f, 0f, 0f, 1f-((float)minigameCompletionWait/40f));
+                int textWidth = Minecraft.getInstance().font.width("Completed");
+                int textHeight = Minecraft.getInstance().font.lineHeight;
+                graphics.fillGradient(x+(imageWidth/2)-(textWidth+5), y+(imageHeight/2)-(textHeight+10), x+(imageWidth/2)+(textWidth+5), y+(imageHeight/2), 0x00000000, fade2.getRGB());
+                graphics.fillGradient(x+(imageWidth/2)-(textWidth+5), y+(imageHeight/2), x+(imageWidth/2)+(textWidth+5), y+(imageHeight/2)+(textHeight+10), fade2.getRGB(), 0x00000000);
+                graphics.drawCenteredString(Minecraft.getInstance().font, "Completed", x+(imageWidth/2), y+(imageHeight/2)-(textHeight/2), fade.getRGB());
+            }
         }
         graphics.disableScissor();
         if (screenType == 0) {
