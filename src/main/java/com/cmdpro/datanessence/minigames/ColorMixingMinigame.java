@@ -22,6 +22,7 @@ public class ColorMixingMinigame extends Minigame {
 
     public Color targetColor;
     public Color startColor;
+    public List<ColorMixingMinigameCreator.ColorMixingMinigameSerializer.ColorManipulation> manipulations;
     public int maxManipulations;
     public int colorLevels;
     public ColorMixingMinigame(List<ColorMixingMinigameCreator.ColorMixingMinigameSerializer.ColorManipulation> manipulations, Color startColor, int maxManipulations, int colorLevels) {
@@ -32,6 +33,7 @@ public class ColorMixingMinigame extends Minigame {
         this.startColor = startColor;
         this.maxManipulations = maxManipulations;
         this.colorLevels = colorLevels;
+        this.manipulations = new ArrayList<>();
     }
     @Override
     public boolean isFinished() {
@@ -40,7 +42,7 @@ public class ColorMixingMinigame extends Minigame {
 
     @Override
     public void render(DataBankScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
-        
+
     }
 
     @Override
