@@ -184,7 +184,7 @@
   "data_tablet.pages.data_tablet.name":              "Data Tablet",
   "data_tablet.pages.data_tablet.flavor": " ◇ Ancient lexicon",
   "data_tablet.pages.data_tablet.page1.text":        "Every researcher is given a personal Data Tablet which contains records of our discoveries, inventions, and knowledge - data. Its contents may be added to by visiting any active research center and copying from its Data Bank, assuming sufficient credentials.\n\nThe Data Tablet contains security mechanisms which prevent a Tablet from accepting data of a higher tier than itself, as well as requiring specific, highly-encrypted critical data and authorization from higher-ranked peers to rise in tier. This is to ensure our gathered knowledge does not fall into the wrong hands.",
-  "data_tablet.pages.data_tablet.page2.text": "The Data Tablet's interface features several tabs, which entries are grouped into. Entries often require others as prerequisites, and this is represented by a glowing line should they share tabs.\n\nWhen viewing an entry, you may \"save\" it with the book-and-quill button on the right, and the Tablet will open to it instead of the main screen.",
+  "data_tablet.pages.data_tablet.page2.text": "The Data Tablet's interface features several tabs, which entries are grouped into. Entries often require others as prerequisites, and this is represented by a glowing line should they share tabs.\n\nWhen viewing an entry, you may \"save\" it with the book-and-quill button on the right, and the Tablet will open to it instead of the main screen. A saved entry can be cleared by sneaking.",
   "data_tablet.pages.data_tablet.page3.text": "The Tablet is capable of displaying text, lifelike depictions of blocks and items, several kinds of recipe diagrams, and multiblock structure blueprints, the latter of which can be previewed in-world through the inbuilt projector by clicking the eye icon on multiblock pages.",
   "data_tablet.pages.essence_redirector.name":       "Essence Redirector",
   "data_tablet.pages.essence_redirector.flavor": " ◇ Is it a wrench?",
@@ -305,6 +305,8 @@
   "advancements.datanessence.use_fluid_collector.description": "Use a Fluid Collector to gather liquid.",
 
   "tooltip.datanessence.toggle_lock": "Toggle Slot Locking",
+  "tooltip.datanessence.save_and_exit": "Save and Exit",
+  "tooltip.datanessence.save_and_exit_sneak": "Clear Saved Entry",
 
   "tag.item.datanessence.polished_obsidian_blocks": "Polished Obsidian Blocks",
   "tag.item.datanessence.shaped_polished_obsidian_blocks": "Shaped Polished Obsidian Blocks",

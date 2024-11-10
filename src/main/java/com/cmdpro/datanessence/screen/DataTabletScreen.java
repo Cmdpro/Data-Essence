@@ -13,9 +13,11 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.KeyboardHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.KeyboardInput;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
@@ -164,10 +166,17 @@ public class DataTabletScreen extends Screen {
                 }
             }
             if (pMouseX >= x+imageWidth && pMouseX <= x+imageWidth+17 && pMouseY >= y+10 && pMouseY <= y+10+21) {
-                savedEntry = clickedEntry.id;
-                savedPage = page;
-                Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
-                super.onClose();
+                if (Screen.hasShiftDown()) {
+                    savedEntry = null;
+                    savedPage = 0;
+                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+                }
+                else {
+                    savedEntry = clickedEntry.id;
+                    savedPage = page;
+                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+                    super.onClose();
+                }
                 return true;
             }
         }
@@ -232,12 +241,14 @@ public class DataTabletScreen extends Screen {
                 o++;
             }
         }
+
         // this is done with four, as both the top and bottom halves of the frame differ in color, and the "handle" needs to be of reasonable length.
-        // handles need to be fixed, the rendering is wack
-        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32, 0, 0, 340, 55, 72, 29, 9); // top half
-        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32+55, 0, 30, 340, 25, 72, 5, 9); // top handle
-        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32+80, 0, 35, 340, 25, 72, 5, 9); // bottom handle
-        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32+105, 0, 39, 340, 105, 72, 29, 9); // bottom half
+        // TODO fix this
+//        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32, 0, 0, 340, 55, 72, 29, 9); // top half
+//        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32+55, 0, 30, 340, 25, 72, 5, 9); // top handle
+//        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32+80, 0, 35, 340, 25, 72, 5, 9); // bottom handle
+//        graphics.blitWithBorder(TEXTURE_FRAME, 32, 32+105, 0, 39, 340, 105, 72, 29, 9); // bottom half
+
         renderBg(graphics, delta, mouseX, mouseY);
         graphics.enableScissor(x+3, y+3, x+imageWidth-3, y+imageHeight-3);
         if (screenType == 0) {
@@ -311,6 +322,8 @@ public class DataTabletScreen extends Screen {
         } else if (screenType == 2) {
             graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.name, x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
             if (mouseX >= x+imageWidth && mouseX <= x+imageWidth+17 && mouseY >= y+10 && mouseY <= y+10+21) {
+                Component tooltip = !Screen.hasShiftDown() ? Component.translatable("tooltip.datanessence.save_and_exit") : Component.translatable("tooltip.datanessence.save_and_exit_sneak");
+                graphics.renderTooltip(Minecraft.getInstance().font, tooltip, mouseX, mouseY);
                 graphics.blit(TEXTURE_MISC, x + imageWidth, y + 10, 38, 21, 17, 21);
             } else {
                 graphics.blit(TEXTURE_MISC, x + imageWidth, y + 10, 38, 0, 17, 21);
@@ -318,31 +331,31 @@ public class DataTabletScreen extends Screen {
         }
     }
 
-    public void drawPage(Page page, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
+    public void drawPage(Page page, GuiGraphics graphics, float pPartialTick, int mouseX, int mouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        page.render(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
-        pGuiGraphics.disableScissor();
+        page.render(this, graphics, pPartialTick, mouseX, mouseY, x, y);
+        graphics.disableScissor();
         if (this.page+1 < clickedEntry.getPagesClient().length) {
             int shift = 0;
-            if (pMouseX >= (x+imageWidth)+6 && pMouseX <= (x+imageWidth)+18) {
-                if (pMouseY >= y + ((imageHeight / 2) - 20) && pMouseY <= y + ((imageHeight / 2) + 20)) {
+            if (mouseX >= (x+imageWidth)+6 && mouseX <= (x+imageWidth)+18) {
+                if (mouseY >= y + ((imageHeight / 2) - 20) && mouseY <= y + ((imageHeight / 2) + 20)) {
                     shift = 40;
                 }
             }
-            pGuiGraphics.blit(getTextureToUse(), (x + imageWidth) + 6, y + ((imageHeight / 2) - 20), 12, 166+shift, 12, 40);
+            graphics.blit(getTextureToUse(), (x + imageWidth) + 6, y + ((imageHeight / 2) - 20), 12, 166+shift, 12, 40);
         }
         if (this.page > 0) {
             int shift = 0;
-            if (pMouseX >= x-18 && pMouseX <= x-6) {
-                if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
+            if (mouseX >= x-18 && mouseX <= x-6) {
+                if (mouseY >= y+((imageHeight/2)-20) && mouseY <= y+((imageHeight/2)+20)) {
                     shift = 40;
                 }
             }
-            pGuiGraphics.blit(getTextureToUse(), x - 18, y + ((imageHeight / 2) - 20), 0, 166+shift, 12, 40);
+            graphics.blit(getTextureToUse(), x - 18, y + ((imageHeight / 2) - 20), 0, 166+shift, 12, 40);
         }
-        page.renderPost(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y);
-        pGuiGraphics.enableScissor(x+1, y+1, x+imageWidth-1, y+imageHeight-1);
+        page.renderPost(this, graphics, pPartialTick, mouseX, mouseY, x, y);
+        graphics.enableScissor(x+1, y+1, x+imageWidth-1, y+imageHeight-1);
     }
 
     public void drawLines(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
