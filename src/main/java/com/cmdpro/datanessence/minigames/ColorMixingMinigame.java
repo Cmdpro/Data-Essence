@@ -55,6 +55,7 @@ public class ColorMixingMinigame extends Minigame {
         Color currentColor = getCurrentColor();
         float[] color = RenderSystem.getShaderColor().clone();
         RenderSystem.setShaderColor(((float)currentColor.getRed())/255f, ((float)currentColor.getGreen())/255f, ((float)currentColor.getBlue())/255f, 1f);
+        RenderSystem.enableBlend();
         pGuiGraphics.blit(TEXTURE, x+((150/2)-24), y+((150/2)-24), 208, 0, 48, 48);
         RenderSystem.setShaderColor(0f, 1f, 1f, 1f);
         pGuiGraphics.blit(TEXTURE, x+((150/2)+24)+16, y+((150/2)-28), 198, 48, 16, 16);
@@ -63,6 +64,7 @@ public class ColorMixingMinigame extends Minigame {
         RenderSystem.setShaderColor(1f, 1f, 0f, 1f);
         pGuiGraphics.blit(TEXTURE, x+((150/2)+24)+16, y+((150/2)-28)+40, 198, 48, 16, 16);
         RenderSystem.setShaderColor(color[0], color[1], color[2], color[3]);
+        RenderSystem.disableBlend();
         pGuiGraphics.blit(TEXTURE, x+((150/2)-16), y+16, 192, 64, 32, 14);
         pGuiGraphics.fill(x+((150/2)-6), y+17, x+((150/2)-6)+12, y+17+12, targetColor.getRGB());
         pGuiGraphics.drawCenteredString(Minecraft.getInstance().font, "Target", x+(150/2), y+5, 0xFFFFFFFF);
