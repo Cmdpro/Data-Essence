@@ -136,9 +136,9 @@
 
   "computer.types.test.files.0": "Very cool testing computer text file, yes very cool, indeed, uh I need more text uh uh uh uh uh uh uh yea",
 
-  "death.attack.magicprojectile": "%1$s was killed by %2$s using magic",
-  "death.attack.magicprojectile.player": "%1$s was killed by %2$s using magic",
-  "death.attack.magicprojectile.item": "%1$s was killed by %2$s using the magic of %3$s",
+  "death.attack.magic_projectile": "%1$s was killed by %2$s using magic",
+  "death.attack.magic_projectile.player": "%1$s was killed by %2$s using magic",
+  "death.attack.magic_projectile.item": "%1$s was killed by %2$s using the magic of %3$s",
   "death.attack.black_hole": "%1$s was spaghettified",
   "death.attack.black_hole.player": "%2$s made %1$s get spaghettified",
   "death.attack.black_hole.item": "%2$s used %3$s to make %1$s get spaghettified",
