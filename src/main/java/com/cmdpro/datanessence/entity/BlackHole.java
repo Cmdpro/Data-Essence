@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.entity;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EntityRegistry;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.nbt.CompoundTag;
@@ -75,7 +76,7 @@ public class BlackHole extends Entity {
                 }
             }
             for (Entity i : level().getEntitiesOfClass(Entity.class, AABB.ofSize(getBoundingBox().getCenter(), entityData.get(SIZE), entityData.get(SIZE), entityData.get(SIZE)))) {
-                i.hurt(damageSources().source(DataNEssence.blackHole), 10);
+                i.hurt(damageSources().source(DamageTypeRegistry.blackHole), 10);
             }
             entityData.set(MAX_SIZE, size);
             if (lifetime > 10) {

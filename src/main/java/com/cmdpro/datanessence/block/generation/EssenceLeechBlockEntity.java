@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -45,7 +46,7 @@ public class EssenceLeechBlockEntity extends BlockEntity implements EssenceBlock
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < pBlockEntity.getStorage().getMaxEssence() && pBlockEntity.cooldown <= 0) {
                 for (LivingEntity i : pLevel.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pPos.getCenter().add(0, 2, 0), 3, 3, 3))) {
                     if (i.isAlive()) {
-                        i.hurt(i.damageSources().source(DataNEssence.essenceSiphoned), 5);
+                        i.hurt(i.damageSources().source(DamageTypeRegistry.essenceSiphoned), 5);
                         if (!i.isAlive()) {
                             pBlockEntity.getStorage().addEssence(EssenceTypeRegistry.ESSENCE.get(), 20);
                         }

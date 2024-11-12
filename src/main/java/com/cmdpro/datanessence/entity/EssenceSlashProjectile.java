@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.entity;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.particle.CircleParticleOptionsAdditive;
+import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
@@ -112,10 +113,10 @@ public class EssenceSlashProjectile extends Projectile {
         Entity entity = this.getOwner();
         DamageSource damagesource;
         if (entity instanceof LivingEntity) {
-            damagesource = this.damageSources().source(DataNEssence.magicProjectile, this, entity);
+            damagesource = this.damageSources().source(DamageTypeRegistry.magicProjectile, this, entity);
             ((LivingEntity)entity).setLastHurtMob(hit.getEntity());
         } else if (entity instanceof Player) {
-            damagesource = this.damageSources().source(DataNEssence.magicProjectile, this, entity);
+            damagesource = this.damageSources().source(DamageTypeRegistry.magicProjectile, this, entity);
             ((LivingEntity)entity).setLastHurtMob(hit.getEntity());
         } else {
             damagesource = null;

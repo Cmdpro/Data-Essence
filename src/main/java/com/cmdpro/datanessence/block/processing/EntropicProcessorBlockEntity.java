@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
@@ -146,7 +147,7 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
                 Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
                 if (recipe.isPresent()) {
                     for (LivingEntity i : pLevel.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pPos.getCenter(), 0.9f, 0.9f, 0.9f))) {
-                        i.hurt(i.damageSources().source(DataNEssence.crushed), 2f);
+                        i.hurt(i.damageSources().source(DamageTypeRegistry.crushed), 2f);
                     }
                     if (!recipe.get().value().equals(pBlockEntity.recipe)) {
                         pBlockEntity.workTime = 0;
