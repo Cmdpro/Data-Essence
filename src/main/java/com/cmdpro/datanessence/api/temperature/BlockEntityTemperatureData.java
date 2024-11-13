@@ -1,25 +1,23 @@
 package com.cmdpro.datanessence.api.temperature;
 
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+
 public class BlockEntityTemperatureData {
     public final int overheatTemperature;
-    public final int cooldownSpeed;
-    public int temperature;
-    public int temperatureSpeed;
-    public int targetTemperature;
-    public BlockEntityTemperatureData(int overheatTemperature, int cooldownSpeed) {
+    public float temperature;
+    public BlockEntityTemperatureData(int overheatTemperature) {
         this.overheatTemperature = overheatTemperature;
-        this.cooldownSpeed = cooldownSpeed;
     }
     public void tick(TemperatureBlockEntity entity) {
-        if (targetTemperature > temperature) {
-            temperature += temperatureSpeed;
-            if (targetTemperature < temperature) {
-                temperature = targetTemperature;
-            }
-        } else if (targetTemperature < temperature) {
-            temperature -= temperatureSpeed;
-            if (targetTemperature > temperature) {
-                temperature = targetTemperature;
+        int heating = entity.getHeating();
+        int cooling = entity.getCooling();
+        int minTemp = entity.getMinimumTemperature();
+        temperature += heating;
+        if (temperature > minTemp) {
+            temperature -= cooling;
+            if (temperature < minTemp) {
+                temperature = minTemp;
             }
         }
         if (temperature >= overheatTemperature) {
