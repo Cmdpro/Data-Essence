@@ -7,6 +7,10 @@
   "datanessence.essence_types.natural_essence": "Natural Essence",
   "datanessence.essence_types.exotic_essence":  "Exotic Essence",
 
+  "datanessence.fluid_display.mb": "%1$smB",
+  "datanessence.fluid_display.b": "%1$sB",
+  "datanessence.fluid_display.kb": "%1$skB",
+
   "item.datanessence.data_tablet": "Data Tablet",
   "item.datanessence.data_drive": "Data Drive",
   "item.datanessence.data_drive.empty": " ◇ Contains no data",
@@ -110,7 +114,7 @@
   "block.datanessence.exotic_essence_battery": "Exotic Essence Battery",
   "block.datanessence.exotic_essence_battery.amount": " ◇ Battery holds %1$s/%2$s Exotic Essence.",
   "block.datanessence.fluid_tank": "Fluid Tank",
-  "block.datanessence.fluid_tank.amount": " ◇ Tank contains %1$smB/%2$smB of %3$s.",
+  "block.datanessence.fluid_tank.amount": " ◇ Tank contains %1$s/%2$s of %3$s.",
   "block.datanessence.fluid_tank.nothing": " ◇ This tank is empty.",
   "block.datanessence.fluidic_glass": "Fluidic Glass",
   "block.datanessence.entropic_processor": "Entropic Processor",

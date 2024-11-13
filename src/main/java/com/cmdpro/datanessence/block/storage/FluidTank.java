@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.storage;
 
+import com.cmdpro.datanessence.api.util.TextUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
@@ -47,7 +48,7 @@ public class FluidTank extends TransparentBlock implements EntityBlock {
             if (!pLevel.isClientSide) {
                 FluidStack fluid = ent.getFluidHandler().getFluidInTank(0);
                 if (fluid.getAmount() > 0) {
-                    pPlayer.displayClientMessage(Component.translatable("block.datanessence.fluid_tank.amount", fluid.getAmount(), ent.getFluidHandler().getTankCapacity(0), fluid.getHoverName()), true);
+                    pPlayer.displayClientMessage(Component.translatable("block.datanessence.fluid_tank.amount", TextUtil.getFluidText(fluid.getAmount()), TextUtil.getFluidText(ent.getFluidHandler().getTankCapacity(0)), fluid.getHoverName()), true);
                 } else {
                     pPlayer.displayClientMessage(Component.translatable("block.datanessence.fluid_tank.nothing"), true);
                 }
