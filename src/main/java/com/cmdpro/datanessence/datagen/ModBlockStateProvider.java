@@ -61,11 +61,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
         //essenceLeech(BlockRegistry.ESSENCE_LEECH);
         //blockWithItem(BlockRegistry.LENSING_CRYSTAL_ORE);
+
+        transparentBlockWithItem(BlockRegistry.SPIRE_GLASS);
     }
 
     private void blockWithItem(Supplier<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
     }
+
+    private void transparentBlockWithItem(Supplier<Block> blockRegistryObject) {
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeAll(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("translucent"));
+    }
+
     private void cubeColumn(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
         simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side"), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath())));

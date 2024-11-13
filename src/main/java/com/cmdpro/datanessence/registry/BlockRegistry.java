@@ -50,6 +50,9 @@ public class BlockRegistry {
     public static final Supplier<Block> LENSING_CRYSTAL_ORE = register("lensing_crystal_ore",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SPIRE_GLASS = register("spire_glass",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",

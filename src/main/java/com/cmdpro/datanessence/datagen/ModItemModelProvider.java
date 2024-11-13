@@ -67,6 +67,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(BlockRegistry.ANCIENT_ROCK_TILES);
         evenSimplerBlockItem(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN);
         evenSimplerBlockItem(BlockRegistry.ANCIENT_LANTERN);
+        evenSimplerBlockItem(BlockRegistry.SPIRE_GLASS);
 
         evenSimplerBlockItem(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
 
