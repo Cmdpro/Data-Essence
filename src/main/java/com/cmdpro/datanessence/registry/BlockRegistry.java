@@ -51,7 +51,7 @@ public class BlockRegistry {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SPIRE_GLASS = register("spire_glass",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
