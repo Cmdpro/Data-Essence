@@ -27,6 +27,9 @@ public class CalciteSpireFeature extends Feature<NoneFeatureConfiguration> {
         float spiralSize = (pContext.random().nextFloat()*0.25f)+0.75f;
         float dirChange = pContext.random().nextBoolean() ? -(5+(pContext.random().nextFloat()*10)) : 5+(pContext.random().nextFloat()*5);
         BlockPos origin = pContext.level().getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, pContext.origin().offset(offset));
+        if (!pContext.level().getBlockState(origin.below()).getFluidState().isEmpty()) {
+            return false;
+        }
         float dir = pContext.random().nextFloat()*360;
         for (int y = -5; y <= height; y++) {
             float range = ((height-y)/10f);
