@@ -1,0 +1,27 @@
+{
+  "type": "datanessence:sanctuary",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "datanessence:sanctuary",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": [
+        {
+          "biome": "datanessence:sanctuary/spire_fields",
+          "parameters": {
+            "temperature": [
+              -0.25,
+              0.25
+            ],
+            "humidity": 0,
+            "continentalness": 0,
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": 0,
+            "offset": 0
+          }
+        }
+      ]
+    }
+  }
+}

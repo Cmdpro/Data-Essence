@@ -20,10 +20,12 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
 
 public class AncientSentinel extends Monster implements RangedAttackMob {
+
     public AncientSentinel(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }

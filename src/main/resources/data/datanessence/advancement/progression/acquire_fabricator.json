@@ -15,11 +15,11 @@
   "criteria": {
     "has_fabricator": {
       "trigger": "minecraft:inventory_changed",
-      "conditions": { "items": [ "datanessence:fabricator" ] }
+      "conditions": { "items": [ { "items": ["datanessence:fabricator" ] } ] }
     },
     "has_redirector": {
       "trigger": "minecraft:inventory_changed",
-      "conditions": { "items": [ "datanessence:magic_wrench" ] }
+      "conditions": { "items": [ { "items": ["datanessence:magic_wrench" ] } ] }
     }
   }
 }

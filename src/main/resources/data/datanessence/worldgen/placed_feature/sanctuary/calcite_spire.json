@@ -1,0 +1,28 @@
+{
+  "feature": {
+    "type": "datanessence:calcite_spire",
+    "config": {}
+  },
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING"
+    },
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:weighted_list",
+        "distribution": [
+          {
+            "weight": 25,
+            "data": 0
+          },
+          {
+            "weight": 2,
+            "data": 1
+          }
+        ]
+      }
+    }
+  ]
+}
