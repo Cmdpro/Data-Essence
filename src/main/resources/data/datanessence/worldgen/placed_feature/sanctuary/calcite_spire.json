@@ -1,8 +1,5 @@
 {
-  "feature": {
-    "type": "datanessence:calcite_spire",
-    "config": {}
-  },
+  "feature": "datanessence:sanctuary/calcite_spire",
   "placement": [
     {
       "type": "minecraft:heightmap",
