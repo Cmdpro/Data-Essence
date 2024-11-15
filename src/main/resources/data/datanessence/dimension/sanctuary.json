@@ -12,8 +12,8 @@
             "temperature": 0,
             "humidity": 0,
             "continentalness": [
-              -1,
-              -0.25
+              -2,
+              0
             ],
             "erosion": 0,
             "weirdness": 0,
@@ -27,8 +27,8 @@
             "temperature": 0,
             "humidity": 0,
             "continentalness": [
-              -0.25,
-              1
+              0,
+              2
             ],
             "erosion": 0,
             "weirdness": 0,
