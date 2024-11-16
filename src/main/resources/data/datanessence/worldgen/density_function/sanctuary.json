@@ -1,44 +1,16 @@
 {
   "type": "minecraft:add",
   "argument1": {
-    "type": "minecraft:add",
-    "argument1": {
-      "type": "minecraft:noise",
-      "noise": "minecraft:spaghetti_2d",
-      "xz_scale": 0.5,
-      "y_scale": 0
-    },
-    "argument2": {
-      "type": "minecraft:y_clamped_gradient",
-      "from_y": 0,
-      "to_y": 192,
-      "from_value": 3,
-      "to_value": -2
-    }
+    "type": "minecraft:noise",
+    "noise": "minecraft:spaghetti_2d",
+    "xz_scale": 0.5,
+    "y_scale": 0
   },
   "argument2": {
-    "type": "minecraft:add",
-    "argument1": {
-      "type": "minecraft:mul",
-      "argument1": {
-        "type": "minecraft:clamp",
-        "input": {
-          "type": "minecraft:noise",
-          "noise": "minecraft:continentalness_large",
-          "xz_scale": 1,
-          "y_scale": 0
-        },
-        "min": -2,
-        "max": 0.5
-      },
-      "argument2": 4
-    },
-    "argument2": {
-      "type": "minecraft:y_clamped_gradient",
-      "from_y": 0,
-      "to_y": 128,
-      "from_value": 2,
-      "to_value": -2
-    }
+    "type": "minecraft:y_clamped_gradient",
+    "from_y": 0,
+    "to_y": 192,
+    "from_value": 3,
+    "to_value": -3
   }
 }

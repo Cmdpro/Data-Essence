@@ -1,0 +1,17 @@
+{
+  "feature": "datanessence:sanctuary/sanctuary_tree",
+  "placement": [
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "WORLD_SURFACE_WG"
+    },
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 0,
+        "max_inclusive": 1
+      }
+    }
+  ]
+}
