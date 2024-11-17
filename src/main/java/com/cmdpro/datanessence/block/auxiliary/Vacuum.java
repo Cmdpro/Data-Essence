@@ -11,11 +11,30 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class Vacuum extends Block implements EntityBlock {
-    private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape SHAPE =  Shapes.or(
+            //Top
+            Block.box(0, 14, 0, 14, 16, 2),
+            Block.box(0, 14, 2, 2, 16, 16),
+            Block.box(2, 14, 14, 16, 16, 16),
+            Block.box(14, 14, 0, 16, 16, 14),
+
+            //Middle
+            Block.box(14, 2, 14, 16, 14, 16),
+            Block.box(14, 2, 0, 16, 14, 2),
+            Block.box(0, 2, 0, 2, 14, 2),
+            Block.box(0, 2, 14, 2, 14, 16),
+
+            //Bottom
+            Block.box(0, 0, 0, 14, 2, 2),
+            Block.box(0, 0, 2, 2, 2, 16),
+            Block.box(2, 0, 14, 16, 2, 16),
+            Block.box(14, 0, 0, 16, 2, 14)
+    );
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
