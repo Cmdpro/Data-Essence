@@ -141,7 +141,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                         if (ent.link.size() <= DataNEssenceConfig.maxNodeWires) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
                             PlayerDataUtil.updateData((ServerPlayer) pPlayer);
-                            pLevel.playSound(null, pPos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 2f, 1.1f);
+                            pLevel.playSound(null, pPos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 1f, 1.1f);
                         }
                     } else {
                         if (linkFrom.get().getBlockState().getBlock() instanceof BaseCapabilityPoint other) {
@@ -158,7 +158,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
-                                    pLevel.playSound(null, pPos, SoundEvents.CROSSBOW_LOADING_END.value(), SoundSource.BLOCKS, 2f, 1.1f);
+                                    pLevel.playSound(null, pPos, SoundEvents.CROSSBOW_LOADING_END.value(), SoundSource.BLOCKS, 1f, 1.1f);
                                 }
                             }
                         }
