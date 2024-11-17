@@ -9,6 +9,8 @@ import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -139,6 +141,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                         if (ent.link.size() <= DataNEssenceConfig.maxNodeWires) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
                             PlayerDataUtil.updateData((ServerPlayer) pPlayer);
+                            pLevel.playSound(null, pPos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 2f, 1.1f);
                         }
                     } else {
                         if (linkFrom.get().getBlockState().getBlock() instanceof BaseEssencePoint other) {
@@ -155,6 +158,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
+                                    pLevel.playSound(null, pPos, SoundEvents.CROSSBOW_LOADING_END.value(), SoundSource.BLOCKS, 2f, 1.1f);
                                 }
                             }
                         }
