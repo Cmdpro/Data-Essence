@@ -24,7 +24,6 @@ import javax.annotation.Nullable;
 
 public class EssenceCrystal extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.FACING;
-    public static final IntegerProperty MODEL = IntegerProperty.create("model", 0, 2);
     protected final VoxelShape northAabb;
     protected final VoxelShape southAabb;
     protected final VoxelShape eastAabb;
@@ -35,7 +34,7 @@ public class EssenceCrystal extends Block {
 
     public EssenceCrystal(Properties pProperties) {
         super(pProperties);
-        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.UP).setValue(MODEL, 0));
+        this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.UP));
         int pOffset = 4;
         int pSize = 8;
         this.upAabb = Block.box((double)pOffset, 0.0D, (double)pOffset, (double)(16 - pOffset), (double)pSize, (double)(16 - pOffset));
@@ -82,7 +81,7 @@ public class EssenceCrystal extends Block {
     @Override
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getClickedFace()).setValue(MODEL, pContext.getPlayer().getRandom().nextInt(0, 3));
+        return this.defaultBlockState().setValue(FACING, pContext.getClickedFace());
     }
     @Override
     public BlockState rotate(BlockState pState, Rotation pRotation) {
@@ -94,6 +93,6 @@ public class EssenceCrystal extends Block {
     }
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING, MODEL);
+        pBuilder.add(FACING);
     }
 }
