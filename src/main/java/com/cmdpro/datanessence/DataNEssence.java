@@ -1,28 +1,18 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.databank.hiddenblock.HiddenBlockConditions;
-import com.cmdpro.databank.model.DatabankModels;
-import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.block.transmission.ItemFilter;
-import com.cmdpro.datanessence.block.transmission.ItemFilterBlockEntity;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.entity.SnifferRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.level.block.DispenserBlock;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
@@ -257,6 +247,7 @@ public class DataNEssence
             event.accept(BlockRegistry.ANCIENT_ROCK_BRICKS.get());
             event.accept(BlockRegistry.ANCIENT_ROCK_TILES.get());
             event.accept(BlockRegistry.ANCIENT_SHELF.get());
+            event.accept(BlockRegistry.ANCIENT_WINDOW.get());
             event.accept(BlockRegistry.DECO_ESSENCE_BUFFER.get());
             event.accept(BlockRegistry.DECO_ITEM_BUFFER.get());
             event.accept(BlockRegistry.DECO_FLUID_BUFFER.get());

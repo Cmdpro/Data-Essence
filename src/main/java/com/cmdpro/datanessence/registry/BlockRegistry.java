@@ -197,6 +197,9 @@ public class BlockRegistry {
     public static final Supplier<Block> ANCIENT_SHELF = register("ancient_shelf",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ANCIENT_WINDOW = register("ancient_window",
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Obsidian Deco
     public static final Supplier<Block> POLISHED_OBSIDIAN = register("polished_obsidian",

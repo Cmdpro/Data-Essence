@@ -35,6 +35,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ancientDecoCubeColumn(BlockRegistry.ANCIENT_ROCK_COLUMN);
         ancientDecoCubeColumn(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN);
         ancientDecoBlockWithItem(BlockRegistry.ANCIENT_LANTERN);
+        ancientShelf(BlockRegistry.ANCIENT_SHELF);
+        transparentAncientDecoBlockWithItem(BlockRegistry.ANCIENT_WINDOW);
 
         bufferDecoBlock(BlockRegistry.DECO_ESSENCE_BUFFER);
         bufferDecoBlock(BlockRegistry.DECO_ITEM_BUFFER);
@@ -60,7 +62,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
         //blockWithItem(BlockRegistry.LENSING_CRYSTAL_ORE);
-        ancientDecoBlockWithItemWithVariants(BlockRegistry.ANCIENT_SHELF, "books", "books2", "bottles", "empty", "empty2", "materials");
 
         transparentBlockWithItem(BlockRegistry.SPIRE_GLASS);
     }
@@ -86,9 +87,27 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlockItem(blockRegistryObject.get(), variants.getFirst());
         simpleBlock(blockRegistryObject.get(), variants.stream().map(ConfiguredModel::new).toList().toArray(new ConfiguredModel[0]));
     }
+    private void ancientShelf(Supplier<Block> blockRegistryObject) {
+        String[] variantPostfixes = new String[] {
+                "books", "books2", "bottles", "empty", "empty2", "materials"
+        };
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        List<ModelFile> variants = new ArrayList<>();
+        for (String i : variantPostfixes) {
+            ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_" + i);
+            ResourceLocation vertical = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/ancient_rock_column_vertical");
+            variants.add(models().cube(loc.getPath() + "_" + i, vertical, vertical, side, side, side, side).texture("particle", vertical));
+        }
+        simpleBlockItem(blockRegistryObject.get(), variants.getFirst());
+        simpleBlock(blockRegistryObject.get(), variants.stream().map(ConfiguredModel::new).toList().toArray(new ConfiguredModel[0]));
+    }
 
     private void transparentBlockWithItem(Supplier<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), models().cubeAll(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("translucent"));
+    }
+    private void transparentAncientDecoBlockWithItem(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeAll(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath())).renderType("translucent"));
     }
 
     private void cubeColumn(Supplier<Block> blockRegistryObject) {
