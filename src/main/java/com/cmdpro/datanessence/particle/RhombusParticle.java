@@ -32,7 +32,7 @@ public class RhombusParticle extends TextureSheetParticle {
     }
     @Override
     public void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
-        super.render(RenderHandler.createBufferSource().getBuffer(RenderTypeHandler.ADDITIVE_PARTICLE), pRenderInfo, pPartialTicks);
+        super.render(RenderHandler.createBufferSource().getBuffer(options.additive ? RenderTypeHandler.ADDITIVE_PARTICLE : RenderTypeHandler.TRANSPARENT_PARTICLE), pRenderInfo, pPartialTicks);
     }
     @Override
     public void tick() {

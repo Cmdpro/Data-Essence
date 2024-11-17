@@ -65,8 +65,8 @@ public class VacuumBlockEntity extends BlockEntity {
             Vec3 vel2 = pPos.getCenter().subtract(pos2).multiply(0.2f, 0.2f, 0.2f);
             Color color1 = particleColors[pLevel.random.nextIntBetweenInclusive(0, particleColors.length-1)];
             Color color2 = particleColors[pLevel.random.nextIntBetweenInclusive(0, particleColors.length-1)];
-            pLevel.addParticle(new RhombusParticleOptions(color1), pos1.x, pos1.y, pos1.z, vel1.x, vel1.y, vel1.z);
-            pLevel.addParticle(new SmallCircleParticleOptions(color2), pos2.x, pos2.y, pos2.z, vel2.x, vel2.y, vel2.z);
+            pLevel.addParticle(new RhombusParticleOptions(color1, false), pos1.x, pos1.y, pos1.z, vel1.x, vel1.y, vel1.z);
+            pLevel.addParticle(new SmallCircleParticleOptions(color2, false), pos2.x, pos2.y, pos2.z, vel2.x, vel2.y, vel2.z);
         }
     }
 }

@@ -67,9 +67,9 @@ public class ModEvents {
                         }
                     }
                 } else {
-                    ent.level().addParticle(new RhombusParticleOptions(new Color(0xff6ab3fc)), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
-                    ent.level().addParticle(new MoteParticleOptions(new Color(0xffffffff)), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
-                    ent.level().addParticle(new SmallCircleParticleOptions(new Color(0xfffc92bb)), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
+                    ent.level().addParticle(new RhombusParticleOptions(new Color(0xff6ab3fc), true), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
+                    ent.level().addParticle(new MoteParticleOptions(new Color(0xffffffff), true), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
+                    ent.level().addParticle(new SmallCircleParticleOptions(new Color(0xfffc92bb), true), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
                 }
             } else {
                 if (!ent.level().isClientSide) {
