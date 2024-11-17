@@ -4,6 +4,7 @@
     "down": "datanessence:block/deco/ancient/ancient_rock_column_vertical",
     "east": "datanessence:block/deco/ancient/ancient_shelf_bottles",
     "north": "datanessence:block/deco/ancient/ancient_shelf_bottles",
+    "particle": "datanessence:block/deco/ancient/ancient_rock_column_vertical",
     "south": "datanessence:block/deco/ancient/ancient_shelf_bottles",
     "up": "datanessence:block/deco/ancient/ancient_rock_column_vertical",
     "west": "datanessence:block/deco/ancient/ancient_shelf_bottles"

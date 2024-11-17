@@ -96,7 +96,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         for (String i : variantPostfixes) {
             ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_" + i);
             ResourceLocation vertical = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/ancient_rock_column_vertical");
-            variants.add(models().cube(loc.getPath() + "_" + i, vertical, vertical, side, side, side, side));
+            variants.add(models().cube(loc.getPath() + "_" + i, vertical, vertical, side, side, side, side).texture("particle", vertical));
         }
         simpleBlockItem(blockRegistryObject.get(), variants.getFirst());
         simpleBlock(blockRegistryObject.get(), variants.stream().map(ConfiguredModel::new).toList().toArray(new ConfiguredModel[0]));
