@@ -266,7 +266,7 @@ public class LunarEssenceBombExplosion extends Explosion {
                 if (level.getBlockState(blockPos).canBeReplaced()) {
                     if (level.getBlockState(blockPos.below()).isCollisionShapeFullBlock(level, blockPos.below())) {
                         found = true;
-                        level.setBlockAndUpdate(blockPos, BlockRegistry.ESSENCE_CRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, Direction.UP).setValue(EssenceCrystal.MODEL, random.nextIntBetweenInclusive(0, 2)));
+                        level.setBlockAndUpdate(blockPos, BlockRegistry.ESSENCE_CRYSTAL.get().defaultBlockState().setValue(EssenceCrystal.FACING, Direction.UP));
                     } else {
                         break;
                     }

@@ -11,12 +11,11 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
-import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
-import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
-import net.neoforged.neoforge.client.model.generators.ModelProvider;
-import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
+import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ModBlockStateProvider extends BlockStateProvider {
@@ -55,18 +54,37 @@ public class ModBlockStateProvider extends BlockStateProvider {
         laserEmitter(BlockRegistry.LASER_EMITTER);
         essenceBattery(BlockRegistry.ESSENCE_BATTERY);
         itemFilter(BlockRegistry.ITEM_FILTER);
+        //essenceLeech(BlockRegistry.ESSENCE_LEECH);
 
         nothing(BlockRegistry.STRUCTURE_PROTECTOR);
 
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
-        //essenceLeech(BlockRegistry.ESSENCE_LEECH);
         //blockWithItem(BlockRegistry.LENSING_CRYSTAL_ORE);
+        ancientDecoBlockWithItemWithVariants(BlockRegistry.ANCIENT_SHELF, "books", "books2", "bottles", "empty", "empty2", "materials");
 
         transparentBlockWithItem(BlockRegistry.SPIRE_GLASS);
     }
 
     private void blockWithItem(Supplier<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), cubeAll(blockRegistryObject.get()));
+    }
+    private void blockWithItemWithVariants(Supplier<Block> blockRegistryObject, String... variantPostfixes) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        List<ModelFile> variants = new ArrayList<>();
+        for (String i : variantPostfixes) {
+            variants.add(models().cubeAll(loc.getPath() + "_" + i, ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_" + i)));
+        }
+        simpleBlockItem(blockRegistryObject.get(), variants.getFirst());
+        simpleBlock(blockRegistryObject.get(), variants.stream().map(ConfiguredModel::new).toList().toArray(new ConfiguredModel[0]));
+    }
+    private void ancientDecoBlockWithItemWithVariants(Supplier<Block> blockRegistryObject, String... variantPostfixes) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        List<ModelFile> variants = new ArrayList<>();
+        for (String i : variantPostfixes) {
+            variants.add(models().cubeAll(loc.getPath() + "_" + i, ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_" + i)));
+        }
+        simpleBlockItem(blockRegistryObject.get(), variants.getFirst());
+        simpleBlock(blockRegistryObject.get(), variants.stream().map(ConfiguredModel::new).toList().toArray(new ConfiguredModel[0]));
     }
 
     private void transparentBlockWithItem(Supplier<Block> blockRegistryObject) {
