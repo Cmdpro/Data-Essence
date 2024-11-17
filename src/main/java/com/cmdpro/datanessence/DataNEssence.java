@@ -256,6 +256,7 @@ public class DataNEssence
             event.accept(BlockRegistry.ANCIENT_LANTERN.get());
             event.accept(BlockRegistry.ANCIENT_ROCK_BRICKS.get());
             event.accept(BlockRegistry.ANCIENT_ROCK_TILES.get());
+            event.accept(BlockRegistry.ANCIENT_SHELF.get());
             event.accept(BlockRegistry.DECO_ESSENCE_BUFFER.get());
             event.accept(BlockRegistry.DECO_ITEM_BUFFER.get());
             event.accept(BlockRegistry.DECO_FLUID_BUFFER.get());

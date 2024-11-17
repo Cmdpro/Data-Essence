@@ -194,6 +194,9 @@ public class BlockRegistry {
     public static final Supplier<Block> ANCIENT_LANTERN = register("ancient_lantern",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).lightLevel((blockState) -> { return 13;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ANCIENT_SHELF = register("ancient_shelf",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Obsidian Deco
     public static final Supplier<Block> POLISHED_OBSIDIAN = register("polished_obsidian",
