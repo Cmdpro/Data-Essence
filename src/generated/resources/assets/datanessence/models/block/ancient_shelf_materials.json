@@ -1,6 +1,11 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "all": "datanessence:block/deco/ancient/ancient_shelf_materials"
+    "down": "datanessence:block/deco/ancient/ancient_rock_column_vertical",
+    "east": "datanessence:block/deco/ancient/ancient_shelf_materials",
+    "north": "datanessence:block/deco/ancient/ancient_shelf_materials",
+    "south": "datanessence:block/deco/ancient/ancient_shelf_materials",
+    "up": "datanessence:block/deco/ancient/ancient_rock_column_vertical",
+    "west": "datanessence:block/deco/ancient/ancient_shelf_materials"
   }
 }

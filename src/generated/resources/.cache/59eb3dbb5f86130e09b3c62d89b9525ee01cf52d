@@ -1,10 +1,11 @@
-// 1.21.1	2024-11-16T21:05:05.9909351	Loot Tables
+// 1.21.1	2024-11-16T21:30:16.0254991	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 bbbe51e74edfcc54136678857699b9b14569a089 data/datanessence/loot_table/blocks/ancient_lantern.json
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_table/blocks/ancient_rock_bricks.json
 6540cac2211b8a360d5bbebd6d8ecce140f3d3cb data/datanessence/loot_table/blocks/ancient_rock_column.json
 56b95cac73dc52cf9672428b3a4720b45303f3a8 data/datanessence/loot_table/blocks/ancient_rock_tiles.json
 9957a0fc34cdc9ad8a7a9de8617427a662548c4c data/datanessence/loot_table/blocks/ancient_shelf.json
+c174468894a2a7f8e1f2e811feab6cfa278fefac data/datanessence/loot_table/blocks/ancient_window.json
 6c75f698c678f430658ac40cbf4955f45e52655c data/datanessence/loot_table/blocks/auto-fabricator.json
 ea5364fdf6f40dd1dc50b2354226d4977911b8b1 data/datanessence/loot_table/blocks/charger.json
 d84e5950a8f59623f762d05a19464f398db0fccd data/datanessence/loot_table/blocks/computer.json
