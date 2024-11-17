@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "datanessence:block/item_vacuum",
-		"particle": "datanessence:block/item_vacuum"
+		"0": "datanessence:block/vacuum",
+		"particle": "datanessence:block/vacuum"
 	},
 	"elements": [
 		{
