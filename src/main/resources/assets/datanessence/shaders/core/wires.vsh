@@ -23,7 +23,7 @@ const mat4 VIEW_SCALE = mat4(
 );
 
 void main() {
-    float LineWidth = 5;
+    float LineWidth = 8; // 5
     vertexDistance = fog_distance(Position, FogShape);
 
     vec4 linePosStart = ProjMat * VIEW_SCALE * ModelViewMat * vec4(Position, 1.0);
