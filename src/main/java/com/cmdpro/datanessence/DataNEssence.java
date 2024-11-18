@@ -219,6 +219,7 @@ public class DataNEssence
             event.accept(ItemRegistry.MUSIC_DISC_PLAYER.get());
             event.accept(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC.get());
             event.accept(ItemRegistry.GENDERFLUID_BUCKET.get());
+            event.accept(ItemRegistry.SPAWN_TELEPORTER.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());

@@ -35,6 +35,7 @@ public class ItemRegistry {
     // Equipment
     public static final Supplier<Item> ESSENCE_SWORD = register("essence_sword", () -> new EssenceSword(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PRIMITIVE_ANTI_GRAVITY_PACK = register("primitive_anti_gravity_pack", () -> new PrimitiveAntiGravityPack(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> SPAWN_TELEPORTER = register("spawn_teleporter", () -> new SpawnTeleportaterItem(new Item.Properties()));
 
     // Essence Shards
     public static final Supplier<Item> ESSENCE_SHARD = register("essence_shard", () -> new EssenceShard(new Item.Properties(), Map.of(EssenceTypeRegistry.ESSENCE, 100f)));
