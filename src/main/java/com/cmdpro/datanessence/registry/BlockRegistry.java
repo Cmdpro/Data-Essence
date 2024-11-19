@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.block.SpreadingPlant;
 import com.cmdpro.datanessence.block.*;
 
 import com.cmdpro.datanessence.block.auxiliary.*;
@@ -52,6 +53,9 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SPIRE_GLASS = register("spire_glass",
             () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> TETHERGRASS = register("tethergrass",
+            () -> new SpreadingPlant(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).lightLevel((blockState) -> { return 5;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators

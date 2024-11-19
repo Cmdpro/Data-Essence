@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.*;
 import com.cmdpro.datanessence.api.item.EssenceShard;
 import com.cmdpro.datanessence.item.*;
 import com.cmdpro.datanessence.item.blockitem.*;
@@ -9,9 +8,6 @@ import com.cmdpro.datanessence.item.equipment.*;
 import com.cmdpro.datanessence.item.lens.*;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -35,7 +31,7 @@ public class ItemRegistry {
     // Equipment
     public static final Supplier<Item> ESSENCE_SWORD = register("essence_sword", () -> new EssenceSword(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PRIMITIVE_ANTI_GRAVITY_PACK = register("primitive_anti_gravity_pack", () -> new PrimitiveAntiGravityPack(new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> SPAWN_TELEPORTER = register("spawn_teleporter", () -> new SpawnTeleportaterItem(new Item.Properties()));
+    public static final Supplier<Item> WARP_CAPSULE = register("warp_capsule", () -> new WarpCapsule(new Item.Properties()));
 
     // Essence Shards
     public static final Supplier<Item> ESSENCE_SHARD = register("essence_shard", () -> new EssenceShard(new Item.Properties(), Map.of(EssenceTypeRegistry.ESSENCE, 100f)));

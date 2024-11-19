@@ -70,9 +70,7 @@
   "item.datanessence.speed_upgrade": "Universal Upgrade Sigil: Speed",
   "item.datanessence.under_the_sky_music_disc": "Music Disc",
   "item.datanessence.music_disc_player": "Harmonic Resonator",
-  "item.datanessence.spawn_teleporter": "Spawn Teleporter",
-  "item.datanessence.spawn_teleporter.wrong_dimension": "You are not currently in the same dimension as your spawn point",
-  "item.datanessence.spawn_teleporter.too_far": "You are too far away from your spawn point",
+  "item.datanessence.warp_capsule": "Warp Capsule",
 
   "block.datanessence.essence_point": "Essence Node",
   "block.datanessence.lunar_essence_point": "Lunar Essence Node",

@@ -6,9 +6,7 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -23,11 +21,8 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
-import net.neoforged.neoforge.items.ItemStackHandler;
 import org.apache.commons.lang3.IntegerRange;
 import org.slf4j.Logger;
-
-import java.util.Optional;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod("datanessence")
@@ -219,7 +214,7 @@ public class DataNEssence
             event.accept(ItemRegistry.MUSIC_DISC_PLAYER.get());
             event.accept(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC.get());
             event.accept(ItemRegistry.GENDERFLUID_BUCKET.get());
-            event.accept(ItemRegistry.SPAWN_TELEPORTER.get());
+            event.accept(ItemRegistry.WARP_CAPSULE.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             event.accept(ItemRegistry.FABRICATOR_ITEM.get());
