@@ -15,7 +15,7 @@ public class SpreadingPlant extends Block {
     @Override
     protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (random.nextInt(15) == 0) {
-
+            // TODO spread randomly around itself, like mushrooms
         }
     }
 }
