@@ -63,7 +63,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
         //blockWithItem(BlockRegistry.LENSING_CRYSTAL_ORE);
 
-        transparentBlockWithItem(BlockRegistry.SPIRE_GLASS);
+        transparentBlockWithItemAndTint(BlockRegistry.SPIRE_GLASS);
     }
 
     private void blockWithItem(Supplier<Block> blockRegistryObject) {
@@ -104,6 +104,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     private void transparentBlockWithItem(Supplier<Block> blockRegistryObject) {
         simpleBlockWithItem(blockRegistryObject.get(), models().cubeAll(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("translucent"));
+    }
+    private void transparentBlockWithItemAndTint(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        simpleBlockWithItem(blockRegistryObject.get(), models().singleTexture(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/cube_all_tinted"), "all", blockTexture(blockRegistryObject.get())).renderType("translucent"));
     }
     private void transparentAncientDecoBlockWithItem(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());

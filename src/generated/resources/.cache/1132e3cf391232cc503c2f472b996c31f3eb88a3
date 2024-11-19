@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-16T21:58:49.5235966	Block States: datanessence
+// 1.21.1	2024-11-18T21:36:57.5889715	Block States: datanessence
 4c3f8bc2b11e812a24d90295ef729dfe488c971c assets/datanessence/blockstates/aether_rune.json
 af8c2eb4489d2c654a869a088de7969af60b1551 assets/datanessence/blockstates/ancient_lantern.json
 140490733763a0972275b8ae5fe9924317809834 assets/datanessence/blockstates/ancient_rock_bricks.json
@@ -77,7 +77,7 @@ eda7dd32c7a916c48c6900b6135e2ad4484babeb assets/datanessence/models/block/fluid_
 8f2386afc57191aafc32702c551d51d3bc88e05d assets/datanessence/models/block/polished_obsidian.json
 717ffa368353383de45243c30cd8832bfe10e0ec assets/datanessence/models/block/polished_obsidian_column.json
 2b7b7c3f07337680737e52333776b296667ad3be assets/datanessence/models/block/polished_obsidian_column_horizontal.json
-bc1821ffc5812f9d86c9526745027acfc7beb300 assets/datanessence/models/block/spire_glass.json
+7f994f51cc7515af56c988e4c2790eb3b7124a8a assets/datanessence/models/block/spire_glass.json
 c611034b642665f1301860514a537280a56c84b5 assets/datanessence/models/block/structure_protector.json
 7eb8dc71b433dfbd977ce15391068b33a206a673 assets/datanessence/models/block/traversite_road.json
 874a608ed3f4128d556616d4dbdccf8863051316 assets/datanessence/models/item/aether_rune.json

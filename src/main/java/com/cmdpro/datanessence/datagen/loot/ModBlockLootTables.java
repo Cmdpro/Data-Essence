@@ -86,6 +86,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.SPIRE_GLASS.get());
         dropSelf(BlockRegistry.ANCIENT_SHELF.get());
         dropSelf(BlockRegistry.ANCIENT_WINDOW.get());
+
+        //so that datagen does not get mad
+        this.add(BlockRegistry.TETHERGRASS.get(),
+                block -> noDrop());
     }
     protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,

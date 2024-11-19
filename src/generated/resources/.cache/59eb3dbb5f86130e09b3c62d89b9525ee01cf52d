@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-16T21:30:16.0254991	Loot Tables
+// 1.21.1	2024-11-18T21:36:18.5582001	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 bbbe51e74edfcc54136678857699b9b14569a089 data/datanessence/loot_table/blocks/ancient_lantern.json
 d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_table/blocks/ancient_rock_bricks.json
@@ -54,5 +54,6 @@ aca436e4c49a253ff47202ccea5ec753aec5a73d data/datanessence/loot_table/blocks/pol
 770c9798fe9e4ae46f0aefadfcc1179cca81b156 data/datanessence/loot_table/blocks/spire_glass.json
 551d36c40595eabcbf647193dbc5537770278255 data/datanessence/loot_table/blocks/structure_protector.json
 c86060a8bee40be4014b0d4ef5328b1f9b6f2250 data/datanessence/loot_table/blocks/synthesis_chamber.json
+c93b69f3ee9fa8db25d53d3b3e6e26d6b1e3283a data/datanessence/loot_table/blocks/tethergrass.json
 dbb37b98d7b947a9b52acc93133a797f6831bbea data/datanessence/loot_table/blocks/traversite_road.json
 79520676cdef899226b1394203ad881f5c962d41 data/datanessence/loot_table/blocks/vacuum.json

@@ -2,6 +2,7 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.databank.music.MusicController;
 import com.cmdpro.databank.music.MusicSystem;
+import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.entity.AncientSentinel;
@@ -22,6 +23,8 @@ import com.cmdpro.datanessence.screen.*;
 import com.cmdpro.datanessence.shaders.GenderEuphoriaShader;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.block.BlockColors;
+import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -48,12 +51,15 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 import net.neoforged.neoforge.items.IItemHandler;
+import org.joml.SimplexNoise;
 
+import java.awt.*;
 import java.util.Optional;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
@@ -213,5 +219,23 @@ public class ClientModEvents {
                 SmallCircleParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.MOTE.get(),
                 MoteParticle.Provider::new);
+    }
+    @SubscribeEvent
+    public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {
+        event.register((pState, pLevel, pPos, pTintIndex) -> {
+            if (pPos != null) {
+                return ColorUtil.blendColors(new Color(0x59C2FF), new Color(0xff8cdd), (SimplexNoise.noise(pPos.getX()/25f, pPos.getY()/25f, pPos.getZ()/25f)+1f)/2f).getRGB();
+            } else {
+                float blendAmount = Minecraft.getInstance().levelRenderer.getTicks()+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
+                return ColorUtil.blendColors(new Color(0x59C2FF), new Color(0xff8cdd), (float) (Math.sin(blendAmount/(360f/5f))+1f)/2f).getRGB();
+            }
+        }, BlockRegistry.SPIRE_GLASS.get());
+    }
+    @SubscribeEvent
+    public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
+        event.register((pStack, pTintIndex) -> {
+            float blendAmount = Minecraft.getInstance().levelRenderer.getTicks()+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
+            return ColorUtil.blendColors(new Color(0x59C2FF), new Color(0xff8cdd), (float) (Math.sin(blendAmount/(360f/5f))+1f)/2f).getRGB();
+        }, BlockRegistry.SPIRE_GLASS.get());
     }
 }
