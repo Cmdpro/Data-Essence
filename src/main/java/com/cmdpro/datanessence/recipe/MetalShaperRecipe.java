@@ -60,7 +60,7 @@ public class MetalShaperRecipe implements Recipe<RecipeInput> {
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get();
+        return RecipeRegistry.METAL_SHAPING_TYPE.get();
     }
 
     public static class Serializer implements RecipeSerializer<MetalShaperRecipe> {

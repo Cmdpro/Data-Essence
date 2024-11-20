@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:metal_shaping",
+  "input": { "item": "minecraft:copper_ingot" },
+  "time": 100,
+  "result": { "id": "datanessence:capacitance_panel", "count": 1 }
+}

@@ -1,23 +1,17 @@
 package com.cmdpro.datanessence.block.production;
 
-import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
-import com.cmdpro.datanessence.api.essence.EssenceType;
-import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.recipe.MetalShaperRecipe;
-import com.cmdpro.datanessence.recipe.SynthesisRecipe;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.MetalShaperMenu;
-import com.cmdpro.datanessence.screen.SynthesisChamberMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -45,7 +39,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
@@ -199,7 +192,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            Optional<RecipeHolder<MetalShaperRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.METAL_SHAPER_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
+            Optional<RecipeHolder<MetalShaperRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.METAL_SHAPING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
             if (recipe.isPresent()) {
                 if (!recipe.get().value().equals(pBlockEntity.recipe)) {
                     pBlockEntity.workTime = 0;

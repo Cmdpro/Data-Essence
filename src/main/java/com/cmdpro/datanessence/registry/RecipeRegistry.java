@@ -3,7 +3,6 @@ package com.cmdpro.datanessence.registry;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.recipe.*;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -27,15 +26,15 @@ public class RecipeRegistry {
             registerSerializer("fluid_mixing", () -> FluidMixingRecipe.Serializer.INSTANCE);
     public static final Supplier<RecipeSerializer<MineralPurificationRecipe>> MINERAL_PURIFICATION =
             registerSerializer("mineral_purification", () -> MineralPurificationRecipe.Serializer.INSTANCE);
-    public static final Supplier<RecipeSerializer<MetalShaperRecipe>> METAL_SHAPER =
-            registerSerializer("metal_shaper", () -> MetalShaperRecipe.Serializer.INSTANCE);
+    public static final Supplier<RecipeSerializer<MetalShaperRecipe>> METAL_SHAPING =
+            registerSerializer("metal_shaping", () -> MetalShaperRecipe.Serializer.INSTANCE);
 
     public static final Supplier<RecipeType<FluidMixingRecipe>> FLUID_MIXING_TYPE =
             registerBasicRecipeType("fluid_mixing");
     public static final Supplier<RecipeType<SynthesisRecipe>> SYNTHESIS_TYPE =
             registerBasicRecipeType("synthesis");
-    public static final Supplier<RecipeType<MetalShaperRecipe>> METAL_SHAPER_TYPE =
-            registerBasicRecipeType("metal_shaper");
+    public static final Supplier<RecipeType<MetalShaperRecipe>> METAL_SHAPING_TYPE =
+            registerBasicRecipeType("metal_shaping");
     public static final Supplier<RecipeType<EntropicProcessingRecipe>> ENTROPIC_PROCESSING_TYPE =
             registerBasicRecipeType("entropic_processing");
     public static final Supplier<RecipeType<InfusionRecipe>> INFUSION_TYPE =

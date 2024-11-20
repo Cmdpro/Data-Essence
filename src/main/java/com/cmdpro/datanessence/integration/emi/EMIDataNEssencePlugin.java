@@ -18,9 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 @EmiEntrypoint
 public class EMIDataNEssencePlugin implements EmiPlugin {
     public static final ResourceLocation EMI_ICONS = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"textures/gui/emi_icons.png");
@@ -70,7 +67,7 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
         for (RecipeHolder<SynthesisRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.SYNTHESIS_TYPE.get())) {
             emiRegistry.addRecipe(new EMISynthesisRecipe(recipe.id(), recipe.value()));
         }
-        for (RecipeHolder<MetalShaperRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.METAL_SHAPER_TYPE.get())) {
+        for (RecipeHolder<MetalShaperRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.METAL_SHAPING_TYPE.get())) {
             emiRegistry.addRecipe(new EMIMetalShaperRecipe(recipe.id(), recipe.value()));
         }
     }
