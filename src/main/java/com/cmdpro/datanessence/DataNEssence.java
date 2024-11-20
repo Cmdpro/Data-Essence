@@ -167,6 +167,15 @@ public class DataNEssence
         });
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.FILTER_UPGRADE.get());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.METAL_SHAPER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedHandler();
+            }
+            if (direction == Direction.DOWN) {
+                return o.getItemHandler();
+            }
+            return o.getOutputHandler();
+        });
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {

@@ -9,9 +9,7 @@ import com.cmdpro.datanessence.block.fluid.GenderfluidBlock;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
 import com.cmdpro.datanessence.block.processing.*;
-import com.cmdpro.datanessence.block.production.EssenceBreaker;
-import com.cmdpro.datanessence.block.production.FluidCollector;
-import com.cmdpro.datanessence.block.production.FluidSpiller;
+import com.cmdpro.datanessence.block.production.*;
 import com.cmdpro.datanessence.block.storage.*;
 import com.cmdpro.datanessence.block.technical.Computer;
 import com.cmdpro.datanessence.block.technical.DataBank;
@@ -115,6 +113,9 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_BREAKER = register("essence_breaker",
             () -> new EssenceBreaker(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> METAL_SHAPER = register("metal_shaper",
+            () -> new MetalShaper(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers

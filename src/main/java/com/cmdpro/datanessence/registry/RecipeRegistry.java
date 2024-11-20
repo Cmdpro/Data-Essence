@@ -27,11 +27,15 @@ public class RecipeRegistry {
             registerSerializer("fluid_mixing", () -> FluidMixingRecipe.Serializer.INSTANCE);
     public static final Supplier<RecipeSerializer<MineralPurificationRecipe>> MINERAL_PURIFICATION =
             registerSerializer("mineral_purification", () -> MineralPurificationRecipe.Serializer.INSTANCE);
+    public static final Supplier<RecipeSerializer<MetalShaperRecipe>> METAL_SHAPER =
+            registerSerializer("metal_shaper", () -> MetalShaperRecipe.Serializer.INSTANCE);
 
     public static final Supplier<RecipeType<FluidMixingRecipe>> FLUID_MIXING_TYPE =
             registerBasicRecipeType("fluid_mixing");
     public static final Supplier<RecipeType<SynthesisRecipe>> SYNTHESIS_TYPE =
             registerBasicRecipeType("synthesis");
+    public static final Supplier<RecipeType<MetalShaperRecipe>> METAL_SHAPER_TYPE =
+            registerBasicRecipeType("metal_shaper");
     public static final Supplier<RecipeType<EntropicProcessingRecipe>> ENTROPIC_PROCESSING_TYPE =
             registerBasicRecipeType("entropic_processing");
     public static final Supplier<RecipeType<InfusionRecipe>> INFUSION_TYPE =

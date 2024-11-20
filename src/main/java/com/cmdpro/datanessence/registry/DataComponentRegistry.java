@@ -26,6 +26,11 @@ public class DataComponentRegistry {
             .networkSynchronized(ResourceLocation.STREAM_CODEC)
             .cacheEncoding()
     );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> MOLD = DATA_COMPONENTS.registerComponentType("mold", builder -> builder
+            .persistent(ResourceLocation.CODEC)
+            .networkSynchronized(ResourceLocation.STREAM_CODEC)
+            .cacheEncoding()
+    );
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> ESSENCE = DATA_COMPONENTS.registerComponentType("essence", builder -> builder
             .persistent(Codec.FLOAT)
             .networkSynchronized(ByteBufCodecs.FLOAT)

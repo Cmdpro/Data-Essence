@@ -70,5 +70,8 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
         for (RecipeHolder<SynthesisRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.SYNTHESIS_TYPE.get())) {
             emiRegistry.addRecipe(new EMISynthesisRecipe(recipe.id(), recipe.value()));
         }
+        for (RecipeHolder<MetalShaperRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.METAL_SHAPER_TYPE.get())) {
+            emiRegistry.addRecipe(new EMIMetalShaperRecipe(recipe.id(), recipe.value()));
+        }
     }
 }
