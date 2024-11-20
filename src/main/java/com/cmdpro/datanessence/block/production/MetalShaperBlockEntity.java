@@ -84,7 +84,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         }
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-            return stack.getItem() instanceof DataDrive;
+            return stack.has(DataComponentRegistry.MOLD);
         }
     };
     private final ItemStackHandler outputItemHandler = new ItemStackHandler(1) {
