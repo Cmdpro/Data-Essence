@@ -28,12 +28,14 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
     public static final EmiStack ENTROPIC_PROCESSER_WORKSTATION = EmiStack.of(ItemRegistry.ENTROPIC_PROCESSOR_ITEM.get());
     public static final EmiStack FLUID_MIXER_WORKSTATION = EmiStack.of(BlockRegistry.FLUID_MIXER.get());
     public static final EmiStack SYNTHESIS_CHAMBER_WORKSTATION = EmiStack.of(BlockRegistry.SYNTHESIS_CHAMBER.get());
+    public static final EmiStack METAL_SHAPER_WORKSTATION = EmiStack.of(BlockRegistry.METAL_SHAPER.get());
 
     public static final EmiRecipeCategory FABRICATION = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"fabrication"), FABRICATOR_WORKSTATION, new EmiTexture(EMI_ICONS, 0, 0, 16, 16));
     public static final EmiRecipeCategory INFUSION = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "infusion"), INFUSER_WORKSTATION, new EmiTexture(EMI_ICONS, 16, 0, 16, 16));
     public static final EmiRecipeCategory ENTROPIC_PROCESSING = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entropic_processing"), ENTROPIC_PROCESSER_WORKSTATION, new EmiTexture(EMI_ICONS, 32, 0, 16, 16));
     public static final EmiRecipeCategory FLUID_MIXING = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fluid_mixing"), FLUID_MIXER_WORKSTATION, new EmiTexture(EMI_ICONS, 48, 0, 16, 16));
     public static final EmiRecipeCategory SYNTHESIS = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "synthesis"), SYNTHESIS_CHAMBER_WORKSTATION, new EmiTexture(EMI_ICONS, 64, 0, 16, 16));
+    public static final EmiRecipeCategory METAL_SHAPER = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "metal_shaping"), METAL_SHAPER_WORKSTATION, new EmiTexture(EMI_ICONS, 80, 0, 16, 16));
 
     @Override
     public void register(EmiRegistry emiRegistry) {
@@ -42,6 +44,7 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
         emiRegistry.addCategory(ENTROPIC_PROCESSING);
         emiRegistry.addCategory(FLUID_MIXING);
         emiRegistry.addCategory(SYNTHESIS);
+        emiRegistry.addCategory(METAL_SHAPER);
 
         emiRegistry.addWorkstation(FABRICATION, FABRICATOR_WORKSTATION);
         emiRegistry.addWorkstation(FABRICATION, AUTO_FABRICATOR_WORKSTATION);
@@ -49,6 +52,7 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
         emiRegistry.addWorkstation(ENTROPIC_PROCESSING, ENTROPIC_PROCESSER_WORKSTATION);
         emiRegistry.addWorkstation(FLUID_MIXING, FLUID_MIXER_WORKSTATION);
         emiRegistry.addWorkstation(SYNTHESIS, SYNTHESIS_CHAMBER_WORKSTATION);
+        emiRegistry.addWorkstation(METAL_SHAPER, METAL_SHAPER_WORKSTATION);
 
         RecipeManager manager = emiRegistry.getRecipeManager();
 

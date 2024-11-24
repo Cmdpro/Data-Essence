@@ -281,6 +281,7 @@ public class DataNEssence
             event.accept(BlockRegistry.LIMITED_ITEM_BUFFER.get());
             event.accept(BlockRegistry.ESSENCE_BREAKER.get());
             event.accept(BlockRegistry.SPIRE_GLASS.get());
+            event.accept(BlockRegistry.METAL_SHAPER.get());
         }
     }
 }
