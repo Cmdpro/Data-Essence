@@ -184,7 +184,7 @@ public class DataNEssence
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.ITEMS.get())) {
             event.accept(ItemRegistry.DATA_TABLET.get());
-            event.accept(ItemRegistry.MAGIC_WRENCH.get());
+            event.accept(ItemRegistry.ESSENCE_REDIRECTOR.get());
             event.accept(ItemRegistry.ESSENCE_WIRE.get());
             event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE.get());
             event.accept(ItemRegistry.NATURAL_ESSENCE_WIRE.get());

@@ -54,7 +54,7 @@ public class EssenceBreaker extends Block implements EntityBlock {
 
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
-        if (pStack.is(ItemRegistry.MAGIC_WRENCH.get())) {
+        if (pStack.is(ItemRegistry.ESSENCE_REDIRECTOR.get())) {
             pLevel.setBlockAndUpdate(pPos, pState.setValue(FACING, pHitResult.getDirection()));
             return ItemInteractionResult.sidedSuccess(pLevel.isClientSide);
         }

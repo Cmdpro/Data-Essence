@@ -179,7 +179,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                         ent.updateBlock();
                     }
                 }
-                if (pPlayer.getItemInHand(pHand).is(ItemRegistry.MAGIC_WRENCH.get())) {
+                if (pPlayer.getItemInHand(pHand).is(ItemRegistry.ESSENCE_REDIRECTOR.get())) {
                     if (!ent.universalUpgrade.getStackInSlot(0).isEmpty()) {
                         pPlayer.getInventory().add(ent.universalUpgrade.getStackInSlot(0));
                         ent.universalUpgrade.setStackInSlot(0, ItemStack.EMPTY);

@@ -25,7 +25,7 @@ public class ItemRegistry {
     public static final Supplier<Item> PRECISION_LENS = register("precision_lens", () -> new PrecisionLens(new Item.Properties().stacksTo(1)));
 
     // Tools
-    public static final Supplier<Item> MAGIC_WRENCH = register("magic_wrench", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ESSENCE_REDIRECTOR = register("essence_redirector", () -> new EssenceRedirector(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> DATA_DRIVE = register("data_drive", () -> new DataDrive(new Item.Properties()));
 
     // Equipment

@@ -219,6 +219,9 @@ public class BlockRegistry {
     public static final Supplier<Block> AETHER_RUNE = register("aether_rune",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> LIGHT_FIXTURE = register("light_fixture",
+            () -> new LightFixture(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Copper Deco
     public static final Supplier<Block> PATTERNED_COPPER = register("patterned_copper",
