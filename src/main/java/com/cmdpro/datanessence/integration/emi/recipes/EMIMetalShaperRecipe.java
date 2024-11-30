@@ -28,7 +28,7 @@ public class EMIMetalShaperRecipe implements EmiRecipe {
     }
     @Override
     public EmiRecipeCategory getCategory() {
-        return EMIDataNEssencePlugin.ENTROPIC_PROCESSING;
+        return EMIDataNEssencePlugin.METAL_SHAPER;
     }
 
     @Override

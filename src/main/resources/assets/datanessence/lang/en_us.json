@@ -287,6 +287,7 @@
   "emi.category.datanessence.entropic_processing": "Entropic Processing",
   "emi.category.datanessence.fluid_mixing": "Fluid Mixing",
   "emi.category.datanessence.synthesis": "Synthesis",
+  "emi.category.datanessence.metal_shaping": "Metal Shaping",
 
   "commands.datanessence.reset_learned": "Reset all of %1$s's unlocked entries.",
   "commands.datanessence.set_tier": "Set %2$s's tier to %1$s.",
