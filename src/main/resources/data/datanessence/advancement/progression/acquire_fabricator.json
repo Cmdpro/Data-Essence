@@ -19,7 +19,7 @@
     },
     "has_redirector": {
       "trigger": "minecraft:inventory_changed",
-      "conditions": { "items": [ { "items": ["datanessence:magic_wrench" ] } ] }
+      "conditions": { "items": [ { "items": ["datanessence:essence_redirector" ] } ] }
     }
   }
 }
