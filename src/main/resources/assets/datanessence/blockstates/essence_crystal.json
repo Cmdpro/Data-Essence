@@ -2,7 +2,8 @@
   "variants": {
     "facing=down": [
       {
-        "model": "datanessence:block/essence_crystal"
+        "model": "datanessence:block/essence_crystal",
+        "x": 180
       },
       {
         "model": "datanessence:block/essence_crystal_2",
