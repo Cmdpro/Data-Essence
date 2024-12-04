@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.effects.GenderEuphoria;
+import com.cmdpro.datanessence.effects.Shrunken;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -22,6 +23,8 @@ public class MobEffectRegistry {
 
     public static DeferredHolder<MobEffect, GenderEuphoria> GENDER_EUPHORIA = register("gender_euphoria", () ->
             new GenderEuphoria(MobEffectCategory.BENEFICIAL, 0xFFFFFF));
+    public static DeferredHolder<MobEffect, Shrunken> SHRUNKEN = register("shrunken", () ->
+            new Shrunken(MobEffectCategory.NEUTRAL, 0xFFFFFF));
     private static <T extends MobEffect> DeferredHolder<MobEffect, T> register(final String name, final Supplier<T> effect) {
         return MOB_EFFECTS.register(name, effect);
     }
