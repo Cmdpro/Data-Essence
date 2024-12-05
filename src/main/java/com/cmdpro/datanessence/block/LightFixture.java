@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.api.block.RedirectorInteractable;
-import com.google.errorprone.annotations.Var;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
