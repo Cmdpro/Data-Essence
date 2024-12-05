@@ -23,7 +23,7 @@
     {
       "type": "datanessence:item",
       "item": {
-        "id": "datanessence:magic_wrench"
+        "id": "datanessence:essence_redirector"
       },
       "text": {
         "translate": "data_tablet.pages.test1.page3.text"

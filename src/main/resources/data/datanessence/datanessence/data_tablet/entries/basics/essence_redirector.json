@@ -1,6 +1,6 @@
 {
   "icon": {
-    "id": "datanessence:magic_wrench"
+    "id": "datanessence:essence_redirector"
   },
   "tab": "datanessence:basics",
   "x": 1,
@@ -9,7 +9,7 @@
     {
       "type": "datanessence:item",
       "item": {
-        "id": "datanessence:magic_wrench"
+        "id": "datanessence:essence_redirector"
       },
       "text": {
         "translate": "data_tablet.pages.essence_redirector.page1.text"

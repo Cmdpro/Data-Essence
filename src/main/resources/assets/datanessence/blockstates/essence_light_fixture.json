@@ -1,0 +1,56 @@
+{
+  "variants": {
+    "facing=down,variant=true": {
+      "model": "datanessence:block/essence_light_fixture_alt",
+      "x": 180
+    },
+    "facing=east,variant=true": {
+      "model": "datanessence:block/essence_light_fixture_alt",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,variant=true": {
+      "model": "datanessence:block/essence_light_fixture_alt",
+      "x": 90
+    },
+    "facing=south,variant=true": {
+      "model": "datanessence:block/essence_light_fixture_alt",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,variant=true": {
+      "model": "datanessence:block/essence_light_fixture_alt"
+    },
+    "facing=west,variant=true": {
+      "model": "datanessence:block/essence_light_fixture_alt",
+      "x": 90,
+      "y": 270
+    },
+    "facing=down,variant=false": {
+      "model": "datanessence:block/essence_light_fixture",
+      "x": 180
+    },
+    "facing=east,variant=false": {
+      "model": "datanessence:block/essence_light_fixture",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north,variant=false": {
+      "model": "datanessence:block/essence_light_fixture",
+      "x": 90
+    },
+    "facing=south,variant=false": {
+      "model": "datanessence:block/essence_light_fixture",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up,variant=false": {
+      "model": "datanessence:block/essence_light_fixture"
+    },
+    "facing=west,variant=false": {
+      "model": "datanessence:block/essence_light_fixture",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
