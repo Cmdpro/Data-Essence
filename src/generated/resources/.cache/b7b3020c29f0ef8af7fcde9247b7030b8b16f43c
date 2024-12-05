@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-18T18:22:48.494300991	Item Models: datanessence
+// 1.21.1	2024-12-05T17:27:49.279024529	Item Models: datanessence
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
@@ -18,6 +18,7 @@ cc8ad366cb50cc565afd44ec81025784569113c0 assets/datanessence/models/item/deco_fl
 01ca71e378e64e9e02886d014639a6bf22ebad8b assets/datanessence/models/item/energized_ancient_rock_column.json
 75395ee34d545367bd2022bcd2edc19f35483609 assets/datanessence/models/item/essence_bomb.json
 898241b351afa63c618a6f84cd67b7fe3118f6f2 assets/datanessence/models/item/essence_crystal.json
+4421a29e2a6e90948c39d10ff72dfde15eaa56b9 assets/datanessence/models/item/essence_redirector.json
 b373f009203404901822d57b9c55e629c6534e1c assets/datanessence/models/item/essence_shard.json
 29859ed5c6878dbae8c38d8ce4c5b33218a3b2e7 assets/datanessence/models/item/essence_wire.json
 6b8f708d916b305e027c88bb21f80121030130bc assets/datanessence/models/item/exotic_essence_bomb.json
@@ -34,7 +35,6 @@ dc6b5004a06b5a6d174a99991c44a9c625c7fed5 assets/datanessence/models/item/logical
 fe1ce05b004a75716ba9ee13cc445e73c1ae74ff assets/datanessence/models/item/lunar_essence_bomb.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/lunar_essence_point.json
 3d310e3313629f8d13026f2ae40006f83f86a491 assets/datanessence/models/item/lunar_essence_wire.json
-516f40090f0536a9ec8db35ae129bb768ba5de73 assets/datanessence/models/item/magic_wrench.json
 cf783901ea1679feb39315eeb19e67cea4923a2e assets/datanessence/models/item/music_disc_player.json
 003b02e930bd05d5cfe42cae5f989aa7e96afe2d assets/datanessence/models/item/music_disc_player_on.json
 d2ee51f8a1c9d8336e8e8d1102e25c8e7c4e4b25 assets/datanessence/models/item/natural_essence_bomb.json

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "datanessence:item/magic_wrench"
+    "layer0": "datanessence:item/essence_redirector"
   }
 }
