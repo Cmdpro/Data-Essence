@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-18T21:36:57.5889715	Block States: datanessence
+// 1.21.1	2024-12-06T17:17:08.9813232	Block States: datanessence
 4c3f8bc2b11e812a24d90295ef729dfe488c971c assets/datanessence/blockstates/aether_rune.json
 af8c2eb4489d2c654a869a088de7969af60b1551 assets/datanessence/blockstates/ancient_lantern.json
 140490733763a0972275b8ae5fe9924317809834 assets/datanessence/blockstates/ancient_rock_bricks.json
@@ -14,7 +14,7 @@ d190993f9449f5c612adedd48a6276cfd83835d2 assets/datanessence/blockstates/deco_fl
 5f664b9a191a428dfebb0cdee2c352bea03a0fae assets/datanessence/blockstates/engraved_polished_obsidian.json
 069bb4f7f5042005b0bee4e353c83972e5c3f4fb assets/datanessence/blockstates/essence_battery.json
 de36bf843295e46cbe4063525652cb8723eb7595 assets/datanessence/blockstates/essence_buffer.json
-eaa858acb704638a8f8b504cffda6aaf1d1699a6 assets/datanessence/blockstates/essence_burner.json
+7b6fe95e73931df96492f64adbee8e7f408b62e6 assets/datanessence/blockstates/essence_burner.json
 a3115ec5848eb7391c3484dd464822e135dd4f25 assets/datanessence/blockstates/fluidic_glass.json
 7d6cb32d05fc4c27ede7821a095aec9357388fa1 assets/datanessence/blockstates/fluid_buffer.json
 9bb78f24fa660cec95959621e22db55d1c6d66b5 assets/datanessence/blockstates/fluid_collector.json
