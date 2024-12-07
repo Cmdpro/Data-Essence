@@ -31,7 +31,7 @@ public class AutoFabricatorItemRenderer extends DatabankItemRenderer<AutoFabrica
 
     public static class Model extends DatabankItemModel<AutoFabricatorItem> {
         public static AnimationDefinition hand;
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {

@@ -98,7 +98,6 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
 
     public static class Model<T extends BaseEssencePointBlockEntity> extends DatabankBlockEntityModel<T> {
         public static AnimationDefinition idle;
-        public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {
@@ -117,8 +116,8 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             return getModel().createLayerDefinition();
         }
         public void setupAnim(T pEntity) {
-            animState.startIfStopped((int)getAgeInTicks());
-            this.animate(animState, idle, 1.0f);
+            pEntity.animState.startIfStopped((int)getAgeInTicks());
+            this.animate(pEntity.animState, idle, 1.0f);
         }
 
         @Override

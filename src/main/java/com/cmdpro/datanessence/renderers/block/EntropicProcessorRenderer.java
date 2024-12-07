@@ -30,7 +30,6 @@ public class EntropicProcessorRenderer extends DatabankBlockEntityRenderer<Entro
         public static DatabankEntityModel model;
         public static AnimationDefinition idle;
         public static AnimationDefinition working;
-        public static final AnimationState state = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart root) {
@@ -50,11 +49,11 @@ public class EntropicProcessorRenderer extends DatabankBlockEntityRenderer<Entro
             return getModel().createLayerDefinition();
         }
         public void setupAnim(EntropicProcessorBlockEntity pEntity) {
-            state.startIfStopped((int)getAgeInTicks());
+            pEntity.animState.startIfStopped((int)getAgeInTicks());
             if (pEntity.workTime >= 0) {
-                this.animate(state, working, 1.0f);
+                this.animate(pEntity.animState, working, 1.0f);
             } else {
-                this.animate(state, idle, 1.0f);
+                this.animate(pEntity.animState, idle, 1.0f);
             }
         }
 

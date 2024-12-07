@@ -26,6 +26,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -45,6 +46,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
+    public AnimationState animState = new AnimationState();
     private final LockableItemHandler itemHandler = new LockableItemHandler(9) {
         @Override
         protected void onContentsChanged(int slot) {

@@ -45,7 +45,6 @@ public class InfuserRenderer extends DatabankBlockEntityRenderer<InfuserBlockEnt
         public static AnimationDefinition idle;
         public static AnimationDefinition active;
         public static AnimationDefinition deactivated;
-        public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {
@@ -66,15 +65,15 @@ public class InfuserRenderer extends DatabankBlockEntityRenderer<InfuserBlockEnt
             return getModel().createLayerDefinition();
         }
         public void setupAnim(InfuserBlockEntity pEntity) {
-            animState.startIfStopped((int)getAgeInTicks());
+            pEntity.animState.startIfStopped((int)getAgeInTicks());
             if (!pEntity.item.isEmpty()) {
                 if (pEntity.workTime >= 0) {
-                    this.animate(animState, active, 1.0f);
+                    this.animate(pEntity.animState, active, 1.0f);
                 } else {
-                    this.animate(animState, idle, 1.0f);
+                    this.animate(pEntity.animState, idle, 1.0f);
                 }
             } else {
-                this.animate(animState, deactivated, 1.0f);
+                this.animate(pEntity.animState, deactivated, 1.0f);
             }
         }
 

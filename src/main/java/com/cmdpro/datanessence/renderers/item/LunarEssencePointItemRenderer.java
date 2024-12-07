@@ -31,7 +31,7 @@ public class LunarEssencePointItemRenderer extends DatabankItemRenderer<LunarEss
 
     public static class Model extends DatabankItemModel<LunarEssencePointItem> {
         public static AnimationDefinition hand;
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {

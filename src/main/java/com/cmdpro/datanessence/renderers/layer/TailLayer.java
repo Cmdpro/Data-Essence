@@ -53,7 +53,7 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
     }
     public class TailModel<T extends Player> extends HierarchicalModel<T> {
         public static AnimationDefinition idle;
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public TailModel(ModelPart pRoot) {

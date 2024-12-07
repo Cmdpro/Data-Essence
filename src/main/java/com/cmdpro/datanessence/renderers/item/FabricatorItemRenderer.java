@@ -30,7 +30,7 @@ public class FabricatorItemRenderer extends DatabankItemRenderer<FabricatorItem>
 
     public static class Model extends DatabankItemModel<FabricatorItem> {
         public static AnimationDefinition hand;
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {

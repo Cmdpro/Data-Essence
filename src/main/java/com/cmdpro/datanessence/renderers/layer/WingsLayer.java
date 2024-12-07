@@ -58,7 +58,7 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
         }
     }
     public class WingsModel<T extends Player> extends HierarchicalModel<T> {
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         public static AnimationDefinition idle;
 
         public static AnimationDefinition fly;

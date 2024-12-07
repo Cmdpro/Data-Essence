@@ -30,7 +30,7 @@ public class ChargerItemRenderer extends DatabankItemRenderer<ChargerItem> {
 
     public static class Model extends DatabankItemModel<ChargerItem> {
         public static AnimationDefinition hand;
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {
