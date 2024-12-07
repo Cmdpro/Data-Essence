@@ -1,8 +1,9 @@
-// 1.21.1	2024-12-05T17:27:49.279024529	Item Models: datanessence
+// 1.21.1	2024-12-06T21:10:29.108585423	Item Models: datanessence
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
+2a14e16db681a6f72cf3786e98d0e0a3f438a78f assets/datanessence/models/item/bonding_powder.json
 c8dbba411053dd980e2d72300e7f2583278c1071 assets/datanessence/models/item/capacitance_panel.json
 1565284aa9a9dfa1f296f1c938a2697dbc80b46c assets/datanessence/models/item/coal_lump.json
 8b9e2c57a53dcbd1e4739dbc91816f453a28034e assets/datanessence/models/item/cognizant_cube.json
@@ -31,6 +32,7 @@ bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/item_po
 869463292549ed3104bcbbdcb698a2aa91206892 assets/datanessence/models/item/item_wire.json
 3b9143700331819b37065e1cabad876d9b4934fb assets/datanessence/models/item/lapis_shard.json
 75ea606ceed228526a2b04991b5eee2b52311b7c assets/datanessence/models/item/lens.json
+27f75bf72da4534b5632b55c6418115543a94343 assets/datanessence/models/item/lensing_crystal.json
 dc6b5004a06b5a6d174a99991c44a9c625c7fed5 assets/datanessence/models/item/logical_matrix.json
 fe1ce05b004a75716ba9ee13cc445e73c1ae74ff assets/datanessence/models/item/lunar_essence_bomb.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/lunar_essence_point.json

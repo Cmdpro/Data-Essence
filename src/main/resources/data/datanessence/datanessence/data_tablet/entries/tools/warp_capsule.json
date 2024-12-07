@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "id": "datanessence:warp_capsule"
+  },
+  "tab": "datanessence:tools",
+  "x": 2,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:warp_capsule" },
+      "text": {
+        "translate": "data_tablet.pages.warp_capsule.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/equipment/warp_capsule"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.warp_capsule.page2.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.warp_capsule.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.warp_capsule.flavor"
+  }
+}

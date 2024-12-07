@@ -71,6 +71,7 @@
   "item.datanessence.under_the_sky_music_disc": "Music Disc",
   "item.datanessence.music_disc_player": "Harmonic Resonator",
   "item.datanessence.warp_capsule": "Warp Capsule",
+  "item.datanessence.bonding_powder": "Bonding Powder",
 
   "block.datanessence.essence_point": "Essence Node",
   "block.datanessence.lunar_essence_point": "Lunar Essence Node",
@@ -206,6 +207,8 @@
   "data_tablet.pages.components.page1.text":         "Unrefined materials can only go so far, so we devised several more refined crafting components that make assembly of Essence-driven machinery far more reasonable. These range from machined parts to circuitry to yet more advanced components.",
   "data_tablet.pages.lensing_crystals.name":         "Lensing Crystals",
   "data_tablet.pages.lensing_crystals.page1.text":   "Near-invisible to the untrained eye, these crystals occur in small, rhombus-shaped geodes underground. They possess incredible precision and efficacy when used to focus energy or as a lens, owing them their name.",
+  "data_tablet.pages.plants.name": "Attuned Flora",
+  "data_tablet.pages.plants.page1.text": "In forests, a careful eye can identify a softly glowing grass that slowly spreads, binding itself to more of the ground. From the blades of this Tethergrass one can harvest Bonding Powder. This substance acts as a sort of glue, or binding agent - it enables stronger unity between disparate parts.",
 
   "_comment.data_tablet_pages.essence_manipulation": "Essence Manipulation category texts.",
   "data_tablet.pages.essence_burner.name":         "Essence Burner",
@@ -273,10 +276,15 @@
   "data_tablet.pages.decorative_blocks.flavor": " ◇ A satisfying factory game",
   "data_tablet.pages.decorative_blocks.page1.text": "Given Obsidian and Copper are used throughout our work, we have decided to polish, cut, and otherwise shape these materials into forms with more aesthetic appeal. In some cases this has resulted in enhanced utility: Polished Obsidian especially serves as a more receptive basic material than the mundane form.",
   "data_tablet.pages.decorative_blocks.page2.text": "Variants of Polished Obsidian are made in the Stonecutter. The application of heat - such as in a furnace - makes them ready to be shaped anew.",
+  "data_tablet.pages.warp_capsule.name": "Warp Capsules",
+  "data_tablet.pages.warp_capsule.flavor": " ◇ There's no place like home",
+  "data_tablet.pages.warp_capsule.page1.text": "Often, one can travel far from home in their research, and the path back can seem twice as exhausting as having traveled there in the first place. To that end, Ender energy once again comes in use, resulting in a Warp Capsule. Coating the pearl with bonding powder allows it to identify the user's home, and take them there when the capsule is shattered in hand.",
+  "data_tablet.pages.warp_capsule.page2.text": " ◇ Distance limit: 10,000 blocks.\n ◇ Cannot teleport cross-dimensionally.",
 
   "_comment.data_tablet.pages.lore": "Ancient History category texts.",
   "data_tablet.pages.essence.name": "What is Essence?",
-  "data_tablet.pages.essence.page1.text": "Essence, as should be evident, is a magical force or energy that is highly workable - receptive and eager to bend to the commands we issue via our engineering. We have noted that it comes in several types, but for security's sake I have been advised to detail only the basic one herein. The purple variant of Essence, which is called simply that, has strong ties to industry, processing, and electricity. It is naturally occurring in Phenua, in living things and in crystals, both of which are amenable to extraction - though not all life is exactly favorable of being siphoned out of. Its applications are wide: from menial labor to refined industrial processes, Essence is the backbone of any capable factory.",
+  "data_tablet.pages.essence.page1.text": "Essence, as should be evident, is a magical force or energy that is highly workable - receptive and eager to bend to the commands we issue via our engineering. We have noted that it comes in several types, but for security's sake I have been advised to detail only the basic one herein.\n\nThe purple variant of Essence, which is called simply that, has strong ties to industry, processing, and electricity. As per the Council's specification we mark this Essence type with the symbol of the hammer of progress.",
+  "data_tablet.pages.essence.page2.text": "It is naturally occurring in Phenua, in living things and in crystals, both of which are amenable to extraction - though not all life is exactly favorable of being siphoned out of. Its applications are wide: from menial labor to refined industrial processes, Essence is the backbone of any capable factory. It has been put to markedly widespread use already, aiding in the refinement of natural resources and powering our less esoteric machines.",
   "data_tablet.pages.phenuan_material_studies.name":       "Phenuan Material Studies",
   "data_tablet.pages.phenuan_material_studies.page1.text": "Copper serves as a nice replacement to our native conductive alloys, able to conduct Essence with ease. It proves flexible, yet sturdy, and produces a beautiful orange color when treated for our work - which many of our builders have taken a liking to. Copper densely saturates the Phenuan overworld's caves, and thus we are in no shortage of raw metal stock for our artifices and production lines.",
   "data_tablet.pages.phenuan_material_studies.page2.text": "Amethyst is a magenta gemstone whose properties as a lens and focus make it a workable substitute to lensing crystals. It is often used in cases where the quality of the lens does not matter as much, but for especially sensitive devices, they prove incapable. To the locals, this gemstone seems to be representative of time. We have noted this for future study.",

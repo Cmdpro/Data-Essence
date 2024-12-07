@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "minecraft:bone" },
+  "time": 150,
+  "result": { "id": "minecraft:bone_meal", "count": 6 }
+}

@@ -1,0 +1,20 @@
+{
+  "icon": {
+    "id": "datanessence:bonding_powder"
+  },
+  "tab": "datanessence:basics",
+  "x": 3,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:bonding_powder" },
+      "text": {
+        "translate": "data_tablet.pages.plants.page1.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.plants.name"
+  }
+}
