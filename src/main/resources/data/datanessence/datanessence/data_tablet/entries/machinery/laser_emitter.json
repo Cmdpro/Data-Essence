@@ -7,7 +7,8 @@
   "y": 4,
   "pages": [
     {
-      "type": "datanessence:text",
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:laser_emitter" },
       "text": {
         "translate": "data_tablet.pages.laser_emitter.page1.text"
       }
@@ -21,7 +22,7 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:fabrication/laser_emitter",
+        "datanessence:fabrication/machines/laser_emitter",
         "datanessence:synthesis/lens_acceleration",
         "datanessence:synthesis/lens_burning",
         "datanessence:synthesis/lens_harming"
