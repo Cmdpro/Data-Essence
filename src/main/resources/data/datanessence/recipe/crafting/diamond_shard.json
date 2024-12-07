@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [{ "item": "minecraft:diamond" }],
   "result": { "id": "datanessence:diamond_shard", "count": 9 }
 }
