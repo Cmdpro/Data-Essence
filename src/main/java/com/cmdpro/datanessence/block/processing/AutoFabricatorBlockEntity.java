@@ -42,10 +42,7 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
     private final LockableItemHandler itemHandler = new LockableItemHandler(9) {
@@ -177,31 +174,6 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         CraftingContainer inventory = new NonMenuCraftingContainer(items, 3, 3);
         return inventory;
     }
-    public boolean hasIngredients(List<Ingredient> ingredients) {
-        List<ItemStack> stacks = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            stacks.add(itemHandler.getStackInSlot(i).copy());
-        }
-        for (Ingredient i : ingredients) {
-            boolean found = false;
-            for (int o = 0; o < 9; o++) {
-                if (!i.isEmpty()) {
-                    if (i.test(stacks.get(o))) {
-                        found = true;
-                        stacks.get(o).shrink(1);
-                        break;
-                    }
-                } else {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                return false;
-            }
-        }
-        return true;
-    }
     public boolean tryCraft() {
         if (recipe instanceof IHasRequiredKnowledge recipe) {
             if (!recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))) {
@@ -210,7 +182,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         }
         ItemStack stack = recipe.assemble(getCraftingInv().asCraftInput(), level.registryAccess()).copy();
         List<Ingredient> ingredients = recipe.getIngredients();
-        if (!hasIngredients(ingredients)) {
+        if (!recipe.matches(getCraftingInv().asCraftInput(), level)) {
             return false;
         }
         for (Ingredient i : ingredients) {
@@ -230,29 +202,37 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
     public Map<ResourceLocation, Float> essenceCost;
     public int craftingProgress;
     public <I extends RecipeInput, T extends Recipe<I>> Optional<RecipeHolder<T>> getRecipeFor(
-            RecipeType<T> type, Level level
+            RecipeType<T> type, Level level, I input
     ) {
-        if (getCraftingInv().isEmpty()) {
-            return Optional.empty();
-        }
-        return level.getRecipeManager().getAllRecipesFor(type).stream().filter(a -> {
+        return level.getRecipeManager().getRecipesFor(type, input, level).stream().filter(a -> {
             if (a.value() instanceof IHasRequiredKnowledge recipe) {
-                if (!recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))) {
-                    return false;
-                }
+                return recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)));
             }
-            return hasIngredients(a.value().getIngredients());
+            return true;
         }).findFirst();
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, AutoFabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
-            Optional<RecipeHolder<IFabricationRecipe>> recipe = pBlockEntity.getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pLevel);
-            if (recipe.isPresent() && hasNotReachedStackLimit(pBlockEntity, recipe.get().value().getResultItem(pLevel.registryAccess()))) {
-                pBlockEntity.recipe = recipe.get().value();
-                pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
-                pBlockEntity.item = recipe.get().value().getResultItem(pLevel.registryAccess());
+            Optional<RecipeHolder<IFabricationRecipe>> fabricationRecipe = pBlockEntity.getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pLevel, pBlockEntity.getCraftingInv().asCraftInput());
+            CraftingRecipe recipe = null;
+            if (fabricationRecipe.isEmpty()) {
+                Optional<RecipeHolder<CraftingRecipe>> vanillaRecipe = pBlockEntity.getRecipeFor(RecipeType.CRAFTING, pLevel, pBlockEntity.getCraftingInv().asCraftInput());
+                if (vanillaRecipe.isPresent()) {
+                    recipe = vanillaRecipe.get().value();
+                }
+            } else {
+                recipe = fabricationRecipe.get().value();
+            }
+            if (recipe != null && hasNotReachedStackLimit(pBlockEntity, recipe.getResultItem(pLevel.registryAccess()))) {
+                pBlockEntity.recipe = recipe;
+                if (recipe instanceof IFabricationRecipe recipe2) {
+                    pBlockEntity.essenceCost = recipe2.getEssenceCost();
+                } else {
+                    pBlockEntity.essenceCost = new HashMap<>();
+                }
+                pBlockEntity.item = recipe.getResultItem(pLevel.registryAccess());
                 boolean enoughEssence = true;
                 for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                     EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
@@ -261,9 +241,9 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                     }
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
-                if (pBlockEntity.hasIngredients(recipe.get().value().getIngredients())) {
+                if (recipe.matches(pBlockEntity.getCraftingInv().asCraftInput(), pBlockEntity.level)) {
                     pBlockEntity.craftingProgress++;
-                    for (Map.Entry<ResourceLocation, Float> i : recipe.get().value().getEssenceCost().entrySet()) {
+                    for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                         EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
                         pBlockEntity.storage.removeEssence(type, i.getValue()/50f);
                     }
