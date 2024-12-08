@@ -15,6 +15,8 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
+import java.util.Optional;
+
 public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequiredKnowledge {
     private final FluidStack output;
     private final FluidIngredient input;
@@ -94,9 +96,9 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
     public static class Serializer implements RecipeSerializer<FluidMixingRecipe> {
         public static final MapCodec<FluidMixingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 FluidStack.CODEC.fieldOf("result").forGetter(r -> r.output),
-                FluidIngredient.CODEC.fieldOf("input").forGetter(r -> r.input),
-                FluidIngredient.CODEC.fieldOf("input2").forGetter(r -> r.input2),
-                Ingredient.CODEC.fieldOf("input2").forGetter(r -> r.input3),
+                FluidIngredient.CODEC.fieldOf("fluid_input").forGetter(r -> r.input),
+                FluidIngredient.CODEC.optionalFieldOf("fluid_input_2").forGetter(r -> r.input2),
+                Ingredient.CODEC.optionalFieldOf("item_input").forGetter(r -> r.input3),
                 Codec.INT.fieldOf("time").forGetter((r) -> r.time),
                 Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry)
