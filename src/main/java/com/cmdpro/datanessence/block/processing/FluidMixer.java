@@ -28,9 +28,10 @@ public class FluidMixer extends Block implements EntityBlock {
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
     }
+
     @Override
     public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Nullable

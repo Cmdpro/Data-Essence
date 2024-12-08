@@ -24,6 +24,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -50,7 +51,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
+    public AnimationState animState = new AnimationState();
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+
     @Override
     public EssenceStorage getStorage() {
         return storage;

@@ -80,6 +80,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.FLUID_TANK.get(), FluidTankRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_BATTERY.get(), EssenceBatteryRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), EntropicProcessorRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.FLUID_MIXER.get(), FluidMixerRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -128,6 +129,8 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(InfuserRenderer.modelLocation, InfuserRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(EntropicProcessorRenderer.modelLocation, EntropicProcessorRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(EntropicProcessorItemRenderer.modelLocation, EntropicProcessorItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(FluidMixerRenderer.modelLocation, FluidMixerRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(FluidMixerItemRenderer.modelLocation, FluidMixerItemRenderer.Model::createLayer);
         });
 
         event.enqueueWork(() -> {
