@@ -1,26 +1,5 @@
 {
   "animations": {
-    "hand": {
-      "length": 0,
-      "looping": true,
-      "animation": [
-        {
-          "bone": "root",
-          "target": "position",
-          "keyframes": [
-            {
-              "timestamp": 0,
-              "target": [
-                0,
-                0,
-                0
-              ],
-              "interpolation": "linear"
-            }
-          ]
-        }
-      ]
-    },
     "working": {
       "length": 0.5,
       "looping": true,
@@ -98,6 +77,11 @@
           ]
         }
       ]
+    },
+    "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": []
     }
   },
   "parts": [
@@ -307,7 +291,7 @@
                 13,
                 0
               ],
-              "inflate": 0
+              "inflate": 0.01
             },
             {
               "name": "glass1",
@@ -337,7 +321,7 @@
                 13,
                 0
               ],
-              "inflate": 0
+              "inflate": 0.01
             },
             {
               "name": "glass2",
@@ -367,7 +351,7 @@
                 13,
                 10
               ],
-              "inflate": 0
+              "inflate": 0.01
             },
             {
               "name": "glass3",
@@ -397,7 +381,7 @@
                 13,
                 10
               ],
-              "inflate": 0
+              "inflate": 0.01
             }
           ]
         },
@@ -473,7 +457,7 @@
                 0,
                 12
               ],
-              "inflate": 0
+              "inflate": 0.01
             }
           ]
         }

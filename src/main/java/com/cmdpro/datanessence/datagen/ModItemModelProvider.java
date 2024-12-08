@@ -96,11 +96,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.LENSING_CRYSTAL);
         simpleItem(ItemRegistry.BONDING_POWDER);
 
-        essencePoint(ItemRegistry.LUNAR_ESSENCE_POINT_ITEM);
-        essencePoint(ItemRegistry.NATURAL_ESSENCE_POINT_ITEM);
-        essencePoint(ItemRegistry.EXOTIC_ESSENCE_POINT_ITEM);
-        essencePoint(ItemRegistry.ITEM_POINT_ITEM);
-        essencePoint(ItemRegistry.FLUID_POINT_ITEM);
+        essencePoint(BlockRegistry.LUNAR_ESSENCE_POINT);
+        essencePoint(BlockRegistry.NATURAL_ESSENCE_POINT);
+        essencePoint(BlockRegistry.EXOTIC_ESSENCE_POINT);
+        essencePoint(BlockRegistry.ITEM_POINT);
+        essencePoint(BlockRegistry.FLUID_POINT);
 
         musicDiscPlayer(ItemRegistry.MUSIC_DISC_PLAYER);
 
@@ -133,8 +133,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         this.withExistingParent(DataNEssence.MOD_ID + ":" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath(),
                 modLoc("block/" + BuiltInRegistries.BLOCK.getKey(block.get()).getPath()));
     }
-    public void essencePoint(Supplier<Item> item) {
-        this.withExistingParent(DataNEssence.MOD_ID + ":" + BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
+    public void essencePoint(Supplier<Block> item) {
+        this.withExistingParent(DataNEssence.MOD_ID + ":" + BuiltInRegistries.ITEM.getKey(item.get().asItem()).getPath(),
                 modLoc("item/essence_point"));
     }
     public void wallItem(Supplier<Block> block, Supplier<Block> baseBlock) {

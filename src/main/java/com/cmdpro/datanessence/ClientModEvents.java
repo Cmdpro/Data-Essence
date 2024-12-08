@@ -175,17 +175,18 @@ public class ClientModEvents {
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(Genderfluid.EXTENSIONS, FluidRegistry.GENDERFLUID_TYPE.get());
 
-        event.registerItem(AutoFabricatorItem.extensions(), ItemRegistry.AUTO_FABRICATOR_ITEM.get());
-        event.registerItem(ChargerItem.extensions(), ItemRegistry.CHARGER_ITEM.get());
-        event.registerItem(EntropicProcessorItem.extensions(), ItemRegistry.ENTROPIC_PROCESSOR_ITEM.get());
-        event.registerItem(EssencePointItem.extensions(), ItemRegistry.ESSENCE_POINT_ITEM.get());
-        event.registerItem(ExoticEssencePointItem.extensions(), ItemRegistry.EXOTIC_ESSENCE_POINT_ITEM.get());
-        event.registerItem(FabricatorItem.extensions(), ItemRegistry.FABRICATOR_ITEM.get());
-        event.registerItem(FluidPointItem.extensions(), ItemRegistry.FLUID_POINT_ITEM.get());
-        event.registerItem(InfuserItem.extensions(), ItemRegistry.INFUSER_ITEM.get());
-        event.registerItem(ItemPointItem.extensions(), ItemRegistry.ITEM_POINT_ITEM.get());
-        event.registerItem(LunarEssencePointItem.extensions(), ItemRegistry.LUNAR_ESSENCE_POINT_ITEM.get());
-        event.registerItem(NaturalEssencePointItem.extensions(), ItemRegistry.NATURAL_ESSENCE_POINT_ITEM.get());
+        event.registerItem(AutoFabricatorItem.extensions(), BlockRegistry.AUTO_FABRICATOR.get().asItem());
+        event.registerItem(ChargerItem.extensions(), BlockRegistry.CHARGER.get().asItem());
+        event.registerItem(EntropicProcessorItem.extensions(), BlockRegistry.ENTROPIC_PROCESSOR.get().asItem());
+        event.registerItem(EssencePointItem.extensions(), BlockRegistry.ESSENCE_POINT.get().asItem());
+        event.registerItem(ExoticEssencePointItem.extensions(), BlockRegistry.EXOTIC_ESSENCE_POINT.get().asItem());
+        event.registerItem(FabricatorItem.extensions(), BlockRegistry.FABRICATOR.get().asItem());
+        event.registerItem(FluidPointItem.extensions(), BlockRegistry.FLUID_POINT.get().asItem());
+        event.registerItem(InfuserItem.extensions(), BlockRegistry.INFUSER.get().asItem());
+        event.registerItem(ItemPointItem.extensions(), BlockRegistry.ITEM_POINT.get().asItem());
+        event.registerItem(LunarEssencePointItem.extensions(), BlockRegistry.LUNAR_ESSENCE_POINT.get().asItem());
+        event.registerItem(NaturalEssencePointItem.extensions(), BlockRegistry.NATURAL_ESSENCE_POINT.get().asItem());
+        event.registerItem(FluidMixerItem.extensions(), BlockRegistry.FLUID_MIXER.get().asItem());
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {

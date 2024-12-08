@@ -22,10 +22,10 @@ import net.minecraft.world.item.crafting.RecipeManager;
 public class EMIDataNEssencePlugin implements EmiPlugin {
     public static final ResourceLocation EMI_ICONS = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"textures/gui/emi_icons.png");
 
-    public static final EmiStack FABRICATOR_WORKSTATION = EmiStack.of(ItemRegistry.FABRICATOR_ITEM.get());
-    public static final EmiStack AUTO_FABRICATOR_WORKSTATION = EmiStack.of(ItemRegistry.AUTO_FABRICATOR_ITEM.get());
-    public static final EmiStack INFUSER_WORKSTATION = EmiStack.of(ItemRegistry.INFUSER_ITEM.get());
-    public static final EmiStack ENTROPIC_PROCESSER_WORKSTATION = EmiStack.of(ItemRegistry.ENTROPIC_PROCESSOR_ITEM.get());
+    public static final EmiStack FABRICATOR_WORKSTATION = EmiStack.of(BlockRegistry.FABRICATOR.get());
+    public static final EmiStack AUTO_FABRICATOR_WORKSTATION = EmiStack.of(BlockRegistry.AUTO_FABRICATOR.get());
+    public static final EmiStack INFUSER_WORKSTATION = EmiStack.of(BlockRegistry.INFUSER.get());
+    public static final EmiStack ENTROPIC_PROCESSER_WORKSTATION = EmiStack.of(BlockRegistry.ENTROPIC_PROCESSOR.get());
     public static final EmiStack FLUID_MIXER_WORKSTATION = EmiStack.of(BlockRegistry.FLUID_MIXER.get());
     public static final EmiStack SYNTHESIS_CHAMBER_WORKSTATION = EmiStack.of(BlockRegistry.SYNTHESIS_CHAMBER.get());
     public static final EmiStack METAL_SHAPER_WORKSTATION = EmiStack.of(BlockRegistry.METAL_SHAPER.get());

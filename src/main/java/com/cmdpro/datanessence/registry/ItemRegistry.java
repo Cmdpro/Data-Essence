@@ -46,19 +46,6 @@ public class ItemRegistry {
     public static final Supplier<Item> FLUID_WIRE = register("fluid_wire", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> DATA_TABLET = register("data_tablet", () -> new DataTablet(new Item.Properties().stacksTo(1)));
 
-    // BlockItems
-    public static final Supplier<Item> FABRICATOR_ITEM = register("fabricator", () -> new FabricatorItem(BlockRegistry.FABRICATOR.get(), new Item.Properties()));
-    public static final Supplier<Item> ESSENCE_POINT_ITEM = register("essence_point", () -> new EssencePointItem(BlockRegistry.ESSENCE_POINT.get(), new Item.Properties()));
-    public static final Supplier<Item> LUNAR_ESSENCE_POINT_ITEM = register("lunar_essence_point", () -> new LunarEssencePointItem(BlockRegistry.LUNAR_ESSENCE_POINT.get(), new Item.Properties()));
-    public static final Supplier<Item> NATURAL_ESSENCE_POINT_ITEM = register("natural_essence_point", () -> new NaturalEssencePointItem(BlockRegistry.NATURAL_ESSENCE_POINT.get(), new Item.Properties()));
-    public static final Supplier<Item> EXOTIC_ESSENCE_POINT_ITEM = register("exotic_essence_point", () -> new ExoticEssencePointItem(BlockRegistry.EXOTIC_ESSENCE_POINT.get(), new Item.Properties()));
-    public static final Supplier<Item> ITEM_POINT_ITEM = register("item_point", () -> new ItemPointItem(BlockRegistry.ITEM_POINT.get(), new Item.Properties()));
-    public static final Supplier<Item> FLUID_POINT_ITEM = register("fluid_point", () -> new FluidPointItem(BlockRegistry.FLUID_POINT.get(), new Item.Properties()));
-    public static final Supplier<Item> INFUSER_ITEM = register("infuser", () -> new InfuserItem(BlockRegistry.INFUSER.get(), new Item.Properties()));
-    public static final Supplier<Item> CHARGER_ITEM = register("charger", () -> new ChargerItem(BlockRegistry.CHARGER.get(), new Item.Properties()));
-    public static final Supplier<Item> AUTO_FABRICATOR_ITEM = register("auto-fabricator", () -> new AutoFabricatorItem(BlockRegistry.AUTO_FABRICATOR.get(), new Item.Properties()));
-    public static final Supplier<Item> ENTROPIC_PROCESSOR_ITEM = register("entropic_processor", () -> new EntropicProcessorItem(BlockRegistry.ENTROPIC_PROCESSOR.get(), new Item.Properties()));
-
     // Bombs
     public static final Supplier<Item> ESSENCE_BOMB = register("essence_bomb", () -> new EssenceBombItem(new Item.Properties()));
     public static final Supplier<Item> LUNAR_ESSENCE_BOMB = register("lunar_essence_bomb", () -> new LunarEssenceBombItem(new Item.Properties()));

@@ -133,7 +133,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
         storage.fromNbt(tag.getCompound("EssenceStorage"));
-        craftingProgress = tag.getInt("craftingProgress");
+        workTime = tag.getInt("workTime");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluidHandler"));
         outputFluidHandler.readFromNBT(pRegistries, tag.getCompound("outputFluidHandler"));
@@ -142,7 +142,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.put("EssenceStorage", storage.toNbt());
-        tag.putInt("craftingProgress", craftingProgress);
+        tag.putInt("workTime", workTime);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
         tag.put("fluidHandler", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("outputFluidHandler", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
@@ -156,7 +156,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         tag.put("fluids", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("outputFluid", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("EssenceStorage", storage.toNbt());
-        tag.putInt("craftingProgress", craftingProgress);
+        tag.putInt("workTime", workTime);
         super.saveAdditional(tag, pRegistries);
     }
     @Override
@@ -167,7 +167,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluids"));
         outputFluidHandler.readFromNBT(pRegistries, nbt.getCompound("outputFluid"));
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
-        craftingProgress = nbt.getInt("craftingProgress");
+        workTime = nbt.getInt("workTime");
     }
     public ItemStack item;
     public SimpleContainer getInv() {
@@ -191,7 +191,6 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     public FluidMixingRecipe recipe;
     public boolean enoughEssence;
     public float essenceCost;
-    public int craftingProgress;
     public int workTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidMixerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {

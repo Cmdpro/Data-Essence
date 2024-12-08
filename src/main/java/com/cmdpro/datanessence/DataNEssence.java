@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.block.transmission.ItemFilter;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.*;
+import com.jcraft.jorbis.Block;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -228,13 +229,13 @@ public class DataNEssence
             event.accept(ItemRegistry.WARP_CAPSULE.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
-            event.accept(ItemRegistry.FABRICATOR_ITEM.get());
-            event.accept(ItemRegistry.ESSENCE_POINT_ITEM.get());
-            event.accept(ItemRegistry.LUNAR_ESSENCE_POINT_ITEM.get());
-            event.accept(ItemRegistry.NATURAL_ESSENCE_POINT_ITEM.get());
-            event.accept(ItemRegistry.EXOTIC_ESSENCE_POINT_ITEM.get());
-            event.accept(ItemRegistry.ITEM_POINT_ITEM.get());
-            event.accept(ItemRegistry.FLUID_POINT_ITEM.get());
+            event.accept(BlockRegistry.FABRICATOR.get());
+            event.accept(BlockRegistry.ESSENCE_POINT.get());
+            event.accept(BlockRegistry.LUNAR_ESSENCE_POINT.get());
+            event.accept(BlockRegistry.NATURAL_ESSENCE_POINT.get());
+            event.accept(BlockRegistry.EXOTIC_ESSENCE_POINT.get());
+            event.accept(BlockRegistry.ITEM_POINT.get());
+            event.accept(BlockRegistry.FLUID_POINT.get());
             event.accept(BlockRegistry.ESSENCE_BUFFER.get());
             event.accept(BlockRegistry.ITEM_BUFFER.get());
             event.accept(BlockRegistry.FLUID_BUFFER.get());
@@ -257,7 +258,7 @@ public class DataNEssence
             event.accept(BlockRegistry.DECO_ESSENCE_BUFFER.get());
             event.accept(BlockRegistry.DECO_ITEM_BUFFER.get());
             event.accept(BlockRegistry.DECO_FLUID_BUFFER.get());
-            event.accept(ItemRegistry.INFUSER_ITEM.get());
+            event.accept(BlockRegistry.INFUSER.get());
             event.accept(BlockRegistry.COMPUTER.get());
             event.accept(BlockRegistry.FLUID_COLLECTOR.get());
             event.accept(BlockRegistry.FLUID_SPILLER.get());
@@ -270,10 +271,10 @@ public class DataNEssence
             event.accept(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
             event.accept(BlockRegistry.FLUID_TANK.get());
             event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
-            event.accept(ItemRegistry.AUTO_FABRICATOR_ITEM.get());
-            event.accept(ItemRegistry.CHARGER_ITEM.get());
+            event.accept(BlockRegistry.AUTO_FABRICATOR.get());
+            event.accept(BlockRegistry.CHARGER.get());
             event.accept(BlockRegistry.FLUID_BOTTLER.get());
-            event.accept(ItemRegistry.ENTROPIC_PROCESSOR_ITEM.get());
+            event.accept(BlockRegistry.ENTROPIC_PROCESSOR.get());
             event.accept(BlockRegistry.ESSENCE_FURNACE.get());
             event.accept(BlockRegistry.FLUID_MIXER.get());
             event.accept(BlockRegistry.SYNTHESIS_CHAMBER.get());

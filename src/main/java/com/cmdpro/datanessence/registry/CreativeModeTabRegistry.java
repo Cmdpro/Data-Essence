@@ -19,7 +19,7 @@ public class CreativeModeTabRegistry {
             CreativeModeTab.builder().icon(() -> new ItemStack(ItemRegistry.DATA_TABLET.get()))
                     .title(Component.translatable("creativemodetab.datanessence_items")).build());
     public static Supplier<CreativeModeTab> BLOCKS = register("datanessence_blocks", () ->
-            CreativeModeTab.builder().icon(() -> new ItemStack(ItemRegistry.FABRICATOR_ITEM.get()))
+            CreativeModeTab.builder().icon(() -> new ItemStack(BlockRegistry.FABRICATOR.get()))
                     .title(Component.translatable("creativemodetab.datanessence_blocks")).build());
     public static ResourceKey getKey(CreativeModeTab tab) {
         return BuiltInRegistries.CREATIVE_MODE_TAB.getResourceKey(tab).get();
