@@ -30,7 +30,7 @@ public class ItemPointItemRenderer extends DatabankItemRenderer<ItemPointItem> {
 
     public static class Model extends DatabankItemModel<ItemPointItem> {
         public static AnimationDefinition hand;
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {

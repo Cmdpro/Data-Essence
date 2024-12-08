@@ -13,6 +13,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -26,6 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public abstract class BaseEssencePointBlockEntity extends BlockEntity {
+    public AnimationState animState = new AnimationState();
     public List<BlockPos> link = new ArrayList<>();
     public List<BlockPos> linkFrom = new ArrayList<>();
     public EssenceNodePath path;

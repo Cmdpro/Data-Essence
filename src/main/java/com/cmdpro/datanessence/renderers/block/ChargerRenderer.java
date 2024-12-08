@@ -54,7 +54,6 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
         public static AnimationDefinition retract_exciters;
         public static AnimationDefinition idle_exciters_out;
         public static AnimationDefinition orb_fall;
-        public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {
@@ -78,56 +77,56 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
         public static LayerDefinition createLayer() {
             return getModel().createLayerDefinition();
         }
-        public AnimationDefinition anim;
         public void setupAnim(ChargerBlockEntity pEntity) {
-            animState.startIfStopped((int)getAgeInTicks());
+            pEntity.animState.startIfStopped((int)getAgeInTicks());
             AnimationDefinition tempAnim = null;
+            AnimationDefinition anim = pEntity.anim;
             if (!pEntity.item.isEmpty()) {
                 if (anim == (idle_empty)) {
                     tempAnim = extend_exciters;
                 }
-                if (anim == (extend_exciters) && BlockEntityKeyframeAnimations.isDone(anim, animState.getAccumulatedTime())) {
+                if (anim == (extend_exciters) && BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime())) {
                     tempAnim = idle_exciters_out;
                 }
                 if (pEntity.charging) {
                     if (anim == (idle_exciters_out)) {
                         tempAnim = orb_rise;
                     }
-                    if (anim == (orb_rise) && BlockEntityKeyframeAnimations.isDone(anim, animState.getAccumulatedTime())) {
+                    if (anim == (orb_rise) && BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime())) {
                         tempAnim = orb_spin;
                     }
                 } else {
                     if (anim == (orb_spin) || anim == (orb_rise)) {
                         tempAnim = orb_fall;
                     }
-                    if (anim == (orb_fall) && BlockEntityKeyframeAnimations.isDone(anim, animState.getAccumulatedTime())) {
+                    if (anim == (orb_fall) && BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime())) {
                         tempAnim = idle_exciters_out;
                     }
                 }
             } else {
                 if (anim == (orb_spin) || anim == (orb_rise)) {
                     tempAnim = orb_fall;
-                } else if (anim == (idle_exciters_out) || anim == (extend_exciters) || (anim == (orb_fall) && BlockEntityKeyframeAnimations.isDone(anim, animState.getAccumulatedTime()))) {
+                } else if (anim == (idle_exciters_out) || anim == (extend_exciters) || (anim == (orb_fall) && BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime()))) {
                     tempAnim = retract_exciters;
-                } else if ((anim != (retract_exciters) && anim != (orb_fall)) || BlockEntityKeyframeAnimations.isDone(anim, animState.getAccumulatedTime())) {
+                } else if ((anim != (retract_exciters) && anim != (orb_fall)) || BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime())) {
                     tempAnim = idle_empty;
                 }
             }
             if (tempAnim != null) {
-                this.animate(animState, tempAnim);
+                this.updateAnim(pEntity, pEntity.animState, tempAnim);
+                this.animate(pEntity.animState, tempAnim);
             } else if (anim != null) {
-                this.animate(animState, anim);
+                this.updateAnim(pEntity, pEntity.animState, anim);
+                this.animate(pEntity.animState, anim);
             }
         }
 
-        @Override
-        protected void animate(AnimationState pAnimationState, AnimationDefinition pAnimationDefinition, float pSpeed) {
-            if (anim != pAnimationDefinition) {
+        protected void updateAnim(ChargerBlockEntity entity, AnimationState pAnimationState, AnimationDefinition pAnimationDefinition) {
+            if (entity.anim != pAnimationDefinition) {
                 pAnimationState.stop();
                 pAnimationState.start((int)getAgeInTicks());
-                anim = pAnimationDefinition;
+                entity.anim = pAnimationDefinition;
             }
-            super.animate(pAnimationState, pAnimationDefinition, pSpeed);
         }
 
         @Override

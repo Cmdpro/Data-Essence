@@ -99,7 +99,6 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
     }
     public static class Model<T extends BaseCapabilityPointBlockEntity> extends DatabankBlockEntityModel<T> {
         public static AnimationDefinition idle;
-        public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {
@@ -118,8 +117,8 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             return getModel().createLayerDefinition();
         }
         public void setupAnim(T pEntity) {
-            animState.startIfStopped((int)getAgeInTicks());
-            this.animate(animState, idle, 1.0f);
+            pEntity.animState.startIfStopped((int)getAgeInTicks());
+            this.animate(pEntity.animState, idle, 1.0f);
         }
 
         @Override

@@ -20,6 +20,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
@@ -43,6 +44,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Optional;
 
 public class EntropicProcessorBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+    public AnimationState animState = new AnimationState();
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
     public EssenceStorage getStorage() {

@@ -37,7 +37,6 @@ public class AncientSentinelRenderer extends MobRenderer<AncientSentinel, Ancien
 
     public static class Model<T extends AncientSentinel> extends HierarchicalModel<T> {
         public static AnimationDefinition idle;
-        public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
         private final ModelPart head;
 
@@ -61,8 +60,8 @@ public class AncientSentinelRenderer extends MobRenderer<AncientSentinel, Ancien
             this.root().getAllParts().forEach(ModelPart::resetPose);
             this.head.xRot = pHeadPitch * (float) (Math.PI / 180.0);
             this.head.yRot = pNetHeadYaw * (float) (Math.PI / 180.0);
-            animState.startIfStopped(pEntity.tickCount);
-            this.animate(animState, idle, pAgeInTicks, 1.0f);
+            pEntity.animState.startIfStopped(pEntity.tickCount);
+            this.animate(pEntity.animState, idle, pAgeInTicks, 1.0f);
         }
 
         @Override

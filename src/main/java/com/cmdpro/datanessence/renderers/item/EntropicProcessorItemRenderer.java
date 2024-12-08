@@ -30,7 +30,7 @@ public class EntropicProcessorItemRenderer extends DatabankItemRenderer<Entropic
 
     public static class Model extends DatabankItemModel<EntropicProcessorItem> {
         public static AnimationDefinition hand;
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {

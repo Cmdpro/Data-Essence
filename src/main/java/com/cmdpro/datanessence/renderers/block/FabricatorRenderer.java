@@ -47,7 +47,6 @@ public class FabricatorRenderer extends DatabankBlockEntityRenderer<FabricatorBl
     public static class Model extends DatabankBlockEntityModel<FabricatorBlockEntity> {
         public static AnimationDefinition idle;
         public static AnimationDefinition ready;
-        public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {
@@ -67,11 +66,11 @@ public class FabricatorRenderer extends DatabankBlockEntityRenderer<FabricatorBl
             return getModel().createLayerDefinition();
         }
         public void setupAnim(FabricatorBlockEntity pEntity) {
-            animState.startIfStopped((int)getAgeInTicks());
+            pEntity.animState.startIfStopped((int)getAgeInTicks());
             if (!pEntity.item.isEmpty()) {
-                this.animate(animState, ready, 1.0f);
+                this.animate(pEntity.animState, ready, 1.0f);
             } else {
-                this.animate(animState, idle, 1.0f);
+                this.animate(pEntity.animState, idle, 1.0f);
             }
         }
 

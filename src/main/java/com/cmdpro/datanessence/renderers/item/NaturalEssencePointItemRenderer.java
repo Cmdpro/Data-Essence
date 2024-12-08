@@ -30,7 +30,7 @@ public class NaturalEssencePointItemRenderer extends DatabankItemRenderer<Natura
 
     public static class Model extends DatabankItemModel<NaturalEssencePointItem> {
         public static AnimationDefinition hand;
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {

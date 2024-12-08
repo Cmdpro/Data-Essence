@@ -53,7 +53,6 @@ public class AutoFabricatorRenderer extends DatabankBlockEntityRenderer<AutoFabr
     public static class Model extends DatabankBlockEntityModel<AutoFabricatorBlockEntity> {
         public static AnimationDefinition idle;
         public static AnimationDefinition crafting;
-        public static final AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {
@@ -73,11 +72,11 @@ public class AutoFabricatorRenderer extends DatabankBlockEntityRenderer<AutoFabr
             return getModel().createLayerDefinition();
         }
         public void setupAnim(AutoFabricatorBlockEntity pEntity) {
-            animState.startIfStopped((int)getAgeInTicks());
+            pEntity.animState.startIfStopped((int)getAgeInTicks());
             if (pEntity.craftingProgress >= 0) {
-                this.animate(animState, crafting, 1.0f);
+                this.animate(pEntity.animState, crafting, 1.0f);
             } else {
-                this.animate(animState, idle, 1.0f);
+                this.animate(pEntity.animState, idle, 1.0f);
             }
         }
 

@@ -30,7 +30,7 @@ public class EssencePointItemRenderer extends DatabankItemRenderer<EssencePointI
 
     public static class Model extends DatabankItemModel<EssencePointItem> {
         public static AnimationDefinition hand;
-        public static final AnimationState animState = new AnimationState();
+        public AnimationState animState = new AnimationState();
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {
