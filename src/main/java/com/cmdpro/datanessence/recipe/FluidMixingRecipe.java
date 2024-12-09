@@ -12,6 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
@@ -20,14 +21,14 @@ import java.util.Optional;
 public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequiredKnowledge {
     private final FluidStack output;
     private final FluidIngredient input;
-    private final FluidIngredient input2;
-    private final Ingredient input3;
+    private final Optional<FluidIngredient> input2;
+    private final Optional<Ingredient> input3;
     private final int time;
     private final float essenceCost;
     private final ResourceLocation entry;
 
     public FluidMixingRecipe(FluidStack output,
-                             FluidIngredient input, FluidIngredient input2, Ingredient input3, int time, float essenceCost, ResourceLocation entry) {
+                             FluidIngredient input, Optional<FluidIngredient> input2, Optional<Ingredient> input3, int time, float essenceCost, ResourceLocation entry) {
         this.output = output;
         this.input = input;
         this.input2 = input2;
@@ -47,17 +48,20 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
         return input;
     }
     public FluidIngredient getInput2() {
-        return input2;
+        return input2.orElse(null);
     }
     @Override
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
-        list.add(input3);
+        input3.ifPresent(list::add);
         return list;
     }
     @Override
     public boolean matches(RecipeInputWithFluid pContainer, Level pLevel) {
-        return input.test(pContainer.getFluid(0)) && input2.test(pContainer.getFluid(1)) && input3.test(pContainer.getItem(0));
+        if (input.test(pContainer.getFluid(0)) && (input2.isEmpty() || input2.get().test(pContainer.getFluid(1))) && (input3.isEmpty() || input3.get().test(pContainer.getItem(0)))) {
+            return true;
+        }
+        return input.test(pContainer.getFluid(1)) && (input2.isEmpty() || input2.get().test(pContainer.getFluid(0))) && (input3.isEmpty() || input3.get().test(pContainer.getItem(0)));
     }
 
     @Override
@@ -85,7 +89,7 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeRegistry.SYNTHESIS_TYPE.get();
+        return RecipeRegistry.FLUID_MIXING_TYPE.get();
     }
 
     @Override
@@ -108,8 +112,10 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
                 (buf, obj) -> {
                     FluidStack.STREAM_CODEC.encode(buf, obj.output);
                     FluidIngredient.STREAM_CODEC.encode(buf, obj.input);
-                    FluidIngredient.STREAM_CODEC.encode(buf, obj.input2);
-                    Ingredient.CONTENTS_STREAM_CODEC.encode(buf, obj.input3);
+                    buf.writeBoolean(obj.input2.isPresent());
+                    obj.input2.ifPresent(fluidIngredient -> FluidIngredient.STREAM_CODEC.encode(buf, fluidIngredient));
+                    buf.writeBoolean(obj.input3.isPresent());
+                    obj.input3.ifPresent(ingredient -> Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ingredient));
                     buf.writeInt(obj.time);
                     buf.writeFloat(obj.essenceCost);
                     buf.writeResourceLocation(obj.entry);
@@ -117,8 +123,16 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
                 (buf) -> {
                     FluidStack output = FluidStack.STREAM_CODEC.decode(buf);
                     FluidIngredient input = FluidIngredient.STREAM_CODEC.decode(buf);
-                    FluidIngredient input2 = FluidIngredient.STREAM_CODEC.decode(buf);
-                    Ingredient input3 = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
+                    boolean input2Exists = buf.readBoolean();
+                    Optional<FluidIngredient> input2 = Optional.empty();
+                    if (input2Exists) {
+                        input2 = Optional.of(FluidIngredient.STREAM_CODEC.decode(buf));
+                    }
+                    boolean input3Exists = buf.readBoolean();
+                    Optional<Ingredient> input3 = Optional.empty();
+                    if (input3Exists) {
+                        input3 = Optional.of(Ingredient.CONTENTS_STREAM_CODEC.decode(buf));
+                    }
                     int time = buf.readInt();
                     float essenceCost = buf.readFloat();
                     ResourceLocation entry = buf.readResourceLocation();

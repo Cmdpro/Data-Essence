@@ -20,24 +20,33 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class EMIFluidMixingRecipe implements EmiRecipe {
     private final ResourceLocation id;
-    private final List<EmiIngredient> input;
+    private final EmiIngredient item;
+    private final EmiIngredient fluid1;
+    private final EmiIngredient fluid2;
+    private final List<EmiIngredient> inputs;
     private final List<EmiStack> output;
     private final float essenceCost;
 
     public EMIFluidMixingRecipe(ResourceLocation id, FluidMixingRecipe recipe) {
         this.id = id;
-        this.input = List.of(
-                EmiIngredient.of(Arrays.stream(recipe.getInput1().getStacks()).map(NeoForgeEmiStack::of).toList()),
-                EmiIngredient.of(Arrays.stream(recipe.getInput2().getStacks()).map(NeoForgeEmiStack::of).toList()),
-                EmiIngredient.of(recipe.getIngredients().get(0))
-        );
+        this.fluid1 = EmiIngredient.of(Arrays.stream(recipe.getInput1().getStacks()).map(NeoForgeEmiStack::of).toList());
+        this.fluid2 = recipe.getInput2() == null ? null : EmiIngredient.of(Arrays.stream(recipe.getInput2().getStacks()).map(NeoForgeEmiStack::of).toList());
+        this.item = recipe.getIngredients().isEmpty() ? null : EmiIngredient.of(recipe.getIngredients().get(0));
+        this.inputs = new ArrayList<>() {
+            {
+                add(fluid1);
+                if (fluid2 != null) {
+                    add(fluid2);
+                }
+                if (item != null) {
+                    add(item);
+                }
+            }
+        };
         this.output = List.of(EmiStack.of(recipe.getOutput().getFluid(), recipe.getOutput().getAmount()));
         this.essenceCost = recipe.getEssenceCost();
     }
@@ -53,7 +62,7 @@ public class EMIFluidMixingRecipe implements EmiRecipe {
 
     @Override
     public List<EmiIngredient> getInputs() {
-        return input;
+        return inputs;
     }
 
     @Override
@@ -78,9 +87,13 @@ public class EMIFluidMixingRecipe implements EmiRecipe {
         widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 10, 76);
 
         // Input
-        widgetHolder.addSlot(input.get(0), 23, 11).drawBack(false);
-        widgetHolder.addSlot(input.get(1), 23, 33).drawBack(false);
-        widgetHolder.addSlot(input.get(2), 34, 21).drawBack(false);
+        widgetHolder.addSlot(fluid1, 13, 10).drawBack(false);
+        if (fluid2 != null) {
+            widgetHolder.addSlot(fluid2, 13, 32).drawBack(false);
+        }
+        if (item != null) {
+            widgetHolder.addSlot(item, 34, 21).drawBack(false);
+        }
         // Output
         widgetHolder.addSlot(output.get(0), 77, 21).recipeContext(this).drawBack(false);
 

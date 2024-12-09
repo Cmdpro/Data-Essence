@@ -1,17 +1,17 @@
 {
   "type": "datanessence:fluid_mixing",
-  "essenceCost": {
-    "datanessence:essence": 50
-  },
+  "essenceCost": 50,
   "fluid_input": {
-    "id": "minecraft:lava",
+    "fluid": "minecraft:lava",
     "amount": 600
   },
   "item_input": {
-    "tag": "c:stone"
+    "tag": "c:stones"
   },
   "result": {
     "id": "minecraft:lava",
     "amount": 800
-  }
+  },
+  "time": 100,
+  "entry": "datanessence:test"
 }
