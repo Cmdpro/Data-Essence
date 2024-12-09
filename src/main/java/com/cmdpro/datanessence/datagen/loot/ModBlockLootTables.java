@@ -88,6 +88,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.ANCIENT_WINDOW.get());
         dropSelf(BlockRegistry.METAL_SHAPER.get());
         dropSelf(BlockRegistry.LIGHT_FIXTURE.get());
+        dropSelf(BlockRegistry.CRYSTALLINE_LEAVES.get());
+        dropSelf(BlockRegistry.CRYSTALLINE_LOG.get());
 
         //so that datagen does not get mad
         this.add(BlockRegistry.TETHERGRASS.get(),

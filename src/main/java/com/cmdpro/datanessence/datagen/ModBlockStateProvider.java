@@ -56,6 +56,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         laserEmitter(BlockRegistry.LASER_EMITTER);
         essenceBattery(BlockRegistry.ESSENCE_BATTERY);
         itemFilter(BlockRegistry.ITEM_FILTER);
+        crystallineLog(BlockRegistry.CRYSTALLINE_LOG);
         //essenceLeech(BlockRegistry.ESSENCE_LEECH);
 
         nothing(BlockRegistry.STRUCTURE_PROTECTOR);
@@ -117,6 +118,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void cubeColumn(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
         simpleBlockWithItem(blockRegistryObject.get(), models().cubeColumn(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side"), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath())));
+    }
+    private void crystallineLog(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        axisBlock((RotatedPillarBlock)blockRegistryObject.get(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath()), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_top"));
     }
     private void essenceBattery(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());

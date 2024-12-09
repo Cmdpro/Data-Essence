@@ -235,6 +235,14 @@ public class ClientModEvents {
                 return ColorUtil.blendColors(new Color(0x0CB3FF), new Color(0xFF49C1), (float) (Math.sin(blendAmount/(360f/5f))+1f)/2f).getRGB();
             }
         }, BlockRegistry.SPIRE_GLASS.get());
+        event.register((pState, pLevel, pPos, pTintIndex) -> {
+            if (pPos != null) {
+                return Color.getHSBColor(((SimplexNoise.noise(pPos.getX()/25f, pPos.getY()/25f, pPos.getZ()/25f)+1f)/2f), 1f, 1f).getRGB();
+            } else {
+                float blendAmount = Minecraft.getInstance().levelRenderer.getTicks()+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
+                return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 1f, 1f).getRGB();
+            }
+        }, BlockRegistry.CRYSTALLINE_LEAVES.get());
     }
     @SubscribeEvent
     public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
@@ -242,5 +250,9 @@ public class ClientModEvents {
             float blendAmount = Minecraft.getInstance().levelRenderer.getTicks()+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
             return ColorUtil.blendColors(new Color(0x0CB3FF), new Color(0xFF49C1), (float) (Math.sin(blendAmount/(360f/5f))+1f)/2f).getRGB();
         }, BlockRegistry.SPIRE_GLASS.get());
+        event.register((pStack, pTintIndex) -> {
+            float blendAmount = Minecraft.getInstance().levelRenderer.getTicks()+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
+            return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 1f, 1f).getRGB();
+        }, BlockRegistry.CRYSTALLINE_LEAVES.get());
     }
 }
