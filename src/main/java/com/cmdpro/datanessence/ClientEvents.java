@@ -20,11 +20,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
@@ -153,7 +155,6 @@ public class ClientEvents {
             SoundManager manager = mc.getSoundManager();
             if (manager.isActive(musicDiscPlayerMusic))
             {
-                mc.getMusicManager().stopPlaying();
                 if (!playMusic)
                 {
                     manager.stop(musicDiscPlayerMusic);
@@ -167,7 +168,20 @@ public class ClientEvents {
             {
                 if (!manager.isActive(musicDiscPlayerMusic) && playMusic)
                 {
-                    musicDiscPlayerMusic = SimpleSoundInstance.forMusic(mus);
+                    musicDiscPlayerMusic = new SimpleSoundInstance(
+                        mus.getLocation(),
+                        SoundSource.RECORDS,
+                        1.0F,
+                        1.0F,
+                        SoundInstance.createUnseededRandom(),
+                        false,
+                        0,
+                        SoundInstance.Attenuation.NONE,
+                        0.0,
+                        0.0,
+                        0.0,
+                        true
+                    );
                     manager.play(musicDiscPlayerMusic);
                 }
             }
