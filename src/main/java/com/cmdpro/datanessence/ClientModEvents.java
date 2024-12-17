@@ -1,6 +1,5 @@
 package com.cmdpro.datanessence;
 
-import com.cmdpro.databank.music.MusicController;
 import com.cmdpro.databank.music.MusicSystem;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.shaders.PostShaderInstance;
@@ -146,30 +145,6 @@ public class ClientModEvents {
         PostShaderManager.addShader(progressionShader);
         genderEuphoriaShader = new GenderEuphoriaShader();
         PostShaderManager.addShader(genderEuphoriaShader);
-        MusicSystem.musicControllers.add(new MusicController() {
-            @Override
-            public int getPriority() {
-                return 9999;
-            }
-            @Override
-            public SoundEvent getMusic() {
-                if (Minecraft.getInstance().player != null) {
-                    for (int index = 0; index < Minecraft.getInstance().player.getInventory().getContainerSize(); index++) {
-                        ItemStack slot = Minecraft.getInstance().player.getInventory().getItem(index);
-                        if (slot.is(ItemRegistry.MUSIC_DISC_PLAYER.get())) {
-                            ResourceKey<SoundEvent> key = slot.get(DataComponentRegistry.PLAYING_MUSIC);
-                            if (key != null) {
-                                SoundEvent sound = BuiltInRegistries.SOUND_EVENT.get(key);
-                                if (sound != null) {
-                                    return sound;
-                                }
-                            }
-                        }
-                    }
-                }
-                return null;
-            }
-        });
     }
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {

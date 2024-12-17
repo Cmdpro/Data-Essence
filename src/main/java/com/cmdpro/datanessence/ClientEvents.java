@@ -1,9 +1,13 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.databank.music.MusicController;
+import com.cmdpro.databank.music.MusicManager;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.MobEffectRegistry;
 import com.cmdpro.datanessence.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.shaders.DataNEssenceRenderTypes;
@@ -16,8 +20,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
@@ -28,6 +37,7 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
@@ -113,5 +123,54 @@ public class ClientEvents {
         GlStateManager._glBindFramebuffer(GL_DRAW_FRAMEBUFFER, tempRenderTarget.frameBufferId);
         GlStateManager._glBlitFrameBuffer(0, 0, renderTarget.width, renderTarget.height, 0, 0, tempRenderTarget.width, tempRenderTarget.height, GlConst.GL_COLOR_BUFFER_BIT, GlConst.GL_NEAREST);
         GlStateManager._glBindFramebuffer(GlConst.GL_FRAMEBUFFER, 0);
+    }
+
+    public static SimpleSoundInstance musicDiscPlayerMusic;
+    @SubscribeEvent
+    public static void onClientTick(ClientTickEvent.Post event)
+    {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level != null)
+        {
+            boolean playMusic = false;
+            SoundEvent mus = null;
+            if (Minecraft.getInstance().player != null) {
+                for (int index = 0; index < Minecraft.getInstance().player.getInventory().getContainerSize(); index++) {
+                    ItemStack slot = Minecraft.getInstance().player.getInventory().getItem(index);
+                    if (slot.is(ItemRegistry.MUSIC_DISC_PLAYER.get())) {
+                        ResourceKey<SoundEvent> key = slot.get(DataComponentRegistry.PLAYING_MUSIC);
+                        if (key != null) {
+                            SoundEvent sound = BuiltInRegistries.SOUND_EVENT.get(key);
+                            if (sound != null) {
+                                mus = sound;
+                                playMusic = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            SoundManager manager = mc.getSoundManager();
+            if (manager.isActive(musicDiscPlayerMusic))
+            {
+                mc.getMusicManager().stopPlaying();
+                if (!playMusic)
+                {
+                    manager.stop(musicDiscPlayerMusic);
+                } else {
+                    if (!musicDiscPlayerMusic.getLocation().equals(mus.getLocation())) {
+                        manager.stop(musicDiscPlayerMusic);
+                    }
+                }
+            }
+            if (!manager.isActive(musicDiscPlayerMusic))
+            {
+                if (!manager.isActive(musicDiscPlayerMusic) && playMusic)
+                {
+                    musicDiscPlayerMusic = SimpleSoundInstance.forMusic(mus);
+                    manager.play(musicDiscPlayerMusic);
+                }
+            }
+        }
     }
 }

@@ -63,7 +63,7 @@ public class MultiblockPage extends Page {
                 MultiblockRenderer.multiblockPos = null;
                 MultiblockRenderer.multiblockRotation = null;
                 MultiblockRenderer.multiblock = MultiblockRenderer.multiblock == null ? MultiblockManager.multiblocks.get(multiblock) : null;
-                Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                Client.playClick();
                 Minecraft.getInstance().popGuiLayer();
                 return true;
             }
@@ -74,5 +74,10 @@ public class MultiblockPage extends Page {
     @Override
     public PageSerializer getSerializer() {
         return MultiblockPageSerializer.INSTANCE;
+    }
+    public static class Client {
+        public static void playClick() {
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+        }
     }
 }
