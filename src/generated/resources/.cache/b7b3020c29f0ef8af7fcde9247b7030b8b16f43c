@@ -1,4 +1,4 @@
-// 1.21.1	2024-12-08T22:42:34.4346187	Item Models: datanessence
+// 1.21.1	2024-12-21T06:29:11.880389695	Item Models: datanessence
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
@@ -49,6 +49,7 @@ c21e404c80d50f53fca78d073b54c48763738238 assets/datanessence/models/item/primiti
 51e08ca19295ad19da59f904f8712159db967e1b assets/datanessence/models/item/propeller.json
 1b09ec0be74ff44bbe133a0ef3f32cf87cde6661 assets/datanessence/models/item/speed_upgrade.json
 cccabab1270cb85664204724c134f6d86b2fe5a6 assets/datanessence/models/item/spire_glass.json
+aee2e6631d57b8fc41df275db6b27a783c52c54f assets/datanessence/models/item/thermometer.json
 7545953a1981f70cdb6d9ccd399301b1df1e65d2 assets/datanessence/models/item/traversite_road_chunk.json
 4485455f0e5dc7ecc006f422e21b5a1dcb972ab0 assets/datanessence/models/item/under_the_sky_music_disc.json
 33d219aaa0c9db2f389822001aefe11e8ca231ce assets/datanessence/models/item/warp_capsule.json

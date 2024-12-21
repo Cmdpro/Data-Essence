@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "id": "datanessence:thermometer"
+  },
+  "tab": "datanessence:tools",
+  "x": 2,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:thermometer" },
+      "text": {
+        "translate": "data_tablet.pages.thermometerpage1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/equipment/thermometer"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.thermometer.page2.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.thermometer.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.thermometer.flavor"
+  }
+}
