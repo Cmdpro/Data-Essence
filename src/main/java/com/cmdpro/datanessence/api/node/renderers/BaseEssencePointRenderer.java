@@ -5,6 +5,7 @@ import com.cmdpro.databank.model.DatabankEntityModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
+import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
@@ -43,7 +44,7 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             Vec3 origin = pBlockEntity.getBlockPos().getCenter();
             for (BlockPos i : pBlockEntity.link) {
                 Vec3 target = i.getCenter();
-                VertexConsumer vertexConsumer = pBufferSource.getBuffer(DataNEssenceRenderTypes.WIRES);
+                VertexConsumer vertexConsumer = RenderHandler.createBufferSource().getBuffer(DataNEssenceRenderTypes.WIRES);
                 ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, pBlockEntity.linkColor());
             }
             pPoseStack.popPose();

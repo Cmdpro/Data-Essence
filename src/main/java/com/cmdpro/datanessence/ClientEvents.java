@@ -2,6 +2,8 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.databank.music.MusicController;
 import com.cmdpro.databank.music.MusicManager;
+import com.cmdpro.databank.rendering.RenderHandler;
+import com.cmdpro.databank.rendering.ShaderHelper;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
@@ -17,6 +19,7 @@ import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
@@ -73,43 +76,56 @@ public class ClientEvents {
             event.getToolTip().add(1, Component.translatable("gui.essence_bar.essence_with_max", format(EssenceChargeableItemUtil.getEssence(event.getItemStack())), format(maxEssence)));
         }
     }
-    @SubscribeEvent(priority = EventPriority.LOWEST)
+    @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (tempRenderTarget == null) {
             tempRenderTarget = new TextureTarget(Minecraft.getInstance().getMainRenderTarget().width, Minecraft.getInstance().getMainRenderTarget().height, true, Minecraft.ON_OSX);
         }
-        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES)) {
+        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
+            MultiBufferSource.BufferSource bufferSource = RenderHandler.createBufferSource();
             if (ClientPlayerData.getLinkPos() != null) {
                 Vec3 pos = event.getCamera().getPosition();
                 Vec3 pos1 = ClientPlayerData.getLinkPos().getCenter();
                 Vec3 pos2 = Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                 event.getPoseStack().pushPose();
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                ClientRenderingUtil.renderLine(Minecraft.getInstance().renderBuffers().bufferSource().getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, ClientPlayerData.getLinkColor());
+                ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, ClientPlayerData.getLinkColor());
                 event.getPoseStack().popPose();
             }
-        }
-        if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_PARTICLES)) {
-            MultiBufferSource.BufferSource bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-            copyBuffers();
-            DataNEssenceCoreShaders.WARPING_POINT.setSampler("DepthBuffer", tempRenderTarget.getDepthTextureId());
-            DataNEssenceCoreShaders.WARPING_POINT.setSampler("ColorBuffer", tempRenderTarget.getColorTextureId());
-            event.getPoseStack().pushPose();
-            event.getPoseStack().translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
-            for (Entity i : Minecraft.getInstance().level.entitiesForRendering()) {
-                if (i instanceof BlackHole hole) {
-                    Vec3 pos = i.getBoundingBox().getCenter();
-                    ClientRenderingUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, hole.getEntityData().get(BlackHole.SIZE), 16, 16);
-                    ClientRenderingUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, -hole.getEntityData().get(BlackHole.SIZE), 16, 16);
-                }
+            if (!ShaderHelper.shouldUseAlternateRendering()) {
+                renderObjects(event);
             }
-            event.getPoseStack().popPose();
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_LEVEL)) {
+            if (ShaderHelper.shouldUseAlternateRendering()) {
+                RenderSystem.getModelViewStack().pushMatrix().set(RenderHandler.matrix4f);
+                RenderSystem.applyModelViewMatrix();
+                RenderSystem.setShaderFogStart(RenderHandler.fogStart);
+                renderObjects(event);
+                FogRenderer.setupNoFog();
+                RenderSystem.getModelViewStack().popMatrix();
+                RenderSystem.applyModelViewMatrix();
+            }
             if (Minecraft.getInstance().player != null) {
                 ClientModEvents.genderEuphoriaShader.setActive(Minecraft.getInstance().player.hasEffect(MobEffectRegistry.GENDER_EUPHORIA));
             }
         }
+    }
+    private static void renderObjects(RenderLevelStageEvent event) {
+        copyBuffers();
+        DataNEssenceCoreShaders.WARPING_POINT.setSampler("DepthBuffer", tempRenderTarget.getDepthTextureId());
+        DataNEssenceCoreShaders.WARPING_POINT.setSampler("ColorBuffer", tempRenderTarget.getColorTextureId());
+        MultiBufferSource.BufferSource bufferSource = RenderHandler.createBufferSource();
+        event.getPoseStack().pushPose();
+        event.getPoseStack().translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
+        for (Entity i : Minecraft.getInstance().level.entitiesForRendering()) {
+            if (i instanceof BlackHole hole) {
+                Vec3 pos = i.getBoundingBox().getCenter();
+                ClientRenderingUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, hole.getEntityData().get(BlackHole.SIZE), 16, 16);
+                ClientRenderingUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, -hole.getEntityData().get(BlackHole.SIZE), 16, 16);
+            }
+        }
+        event.getPoseStack().popPose();
     }
     public static void copyBuffers() {
         if (tempRenderTarget == null) return;

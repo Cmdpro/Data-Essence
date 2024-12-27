@@ -87,7 +87,7 @@ public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client
                 consumer.addVertex(last, p2.x(), p2.y(), p2.z());
             }
         }
-        ((MultiBufferSource.BufferSource)source).endLastBatch();
+        ((MultiBufferSource.BufferSource)source).endBatch(DataNEssenceRenderTypes.WARPING_POINT);
         stack.popPose();
     }
     public static double getFractionalLerp(int current, int max) {
