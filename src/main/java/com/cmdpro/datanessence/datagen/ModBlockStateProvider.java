@@ -62,7 +62,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         nothing(BlockRegistry.STRUCTURE_PROTECTOR);
 
         blockWithItem(BlockRegistry.TRAVERSITE_ROAD);
-        //blockWithItem(BlockRegistry.LENSING_CRYSTAL_ORE);
+        blockWithItem(BlockRegistry.LENSING_CRYSTAL_ORE);
 
         transparentBlockWithItemAndTint(BlockRegistry.SPIRE_GLASS);
     }

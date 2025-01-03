@@ -1,6 +1,6 @@
 {
-  "creativemodetab.datanessence_blocks": "Data & Essence Blocks",
-  "creativemodetab.datanessence_items": "Data & Essence Items",
+  "creativemodetab.datanessence_blocks": "Data & Essence: Blocks",
+  "creativemodetab.datanessence_items": "Data & Essence: Items",
 
   "datanessence.essence_types.essence":         "Essence",
   "datanessence.essence_types.lunar_essence":   "Lunar Essence",
@@ -210,6 +210,11 @@
   "data_tablet.pages.lensing_crystals.page1.text":   "Near-invisible to the untrained eye, these crystals occur in small, rhombus-shaped geodes underground. They possess incredible precision and efficacy when used to focus energy or as a lens, owing them their name.",
   "data_tablet.pages.plants.name": "Attuned Flora",
   "data_tablet.pages.plants.page1.text": "In forests, a careful eye can identify a softly glowing grass that slowly spreads, binding itself to more of the ground. From the blades of this Tethergrass one can harvest Bonding Powder. This substance acts as a sort of glue, or binding agent - it enables stronger unity between disparate parts.",
+  "data_tablet.pages.temperature.name": "On Temperature",
+  "data_tablet.pages.temperature.flavor": " ◇ Control over hot and cold",
+  "data_tablet.pages.temperature.page1.text": "Some machines are sensitive to heat and cold. These typically need to be a particular temperature to work, and may shut down - or, in some cases, break and need repairing - if they overheat. Heat sensitive machines can be provided with hot or cold fluids to adjust their temperature. Should that supply ever run out, the machine will quickly shift back to the ambient temperature, likely interrupting processing.",
+  "data_tablet.pages.temperature.page2.text": "The ambient temperature of an area considers many factors, including biome, altitude (it is generally colder the higher up one is), the weather, and the time of day (it is colder at night). We have also noticed that it is far, far hotter in that strange fiery area of the Phenuan realm, so much so that it may make some pursuits impossible there, and others trivial. A Thermometer can be helpful.",
+  "data_tablet.pages.temperature.page3.text": " ◇ Use on air to query ambient temperature.\n ◇ Use on a heat sensitive machine to query its temperature.",
 
   "_comment.data_tablet_pages.essence_manipulation": "Essence Manipulation category texts.",
   "data_tablet.pages.essence_burner.name":         "Essence Burner",
