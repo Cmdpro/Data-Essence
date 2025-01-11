@@ -3,6 +3,7 @@
     "id": "datanessence:bonding_powder"
   },
   "tab": "datanessence:basics",
+  "critical": true,
   "x": 3,
   "y": 2,
   "pages": [

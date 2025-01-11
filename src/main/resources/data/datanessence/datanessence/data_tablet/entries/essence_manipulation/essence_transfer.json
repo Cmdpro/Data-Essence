@@ -3,6 +3,7 @@
     "id": "datanessence:essence_wire"
   },
   "tab": "datanessence:essence_manipulation",
+  "critical": true,
   "x": 2,
   "y": 0,
   "pages": [

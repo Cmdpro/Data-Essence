@@ -3,6 +3,7 @@
     "id": "datanessence:charger"
   },
   "tab": "datanessence:tools",
+  "critical": true,
   "x": 0,
   "y": 0,
   "pages": [

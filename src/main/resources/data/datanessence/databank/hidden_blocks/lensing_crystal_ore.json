@@ -1,7 +1,7 @@
 {
   "condition": "datanessence:entry",
   "conditionData": {
-    "entry": "datanessence:test"
+    "entry": "datanessence:basics/lensing_crystals"
   },
   "hiddenAs": "minecraft:stone",
   "originalBlock": "datanessence:lensing_crystal_ore"

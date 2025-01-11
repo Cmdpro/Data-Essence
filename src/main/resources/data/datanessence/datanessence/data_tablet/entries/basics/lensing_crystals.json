@@ -3,6 +3,7 @@
     "id": "datanessence:lensing_crystal"
   },
   "tab": "datanessence:basics",
+  "critical": true,
   "x": 2,
   "y": 2,
   "pages": [

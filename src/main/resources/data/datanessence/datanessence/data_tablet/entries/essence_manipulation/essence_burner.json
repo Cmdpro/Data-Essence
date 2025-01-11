@@ -3,6 +3,7 @@
     "id": "datanessence:essence_burner"
   },
   "tab": "datanessence:essence_manipulation",
+  "critical": true,
   "x": 0,
   "y": 0,
   "pages": [

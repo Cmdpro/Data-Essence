@@ -3,6 +3,7 @@
     "id": "datanessence:data_drive"
   },
   "tab": "datanessence:machinery",
+  "critical": true,
   "x": 0,
   "y": 0,
   "pages": [
