@@ -140,6 +140,9 @@
   "block.datanessence.essence_breaker": "Essence Breaker",
   "block.datanessence.spire_glass": "Spire Glass",
   "block.datanessence.ancient_shelf": "Ancient Shelf",
+  "block.datanessence.arekko": "Dead Researcher",
+  "block.datanessence.arekko.obtain_data_tablet": "You spot a strange device among the remains.",
+  "block.datanessence.arekko.nothing_left": "You don't see anything else of value here.",
 
   "jukebox_song.datanessence.under_the_sky": "DavidRarria09 - UnderTheSky",
 

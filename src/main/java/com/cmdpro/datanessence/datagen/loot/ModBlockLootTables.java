@@ -94,6 +94,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         //so that datagen does not get mad
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> noDrop());
+
+        // TODO regardless of how, always drops 1-3 bones.
+        this.add(BlockRegistry.AREKKO.get(),
+                block -> noDrop());
     }
     protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,

@@ -34,6 +34,11 @@ public class DataNEssence
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
     public static RandomSource random;
+
+    public static ResourceLocation locate(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
+
     public DataNEssence(IEventBus bus)
     {
         ModLoadingContext modLoadingContext = ModLoadingContext.get();

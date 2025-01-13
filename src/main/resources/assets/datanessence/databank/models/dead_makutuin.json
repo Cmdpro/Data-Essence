@@ -1,0 +1,788 @@
+{
+  "animations": {
+    "idle": {
+      "length": 0,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "Head",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -97.52832079643167,
+                4.957116789917109,
+                -0.6542642738377253
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "Head",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                1.25,
+                -21,
+                10.75
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "Body",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -92.5,
+                5,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "Body",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                1,
+                -21.29999999999999,
+                11
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "RightArm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -165.6936722599362,
+                5.684223786208349,
+                -91.40419996537639
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "RightArm",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -18.25,
+                9
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "LeftArm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -100.17733307108301,
+                -1.6235998682477657,
+                94.92583221507994
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "LeftArm",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                1.25,
+                -18.5,
+                8
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "RightLeg",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -81.7253681763259,
+                19.506445531723784,
+                4.504320254954564
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "RightLeg",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -9,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "LeftLeg",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -82.4884662400018,
+                2.4407037106680036,
+                0.5414265722342861
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "LeftLeg",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -9,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        24,
+        0
+      ],
+      "isCube": false,
+      "children": [
+        {
+          "name": "Head",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "Head",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                24,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -4,
+                -32,
+                -4
+              ],
+              "dimensions": [
+                8,
+                8,
+                8
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "Hat Layer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                24,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                32,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -4,
+                -32,
+                -4
+              ],
+              "dimensions": [
+                8,
+                8,
+                8
+              ],
+              "inflate": 0.5
+            },
+            {
+              "name": "Head Feathers R",
+              "rotation": [
+                0,
+                0.3490658503988659,
+                0
+              ],
+              "offset": [
+                -4.5,
+                -3,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -3,
+                -1
+              ],
+              "dimensions": [
+                2,
+                5,
+                0
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "Head Feathers L",
+              "rotation": [
+                0,
+                -0.3490658503988659,
+                0
+              ],
+              "offset": [
+                4.5,
+                -3,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                4,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -3,
+                -1
+              ],
+              "dimensions": [
+                2,
+                5,
+                0
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "name": "Body",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "Body",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                24,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                16,
+                16
+              ],
+              "mirror": false,
+              "origin": [
+                -4,
+                -24,
+                -2
+              ],
+              "dimensions": [
+                8,
+                12,
+                4
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "Body Layer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                24,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                16,
+                32
+              ],
+              "mirror": false,
+              "origin": [
+                -4,
+                -24,
+                -2
+              ],
+              "dimensions": [
+                8,
+                12,
+                4
+              ],
+              "inflate": 0.25
+            }
+          ]
+        },
+        {
+          "name": "RightArm",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -5,
+            2,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "Right Arm",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                5,
+                22,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                40,
+                16
+              ],
+              "mirror": false,
+              "origin": [
+                -7,
+                -24,
+                -2
+              ],
+              "dimensions": [
+                3,
+                12,
+                4
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "Right Arm Layer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                5,
+                22,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                40,
+                32
+              ],
+              "mirror": false,
+              "origin": [
+                -7,
+                -24,
+                -2
+              ],
+              "dimensions": [
+                3,
+                12,
+                4
+              ],
+              "inflate": 0.25
+            },
+            {
+              "name": "Right Arm Wing",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                3
+              ],
+              "isCube": true,
+              "texOffset": [
+                56,
+                16
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -2,
+                -1
+              ],
+              "dimensions": [
+                1,
+                11,
+                3
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "name": "LeftArm",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            5,
+            2,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "Left Arm",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -5,
+                22,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                32,
+                48
+              ],
+              "mirror": false,
+              "origin": [
+                4,
+                -24,
+                -2
+              ],
+              "dimensions": [
+                3,
+                12,
+                4
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "Left Arm Layer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -5,
+                22,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                48,
+                48
+              ],
+              "mirror": false,
+              "origin": [
+                4,
+                -24,
+                -2
+              ],
+              "dimensions": [
+                3,
+                12,
+                4
+              ],
+              "inflate": 0.25
+            },
+            {
+              "name": "Left Arm Wing",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                1,
+                0,
+                3
+              ],
+              "isCube": true,
+              "texOffset": [
+                56,
+                16
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -2,
+                -1
+              ],
+              "dimensions": [
+                1,
+                11,
+                3
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "name": "RightLeg",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -1.9,
+            12,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "Right Leg",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                1.9,
+                12,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                16
+              ],
+              "mirror": false,
+              "origin": [
+                -3.9,
+                -12,
+                -2
+              ],
+              "dimensions": [
+                4,
+                12,
+                4
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "Right Leg Layer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                1.9,
+                12,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                32
+              ],
+              "mirror": false,
+              "origin": [
+                -3.9,
+                -12,
+                -2
+              ],
+              "dimensions": [
+                4,
+                12,
+                4
+              ],
+              "inflate": 0.25
+            }
+          ]
+        },
+        {
+          "name": "LeftLeg",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            1.9,
+            12,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "Left Leg",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -1.9,
+                12,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                16,
+                48
+              ],
+              "mirror": false,
+              "origin": [
+                -0.10000000000000009,
+                -12,
+                -2
+              ],
+              "dimensions": [
+                4,
+                12,
+                4
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "Left Leg Layer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -1.9,
+                12,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                48
+              ],
+              "mirror": false,
+              "origin": [
+                -0.10000000000000009,
+                -12,
+                -2
+              ],
+              "dimensions": [
+                4,
+                12,
+                4
+              ],
+              "inflate": 0.25
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    64,
+    64
+  ]
+}

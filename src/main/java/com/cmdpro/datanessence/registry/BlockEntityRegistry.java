@@ -10,6 +10,7 @@ import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidSpillerBlockEntity;
 import com.cmdpro.datanessence.block.production.MetalShaperBlockEntity;
 import com.cmdpro.datanessence.block.storage.*;
+import com.cmdpro.datanessence.block.technical.ArekkoBlockEntity;
 import com.cmdpro.datanessence.block.technical.ComputerBlockEntity;
 import com.cmdpro.datanessence.block.technical.DataBankBlockEntity;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
@@ -175,6 +176,10 @@ public class BlockEntityRegistry {
             register("metal_shaper", () ->
                     BlockEntityType.Builder.of(MetalShaperBlockEntity::new,
                             BlockRegistry.METAL_SHAPER.get()).build(null));
+    public static final Supplier<BlockEntityType<ArekkoBlockEntity>> AREKKO =
+            register("arekko", () ->
+                    BlockEntityType.Builder.of(ArekkoBlockEntity::new,
+                            BlockRegistry.AREKKO.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {
