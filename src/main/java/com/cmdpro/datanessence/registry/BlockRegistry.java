@@ -260,7 +260,7 @@ public class BlockRegistry {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUIDIC_GLASS = register("fluidic_glass",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     // Fluids
     public static final Supplier<LiquidBlock> GENDERFLUID = registerBlock("genderfluid", () -> new GenderfluidBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(DyeColor.BLACK)));

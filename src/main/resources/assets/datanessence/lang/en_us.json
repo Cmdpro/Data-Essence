@@ -152,6 +152,7 @@
   "jukebox_song.datanessence.under_the_sky": "DavidRarria09 - UnderTheSky",
 
   "computer.types.test.files.0": "Very cool testing computer text file, yes very cool, indeed, uh I need more text uh uh uh uh uh uh uh yea",
+  "computer.arekkos_vault.log": "Cryostasis Reason: PRESERVATION\nOccupant: AREKKO BULOK-ENTEE\nAuthority: [REDACTED]\n\nNotes: Arekko requested to be sealed with their data tablet. Possible security risk in case of intruders?",
 
   "death.attack.magic_projectile": "%1$s was killed by %2$s using magic",
   "death.attack.magic_projectile.player": "%1$s was killed by %2$s using magic",
@@ -349,6 +350,6 @@
   "tag.item.datanessence.shaped_polished_obsidian_blocks": "Shaped Polished Obsidian Blocks",
   "tag.item.datanessence.explosive_material": "Explosive Material",
 
-  "emi.info.datanessence.ancient_items_are_loot_only": "This is an Ancient item. It cannot be crafted, and must instead be found.\nTry searching inside structures built from an obsidian-esque rock.",
+  "emi.info.datanessence.ancient_items_are_loot_only": "This is an Ancient item. It cannot be crafted, and must instead be found.\nTry searching inside structures built from an otherworldly, purple rock.",
   "emi.info.datanessence.dimension_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found."
 }

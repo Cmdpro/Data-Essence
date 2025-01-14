@@ -49,7 +49,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         pillarDecoBlock(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
         decoBlock(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN);
         decoBlock(BlockRegistry.PATTERNED_COPPER);
-        decoBlock(BlockRegistry.FLUIDIC_GLASS);
+        transparentDecoBlockWithItem(BlockRegistry.FLUIDIC_GLASS);
         decoBlock(BlockRegistry.AETHER_RUNE);
 
         essenceBurner(BlockRegistry.ESSENCE_BURNER);
@@ -112,6 +112,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void transparentBlockWithItemAndTint(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
         simpleBlockWithItem(blockRegistryObject.get(), models().singleTexture(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/cube_all_tinted"), "all", blockTexture(blockRegistryObject.get())).renderType("translucent"));
+    }
+    private void transparentDecoBlockWithItem(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        simpleBlockWithItem(blockRegistryObject.get(), models().cubeAll(BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get()).getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath())).renderType("translucent"));
     }
     private void transparentAncientDecoBlockWithItem(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
