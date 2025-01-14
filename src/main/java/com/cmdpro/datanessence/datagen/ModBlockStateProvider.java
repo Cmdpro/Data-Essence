@@ -37,6 +37,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ancientDecoBlockWithItem(BlockRegistry.ANCIENT_LANTERN);
         ancientShelf(BlockRegistry.ANCIENT_SHELF);
         transparentAncientDecoBlockWithItem(BlockRegistry.ANCIENT_WINDOW);
+        ancientDecoBlockWithItem(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK);
+        ancientDecoBlockWithItem(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN);
+        ancientDecoBlockWithItem(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE);
 
         bufferDecoBlock(BlockRegistry.DECO_ESSENCE_BUFFER);
         bufferDecoBlock(BlockRegistry.DECO_ITEM_BUFFER);

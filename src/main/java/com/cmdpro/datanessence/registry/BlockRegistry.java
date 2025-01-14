@@ -228,6 +228,15 @@ public class BlockRegistry {
     public static final Supplier<Block> ANCIENT_WINDOW = register("ancient_window",
             () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ANCIENT_GLYPH_STONE_BLANK = register("ancient_glyph_stone_blank",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ANCIENT_GLYPH_STONE_MAKUTUIN = register("ancient_glyph_stone_makutuin",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ANCIENT_GLYPH_STONE_ESSENCE = register("ancient_glyph_stone_essence",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Obsidian Deco
     public static final Supplier<Block> POLISHED_OBSIDIAN = register("polished_obsidian",
