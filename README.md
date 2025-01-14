@@ -9,7 +9,9 @@ Over the course of progression, you will work with more types of Essence and mor
 
 ## Starting the Mod, and Progressing
 You will need to explore your world to find a specific structure, *Arekko's Vault*. The Vault generates in \<TODO\>. Once found, you may enter from above to retrieve a Data Tablet... after some effort. This Tablet is your guide through the mod.
+
 To unlock more entries and recipes, find at least one other structure type and clear the way to its Data Bank. Unlocking some entries may reveal things in the world that you never knew were there before....
+
 Eventually you may unlock enough entries to advance in Tier, garnering more entries to unlock and, later on, new Essence types and additional places to explore.
 
 ## Credits
