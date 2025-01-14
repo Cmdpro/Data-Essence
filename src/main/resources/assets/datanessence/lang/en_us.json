@@ -280,6 +280,10 @@
   "data_tablet.pages.metal_shaper.title": "More Efficient Processing",
   "data_tablet.pages.metal_shaper.page1.text": "Shaping raw metal stock by hand is prone to user error, resulting in inefficiency. Such a process also takes up valuable time that could be spent on higher pursuits. Thus, enter the Metal Shaper. This machine is able to cut and shape metal into various forms more efficiently than by hand.",
   "data_tablet.pages.metal_shaper.page2.text": " ◇ ...",
+  "data_tablet.pages.essence_furnace.name": "Essence Furnace",
+  "data_tablet.pages.essence_furnace.flavor": " ◇ Copper Convection Cooker",
+  "data_tablet.pages.essence_furnace.page1.text": "Smelting is a common task, but the inefficiency and slow speeds of an ordinary furnace are unacceptable for many of our applications. We quickly discovered how to make Essence power a heating element that does the work instead, solving both of these problems.",
+  "data_tablet.pages.essence_furnace.page2.text": " ◇ Works 25% faster than an ordinary Furnace.",
 
   "_comment.data_tablet_pages.tools": "Tools and Utilities category texts.",
   "data_tablet.pages.traversite_road.name":                  "Traversite Road",
