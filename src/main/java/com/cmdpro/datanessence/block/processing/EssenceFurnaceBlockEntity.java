@@ -85,12 +85,14 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
         CompoundTag tag = pkt.getTag();
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
+        recipeTime = tag.getDouble("recipeTime");
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
+        tag.putDouble("recipeTime", recipeTime);
         return tag;
     }
 
@@ -100,6 +102,7 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
         tag.put("output", outputItemHandler.serializeNBT(pRegistries));
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
+        tag.putDouble("recipeTime", recipeTime);
         super.saveAdditional(tag, pRegistries);
     }
     @Override
@@ -109,6 +112,7 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
+        recipeTime = nbt.getDouble("recipeTime");
     }
     public ItemStack item;
     public SimpleContainer getInv() {
@@ -126,11 +130,10 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
         return inventory;
     }
     public int workTime;
+    public double recipeTime;
     public SmeltingRecipe recipe;
     public float essenceCost;
-    public float lunarEssenceCost;
-    public float naturalEssenceCost;
-    public float exoticEssenceCost;
+
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceFurnaceBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
@@ -143,12 +146,14 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
                         pBlockEntity.workTime = 0;
                     }
                     pBlockEntity.recipe = recipe.get().value();
+                    pBlockEntity.recipeTime = recipe.get().value().getCookingTime() * 0.75; // 25% faster than a vanilla Furnace
+
                     ItemStack result = recipe.get().value().getResultItem(pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
-                        if (pBlockEntity.workTime >= recipe.get().value().getCookingTime()) {
+                        if (pBlockEntity.workTime >= pBlockEntity.recipeTime) {
                             pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
