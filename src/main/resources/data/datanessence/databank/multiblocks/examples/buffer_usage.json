@@ -1,0 +1,40 @@
+{
+  "key": {
+    "I": {
+      "type": "databank:blockstate",
+      "state": "datanessence:item_buffer"
+    },
+    "i": {
+      "type": "databank:blockstate",
+      "state": "datanessence:item_point[face=wall,facing=east]"
+    },
+    "E": {
+      "type": "databank:blockstate",
+      "state": "datanessence:essence_buffer"
+    },
+    "e": {
+      "type": "databank:blockstate",
+      "state": "datanessence:essence_point[face=wall,facing=west]"
+    },
+    "M": {
+      "type": "databank:blockstate",
+      "state": "datanessence:infuser"
+    }
+  },
+  "layers": [
+    [
+      " Ii"
+    ],
+    [
+      "eE"
+    ],
+    [
+      " M"
+    ]
+  ],
+  "offset": [
+    0,
+    0,
+    0
+  ]
+}

@@ -28,5 +28,8 @@
   },
   "flavor": {
     "translate": "data_tablet.pages.warp_capsule.flavor"
-  }
+  },
+  "parents": [
+    "datanessence:basics/plants"
+  ]
 }

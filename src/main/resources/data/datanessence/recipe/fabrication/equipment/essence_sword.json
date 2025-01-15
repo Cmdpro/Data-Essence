@@ -1,0 +1,17 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 500
+  },
+  "entry": "datanessence:tools/essence_sword",
+  "pattern": [
+    "  E",
+    " E ",
+    "R  "
+  ],
+  "key": {
+    "E": { "item": "datanessence:essence_shard" },
+    "R": { "item": "datanessence:conductance_rod" }
+  },
+  "result": { "id": "datanessence:essence_sword" }
+}

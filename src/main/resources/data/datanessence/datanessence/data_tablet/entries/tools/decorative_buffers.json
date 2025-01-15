@@ -1,0 +1,34 @@
+{
+  "icon": {
+    "id": "datanessence:deco_fluid_buffer"
+  },
+  "tab": "datanessence:tools",
+  "x": 0,
+  "y": -4,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.decorative_buffers.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/decoration/deco_essence_buffer",
+        "datanessence:fabrication/decoration/deco_fluid_buffer",
+        "datanessence:fabrication/decoration/deco_item_buffer"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.decorative_buffers.page2.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.decorative_buffers.name"
+  },
+  "parents": [
+    "datanessence:tools/decorative_blocks",
+    "datanessence:machinery/buffers"
+  ]
+}

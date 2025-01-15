@@ -13,11 +13,15 @@
       }
     },
     {
+      "type": "datanessence:multiblock",
+      "multiblock": "datanessence:examples/buffer_usage"
+    },
+    {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:fabrication/essence_buffer",
-        "datanessence:fabrication/item_buffer",
-        "datanessence:fabrication/fluid_buffer"
+        "datanessence:fabrication/machines/buffer_essence",
+        "datanessence:fabrication/machines/buffer_item",
+        "datanessence:fabrication/machines/buffer_fluid"
       ]
     }
   ],

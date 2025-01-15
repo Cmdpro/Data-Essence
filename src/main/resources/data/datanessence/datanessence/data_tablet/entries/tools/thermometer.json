@@ -3,14 +3,14 @@
     "id": "datanessence:thermometer"
   },
   "tab": "datanessence:tools",
-  "x": 2,
+  "x": -2,
   "y": -2,
   "pages": [
     {
       "type": "datanessence:item",
       "item": { "id": "datanessence:thermometer" },
       "text": {
-        "translate": "data_tablet.pages.thermometerpage1.text"
+        "translate": "data_tablet.pages.thermometer.page1.text"
       }
     },
     {

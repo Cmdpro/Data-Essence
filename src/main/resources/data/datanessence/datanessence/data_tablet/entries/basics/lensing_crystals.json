@@ -4,8 +4,8 @@
   },
   "tab": "datanessence:basics",
   "critical": true,
-  "x": 2,
-  "y": 2,
+  "x": 5,
+  "y": 1,
   "pages": [
     {
       "type": "datanessence:item",

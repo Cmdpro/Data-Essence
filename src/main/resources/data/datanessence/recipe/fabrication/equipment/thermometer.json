@@ -7,7 +7,7 @@
   "pattern": [
     "  G",
     " G ",
-    "R "
+    "R  "
   ],
   "key": {
     "G": { "tag": "c:glass_blocks" },

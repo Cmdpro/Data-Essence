@@ -1,0 +1,34 @@
+{
+  "icon": {
+    "id": "datanessence:essence_sword"
+  },
+  "tab": "datanessence:tools",
+  "x": 2,
+  "y": 1,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:essence_sword"
+      },
+      "text": {
+        "translate": "data_tablet.pages.essence_sword.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.essence_sword.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/equipment/essence_sword"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.essence_sword.name"
+  },
+  "parents": [
+    "datanessence:tools/charger"
+  ]
+}
