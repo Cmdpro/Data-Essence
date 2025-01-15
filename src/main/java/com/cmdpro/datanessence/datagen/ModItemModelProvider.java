@@ -57,6 +57,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.FLUID_WIRE, "wires");
 
         handheldItem(ItemRegistry.ESSENCE_REDIRECTOR);
+        handheldItem(ItemRegistry.ESSENCE_SWORD);
 
         evenSimplerBlockItem(BlockRegistry.ESSENCE_CRYSTAL);
 
