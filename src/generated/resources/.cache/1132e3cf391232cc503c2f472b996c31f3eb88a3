@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-14T05:25:35.619384484	Block States: datanessence
+// 1.21.1	2025-01-15T07:11:32.512691246	Block States: datanessence
 4c3f8bc2b11e812a24d90295ef729dfe488c971c assets/datanessence/blockstates/aether_rune.json
 768dfda3826afab6ac2a48d49a2f703f413da50a assets/datanessence/blockstates/ancient_glyph_stone_blank.json
 a95f027a62699569a8ea8ed39de6b52e8c27d18f assets/datanessence/blockstates/ancient_glyph_stone_essence.json
@@ -64,6 +64,7 @@ dcc5797fac2f6da5eec896cfc6a7424b9c61dc1c assets/datanessence/models/block/deco_i
 3ff18bcb312db8add763dd1af382291dc30fe82a assets/datanessence/models/block/essence_battery.json
 955280dba904e510f5ec0735c25122d7e1597e50 assets/datanessence/models/block/essence_buffer.json
 c8dbb3e84ada0d871b502655ef5804a2ac3d25eb assets/datanessence/models/block/essence_burner.json
+228cf80edcd713435c101b249546ab8141897218 assets/datanessence/models/block/essence_leech.json
 c2046ad27e4aae201cf98ca3d63d41d882fb40f2 assets/datanessence/models/block/fluid_buffer.json
 0bddd0120a284dd1f05c75f47ca7975e6ad9e2d0 assets/datanessence/models/block/fluid_collector_down.json
 97dc22b7f1211504ec2b239f86dacc735caabca9 assets/datanessence/models/block/fluid_collector_east.json
@@ -105,6 +106,7 @@ c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient
 848b1acf1d73aa5f8eb41bb36262c4e5b5feec9f assets/datanessence/models/item/essence_battery.json
 19007ebf3c05d320245d044f62503f1b85f55a2d assets/datanessence/models/item/essence_buffer.json
 ada061668201d88cf47189a90420d3cd4861012a assets/datanessence/models/item/essence_burner.json
+7ee5ba34ce52390849a5cda85f2134f7083a61cc assets/datanessence/models/item/essence_leech.json
 a14e3749f03b6f395206fcccf634f58f8056dfb8 assets/datanessence/models/item/fluid_buffer.json
 125def7c625da03a3b840c7a08ebd8419103bd22 assets/datanessence/models/item/fluid_collector.json
 261cada480be95992c6b92a41c86387e8aa9d116 assets/datanessence/models/item/fluid_spiller.json

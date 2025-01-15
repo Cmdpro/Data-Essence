@@ -60,7 +60,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         essenceBattery(BlockRegistry.ESSENCE_BATTERY);
         itemFilter(BlockRegistry.ITEM_FILTER);
         crystallineLog(BlockRegistry.CRYSTALLINE_LOG);
-        //essenceLeech(BlockRegistry.ESSENCE_LEECH);
+        essenceLeech(BlockRegistry.ESSENCE_LEECH);
 
         nothing(BlockRegistry.STRUCTURE_PROTECTOR);
 
@@ -169,11 +169,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("south", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side"))
                 .texture("particle", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side"));
         simpleBlockItem(blockRegistryObject.get(), model);
-        getVariantBuilder(blockRegistryObject.get())
-                .partialState().with(EssenceBurner.FACING, Direction.EAST).modelForState().modelFile(model).rotationY(90).addModel()
-                .partialState().with(EssenceBurner.FACING, Direction.NORTH).modelForState().modelFile(model).addModel()
-                .partialState().with(EssenceBurner.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).addModel()
-                .partialState().with(EssenceBurner.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).addModel();
     }
     private void essenceBurner(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());

@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "datanessence:block/essence_leech_bottom",
+    "east": "datanessence:block/essence_leech_side",
+    "north": "datanessence:block/essence_leech_side",
+    "particle": "datanessence:block/essence_leech_side",
+    "south": "datanessence:block/essence_leech_side",
+    "up": "datanessence:block/essence_leech_top",
+    "west": "datanessence:block/essence_leech_side"
+  }
+}
