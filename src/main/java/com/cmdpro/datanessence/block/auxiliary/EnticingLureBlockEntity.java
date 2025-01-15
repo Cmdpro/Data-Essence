@@ -5,7 +5,9 @@ import com.cmdpro.datanessence.screen.EnticingLureMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -25,6 +28,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EnticingLureBlockEntity extends BlockEntity implements MenuProvider {
+    public ItemStack item;
+
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -41,8 +46,27 @@ public class EnticingLureBlockEntity extends BlockEntity implements MenuProvider
     }
 
     @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket(){
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
+        CompoundTag tag = pkt.getTag();
+        item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        CompoundTag tag = new CompoundTag();
+        tag.put("item", item.saveOptional(pRegistries));
+        return tag;
+    }
+
+    @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
+        tag.put("item", item.saveOptional(pRegistries));
         super.saveAdditional(tag, pRegistries);
     }
     @Override
@@ -64,6 +88,9 @@ public class EnticingLureBlockEntity extends BlockEntity implements MenuProvider
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EnticingLureBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide) {
+            ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0).copy();
+            pBlockEntity.item = stack;
+
             for (Animal i : pLevel.getEntitiesOfClass(Animal.class, AABB.ofSize(pPos.getCenter(), 10, 10, 10))) {
                 if (i.isFood(pBlockEntity.itemHandler.getStackInSlot(0))) {
                     if (i.position().distanceTo(pPos.getCenter()) > 3) {
