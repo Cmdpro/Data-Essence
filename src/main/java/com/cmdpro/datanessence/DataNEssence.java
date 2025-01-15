@@ -189,21 +189,38 @@ public class DataNEssence
 
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.ITEMS.get())) {
+            // Tools
             event.accept(ItemRegistry.DATA_TABLET.get());
             event.accept(ItemRegistry.ESSENCE_REDIRECTOR.get());
             event.accept(ItemRegistry.DATA_DRIVE.get());
             event.accept(ItemRegistry.THERMOMETER.get());
+            event.accept(ItemRegistry.ESSENCE_BOMB.get());
+            //event.accept(ItemRegistry.LUNAR_ESSENCE_BOMB.get());
+            //event.accept(ItemRegistry.NATURAL_ESSENCE_BOMB.get());
+            //event.accept(ItemRegistry.EXOTIC_ESSENCE_BOMB.get());
+            event.accept(ItemRegistry.WARP_CAPSULE.get());
+            event.accept(ItemRegistry.ESSENCE_SWORD.get());
+            event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
+
+            // Wires
             event.accept(ItemRegistry.ESSENCE_WIRE.get());
-            event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE.get());
-            event.accept(ItemRegistry.NATURAL_ESSENCE_WIRE.get());
-            event.accept(ItemRegistry.EXOTIC_ESSENCE_WIRE.get());
+            //event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE.get());
+            //event.accept(ItemRegistry.NATURAL_ESSENCE_WIRE.get());
+            //event.accept(ItemRegistry.EXOTIC_ESSENCE_WIRE.get());
             event.accept(ItemRegistry.ITEM_WIRE.get());
             event.accept(ItemRegistry.FLUID_WIRE.get());
+
+            // Upgrades
+            event.accept(ItemRegistry.HARMING_LENS.get());
+            event.accept(ItemRegistry.HEALING_LENS.get());
+            event.accept(ItemRegistry.ACCELERATION_LENS.get());
+            event.accept(ItemRegistry.BURNING_LENS.get());
+            event.accept(ItemRegistry.PRECISION_LENS.get());
+            event.accept(ItemRegistry.SPEED_UPGRADE.get());
+            event.accept(ItemRegistry.FILTER_UPGRADE.get());
+
+            // Materials
             event.accept(ItemRegistry.ESSENCE_SHARD.get());
-            event.accept(ItemRegistry.ESSENCE_BOMB.get());
-            event.accept(ItemRegistry.LUNAR_ESSENCE_BOMB.get());
-            event.accept(ItemRegistry.NATURAL_ESSENCE_BOMB.get());
-            event.accept(ItemRegistry.EXOTIC_ESSENCE_BOMB.get());
             event.accept(ItemRegistry.CAPACITANCE_PANEL.get());
             event.accept(ItemRegistry.CONDUCTANCE_ROD.get());
             event.accept(ItemRegistry.WIRE_SPOOL.get());
@@ -217,29 +234,84 @@ public class DataNEssence
             event.accept(ItemRegistry.EMERALD_SHARD.get());
             event.accept(ItemRegistry.LAPIS_SHARD.get());
             event.accept(ItemRegistry.COAL_LUMP.get());
-            event.accept(ItemRegistry.COGNIZANT_CUBE.get());
-            event.accept(ItemRegistry.HARMING_LENS.get());
-            event.accept(ItemRegistry.HEALING_LENS.get());
-            event.accept(ItemRegistry.ACCELERATION_LENS.get());
-            event.accept(ItemRegistry.BURNING_LENS.get());
-            event.accept(ItemRegistry.PRECISION_LENS.get());
-            event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
             event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
-            event.accept(ItemRegistry.ESSENCE_SWORD.get());
-            event.accept(ItemRegistry.SPEED_UPGRADE.get());
-            event.accept(ItemRegistry.FILTER_UPGRADE.get());
+
+            // Buckets
+            event.accept(ItemRegistry.GENDERFLUID_BUCKET.get());
+
+            // Loot Items
+            event.accept(ItemRegistry.COGNIZANT_CUBE.get());
             event.accept(ItemRegistry.MUSIC_DISC_PLAYER.get());
             event.accept(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC.get());
-            event.accept(ItemRegistry.GENDERFLUID_BUCKET.get());
-            event.accept(ItemRegistry.WARP_CAPSULE.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
+            // World
+            event.accept(BlockRegistry.ESSENCE_CRYSTAL.get());
+            event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+            event.accept(BlockRegistry.TETHERGRASS.get());
+            //event.accept(BlockRegistry.SPIRE_GLASS.get());
+            //event.accept(BlockRegistry.CRYSTALLINE_LOG.get());
+            //event.accept(BlockRegistry.CRYSTALLINE_LEAVES.get());
+
+            // Generators
+            event.accept(BlockRegistry.ESSENCE_BURNER.get());
+            event.accept(BlockRegistry.ESSENCE_LEECH.get());
+
+            // Machines
+            event.accept(BlockRegistry.FABRICATOR.get());
+            event.accept(BlockRegistry.INFUSER.get());
+            event.accept(BlockRegistry.FLUID_COLLECTOR.get());
+            event.accept(BlockRegistry.FLUID_SPILLER.get());
+            event.accept(BlockRegistry.FLUID_MIXER.get());
+            event.accept(BlockRegistry.LASER_EMITTER.get());
+            event.accept(BlockRegistry.VACUUM.get());
+            event.accept(BlockRegistry.AUTO_FABRICATOR.get());
+            event.accept(BlockRegistry.CHARGER.get());
+            event.accept(BlockRegistry.FLUID_BOTTLER.get());
+            event.accept(BlockRegistry.ENTROPIC_PROCESSOR.get());
+            event.accept(BlockRegistry.ESSENCE_FURNACE.get());
+            event.accept(BlockRegistry.SYNTHESIS_CHAMBER.get());
+            event.accept(BlockRegistry.ENTICING_LURE.get());
+            event.accept(BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get());
+            event.accept(BlockRegistry.ESSENCE_BREAKER.get());
+            event.accept(BlockRegistry.METAL_SHAPER.get());
+
+            // Logistics
+            event.accept(BlockRegistry.ITEM_FILTER.get());
+            event.accept(BlockRegistry.ESSENCE_POINT.get());
+            //event.accept(BlockRegistry.LUNAR_ESSENCE_POINT.get());
+            //event.accept(BlockRegistry.NATURAL_ESSENCE_POINT.get());
+            //event.accept(BlockRegistry.EXOTIC_ESSENCE_POINT.get());
+            event.accept(BlockRegistry.ITEM_POINT.get());
+            event.accept(BlockRegistry.FLUID_POINT.get());
+            event.accept(BlockRegistry.ESSENCE_BUFFER.get());
+            event.accept(BlockRegistry.ITEM_BUFFER.get());
+            event.accept(BlockRegistry.FLUID_BUFFER.get());
+            event.accept(BlockRegistry.LIMITED_ITEM_BUFFER.get());
+
+            // Storage Blocks
+            event.accept(BlockRegistry.ESSENCE_BATTERY.get());
+            //event.accept(BlockRegistry.LUNAR_ESSENCE_BATTERY.get());
+            //event.accept(BlockRegistry.NATURAL_ESSENCE_BATTERY.get());
+            //event.accept(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
+            event.accept(BlockRegistry.FLUID_TANK.get());
+
+            // Utility Blocks
+            event.accept(BlockRegistry.TRAVERSITE_ROAD.get());
+
+            // Decoration
             event.accept(BlockRegistry.POLISHED_OBSIDIAN.get());
             event.accept(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get());
             event.accept(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get());
+            event.accept(BlockRegistry.FLUIDIC_GLASS.get());
             event.accept(BlockRegistry.LIGHT_FIXTURE.get());
-            event.accept(BlockRegistry.AETHER_RUNE.get());
             event.accept(BlockRegistry.PATTERNED_COPPER.get());
+            event.accept(BlockRegistry.DECO_ESSENCE_BUFFER.get());
+            event.accept(BlockRegistry.DECO_ITEM_BUFFER.get());
+            event.accept(BlockRegistry.DECO_FLUID_BUFFER.get());
+
+            // Structure Blocks
+            event.accept(BlockRegistry.AETHER_RUNE.get());
             event.accept(BlockRegistry.ANCIENT_ROCK_COLUMN.get());
             event.accept(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN.get());
             event.accept(BlockRegistry.ANCIENT_LANTERN.get());
@@ -252,50 +324,6 @@ public class DataNEssence
             event.accept(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
             event.accept(BlockRegistry.COMPUTER.get());
             event.accept(BlockRegistry.DATA_BANK.get());
-            event.accept(BlockRegistry.FABRICATOR.get());
-            event.accept(BlockRegistry.ESSENCE_POINT.get());
-            event.accept(BlockRegistry.LUNAR_ESSENCE_POINT.get());
-            event.accept(BlockRegistry.NATURAL_ESSENCE_POINT.get());
-            event.accept(BlockRegistry.EXOTIC_ESSENCE_POINT.get());
-            event.accept(BlockRegistry.ITEM_POINT.get());
-            event.accept(BlockRegistry.FLUID_POINT.get());
-            event.accept(BlockRegistry.ESSENCE_BUFFER.get());
-            event.accept(BlockRegistry.ITEM_BUFFER.get());
-            event.accept(BlockRegistry.FLUID_BUFFER.get());
-            event.accept(BlockRegistry.ESSENCE_CRYSTAL.get());
-            event.accept(BlockRegistry.ESSENCE_BURNER.get());
-            event.accept(BlockRegistry.TRAVERSITE_ROAD.get());
-            event.accept(BlockRegistry.DECO_ESSENCE_BUFFER.get());
-            event.accept(BlockRegistry.DECO_ITEM_BUFFER.get());
-            event.accept(BlockRegistry.DECO_FLUID_BUFFER.get());
-            event.accept(BlockRegistry.INFUSER.get());
-            event.accept(BlockRegistry.FLUID_COLLECTOR.get());
-            event.accept(BlockRegistry.FLUID_SPILLER.get());
-            event.accept(BlockRegistry.LASER_EMITTER.get());
-            event.accept(BlockRegistry.VACUUM.get());
-            event.accept(BlockRegistry.ESSENCE_LEECH.get());
-            event.accept(BlockRegistry.ESSENCE_BATTERY.get());
-            event.accept(BlockRegistry.LUNAR_ESSENCE_BATTERY.get());
-            event.accept(BlockRegistry.NATURAL_ESSENCE_BATTERY.get());
-            event.accept(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
-            event.accept(BlockRegistry.FLUID_TANK.get());
-            event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
-            event.accept(BlockRegistry.AUTO_FABRICATOR.get());
-            event.accept(BlockRegistry.CHARGER.get());
-            event.accept(BlockRegistry.FLUID_BOTTLER.get());
-            event.accept(BlockRegistry.ENTROPIC_PROCESSOR.get());
-            event.accept(BlockRegistry.ESSENCE_FURNACE.get());
-            event.accept(BlockRegistry.FLUID_MIXER.get());
-            event.accept(BlockRegistry.SYNTHESIS_CHAMBER.get());
-            event.accept(BlockRegistry.ENTICING_LURE.get());
-            event.accept(BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get());
-            event.accept(BlockRegistry.ITEM_FILTER.get());
-            event.accept(BlockRegistry.LIMITED_ITEM_BUFFER.get());
-            event.accept(BlockRegistry.ESSENCE_BREAKER.get());
-            event.accept(BlockRegistry.SPIRE_GLASS.get());
-            event.accept(BlockRegistry.METAL_SHAPER.get());
-            event.accept(BlockRegistry.CRYSTALLINE_LOG.get());
-            event.accept(BlockRegistry.CRYSTALLINE_LEAVES.get());
         }
     }
 }
