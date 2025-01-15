@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:infusion",
+  "essenceCost": {
+    "datanessence:essence": 100
+  },
+  "entry": "datanessence:machinery/infuser",
+  "input": {
+    "item": "minecraft:amethyst_shard",
+    "count": 1
+  },
+  "result": {
+    "id": "datanessence:essence_shard",
+    "count": 1
+  }
+}

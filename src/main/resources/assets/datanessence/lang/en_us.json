@@ -73,6 +73,7 @@
   "item.datanessence.warp_capsule": "Warp Capsule",
   "item.datanessence.bonding_powder": "Bonding Powder",
   "item.datanessence.thermometer": "Thermometer",
+  "item.datanessence.genderfluid_bucket": "Bucketed Gender",
 
   "block.datanessence.essence_point": "Essence Node",
   "block.datanessence.lunar_essence_point": "Lunar Essence Node",
@@ -149,6 +150,9 @@
   "block.datanessence.arekko.nothing_left": "You don't see anything else of note here.",
   "block.datanessence.essence_light_fixture": "Essence Light Fixture",
   "block.datanessence.tethergrass": "Tethergrass",
+  "block.datanessence.metal_shaper": "Metal Shaper",
+  "block.datanessence.limited_item_buffer": "Item Buffer (Limited)",
+  "block.datanessence.genderfluid": "Genderfluid",
 
   "jukebox_song.datanessence.under_the_sky": "DavidRarria09 - UnderTheSky",
 

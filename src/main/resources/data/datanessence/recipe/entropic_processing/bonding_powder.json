@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "datanessence:tethergrass" },
+  "time": 100,
+  "result": { "id": "datanessence:bonding_powder", "count": 3 }
+}
