@@ -1,0 +1,36 @@
+{
+  "icon": {
+    "id": "datanessence:fluid_mixer"
+  },
+  "tab": "datanessence:machinery",
+  "x": 5,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:fluid_mixer"
+      },
+      "text": {
+        "translate": "data_tablet.pages.fluid_mixer.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.fluid_mixer.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/machines/fluid_mixer",
+        "datanessence:fluid_mixing/lava_duplication_from_stone"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.fluid_mixer.name"
+  },
+  "parents": [
+    "datanessence:machinery/fluidworks",
+    "datanessence:machinery/automation"
+  ]
+}

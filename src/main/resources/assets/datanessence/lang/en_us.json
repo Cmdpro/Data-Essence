@@ -285,6 +285,9 @@
   "data_tablet.pages.essence_furnace.flavor": " ◇ Copper Convection Cooker",
   "data_tablet.pages.essence_furnace.page1.text": "Smelting is a common task, but the inefficiency and slow speeds of an ordinary furnace are unacceptable for many of our applications. We quickly discovered how to make Essence power a heating element that does the work instead, solving both of these problems.",
   "data_tablet.pages.essence_furnace.page2.text": " ◇ Works 25% faster than an ordinary Furnace.",
+  "data_tablet.pages.fluid_mixer.name": "Fluid Mixer",
+  "data_tablet.pages.fluid_mixer.page1.text": "The Fluid Mixer is a simple machine: Essence drives a rotor that spins at sufficient speed to homogenize fluids and items together into another fluid. We have already found a sufficient use for it in the form of mass producing lava.",
+  "data_tablet.pages.fluid_mixer.page2.text": " ◇ Must have a loaded Data Drive inserted to know what to craft.",
 
   "_comment.data_tablet_pages.tools": "Tools and Utilities category texts.",
   "data_tablet.pages.traversite_road.name":                  "Traversite Road",
@@ -293,6 +296,8 @@
   "data_tablet.pages.essence_bombs.page1.text":              "By packing Essence into a tightly-enclosed spherical shell along with some unstable matter, we found ourselves with a form of explosive artillery. It was suggested that we strictly regulate their manufacture, but there's little point: the formula is decently simple.\n\nThe basic Essence Bomb is simply a projectile that causes a nice explosion where it lands.",
   "data_tablet.pages.primitive_antigravity_pack.name":       "Antigravity Pack",
   "data_tablet.pages.primitive_antigravity_pack.page1.text": "As travel between research centers often involves crossing uneven terrain, such as cliffs or mountains, some measure of protection from lethal falls is desirable. Our first developments into the matter led us to the Primitive Antigravity Pack, which is able to provide some measure of grace during falls when charged up with Essence.",
+  "data_tablet.pages.essence_sword.name": "Essence Sword",
+  "data_tablet.pages.essence_sword.page1.text": "Curiously, one is able to shape Essence Shards into a blade. By sending Essence through it, this blade sends out a sweeping slash, damaging whoever - or whatever - may stand in the wielder's way.",
   "data_tablet.pages.charger.name":                          "Charging Equipment",
   "data_tablet.pages.charger.page1.text":                    "A device may be constructed that channels Essence along a pair of exciters into an item, thereby charging it with Essence. This charger is therefore invaluable in the fuelling of tools and equipment - instead of having to carry an entire Essence Battery around and somehow connect the item to it, which would be, in this researcher's opinion, asinine.",
   "data_tablet.pages.decorative_blocks.name": "Decorative Blocks",
