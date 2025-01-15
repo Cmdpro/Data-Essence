@@ -1,9 +1,11 @@
-// 1.21.1	2025-01-14T23:08:01.400779183	Item Models: datanessence
+// 1.21.1	2025-01-14T23:47:55.247049757	Item Models: datanessence
+801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
 9ee82e8a01b280a538916cb70230ca7db531d46c assets/datanessence/models/item/ancient_rock_column.json
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
 2a14e16db681a6f72cf3786e98d0e0a3f438a78f assets/datanessence/models/item/bonding_powder.json
+99a993d22ab6d2efb1dbd0f8aa71b364f9588cb5 assets/datanessence/models/item/burning_lens.json
 c8dbba411053dd980e2d72300e7f2583278c1071 assets/datanessence/models/item/capacitance_panel.json
 1565284aa9a9dfa1f296f1c938a2697dbc80b46c assets/datanessence/models/item/coal_lump.json
 8b9e2c57a53dcbd1e4739dbc91816f453a28034e assets/datanessence/models/item/cognizant_cube.json
@@ -31,6 +33,8 @@ bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/exotic_
 d747ed713b2de5e004d4e19bfe914756bf68d6a3 assets/datanessence/models/item/filter_upgrade.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/fluid_point.json
 f356571ca7c924ca20dabcdac766bc379c05608e assets/datanessence/models/item/fluid_wire.json
+65a017c6b809f40655cecc7e07b81aeee8ce8a80 assets/datanessence/models/item/harming_lens.json
+38024141123ce88a752e39c367a3ea1233632ca8 assets/datanessence/models/item/healing_lens.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/item_point.json
 869463292549ed3104bcbbdcb698a2aa91206892 assets/datanessence/models/item/item_wire.json
 3b9143700331819b37065e1cabad876d9b4934fb assets/datanessence/models/item/lapis_shard.json
@@ -46,6 +50,7 @@ d2ee51f8a1c9d8336e8e8d1102e25c8e7c4e4b25 assets/datanessence/models/item/natural
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/natural_essence_point.json
 72daa0cb5cd463cd7dd4d1760219c24e210917e4 assets/datanessence/models/item/natural_essence_wire.json
 de272af4e4feac0b7f325c246f01dbdc0d6ea318 assets/datanessence/models/item/polished_obsidian_column.json
+54bfdfccf479e077ffb9710c8d4333bab9934d7c assets/datanessence/models/item/precision_lens.json
 c21e404c80d50f53fca78d073b54c48763738238 assets/datanessence/models/item/primitive_anti_gravity_pack.json
 51e08ca19295ad19da59f904f8712159db967e1b assets/datanessence/models/item/propeller.json
 1b09ec0be74ff44bbe133a0ef3f32cf87cde6661 assets/datanessence/models/item/speed_upgrade.json
