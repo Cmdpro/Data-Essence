@@ -21,8 +21,8 @@ public class EssenceRedirector extends Item {
         BlockEntity tile = world.getBlockEntity(context.getClickedPos());
         BlockState block = world.getBlockState(context.getClickedPos());
 
-        if ( block instanceof RedirectorInteractable) {
-            if ( ((RedirectorInteractable) block).onRedirectorUse(context) ) {
+        if ( block.getBlock() instanceof RedirectorInteractable ri ) {
+            if ( ri.onRedirectorUse(context) ) {
                 return InteractionResult.SUCCESS;
             }
         }
