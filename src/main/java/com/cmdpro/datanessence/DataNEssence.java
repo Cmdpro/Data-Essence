@@ -161,13 +161,15 @@ public class DataNEssence
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_FILTER.get(), (o, direction) -> {
             IntegerRange range = ItemFilter.DIRECTIONS.get(direction);
             boolean canInsert = true;
-            for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
-                if (!o.getFilterHandler().getStackInSlot(i).isEmpty()) {
-                    canInsert = false;
+            if (range != null) {
+                for (int i = range.getMinimum(); i <= range.getMaximum(); i++) {
+                    if (!o.getFilterHandler().getStackInSlot(i).isEmpty()) {
+                        canInsert = false;
+                    }
                 }
-            }
-            if (canInsert) {
-                return o.getItemHandler();
+                if (canInsert) {
+                    return o.getItemHandler();
+                }
             }
             return null;
         });
