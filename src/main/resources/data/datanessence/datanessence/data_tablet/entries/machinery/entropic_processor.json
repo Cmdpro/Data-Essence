@@ -3,8 +3,8 @@
     "id": "datanessence:entropic_processor"
   },
   "tab": "datanessence:machinery",
-  "x": 1,
-  "y": 2,
+  "x": 2,
+  "y": 4,
   "pages": [
     {
       "type": "datanessence:item",
@@ -24,6 +24,12 @@
         "datanessence:entropic_processing/cobble_to_gravel",
         "datanessence:entropic_processing/gravel_to_sand"
       ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:entropic_processing/bone_meal"
+      ]
     }
   ],
   "name": {
@@ -33,6 +39,6 @@
     "translate": "data_tablet.pages.entropic_processor.flavor"
   },
   "parents": [
-    "datanessence:machinery/automation"
+    "datanessence:basics/fabricator"
   ]
 }

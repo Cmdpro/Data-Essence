@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 50 },
+  "entry": "datanessence:machines/enticing_lure",
+  "pattern": [
+    "RER",
+    "ROR"
+  ],
+  "key": {
+    "R": { "item": "datanessence:conductance_rod" },
+    "E": { "item": "minecraft:emerald" },
+    "O": { "item": "datanessence:polished_obsidian" }
+  },
+  "result": { "id": "datanessence:enticing_lure" }
+}

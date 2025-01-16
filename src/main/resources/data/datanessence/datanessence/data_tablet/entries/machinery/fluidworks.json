@@ -31,7 +31,6 @@
   },
   "parents": [
     "datanessence:basics/fabricator",
-    "datanessence:essence_manipulation/essence_transfer",
-    "datanessence:machinery/automation"
+    "datanessence:essence_manipulation/essence_transfer"
   ]
 }

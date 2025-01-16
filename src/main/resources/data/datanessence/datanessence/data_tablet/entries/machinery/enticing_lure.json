@@ -1,0 +1,28 @@
+{
+  "icon": {
+    "id": "datanessence:enticing_lure"
+  },
+  "tab": "datanessence:machinery",
+  "x": -2,
+  "y": 4,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:enticing_lure" },
+      "text": {
+        "translate": "data_tablet.pages.enticing_lure.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/machines/enticing_lure"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.enticing_lure.name"
+  },
+  "parents": [
+  ]
+}

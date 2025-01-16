@@ -1,0 +1,14 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 0 },
+  "entry": "datanessence:tools/decorative_blocks",
+  "pattern": [
+    " G ",
+    " O "
+  ],
+  "key": {
+    "O": { "item": "datanessence:polished_obsidian" },
+    "G": { "item": "minecraft:glowstone_dust" }
+  },
+  "result": { "id": "datanessence:essence_light_fixture", "count": 4 }
+}

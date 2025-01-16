@@ -1,0 +1,35 @@
+{
+  "icon": {
+    "id": "datanessence:essence_furnace"
+  },
+  "tab": "datanessence:machinery",
+  "x": -5,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:essence_furnace" },
+      "text": {
+        "translate": "data_tablet.pages.essence_furnace.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.essence_furnace.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/machines/essence_furnace"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.essence_furnace.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.essence_furnace.flavor"
+  },
+  "parents": [
+    "datanessence:machinery/itemworks"
+  ]
+}

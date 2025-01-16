@@ -31,10 +31,22 @@
       "text": {
         "translate": "data_tablet.pages.decorative_blocks.page3.text"
       }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/decoration/essence_light_fixture"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.decorative_blocks.page4.text"
+      }
     }
   ],
   "name": {
     "translate": "data_tablet.pages.decorative_blocks.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.decorative_blocks.flavor"
   },
   "parents": [
     "datanessence:basics/fabricator"

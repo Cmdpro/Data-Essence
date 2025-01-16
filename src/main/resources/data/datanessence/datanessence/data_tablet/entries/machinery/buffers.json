@@ -29,7 +29,6 @@
     "translate": "data_tablet.pages.buffers.name"
   },
   "parents": [
-    "datanessence:machinery/automation",
     "datanessence:machinery/itemworks",
     "datanessence:machinery/fluidworks"
   ]

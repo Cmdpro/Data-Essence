@@ -26,6 +26,6 @@
     "translate": "data_tablet.pages.infuser.name"
   },
   "parents": [
-    "datanessence:automation"
+    "datanessence:machinery/automation"
   ]
 }

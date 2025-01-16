@@ -3,8 +3,8 @@
     "id": "datanessence:mineral_purification_chamber"
   },
   "tab": "datanessence:machinery",
-  "x": 3,
-  "y": 2,
+  "x": 5,
+  "y": 0,
   "pages": [
     {
       "type": "datanessence:item",
@@ -30,7 +30,6 @@
     "translate": "data_tablet.pages.mineral_purification_chamber.flavor"
   },
   "parents": [
-    "datanessence:machinery/automation",
     "datanessence:machinery/fluidworks"
   ]
 }

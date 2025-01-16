@@ -1,0 +1,35 @@
+{
+  "icon": {
+    "id": "datanessence:vacuum"
+  },
+  "tab": "datanessence:machinery",
+  "x": -5,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:vacuum"
+      },
+      "text": {
+        "translate": "data_tablet.pages.vacuum.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.vacuum.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/machines/vacuum"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.vacuum.name"
+  },
+  "parents": [
+    "datanessence:basics/fabricator",
+    "datanessence:machinery/itemworks"
+  ]
+}

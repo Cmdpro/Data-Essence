@@ -1,0 +1,16 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 250 },
+  "entry": "datanessence:machines/metal_shaper",
+  "pattern": [
+    "RCR",
+    "CEC",
+    "RCR"
+  ],
+  "key": {
+    "C": { "item": "datanessence:conductance_rod" },
+    "E": { "item": "minecraft:ender_pearl" },
+    "R": { "item": "minecraft:redstone" }
+  },
+  "result": { "id": "datanessence:metal_shaper" }
+}
