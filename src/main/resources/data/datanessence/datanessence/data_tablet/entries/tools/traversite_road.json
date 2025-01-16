@@ -24,6 +24,6 @@
     "translate": "data_tablet.pages.traversite_road.name"
   },
   "parents": [
-    "datanessence:infuser"
+    "datanessence:machinery/infuser"
   ]
 }

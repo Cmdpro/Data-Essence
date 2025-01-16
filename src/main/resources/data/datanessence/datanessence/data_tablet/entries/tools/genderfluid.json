@@ -1,0 +1,39 @@
+{
+  "icon": {
+    "id": "datanessence:traversite_road_chunk"
+  },
+  "tab": "datanessence:tools",
+  "x": 5,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:traversite_road_chunk" },
+      "text": {
+        "translate": "data_tablet.pages.genderfluid.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:genderfluid_bucket" },
+      "text": {
+        "translate": "data_tablet.pages.genderfluid.page2.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:entropic_processing/traversite_road_chunk",
+        "datanessence:fluid_mixing/genderfluid"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.genderfluid.name"
+  },
+  "parents": [
+    "datanessence:tools/traversite_road",
+    "datanessence:machinery/entropic_processor",
+    "datanessence:machinery/fluid_mixer"
+  ]
+}
