@@ -27,8 +27,9 @@ public class EssenceRedirector extends Item {
             }
         }
 
-        if ( tile instanceof RedirectorInteractable ) {
-            if ( ((RedirectorInteractable) tile).onRedirectorUse(context) ) {
+        // as we do not currently have any suitable TEs i don't know if this one works.
+        if ( tile instanceof RedirectorInteractable ri ) {
+            if ( ri.onRedirectorUse(context) ) {
                 return InteractionResult.SUCCESS;
             }
         }
