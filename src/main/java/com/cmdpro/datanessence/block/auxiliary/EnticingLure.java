@@ -18,7 +18,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class EnticingLure extends Block implements EntityBlock {
-    private static final VoxelShape SHAPE =  Block.box(7, 0, 7, 13, 12, 13);
+    private static final VoxelShape SHAPE =  Block.box(5, 0, 5, 11, 12, 11);
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {

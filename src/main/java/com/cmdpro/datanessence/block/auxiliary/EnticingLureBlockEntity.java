@@ -28,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class EnticingLureBlockEntity extends BlockEntity implements MenuProvider {
-    public ItemStack item;
 
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
@@ -46,27 +45,8 @@ public class EnticingLureBlockEntity extends BlockEntity implements MenuProvider
     }
 
     @Override
-    public ClientboundBlockEntityDataPacket getUpdatePacket(){
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
-        CompoundTag tag = pkt.getTag();
-        item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        CompoundTag tag = new CompoundTag();
-        tag.put("item", item.saveOptional(pRegistries));
-        return tag;
-    }
-
-    @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
-        tag.put("item", item.saveOptional(pRegistries));
         super.saveAdditional(tag, pRegistries);
     }
     @Override
@@ -89,7 +69,6 @@ public class EnticingLureBlockEntity extends BlockEntity implements MenuProvider
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EnticingLureBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide) {
             ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0).copy();
-            pBlockEntity.item = stack;
 
             for (Animal i : pLevel.getEntitiesOfClass(Animal.class, AABB.ofSize(pPos.getCenter(), 10, 10, 10))) {
                 if (i.isFood(pBlockEntity.itemHandler.getStackInSlot(0))) {
