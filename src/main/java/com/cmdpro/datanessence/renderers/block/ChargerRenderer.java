@@ -6,6 +6,7 @@ import com.cmdpro.databank.model.blockentity.BlockEntityKeyframeAnimations;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.block.auxiliary.Charger;
 import com.cmdpro.datanessence.block.auxiliary.ChargerBlockEntity;
 import com.cmdpro.datanessence.block.processing.AutoFabricatorBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -19,28 +20,48 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 
 public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEntity> {
     public static final ModelLayerLocation chargerLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "charger"), "main");
+
     public ChargerRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model(rendererProvider.getModelSet().bakeLayer(chargerLocation)));
     }
 
     @Override
-    public void render(ChargerBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
-        super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
-        pPoseStack.pushPose();
-        pPoseStack.translate(0.5D, 0.5D, 0.5D);
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(pBlockEntity.getLevel().getLevelData().getGameTime() % 360));
-        pPoseStack.scale(0.25F, 0.25F, 0.25F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(pBlockEntity.item, ItemDisplayContext.GUI, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 0);
-        pPoseStack.popPose();
+    public void render(ChargerBlockEntity charger, float pPartialTick, PoseStack poseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+        Direction facing = charger.getBlockState().getValue(Charger.FACING);
+        Vec3 rotateAround = new Vec3(0.5, 0.5, 0.5);
+
+        if (facing.equals(Direction.NORTH)) {
+            poseStack.rotateAround(Axis.YP.rotationDegrees(0), (float)rotateAround.x, (float)rotateAround.y, (float)rotateAround.z);
+        }
+        if (facing.equals(Direction.SOUTH)) {
+            poseStack.rotateAround(Axis.YP.rotationDegrees(0), (float)rotateAround.x, (float)rotateAround.y, (float)rotateAround.z);
+        }
+        if (facing.equals(Direction.EAST)) {
+            poseStack.rotateAround(Axis.YP.rotationDegrees(-90), (float)rotateAround.x, (float)rotateAround.y, (float)rotateAround.z);
+        }
+        if (facing.equals(Direction.WEST)) {
+            poseStack.rotateAround(Axis.YP.rotationDegrees(-90), (float)rotateAround.x, (float)rotateAround.y, (float)rotateAround.z);
+        }
+
+        super.render(charger, pPartialTick, poseStack, pBufferSource, pPackedLight, pPackedOverlay);
+        poseStack.pushPose();
+        poseStack.translate(0.5D, 0.5D, 0.5D);
+        poseStack.mulPose(Axis.YP.rotationDegrees(charger.getLevel().getLevelData().getGameTime() % 360));
+        poseStack.scale(0.25F, 0.25F, 0.25F);
+        Minecraft.getInstance().getItemRenderer().renderStatic(charger.item, ItemDisplayContext.GUI, pPackedLight, pPackedOverlay, poseStack, pBufferSource, charger.getLevel(), 0);
+        poseStack.popPose();
     }
+
     @Override
     public ResourceLocation getTextureLocation() {
         return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/charger.png");
