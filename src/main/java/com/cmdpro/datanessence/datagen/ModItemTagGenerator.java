@@ -1,10 +1,16 @@
 package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
+import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,5 +24,19 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        //placeholder plant for testing
+        this.tag(TagRegistry.Items.LOW_ESSENCE_PLANTS);
+        this.tag(TagRegistry.Items.MEDIUM_ESSENCE_PLANTS);
+        this.tag(TagRegistry.Items.HIGH_ESSENCE_PLANTS)
+                .add(Items.CHORUS_FRUIT);
+        this.tag(TagRegistry.Items.EXPLOSIVE_MATERIAL)
+                .add(Items.GUNPOWDER)
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "sulfur"));
+        this.tag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
+                .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem());
+        this.tag(TagRegistry.Items.POLISHED_OBSIDIAN_BLOCKS)
+                .addTag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
+                .add(BlockRegistry.POLISHED_OBSIDIAN.get().asItem());
     }
 }

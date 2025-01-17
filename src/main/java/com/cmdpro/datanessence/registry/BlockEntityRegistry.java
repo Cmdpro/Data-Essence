@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
+import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphonBlockEntity;
 import com.cmdpro.datanessence.block.processing.*;
 import com.cmdpro.datanessence.block.production.EssenceBreakerBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
@@ -180,6 +181,10 @@ public class BlockEntityRegistry {
             register("arekko", () ->
                     BlockEntityType.Builder.of(ArekkoBlockEntity::new,
                             BlockRegistry.AREKKO.get()).build(null));
+    public static final Supplier<BlockEntityType<IndustrialPlantSiphonBlockEntity>> INDUSTRIAL_PLANT_SIPHON =
+            register("industrial_plant_siphon", () ->
+                    BlockEntityType.Builder.of(IndustrialPlantSiphonBlockEntity::new,
+                            BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

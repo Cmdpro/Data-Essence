@@ -185,6 +185,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.MUSIC_DISC_PLAYER_MENU.get(), MusicDiscPlayerScreen::new);
         event.register(MenuRegistry.FILTER_NODE_UPGRADE_MENU.get(), FilterNodeUpgradeScreen::new);
         event.register(MenuRegistry.METAL_SHAPER_MENU.get(), MetalShaperScreen::new);
+        event.register(MenuRegistry.INDUSTRIAL_PLANT_SIPHON_MENU.get(), IndustrialPlantSiphonScreen::new);
     }
     public static PostShaderInstance progressionShader;
     public static PostShaderInstance genderEuphoriaShader;

@@ -372,6 +372,9 @@
   "tag.item.datanessence.polished_obsidian_blocks": "Polished Obsidian Blocks",
   "tag.item.datanessence.shaped_polished_obsidian_blocks": "Shaped Polished Obsidian Blocks",
   "tag.item.datanessence.explosive_material": "Explosive Material",
+  "tag.item.datanessence.low_essence_plants": "Low Essence Plants",
+  "tag.item.datanessence.medium_essence_plants": "Medium Essence Plants",
+  "tag.item.datanessence.high_essence_plants": "High Essence Plants",
 
   "emi.info.datanessence.ancient_items_are_loot_only": "This is an Ancient item. It cannot be crafted, and must instead be found.\nTry searching inside structures built from an otherworldly, purple rock.",
   "emi.info.datanessence.dimension_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found."

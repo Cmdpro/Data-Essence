@@ -1,1 +1,7 @@
-// 1.21.1	2024-09-22T02:35:48.620285542	Tags for minecraft:item mod id datanessence
+// 1.21.1	2025-01-17T04:35:46.4317541	Tags for minecraft:item mod id datanessence
+5533e174f067e437c8498ac190aca7cf72f62f1f data/datanessence/tags/item/explosive_material.json
+b4cc0642cc95aece33ec9cce364d245dd186c647 data/datanessence/tags/item/high_essence_plants.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/datanessence/tags/item/low_essence_plants.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/datanessence/tags/item/medium_essence_plants.json
+42ff038bd87bd6f82af3e5d6052ff1efd5c3ff20 data/datanessence/tags/item/polished_obsidian_blocks.json
+ee777c7407fcfc7aa6a4260a1880613dc1cd3b5e data/datanessence/tags/item/shaped_polished_obsidian_blocks.json

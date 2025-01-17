@@ -38,7 +38,7 @@ public record PlayerTierSyncS2CPacket(int tier, boolean showIndicator) implement
             ClientHandler.addToast(tier);
         }
     }
-    public static class ClientHandler {
+    private static class ClientHandler {
         public static void addToast(int tier) {
             Minecraft.getInstance().getToasts().addToast(new TierToast(tier));
         }

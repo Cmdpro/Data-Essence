@@ -35,7 +35,7 @@ public record EntrySyncS2CPacket(Map<ResourceLocation, Entry> entries, Map<Resou
     }
     public static final Type<EntrySyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry_sync"));
 
-    public static class ClientHandler {
+    private static class ClientHandler {
         public static void handle(EntrySyncS2CPacket packet) {
             Entries.entries.clear();
             Entries.entries.putAll(packet.entries);

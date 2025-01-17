@@ -8,6 +8,7 @@ import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.fluid.GenderfluidBlock;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
+import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphon;
 import com.cmdpro.datanessence.block.processing.*;
 import com.cmdpro.datanessence.block.production.*;
 import com.cmdpro.datanessence.block.storage.*;
@@ -70,6 +71,9 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_LEECH = register("essence_leech",
             () -> new EssenceLeech(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> INDUSTRIAL_PLANT_SIPHON = register("industrial_plant_siphon",
+            () -> new IndustrialPlantSiphon(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Machines

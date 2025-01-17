@@ -1,6 +1,0 @@
-{
-    "values": [
-        "minecraft:gunpowder",
-        { "id": "#c:sulfur", "required": false }
-    ]
-}

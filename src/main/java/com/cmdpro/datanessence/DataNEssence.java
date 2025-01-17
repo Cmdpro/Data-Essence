@@ -184,6 +184,9 @@ public class DataNEssence
             }
             return o.getOutputHandler();
         });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), (o, direction) -> {
+            return o.getItemHandler();
+        });
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -258,6 +261,7 @@ public class DataNEssence
             // Generators
             event.accept(BlockRegistry.ESSENCE_BURNER.get());
             event.accept(BlockRegistry.ESSENCE_LEECH.get());
+            event.accept(BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get());
 
             // Machines
             event.accept(BlockRegistry.FABRICATOR.get());
