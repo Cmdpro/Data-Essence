@@ -20,15 +20,15 @@ import java.util.Optional;
 
 public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequiredKnowledge {
     private final FluidStack output;
-    private final FluidIngredient input;
-    private final Optional<FluidIngredient> input2;
+    private final FluidStack input;
+    private final Optional<FluidStack> input2;
     private final Optional<Ingredient> input3;
     private final int time;
     private final float essenceCost;
     private final ResourceLocation entry;
 
     public FluidMixingRecipe(FluidStack output,
-                             FluidIngredient input, Optional<FluidIngredient> input2, Optional<Ingredient> input3, int time, float essenceCost, ResourceLocation entry) {
+                             FluidStack input, Optional<FluidStack> input2, Optional<Ingredient> input3, int time, float essenceCost, ResourceLocation entry) {
         this.output = output;
         this.input = input;
         this.input2 = input2;
@@ -44,11 +44,11 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
     public int getTime() {
         return time;
     }
-    public FluidIngredient getInput1() {
+    public FluidStack getInput1() {
         return input;
     }
-    public FluidIngredient getInput2() {
-        return input2.orElse(null);
+    public FluidStack getInput2() {
+        return input2.orElse(FluidStack.EMPTY);
     }
     @Override
     public NonNullList<Ingredient> getIngredients() {
@@ -58,10 +58,10 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
     }
     @Override
     public boolean matches(RecipeInputWithFluid pContainer, Level pLevel) {
-        if (input.test(pContainer.getFluid(0)) && (input2.isEmpty() || input2.get().test(pContainer.getFluid(1))) && (input3.isEmpty() || input3.get().test(pContainer.getItem(0)))) {
+        if (FluidStack.isSameFluidSameComponents(input, pContainer.getFluid(0)) && (input2.isEmpty() || FluidStack.isSameFluidSameComponents(input2.get(), pContainer.getFluid(1))) && (input3.isEmpty() || input3.get().test(pContainer.getItem(0)))) {
             return true;
         }
-        return input.test(pContainer.getFluid(1)) && (input2.isEmpty() || input2.get().test(pContainer.getFluid(0))) && (input3.isEmpty() || input3.get().test(pContainer.getItem(0)));
+        return FluidStack.isSameFluidSameComponents(input, pContainer.getFluid(1)) && (input2.isEmpty() || FluidStack.isSameFluidSameComponents(input2.get(), pContainer.getFluid(0))) && (input3.isEmpty() || input3.get().test(pContainer.getItem(0)));
     }
 
     @Override
@@ -100,8 +100,8 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
     public static class Serializer implements RecipeSerializer<FluidMixingRecipe> {
         public static final MapCodec<FluidMixingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 FluidStack.CODEC.fieldOf("result").forGetter(r -> r.output),
-                FluidIngredient.CODEC.fieldOf("fluid_input").forGetter(r -> r.input),
-                FluidIngredient.CODEC.optionalFieldOf("fluid_input_2").forGetter(r -> r.input2),
+                FluidStack.CODEC.fieldOf("fluid_input").forGetter(r -> r.input),
+                FluidStack.CODEC.optionalFieldOf("fluid_input_2").forGetter(r -> r.input2),
                 Ingredient.CODEC.optionalFieldOf("item_input").forGetter(r -> r.input3),
                 Codec.INT.fieldOf("time").forGetter((r) -> r.time),
                 Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
@@ -111,9 +111,9 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
         public static final StreamCodec<RegistryFriendlyByteBuf, FluidMixingRecipe> STREAM_CODEC = StreamCodec.of(
                 (buf, obj) -> {
                     FluidStack.STREAM_CODEC.encode(buf, obj.output);
-                    FluidIngredient.STREAM_CODEC.encode(buf, obj.input);
+                    FluidStack.STREAM_CODEC.encode(buf, obj.input);
                     buf.writeBoolean(obj.input2.isPresent());
-                    obj.input2.ifPresent(fluidIngredient -> FluidIngredient.STREAM_CODEC.encode(buf, fluidIngredient));
+                    obj.input2.ifPresent(fluidIngredient -> FluidStack.STREAM_CODEC.encode(buf, fluidIngredient));
                     buf.writeBoolean(obj.input3.isPresent());
                     obj.input3.ifPresent(ingredient -> Ingredient.CONTENTS_STREAM_CODEC.encode(buf, ingredient));
                     buf.writeInt(obj.time);
@@ -122,11 +122,11 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
                 },
                 (buf) -> {
                     FluidStack output = FluidStack.STREAM_CODEC.decode(buf);
-                    FluidIngredient input = FluidIngredient.STREAM_CODEC.decode(buf);
+                    FluidStack input = FluidStack.STREAM_CODEC.decode(buf);
                     boolean input2Exists = buf.readBoolean();
-                    Optional<FluidIngredient> input2 = Optional.empty();
+                    Optional<FluidStack> input2 = Optional.empty();
                     if (input2Exists) {
-                        input2 = Optional.of(FluidIngredient.STREAM_CODEC.decode(buf));
+                        input2 = Optional.of(FluidStack.STREAM_CODEC.decode(buf));
                     }
                     boolean input3Exists = buf.readBoolean();
                     Optional<Ingredient> input3 = Optional.empty();

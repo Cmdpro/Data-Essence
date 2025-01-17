@@ -25,16 +25,16 @@ import java.util.*;
 public class EMIFluidMixingRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final EmiIngredient item;
-    private final EmiIngredient fluid1;
-    private final EmiIngredient fluid2;
+    private final EmiStack fluid1;
+    private final EmiStack fluid2;
     private final List<EmiIngredient> inputs;
     private final List<EmiStack> output;
     private final float essenceCost;
 
     public EMIFluidMixingRecipe(ResourceLocation id, FluidMixingRecipe recipe) {
         this.id = id;
-        this.fluid1 = EmiIngredient.of(Arrays.stream(recipe.getInput1().getStacks()).map(NeoForgeEmiStack::of).toList());
-        this.fluid2 = recipe.getInput2() == null ? null : EmiIngredient.of(Arrays.stream(recipe.getInput2().getStacks()).map(NeoForgeEmiStack::of).toList());
+        this.fluid1 = EmiStack.of(recipe.getInput1().getFluid(), recipe.getInput1().getAmount());
+        this.fluid2 = recipe.getInput2() == null ? null : EmiStack.of(recipe.getInput2().getFluid(), recipe.getInput2().getAmount());
         this.item = recipe.getIngredients().isEmpty() ? null : EmiIngredient.of(recipe.getIngredients().get(0));
         this.inputs = new ArrayList<>() {
             {

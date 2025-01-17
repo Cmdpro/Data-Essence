@@ -179,7 +179,7 @@
   "effect.datanessence.gender_euphoria.description": "You feel a rush of pure joy about your gender!",
 
   "gui.widget.fluid":  "%3$s: %1$s/%2$smB",
-  "gui.widget.fluid.without_max": " %2$s: %1$s",
+  "gui.widget.fluid.without_max": "%2$s: %1$s",
 
   "gui.essence_bar.essence_with_max":         "Essence: %1$s/%2$s",
   "gui.essence_bar.lunar_essence_with_max":   "Lunar Essence: %1$s/%2$s",

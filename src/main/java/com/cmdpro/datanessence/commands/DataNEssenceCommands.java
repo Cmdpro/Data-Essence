@@ -172,7 +172,7 @@ public class DataNEssenceCommands {
         if(command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();
             for (Entry i : Entries.entries.values()) {
-                DataTabletUtil.unlockEntry(player, i.id, false);
+                DataTabletUtil.unlockEntryAndParents(player, i.id, false);
             }
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.unlock_all");
@@ -189,16 +189,16 @@ public class DataNEssenceCommands {
                 return Component.translatable("commands.datanessence.maximize", player.getName());
             }, true);
 
-            for (Entry entry : Entries.entries.values()) {
-                DataTabletUtil.unlockEntry(player, entry.id, false);
-            }
-            command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.datanessence.unlock_all", player.getName());
-            }, true);
-
             DataTabletUtil.setTier(player, 8);
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.set_tier", 8, player.getName());
+            }, true);
+
+            for (Entry entry : Entries.entries.values()) {
+                DataTabletUtil.unlockEntryAndParents(player, entry.id, false);
+            }
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.datanessence.unlock_all", player.getName());
             }, true);
 
             player.setData(AttachmentTypeRegistry.HAS_HORNS, true);

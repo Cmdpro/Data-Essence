@@ -24,8 +24,8 @@ public class FluidMixingType extends CraftingType {
             pGuiGraphics.blit(DataTabletScreen.TEXTURE_CRAFTING, xOffset + x, yOffset + y, 10, 76, 123, 60);
             page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(BlockRegistry.FLUID_MIXER.get()), xOffset + x + 78, yOffset + y + 43, pMouseX, pMouseY);
 
-            ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x+5, yOffset + y+19, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost(), 1000);
-            Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x+5, yOffset + y+19, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost());
+            ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x + 5, yOffset + y + 19, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost(), 1000);
+            Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x + 5, yOffset + y + 19, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost());
             if (essence != null) {
                 page.tooltipToShow.clear();
                 page.showTooltip = true;
@@ -33,9 +33,15 @@ public class FluidMixingType extends CraftingType {
             }
 
             page.renderFluidWithTooltip(pGuiGraphics, recipe2.getOutput(), xOffset + x + 78, yOffset + y + 22, pMouseX, pMouseY);
-            page.renderFluidIngredientWithTooltip(screen, pGuiGraphics, recipe2.getInput1(), xOffset + x + 24, yOffset + y + 12, pMouseX, pMouseY);
-            page.renderFluidIngredientWithTooltip(screen, pGuiGraphics, recipe2.getInput2(), xOffset + x + 24, yOffset + y + 34, pMouseX, pMouseY);
-            page.renderIngredientWithTooltip(screen, pGuiGraphics, recipe2.getIngredients().get(0), xOffset + x + 35, yOffset + y + 22, pMouseX, pMouseY);
+            if (!recipe2.getInput1().isEmpty()) {
+                page.renderFluidWithTooltip(pGuiGraphics, recipe2.getInput1(), xOffset + x + 14, yOffset + y + 11, pMouseX, pMouseY);
+            }
+            if (!recipe2.getInput2().isEmpty()) {
+                page.renderFluidWithTooltip(pGuiGraphics, recipe2.getInput2(), xOffset + x + 14, yOffset + y + 33, pMouseX, pMouseY);
+            }
+            if (!recipe2.getIngredients().isEmpty()) {
+                page.renderIngredientWithTooltip(screen, pGuiGraphics, recipe2.getIngredients().get(0), xOffset + x + 35, yOffset + y + 22, pMouseX, pMouseY);
+            }
         }
     }
 

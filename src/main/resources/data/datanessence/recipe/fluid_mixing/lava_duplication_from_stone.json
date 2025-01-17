@@ -2,7 +2,7 @@
   "type": "datanessence:fluid_mixing",
   "essenceCost": 50,
   "fluid_input": {
-    "fluid": "minecraft:lava",
+    "id": "minecraft:lava",
     "amount": 600
   },
   "item_input": {

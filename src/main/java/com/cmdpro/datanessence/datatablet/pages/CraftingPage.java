@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidUtil;
 import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.awt.*;
@@ -122,17 +123,18 @@ public class CraftingPage extends TextPage {
             TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(stillTexture);
             int tintColor = fluidTypeExtensions.getTintColor(fluid);
             Color tint = new Color(tintColor);
-            graphics.blit(x, y, 0, x+16, y+16, sprite, (float)tint.getRed()/255f, (float)tint.getGreen()/255f, (float)tint.getBlue()/255f, (float)tint.getAlpha()/255f);
-        }
-        if (!fluid.isEmpty()) {
-            tooltipToShow.clear();
-            tooltipToShow.add(Component.translatable("gui.widget.fluid.without_max", fluid.getAmount(), fluid.getHoverName()).getVisualOrderText());
-        } else {
-            tooltipToShow.clear();
-            tooltipToShow.add(Component.empty().getVisualOrderText());
+            graphics.blit(x, y, 0, 16, 16, sprite, (float)tint.getRed()/255f, (float)tint.getGreen()/255f, (float)tint.getBlue()/255f, (float)tint.getAlpha()/255f);
         }
         if (mouseX <= x+16 && mouseY <= y+16 && mouseX >= x && mouseY >= y) {
-            graphics.fill(x, y, x+16, y+16, 0x7fFFFFFF);
+            if (!fluid.isEmpty()) {
+                showTooltip = true;
+                tooltipToShow.clear();
+                tooltipToShow.add(Component.translatable("gui.widget.fluid.without_max", fluid.getAmount(), fluid.getHoverName()).getVisualOrderText());
+            } else {
+                showTooltip = true;
+                tooltipToShow.clear();
+                tooltipToShow.add(Component.empty().getVisualOrderText());
+            }
         }
     }
     @Override

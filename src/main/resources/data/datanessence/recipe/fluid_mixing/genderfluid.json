@@ -2,7 +2,7 @@
   "type": "datanessence:fluid_mixing",
   "essenceCost": 50,
   "fluid_input": {
-    "fluid": "minecraft:water",
+    "id": "minecraft:water",
     "amount": 1000
   },
   "item_input": {
