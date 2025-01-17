@@ -1,0 +1,34 @@
+{
+  "icon": {
+    "id": "datanessence:fluid_bottler"
+  },
+  "tab": "datanessence:machinery",
+  "x": 5,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:fluid_bottler"
+      },
+      "text": {
+        "translate": "data_tablet.pages.fluid_bottler.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.fluid_bottler.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/machines/fluid_bottler"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.fluid_bottler.name"
+  },
+  "parents": [
+    "datanessence:machinery/fluidworks"
+  ]
+}

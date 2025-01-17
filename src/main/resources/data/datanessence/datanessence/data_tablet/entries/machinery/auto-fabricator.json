@@ -1,0 +1,28 @@
+{
+  "icon": {
+    "id": "datanessence:auto-fabricator"
+  },
+  "tab": "datanessence:machinery",
+  "x": -4,
+  "y": 4,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:auto-fabricator" },
+      "text": {
+        "translate": "data_tablet.pages.auto-fabricator.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/machines/auto-fabricator"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.auto-fabricator.name"
+  },
+  "parents": [
+  ]
+}

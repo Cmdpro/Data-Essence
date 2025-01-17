@@ -1,29 +1,29 @@
 {
   "icon": {
-    "id": "datanessence:essence_leech"
+    "id": "datanessence:industrial_plant_siphon"
   },
   "tab": "datanessence:essence_manipulation",
-  "x": -1,
+  "x": 1,
   "y": 2,
   "pages": [
     {
       "type": "datanessence:text",
       "text": {
-        "translate": "data_tablet.pages.essence_leech.page1.text"
+        "translate": "data_tablet.pages.industrial_plant_siphon.page1.text"
       }
     },
     {
       "type": "datanessence:crafting",
       "text": {
-        "translate": "data_tablet.pages.essence_leech.page2.text"
+        "translate": "data_tablet.pages.industrial_plant_siphon.page2.text"
       },
       "recipes": [
-        "datanessence:fabrication/essence_leech"
+        "datanessence:fabrication/industrial_plant_siphon"
       ]
     }
   ],
   "name": {
-    "translate": "data_tablet.pages.essence_leech.name"
+    "translate": "data_tablet.pages.industrial_plant_siphon.name"
   },
   "parents": [
     "datanessence:essence_manipulation/essence_burner"

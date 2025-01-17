@@ -23,7 +23,7 @@ public class DataNEssenceConfig {
         itemPointTransferValue = buildInteger(builder, "itemNodeTransfer", "all", 4, 1, 64, "How much should an item node transfer?");
         essenceBatteryMaxValue = buildInteger(builder, "essenceBatteryMax", "all", 10000, 1, 1000000, "How much should an essence battery hold? (Applies to all essence battery types)");
         maxNodeWiresValue = buildInteger(builder, "maxNodeWires", "all", 4, 1, 50, "How much wires should nodes be able to have? (Applies to all nodes)");
-        lowValuePlantEssenceValue = buildDouble(builder, "lowValuePlantEssence", "all", 25, 0, 1000, "How much should a plant with the low_essence_plant tag give in the Industrial Plant Siphon?");
+        lowValuePlantEssenceValue = buildDouble(builder, "lowValuePlantEssence", "all", 10, 0, 1000, "How much should a plant with the low_essence_plant tag give in the Industrial Plant Siphon?");
         mediumValuePlantEssenceValue = buildDouble(builder, "mediumValuePlantEssence", "all", 50, 0, 1000, "How much should a plant with the low_essence_plant tag give in the Industrial Plant Siphon?");
         highValuePlantEssenceValue = buildDouble(builder, "highValuePlantEssence", "all", 100, 0, 1000, "How much a plant with the low_essence_plant tag give in the Industrial Plant Siphon?");
     }
@@ -41,7 +41,7 @@ public class DataNEssenceConfig {
     public static int itemPointTransfer = 4;
     public static int essenceBatteryMax = 50;
     public static int maxNodeWires = 4;
-    public static float lowValuePlantEssence = 25;
+    public static float lowValuePlantEssence = 10;
     public static float mediumValuePlantEssence = 50;
     public static float highValuePlantEssence = 100;
     public final ModConfigSpec.IntValue fluidPointTransferValue;

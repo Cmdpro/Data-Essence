@@ -1,29 +1,29 @@
 {
   "icon": {
-    "id": "datanessence:infuser"
+    "id": "datanessence:synthesis_chamber"
   },
   "tab": "datanessence:machinery",
-  "x": -1,
+  "x": 1,
   "y": 2,
   "pages": [
     {
       "type": "datanessence:text",
       "text": {
-        "translate": "data_tablet.pages.infuser.page1.text"
+        "translate": "data_tablet.pages.synthesis_chamber.page1.text"
       }
     },
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:fabrication/machines/infuser"
+        "datanessence:fabrication/machines/synthesis_chamber"
       ],
       "text": {
-        "translate": "data_tablet.pages.infuser.page2.text"
+        "translate": "data_tablet.pages.synthesis_chamber.page2.text"
       }
     }
   ],
   "name": {
-    "translate": "data_tablet.pages.infuser.name"
+    "translate": "data_tablet.pages.synthesis_chamber.name"
   },
   "parents": [
     "datanessence:machinery/automation"

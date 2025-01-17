@@ -1,0 +1,29 @@
+{
+  "icon": {
+    "id": "datanessence:limited_item_buffer"
+  },
+  "tab": "datanessence:machinery",
+  "x": -1,
+  "y": -4,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.limited_item_buffer.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/machines/limited_item_buffer"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.limited_item_buffer.name"
+  },
+  "parents": [
+    "datanessence:machinery/itemworks",
+    "datanessence:machinery/buffers"
+  ]
+}

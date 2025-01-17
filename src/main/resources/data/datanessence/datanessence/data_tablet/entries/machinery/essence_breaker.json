@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "id": "datanessence:essence_breaker"
+  },
+  "tab": "datanessence:machinery",
+  "x": 4,
+  "y": 4,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:essence_breaker" },
+      "text": {
+        "translate": "data_tablet.pages.essence_breaker.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/machines/essence_breaker"
+        ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.essence_breaker.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.essence_breaker.flavor"
+  },
+  "parents": [
+    "datanessence:basics/fabricator"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "icon": {
+    "id": "datanessence:metal_shaper"
+  },
+  "tab": "datanessence:machinery",
+  "x": -5,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:metal_shaper" },
+      "text": {
+        "translate": "data_tablet.pages.metal_shaper.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.metal_shaper.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/machines/metal_shaper"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.metal_shaper.name"
+  },
+  "parents": [
+    "datanessence:machinery/itemworks",
+    "datanessence:machinery/automation"
+  ]
+}
