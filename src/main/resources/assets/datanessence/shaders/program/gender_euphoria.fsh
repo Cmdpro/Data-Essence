@@ -34,9 +34,9 @@ vec3 calculateNormal(vec2 uv0) {
     vec2 uv1 = uv0 + vec2(1.0, 0.0) / depthDimensions;
     vec2 uv2 = uv0 + vec2(0.0, 1.0) / depthDimensions;
 
-    float depth0 = linearizeDepth(texture2D(DiffuseDepthSampler, uv0).r);
-    float depth1 = linearizeDepth(texture2D(DiffuseDepthSampler, uv1).r);
-    float depth2 = linearizeDepth(texture2D(DiffuseDepthSampler, uv2).r);
+    float depth0 = linearizeDepth(texture(DiffuseDepthSampler, uv0).r);
+    float depth1 = linearizeDepth(texture(DiffuseDepthSampler, uv1).r);
+    float depth2 = linearizeDepth(texture(DiffuseDepthSampler, uv2).r);
 
     vec3 p0 = reconstructPosition(uv0, depth0, invProj);
     vec3 p1 = reconstructPosition(uv1, depth1, invProj);
@@ -102,9 +102,9 @@ void main() {
     }
     vec3 color = mix(vec3(252.0/255.0, 146.0/255.0, 186.0/255.0), vec3(105.0/255.0, 179.0/255.0, 252.0/255.0), coord*2);
     float blend = sobel().a;
-    vec3 world = worldPos(texture2D(DiffuseDepthSampler, texCoord).r);
+    vec3 world = worldPos(texture(DiffuseDepthSampler, texCoord).r);
     blend *= 1-clamp(distance(world, CameraPosition)/50, 0, 1);
     float actualFade = sin(radians(fade*(360/5)));
     blend *= (actualFade*0.25)+0.75;
-    fragColor = mix(texture2D(DiffuseSampler, texCoord), vec4(color, 1), blend);
+    fragColor = mix(texture(DiffuseSampler, texCoord), vec4(color, 1), blend);
 }
