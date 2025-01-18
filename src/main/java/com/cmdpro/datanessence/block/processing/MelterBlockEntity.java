@@ -11,6 +11,7 @@ import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
+import com.cmdpro.datanessence.screen.MelterMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -196,6 +197,6 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
-        return new EntropicProcessorMenu(pContainerId, pInventory, this);
+        return new MelterMenu(pContainerId, pInventory, this);
     }
 }
