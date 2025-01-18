@@ -28,6 +28,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         bufferBlock(BlockRegistry.ESSENCE_BUFFER);
         bufferBlock(BlockRegistry.ITEM_BUFFER);
+        bufferBlock(BlockRegistry.LIMITED_ITEM_BUFFER);
         bufferBlock(BlockRegistry.FLUID_BUFFER);
 
         ancientDecoBlockWithItem(BlockRegistry.ANCIENT_ROCK_BRICKS);
