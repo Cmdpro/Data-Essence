@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:essence_crystal"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.essence_crystals.name"
+  },
+  "entry": "datanessence:basics/essence_crystals"
+}

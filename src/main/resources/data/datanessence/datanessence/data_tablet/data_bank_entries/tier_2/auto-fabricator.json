@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:auto-fabricator"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.auto-fabricator.name"
+  },
+  "entry": "datanessence:machinery/auto-fabricator"
+}

@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:metal_shaper"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.metal_shaper.name"
+  },
+  "entry": "datanessence:machinery/metal_shaper"
+}

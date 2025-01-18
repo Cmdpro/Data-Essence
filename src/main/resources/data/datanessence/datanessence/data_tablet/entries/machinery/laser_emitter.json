@@ -40,7 +40,6 @@
     "translate": "data_tablet.pages.laser_emitter.name"
   },
   "parents": [
-    "datanessence:machinery/synthesis_chamber",
     "datanessence:machinery/infuser"
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:lensing_crystal_ore"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.lensing_crystals.name"
+  },
+  "entry": "datanessence:basics/lensing_crystals"
+}

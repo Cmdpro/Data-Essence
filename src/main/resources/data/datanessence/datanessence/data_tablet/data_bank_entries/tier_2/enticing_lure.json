@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:enticing_lure"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.enticing_lure.name"
+  },
+  "entry": "datanessence:machinery/enticing_lure"
+}

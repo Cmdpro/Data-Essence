@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:industrial_plant_siphon"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.industrial_plant_siphon.name"
+  },
+  "entry": "datanessence:essence_manipulation/industrial_plant_siphon"
+}

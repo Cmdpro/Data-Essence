@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:laser_emitter"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.laser_emitter.name"
+  },
+  "entry": "datanessence:machinery/laser_emitter"
+}

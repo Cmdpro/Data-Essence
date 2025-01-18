@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "minecraft:copper_ingot"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.phenuan_material_studies.name"
+  },
+  "entry": "datanessence:lore/phenuan_material_studies"
+}

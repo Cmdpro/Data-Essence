@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:entropic_processor"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.entropic_processor.name"
+  },
+  "entry": "datanessence:machinery/entropic_processor"
+}

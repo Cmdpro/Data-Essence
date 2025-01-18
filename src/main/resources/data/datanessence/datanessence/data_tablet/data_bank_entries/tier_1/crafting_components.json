@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:logical_matrix"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.crafting_components.name"
+  },
+  "entry": "datanessence:basics/crafting_components"
+}

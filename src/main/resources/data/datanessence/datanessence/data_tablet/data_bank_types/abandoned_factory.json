@@ -1,9 +1,6 @@
 {
   "add": [
     "datanessence:tier_1/essence_burner",
-    "datanessence:tier_1/essence_bomb"
-  ],
-  "remove":[
-    "datanessence:fabricator"
+    "datanessence:tier_1/crafting_components"
   ]
 }

@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:fluid_mixer"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.fluid_mixer.name"
+  },
+  "entry": "datanessence:machinery/fluid_mixer"
+}

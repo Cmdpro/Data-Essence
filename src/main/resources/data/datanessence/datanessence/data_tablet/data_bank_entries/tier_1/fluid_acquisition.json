@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:fluid_collector"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.fluid_acquisition.name"
+  },
+  "entry": "datanessence:machinery/fluid_acquisition"
+}

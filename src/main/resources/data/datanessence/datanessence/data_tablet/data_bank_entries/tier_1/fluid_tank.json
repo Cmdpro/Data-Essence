@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:fluid_tank"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.fluid_tank.name"
+  },
+  "entry": "datanessence:machinery/fluid_tank"
+}
