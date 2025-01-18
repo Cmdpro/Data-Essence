@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:melting",
+  "input": { "item": "minecraft:ice" },
+  "output": { "id": "minecraft:water", "amount": 1000 },
+  "time": 100
+}
