@@ -18,11 +18,8 @@
     },
     {
       "type": "datanessence:crafting",
-      "text": {
-        "translate": "data_tablet.pages.charger.page2.text"
-      },
       "recipes": [
-        "datanessence:fabrication/charger"
+        "datanessence:fabrication/machines/charger"
       ]
     }
   ],

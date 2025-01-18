@@ -88,6 +88,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.LENS, "components");
         simpleItemWithSubdirectory(ItemRegistry.PROPELLER, "components");
         simpleItemWithSubdirectory(ItemRegistry.WIRE_SPOOL, "components");
+        simpleItemWithSubdirectory(ItemRegistry.IRON_DRILL, "components");
+        simpleItemWithSubdirectory(ItemRegistry.EXCITER, "components");
 
         simpleItemWithSubdirectory(ItemRegistry.COPPER_NUGGET, "intermediates");
         simpleItemWithSubdirectory(ItemRegistry.DIAMOND_SHARD, "intermediates");

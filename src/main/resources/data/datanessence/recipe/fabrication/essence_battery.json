@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 500
+  },
+  "entry": "datanessence:essence_manipulation/essence_battery",
+  "pattern": [
+    "COC",
+    "SBS",
+    "COC"
+  ],
+  "key": {
+    "O": { "item": "datanessence:polished_obsidian" },
+    "C": { "item": "datanessence:capacitance_panel" },
+    "S": { "item": "datanessence:essence_shard" },
+    "B": { "item": "datanessence:essence_buffer" }
+  },
+  "result": { "id": "datanessence:essence_battery" }
+}

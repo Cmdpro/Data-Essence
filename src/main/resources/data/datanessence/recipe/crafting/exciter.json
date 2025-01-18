@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CR ",
+    "CR ",
+    " R "
+  ],
+  "key": {
+    "C": { "item": "datanessence:capacitance_panel" },
+    "R": { "item": "datanessence:conductance_rod" }
+  },
+  "result": { "id": "datanessence:exciter", "count": 1 }
+}

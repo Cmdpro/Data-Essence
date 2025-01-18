@@ -15,7 +15,7 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:fabrication/machines/limited_item_buffer"
+        "datanessence:fabrication/machines/buffer_item_limited"
       ]
     }
   ],

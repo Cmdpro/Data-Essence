@@ -1,0 +1,13 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {},
+  "entry": "datanessence:machinery/limited_item_buffer",
+  "pattern": [
+    "RBR"
+  ],
+  "key": {
+    "R": { "item": "datanessence:conductance_rod" },
+    "B": { "item": "datanessence:item_buffer" }
+  },
+  "result": { "id": "datanessence:limited_item_buffer", "count": 1 }
+}

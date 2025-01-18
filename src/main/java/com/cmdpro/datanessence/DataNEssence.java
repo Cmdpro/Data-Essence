@@ -242,6 +242,8 @@ public class DataNEssence
             event.accept(ItemRegistry.WIRE_SPOOL.get());
             event.accept(ItemRegistry.LOGICAL_MATRIX.get());
             event.accept(ItemRegistry.PROPELLER.get());
+            event.accept(ItemRegistry.EXCITER.get());
+            event.accept(ItemRegistry.IRON_DRILL.get());
             event.accept(ItemRegistry.LENSING_CRYSTAL.get());
             event.accept(ItemRegistry.BONDING_POWDER.get());
             event.accept(ItemRegistry.LENS.get());

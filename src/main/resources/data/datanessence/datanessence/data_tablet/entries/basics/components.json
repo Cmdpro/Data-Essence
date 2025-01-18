@@ -25,7 +25,9 @@
       "type": "datanessence:crafting",
       "recipes": [
         "datanessence:infusion/lens_from_glass",
-        "datanessence:crafting/propeller"
+        "datanessence:crafting/propeller",
+        "datanessence:crafting/exciter",
+        "datanessence:crafting/iron_drill"
       ]
     }
   ],
