@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-18T08:31:33.369470794	Block States: datanessence
+// 1.21.1	2025-01-18T09:30:04.821064122	Block States: datanessence
 4c3f8bc2b11e812a24d90295ef729dfe488c971c assets/datanessence/blockstates/aether_rune.json
 768dfda3826afab6ac2a48d49a2f703f413da50a assets/datanessence/blockstates/ancient_glyph_stone_blank.json
 a95f027a62699569a8ea8ed39de6b52e8c27d18f assets/datanessence/blockstates/ancient_glyph_stone_essence.json
@@ -19,6 +19,7 @@ d190993f9449f5c612adedd48a6276cfd83835d2 assets/datanessence/blockstates/deco_fl
 069bb4f7f5042005b0bee4e353c83972e5c3f4fb assets/datanessence/blockstates/essence_battery.json
 de36bf843295e46cbe4063525652cb8723eb7595 assets/datanessence/blockstates/essence_buffer.json
 7b6fe95e73931df96492f64adbee8e7f408b62e6 assets/datanessence/blockstates/essence_burner.json
+f266e5744623d4b7aac75fde32b0bcd6d0e8a4ff assets/datanessence/blockstates/essence_leech.json
 7d6cb32d05fc4c27ede7821a095aec9357388fa1 assets/datanessence/blockstates/fluid_buffer.json
 9bb78f24fa660cec95959621e22db55d1c6d66b5 assets/datanessence/blockstates/fluid_collector.json
 17ad5bce642d92ece47b31a656785779c237f838 assets/datanessence/blockstates/fluid_spiller.json
