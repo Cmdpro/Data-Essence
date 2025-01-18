@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -73,11 +74,17 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.SYNTHESIS_CHAMBER.get())
                 .add(BlockRegistry.TRAVERSITE_ROAD.get())
                 .add(BlockRegistry.VACUUM.get())
-                .add(BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get());
+                .add(BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get())
+                .add(BlockRegistry.MELTER.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+        this.tag(TagRegistry.Blocks.BUFFER_DETECTION_PASS)
+                .add(BlockRegistry.ITEM_BUFFER.get())
+                .add(BlockRegistry.FLUID_BUFFER.get())
+                .add(BlockRegistry.ESSENCE_BUFFER.get())
+                .add(BlockRegistry.LIMITED_ITEM_BUFFER.get());
     }
 }

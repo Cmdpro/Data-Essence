@@ -185,6 +185,10 @@ public class BlockEntityRegistry {
             register("industrial_plant_siphon", () ->
                     BlockEntityType.Builder.of(IndustrialPlantSiphonBlockEntity::new,
                             BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get()).build(null));
+    public static final Supplier<BlockEntityType<MelterBlockEntity>> MELTER =
+            register("melter", () ->
+                    BlockEntityType.Builder.of(MelterBlockEntity::new,
+                            BlockRegistry.MELTER.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

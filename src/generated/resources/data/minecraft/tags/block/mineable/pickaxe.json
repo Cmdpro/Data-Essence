@@ -54,6 +54,7 @@
     "datanessence:synthesis_chamber",
     "datanessence:traversite_road",
     "datanessence:vacuum",
-    "datanessence:industrial_plant_siphon"
+    "datanessence:industrial_plant_siphon",
+    "datanessence:melter"
   ]
 }

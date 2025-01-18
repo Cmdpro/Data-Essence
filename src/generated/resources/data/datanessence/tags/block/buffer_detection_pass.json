@@ -1,0 +1,8 @@
+{
+  "values": [
+    "datanessence:item_buffer",
+    "datanessence:fluid_buffer",
+    "datanessence:essence_buffer",
+    "datanessence:limited_item_buffer"
+  ]
+}

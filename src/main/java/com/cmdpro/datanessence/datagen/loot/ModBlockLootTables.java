@@ -97,6 +97,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get());
         dropSelf(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
         dropSelf(BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get());
+        dropSelf(BlockRegistry.MELTER.get());
 
         //so that datagen does not get mad
         this.add(BlockRegistry.TETHERGRASS.get(),

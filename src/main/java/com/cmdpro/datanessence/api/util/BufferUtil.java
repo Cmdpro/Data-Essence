@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.block.transmission.EssenceBufferBlockEntity;
 import com.cmdpro.datanessence.block.transmission.FluidBufferBlockEntity;
 import com.cmdpro.datanessence.block.transmission.ItemBufferBlockEntity;
 import com.cmdpro.datanessence.api.LockableItemHandler;
+import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,6 +24,9 @@ public class BufferUtil {
             if (ent instanceof EssenceBufferBlockEntity buffer) {
                 EssenceStorage.transferEssence(buffer.getStorage(), ((EssenceBlockEntity)container).getStorage(), type, buffer.getStorage().getMaxEssence());
             }
+            if (!container.getLevel().getBlockState(container.getBlockPos().offset(0, -i, 0)).is(TagRegistry.Blocks.BUFFER_DETECTION_PASS)) {
+                break;
+            }
         }
     }
     public static void getEssenceFromBuffersBelow(BlockEntity container, Iterable<EssenceType> types) {
@@ -32,6 +36,9 @@ public class BufferUtil {
                 for (EssenceType o : types) {
                     EssenceStorage.transferEssence(buffer.getStorage(), ((EssenceBlockEntity)container).getStorage(), o, buffer.getStorage().getMaxEssence());
                 }
+            }
+            if (!container.getLevel().getBlockState(container.getBlockPos().offset(0, -i, 0)).is(TagRegistry.Blocks.BUFFER_DETECTION_PASS)) {
+                break;
             }
         }
     }
@@ -46,6 +53,9 @@ public class BufferUtil {
             if (ent instanceof ItemBufferBlockEntity buffer) {
                 buffer.transfer(handler);
             }
+            if (!container.getLevel().getBlockState(container.getBlockPos().offset(0, -i, 0)).is(TagRegistry.Blocks.BUFFER_DETECTION_PASS)) {
+                break;
+            }
         }
     }
 
@@ -58,6 +68,9 @@ public class BufferUtil {
             BlockEntity ent = container.getLevel().getBlockEntity(container.getBlockPos().offset(0, -i, 0));
             if (ent instanceof FluidBufferBlockEntity buffer) {
                 buffer.transfer(handler);
+            }
+            if (!container.getLevel().getBlockState(container.getBlockPos().offset(0, -i, 0)).is(TagRegistry.Blocks.BUFFER_DETECTION_PASS)) {
+                break;
             }
         }
     }

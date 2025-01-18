@@ -28,6 +28,8 @@ public class RecipeRegistry {
             registerSerializer("mineral_purification", () -> MineralPurificationRecipe.Serializer.INSTANCE);
     public static final Supplier<RecipeSerializer<MetalShaperRecipe>> METAL_SHAPING =
             registerSerializer("metal_shaping", () -> MetalShaperRecipe.Serializer.INSTANCE);
+    public static final Supplier<RecipeSerializer<MeltingRecipe>> MELTING =
+            registerSerializer("melting", () -> MeltingRecipe.Serializer.INSTANCE);
 
     public static final Supplier<RecipeType<FluidMixingRecipe>> FLUID_MIXING_TYPE =
             registerBasicRecipeType("fluid_mixing");
@@ -43,6 +45,8 @@ public class RecipeRegistry {
             registerBasicRecipeType("mineral_purification");
     public static final Supplier<RecipeType<IFabricationRecipe>> FABRICATIONCRAFTING =
             registerBasicRecipeType("fabrication_recipe");
+    public static final Supplier<RecipeType<MeltingRecipe>> MELTING_TYPE =
+            registerBasicRecipeType("melting");
 
     private static <T extends RecipeType<?>> Supplier<T> registerType(final String name, final Supplier<T> recipe) {
         return RECIPE_TYPES.register(name, recipe);

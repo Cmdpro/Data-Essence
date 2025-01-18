@@ -187,6 +187,17 @@ public class DataNEssence
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), (o, direction) -> {
             return o.getItemHandler();
         });
+        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
+        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.FILTER_UPGRADE.get());
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (o, direction) -> {
+            return o.getItemHandler();
+        });
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (o, direction) -> {
+            if (direction == Direction.DOWN) {
+                return o.getFuelHandler();
+            }
+            return o.getOutputHandler();
+        });
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -281,6 +292,7 @@ public class DataNEssence
             event.accept(BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get());
             event.accept(BlockRegistry.ESSENCE_BREAKER.get());
             event.accept(BlockRegistry.METAL_SHAPER.get());
+            event.accept(BlockRegistry.MELTER.get());
 
             // Logistics
             event.accept(BlockRegistry.ITEM_FILTER.get());

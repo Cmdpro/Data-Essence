@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 
 public class TagRegistry {
     public static class Blocks {
+        public static final TagKey<Block> BUFFER_DETECTION_PASS = tag("buffer_detection_pass");
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, name));
         }
