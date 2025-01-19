@@ -3,6 +3,7 @@
     "id": "datanessence:essence_breaker"
   },
   "tier": 1,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.essence_breaker.name"
   },

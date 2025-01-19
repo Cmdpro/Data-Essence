@@ -1,6 +1,12 @@
 {
   "add": [
     "datanessence:tier_1/essence_burner",
-    "datanessence:tier_1/crafting_components"
+    "datanessence:tier_1/crafting_components",
+    "datanessence:tier_1/automation",
+    "datanessence:tier_1/essence_transfer",
+    "datanessence:tier_1/itemworks",
+    "datanessence:tier_1/fluidworks",
+    "datanessence:tier_1/buffers",
+    "datanessence:tier_1/fluid_acquisition"
   ]
 }

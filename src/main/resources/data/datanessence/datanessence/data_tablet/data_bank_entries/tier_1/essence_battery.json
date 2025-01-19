@@ -3,6 +3,7 @@
     "id": "datanessence:essence_battery"
   },
   "tier": 1,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.essence_battery.name"
   },

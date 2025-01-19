@@ -3,6 +3,7 @@
     "id": "datanessence:fluid_wire"
   },
   "tier": 1,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.fluidworks.name"
   },

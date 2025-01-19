@@ -3,6 +3,7 @@
     "id": "datanessence:fluid_mixer"
   },
   "tier": 2,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.fluid_mixer.name"
   },

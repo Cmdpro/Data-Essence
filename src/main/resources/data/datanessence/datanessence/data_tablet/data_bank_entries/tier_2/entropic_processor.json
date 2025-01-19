@@ -3,6 +3,7 @@
     "id": "datanessence:entropic_processor"
   },
   "tier": 2,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.entropic_processor.name"
   },

@@ -3,6 +3,7 @@
     "id": "datanessence:essence_buffer"
   },
   "tier": 1,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.buffers.name"
   },

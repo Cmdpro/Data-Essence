@@ -3,6 +3,7 @@
     "id": "datanessence:auto-fabricator"
   },
   "tier": 2,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.auto-fabricator.name"
   },

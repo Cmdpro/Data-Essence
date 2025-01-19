@@ -3,6 +3,7 @@
     "id": "datanessence:limited_item_buffer"
   },
   "tier": 1,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.limited_item_buffer.name"
   },

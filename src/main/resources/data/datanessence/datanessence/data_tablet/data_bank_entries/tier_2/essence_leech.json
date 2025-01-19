@@ -3,6 +3,7 @@
     "id": "datanessence:essence_leech"
   },
   "tier": 2,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.essence_leech.name"
   },

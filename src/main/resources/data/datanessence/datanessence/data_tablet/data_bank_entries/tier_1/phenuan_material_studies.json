@@ -3,6 +3,7 @@
     "id": "minecraft:copper_ingot"
   },
   "tier": 1,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.phenuan_material_studies.name"
   },

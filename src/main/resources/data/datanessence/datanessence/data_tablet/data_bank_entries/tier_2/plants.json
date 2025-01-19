@@ -3,6 +3,7 @@
     "id": "datanessence:tethergrass"
   },
   "tier": 2,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.plants.name"
   },

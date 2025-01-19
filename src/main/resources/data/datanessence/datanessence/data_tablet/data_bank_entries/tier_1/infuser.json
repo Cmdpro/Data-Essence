@@ -3,6 +3,7 @@
     "id": "datanessence:infuser"
   },
   "tier": 1,
+  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.infuser.name"
   },
