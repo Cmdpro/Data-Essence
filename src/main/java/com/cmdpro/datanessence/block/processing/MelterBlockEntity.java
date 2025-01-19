@@ -58,8 +58,20 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
             setChanged();
         }
     };
-    private final FluidTank outputFluidHandler = new FluidTank(2000);
-    private final FluidTank fuelFluidHandler = new FluidTank(2000);
+    private final FluidTank outputFluidHandler = new FluidTank(2000) {
+        @Override
+        protected void onContentsChanged() {
+            super.onContentsChanged();
+            updateBlock();
+        }
+    };
+    private final FluidTank fuelFluidHandler = new FluidTank(2000) {
+        @Override
+        protected void onContentsChanged() {
+            super.onContentsChanged();
+            updateBlock();
+        }
+    };
 
     public void drops() {
         SimpleContainer inventory = getInv();
@@ -169,6 +181,7 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
                         }
+                        pBlockEntity.updateBlock();
                     }
                 } else {
                     pBlockEntity.recipe = null;
@@ -180,8 +193,8 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
             }
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;
+                pBlockEntity.updateBlock();
             }
-            pBlockEntity.updateBlock();
         }
     }
     protected void updateBlock() {
