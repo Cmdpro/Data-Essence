@@ -24,11 +24,28 @@
     "datanessence:tier_1/primitive_antigravity_pack",
     "datanessence:tier_1/traversite_road",
     "datanessence:tier_1/vacuum",
-    "datanessence:tier_2/genderfluid"
+    "datanessence:tier_2/auto-fabricator",
+    "datanessence:tier_2/enticing_lure",
+    "datanessence:tier_2/entropic_processor",
+    "datanessence:tier_2/essence",
+    "datanessence:tier_2/essence_furnace",
+    "datanessence:tier_2/essence_leech",
+    "datanessence:tier_2/fluid_bottler",
+    "datanessence:tier_2/fluid_mixer",
+    "datanessence:tier_2/genderfluid",
+    "datanessence:tier_2/industrial_plant_siphon",
+    "datanessence:tier_2/lensing_crystals",
+    "datanessence:tier_2/metal_shaper",
+    "datanessence:tier_2/mineral_purification_chamber",
+    "datanessence:tier_2/node_upgrades",
+    "datanessence:tier_2/plants",
+    "datanessence:tier_2/synthesis_chamber",
+    "datanessence:tier_2/warp_capsule"
   ],
   "remove": [
-    "datanessence:tier_1/essence_bomb",
+    "datanessence:tier_1/essence_bombs",
     "datanessence:tier_1/essence_sword",
-    "datanessence:tier_1/phenuan_material_studies"
+    "datanessence:tier_2/lensing_crystals",
+    "datanessence:tier_2/plants"
   ]
 }

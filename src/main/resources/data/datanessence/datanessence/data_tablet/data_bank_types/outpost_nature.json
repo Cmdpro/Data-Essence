@@ -1,10 +1,12 @@
 {
   "add": [
-    "datanessence:fabricator",
-    "datanessence:test1",
-    "datanessence:test2"
+    "datanessence:tier_1/essence_crystals",
+    "datanessence:tier_2/enticing_lure",
+    "datanessence:tier_2/industrial_plant_siphon",
+    "datanessence:tier_2/lensing_crystals",
+    "datanessence:tier_2/plants",
+    "datanessence:tier_2/warp_capsule"
   ],
-  "remove":[
-    "datanessence:fabricator"
+  "remove": [
   ]
 }
