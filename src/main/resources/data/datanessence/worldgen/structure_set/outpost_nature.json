@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "datanessence:outpost_nature",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1256291336,
+    "spacing": 40,
+    "separation": 20
+  }
+}

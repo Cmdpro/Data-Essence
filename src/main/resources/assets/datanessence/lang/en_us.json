@@ -159,6 +159,7 @@
 
   "computer.arekkos_vault.clue": "...",
   "computer.arekkos_vault.log": "Cryostasis Reason: PRESERVATION\nOccupant: AREKKO BULOK-ENTEE\nAuthority: [REDACTED]\n\nNotes: Arekko requested to be sealed with their data tablet. Possible security risk in case of intruders?",
+  "computer.outpost_nature_01.access_log": "viqbogavku... kvbeoy.\nklogo zokr youg offquuql... [QBBVB - GAEQUGOEI FVBBNIGQL?].\nbqouvk hvb offquu: bqgbaqsoy vh qkgbx \"Aklnugbaoy Iyokg Uaimvk\" hvb bqugvbogavk vh uaimvk ivwqb iyokg.",
 
   "death.attack.black_hole": "%1$s was spaghettified",
   "death.attack.black_hole.item": "%2$s used %3$s to send %1$s to their spaghettification",
@@ -262,7 +263,7 @@
   "data_tablet.pages.entropic_processor.name": "Entropic Processor",
   "data_tablet.pages.entropic_processor.page1.text": "Diamonds are one of the hardest materials in the world. It is only sensible to utilize that hardness for raw cutting power, and the Entropic Processor is the result. This machine has three sets of eight diamond grinding wheels that are able to crush, grind, macerate, and pulverize whatever runs through it.",
   "data_tablet.pages.entropic_processor.page2.text": " ◇ It is generally advised to avoid contacting the grinding wheels while they are spinning.",
-    "data_tablet.pages.essence_breaker.flavor": " ◇ Powering cobblestone generators the world over",
+  "data_tablet.pages.essence_breaker.flavor": " ◇ Powering cobblestone generators the world over",
   "data_tablet.pages.essence_breaker.name": "Block Breaking",
   "data_tablet.pages.essence_breaker.page1.text": "It is possible to have Essence drive a drill that mines whatever block lay in front of it. The design of such an Essence Breaker is trivial, but that simplicity likewise means it does not handle item drops by itself.",
   "data_tablet.pages.essence_furnace.flavor": " ◇ Copper Convection Cooker",
