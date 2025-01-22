@@ -1,0 +1,11 @@
+{
+  "icon": {
+    "id": "datanessence:primitive_anti_gravity_pack"
+  },
+  "tier": 1,
+  "minigames": [],
+  "name": {
+    "translate": "data_tablet.pages.primitive_antigravity_pack.name"
+  },
+  "entry": "datanessence:tools/primitive_antigravity_pack"
+}

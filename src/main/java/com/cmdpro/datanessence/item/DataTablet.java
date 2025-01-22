@@ -26,11 +26,16 @@ public class DataTablet extends Item {
             if (DataTabletUtil.getTier(pPlayer) <= 0) {
                 DataTabletUtil.setTier(pPlayer, 1);
             }
-            DataTabletUtil.unlockEntry(pPlayer, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "basics/fabricator"), false);
-            DataTabletUtil.unlockEntry(pPlayer, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "basics/data_tablet"), false);
+
+            // unlock starting entries
+            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/fabricator"), false);
+            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/essence_redirector"), false);
+            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/data_tablet"), false);
+            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("tools/decorative_blocks"), false);
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
     }
+
     public static class Client {
         public static void openScreen() {
             Minecraft.getInstance().setScreen(new DataTabletScreen(Component.empty()));

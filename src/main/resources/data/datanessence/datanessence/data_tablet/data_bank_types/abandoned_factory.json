@@ -1,12 +1,34 @@
 {
   "add": [
-    "datanessence:tier_1/essence_burner",
-    "datanessence:tier_1/crafting_components",
     "datanessence:tier_1/automation",
-    "datanessence:tier_1/essence_transfer",
-    "datanessence:tier_1/itemworks",
-    "datanessence:tier_1/fluidworks",
     "datanessence:tier_1/buffers",
-    "datanessence:tier_1/fluid_acquisition"
+    "datanessence:tier_1/charger",
+    "datanessence:tier_1/crafting_components",
+    "datanessence:tier_1/decorative_buffers",
+    "datanessence:tier_1/essence_battery",
+    "datanessence:tier_1/essence_bombs",
+    "datanessence:tier_1/essence_breaker",
+    "datanessence:tier_1/essence_burner",
+    "datanessence:tier_1/essence_crystals",
+    "datanessence:tier_1/essence_sword",
+    "datanessence:tier_1/essence_transfer",
+    "datanessence:tier_1/fluid_acquisition",
+    "datanessence:tier_1/fluid_tank",
+    "datanessence:tier_1/fluidworks",
+    "datanessence:tier_1/infuser",
+    "datanessence:tier_1/item_filter",
+    "datanessence:tier_1/itemworks",
+    "datanessence:tier_1/laser_emitter",
+    "datanessence:tier_1/limited_item_buffer",
+    "datanessence:tier_1/phenuan_material_studies",
+    "datanessence:tier_1/primitive_antigravity_pack",
+    "datanessence:tier_1/traversite_road",
+    "datanessence:tier_1/vacuum",
+    "datanessence:tier_2/genderfluid"
+  ],
+  "remove": [
+    "datanessence:tier_1/essence_bomb",
+    "datanessence:tier_1/essence_sword",
+    "datanessence:tier_1/phenuan_material_studies"
   ]
 }

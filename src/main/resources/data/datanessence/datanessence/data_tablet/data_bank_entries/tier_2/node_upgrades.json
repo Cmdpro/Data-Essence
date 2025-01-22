@@ -1,0 +1,11 @@
+{
+  "icon": {
+    "id": "datanessence:filter_upgrade"
+  },
+  "tier": 2,
+  "minigames": [],
+  "name": {
+    "translate": "data_tablet.pages.node_upgrades.name"
+  },
+  "entry": "datanessence:machinery/node_upgrades"
+}

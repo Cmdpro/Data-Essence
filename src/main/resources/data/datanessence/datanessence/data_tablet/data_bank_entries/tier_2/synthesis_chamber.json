@@ -1,0 +1,11 @@
+{
+  "icon": {
+    "id": "datanessence:synthesis_chamber"
+  },
+  "tier": 2,
+  "minigames": [],
+  "name": {
+    "translate": "data_tablet.pages.synthesis_chamber.name"
+  },
+  "entry": "datanessence:machinery/synthesis_chamber"
+}

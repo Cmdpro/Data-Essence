@@ -1,0 +1,11 @@
+{
+  "icon": {
+    "id": "datanessence:mineral_purification_chamber"
+  },
+  "tier": 2,
+  "minigames": [],
+  "name": {
+    "translate": "data_tablet.pages.mineral_purification_chamber.name"
+  },
+  "entry": "datanessence:machinery/mineral_purification_chamber"
+}

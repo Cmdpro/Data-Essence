@@ -1,0 +1,11 @@
+{
+  "icon": {
+    "id": "datanessence:vacuum"
+  },
+  "tier": 1,
+  "minigames": [],
+  "name": {
+    "translate": "data_tablet.pages.vacuum.name"
+  },
+  "entry": "datanessence:machinery/vacuum"
+}

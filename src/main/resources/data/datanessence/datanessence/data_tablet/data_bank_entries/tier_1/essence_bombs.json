@@ -11,7 +11,7 @@
     }
   ],
   "name": {
-    "translate": "data_tablet.pages.essence_bomb.name"
+    "translate": "data_tablet.pages.essence_bombs.name"
   },
-  "entry": "datanessence:tools/essence_bomb"
+  "entry": "datanessence:tools/essence_bombs"
 }
