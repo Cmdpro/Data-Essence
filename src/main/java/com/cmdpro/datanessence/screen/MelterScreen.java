@@ -28,8 +28,8 @@ public class MelterScreen extends AbstractContainerScreen<MelterMenu> {
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        addRenderableWidget(new FluidWidget(x+26, y+28, 16, 28, menu.blockEntity.getFuelHandler(), 0));
-        addRenderableWidget(new FluidWidget(x+80, y+47, 24, 24, menu.blockEntity.getOutputHandler(), 0));
+        addRenderableWidget(new FluidWidget(x+26, y+28, 16, 28, menu.blockEntity.getFuelHandler(), 0, true));
+        addRenderableWidget(new FluidWidget(x+80, y+47, 24, 24, menu.blockEntity.getOutputHandler(), 0, true));
     }
     @Override
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {

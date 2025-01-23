@@ -105,8 +105,8 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
         maxTime = tag.getInt("maxTime");
-        tag.put("outputFluidHandler", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
-        tag.put("fuelFluidHandler", fuelFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
+        outputFluidHandler.readFromNBT(pRegistries, tag.getCompound("outputFluidHandler"));
+        fuelFluidHandler.readFromNBT(pRegistries, tag.getCompound("fuelFluidHandler"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -114,17 +114,17 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
         tag.putInt("maxTime", recipe == null ? -1 : recipe.getTime());
-        outputFluidHandler.readFromNBT(pRegistries, tag.getCompound("outputFluidHandler"));
-        fuelFluidHandler.readFromNBT(pRegistries, tag.getCompound("fuelFluidHandler"));
+        tag.put("outputFluidHandler", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
+        tag.put("fuelFluidHandler", fuelFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         return tag;
     }
 
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("input", itemHandler.serializeNBT(pRegistries));
-        tag.put("outputFluidHandler", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
+        tag.put("outputFluidHandler", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("fuelFluidHandler", fuelFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         super.saveAdditional(tag, pRegistries);
     }
@@ -133,10 +133,10 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("input"));
-        outputFluidHandler.readFromNBT(pRegistries, nbt.getCompound("outputFluidHandler"));
-        fuelFluidHandler.readFromNBT(pRegistries, nbt.getCompound("fuelFluidHandler"));
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
+        outputFluidHandler.readFromNBT(pRegistries, nbt.getCompound("outputFluidHandler"));
+        fuelFluidHandler.readFromNBT(pRegistries, nbt.getCompound("fuelFluidHandler"));
     }
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());

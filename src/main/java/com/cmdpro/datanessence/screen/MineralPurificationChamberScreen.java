@@ -47,7 +47,7 @@ public class MineralPurificationChamberScreen extends AbstractContainerScreen<Mi
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        addRenderableWidget(new FluidWidget(x+26, y+28, 16, 28, menu.blockEntity.getWaterHandler(), 0));
+        addRenderableWidget(new FluidWidget(x+26, y+28, 16, 28, menu.blockEntity.getWaterHandler(), 0, true));
     }
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {

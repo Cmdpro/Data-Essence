@@ -29,7 +29,7 @@ public class FluidBottlerScreen extends AbstractContainerScreen<FluidBottlerMenu
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        addRenderableWidget(new FluidWidget(x+62, y+45, menu.blockEntity.getFluidHandler(), 0));
+        addRenderableWidget(new FluidWidget(x+62, y+45, menu.blockEntity.getFluidHandler(), 0, false));
     }
 
     @Override

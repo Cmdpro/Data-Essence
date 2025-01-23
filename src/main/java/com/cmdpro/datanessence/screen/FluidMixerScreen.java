@@ -32,9 +32,9 @@ public class FluidMixerScreen extends AbstractContainerScreen<FluidMixerMenu> {
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        addRenderableWidget(new FluidWidget(x+39, y+22, menu.blockEntity.getFluidHandler(), 0));
-        addRenderableWidget(new FluidWidget(x+39, y+45, menu.blockEntity.getFluidHandler(), 1));
-        addRenderableWidget(new FluidWidget(x+116, y+34, menu.blockEntity.getOutputHandler(), 0));
+        addRenderableWidget(new FluidWidget(x+39, y+22, menu.blockEntity.getFluidHandler(), 0, false));
+        addRenderableWidget(new FluidWidget(x+39, y+45, menu.blockEntity.getFluidHandler(), 1, false));
+        addRenderableWidget(new FluidWidget(x+116, y+34, menu.blockEntity.getOutputHandler(), 0, false));
         addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+84, y+52));
     }
 
