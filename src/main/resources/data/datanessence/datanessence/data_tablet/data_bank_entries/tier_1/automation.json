@@ -3,7 +3,6 @@
     "id": "datanessence:data_drive"
   },
   "tier": 1,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.automation.name"
   },

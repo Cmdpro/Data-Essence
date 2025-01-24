@@ -3,7 +3,6 @@
     "id": "datanessence:industrial_plant_siphon"
   },
   "tier": 2,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.industrial_plant_siphon.name"
   },

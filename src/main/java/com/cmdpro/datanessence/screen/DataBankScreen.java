@@ -87,10 +87,12 @@ public class DataBankScreen extends Screen {
         if (screenType == 1) {
             if (minigameCompletionWait == -1) {
                 if (isMouseInsideMinigame(pMouseX, pMouseY)) {
-                    double mouseX = pMouseX - (x + (imageWidth / 2) - 75);
-                    double mouseY = pMouseY - (y + (imageHeight / 2) - 75);
-                    minigames[minigameProgress].mouseClicked(mouseX, mouseY, pButton);
-                    return true;
+                    if (minigameProgress < minigames.length) {
+                        double mouseX = pMouseX - (x + (imageWidth / 2) - 75);
+                        double mouseY = pMouseY - (y + (imageHeight / 2) - 75);
+                        minigames[minigameProgress].mouseClicked(mouseX, mouseY, pButton);
+                        return true;
+                    }
                 }
             }
         }
@@ -121,10 +123,12 @@ public class DataBankScreen extends Screen {
         if (screenType == 1) {
             if (minigameCompletionWait == -1) {
                 if (isMouseInsideMinigame(pMouseX, pMouseY) && isMouseInsideMinigame(pMouseX + pDragX, pMouseY + pDragY)) {
-                    double mouseX = pMouseX - (x + (imageWidth / 2) - 75);
-                    double mouseY = pMouseY - (y + (imageHeight / 2) - 75);
-                    minigames[minigameProgress].mouseDragged(mouseX, mouseY, pButton, pDragX, pDragY);
-                    return true;
+                    if (minigameProgress < minigames.length) {
+                        double mouseX = pMouseX - (x + (imageWidth / 2) - 75);
+                        double mouseY = pMouseY - (y + (imageHeight / 2) - 75);
+                        minigames[minigameProgress].mouseDragged(mouseX, mouseY, pButton, pDragX, pDragY);
+                        return true;
+                    }
                 }
             }
         }
@@ -138,10 +142,12 @@ public class DataBankScreen extends Screen {
         if (screenType == 1) {
             if (minigameCompletionWait == -1) {
                 if (isMouseInsideMinigame(pMouseX, pMouseY)) {
-                    double mouseX = pMouseX - (x + (imageWidth / 2) - 75);
-                    double mouseY = pMouseY - (y + (imageHeight / 2) - 75);
-                    minigames[minigameProgress].mouseReleased(mouseX, mouseY, pButton);
-                    return true;
+                    if (minigameProgress < minigames.length) {
+                        double mouseX = pMouseX - (x + (imageWidth / 2) - 75);
+                        double mouseY = pMouseY - (y + (imageHeight / 2) - 75);
+                        minigames[minigameProgress].mouseReleased(mouseX, mouseY, pButton);
+                        return true;
+                    }
                 }
             }
         }
@@ -152,7 +158,9 @@ public class DataBankScreen extends Screen {
     public boolean keyPressed(int pKeyCode, int pScanCode, int pModifiers) {
         if (screenType == 1) {
             if (minigameCompletionWait == -1) {
-                minigames[minigameProgress].keyPressed(pKeyCode, pScanCode, pModifiers);
+                if (minigameProgress < minigames.length) {
+                    minigames[minigameProgress].keyPressed(pKeyCode, pScanCode, pModifiers);
+                }
             }
         }
         return super.keyPressed(pKeyCode, pScanCode, pModifiers);
@@ -161,7 +169,9 @@ public class DataBankScreen extends Screen {
     public boolean keyReleased(int pKeyCode, int pScanCode, int pModifiers) {
         if (screenType == 1) {
             if (minigameCompletionWait == -1) {
-                minigames[minigameProgress].keyReleased(pKeyCode, pScanCode, pModifiers);
+                if (minigameProgress < minigames.length) {
+                    minigames[minigameProgress].keyReleased(pKeyCode, pScanCode, pModifiers);
+                }
             }
         }
         return super.keyReleased(pKeyCode, pScanCode, pModifiers);
@@ -171,30 +181,31 @@ public class DataBankScreen extends Screen {
     public void tick() {
         super.tick();
         if (screenType == 1) {
-            minigames[minigameProgress].tick();
-            if (minigames[minigameProgress].isFinished()) {
-                if (minigameCompletionWait == -1) {
-                    minigameCompletionWait = 40;
+            if (minigameProgress >= minigames.length) {
+                Entry entry = Entries.entries.get(clickedEntry.entry);
+                if (entry.incomplete) {
+                    if (!ClientPlayerUnlockedEntries.getIncomplete().contains(clickedEntry.entry)) {
+                        ClientPlayerUnlockedEntries.getIncomplete().add(clickedEntry.entry);
+                    }
+                } else {
+                    if (!ClientPlayerUnlockedEntries.getUnlocked().contains(clickedEntry.entry)) {
+                        ClientPlayerUnlockedEntries.getUnlocked().add(clickedEntry.entry);
+                    }
                 }
-            }
-            if (minigameCompletionWait > 0) {
-                minigameCompletionWait--;
-                if (minigameCompletionWait <= 0) {
-                    minigameCompletionWait = -1;
-                    minigameProgress++;
-                    if (minigameProgress >= minigames.length) {
-                        Entry entry = Entries.entries.get(clickedEntry.entry);
-                        if (entry.incomplete) {
-                            if (!ClientPlayerUnlockedEntries.getIncomplete().contains(clickedEntry.entry)) {
-                                ClientPlayerUnlockedEntries.getIncomplete().add(clickedEntry.entry);
-                            }
-                        } else {
-                            if (!ClientPlayerUnlockedEntries.getUnlocked().contains(clickedEntry.entry)) {
-                                ClientPlayerUnlockedEntries.getUnlocked().add(clickedEntry.entry);
-                            }
-                        }
-                        ModMessages.sendToServer(new PlayerFinishDataBankMinigameC2SPacket(clickedEntry.id));
-                        screenType = 0;
+                ModMessages.sendToServer(new PlayerFinishDataBankMinigameC2SPacket(clickedEntry.id));
+                screenType = 0;
+            } else {
+                minigames[minigameProgress].tick();
+                if (minigames[minigameProgress].isFinished()) {
+                    if (minigameCompletionWait == -1) {
+                        minigameCompletionWait = 40;
+                    }
+                }
+                if (minigameCompletionWait > 0) {
+                    minigameCompletionWait--;
+                    if (minigameCompletionWait <= 0) {
+                        minigameCompletionWait = -1;
+                        minigameProgress++;
                     }
                 }
             }
@@ -246,17 +257,20 @@ public class DataBankScreen extends Screen {
             graphics.blit(TEXTURE, x+imageWidth-7, y+imageHeight-7, 24, 170, 4, 4);
             graphics.pose().popPose();
         } else if (screenType == 1) {
-            drawMinigame(minigames[minigameProgress], graphics, delta, mouseX, mouseY);
+            if (minigameProgress < minigames.length) {
+                drawMinigame(minigames[minigameProgress], graphics, delta, mouseX, mouseY);
+            }
             graphics.blit(TEXTURE, x+26-10, y+26-10, 0, 166, 20, 20);
             graphics.renderItem(clickedEntry.icon, x+26-8, y+26-8);
             if (minigameCompletionWait > 0) {
                 Color fade = new Color(1f, 1f, 1f, 1f-((float)minigameCompletionWait/40f));
                 Color fade2 = new Color(0f, 0f, 0f, 1f-((float)minigameCompletionWait/40f));
-                int textWidth = Minecraft.getInstance().font.width("Completed");
+                Component completed = Component.translatable("data_tablet.databank_minigame_completed");
+                int textWidth = Minecraft.getInstance().font.width(completed);
                 int textHeight = Minecraft.getInstance().font.lineHeight;
                 graphics.fillGradient(x+(imageWidth/2)-(textWidth+5), y+(imageHeight/2)-(textHeight+10), x+(imageWidth/2)+(textWidth+5), y+(imageHeight/2), 0x00000000, fade2.getRGB());
                 graphics.fillGradient(x+(imageWidth/2)-(textWidth+5), y+(imageHeight/2), x+(imageWidth/2)+(textWidth+5), y+(imageHeight/2)+(textHeight+10), fade2.getRGB(), 0x00000000);
-                graphics.drawCenteredString(Minecraft.getInstance().font, "Completed", x+(imageWidth/2), y+(imageHeight/2)-(textHeight/2), fade.getRGB());
+                graphics.drawCenteredString(Minecraft.getInstance().font, completed, x+(imageWidth/2), y+(imageHeight/2)-(textHeight/2), fade.getRGB());
             }
         }
         graphics.disableScissor();
@@ -288,7 +302,9 @@ public class DataBankScreen extends Screen {
             }
         } else if (screenType == 1) {
             if (isMouseInsideMinigame(mouseX, mouseY)) {
-                graphics.renderTooltip(Minecraft.getInstance().font, minigames[minigameProgress].getTooltip(), mouseX, mouseY);
+                if (minigameProgress < minigames.length) {
+                    graphics.renderTooltip(Minecraft.getInstance().font, minigames[minigameProgress].getTooltip(), mouseX, mouseY);
+                }
             } else if (mouseX >= x+26-10 && mouseY >= y+26-10 && mouseX <= x+26+10 && mouseY <= y+26+10) {
                 graphics.renderTooltip(Minecraft.getInstance().font, clickedEntry.name, mouseX, mouseY);
             }

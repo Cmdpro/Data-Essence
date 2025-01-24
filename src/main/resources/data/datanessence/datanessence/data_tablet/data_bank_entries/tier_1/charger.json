@@ -3,7 +3,6 @@
     "id": "datanessence:charger"
   },
   "tier": 1,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.charger.name"
   },

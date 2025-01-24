@@ -101,7 +101,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         //so that datagen does not get mad
         this.add(BlockRegistry.TETHERGRASS.get(),
-                block -> noDrop());
+                block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));
 
         // TODO regardless of how, always drops 1-3 bones.
         this.add(BlockRegistry.AREKKO.get(),
@@ -112,6 +112,13 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 this.applyExplosionDecay(pBlock,
                         LootItem.lootTableItem(item)
                                 .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+                                .apply(ApplyBonusCount.addOreBonusCount(this.registries.holderOrThrow(Enchantments.FORTUNE)))));
+    }
+    protected LootTable.Builder createTethergrassDrops(Block pBlock, Item item) {
+        return createSilkTouchOrShearsDispatchTable(pBlock,
+                this.applyExplosionDecay(pBlock,
+                        LootItem.lootTableItem(item)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(1.0F, 3.0F)))
                                 .apply(ApplyBonusCount.addOreBonusCount(this.registries.holderOrThrow(Enchantments.FORTUNE)))));
     }
     protected LootTable.Builder createArekkoDrops(Block pBlock, Item item) {

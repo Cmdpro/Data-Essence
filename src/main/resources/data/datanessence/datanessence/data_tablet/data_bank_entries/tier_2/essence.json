@@ -3,7 +3,6 @@
     "id": "datanessence:essence_wire"
   },
   "tier": 2,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.essence.name"
   },

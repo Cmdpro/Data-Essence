@@ -15,6 +15,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class DataBankEntrySerializer {
             ItemStack.CODEC.fieldOf("icon").forGetter((entry) -> entry.icon),
             Codec.INT.fieldOf("tier").forGetter((entry) -> entry.tier),
             ComponentSerialization.CODEC.fieldOf("name").forGetter((entry) -> entry.name),
-            MINIGAME_CODEC.listOf().fieldOf("minigames").forGetter((entry) -> List.of(entry.minigames)),
+            MINIGAME_CODEC.listOf().optionalFieldOf("minigames", new ArrayList<>()).forGetter((entry) -> List.of(entry.minigames)),
             ResourceLocation.CODEC.fieldOf("entry").forGetter((entry) -> entry.entry)
     ).apply(instance, (icon, tier, name, minigames, entry) -> new DataBankEntry(null, icon, tier, minigames.toArray(new MinigameCreator[0]), name, entry)));
     public static final StreamCodec<RegistryFriendlyByteBuf, DataBankEntry> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {

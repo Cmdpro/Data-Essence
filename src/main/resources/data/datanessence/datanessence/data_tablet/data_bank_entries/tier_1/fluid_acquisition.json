@@ -3,7 +3,6 @@
     "id": "datanessence:fluid_collector"
   },
   "tier": 1,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.fluid_acquisition.name"
   },

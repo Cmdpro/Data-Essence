@@ -135,7 +135,7 @@ public class DataNEssenceCommands {
             incompleteEntries.clear();
             PlayerDataUtil.updateUnlockedEntries((ServerPlayer)player);
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.datanessence.reset_learned");
+                return Component.translatable("commands.datanessence.reset_learned", player.getName());
             }, true);
         }
         return Command.SINGLE_SUCCESS;
@@ -175,7 +175,7 @@ public class DataNEssenceCommands {
                 DataTabletUtil.unlockEntryAndParents(player, i.id, false);
             }
             command.getSource().sendSuccess(() -> {
-                return Component.translatable("commands.datanessence.unlock_all");
+                return Component.translatable("commands.datanessence.unlock_all", player.getName());
             }, true);
         }
         return Command.SINGLE_SUCCESS;

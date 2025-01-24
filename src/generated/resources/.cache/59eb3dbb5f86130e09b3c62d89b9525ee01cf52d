@@ -1,4 +1,4 @@
-// 1.21.1	2025-01-18T06:45:11.006492825	Loot Tables
+// 1.21.1	2025-01-24T10:42:51.3397713	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -35,6 +35,7 @@ cf1808b270b378eeac641aed9d59037a516e120c data/datanessence/loot_table/blocks/ess
 3b776b2d30cb9c0fb7ade18c7f7bf11acd280c89 data/datanessence/loot_table/blocks/exotic_essence_battery.json
 e872ba657276f7b578577d7f6f39c9a5112a6898 data/datanessence/loot_table/blocks/exotic_essence_point.json
 cc264d7f4e88e760ab31df3690efb2e3342c0a44 data/datanessence/loot_table/blocks/fabricator.json
+351474a0ce3cb81331aa54fdfd5c70575c10d690 data/datanessence/loot_table/blocks/fluidic_glass.json
 e1c242131171262fc09d6b3a382070f06850d4c9 data/datanessence/loot_table/blocks/fluid_bottler.json
 691617552f5f77219e22e1ab9ac805f869fec2de data/datanessence/loot_table/blocks/fluid_buffer.json
 0519c7bd1877f649a5a8a95eb1c592f96ab49c70 data/datanessence/loot_table/blocks/fluid_collector.json
@@ -42,7 +43,6 @@ e1c242131171262fc09d6b3a382070f06850d4c9 data/datanessence/loot_table/blocks/flu
 f2a29214b3a71ca945068d1c8409c2bced4dcaec data/datanessence/loot_table/blocks/fluid_point.json
 fcbdf81a9730cd95fb91e6786a932853ae148da5 data/datanessence/loot_table/blocks/fluid_spiller.json
 a63c22d76b677d9f5d4b6212d1011f4d3f31c962 data/datanessence/loot_table/blocks/fluid_tank.json
-351474a0ce3cb81331aa54fdfd5c70575c10d690 data/datanessence/loot_table/blocks/fluidic_glass.json
 21f5ad05e5229616ea951d95ad1307af1b7f1539 data/datanessence/loot_table/blocks/industrial_plant_siphon.json
 b8d2fa9097bae3a836da7acd662de09e9d889ee9 data/datanessence/loot_table/blocks/infuser.json
 26c69dcff1defc45669115decebc18f32b791f08 data/datanessence/loot_table/blocks/item_buffer.json
@@ -64,6 +64,6 @@ aca436e4c49a253ff47202ccea5ec753aec5a73d data/datanessence/loot_table/blocks/pol
 770c9798fe9e4ae46f0aefadfcc1179cca81b156 data/datanessence/loot_table/blocks/spire_glass.json
 551d36c40595eabcbf647193dbc5537770278255 data/datanessence/loot_table/blocks/structure_protector.json
 c86060a8bee40be4014b0d4ef5328b1f9b6f2250 data/datanessence/loot_table/blocks/synthesis_chamber.json
-c93b69f3ee9fa8db25d53d3b3e6e26d6b1e3283a data/datanessence/loot_table/blocks/tethergrass.json
+a18959e3b6e8284ae969ac3db3a191ba210e4ff3 data/datanessence/loot_table/blocks/tethergrass.json
 dbb37b98d7b947a9b52acc93133a797f6831bbea data/datanessence/loot_table/blocks/traversite_road.json
 79520676cdef899226b1394203ad881f5c962d41 data/datanessence/loot_table/blocks/vacuum.json

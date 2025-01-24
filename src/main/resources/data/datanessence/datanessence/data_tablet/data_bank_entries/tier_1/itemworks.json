@@ -3,7 +3,6 @@
     "id": "datanessence:item_wire"
   },
   "tier": 1,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.itemworks.name"
   },

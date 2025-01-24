@@ -3,7 +3,6 @@
     "id": "datanessence:item_filter"
   },
   "tier": 1,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.item_filter.name"
   },

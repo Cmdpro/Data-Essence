@@ -3,7 +3,6 @@
     "id": "datanessence:logical_matrix"
   },
   "tier": 1,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.crafting_components.name"
   },

@@ -3,7 +3,6 @@
     "id": "datanessence:fluid_bottler"
   },
   "tier": 2,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.fluid_bottler.name"
   },

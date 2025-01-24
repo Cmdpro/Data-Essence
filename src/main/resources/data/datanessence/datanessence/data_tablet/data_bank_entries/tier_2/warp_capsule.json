@@ -3,7 +3,6 @@
     "id": "datanessence:warp_capsule"
   },
   "tier": 2,
-  "minigames": [],
   "name": {
     "translate": "data_tablet.pages.warp_capsule.name"
   },
