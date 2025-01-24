@@ -1,0 +1,28 @@
+{
+  "icon": {
+    "id": "datanessence:data_bank"
+  },
+  "tab": "datanessence:basics",
+  "x": 0,
+  "y": -4,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.structures.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.structures.page2.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.structures.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.structures.flavor"
+  }
+}

@@ -31,6 +31,7 @@ public class DataTablet extends Item {
             DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/fabricator"), false);
             DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/essence_redirector"), false);
             DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/data_tablet"), false);
+            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/structures"), false);
             DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("tools/decorative_blocks"), false);
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
