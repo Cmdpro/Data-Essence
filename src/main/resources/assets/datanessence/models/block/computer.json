@@ -3,7 +3,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "datanessence:block/computer",
-		"particle": "datanessence:block/computer"
+		"particle": "datanessence:block/deco/patterned_copper"
 	},
 	"render_type": "minecraft:cutout",
 	"elements": [

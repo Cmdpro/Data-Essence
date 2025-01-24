@@ -3,7 +3,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "datanessence:block/enticing_lure",
-		"particle": "datanessence:block/enticing_lure"
+		"particle": "datanessence:block/deco/patterned_copper"
 	},
 	"render_type": "minecraft:cutout",
 	"elements": [

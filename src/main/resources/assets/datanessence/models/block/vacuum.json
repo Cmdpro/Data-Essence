@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "datanessence:block/vacuum",
-		"particle": "datanessence:block/vacuum"
+		"particle": "datanessence:block/deco/patterned_copper"
 	},
 	"render_type": "minecraft:cutout",
 	"elements": [

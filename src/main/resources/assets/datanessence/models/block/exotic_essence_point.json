@@ -1,6 +1,6 @@
 {
   "parent": "datanessence:block/essence_point",
   "textures": {
-    "particle": "datanessence:block/exotic_essence_point"
+    "particle": "datanessence:block/deco/polished_obsidian"
   }
 }

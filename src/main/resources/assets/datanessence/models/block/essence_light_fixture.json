@@ -2,7 +2,7 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "datanessence:block/deco/essence_light_fixture",
-		"particle": "datanessence:block/deco/essence_light_fixture"
+		"particle": "datanessence:block/deco/polished_obsidian"
 	},
 	"elements": [
 		{

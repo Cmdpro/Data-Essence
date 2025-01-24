@@ -4,5 +4,8 @@
   "texture_size": [
     64,
     64
-  ]
+  ],
+  "textures": {
+    "particle": "datanessence:block/deco/polished_obsidian"
+  }
 }
