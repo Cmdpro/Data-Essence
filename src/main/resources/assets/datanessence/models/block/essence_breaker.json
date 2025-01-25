@@ -1,0 +1,81 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "datanessence:block/essence_breaker_back",
+		"1": "datanessence:block/essence_breaker_side",
+		"2": "datanessence:block/essence_breaker_front",
+		"particle": "datanessence:block/essence_breaker_back"
+	},
+	"elements": [
+		{
+			"name": "slab",
+			"from": [0, 0, 8],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 0, 14]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 0, 8, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 0, 8, 16], "texture": "#1"},
+				"up": {"uv": [0, 0, 8, 16], "rotation": 90, "texture": "#1"},
+				"down": {"uv": [0, 0, 8, 16], "rotation": 90, "texture": "#1"}
+			}
+		},
+		{
+			"name": "drill_1",
+			"from": [3, 3, 5],
+			"to": [13, 13, 8],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [8, 8, 6]},
+			"faces": {
+				"north": {"uv": [10, 0, 0, 10], "texture": "#2"},
+				"east": {"uv": [8, 0, 11, 10], "texture": "#1"},
+				"south": {"uv": [0, 0, 10, 10], "texture": "#2"},
+				"west": {"uv": [11, 0, 8, 10], "rotation": 180, "texture": "#1"},
+				"up": {"uv": [11, 0, 8, 10], "rotation": 90, "texture": "#1"},
+				"down": {"uv": [11, 0, 8, 10], "rotation": 270, "texture": "#1"}
+			}
+		},
+		{
+			"name": "drill_2",
+			"from": [4, 4, 2],
+			"to": [12, 12, 5],
+			"rotation": {"angle": -45, "axis": "z", "origin": [8, 8, 2]},
+			"faces": {
+				"north": {"uv": [9, 1, 1, 9], "rotation": 90, "texture": "#2"},
+				"east": {"uv": [14, 1, 11, 9], "rotation": 180, "texture": "#1"},
+				"south": {"uv": [1, 1, 9, 9], "rotation": 270, "texture": "#2"},
+				"west": {"uv": [14, 1, 11, 9], "texture": "#1"},
+				"up": {"uv": [11, 1, 14, 9], "rotation": 270, "texture": "#1"},
+				"down": {"uv": [14, 1, 11, 9], "rotation": 90, "texture": "#1"}
+			}
+		},
+		{
+			"name": "drill_3",
+			"from": [5, 5, -1],
+			"to": [11, 11, 2],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [8, 8, -1]},
+			"faces": {
+				"north": {"uv": [8, 2, 2, 8], "rotation": 90, "texture": "#2"},
+				"east": {"uv": [8, 16, 11, 10], "texture": "#1"},
+				"south": {"uv": [2, 2, 8, 8], "rotation": 270, "texture": "#2"},
+				"west": {"uv": [8, 16, 11, 10], "rotation": 180, "texture": "#1"},
+				"up": {"uv": [8, 10, 11, 16], "rotation": 270, "texture": "#1"},
+				"down": {"uv": [11, 16, 8, 10], "rotation": 270, "texture": "#1"}
+			}
+		},
+		{
+			"name": "drill_4",
+			"from": [6.5, 6.5, -4],
+			"to": [9.5, 9.5, -1],
+			"rotation": {"angle": 0, "axis": "z", "origin": [7.5, 7.5, -4]},
+			"faces": {
+				"north": {"uv": [6, 7, 3, 4], "rotation": 90, "texture": "#2"},
+				"east": {"uv": [14, 11, 11, 14], "rotation": 180, "texture": "#1"},
+				"south": {"uv": [6, 4, 3, 7], "rotation": 270, "texture": "#2"},
+				"west": {"uv": [14, 11, 11, 14], "texture": "#1"},
+				"up": {"uv": [14, 14, 11, 11], "rotation": 90, "texture": "#1"},
+				"down": {"uv": [11, 11, 14, 14], "rotation": 90, "texture": "#1"}
+			}
+		}
+	]
+}

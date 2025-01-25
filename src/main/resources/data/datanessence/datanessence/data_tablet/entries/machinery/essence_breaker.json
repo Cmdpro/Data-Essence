@@ -17,7 +17,10 @@
       "type": "datanessence:crafting",
       "recipes": [
         "datanessence:fabrication/machines/essence_breaker"
-        ]
+        ],
+      "text": {
+        "translate": "data_tablet.pages.essence_breaker.page2.text"
+      }
     }
   ],
   "name": {

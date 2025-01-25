@@ -49,6 +49,7 @@ public class EssenceBreakerBlockEntity extends BlockEntity implements EssenceBlo
                     ) {
                         world.destroyBlock(breakPos, true);
                         ((ServerLevel) world).sendParticles(ParticleTypes.EXPLOSION, breakPos.getCenter().x, breakPos.getCenter().y, breakPos.getCenter().z, 1, 0, 0, 0, 0);
+                        tile.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), tile.breakCost);
                         tile.interval = 20;
                     }
                 }

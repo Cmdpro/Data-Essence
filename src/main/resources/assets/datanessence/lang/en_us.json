@@ -271,6 +271,7 @@
   "data_tablet.pages.essence_breaker.flavor": " ◇ Powering cobblestone generators the world over",
   "data_tablet.pages.essence_breaker.name": "Block Breaking",
   "data_tablet.pages.essence_breaker.page1.text": "It is possible to have Essence drive a drill that mines whatever block lay in front of it. The design of such an Essence Breaker is trivial, but that simplicity likewise means it does not handle item drops by itself.",
+  "data_tablet.pages.essence_breaker.page2.text": " ◇ Can be disabled with redstone.",
   "data_tablet.pages.essence_furnace.flavor": " ◇ Copper Convection Cooker",
   "data_tablet.pages.essence_furnace.name": "Essence Furnace",
   "data_tablet.pages.essence_furnace.page1.text": "Smelting is a common task, but the inefficiency and slow speeds of an ordinary furnace are unacceptable for many of our applications. We quickly discovered how to make Essence power a heating element that does the work instead, solving both of these problems.",

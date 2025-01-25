@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "datanessence:block/essence_breaker",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "datanessence:block/essence_breaker",
+      "x": 0,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "datanessence:block/essence_breaker",
+      "x": 0
+    },
+    "facing=south": {
+      "model": "datanessence:block/essence_breaker",
+      "x": 0,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "datanessence:block/essence_breaker",
+      "x": 270
+    },
+    "facing=west": {
+      "model": "datanessence:block/essence_breaker",
+      "x": 0,
+      "y": 270
+    }
+  }
+}
