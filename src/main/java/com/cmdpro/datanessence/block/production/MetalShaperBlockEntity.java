@@ -201,7 +201,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
                 if (!pBlockEntity.moldHandler.getStackInSlot(0).isEmpty()) {
                     moldRecipe = pBlockEntity.moldHandler.getStackInSlot(0).get(DataComponentRegistry.MOLD);
                 }
-                if (recipe.get().id().equals(moldRecipe)) {
+                if (recipe.get().id().equals(moldRecipe) && pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) > 0) {
                     if (!recipe.get().value().equals(pBlockEntity.recipe)) {
                         pBlockEntity.workTime = 0;
                     }

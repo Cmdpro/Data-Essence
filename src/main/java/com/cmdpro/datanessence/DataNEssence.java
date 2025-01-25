@@ -209,6 +209,8 @@ public class DataNEssence
             event.accept(ItemRegistry.DATA_TABLET.get());
             event.accept(ItemRegistry.ESSENCE_REDIRECTOR.get());
             event.accept(ItemRegistry.DATA_DRIVE.get());
+            event.accept(ItemRegistry.MOLD_PANEL.get());
+            event.accept(ItemRegistry.MOLD_ROD.get());
             event.accept(ItemRegistry.THERMOMETER.get());
             event.accept(ItemRegistry.ESSENCE_BOMB.get());
             //event.accept(ItemRegistry.LUNAR_ESSENCE_BOMB.get());

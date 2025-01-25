@@ -21,6 +21,13 @@
       "recipes": [
         "datanessence:fabrication/machines/metal_shaper"
       ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:crafting/panel_mold",
+        "datanessence:crafting/rod_mold"
+      ]
     }
   ],
   "name": {
