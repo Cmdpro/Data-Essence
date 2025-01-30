@@ -13,6 +13,15 @@
       "text": {
         "translate": "data_tablet.pages.plants.page1.text"
       }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:entropic_processing/bonding_powder"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.plants.page2.text"
+      }
     }
   ],
   "name": {
