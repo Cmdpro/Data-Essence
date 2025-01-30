@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:infusion",
+  "essenceCost": {
+    "datanessence:essence": 1000
+  },
+  "entry": "datanessence:machinery/infuser",
+  "input": {
+    "tag": "c:music_discs",
+    "count": 1
+  },
+  "result": {
+    "id": "datanessence:under_the_sky_music_disc",
+    "count": 1
+  }
+}
