@@ -5,7 +5,7 @@ In both aesthetic and mechanics, DnE is magitech: a blend of technology and magi
 
 Over the course of progression, you will work with more types of Essence and more complex mechanics, gaining access to more powerful machinery and equipment. This culminates in discovering a way to travel outside of your realm, to one where Essence permeates everything within it. Exploration of this other realm yields some of the most powerful things in the mod, as well as deeper insight into the origins of Essence and the Ancients you've been learning from.
 
-[Design Doc](https://docs.google.com/document/d/1jXmHCer-_6um1-AJRqcDkGYyKjpoGbhyEGBNibIRoIk/edit?tab=t.0) | [Discord](https://discord.gg/yjpMkxHhNJ)
+[CurseForge](https://curseforge.com/minecraft/mc-mods/data-essence) | [Design Doc](https://docs.google.com/document/d/1jXmHCer-_6um1-AJRqcDkGYyKjpoGbhyEGBNibIRoIk/edit?tab=t.0) | [Discord](https://discord.gg/yjpMkxHhNJ) | [Modrinth](https://modrinth.com/project/data-essence)
 
 ## Starting the Mod, and Progressing
 You will need to explore your world to find a specific structure, *Arekko's Vault*. The Vault generates in \<TODO\>. Once found, you may enter from above to retrieve a Data Tablet... after some effort. This Tablet is your guide through the mod.
