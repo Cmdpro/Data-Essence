@@ -14,14 +14,19 @@ import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.MetalShaperMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -43,6 +48,8 @@ import java.util.Optional;
 
 public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public AnimationState animState = new AnimationState();
+
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -209,6 +216,12 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
                     ItemStack assembled = recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
                         resetWorkTime = false;
+                        // working vfx
+                        if (pLevel.random.nextInt() % 20 == 0) {
+                            pLevel.playSound(null, pPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.8f, 0.75f);
+                            ((ServerLevel) pLevel).sendParticles(ParticleTypes.SMOKE, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, 5, 0, 0, 0, 0);
+                        }
+
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
                         if (pBlockEntity.workTime >= recipe.get().value().getTime()) {

@@ -82,6 +82,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.FLUID_MIXER.get(), FluidMixerRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.AREKKO.get(), ArekkoRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENTICING_LURE.get(), EnticingLureRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.METAL_SHAPER.get(), MetalShaperRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -133,6 +134,7 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(FluidMixerRenderer.modelLocation, FluidMixerRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(FluidMixerItemRenderer.modelLocation, FluidMixerItemRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(ArekkoRenderer.modelLocation, ArekkoRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(MetalShaperRenderer.modelLocation, MetalShaperRenderer.Model::createLayer);
         });
 
         event.enqueueWork(() -> {
@@ -165,6 +167,7 @@ public class ClientModEvents {
         event.registerItem(LunarEssencePointItem.extensions(), BlockRegistry.LUNAR_ESSENCE_POINT.get().asItem());
         event.registerItem(NaturalEssencePointItem.extensions(), BlockRegistry.NATURAL_ESSENCE_POINT.get().asItem());
         event.registerItem(FluidMixerItem.extensions(), BlockRegistry.FLUID_MIXER.get().asItem());
+        event.registerItem(MetalShaperItem.extensions(), BlockRegistry.METAL_SHAPER.get().asItem());
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
