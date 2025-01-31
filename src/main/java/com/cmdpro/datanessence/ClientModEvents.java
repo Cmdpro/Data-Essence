@@ -135,6 +135,7 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(FluidMixerItemRenderer.modelLocation, FluidMixerItemRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(ArekkoRenderer.modelLocation, ArekkoRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(MetalShaperRenderer.modelLocation, MetalShaperRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(MetalShaperItemRenderer.modelLocation, MetalShaperItemRenderer.Model::createLayer);
         });
 
         event.enqueueWork(() -> {
