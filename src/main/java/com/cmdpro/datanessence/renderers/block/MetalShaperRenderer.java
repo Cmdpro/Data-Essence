@@ -5,6 +5,7 @@ import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.block.auxiliary.ChargerBlockEntity;
 import com.cmdpro.datanessence.block.production.MetalShaper;
 import com.cmdpro.datanessence.block.production.MetalShaperBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -18,6 +19,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
@@ -88,16 +90,26 @@ public class MetalShaperRenderer extends DatabankBlockEntityRenderer<MetalShaper
             return getModel().createLayerDefinition();
         }
 
-        // TODO these anims snap into place, instead of actually animating. why?
         public void setupAnim(MetalShaperBlockEntity pEntity) {
             pEntity.animState.startIfStopped((int)getAgeInTicks());
-            if (pEntity.workTime >= 0) {
-                this.animate(pEntity.animState, lowerPress, 1.0f);
+            AnimationDefinition anim;
+            if (pEntity.workTime >= 0 && pEntity.workTime <= pEntity.maxWorkTime-15) {
+                anim = lowerPress;
             } else {
-                this.animate(pEntity.animState, raisePress, 1.0f);
+                anim = raisePress;
+            }
+            if (anim != pEntity.anim) {
+                this.updateAnim(pEntity, pEntity.animState, anim);
+            }
+            this.animate(pEntity.animState, pEntity.anim, 1.0f);
+        }
+        protected void updateAnim(MetalShaperBlockEntity entity, AnimationState pAnimationState, AnimationDefinition pAnimationDefinition) {
+            if (entity.anim != pAnimationDefinition) {
+                pAnimationState.stop();
+                pAnimationState.start((int)getAgeInTicks());
+                entity.anim = pAnimationDefinition;
             }
         }
-
         @Override
         public ModelPart root() {
             return root;

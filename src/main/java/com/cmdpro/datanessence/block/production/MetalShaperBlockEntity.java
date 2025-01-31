@@ -12,6 +12,7 @@ import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.MetalShaperMenu;
+import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -49,7 +50,7 @@ import java.util.Optional;
 public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     public AnimationState animState = new AnimationState();
-
+    public AnimationDefinition anim;
     @Override
     public EssenceStorage getStorage() {
         return storage;
