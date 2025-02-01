@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "allthemodium"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:raw_materials/allthemodium" },
+    "time": 200,
+    "result": { "id": "allthemodium:allthemodium_ingot" },
+    "nuggetResult": { "id": "allthemodium:allthemodium_nugget", "count": 1 }
+}
