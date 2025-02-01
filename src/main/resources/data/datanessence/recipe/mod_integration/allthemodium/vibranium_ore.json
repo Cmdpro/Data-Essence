@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "allthemodium"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:ores/vibranium" },
+    "time": 400,
+    "result": { "id": "allthemodium:vibranium_ingot" },
+    "nuggetResult": { "id": "allthemodium:vibranium_nugget", "count": 2 }
+}
