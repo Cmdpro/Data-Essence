@@ -22,7 +22,19 @@ public class SpreadingPlant extends Block {
 
     @Override
     protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (random.nextInt(15) == 0) {
+        grow(state, world, pos, random, 15);
+    }
+
+    /**
+     * Trigger a mushroom-like growth in this plant.
+     * @param state block state to operate on
+     * @param world world to operate in
+     * @param pos coords of the block
+     * @param random random source
+     * @param chance how often the growth may occur (works inverse of what one may intuit - smaller number is more frequent!)
+     */
+    public void grow(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, int chance) {
+        if (random.nextInt(chance) == 0) {
             int i = 5;
 
             for (BlockPos blockpos : BlockPos.betweenClosed(pos.offset(-4, -1, -4), pos.offset(4, 1, 4))) {
