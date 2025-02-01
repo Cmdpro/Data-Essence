@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "mekanism"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:ores/osmium" },
+    "time": 400,
+    "result": { "id": "mekanism:ingot_osmium" },
+    "nuggetResult": { "id": "mekanism:nugget_osmium", "count": 2 }
+}

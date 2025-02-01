@@ -2,12 +2,12 @@
     "neoforge:conditions": [
         {
             "type": "neoforge:mod_loaded",
-            "modid": "alltheores"
+            "modid": "mekanism"
         }
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:ores/tin" },
     "time": 400,
-    "result": { "id": "alltheores:tin_ingot" },
-    "nuggetResult": { "id": "alltheores:tin_nugget", "count": 2 }
+    "result": { "id": "mekanism:ingot_tin" },
+    "nuggetResult": { "id": "mekanism:nugget_tin", "count": 2 }
 }
