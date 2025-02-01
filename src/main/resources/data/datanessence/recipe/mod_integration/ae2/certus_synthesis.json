@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 25
+  },
+  "input": { "item": "ae2:certus_quartz_crystal" },
+  "input2": { "item": "ae2:certus_quartz_dust" },
+  "time": 120,
+  "result": { "id": "ae2:certus_quartz_crystal", "count": 2 },
+  "entry": "datanessence:basics/mod_integration_ae2"
+}

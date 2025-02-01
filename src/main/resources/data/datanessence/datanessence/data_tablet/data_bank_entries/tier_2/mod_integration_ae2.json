@@ -1,0 +1,20 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
+  "icon": {
+    "id": "ae2:charged_certus_quartz_crystal"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.integration_ae2.name"
+  },
+  "entry": "datanessence:basics/mod_integration_ae2",
+  "parents": [
+    "datanessence:machinery/entropic_processor",
+    "datanessence:machinery/synthesis_chamber"
+  ]
+}

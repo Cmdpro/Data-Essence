@@ -259,6 +259,10 @@
   "data_tablet.pages.industrial_plant_siphon.page1.text": "The life of the world is not limited to creatures - nature, too, bears Essence of a kind. We can use industrial processes to siphon basic Essence from nature, yielding a far more readily sustainable source than crystals or monsters.\n\nIt does, however, seem that common plants provide far less Essence than rarer, more magically attuned ones....",
   "data_tablet.pages.industrial_plant_siphon.page2.text": " ◇ Power source: Plants.\n ◇ Coolant: None.\n ◇ Requires consumables: Plants/leaves/crops.\n ◇ Risks: None.",
 
+  "_comment.data_tablet.pages.integration": "Separate lang category for mod integration entries.",
+  "data_tablet.pages.integration_ae2.name": "Integration: Applied Energistics 2",
+  "data_tablet.pages.integration_ae2.page1.text": "We have discovered a meteor, inside of which was a series of strange circuit presses and sky blue crystals. From this salvage we were able to make a form of networked control and storage system. The data of hundreds of thousands of items etched onto crystalline disks; traveling across neuronic pathways of glowing purple; decomposition and reformation. However, the process by which many of the fundamental materials for this system are acquired left much to be desired, and so innovation was required.",
+
   "_comment.data_tablet_pages.machinery": "Machinery and Processing category texts.",
   "data_tablet.pages.auto-fabricator.flavor": " ◇ Autocrafting the autocrafter",
   "data_tablet.pages.auto-fabricator.name": "Automatic Fabrication",
