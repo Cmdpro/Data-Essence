@@ -33,7 +33,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(Items.CHORUS_FRUIT);
         this.tag(TagRegistry.Items.EXPLOSIVE_MATERIAL)
                 .add(Items.GUNPOWDER)
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "sulfur"));
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "dusts/sulfur"));
         this.tag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem())
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get().asItem());

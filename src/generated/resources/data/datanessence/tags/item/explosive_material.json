@@ -2,7 +2,7 @@
   "values": [
     "minecraft:gunpowder",
     {
-      "id": "#c:sulfur",
+      "id": "#c:dusts/sulfur",
       "required": false
     }
   ]
