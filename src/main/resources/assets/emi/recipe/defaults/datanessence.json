@@ -48,6 +48,7 @@
       "datanessence:fabrication/machines/infuser",
       "datanessence:fabrication/machines/item_filter",
       "datanessence:fabrication/machines/laser_emitter",
+      "datanessence:fabrication/machines/metal_shaper",
       "datanessence:fabrication/machines/vacuum",
       "datanessence:fabrication/points/essence_point",
       "datanessence:fabrication/points/fluid_point",
