@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "alltheores"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:raw_materials/zinc" },
+    "time": 200,
+    "result": { "id": "alltheores:zinc_ingot" },
+    "nuggetResult": { "id": "alltheores:zinc_nugget", "count": 1 }
+}

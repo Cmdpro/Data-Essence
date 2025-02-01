@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "alltheores"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:ores/uranium" },
+    "time": 400,
+    "result": { "id": "alltheores:uranium_ingot" },
+    "nuggetResult": { "id": "alltheores:uranium_nugget", "count": 2 }
+}
