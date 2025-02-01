@@ -37,7 +37,6 @@ public class EntryManager extends SimpleJsonResourceReloadListener {
             try {
                 Entry entry = deserializeEntry(location, GsonHelper.convertToJsonObject(i.getValue(), "top member"));
                 if (entry == null) {
-                    DataNEssence.LOGGER.info("Skipping loading element {} as its serializer returned null", location);
                     continue;
                 }
                 Entries.entries.put(i.getKey(), entry);

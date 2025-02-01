@@ -37,7 +37,6 @@ public class DataTabManager extends SimpleJsonResourceReloadListener {
             try {
                 DataTab tab = deserializeTab(location, GsonHelper.convertToJsonObject(i.getValue(), "top member"));
                 if (tab == null) {
-                    DataNEssence.LOGGER.info("Skipping loading element {} as its serializer returned null", location);
                     continue;
                 }
                 Entries.tabs.put(i.getKey(), tab);

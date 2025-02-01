@@ -37,7 +37,6 @@ public class DataBankEntryManager extends SimpleJsonResourceReloadListener {
             try {
                 DataBankEntry entry = deserializeEntry(location, GsonHelper.convertToJsonObject(i.getValue(), "top member"));
                 if (entry == null) {
-                    DataNEssence.LOGGER.info("Skipping loading element {} as its serializer returned null", location);
                     continue;
                 }
                 DataBankEntries.entries.put(i.getKey(), entry);

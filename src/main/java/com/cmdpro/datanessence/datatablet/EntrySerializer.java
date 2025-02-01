@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.datatablet;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.api.datatablet.PageSerializer;
+import com.cmdpro.datanessence.databank.DataBankEntry;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.*;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -13,16 +14,24 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.conditions.ConditionalOps;
+import net.neoforged.neoforge.common.conditions.ICondition;
+import net.neoforged.neoforge.common.conditions.WithConditions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class EntrySerializer {
     public Entry read(ResourceLocation entryId, JsonObject json) {
-        Entry entry = CODEC.codec().parse(JsonOps.INSTANCE, json).getOrThrow();
-        entry.id = entryId;
-        return entry;
+        Entry entry = ICondition.getWithWithConditionsCodec(CODEC, JsonOps.INSTANCE, json).orElse(null);
+        if (entry != null) {
+            entry.id = entryId;
+            return entry;
+        } else {
+            return null;
+        }
     }
     public static final Codec<Page> PAGE_CODEC = DataNEssenceRegistries.PAGE_TYPE_REGISTRY.byNameCodec().dispatch(Page::getSerializer, pageSerializer -> pageSerializer.getCodec());
     public static final StreamCodec<RegistryFriendlyByteBuf, Page> PAGE_STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
@@ -34,7 +43,7 @@ public class EntrySerializer {
         Page page = (Page)pageSerializer.getStreamCodec().decode(pBuffer);
         return page;
     });
-    public static final MapCodec<Entry> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+    public static final MapCodec<Entry> ORIGINAL_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             ItemStack.CODEC.fieldOf("icon").forGetter((entry) -> entry.icon),
             Codec.INT.fieldOf("x").forGetter((entry) -> entry.x),
             Codec.INT.fieldOf("y").forGetter((entry) -> entry.y),
@@ -48,6 +57,7 @@ public class EntrySerializer {
             PAGE_CODEC.listOf().optionalFieldOf("incompletePages", new ArrayList<>()).forGetter((entry) -> Arrays.stream(entry.incompletePages).toList()),
             ResourceLocation.CODEC.optionalFieldOf("completionAdvancement", ResourceLocation.fromNamespaceAndPath("", "")).forGetter((entry) -> entry.completionAdvancement)
     ).apply(instance, (icon, x, y, name, flavor, parents, pages, critical, tab, incomplete, incompletePages, completionAdvancement) -> new Entry(null, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, flavor, critical, incomplete, incompletePages.toArray(new Page[0]), completionAdvancement)));
+    public static final Codec<Optional<WithConditions<Entry>>> CODEC = ConditionalOps.createConditionalCodecWithConditions(ORIGINAL_CODEC.codec());
     public static final StreamCodec<RegistryFriendlyByteBuf, Entry> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
         pBuffer.writeResourceLocation(pValue.id);
         pBuffer.writeInt(pValue.x);

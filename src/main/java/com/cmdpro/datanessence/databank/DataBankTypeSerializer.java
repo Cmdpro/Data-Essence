@@ -19,7 +19,19 @@ public class DataBankTypeSerializer {
         List<ResourceLocation> ids = new ArrayList<>();
         if (json.has("add")) {
             for (JsonElement i : json.getAsJsonArray("add")) {
-                ids.add(ResourceLocation.tryParse(i.getAsString()));
+                if (i.isJsonObject()) {
+                    ResourceLocation value = ResourceLocation.tryParse(i.getAsJsonObject().get("value").getAsString());
+                    boolean required = i.getAsJsonObject().has("required") ? i.getAsJsonObject().get("required").getAsBoolean() : false;
+                    if (!required) {
+                        if (DataBankEntries.entries.containsKey(value)) {
+                            ids.add(value);
+                        }
+                    } else {
+                        ids.add(value);
+                    }
+                } else {
+                    ids.add(ResourceLocation.tryParse(i.getAsString()));
+                }
             }
         }
         return ids.toArray(new ResourceLocation[0]);
