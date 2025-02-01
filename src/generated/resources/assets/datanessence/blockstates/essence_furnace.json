@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "datanessence:block/essence_furnace",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "datanessence:block/essence_furnace"
+    },
+    "facing=south": {
+      "model": "datanessence:block/essence_furnace",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "datanessence:block/essence_furnace",
+      "y": 270
+    }
+  }
+}

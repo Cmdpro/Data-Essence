@@ -53,7 +53,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         transparentDecoBlockWithItem(BlockRegistry.FLUIDIC_GLASS);
         decoBlock(BlockRegistry.AETHER_RUNE);
 
-        essenceBurner(BlockRegistry.ESSENCE_BURNER);
+        essenceBurner(BlockRegistry.ESSENCE_BURNER); // TODO "on" textures
         dataBank(BlockRegistry.DATA_BANK);
         fluidCollector(BlockRegistry.FLUID_COLLECTOR);
         fluidCollector(BlockRegistry.FLUID_SPILLER);
@@ -62,6 +62,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         itemFilter(BlockRegistry.ITEM_FILTER);
         crystallineLog(BlockRegistry.CRYSTALLINE_LOG);
         essenceLeech(BlockRegistry.ESSENCE_LEECH);
+        essenceFurnace(BlockRegistry.ESSENCE_FURNACE); // TODO "on" textures
 
         nothing(BlockRegistry.STRUCTURE_PROTECTOR);
 
@@ -180,6 +181,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("down", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/polished_obsidian"))
                 .texture("up", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top"))
                 .texture("south", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_back"))
+                .texture("particle", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_front"));
+        simpleBlockItem(blockRegistryObject.get(), model);
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(EssenceBurner.FACING, Direction.EAST).modelForState().modelFile(model).rotationY(90).addModel()
+                .partialState().with(EssenceBurner.FACING, Direction.NORTH).modelForState().modelFile(model).addModel()
+                .partialState().with(EssenceBurner.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).addModel()
+                .partialState().with(EssenceBurner.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).addModel();
+    }
+    private void essenceFurnace(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side"))
+                .texture("east", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side"))
+                .texture("north", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_front"))
+                .texture("down", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/patterned_copper"))
+                .texture("up", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top"))
+                .texture("south", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side"))
                 .texture("particle", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_front"));
         simpleBlockItem(blockRegistryObject.get(), model);
         getVariantBuilder(blockRegistryObject.get())
