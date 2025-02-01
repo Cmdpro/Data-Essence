@@ -40,7 +40,8 @@
     "datanessence:tier_2/node_upgrades",
     "datanessence:tier_2/plants",
     "datanessence:tier_2/synthesis_chamber",
-    "datanessence:tier_2/warp_capsule"
+    "datanessence:tier_2/warp_capsule",
+    { "value": "datanessence:tier_2/mod_integration_ae2", "required": false }
   ],
   "remove": [
     "datanessence:tier_1/essence_bombs",

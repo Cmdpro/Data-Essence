@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 30
+  },
+  "input": { "item": "ae2:certus_quartz_dust" },
+  "input2": { "tag": "minecraft:sand" },
+  "time": 100,
+  "result": { "id": "ae2:silicon", "count": 2 },
+  "entry": "datanessence:basics/integration_ae2"
+}

@@ -1,0 +1,42 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
+  "icon": {
+    "id": "ae2:charged_certus_quartz_crystal"
+  },
+  "tab": "datanessence:basics",
+  "x": 0,
+  "y": 4,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.integration_ae2.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:mod_integration/ae2/certus_crushing",
+        "datanessence:mod_integration/ae2/fluix_crushing",
+        "datanessence:mod_integration/ae2/ender_pearl_crushing",
+        "datanessence:mod_integration/ae2/sky_stone_crushing"
+      ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:mod_integration/ae2/certus_synthesis",
+        "datanessence:mod_integration/ae2/fluix_synthesis",
+        "datanessence:mod_integration/ae2/silicon_synthesis"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.integration_ae2.name"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "ae2"
+    }
+  ],
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "minecraft:ender_pearl" },
+  "time": 100,
+  "result": { "id": "ae2:ender_dust", "count": 1 }
+}
