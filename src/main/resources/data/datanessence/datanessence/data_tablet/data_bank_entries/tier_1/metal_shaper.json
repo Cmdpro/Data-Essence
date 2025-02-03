@@ -2,7 +2,7 @@
   "icon": {
     "id": "datanessence:metal_shaper"
   },
-  "tier": 2,
+  "tier": 1,
   "name": {
     "translate": "data_tablet.pages.metal_shaper.name"
   },
