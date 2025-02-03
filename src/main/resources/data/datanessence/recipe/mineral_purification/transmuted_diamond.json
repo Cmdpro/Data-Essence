@@ -1,7 +1,0 @@
-{
-    "type": "datanessence:mineral_purification",
-    "input": { "item": "datanessence:transmuted_diamond" },
-    "time": 100,
-    "result": { "id": "minecraft:diamond" },
-    "nuggetResult": { "id": "datanessence:diamond_shard", "count": 1 }
-}
