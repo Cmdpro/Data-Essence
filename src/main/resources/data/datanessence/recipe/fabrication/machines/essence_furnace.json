@@ -1,6 +1,6 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
-  "essenceCost": { "datanessence:essence": 125 },
+  "essenceCost": { "datanessence:essence": 10 },
   "entry": "datanessence:machinery/essence_furnace",
   "pattern": [
     "PPP",

@@ -1,7 +1,7 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
   "essenceCost": {
-    "datanessence:essence": 100
+    "datanessence:essence": 10
   },
   "entry": "datanessence:machinery/fluidworks",
   "pattern": [

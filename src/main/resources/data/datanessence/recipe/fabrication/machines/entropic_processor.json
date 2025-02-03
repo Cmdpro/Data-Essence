@@ -1,6 +1,6 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
-  "essenceCost": { "datanessence:essence": 250 },
+  "essenceCost": { "datanessence:essence": 25 },
   "entry": "datanessence:machinery/entropic_processor",
   "pattern": [
     "CDC",

@@ -1,7 +1,7 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
   "essenceCost": {
-    "datanessence:essence": 125
+    "datanessence:essence": 25
   },
   "entry": "datanessence:machinery/fluid_bottler",
   "pattern": [
