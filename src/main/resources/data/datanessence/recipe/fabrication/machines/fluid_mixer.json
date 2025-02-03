@@ -1,7 +1,7 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
   "essenceCost": { "datanessence:essence": 25 },
-  "entry": "datanessence:machines/fluid_mixer",
+  "entry": "datanessence:machinery/fluid_mixer",
   "pattern": [
     "I I",
     "GPG",

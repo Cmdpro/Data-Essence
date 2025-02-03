@@ -1,7 +1,7 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
   "essenceCost": { "datanessence:essence": 50 },
-  "entry": "datanessence:machines/metal_shaper",
+  "entry": "datanessence:machinery/metal_shaper",
   "pattern": [
     "RIR",
     "P P",

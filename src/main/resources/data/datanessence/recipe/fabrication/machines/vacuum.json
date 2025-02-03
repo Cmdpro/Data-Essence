@@ -1,7 +1,7 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
   "essenceCost": { "datanessence:essence": 5 },
-  "entry": "datanessence:machines/vacuum",
+  "entry": "datanessence:machinery/vacuum",
   "pattern": [
     "RCR",
     "CEC",

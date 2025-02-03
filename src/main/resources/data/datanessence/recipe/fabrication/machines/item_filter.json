@@ -1,7 +1,7 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
   "essenceCost": { "datanessence:essence": 5 },
-  "entry": "datanessence:machines/item_filter",
+  "entry": "datanessence:machinery/item_filter",
   "pattern": [
     "COC",
     "DLD",
