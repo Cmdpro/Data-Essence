@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "datanessence:block/fluid_bottler",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "datanessence:block/fluid_bottler"
+    },
+    "facing=south": {
+      "model": "datanessence:block/fluid_bottler",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "datanessence:block/fluid_bottler",
+      "y": 270
+    }
+  }
+}
