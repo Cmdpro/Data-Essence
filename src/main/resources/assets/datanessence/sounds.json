@@ -4,6 +4,12 @@
             "datanessence:critical_data_unlocked"
         ]
     },
+    "entropic_processor_working": {
+        "sounds": [
+            "datanessence:grind"
+        ],
+        "subtitle": "subtitle.datanessence.entropic_processor_working"
+    },
     "ui_click": {
         "sounds": [
             "datanessence:ui_click"

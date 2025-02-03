@@ -1,28 +1,25 @@
 package com.cmdpro.datanessence.block.processing;
 
-import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
-import com.cmdpro.datanessence.registry.BlockEntityRegistry;
-import com.cmdpro.datanessence.registry.DamageTypeRegistry;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
-import com.cmdpro.datanessence.registry.RecipeRegistry;
+import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -46,6 +43,8 @@ import java.util.Optional;
 public class EntropicProcessorBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public AnimationState animState = new AnimationState();
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public int soundTick; // noise
+
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -112,6 +111,7 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         tag.put("output", outputItemHandler.serializeNBT(pRegistries));
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
+        tag.putInt("SoundTick", soundTick);
         super.saveAdditional(tag, pRegistries);
     }
     public float maxTime;
@@ -122,6 +122,7 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
+        soundTick = nbt.getInt("SoundTick");
     }
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots()+outputItemHandler.getSlots());
@@ -148,22 +149,32 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
                 Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
                 if (recipe.isPresent()) {
-                    for (LivingEntity i : pLevel.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pPos.getCenter(), 0.9f, 0.9f, 0.9f))) {
-                        i.hurt(i.damageSources().source(DamageTypeRegistry.crushed), 2f);
+
+                    for (LivingEntity victim : pLevel.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pPos.getCenter(), 0.9f, 0.9f, 0.9f))) {
+                        victim.hurt(victim.damageSources().source(DamageTypeRegistry.crushed), 2f);
                     }
-                    if (!recipe.get().value().equals(pBlockEntity.recipe)) {
+                    if (!recipe.get().value().equals(pBlockEntity.recipe))
                         pBlockEntity.workTime = 0;
-                    }
+
                     pBlockEntity.recipe = recipe.get().value();
                     ItemStack assembled = recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
+
+                        // TODO why does this not play
+                        if (pBlockEntity.soundTick <= 0) {
+                            pLevel.playSound(null, pPos, SoundRegistry.ENTROPIC_PROCESSOR_WORKING.get(), SoundSource.BLOCKS, 0.5f, 1.25f);
+                            pBlockEntity.soundTick = 240; // the sound file is 12 seconds long
+                        }
+                        else { pBlockEntity.soundTick -= 1; }
+
                         if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
                             pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
+                            pBlockEntity.soundTick = 0;
                         }
                     }
                 } else {
@@ -174,7 +185,9 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
             }
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;
+                pBlockEntity.soundTick = 0;
             }
+
             pBlockEntity.updateBlock();
         }
     }

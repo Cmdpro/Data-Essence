@@ -13,6 +13,8 @@ public class SoundRegistry {
 
     public static final Supplier<SoundEvent> CRITICAL_DATA_UNLOCKED = SOUND_EVENTS.register("critical_data_unlocked",
             () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "critical_data_unlocked")));
+    public static final Supplier<SoundEvent> ENTROPIC_PROCESSOR_WORKING = SOUND_EVENTS.register("entropic_processor_working",
+            () -> SoundEvent.createVariableRangeEvent(DataNEssence.locate("grind")));
     public static final Supplier<SoundEvent> UI_CLICK = SOUND_EVENTS.register("ui_click",
             () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "ui_click")));
     public static final Supplier<SoundEvent> UNDER_THE_SKY = SOUND_EVENTS.register("under_the_sky",

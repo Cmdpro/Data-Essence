@@ -406,6 +406,8 @@
   "tooltip.datanessence.save_and_exit": "Save and Exit",
   "tooltip.datanessence.save_and_exit_sneak": "Clear Saved Entry",
 
+  "subtitle.datanessence.entropic_processor_working": "Entropic Processor grinds",
+
   "tag.item.datanessence.polished_obsidian_blocks": "Polished Obsidian Blocks",
   "tag.item.datanessence.shaped_polished_obsidian_blocks": "Shaped Polished Obsidian Blocks",
   "tag.item.datanessence.explosive_material": "Explosive Material",
