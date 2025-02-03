@@ -31,7 +31,7 @@ public class AutoFabricatorScreen extends AbstractContainerScreen<AutoFabricator
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+113, y+52));
+        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+128, y+3));
     }
 
     public float time;

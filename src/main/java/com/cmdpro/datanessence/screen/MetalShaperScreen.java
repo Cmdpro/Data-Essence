@@ -30,7 +30,7 @@ public class MetalShaperScreen extends AbstractContainerScreen<MetalShaperMenu> 
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+38, y+33));
+        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+151, y+30));
     }
     @Override
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
@@ -41,7 +41,7 @@ public class MetalShaperScreen extends AbstractContainerScreen<MetalShaperMenu> 
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
         ClientRenderingUtil.renderLockedSlotBg(pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y, menu.slots);
         if (menu.blockEntity.workTime >= 0 && menu.blockEntity.maxWorkTime != -1) {
-            pGuiGraphics.blit(TEXTURE, x + 82, y + 33, 188, 0, (int) Math.ceil(22f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxWorkTime)), 17);
+            pGuiGraphics.blit(TEXTURE, x + 82, y + 27, 188, 0, 12, (int) Math.ceil(15f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxWorkTime)));
         }
         ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
         if (ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false)) {

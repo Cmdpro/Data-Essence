@@ -48,7 +48,7 @@ public class AutoFabricatorMenu extends AbstractContainerMenu implements IDataNE
             }
         }
         this.addSlot(new SlotItemHandler(handler, 9, 145, 35));
-        this.addSlot(new SlotItemHandler(handler, 10, 152, 8));
+        this.addSlot(new SlotItemHandler(handler, 10, 152, 4));
     }
 
     @Override

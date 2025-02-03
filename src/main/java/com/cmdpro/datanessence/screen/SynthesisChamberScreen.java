@@ -31,7 +31,7 @@ public class SynthesisChamberScreen extends AbstractContainerScreen<SynthesisCha
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+84, y+52));
+        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+151, y+30));
     }
 
     public float time;

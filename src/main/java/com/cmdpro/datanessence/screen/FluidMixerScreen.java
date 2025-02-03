@@ -35,7 +35,7 @@ public class FluidMixerScreen extends AbstractContainerScreen<FluidMixerMenu> {
         addRenderableWidget(new FluidWidget(x+39, y+22, menu.blockEntity.getFluidHandler(), 0, false));
         addRenderableWidget(new FluidWidget(x+39, y+45, menu.blockEntity.getFluidHandler(), 1, false));
         addRenderableWidget(new FluidWidget(x+116, y+34, menu.blockEntity.getOutputHandler(), 0, false));
-        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+84, y+52));
+        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+151, y+30));
     }
 
     @Override

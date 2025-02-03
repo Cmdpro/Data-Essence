@@ -41,8 +41,8 @@ public class MetalShaperMenu extends AbstractContainerMenu implements IDataNEsse
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
         this.addSlot(new MoldSlot(blockEntity.getMoldHandler(), 0, 152, 8));
-        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 62, 34));
-        this.addSlot(new ModResultSlot(blockEntity.getOutputHandler(), 0, 116, 34));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 80, 7));
+        this.addSlot(new ModResultSlot(blockEntity.getOutputHandler(), 0, 80, 54));
     }
 
     @Override
