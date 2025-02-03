@@ -10,12 +10,14 @@ public class EssenceType {
     public static final ResourceLocation ESSENCE_BAR_LOCATION = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/essence_bars.png");
 
     public final Component name;
+    public final int tier;
     public final int color;
     public final EssenceBarSpriteLocation tinyBarSprite, bigBarSprite;
     public final String tooltipKey;
 
-    public EssenceType(Component name, int color, String tooltipKey, EssenceBarSpriteLocation tinyBarSprite, EssenceBarSpriteLocation bigBarSprite) {
+    public EssenceType(Component name, int tier, int color, String tooltipKey, EssenceBarSpriteLocation tinyBarSprite, EssenceBarSpriteLocation bigBarSprite) {
         this.name = name;
+        this.tier = tier;
         this.color = color;
         this.tinyBarSprite = tinyBarSprite;
         this.bigBarSprite = bigBarSprite;

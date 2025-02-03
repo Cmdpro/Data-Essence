@@ -23,7 +23,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DataNEssenceCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher){
@@ -133,7 +135,12 @@ public class DataNEssenceCommands {
             unlockedEntries.clear();
             List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
             incompleteEntries.clear();
+            HashMap<ResourceLocation, Boolean> unlockedEssences = player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCES);
+            unlockedEssences.clear();
             PlayerDataUtil.updateUnlockedEntries((ServerPlayer)player);
+            PlayerDataUtil.updateData((ServerPlayer)player);
+            player.setData(AttachmentTypeRegistry.TIER, 0);
+            PlayerDataUtil.sendTier((ServerPlayer)player, false);
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.reset_learned", player.getName());
             }, true);

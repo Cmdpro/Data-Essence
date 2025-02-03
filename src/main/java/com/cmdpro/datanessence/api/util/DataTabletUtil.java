@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,12 +77,16 @@ public class DataTabletUtil {
     public static void setTier(Player player, int tier) {
         player.setData(AttachmentTypeRegistry.TIER, tier);
         PlayerDataUtil.sendTier((ServerPlayer) player, true);
-        EssenceType essenceType = DataTabletUtil.getUnlockedTypeForTier(tier);
-        if (essenceType != null) {
-            if (!player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCES).getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(essenceType), false)) {
-                player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCES).put(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(essenceType), true);
-                PlayerDataUtil.updateData((ServerPlayer) player);
+        List<EssenceType> essenceTypes = DataTabletUtil.getUnlockedTypesForTier(tier);
+        boolean anyUnlocked = false;
+        for (EssenceType i : essenceTypes) {
+            if (!player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCES).getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), false)) {
+                player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCES).put(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), true);
+                anyUnlocked = true;
             }
+        }
+        if (anyUnlocked) {
+            PlayerDataUtil.updateData((ServerPlayer) player);
         }
     }
     public static int getMaxTier() {
@@ -110,21 +115,13 @@ public class DataTabletUtil {
             setTier(player, tier);
         }
     }
-    @Nullable
-    private static EssenceType getUnlockedTypeForTier(int tier) {
-        EssenceType essenceType = null;
-        if (tier >= 1) {
-            essenceType = EssenceTypeRegistry.ESSENCE.get();
+    public static List<EssenceType> getUnlockedTypesForTier(int tier) {
+        List<EssenceType> essenceTypes = new ArrayList<>();
+        for (EssenceType i : DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.stream().toList()) {
+            if (tier >= i.tier) {
+                essenceTypes.add(i);
+            }
         }
-        if (tier >= 3) {
-            essenceType = EssenceTypeRegistry.LUNAR_ESSENCE.get();
-        }
-        if (tier >= 5) {
-            essenceType = EssenceTypeRegistry.NATURAL_ESSENCE.get();
-        }
-        if (tier >= 7) {
-            essenceType = EssenceTypeRegistry.EXOTIC_ESSENCE.get();
-        }
-        return essenceType;
+        return essenceTypes;
     }
 }
