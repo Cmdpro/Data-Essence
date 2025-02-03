@@ -2,6 +2,8 @@ package com.cmdpro.datanessence.api.util;
 
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.databank.DataBankEntries;
+import com.cmdpro.datanessence.databank.DataBankEntry;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.datatablet.Entries;
@@ -12,6 +14,7 @@ import net.minecraft.world.entity.player.Player;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Optional;
 
 public class DataTabletUtil {
     public static void unlockEntry(Player player, ResourceLocation entry, boolean incomplete) {
@@ -31,6 +34,7 @@ public class DataTabletUtil {
             }
             unlocked.add(entry);
             PlayerDataUtil.unlockEntry((ServerPlayer) player, entry, incomplete);
+            checkForTierUpgrades(player);
         }
     }
 
@@ -55,6 +59,7 @@ public class DataTabletUtil {
                 DataTabletUtil.unlockEntryAndParents(player, i.id, i.incomplete);
             }
         }
+        checkForTierUpgrades(player);
     }
 
     public static boolean playerHasEntry(Player player, ResourceLocation entry) {
@@ -79,7 +84,32 @@ public class DataTabletUtil {
             }
         }
     }
-
+    public static int getMaxTier() {
+        int tier = 0;
+        for (var i : DataBankEntries.entries.values()) {
+            if (i.tier > tier) {
+                tier = i.tier;
+            }
+        }
+        return tier;
+    }
+    public static void checkForTierUpgrades(Player player) {
+        int tier = getMaxTier();
+        var unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+        for (var i : Entries.entries.values()) {
+            if (!unlocked.contains(i.id) && i.critical) {
+                Optional<DataBankEntry> entry = DataBankEntries.entries.values().stream().filter((a) -> a.entry.equals(i.id)).findFirst();
+                if (entry.isPresent()) {
+                    if (tier > entry.get().tier) {
+                        tier = entry.get().tier;
+                    }
+                }
+            }
+        }
+        if (getTier(player) != tier) {
+            setTier(player, tier);
+        }
+    }
     @Nullable
     private static EssenceType getUnlockedTypeForTier(int tier) {
         EssenceType essenceType = null;
