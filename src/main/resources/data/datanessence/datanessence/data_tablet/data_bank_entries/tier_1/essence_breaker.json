@@ -3,6 +3,13 @@
     "id": "datanessence:essence_breaker"
   },
   "tier": 1,
+  "minigames": [
+    {
+      "type": "datanessence:minesweeper",
+      "bombs": 10,
+      "size": 5
+    }
+  ],
   "name": {
     "translate": "data_tablet.pages.essence_breaker.name"
   },
