@@ -185,6 +185,87 @@
           ]
         }
       ]
+    },
+    "cryosleeping": {
+      "length": 0,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "LeftLeg",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                4.9810693937001815,
+                0.43523000247023447,
+                -4.9810693937001815
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "RightLeg",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -2.5,
+                0,
+                2.5
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "LeftArm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -2.5
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "RightArm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -16.806327740063807,
+                -5.684223786208349,
+                -11.404199965376847
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "Head",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                4.9810693937001815,
+                0.43523000247023447,
+                -4.9810693937001815
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
     }
   },
   "parts": [
