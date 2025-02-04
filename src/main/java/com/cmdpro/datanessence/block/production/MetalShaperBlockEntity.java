@@ -200,21 +200,27 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            Optional<RecipeHolder<MetalShaperRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.METAL_SHAPING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
-            if (recipe.isPresent()) {
-                if (!recipe.get().value().equals(pBlockEntity.recipe)) {
+            List<RecipeHolder<MetalShaperRecipe>> recipes = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.METAL_SHAPING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
+            RecipeHolder<MetalShaperRecipe> recipe = null;
+            ResourceLocation moldRecipe = null;
+            if (!pBlockEntity.moldHandler.getStackInSlot(0).isEmpty()) {
+                moldRecipe = pBlockEntity.moldHandler.getStackInSlot(0).get(DataComponentRegistry.MOLD);
+            }
+            for (RecipeHolder<MetalShaperRecipe> i : recipes) {
+                if (i.id().equals(moldRecipe)) {
+                    recipe = i;
+                }
+            }
+            if (recipe != null) {
+                if (!recipe.value().equals(pBlockEntity.recipe)) {
                     pBlockEntity.workTime = 0;
                 }
-                ResourceLocation moldRecipe = null;
-                if (!pBlockEntity.moldHandler.getStackInSlot(0).isEmpty()) {
-                    moldRecipe = pBlockEntity.moldHandler.getStackInSlot(0).get(DataComponentRegistry.MOLD);
-                }
-                if (recipe.get().id().equals(moldRecipe) && pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) > 0) {
-                    if (!recipe.get().value().equals(pBlockEntity.recipe)) {
+                if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) > 0) {
+                    if (!recipe.value().equals(pBlockEntity.recipe)) {
                         pBlockEntity.workTime = 0;
                     }
-                    pBlockEntity.recipe = recipe.get().value();
-                    ItemStack assembled = recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
+                    pBlockEntity.recipe = recipe.value();
+                    ItemStack assembled = recipe.value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
                         resetWorkTime = false;
                         // working vfx
@@ -225,7 +231,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
 
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
-                        if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
+                        if (pBlockEntity.workTime >= recipe.value().getTime()) {
                             pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
