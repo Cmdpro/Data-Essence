@@ -114,12 +114,13 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
     public static void tick(Level world, BlockPos pos, BlockState state, IndustrialPlantSiphonBlockEntity tile) {
         if (!world.isClientSide()) {
             BufferUtil.getItemsFromBuffersBelow(tile);
-            if (tile.essenceGenerationTicks <= 0 )
+            if (tile.essenceGenerationTicks <= 0 ) {
                 tile.essenceGenerationTicks = tile.getEssenceProduced(tile);
+                tile.itemHandler.extractItem(0, 1, false);
+            }
 
             if (tile.essenceGenerationTicks > 0) {
                 if ( !(tile.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) + essenceProduced > tile.storage.getMaxEssence()) ) {
-                    tile.itemHandler.extractItem(0, 1, false);
                     tile.storage.addEssence(EssenceTypeRegistry.ESSENCE.get(), essenceProduced);
                     tile.essenceGenerationTicks--;
                 }
