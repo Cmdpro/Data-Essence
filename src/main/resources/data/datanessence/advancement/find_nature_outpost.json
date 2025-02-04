@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:jungle_leaves"
+    },
+    "title": {
+      "translate": "advancements.datanessence.find_nature_outpost.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.find_nature_outpost.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:datanessence",
+  "criteria": {
+    "at_nature_outpost": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "location": {
+            "structures": "datanessence:outpost_nature"
+          }
+        }
+      }
+    }
+  }
+}

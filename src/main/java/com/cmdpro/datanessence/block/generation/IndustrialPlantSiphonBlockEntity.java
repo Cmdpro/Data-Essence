@@ -42,7 +42,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         return storage;
     }
 
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();

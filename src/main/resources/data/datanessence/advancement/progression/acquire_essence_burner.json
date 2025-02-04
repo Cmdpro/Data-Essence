@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:essence_burner"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_essence_burner.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_essence_burner.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_fabricator",
+  "criteria": {
+    "has_burner": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:essence_burner" ] } ] }
+    }
+  }
+}
