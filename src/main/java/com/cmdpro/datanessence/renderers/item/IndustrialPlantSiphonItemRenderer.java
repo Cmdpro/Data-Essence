@@ -17,7 +17,7 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemStack;
 
 public class IndustrialPlantSiphonItemRenderer extends DatabankItemRenderer<IndustrialPlantSiphonItem> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("industrial_plant_siphon"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("industrial_plant_siphon_item"), "main");
 
     @Override
     public ResourceLocation getTextureLocation() {

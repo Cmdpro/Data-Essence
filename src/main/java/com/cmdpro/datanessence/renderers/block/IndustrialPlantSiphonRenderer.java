@@ -73,7 +73,7 @@ public class IndustrialPlantSiphonRenderer extends DatabankBlockEntityRenderer<I
         }
 
         public void setupAnim(IndustrialPlantSiphonBlockEntity pEntity) {
-            if (pEntity.essenceGenerationTicks >= 0 && !(pEntity.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) + IndustrialPlantSiphonBlockEntity.essenceProduced > pEntity.storage.getMaxEssence())) {
+            if (pEntity.essenceGenerationTicks > 0 && !(pEntity.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) + IndustrialPlantSiphonBlockEntity.essenceProduced > pEntity.storage.getMaxEssence())) {
                 this.animate(pEntity.animState, working, 1.0f);
             } else {
                 this.animate(pEntity.animState, idle, 1.0f);
