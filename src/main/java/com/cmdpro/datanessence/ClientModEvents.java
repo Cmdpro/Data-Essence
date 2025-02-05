@@ -83,6 +83,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.AREKKO.get(), ArekkoRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENTICING_LURE.get(), EnticingLureRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.METAL_SHAPER.get(), MetalShaperRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), IndustrialPlantSiphonRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -136,6 +137,8 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(ArekkoRenderer.modelLocation, ArekkoRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(MetalShaperRenderer.modelLocation, MetalShaperRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(MetalShaperItemRenderer.modelLocation, MetalShaperItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(IndustrialPlantSiphonRenderer.modelLocation, IndustrialPlantSiphonRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(IndustrialPlantSiphonItemRenderer.modelLocation, IndustrialPlantSiphonItemRenderer.Model::createLayer);
         });
 
         event.enqueueWork(() -> {

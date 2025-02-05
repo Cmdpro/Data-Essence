@@ -2,13 +2,14 @@ package com.cmdpro.datanessence.block.generation;
 
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
-import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
+import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import com.cmdpro.datanessence.screen.IndustrialPlantSiphonMenu;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -18,6 +19,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -31,11 +33,11 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
-
 public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
-    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get()), 1000);
+    public AnimationState animState = new AnimationState();
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     public static float essenceProduced = 2.0f; // how much does this generator make per work tick?
+    public float essenceGenerationTicks; // fuel timer
 
     @Override
     public EssenceStorage getStorage() {
@@ -56,31 +58,35 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
             return super.isItemValid(slot, stack);
         }
     };
-    public float essenceGenerationTicks;
 
     public void drops() {
         SimpleContainer inventory = getInv();
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
+
     private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
 
     public IndustrialPlantSiphonBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), pos, state);
     }
+
     public IItemHandler getItemHandler() {
         return lazyItemHandler.get();
     }
+
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
     }
+
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         essenceGenerationTicks = tag.getFloat("EssenceGenerationTicks");
     }
+
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
@@ -96,6 +102,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         tag.putFloat("EssenceGenerationTicks", essenceGenerationTicks);
         super.saveAdditional(tag, pRegistries);
     }
+
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
@@ -103,6 +110,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         essenceGenerationTicks = nbt.getFloat("EssenceGenerationTicks");
     }
+
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {

@@ -34,7 +34,7 @@ public class IndustrialPlantSiphon extends Block implements EntityBlock {
     }
     @Override
     public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Nullable
