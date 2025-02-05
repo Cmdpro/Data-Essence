@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "datanessence:abandoned_factory",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1136698321,
+    "spacing": 32,
+    "separation": 20
+  }
+}
