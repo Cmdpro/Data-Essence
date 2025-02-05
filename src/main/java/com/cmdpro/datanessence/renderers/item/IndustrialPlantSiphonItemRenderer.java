@@ -25,7 +25,7 @@ public class IndustrialPlantSiphonItemRenderer extends DatabankItemRenderer<Indu
     }
 
     public IndustrialPlantSiphonItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
-        super(dispatcher, modelSet, new Model(modelSet.bakeLayer(modelLocation)));
+        super(dispatcher, modelSet, new IndustrialPlantSiphonItemRenderer.Model(modelSet.bakeLayer(modelLocation)));
     }
 
     public static class Model extends DatabankItemModel<IndustrialPlantSiphonItem> {

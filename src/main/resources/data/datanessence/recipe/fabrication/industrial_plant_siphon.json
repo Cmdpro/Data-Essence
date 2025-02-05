@@ -1,0 +1,16 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 25 },
+  "entry": "datanessence:essence_manipulation/industrial_plant_siphon",
+  "pattern": [
+    "C  ",
+    "OIC",
+    "OOO"
+  ],
+  "key": {
+    "C": { "item": "datanessence:conductance_rod" },
+    "O": { "item": "datanessence:polished_obsidian" },
+    "I": { "item": "minecraft:iron_bars" }
+  },
+  "result": { "id": "datanessence:industrial_plant_siphon" }
+}
