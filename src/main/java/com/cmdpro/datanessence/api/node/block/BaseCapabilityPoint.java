@@ -78,15 +78,10 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         for(Direction direction : pContext.getNearestLookingDirections()) {
-            BlockState blockstate;
             if (direction.getAxis() == Direction.Axis.Y) {
-                blockstate = this.defaultBlockState().setValue(FACE, direction == Direction.UP ? AttachFace.CEILING : AttachFace.FLOOR).setValue(FACING, pContext.getHorizontalDirection());
+                return this.defaultBlockState().setValue(FACE, direction == Direction.UP ? AttachFace.CEILING : AttachFace.FLOOR).setValue(FACING, pContext.getHorizontalDirection());
             } else {
-                blockstate = this.defaultBlockState().setValue(FACE, AttachFace.WALL).setValue(FACING, direction.getOpposite());
-            }
-
-            if (blockstate.canSurvive(pContext.getLevel(), pContext.getClickedPos())) {
-                return blockstate;
+                return this.defaultBlockState().setValue(FACE, AttachFace.WALL).setValue(FACING, direction.getOpposite());
             }
         }
 
@@ -111,9 +106,6 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
     }
 
-    public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
-        return canAttach(pLevel, pPos, getConnectedDirection(pState).getOpposite());
-    }
     public static Direction getConnectedDirection(BlockState pState) {
         switch ((AttachFace)pState.getValue(FACE)) {
             case CEILING:
@@ -124,10 +116,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                 return pState.getValue(FACING);
         }
     }
-    public static boolean canAttach(LevelReader pReader, BlockPos pPos, Direction pDirection) {
-        BlockPos blockpos = pPos.relative(pDirection);
-        return pReader.getBlockState(blockpos).isFaceSturdy(pReader, blockpos, pDirection.getOpposite());
-    }
+
     public abstract Item getRequiredWire();
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
