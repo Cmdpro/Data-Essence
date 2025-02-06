@@ -1,0 +1,16 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 25 },
+  "entry": "datanessence:machinery/melter",
+  "pattern": [
+    "O O",
+    "OOO",
+    "CWC"
+  ],
+  "key": {
+    "O": { "item": "datanessence:polished_obsidian" },
+    "C": { "item": "minecraft:copper_ingot" },
+    "W": { "item": "datanessence:essence_wire" }
+  },
+  "result": { "id": "datanessence:melter" }
+}

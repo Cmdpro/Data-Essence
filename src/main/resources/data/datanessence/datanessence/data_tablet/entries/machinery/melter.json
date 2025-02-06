@@ -1,0 +1,31 @@
+{
+  "icon": {
+    "id": "datanessence:melter"
+  },
+  "tab": "datanessence:machinery",
+  "x": 2,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.melter.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/machines/melter"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.melter.page2.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.melter.name"
+  },
+  "parents": [
+    "datanessence:machinery/fluidworks"
+  ]
+}
