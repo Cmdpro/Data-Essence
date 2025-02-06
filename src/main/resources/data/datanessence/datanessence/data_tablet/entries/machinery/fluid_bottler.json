@@ -17,9 +17,6 @@
     },
     {
       "type": "datanessence:crafting",
-      "text": {
-        "translate": "data_tablet.pages.fluid_bottler.page2.text"
-      },
       "recipes": [
         "datanessence:fabrication/machines/fluid_bottler"
       ]

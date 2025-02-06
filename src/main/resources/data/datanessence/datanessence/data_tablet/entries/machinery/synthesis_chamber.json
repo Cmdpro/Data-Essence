@@ -16,10 +16,7 @@
       "type": "datanessence:crafting",
       "recipes": [
         "datanessence:fabrication/machines/synthesis_chamber"
-      ],
-      "text": {
-        "translate": "data_tablet.pages.synthesis_chamber.page2.text"
-      }
+      ]
     }
   ],
   "name": {

@@ -239,6 +239,8 @@ public class DataNEssence
 
             // Materials
             event.accept(ItemRegistry.ESSENCE_SHARD.get());
+            event.accept(ItemRegistry.LENSING_CRYSTAL.get());
+            event.accept(ItemRegistry.BONDING_POWDER.get());
             event.accept(ItemRegistry.CAPACITANCE_PANEL.get());
             event.accept(ItemRegistry.CONDUCTANCE_ROD.get());
             event.accept(ItemRegistry.WIRE_SPOOL.get());
@@ -246,8 +248,6 @@ public class DataNEssence
             event.accept(ItemRegistry.PROPELLER.get());
             event.accept(ItemRegistry.EXCITER.get());
             event.accept(ItemRegistry.IRON_DRILL.get());
-            event.accept(ItemRegistry.LENSING_CRYSTAL.get());
-            event.accept(ItemRegistry.BONDING_POWDER.get());
             event.accept(ItemRegistry.LENS.get());
             event.accept(ItemRegistry.COPPER_NUGGET.get());
             event.accept(ItemRegistry.DIAMOND_SHARD.get());

@@ -74,7 +74,7 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INDUSTRIAL_PLANT_SIPHON = register("industrial_plant_siphon",
             () -> new IndustrialPlantSiphon(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+            object -> () -> new IndustrialPlantSiphonItem(object.get(), new Item.Properties()));
 
     // Machines
     public static final Supplier<Block> FABRICATOR = register("fabricator",
