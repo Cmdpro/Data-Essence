@@ -8,7 +8,7 @@ Over the course of progression, you will work with more types of Essence and mor
 [CurseForge](https://curseforge.com/minecraft/mc-mods/data-essence) | [Design Doc](https://docs.google.com/document/d/1jXmHCer-_6um1-AJRqcDkGYyKjpoGbhyEGBNibIRoIk/edit?tab=t.0) | [Discord](https://discord.gg/yjpMkxHhNJ) | [Modrinth](https://modrinth.com/project/data-essence)
 
 ## Starting the Mod, and Progressing
-You will need to explore your world to find a specific structure, *Arekko's Vault*. The Vault generates in \<TODO\>. Once found, you may enter from above to retrieve a Data Tablet... after some effort. This Tablet is your guide through the mod.
+You will need to explore your world to find a specific structure, *Arekko's Vault*. The Vault generates in mountains. Once found, you may enter from above to retrieve a Data Tablet... after some effort. This Tablet is your guide through the mod.
 
 To unlock more entries and recipes, find at least one other structure type and clear the way to its Data Bank. Unlocking some entries may reveal things in the world that you never knew were there before....
 

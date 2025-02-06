@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "datanessence:arekkos_vault",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 1645595371,
+    "spacing": 24,
+    "separation": 16
+  }
+}
