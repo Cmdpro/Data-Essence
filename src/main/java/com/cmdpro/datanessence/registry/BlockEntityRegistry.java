@@ -15,6 +15,7 @@ import com.cmdpro.datanessence.block.technical.ArekkoBlockEntity;
 import com.cmdpro.datanessence.block.technical.ComputerBlockEntity;
 import com.cmdpro.datanessence.block.technical.DataBankBlockEntity;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
+import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberBlockEntity;
 import com.cmdpro.datanessence.block.transmission.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -189,6 +190,10 @@ public class BlockEntityRegistry {
             register("melter", () ->
                     BlockEntityType.Builder.of(MelterBlockEntity::new,
                             BlockRegistry.MELTER.get()).build(null));
+    public static final Supplier<BlockEntityType<CryochamberBlockEntity>> CRYOCHAMBER =
+            register("cryochamber", () ->
+                    BlockEntityType.Builder.of(CryochamberBlockEntity::new,
+                            BlockRegistry.CRYOCHAMBER.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

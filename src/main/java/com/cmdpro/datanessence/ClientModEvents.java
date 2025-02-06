@@ -84,6 +84,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENTICING_LURE.get(), EnticingLureRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.METAL_SHAPER.get(), MetalShaperRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), IndustrialPlantSiphonRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.CRYOCHAMBER.get(), CryochamberRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -139,6 +140,7 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(MetalShaperItemRenderer.modelLocation, MetalShaperItemRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(IndustrialPlantSiphonRenderer.modelLocation, IndustrialPlantSiphonRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(IndustrialPlantSiphonItemRenderer.modelLocation, IndustrialPlantSiphonItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(CryochamberRenderer.modelLocation, CryochamberRenderer.Model::createLayer);
         });
 
         event.enqueueWork(() -> {
