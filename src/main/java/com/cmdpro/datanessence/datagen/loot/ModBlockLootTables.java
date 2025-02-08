@@ -47,6 +47,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 block -> noDrop());
         this.add(BlockRegistry.COMPUTER.get(),
                 block -> noDrop());
+        this.add(BlockRegistry.CRYOCHAMBER.get(),
+                block -> noDrop());
+        this.add(BlockRegistry.CRYOCHAMBER_FILLER.get(),
+                block -> noDrop());
         this.add(BlockRegistry.ESSENCE_CRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemRegistry.ESSENCE_SHARD.get()));
         dropSelf(BlockRegistry.ANCIENT_ROCK_COLUMN.get());
         dropSelf(BlockRegistry.ANCIENT_ROCK_BRICKS.get());

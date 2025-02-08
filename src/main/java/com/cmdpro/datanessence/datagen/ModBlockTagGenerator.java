@@ -30,6 +30,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.AUTO_FABRICATOR.get())
                 .add(BlockRegistry.CHARGER.get())
                 .add(BlockRegistry.COMPUTER.get())
+                .add(BlockRegistry.CRYOCHAMBER.get())
+                .add(BlockRegistry.CRYOCHAMBER_FILLER.get())
                 .add(BlockRegistry.DATA_BANK.get())
                 .add(BlockRegistry.DECO_ESSENCE_BUFFER.get())
                 .add(BlockRegistry.DECO_FLUID_BUFFER.get())

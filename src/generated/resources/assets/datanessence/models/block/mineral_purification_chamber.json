@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "datanessence:block/mineral_purification_chamber_bottom",
+    "east": "datanessence:block/mineral_purification_chamber_side",
+    "north": "datanessence:block/mineral_purification_chamber_front",
+    "particle": "datanessence:block/mineral_purification_chamber_front",
+    "south": "datanessence:block/mineral_purification_chamber_side",
+    "up": "datanessence:block/mineral_purification_chamber_top",
+    "west": "datanessence:block/mineral_purification_chamber_side"
+  }
+}

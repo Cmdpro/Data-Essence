@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "datanessence:block/mineral_purification_chamber",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "datanessence:block/mineral_purification_chamber"
+    },
+    "facing=south": {
+      "model": "datanessence:block/mineral_purification_chamber",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "datanessence:block/mineral_purification_chamber",
+      "y": 270
+    }
+  }
+}

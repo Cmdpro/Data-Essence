@@ -1,0 +1,17 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 50 },
+  "entry": "datanessence:machinery/mineral_purification_chamber",
+  "pattern": [
+    "RPR",
+    "F F",
+    "ROR"
+  ],
+  "key": {
+    "O": { "item": "datanessence:polished_obsidian" },
+    "R": { "item": "datanessence:conductance_rod" },
+    "P": { "item": "datanessence:propeller" },
+    "F": { "item": "datanessence:fluidic_glass" }
+  },
+  "result": { "id": "datanessence:mineral_purification_chamber" }
+}
