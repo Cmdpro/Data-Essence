@@ -8,6 +8,9 @@ import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -43,7 +46,6 @@ import java.util.Optional;
 public class EntropicProcessorBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public AnimationState animState = new AnimationState();
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
-    public int soundTick; // noise
 
     @Override
     public EssenceStorage getStorage() {
@@ -83,6 +85,7 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     }
     public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
+        workingSound = new SimpleSoundInstance(SoundRegistry.ENTROPIC_PROCESSOR_WORKING.get(), SoundSource.BLOCKS, 1f, 1f, SoundInstance.createUnseededRandom(), pos);
     }
 
     @Override
@@ -111,7 +114,6 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         tag.put("output", outputItemHandler.serializeNBT(pRegistries));
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
-        tag.putInt("SoundTick", soundTick);
         super.saveAdditional(tag, pRegistries);
     }
     public float maxTime;
@@ -122,7 +124,6 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         outputItemHandler.deserializeNBT(pRegistries, nbt.getCompound("output"));
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
-        soundTick = nbt.getInt("SoundTick");
     }
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots()+outputItemHandler.getSlots());
@@ -163,18 +164,10 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
 
-                        // TODO why does this not play
-                        if (pBlockEntity.soundTick <= 0) {
-                            pLevel.playSound(null, pPos, SoundRegistry.ENTROPIC_PROCESSOR_WORKING.get(), SoundSource.BLOCKS, 0.5f, 1.25f);
-                            pBlockEntity.soundTick = 240; // the sound file is 12 seconds long
-                        }
-                        else { pBlockEntity.soundTick -= 1; }
-
                         if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
                             pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
-                            pBlockEntity.soundTick = 0;
                         }
                     }
                 } else {
@@ -185,12 +178,22 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
             }
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;
-                pBlockEntity.soundTick = 0;
             }
 
             pBlockEntity.updateBlock();
+        } else {
+            if (pBlockEntity.workTime >= 0) {
+                if (!ClientHandler.isSoundPlaying(pBlockEntity.workingSound)) {
+                    ClientHandler.startSound(pBlockEntity.workingSound);
+                }
+            } else {
+                if (ClientHandler.isSoundPlaying(pBlockEntity.workingSound)) {
+                    ClientHandler.stopSound(pBlockEntity.workingSound);
+                }
+            }
         }
     }
+    public SoundInstance workingSound;
     protected void updateBlock() {
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
@@ -210,5 +213,16 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
             return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
         } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();
+    }
+    private static class ClientHandler {
+        public static void startSound(SoundInstance sound) {
+            Minecraft.getInstance().getSoundManager().play(sound);
+        }
+        public static void stopSound(SoundInstance sound) {
+            Minecraft.getInstance().getSoundManager().stop(sound);
+        }
+        public static boolean isSoundPlaying(SoundInstance sound) {
+            return Minecraft.getInstance().getSoundManager().isActive(sound);
+        }
     }
 }
