@@ -57,6 +57,11 @@
     "datanessence:traversite_road",
     "datanessence:vacuum",
     "datanessence:industrial_plant_siphon",
-    "datanessence:melter"
+    "datanessence:melter",
+    "datanessence:essence_light_fixture",
+    "datanessence:ancient_glyph_stone_blank",
+    "datanessence:ancient_glyph_stone_essence",
+    "datanessence:ancient_glyph_stone_makutuin",
+    "datanessence:metal_shaper"
   ]
 }
