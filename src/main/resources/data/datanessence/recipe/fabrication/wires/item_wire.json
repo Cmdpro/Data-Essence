@@ -3,7 +3,7 @@
   "essenceCost": {
     "datanessence:essence": 0
   },
-  "entry": "datanessence:machinery/fluidworks",
+  "entry": "datanessence:machinery/itemworks",
   "pattern": [
     " C ",
     "rRr",

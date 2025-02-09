@@ -58,7 +58,7 @@ public class FluidSpillerBlockEntity extends BlockEntity implements EssenceBlock
                     BlockState state2 = pLevel.getBlockState(pos);
                     FluidStack stack = new FluidStack(pBlockEntity.fluidHandler.getFluid().getFluid(), 1000);
                     if ((state.isEmpty() || !state.isSource()) && state2.canBeReplaced(stack.getFluid())) {
-                        if (pBlockEntity.fluidHandler.getCapacity() >= 1000) {
+                        if (pBlockEntity.fluidHandler.getFluidAmount() >= 1000) {
                             pBlockEntity.fluidHandler.drain(stack, IFluidHandler.FluidAction.EXECUTE);
                             pLevel.setBlockAndUpdate(pos, stack.getFluid().defaultFluidState().createLegacyBlock());
                             pLevel.playSound(null, pPos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 2, 1);

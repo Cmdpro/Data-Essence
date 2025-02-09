@@ -134,6 +134,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         CompoundTag tag = pkt.getTag();
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
+        maxWorkTime = tag.getInt("maxWorkTime");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluidHandler"));
         outputFluidHandler.readFromNBT(pRegistries, tag.getCompound("outputFluidHandler"));
@@ -143,6 +144,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         CompoundTag tag = new CompoundTag();
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
+        tag.putInt("maxWorkTime", recipe != null ? recipe.getTime() : -1);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
         tag.put("fluidHandler", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("outputFluidHandler", outputFluidHandler.writeToNBT(pRegistries, new CompoundTag()));
@@ -192,6 +194,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     public boolean enoughEssence;
     public float essenceCost;
     public int workTime;
+    public int maxWorkTime;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidMixerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
@@ -213,12 +216,12 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
                     pBlockEntity.enoughEssence = enoughEssence;
                     if (enoughEssence) {
                         FluidStack result = recipe.get().value().getOutput();
-                        if (pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE) <= 0) {
+                        if (pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE) >= result.getAmount()) {
                             resetWorkTime = false;
                             pBlockEntity.workTime++;
                             pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), pBlockEntity.essenceCost/recipe.get().value().getTime());
                             if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                                pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE);
+                                pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.EXECUTE);
                                 pBlockEntity.itemHandler.extractItem(0, 1, false);
                                 pBlockEntity.fluidHandler.drain(recipe.get().value().getInput1(), IFluidHandler.FluidAction.EXECUTE);
                                 pBlockEntity.fluidHandler.drain(recipe.get().value().getInput2(), IFluidHandler.FluidAction.EXECUTE);
