@@ -1,4 +1,4 @@
-// 1.21.1	2025-02-08T10:38:16.626840607	Block States: datanessence
+// 1.21.1	2025-02-09T10:45:54.350946246	Block States: datanessence
 4c3f8bc2b11e812a24d90295ef729dfe488c971c assets/datanessence/blockstates/aether_rune.json
 768dfda3826afab6ac2a48d49a2f703f413da50a assets/datanessence/blockstates/ancient_glyph_stone_blank.json
 a95f027a62699569a8ea8ed39de6b52e8c27d18f assets/datanessence/blockstates/ancient_glyph_stone_essence.json
@@ -36,6 +36,7 @@ d00b72f016a4a1672dc94c14d423bc06cb486c85 assets/datanessence/blockstates/item_bu
 7b2c32f549c198b04f7eea0ceaa04174e1bab461 assets/datanessence/blockstates/polished_obsidian_column.json
 a6499ce55f80fed3ff68177fbb938474c3b59c0d assets/datanessence/blockstates/spire_glass.json
 08e32f2d8168b4c3ef215d2d94eb667ac8a5b450 assets/datanessence/blockstates/structure_protector.json
+3c736218927f15dcf6f239718ea064800f1c15f1 assets/datanessence/blockstates/synthesis_chamber.json
 a02d60ed4563ae33705b9375a0709ea8206de7b8 assets/datanessence/blockstates/traversite_road.json
 62d826d3be18c01ac72047e638f9c30817d4ecd9 assets/datanessence/models/block/aether_rune.json
 8f144c47998fe0dc16044dc2918d93193089036d assets/datanessence/models/block/ancient_glyph_stone_blank.json
@@ -98,6 +99,7 @@ fa96f591a5154554bf8d0d1f595c4f0c0594a487 assets/datanessence/models/block/limite
 2b7b7c3f07337680737e52333776b296667ad3be assets/datanessence/models/block/polished_obsidian_column_horizontal.json
 7f994f51cc7515af56c988e4c2790eb3b7124a8a assets/datanessence/models/block/spire_glass.json
 c611034b642665f1301860514a537280a56c84b5 assets/datanessence/models/block/structure_protector.json
+9eea613e790143c0eb0d7f9f1c0d1c996ee4a4b4 assets/datanessence/models/block/synthesis_chamber.json
 7eb8dc71b433dfbd977ce15391068b33a206a673 assets/datanessence/models/block/traversite_road.json
 874a608ed3f4128d556616d4dbdccf8863051316 assets/datanessence/models/item/aether_rune.json
 03b6b0611188fbdf7179a48d8b368f6ac62a8aa0 assets/datanessence/models/item/ancient_glyph_stone_blank.json
@@ -128,4 +130,5 @@ e7551f807f1eb7ba473f782ee59dae7de296f810 assets/datanessence/models/item/mineral
 ccadb6f481b5bf27132dc4d69dac33424af5cd6e assets/datanessence/models/item/patterned_copper.json
 d1962717ef3fbf338b69ed754290f694ad50c92b assets/datanessence/models/item/polished_obsidian.json
 cccabab1270cb85664204724c134f6d86b2fe5a6 assets/datanessence/models/item/spire_glass.json
+763a444711133ad902a607d150d416a93b454906 assets/datanessence/models/item/synthesis_chamber.json
 a0d92351947ae42f4c2afa0497445510dc2d77e5 assets/datanessence/models/item/traversite_road.json
