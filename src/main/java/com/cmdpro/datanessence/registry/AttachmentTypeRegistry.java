@@ -19,7 +19,7 @@ public class AttachmentTypeRegistry {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.ATTACHMENT_TYPES,
             DataNEssence.MOD_ID);
     public static final Supplier<AttachmentType<Integer>> TIER =
-            register("tier", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build());
+            register("tier", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).copyOnDeath().build());
     public static final Supplier<AttachmentType<Optional<BlockEntity>>> LINK_FROM =
             register("link_from", () -> AttachmentType.builder(() -> Optional.ofNullable((BlockEntity)null)).build());
     public static final Supplier<AttachmentType<ArrayList<StructureProtectorBlockEntity>>> STRUCTURE_CONTROLLERS =
