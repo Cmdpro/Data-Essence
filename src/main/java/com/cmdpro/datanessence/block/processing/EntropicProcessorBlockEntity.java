@@ -85,7 +85,7 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     }
     public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
-        workingSound = new SimpleSoundInstance(SoundRegistry.ENTROPIC_PROCESSOR_WORKING.get(), SoundSource.BLOCKS, 1f, 1f, SoundInstance.createUnseededRandom(), pos);
+        workingSound = new SimpleSoundInstance(SoundRegistry.ENTROPIC_PROCESSOR_WORKING.get(), SoundSource.BLOCKS, 0.5f, 1.25f, SoundInstance.createUnseededRandom(), pos);
     }
 
     @Override
