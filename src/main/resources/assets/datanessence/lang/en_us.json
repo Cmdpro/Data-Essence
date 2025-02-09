@@ -162,6 +162,15 @@
   "block.datanessence.cryochamber": "Cryochamber",
   "block.datanessence.cryochamber_filler": "Cryochamber",
 
+  "entity.datanessence.essence_bomb": "Essence Bomb",
+  "entity.datanessence.lunar_essence_bomb": "Lunar Essence Bomb",
+  "entity.datanessence.natural_essence_bomb": "Natural Essence Bomb",
+  "entity.datanessence.exotic_essence_bomb": "Exotic Essence Bomb",
+  "entity.datanessence.ancient_sentinel": "Ancient Sentinel",
+  "entity.datanessence.ancient_sentinel_projectile": "Ancient Sentinel Projectile",
+  "entity.datanessence.black_hole": "Black Hole",
+  "entity.datanessence.essence_slash": "Essence Slash",
+
   "jukebox_song.datanessence.under_the_sky": "DavidRarria09 - UnderTheSky",
 
   "computer.arekkos_vault.clue": "...",
