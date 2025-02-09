@@ -85,7 +85,15 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     }
     public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
-        workingSound = new SimpleSoundInstance(SoundRegistry.ENTROPIC_PROCESSOR_WORKING.get(), SoundSource.BLOCKS, 0.5f, 1.25f, SoundInstance.createUnseededRandom(), pos);
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (level.isClientSide) {
+            clientHandler = new ClientHandler();
+            clientHandler.createWorkingSound(getBlockPos());
+        }
     }
 
     @Override
@@ -183,17 +191,17 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
             pBlockEntity.updateBlock();
         } else {
             if (pBlockEntity.workTime >= 0) {
-                if (!ClientHandler.isSoundPlaying(pBlockEntity.workingSound)) {
-                    ClientHandler.startSound(pBlockEntity.workingSound);
+                if (!pBlockEntity.clientHandler.isSoundPlaying()) {
+                    pBlockEntity.clientHandler.startSound();
                 }
             } else {
-                if (ClientHandler.isSoundPlaying(pBlockEntity.workingSound)) {
-                    ClientHandler.stopSound(pBlockEntity.workingSound);
+                if (pBlockEntity.clientHandler.isSoundPlaying()) {
+                    pBlockEntity.clientHandler.stopSound();
                 }
             }
         }
     }
-    public SoundInstance workingSound;
+    private ClientHandler clientHandler;
     protected void updateBlock() {
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
@@ -215,14 +223,18 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();
     }
     private static class ClientHandler {
-        public static void startSound(SoundInstance sound) {
-            Minecraft.getInstance().getSoundManager().play(sound);
+        public SoundInstance workingSound;
+        public void createWorkingSound(BlockPos pos) {
+            workingSound = new SimpleSoundInstance(SoundRegistry.ENTROPIC_PROCESSOR_WORKING.get(), SoundSource.BLOCKS, 0.5f, 1.25f, SoundInstance.createUnseededRandom(), pos);
         }
-        public static void stopSound(SoundInstance sound) {
-            Minecraft.getInstance().getSoundManager().stop(sound);
+        public void startSound() {
+            Minecraft.getInstance().getSoundManager().play(workingSound);
         }
-        public static boolean isSoundPlaying(SoundInstance sound) {
-            return Minecraft.getInstance().getSoundManager().isActive(sound);
+        public void stopSound() {
+            Minecraft.getInstance().getSoundManager().stop(workingSound);
+        }
+        public boolean isSoundPlaying() {
+            return Minecraft.getInstance().getSoundManager().isActive(workingSound);
         }
     }
 }
