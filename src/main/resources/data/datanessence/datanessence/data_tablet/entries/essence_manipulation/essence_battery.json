@@ -14,9 +14,6 @@
     },
     {
       "type": "datanessence:crafting",
-      "text": {
-        "translate": "data_tablet.pages.essence_battery.page2.text"
-      },
       "recipes": [
         "datanessence:fabrication/essence_battery"
       ]

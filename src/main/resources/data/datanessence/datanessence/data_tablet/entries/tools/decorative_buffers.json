@@ -18,10 +18,7 @@
         "datanessence:fabrication/decoration/deco_essence_buffer",
         "datanessence:fabrication/decoration/deco_fluid_buffer",
         "datanessence:fabrication/decoration/deco_item_buffer"
-      ],
-      "text": {
-        "translate": "data_tablet.pages.decorative_buffers.page2.text"
-      }
+      ]
     }
   ],
   "name": {
