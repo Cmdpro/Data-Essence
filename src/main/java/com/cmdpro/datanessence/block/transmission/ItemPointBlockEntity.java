@@ -8,6 +8,7 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -54,22 +55,21 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
             }
             boolean movedAnything = false;
             for (int o = 0; o < resolved2.getSlots(); o++) {
-                ItemStack copy = resolved2.getStackInSlot(o).copy();
+                ItemStack copy = resolved2.extractItem(o, transferAmount, true).copy();
                 if (allowedItemstacks != null && allowedItemstacks.stream().noneMatch((stack) -> ItemStack.isSameItem(stack, copy))) {
                     continue;
                 }
                 if (!copy.isEmpty()) {
-                    copy.setCount(Math.clamp(0, transferAmount, copy.getCount()));
                     ItemStack copy2 = copy.copy();
                     int p = 0;
                     while (p < resolved.getSlots()) {
                         ItemStack copyCopy = copy.copy();
-                        int remove = resolved.insertItem(p, copyCopy, false).getCount();
-                        if (remove < copyCopy.getCount()) {
+                        int remaining = resolved.insertItem(p, copyCopy, false).getCount();
+                        copy.setCount(remaining);
+                        if (copy2.getCount() - copy.getCount() > 0) {
                             movedAnything = true;
                         }
-                        copy.setCount(remove);
-                        if (remove <= 0) {
+                        if (remaining <= 0) {
                             break;
                         }
                         p++;
