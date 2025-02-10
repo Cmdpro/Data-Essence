@@ -40,7 +40,7 @@ public class VacuumBlockEntity extends BlockEntity {
                             ItemStack stack = itemHandler.getStackInSlot(o);
                             if (stack.is(copy.getItem()) || stack.isEmpty()) {
                                 copy = itemHandler.insertItem(o, copy, false);
-                                world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.7f, 0.3f);
+                                world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.4f, 0.3f);
                             }
                         }
                     }

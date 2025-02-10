@@ -225,7 +225,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
                         resetWorkTime = false;
                         // working vfx
                         if (pLevel.random.nextInt() % 20 == 0) {
-                            pLevel.playSound(null, pPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.8f, 0.75f);
+                            pLevel.playSound(null, pPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.4f, 0.75f);
                             ((ServerLevel) pLevel).sendParticles(ParticleTypes.SMOKE, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, 5, 0, 0, 0, 0);
                         }
 
