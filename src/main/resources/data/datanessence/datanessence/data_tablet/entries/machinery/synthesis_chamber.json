@@ -15,7 +15,10 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:fabrication/machines/synthesis_chamber"
+        "datanessence:fabrication/machines/synthesis_chamber",
+        "datanessence:synthesis/essence_wire_synthesis",
+        "datanessence:synthesis/item_wire_synthesis",
+        "datanessence:synthesis/fluid_wire_synthesis"
       ]
     }
   ],
