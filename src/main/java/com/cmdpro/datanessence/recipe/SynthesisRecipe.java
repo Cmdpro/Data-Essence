@@ -54,7 +54,7 @@ public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IH
 
     @Override
     public ItemStack assemble(RecipeInput pContainer, HolderLookup.Provider pRegistryAccess) {
-        return output;
+        return output.copy();
     }
 
     @Override

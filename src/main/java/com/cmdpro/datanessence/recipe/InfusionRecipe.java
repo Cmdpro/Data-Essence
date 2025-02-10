@@ -47,7 +47,7 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
 
     @Override
     public ItemStack assemble(RecipeInput pContainer, HolderLookup.Provider pRegistryAccess) {
-        return output;
+        return output.copy();
     }
 
     @Override

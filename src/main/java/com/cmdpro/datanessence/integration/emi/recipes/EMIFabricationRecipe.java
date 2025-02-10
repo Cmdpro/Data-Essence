@@ -6,10 +6,12 @@ import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.integration.emi.EMIDataNEssencePlugin;
 import com.cmdpro.datanessence.integration.emi.widgets.EssenceBarWidget;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
+import com.cmdpro.datanessence.recipe.ShapedFabricationRecipe;
 import com.cmdpro.datanessence.recipe.ShapelessFabricationRecipe;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 
+import com.google.common.collect.Lists;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -32,15 +34,40 @@ public class EMIFabricationRecipe implements EmiRecipe {
     private final EmiStack output;
     private final boolean shapeless;
     private final Map<EssenceType, Float> essenceCost;
+    private final int width;
+    private final int height;
 
     public EMIFabricationRecipe(ResourceLocation id, IFabricationRecipe recipe) {
         this.id = id;
         this.shapeless = recipe instanceof ShapelessFabricationRecipe;
-        this.input = recipe.getIngredients().stream().map(EmiIngredient::of).toList();
+        boolean shapeless = recipe.canCraftInDimensions(1, recipe.getIngredients().size()) && recipe.canCraftInDimensions(recipe.getIngredients().size(), 1);
+        List<EmiIngredient> input;
+        if (shapeless) {
+            input = recipe.getIngredients().stream().map(EmiIngredient::of).toList();
+        } else {
+            int width = recipe.canCraftInDimensions(2, 3) ? recipe.canCraftInDimensions(1, 3) ? 1 : 2 : 3;
+            input = Lists.newArrayList();
+            for (int i = 0; i < recipe.getIngredients().size(); i++) {
+                input.add(EmiIngredient.of(recipe.getIngredients().get(i)));
+                if ((i + 1) % width == 0) {
+                    for (int j = width; j < 3; j++) {
+                        input.add(EmiStack.EMPTY);
+                    }
+                }
+            }
+        }
+        this.input = input;
         this.output = EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()));
         this.essenceCost = new HashMap<>();
         for (Map.Entry<ResourceLocation, Float> i : recipe.getEssenceCost().entrySet()) {
             this.essenceCost.put(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey()), i.getValue());
+        }
+        if (recipe instanceof ShapedFabricationRecipe recipe1) {
+            width = recipe1.getWidth();
+            height = recipe1.getHeight();
+        } else {
+            width = 3;
+            height = 3;
         }
     }
 
@@ -107,16 +134,12 @@ public class EMIFabricationRecipe implements EmiRecipe {
         } else {
             widgetHolder.addTexture(DataTabletScreen.TEXTURE_CRAFTING, 93, 4, 14, 11, 242, 185);
         }
-        int i = 0;
-        for (int y = 0; y < 3; ++y) {
-            for (int x = 0; x < 3; ++x) {
-                int s = i + sOff;
-                if (s >= 0 && s < input.size()) {
-                    widgetHolder.addSlot(input.get(s), x * 17 + 20, y * 17 + 4).drawBack(false);
-                } else {
-                    widgetHolder.addSlot(EmiStack.of(ItemStack.EMPTY), x * 17 + 20, y * 17 + 4).drawBack(false);
-                }
-                i++;
+        for (int i = 0; i < 9; i++) {
+            int s = i + sOff;
+            if (s >= 0 && s < input.size()) {
+                widgetHolder.addSlot(input.get(s), (i % 3 * 17) + 20, (i / 3 * 17) + 4).drawBack(false);
+            } else {
+                widgetHolder.addSlot(EmiStack.of(ItemStack.EMPTY), (i % 3 * 17) + 20, (i / 3 * 17) + 4).drawBack(false);
             }
         }
         widgetHolder.add(new EssenceBarWidget(5, 6, EssenceTypeRegistry.ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.ESSENCE.get(), 0f)));
