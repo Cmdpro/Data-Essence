@@ -3,6 +3,6 @@
   "conditionData": {
     "entry": "datanessence:basics/plants"
   },
-  "hiddenAs": "minecraft:brown_mushroom",
+  "hiddenAs": "minecraft:short_grass",
   "originalBlock": "datanessence:tethergrass"
 }
