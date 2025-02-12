@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:essence_crystal"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_essence_shard.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_essence_shard.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:datanessence",
+  "criteria": {
+    "has_burner": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:essence_shard" ] } ] }
+    }
+  }
+}

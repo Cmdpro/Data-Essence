@@ -1,0 +1,25 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:essence_wire"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_essence_node_and_wire.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_essence_node_and_wire.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_fabricator",
+  "criteria": {
+    "has_fabricator": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:essence_point" ] } ] }
+    },
+    "has_redirector": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:essence_wire" ] } ] }
+    }
+  }
+}
