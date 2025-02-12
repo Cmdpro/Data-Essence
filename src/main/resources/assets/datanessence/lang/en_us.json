@@ -258,6 +258,7 @@
   "data_tablet.pages.essence_battery.name": "Storing Essence",
   "data_tablet.pages.essence_battery.page1.text": "There may come a time where one wants a storage of Essence in case of emergency, or simply having a stockpile. Essence Batteries are a modified Buffer that, as expected, stores Essence - and more of it.",
   "data_tablet.pages.essence_burner.name": "Essence Burner",
+  "data_tablet.pages.essence_burner.page1.incomplete_text": "We have been looking into a way to produce usable Essence from local resources. One member of our squadron posed the idea of a kind of obsidian and copper chamber, with vents on the top and a chamber in which fuel and some form of catalyst goes. We must experiment with the prototype.",
   "data_tablet.pages.essence_burner.page1.text": "The simplest form of Essence generation is to apply sufficient heat to raw Essence Shards such that they melt into a gaseous form. As this gas dissipates, it leaves behind usable Essence with which to drive machinery.\n\nThe Burner device does exactly this, featuring a chamber in which to insert Shards and fuel, as well as a grate on the top that harmlessly vents the gas.",
   "data_tablet.pages.essence_burner.page2.text": " ◇ Power source: Essence Shards.\n ◇ Coolant: None.\n ◇ Requires consumables: Essence Shards, furnace fuel (eg. coal, charcoal, etc).\n ◇ Risks: None.",
   "data_tablet.pages.essence_leech.name": "Essence Leech",

@@ -25,5 +25,21 @@
   ],
   "name": {
     "translate": "data_tablet.pages.essence_burner.name"
-  }
+  },
+  "incomplete": true,
+  "completion_advancement": "datanessence:progression/acquire_essence_burner",
+  "incomplete_pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.essence_burner.page1.incomplete_text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/essence_burner"
+      ]
+    }
+  ]
 }

@@ -54,8 +54,8 @@ public class EntrySerializer {
             Codec.BOOL.optionalFieldOf("critical", false).forGetter((entry) -> entry.critical),
             ResourceLocation.CODEC.fieldOf("tab").forGetter((entry) -> entry.tab),
             Codec.BOOL.optionalFieldOf("incomplete", false).forGetter((entry) -> entry.incomplete),
-            PAGE_CODEC.listOf().optionalFieldOf("incompletePages", new ArrayList<>()).forGetter((entry) -> Arrays.stream(entry.incompletePages).toList()),
-            ResourceLocation.CODEC.optionalFieldOf("completionAdvancement", ResourceLocation.fromNamespaceAndPath("", "")).forGetter((entry) -> entry.completionAdvancement)
+            PAGE_CODEC.listOf().optionalFieldOf("incomplete_pages", new ArrayList<>()).forGetter((entry) -> Arrays.stream(entry.incompletePages).toList()),
+            ResourceLocation.CODEC.optionalFieldOf("completion_advancement", ResourceLocation.fromNamespaceAndPath("", "")).forGetter((entry) -> entry.completionAdvancement)
     ).apply(instance, (icon, x, y, name, flavor, parents, pages, critical, tab, incomplete, incompletePages, completionAdvancement) -> new Entry(null, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, flavor, critical, incomplete, incompletePages.toArray(new Page[0]), completionAdvancement)));
     public static final Codec<Optional<WithConditions<Entry>>> CODEC = ConditionalOps.createConditionalCodecWithConditions(ORIGINAL_CODEC.codec());
     public static final StreamCodec<RegistryFriendlyByteBuf, Entry> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
