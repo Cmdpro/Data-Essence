@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.databank.ClientDatabankUtils;
 import com.cmdpro.databank.music.MusicSystem;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.shaders.PostShaderInstance;
@@ -43,6 +44,7 @@ import net.minecraft.world.item.JukeboxSong;
 import net.minecraft.world.item.JukeboxSongs;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -233,6 +235,13 @@ public class ClientModEvents {
                 return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 1f, 1f).getRGB();
             }
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
+        event.register((pState, pLevel, pPos, pTintIndex) -> {
+            BlockState state = ClientDatabankUtils.getHiddenBlock(pState.getBlock());
+            if (state != null) {
+                return Minecraft.getInstance().getBlockColors().getColor(state, pLevel, pPos, pTintIndex);
+            }
+            return 0xFFFFFFFF;
+        }, BlockRegistry.TETHERGRASS.get());
     }
     @SubscribeEvent
     public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {

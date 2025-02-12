@@ -138,12 +138,12 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation "net.neoforged:neoforge:${neo_version}"
 
-    implementation "blank:databank-1.0.0"
+    implementation "blank:databank-1.0.1"
     implementation "com.eliotlash.mclib:mclib:20"
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     localRuntime "dev.emi:emi-neoforge:${emi_version}"
     implementation "maven.modrinth:iris:1.8.1+1.21.1-neoforge"
-    implementation "maven.modrinth:sodium:mc1.21.1-0.6.5-neoforge"
+    implementation "maven.modrinth:sodium:mc1.21.1-0.6.7-neoforge"
     // Example optional mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
