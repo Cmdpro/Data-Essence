@@ -2,13 +2,16 @@ package com.cmdpro.datanessence.worldgen.features;
 
 import com.cmdpro.datanessence.block.world.EssenceCrystal;
 import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.TagRegistry;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
+import net.neoforged.neoforge.common.Tags;
 
 public class EssenceCrystalFeature extends Feature<NoneFeatureConfiguration> {
     public EssenceCrystalFeature(Codec<NoneFeatureConfiguration> pCodec) {
@@ -52,9 +55,11 @@ public class EssenceCrystalFeature extends Feature<NoneFeatureConfiguration> {
                     Direction[] directions = Direction.allShuffled(pContext.random()).toArray(new Direction[0]);
                     for (Direction p : directions) {
                         if (pContext.level().getBlockState(offset.relative(p)).isCollisionShapeFullBlock(pContext.level(), offset.relative(p))) {
-                            dir = p.getOpposite();
-                            foundValid = true;
-                            break;
+                            if (pContext.level().getBlockState(offset.relative(p)).is(BlockTags.BASE_STONE_OVERWORLD)) {
+                                dir = p.getOpposite();
+                                foundValid = true;
+                                break;
+                            }
                         }
                     }
                     if (foundValid) {
