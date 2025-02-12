@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "modern_industrialization"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:ores/nickel" },
+    "time": 400,
+    "result": { "id": "modern_industrialization:nickel_ingot" },
+    "nuggetResult": { "id": "modern_industrialization:nickel_nugget", "count": 2 }
+}
