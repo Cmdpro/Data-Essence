@@ -131,30 +131,34 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
     public static InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
                                         Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-        if (blockEntity instanceof FabricatorBlockEntity ent) {
-            if (ent.recipe != null) {
-                if (ent.enoughEssence) {
-                    IFabricationRecipe fabricationRecipe = null;
-                    if (ent.recipe instanceof IFabricationRecipe) {
-                        fabricationRecipe = (IFabricationRecipe)ent.recipe;
-                    }
-                    if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry())) {
-                        ItemStack stack = ent.recipe.assemble(ent.getCraftingInv().asCraftInput(), pLevel.registryAccess()).copy();
-                        for (int i = 0; i < 9; i++) {
-                            ent.itemHandler.extractItem(i, 1, false);
+        if (!pLevel.isClientSide) {
+            if (blockEntity instanceof FabricatorBlockEntity ent) {
+                if (ent.recipe != null) {
+                    if (ent.enoughEssence) {
+                        IFabricationRecipe fabricationRecipe = null;
+                        if (ent.recipe instanceof IFabricationRecipe) {
+                            fabricationRecipe = (IFabricationRecipe) ent.recipe;
                         }
-                        for (Map.Entry<ResourceLocation, Float> i : ent.essenceCost.entrySet()) {
-                            EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                            ent.storage.removeEssence(type, i.getValue());
+                        if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry())) {
+                            ItemStack stack = ent.recipe.assemble(ent.getCraftingInv().asCraftInput(), pLevel.registryAccess()).copy();
+                            for (int i = 0; i < 9; i++) {
+                                ent.itemHandler.extractItem(i, 1, false);
+                            }
+                            if (ent.essenceCost != null) {
+                                for (Map.Entry<ResourceLocation, Float> i : ent.essenceCost.entrySet()) {
+                                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                                    ent.storage.removeEssence(type, i.getValue());
+                                }
+                            }
+                            ItemEntity entity = new ItemEntity(pLevel, (float) pPos.getX() + 0.5f, (float) pPos.getY() + 1f, (float) pPos.getZ() + 0.5f, stack);
+                            pLevel.addFreshEntity(entity);
+                            pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
+                        } else {
+                            pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.dont_know_how"));
                         }
-                        ItemEntity entity = new ItemEntity(pLevel, (float) pPos.getX() + 0.5f, (float) pPos.getY() + 1f, (float) pPos.getZ() + 0.5f, stack);
-                        pLevel.addFreshEntity(entity);
-                        pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
                     } else {
-                        pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.dont_know_how"));
+                        pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.not_enough_essence"));
                     }
-                } else {
-                    pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.not_enough_essence"));
                 }
             }
         }
