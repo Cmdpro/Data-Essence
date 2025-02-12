@@ -13,11 +13,11 @@
   },
   "parent": "datanessence:progression/acquire_fabricator",
   "criteria": {
-    "has_fabricator": {
+    "has_node": {
       "trigger": "minecraft:inventory_changed",
       "conditions": { "items": [ { "items": ["datanessence:essence_point" ] } ] }
     },
-    "has_redirector": {
+    "has_wire": {
       "trigger": "minecraft:inventory_changed",
       "conditions": { "items": [ { "items": ["datanessence:essence_wire" ] } ] }
     }

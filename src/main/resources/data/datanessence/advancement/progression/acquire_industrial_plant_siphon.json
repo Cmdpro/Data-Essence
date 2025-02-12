@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:industrial_plant_siphon"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_industrial_plant_siphon.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_industrial_plant_siphon.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_essence_burner",
+  "criteria": {
+    "has_siphon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:industrial_plant_siphon" ] } ] }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:infuser"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_infuser.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_infuser.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/use_data_drive",
+  "criteria": {
+    "has_infuser": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:infuser" ] } ] }
+    }
+  }
+}

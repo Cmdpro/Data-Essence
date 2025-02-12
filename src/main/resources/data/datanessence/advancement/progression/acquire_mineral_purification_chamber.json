@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:mineral_purification_chamber"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_mineral_purification_chamber.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_mineral_purification_chamber.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/use_data_drive",
+  "criteria": {
+    "has_chamber": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:mineral_purification_chamber" ] } ] }
+    }
+  }
+}

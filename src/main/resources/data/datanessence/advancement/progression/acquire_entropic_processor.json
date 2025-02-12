@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:entropic_processor"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_entropic_processor.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_entropic_processor.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/use_data_drive",
+  "criteria": {
+    "has_processor": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:entropic_processor" ] } ] }
+    }
+  }
+}

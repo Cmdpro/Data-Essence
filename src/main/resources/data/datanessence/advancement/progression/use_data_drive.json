@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:data_drive"
+    },
+    "title": {
+      "translate": "advancements.datanessence.use_data_drive.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.use_data_drive.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_fabricator",
+  "criteria": {
+    "has_data_drive": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:data_drive" ] } ] }
+    }
+  }
+}

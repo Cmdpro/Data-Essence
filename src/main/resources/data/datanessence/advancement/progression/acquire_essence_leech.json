@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:essence_leech"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_essence_leech.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_essence_leech.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_essence_burner",
+  "criteria": {
+    "has_leech": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:essence_leech" ] } ] }
+    }
+  }
+}

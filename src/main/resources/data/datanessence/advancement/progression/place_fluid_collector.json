@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:fluid_collector"
+    },
+    "title": {
+      "translate": "advancements.datanessence.place_fluid_collector.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.place_fluid_collector.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_fabricator",
+  "criteria": {
+    "placed_fluid_collector": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": { "block": { "blocks": [ "datanessence:fluid_collector" ] } }
+          }
+        ]
+      }
+    }
+  }
+}
