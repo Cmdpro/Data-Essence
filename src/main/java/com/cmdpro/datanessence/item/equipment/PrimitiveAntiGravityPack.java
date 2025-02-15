@@ -28,7 +28,7 @@ public class PrimitiveAntiGravityPack extends ArmorItem {
     @Override
     public void inventoryTick(ItemStack pStack, Level pLevel, Entity pEntity, int pSlotId, boolean pIsSelected) {
         super.inventoryTick(pStack, pLevel, pEntity, pSlotId, pIsSelected);
-        if (pEntity instanceof LivingEntity ent) {
+        if (pEntity instanceof LivingEntity ent && ent.fallDistance > 0f) {
             if (ent.getItemBySlot(EquipmentSlot.CHEST).equals(pStack)) {
                 EssenceChargeableItemUtil.drainEssence(pStack, 0.1f);
             }
