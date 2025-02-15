@@ -30,11 +30,25 @@ public class StructureProtectorBlockEntity extends BlockEntity {
     @Override
     public void setLevel(Level pLevel) {
         if (level != null) {
-            level.getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS).remove(this);
+            if (!level.isClientSide) {
+                level.getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS).remove(this);
+            }
         }
         super.setLevel(pLevel);
-        if (!pLevel.getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS).contains(this)) {
-            pLevel.getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS).add(this);
+        if (!pLevel.isClientSide) {
+            if (!pLevel.getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS).contains(this)) {
+                pLevel.getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS).add(this);
+            }
+        }
+    }
+
+    @Override
+    public void setRemoved() {
+        super.setRemoved();
+        if (level != null) {
+            if (!level.isClientSide) {
+                level.getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS).remove(this);
+            }
         }
     }
 

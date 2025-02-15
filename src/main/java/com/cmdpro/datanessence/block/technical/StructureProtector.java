@@ -57,13 +57,6 @@ public class StructureProtector extends Block implements EntityBlock {
         return new StructureProtectorBlockEntity(pPos, pState);
     }
 
-    @Override
-    protected void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
-        if (pLevel.getBlockEntity(pPos) instanceof StructureProtectorBlockEntity ent) {
-            pLevel.getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS).remove(ent);
-        }
-        super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
-    }
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {

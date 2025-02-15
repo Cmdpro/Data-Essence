@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.registry.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
@@ -64,6 +65,13 @@ public class AncientSentinel extends Monster implements RangedAttackMob {
     }
     protected float getSoundVolume() {
         return 0.2F;
+    }
+
+    @Override
+    public void checkDespawn() {
+        if (this.level().getDifficulty() == Difficulty.PEACEFUL && this.shouldDespawnInPeaceful()) {
+            this.discard();
+        }
     }
 
     @Override
