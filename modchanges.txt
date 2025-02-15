@@ -1,0 +1,5 @@
+## Changes
+- Data Banks now require a Data Bank in your inventory to use.
+## Fixes
+- Ancient Sentinels can't despawn anymore.
+- Potentially fixed Structure Protectors not spawning in certain conditions.

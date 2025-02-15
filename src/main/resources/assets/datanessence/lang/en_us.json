@@ -96,6 +96,7 @@
   "block.datanessence.charger": "Charger",
   "block.datanessence.computer": "Computer",
   "block.datanessence.data_bank": "Ancient Data Bank",
+  "block.datanessence.data_bank.cannot_use": "You need a Data Tablet to make use of this.",
   "block.datanessence.deco_essence_buffer": "Essence Buffer (Decorative)",
   "block.datanessence.deco_fluid_buffer": "Fluid Buffer (Decorative)",
   "block.datanessence.deco_item_buffer": "Item Buffer (Decorative)",

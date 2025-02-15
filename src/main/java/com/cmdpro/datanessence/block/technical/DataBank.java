@@ -2,10 +2,13 @@ package com.cmdpro.datanessence.block.technical;
 
 import com.cmdpro.datanessence.api.util.DataBankUtil;
 import com.cmdpro.datanessence.databank.DataBankTypeManager;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -32,7 +35,12 @@ public class DataBank extends Block implements EntityBlock {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof DataBankBlockEntity ent) {
                 if (ent.type != null) {
-                    DataBankUtil.sendDataBankEntries(pPlayer, DataBankTypeManager.types.get(ent.type));
+                    if ( pPlayer.getInventory().contains(new ItemStack(ItemRegistry.DATA_TABLET.get(), 1)) ) {
+                        DataBankUtil.sendDataBankEntries(pPlayer, DataBankTypeManager.types.get(ent.type));
+                    }
+                    else {
+                        pPlayer.displayClientMessage(Component.translatable("block.datanessence.data_bank.cannot_use"), true);
+                    }
                 }
             }
         }
