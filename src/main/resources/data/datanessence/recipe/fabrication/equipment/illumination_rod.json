@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 100
+  },
+  "entry": "datanessence:tools/illumination_rod",
+  "pattern": [
+    " GL",
+    " MG",
+    "R  "
+  ],
+  "key": {
+    "G": { "item": "minecraft:glowstone_dust" },
+    "R": { "item": "datanessence:conductance_rod" },
+    "M": { "item": "datanessence:logical_matrix" },
+    "L": { "item": "datanessence:lensing_crystal" }
+  },
+  "result": { "id": "datanessence:illumination_rod" }
+}

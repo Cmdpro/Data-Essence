@@ -6,11 +6,9 @@
     "datanessence:tier_1/components",
     "datanessence:tier_1/decorative_buffers",
     "datanessence:tier_1/essence_battery",
-    "datanessence:tier_1/essence_bombs",
     "datanessence:tier_1/essence_breaker",
     "datanessence:tier_1/essence_burner",
     "datanessence:tier_1/essence_crystals",
-    "datanessence:tier_1/essence_sword",
     "datanessence:tier_1/essence_transfer",
     "datanessence:tier_1/fluid_acquisition",
     "datanessence:tier_1/fluid_tank",
@@ -34,20 +32,13 @@
     "datanessence:tier_2/fluid_bottler",
     "datanessence:tier_2/fluid_mixer",
     "datanessence:tier_2/genderfluid",
+    "datanessence:tier_2/illumination_rod",
     "datanessence:tier_2/industrial_plant_siphon",
-    "datanessence:tier_2/lensing_crystals",
     "datanessence:tier_2/melter",
     "datanessence:tier_2/mineral_purification_chamber",
     "datanessence:tier_2/node_upgrades",
-    "datanessence:tier_2/plants",
     "datanessence:tier_2/synthesis_chamber",
     "datanessence:tier_2/warp_capsule",
     { "value": "datanessence:tier_2/mod_integration_ae2", "required": false }
-  ],
-  "remove": [
-    "datanessence:tier_1/essence_bombs",
-    "datanessence:tier_1/essence_sword",
-    "datanessence:tier_2/lensing_crystals",
-    "datanessence:tier_2/plants"
   ]
 }

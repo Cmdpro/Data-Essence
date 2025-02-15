@@ -1,0 +1,6 @@
+{
+  "parent": "builtin/block",
+  "textures": {
+    "particle": "datanessence:block/nothing"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:illumination_rod"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.illumination_rod.name"
+  },
+  "entry": "datanessence:tools/illumination_rod"
+}

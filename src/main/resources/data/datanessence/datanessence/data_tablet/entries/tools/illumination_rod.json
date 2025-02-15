@@ -1,0 +1,30 @@
+{
+  "icon": {
+    "id": "datanessence:illumination_rod"
+  },
+  "tab": "datanessence:tools",
+  "x": 0,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:illumination_rod" },
+      "text": {
+        "translate": "data_tablet.pages.illumination_rod.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/equipment/illumination_rod"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.illumination_rod.name"
+  },
+  "parents": [
+    "datanessence:basics/lensing_crystals",
+    "datanessence:tools/charger"
+  ]
+}
