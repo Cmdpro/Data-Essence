@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.auxiliary.*;
+import com.cmdpro.datanessence.block.decoration.FlareLightBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphonBlockEntity;
@@ -194,6 +195,10 @@ public class BlockEntityRegistry {
             register("cryochamber", () ->
                     BlockEntityType.Builder.of(CryochamberBlockEntity::new,
                             BlockRegistry.CRYOCHAMBER.get()).build(null));
+    public static final Supplier<BlockEntityType<FlareLightBlockEntity>> FLARE_LIGHT =
+            register("flare_light", () ->
+                    BlockEntityType.Builder.of(FlareLightBlockEntity::new,
+                            BlockRegistry.FLARE_LIGHT.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

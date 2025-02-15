@@ -5,6 +5,8 @@ import com.cmdpro.datanessence.api.block.SpreadingPlant;
 import com.cmdpro.datanessence.block.*;
 
 import com.cmdpro.datanessence.block.auxiliary.*;
+import com.cmdpro.datanessence.block.decoration.FlareLight;
+import com.cmdpro.datanessence.block.decoration.LightFixture;
 import com.cmdpro.datanessence.block.fluid.GenderfluidBlock;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
@@ -277,6 +279,11 @@ public class BlockRegistry {
     public static final Supplier<Block> FLUIDIC_GLASS = register("fluidic_glass",
             () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
+    // Misc Deco
+    public static final Supplier<Block> FLARE_LIGHT = registerBlock("flare_light",
+            () -> new FlareLight(BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHT).instabreak().noCollission()));
+
     // Fluids
     public static final Supplier<LiquidBlock> GENDERFLUID = registerBlock("genderfluid", () -> new GenderfluidBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(DyeColor.BLACK)));
 

@@ -219,6 +219,7 @@ public class DataNEssence
             event.accept(ItemRegistry.WARP_CAPSULE.get());
             event.accept(ItemRegistry.ESSENCE_SWORD.get());
             event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
+            event.accept(ItemRegistry.ILLUMINATION_ROD.get());
 
             // Wires
             event.accept(ItemRegistry.ESSENCE_WIRE.get());
@@ -252,7 +253,6 @@ public class DataNEssence
             event.accept(ItemRegistry.COPPER_NUGGET.get());
             event.accept(ItemRegistry.DIAMOND_SHARD.get());
             event.accept(ItemRegistry.EMERALD_SHARD.get());
-            event.accept(ItemRegistry.LAPIS_SHARD.get());
             event.accept(ItemRegistry.COAL_LUMP.get());
             event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
 

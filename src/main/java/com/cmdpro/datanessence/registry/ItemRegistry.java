@@ -35,6 +35,7 @@ public class ItemRegistry {
     public static final Supplier<Item> ESSENCE_SWORD = register("essence_sword", () -> new EssenceSword(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PRIMITIVE_ANTI_GRAVITY_PACK = register("primitive_anti_gravity_pack", () -> new PrimitiveAntiGravityPack(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> WARP_CAPSULE = register("warp_capsule", () -> new WarpCapsule(new Item.Properties()));
+    public static final Supplier<Item> ILLUMINATION_ROD = register("illumination_rod", () -> new IlluminationRod(new Item.Properties().stacksTo(1)));
 
     // Essence Shards
     public static final Supplier<Item> ESSENCE_SHARD = register("essence_shard", () -> new EssenceShard(new Item.Properties(), Map.of(EssenceTypeRegistry.ESSENCE, 100f)));
@@ -70,7 +71,6 @@ public class ItemRegistry {
     public static final Supplier<Item> COPPER_NUGGET = register("copper_nugget", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> DIAMOND_SHARD = register("diamond_shard", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> EMERALD_SHARD = register("emerald_shard", () -> new Item(new Item.Properties()));
-    public static final Supplier<Item> LAPIS_SHARD = register("lapis_shard", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> COAL_LUMP = register("coal_lump", () -> new Item(new Item.Properties()));
 
     // Misc

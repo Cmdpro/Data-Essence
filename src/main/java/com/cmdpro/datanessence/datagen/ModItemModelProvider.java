@@ -66,6 +66,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         handheldItem(ItemRegistry.ESSENCE_REDIRECTOR);
         handheldItem(ItemRegistry.ESSENCE_SWORD);
+        handheldItem(ItemRegistry.ILLUMINATION_ROD);
 
         evenSimplerBlockItem(BlockRegistry.ESSENCE_CRYSTAL);
 
@@ -96,7 +97,6 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.COPPER_NUGGET, "intermediates");
         simpleItemWithSubdirectory(ItemRegistry.DIAMOND_SHARD, "intermediates");
         simpleItemWithSubdirectory(ItemRegistry.EMERALD_SHARD, "intermediates");
-        simpleItemWithSubdirectory(ItemRegistry.LAPIS_SHARD, "intermediates");
         simpleItemWithSubdirectory(ItemRegistry.COAL_LUMP, "intermediates");
 
         simpleItemWithSubdirectory(ItemRegistry.ESSENCE_BOMB, "bombs");

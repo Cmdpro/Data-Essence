@@ -1,3 +1,9 @@
+## Additions
+- Added the Illumination Rod, a light placing tool that unlocks at tier 2
+
+## Removals
+- Removed Lapis Shard item
+
 ## Changes
 - Data Banks require a Data Tablet in your inventory to use
 - Primitive Antigravity Pack only drains Essence if you are actively falling

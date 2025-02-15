@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.block;
+package com.cmdpro.datanessence.block.decoration;
 
 import com.cmdpro.datanessence.api.block.RedirectorInteractable;
 import com.cmdpro.datanessence.particle.MoteParticleOptions;
