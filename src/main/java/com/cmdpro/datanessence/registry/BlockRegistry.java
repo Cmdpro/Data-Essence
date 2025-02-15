@@ -282,7 +282,14 @@ public class BlockRegistry {
 
     // Misc Deco
     public static final Supplier<Block> FLARE_LIGHT = registerBlock("flare_light",
-            () -> new FlareLight(BlockBehaviour.Properties.ofFullCopy(Blocks.LIGHT).instabreak().noCollission()));
+            () -> new FlareLight(
+                    BlockBehaviour.Properties.of()
+                            .replaceable()
+                            .strength(-1.0F, 3600000.8F)
+                            .mapColor(MapColor.NONE)
+                            .lightLevel((state) -> 15)
+                            .noLootTable()
+                            .noOcclusion().instabreak().noCollission()));
 
     // Fluids
     public static final Supplier<LiquidBlock> GENDERFLUID = registerBlock("genderfluid", () -> new GenderfluidBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(DyeColor.BLACK)));
