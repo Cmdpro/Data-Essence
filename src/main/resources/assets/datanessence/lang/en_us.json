@@ -450,6 +450,9 @@
 
   "subtitle.datanessence.entropic_processor_working": "Entropic Processor grinds",
 
+  "tag.item.c.nuggets.coal": "Coal Nuggets",
+  "tag.item.c.nuggets.diamond": "Diamond Nuggets",
+  "tag.item.c.nuggets.emerald": "Emerald Nuggets",
   "tag.item.datanessence.polished_obsidian_blocks": "Polished Obsidian Blocks",
   "tag.item.datanessence.shaped_polished_obsidian_blocks": "Shaped Polished Obsidian Blocks",
   "tag.item.datanessence.explosive_material": "Explosive Material",

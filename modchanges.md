@@ -1,13 +1,2 @@
-## Additions
-- Added the Illumination Rod, a light placing tool that unlocks at tier 2
-
-## Removals
-- Removed Lapis Shard item
-
-## Changes
-- Data Banks require a Data Tablet in your inventory to use
-- Primitive Antigravity Pack only drains Essence if you are actively falling
-
-## Fixes
-- Ancient Sentinels should no longer despawn
-- Potentially fixed structure protectors still protecting even when they don't exist
+### Fixes
+- The various nugget/shard items are now properly tagged as nuggets for their respective material
