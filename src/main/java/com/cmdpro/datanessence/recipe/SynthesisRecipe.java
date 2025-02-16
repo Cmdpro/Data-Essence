@@ -23,15 +23,17 @@ public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IH
     private final int time;
     private final Map<ResourceLocation, Float> essenceCost;
     private final ResourceLocation entry;
+    private final boolean allowIncomplete;
 
     public SynthesisRecipe(ItemStack output,
-                           Ingredient input, Ingredient input2, int time, Map<ResourceLocation, Float> essenceCost, ResourceLocation entry) {
+                           Ingredient input, Ingredient input2, int time, Map<ResourceLocation, Float> essenceCost, ResourceLocation entry, boolean allowIncomplete) {
         this.output = output;
         this.input = input;
         this.input2 = input2;
         this.time = time;
         this.essenceCost = essenceCost;
         this.entry = entry;
+        this.allowIncomplete = allowIncomplete;
     }
     @Override
     public Map<ResourceLocation, Float> getEssenceCost() {
@@ -83,6 +85,11 @@ public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IH
         return entry;
     }
 
+    @Override
+    public boolean allowIncomplete() {
+        return allowIncomplete;
+    }
+
     public static class Serializer implements RecipeSerializer<SynthesisRecipe> {
         public static final MapCodec<SynthesisRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 ItemStack.CODEC.fieldOf("result").forGetter(r -> r.output),
@@ -90,7 +97,8 @@ public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IH
                 Ingredient.CODEC.fieldOf("input2").forGetter(r -> r.input2),
                 Codec.INT.fieldOf("time").forGetter((r) -> r.time),
                 Codec.unboundedMap(ResourceLocation.CODEC, Codec.FLOAT).fieldOf("essenceCost").forGetter(r -> r.essenceCost),
-                ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry)
+                ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
+                Codec.BOOL.optionalFieldOf("allow_incomplete", false).forGetter((r) -> r.allowIncomplete)
         ).apply(instance, SynthesisRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, SynthesisRecipe> STREAM_CODEC = StreamCodec.of(
@@ -101,6 +109,7 @@ public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IH
                     buf.writeInt(obj.time);
                     buf.writeMap(obj.essenceCost, FriendlyByteBuf::writeResourceLocation, FriendlyByteBuf::writeFloat);
                     buf.writeResourceLocation(obj.entry);
+                    buf.writeBoolean(obj.allowIncomplete);
                 },
                 (buf) -> {
                     ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
@@ -109,7 +118,8 @@ public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IH
                     int time = buf.readInt();
                     Map<ResourceLocation, Float> essenceCost = buf.readMap(FriendlyByteBuf::readResourceLocation, FriendlyByteBuf::readFloat);
                     ResourceLocation entry = buf.readResourceLocation();
-                    return new SynthesisRecipe(output, input, input2, time, essenceCost, entry);
+                    boolean allowIncomplete = buf.readBoolean();
+                    return new SynthesisRecipe(output, input, input2, time, essenceCost, entry, allowIncomplete);
                 }
         );
 

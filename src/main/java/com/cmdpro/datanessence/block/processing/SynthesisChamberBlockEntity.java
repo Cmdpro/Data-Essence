@@ -196,12 +196,12 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            Optional<RecipeHolder<SynthesisRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.SYNTHESIS_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
+            Optional<RecipeHolder<SynthesisRecipe>> recipe = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.SYNTHESIS_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel).stream().filter((a) -> !a.value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))).findFirst();
             if (recipe.isPresent()) {
                 if (!recipe.get().value().equals(pBlockEntity.recipe)) {
                     pBlockEntity.workTime = 0;
                 }
-                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))) {
+                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(pBlockEntity.dataDriveHandler.getStackInSlot(0)) || pBlockEntity.recipe.allowIncomplete())) {
                     pBlockEntity.recipe = recipe.get().value();
                     pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
                     boolean enoughEssence = true;

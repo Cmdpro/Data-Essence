@@ -20,14 +20,20 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
     private final ItemStack output;
     private final Ingredient input;
     private final ResourceLocation entry;
+    private final boolean allowIncomplete;
     private final Map<ResourceLocation, Float> essenceCost;
 
     public InfusionRecipe(ItemStack output,
-                          Ingredient input, ResourceLocation entry, Map<ResourceLocation, Float> essenceCost) {
+                          Ingredient input, ResourceLocation entry, boolean allowIncomplete, Map<ResourceLocation, Float> essenceCost) {
         this.output = output;
         this.input = input;
         this.entry = entry;
+        this.allowIncomplete = allowIncomplete;
         this.essenceCost = essenceCost;
+    }
+    @Override
+    public boolean allowIncomplete() {
+        return allowIncomplete;
     }
 
     @Override
@@ -80,22 +86,25 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
                 ItemStack.CODEC.fieldOf("result").forGetter(r -> r.output),
                 Ingredient.CODEC.fieldOf("input").forGetter(r -> r.input),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
+                Codec.BOOL.optionalFieldOf("allow_incomplete", false).forGetter((r) -> r.allowIncomplete),
                 Codec.unboundedMap(ResourceLocation.CODEC, Codec.FLOAT).fieldOf("essenceCost").forGetter(r -> r.essenceCost)
-        ).apply(instance, (result, input, entry, essenceCost) -> new InfusionRecipe(result, input, entry, essenceCost)));
+        ).apply(instance, InfusionRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, InfusionRecipe> STREAM_CODEC = StreamCodec.of(
                 (buf, obj) -> {
                     ItemStack.STREAM_CODEC.encode(buf, obj.output);
                     Ingredient.CONTENTS_STREAM_CODEC.encode(buf, obj.input);
                     buf.writeResourceLocation(obj.entry);
+                    buf.writeBoolean(obj.allowIncomplete);
                     buf.writeMap(obj.essenceCost, FriendlyByteBuf::writeResourceLocation, FriendlyByteBuf::writeFloat);
                 },
                 (buf) -> {
                     ItemStack output = ItemStack.STREAM_CODEC.decode(buf);
                     Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
                     ResourceLocation entry = buf.readResourceLocation();
+                    boolean allowIncomplete = buf.readBoolean();
                     Map<ResourceLocation, Float> essenceCost = buf.readMap(FriendlyByteBuf::readResourceLocation, FriendlyByteBuf::readFloat);
-                    return new InfusionRecipe(output, input, entry, essenceCost);
+                    return new InfusionRecipe(output, input, entry, allowIncomplete, essenceCost);
                 }
         );
 

@@ -3,3 +3,4 @@
 
 ### Fixes
 - The various nugget/shard items are now properly tagged as nuggets for their respective material
+- Fixed incomplete entries not allowing crafting of recipes

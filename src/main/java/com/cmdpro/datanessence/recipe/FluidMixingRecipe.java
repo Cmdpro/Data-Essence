@@ -26,9 +26,10 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
     private final int time;
     private final float essenceCost;
     private final ResourceLocation entry;
+    private final boolean allowIncomplete;
 
     public FluidMixingRecipe(FluidStack output,
-                             FluidStack input, Optional<FluidStack> input2, Optional<Ingredient> input3, int time, float essenceCost, ResourceLocation entry) {
+                             FluidStack input, Optional<FluidStack> input2, Optional<Ingredient> input3, int time, float essenceCost, ResourceLocation entry, boolean allowIncomplete) {
         this.output = output;
         this.input = input;
         this.input2 = input2;
@@ -36,6 +37,11 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
         this.time = time;
         this.essenceCost = essenceCost;
         this.entry = entry;
+        this.allowIncomplete = allowIncomplete;
+    }
+    @Override
+    public boolean allowIncomplete() {
+        return allowIncomplete;
     }
 
     public float getEssenceCost() {
@@ -105,7 +111,8 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
                 Ingredient.CODEC.optionalFieldOf("item_input").forGetter(r -> r.input3),
                 Codec.INT.fieldOf("time").forGetter((r) -> r.time),
                 Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
-                ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry)
+                ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
+                Codec.BOOL.optionalFieldOf("allow_incomplete", false).forGetter((r) -> r.allowIncomplete)
         ).apply(instance, FluidMixingRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, FluidMixingRecipe> STREAM_CODEC = StreamCodec.of(
@@ -119,6 +126,7 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
                     buf.writeInt(obj.time);
                     buf.writeFloat(obj.essenceCost);
                     buf.writeResourceLocation(obj.entry);
+                    buf.writeBoolean(obj.allowIncomplete);
                 },
                 (buf) -> {
                     FluidStack output = FluidStack.STREAM_CODEC.decode(buf);
@@ -136,7 +144,8 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
                     int time = buf.readInt();
                     float essenceCost = buf.readFloat();
                     ResourceLocation entry = buf.readResourceLocation();
-                    return new FluidMixingRecipe(output, input, input2, input3, time, essenceCost, entry);
+                    boolean allowIncomplete = buf.readBoolean();
+                    return new FluidMixingRecipe(output, input, input2, input3, time, essenceCost, entry, allowIncomplete);
                 }
         );
 

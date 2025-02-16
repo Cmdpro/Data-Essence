@@ -28,6 +28,9 @@ public class DataDrive extends Item {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
         if (pStack.has(DataComponentRegistry.DATA_ID)) {
             pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.loaded", Entries.entries.get(pStack.get(DataComponentRegistry.DATA_ID)).name).withStyle(ChatFormatting.GRAY));
+            if (pStack.getOrDefault(DataComponentRegistry.DATA_INCOMPLETE, false)) {
+                pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.incomplete").withStyle(ChatFormatting.GRAY));
+            }
         }
         else {
             pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.empty").withStyle(ChatFormatting.GRAY));
@@ -45,6 +48,14 @@ public class DataDrive extends Item {
         if (stack != null) {
             if (stack.has(DataComponentRegistry.DATA_ID)) {
                 return Entries.entries.get(stack.get(DataComponentRegistry.DATA_ID)).id;
+            }
+        }
+        return null;
+    }
+    public static Boolean getEntryIncomplete(ItemStack stack) {
+        if (stack != null) {
+            if (stack.has(DataComponentRegistry.DATA_ID)) {
+                return stack.get(DataComponentRegistry.DATA_INCOMPLETE);
             }
         }
         return null;

@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
+import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
@@ -139,7 +140,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
                         if (ent.recipe instanceof IFabricationRecipe) {
                             fabricationRecipe = (IFabricationRecipe) ent.recipe;
                         }
-                        if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry())) {
+                        if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry(), fabricationRecipe.allowIncomplete())) {
                             ItemStack stack = ent.recipe.assemble(ent.getCraftingInv().asCraftInput(), pLevel.registryAccess()).copy();
                             for (int i = 0; i < 9; i++) {
                                 ent.itemHandler.extractItem(i, 1, false);

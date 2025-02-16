@@ -23,6 +23,7 @@
   "item.datanessence.data_drive.empty": " ◇ Contains no data",
   "item.datanessence.data_drive.loaded": " ◇ Loaded: %1$s",
   "item.datanessence.data_drive.text": "Select the data to load onto this Data Drive",
+  "item.datanessence.data_drive.incomplete": "Incomplete",
   "item.datanessence.data_tablet": "Data Tablet",
   "item.datanessence.diamond_shard": "Diamond Shard",
   "item.datanessence.emerald_shard": "Emerald Shard",

@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
@@ -24,6 +25,11 @@ public class DataComponentRegistry {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> DATA_ID = DATA_COMPONENTS.registerComponentType("data_id", builder -> builder
             .persistent(ResourceLocation.CODEC)
             .networkSynchronized(ResourceLocation.STREAM_CODEC)
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> DATA_INCOMPLETE = DATA_COMPONENTS.registerComponentType("data_incomplete", builder -> builder
+            .persistent(Codec.BOOL)
+            .networkSynchronized(ByteBufCodecs.BOOL)
             .cacheEncoding()
     );
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> MOLD = DATA_COMPONENTS.registerComponentType("mold", builder -> builder

@@ -63,11 +63,16 @@ public class DataTabletUtil {
         checkForTierUpgrades(player);
     }
 
-    public static boolean playerHasEntry(Player player, ResourceLocation entry) {
+    public static boolean playerHasEntry(Player player, ResourceLocation entry, boolean allowIncomplete) {
         if (entry != null) {
-            return player.getData(AttachmentTypeRegistry.UNLOCKED).contains(entry);
+            if (player.getData(AttachmentTypeRegistry.UNLOCKED).contains(entry)) {
+                return true;
+            } else return allowIncomplete && player.getData(AttachmentTypeRegistry.INCOMPLETE).contains(entry);
         }
         return false;
+    }
+    public static boolean playerHasEntry(Player player, ResourceLocation entry) {
+        return playerHasEntry(player, entry, false);
     }
 
     public static int getTier(Player player) {

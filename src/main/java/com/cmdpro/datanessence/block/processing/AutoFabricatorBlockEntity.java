@@ -179,7 +179,9 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
     public boolean tryCraft() {
         if (recipe instanceof IHasRequiredKnowledge recipe) {
             if (!recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))) {
-                return false;
+                if (DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) && !recipe.allowIncomplete()) {
+                    return false;
+                }
             }
         }
         ItemStack stack = recipe.assemble(getCraftingInv().asCraftInput(), level.registryAccess()).copy();

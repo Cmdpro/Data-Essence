@@ -2,6 +2,7 @@
   "type": "datanessence:shaped_fabrication_recipe",
   "essenceCost": {},
   "entry": "datanessence:essence_manipulation/essence_burner",
+  "allow_incomplete": true,
   "pattern": [
     "CCC",
     "O O",
