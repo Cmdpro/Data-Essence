@@ -4,6 +4,7 @@
     "datanessence:essence": 0
   },
   "entry": "datanessence:essence_manipulation/essence_transfer",
+  "allow_incomplete": true,
   "pattern": [
     " C ",
     "ARA",
