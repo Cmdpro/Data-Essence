@@ -19,17 +19,27 @@
         "translate": "data_tablet.pages.entropic_processor.page2.text"
       },
       "recipes": [
-        "datanessence:fabrication/machines/entropic_processor",
-        "datanessence:entropic_processing/stone_to_cobble",
-        "datanessence:entropic_processing/cobble_to_gravel",
-        "datanessence:entropic_processing/gravel_to_sand"
+        "datanessence:fabrication/machines/entropic_processor"
       ]
     },
     {
       "type": "datanessence:crafting",
       "recipes": [
+        "datanessence:entropic_processing/stone_to_cobble",
+        "datanessence:entropic_processing/cobble_to_gravel",
+        "datanessence:entropic_processing/gravel_to_sand",
         "datanessence:entropic_processing/bone_meal"
       ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:entropic_processing/dye/green_dye",
+        "datanessence:entropic_processing/dye/red_dye"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.entropic_processor.page4.text"
+      }
     }
   ],
   "name": {

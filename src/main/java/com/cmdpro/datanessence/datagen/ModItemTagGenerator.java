@@ -40,5 +40,61 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(TagRegistry.Items.POLISHED_OBSIDIAN_BLOCKS)
                 .addTag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get().asItem());
+
+        this.tag(TagRegistry.Items.MAKES_WHITE_DYE)
+                .add(Items.LILY_OF_THE_VALLEY)
+                .add(Items.BONE_MEAL);
+        this.tag(TagRegistry.Items.MAKES_LIGHT_GRAY_DYE)
+                .add(Items.AZURE_BLUET)
+                .add(Items.WHITE_TULIP)
+                .add(Items.OXEYE_DAISY);
+        this.tag(TagRegistry.Items.MAKES_GRAY_DYE);
+                // vanilla has nothing that directly makes gray???
+        this.tag(TagRegistry.Items.MAKES_BLACK_DYE)
+                .add(Items.INK_SAC)
+                .add(Items.WITHER_ROSE)
+                .add(Items.CHARCOAL);
+        this.tag(TagRegistry.Items.MAKES_BROWN_DYE)
+                .add(Items.COCOA_BEANS)
+                .add(Items.BROWN_MUSHROOM);
+        this.tag(TagRegistry.Items.MAKES_RED_DYE)
+                .add(Items.POPPY)
+                .add(Items.RED_TULIP)
+                .add(Items.ROSE_BUSH)
+                .add(Items.BEETROOT)
+                .add(Items.RED_MUSHROOM)
+                .add(Items.CRIMSON_FUNGUS);
+        this.tag(TagRegistry.Items.MAKES_ORANGE_DYE)
+                .add(Items.ORANGE_TULIP)
+                .add(Items.TORCHFLOWER);
+        this.tag(TagRegistry.Items.MAKES_YELLOW_DYE)
+                .add(Items.SUNFLOWER)
+                .add(Items.DANDELION);
+        this.tag(TagRegistry.Items.MAKES_LIME_DYE);
+                // nothing for lime either!
+        this.tag(TagRegistry.Items.MAKES_GREEN_DYE)
+                .add(Items.CACTUS)
+                .add(Items.SHORT_GRASS)
+                .add(Items.TALL_GRASS)
+                .add(Items.FERN)
+                .add(Items.LARGE_FERN);
+        this.tag(TagRegistry.Items.MAKES_CYAN_DYE)
+                .add(Items.PITCHER_PLANT)
+                .add(Items.WARPED_FUNGUS);
+        this.tag(TagRegistry.Items.MAKES_LIGHT_BLUE_DYE)
+                .add(Items.BLUE_ORCHID);
+        this.tag(TagRegistry.Items.MAKES_BLUE_DYE)
+                .add(Items.LAPIS_LAZULI)
+                .add(Items.CORNFLOWER);
+        this.tag(TagRegistry.Items.MAKES_PURPLE_DYE);
+                // again, nothing
+        this.tag(TagRegistry.Items.MAKES_MAGENTA_DYE)
+                .add(Items.ALLIUM)
+                .add(Items.LILAC)
+                .add(Items.SPORE_BLOSSOM);
+        this.tag(TagRegistry.Items.MAKES_PINK_DYE)
+                .add(Items.PEONY)
+                .add(Items.PINK_PETALS)
+                .add(Items.PINK_TULIP);
     }
 }

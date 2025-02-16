@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "tag": "datanessence:makes_red_dye" },
+  "time": 50,
+  "result": { "id": "minecraft:red_dye", "count": 3 }
+}

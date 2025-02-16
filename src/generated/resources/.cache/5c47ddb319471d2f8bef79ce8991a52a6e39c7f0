@@ -1,7 +1,23 @@
-// 1.21.1	2025-01-31T21:28:28.129214031	Tags for minecraft:item mod id datanessence
+// 1.21.1	2025-02-15T20:18:37.412866727	Tags for minecraft:item mod id datanessence
 2de480fdf84933ba907798fa90de70b537e2b008 data/datanessence/tags/item/explosive_material.json
 b4cc0642cc95aece33ec9cce364d245dd186c647 data/datanessence/tags/item/high_essence_plants.json
 455f93dd270fe5e97098fe34f83f435741b604fc data/datanessence/tags/item/low_essence_plants.json
+e2da4e19973b7a1b57144263d080ccf9a0750636 data/datanessence/tags/item/makes_black_dye.json
+c2970d27e5a1275fe94ef26dbbf72254cf7213bf data/datanessence/tags/item/makes_blue_dye.json
+e9c0fe6c8b8d86a35fa8aeb9acb5b5096c14209c data/datanessence/tags/item/makes_brown_dye.json
+9ebcbe0ab86255c4a569291a5926cc11adaf48f4 data/datanessence/tags/item/makes_cyan_dye.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/datanessence/tags/item/makes_gray_dye.json
+a257c17a123bc3c05bd0968c7765dd7e162de975 data/datanessence/tags/item/makes_green_dye.json
+a13e0a2ea813fbd7e6f7e04223915ea1edd9ab68 data/datanessence/tags/item/makes_light_blue_dye.json
+0d3e2b327da44b22a4231de26d55f1f7c17d51d5 data/datanessence/tags/item/makes_light_gray_dye.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/datanessence/tags/item/makes_lime_dye.json
+0fc92b2f406c08141116bf7b62493895d8cd2036 data/datanessence/tags/item/makes_magenta_dye.json
+e19e6acebf1434e39bcc3c07be2516d6fa7cee35 data/datanessence/tags/item/makes_orange_dye.json
+bce5073bf52115ba41d2a7876709ffc5ecdf34f7 data/datanessence/tags/item/makes_pink_dye.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data/datanessence/tags/item/makes_purple_dye.json
+170eff9dc5bad0c59ffeeef3adda2c8c4e4dd416 data/datanessence/tags/item/makes_red_dye.json
+351ab4f85e4a63b60a30bd4a83acfd133b7ee670 data/datanessence/tags/item/makes_white_dye.json
+73a0f0ef78ea29bdc25208fc70b485fbc5620512 data/datanessence/tags/item/makes_yellow_dye.json
 f20021795384d03de093e8106f4c361eb069cd13 data/datanessence/tags/item/medium_essence_plants.json
 42ff038bd87bd6f82af3e5d6052ff1efd5c3ff20 data/datanessence/tags/item/polished_obsidian_blocks.json
 776a17f452de21db68981d4b9b0cf35cecbb504d data/datanessence/tags/item/shaped_polished_obsidian_blocks.json

@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "tag": "datanessence:makes_white_dye" },
+  "time": 50,
+  "result": { "id": "minecraft:white_dye", "count": 3 }
+}
