@@ -199,6 +199,9 @@
   "effect.datanessence.gender_euphoria": "Gender Euphoria",
   "effect.datanessence.gender_euphoria.description": "You feel a rush of pure joy about your gender!",
 
+  "item.minecraft.potion.effect.gender_euphoria": "Potion of Gender Euphoria",
+  "item.minecraft.potion.effect.long_gender_euphoria": "Potion of Gender Euphoria",
+
   "gui.widget.fluid":  "%3$s: %1$s/%2$smB",
   "gui.widget.fluid.without_max": "%2$s: %1$s",
 

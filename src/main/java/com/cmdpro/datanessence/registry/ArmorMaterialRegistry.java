@@ -23,7 +23,7 @@ import java.util.function.Supplier;
 public class ArmorMaterialRegistry {
     public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIALS = DeferredRegister.create(BuiltInRegistries.ARMOR_MATERIAL,
             DataNEssence.MOD_ID);
-    public static final Holder<ArmorMaterial> PRIMITIVE_ANTI_GRAVITY_PACK = ARMOR_MATERIALS.register("primitive_anti_gravity_pack", () -> new ArmorMaterial(
+    public static final Holder<ArmorMaterial> PRIMITIVE_ANTI_GRAVITY_PACK = register("primitive_anti_gravity_pack", () -> new ArmorMaterial(
             Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
                 map.put(ArmorItem.Type.CHESTPLATE, 2);
             }),

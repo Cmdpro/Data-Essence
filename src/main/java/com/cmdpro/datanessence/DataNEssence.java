@@ -64,6 +64,7 @@ public class DataNEssence
         SoundRegistry.SOUND_EVENTS.register(bus);
         FluidRegistry.FLUID_TYPES.register(bus);
         FluidRegistry.FLUIDS.register(bus);
+        PotionRegistry.POTIONS.register(bus);
         random = RandomSource.create();
         HiddenBlockConditions.conditions.put(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
     }
