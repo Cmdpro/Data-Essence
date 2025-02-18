@@ -1,6 +1,12 @@
 {
   "values": [
     "#c:crops",
-    "#minecraft:leaves"
+    "#c:seeds",
+    "#minecraft:leaves",
+    "#minecraft:flowers",
+    "#minecraft:saplings",
+    "minecraft:bamboo",
+    "minecraft:kelp",
+    "minecraft:sea_pickle"
   ]
 }

@@ -1,5 +1,10 @@
 {
   "values": [
-    "datanessence:tethergrass"
+    "minecraft:chorus_fruit",
+    "minecraft:chorus_flower",
+    "minecraft:wither_rose",
+    "minecraft:spore_blossom",
+    "minecraft:pitcher_plant",
+    "minecraft:torchflower"
   ]
 }
