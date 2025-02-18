@@ -201,7 +201,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            Optional<RecipeHolder<FluidMixingRecipe>> recipe = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.FLUID_MIXING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel).stream().filter((a) -> !a.value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))).findFirst();
+            Optional<RecipeHolder<FluidMixingRecipe>> recipe = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.FLUID_MIXING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel).stream().filter((a) -> a.value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))).findFirst();
             if (recipe.isPresent()) {
                 if (!recipe.get().value().equals(pBlockEntity.recipe)) {
                     pBlockEntity.workTime = 0;

@@ -172,7 +172,7 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0);
             boolean shouldReset = true;
-            Optional<RecipeHolder<InfusionRecipe>> recipe = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.INFUSION_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel).stream().filter((a) -> !a.value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))).findFirst();
+            Optional<RecipeHolder<InfusionRecipe>> recipe = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.INFUSION_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel).stream().filter((a) -> a.value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))).findFirst();
             if (recipe.isPresent()) {
                 pBlockEntity.recipe = recipe.get().value();
                 pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
