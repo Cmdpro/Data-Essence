@@ -240,6 +240,11 @@ public class DataBankScreen extends Screen {
     }
 
     @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
+
+    @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float delta) {
         super.render(graphics, mouseX, mouseY, delta);
         renderBg(graphics, delta, mouseX, mouseY);
