@@ -22,19 +22,19 @@ public class DataTabletUtil {
         Entry entry2 = Entries.entries.get(entry);
         List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
         List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+        boolean finalIncomplete = false;
         if (incomplete) {
             if (!((ServerPlayer) player).getAdvancements().getOrStartProgress(player.getServer().getAdvancements().get(entry2.completionAdvancement)).isDone()) {
                 unlocked = incompleteEntries;
-            } else {
-                incompleteEntries.remove(entry);
+                finalIncomplete = true;
             }
         }
         if (entry2 != null && entry2.isUnlockedServer(player) && !unlocked.contains(entry)) {
-            if (!incomplete) {
+            if (!finalIncomplete) {
                 incompleteEntries.remove(entry);
             }
             unlocked.add(entry);
-            PlayerDataUtil.unlockEntry((ServerPlayer) player, entry, incomplete);
+            PlayerDataUtil.unlockEntry((ServerPlayer) player, entry, finalIncomplete);
             checkForTierUpgrades(player);
         }
     }
@@ -43,19 +43,19 @@ public class DataTabletUtil {
         Entry entry2 = Entries.entries.get(entry);
         List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
         List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+        boolean finalIncomplete = false;
         if (incomplete) {
             if (!((ServerPlayer) player).getAdvancements().getOrStartProgress(player.getServer().getAdvancements().get(entry2.completionAdvancement)).isDone()) {
                 unlocked = incompleteEntries;
-            } else {
-                incompleteEntries.remove(entry);
+                finalIncomplete = true;
             }
         }
         if (entry2 != null && !unlocked.contains(entry)) {
-            if (!incomplete) {
+            if (!finalIncomplete) {
                 incompleteEntries.remove(entry);
             }
             unlocked.add(entry);
-            PlayerDataUtil.unlockEntry((ServerPlayer) player, entry, incomplete);
+            PlayerDataUtil.unlockEntry((ServerPlayer) player, entry, finalIncomplete);
             for (Entry i : entry2.getParentEntries()) {
                 DataTabletUtil.unlockEntryAndParents(player, i.id, i.incomplete);
             }
