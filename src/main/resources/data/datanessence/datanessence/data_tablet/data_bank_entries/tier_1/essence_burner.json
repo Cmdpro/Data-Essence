@@ -8,39 +8,33 @@
       "type": "datanessence:wire",
       "tiles": [
         {
-          "x": 7,
+          "x": 1,
           "y": 7,
           "type": 1,
           "essence": 0
         },
         {
-          "x": 9,
+          "x": 11,
           "y": 7,
-          "type": 3,
-          "essence": 0
+          "type": 2,
+          "essence": 1
         },
         {
-          "x": 9,
-          "y": 9,
+          "x": 13,
+          "y": 7,
           "type": 2,
           "essence": 0
         },
         {
-          "x": 7,
-          "y": 5,
+          "x": 3,
+          "y": 7,
           "type": 1,
-          "essence": 0
-        },
-        {
-          "x": 5,
-          "y": 7,
-          "type": 3,
-          "essence": 0
+          "essence": 1
         },
         {
           "x": 7,
-          "y": 9,
-          "type": 2,
+          "y": 10,
+          "type": 3,
           "essence": 0
         }
       ]

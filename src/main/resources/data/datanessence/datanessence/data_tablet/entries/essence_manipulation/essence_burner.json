@@ -27,7 +27,7 @@
     "translate": "data_tablet.pages.essence_burner.name"
   },
   "incomplete": true,
-  "completion_advancement": "datanessence:progression/acquire_essence_burner",
+  "completion_advancement": "datanessence:progression/place_essence_burner",
   "incomplete_pages": [
     {
       "type": "datanessence:text",

@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:essence_burner"
+    },
+    "title": {
+      "translate": "advancements.datanessence.place_essence_burner.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.place_essence_burner.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_fabricator",
+  "criteria": {
+    "placed_burner": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": { "block": { "blocks": [ "datanessence:essence_burner" ] } }
+          }
+        ]
+      }
+    }
+  }
+}
