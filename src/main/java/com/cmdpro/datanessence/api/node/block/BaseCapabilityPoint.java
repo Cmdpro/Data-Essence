@@ -216,4 +216,11 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
     public BlockState updateShape(BlockState pState, Direction pFacing, BlockState pFacingState, LevelAccessor pLevel, BlockPos pCurrentPos, BlockPos pFacingPos) {
         return getConnectedDirection(pState).getOpposite() == pFacing && !pState.canSurvive(pLevel, pCurrentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(pState, pFacing, pFacingState, pLevel, pCurrentPos, pFacingPos);
     }
+
+    public BlockState rotate(BlockState pState, Rotation pRotation) {
+        return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
+    }
+    public BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+    }
 }

@@ -71,4 +71,10 @@ public class FluidCollector extends Block implements EntityBlock {
             }
         };
     }
+    public BlockState rotate(BlockState pState, Rotation pRotation) {
+        return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
+    }
+    public BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+    }
 }
