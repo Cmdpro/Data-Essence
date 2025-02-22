@@ -42,6 +42,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(Items.TORCHFLOWER);
         this.tag(TagRegistry.Items.HIGH_ESSENCE_PLANTS)
                 .add(BlockRegistry.TETHERGRASS.get().asItem());
+
         this.tag(TagRegistry.Items.EXPLOSIVE_MATERIAL)
                 .add(Items.GUNPOWDER)
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "dusts/sulfur"));
