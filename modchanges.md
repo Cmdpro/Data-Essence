@@ -5,3 +5,6 @@
 ### Changes
 - Revised Essence Burner puzzle; new puzzle requires a connection node to solve
 - Essence Burner advancement now needs you to actually place one down
+
+### Fixes
+- UnderTheSky music disc wasn't tagged `#c:music_discs`
