@@ -8,3 +8,4 @@
 
 ### Fixes
 - UnderTheSky music disc wasn't tagged `#c:music_discs`
+- Fixed a multiblock render crash
