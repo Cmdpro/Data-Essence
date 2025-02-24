@@ -45,6 +45,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC);
         simpleItem(ItemRegistry.ESSENCE_SHARD);
         simpleItem(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK);
+        simpleItem(ItemRegistry.TRAVERSITE_TRUDGERS);
         simpleItem(ItemRegistry.TRAVERSITE_ROAD_CHUNK);
         simpleItem(ItemRegistry.WARP_CAPSULE);
         simpleItem(ItemRegistry.THERMOMETER);

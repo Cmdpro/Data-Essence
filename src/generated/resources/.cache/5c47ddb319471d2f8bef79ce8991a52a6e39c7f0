@@ -1,4 +1,5 @@
-// 1.21.1	2025-02-18T15:35:05.376875738	Tags for minecraft:item mod id datanessence
+// 1.21.1	2025-02-24T03:44:26.356999607	Tags for minecraft:item mod id datanessence
+8cdb9e30481dbfb955c51d5218c4d55973aed710 data/c/tags/item/armors.json
 2de480fdf84933ba907798fa90de70b537e2b008 data/datanessence/tags/item/explosive_material.json
 f20021795384d03de093e8106f4c361eb069cd13 data/datanessence/tags/item/high_essence_plants.json
 76bfcdd7193340428adee6675df135c4100bc32d data/datanessence/tags/item/low_essence_plants.json
@@ -21,3 +22,4 @@ bce5073bf52115ba41d2a7876709ffc5ecdf34f7 data/datanessence/tags/item/makes_pink_
 b481c771dec1a8da797b59abff9f2731e32319e8 data/datanessence/tags/item/medium_essence_plants.json
 42ff038bd87bd6f82af3e5d6052ff1efd5c3ff20 data/datanessence/tags/item/polished_obsidian_blocks.json
 776a17f452de21db68981d4b9b0cf35cecbb504d data/datanessence/tags/item/shaped_polished_obsidian_blocks.json
+81ba9b55e5886431788b273e43d5d5f8555aa26e data/minecraft/tags/item/freeze_immune_wearables.json

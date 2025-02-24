@@ -1,0 +1,18 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 50
+  },
+  "entry": "datanessence:tools/traversite_trudgers",
+  "pattern": [
+    "W W",
+    " L ",
+    "T T"
+  ],
+  "key": {
+    "T": { "item": "datanessence:traversite_road" },
+    "W": { "item": "minecraft:light_blue_wool" },
+    "L": { "item": "minecraft:leather_boots" }
+  },
+  "result": { "id": "datanessence:traversite_trudgers" }
+}

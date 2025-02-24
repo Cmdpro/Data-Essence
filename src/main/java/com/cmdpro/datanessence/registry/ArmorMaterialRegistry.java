@@ -38,6 +38,21 @@ public class ArmorMaterialRegistry {
             0
     ));
 
+    public static final Holder<ArmorMaterial> TRAVERSITE_TRUDGERS = register("traversite_trudgers", () -> new ArmorMaterial(
+            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.BOOTS, 1);
+            }),
+            15,
+            SoundEvents.ARMOR_EQUIP_LEATHER,
+            () -> Ingredient.of(Tags.Items.LEATHERS), List.of(
+            new ArmorMaterial.Layer(
+                    ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "traversite_trudgers")
+            )
+    ),
+            0,
+            0
+    ));
+
     private static <T extends ArmorMaterial> DeferredHolder<ArmorMaterial, T> register(final String name, final Supplier<T> material) {
         return ARMOR_MATERIALS.register(name, material);
     }

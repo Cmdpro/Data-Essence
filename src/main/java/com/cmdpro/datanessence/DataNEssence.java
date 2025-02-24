@@ -213,14 +213,18 @@ public class DataNEssence
             event.accept(ItemRegistry.MOLD_PANEL.get());
             event.accept(ItemRegistry.MOLD_ROD.get());
             //event.accept(ItemRegistry.THERMOMETER.get());
+            // Combat Tools
             event.accept(ItemRegistry.ESSENCE_BOMB.get());
             //event.accept(ItemRegistry.LUNAR_ESSENCE_BOMB.get());
             //event.accept(ItemRegistry.NATURAL_ESSENCE_BOMB.get());
             //event.accept(ItemRegistry.EXOTIC_ESSENCE_BOMB.get());
-            event.accept(ItemRegistry.WARP_CAPSULE.get());
             event.accept(ItemRegistry.ESSENCE_SWORD.get());
-            event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
+            // Exploration Tools
+            event.accept(ItemRegistry.WARP_CAPSULE.get());
             event.accept(ItemRegistry.ILLUMINATION_ROD.get());
+            event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
+            event.accept(ItemRegistry.TRAVERSITE_TRUDGERS.get());
+
 
             // Wires
             event.accept(ItemRegistry.ESSENCE_WIRE.get());

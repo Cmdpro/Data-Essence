@@ -1,0 +1,31 @@
+{
+  "icon": {
+    "id": "datanessence:traversite_trudgers"
+  },
+  "tab": "datanessence:tools",
+  "x": 5,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.traversite_trudgers.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/equipment/traversite_trudgers"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.traversite_trudgers.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.traversite_trudgers.flavor"
+  },
+  "parents": [
+    "datanessence:tools/traversite_road"
+  ]
+}

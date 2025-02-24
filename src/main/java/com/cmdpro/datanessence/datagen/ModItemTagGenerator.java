@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -24,6 +25,13 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        this.tag(Tags.Items.ARMORS)
+                .add(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get())
+                .add(ItemRegistry.TRAVERSITE_TRUDGERS.get());
+
+        this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES)
+                .add(ItemRegistry.TRAVERSITE_TRUDGERS.get());
+
         this.tag(TagRegistry.Items.LOW_ESSENCE_PLANTS)
                 .addTag(Tags.Items.CROPS)
                 .addTag(Tags.Items.SEEDS)

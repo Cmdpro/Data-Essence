@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:traversite_trudgers"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.traversite_trudgers.name"
+  },
+  "entry": "datanessence:tools/traversite_trudgers"
+}
