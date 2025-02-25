@@ -486,5 +486,7 @@
   "tag.item.datanessence.makes_pink_dye": "Makes Pink Dye",
 
   "emi.info.datanessence.ancient_items_are_loot_only": "This is an Ancient item. It cannot be crafted, and must instead be found.\nTry searching inside structures built from an otherworldly, purple rock.",
-  "emi.info.datanessence.dimension_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found."
+  "emi.info.datanessence.dimension_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found.",
+  "emi.datanessence.recipe_locked_line_1": "Data insufficient for",
+  "emi.datanessence.recipe_locked_line_2": "recipe reconstruction"
 }

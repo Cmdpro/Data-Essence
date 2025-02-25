@@ -1,8 +1,7 @@
 package com.cmdpro.datanessence.integration.emi.recipes;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.integration.emi.EMIDataNEssencePlugin;
-import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
+import com.cmdpro.datanessence.integration.emi.DataNEssenceEMIPlugin;
 import com.cmdpro.datanessence.recipe.MetalShaperRecipe;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
@@ -28,7 +27,7 @@ public class EMIMetalShaperRecipe implements EmiRecipe {
     }
     @Override
     public EmiRecipeCategory getCategory() {
-        return EMIDataNEssencePlugin.METAL_SHAPER;
+        return DataNEssenceEMIPlugin.METAL_SHAPER;
     }
 
     @Override

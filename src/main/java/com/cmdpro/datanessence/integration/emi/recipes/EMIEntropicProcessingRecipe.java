@@ -1,13 +1,8 @@
 package com.cmdpro.datanessence.integration.emi.recipes;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.DataNEssenceRegistries;
-import com.cmdpro.datanessence.api.essence.EssenceType;
-import com.cmdpro.datanessence.integration.emi.EMIDataNEssencePlugin;
-import com.cmdpro.datanessence.integration.emi.widgets.EssenceBarWidget;
+import com.cmdpro.datanessence.integration.emi.DataNEssenceEMIPlugin;
 import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
-import com.cmdpro.datanessence.recipe.InfusionRecipe;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -18,9 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class EMIEntropicProcessingRecipe implements EmiRecipe {
     private final ResourceLocation id;
@@ -34,7 +27,7 @@ public class EMIEntropicProcessingRecipe implements EmiRecipe {
     }
     @Override
     public EmiRecipeCategory getCategory() {
-        return EMIDataNEssencePlugin.ENTROPIC_PROCESSING;
+        return DataNEssenceEMIPlugin.ENTROPIC_PROCESSING;
     }
 
     @Override

@@ -4,7 +4,6 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.integration.emi.recipes.*;
 import com.cmdpro.datanessence.recipe.*;
 import com.cmdpro.datanessence.registry.BlockRegistry;
-import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 
 import dev.emi.emi.api.EmiEntrypoint;
@@ -13,21 +12,15 @@ import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
 import dev.emi.emi.api.render.EmiTexture;
-import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 
-import java.util.List;
-
 @EmiEntrypoint
-public class EMIDataNEssencePlugin implements EmiPlugin {
+public class DataNEssenceEMIPlugin implements EmiPlugin {
     public static final ResourceLocation EMI_ICONS = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"textures/gui/emi_icons.png");
 
     public static final EmiStack FABRICATOR_WORKSTATION = EmiStack.of(BlockRegistry.FABRICATOR.get());
