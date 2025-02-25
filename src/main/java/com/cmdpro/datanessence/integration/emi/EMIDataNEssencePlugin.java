@@ -11,12 +11,20 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
+import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
 import dev.emi.emi.api.render.EmiTexture;
+import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
+
+import java.util.List;
 
 @EmiEntrypoint
 public class EMIDataNEssencePlugin implements EmiPlugin {
@@ -37,6 +45,10 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
     public static final EmiRecipeCategory SYNTHESIS = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "synthesis"), SYNTHESIS_CHAMBER_WORKSTATION, new EmiTexture(EMI_ICONS, 64, 0, 16, 16));
     public static final EmiRecipeCategory METAL_SHAPER = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "metal_shaping"), METAL_SHAPER_WORKSTATION, new EmiTexture(EMI_ICONS, 80, 0, 16, 16));
 
+    // TODO this Essence Furnace should have a custom tooltip, because *polish*
+    public static ItemStack ESSENCE_FURNACE = new ItemStack(BlockRegistry.ESSENCE_FURNACE.get().asItem());
+    // .set(DataComponents.LORE, new ItemLore(List.of(Component.translatable("data_tablet.pages.essence_furnace.page2.text"))))
+
     @Override
     public void register(EmiRegistry emiRegistry) {
         emiRegistry.addCategory(FABRICATION);
@@ -46,6 +58,12 @@ public class EMIDataNEssencePlugin implements EmiPlugin {
         emiRegistry.addCategory(SYNTHESIS);
         emiRegistry.addCategory(METAL_SHAPER);
 
+        // Vanilla
+        emiRegistry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, FABRICATOR_WORKSTATION);
+        emiRegistry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, AUTO_FABRICATOR_WORKSTATION);
+        emiRegistry.addWorkstation(VanillaEmiRecipeCategories.SMELTING, EmiStack.of(ESSENCE_FURNACE));
+
+        // Ours
         emiRegistry.addWorkstation(FABRICATION, FABRICATOR_WORKSTATION);
         emiRegistry.addWorkstation(FABRICATION, AUTO_FABRICATOR_WORKSTATION);
         emiRegistry.addWorkstation(INFUSION, INFUSER_WORKSTATION);
