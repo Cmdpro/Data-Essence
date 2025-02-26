@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.integration.emi;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
+import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -41,7 +42,8 @@ public abstract class DataNEssenceEMIRecipe implements EmiRecipe {
 
     public boolean hasData(ResourceLocation dataEntry) {
         Minecraft client = Minecraft.getInstance();
-        return DataTabletUtil.playerHasEntry(client.player, dataEntry, true);
+        // return DataTabletUtil.playerHasEntry(client.player, dataEntry, true); // that was not synced to the client...
+        return ClientPlayerUnlockedEntries.getUnlocked().contains(dataEntry) || ClientPlayerUnlockedEntries.getIncomplete().contains(dataEntry);
     }
 
     public abstract void addUnlockedWidgets(WidgetHolder widgets);
