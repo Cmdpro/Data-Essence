@@ -6,6 +6,7 @@
 
 ### Changes
 - Essence Leeches emit particles
+- Light Fixtures no longer have collision
 
 ### Fixes
 - Abandoned Factory chains are not waterlogged anymore
