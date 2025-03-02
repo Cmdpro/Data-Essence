@@ -443,16 +443,22 @@ public class DataTabletScreen extends Screen {
         for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
                 if (i.isVisibleClient()) {
-                    int shift = 0;
+                    int entryShift = 0;
+                    int incompleteShift = 0;
                     if (pMouseX >= x && pMouseY >= y && pMouseX <= x+imageWidth && pMouseY <= y+imageHeight) {
                         if (pMouseX >= ((i.x * 20) - 10) + offsetX + x && pMouseX <= ((i.x * 20) + 10) + offsetX + x) {
                             if (pMouseY >= ((i.y * 20) - 10) + offsetY + y && pMouseY <= ((i.y * 20) + 10) + offsetY + y) {
-                                shift = 40;
+                                entryShift = 40;
+                                incompleteShift = 10;
                             }
                         }
                     }
-                    pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166+shift, 20, 20);
+                    pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166+entryShift, 20, 20);
                     pGuiGraphics.renderItem(i.icon, x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
+
+                    if (i.isIncompleteClient()) {
+                        pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) + 5) + (int) offsetX, y + ((i.y * 20) + 5) + (int) offsetY, 0, 186+incompleteShift, 11, 10);
+                    }
                 }
             }
         }
