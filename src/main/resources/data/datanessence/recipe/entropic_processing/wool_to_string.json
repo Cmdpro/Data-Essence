@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "tag": "minecraft:wool" },
+  "time": 100,
+  "result": { "id": "minecraft:string", "count": 4 }
+}

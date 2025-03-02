@@ -289,6 +289,7 @@ public class BlockRegistry {
                             .mapColor(MapColor.NONE)
                             .lightLevel((state) -> 15)
                             .noLootTable()
+                            .sound(SoundType.AMETHYST)
                             .noOcclusion().instabreak().noCollission()));
 
     // Fluids

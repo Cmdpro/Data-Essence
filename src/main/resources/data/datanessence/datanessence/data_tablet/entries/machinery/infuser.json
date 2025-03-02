@@ -15,7 +15,8 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:fabrication/machines/infuser"
+        "datanessence:fabrication/machines/infuser",
+        "datanessence:infusion/rotten_flesh_to_leather"
       ],
       "text": {
         "translate": "data_tablet.pages.infuser.page2.text"

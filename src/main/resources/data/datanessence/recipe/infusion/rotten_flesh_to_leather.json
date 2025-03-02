@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:infusion",
+  "essenceCost": {
+    "datanessence:essence": 50
+  },
+  "entry": "datanessence:machinery/infuser",
+  "input": {
+    "item": "minecraft:rotten_flesh",
+    "count": 1
+  },
+  "result": {
+    "id": "minecraft:leather",
+    "count": 1
+  }
+}

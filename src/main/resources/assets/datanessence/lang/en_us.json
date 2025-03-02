@@ -323,7 +323,7 @@
   "data_tablet.pages.fluidworks.page1.text": "Fluid manipulation, particularly moving it between machines, is an important facet of our work. Building upon the existing design that suits Essence so well, we designed Fluid Nodes and corresponding Wire. These work just as one may expect, allowing for point-to-point transportation of any liquids we wish.",
   "data_tablet.pages.fluidworks.page2.text": " ◇ The linking order of nodes controls the direction of flow - sender to receiver.\n ◇ Intermediate nodes cannot send nor receive.",
   "data_tablet.pages.infuser.name": "Infuser",
-  "data_tablet.pages.infuser.page1.text": "The Fabricator is an ideal worktable for more refined processing, but there are times when what is required is to dump Essence into an object without much finesse. That is where the Infuser device comes in: it is able to infuse blocks and items with Essence, often resulting in something new, or changed.",
+  "data_tablet.pages.infuser.page1.text": "The Fabricator is an ideal worktable for more refined processing, but there are times when what is required is to dump Essence into an object without much finesse. That is where the Infuser device comes in: it is able to infuse blocks and items with Essence, often resulting in something new, or changed. A very simple application of this is to harden rotting material into a kind of leather.",
   "data_tablet.pages.infuser.page2.text": " ◇ Must have a loaded Data Drive inserted to know what to craft.",
   "data_tablet.pages.item_filter.flavor": " ◇ Not a diamond pipe",
   "data_tablet.pages.item_filter.name": "Sorting Items",

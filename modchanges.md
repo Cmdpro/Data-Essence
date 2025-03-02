@@ -4,10 +4,12 @@
 - Added indicator for incomplete Data Tablet entries
 - EMI plugin displays that DnE's machines can be used for some vanilla recipe types (crafting, smelting)
 - EMI plugin hides recipes you have not gotten the data for yet, to reduce progression confusion
+- Entropic Processor can grind Wool into String
 
 ### Changes
 - Essence Leeches emit particles
 - Light Fixtures no longer have collision
+- Flare Lights make amethyst sounds
 
 ### Fixes
 - Abandoned Factory chains are not waterlogged anymore

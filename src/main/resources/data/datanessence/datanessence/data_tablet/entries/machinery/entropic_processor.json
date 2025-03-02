@@ -40,6 +40,12 @@
       "text": {
         "translate": "data_tablet.pages.entropic_processor.page4.text"
       }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:entropic_processing/wool_to_string"
+      ]
     }
   ],
   "name": {
