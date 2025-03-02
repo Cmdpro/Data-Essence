@@ -5,6 +5,7 @@
 - EMI plugin displays that DnE's machines can be used for some vanilla recipe types (crafting, smelting)
 - EMI plugin hides recipes you have not gotten the data for yet, to reduce progression confusion
 - Entropic Processor can grind Wool into String
+- Infuser can harden Rotten Flesh into Leather
 
 ### Changes
 - Essence Leeches emit particles
