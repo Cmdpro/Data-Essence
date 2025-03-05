@@ -6,11 +6,13 @@
 - EMI plugin hides recipes you have not gotten the data for yet, to reduce progression confusion
 - Entropic Processor can grind Wool into String
 - Infuser can harden Rotten Flesh into Leather
+- New background for Data Tablet entry browser
 
 ### Changes
 - Essence Leeches emit particles
 - Light Fixtures no longer have collision
 - Flare Lights make amethyst sounds
+- Changed Data Tablet entry connection line colors to blue
 
 ### Fixes
 - Abandoned Factory chains are not waterlogged anymore
