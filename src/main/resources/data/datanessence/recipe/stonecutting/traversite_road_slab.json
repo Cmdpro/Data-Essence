@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": { "item": "datanessence:traversite_road" },
+  "result": { "id": "datanessence:traversite_road_slab", "count": 2 }
+}

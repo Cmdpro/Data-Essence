@@ -15,6 +15,9 @@
     },
     {
       "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.traversite_road.page2.text"
+      },
       "recipes": [
         "datanessence:infusion/traversite_road"
       ]

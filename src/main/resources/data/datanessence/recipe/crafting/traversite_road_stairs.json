@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "T  ",
+    "TT ",
+    "TTT"
+  ],
+  "key": {
+    "T": { "item": "datanessence:traversite_road" }
+  },
+  "result": { "id": "datanessence:traversite_road_stairs", "count": 4 }
+}
