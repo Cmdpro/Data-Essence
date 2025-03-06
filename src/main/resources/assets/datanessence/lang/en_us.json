@@ -165,6 +165,8 @@
   "block.datanessence.vacuum": "Vacuum",
   "block.datanessence.cryochamber": "Cryochamber",
   "block.datanessence.cryochamber_filler": "Cryochamber",
+  "block.datanessence.traversite_road_slab": "Traversite Road Slab",
+  "block.datanessence.traversite_road_stairs": "Traversite Road Stairs",
 
   "entity.datanessence.essence_bomb": "Essence Bomb",
   "entity.datanessence.lunar_essence_bomb": "Lunar Essence Bomb",
@@ -202,6 +204,12 @@
 
   "item.minecraft.potion.effect.gender_euphoria": "Potion of Gender Euphoria",
   "item.minecraft.potion.effect.long_gender_euphoria": "Potion of Gender Euphoria",
+  "item.minecraft.splash_potion.effect.gender_euphoria": "Splash Potion of Gender Euphoria",
+  "item.minecraft.splash_potion.effect.long_gender_euphoria": "Splash Potion of Gender Euphoria",
+  "item.minecraft.lingering_potion.effect.gender_euphoria": "Lingering Potion of Gender Euphoria",
+  "item.minecraft.lingering_potion.effect.long_gender_euphoria": "Lingering Potion of Gender Euphoria",
+  "item.minecraft.tipped_arrow.effect.gender_euphoria": "Arrow of Gender Euphoria",
+  "item.minecraft.tipped_arrow.effect.long_gender_euphoria": "Arrow of Gender Euphoria",
 
   "gui.widget.fluid":  "%3$s: %1$s/%2$smB",
   "gui.widget.fluid.without_max": "%2$s: %1$s",

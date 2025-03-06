@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "datanessence:block/traversite_road",
+    "side": "datanessence:block/traversite_road",
+    "top": "datanessence:block/traversite_road"
+  }
+}

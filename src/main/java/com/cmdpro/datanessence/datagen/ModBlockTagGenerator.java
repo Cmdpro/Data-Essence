@@ -75,6 +75,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
                 .add(BlockRegistry.SYNTHESIS_CHAMBER.get())
                 .add(BlockRegistry.TRAVERSITE_ROAD.get())
+                .add(BlockRegistry.TRAVERSITE_ROAD_STAIRS.get())
+                .add(BlockRegistry.TRAVERSITE_ROAD_SLAB.get())
                 .add(BlockRegistry.VACUUM.get())
                 .add(BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get())
                 .add(BlockRegistry.MELTER.get())

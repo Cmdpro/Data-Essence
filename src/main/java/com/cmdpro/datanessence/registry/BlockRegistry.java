@@ -222,6 +222,12 @@ public class BlockRegistry {
     public static final Supplier<Block> TRAVERSITE_ROAD = register("traversite_road",
             () -> new TraversiteRoad(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().strength(2.0f), 2),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> TRAVERSITE_ROAD_STAIRS = register("traversite_road_stairs",
+            () -> new TraversiteStairs(TRAVERSITE_ROAD.get().defaultBlockState(), BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().strength(2.0f), 2),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> TRAVERSITE_ROAD_SLAB = register("traversite_road_slab",
+            () -> new TraversiteSlab(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().strength(2.0f), 2),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Ancient Rock
     public static final Supplier<Block> ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks",

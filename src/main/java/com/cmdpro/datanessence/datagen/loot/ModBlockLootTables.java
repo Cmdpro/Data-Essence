@@ -102,6 +102,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
         dropSelf(BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get());
         dropSelf(BlockRegistry.MELTER.get());
+        dropSelf(BlockRegistry.TRAVERSITE_ROAD_SLAB.get());
+        dropSelf(BlockRegistry.TRAVERSITE_ROAD_STAIRS.get());
 
         //so that datagen does not get mad
         this.add(BlockRegistry.TETHERGRASS.get(),

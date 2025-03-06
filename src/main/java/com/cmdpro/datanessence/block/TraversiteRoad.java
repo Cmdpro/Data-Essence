@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.block.TraversiteBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -17,11 +18,15 @@ import net.minecraft.world.phys.AABB;
 
 import java.util.UUID;
 
-public class TraversiteRoad extends Block {
-    public static final ResourceLocation TRAVERSITE_ROAD_SPEED_UUID = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "traversite_road_speed");
+public class TraversiteRoad extends Block implements TraversiteBlock {
     public float boost;
     public TraversiteRoad(Properties pProperties, float boost) {
         super(pProperties);
         this.boost = boost;
+    }
+
+    @Override
+    public float getBoost() {
+        return boost;
     }
 }

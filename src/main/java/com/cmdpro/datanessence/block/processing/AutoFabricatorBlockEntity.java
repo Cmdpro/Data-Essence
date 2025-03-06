@@ -201,7 +201,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         level.playSound(null, worldPosition, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
         return true;
     }
-    public CraftingRecipe recipe;
+    public Recipe<CraftingInput> recipe;
     public boolean enoughEssence;
     public Map<ResourceLocation, Float> essenceCost;
     public int craftingProgress;
@@ -220,7 +220,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             Optional<RecipeHolder<IFabricationRecipe>> fabricationRecipe = pBlockEntity.getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pLevel, pBlockEntity.getCraftingInv().asCraftInput());
-            CraftingRecipe recipe = null;
+            Recipe<CraftingInput> recipe = null;
             if (fabricationRecipe.isEmpty()) {
                 Optional<RecipeHolder<CraftingRecipe>> vanillaRecipe = pBlockEntity.getRecipeFor(RecipeType.CRAFTING, pLevel, pBlockEntity.getCraftingInv().asCraftInput());
                 if (vanillaRecipe.isPresent()) {

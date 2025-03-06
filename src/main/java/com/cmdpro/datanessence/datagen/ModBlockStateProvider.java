@@ -72,6 +72,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(BlockRegistry.LENSING_CRYSTAL_ORE);
 
         transparentBlockWithItemAndTint(BlockRegistry.SPIRE_GLASS);
+
+        stairsBlock((StairBlock)BlockRegistry.TRAVERSITE_ROAD_STAIRS.get(), DataNEssence.locate("block/traversite_road"));
+        slabBlock((SlabBlock) BlockRegistry.TRAVERSITE_ROAD_SLAB.get(), DataNEssence.locate("block/traversite_road"), DataNEssence.locate("block/traversite_road"));
     }
 
     private void blockWithItem(Supplier<Block> blockRegistryObject) {

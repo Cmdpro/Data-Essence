@@ -325,6 +325,8 @@ public class DataNEssence
 
             // Utility Blocks
             event.accept(BlockRegistry.TRAVERSITE_ROAD.get());
+            event.accept(BlockRegistry.TRAVERSITE_ROAD_STAIRS.get());
+            event.accept(BlockRegistry.TRAVERSITE_ROAD_SLAB.get());
 
             // Decoration
             event.accept(BlockRegistry.POLISHED_OBSIDIAN.get());

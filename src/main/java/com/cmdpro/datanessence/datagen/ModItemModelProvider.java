@@ -86,6 +86,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         evenSimplerBlockItem(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
 
+        evenSimplerBlockItem(BlockRegistry.TRAVERSITE_ROAD_STAIRS);
+        evenSimplerBlockItem(BlockRegistry.TRAVERSITE_ROAD_SLAB);
+
         simpleItemWithSubdirectory(ItemRegistry.CONDUCTANCE_ROD, "components");
         simpleItemWithSubdirectory(ItemRegistry.CAPACITANCE_PANEL, "components");
         simpleItemWithSubdirectory(ItemRegistry.LOGICAL_MATRIX, "components");

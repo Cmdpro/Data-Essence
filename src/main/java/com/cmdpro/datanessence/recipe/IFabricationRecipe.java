@@ -3,11 +3,9 @@ package com.cmdpro.datanessence.recipe;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 
-public interface IFabricationRecipe extends CraftingRecipe, IHasRequiredKnowledge, IHasEssenceCost {
+public interface IFabricationRecipe extends Recipe<CraftingInput>, IHasRequiredKnowledge, IHasEssenceCost {
     @Override
     default RecipeType<?> getType() {
         return RecipeRegistry.FABRICATIONCRAFTING.get();
@@ -21,10 +19,5 @@ public interface IFabricationRecipe extends CraftingRecipe, IHasRequiredKnowledg
     @Override
     default ItemStack getToastSymbol() {
         return new ItemStack(BlockRegistry.FABRICATOR.get());
-    }
-
-    @Override
-    default CraftingBookCategory category() {
-        return CraftingBookCategory.MISC;
     }
 }

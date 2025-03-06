@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.datanessence.api.block.TraversiteBlock;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePoint;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
@@ -56,14 +57,14 @@ public class ModEvents {
     @SubscribeEvent
     public static void onLivingEntityTick(EntityTickEvent.Pre event) {
         if (event.getEntity() instanceof LivingEntity ent) {
-            if (event.getEntity().getBlockStateOn().getBlock() instanceof TraversiteRoad road) {
+            if (event.getEntity().getBlockStateOn().getBlock() instanceof TraversiteBlock road) {
                 if (!ent.level().isClientSide) {
                     if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID) == null) {
-                        ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                        ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, road.getBoost(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
                     } else {
-                        if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID).amount() != road.boost) {
+                        if (ent.getAttribute(Attributes.MOVEMENT_SPEED).getModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID).amount() != road.getBoost()) {
                             ent.getAttribute(Attributes.MOVEMENT_SPEED).removeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID);
-                            ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, road.boost, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+                            ent.getAttribute(Attributes.MOVEMENT_SPEED).addPermanentModifier(new AttributeModifier(TraversiteRoad.TRAVERSITE_ROAD_SPEED_UUID, road.getBoost(), AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
                         }
                     }
                 } else {

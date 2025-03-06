@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "datanessence:block/traversite_road_slab"
+    },
+    "type=double": {
+      "model": "datanessence:block/traversite_road"
+    },
+    "type=top": {
+      "model": "datanessence:block/traversite_road_slab_top"
+    }
+  }
+}
