@@ -85,6 +85,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(BlockRegistry.CRYSTALLINE_LOG);
 
         evenSimplerBlockItem(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
+        evenSimplerBlockItem(BlockRegistry.POLISHED_OBSIDIAN_TRACT);
 
         evenSimplerBlockItem(BlockRegistry.TRAVERSITE_ROAD_STAIRS);
         evenSimplerBlockItem(BlockRegistry.TRAVERSITE_ROAD_SLAB);

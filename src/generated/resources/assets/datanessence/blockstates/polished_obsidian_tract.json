@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "datanessence:block/polished_obsidian_tract_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "datanessence:block/polished_obsidian_tract"
+    },
+    "axis=z": {
+      "model": "datanessence:block/polished_obsidian_tract_horizontal",
+      "x": 90
+    }
+  }
+}

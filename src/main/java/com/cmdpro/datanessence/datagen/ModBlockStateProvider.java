@@ -47,7 +47,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         bufferDecoBlock(BlockRegistry.DECO_FLUID_BUFFER);
 
         decoBlock(BlockRegistry.POLISHED_OBSIDIAN);
+        decoBlock(BlockRegistry.POLISHED_OBSIDIAN_BRICKS);
         pillarDecoBlock(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
+        pillarDecoBlock(BlockRegistry.POLISHED_OBSIDIAN_TRACT);
         decoBlock(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN);
         decoBlock(BlockRegistry.PATTERNED_COPPER);
         transparentDecoBlockWithItem(BlockRegistry.FLUIDIC_GLASS);

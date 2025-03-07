@@ -330,7 +330,9 @@ public class DataNEssence
 
             // Decoration
             event.accept(BlockRegistry.POLISHED_OBSIDIAN.get());
+            event.accept(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get());
             event.accept(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get());
+            event.accept(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get());
             event.accept(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get());
             event.accept(BlockRegistry.FLUIDIC_GLASS.get());
             event.accept(BlockRegistry.LIGHT_FIXTURE.get());

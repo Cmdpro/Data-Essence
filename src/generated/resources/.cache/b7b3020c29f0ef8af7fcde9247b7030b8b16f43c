@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-05T19:12:25.5370227	Item Models: datanessence
+// 1.21.1	2025-03-07T14:40:01.928120554	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -54,6 +54,7 @@ bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/natural
 72daa0cb5cd463cd7dd4d1760219c24e210917e4 assets/datanessence/models/item/natural_essence_wire.json
 3f113d59fbbd0619d84739ba168015f92f3633cf assets/datanessence/models/item/panel_mold.json
 de272af4e4feac0b7f325c246f01dbdc0d6ea318 assets/datanessence/models/item/polished_obsidian_column.json
+459eef21097a7380dfaabddb2f94c81edbc412cd assets/datanessence/models/item/polished_obsidian_tract.json
 54bfdfccf479e077ffb9710c8d4333bab9934d7c assets/datanessence/models/item/precision_lens.json
 c21e404c80d50f53fca78d073b54c48763738238 assets/datanessence/models/item/primitive_anti_gravity_pack.json
 51e08ca19295ad19da59f904f8712159db967e1b assets/datanessence/models/item/propeller.json

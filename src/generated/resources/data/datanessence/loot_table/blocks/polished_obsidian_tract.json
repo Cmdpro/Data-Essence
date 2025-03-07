@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "datanessence:polished_obsidian_tract"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "datanessence:blocks/polished_obsidian_tract"
+}

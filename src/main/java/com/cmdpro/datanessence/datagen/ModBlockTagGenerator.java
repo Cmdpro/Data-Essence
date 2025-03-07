@@ -72,6 +72,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.NATURAL_ESSENCE_POINT.get())
                 .add(BlockRegistry.PATTERNED_COPPER.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
                 .add(BlockRegistry.SYNTHESIS_CHAMBER.get())
                 .add(BlockRegistry.TRAVERSITE_ROAD.get())
@@ -88,7 +89,9 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get())
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get())
                 .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
         this.tag(TagRegistry.Blocks.BUFFER_DETECTION_PASS)
                 .add(BlockRegistry.ITEM_BUFFER.get())

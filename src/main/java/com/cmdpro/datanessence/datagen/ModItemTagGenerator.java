@@ -56,7 +56,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "dusts/sulfur"));
         this.tag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem())
-                .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get().asItem());
+                .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get().asItem())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get().asItem())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get().asItem());
         this.tag(TagRegistry.Items.POLISHED_OBSIDIAN_BLOCKS)
                 .addTag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get().asItem());
