@@ -19,7 +19,7 @@ public class DataNEssenceConfig {
     }
     public DataNEssenceConfig(ModConfigSpec.Builder builder) {
         builder.push("balancing");
-        fluidPointTransferValue = buildInteger(builder, "fluidNodeTransfer", "all", 50, 1, 1000000, "How much should a fluid node transfer?");
+        fluidPointTransferValue = buildInteger(builder, "fluidNodeTransfer", "all", 50, 1, 1000000, "How much should a fluid node transfer? (Also applies to chemical nodes if Mekanism is installed)");
         essencePointTransferValue = buildInteger(builder, "essenceNodeTransfer", "all", 50, 1, 1000000, "How much should an essence node transfer? (Applies to all essence node types)");
         itemPointTransferValue = buildInteger(builder, "itemNodeTransfer", "all", 4, 1, 64, "How much should an item node transfer?");
         essenceBatteryMaxValue = buildInteger(builder, "essenceBatteryMax", "all", 10000, 1, 1000000, "How much should an essence battery hold? (Applies to all essence battery types)");
@@ -64,7 +64,7 @@ public class DataNEssenceConfig {
             mediumValuePlantEssence = COMMON.mediumValuePlantEssenceValue.get().floatValue();
             highValuePlantEssence = COMMON.highValuePlantEssenceValue.get().floatValue();
         } catch (Exception e) {
-            DataNEssence.LOGGER.warn("Failed to load DataNEssence config");
+            DataNEssence.LOGGER.warn("[DATANESSENCE] Failed to load config!");
             e.printStackTrace();
         }
     }

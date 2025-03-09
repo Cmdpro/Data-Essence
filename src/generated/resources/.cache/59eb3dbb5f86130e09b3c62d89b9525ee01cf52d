@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-07T14:34:26.596315957	Loot Tables
+// 1.21.1	2025-03-08T19:13:31.765476736	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -12,6 +12,7 @@ c174468894a2a7f8e1f2e811feab6cfa278fefac data/datanessence/loot_table/blocks/anc
 3831944dfafd2bf28a5d34fa89acc5400cb969a9 data/datanessence/loot_table/blocks/arekko.json
 6c75f698c678f430658ac40cbf4955f45e52655c data/datanessence/loot_table/blocks/auto-fabricator.json
 ea5364fdf6f40dd1dc50b2354226d4977911b8b1 data/datanessence/loot_table/blocks/charger.json
+2f8cce94dad3d191cc14cdd1797ab11600ee1783 data/datanessence/loot_table/blocks/chemical_node.json
 d84e5950a8f59623f762d05a19464f398db0fccd data/datanessence/loot_table/blocks/computer.json
 807ffa85c28e57e89e5f50a3fd2f767258f6107d data/datanessence/loot_table/blocks/cryochamber.json
 2672ed21ab03c35de884823e3ff02817789b7ee9 data/datanessence/loot_table/blocks/cryochamber_filler.json

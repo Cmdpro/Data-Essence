@@ -1,13 +1,13 @@
 package com.cmdpro.datanessence;
 
 import com.cmdpro.databank.ClientDatabankUtils;
-import com.cmdpro.databank.music.MusicSystem;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.databank.shaders.PostShaderManager;
-import com.cmdpro.datanessence.entity.AncientSentinel;
-import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.fluid.Genderfluid;
+import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
+import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItemRenderer;
+import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
 import com.cmdpro.datanessence.item.blockitem.*;
 import com.cmdpro.datanessence.particle.*;
 import com.cmdpro.datanessence.registry.*;
@@ -23,45 +23,26 @@ import com.cmdpro.datanessence.screen.*;
 import com.cmdpro.datanessence.shaders.GenderEuphoriaShader;
 import com.cmdpro.datanessence.shaders.ProgressionShader;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColors;
-import net.minecraft.client.color.item.ItemColors;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.PlayerSkin;
-import net.minecraft.core.Holder;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.JukeboxPlayable;
-import net.minecraft.world.item.JukeboxSong;
-import net.minecraft.world.item.JukeboxSongs;
-import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.level.block.entity.JukeboxBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-import net.neoforged.neoforge.items.ComponentItemHandler;
-import net.neoforged.neoforge.items.IItemHandler;
 import org.joml.SimplexNoise;
 
 import java.awt.*;
-import java.util.Optional;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ClientModEvents {
@@ -87,6 +68,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.METAL_SHAPER.get(), MetalShaperRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), IndustrialPlantSiphonRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.CRYOCHAMBER.get(), CryochamberRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.CHEMICAL_NODE.get(), ChemicalNodeRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -143,6 +125,8 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(IndustrialPlantSiphonRenderer.modelLocation, IndustrialPlantSiphonRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(IndustrialPlantSiphonItemRenderer.modelLocation, IndustrialPlantSiphonItemRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(CryochamberRenderer.modelLocation, CryochamberRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(ChemicalNodeRenderer.modelLocation, ChemicalNodeRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(ChemicalNodeItemRenderer.modelLocation, ChemicalNodeItemRenderer.Model::createLayer);
         });
 
         event.enqueueWork(() -> {
@@ -177,6 +161,7 @@ public class ClientModEvents {
         event.registerItem(FluidMixerItem.extensions(), BlockRegistry.FLUID_MIXER.get().asItem());
         event.registerItem(MetalShaperItem.extensions(), BlockRegistry.METAL_SHAPER.get().asItem());
         event.registerItem(IndustrialPlantSiphonItem.extensions(), BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get().asItem());
+        event.registerItem(ChemicalNodeItem.extensions(), BlockRegistry.CHEMICAL_NODE.get().asItem());
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {

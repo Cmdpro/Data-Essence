@@ -27,6 +27,8 @@ import com.cmdpro.datanessence.block.transmission.ExoticEssencePoint;
 import com.cmdpro.datanessence.block.transmission.LunarEssencePoint;
 import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
 import com.cmdpro.datanessence.block.world.EssenceCrystal;
+import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
+import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
 import com.cmdpro.datanessence.item.blockitem.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -166,7 +168,7 @@ public class BlockRegistry {
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
-    // Points
+    // Nodes
     public static final Supplier<Block> ESSENCE_POINT = register("essence_point",
             () -> new EssencePoint(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new EssencePointItem(object.get(), new Item.Properties()));
@@ -185,6 +187,9 @@ public class BlockRegistry {
     public static final Supplier<Block> ITEM_POINT = register("item_point",
             () -> new ItemPoint(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
             object -> () -> new ItemPointItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> CHEMICAL_NODE = register("chemical_node",
+            () -> new ChemicalNode(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            object -> () -> new ChemicalNodeItem(object.get(), new Item.Properties()));
 
     // Storage
     public static final Supplier<Block> ESSENCE_BATTERY = register("essence_battery",

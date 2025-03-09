@@ -18,6 +18,7 @@ import com.cmdpro.datanessence.block.technical.DataBankBlockEntity;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberBlockEntity;
 import com.cmdpro.datanessence.block.transmission.*;
+import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -199,6 +200,10 @@ public class BlockEntityRegistry {
             register("flare_light", () ->
                     BlockEntityType.Builder.of(FlareLightBlockEntity::new,
                             BlockRegistry.FLARE_LIGHT.get()).build(null));
+    public static final Supplier<BlockEntityType<ChemicalNodeBlockEntity>> CHEMICAL_NODE =
+            register("chemical_node", () ->
+                    BlockEntityType.Builder.of(ChemicalNodeBlockEntity::new,
+                            BlockRegistry.CHEMICAL_NODE.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

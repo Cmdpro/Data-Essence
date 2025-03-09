@@ -1,0 +1,17 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 0
+  },
+  "entry": "datanessence:machinery/itemworks",
+  "pattern": [
+    "RrR",
+    " O "
+  ],
+  "key": {
+    "r": { "item": "minecraft:redstone" },
+    "R": { "item": "datanessence:conductance_rod" },
+    "O": { "item": "datanessence:polished_obsidian" }
+  },
+  "result": { "id": "datanessence:chemical_node", "count": 2 }
+}

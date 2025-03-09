@@ -106,12 +106,11 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.MELTER.get());
         dropSelf(BlockRegistry.TRAVERSITE_ROAD_SLAB.get());
         dropSelf(BlockRegistry.TRAVERSITE_ROAD_STAIRS.get());
+        dropSelf(BlockRegistry.CHEMICAL_NODE.get());
 
-        //so that datagen does not get mad
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));
 
-        // TODO regardless of how, always drops 1-3 bones.
         this.add(BlockRegistry.AREKKO.get(),
                 block -> createArekkoDrops(BlockRegistry.AREKKO.get(), Items.BONE));
     }

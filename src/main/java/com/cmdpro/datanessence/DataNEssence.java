@@ -5,7 +5,6 @@ import com.cmdpro.datanessence.block.transmission.ItemFilter;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.*;
-import com.jcraft.jorbis.Block;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
@@ -24,6 +23,8 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 import org.apache.commons.lang3.IntegerRange;
 import org.slf4j.Logger;
+
+import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasMekanism;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod("datanessence")
@@ -67,6 +68,9 @@ public class DataNEssence
         PotionRegistry.POTIONS.register(bus);
         random = RandomSource.create();
         HiddenBlockConditions.conditions.put(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
+
+        if (hasMekanism)
+            DataNEssence.LOGGER.info("[DATANESSENCE] Mekanism detected; enabling integration features. Careful with your reactors!");
     }
 
     @SubscribeEvent
@@ -233,6 +237,8 @@ public class DataNEssence
             //event.accept(ItemRegistry.EXOTIC_ESSENCE_WIRE.get());
             event.accept(ItemRegistry.ITEM_WIRE.get());
             event.accept(ItemRegistry.FLUID_WIRE.get());
+            if (hasMekanism)
+                event.accept(ItemRegistry.CHEMICAL_WIRE.get());
 
             // Upgrades
             event.accept(ItemRegistry.HARMING_LENS.get());
@@ -311,6 +317,8 @@ public class DataNEssence
             //event.accept(BlockRegistry.EXOTIC_ESSENCE_POINT.get());
             event.accept(BlockRegistry.ITEM_POINT.get());
             event.accept(BlockRegistry.FLUID_POINT.get());
+            if (hasMekanism)
+                event.accept(BlockRegistry.CHEMICAL_NODE.get());
             event.accept(BlockRegistry.ESSENCE_BUFFER.get());
             event.accept(BlockRegistry.ITEM_BUFFER.get());
             event.accept(BlockRegistry.FLUID_BUFFER.get());

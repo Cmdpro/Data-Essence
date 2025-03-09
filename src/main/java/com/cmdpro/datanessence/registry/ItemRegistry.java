@@ -48,6 +48,7 @@ public class ItemRegistry {
     public static final Supplier<Item> EXOTIC_ESSENCE_WIRE = register("exotic_essence_wire", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> ITEM_WIRE = register("item_wire", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> FLUID_WIRE = register("fluid_wire", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> CHEMICAL_WIRE = register("chemical_wire", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> DATA_TABLET = register("data_tablet", () -> new DataTablet(new Item.Properties().stacksTo(1)));
 
     // Bombs
@@ -89,6 +90,7 @@ public class ItemRegistry {
 
     // Buckets
     public static final Supplier<Item> GENDERFLUID_BUCKET = register("genderfluid_bucket", () -> new BucketItem(FluidRegistry.GENDERFLUID.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
     private static <T extends Item> Supplier<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);
     }
