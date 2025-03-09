@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "mekanism"
+    }
+  ],
+  "icon": {
+    "id": "mekanism:fluorite_gem"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.integration_mekanism.name"
+  },
+  "entry": "datanessence:basics/mod_integration_mekanism"
+}

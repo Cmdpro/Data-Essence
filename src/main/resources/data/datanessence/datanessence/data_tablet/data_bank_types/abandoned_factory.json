@@ -39,6 +39,7 @@
     "datanessence:tier_2/node_upgrades",
     "datanessence:tier_2/synthesis_chamber",
     "datanessence:tier_2/warp_capsule",
-    { "value": "datanessence:tier_2/mod_integration_ae2", "required": false }
+    { "value": "datanessence:tier_2/mod_integration_ae2", "required": false },
+    { "value": "datanessence:tier_2/mod_integration_mekanism", "required": false }
   ]
 }

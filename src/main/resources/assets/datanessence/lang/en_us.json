@@ -294,6 +294,8 @@
   "_comment.data_tablet.pages.integration": "Separate lang category for mod integration entries.",
   "data_tablet.pages.integration_ae2.name": "Integration: Applied Energistics 2",
   "data_tablet.pages.integration_ae2.page1.text": "We have discovered a meteor, inside of which was a series of strange circuit presses and sky blue crystals. From this salvage we were able to make a form of networked control and storage system. The data of hundreds of thousands of items etched onto crystalline disks; traveling across neuronic pathways of glowing purple; decomposition and reformation. However, the process by which many of the fundamental materials for this system are acquired left much to be desired, and so innovation was required.",
+  "data_tablet.pages.integration_mekanism.name": "Integration: Mekanism",
+  "data_tablet.pages.integration_mekanism.page1.text": "Some of our squadron have been experimenting with advanced machinery that operates on electricity. They seem to have developed a sort of fascination for it, so to ensure that their primary objective remains clear, I have tasked them with developing constructs that interface with such machinery. So far, their developments have produced a kind of Node and Wire that is able to transfer Chemicals, which will surely neaten those messes they call factories.",
 
   "_comment.data_tablet_pages.machinery": "Machinery and Processing category texts.",
   "data_tablet.pages.auto-fabricator.flavor": " ◇ Autocrafting the autocrafter",

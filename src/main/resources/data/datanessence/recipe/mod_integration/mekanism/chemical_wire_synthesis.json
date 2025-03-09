@@ -1,0 +1,11 @@
+{
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 50
+  },
+  "input": { "item": "datanessence:wire_spool" },
+  "input2": { "item": "mekanism:fluorite_gem" },
+  "time": 100,
+  "result": { "id": "datanessence:chemical_wire", "count": 4 },
+  "entry": "datanessence:basics/mod_integration_mekanism"
+}

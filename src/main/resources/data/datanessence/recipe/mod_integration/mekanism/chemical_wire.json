@@ -5,13 +5,14 @@
   },
   "entry": "datanessence:basics/mod_integration_mekanism",
   "pattern": [
-    "RFR",
-    " O "
+    " C ",
+    "FRF",
+    " C "
   ],
   "key": {
     "F": { "item": "mekanism:fluorite_gem" },
     "R": { "item": "datanessence:conductance_rod" },
-    "O": { "item": "datanessence:polished_obsidian" }
+    "C": { "item": "minecraft:copper_ingot" }
   },
-  "result": { "id": "datanessence:chemical_node", "count": 2 }
+  "result": { "id": "datanessence:chemical_wire", "count": 2 }
 }
