@@ -20,7 +20,7 @@ public class MoteParticle extends TextureSheetParticle {
         this.zd = zd;
         this.quadSize *= 0.85F;
         startQuadSize = this.quadSize;
-        this.lifetime = 20;
+        this.lifetime = options.lifetime;
         this.setSpriteFromAge(spriteSet);
 
         this.rCol = (float)options.color.getRed()/255f;
