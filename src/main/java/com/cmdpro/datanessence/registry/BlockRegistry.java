@@ -26,6 +26,7 @@ import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.block.transmission.ExoticEssencePoint;
 import com.cmdpro.datanessence.block.transmission.LunarEssencePoint;
 import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
+import com.cmdpro.datanessence.block.world.CrystallineLeaves;
 import com.cmdpro.datanessence.block.world.EssenceCrystal;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
@@ -69,7 +70,7 @@ public class BlockRegistry {
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CRYSTALLINE_LEAVES = register("crystalline_leaves",
-            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).emissiveRendering(BlockRegistry::always).lightLevel(state -> 5).sound(SoundType.AMETHYST)),
+            () -> new CrystallineLeaves(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).emissiveRendering(BlockRegistry::always).lightLevel(state -> 5).sound(SoundType.AMETHYST)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
