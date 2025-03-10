@@ -69,7 +69,7 @@ public class BlockRegistry {
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CRYSTALLINE_LEAVES = register("crystalline_leaves",
-            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).emissiveRendering(BlockRegistry::always).lightLevel(state -> 5).sound(SoundType.AMETHYST)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
@@ -328,5 +328,9 @@ public class BlockRegistry {
     }
     private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return false;
+    }
+
+    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+        return true;
     }
 }

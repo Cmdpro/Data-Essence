@@ -214,10 +214,17 @@ public class ClientModEvents {
         }, BlockRegistry.SPIRE_GLASS.get());
         event.register((pState, pLevel, pPos, pTintIndex) -> {
             if (pPos != null) {
-                return Color.getHSBColor(((SimplexNoise.noise(pPos.getX()/25f, pPos.getY()/25f, pPos.getZ()/25f)+1f)/2f), 1f, 1f).getRGB();
+                double d = 1;
+                double n = 7;
+                double x = pPos.getX();
+                double y = pPos.getY();
+                double z = pPos.getZ();
+
+                float hue = (float) (y/(n*2)+(d*z/(n*6)+0.5+0.5*Math.sin((d*x)/(n*2))));
+                return Color.getHSBColor( hue, 0.8f, 1f ).getRGB();
             } else {
                 float blendAmount = Minecraft.getInstance().levelRenderer.getTicks()+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
-                return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 1f, 1f).getRGB();
+                return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 0.8f, 1f).getRGB();
             }
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
         event.register((pState, pLevel, pPos, pTintIndex) -> {
