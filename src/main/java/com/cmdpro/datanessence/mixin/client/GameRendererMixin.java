@@ -1,8 +1,6 @@
 package com.cmdpro.datanessence.mixin.client;
 
-import com.cmdpro.databank.shaders.PostShaderInstance;
-import com.cmdpro.databank.shaders.PostShaderManager;
-import com.cmdpro.datanessence.ClientEvents;
+import com.cmdpro.datanessence.client.ClientEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;

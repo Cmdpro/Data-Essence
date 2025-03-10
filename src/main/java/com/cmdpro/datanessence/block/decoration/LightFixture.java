@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block.decoration;
 
 import com.cmdpro.datanessence.api.block.RedirectorInteractable;
-import com.cmdpro.datanessence.particle.MoteParticleOptions;
+import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;

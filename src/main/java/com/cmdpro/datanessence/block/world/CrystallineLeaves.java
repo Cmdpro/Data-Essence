@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.world;
 
-import com.cmdpro.datanessence.particle.MoteParticleOptions;
+import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;

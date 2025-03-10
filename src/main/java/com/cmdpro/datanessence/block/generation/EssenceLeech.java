@@ -1,8 +1,6 @@
 package com.cmdpro.datanessence.block.generation;
 
-import com.cmdpro.datanessence.particle.CircleParticleOptionsAdditive;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
-import com.cmdpro.datanessence.registry.ParticleRegistry;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptionsAdditive;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;

@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.item.blockitem;
 
-import com.cmdpro.datanessence.renderers.item.MetalShaperItemRenderer;
+import com.cmdpro.datanessence.client.renderers.item.MetalShaperItemRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;

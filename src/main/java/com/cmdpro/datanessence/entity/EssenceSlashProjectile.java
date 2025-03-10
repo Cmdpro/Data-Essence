@@ -1,7 +1,5 @@
 package com.cmdpro.datanessence.entity;
 
-import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.particle.CircleParticleOptionsAdditive;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -15,10 +13,8 @@ import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.event.EventHooks;
-import org.apache.commons.lang3.RandomUtils;
 
 import javax.annotation.Nullable;
-import java.awt.*;
 
 public class EssenceSlashProjectile extends Projectile {
     public int time;

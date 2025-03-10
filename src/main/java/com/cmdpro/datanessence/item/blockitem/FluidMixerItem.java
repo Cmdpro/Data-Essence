@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.item.blockitem;
 
-import com.cmdpro.datanessence.renderers.item.FluidMixerItemRenderer;
+import com.cmdpro.datanessence.client.renderers.item.FluidMixerItemRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;

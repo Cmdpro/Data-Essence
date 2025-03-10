@@ -1,12 +1,8 @@
 package com.cmdpro.datanessence.entity;
 
-import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.particle.CircleParticleOptionsAdditive;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptionsAdditive;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
-import com.cmdpro.datanessence.registry.EntityRegistry;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -16,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.event.EventHooks;
 import org.apache.commons.lang3.RandomUtils;

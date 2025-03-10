@@ -1,14 +1,11 @@
 package com.cmdpro.datanessence.item.blockitem;
 
-import com.cmdpro.datanessence.renderers.item.FabricatorItemRenderer;
-import com.cmdpro.datanessence.renderers.item.FluidPointItemRenderer;
+import com.cmdpro.datanessence.client.renderers.item.FabricatorItemRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-
-import java.util.function.Consumer;
 
 public class FabricatorItem extends BlockItem {
 

@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.technical;
 
-import com.cmdpro.datanessence.particle.CircleParticleOptionsAdditive;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptionsAdditive;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.client.Minecraft;

@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.api.util.client;
 
-import com.cmdpro.datanessence.ClientModEvents;
+import com.cmdpro.datanessence.client.ClientModEvents;
 import com.cmdpro.datanessence.datatablet.Entry;
 import com.cmdpro.datanessence.toasts.CriticalDataToast;
 import net.minecraft.client.Minecraft;
