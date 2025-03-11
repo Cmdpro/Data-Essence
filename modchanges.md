@@ -6,3 +6,6 @@
 ### Changes
 - Blacklisted Structure Protectors from being relocated by (hopefully) many mods
 - Various internal changes to the Mote particle
+
+### Fixes
+- Wire Spools required the Synthesis Chamber to be unlocked despite being a crafting component
