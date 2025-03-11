@@ -16,17 +16,27 @@ public class MoteParticleOptions implements ParticleOptions {
     public Color color;
     public boolean additive;
     public int lifetime;
+    public float friction;
 
     public MoteParticleOptions(Color color, boolean additive) {
         this.color = color;
         this.additive = additive;
         this.lifetime = 20;
+        this.friction = 0.8f;
     }
 
     public MoteParticleOptions(Color color, boolean additive, int lifetime) {
         this.color = color;
         this.additive = additive;
         this.lifetime = lifetime;
+        this.friction = 0.8f;
+    }
+
+    public MoteParticleOptions(Color color, boolean additive, int lifetime, float friction) {
+        this.color = color;
+        this.additive = additive;
+        this.lifetime = lifetime;
+        this.friction = friction;
     }
 
     @Override
@@ -41,7 +51,9 @@ public class MoteParticleOptions implements ParticleOptions {
             return particle.additive;
         }), Codec.INT.fieldOf("lifetime").forGetter((particle) -> {
             return particle.lifetime;
-        })).apply(builder, (color, additive, lifetime) -> new MoteParticleOptions(new Color(color), additive, lifetime));
+        }), Codec.FLOAT.fieldOf("friction").forGetter((particle) -> {
+            return particle.friction;
+        })).apply(builder, (color, additive, lifetime, friction) -> new MoteParticleOptions(new Color(color), additive, lifetime, friction));
     });
 
 
@@ -52,6 +64,7 @@ public class MoteParticleOptions implements ParticleOptions {
         buf.writeInt(options.color.getAlpha());
         buf.writeBoolean(options.additive);
         buf.writeInt(options.lifetime);
+        buf.writeFloat(options.friction);
     }, (buf) -> {
         int r = buf.readInt();
         int g = buf.readInt();
@@ -59,6 +72,7 @@ public class MoteParticleOptions implements ParticleOptions {
         int a = buf.readInt();
         boolean additive = buf.readBoolean();
         int lifetime = buf.readInt();
-        return new MoteParticleOptions(new Color(r, g, b, a), additive, lifetime);
+        float friction = buf.readFloat();
+        return new MoteParticleOptions(new Color(r, g, b, a), additive, lifetime, friction);
     });
 }

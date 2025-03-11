@@ -107,6 +107,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.TRAVERSITE_ROAD_SLAB.get());
         dropSelf(BlockRegistry.TRAVERSITE_ROAD_STAIRS.get());
         dropSelf(BlockRegistry.CHEMICAL_NODE.get());
+        dropSelf(BlockRegistry.DEWLAMP.get());
 
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));

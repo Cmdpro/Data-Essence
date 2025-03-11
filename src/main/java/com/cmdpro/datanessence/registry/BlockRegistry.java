@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.block.SpreadingPlant;
 import com.cmdpro.datanessence.block.*;
 
 import com.cmdpro.datanessence.block.auxiliary.*;
+import com.cmdpro.datanessence.block.decoration.Dewlamp;
 import com.cmdpro.datanessence.block.decoration.FlareLight;
 import com.cmdpro.datanessence.block.decoration.LightFixture;
 import com.cmdpro.datanessence.block.fluid.GenderfluidBlock;
@@ -309,6 +310,9 @@ public class BlockRegistry {
                             .noLootTable()
                             .sound(SoundType.AMETHYST)
                             .noOcclusion().instabreak().noCollission()));
+    public static final Supplier<Block> DEWLAMP = register("dewlamp",
+            () -> new Dewlamp(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN).noOcclusion().noCollission().lightLevel((blockState) -> { return 5;})),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Fluids
     public static final Supplier<LiquidBlock> GENDERFLUID = registerBlock("genderfluid", () -> new GenderfluidBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(DyeColor.BLACK)));

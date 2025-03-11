@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-08T19:13:31.765476736	Loot Tables
+// 1.21.1	2025-03-10T21:11:58.493735276	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -22,6 +22,7 @@ fea2a941c650615615e90e27482b9b2032ee71e8 data/datanessence/loot_table/blocks/cry
 8f6c8cd8d11552fd4c14a8d37ed68faaf224129f data/datanessence/loot_table/blocks/deco_essence_buffer.json
 67a0a29f225849b9d1a9d4d864f4f16a8ffb645b data/datanessence/loot_table/blocks/deco_fluid_buffer.json
 d780424182f390bb85712d7baf184b36886bae45 data/datanessence/loot_table/blocks/deco_item_buffer.json
+93ca4ae06d5943c0e12e40c4b9c86fc0bd6453e9 data/datanessence/loot_table/blocks/dewlamp.json
 29cf93937134563596a438a411dbb8811fa8cc92 data/datanessence/loot_table/blocks/energized_ancient_rock_column.json
 b4e06af3b19028f6e283a59c3f045a5cf5d3020d data/datanessence/loot_table/blocks/engraved_polished_obsidian.json
 b5cfbe5adbc39553904bbf0be1a5cf945eb66357 data/datanessence/loot_table/blocks/enticing_lure.json

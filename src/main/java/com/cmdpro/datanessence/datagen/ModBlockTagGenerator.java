@@ -86,7 +86,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get())
-                .add(BlockRegistry.METAL_SHAPER.get());
+                .add(BlockRegistry.METAL_SHAPER.get())
+                .add(BlockRegistry.DEWLAMP.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())

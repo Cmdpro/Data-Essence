@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 10 },
+  "entry": "datanessence:tools/decorative_blocks",
+  "pattern": [
+    " B ",
+    " D ",
+    " B "
+  ],
+  "key": {
+    "B": { "item": "minecraft:basalt" },
+    "D": { "tag": "c:dyes" }
+  },
+  "result": { "id": "datanessence:dewlamp", "count": 4 }
+}

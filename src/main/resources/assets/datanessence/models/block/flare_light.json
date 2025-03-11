@@ -1,5 +1,5 @@
 {
-  "parent": "builtin/block",
+  "parent": "minecraft:block",
   "textures": {
     "particle": "datanessence:block/nothing"
   }

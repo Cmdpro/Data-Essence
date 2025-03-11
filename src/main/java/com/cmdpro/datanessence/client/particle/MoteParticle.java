@@ -14,7 +14,7 @@ public class MoteParticle extends TextureSheetParticle {
                            SpriteSet spriteSet, double xd, double yd, double zd, MoteParticleOptions options) {
         super(level, xCoord, yCoord, zCoord, xd, yd, zd);
 
-        this.friction = 0.8F;
+        this.friction = options.friction;
         this.xd = xd;
         this.yd = yd;
         this.zd = zd;

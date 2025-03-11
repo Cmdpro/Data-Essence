@@ -40,6 +40,15 @@
       "text": {
         "translate": "data_tablet.pages.decorative_blocks.page4.text"
       }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/decoration/dewlamp"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.decorative_blocks.page5.text"
+      }
     }
   ],
   "name": {
