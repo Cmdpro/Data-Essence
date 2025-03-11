@@ -36,22 +36,27 @@ public class Dewlamp extends Block {
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         float hue = RandomUtils.nextFloat(0f, 1f);
+        int lifetime = RandomUtils.nextInt(60, 180);
         Color color = new Color( Color.HSBtoRGB(hue, 0.8f, 1f) );
-        double d0 = 0.5625;
+        double d0 = 0.2; // 0.5625;
+        float horizontalVelocity = random.nextFloat() * 0.02f;
+        horizontalVelocity = random.nextInt() % 2 == 0 ? horizontalVelocity : -horizontalVelocity;
 
+        // center light
         world.addParticle(
                 new CircleParticleOptionsAdditive(color), true, pos.getCenter().x, pos.getCenter().y+0.15, pos.getCenter().z, 0.0, 0.0, 0.0
         );
 
+        // light dew
         for (Direction direction : Direction.values()) {
             BlockPos blockpos = pos.relative(direction);
-            if (!world.getBlockState(blockpos).isSolidRender(world, blockpos)) {
-                Direction.Axis direction$axis = direction.getAxis();
-                double d1 = direction$axis == Direction.Axis.X ? 0.5 + 0.5625 * (double)direction.getStepX() : (double)random.nextFloat();
-                double d2 = direction$axis == Direction.Axis.Y ? 0.5 + 0.5625 * (double)direction.getStepY() : (double)random.nextFloat();
-                double d3 = direction$axis == Direction.Axis.Z ? 0.5 + 0.5625 * (double)direction.getStepZ() : (double)random.nextFloat();
+            if (!world.getBlockState(blockpos).isSolidRender(world, blockpos) && direction != Direction.UP && direction != Direction.DOWN) {
+                Direction.Axis axis = direction.getAxis();
+                double d1 = axis == Direction.Axis.X ? 0.5 + d0 * (double)direction.getStepX() : (double)random.nextFloat();
+                double d2 = axis == Direction.Axis.Y ? 0.5 + d0 * (double)direction.getStepY() : (double)random.nextFloat();
+                double d3 = axis == Direction.Axis.Z ? 0.5 + d0 * (double)direction.getStepZ() : (double)random.nextFloat();
                 world.addParticle(
-                        new MoteParticleOptions(color, true, 120, 1f), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, 0.0, -0.04, 0.0
+                        new MoteParticleOptions(color, true, lifetime, 1f, 0.04f), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, horizontalVelocity, 0, horizontalVelocity
                 );
             }
         }

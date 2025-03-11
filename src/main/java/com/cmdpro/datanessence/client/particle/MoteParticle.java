@@ -8,7 +8,7 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
 public class MoteParticle extends TextureSheetParticle {
-    public float startQuadSize;
+    public float maxQuadSize;
     public MoteParticleOptions options;
     protected MoteParticle(ClientLevel level, double xCoord, double yCoord, double zCoord,
                            SpriteSet spriteSet, double xd, double yd, double zd, MoteParticleOptions options) {
@@ -19,8 +19,9 @@ public class MoteParticle extends TextureSheetParticle {
         this.yd = yd;
         this.zd = zd;
         this.quadSize *= 0.85F;
-        startQuadSize = this.quadSize;
+        maxQuadSize = this.quadSize;
         this.lifetime = options.lifetime;
+        this.gravity = options.gravity;
         this.setSpriteFromAge(spriteSet);
 
         this.rCol = (float)options.color.getRed()/255f;
@@ -42,7 +43,7 @@ public class MoteParticle extends TextureSheetParticle {
     }
 
     private void fadeOut() {
-        this.quadSize = (-(1/(float)lifetime) * age + 1)*startQuadSize;
+        this.quadSize = (-(1/(float)lifetime) * age + 1)* maxQuadSize;
     }
 
     @Override
