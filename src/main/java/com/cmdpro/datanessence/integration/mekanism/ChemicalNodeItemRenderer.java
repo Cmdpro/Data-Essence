@@ -24,7 +24,7 @@ public class ChemicalNodeItemRenderer extends DatabankItemRenderer<ChemicalNodeI
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return null;
+        return DataNEssence.locate("textures/block/chemical_node.png");
     }
 
     public static class Model extends DatabankItemModel<ChemicalNodeItem> {

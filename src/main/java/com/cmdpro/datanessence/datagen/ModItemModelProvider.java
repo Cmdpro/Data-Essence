@@ -122,6 +122,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         essencePoint(BlockRegistry.EXOTIC_ESSENCE_POINT);
         essencePoint(BlockRegistry.ITEM_POINT);
         essencePoint(BlockRegistry.FLUID_POINT);
+        essencePoint(BlockRegistry.CHEMICAL_NODE);
 
         musicDiscPlayer(ItemRegistry.MUSIC_DISC_PLAYER);
 
