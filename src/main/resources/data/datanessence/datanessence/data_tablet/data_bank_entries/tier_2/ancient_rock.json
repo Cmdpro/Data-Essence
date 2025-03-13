@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:ancient_rock_bricks"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.ancient_rock.name"
+  },
+  "entry": "datanessence:lore/ancient_rock"
+}

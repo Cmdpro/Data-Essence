@@ -1,0 +1,28 @@
+{
+  "icon": {
+    "id": "datanessence:ancient_rock_bricks"
+  },
+  "tab": "datanessence:lore",
+  "x": 2,
+  "y": 1,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.ancient_rock.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.ancient_rock.page2.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.ancient_rock.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.ancient_rock.flavor"
+  }
+}

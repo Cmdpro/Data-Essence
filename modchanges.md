@@ -2,6 +2,7 @@
 - Added some new variants of Polished Obsidian (Bricks, Tract)
 - Added a variant of Node/Wire for Mekanism Chemicals
 - Added Dewlamps, a decorative light fixture - recipe is temporary until a certain place gets added
+- Added lore entry about Ancient Rock, found at Tier 2 in Nature Outposts and Ancient Weapons Facilities
 
 ### Changes
 - Blacklisted Structure Protectors from being relocated by (hopefully) many mods
