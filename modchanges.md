@@ -12,3 +12,4 @@
 
 ### Fixes
 - Wire Spools required the Synthesis Chamber to be unlocked despite being a crafting component
+- Untyped Computers crashed the game when opened

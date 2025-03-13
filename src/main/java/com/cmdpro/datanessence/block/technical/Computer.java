@@ -31,7 +31,7 @@ public class Computer extends Block implements EntityBlock {
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide) {
             if (pLevel.getBlockEntity(pPos) instanceof ComputerBlockEntity ent) {
-                if (ent.type != null) {
+                if (ent.type != null && ComputerTypeManager.types.containsKey(ent.type)) {
                     ComputerUtil.openComputer(pPlayer, ComputerTypeManager.types.get(ent.type));
                 }
             }
