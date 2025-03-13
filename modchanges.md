@@ -6,6 +6,8 @@
 ### Changes
 - Blacklisted Structure Protectors from being relocated by (hopefully) many mods
 - Various internal changes to the Mote particle
+- Ancient Rock blocks cannot be broken by non-players anymore - as a side effect, mods like Jade unfortunately don't show their harvestability for now
+- Essence Breaker checks if a block is supposed to be unbreakable before breaking it
 
 ### Fixes
 - Wire Spools required the Synthesis Chamber to be unlocked despite being a crafting component

@@ -27,8 +27,8 @@ import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.block.transmission.ExoticEssencePoint;
 import com.cmdpro.datanessence.block.transmission.LunarEssencePoint;
 import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
-import com.cmdpro.datanessence.block.world.CrystallineLeaves;
-import com.cmdpro.datanessence.block.world.EssenceCrystal;
+import com.cmdpro.datanessence.block.world.*;
+import com.cmdpro.datanessence.block.world.shieldingstone.*;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
 import com.cmdpro.datanessence.item.blockitem.*;
@@ -238,34 +238,34 @@ public class BlockRegistry {
 
     // Ancient Rock
     public static final Supplier<Block> ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            AncientShieldingStone::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_ROCK_TILES = register("ancient_rock_tiles",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            AncientShieldingStone::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_ROCK_COLUMN = register("ancient_rock_column",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            AncientShieldingPillar::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENERGIZED_ANCIENT_ROCK_COLUMN = register("energized_ancient_rock_column",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).lightLevel((blockState) -> { return 3;})),
+            () -> new LuminousAncientShieldingPillar(3),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_LANTERN = register("ancient_lantern",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).lightLevel((blockState) -> { return 13;})),
+            () -> new LuminousAncientShieldingStone(13),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_SHELF = register("ancient_shelf",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            AncientShieldingStone::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_WINDOW = register("ancient_window",
-            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
+            AncientShieldingGlass::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_GLYPH_STONE_BLANK = register("ancient_glyph_stone_blank",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            AncientShieldingStone::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_GLYPH_STONE_MAKUTUIN = register("ancient_glyph_stone_makutuin",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            AncientShieldingStone::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_GLYPH_STONE_ESSENCE = register("ancient_glyph_stone_essence",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            AncientShieldingStone::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Obsidian Deco
@@ -328,14 +328,16 @@ public class BlockRegistry {
         ITEMS.register(name, item.apply(obj));
         return obj;
     }
-    private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
-        return false;
-    }
-    private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+
+    public static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return false;
     }
 
-    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+    public static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
+        return false;
+    }
+
+    public static boolean always(BlockState state, BlockGetter blockGetter, BlockPos pos) {
         return true;
     }
 }

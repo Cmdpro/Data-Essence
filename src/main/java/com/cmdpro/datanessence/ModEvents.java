@@ -100,10 +100,11 @@ public class ModEvents {
             }
         }
     }
+
     @SubscribeEvent
-    public static void onBlockBreak(BlockEvent.BreakEvent event) {
-        boolean creative = event.getPlayer().isCreative();
-        if (!creative) {
+    public static void preventBreakingProtectedBlocks(BlockEvent.BreakEvent event) {
+
+        if (!event.getPlayer().isCreative()) {
             if (!event.getLevel().getBlockState(event.getPos()).is(BlockRegistry.STRUCTURE_PROTECTOR.get())) {
                 if (!event.getLevel().isClientSide()) {
                     if (((Level) event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
@@ -120,8 +121,9 @@ public class ModEvents {
             }
         }
     }
+
     @SubscribeEvent
-    public static void onBlockPlace(BlockEvent.EntityPlaceEvent event) {
+    public static void preventPlacingInProtectedZone(BlockEvent.EntityPlaceEvent event) {
         boolean creative = false;
         if (event.getEntity() instanceof Player player) {
             if (player.isCreative()) {

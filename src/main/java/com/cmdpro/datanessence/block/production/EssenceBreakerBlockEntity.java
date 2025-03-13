@@ -45,7 +45,8 @@ public class EssenceBreakerBlockEntity extends BlockEntity implements EssenceBlo
                             breakState.is(BlockTags.MINEABLE_WITH_AXE) ||
                             breakState.is(BlockTags.MINEABLE_WITH_HOE) ||
                             breakState.is(BlockTags.MINEABLE_WITH_SHOVEL)) &&
-                            !breakState.is(BlockTags.INCORRECT_FOR_DIAMOND_TOOL)
+                            !breakState.is(BlockTags.INCORRECT_FOR_DIAMOND_TOOL) &&
+                            !(breakState.getDestroySpeed(world, breakPos) <= -1.0f)
                     ) {
                         world.destroyBlock(breakPos, true);
                         ((ServerLevel) world).sendParticles(ParticleTypes.EXPLOSION, breakPos.getCenter().x, breakPos.getCenter().y, breakPos.getCenter().z, 1, 0, 0, 0, 0);
