@@ -234,6 +234,7 @@
   "data_tablet.tier_upgrade": "You have advanced to",
   "data_tablet.tier": "Tier %1$s",
   "data_tablet.databank_minigame_completed": "Completed",
+  "data_tablet.databank_no_entries_left": "Insufficient clearance to display further data",
 
   "data_tablet.tabs.basics.name": "Basic Information",
   "data_tablet.tabs.essence_manipulation.name": "Essence Manipulation",

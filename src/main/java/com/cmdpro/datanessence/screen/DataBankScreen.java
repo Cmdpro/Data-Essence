@@ -12,6 +12,7 @@ import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.PlayerFinishDataBankMinigameC2SPacket;
 import com.cmdpro.datanessence.datatablet.Entries;
 import com.cmdpro.datanessence.datatablet.Entry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.eliotlash.mclib.math.functions.limit.Min;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -77,7 +78,7 @@ public class DataBankScreen extends Screen {
                                 minigames2.add(o.createMinigame());
                             }
                             minigames = minigames2.toArray(new Minigame[0]);
-                            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+                            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
                             return true;
                         }
                     }
@@ -285,10 +286,14 @@ public class DataBankScreen extends Screen {
             int x2 = 4;
             List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
             entries.sort(Comparator.comparingInt((a) -> a.tier));
+
+            List<DataBankEntry> unfinishedEntries = new ArrayList<>(); // to track whether no entries are displayed on the gui - will be empty if that is so
+
             for (DataBankEntry i : entries) {
                 if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
                     if (entry == null || !isUnlocked(entry)) {
+                        unfinishedEntries.add(i);
                         continue;
                     }
                     if (i.tier != currentTier) {
@@ -305,6 +310,12 @@ public class DataBankScreen extends Screen {
                     }
                 }
             }
+
+            if (unfinishedEntries.isEmpty()) {
+                graphics.blit(TEXTURE, (width / 2) - 23, (height / 2) - 33, 39, 166, 46, 46);
+                graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("data_tablet.databank_no_entries_left"), width / 2, height / 2, new Color(255, 150, 181).getRGB());
+            }
+
         } else if (screenType == 1) {
             if (isMouseInsideMinigame(mouseX, mouseY)) {
                 if (minigameProgress < minigames.length) {
@@ -338,6 +349,7 @@ public class DataBankScreen extends Screen {
         List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
         entries.sort(Comparator.comparingInt((a) -> a.tier));
         for (DataBankEntry i : entries) {
+
             if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry)) {
                 Entry entry = Entries.entries.get(i.entry);
                 if (entry == null || !isUnlocked(entry)) {
@@ -358,6 +370,7 @@ public class DataBankScreen extends Screen {
                 }
             }
         }
+
         int o = 1;
         for (Map.Entry<Integer, Integer> i : tiers.entrySet()) {
             pGuiGraphics.blit(TEXTURE, x+4+(int)offsetX, y+((32*o)-14)+(int)offsetY, 28, 166, 3, 28);
