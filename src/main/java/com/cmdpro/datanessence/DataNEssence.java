@@ -203,6 +203,18 @@ public class DataNEssence
             }
             return o.getOutputHandler();
         });
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.DRYING_TABLE.get(), (o, direction) -> {
+            return o.getFluidHandler();
+        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.DRYING_TABLE.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedHandler();
+            }
+            if (direction == Direction.DOWN) {
+                return o.getItemHandler();
+            }
+            return o.getOutputHandler();
+        });
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -308,6 +320,7 @@ public class DataNEssence
             event.accept(BlockRegistry.ESSENCE_BREAKER.get());
             event.accept(BlockRegistry.METAL_SHAPER.get());
             event.accept(BlockRegistry.MELTER.get());
+            event.accept(BlockRegistry.DRYING_TABLE.get());
 
             // Logistics
             event.accept(BlockRegistry.ITEM_FILTER.get());

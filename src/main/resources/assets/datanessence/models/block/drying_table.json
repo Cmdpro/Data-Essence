@@ -3,8 +3,9 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "datanessence:block/drying_table",
-		"particle": "datanessence:block/drying_table"
+		"particle": "datanessence:block/deco/patterned_copper"
 	},
+	"render_type": "minecraft:cutout",
 	"elements": [
 		{
 			"name": "stand north",

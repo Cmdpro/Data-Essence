@@ -145,6 +145,9 @@ public class BlockRegistry {
     public static final Supplier<Block> MELTER = register("melter",
             () -> new Melter(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> DRYING_TABLE = register("drying_table",
+            () -> new DryingTable(MACHINE_PROPERTIES),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers
     public static final Supplier<Block> ESSENCE_BUFFER = register("essence_buffer",

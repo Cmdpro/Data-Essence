@@ -1,0 +1,14 @@
+{
+  "type": "datanessence:drying",
+  "time": 800,
+  "input": {
+    "id": "minecraft:lava",
+    "amount": 1000
+  },
+  "additive": {
+    "tag": "c:netherrack"
+  },
+  "result": {
+    "id": "minecraft:magma_block"
+  }
+}

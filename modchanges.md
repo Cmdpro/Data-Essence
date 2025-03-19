@@ -1,16 +1,10 @@
 ### Additions
-- Added some new variants of Polished Obsidian (Bricks, Tract)
-- Added a variant of Node/Wire for Mekanism Chemicals
-- Added Dewlamps, a decorative light fixture - recipe is temporary until a certain place gets added
-- Added lore entry about Ancient Rock, found at Tier 2 in Nature Outposts and Ancient Weapons Facilities
+- New Drying Table machine - fluid and an optional additive undergo an accelerated drying process thanks to Essence, yielding a resultant item (such as water + sand = clay)
+- Added EMI Handler for Melting recipes
 
 ### Changes
-- Blacklisted Structure Protectors from being relocated by (hopefully) many mods
-- Various internal changes to the Mote particle
-- Ancient Rock blocks cannot be broken by non-players anymore - as a side effect, mods like Jade unfortunately don't show their harvestability for now
-- Essence Breaker checks if a block is supposed to be unbreakable before breaking it
-- Tweaked Computer gui to match its block texture
+- Data Banks show a hint that suggests you return later when there are no entries to display
+- Buffers display upwards moving particles when transferring
 
 ### Fixes
-- Wire Spools required the Synthesis Chamber to be unlocked despite being a crafting component
-- Untyped Computers crashed the game when opened
+- Coal Lumps had no burn time in furnaces/etc; now they burn for 180 ticks

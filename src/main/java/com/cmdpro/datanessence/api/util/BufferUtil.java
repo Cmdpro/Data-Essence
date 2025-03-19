@@ -35,6 +35,7 @@ public class BufferUtil {
             if (ent instanceof EssenceBufferBlockEntity buffer) {
                 for (EssenceType o : types) {
                     EssenceStorage.transferEssence(buffer.getStorage(), ((EssenceBlockEntity)container).getStorage(), o, buffer.getStorage().getMaxEssence());
+                    buffer.doTransferParticles(buffer.getBlockPos(), buffer.getLevel());
                 }
             }
             if (!container.getLevel().getBlockState(container.getBlockPos().offset(0, -i, 0)).is(TagRegistry.Blocks.BUFFER_DETECTION_PASS)) {

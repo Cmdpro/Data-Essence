@@ -1,0 +1,14 @@
+{
+  "type": "datanessence:drying",
+  "time": 400,
+  "input": {
+    "id": "minecraft:water",
+    "amount": 100
+  },
+  "additive": {
+    "tag": "c:sands"
+  },
+  "result": {
+    "id": "minecraft:clay"
+  }
+}
