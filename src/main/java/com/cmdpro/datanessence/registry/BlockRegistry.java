@@ -50,6 +50,8 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BlockRegistry {
+    public static final BlockBehaviour.Properties MACHINE_PROPERTIES = BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f);
+
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK,
             DataNEssence.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = ItemRegistry.ITEMS;
@@ -76,141 +78,141 @@ public class BlockRegistry {
 
     // Generators
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",
-            () -> new EssenceBurner(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new EssenceBurner(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_LEECH = register("essence_leech",
-            () -> new EssenceLeech(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new EssenceLeech(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INDUSTRIAL_PLANT_SIPHON = register("industrial_plant_siphon",
-            () -> new IndustrialPlantSiphon(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new IndustrialPlantSiphon(MACHINE_PROPERTIES),
             object -> () -> new IndustrialPlantSiphonItem(object.get(), new Item.Properties()));
 
     // Machines
     public static final Supplier<Block> FABRICATOR = register("fabricator",
-            () -> new Fabricator(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new Fabricator(MACHINE_PROPERTIES),
             object -> () -> new FabricatorItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INFUSER = register("infuser",
-            () -> new Infuser(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new Infuser(MACHINE_PROPERTIES),
             object -> () -> new InfuserItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_COLLECTOR = register("fluid_collector",
-            () -> new FluidCollector(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new FluidCollector(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_MIXER = register("fluid_mixer",
-            () -> new FluidMixer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new FluidMixer(MACHINE_PROPERTIES),
             object -> () -> new FluidMixerItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> MINERAL_PURIFICATION_CHAMBER = register("mineral_purification_chamber",
-            () -> new MineralPurificationChamber(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new MineralPurificationChamber(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> VACUUM = register("vacuum",
-            () -> new Vacuum(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f).lightLevel((blockState) -> { return 3;})),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> STRUCTURE_PROTECTOR = register("structure_protector",
-            () -> new StructureProtector(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().instabreak().noCollission()),
+            () -> new Vacuum(MACHINE_PROPERTIES.lightLevel((blockState) -> { return 3;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LASER_EMITTER = register("laser_emitter",
-            () -> new LaserEmitter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new LaserEmitter(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_BOTTLER = register("fluid_bottler",
-            () -> new FluidBottler(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new FluidBottler(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENTROPIC_PROCESSOR = register("entropic_processor",
-            () -> new EntropicProcessor(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new EntropicProcessor(MACHINE_PROPERTIES),
             object -> () -> new EntropicProcessorItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SYNTHESIS_CHAMBER = register("synthesis_chamber",
-            () -> new SynthesisChamber(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new SynthesisChamber(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_FURNACE = register("essence_furnace",
-            () -> new EssenceFurnace(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new EssenceFurnace(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_SPILLER = register("fluid_spiller",
-            () -> new FluidSpiller(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new FluidSpiller(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CHARGER = register("charger",
-            () -> new Charger(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new Charger(MACHINE_PROPERTIES),
             object -> () -> new ChargerItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AUTO_FABRICATOR = register("auto-fabricator",
-            () -> new AutoFabricator(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new AutoFabricator(MACHINE_PROPERTIES),
             object -> () -> new AutoFabricatorItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENTICING_LURE = register("enticing_lure",
-            () -> new EnticingLure(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new EnticingLure(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ITEM_FILTER = register("item_filter",
-            () -> new ItemFilter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new ItemFilter(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_BREAKER = register("essence_breaker",
-            () -> new EssenceBreaker(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new EssenceBreaker(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> METAL_SHAPER = register("metal_shaper",
-            () -> new MetalShaper(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new MetalShaper(MACHINE_PROPERTIES),
             object -> () -> new MetalShaperItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> MELTER = register("melter",
-            () -> new Melter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new Melter(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers
     public static final Supplier<Block> ESSENCE_BUFFER = register("essence_buffer",
-            () -> new EssenceBuffer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new EssenceBuffer(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ITEM_BUFFER = register("item_buffer",
-            () -> new ItemBuffer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new ItemBuffer(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LIMITED_ITEM_BUFFER = register("limited_item_buffer",
-            () -> new LimitedItemBuffer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new LimitedItemBuffer(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_BUFFER = register("fluid_buffer",
-            () -> new FluidBuffer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new FluidBuffer(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> DECO_ESSENCE_BUFFER = register("deco_essence_buffer",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new RotatedPillarBlock(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> DECO_FLUID_BUFFER = register("deco_fluid_buffer",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new RotatedPillarBlock(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> DECO_ITEM_BUFFER = register("deco_item_buffer",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new RotatedPillarBlock(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Nodes
     public static final Supplier<Block> ESSENCE_POINT = register("essence_point",
-            () -> new EssencePoint(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new EssencePoint(MACHINE_PROPERTIES),
             object -> () -> new EssencePointItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LUNAR_ESSENCE_POINT = register("lunar_essence_point",
-            () -> new LunarEssencePoint(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new LunarEssencePoint(MACHINE_PROPERTIES),
             object -> () -> new LunarEssencePointItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> NATURAL_ESSENCE_POINT = register("natural_essence_point",
-            () -> new NaturalEssencePoint(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new NaturalEssencePoint(MACHINE_PROPERTIES),
             object -> () -> new NaturalEssencePointItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> EXOTIC_ESSENCE_POINT = register("exotic_essence_point",
-            () -> new ExoticEssencePoint(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new ExoticEssencePoint(MACHINE_PROPERTIES),
             object -> () -> new ExoticEssencePointItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_POINT = register("fluid_point",
-            () -> new FluidPoint(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new FluidPoint(MACHINE_PROPERTIES),
             object -> () -> new FluidPointItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ITEM_POINT = register("item_point",
-            () -> new ItemPoint(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new ItemPoint(MACHINE_PROPERTIES),
             object -> () -> new ItemPointItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CHEMICAL_NODE = register("chemical_node",
-            () -> new ChemicalNode(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new ChemicalNode(MACHINE_PROPERTIES),
             object -> () -> new ChemicalNodeItem(object.get(), new Item.Properties()));
 
     // Storage
     public static final Supplier<Block> ESSENCE_BATTERY = register("essence_battery",
-            () -> new EssenceBattery(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new EssenceBattery(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LUNAR_ESSENCE_BATTERY = register("lunar_essence_battery",
-            () -> new LunarEssenceBattery(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new LunarEssenceBattery(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> NATURAL_ESSENCE_BATTERY = register("natural_essence_battery",
-            () -> new NaturalEssenceBattery(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new NaturalEssenceBattery(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> EXOTIC_ESSENCE_BATTERY = register("exotic_essence_battery",
-            () -> new ExoticEssenceBattery(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new ExoticEssenceBattery(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_TANK = register("fluid_tank",
-            () -> new FluidTank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f)),
+            () -> new FluidTank(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Technical Blocks
+    public static final Supplier<Block> STRUCTURE_PROTECTOR = register("structure_protector",
+            () -> new StructureProtector(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().instabreak().noCollission()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> DATA_BANK = register("data_bank",
             () -> new DataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -225,7 +227,7 @@ public class BlockRegistry {
     public static final Supplier<Block> CRYOCHAMBER_FILLER = registerBlock("cryochamber_filler",
             () -> new CryochamberFiller(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()));
 
-    // ???
+    // Utility Blocks
     public static final Supplier<Block> TRAVERSITE_ROAD = register("traversite_road",
             () -> new TraversiteRoad(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().strength(2.0f), 2),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
