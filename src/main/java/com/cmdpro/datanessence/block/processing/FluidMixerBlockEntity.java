@@ -210,7 +210,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
                     pBlockEntity.recipe = recipe.get().value();
                     pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
                     boolean enoughEssence = false;
-                    if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= pBlockEntity.essenceCost) {
+                    if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= pBlockEntity.essenceCost/recipe.get().value().getTime()) {
                         enoughEssence = true;
                     }
                     pBlockEntity.enoughEssence = enoughEssence;

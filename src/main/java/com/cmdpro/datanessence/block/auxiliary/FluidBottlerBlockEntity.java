@@ -153,7 +153,7 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 50) {
+            if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 2.5) {
                 ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0);
                 if (stack.is(Items.BUCKET)) {
                     if (pBlockEntity.fluidHandler.getFluid().getAmount() >= 1000) {

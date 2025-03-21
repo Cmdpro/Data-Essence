@@ -207,7 +207,7 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
                     boolean enoughEssence = true;
                     for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                         EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                        if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
+                        if (pBlockEntity.storage.getEssence(type) < i.getValue()/recipe.get().value().getTime()) {
                             enoughEssence = false;
                         }
                     }
