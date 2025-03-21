@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:melting",
+  "input": { "item": "minecraft:magma_block" },
+  "result": { "id": "minecraft:lava", "amount": 1000 },
+  "time": 150
+}

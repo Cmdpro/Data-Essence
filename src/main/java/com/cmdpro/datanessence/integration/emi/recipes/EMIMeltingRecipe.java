@@ -2,32 +2,32 @@ package com.cmdpro.datanessence.integration.emi.recipes;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.integration.emi.DataNEssenceEMIPlugin;
-import com.cmdpro.datanessence.recipe.MetalShaperRecipe;
+import com.cmdpro.datanessence.recipe.MeltingRecipe;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class EMIMetalShaperRecipe implements EmiRecipe {
+public class EMIMeltingRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiStack> output;
 
-    public EMIMetalShaperRecipe(ResourceLocation id, MetalShaperRecipe recipe) {
+    public EMIMeltingRecipe(ResourceLocation id, MeltingRecipe recipe) {
         this.id = id;
         this.input = recipe.getIngredients().stream().map(s -> EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())).toList();
-        this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())));
+        this.output = List.of(EmiStack.of(recipe.getOutput().getFluid(), recipe.getOutput().getAmount()));
     }
+
     @Override
     public EmiRecipeCategory getCategory() {
-        return DataNEssenceEMIPlugin.METAL_SHAPING;
+        return DataNEssenceEMIPlugin.MELTING;
     }
 
     @Override
@@ -57,9 +57,9 @@ public class EMIMetalShaperRecipe implements EmiRecipe {
 
     @Override
     public void addWidgets(WidgetHolder widgetHolder) {
-        ResourceLocation background = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
+        ResourceLocation background = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting2.png");
 
-        widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 133, 16);
+        widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 10, 196);
 
         // Input
         widgetHolder.addSlot(input.get(0), 29, 21).drawBack(false);

@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:melting",
+  "input": { "tag": "c:netherracks" },
+  "result": { "id": "minecraft:lava", "amount": 1000 },
+  "time": 300
+}

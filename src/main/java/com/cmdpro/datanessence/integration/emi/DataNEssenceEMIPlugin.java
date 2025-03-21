@@ -14,10 +14,16 @@ import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
 import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiStack;
 
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
+
+import java.util.List;
 
 @EmiEntrypoint
 public class DataNEssenceEMIPlugin implements EmiPlugin {
@@ -30,13 +36,17 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
     public static final EmiStack FLUID_MIXER_WORKSTATION = EmiStack.of(BlockRegistry.FLUID_MIXER.get());
     public static final EmiStack SYNTHESIS_CHAMBER_WORKSTATION = EmiStack.of(BlockRegistry.SYNTHESIS_CHAMBER.get());
     public static final EmiStack METAL_SHAPER_WORKSTATION = EmiStack.of(BlockRegistry.METAL_SHAPER.get());
+    public static final EmiStack MELTER_WORKSTATION = EmiStack.of(BlockRegistry.MELTER.get());
+    public static final EmiStack DRYING_TABLE_WORKSTATION = EmiStack.of(BlockRegistry.DRYING_TABLE.get());
 
-    public static final EmiRecipeCategory FABRICATION = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"fabrication"), FABRICATOR_WORKSTATION, new EmiTexture(EMI_ICONS, 0, 0, 16, 16));
-    public static final EmiRecipeCategory INFUSION = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "infusion"), INFUSER_WORKSTATION, new EmiTexture(EMI_ICONS, 16, 0, 16, 16));
-    public static final EmiRecipeCategory ENTROPIC_PROCESSING = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entropic_processing"), ENTROPIC_PROCESSER_WORKSTATION, new EmiTexture(EMI_ICONS, 32, 0, 16, 16));
-    public static final EmiRecipeCategory FLUID_MIXING = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fluid_mixing"), FLUID_MIXER_WORKSTATION, new EmiTexture(EMI_ICONS, 48, 0, 16, 16));
-    public static final EmiRecipeCategory SYNTHESIS = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "synthesis"), SYNTHESIS_CHAMBER_WORKSTATION, new EmiTexture(EMI_ICONS, 64, 0, 16, 16));
-    public static final EmiRecipeCategory METAL_SHAPER = new EmiRecipeCategory(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "metal_shaping"), METAL_SHAPER_WORKSTATION, new EmiTexture(EMI_ICONS, 80, 0, 16, 16));
+    public static final EmiRecipeCategory FABRICATION = new EmiRecipeCategory(DataNEssence.locate("fabrication"), FABRICATOR_WORKSTATION, new EmiTexture(EMI_ICONS, 0, 0, 16, 16));
+    public static final EmiRecipeCategory INFUSION = new EmiRecipeCategory(DataNEssence.locate("infusion"), INFUSER_WORKSTATION, new EmiTexture(EMI_ICONS, 16, 0, 16, 16));
+    public static final EmiRecipeCategory ENTROPIC_PROCESSING = new EmiRecipeCategory(DataNEssence.locate("entropic_processing"), ENTROPIC_PROCESSER_WORKSTATION, new EmiTexture(EMI_ICONS, 32, 0, 16, 16));
+    public static final EmiRecipeCategory FLUID_MIXING = new EmiRecipeCategory(DataNEssence.locate("fluid_mixing"), FLUID_MIXER_WORKSTATION, new EmiTexture(EMI_ICONS, 48, 0, 16, 16));
+    public static final EmiRecipeCategory SYNTHESIS = new EmiRecipeCategory(DataNEssence.locate("synthesis"), SYNTHESIS_CHAMBER_WORKSTATION, new EmiTexture(EMI_ICONS, 64, 0, 16, 16));
+    public static final EmiRecipeCategory METAL_SHAPING = new EmiRecipeCategory(DataNEssence.locate("metal_shaping"), METAL_SHAPER_WORKSTATION, new EmiTexture(EMI_ICONS, 80, 0, 16, 16));
+    public static final EmiRecipeCategory MELTING = new EmiRecipeCategory(DataNEssence.locate("melting"), MELTER_WORKSTATION, new EmiTexture(EMI_ICONS, 96, 0, 16, 16));
+    public static final EmiRecipeCategory DRYING = new EmiRecipeCategory(DataNEssence.locate("drying"), DRYING_TABLE_WORKSTATION, new EmiTexture(EMI_ICONS, 128, 0, 16, 16));
 
     // TODO this Essence Furnace should have a custom tooltip, because *polish*
     public static ItemStack ESSENCE_FURNACE = new ItemStack(BlockRegistry.ESSENCE_FURNACE.get().asItem());
@@ -49,7 +59,8 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
         emiRegistry.addCategory(ENTROPIC_PROCESSING);
         emiRegistry.addCategory(FLUID_MIXING);
         emiRegistry.addCategory(SYNTHESIS);
-        emiRegistry.addCategory(METAL_SHAPER);
+        emiRegistry.addCategory(METAL_SHAPING);
+        emiRegistry.addCategory(MELTING);
 
         // Vanilla
         emiRegistry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, FABRICATOR_WORKSTATION);
@@ -63,7 +74,8 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
         emiRegistry.addWorkstation(ENTROPIC_PROCESSING, ENTROPIC_PROCESSER_WORKSTATION);
         emiRegistry.addWorkstation(FLUID_MIXING, FLUID_MIXER_WORKSTATION);
         emiRegistry.addWorkstation(SYNTHESIS, SYNTHESIS_CHAMBER_WORKSTATION);
-        emiRegistry.addWorkstation(METAL_SHAPER, METAL_SHAPER_WORKSTATION);
+        emiRegistry.addWorkstation(METAL_SHAPING, METAL_SHAPER_WORKSTATION);
+        emiRegistry.addWorkstation(MELTING, MELTER_WORKSTATION);
 
         RecipeManager manager = emiRegistry.getRecipeManager();
 
@@ -84,6 +96,9 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
         }
         for (RecipeHolder<MetalShaperRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.METAL_SHAPING_TYPE.get())) {
             emiRegistry.addRecipe(new EMIMetalShaperRecipe(recipe.id(), recipe.value()));
+        }
+        for (RecipeHolder<MeltingRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.MELTING_TYPE.get())) {
+            emiRegistry.addRecipe(new EMIMeltingRecipe(recipe.id(), recipe.value()));
         }
     }
 }

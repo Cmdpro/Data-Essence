@@ -134,7 +134,7 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
 
             boolean resetWorkTime = true;
 
-            if (dryingTable.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
+            if (dryingTable.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 0.5f) {
                 Optional<RecipeHolder<DryingRecipe>> recipe = world.getRecipeManager().getRecipeFor(RecipeRegistry.DRYING_TYPE.get(), dryingTable.getCraftingInv(), world);
                 if (recipe.isPresent()) {
 
