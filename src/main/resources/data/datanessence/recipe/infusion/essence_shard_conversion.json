@@ -3,7 +3,7 @@
   "essenceCost": {
     "datanessence:essence": 100
   },
-  "entry": "datanessence:machinery/infuser",
+  "entry": "datanessence:basics/essence_crystals",
   "input": {
     "item": "minecraft:amethyst_shard",
     "count": 1
