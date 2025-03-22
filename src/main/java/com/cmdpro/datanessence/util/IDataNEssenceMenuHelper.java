@@ -26,9 +26,7 @@ public interface IDataNEssenceMenuHelper {
             } else {
                 return ItemStack.EMPTY;
             }
-            if (!stack.isEmpty()) {
-                slot.setChanged();
-            }
+            slot.set(stack);
             slot.onTake(player, stack);
             return copy;
         } else {

@@ -56,6 +56,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
 
         @Override
@@ -69,7 +70,25 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
     public IItemHandler getItemHandler() {
         return lazyItemHandler.get();
     }
-
+    public void checkRecipes() {
+        Optional<RecipeHolder<IFabricationRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), getCraftingInv().asCraftInput(), level);
+        if (recipe.isPresent()) {
+            this.recipe = recipe.get().value();
+            essenceCost = recipe.get().value().getEssenceCost();
+            item = recipe.get().value().getResultItem(level.registryAccess());
+        } else {
+            Optional<RecipeHolder<CraftingRecipe>> recipe2 = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, getCraftingInv().asCraftInput(), level);
+            if (recipe2.isPresent()) {
+                this.recipe = recipe2.get().value();
+                item = recipe2.get().value().getResultItem(level.registryAccess());
+                essenceCost = null;
+            } else {
+                this.recipe = null;
+                essenceCost = null;
+                item = ItemStack.EMPTY;
+            }
+        }
+    }
     public void drops() {
         SimpleContainer inventory = getInv();
 
@@ -169,11 +188,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
-            Optional<RecipeHolder<IFabricationRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pBlockEntity.getCraftingInv().asCraftInput(), pLevel);
-            if (recipe.isPresent()) {
-                pBlockEntity.recipe = recipe.get().value();
-                pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
-                pBlockEntity.item = recipe.get().value().getResultItem(pLevel.registryAccess());
+            if (pBlockEntity.essenceCost != null) {
                 boolean enoughEssence = true;
                 for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                     EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
@@ -183,17 +198,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
             } else {
-                Optional<RecipeHolder<CraftingRecipe>> recipe2 = pLevel.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, pBlockEntity.getCraftingInv().asCraftInput(), pLevel);
-                if (recipe2.isPresent()) {
-                    pBlockEntity.recipe = recipe2.get().value();
-                    pBlockEntity.item = recipe2.get().value().getResultItem(pLevel.registryAccess());
-                    pBlockEntity.enoughEssence = true;
-                    pBlockEntity.essenceCost = null;
-                } else {
-                    pBlockEntity.recipe = null;
-                    pBlockEntity.essenceCost = null;
-                    pBlockEntity.item = ItemStack.EMPTY;
-                }
+                pBlockEntity.enoughEssence = true;
             }
             pBlockEntity.updateBlock();
         }
