@@ -6,7 +6,7 @@
     "amount": 100
   },
   "additive": {
-    "tag": "c:dirt"
+    "tag": "minecraft:dirt"
   },
   "result": {
     "id": "minecraft:mud"

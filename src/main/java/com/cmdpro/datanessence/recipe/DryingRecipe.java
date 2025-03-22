@@ -45,7 +45,7 @@ public class DryingRecipe implements Recipe<RecipeInputWithFluid> {
 
     @Override
     public boolean matches(RecipeInputWithFluid input, Level level) {
-        return (FluidStack.isSameFluidSameComponents(this.input, input.getFluid(0)) && this.additive.isEmpty() || additive.get().test(input.getItem(0)));
+        return (FluidStack.isSameFluidSameComponents(this.input, input.getFluid(0)) && (this.additive.isEmpty() || additive.get().test(input.getItem(0))));
     }
 
     @Override

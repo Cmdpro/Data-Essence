@@ -6,7 +6,7 @@
     "amount": 1000
   },
   "additive": {
-    "tag": "c:netherrack"
+    "tag": "c:netherracks"
   },
   "result": {
     "id": "minecraft:magma_block"

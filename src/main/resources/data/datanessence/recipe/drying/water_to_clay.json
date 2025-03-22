@@ -6,7 +6,7 @@
     "amount": 100
   },
   "additive": {
-    "tag": "c:sands"
+    "tag": "minecraft:sand"
   },
   "result": {
     "id": "minecraft:clay"
