@@ -7,6 +7,8 @@ Over the course of progression, you will work with more types of Essence and mor
 
 [CurseForge](https://curseforge.com/minecraft/mc-mods/data-essence) | [Design Doc](https://docs.google.com/document/d/1jXmHCer-_6um1-AJRqcDkGYyKjpoGbhyEGBNibIRoIk/edit?tab=t.0) | [Discord](https://discord.gg/yjpMkxHhNJ) | [Modrinth](https://modrinth.com/project/data-essence)
 
+![Screenshot of several earlygame machines and generators made out of shiny orange copper and deep purple obsidian, placed in a room with a translucent glass floor and otherworldly purple brick walls.](https://raw.githubusercontent.com/Cmdpro/Data-Essence/refs/heads/main/raw/images/earlygame_splash.png)
+
 ## Starting the Mod, and Progressing
 You will need to explore your world to find a specific structure, *Arekko's Vault*. The Vault generates in mountains. Once found, you may enter from above to retrieve a Data Tablet... after some effort. This Tablet is your guide through the mod.
 
