@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.SpecialConditionHandler;
 import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.datatablet.DataTab;
 import com.cmdpro.datanessence.datatablet.Entries;
@@ -187,6 +188,12 @@ public class DataTabletScreen extends Screen {
     public void tick() {
         super.tick();
         ticks++;
+        if (SpecialConditionHandler.isAprilFools()) {
+            battery -= ((1f / 20f) / 5f) * (Math.clamp(0, 1, (battery / 100f) * 3));///30f;
+            if (battery < 1) {
+                battery = 1;
+            }
+        }
     }
 
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
@@ -329,8 +336,23 @@ public class DataTabletScreen extends Screen {
                 graphics.blit(TEXTURE_MISC, x + imageWidth, y + 10, 38, 0, 17, 21);
             }
         }
+        if (SpecialConditionHandler.isAprilFools()) {
+            graphics.blit(TEXTURE_MISC, x + 5, y + 5, 16, 38, 17, 8);
+            int batteryWidth = 11;
+            if (battery <= 99f) {
+                batteryWidth = 8;
+            }
+            if (battery <= (100f/3f)*2f) {
+                batteryWidth = 5;
+            }
+            if (battery <= (100f/3f)) {
+                batteryWidth = 2;
+            }
+            graphics.blit(TEXTURE_MISC, x + 8, y + 7, 16, 46, batteryWidth, 8);
+            graphics.drawString(Minecraft.getInstance().font, (int)Math.ceil(battery) + "%", x + 24, y + 5, 0xff96b5);
+        }
     }
-
+    public static float battery = 100;
     public void drawPage(Page page, GuiGraphics graphics, float pPartialTick, int mouseX, int mouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
