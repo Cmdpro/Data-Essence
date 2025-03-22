@@ -15,5 +15,7 @@ public class CraftingTypes {
         types.add(new FluidMixingType());
         types.add(new SynthesisType());
         types.add(new SmeltingType());
+        types.add(new MeltingType());
+        types.add(new DryingType());
     }
 }

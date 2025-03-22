@@ -15,11 +15,21 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:fabrication/machines/melter"
+        "datanessence:fabrication/machines/melter",
+        "datanessence:melting/ice"
       ],
       "text": {
         "translate": "data_tablet.pages.melter.page2.text"
       }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:melting/magma",
+        "datanessence:melting/mud",
+        "datanessence:melting/netherrack",
+        "datanessence:melting/stone"
+      ]
     }
   ],
   "name": {
