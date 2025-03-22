@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.api.util;
 
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.DataBankEntrySyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.s2c.DataBankEntrySync;
 import com.cmdpro.datanessence.databank.DataBankEntries;
 import com.cmdpro.datanessence.databank.DataBankEntry;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +17,7 @@ public class DataBankUtil {
         for (ResourceLocation i : ids) {
             entries.put(i, DataBankEntries.entries.get(i));
         }
-        ModMessages.sendToPlayer(new DataBankEntrySyncS2CPacket(entries), (player));
+        ModMessages.sendToPlayer(new DataBankEntrySync(entries), (player));
     }
 
     public static void sendDataBankEntries(Player player, ResourceLocation[] ids) {

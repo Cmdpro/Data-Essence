@@ -1,26 +1,22 @@
 package com.cmdpro.datanessence.networking;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.computers.ComputerData;
-import com.cmdpro.datanessence.networking.packet.*;
-import com.cmdpro.datanessence.recipe.ShapedFabricationRecipe;
+import com.cmdpro.datanessence.networking.packet.c2s.PlayerChangeDriveData;
+import com.cmdpro.datanessence.networking.packet.c2s.PlayerFinishDataBankMinigame;
+import com.cmdpro.datanessence.networking.packet.c2s.PlayerSetItemHandlerLocked;
+import com.cmdpro.datanessence.networking.packet.s2c.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.LogicalSide;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-
-import java.util.concurrent.Callable;
-import java.util.function.Function;
 
 @EventBusSubscriber(modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ModMessages {
@@ -61,18 +57,18 @@ public class ModMessages {
                 .versioned("1.0");
 
         //S2C
-        registrar.playToClient(UnlockEntryS2CPacket.TYPE, getNetworkCodec(UnlockEntryS2CPacket::read, UnlockEntryS2CPacket::write), Handler::handle);
-        registrar.playToClient(UnlockedEntrySyncS2CPacket.TYPE, getNetworkCodec(UnlockedEntrySyncS2CPacket::read, UnlockedEntrySyncS2CPacket::write), Handler::handle);
-        registrar.playToClient(PlayerTierSyncS2CPacket.TYPE, getNetworkCodec(PlayerTierSyncS2CPacket::read, PlayerTierSyncS2CPacket::write), Handler::handle);
-        registrar.playToClient(PlayerDataSyncS2CPacket.TYPE, getNetworkCodec(PlayerDataSyncS2CPacket::read, PlayerDataSyncS2CPacket::write), Handler::handle);
-        registrar.playToClient(DataBankEntrySyncS2CPacket.TYPE, getNetworkCodec(DataBankEntrySyncS2CPacket::read, DataBankEntrySyncS2CPacket::write), Handler::handle);
-        registrar.playToClient(ComputerDataSyncS2CPacket.TYPE, getNetworkCodec(ComputerDataSyncS2CPacket::read, ComputerDataSyncS2CPacket::write), Handler::handle);
-        registrar.playToClient(EntrySyncS2CPacket.TYPE, getNetworkCodec(EntrySyncS2CPacket::read, EntrySyncS2CPacket::write), Handler::handle);
-        registrar.playToClient(DragonPartsSyncS2CPacket.TYPE, getNetworkCodec(DragonPartsSyncS2CPacket::read, DragonPartsSyncS2CPacket::write), Handler::handle);
+        registrar.playToClient(UnlockEntry.TYPE, getNetworkCodec(UnlockEntry::read, UnlockEntry::write), Handler::handle);
+        registrar.playToClient(UnlockedEntrySync.TYPE, getNetworkCodec(UnlockedEntrySync::read, UnlockedEntrySync::write), Handler::handle);
+        registrar.playToClient(PlayerTierSync.TYPE, getNetworkCodec(PlayerTierSync::read, PlayerTierSync::write), Handler::handle);
+        registrar.playToClient(PlayerDataSync.TYPE, getNetworkCodec(PlayerDataSync::read, PlayerDataSync::write), Handler::handle);
+        registrar.playToClient(DataBankEntrySync.TYPE, getNetworkCodec(DataBankEntrySync::read, DataBankEntrySync::write), Handler::handle);
+        registrar.playToClient(ComputerDataSync.TYPE, getNetworkCodec(ComputerDataSync::read, ComputerDataSync::write), Handler::handle);
+        registrar.playToClient(EntrySync.TYPE, getNetworkCodec(EntrySync::read, EntrySync::write), Handler::handle);
+        registrar.playToClient(DragonPartsSync.TYPE, getNetworkCodec(DragonPartsSync::read, DragonPartsSync::write), Handler::handle);
         //C2S
-        registrar.playToServer(PlayerFinishDataBankMinigameC2SPacket.TYPE, getNetworkCodec(PlayerFinishDataBankMinigameC2SPacket::read, PlayerFinishDataBankMinigameC2SPacket::write), Handler::handle);
-        registrar.playToServer(PlayerChangeDriveDataC2SPacket.TYPE, getNetworkCodec(PlayerChangeDriveDataC2SPacket::read, PlayerChangeDriveDataC2SPacket::write), Handler::handle);
-        registrar.playToServer(PlayerSetItemHandlerLockedC2SPacket.TYPE, getNetworkCodec(PlayerSetItemHandlerLockedC2SPacket::read, PlayerSetItemHandlerLockedC2SPacket::write), Handler::handle);
+        registrar.playToServer(PlayerFinishDataBankMinigame.TYPE, getNetworkCodec(PlayerFinishDataBankMinigame::read, PlayerFinishDataBankMinigame::write), Handler::handle);
+        registrar.playToServer(PlayerChangeDriveData.TYPE, getNetworkCodec(PlayerChangeDriveData::read, PlayerChangeDriveData::write), Handler::handle);
+        registrar.playToServer(PlayerSetItemHandlerLocked.TYPE, getNetworkCodec(PlayerSetItemHandlerLocked::read, PlayerSetItemHandlerLocked::write), Handler::handle);
     }
 
     public static <T extends Message> StreamCodec<RegistryFriendlyByteBuf, T> getNetworkCodec(Handler.Reader<T> reader, Handler.Writer<T> writer) {

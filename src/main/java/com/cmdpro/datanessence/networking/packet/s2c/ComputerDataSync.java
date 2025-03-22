@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.networking.packet;
+package com.cmdpro.datanessence.networking.packet.s2c;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.computers.ClientComputerData;
@@ -13,10 +13,10 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-public record ComputerDataSyncS2CPacket(ComputerData data) implements Message {
-    public static ComputerDataSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
+public record ComputerDataSync(ComputerData data) implements Message {
+    public static ComputerDataSync read(RegistryFriendlyByteBuf buf) {
         ComputerData data = ComputerTypeSerializer.STREAM_CODEC.decode(buf);
-        return new ComputerDataSyncS2CPacket(data);
+        return new ComputerDataSync(data);
     }
 
     @Override
@@ -25,14 +25,14 @@ public record ComputerDataSyncS2CPacket(ComputerData data) implements Message {
         ClientHandler.openScreen();
     }
 
-    public static void write(RegistryFriendlyByteBuf buf, ComputerDataSyncS2CPacket obj) {
+    public static void write(RegistryFriendlyByteBuf buf, ComputerDataSync obj) {
         ComputerTypeSerializer.STREAM_CODEC.encode(buf, obj.data);
     }
     @Override
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<ComputerDataSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "computer_data_sync"));
+    public static final Type<ComputerDataSync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "computer_data_sync"));
     private static class ClientHandler {
         public static void openScreen() {
             Minecraft.getInstance().setScreen(new ComputerScreen(Component.empty()));

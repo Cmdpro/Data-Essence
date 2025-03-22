@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.networking.packet;
+package com.cmdpro.datanessence.networking.packet.s2c;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
@@ -12,7 +12,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-public record UnlockEntryS2CPacket(ResourceLocation unlocked, boolean incomplete) implements Message {
+public record UnlockEntry(ResourceLocation unlocked, boolean incomplete) implements Message {
     @Override
     public void handleClient(Minecraft minecraft, Player player) {
         Entry entry = Entries.entries.get(unlocked);
@@ -34,7 +34,7 @@ public record UnlockEntryS2CPacket(ResourceLocation unlocked, boolean incomplete
         }
     }
 
-    public static void write(RegistryFriendlyByteBuf pBuffer, UnlockEntryS2CPacket obj) {
+    public static void write(RegistryFriendlyByteBuf pBuffer, UnlockEntry obj) {
         pBuffer.writeResourceLocation(obj.unlocked);
         pBuffer.writeBoolean(obj.incomplete);
     }
@@ -42,12 +42,12 @@ public record UnlockEntryS2CPacket(ResourceLocation unlocked, boolean incomplete
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<UnlockEntryS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "unlock_entry"));
+    public static final Type<UnlockEntry> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "unlock_entry"));
 
-    public static UnlockEntryS2CPacket read(RegistryFriendlyByteBuf buf) {
+    public static UnlockEntry read(RegistryFriendlyByteBuf buf) {
         ResourceLocation unlocked = buf.readResourceLocation();
         boolean incomplete = buf.readBoolean();
-        return new UnlockEntryS2CPacket(unlocked, incomplete);
+        return new UnlockEntry(unlocked, incomplete);
     }
 
 }

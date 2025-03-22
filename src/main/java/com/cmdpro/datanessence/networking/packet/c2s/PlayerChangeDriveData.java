@@ -1,11 +1,10 @@
-package com.cmdpro.datanessence.networking.packet;
+package com.cmdpro.datanessence.networking.packet.c2s;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
@@ -16,7 +15,7 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public record PlayerChangeDriveDataC2SPacket(ResourceLocation entry, boolean incomplete, boolean offhand) implements Message {
+public record PlayerChangeDriveData(ResourceLocation entry, boolean incomplete, boolean offhand) implements Message {
 
     @Override
     public void handleServer(MinecraftServer server, ServerPlayer player) {
@@ -31,13 +30,13 @@ public record PlayerChangeDriveDataC2SPacket(ResourceLocation entry, boolean inc
         }
     }
 
-    public static PlayerChangeDriveDataC2SPacket read(RegistryFriendlyByteBuf buf) {
+    public static PlayerChangeDriveData read(RegistryFriendlyByteBuf buf) {
         ResourceLocation entry = buf.readResourceLocation();
         boolean incomplete = buf.readBoolean();
         boolean offhand = buf.readBoolean();
-        return new PlayerChangeDriveDataC2SPacket(entry, incomplete, offhand);
+        return new PlayerChangeDriveData(entry, incomplete, offhand);
     }
-    public static void write(RegistryFriendlyByteBuf buf, PlayerChangeDriveDataC2SPacket obj) {
+    public static void write(RegistryFriendlyByteBuf buf, PlayerChangeDriveData obj) {
         buf.writeResourceLocation(obj.entry);
         buf.writeBoolean(obj.incomplete);
         buf.writeBoolean(obj.offhand);
@@ -47,5 +46,5 @@ public record PlayerChangeDriveDataC2SPacket(ResourceLocation entry, boolean inc
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerChangeDriveDataC2SPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_change_data_drive_data"));
+    public static final Type<PlayerChangeDriveData> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_change_data_drive_data"));
 }

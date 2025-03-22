@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.networking.packet;
+package com.cmdpro.datanessence.networking.packet.s2c;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
@@ -13,15 +13,15 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
 
-public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked, List<ResourceLocation> incomplete) implements Message {
+public record UnlockedEntrySync(List<ResourceLocation> unlocked, List<ResourceLocation> incomplete) implements Message {
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<UnlockedEntrySyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "unlocked_entry_sync"));
+    public static final Type<UnlockedEntrySync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "unlocked_entry_sync"));
 
-    public static void write(RegistryFriendlyByteBuf buf, UnlockedEntrySyncS2CPacket obj) {
+    public static void write(RegistryFriendlyByteBuf buf, UnlockedEntrySync obj) {
         buf.writeCollection(obj.unlocked, FriendlyByteBuf::writeResourceLocation);
         buf.writeCollection(obj.incomplete, FriendlyByteBuf::writeResourceLocation);
     }
@@ -32,9 +32,9 @@ public record UnlockedEntrySyncS2CPacket(List<ResourceLocation> unlocked, List<R
         ClientRenderingUtil.updateWorld();
     }
 
-    public static UnlockedEntrySyncS2CPacket read(RegistryFriendlyByteBuf buf) {
+    public static UnlockedEntrySync read(RegistryFriendlyByteBuf buf) {
         List<ResourceLocation> unlocked = buf.readList(ResourceLocation.STREAM_CODEC);
         List<ResourceLocation> incomplete = buf.readList(ResourceLocation.STREAM_CODEC);
-        return new UnlockedEntrySyncS2CPacket(unlocked, incomplete);
+        return new UnlockedEntrySync(unlocked, incomplete);
     }
 }

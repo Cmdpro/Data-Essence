@@ -4,10 +4,10 @@ import com.cmdpro.databank.DatabankUtils;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.PlayerDataSyncS2CPacket;
-import com.cmdpro.datanessence.networking.packet.PlayerTierSyncS2CPacket;
-import com.cmdpro.datanessence.networking.packet.UnlockEntryS2CPacket;
-import com.cmdpro.datanessence.networking.packet.UnlockedEntrySyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.s2c.PlayerDataSync;
+import com.cmdpro.datanessence.networking.packet.s2c.PlayerTierSync;
+import com.cmdpro.datanessence.networking.packet.s2c.UnlockEntry;
+import com.cmdpro.datanessence.networking.packet.s2c.UnlockedEntrySync;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -31,21 +31,21 @@ public class PlayerDataUtil {
                 linkColor = linkFrom2.linkColor();
             }
         }
-        ModMessages.sendToPlayer(new PlayerDataSyncS2CPacket(PlayerDataUtil.getUnlockedEssences(player), linkFrom, linkColor), (player));
+        ModMessages.sendToPlayer(new PlayerDataSync(PlayerDataUtil.getUnlockedEssences(player), linkFrom, linkColor), (player));
     }
 
     public static void updateUnlockedEntries(ServerPlayer player) {
-        ModMessages.sendToPlayer(new UnlockedEntrySyncS2CPacket(player.getData(AttachmentTypeRegistry.UNLOCKED), player.getData(AttachmentTypeRegistry.INCOMPLETE)), (player));
+        ModMessages.sendToPlayer(new UnlockedEntrySync(player.getData(AttachmentTypeRegistry.UNLOCKED), player.getData(AttachmentTypeRegistry.INCOMPLETE)), (player));
         DatabankUtils.updateHiddenBlocks(player);
     }
 
     public static void unlockEntry(ServerPlayer player, ResourceLocation entry, boolean incomplete) {
-        ModMessages.sendToPlayer(new UnlockEntryS2CPacket(entry, incomplete), (player));
+        ModMessages.sendToPlayer(new UnlockEntry(entry, incomplete), (player));
         DatabankUtils.updateHiddenBlocks(player);
     }
 
     public static void sendTier(ServerPlayer player, boolean showIndicator) {
-        ModMessages.sendToPlayer(new PlayerTierSyncS2CPacket(player.getData(AttachmentTypeRegistry.TIER), showIndicator), player);
+        ModMessages.sendToPlayer(new PlayerTierSync(player.getData(AttachmentTypeRegistry.TIER), showIndicator), player);
     }
 
     public static Map<ResourceLocation, Boolean> getUnlockedEssences(ServerPlayer player) {

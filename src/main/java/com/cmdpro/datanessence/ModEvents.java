@@ -9,8 +9,8 @@ import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.DragonPartsSyncS2CPacket;
-import com.cmdpro.datanessence.networking.packet.EntrySyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
+import com.cmdpro.datanessence.networking.packet.s2c.EntrySync;
 import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.client.particle.RhombusParticleOptions;
 import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
@@ -193,7 +193,7 @@ public class ModEvents {
         Player player = evt.getEntity();
 
         if (player instanceof ServerPlayer serverPlayer && target instanceof Player targetPlayer) {
-            ModMessages.sendToPlayer(new DragonPartsSyncS2CPacket(target.getId(), targetPlayer.getData(AttachmentTypeRegistry.HAS_HORNS), targetPlayer.getData(AttachmentTypeRegistry.HAS_TAIL), targetPlayer.getData(AttachmentTypeRegistry.HAS_WINGS)), serverPlayer);
+            ModMessages.sendToPlayer(new DragonPartsSync(target.getId(), targetPlayer.getData(AttachmentTypeRegistry.HAS_HORNS), targetPlayer.getData(AttachmentTypeRegistry.HAS_TAIL), targetPlayer.getData(AttachmentTypeRegistry.HAS_WINGS)), serverPlayer);
         }
     }
     @SubscribeEvent
@@ -234,21 +234,21 @@ public class ModEvents {
         if (event.getPlayer() == null) {
             for (ServerPlayer player : event.getPlayerList().getPlayers()) {
                 syncToPlayer(player);
-                ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), player);
+                ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSync(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), player);
             }
         } else {
             syncToPlayer(event.getPlayer());
-            ModMessages.sendToPlayer(new DragonPartsSyncS2CPacket(event.getPlayer().getId(), event.getPlayer().getData(AttachmentTypeRegistry.HAS_HORNS), event.getPlayer().getData(AttachmentTypeRegistry.HAS_TAIL), event.getPlayer().getData(AttachmentTypeRegistry.HAS_WINGS)), event.getPlayer());
+            ModMessages.sendToPlayer(new DragonPartsSync(event.getPlayer().getId(), event.getPlayer().getData(AttachmentTypeRegistry.HAS_HORNS), event.getPlayer().getData(AttachmentTypeRegistry.HAS_TAIL), event.getPlayer().getData(AttachmentTypeRegistry.HAS_WINGS)), event.getPlayer());
         }
     }
     protected static void syncToPlayer(ServerPlayer player) {
-        ModMessages.sendToPlayer(new EntrySyncS2CPacket(Entries.entries, Entries.tabs), player);
+        ModMessages.sendToPlayer(new EntrySync(Entries.entries, Entries.tabs), player);
     }
     @SubscribeEvent
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {
         if(!event.getLevel().isClientSide()) {
             if(event.getEntity() instanceof ServerPlayer player) {
-                ModMessages.sendToPlayer(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), player);
+                ModMessages.sendToPlayer(new DragonPartsSync(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), player);
                 PlayerDataUtil.updateData(player);
                 PlayerDataUtil.updateUnlockedEntries(player);
                 PlayerDataUtil.sendTier(player, false);

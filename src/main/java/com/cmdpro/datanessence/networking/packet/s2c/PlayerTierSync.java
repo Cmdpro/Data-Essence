@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.networking.packet;
+package com.cmdpro.datanessence.networking.packet.s2c;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
@@ -11,23 +11,23 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-public record PlayerTierSyncS2CPacket(int tier, boolean showIndicator) implements Message {
+public record PlayerTierSync(int tier, boolean showIndicator) implements Message {
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerTierSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_tier_sync"));
+    public static final Type<PlayerTierSync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_tier_sync"));
 
-    public static void write(RegistryFriendlyByteBuf pBuffer, PlayerTierSyncS2CPacket obj) {
+    public static void write(RegistryFriendlyByteBuf pBuffer, PlayerTierSync obj) {
         pBuffer.writeInt(obj.tier);
         pBuffer.writeBoolean(obj.showIndicator);
     }
 
-    public static PlayerTierSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
+    public static PlayerTierSync read(RegistryFriendlyByteBuf buf) {
         int tier = buf.readInt();
         boolean showIndicator = buf.readBoolean();
-        return new PlayerTierSyncS2CPacket(tier, showIndicator);
+        return new PlayerTierSync(tier, showIndicator);
     }
 
     @Override

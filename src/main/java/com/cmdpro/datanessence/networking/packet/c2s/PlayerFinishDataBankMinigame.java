@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.networking.packet;
+package com.cmdpro.datanessence.networking.packet.c2s;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
@@ -14,11 +14,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
-public record PlayerFinishDataBankMinigameC2SPacket(ResourceLocation entry) implements Message {
+public record PlayerFinishDataBankMinigame(ResourceLocation entry) implements Message {
 
-    public static PlayerFinishDataBankMinigameC2SPacket read(RegistryFriendlyByteBuf buf) {
+    public static PlayerFinishDataBankMinigame read(RegistryFriendlyByteBuf buf) {
         ResourceLocation entry = buf.readResourceLocation();
-        return new PlayerFinishDataBankMinigameC2SPacket(entry);
+        return new PlayerFinishDataBankMinigame(entry);
     }
 
     @Override
@@ -32,7 +32,7 @@ public record PlayerFinishDataBankMinigameC2SPacket(ResourceLocation entry) impl
         }
     }
 
-    public static void write(RegistryFriendlyByteBuf buf, PlayerFinishDataBankMinigameC2SPacket obj) {
+    public static void write(RegistryFriendlyByteBuf buf, PlayerFinishDataBankMinigame obj) {
         buf.writeResourceLocation(obj.entry);
     }
 
@@ -40,5 +40,5 @@ public record PlayerFinishDataBankMinigameC2SPacket(ResourceLocation entry) impl
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerFinishDataBankMinigameC2SPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_finish_data_bank_minigame"));
+    public static final Type<PlayerFinishDataBankMinigame> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_finish_data_bank_minigame"));
 }

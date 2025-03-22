@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.networking.packet;
+package com.cmdpro.datanessence.networking.packet.s2c;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
@@ -12,19 +12,17 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 
-public record PlayerDataSyncS2CPacket(Map<ResourceLocation, Boolean> unlockedEssences, BlockPos linkPos, Color linkColor) implements Message {
+public record PlayerDataSync(Map<ResourceLocation, Boolean> unlockedEssences, BlockPos linkPos, Color linkColor) implements Message {
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerDataSyncS2CPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_data_sync"));
+    public static final Type<PlayerDataSync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_data_sync"));
 
-    public static void write(RegistryFriendlyByteBuf buf, PlayerDataSyncS2CPacket obj) {
+    public static void write(RegistryFriendlyByteBuf buf, PlayerDataSync obj) {
         buf.writeMap(obj.unlockedEssences, FriendlyByteBuf::writeResourceLocation, FriendlyByteBuf::writeBoolean);
         buf.writeBoolean(obj.linkPos != null);
         if (obj.linkPos != null) {
@@ -35,7 +33,7 @@ public record PlayerDataSyncS2CPacket(Map<ResourceLocation, Boolean> unlockedEss
         buf.writeInt(obj.linkColor.getBlue());
         buf.writeInt(obj.linkColor.getAlpha());
     }
-    public static PlayerDataSyncS2CPacket read(RegistryFriendlyByteBuf buf) {
+    public static PlayerDataSync read(RegistryFriendlyByteBuf buf) {
         Map<ResourceLocation, Boolean> unlockedEssences = buf.readMap(FriendlyByteBuf::readResourceLocation, FriendlyByteBuf::readBoolean);
         boolean hasLinkPos = buf.readBoolean();
         BlockPos linkPos = null;
@@ -47,7 +45,7 @@ public record PlayerDataSyncS2CPacket(Map<ResourceLocation, Boolean> unlockedEss
         int b = buf.readInt();
         int a = buf.readInt();
         Color linkColor = new Color(r, g, b, a);
-        return new PlayerDataSyncS2CPacket(unlockedEssences, linkPos, linkColor);
+        return new PlayerDataSync(unlockedEssences, linkPos, linkColor);
     }
 
     @Override

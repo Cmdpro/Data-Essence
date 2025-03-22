@@ -4,7 +4,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.DragonPartsSyncS2CPacket;
+import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.datatablet.Entries;
 import com.cmdpro.datanessence.datatablet.Entry;
@@ -25,7 +25,6 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class DataNEssenceCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher){
@@ -110,7 +109,7 @@ public class DataNEssenceCommands {
                 player.setData(AttachmentTypeRegistry.HAS_TAIL, true);
                 player.setData(AttachmentTypeRegistry.HAS_WINGS, true);
             }
-            ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), (ServerPlayer)player);
+            ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSync(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), (ServerPlayer)player);
             command.getSource().sendSuccess(() -> {
                 return part.equals("all") ? Component.translatable("commands.datanessence.give_all_dragon_parts", player.getName()) : Component.translatable("commands.datanessence.give_dragon_part", part, player.getName());
             }, true);
@@ -211,7 +210,7 @@ public class DataNEssenceCommands {
             player.setData(AttachmentTypeRegistry.HAS_HORNS, true);
             player.setData(AttachmentTypeRegistry.HAS_TAIL, true);
             player.setData(AttachmentTypeRegistry.HAS_WINGS, true);
-            ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSyncS2CPacket(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), (ServerPlayer)player);
+            ModMessages.sendToPlayersTrackingEntityAndSelf(new DragonPartsSync(player.getId(), player.getData(AttachmentTypeRegistry.HAS_HORNS), player.getData(AttachmentTypeRegistry.HAS_TAIL), player.getData(AttachmentTypeRegistry.HAS_WINGS)), (ServerPlayer)player);
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.give_all_dragon_parts", player.getName());
             }, true);

@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.networking.packet;
+package com.cmdpro.datanessence.networking.packet.c2s;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
@@ -11,12 +11,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
-public record PlayerSetItemHandlerLockedC2SPacket(BlockPos blockPos, boolean locked) implements Message {
+public record PlayerSetItemHandlerLocked(BlockPos blockPos, boolean locked) implements Message {
 
-    public static PlayerSetItemHandlerLockedC2SPacket read(RegistryFriendlyByteBuf buf) {
+    public static PlayerSetItemHandlerLocked read(RegistryFriendlyByteBuf buf) {
         BlockPos blockPos = buf.readBlockPos();
         boolean locked = buf.readBoolean();
-        return new PlayerSetItemHandlerLockedC2SPacket(blockPos, locked);
+        return new PlayerSetItemHandlerLocked(blockPos, locked);
     }
 
     @Override
@@ -32,7 +32,7 @@ public record PlayerSetItemHandlerLockedC2SPacket(BlockPos blockPos, boolean loc
         }
     }
 
-    public static void write(RegistryFriendlyByteBuf buf, PlayerSetItemHandlerLockedC2SPacket obj) {
+    public static void write(RegistryFriendlyByteBuf buf, PlayerSetItemHandlerLocked obj) {
         buf.writeBlockPos(obj.blockPos);
         buf.writeBoolean(obj.locked);
     }
@@ -41,5 +41,5 @@ public record PlayerSetItemHandlerLockedC2SPacket(BlockPos blockPos, boolean loc
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerSetItemHandlerLockedC2SPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_set_item_handler_locked"));
+    public static final Type<PlayerSetItemHandlerLocked> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_set_item_handler_locked"));
 }

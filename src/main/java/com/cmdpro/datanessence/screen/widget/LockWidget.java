@@ -3,7 +3,7 @@ package com.cmdpro.datanessence.screen.widget;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.PlayerSetItemHandlerLockedC2SPacket;
+import com.cmdpro.datanessence.networking.packet.c2s.PlayerSetItemHandlerLocked;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
@@ -42,7 +42,7 @@ public class LockWidget extends AbstractWidget {
 
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
-        ModMessages.sendToServer(new PlayerSetItemHandlerLockedC2SPacket(entity.getBlockPos(), !handler.locked));
+        ModMessages.sendToServer(new PlayerSetItemHandlerLocked(entity.getBlockPos(), !handler.locked));
     }
 
     @Override

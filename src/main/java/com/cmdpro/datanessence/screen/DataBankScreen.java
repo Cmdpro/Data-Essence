@@ -3,17 +3,15 @@ package com.cmdpro.datanessence.screen;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.databank.Minigame;
 import com.cmdpro.datanessence.api.databank.MinigameCreator;
-import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.databank.DataBankEntries;
 import com.cmdpro.datanessence.databank.DataBankEntry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.PlayerFinishDataBankMinigameC2SPacket;
+import com.cmdpro.datanessence.networking.packet.c2s.PlayerFinishDataBankMinigame;
 import com.cmdpro.datanessence.datatablet.Entries;
 import com.cmdpro.datanessence.datatablet.Entry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
-import com.eliotlash.mclib.math.functions.limit.Min;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -22,7 +20,6 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 
 import java.awt.*;
 import java.util.*;
@@ -193,7 +190,7 @@ public class DataBankScreen extends Screen {
                         ClientPlayerUnlockedEntries.getUnlocked().add(clickedEntry.entry);
                     }
                 }
-                ModMessages.sendToServer(new PlayerFinishDataBankMinigameC2SPacket(clickedEntry.id));
+                ModMessages.sendToServer(new PlayerFinishDataBankMinigame(clickedEntry.id));
                 screenType = 0;
             } else {
                 minigames[minigameProgress].tick();
