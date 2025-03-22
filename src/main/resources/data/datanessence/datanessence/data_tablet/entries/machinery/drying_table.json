@@ -1,0 +1,34 @@
+{
+  "icon": {
+    "id": "datanessence:drying_table"
+  },
+  "tab": "datanessence:machinery",
+  "x": 5,
+  "y": -4,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:drying_table"
+      },
+      "text": {
+        "translate": "data_tablet.pages.drying_table.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/machines/drying_table"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.drying_table.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.drying_table.flavor"
+  },
+  "parents": [
+    "datanessence:machinery/fluidworks"
+  ]
+}

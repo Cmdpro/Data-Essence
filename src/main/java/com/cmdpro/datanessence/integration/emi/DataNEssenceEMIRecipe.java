@@ -42,8 +42,7 @@ public abstract class DataNEssenceEMIRecipe implements EmiRecipe {
 
     public boolean hasData(ResourceLocation dataEntry) {
         Minecraft client = Minecraft.getInstance();
-        // return DataTabletUtil.playerHasEntry(client.player, dataEntry, true); // that was not synced to the client...
-        return ClientPlayerUnlockedEntries.getUnlocked().contains(dataEntry) || ClientPlayerUnlockedEntries.getIncomplete().contains(dataEntry);
+        return ClientPlayerUnlockedEntries.getUnlocked().contains(dataEntry);
     }
 
     public abstract void addUnlockedWidgets(WidgetHolder widgets);

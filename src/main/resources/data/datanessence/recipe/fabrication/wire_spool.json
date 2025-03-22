@@ -1,7 +1,7 @@
 {
   "type": "datanessence:shaped_fabrication_recipe",
   "essenceCost": {},
-  "entry": "datanessence:basics/crafting_components",
+  "entry": "datanessence:basics/components",
   "pattern": [
     " C ",
     " R ",
