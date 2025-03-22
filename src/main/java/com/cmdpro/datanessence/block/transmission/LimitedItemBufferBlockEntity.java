@@ -22,7 +22,7 @@ public class LimitedItemBufferBlockEntity extends ItemBufferBlockEntity {
     }
 
     @Override
-    public void transfer(IItemHandler handler) {
+    public boolean transfer(IItemHandler handler) {
         IItemHandler resolved = getItemHandler();
         boolean movedAnything = false;
         for (int o = 0; o < resolved.getSlots(); o++) {
@@ -61,5 +61,6 @@ public class LimitedItemBufferBlockEntity extends ItemBufferBlockEntity {
                 }
             }
         }
+        return movedAnything;
     }
 }

@@ -163,6 +163,7 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1 && pBlockEntity.waterFluidHandler.getFluidAmount() >= 250) {
                 Optional<RecipeHolder<MineralPurificationRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.MINERAL_PURIFICATION_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);

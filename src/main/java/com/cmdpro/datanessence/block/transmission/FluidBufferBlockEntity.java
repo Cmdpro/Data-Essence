@@ -26,16 +26,20 @@ public class FluidBufferBlockEntity extends BlockEntity {
     public FluidBufferBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
-    public void transfer(IFluidHandler handler) {
+    public boolean transfer(IFluidHandler handler) {
+        boolean transferredSomething = false;
         IFluidHandler resolved = getFluidHandler();
         for (int o = 0; o < resolved.getTanks(); o++) {
             FluidStack copy = resolved.getFluidInTank(o).copy();
             if (!copy.isEmpty()) {
                 copy.setAmount(Math.clamp(0, 4000, copy.getAmount()));
                 int filled = handler.fill(copy, IFluidHandler.FluidAction.EXECUTE);
+                if (filled > 0)
+                    transferredSomething = true;
                 resolved.getFluidInTank(o).shrink(filled);
             }
         }
+        return transferredSomething;
     }
     public IFluidHandler getFluidHandler() {
         return lazyFluidHandler.get();

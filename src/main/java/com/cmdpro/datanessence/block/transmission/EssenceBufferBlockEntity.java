@@ -40,23 +40,4 @@ public class EssenceBufferBlockEntity extends BlockEntity implements EssenceBloc
         super.loadAdditional(nbt, pRegistries);
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
     }
-
-    public void doTransferParticles(BlockPos pos, Level world) {
-        RandomSource random = world.getRandom();
-        Color color = new Color(162, 29, 220);
-        double d0 = 0.5625;
-
-        for (Direction direction : Direction.values()) {
-            BlockPos blockpos = pos.relative(direction);
-            if (!world.getBlockState(blockpos).isSolidRender(world, blockpos)) {
-                Direction.Axis direction$axis = direction.getAxis();
-                double d1 = direction$axis == Direction.Axis.X ? 0.5 + d0 * (double)direction.getStepX() : (double)random.nextFloat();
-                double d2 = direction$axis == Direction.Axis.Y ? 0.5 + d0 * (double)direction.getStepY() : (double)random.nextFloat();
-                double d3 = direction$axis == Direction.Axis.Z ? 0.5 + d0 * (double)direction.getStepZ() : (double)random.nextFloat();
-                world.addParticle(
-                        new MoteParticleOptions(color, true, 20), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, 0.0, 0.1, 0.0
-                );
-            }
-        }
-    }
 }

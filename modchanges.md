@@ -13,3 +13,4 @@
 - Coal Lumps had no burn time in furnaces/etc; now they burn for 200 ticks
 - Some Machines refused to work if their stored Essence went under the amount required for the recipe
 - Amethyst Shard > Essence Shard recipe was erroneously hidden in the tablet
+- Mineral Purification Chamber didn't receive water from a buffer

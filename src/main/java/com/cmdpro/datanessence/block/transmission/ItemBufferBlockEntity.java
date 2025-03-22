@@ -50,7 +50,7 @@ public class ItemBufferBlockEntity extends BlockEntity {
     public ItemBufferBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {
         super(pType, pPos, pBlockState);
     }
-    public void transfer(IItemHandler handler) {
+    public boolean transfer(IItemHandler handler) {
         IItemHandler resolved = getItemHandler();
         boolean movedAnything = false;
         for (int o = 0; o < resolved.getSlots(); o++) {
@@ -83,6 +83,7 @@ public class ItemBufferBlockEntity extends BlockEntity {
                 }
             }
         }
+        return movedAnything;
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
