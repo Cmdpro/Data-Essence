@@ -284,13 +284,10 @@ public class DataBankScreen extends Screen {
             List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
             entries.sort(Comparator.comparingInt((a) -> a.tier));
 
-            List<DataBankEntry> unfinishedEntries = new ArrayList<>(); // to track whether no entries are displayed on the gui - will be empty if that is so
-
             for (DataBankEntry i : entries) {
                 if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
                     if (entry == null || !isUnlocked(entry)) {
-                        unfinishedEntries.add(i);
                         continue;
                     }
                     if (i.tier != currentTier) {
@@ -307,8 +304,17 @@ public class DataBankScreen extends Screen {
                     }
                 }
             }
+            boolean anyUnfinished = false;
+            for (DataBankEntry i : entries) {
+                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry)) {
+                    Entry entry = Entries.entries.get(i.entry);
+                    if (entry == null || isUnlocked(entry)) {
+                        anyUnfinished = true;
+                    }
+                }
+            }
 
-            if (unfinishedEntries.isEmpty()) {
+            if (!anyUnfinished) {
                 graphics.blit(TEXTURE, (width / 2) - 23, (height / 2) - 33, 39, 166, 46, 46);
                 graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("data_tablet.databank_no_entries_left"), width / 2, height / 2, new Color(255, 150, 181).getRGB());
             }
