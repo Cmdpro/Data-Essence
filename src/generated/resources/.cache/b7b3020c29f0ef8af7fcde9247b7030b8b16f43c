@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-11T13:51:18.61066465	Item Models: datanessence
+// 1.21.1	2025-03-21T21:21:14.698410578	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -37,6 +37,7 @@ d747ed713b2de5e004d4e19bfe914756bf68d6a3 assets/datanessence/models/item/filter_
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/fluid_point.json
 f356571ca7c924ca20dabcdac766bc379c05608e assets/datanessence/models/item/fluid_wire.json
 e7ed11614b8a776b431eb08293c8e6cb0aeaf7d4 assets/datanessence/models/item/genderfluid_bucket.json
+f5f3309e5c10ed2cbcc9f72edfa1da8ca74ab5d4 assets/datanessence/models/item/hammer_and_chisel.json
 65a017c6b809f40655cecc7e07b81aeee8ce8a80 assets/datanessence/models/item/harming_lens.json
 38024141123ce88a752e39c367a3ea1233632ca8 assets/datanessence/models/item/healing_lens.json
 1b55d3de0db75e26ae39c281bed690c07d3c11a4 assets/datanessence/models/item/illumination_rod.json

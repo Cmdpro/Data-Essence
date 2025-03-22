@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "DP",
+    "R "
+  ],
+  "key": {
+    "D": { "item": "minecraft:diamond" },
+    "P": { "item": "minecraft:diamond_pickaxe" },
+    "R": { "tag": "c:rods/wooden" }
+  },
+  "result": { "id": "datanessence:hammer_and_chisel", "count": 1 }
+}

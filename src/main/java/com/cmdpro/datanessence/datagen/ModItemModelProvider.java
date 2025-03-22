@@ -51,6 +51,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.THERMOMETER);
         simpleItem(ItemRegistry.MOLD_ROD);
         simpleItem(ItemRegistry.MOLD_PANEL);
+        simpleItem(ItemRegistry.HAMMER_AND_CHISEL);
 
         simpleItemWithSubdirectory(ItemRegistry.ESSENCE_WIRE, "wires");
         simpleItemWithSubdirectory(ItemRegistry.LUNAR_ESSENCE_WIRE, "wires");

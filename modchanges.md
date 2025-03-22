@@ -1,5 +1,6 @@
 ### Additions
 - New Drying Table machine - fluid and an optional additive undergo an accelerated drying process thanks to Essence, yielding a resultant item (such as water + sand = clay)
+- New Hammer and Chisel tool for expedited gathering of any block tagged #datanessence:hammer_and_chisel_collectable, such as obsidian and similar blocks; available from the start
 - Added EMI Handler for Melting recipes
 - Added new Melting recipes for Mud, Magma, Netherrack, and Stone
 

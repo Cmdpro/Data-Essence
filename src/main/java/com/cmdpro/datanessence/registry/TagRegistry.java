@@ -13,6 +13,8 @@ import net.minecraft.world.level.block.Block;
 public class TagRegistry {
     public static class Blocks {
         public static final TagKey<Block> BUFFER_DETECTION_PASS = tag("buffer_detection_pass");
+        public static final TagKey<Block> HAMMER_AND_CHISEL_COLLECTABLE = tag("hammer_and_chisel_collectable"); // for the Hammer and Chisel tool
+
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, name));
         }

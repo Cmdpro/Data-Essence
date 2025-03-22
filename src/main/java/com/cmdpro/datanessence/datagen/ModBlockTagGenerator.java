@@ -6,6 +6,8 @@ import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -88,7 +90,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get())
                 .add(BlockRegistry.METAL_SHAPER.get())
-                .add(BlockRegistry.DEWLAMP.get());
+                .add(BlockRegistry.DEWLAMP.get())
+                .add(BlockRegistry.DRYING_TABLE.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
@@ -101,5 +104,24 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.FLUID_BUFFER.get())
                 .add(BlockRegistry.ESSENCE_BUFFER.get())
                 .add(BlockRegistry.LIMITED_ITEM_BUFFER.get());
+        this.tag(TagRegistry.Blocks.HAMMER_AND_CHISEL_COLLECTABLE)
+                .add(Blocks.OBSIDIAN)
+                .add(Blocks.CRYING_OBSIDIAN)
+                .add(BlockRegistry.POLISHED_OBSIDIAN.get())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
+                .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get())
+                .add(BlockRegistry.AETHER_RUNE.get())
+                .add(BlockRegistry.ANCIENT_ROCK_COLUMN.get())
+                .add(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN.get())
+                .add(BlockRegistry.ANCIENT_LANTERN.get())
+                .add(BlockRegistry.ANCIENT_ROCK_BRICKS.get())
+                .add(BlockRegistry.ANCIENT_ROCK_TILES.get())
+                .add(BlockRegistry.ANCIENT_SHELF.get())
+                .add(BlockRegistry.ANCIENT_WINDOW.get())
+                .add(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK.get())
+                .add(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get())
+                .add(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
     }
 }

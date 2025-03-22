@@ -41,6 +41,7 @@
   "item.datanessence.filter_upgrade": "Unique Upgrade Sigil: Filter",
   "item.datanessence.fluid_wire": "Fluid Wire",
   "item.datanessence.genderfluid_bucket": "Bucketed Gender",
+  "item.datanessence.hammer_and_chisel": "Hammer and Chisel",
   "item.datanessence.harming_lens": "Harming Lens",
   "item.datanessence.healing_lens": "Healing Lens",
   "item.datanessence.illumination_rod": "Illumination Rod",
@@ -516,6 +517,7 @@
 
   "emi.info.datanessence.ancient_items_are_loot_only": "This is an Ancient item. It cannot be crafted, and must instead be found.\nTry searching inside structures built from an otherworldly, purple rock.",
   "emi.info.datanessence.dimension_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found.",
+  "emi.info.datanessence.hammer_and_chisel": "The Hammer and Chisel is a tool that can gather certain blocks, such as Obsidian and its derivatives, far more expeditiously than most other pieces of equipment. Use it on a suitable block to cause it to drop instantly.",
   "emi.datanessence.recipe_locked_line_1": "Data insufficient for",
   "emi.datanessence.recipe_locked_line_2": "recipe reconstruction"
 }

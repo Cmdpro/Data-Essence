@@ -1,0 +1,7 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:datanessence:hammer_and_chisel"
+  ],
+  "text": "emi.info.datanessence.hammer_and_chisel"
+}
