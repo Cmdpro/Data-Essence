@@ -1,0 +1,22 @@
+{
+  "values": [
+    "minecraft:obsidian",
+    "minecraft:crying_obsidian",
+    "datanessence:polished_obsidian",
+    "datanessence:polished_obsidian_bricks",
+    "datanessence:polished_obsidian_column",
+    "datanessence:engraved_polished_obsidian",
+    "datanessence:polished_obsidian_tract",
+    "datanessence:aether_rune",
+    "datanessence:ancient_rock_column",
+    "datanessence:energized_ancient_rock_column",
+    "datanessence:ancient_lantern",
+    "datanessence:ancient_rock_bricks",
+    "datanessence:ancient_rock_tiles",
+    "datanessence:ancient_shelf",
+    "datanessence:ancient_window",
+    "datanessence:ancient_glyph_stone_blank",
+    "datanessence:ancient_glyph_stone_makutuin",
+    "datanessence:ancient_glyph_stone_essence"
+  ]
+}
