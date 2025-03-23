@@ -142,6 +142,14 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
             this.recipe = null;
     }
 
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipe();
+        }
+    }
+
     public static void tick(Level world, BlockPos pos, BlockState state, DryingTableBlockEntity dryingTable) {
         if (!world.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(dryingTable, EssenceTypeRegistry.ESSENCE.get());
