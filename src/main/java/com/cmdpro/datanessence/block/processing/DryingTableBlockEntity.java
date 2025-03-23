@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.recipe.DryingRecipe;
 import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
+import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.RecipeInputWithFluid;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -49,11 +50,18 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
     public int workTime;
     public DryingRecipe recipe;
 
-    private final FluidTank fluidHandler = new FluidTank(1000);
+    private final FluidTank fluidHandler = new FluidTank(1000) {
+        @Override
+        protected void onContentsChanged() {
+            setChanged();
+            checkRecipe();
+        }
+    };
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipe();
         }
     };
     private final ItemStackHandler outputItemHandler = new ItemStackHandler(1) {
@@ -126,44 +134,38 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
+    public void checkRecipe() {
+        Optional<RecipeHolder<DryingRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.DRYING_TYPE.get(), getCraftingInv(), level);
+        if (recipe.isPresent())
+            this.recipe = recipe.get().value();
+        if (recipe.isEmpty())
+            this.recipe = null;
+    }
+
     public static void tick(Level world, BlockPos pos, BlockState state, DryingTableBlockEntity dryingTable) {
         if (!world.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(dryingTable, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getFluidsFromBuffersBelow(dryingTable);
             BufferUtil.getItemsFromBuffersBelow(dryingTable);
 
-            boolean resetWorkTime = true;
+            if (dryingTable.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 0.5f && dryingTable.recipe != null) {
 
-            if (dryingTable.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 0.5f) {
-                Optional<RecipeHolder<DryingRecipe>> recipe = world.getRecipeManager().getRecipeFor(RecipeRegistry.DRYING_TYPE.get(), dryingTable.getCraftingInv(), world);
-                if (recipe.isPresent()) {
+                ItemStack assembled = dryingTable.recipe.assemble(dryingTable.getCraftingInv(), world.registryAccess());
+                if (dryingTable.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
+                    dryingTable.workTime++;
+                    dryingTable.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 0.5f);
 
-                    if (!recipe.get().value().equals(dryingTable.recipe))
+                    if (dryingTable.workTime >= dryingTable.recipe.getTime()) {
+                        dryingTable.outputItemHandler.insertItem(0, assembled, false);
+                        dryingTable.itemHandler.extractItem(0, 1, false);
+                        dryingTable.fluidHandler.drain(dryingTable.recipe.getInput(), IFluidHandler.FluidAction.EXECUTE);
                         dryingTable.workTime = 0;
-
-                    dryingTable.recipe = recipe.get().value();
-                    ItemStack assembled = recipe.get().value().assemble(dryingTable.getCraftingInv(), world.registryAccess());
-                    if (dryingTable.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
-                        resetWorkTime = false;
-                        dryingTable.workTime++;
-                        dryingTable.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 0.5f);
-
-                        if (dryingTable.workTime >= recipe.get().value().getTime()) {
-                            dryingTable.outputItemHandler.insertItem(0, assembled, false);
-                            dryingTable.itemHandler.extractItem(0, 1, false);
-                            dryingTable.fluidHandler.drain(recipe.get().value().getInput(), IFluidHandler.FluidAction.EXECUTE);
-                            dryingTable.workTime = 0;
-                        }
                     }
-                } else {
-                    dryingTable.recipe = null;
                 }
-            } else {
-                dryingTable.recipe = null;
             }
-            if (resetWorkTime) {
-                dryingTable.workTime = -1;
-            }
+        }
+        else {
+            dryingTable.workTime = -1;
         }
     }
 
