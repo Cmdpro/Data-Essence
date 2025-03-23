@@ -51,6 +51,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
 
         @Override
@@ -74,6 +75,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
@@ -185,17 +187,11 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
             }
         }
         ItemStack stack = recipe.assemble(getCraftingInv().asCraftInput(), level.registryAccess()).copy();
-        List<Ingredient> ingredients = recipe.getIngredients();
         if (!recipe.matches(getCraftingInv().asCraftInput(), level)) {
             return false;
         }
-        for (Ingredient i : ingredients) {
-            for (int o = 0; o < 9; o++) {
-                if (i.test(itemHandler.getStackInSlot(o))) {
-                    itemHandler.extractItem(o, 1, false);
-                    break;
-                }
-            }
+        for (int i = 0; i < 9; i++) {
+            itemHandler.extractItem(i, 1, false);
         }
         outputItemHandler.insertItem(0, stack, false);
         level.playSound(null, worldPosition, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
@@ -215,28 +211,43 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
             return true;
         }).findFirst();
     }
+    public void checkRecipes() {
+        Optional<RecipeHolder<IFabricationRecipe>> fabricationRecipe = getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), level, getCraftingInv().asCraftInput());
+        Recipe<CraftingInput> recipe = null;
+        if (fabricationRecipe.isEmpty()) {
+            Optional<RecipeHolder<CraftingRecipe>> vanillaRecipe = getRecipeFor(RecipeType.CRAFTING, level, getCraftingInv().asCraftInput());
+            if (vanillaRecipe.isPresent()) {
+                recipe = vanillaRecipe.get().value();
+            }
+        } else {
+            recipe = fabricationRecipe.get().value();
+        }
+        if (recipe != null) {
+            this.recipe = recipe;
+            if (recipe instanceof IFabricationRecipe recipe2) {
+                essenceCost = recipe2.getEssenceCost();
+            } else {
+                essenceCost = new HashMap<>();
+            }
+            item = recipe.getResultItem(level.registryAccess());
+        } else {
+            this.recipe = null;
+            essenceCost = null;
+            item = ItemStack.EMPTY;
+        }
+    }
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipes();
+        }
+    }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, AutoFabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
-            Optional<RecipeHolder<IFabricationRecipe>> fabricationRecipe = pBlockEntity.getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), pLevel, pBlockEntity.getCraftingInv().asCraftInput());
-            Recipe<CraftingInput> recipe = null;
-            if (fabricationRecipe.isEmpty()) {
-                Optional<RecipeHolder<CraftingRecipe>> vanillaRecipe = pBlockEntity.getRecipeFor(RecipeType.CRAFTING, pLevel, pBlockEntity.getCraftingInv().asCraftInput());
-                if (vanillaRecipe.isPresent()) {
-                    recipe = vanillaRecipe.get().value();
-                }
-            } else {
-                recipe = fabricationRecipe.get().value();
-            }
-            if (recipe != null && hasNotReachedStackLimit(pBlockEntity, recipe.getResultItem(pLevel.registryAccess()))) {
-                pBlockEntity.recipe = recipe;
-                if (recipe instanceof IFabricationRecipe recipe2) {
-                    pBlockEntity.essenceCost = recipe2.getEssenceCost();
-                } else {
-                    pBlockEntity.essenceCost = new HashMap<>();
-                }
-                pBlockEntity.item = recipe.getResultItem(pLevel.registryAccess());
+            if (pBlockEntity.recipe != null && hasNotReachedStackLimit(pBlockEntity, pBlockEntity.recipe.getResultItem(pLevel.registryAccess()))) {
                 boolean enoughEssence = true;
                 for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                     EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
@@ -245,7 +256,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                     }
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
-                if (recipe.matches(pBlockEntity.getCraftingInv().asCraftInput(), pBlockEntity.level)) {
+                if (pBlockEntity.recipe.matches(pBlockEntity.getCraftingInv().asCraftInput(), pBlockEntity.level)) {
                     pBlockEntity.craftingProgress++;
                     for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                         EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
@@ -255,9 +266,6 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                     pBlockEntity.craftingProgress = -1;
                 }
             } else {
-                pBlockEntity.recipe = null;
-                pBlockEntity.essenceCost = null;
-                pBlockEntity.item = ItemStack.EMPTY;
                 pBlockEntity.craftingProgress = -1;
             }
             if (pBlockEntity.craftingProgress >= 50) {

@@ -59,6 +59,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
 
         @Override
@@ -82,6 +83,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
@@ -122,6 +124,15 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         super(BlockEntityRegistry.METAL_SHAPER.get(), pos, state);
         item = ItemStack.EMPTY;
     }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipes();
+        }
+    }
+
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
@@ -192,6 +203,27 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         };
         return inventory;
     }
+    public void checkRecipes() {
+        List<RecipeHolder<MetalShaperRecipe>> recipes = level.getRecipeManager().getRecipesFor(RecipeRegistry.METAL_SHAPING_TYPE.get(), getCraftingInv(), level);
+        RecipeHolder<MetalShaperRecipe> recipe = null;
+        ResourceLocation moldRecipe = null;
+        if (!moldHandler.getStackInSlot(0).isEmpty()) {
+            moldRecipe = moldHandler.getStackInSlot(0).get(DataComponentRegistry.MOLD);
+        }
+        for (RecipeHolder<MetalShaperRecipe> i : recipes) {
+            if (i.id().equals(moldRecipe)) {
+                recipe = i;
+            }
+        }
+        if (recipe != null) {
+            if (!recipe.value().equals(this.recipe)) {
+                workTime = 0;
+            }
+            this.recipe = recipe.value();
+        } else {
+            this.recipe = null;
+        }
+    }
     public MetalShaperRecipe recipe;
     public int workTime;
     public int maxWorkTime;
@@ -200,27 +232,9 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            List<RecipeHolder<MetalShaperRecipe>> recipes = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.METAL_SHAPING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
-            RecipeHolder<MetalShaperRecipe> recipe = null;
-            ResourceLocation moldRecipe = null;
-            if (!pBlockEntity.moldHandler.getStackInSlot(0).isEmpty()) {
-                moldRecipe = pBlockEntity.moldHandler.getStackInSlot(0).get(DataComponentRegistry.MOLD);
-            }
-            for (RecipeHolder<MetalShaperRecipe> i : recipes) {
-                if (i.id().equals(moldRecipe)) {
-                    recipe = i;
-                }
-            }
-            if (recipe != null) {
-                if (!recipe.value().equals(pBlockEntity.recipe)) {
-                    pBlockEntity.workTime = 0;
-                }
+            if (pBlockEntity.recipe != null) {
                 if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) > 0) {
-                    if (!recipe.value().equals(pBlockEntity.recipe)) {
-                        pBlockEntity.workTime = 0;
-                    }
-                    pBlockEntity.recipe = recipe.value();
-                    ItemStack assembled = recipe.value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
+                    ItemStack assembled = pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
                         resetWorkTime = false;
                         // working vfx
@@ -228,20 +242,15 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
                             pLevel.playSound(null, pPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.4f, 0.75f);
                             ((ServerLevel) pLevel).sendParticles(ParticleTypes.SMOKE, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, 5, 0, 0, 0, 0);
                         }
-
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
-                        if (pBlockEntity.workTime >= recipe.value().getTime()) {
+                        if (pBlockEntity.workTime >= pBlockEntity.recipe.getTime()) {
                             pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
                         }
                     }
-                } else {
-                    pBlockEntity.recipe = null;
                 }
-            } else {
-                pBlockEntity.recipe = null;
             }
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;

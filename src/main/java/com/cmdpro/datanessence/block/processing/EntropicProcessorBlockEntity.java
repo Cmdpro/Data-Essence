@@ -56,6 +56,7 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
     };
     private final ItemStackHandler outputItemHandler = new ItemStackHandler(1) {
@@ -93,6 +94,8 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         if (level.isClientSide) {
             clientHandler = new ClientHandler();
             clientHandler.createWorkingSound(getBlockPos());
+        } else {
+            checkRecipes();
         }
     }
 
@@ -147,6 +150,17 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         RecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
         return inventory;
     }
+    public void checkRecipes() {
+        Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), getCraftingInv(), level);
+        if (recipe.isPresent()) {
+            if (!recipe.get().value().equals(this.recipe))
+                workTime = 0;
+
+            this.recipe = recipe.get().value();
+        } else {
+            this.recipe = null;
+        }
+    }
     public int workTime;
     public EntropicProcessingRecipe recipe;
     public float essenceCost;
@@ -156,33 +170,23 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
-                Optional<RecipeHolder<EntropicProcessingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.ENTROPIC_PROCESSING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
-                if (recipe.isPresent()) {
-
-                    for (LivingEntity victim : pLevel.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pPos.getCenter(), 0.9f, 0.9f, 0.9f))) {
-                        victim.hurt(victim.damageSources().source(DamageTypeRegistry.crushed), 2f);
-                    }
-                    if (!recipe.get().value().equals(pBlockEntity.recipe))
-                        pBlockEntity.workTime = 0;
-
-                    pBlockEntity.recipe = recipe.get().value();
-                    ItemStack assembled = recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
+                if (pBlockEntity.recipe != null) {
+                    ItemStack assembled = pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
+                        for (LivingEntity victim : pLevel.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pPos.getCenter(), 0.9f, 0.9f, 0.9f))) {
+                            victim.hurt(victim.damageSources().source(DamageTypeRegistry.crushed), 2f);
+                        }
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
 
-                        if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
+                        if (pBlockEntity.workTime >= pBlockEntity.recipe.getTime()) {
                             pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
                         }
                     }
-                } else {
-                    pBlockEntity.recipe = null;
                 }
-            } else {
-                pBlockEntity.recipe = null;
             }
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;

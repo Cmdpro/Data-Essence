@@ -57,12 +57,14 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
     };
     private final ItemStackHandler dataDriveHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
@@ -79,6 +81,13 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
         }
     };
 
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipes();
+        }
+    }
     public void drops() {
         SimpleContainer inventory = getInv();
 
@@ -162,6 +171,15 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
         RecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
         return inventory;
     }
+    public void checkRecipes() {
+        Optional<RecipeHolder<InfusionRecipe>> recipe = level.getRecipeManager().getRecipesFor(RecipeRegistry.INFUSION_TYPE.get(), getCraftingInv(), level).stream().filter((a) -> a.value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))).findFirst();
+        if (recipe.isPresent()) {
+            this.recipe = recipe.get().value();
+            essenceCost = recipe.get().value().getEssenceCost();
+        } else {
+            this.recipe = null;
+        }
+    }
     public int workTime;
     public InfusionRecipe recipe;
     public boolean enoughEssence;
@@ -172,10 +190,7 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0);
             boolean shouldReset = true;
-            Optional<RecipeHolder<InfusionRecipe>> recipe = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.INFUSION_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel).stream().filter((a) -> a.value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))).findFirst();
-            if (recipe.isPresent()) {
-                pBlockEntity.recipe = recipe.get().value();
-                pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
+            if (pBlockEntity.recipe != null) {
                 boolean enoughEssence = true;
                 for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                     EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());

@@ -62,6 +62,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
 
         @Override
@@ -85,6 +86,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
@@ -92,7 +94,14 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         }
     };
 
-    private final MultiFluidTank fluidHandler = new MultiFluidTankNoDuplicateFluids(List.of(new FluidTank(1000), new FluidTank(1000)));
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipes();
+        }
+    }
+    private final MultiFluidTank fluidHandler = new MultiFluidTankNoDuplicateFluids(List.of(new FluidTank(1000) { @Override protected void onContentsChanged() { checkRecipes(); } }, new FluidTank(1000) { @Override protected void onContentsChanged() { checkRecipes(); } }));
     private final FluidTank outputFluidHandler = new FluidTank(1000);
     public IFluidHandler getFluidHandler() {
         return lazyFluidHandler.get();
@@ -190,6 +199,22 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         }
         return new RecipeInputWithFluid(inventory, fluids);
     }
+    public void checkRecipes() {
+        Optional<RecipeHolder<FluidMixingRecipe>> recipe = level.getRecipeManager().getRecipesFor(RecipeRegistry.FLUID_MIXING_TYPE.get(), getCraftingInv(), level).stream().filter((a) -> a.value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))).findFirst();
+        if (recipe.isPresent()) {
+            if (!recipe.get().value().equals(this.recipe)) {
+                workTime = 0;
+            }
+            if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) || this.recipe.allowIncomplete())) {
+                this.recipe = recipe.get().value();
+                essenceCost = recipe.get().value().getEssenceCost();
+            } else {
+                this.recipe = null;
+            }
+        } else {
+            this.recipe = null;
+        }
+    }
     public FluidMixingRecipe recipe;
     public boolean enoughEssence;
     public float essenceCost;
@@ -201,39 +226,29 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            Optional<RecipeHolder<FluidMixingRecipe>> recipe = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.FLUID_MIXING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel).stream().filter((a) -> a.value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))).findFirst();
-            if (recipe.isPresent()) {
-                if (!recipe.get().value().equals(pBlockEntity.recipe)) {
-                    pBlockEntity.workTime = 0;
+            if (pBlockEntity.recipe != null) {
+                boolean enoughEssence = false;
+                if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= pBlockEntity.essenceCost/pBlockEntity.recipe.getTime()) {
+                    enoughEssence = true;
                 }
-                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(pBlockEntity.dataDriveHandler.getStackInSlot(0)) || pBlockEntity.recipe.allowIncomplete())) {
-                    pBlockEntity.recipe = recipe.get().value();
-                    pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
-                    boolean enoughEssence = false;
-                    if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= pBlockEntity.essenceCost/recipe.get().value().getTime()) {
-                        enoughEssence = true;
-                    }
-                    pBlockEntity.enoughEssence = enoughEssence;
-                    if (enoughEssence) {
-                        FluidStack result = recipe.get().value().getOutput();
-                        if (pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE) >= result.getAmount()) {
-                            resetWorkTime = false;
-                            pBlockEntity.workTime++;
-                            pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), pBlockEntity.essenceCost/recipe.get().value().getTime());
-                            if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                                pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.EXECUTE);
-                                pBlockEntity.itemHandler.extractItem(0, 1, false);
-                                pBlockEntity.fluidHandler.drain(recipe.get().value().getInput1(), IFluidHandler.FluidAction.EXECUTE);
-                                pBlockEntity.fluidHandler.drain(recipe.get().value().getInput2(), IFluidHandler.FluidAction.EXECUTE);
-                                pBlockEntity.workTime = 0;
-                            }
+                pBlockEntity.enoughEssence = enoughEssence;
+                if (enoughEssence) {
+                    FluidStack result = pBlockEntity.recipe.getOutput();
+                    if (pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.SIMULATE) >= result.getAmount()) {
+                        resetWorkTime = false;
+                        pBlockEntity.workTime++;
+                        pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), pBlockEntity.essenceCost/pBlockEntity.recipe.getTime());
+                        if (pBlockEntity.workTime >= pBlockEntity.recipe.getTime()) {
+                            FluidStack input1 = pBlockEntity.recipe.getInput1();
+                            FluidStack input2 = pBlockEntity.recipe.getInput2();
+                            pBlockEntity.outputFluidHandler.fill(result, IFluidHandler.FluidAction.EXECUTE);
+                            pBlockEntity.itemHandler.extractItem(0, 1, false);
+                            pBlockEntity.fluidHandler.drain(input1, IFluidHandler.FluidAction.EXECUTE);
+                            pBlockEntity.fluidHandler.drain(input2, IFluidHandler.FluidAction.EXECUTE);
+                            pBlockEntity.workTime = 0;
                         }
                     }
-                } else {
-                    pBlockEntity.recipe = null;
                 }
-            } else {
-                pBlockEntity.recipe = null;
             }
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;

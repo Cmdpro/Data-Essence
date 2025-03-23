@@ -67,6 +67,13 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
             return super.isItemValid(slot, stack);
         }
     };
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipes();
+        }
+    }
     public IItemHandler getItemHandler() {
         return lazyItemHandler.get();
     }

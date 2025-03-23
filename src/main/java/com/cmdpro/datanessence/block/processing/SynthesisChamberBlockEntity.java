@@ -53,6 +53,7 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
 
         @Override
@@ -76,6 +77,7 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
@@ -186,6 +188,23 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         };
         return inventory;
     }
+    public void checkRecipes() {
+
+        Optional<RecipeHolder<SynthesisRecipe>> recipe = level.getRecipeManager().getRecipesFor(RecipeRegistry.SYNTHESIS_TYPE.get(), getCraftingInv(), level).stream().filter((a) -> a.value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))).findFirst();
+        if (recipe.isPresent()) {
+            if (!recipe.get().value().equals(this.recipe)) {
+                workTime = 0;
+            }
+            if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) || recipe.get().value().allowIncomplete())) {
+                this.recipe = recipe.get().value();
+                essenceCost = recipe.get().value().getEssenceCost();
+            } else {
+                this.recipe = null;
+            }
+        } else {
+            this.recipe = null;
+        }
+    }
     public SynthesisRecipe recipe;
     public boolean enoughEssence;
     public Map<ResourceLocation, Float> essenceCost;
@@ -196,58 +215,51 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
-            Optional<RecipeHolder<SynthesisRecipe>> recipe = pLevel.getRecipeManager().getRecipesFor(RecipeRegistry.SYNTHESIS_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel).stream().filter((a) -> a.value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0)))).findFirst();
-            if (recipe.isPresent()) {
-                if (!recipe.get().value().equals(pBlockEntity.recipe)) {
-                    pBlockEntity.workTime = 0;
+            if (pBlockEntity.recipe != null) {
+                boolean enoughEssence = true;
+                for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                    if (pBlockEntity.storage.getEssence(type) < i.getValue()/pBlockEntity.recipe.getTime()) {
+                        enoughEssence = false;
+                    }
                 }
-                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(pBlockEntity.dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(pBlockEntity.dataDriveHandler.getStackInSlot(0)) || pBlockEntity.recipe.allowIncomplete())) {
-                    pBlockEntity.recipe = recipe.get().value();
-                    pBlockEntity.essenceCost = recipe.get().value().getEssenceCost();
-                    boolean enoughEssence = true;
-                    for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
-                        EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                        if (pBlockEntity.storage.getEssence(type) < i.getValue()/recipe.get().value().getTime()) {
-                            enoughEssence = false;
+                pBlockEntity.enoughEssence = enoughEssence;
+                if (enoughEssence) {
+                    ItemStack result = pBlockEntity.recipe.getResultItem(pLevel.registryAccess());
+                    if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
+                        resetWorkTime = false;
+                        pBlockEntity.workTime++;
+                        for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                            EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                            pBlockEntity.storage.removeEssence(type, i.getValue()/pBlockEntity.recipe.getTime());
+                        }
+                        if (pBlockEntity.workTime >= pBlockEntity.recipe.getTime()) {
+                            pBlockEntity.outputItemHandler.insertItem(0, pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
+                            pBlockEntity.itemHandler.extractItem(0, 1, false);
+                            pBlockEntity.itemHandler.extractItem(1, 1, false);
+                            pBlockEntity.workTime = 0;
                         }
                     }
-                    pBlockEntity.enoughEssence = enoughEssence;
-                    if (enoughEssence) {
-                        ItemStack result = recipe.get().value().getResultItem(pLevel.registryAccess());
-                        if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
-                            resetWorkTime = false;
-                            pBlockEntity.workTime++;
-                            for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
-                                EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                                pBlockEntity.storage.removeEssence(type, i.getValue()/recipe.get().value().getTime());
-                            }
-                            if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
-                                pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
-                                pBlockEntity.itemHandler.extractItem(0, 1, false);
-                                pBlockEntity.itemHandler.extractItem(1, 1, false);
-                                pBlockEntity.workTime = 0;
-                            }
-                        }
-                    }
-                } else {
-                    pBlockEntity.recipe = null;
                 }
-            } else {
-                pBlockEntity.recipe = null;
             }
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;
             }
             pBlockEntity.updateBlock();
-        } else {
-            Optional<RecipeHolder<SynthesisRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.SYNTHESIS_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
-            recipe.ifPresentOrElse(recipeHolder -> pBlockEntity.recipe = recipeHolder.value(), () -> pBlockEntity.recipe = null);
         }
     }
     protected void updateBlock() {
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipes();
+        }
     }
     private static boolean hasNotReachedStackLimit(SynthesisChamberBlockEntity entity, ItemStack toAdd) {
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {

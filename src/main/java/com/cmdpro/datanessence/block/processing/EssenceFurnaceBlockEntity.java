@@ -44,6 +44,7 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
     };
     private final ItemStackHandler outputItemHandler = new ItemStackHandler(1) {
@@ -133,34 +134,36 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
     public double recipeTime;
     public SmeltingRecipe recipe;
     public float essenceCost;
-
+    public void checkRecipes() {
+        Optional<RecipeHolder<SmeltingRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, getCraftingInv(), level);
+        if (recipe.isPresent()) {
+            if (!recipe.get().value().equals(this.recipe)) {
+                workTime = 0;
+            }
+            this.recipe = recipe.get().value();
+            recipeTime = recipe.get().value().getCookingTime() * 0.75; // 25% faster than a vanilla Furnace
+        } else {
+            this.recipe = null;
+        }
+    }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceFurnaceBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
-                Optional<RecipeHolder<SmeltingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeType.SMELTING, pBlockEntity.getCraftingInv(), pLevel);
-                if (recipe.isPresent()) {
-                    if (!recipe.get().value().equals(pBlockEntity.recipe)) {
-                        pBlockEntity.workTime = 0;
-                    }
-                    pBlockEntity.recipe = recipe.get().value();
-                    pBlockEntity.recipeTime = recipe.get().value().getCookingTime() * 0.75; // 25% faster than a vanilla Furnace
-
-                    ItemStack result = recipe.get().value().getResultItem(pLevel.registryAccess());
+                if (pBlockEntity.recipe != null) {
+                    ItemStack result = pBlockEntity.recipe.getResultItem(pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
                         if (pBlockEntity.workTime >= pBlockEntity.recipeTime) {
-                            pBlockEntity.outputItemHandler.insertItem(0, recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
+                            pBlockEntity.outputItemHandler.insertItem(0, pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
                         }
                     }
-                } else {
-                    pBlockEntity.recipe = null;
                 }
             } else {
                 pBlockEntity.recipe = null;
@@ -169,9 +172,14 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
                 pBlockEntity.workTime = -1;
             }
             pBlockEntity.updateBlock();
-        } else {
-            Optional<RecipeHolder<SmeltingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeType.SMELTING, pBlockEntity.getCraftingInv(), pLevel);
-            recipe.ifPresentOrElse(recipeHolder -> pBlockEntity.recipe = recipeHolder.value(), () -> pBlockEntity.recipe = null);
+        }
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipes();
         }
     }
     protected void updateBlock() {

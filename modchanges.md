@@ -17,3 +17,5 @@
 - Mineral Purification Chamber didn't receive water from a buffer
 - Lensing Crystal Ore and Lensing Crystal were lacking tags
 - Wire Spool had incorrect entry lock
+- Performance improvements
+- Wires would not drop if the destination was broken

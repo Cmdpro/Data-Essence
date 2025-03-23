@@ -56,6 +56,7 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
     };
     private final FluidTank outputFluidHandler = new FluidTank(2000) {
@@ -70,9 +71,17 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
         protected void onContentsChanged() {
             super.onContentsChanged();
             updateBlock();
+            checkRecipes();
         }
     };
 
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipes();
+        }
+    }
     public void drops() {
         SimpleContainer inventory = getInv();
 
@@ -149,6 +158,17 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
         RecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
         return inventory;
     }
+    public void checkRecipes() {
+        Optional<RecipeHolder<MeltingRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.MELTING_TYPE.get(), getCraftingInv(), level);
+        if (recipe.isPresent()) {
+            if (!recipe.get().value().equals(this.recipe)) {
+                workTime = 0;
+            }
+            this.recipe = recipe.get().value();
+        } else {
+            this.recipe = null;
+        }
+    }
     public int workTime;
     public MeltingRecipe recipe;
     public float essenceCost;
@@ -160,13 +180,8 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
             BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
-                Optional<RecipeHolder<MeltingRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.MELTING_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
-                if (recipe.isPresent()) {
-                    if (!recipe.get().value().equals(pBlockEntity.recipe)) {
-                        pBlockEntity.workTime = 0;
-                    }
-                    pBlockEntity.recipe = recipe.get().value();
-                    FluidStack assembled = recipe.get().value().getOutput().copy();
+                if (pBlockEntity.recipe != null) {
+                    FluidStack assembled = pBlockEntity.recipe.getOutput().copy();
                     if (pBlockEntity.getFuelHandler().drain(1, IFluidHandler.FluidAction.SIMULATE).getAmount() >= 1 && pBlockEntity.outputFluidHandler.fill(assembled, IFluidHandler.FluidAction.SIMULATE) >= assembled.getAmount()) {
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
@@ -176,7 +191,7 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
                             pBlockEntity.getFuelHandler().drain(1, IFluidHandler.FluidAction.EXECUTE);
                         }
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
-                        if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
+                        if (pBlockEntity.workTime >= pBlockEntity.recipe.getTime()) {
                             pBlockEntity.outputFluidHandler.fill(assembled, IFluidHandler.FluidAction.EXECUTE);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
                             pBlockEntity.workTime = 0;
@@ -184,11 +199,9 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
                         pBlockEntity.updateBlock();
                     }
                 } else {
-                    pBlockEntity.recipe = null;
                     pBlockEntity.drainCooldown = 0;
                 }
             } else {
-                pBlockEntity.recipe = null;
                 pBlockEntity.drainCooldown = 0;
             }
             if (resetWorkTime) {

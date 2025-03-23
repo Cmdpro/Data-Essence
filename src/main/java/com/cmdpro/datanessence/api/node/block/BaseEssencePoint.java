@@ -97,6 +97,8 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
             }
             for (BlockPos i : ent.linkFrom) {
                 if (pLevel.getBlockEntity(i) instanceof BaseEssencePointBlockEntity ent2) {
+                    ItemEntity item = new ItemEntity(pLevel, i.getCenter().x, i.getCenter().y, i.getCenter().z, new ItemStack(getRequiredWire()));
+                    pLevel.addFreshEntity(item);
                     ent2.link.remove(pPos);
                     EssenceNodePath.updatePaths(ent2);
                     ent2.updateBlock();

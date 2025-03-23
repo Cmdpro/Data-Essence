@@ -60,6 +60,7 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
+            checkRecipes();
         }
     };
     private final ItemStackHandler outputItemHandler = new ItemStackHandler(2) {
@@ -75,6 +76,13 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
         }
     };
 
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (!level.isClientSide) {
+            checkRecipes();
+        }
+    }
     public void drops() {
         SimpleContainer inventory = getInv();
 
@@ -156,6 +164,17 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
         RecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
         return inventory;
     }
+    public void checkRecipes() {
+        Optional<RecipeHolder<MineralPurificationRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.MINERAL_PURIFICATION_TYPE.get(), getCraftingInv(), level);
+        if (recipe.isPresent()) {
+            if (!recipe.get().value().equals(this.recipe)) {
+                workTime = 0;
+            }
+            this.recipe = recipe.get().value();
+        } else {
+            this.recipe = null;
+        }
+    }
     public int workTime;
     public MineralPurificationRecipe recipe;
     public float essenceCost;
@@ -166,19 +185,14 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
             BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1 && pBlockEntity.waterFluidHandler.getFluidAmount() >= 250) {
-                Optional<RecipeHolder<MineralPurificationRecipe>> recipe = pLevel.getRecipeManager().getRecipeFor(RecipeRegistry.MINERAL_PURIFICATION_TYPE.get(), pBlockEntity.getCraftingInv(), pLevel);
-                if (recipe.isPresent()) {
-                    if (!recipe.get().value().equals(pBlockEntity.recipe)) {
-                        pBlockEntity.workTime = 0;
-                    }
-                    pBlockEntity.recipe = recipe.get().value();
-                    ItemStack assembled = recipe.get().value().assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
-                    ItemStack assembled2 = recipe.get().value().assembleNuggetOutput(pLevel.random, pBlockEntity.getCraftingInv(), pLevel.registryAccess());
+                if (pBlockEntity.recipe != null) {
+                    ItemStack assembled = pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
+                    ItemStack assembled2 = pBlockEntity.recipe.assembleNuggetOutput(pLevel.random, pBlockEntity.getCraftingInv(), pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, assembled, true).isEmpty() && pBlockEntity.outputItemHandler.insertItem(1, assembled2, true).isEmpty()) {
                         resetWorkTime = false;
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
-                        if (pBlockEntity.workTime >= recipe.get().value().getTime()) {
+                        if (pBlockEntity.workTime >= pBlockEntity.recipe.getTime()) {
                             pBlockEntity.waterFluidHandler.drain(250, IFluidHandler.FluidAction.EXECUTE);
                             pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.outputItemHandler.insertItem(1, assembled2, false);
@@ -188,11 +202,7 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
                             pBlockEntity.workTime = 0;
                         }
                     }
-                } else {
-                    pBlockEntity.recipe = null;
                 }
-            } else {
-                pBlockEntity.recipe = null;
             }
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;
