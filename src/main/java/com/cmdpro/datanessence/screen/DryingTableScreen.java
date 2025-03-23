@@ -42,7 +42,7 @@ public class DryingTableScreen extends AbstractContainerScreen<DryingTableMenu> 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         if (menu.blockEntity.workTime >= 0 && menu.blockEntity.maxWorkTime != -1) {
-            guiGraphics.blit(TEXTURE, x + 81, y + 28, 188, 0, 14, (int) Math.ceil(40f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxWorkTime)));
+            guiGraphics.blit(TEXTURE, x + 81, y + 28, 188, 0, 14, (int) Math.ceil(14f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxWorkTime)));
         }
 
         ClientEssenceBarUtil.drawEssenceBar(guiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());

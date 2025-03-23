@@ -175,10 +175,9 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
                     }
                     dryingTable.updateBlock();
                 }
+            } else {
+                dryingTable.workTime = -1;
             }
-        }
-        else {
-            dryingTable.workTime = -1;
         }
     }
 
