@@ -46,7 +46,7 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
     public static final EmiRecipeCategory SYNTHESIS = new EmiRecipeCategory(DataNEssence.locate("synthesis"), SYNTHESIS_CHAMBER_WORKSTATION, new EmiTexture(EMI_ICONS, 64, 0, 16, 16));
     public static final EmiRecipeCategory METAL_SHAPING = new EmiRecipeCategory(DataNEssence.locate("metal_shaping"), METAL_SHAPER_WORKSTATION, new EmiTexture(EMI_ICONS, 80, 0, 16, 16));
     public static final EmiRecipeCategory MELTING = new EmiRecipeCategory(DataNEssence.locate("melting"), MELTER_WORKSTATION, new EmiTexture(EMI_ICONS, 96, 0, 16, 16));
-    public static final EmiRecipeCategory DRYING = new EmiRecipeCategory(DataNEssence.locate("drying"), DRYING_TABLE_WORKSTATION, new EmiTexture(EMI_ICONS, 128, 0, 16, 16));
+    public static final EmiRecipeCategory DRYING = new EmiRecipeCategory(DataNEssence.locate("drying"), DRYING_TABLE_WORKSTATION, new EmiTexture(EMI_ICONS, 112, 0, 16, 16));
 
     // TODO this Essence Furnace should have a custom tooltip, because *polish*
     public static ItemStack ESSENCE_FURNACE = new ItemStack(BlockRegistry.ESSENCE_FURNACE.get().asItem());
@@ -61,6 +61,7 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
         emiRegistry.addCategory(SYNTHESIS);
         emiRegistry.addCategory(METAL_SHAPING);
         emiRegistry.addCategory(MELTING);
+        emiRegistry.addCategory(DRYING);
 
         // Vanilla
         emiRegistry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, FABRICATOR_WORKSTATION);
@@ -76,6 +77,7 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
         emiRegistry.addWorkstation(SYNTHESIS, SYNTHESIS_CHAMBER_WORKSTATION);
         emiRegistry.addWorkstation(METAL_SHAPING, METAL_SHAPER_WORKSTATION);
         emiRegistry.addWorkstation(MELTING, MELTER_WORKSTATION);
+        emiRegistry.addWorkstation(DRYING, DRYING_TABLE_WORKSTATION);
 
         RecipeManager manager = emiRegistry.getRecipeManager();
 
@@ -99,6 +101,9 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
         }
         for (RecipeHolder<MeltingRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.MELTING_TYPE.get())) {
             emiRegistry.addRecipe(new EMIMeltingRecipe(recipe.id(), recipe.value()));
+        }
+        for (RecipeHolder<DryingRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.DRYING_TYPE.get())) {
+            emiRegistry.addRecipe(new EMIDryingRecipe(recipe.id(), recipe.value()));
         }
     }
 }
