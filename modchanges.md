@@ -9,6 +9,7 @@
 - Buffers display upwards moving particles when transferring
 - Coal Lumps are now 8:1 with Coal, for consistency with other mods that add coal fragments
 - EMI Plugin no longer shows recipes from incomplete entries, as to avoid spoiling puzzle solutions in the future
+- Made the Essence Burner and Essence Furnace have different visuals when active
 
 ### Fixes
 - Coal Lumps had no burn time in furnaces/etc; now they burn for 200 ticks
