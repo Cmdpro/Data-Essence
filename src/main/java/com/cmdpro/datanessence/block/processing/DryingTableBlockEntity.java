@@ -55,6 +55,7 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
         protected void onContentsChanged() {
             setChanged();
             checkRecipe();
+            updateBlock();
         }
     };
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
@@ -62,6 +63,7 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
         protected void onContentsChanged(int slot) {
             setChanged();
             checkRecipe();
+            updateBlock();
         }
     };
     private final ItemStackHandler outputItemHandler = new ItemStackHandler(1) {
@@ -216,5 +218,16 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
         tag.put("fluidHandler", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("outputItemHandler", outputItemHandler.serializeNBT(pRegistries));
         return tag;
+    }
+
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket(){
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    protected void updateBlock() {
+        BlockState blockState = level.getBlockState(this.getBlockPos());
+        this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
+        this.setChanged();
     }
 }

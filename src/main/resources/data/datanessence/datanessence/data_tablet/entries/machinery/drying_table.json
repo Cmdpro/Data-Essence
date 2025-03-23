@@ -18,7 +18,16 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:fabrication/machines/drying_table"
+        "datanessence:fabrication/machines/drying_table",
+        "datanessence:drying/lava_to_magma"
+      ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:drying/lava_to_stone",
+        "datanessence:drying/water_to_clay",
+        "datanessence:drying/water_to_mud"
       ]
     }
   ],

@@ -19,7 +19,10 @@ public class DryingType extends CraftingType {
             pGuiGraphics.blit(DataTabletScreen.TEXTURE_CRAFTING2, xOffset + x, yOffset + y, 133, 196, 123, 60);
             page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(BlockRegistry.DRYING_TABLE.get()), xOffset + x + 74, yOffset + y + 43, pMouseX, pMouseY);
             page.renderItemWithTooltip(pGuiGraphics, dryingRecipe.getResultItem(RegistryAccess.EMPTY), xOffset + x + 74, yOffset + y + 22, pMouseX, pMouseY);
-            // TODO finish
+            page.renderFluidWithTooltip(pGuiGraphics, dryingRecipe.getInput(), xOffset + x + 30, yOffset + y + 10, pMouseX, pMouseY);
+            if (!dryingRecipe.getIngredients().isEmpty()) {
+                page.renderIngredientWithTooltip(screen, pGuiGraphics, dryingRecipe.getIngredients().get(0), xOffset + x + 30, yOffset + y + 32, pMouseX, pMouseY);
+            }
         }
     }
 
