@@ -11,6 +11,7 @@ import com.cmdpro.datanessence.recipe.RecipeInputWithFluid;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
+import com.cmdpro.datanessence.screen.DryingTableMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -48,6 +49,7 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
 
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     public int workTime;
+    public int maxWorkTime;
     public DryingRecipe recipe;
 
     private final FluidTank fluidHandler = new FluidTank(1000) {
@@ -107,7 +109,7 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
 
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player) {
-        return null;
+        return new DryingTableMenu(containerId, playerInventory, this);
     }
 
     public SimpleContainer getInv() {
@@ -171,6 +173,7 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
                         dryingTable.fluidHandler.drain(dryingTable.recipe.getInput(), IFluidHandler.FluidAction.EXECUTE);
                         dryingTable.workTime = 0;
                     }
+                    dryingTable.updateBlock();
                 }
             }
         }
@@ -207,6 +210,7 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluidHandler"));
         outputItemHandler.deserializeNBT(pRegistries, tag.getCompound("outputItemHandler"));
+        maxWorkTime = tag.getInt("maxWorkTime");
     }
 
     @Override
@@ -217,6 +221,7 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
         tag.put("fluidHandler", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.put("outputItemHandler", outputItemHandler.serializeNBT(pRegistries));
+        tag.putInt("maxWorkTime", recipe != null ? recipe.getTime() : -1);
         return tag;
     }
 

@@ -36,6 +36,9 @@ public class DataNEssence
     public static final Logger LOGGER = LogUtils.getLogger();
     public static RandomSource random;
 
+    /**
+     * Provides a ResourceLocation under DnE's namespace.
+     */
     public static ResourceLocation locate(String path) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }

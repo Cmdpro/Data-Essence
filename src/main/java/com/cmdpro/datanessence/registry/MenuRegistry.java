@@ -34,6 +34,7 @@ public class MenuRegistry {
     public static final Supplier<MenuType<MetalShaperMenu>> METAL_SHAPER_MENU = register(MetalShaperMenu::new, "metal_shaper");
     public static final Supplier<MenuType<IndustrialPlantSiphonMenu>> INDUSTRIAL_PLANT_SIPHON_MENU = register(IndustrialPlantSiphonMenu::new, "industrial_plant_siphon");
     public static final Supplier<MenuType<MelterMenu>> MELTER_MENU = register(MelterMenu::new, "melter");
+    public static final Supplier<MenuType<DryingTableMenu>> DRYING_TABLE_MENU = register(DryingTableMenu::new, "drying_table");
     private static <T extends AbstractContainerMenu> Supplier<MenuType<T>> register(IContainerFactory<T> factory, String name) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));
     }
