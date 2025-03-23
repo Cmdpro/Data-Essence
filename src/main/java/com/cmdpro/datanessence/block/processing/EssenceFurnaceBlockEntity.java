@@ -22,6 +22,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
@@ -151,11 +152,13 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
             boolean resetWorkTime = true;
+            pBlockEntity.lit = false;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
                 if (pBlockEntity.recipe != null) {
                     ItemStack result = pBlockEntity.recipe.getResultItem(pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
                         resetWorkTime = false;
+                        pBlockEntity.lit = true;
                         pBlockEntity.workTime++;
                         pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
                         if (pBlockEntity.workTime >= pBlockEntity.recipeTime) {
@@ -171,10 +174,14 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;
             }
+            if (pBlockEntity.lit != pState.getValue(EssenceFurnace.LIT)) {
+                BlockState state = pState.setValue(EssenceFurnace.LIT, pBlockEntity.lit);
+                pBlockEntity.level.setBlock(pPos, state, 3);
+            }
             pBlockEntity.updateBlock();
         }
     }
-
+    public boolean lit;
     @Override
     public void onLoad() {
         super.onLoad();

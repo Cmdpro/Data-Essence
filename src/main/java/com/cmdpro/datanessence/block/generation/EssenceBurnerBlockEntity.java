@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.item.EssenceShard;
+import com.cmdpro.datanessence.block.processing.EssenceFurnace;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.EssenceBurnerMenu;
@@ -122,9 +123,11 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
         }
         return inventory;
     }
+    public boolean lit;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceBurnerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            pBlockEntity.lit = false;
             if (pBlockEntity.itemHandler.getStackInSlot(0).getItem() instanceof EssenceShard shard) {
                 boolean canFit = true;
                 for (Map.Entry<Supplier<EssenceType>, Float> i : shard.essence.entrySet()) {
@@ -140,9 +143,11 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
                             pBlockEntity.maxBurnTime = pBlockEntity.itemHandler.getStackInSlot(1).getBurnTime(RecipeType.SMELTING);
                             pBlockEntity.itemHandler.extractItem(1, 1, false);
                             pBlockEntity.burnTime = pBlockEntity.maxBurnTime;
+                            pBlockEntity.lit = true;
                         }
                     }
                 } else {
+                    pBlockEntity.lit = true;
                     pBlockEntity.essenceBurnCooldown--;
                     pBlockEntity.burnTime--;
                     if (pBlockEntity.essenceBurnCooldown <= 0) {
@@ -155,6 +160,10 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
                         }
                     }
                 }
+            }
+            if (pBlockEntity.lit != pState.getValue(EssenceBurner.LIT)) {
+                BlockState state = pState.setValue(EssenceBurner.LIT, pBlockEntity.lit);
+                pBlockEntity.level.setBlock(pPos, state, 3);
             }
             pBlockEntity.updateBlock();
         }

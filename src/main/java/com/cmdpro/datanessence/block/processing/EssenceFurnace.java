@@ -13,6 +13,7 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -21,9 +22,10 @@ import org.jetbrains.annotations.Nullable;
 
 public class EssenceFurnace extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final BooleanProperty LIT = AbstractFurnaceBlock.LIT;
     public EssenceFurnace(Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
@@ -87,6 +89,6 @@ public class EssenceFurnace extends Block implements EntityBlock {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
-        pBuilder.add(FACING);
+        pBuilder.add(FACING, LIT);
     }
 }

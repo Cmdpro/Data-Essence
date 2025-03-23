@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,lit=false": {
       "model": "datanessence:block/essence_furnace",
       "y": 90
     },
-    "facing=north": {
+    "facing=east,lit=true": {
+      "model": "datanessence:block/essence_furnace_lit",
+      "y": 90
+    },
+    "facing=north,lit=false": {
       "model": "datanessence:block/essence_furnace"
     },
-    "facing=south": {
+    "facing=north,lit=true": {
+      "model": "datanessence:block/essence_furnace_lit"
+    },
+    "facing=south,lit=false": {
       "model": "datanessence:block/essence_furnace",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,lit=true": {
+      "model": "datanessence:block/essence_furnace_lit",
+      "y": 180
+    },
+    "facing=west,lit=false": {
       "model": "datanessence:block/essence_furnace",
+      "y": 270
+    },
+    "facing=west,lit=true": {
+      "model": "datanessence:block/essence_furnace_lit",
       "y": 270
     }
   }

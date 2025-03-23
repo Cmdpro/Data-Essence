@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "datanessence:block/deco/patterned_copper",
+    "east": "datanessence:block/essence_furnace_side",
+    "north": "datanessence:block/essence_furnace_front_on",
+    "particle": "datanessence:block/essence_furnace_front_on",
+    "south": "datanessence:block/essence_furnace_side",
+    "up": "datanessence:block/essence_furnace_top",
+    "west": "datanessence:block/essence_furnace_side"
+  }
+}

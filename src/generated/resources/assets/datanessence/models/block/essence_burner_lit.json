@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "datanessence:block/deco/polished_obsidian",
+    "east": "datanessence:block/essence_burner_side",
+    "north": "datanessence:block/essence_burner_front_on",
+    "particle": "datanessence:block/essence_burner_front_on",
+    "south": "datanessence:block/essence_burner_back",
+    "up": "datanessence:block/essence_burner_top_on",
+    "west": "datanessence:block/essence_burner_side"
+  }
+}
