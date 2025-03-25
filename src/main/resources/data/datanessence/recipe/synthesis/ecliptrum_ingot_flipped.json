@@ -1,0 +1,12 @@
+{
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 100
+  },
+  "input": { "tag": "c:ingots/gold" },
+  "input2": { "tag": "c:ingots/iron" },
+  "time": 200,
+  "result": { "id": "datanessence:ecliptrum_ingot", "count": 2 },
+  "entry": "datanessence:machinery_transformation/ecliptrum",
+  "allow_incomplete": true
+}

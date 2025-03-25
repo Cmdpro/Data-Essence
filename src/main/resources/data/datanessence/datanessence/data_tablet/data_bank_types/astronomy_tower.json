@@ -1,10 +1,7 @@
 {
   "add": [
-    "datanessence:fabricator",
-    "datanessence:test1",
-    "datanessence:test2"
+    "datanessence:tier_3/ecliptrum"
   ],
   "remove":[
-    "datanessence:fabricator"
   ]
 }

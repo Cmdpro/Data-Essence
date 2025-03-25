@@ -10,7 +10,7 @@
     " O "
   ],
   "key": {
-    "A": { "item": "minecraft:amethyst_shard" },
+    "A": { "item": "datanessence:essence_shard" },
     "R": { "item": "datanessence:conductance_rod" },
     "O": { "item": "datanessence:polished_obsidian" }
   },

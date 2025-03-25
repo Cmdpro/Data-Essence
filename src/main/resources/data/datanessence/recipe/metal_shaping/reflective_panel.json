@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:metal_shaping",
+  "input": { "item": "datanessence:ecliptrum_ingot" },
+  "time": 100,
+  "result": { "id": "datanessence:reflective_panel", "count": 1 }
+}

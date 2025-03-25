@@ -52,6 +52,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.MOLD_ROD);
         simpleItem(ItemRegistry.MOLD_PANEL);
         simpleItem(ItemRegistry.HAMMER_AND_CHISEL);
+        simpleItem(ItemRegistry.ECLIPTRUM_INGOT);
 
         simpleItemWithSubdirectory(ItemRegistry.ESSENCE_WIRE, "wires");
         simpleItemWithSubdirectory(ItemRegistry.LUNAR_ESSENCE_WIRE, "wires");
@@ -100,6 +101,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.WIRE_SPOOL, "components");
         simpleItemWithSubdirectory(ItemRegistry.IRON_DRILL, "components");
         simpleItemWithSubdirectory(ItemRegistry.EXCITER, "components");
+        simpleItemWithSubdirectory(ItemRegistry.TRANSFORMATIVE_ROD, "components");
+        simpleItemWithSubdirectory(ItemRegistry.REFLECTIVE_PANEL, "components");
 
         simpleItemWithSubdirectory(ItemRegistry.COPPER_NUGGET, "intermediates");
         simpleItemWithSubdirectory(ItemRegistry.DIAMOND_SHARD, "intermediates");
