@@ -11,7 +11,7 @@
     " C "
   ],
   "key": {
-    "A": { "item": "minecraft:amethyst_shard" },
+    "A": { "item": "datanessence:essence_shard" },
     "R": { "item": "datanessence:conductance_rod" },
     "C": { "item": "minecraft:copper_ingot" }
   },

@@ -1,9 +1,9 @@
 {
   "icon": {
-    "id": "datanessence:infuser"
+    "id": "datanessence:essence_wire"
   },
   "name": {
     "translate": "data_tablet.tabs.machinery.name"
   },
-  "priority": 2
+  "priority": 3
 }
