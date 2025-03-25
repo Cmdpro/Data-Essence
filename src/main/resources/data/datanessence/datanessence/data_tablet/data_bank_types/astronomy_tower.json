@@ -1,7 +1,6 @@
 {
   "add": [
-    "datanessence:tier_3/ecliptrum",
-    "datanessence:tier_3/phenuan_material_studies_2"
+    "datanessence:tier_3/ecliptrum"
   ],
   "remove":[
   ]
