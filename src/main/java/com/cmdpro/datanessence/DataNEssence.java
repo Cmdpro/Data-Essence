@@ -235,7 +235,7 @@ public class DataNEssence
             event.accept(ItemRegistry.HAMMER_AND_CHISEL.get());
             // Combat Tools
             event.accept(ItemRegistry.ESSENCE_BOMB.get());
-            //event.accept(ItemRegistry.LUNAR_ESSENCE_BOMB.get());
+            event.accept(ItemRegistry.LUNAR_ESSENCE_BOMB.get());
             //event.accept(ItemRegistry.NATURAL_ESSENCE_BOMB.get());
             //event.accept(ItemRegistry.EXOTIC_ESSENCE_BOMB.get());
             event.accept(ItemRegistry.ESSENCE_SWORD.get());
@@ -248,7 +248,7 @@ public class DataNEssence
 
             // Wires
             event.accept(ItemRegistry.ESSENCE_WIRE.get());
-            //event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE.get());
+            event.accept(ItemRegistry.LUNAR_ESSENCE_WIRE.get());
             //event.accept(ItemRegistry.NATURAL_ESSENCE_WIRE.get());
             //event.accept(ItemRegistry.EXOTIC_ESSENCE_WIRE.get());
             event.accept(ItemRegistry.ITEM_WIRE.get());
@@ -276,6 +276,9 @@ public class DataNEssence
             event.accept(ItemRegistry.PROPELLER.get());
             event.accept(ItemRegistry.EXCITER.get());
             event.accept(ItemRegistry.IRON_DRILL.get());
+            event.accept(ItemRegistry.ECLIPTRUM_INGOT.get());
+            event.accept(ItemRegistry.REFLECTIVE_PANEL.get());
+            event.accept(ItemRegistry.TRANSFORMATIVE_ROD.get());
             event.accept(ItemRegistry.LENS.get());
             event.accept(ItemRegistry.COPPER_NUGGET.get());
             event.accept(ItemRegistry.DIAMOND_SHARD.get());
@@ -329,7 +332,7 @@ public class DataNEssence
             // Logistics
             event.accept(BlockRegistry.ITEM_FILTER.get());
             event.accept(BlockRegistry.ESSENCE_POINT.get());
-            //event.accept(BlockRegistry.LUNAR_ESSENCE_POINT.get());
+            event.accept(BlockRegistry.LUNAR_ESSENCE_POINT.get());
             //event.accept(BlockRegistry.NATURAL_ESSENCE_POINT.get());
             //event.accept(BlockRegistry.EXOTIC_ESSENCE_POINT.get());
             event.accept(BlockRegistry.ITEM_POINT.get());
@@ -343,7 +346,7 @@ public class DataNEssence
 
             // Storage Blocks
             event.accept(BlockRegistry.ESSENCE_BATTERY.get());
-            //event.accept(BlockRegistry.LUNAR_ESSENCE_BATTERY.get());
+            event.accept(BlockRegistry.LUNAR_ESSENCE_BATTERY.get());
             //event.accept(BlockRegistry.NATURAL_ESSENCE_BATTERY.get());
             //event.accept(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
             event.accept(BlockRegistry.FLUID_TANK.get());

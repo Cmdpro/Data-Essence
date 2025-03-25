@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:ecliptrum_ingot"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_ecliptrum.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_ecliptrum.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/use_data_drive",
+  "criteria": {
+    "has_ecliptrum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:ecliptrum_ingot" ] } ] }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CCC",
+    "   ",
+    "   "
+  ],
+  "key": {
+    "C": { "item": "datanessence:ecliptrum_ingot" }
+  },
+  "result": { "id": "datanessence:reflective_panel", "count": 2 }
+}
