@@ -1,0 +1,47 @@
+{
+  "icon": {
+    "id": "datanessence:ecliptrum_ingot"
+  },
+  "tab": "datanessence:machinery_transformation",
+  "x": 0,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:ecliptrum_ingot"
+      },
+      "text": {
+        "translate": "data_tablet.pages.ecliptrum.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:synthesis/ecliptrum_ingot",
+        "datanessence:crafting/reflective_panel",
+        "datanessence:crafting/transformative_rod"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.ecliptrum.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.ecliptrum.flavor"
+  },
+  "parents": [
+    "datanessence:machinery/synthesis_chamber"
+  ],
+  "critical": true,
+  "incomplete": true,
+  "completion_advancement": "datanessence:progression/acquire_ecliptrum",
+  "incomplete_pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.ecliptrum.page1.incomplete_text"
+      }
+    }
+  ]
+}
