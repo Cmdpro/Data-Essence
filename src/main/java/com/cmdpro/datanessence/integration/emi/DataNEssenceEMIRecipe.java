@@ -51,8 +51,8 @@ public abstract class DataNEssenceEMIRecipe implements EmiRecipe {
     public void addWidgets(WidgetHolder widgets) {
         if (!isUnlocked()) {
             ResourceLocation background = DataNEssence.locate("textures/gui/emi_recipe_locked.png");
-            int lightColor = new Color(255, 150, 181).getRGB(); // blend between this and the dark one later.
-            int darkColor = new Color(242, 94, 161).getRGB();
+            int lightColor = 0xFFFF96B5;
+            int darkColor = 0xFFF25EA1;
 
             widgets.addTexture(background, 0, 0, 123, 60, 0, 0);
             widgets.addText(lockedText1, 123 - 4, 60 / 2, lightColor, false).horizontalAlign(TextWidget.Alignment.END);
