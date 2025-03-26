@@ -1,6 +1,8 @@
 ## Midgame - Lunar Update
 ### Additions
-- Enabled Lunar Essence Wires, Nodes, and Batteries
-- Added Ecliptrum material
-- Added Essence Derivation Spike
-- Added Astronomy Tower structure
+- Added Ecliptrum, a new alloy more receptive to this new Essence type
+- Enabled Lunar Essence Wires, Nodes, Bombs, and Batteries
+
+### Changes
+- Conductance Rods' manual crafting recipe is less expensive
+- Essence Wires and Nodes are made with Essence Shards instead of Amethyst
