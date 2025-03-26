@@ -60,6 +60,9 @@ public class BlockRegistry {
     public static final Supplier<Block> ESSENCE_CRYSTAL = register("essence_crystal",
             () -> new EssenceCrystal(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER).noOcclusion().strength(2.0f)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> LUNAR_ESSENCE_CRYSTAL = register("lunar_essence_crystal",
+            () -> new LunarEssenceCrystal(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_CLUSTER).noOcclusion().strength(2.0f)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LENSING_CRYSTAL_ORE = register("lensing_crystal_ore",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

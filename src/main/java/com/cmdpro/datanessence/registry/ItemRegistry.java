@@ -42,6 +42,7 @@ public class ItemRegistry {
 
     // Essence Shards
     public static final Supplier<Item> ESSENCE_SHARD = register("essence_shard", () -> new EssenceShard(new Item.Properties(), Map.of(EssenceTypeRegistry.ESSENCE, 100f)));
+    public static final Supplier<Item> LUNAR_ESSENCE_SHARD = register("lunar_essence_shard", () -> new EssenceShard(new Item.Properties(), Map.of(EssenceTypeRegistry.LUNAR_ESSENCE, 100f)));
 
     // Wires
     public static final Supplier<Item> ESSENCE_WIRE = register("essence_wire", () -> new Item(new Item.Properties()));

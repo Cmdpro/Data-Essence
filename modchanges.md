@@ -1,6 +1,7 @@
 ## Midgame - Lunar Update
 ### Additions
-- Added Ecliptrum, a new alloy more receptive to this new Essence type
+- Added Ecliptrum material
+- Added Lunar Essence Shards and Crystal
 - Enabled Lunar Essence Wires, Nodes, Bombs, and Batteries
 
 ### Changes
