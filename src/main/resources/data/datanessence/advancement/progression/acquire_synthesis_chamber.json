@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:synthesis_chamber"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_synthesis_chamber.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_synthesis_chamber.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/use_data_drive",
+  "criteria": {
+    "has_synthesis_chamber": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:synthesis_chamber" ] } ] }
+    }
+  }
+}

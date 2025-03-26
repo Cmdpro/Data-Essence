@@ -63,6 +63,7 @@
       "datanessence:fabrication/points/essence_point",
       "datanessence:fabrication/points/fluid_point",
       "datanessence:fabrication/points/item_point",
+      "datanessence:fabrication/points/lunar_essence_node",
       "datanessence:fabrication/sigils/filter",
       "datanessence:fabrication/sigils/speed",
       "datanessence:fabrication/wire_spool",
@@ -88,6 +89,7 @@
       "datanessence:synthesis/lens_burning",
       "datanessence:synthesis/lens_harming",
       "datanessence:synthesis/lens_healing",
-      "datanessence:synthesis/lens_precision"
+      "datanessence:synthesis/lens_precision",
+      "datanessence:synthesis/lunar_essence_wire"
     ]
 }

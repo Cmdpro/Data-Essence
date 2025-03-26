@@ -1,0 +1,31 @@
+{
+  "icon": {
+    "id": "datanessence:lunar_essence_wire"
+  },
+  "tab": "datanessence:essence_manipulation",
+  "x": 3,
+  "y": -1,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.lunar_essence_transfer.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/points/lunar_essence_node",
+        "datanessence:synthesis/lunar_essence_wire"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.lunar_essence_transfer.name"
+  },
+  "parents": [
+    "datanessence:essence_manipulation/essence_transfer",
+    "datanessence:machinery_transformation/ecliptrum"
+  ],
+  "critical": true
+}

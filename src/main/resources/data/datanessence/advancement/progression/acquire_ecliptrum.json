@@ -9,9 +9,9 @@
     "description": {
       "translate": "advancements.datanessence.acquire_ecliptrum.description"
     },
-    "hidden": false
+    "hidden": true
   },
-  "parent": "datanessence:progression/use_data_drive",
+  "parent": "datanessence:progression/acquire_synthesis_chamber",
   "criteria": {
     "has_ecliptrum": {
       "trigger": "minecraft:inventory_changed",
