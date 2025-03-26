@@ -53,6 +53,7 @@ runs {
         dependencies {
             runtime('org.jgrapht:jgrapht-core:1.5.2')
             runtime('org.jheaps:jheaps:0.14')
+            runtime('org.apfloat:apfloat:1.14.0')
         }
     }
 
@@ -150,6 +151,8 @@ dependencies {
     jarJar (group: 'org.jgrapht', name: 'jgrapht-core', version: '[1.5.2,)')
     implementation('org.jheaps:jheaps:0.14')
     jarJar (group: 'org.jheaps', name: 'jheaps', version: '[0.14,)')
+    implementation('org.apfloat:apfloat:1.14.0')
+    jarJar (group: 'org.apfloat', name: 'apfloat', version: '[1.14.0,)')
 }
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
