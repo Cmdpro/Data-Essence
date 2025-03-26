@@ -69,6 +69,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.LENSING_CRYSTAL_ORE.get())
                 .add(BlockRegistry.LIMITED_ITEM_BUFFER.get())
                 .add(BlockRegistry.LUNAR_ESSENCE_BATTERY.get())
+                .add(BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get())
                 .add(BlockRegistry.LUNAR_ESSENCE_POINT.get())
                 .add(BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get())
                 .add(BlockRegistry.NATURAL_ESSENCE_BATTERY.get())

@@ -1,0 +1,94 @@
+{
+  "variants": {
+    "facing=down": [
+      {
+        "model": "datanessence:block/lunar_essence_crystal",
+        "x": 180
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_2",
+        "x": 180
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_3",
+        "x": 180
+      }
+    ],
+    "facing=east": [
+      {
+        "model": "datanessence:block/lunar_essence_crystal",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_2",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_3",
+        "x": 90,
+        "y": 90
+      }
+    ],
+    "facing=north": [
+      {
+        "model": "datanessence:block/lunar_essence_crystal",
+        "x": 90
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_2",
+        "x": 90
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_3",
+        "x": 90
+      }
+    ],
+    "facing=south": [
+      {
+        "model": "datanessence:block/lunar_essence_crystal",
+        "x": 90,
+        "y": 180
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_2",
+        "x": 90,
+        "y": 180
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_3",
+        "x": 90,
+        "y": 180
+      }
+    ],
+    "facing=up": [
+      {
+        "model": "datanessence:block/lunar_essence_crystal"
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_2"
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_3"
+      }
+    ],
+    "facing=west": [
+      {
+        "model": "datanessence:block/lunar_essence_crystal",
+        "x": 90,
+        "y": 270
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_2",
+        "x": 90,
+        "y": 270
+      },
+      {
+        "model": "datanessence:block/lunar_essence_crystal_3",
+        "x": 90,
+        "y": 270
+      }
+    ]
+  }
+}

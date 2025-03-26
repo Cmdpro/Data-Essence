@@ -267,6 +267,7 @@ public class DataNEssence
 
             // Materials
             event.accept(ItemRegistry.ESSENCE_SHARD.get());
+            event.accept(ItemRegistry.LUNAR_ESSENCE_SHARD.get());
             event.accept(ItemRegistry.LENSING_CRYSTAL.get());
             event.accept(ItemRegistry.BONDING_POWDER.get());
             event.accept(ItemRegistry.CAPACITANCE_PANEL.get());
@@ -297,6 +298,7 @@ public class DataNEssence
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
             // World
             event.accept(BlockRegistry.ESSENCE_CRYSTAL.get());
+            event.accept(BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get());
             event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
             event.accept(BlockRegistry.TETHERGRASS.get());
             //event.accept(BlockRegistry.SPIRE_GLASS.get());

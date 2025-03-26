@@ -44,6 +44,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.COGNIZANT_CUBE);
         simpleItem(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC);
         simpleItem(ItemRegistry.ESSENCE_SHARD);
+        simpleItem(ItemRegistry.LUNAR_ESSENCE_SHARD);
         simpleItem(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK);
         simpleItem(ItemRegistry.TRAVERSITE_TRUDGERS);
         simpleItem(ItemRegistry.TRAVERSITE_ROAD_CHUNK);
@@ -73,6 +74,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ItemRegistry.ILLUMINATION_ROD);
 
         evenSimplerBlockItem(BlockRegistry.ESSENCE_CRYSTAL);
+        evenSimplerBlockItem(BlockRegistry.LUNAR_ESSENCE_CRYSTAL);
 
         evenSimplerBlockItem(BlockRegistry.DECO_ESSENCE_BUFFER);
         evenSimplerBlockItem(BlockRegistry.DECO_ITEM_BUFFER);

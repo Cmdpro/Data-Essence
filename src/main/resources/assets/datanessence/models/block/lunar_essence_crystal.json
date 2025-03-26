@@ -1,0 +1,7 @@
+{
+	"parent": "datanessence:block/essence_crystal",
+	"textures": {
+		"0": "datanessence:block/lunar_essence_crystal_1",
+		"particle": "datanessence:block/lunar_essence_crystal_1"
+	}
+}
