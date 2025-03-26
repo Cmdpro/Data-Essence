@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.api.node.block;
 
+import com.cmdpro.datanessence.api.node.EssenceNodeNetworks;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
-import com.cmdpro.datanessence.api.node.EssenceNodePath;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
@@ -22,7 +22,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,8 +33,11 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
 
 import java.util.Optional;
+import java.util.Set;
 
 public abstract class BaseEssencePoint extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -90,19 +92,22 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
 
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
-        if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity ent) {
-            for (BlockPos i : ent.link) {
-                ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
-                pLevel.addFreshEntity(item);
-            }
-            for (BlockPos i : ent.linkFrom) {
-                if (pLevel.getBlockEntity(i) instanceof BaseEssencePointBlockEntity ent2) {
-                    ItemEntity item = new ItemEntity(pLevel, i.getCenter().x, i.getCenter().y, i.getCenter().z, new ItemStack(getRequiredWire()));
+        if (pState.getBlock() != pNewState.getBlock()) {
+            if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity) {
+                EssenceNodeNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+                Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
+                for (DefaultEdge i : edges) {
+                    BlockPos pos = networks.graph.getEdgeSource(i);
+                    ItemEntity item = new ItemEntity(pLevel, pos.getCenter().x, pos.getCenter().y, pos.getCenter().z, new ItemStack(getRequiredWire()));
                     pLevel.addFreshEntity(item);
-                    ent2.link.remove(pPos);
-                    EssenceNodePath.updatePaths(ent2);
-                    ent2.updateBlock();
+                    if (!pos.equals(pPos)) {
+                        if (pLevel.getBlockEntity(pos) instanceof BaseEssencePointBlockEntity ent) {
+                            ent.updateBlock();
+                        }
+                    }
+                    networks.graph.removeEdge(i);
                 }
+                networks.updatePath();
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
@@ -127,9 +132,11 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof BaseEssencePointBlockEntity ent) {
                 if (pPlayer.getItemInHand(pHand).is(getRequiredWire())) {
+                    EssenceNodeNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+                    Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
                     Optional<BlockEntity> linkFrom = pPlayer.getData(AttachmentTypeRegistry.LINK_FROM);
                     if (!linkFrom.isPresent()) {
-                        if (ent.link.size() <= DataNEssenceConfig.maxNodeWires) {
+                        if (edges.stream().filter((edge) -> networks.graph.getEdgeSource(edge).equals(pPos)).toList().size() < DataNEssenceConfig.maxNodeWires) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
                             PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                             pLevel.playSound(null, pPos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 1f, 1.1f);
@@ -138,18 +145,13 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                         if (linkFrom.get().getBlockState().getBlock() instanceof BaseEssencePoint other) {
                             if (other.getRequiredWire() == getRequiredWire() && ent != linkFrom.get() && (ent.link.isEmpty() || !ent.link.contains(linkFrom.get().getBlockPos()))) {
                                 if (linkFrom.get() instanceof BaseEssencePointBlockEntity linkFrom2) {
-                                    if (!linkFrom2.link.contains(pPos)) {
-                                        linkFrom2.link.add(pPos);
-                                        EssenceNodePath.updatePaths(linkFrom2);
-                                        if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity linkTo) {
-                                            linkTo.linkFrom.add(linkFrom2.getBlockPos());
-                                        }
-                                    }
+                                    networks.graph.addEdge(linkFrom2.getBlockPos(), pPos);
                                     linkFrom2.updateBlock();
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
                                     pLevel.playSound(null, pPos, SoundEvents.CROSSBOW_LOADING_END.value(), SoundSource.BLOCKS, 1f, 1.1f);
+                                    networks.updatePath();
                                 }
                             }
                         }
@@ -195,18 +197,17 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof BaseEssencePointBlockEntity ent) {
                 if (pPlayer.isShiftKeyDown()) {
-                    if (!ent.link.isEmpty()) {
-                        for (BlockPos i : ent.link) {
-                            if (pLevel.getBlockEntity(i) instanceof BaseEssencePointBlockEntity linkTo) {
-                                linkTo.linkFrom.remove(ent.getBlockPos());
+                    EssenceNodeNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+                    Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
+                    if (edges.stream().anyMatch((edge) -> networks.graph.getEdgeSource(edge).equals(pPos))) {
+                        for (DefaultEdge i : edges) {
+                            if (networks.graph.getEdgeSource(i).equals(pPos)) {
+                                ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
+                                pLevel.addFreshEntity(item);
+                                networks.graph.removeEdge(i);
                             }
                         }
-                        for (BlockPos i : ent.link) {
-                            ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
-                            pLevel.addFreshEntity(item);
-                        }
-                        ent.link.clear();
-                        EssenceNodePath.updatePaths(ent);
+                        networks.updatePath();
                         ent.updateBlock();
                     }
                 }

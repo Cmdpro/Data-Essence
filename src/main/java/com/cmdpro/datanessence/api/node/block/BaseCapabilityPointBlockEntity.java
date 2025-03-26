@@ -1,9 +1,10 @@
 package com.cmdpro.datanessence.api.node.block;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.node.NodePathEnd;
+import com.cmdpro.datanessence.api.node.EssenceNodeNetworks;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
-import com.cmdpro.datanessence.api.node.CapabilityNodePath;
+import com.cmdpro.datanessence.api.node.CapabilityNodeNetworks;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -20,17 +21,19 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
+import org.jgrapht.graph.DefaultEdge;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     public AnimationState animState = new AnimationState();
-    public List<BlockPos> link = new ArrayList<>();
-    public List<BlockPos> linkFrom = new ArrayList<>();
-    public CapabilityNodePath path;
+    public List<BlockPos> link;
     public final ItemStackHandler universalUpgrade = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -75,44 +78,69 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     @Override
     public void onLoad() {
         super.onLoad();
-        path = CapabilityNodePath.calculate(this);
+        if (level != null) {
+            if (!level.isClientSide) {
+                CapabilityNodeNetworks networks = level.getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
+                if (!networks.graph.containsVertex(getBlockPos())) {
+                    networks.graph.addVertex(getBlockPos());
+                }
+            }
+        }
     }
     public abstract Color linkColor();
     @Override
     protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.saveAdditional(pTag, pRegistries);
-        ListTag list = new ListTag();
-        for (BlockPos i : link) {
-            CompoundTag blockpos = new CompoundTag();
-            blockpos.putInt("linkX", i.getX());
-            blockpos.putInt("linkY", i.getY());
-            blockpos.putInt("linkZ", i.getZ());
-            list.add(blockpos);
-        }
-        pTag.put("link", list);
-        ListTag list2 = new ListTag();
-        for (BlockPos i : linkFrom) {
-            CompoundTag blockpos = new CompoundTag();
-            blockpos.putInt("linkX", i.getX());
-            blockpos.putInt("linkY", i.getY());
-            blockpos.putInt("linkZ", i.getZ());
-            list2.add(blockpos);
-        }
-        pTag.put("linkFrom", list2);
         pTag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
         pTag.put("universalUpgrade", universalUpgrade.serializeNBT(pRegistries));
+        ListTag list = new ListTag();
+        if (link != null) {
+            for (BlockPos target : link) {
+                CompoundTag blockpos = new CompoundTag();
+                blockpos.putInt("linkX", target.getX());
+                blockpos.putInt("linkY", target.getY());
+                blockpos.putInt("linkZ", target.getZ());
+                list.add(blockpos);
+            }
+        }
+        pTag.put("link", list);
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseCapabilityPointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            if (pBlockEntity.linkFrom.isEmpty()) {
-                List<NodePathEnd> ends = Arrays.stream(pBlockEntity.path.ends).toList();
+            if (pBlockEntity.link == null) {
+                pBlockEntity.updateLinks();
+            }
+            CapabilityNodeNetworks networks = pLevel.getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
+            Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
+            if (edges.stream().noneMatch((edge) -> networks.graph.getEdgeTarget(edge).equals(pPos)) && !edges.isEmpty()) {
+                ShortestPathAlgorithm.SingleSourcePaths<BlockPos, DefaultEdge> paths = networks.path.getPaths(pPos);
+                List<GraphPath<BlockPos, DefaultEdge>> ends = networks.graph.vertexSet().stream().filter((vertex) -> pLevel.isLoaded(vertex) && networks.graph.edgesOf(vertex).stream().noneMatch((edge) -> networks.graph.getEdgeSource(edge).equals(vertex)) && paths.getPath(vertex) != null).map(paths::getPath).toList();
                 pBlockEntity.preTransferHooks(pBlockEntity, ends);
                 pBlockEntity.transfer(pBlockEntity, ends);
                 pBlockEntity.postTransferHooks(pBlockEntity, ends);
             }
+        } else {
+            if (pBlockEntity.link == null) {
+                pBlockEntity.link = new ArrayList<>();
+            }
         }
     }
-    public boolean preTransferHooks(BlockEntity from, List<NodePathEnd> other) {
+    public void updateLinks() {
+        if (link == null) {
+            link = new ArrayList<>();
+        }
+        link.clear();
+        CapabilityNodeNetworks networks = level.getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
+        if (networks.graph.containsVertex(getBlockPos())) {
+            for (DefaultEdge i : networks.graph.edgesOf(getBlockPos())) {
+                if (networks.graph.getEdgeSource(i).equals(getBlockPos())) {
+                    BlockPos target = networks.graph.getEdgeTarget(i);
+                    link.add(target);
+                }
+            }
+        }
+    }
+    public boolean preTransferHooks(BlockEntity from, List<GraphPath<BlockPos, DefaultEdge>> other) {
         boolean cancel = false;
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             if (upgrade.preTransfer(universalUpgrade.getStackInSlot(0), from, other, cancel)) {
@@ -126,7 +154,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         }
         return cancel;
     }
-    public void postTransferHooks(BlockEntity from, List<NodePathEnd> other) {
+    public void postTransferHooks(BlockEntity from, List<GraphPath<BlockPos, DefaultEdge>> other) {
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             upgrade.postTransfer(universalUpgrade.getStackInSlot(0), from, other);
         }
@@ -134,7 +162,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
             upgrade.postTransfer(uniqueUpgrade.getStackInSlot(0), from, other);
         }
     }
-    public abstract void transfer(BaseCapabilityPointBlockEntity from, List<NodePathEnd> other);
+    public abstract void transfer(BaseCapabilityPointBlockEntity from, List<GraphPath<BlockPos, DefaultEdge>> other);
     public Direction getDirection() {
         if (getBlockState().getValue(BaseCapabilityPoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;
@@ -152,6 +180,9 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries) {
         CompoundTag tag = pkt.getTag();
         ListTag list = (ListTag)tag.get("link");
+        if (link == null) {
+            link = new ArrayList<>();
+        }
         link.clear();
         for (Tag i : list) {
             CompoundTag blockpos = (CompoundTag)i;
@@ -164,12 +195,14 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         ListTag list = new ListTag();
-        for (BlockPos i : link) {
-            CompoundTag blockpos = new CompoundTag();
-            blockpos.putInt("linkX", i.getX());
-            blockpos.putInt("linkY", i.getY());
-            blockpos.putInt("linkZ", i.getZ());
-            list.add(blockpos);
+        if (link != null) {
+            for (BlockPos target : link) {
+                CompoundTag blockpos = new CompoundTag();
+                blockpos.putInt("linkX", target.getX());
+                blockpos.putInt("linkY", target.getY());
+                blockpos.putInt("linkZ", target.getZ());
+                list.add(blockpos);
+            }
         }
         tag.put("link", list);
         tag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
@@ -177,6 +210,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         return tag;
     }
     public void updateBlock() {
+        updateLinks();
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
@@ -184,21 +218,14 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     @Override
     public void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
         super.loadAdditional(pTag, pRegistries);
-        link.clear();
-        if (pTag.contains("link")) {
-            ListTag list = (ListTag) pTag.get("link");
-            for (Tag i : list) {
-                CompoundTag blockpos = (CompoundTag) i;
-                link.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
-            }
+        ListTag list = (ListTag)pTag.get("link");
+        if (link == null) {
+            link = new ArrayList<>();
         }
-        linkFrom.clear();
-        if (pTag.contains("linkFrom")) {
-            ListTag list2 = (ListTag) pTag.get("linkFrom");
-            for (Tag i : list2) {
-                CompoundTag blockpos = (CompoundTag) i;
-                linkFrom.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
-            }
+        link.clear();
+        for (Tag i : list) {
+            CompoundTag blockpos = (CompoundTag)i;
+            link.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
         }
         uniqueUpgrade.deserializeNBT(pRegistries, pTag.getCompound("uniqueUpgrade"));
         universalUpgrade.deserializeNBT(pRegistries, pTag.getCompound("universalUpgrade"));

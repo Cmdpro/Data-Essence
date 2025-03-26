@@ -1,7 +1,6 @@
 package com.cmdpro.datanessence.integration.mekanism;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.node.NodePathEnd;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
@@ -12,6 +11,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jgrapht.GraphPath;
+import org.jgrapht.graph.DefaultEdge;
 import org.joml.Math;
 
 import java.awt.*;
@@ -31,46 +32,47 @@ public class ChemicalNodeBlockEntity extends BaseCapabilityPointBlockEntity {
     }
 
     @Override
-    public void transfer(BaseCapabilityPointBlockEntity from, List<NodePathEnd> other) {
+    public void transfer(BaseCapabilityPointBlockEntity from, List<GraphPath<BlockPos, DefaultEdge>> other) {
         int transferAmount = (int) Math.floor((float)getFinalSpeed(DataNEssenceConfig.fluidPointTransfer)/(float)other.size());
 
-        for (NodePathEnd i : other) {
-            BaseCapabilityPointBlockEntity to = (BaseCapabilityPointBlockEntity) i.entity;
-            List<ChemicalStack> allowedChemicals = null;
+        for (GraphPath<BlockPos, DefaultEdge> i : other) {
+            if (level.getBlockEntity(i.getEndVertex()) instanceof BaseCapabilityPointBlockEntity to) {
+                List<ChemicalStack> allowedChemicals = null;
 
-            for (BlockEntity j : i.path) {
-                BaseCapabilityPointBlockEntity to2 = (BaseCapabilityPointBlockEntity) j;
-
-                List<ChemicalStack> value = to2.getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "allowed_chemicals"), null);
-                if (allowedChemicals == null) {
-                    allowedChemicals = value;
-                } else if (value != null) {
-                    allowedChemicals = allowedChemicals.stream().filter((stack1) -> value.stream().anyMatch((stack2) -> ChemicalStack.isSameChemical(stack1, stack2))).toList();
+                for (BlockPos j : i.getVertexList()) {
+                    if (level.getBlockEntity(j) instanceof BaseCapabilityPointBlockEntity to2) {
+                        List<ChemicalStack> value = to2.getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "allowed_chemicals"), null);
+                        if (allowedChemicals == null) {
+                            allowedChemicals = value;
+                        } else if (value != null) {
+                            allowedChemicals = allowedChemicals.stream().filter((stack1) -> value.stream().anyMatch((stack2) -> ChemicalStack.isSameChemical(stack1, stack2))).toList();
+                        }
+                    }
                 }
-            }
 
-            IChemicalHandler resolved = level.getCapability(BLOCK_CHEMICAL, i.entity.getBlockPos().relative(to.getDirection().getOpposite()), to.getDirection());
-            IChemicalHandler resolved2 = level.getCapability(BLOCK_CHEMICAL, from.getBlockPos().relative(from.getDirection().getOpposite()), from.getDirection());
+                IChemicalHandler resolved = level.getCapability(BLOCK_CHEMICAL, to.getBlockPos().relative(to.getDirection().getOpposite()), to.getDirection());
+                IChemicalHandler resolved2 = level.getCapability(BLOCK_CHEMICAL, from.getBlockPos().relative(from.getDirection().getOpposite()), from.getDirection());
 
-            if (resolved == null || resolved2 == null) {
-                continue;
-            }
-
-            if (other instanceof ICustomChemicalNodeBehaviour behaviour) {
-                if (!behaviour.canInsertChemical(resolved, resolved2)) {
+                if (resolved == null || resolved2 == null) {
                     continue;
                 }
-            }
 
-            for (int o = 0; o < resolved2.getChemicalTanks(); o++) {
-                ChemicalStack copy = resolved2.getChemicalInTank(o).copy();
-                if (allowedChemicals != null && allowedChemicals.stream().noneMatch((stack) -> ChemicalStack.isSameChemical(stack, copy))) {
-                    continue;
+                if (other instanceof ICustomChemicalNodeBehaviour behaviour) {
+                    if (!behaviour.canInsertChemical(resolved, resolved2)) {
+                        continue;
+                    }
                 }
-                if (!copy.isEmpty()) {
-                    copy.setAmount((long) Math.clamp(0, transferAmount, copy.getAmount()));
-                    ChemicalStack filled = resolved.insertChemical(copy, Action.EXECUTE);
-                    resolved2.extractChemical(new ChemicalStack(copy.getChemical(), filled.getAmount()), Action.EXECUTE);
+
+                for (int o = 0; o < resolved2.getChemicalTanks(); o++) {
+                    ChemicalStack copy = resolved2.getChemicalInTank(o).copy();
+                    if (allowedChemicals != null && allowedChemicals.stream().noneMatch((stack) -> ChemicalStack.isSameChemical(stack, copy))) {
+                        continue;
+                    }
+                    if (!copy.isEmpty()) {
+                        copy.setAmount((long) Math.clamp(0, transferAmount, copy.getAmount()));
+                        ChemicalStack filled = resolved.insertChemical(copy, Action.EXECUTE);
+                        resolved2.extractChemical(new ChemicalStack(copy.getChemical(), filled.getAmount()), Action.EXECUTE);
+                    }
                 }
             }
         }

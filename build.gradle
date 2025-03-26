@@ -18,10 +18,6 @@ tasks.named('wrapper', Wrapper).configure {
 version = mod_version
 group = mod_group_id
 
-repositories {
-    mavenLocal()
-}
-
 base {
     archivesName = mod_id
 }
@@ -29,6 +25,7 @@ base {
 // Mojang ships Java 21 to end users starting in 1.20.5, so mods should target Java 21.
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+jarJar.enable()
 minecraft {
     accessTransformers {
         file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -53,6 +50,10 @@ runs {
         systemProperty 'forge.logging.console.level', 'debug'
 
         modSource project.sourceSets.main
+        dependencies {
+            runtime('org.jgrapht:jgrapht-core:1.5.2')
+            runtime('org.jheaps:jheaps:0.14')
+        }
     }
 
     client {
@@ -129,6 +130,7 @@ repositories {
         url = "https://api.modrinth.com/maven"
     }
     maven { url = 'https://modmaven.dev/' } // Mekanism
+    mavenCentral()
 }
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
@@ -143,6 +145,11 @@ dependencies {
 
     compileOnly "mekanism:Mekanism:${mekanism_version}:api"
     localRuntime "mekanism:Mekanism:${mekanism_version}"
+
+    implementation('org.jgrapht:jgrapht-core:1.5.2')
+    jarJar (group: 'org.jgrapht', name: 'jgrapht-core', version: '[1.5.2,)')
+    implementation('org.jheaps:jheaps:0.14')
+    jarJar (group: 'org.jheaps', name: 'jheaps', version: '[0.14,)')
 }
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [

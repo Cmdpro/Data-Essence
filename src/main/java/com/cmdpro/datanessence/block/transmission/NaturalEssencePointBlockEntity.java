@@ -1,6 +1,5 @@
 package com.cmdpro.datanessence.block.transmission;
 
-import com.cmdpro.datanessence.api.node.NodePathEnd;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
@@ -11,6 +10,8 @@ import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jgrapht.GraphPath;
+import org.jgrapht.graph.DefaultEdge;
 import org.joml.Math;
 
 import java.awt.*;
@@ -26,20 +27,22 @@ public class NaturalEssencePointBlockEntity extends BaseEssencePointBlockEntity 
     }
 
     @Override
-    public void transfer(BaseEssencePointBlockEntity from, List<NodePathEnd> other) {
+    public void transfer(BaseEssencePointBlockEntity from, List<GraphPath<BlockPos, DefaultEdge>> other) {
         int transferAmount = (int) Math.floor((float)getFinalSpeed(DataNEssenceConfig.essencePointTransfer)/(float)other.size());
-        for (NodePathEnd i : other) {
-            BlockEntity fromEnt = from.getLevel().getBlockEntity(from.getBlockPos().relative(from.getDirection().getOpposite()));
-            BlockEntity toEnt = i.entity.getLevel().getBlockEntity(i.entity.getBlockPos().relative(((BaseEssencePointBlockEntity)i.entity).getDirection().getOpposite()));
-            if (fromEnt instanceof EssenceBlockEntity fromStorage && toEnt instanceof EssenceBlockEntity toStorage) {
-                if (toEnt instanceof ICustomEssencePointBehaviour behaviour) {
-                    if (!behaviour.canInsertEssence(toStorage.getStorage(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), transferAmount)) {
-                        return;
+        for (GraphPath<BlockPos, DefaultEdge> i : other) {
+            if (level.getBlockEntity(i.getEndVertex()) instanceof BaseEssencePointBlockEntity entity) {
+                BlockEntity fromEnt = from.getLevel().getBlockEntity(from.getBlockPos().relative(from.getDirection().getOpposite()));
+                BlockEntity toEnt = entity.getLevel().getBlockEntity(entity.getBlockPos().relative(((BaseEssencePointBlockEntity) entity).getDirection().getOpposite()));
+                if (fromEnt instanceof EssenceBlockEntity fromStorage && toEnt instanceof EssenceBlockEntity toStorage) {
+                    if (toEnt instanceof ICustomEssencePointBehaviour behaviour) {
+                        if (!behaviour.canInsertEssence(toStorage.getStorage(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), transferAmount)) {
+                            return;
+                        }
                     }
+                    EssenceStorage.transferEssence(fromStorage.getStorage(), toStorage.getStorage(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), transferAmount);
+                    updateBlock(fromEnt);
+                    updateBlock(toEnt);
                 }
-                EssenceStorage.transferEssence(fromStorage.getStorage(), toStorage.getStorage(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), transferAmount);
-                updateBlock(fromEnt);
-                updateBlock(toEnt);
             }
         }
     }
