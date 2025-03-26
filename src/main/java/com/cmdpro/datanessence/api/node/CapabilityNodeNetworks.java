@@ -21,6 +21,4 @@ public class CapabilityNodeNetworks {
         this.graph = graph;
         path = new DijkstraShortestPath<>(graph);
     }
-    public void updatePath() {
-    }
 }

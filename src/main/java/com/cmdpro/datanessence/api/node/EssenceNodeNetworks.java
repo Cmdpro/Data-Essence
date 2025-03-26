@@ -18,6 +18,4 @@ public class EssenceNodeNetworks {
         this.graph = graph;
         path = new DijkstraShortestPath<>(graph);
     }
-    public void updatePath() {
-    }
 }

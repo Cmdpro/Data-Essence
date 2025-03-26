@@ -100,14 +100,13 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                     BlockPos pos = networks.graph.getEdgeSource(i);
                     ItemEntity item = new ItemEntity(pLevel, pos.getCenter().x, pos.getCenter().y, pos.getCenter().z, new ItemStack(getRequiredWire()));
                     pLevel.addFreshEntity(item);
+                    networks.graph.removeEdge(i);
                     if (!pos.equals(pPos)) {
                         if (pLevel.getBlockEntity(pos) instanceof BaseEssencePointBlockEntity ent) {
                             ent.updateBlock();
                         }
                     }
-                    networks.graph.removeEdge(i);
                 }
-                networks.updatePath();
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
@@ -151,7 +150,6 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
                                     pLevel.playSound(null, pPos, SoundEvents.CROSSBOW_LOADING_END.value(), SoundSource.BLOCKS, 1f, 1.1f);
-                                    networks.updatePath();
                                 }
                             }
                         }
@@ -207,7 +205,6 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                                 networks.graph.removeEdge(i);
                             }
                         }
-                        networks.updatePath();
                         ent.updateBlock();
                     }
                 }
