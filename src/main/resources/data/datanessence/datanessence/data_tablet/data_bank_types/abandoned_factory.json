@@ -41,6 +41,7 @@
     "datanessence:tier_2/synthesis_chamber",
     "datanessence:tier_2/warp_capsule",
     "datanessence:tier_3/ecliptrum",
+    "datanessence:tier_3/lunar_essence_transfer",
     { "value": "datanessence:tier_2/mod_integration_ae2", "required": false },
     { "value": "datanessence:tier_2/mod_integration_mekanism", "required": false }
   ]

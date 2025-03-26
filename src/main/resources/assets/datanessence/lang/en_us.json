@@ -303,6 +303,8 @@
   "data_tablet.pages.industrial_plant_siphon.name": "Industrial Plant Siphon",
   "data_tablet.pages.industrial_plant_siphon.page1.text": "The life of the world is not limited to creatures - nature, too, bears Essence of a kind. We can use industrial processes to siphon basic Essence from nature, yielding a far more readily sustainable source than crystals or monsters.\n\nIt does, however, seem that common plants provide far less Essence than rarer, more magically attuned ones....",
   "data_tablet.pages.industrial_plant_siphon.page2.text": " ◇ Power source: Plants.\n ◇ Coolant: None.\n ◇ Requires consumables: Plants/leaves/crops.\n ◇ Risks: None.",
+  "data_tablet.pages.lunar_essence_transfer.name": "Lunar Essence Transfer",
+  "data_tablet.pages.lunar_essence_transfer.page1.text": "As we have Wires and Nodes for basic Essence, the same basic design carries over to Lunar Essence, as well. However, instead of copper for the nodes, they instead must be plated with Ecliptrum. The wires, curiously, work satisfactorily as-is, though of course needing a different coating material.",
 
   "_comment.data_tablet.pages.integration": "Separate lang category for mod integration entries.",
   "data_tablet.pages.integration_ae2.name": "Integration: Applied Energistics 2",
