@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:lunar_essence_crystal"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_lunar_essence_shard.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_lunar_essence_shard.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_ecliptrum",
+  "criteria": {
+    "has_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:lunar_essence_shard" ] } ] }
+    }
+  }
+}
