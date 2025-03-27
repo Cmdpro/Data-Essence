@@ -8,3 +8,4 @@
 - Conductance Rods' manual crafting recipe is less expensive
 - Essence Wires and Nodes are made with Essence Shards instead of Amethyst
 - Enforced use of buffers
+- Certain recipes from incomplete entries can show in EMI again
