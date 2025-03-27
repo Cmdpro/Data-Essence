@@ -49,7 +49,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Ess
         }
     };
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
 
     public void drops() {
@@ -57,7 +57,7 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Ess
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    
 
     public ChargerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.CHARGER.get(), pos, state);

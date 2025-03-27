@@ -71,18 +71,14 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, outputItemHandler));
+    
+    
 
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IItemHandler getOutputHandler() {
-        return lazyOutputHandler.get();
-    }
-    public IItemHandler getCombinedHandler() {
-        return lazyCombinedHandler.get();
+        return outputItemHandler;
     }
     public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
@@ -167,7 +163,7 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EntropicProcessorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
                 if (pBlockEntity.recipe != null) {

@@ -79,23 +79,10 @@ public class DataNEssence
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ESSENCE_BURNER.get(), (o, direction) -> o.getItemHandler());
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FABRICATOR.get(), (o, direction) -> o.getItemHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INFUSER.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getItemHandler();
-            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.AUTO_FABRICATOR.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getItemHandler();
-            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_BUFFER.get(), (o, direction) -> o.getItemHandler());
@@ -103,69 +90,29 @@ public class DataNEssence
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_BUFFER.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_COLLECTOR.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_SPILLER.get(), (o, direction) -> o.getFluidHandler());
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.CHARGER.get(), (o, direction) -> o.getItemHandler());
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.LASER_EMITTER.get(), (o, direction) -> o.getItemHandler());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_TANK.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FLUID_BOTTLER.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getItemHandler();
-            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_BOTTLER.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getItemHandler();
-            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ESSENCE_FURNACE.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getItemHandler();
-            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.SYNTHESIS_CHAMBER.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getItemHandler();
-            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_MIXER.get(), (o, direction) -> {
-            if (direction == Direction.DOWN) {
-                return o.getFluidHandler();
-            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FLUID_MIXER.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
             return o.getItemHandler();
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTICING_LURE.get(), (o, direction) -> o.getItemHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getItemHandler();
-            }
             return o.getOutputHandler();
         });
-        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), (o, direction) -> o.getWaterHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_FILTER.get(), (o, direction) -> {
             IntegerRange range = ItemFilter.DIRECTIONS.get(direction);
             boolean canInsert = true;
@@ -184,38 +131,14 @@ public class DataNEssence
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.FILTER_UPGRADE.get());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.METAL_SHAPER.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getItemHandler();
-            }
             return o.getOutputHandler();
-        });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), (o, direction) -> {
-            return o.getItemHandler();
         });
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.FILTER_UPGRADE.get());
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (o, direction) -> {
-            return o.getItemHandler();
-        });
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (o, direction) -> {
-            if (direction == Direction.DOWN) {
-                return o.getFuelHandler();
-            }
             return o.getOutputHandler();
         });
-        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.DRYING_TABLE.get(), (o, direction) -> {
-            return o.getFluidHandler();
-        });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.DRYING_TABLE.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedHandler();
-            }
-            if (direction == Direction.DOWN) {
-                return o.getItemHandler();
-            }
             return o.getOutputHandler();
         });
     }

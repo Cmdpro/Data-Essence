@@ -35,9 +35,9 @@ public class EnticingLureBlockEntity extends BlockEntity implements MenuProvider
             setChanged();
         }
     };
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
 
     public EnticingLureBlockEntity(BlockPos pos, BlockState state) {

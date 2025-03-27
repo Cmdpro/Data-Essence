@@ -88,9 +88,9 @@ public class ItemFilterBlockEntity extends BlockEntity implements MenuProvider, 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    
     private final ItemStackHandler filterHandler = new ItemStackHandler(9*6) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -98,9 +98,9 @@ public class ItemFilterBlockEntity extends BlockEntity implements MenuProvider, 
         }
     };
     public IItemHandler getFilterHandler() {
-        return lazyFilterHandler.get();
+        return filterHandler;
     }
-    private Lazy<IItemHandler> lazyFilterHandler = Lazy.of(() -> filterHandler);
+    
     public ItemFilterBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ITEM_FILTER.get(), pos, state);
     }

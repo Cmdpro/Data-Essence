@@ -87,18 +87,18 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IFluidHandler> lazyOutputHandler = Lazy.of(() -> outputFluidHandler);
-    private Lazy<IFluidHandler> lazyFuelHandler = Lazy.of(() -> fuelFluidHandler);
+    
+    
+    
 
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IFluidHandler getOutputHandler() {
-        return lazyOutputHandler.get();
+        return outputFluidHandler;
     }
     public IFluidHandler getFuelHandler() {
-        return lazyFuelHandler.get();
+        return fuelFluidHandler;
     }
     public MelterBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.MELTER.get(), pos, state);
@@ -176,8 +176,8 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, MelterBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
-            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
+            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity, pBlockEntity.fuelFluidHandler);
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
                 if (pBlockEntity.recipe != null) {

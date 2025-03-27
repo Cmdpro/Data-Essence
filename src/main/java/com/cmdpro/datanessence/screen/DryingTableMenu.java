@@ -33,8 +33,7 @@ public class DryingTableMenu extends AbstractContainerMenu implements IDataNEsse
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
-        this.addSlot(new SlotItemHandler(handler, 0, 94, 7));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 94, 7));
         this.addSlot(new ModResultSlot(blockEntity.getOutputHandler(), 0, 80, 54));
     }
 

@@ -37,8 +37,7 @@ public class ChargerMenu extends AbstractContainerMenu implements IDataNEssenceM
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
-        this.addSlot(new SlotItemHandler(handler, 0, 98, 34));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 98, 34));
     }
 
     @Override

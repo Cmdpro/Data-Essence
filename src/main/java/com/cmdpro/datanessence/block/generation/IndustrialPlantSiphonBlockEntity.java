@@ -65,14 +65,14 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    
 
     public IndustrialPlantSiphonBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), pos, state);
     }
 
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
 
     public static void tick(Level world, BlockPos pos, BlockState state, IndustrialPlantSiphonBlockEntity tile) {
         if (!world.isClientSide()) {
-            BufferUtil.getItemsFromBuffersBelow(tile);
+            BufferUtil.getItemsFromBuffersBelow(tile, tile.itemHandler);
             if (tile.essenceGenerationTicks <= 0 ) {
                 tile.essenceGenerationTicks = tile.getEssenceProduced(tile);
                 tile.itemHandler.extractItem(0, 1, false);

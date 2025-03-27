@@ -104,31 +104,27 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     private final MultiFluidTank fluidHandler = new MultiFluidTankNoDuplicateFluids(List.of(new FluidTank(1000) { @Override protected void onContentsChanged() { checkRecipes(); } }, new FluidTank(1000) { @Override protected void onContentsChanged() { checkRecipes(); } }));
     private final FluidTank outputFluidHandler = new FluidTank(1000);
     public IFluidHandler getFluidHandler() {
-        return lazyFluidHandler.get();
+        return fluidHandler;
     }
-    private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
+    
 
     public void drops() {
         SimpleContainer inventory = getInv();
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IItemHandler> lazyDataDriveHandler = Lazy.of(() -> dataDriveHandler);
-    private Lazy<IFluidHandler> lazyOutputFluidHandler = Lazy.of(() -> outputFluidHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, dataDriveHandler));
+    
+    
+    
 
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IItemHandler getDataDriveHandler() {
-        return lazyDataDriveHandler.get();
+        return dataDriveHandler;
     }
     public IFluidHandler getOutputHandler() {
-        return lazyOutputFluidHandler.get();
-    }
-    public IItemHandler getCombinedHandler() {
-        return lazyCombinedHandler.get();
+        return outputFluidHandler;
     }
 
     public FluidMixerBlockEntity(BlockPos pos, BlockState state) {
@@ -223,8 +219,8 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidMixerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
-            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
+            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity, pBlockEntity.fluidHandler);
             boolean resetWorkTime = true;
             if (pBlockEntity.recipe != null) {
                 boolean enoughEssence = false;

@@ -38,8 +38,7 @@ public class IndustrialPlantSiphonMenu extends AbstractContainerMenu implements 
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
-        this.addSlot(new SlotItemHandler(handler, 0, 80, 34));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 80, 34));
     }
 
     @Override

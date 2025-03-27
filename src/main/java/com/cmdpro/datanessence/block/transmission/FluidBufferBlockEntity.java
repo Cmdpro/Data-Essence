@@ -42,9 +42,9 @@ public class FluidBufferBlockEntity extends BlockEntity {
         return transferredSomething;
     }
     public IFluidHandler getFluidHandler() {
-        return lazyFluidHandler.get();
+        return fluidHandler;
     }
-    private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
+    
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("fluid", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));

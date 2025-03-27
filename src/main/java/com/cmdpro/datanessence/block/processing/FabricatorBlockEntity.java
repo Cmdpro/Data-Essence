@@ -75,7 +75,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
         }
     }
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public void checkRecipes() {
         Optional<RecipeHolder<IFabricationRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), getCraftingInv().asCraftInput(), level);
@@ -101,7 +101,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    
 
     public FabricatorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FABRICATOR.get(), pos, state);

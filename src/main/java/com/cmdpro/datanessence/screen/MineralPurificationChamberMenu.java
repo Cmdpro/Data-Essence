@@ -39,10 +39,9 @@ public class MineralPurificationChamberMenu extends AbstractContainerMenu implem
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
-        this.addSlot(new SlotItemHandler(handler, 0, 62, 34));
-        this.addSlot(new ModResultSlot(handler, 1, 116, 22));
-        this.addSlot(new ModResultSlot(handler, 2, 116, 51));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 62, 34));
+        this.addSlot(new ModResultSlot(blockEntity.getOutputHandler(), 0, 116, 22));
+        this.addSlot(new ModResultSlot(blockEntity.getOutputHandler(), 1, 116, 51));
     }
 
     @Override

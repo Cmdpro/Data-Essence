@@ -31,9 +31,9 @@ public class FluidSpillerBlockEntity extends BlockEntity implements EssenceBlock
         super(BlockEntityRegistry.FLUID_SPILLER.get(), pos, state);
     }
     public IFluidHandler getFluidHandler() {
-        return lazyFluidHandler.get();
+        return fluidHandler;
     }
-    private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
+    
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("EssenceStorage", storage.toNbt());

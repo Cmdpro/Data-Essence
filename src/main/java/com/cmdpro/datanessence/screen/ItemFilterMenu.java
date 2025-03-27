@@ -38,11 +38,10 @@ public class ItemFilterMenu extends AbstractContainerMenu implements IDataNEssen
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = blockEntity.getFilterHandler();
         int o = 0;
         for (int j = 0; j < 6; j++) {
             for (int i = 0; i < 9; i++) {
-                this.addSlot(new SlotItemHandler(handler, o, 8 + (i * 18), 7 + (j * 18)));
+                this.addSlot(new SlotItemHandler(blockEntity.getFilterHandler(), o, 8 + (i * 18), 7 + (j * 18)));
                 o++;
             }
         }

@@ -75,22 +75,18 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
         }
     };
 
-    private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, outputItemHandler));
+    
+    
+    
 
     public IFluidHandler getFluidHandler() {
-        return lazyFluidHandler.get();
+        return fluidHandler;
     }
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IItemHandler getOutputHandler() {
-        return lazyOutputHandler.get();
-    }
-    public IItemHandler getCombinedHandler() {
-        return lazyCombinedHandler.get();
+        return outputItemHandler;
     }
 
     public DryingTableBlockEntity(BlockPos pos, BlockState blockState) {
@@ -157,8 +153,8 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
     public static void tick(Level world, BlockPos pos, BlockState state, DryingTableBlockEntity dryingTable) {
         if (!world.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(dryingTable, EssenceTypeRegistry.ESSENCE.get());
-            BufferUtil.getFluidsFromBuffersBelow(dryingTable);
-            BufferUtil.getItemsFromBuffersBelow(dryingTable);
+            BufferUtil.getFluidsFromBuffersBelow(dryingTable, dryingTable.fluidHandler);
+            BufferUtil.getItemsFromBuffersBelow(dryingTable, dryingTable.itemHandler);
 
             if (dryingTable.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 0.5f && dryingTable.recipe != null) {
 

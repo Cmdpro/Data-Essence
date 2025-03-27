@@ -34,9 +34,9 @@ public class FluidCollectorBlockEntity extends BlockEntity implements EssenceBlo
     }
     private final FluidTank fluidHandler = new FluidTank(4000);
     public IFluidHandler getFluidHandler() {
-        return lazyFluidHandler.get();
+        return fluidHandler;
     }
-    private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
+    
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("EssenceStorage", storage.toNbt());
