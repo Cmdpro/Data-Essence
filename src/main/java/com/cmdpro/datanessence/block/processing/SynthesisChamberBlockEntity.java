@@ -109,6 +109,10 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
     public IItemHandler getOutputHandler() {
         return outputItemHandler;
     }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, dataDriveHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
 
     public SynthesisChamberBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.SYNTHESIS_CHAMBER.get(), pos, state);

@@ -106,6 +106,10 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
     public IItemHandler getOutputHandler() {
         return outputItemHandler;
     }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, dataDriveHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     public InfuserBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.INFUSER.get(), pos, state);
         item = ItemStack.EMPTY;

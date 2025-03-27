@@ -101,6 +101,10 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
     public IItemHandler getOutputHandler() {
         return outputItemHandler;
     }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     public MineralPurificationChamberBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), pos, state);
     }

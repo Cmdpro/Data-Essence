@@ -107,6 +107,10 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
     public IItemHandler getOutputHandler() {
         return outputItemHandler;
     }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, dataDriveHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
 
     public AutoFabricatorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.AUTO_FABRICATOR.get(), pos, state);

@@ -42,6 +42,9 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
@@ -61,8 +64,11 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
             setChanged();
         }
     };
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     private final FluidTank fluidHandler = new FluidTank(4000);
-
     public void drops() {
         SimpleContainer inventory = getInv();
 

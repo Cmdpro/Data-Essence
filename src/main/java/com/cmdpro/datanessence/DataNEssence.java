@@ -79,9 +79,15 @@ public class DataNEssence
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INFUSER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.AUTO_FABRICATOR.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_BUFFER.get(), (o, direction) -> o.getItemHandler());
@@ -91,28 +97,51 @@ public class DataNEssence
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_SPILLER.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_TANK.get(), (o, direction) -> o.getFluidHandler());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FLUID_BOTTLER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getOutputHandler();
         });
-        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_BOTTLER.get(), (o, direction) -> o.getFluidHandler());
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_BOTTLER.get(), (o, direction) -> {
+            return o.getFluidHandler();
+        });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ESSENCE_FURNACE.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.SYNTHESIS_CHAMBER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_MIXER.get(), (o, direction) -> {
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FLUID_MIXER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getItemHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_FILTER.get(), (o, direction) -> {
+            if (direction == null) {
+                return null;
+            }
             IntegerRange range = ItemFilter.DIRECTIONS.get(direction);
             boolean canInsert = true;
             if (range != null) {
@@ -130,6 +159,9 @@ public class DataNEssence
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.FILTER_UPGRADE.get());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.METAL_SHAPER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getOutputHandler();
         });
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
@@ -138,7 +170,52 @@ public class DataNEssence
             return o.getOutputHandler();
         });
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.DRYING_TABLE.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
             return o.getOutputHandler();
+        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.CHARGER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
+            return null;
+        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTICING_LURE.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
+            return null;
+        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.LASER_EMITTER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
+            return null;
+        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ESSENCE_BURNER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
+            return null;
+        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
+            return null;
+        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FABRICATOR.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
+            return null;
+        });
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (o, direction) -> {
+            if (direction == null) {
+                return o.getCombinedInvWrapper();
+            }
+            return null;
         });
     }
     @SubscribeEvent

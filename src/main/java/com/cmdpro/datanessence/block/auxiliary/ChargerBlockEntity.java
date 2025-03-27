@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,6 +53,10 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Ess
         return itemHandler;
     }
 
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     public void drops() {
         SimpleContainer inventory = getInv();
 

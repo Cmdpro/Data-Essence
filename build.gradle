@@ -143,6 +143,7 @@ dependencies {
 
     implementation "maven.modrinth:iris:1.8.1+1.21.1-neoforge"
     implementation "maven.modrinth:sodium:mc1.21.1-0.6.7-neoforge"
+    implementation "maven.modrinth:jade:15.9.2+neoforge"
 
     compileOnly "mekanism:Mekanism:${mekanism_version}:api"
     localRuntime "mekanism:Mekanism:${mekanism_version}"

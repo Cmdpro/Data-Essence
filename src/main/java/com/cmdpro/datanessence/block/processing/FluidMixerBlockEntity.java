@@ -127,6 +127,10 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         return outputFluidHandler;
     }
 
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, dataDriveHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     public FluidMixerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_MIXER.get(), pos, state);
     }

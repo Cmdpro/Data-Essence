@@ -69,6 +69,10 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
     public IItemHandler getOutputHandler() {
         return outputItemHandler;
     }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     public EssenceFurnaceBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ESSENCE_FURNACE.get(), pos, state);
         item = ItemStack.EMPTY;

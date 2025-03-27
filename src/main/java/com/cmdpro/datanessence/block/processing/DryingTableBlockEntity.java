@@ -88,7 +88,10 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
     public IItemHandler getOutputHandler() {
         return outputItemHandler;
     }
-
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     public DryingTableBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistry.DRYING_TABLE.get(), pos, blockState);
     }

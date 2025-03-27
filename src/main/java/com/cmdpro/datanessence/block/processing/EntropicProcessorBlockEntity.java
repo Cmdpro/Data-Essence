@@ -80,6 +80,10 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     public IItemHandler getOutputHandler() {
         return outputItemHandler;
     }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
     }

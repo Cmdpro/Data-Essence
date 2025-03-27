@@ -40,6 +40,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -99,6 +100,10 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
     }
     public IFluidHandler getFuelHandler() {
         return fuelFluidHandler;
+    }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
     }
     public MelterBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.MELTER.get(), pos, state);

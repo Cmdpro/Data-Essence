@@ -115,6 +115,10 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
     public IItemHandler getOutputHandler() {
         return outputItemHandler;
     }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, moldHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
 
     public MetalShaperBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.METAL_SHAPER.get(), pos, state);
