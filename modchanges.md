@@ -9,3 +9,5 @@
 - Essence Wires and Nodes are made with Essence Shards instead of Amethyst
 - Enforced use of buffers
 - Certain recipes from incomplete entries can show in EMI again
+- Made more entries critical (Buffers, Auto-Fabricator, Essence Leech, Industrial Plant Siphon, What Is Essence?)
+- Adjusted some entries' requisites
