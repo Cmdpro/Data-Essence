@@ -21,5 +21,8 @@
   ],
   "name": {
     "translate": "data_tablet.pages.essence_battery.name"
-  }
+  },
+  "parents": [
+    "datanessence:machinery/buffers"
+  ]
 }

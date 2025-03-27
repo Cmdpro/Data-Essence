@@ -31,5 +31,6 @@
   "parents": [
     "datanessence:machinery/itemworks",
     "datanessence:machinery/fluidworks"
-  ]
+  ],
+  "critical": true
 }
