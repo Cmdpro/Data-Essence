@@ -12,3 +12,4 @@
 - Certain recipes from incomplete entries can show in EMI again
 - Made more entries critical (Buffers, Auto-Fabricator, Essence Leech, Industrial Plant Siphon, What Is Essence?)
 - Adjusted some entries' requisites
+- Nerfed Essence Leeches - low-health mobs make less Essence
