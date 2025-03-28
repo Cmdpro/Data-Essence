@@ -1,0 +1,18 @@
+{
+  "files": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.generic.poem_02",
+        "font": "datanessence:ancient",
+        "rtl": true
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.astronomy_tower_02.requisition"
+      }
+    }
+  ]
+}
