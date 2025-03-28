@@ -17,6 +17,12 @@
       "text": {
         "translate": "data_tablet.pages.structures.page2.text"
       }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.structures.page3.text"
+      }
     }
   ],
   "name": {

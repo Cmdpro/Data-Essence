@@ -3,6 +3,7 @@
 - Added Ecliptrum material
 - Added Lunar Essence Shards and Crystal
 - Enabled Lunar Essence Wires, Nodes, Bombs, and Batteries
+- Added Astronomy Tower structure
 
 ### Changes
 - Conductance Rods' manual crafting recipe is less expensive

@@ -1,0 +1,36 @@
+{
+  "files": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.generic.signal_from_mountains"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.generic.poem_01",
+        "font": "datanessence:ancient",
+        "rtl": true
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.astronomy_tower_01.lunar_strikes_1"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.astronomy_tower_01.lunar_strikes_2"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.astronomy_tower_01.lunar_strikes_3"
+      }
+    }
+  ]
+}

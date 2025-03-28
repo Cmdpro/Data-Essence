@@ -1,0 +1,14 @@
+{
+  "structures": [
+    {
+      "structure": "datanessence:astronomy_tower",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "type": "minecraft:random_spread",
+    "salt": 146521607,
+    "spacing": 24,
+    "separation": 12
+  }
+}
