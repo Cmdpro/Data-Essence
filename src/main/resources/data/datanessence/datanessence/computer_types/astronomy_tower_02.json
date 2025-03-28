@@ -4,9 +4,9 @@
       "type": "datanessence:text",
       "text": {
         "translate": "computer.generic.poem_02",
-        "font": "datanessence:ancient",
-        "rtl": true
-      }
+        "font": "datanessence:ancient"
+      },
+      "rtl": true
     },
     {
       "type": "datanessence:text",

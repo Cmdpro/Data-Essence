@@ -10,9 +10,9 @@
       "type": "datanessence:text",
       "text": {
         "translate": "computer.outpost_nature_01.access_log",
-        "font": "datanessence:ancient",
-        "rtl": true
-      }
+        "font": "datanessence:ancient"
+      },
+      "rtl": true
     }
   ]
 }
