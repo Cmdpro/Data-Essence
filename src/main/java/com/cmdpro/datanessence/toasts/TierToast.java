@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.toasts;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -11,7 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 
 public class TierToast implements Toast {
-    private static final ResourceLocation TEXTURE = ResourceLocation.withDefaultNamespace("toast/advancement");
+    private static final ResourceLocation TEXTURE = DataNEssence.locate("tier_toast");
     public int tier;
     public boolean playedSound;
     public TierToast(int tier) {
@@ -28,8 +29,6 @@ public class TierToast implements Toast {
             pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F));
         }
 
-        pGuiGraphics.renderFakeItem(dataTabletStack, 8, 8);
         return (double)pTimeSinceLastVisible >= 5000.0D * pToastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;
     }
-    public ItemStack dataTabletStack = new ItemStack(ItemRegistry.DATA_TABLET.get());
 }
