@@ -71,6 +71,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.CRYOCHAMBER.get(), CryochamberRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.CHEMICAL_NODE.get(), ChemicalNodeRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.DRYING_TABLE.get(), DryingTableRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_DERIVATION_SPIKE.get(), EssenceDerivationSpikeRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -129,6 +130,7 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(CryochamberRenderer.modelLocation, CryochamberRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(ChemicalNodeRenderer.modelLocation, ChemicalNodeRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(ChemicalNodeItemRenderer.modelLocation, ChemicalNodeItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EssenceDerivationSpikeRenderer.modelLocation, EssenceDerivationSpikeRenderer.Model::createLayer);
         });
 
         event.enqueueWork(() -> {

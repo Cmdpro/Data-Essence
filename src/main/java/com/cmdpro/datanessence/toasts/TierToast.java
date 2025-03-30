@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.toasts;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.ItemRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
@@ -26,7 +27,7 @@ public class TierToast implements Toast {
         pGuiGraphics.drawString(pToastComponent.getMinecraft().font, Component.translatable("data_tablet.tier", tier), 30, 18, i | -16777216, false);
         if (!this.playedSound && pTimeSinceLastVisible > 0L) {
             this.playedSound = true;
-            pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F));
+            pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.TIER_ADVANCED.get(), 1.0F, 1.0F));
         }
 
         return (double)pTimeSinceLastVisible >= 5000.0D * pToastComponent.getNotificationDisplayTimeMultiplier() ? Visibility.HIDE : Visibility.SHOW;

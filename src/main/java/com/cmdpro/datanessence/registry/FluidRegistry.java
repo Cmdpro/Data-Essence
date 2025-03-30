@@ -26,6 +26,8 @@ public class FluidRegistry {
     public static final Supplier<FlowingFluid> GENDERFLUID_FLOWING = register("genderfluid_flowing", Genderfluid.Flowing::new);
     public static final Supplier<FluidType> GENDERFLUID_TYPE = registerType("genderfluid", () -> new FluidType(FluidType.Properties.create()
             .descriptionId("block.datanessence.genderfluid")
+            .density(500)
+            .viscosity(500)
             .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
             .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
             .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH)));

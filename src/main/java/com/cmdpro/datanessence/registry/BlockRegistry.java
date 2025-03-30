@@ -12,6 +12,7 @@ import com.cmdpro.datanessence.block.fluid.GenderfluidBlock;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphon;
+import com.cmdpro.datanessence.block.generation.derivationspike.EssenceDerivationSpike;
 import com.cmdpro.datanessence.block.processing.*;
 import com.cmdpro.datanessence.block.production.*;
 import com.cmdpro.datanessence.block.storage.*;
@@ -89,6 +90,9 @@ public class BlockRegistry {
     public static final Supplier<Block> INDUSTRIAL_PLANT_SIPHON = register("industrial_plant_siphon",
             () -> new IndustrialPlantSiphon(MACHINE_PROPERTIES),
             object -> () -> new IndustrialPlantSiphonItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ESSENCE_DERIVATION_SPIKE = register("essence_derivation_spike",
+            () -> new EssenceDerivationSpike(MACHINE_PROPERTIES),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Machines
     public static final Supplier<Block> FABRICATOR = register("fabricator",
