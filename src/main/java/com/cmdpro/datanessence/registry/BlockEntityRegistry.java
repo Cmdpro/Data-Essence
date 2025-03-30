@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.block.decoration.FlareLightBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphonBlockEntity;
+import com.cmdpro.datanessence.block.generation.derivationspike.EssenceDerivationSpikeBlockEntity;
 import com.cmdpro.datanessence.block.processing.*;
 import com.cmdpro.datanessence.block.production.EssenceBreakerBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
@@ -208,6 +209,10 @@ public class BlockEntityRegistry {
             register("drying_table", () ->
                     BlockEntityType.Builder.of(DryingTableBlockEntity::new,
                             BlockRegistry.DRYING_TABLE.get()).build(null));
+    public static final Supplier<BlockEntityType<EssenceDerivationSpikeBlockEntity>> ESSENCE_DERIVATION_SPIKE =
+            register("essence_derivation_spike", () ->
+                    BlockEntityType.Builder.of(EssenceDerivationSpikeBlockEntity::new,
+                            BlockRegistry.ESSENCE_DERIVATION_SPIKE.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

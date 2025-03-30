@@ -1,0 +1,916 @@
+{
+  "animations": {
+    "extend_spike": {
+      "length": 1.25,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "spike",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -16,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                1,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_1",
+          "target": "scale",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -1,
+                -1,
+                -1
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                1,
+                1,
+                1
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "spike_extension",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -10,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                -10,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_2",
+          "target": "scale",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -1,
+                -1,
+                -1
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                1,
+                1,
+                1
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_3",
+          "target": "scale",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -1,
+                -1,
+                -1
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                1,
+                1,
+                1
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "retract_spike": {
+      "length": 1,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "spike",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                -16,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_1",
+          "target": "scale",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                1,
+                1,
+                1
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -1,
+                -1,
+                -1
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "spike_extension",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                -10,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                -10,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_2",
+          "target": "scale",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                1,
+                1,
+                1
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -1,
+                -1,
+                -1
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_3",
+          "target": "scale",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                1,
+                1,
+                1
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -1,
+                -1,
+                -1
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "rotate_rings": {
+      "length": 1,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "ring_1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                -90,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -180,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                -270,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                -360,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_1",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -0.5,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "ring_2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                90,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_2",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -0.5,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "ring_3",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -90,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                -180,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_3",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.20833333333333334,
+              "target": [
+                0,
+                0.25,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -0.25,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        24,
+        0
+      ],
+      "isCube": false,
+      "children": [
+        {
+          "name": "base",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": true,
+          "texOffset": [
+            0,
+            0
+          ],
+          "mirror": false,
+          "origin": [
+            -8,
+            -10,
+            -8
+          ],
+          "dimensions": [
+            16,
+            10,
+            16
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "pyramid north",
+          "rotation": [
+            0.45973717826782634,
+            0.41761295863924236,
+            2.455282242348744
+          ],
+          "offset": [
+            0,
+            -10,
+            -4.5
+          ],
+          "isCube": true,
+          "texOffset": [
+            0,
+            46
+          ],
+          "mirror": false,
+          "origin": [
+            -5,
+            -5,
+            0
+          ],
+          "dimensions": [
+            10,
+            10,
+            0
+          ],
+          "inflate": 0.01
+        },
+        {
+          "name": "pyramid south",
+          "rotation": [
+            0.45973717826782634,
+            -0.41761295863924236,
+            0.6863104112410491
+          ],
+          "offset": [
+            0,
+            -10,
+            4.5
+          ],
+          "isCube": true,
+          "texOffset": [
+            48,
+            26
+          ],
+          "mirror": false,
+          "origin": [
+            -5,
+            -5,
+            0
+          ],
+          "dimensions": [
+            10,
+            10,
+            0
+          ],
+          "inflate": 0.01
+        },
+        {
+          "name": "pyramid west",
+          "rotation": [
+            -1.5707963267948966,
+            0.7853981633974483,
+            0.9599310885968811
+          ],
+          "offset": [
+            4.5,
+            -10,
+            0
+          ],
+          "isCube": true,
+          "texOffset": [
+            20,
+            46
+          ],
+          "mirror": false,
+          "origin": [
+            -5,
+            -5,
+            0
+          ],
+          "dimensions": [
+            10,
+            10,
+            0
+          ],
+          "inflate": 0.01
+        },
+        {
+          "name": "pyramid east",
+          "rotation": [
+            -1.5707963267948966,
+            -0.7853981633974483,
+            2.181661564992912
+          ],
+          "offset": [
+            -4.5,
+            -10,
+            0
+          ],
+          "isCube": true,
+          "texOffset": [
+            40,
+            46
+          ],
+          "mirror": false,
+          "origin": [
+            -5,
+            -5,
+            0
+          ],
+          "dimensions": [
+            10,
+            10,
+            0
+          ],
+          "inflate": 0.01
+        },
+        {
+          "name": "spike",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": false,
+          "children": [
+            {
+              "name": "spike_1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -10,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                56
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -18,
+                -1
+              ],
+              "dimensions": [
+                2,
+                18,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "ring_1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -25,
+                0
+              ],
+              "isCube": false,
+              "children": [
+                {
+                  "name": "ring",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": true,
+                  "texOffset": [
+                    0,
+                    38
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -4,
+                    -1,
+                    -4
+                  ],
+                  "dimensions": [
+                    8,
+                    0,
+                    8
+                  ],
+                  "inflate": 0.01
+                }
+              ]
+            },
+            {
+              "name": "spike_extension",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -10,
+                0
+              ],
+              "isCube": false,
+              "children": [
+                {
+                  "name": "spike_2",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0.5,
+                    -18,
+                    0.5
+                  ],
+                  "isCube": true,
+                  "texOffset": [
+                    8,
+                    56
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    -15,
+                    -1
+                  ],
+                  "dimensions": [
+                    1,
+                    15,
+                    1
+                  ],
+                  "inflate": 0
+                },
+                {
+                  "name": "ring_2",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    -20,
+                    0
+                  ],
+                  "isCube": false,
+                  "children": [
+                    {
+                      "name": "ring1",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "isCube": true,
+                      "texOffset": [
+                        0,
+                        26
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        -6,
+                        -2,
+                        -6
+                      ],
+                      "dimensions": [
+                        12,
+                        0,
+                        12
+                      ],
+                      "inflate": 0.01
+                    }
+                  ]
+                },
+                {
+                  "name": "ring_3",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    -25,
+                    0
+                  ],
+                  "isCube": false,
+                  "children": [
+                    {
+                      "name": "ring2",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "isCube": true,
+                      "texOffset": [
+                        32,
+                        38
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        -4,
+                        -1,
+                        -4
+                      ],
+                      "dimensions": [
+                        8,
+                        0,
+                        8
+                      ],
+                      "inflate": 0.01
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    128,
+    128
+  ]
+}

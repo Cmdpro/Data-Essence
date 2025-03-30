@@ -1,0 +1,38 @@
+{
+  "icon": {
+    "id": "datanessence:essence_leech"
+  },
+  "tab": "datanessence:essence_manipulation",
+  "x": -1,
+  "y": 4,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.essence_derivation_spike.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.essence_derivation_spike.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/essence_derivation_spike"
+      ]
+    },
+    {
+      "type": "datanessence:multiblock",
+      "multiblock": "datanessence:generators/essence_derivation_spike"
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.essence_derivation_spike.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.essence_derivation_spike.flavor"
+  },
+  "parents": [
+    "datanessence:essence_manipulation/essence_leech"
+  ]
+}

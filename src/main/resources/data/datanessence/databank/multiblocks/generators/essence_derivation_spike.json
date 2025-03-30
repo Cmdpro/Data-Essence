@@ -1,0 +1,41 @@
+{
+  "key": {
+    "b": {
+      "type": "databank:blockstate",
+      "state": "datanessence:polished_obsidian_bricks"
+    },
+    "x": {
+      "type": "databank:blockstate",
+      "state": "datanessence:polished_obsidian_tract[axis=x]"
+    },
+    "z": {
+      "type": "databank:blockstate",
+      "state": "datanessence:polished_obsidian_tract[axis=z]"
+    },
+    "1": {
+      "type": "databank:blockstate",
+      "state": "datanessence:essence_derivation_spike"
+    }
+  },
+  "layers": [
+    [
+      " bbb ",
+      "bbzbb",
+      "bx xb",
+      "bbzbb",
+      " bbb "
+    ],
+    [
+      "     ",
+      "     ",
+      "  1  ",
+      "     ",
+      "     "
+    ]
+  ],
+  "offset": [
+    0,
+    0,
+    0
+  ]
+}
