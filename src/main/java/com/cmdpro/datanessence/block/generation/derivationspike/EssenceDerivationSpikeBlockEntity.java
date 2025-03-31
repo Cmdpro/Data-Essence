@@ -70,9 +70,9 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
             spike.hasStructure = spike.structure.checkMultiblock(world, pos);
             if (spike.hasStructure) {
 
-                if (spike.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < spike.getStorage().getMaxEssence() && spike.cooldown == 0) {
+                if (spike.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < spike.getStorage().getMaxEssence() && spike.cooldown <= 0) {
 
-                    for (LivingEntity entity : world.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pos.getCenter().add(0, 2, 0), 11, 3, 11))) {
+                    for (LivingEntity entity : world.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pos.getCenter().add(0, 1, 0), 11, 3, 11))) {
                         if (entity.isAlive())
                             entity.hurt(entity.damageSources().source(DamageTypeRegistry.essenceSiphoned), 10);
                         if (!entity.isAlive()) {
@@ -83,7 +83,9 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
                     spike.cooldown = 20;
                 }
                 spike.cooldown--;
-                spike.temperature = Math.max(spike.temperature - 1, TemperatureUtil.ABSOLUTE_ZERO);// todo only if coolant is present
+
+                if ( world.random.nextInt() % 15 == 0)
+                    spike.temperature = Math.max(spike.temperature - 1, TemperatureUtil.getBiomeTemperature(world.getBiome(pos).value()));// todo only if coolant is present
                 spike.updateBlock();
             }
         }
