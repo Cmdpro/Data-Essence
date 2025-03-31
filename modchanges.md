@@ -16,3 +16,7 @@
 - Adjusted some entries' requisites
 - Nerfed Essence Leeches - low-health mobs make less Essence
 - Basic Essence renamed to Industrial Essence for more consistency
+- Data Banks can no longer be relocated with mods like Carry On to preserve intended design
+
+### Fixes
+- Cryochambers can no longer be relocated with mods like Carry On - this caused problems

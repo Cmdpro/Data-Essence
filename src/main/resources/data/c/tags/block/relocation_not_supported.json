@@ -1,6 +1,9 @@
 {
   "replace": false,
   "values": [
-    "datanessence:structure_protector"
+    "datanessence:structure_protector",
+    "datanessence:cryochamber",
+    "datanessence:cryochamber_filler",
+    "datanessence:data_bank"
   ]
 }
