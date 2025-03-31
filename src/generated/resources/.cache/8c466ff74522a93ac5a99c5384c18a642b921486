@@ -1,5 +1,5 @@
-// 1.21.1	2025-03-26T15:33:05.490031085	Tags for minecraft:block mod id datanessence
+// 1.21.1	2025-03-31T19:34:20.071145144	Tags for minecraft:block mod id datanessence
 ef9266be182f366d768a314813fb2741fff739ae data/datanessence/tags/block/buffer_detection_pass.json
 e041c2dd3bfdcc54892f8ba408961e738498dd18 data/datanessence/tags/block/hammer_and_chisel_collectable.json
-4b677569ffafb2a0de1f6ceb52400e6c44e9d8db data/minecraft/tags/block/mineable/pickaxe.json
+383d9b54b9ca79bc0a18d44e2460e6f72bd3b2eb data/minecraft/tags/block/mineable/pickaxe.json
 ac466dd784c12d07e50d84d15e14c6127b91ae5a data/minecraft/tags/block/needs_diamond_tool.json
