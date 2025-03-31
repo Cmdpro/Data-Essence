@@ -1,6 +1,14 @@
 package com.cmdpro.datanessence.block.generation.derivationspike;
 
+import com.cmdpro.datanessence.registry.ItemRegistry;
+import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -10,6 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -49,5 +58,20 @@ public class EssenceDerivationSpike extends Block implements EntityBlock {
                 EssenceDerivationSpikeBlockEntity.tick(lvl, pos, st, ent);
             }
         };
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+
+        if ( world.getBlockEntity(pos) instanceof EssenceDerivationSpikeBlockEntity spike && spike.isBroken ) {
+            if ( stack.is(TagRegistry.Items.COPPER_PARTS) ) {
+                spike.isBroken = false;
+                world.playSound(null, pos, SoundEvents.SMITHING_TABLE_USE, SoundSource.BLOCKS);
+                stack.shrink(1);
+                return ItemInteractionResult.SUCCESS;
+            }
+        }
+
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 }

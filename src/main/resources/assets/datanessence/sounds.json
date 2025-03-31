@@ -7,7 +7,7 @@
     "tier_advanced": {
         "sounds": [
             {
-                "minecraft:ui/toast/challenge_complete",
+                "sound": "minecraft:ui/toast/challenge_complete",
                 "volume": 0.6
             }
         ]

@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-26T15:33:05.491992671	Loot Tables
+// 1.21.1	2025-03-31T19:34:20.072750442	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -33,6 +33,7 @@ c232170197401c1a1aaacb65b136c0772dafecf8 data/datanessence/loot_table/blocks/ess
 c996e8f671e37b19ca6756e1c080759fc1be75b7 data/datanessence/loot_table/blocks/essence_buffer.json
 adf2742d3d9f5464a2f1d87f21c26c5165febddd data/datanessence/loot_table/blocks/essence_burner.json
 aa6badc0ff47b9a3a0fcafe00bf7cb6a1d2fa9c0 data/datanessence/loot_table/blocks/essence_crystal.json
+39733bf3e5535e6090e2c999b4e8cf0a9c4d2e12 data/datanessence/loot_table/blocks/essence_derivation_spike.json
 e2997e92529785e8ea49971c1469c36ca8df9493 data/datanessence/loot_table/blocks/essence_furnace.json
 f3c7304956c1cfbcc07dd3ee7303a7cec61f2ea4 data/datanessence/loot_table/blocks/essence_leech.json
 cf1808b270b378eeac641aed9d59037a516e120c data/datanessence/loot_table/blocks/essence_light_fixture.json

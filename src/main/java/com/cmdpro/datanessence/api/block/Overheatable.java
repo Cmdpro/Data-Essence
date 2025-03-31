@@ -4,10 +4,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public interface Overheatable {
-    /**
-     * After failure, an overheatable block needs repair - this defines what with.
-     */
-    Ingredient canBeRepairedWith();
 
     /**
      * An overheatable block can sustain temperatures only up to this amount, after which it will fail.

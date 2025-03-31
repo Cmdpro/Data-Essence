@@ -15,7 +15,11 @@ import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -51,18 +55,23 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
     }
 
     @Override
-    public Ingredient canBeRepairedWith() {
-        return null;
-    }
-
-    @Override
     public int getMaxTemperature() {
         return 1300;
     }
 
     @Override
     public void overheat(BlockEntity block) {
+        BlockPos pos = block.getBlockPos();
+        Level world = block.getLevel();
+        temperature = TemperatureUtil.getBiomeTemperature(world.getBiome(pos).value());
         // angry hiss, damages everything in its AABB a LOT, shuts down.
+        world.playSound(null, pos, SoundEvents.CREEPER_PRIMED, SoundSource.BLOCKS);
+        world.playSound(null, pos, SoundEvents.ANVIL_BREAK, SoundSource.BLOCKS);
+        for (LivingEntity entity : world.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pos.getCenter().add(0, 1, 0), 11, 3, 11))) {
+            if (entity.isAlive())
+                entity.hurt(entity.damageSources().source(DamageTypeRegistry.essenceSiphoned), 20);
+        }
+        isBroken = true;
     }
 
     public static void tick(Level world, BlockPos pos, BlockState state, EssenceDerivationSpikeBlockEntity spike) {
@@ -70,7 +79,7 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
             spike.hasStructure = spike.structure.checkMultiblock(world, pos);
             if (spike.hasStructure) {
 
-                if (spike.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < spike.getStorage().getMaxEssence() && spike.cooldown <= 0) {
+                if (spike.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < spike.getStorage().getMaxEssence() && spike.cooldown <= 0 && !spike.isBroken) {
 
                     for (LivingEntity entity : world.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pos.getCenter().add(0, 1, 0), 11, 3, 11))) {
                         if (entity.isAlive())
@@ -84,8 +93,16 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
                 }
                 spike.cooldown--;
 
-                if ( world.random.nextInt() % 15 == 0)
-                    spike.temperature = Math.max(spike.temperature - 1, TemperatureUtil.getBiomeTemperature(world.getBiome(pos).value()));// todo only if coolant is present
+                if ( spike.temperature >= spike.getMaxTemperature() )
+                    spike.overheat(spike);
+
+                //if ( world.random.nextInt() % 15 == 0)
+                //    spike.temperature = Math.max(spike.temperature - 1, TemperatureUtil.getBiomeTemperature(world.getBiome(pos).value()));// todo only if coolant is present
+
+                if ( spike.isBroken && world.random.nextInt() % 17 == 0 ) {
+                    world.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.4f, 0.75f);
+                    ((ServerLevel) world).sendParticles(ParticleTypes.SMOKE, pos.getCenter().x, pos.getCenter().y, pos.getCenter().z, 5, 0, 0, 0, 0);
+                }
                 spike.updateBlock();
             }
         }

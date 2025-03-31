@@ -32,6 +32,10 @@ public class TagRegistry {
         // Crafting materials
         public static final TagKey<Item> EXPLOSIVE_MATERIAL = tag("explosive_material");
 
+        // Repair materials
+        public static final TagKey<Item> COPPER_PARTS = tag("copper_parts");
+        public static final TagKey<Item> ECLIPTRUM_PARTS = tag("ecliptrum_parts");
+
         // Dye materials
         public static final TagKey<Item> MAKES_WHITE_DYE = tag("makes_white_dye");
         public static final TagKey<Item> MAKES_LIGHT_GRAY_DYE = tag("makes_light_gray_dye");

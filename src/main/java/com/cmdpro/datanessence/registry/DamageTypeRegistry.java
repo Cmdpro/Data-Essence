@@ -16,6 +16,7 @@ public class DamageTypeRegistry {
     public static final ResourceKey<DamageType> blackHole = damageType("black_hole");
     public static final ResourceKey<DamageType> essenceSiphoned = damageType("essence_siphoned");
     public static final ResourceKey<DamageType> crushed = damageType("crushed");
+    public static final ResourceKey<DamageType> overheatFailure = damageType("overheat_failure");
 
     private static ResourceKey<DamageType> damageType(String name) {
         return ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, name));

@@ -54,11 +54,22 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(TagRegistry.Items.EXPLOSIVE_MATERIAL)
                 .add(Items.GUNPOWDER)
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "dusts/sulfur"));
+
+        this.tag(TagRegistry.Items.COPPER_PARTS)
+                .add(ItemRegistry.CAPACITANCE_PANEL.get())
+                .add(ItemRegistry.CONDUCTANCE_ROD.get())
+                .add(Items.COPPER_INGOT);
+        this.tag(TagRegistry.Items.ECLIPTRUM_PARTS)
+                .add(ItemRegistry.REFLECTIVE_PANEL.get())
+                .add(ItemRegistry.TRANSFORMATIVE_ROD.get())
+                .add(ItemRegistry.ECLIPTRUM_INGOT.get());
+
         this.tag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem())
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get().asItem())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get().asItem())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get().asItem());
+
         this.tag(TagRegistry.Items.POLISHED_OBSIDIAN_BLOCKS)
                 .addTag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get().asItem());
