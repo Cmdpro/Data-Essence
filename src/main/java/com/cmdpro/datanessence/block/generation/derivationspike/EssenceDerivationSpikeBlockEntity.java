@@ -13,6 +13,7 @@ import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 
+import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -22,7 +23,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,11 +33,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements EssenceBlockEntity, Overheatable {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 2000f);
-    public int cooldown;
-    public int temperature;
+    public int cooldown, temperature;
+    public AnimationDefinition anim;
     public AnimationState animState = new AnimationState();
-    public boolean isBroken;
-    public boolean hasStructure;
+    public boolean isBroken, hasStructure, hasRedstone;
     final Multiblock structure = MultiblockManager.multiblocks.get(DataNEssence.locate("generators/essence_derivation_spike"));
 
     private final FluidTank coolantTank = new FluidTank(4000);
@@ -74,12 +73,18 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
         isBroken = true;
     }
 
+    public boolean isRedstonePowered() {
+        BlockPos pos = this.getBlockPos();
+        hasRedstone = this.getLevel().hasNeighborSignal(pos);
+        return hasRedstone;
+    }
+
     public static void tick(Level world, BlockPos pos, BlockState state, EssenceDerivationSpikeBlockEntity spike) {
         if (!world.isClientSide()) {
             spike.hasStructure = spike.structure.checkMultiblock(world, pos);
             if (spike.hasStructure) {
 
-                if (spike.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < spike.getStorage().getMaxEssence() && spike.cooldown <= 0 && !spike.isBroken) {
+                if (spike.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < spike.getStorage().getMaxEssence() && spike.cooldown <= 0 && !spike.isBroken && spike.isRedstonePowered()) {
 
                     for (LivingEntity entity : world.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pos.getCenter().add(0, 1, 0), 11, 3, 11))) {
                         if (entity.isAlive())
@@ -121,6 +126,7 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
         tag.putInt("Temp", temperature);
         tag.putBoolean("IsBroken", isBroken);
         tag.putBoolean("Multi", hasStructure);
+        tag.putBoolean("Redstone", hasRedstone);
         tag.put("EssenceStorage", storage.toNbt());
     }
 
@@ -131,6 +137,7 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
         cooldown = nbt.getInt("cooldown");
         temperature = nbt.getInt("Temp");
         isBroken = nbt.getBoolean("IsBroken");
+        hasRedstone = nbt.getBoolean("Redstone");
         hasStructure = nbt.getBoolean("Multi");
     }
 }

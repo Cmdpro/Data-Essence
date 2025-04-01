@@ -12,6 +12,7 @@ import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.AnimationState;
 
 public class EssenceDerivationSpikeRenderer extends DatabankBlockEntityRenderer<EssenceDerivationSpikeBlockEntity> {
     public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("essence_derivation_spike"), "main");
@@ -54,7 +55,25 @@ public class EssenceDerivationSpikeRenderer extends DatabankBlockEntityRenderer<
             spike.animState.startIfStopped((int) getAgeInTicks());
             AnimationDefinition anim;
 
-            this.animate(spike.animState, rotateRings, 1.0f);
+            // TODO extendSpike needs to play, fix animations
+
+            if ( spike.hasRedstone && spike.hasStructure && !spike.isBroken )
+                anim = rotateRings;
+            else
+                anim = retractSpike;
+
+            if ( anim != spike.anim )
+                updateAnim(spike, spike.animState, anim);
+
+            this.animate(spike.animState, anim, 1.0f);
+        }
+
+        protected void updateAnim(EssenceDerivationSpikeBlockEntity entity, AnimationState state, AnimationDefinition definition) {
+            if (entity.anim != definition) {
+                state.stop();
+                state.start((int)getAgeInTicks());
+                entity.anim = definition;
+            }
         }
 
         @Override
