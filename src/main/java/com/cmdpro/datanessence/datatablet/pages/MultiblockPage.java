@@ -43,7 +43,7 @@ public class MultiblockPage extends Page {
         pGuiGraphics.pose().mulPose(Axis.YP.rotationDegrees((((float)screen.ticks+Minecraft.getInstance().getTimer().getRealtimeDeltaTicks())/5f)%360f));
         pGuiGraphics.pose().mulPose(Axis.YP.rotationDegrees(-45));
         pGuiGraphics.pose().translate(offX, 0, offZ);
-        pGuiGraphics.pose().translate(-multiblock.offset.getX(), -multiblock.offset.getY(), -multiblock.offset.getZ());
+        pGuiGraphics.pose().translate(-multiblock.center.getX(), -multiblock.center.getY(), -multiblock.center.getZ());
         MultiblockRenderer.renderMultiblock(multiblock, null, pGuiGraphics.pose(), Minecraft.getInstance().getTimer(), Rotation.NONE, Minecraft.getInstance().renderBuffers().bufferSource());
         pGuiGraphics.pose().popPose();
         pGuiGraphics.pose().pushPose();
