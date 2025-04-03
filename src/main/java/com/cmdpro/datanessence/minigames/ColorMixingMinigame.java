@@ -77,19 +77,34 @@ public class ColorMixingMinigame extends Minigame {
         int undoY = y+((150/2)-20);
         int resetX = x+((150/2)-48);
         int resetY = y+((150/2)+4);
-        if (pMouseX >= undoX && pMouseY >= undoY && pMouseX <= undoX+16 && pMouseY <= undoY+16) {
-            pGuiGraphics.blit(TEXTURE, undoX, undoY, 240, 64, 16, 16);
-        } else {
-            pGuiGraphics.blit(TEXTURE, undoX, undoY, 224, 64, 16, 16);
+        int sliderX = x+((150/2)-32)+(int)((((float)currentColorLevel/(float)colorLevels)*64f)-2.5f);
+        int sliderY = y+((150/2)+48)-8;
+
+        // undo
+        if (!manipulations.isEmpty()) {
+            if (pMouseX >= undoX && pMouseY >= undoY && pMouseX <= undoX + 16 && pMouseY <= undoY + 16) {
+                pGuiGraphics.blit(TEXTURE, undoX, undoY, 240, 64, 16, 16);
+            } else {
+                pGuiGraphics.blit(TEXTURE, undoX, undoY, 224, 64, 16, 16);
+            }
+            RenderSystem.enableBlend();
+            var currentManipulation = manipulations.getLast();
+            RenderSystem.setShaderColor(currentManipulation.color.getRed(), currentManipulation.color.getGreen(), currentManipulation.color.getBlue(), 1f);
+            pGuiGraphics.blit(TEXTURE, undoX + 2, undoY + 2, 224, 80, 12, 12);
+            RenderSystem.setShaderColor(color[0], color[1], color[2], color[3]);
+            RenderSystem.disableBlend();
+            pGuiGraphics.blit(TEXTURE, undoX+2, undoY + 10, 224, 92, 7, 2);
         }
+
+        // reset
         if (pMouseX >= resetX && pMouseY >= resetY && pMouseX <= resetX+16 && pMouseY <= resetY+16) {
             pGuiGraphics.blit(TEXTURE, resetX, resetY, 240, 48, 16, 16);
         } else {
             pGuiGraphics.blit(TEXTURE, resetX, resetY, 224, 48, 16, 16);
         }
+
+        // intensity slider
         pGuiGraphics.hLine(x+(150/2)-32, x+(150/2)+32, y+((150/2)+48), 0xFF2621a5);
-        int sliderX = x+((150/2)-32)+(int)((((float)currentColorLevel/(float)colorLevels)*64f)-2.5f);
-        int sliderY = y+((150/2)+48)-8;
         if (pMouseX >= sliderX && pMouseY >= sliderY && pMouseX <= sliderX+5 && pMouseY <= sliderY+16) {
             pGuiGraphics.blit(TEXTURE, sliderX, sliderY, 219, 48, 5, 16);
         } else {
