@@ -7,6 +7,7 @@
 - New textures for tier advancement and critical data unlock messages
 - Added Essence Derivation Spike generator
 - Added new recipes for Entropic Processor: Clay block > clay balls
+- New textures and some visual touchups for minigames
 
 ### Changes
 - Conductance Rods' manual crafting recipe is less expensive
@@ -19,6 +20,10 @@
 - Basic Essence renamed to Industrial Essence for more consistency
 - Data Banks can no longer be relocated with mods like Carry On to preserve intended design
 - Lowered Vacuum's pickup volume
+- Improved the Item Filter
 
 ### Fixes
+- Adapted code to work with the code changes required by Databank 1.0.4
 - Cryochambers can no longer be relocated with mods like Carry On - this caused problems
+- Fixed the color minigame
+- Fixed block entity special node interactions not applying correctly
