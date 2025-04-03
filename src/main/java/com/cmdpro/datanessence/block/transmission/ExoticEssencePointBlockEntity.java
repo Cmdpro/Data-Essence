@@ -3,7 +3,7 @@ package com.cmdpro.datanessence.block.transmission;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
-import com.cmdpro.datanessence.api.misc.ICustomEssencePointBehaviour;
+import com.cmdpro.datanessence.api.node.ICustomEssencePointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -34,8 +34,13 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity {
                 BlockEntity fromEnt = from.getLevel().getBlockEntity(from.getBlockPos().relative(from.getDirection().getOpposite()));
                 BlockEntity toEnt = entity.getLevel().getBlockEntity(entity.getBlockPos().relative(((BaseEssencePointBlockEntity) entity).getDirection().getOpposite()));
                 if (fromEnt instanceof EssenceBlockEntity fromStorage && toEnt instanceof EssenceBlockEntity toStorage) {
+                    if (fromEnt instanceof ICustomEssencePointBehaviour behaviour) {
+                        if (!behaviour.canExtractEssence(fromStorage.getStorage(), toStorage.getStorage(), EssenceTypeRegistry.EXOTIC_ESSENCE.get(), transferAmount)) {
+                            return;
+                        }
+                    }
                     if (toEnt instanceof ICustomEssencePointBehaviour behaviour) {
-                        if (!behaviour.canInsertEssence(toStorage.getStorage(), EssenceTypeRegistry.EXOTIC_ESSENCE.get(), transferAmount)) {
+                        if (!behaviour.canInsertEssence(fromStorage.getStorage(), toStorage.getStorage(), EssenceTypeRegistry.EXOTIC_ESSENCE.get(), transferAmount)) {
                             return;
                         }
                     }

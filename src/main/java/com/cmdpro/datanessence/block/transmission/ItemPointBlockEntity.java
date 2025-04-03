@@ -2,13 +2,12 @@ package com.cmdpro.datanessence.block.transmission;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
-import com.cmdpro.datanessence.api.misc.ICustomItemPointBehaviour;
+import com.cmdpro.datanessence.api.node.ICustomItemPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -48,7 +47,12 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
                 if (resolved == null || resolved2 == null) {
                     continue;
                 }
-                if (other instanceof ICustomItemPointBehaviour behaviour) {
+                if (level.getBlockEntity(from.getBlockPos().relative(from.getDirection().getOpposite())) instanceof ICustomItemPointBehaviour behaviour) {
+                    if (!behaviour.canExtractItem(resolved, resolved2)) {
+                        continue;
+                    }
+                }
+                if (level.getBlockEntity(ent.getBlockPos().relative(ent.getDirection().getOpposite())) instanceof ICustomItemPointBehaviour behaviour) {
                     if (!behaviour.canInsertItem(resolved, resolved2)) {
                         continue;
                     }

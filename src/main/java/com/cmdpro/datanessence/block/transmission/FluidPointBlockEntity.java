@@ -1,13 +1,13 @@
 package com.cmdpro.datanessence.block.transmission;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.node.ICustomItemPointBehaviour;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
-import com.cmdpro.datanessence.api.misc.ICustomFluidPointBehaviour;
+import com.cmdpro.datanessence.api.node.ICustomFluidPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -48,7 +48,12 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
                 if (resolved == null || resolved2 == null) {
                     continue;
                 }
-                if (other instanceof ICustomFluidPointBehaviour behaviour) {
+                if (level.getBlockEntity(from.getBlockPos().relative(from.getDirection().getOpposite())) instanceof ICustomFluidPointBehaviour behaviour) {
+                    if (!behaviour.canExtractFluid(resolved, resolved2)) {
+                        continue;
+                    }
+                }
+                if (level.getBlockEntity(ent.getBlockPos().relative(ent.getDirection().getOpposite())) instanceof ICustomFluidPointBehaviour behaviour) {
                     if (!behaviour.canInsertFluid(resolved, resolved2)) {
                         continue;
                     }
