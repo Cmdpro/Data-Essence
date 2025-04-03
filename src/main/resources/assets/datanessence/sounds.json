@@ -6,10 +6,7 @@
     },
     "tier_advanced": {
         "sounds": [
-            {
-                "sound": "minecraft:ui/toast/challenge_complete",
-                "volume": 0.6
-            }
+            "minecraft:ui/toast/challenge_complete"
         ]
     },
     "entropic_processor_working": {

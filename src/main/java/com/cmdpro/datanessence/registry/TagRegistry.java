@@ -54,6 +54,9 @@ public class TagRegistry {
         public static final TagKey<Item> MAKES_MAGENTA_DYE = tag("makes_magenta_dye");
         public static final TagKey<Item> MAKES_PINK_DYE = tag("makes_pink_dye");
 
+        // Advancement trigger materials
+        public static final TagKey<Item> HIDDEN_RESOURCES = tag ("hidden_resources");
+
         private static TagKey<Item> tag(String name) {
             return ItemTags.create(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, name));
         }

@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:lensing_crystal_ore"
+    },
+    "title": {
+      "translate": "advancements.datanessence.discover_lensing_crystals.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.discover_lensing_crystals.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:exploration/discover_hidden_block",
+  "criteria": {
+    "has_lensing_crystal": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:lensing_crystal" ] } ] }
+    }
+  }
+}

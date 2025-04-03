@@ -129,5 +129,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(Items.PEONY)
                 .add(Items.PINK_PETALS)
                 .add(Items.PINK_TULIP);
+
+        this.tag(TagRegistry.Items.HIDDEN_RESOURCES)
+                .add(ItemRegistry.LENSING_CRYSTAL.get())
+                .add(ItemRegistry.BONDING_POWDER.get());
     }
 }

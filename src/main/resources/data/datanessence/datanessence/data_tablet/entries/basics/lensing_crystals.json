@@ -26,5 +26,15 @@
   },
   "parents": [
     "datanessence:machinery/infuser"
+  ],
+  "incomplete": true,
+  "completion_advancement": "datanessence:exploration/discover_lensing_crystals",
+  "incomplete_pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.lensing_crystals.page1.incomplete_text"
+      }
+    }
   ]
 }

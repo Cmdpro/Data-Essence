@@ -9,7 +9,7 @@
     "description": {
       "translate": "advancements.datanessence.datanessence.description"
     },
-    "background": "datanessence:textures/block/deco/polished_obsidian.png"
+    "background": "datanessence:textures/block/deco/polished_obsidian_bricks.png"
   },
   "criteria": {
     "requirement": {

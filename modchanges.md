@@ -6,6 +6,7 @@
 - Added Astronomy Tower structure
 - New textures for tier advancement and critical data unlock messages
 - Added Essence Derivation Spike generator
+- Added new recipes for Entropic Processor: Clay block > clay balls
 
 ### Changes
 - Conductance Rods' manual crafting recipe is less expensive
@@ -13,7 +14,7 @@
 - Enforced use of buffers
 - Certain recipes from incomplete entries can show in EMI again
 - Made more entries critical (Buffers, Auto-Fabricator, Essence Leech, Industrial Plant Siphon, What Is Essence?)
-- Adjusted some entries' requisites
+- Adjusted some entries' requisites and completion requirements
 - Nerfed Essence Leeches - low-health mobs make less Essence
 - Basic Essence renamed to Industrial Essence for more consistency
 - Data Banks can no longer be relocated with mods like Carry On to preserve intended design

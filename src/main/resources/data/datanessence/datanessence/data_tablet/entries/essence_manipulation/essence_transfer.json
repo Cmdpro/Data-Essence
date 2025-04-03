@@ -28,7 +28,6 @@
     "translate": "data_tablet.pages.essence_transfer.name"
   },
   "parents": [
-    "datanessence:essence_manipulation/essence_burner"
   ],
   "incomplete": true,
   "completion_advancement": "datanessence:progression/acquire_essence_node_and_wire",
