@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.client;
 
 import com.cmdpro.databank.ClientDatabankUtils;
+import com.cmdpro.databank.DatabankUtils;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.databank.shaders.PostShaderManager;
@@ -30,6 +31,7 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -233,9 +235,9 @@ public class ClientModEvents {
             }
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
         event.register((pState, pLevel, pPos, pTintIndex) -> {
-            BlockState state = ClientDatabankUtils.getHiddenBlock(pState.getBlock());
-            if (state != null) {
-                return Minecraft.getInstance().getBlockColors().getColor(state, pLevel, pPos, pTintIndex);
+            Block block = ClientDatabankUtils.getHiddenBlock(pState.getBlock());
+            if (block != null) {
+                return Minecraft.getInstance().getBlockColors().getColor(DatabankUtils.changeBlockType(pState, block), pLevel, pPos, pTintIndex);
             }
             return 0xFFFFFFFF;
         }, BlockRegistry.TETHERGRASS.get());
