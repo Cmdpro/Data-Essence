@@ -18,6 +18,7 @@ import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.AutoFabricatorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -27,6 +28,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -186,12 +188,37 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                 }
             }
         }
-        ItemStack stack = recipe.assemble(getCraftingInv().asCraftInput(), level.registryAccess()).copy();
-        if (!recipe.matches(getCraftingInv().asCraftInput(), level)) {
+        CraftingInput craftingInput = getCraftingInv().asCraftInput();
+        ItemStack stack = recipe.assemble(craftingInput, level.registryAccess()).copy();
+        if (!recipe.matches(craftingInput, level)) {
             return false;
         }
-        for (int i = 0; i < 9; i++) {
-            itemHandler.extractItem(i, 1, false);
+        NonNullList<ItemStack> remaining = recipe.getRemainingItems(craftingInput);
+        int left = getCraftingInv().asPositionedCraftInput().left();
+        int top = getCraftingInv().asPositionedCraftInput().top();
+        int craftWidth = 3;
+        for (int k = 0; k < craftingInput.height(); k++) {
+            for (int l = 0; l < craftingInput.width(); l++) {
+                int i1 = l + left + (k + top) * craftWidth;
+                ItemStack itemstack = itemHandler.getStackInSlot(i1);
+                ItemStack itemstack1 = remaining.get(l + k * craftingInput.width());
+                if (!itemstack.isEmpty()) {
+                    itemHandler.extractItem(i1, 1, false);
+                    itemstack =  itemHandler.getStackInSlot(i1);
+                }
+
+                if (!itemstack1.isEmpty()) {
+                    if (itemstack.isEmpty()) {
+                        itemHandler.setStackInSlot(i1, itemstack1);
+                    } else if (ItemStack.isSameItemSameComponents(itemstack, itemstack1)) {
+                        itemstack1.grow(itemstack.getCount());
+                        itemHandler.setStackInSlot(i1, itemstack1);
+                    } else {
+                        ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, stack);
+                        level.addFreshEntity(entity);
+                    }
+                }
+            }
         }
         outputItemHandler.insertItem(0, stack, false);
         level.playSound(null, worldPosition, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);

@@ -57,6 +57,8 @@ public class LockableItemHandler extends ItemStackHandler {
                 } else {
                     return false;
                 }
+            } else {
+                return false;
             }
         }
         return super.isItemValid(slot, stack);

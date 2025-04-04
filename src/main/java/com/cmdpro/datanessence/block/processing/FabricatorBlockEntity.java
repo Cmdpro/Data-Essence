@@ -16,6 +16,7 @@ import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
 import com.cmdpro.datanessence.screen.FabricatorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -169,10 +170,35 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
                         if (ent.recipe instanceof IFabricationRecipe) {
                             fabricationRecipe = (IFabricationRecipe) ent.recipe;
                         }
+                        CraftingInput craftingInput = ent.getCraftingInv().asCraftInput();
                         if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry(), fabricationRecipe.allowIncomplete())) {
-                            ItemStack stack = ent.recipe.assemble(ent.getCraftingInv().asCraftInput(), pLevel.registryAccess()).copy();
-                            for (int i = 0; i < 9; i++) {
-                                ent.itemHandler.extractItem(i, 1, false);
+                            ItemStack stack = ent.recipe.assemble(craftingInput, pLevel.registryAccess()).copy();
+                            NonNullList<ItemStack> remaining = ent.recipe.getRemainingItems(craftingInput);
+                            int left = ent.getCraftingInv().asPositionedCraftInput().left();
+                            int top = ent.getCraftingInv().asPositionedCraftInput().top();
+                            int craftWidth = 3;
+                            for (int k = 0; k < craftingInput.height(); k++) {
+                                for (int l = 0; l < craftingInput.width(); l++) {
+                                    int i1 = l + left + (k + top) * craftWidth;
+                                    ItemStack itemstack = ent.itemHandler.getStackInSlot(i1);
+                                    ItemStack itemstack1 = remaining.get(l + k * craftingInput.width());
+                                    if (!itemstack.isEmpty()) {
+                                        ent.itemHandler.extractItem(i1, 1, false);
+                                        itemstack =  ent.itemHandler.getStackInSlot(i1);
+                                    }
+
+                                    if (!itemstack1.isEmpty()) {
+                                        if (itemstack.isEmpty()) {
+                                            ent.itemHandler.setStackInSlot(i1, itemstack1);
+                                        } else if (ItemStack.isSameItemSameComponents(itemstack, itemstack1)) {
+                                            itemstack1.grow(itemstack.getCount());
+                                            ent.itemHandler.setStackInSlot(i1, itemstack1);
+                                        } else {
+                                            ItemEntity entity = new ItemEntity(pLevel, (float) pPos.getX() + 0.5f, (float) pPos.getY() + 1f, (float) pPos.getZ() + 0.5f, stack);
+                                            pLevel.addFreshEntity(entity);
+                                        }
+                                    }
+                                }
                             }
                             if (ent.essenceCost != null) {
                                 for (Map.Entry<ResourceLocation, Float> i : ent.essenceCost.entrySet()) {

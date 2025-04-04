@@ -21,3 +21,5 @@
 - Cryochambers can no longer be relocated with mods like Carry On - this caused problems
 - Fixed the color minigame
 - Fixed block entity special node interactions not applying correctly
+- Fixed Fabricator & Auto-Fabricator recipe remainders
+- Fixed locked inventories having slots meant to be empty filled

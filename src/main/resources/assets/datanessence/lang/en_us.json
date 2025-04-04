@@ -572,6 +572,7 @@
   "tag.item.datanessence.makes_purple_dye": "Makes Purple Dye",
   "tag.item.datanessence.makes_magenta_dye": "Makes Magenta Dye",
   "tag.item.datanessence.makes_pink_dye": "Makes Pink Dye",
+  "tag.item.datanessence.hidden_resources": "Hidden Resources",
 
   "emi.info.datanessence.ancient_items_are_loot_only": "This is an Ancient item. It cannot be crafted, and must instead be found.\nTry searching inside structures built from an otherworldly, purple rock.",
   "emi.info.datanessence.dimension_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found.",
