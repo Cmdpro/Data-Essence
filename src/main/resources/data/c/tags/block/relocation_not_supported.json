@@ -10,6 +10,7 @@
     "datanessence:natural_essence_point",
     "datanessence:exotic_essence_point",
     "datanessence:item_point",
-    "datanessence:fluid_point"
+    "datanessence:fluid_point",
+    "datanessence:chemical_node"
   ]
 }

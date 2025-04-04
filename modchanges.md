@@ -18,7 +18,7 @@
 
 ### Fixes
 - Adapted code to work with the code changes required by Databank 1.0.4
-- Cryochambers can no longer be relocated with mods like Carry On - this caused problems
+- Cryochambers and nodes can no longer be relocated with mods like Carry On - this caused problems
 - Fixed the color minigame
 - Fixed block entity special node interactions not applying correctly
 - Fixed Fabricator & Auto-Fabricator recipe remainders
