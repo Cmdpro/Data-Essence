@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-26T15:33:05.49122021	Item Models: datanessence
+// 1.21.1	2025-04-03T20:18:56.382097746	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -21,7 +21,6 @@ d7143cba0a3221569cc1595af65cd714d785cc89 assets/datanessence/models/item/data_ta
 cc8ad366cb50cc565afd44ec81025784569113c0 assets/datanessence/models/item/deco_fluid_buffer.json
 649ebbd5fb39366d57ca9fdeda86c510f0aa80fa assets/datanessence/models/item/deco_item_buffer.json
 6122c17dc068aea2a720c8ab78ec3a725285f2a9 assets/datanessence/models/item/diamond_shard.json
-fb227363ffeddcd931ae86674b701922b22763fb assets/datanessence/models/item/ecliptrum_ingot.json
 6b75af815e799d6d97dff366182e471862d08cf1 assets/datanessence/models/item/emerald_shard.json
 01ca71e378e64e9e02886d014639a6bf22ebad8b assets/datanessence/models/item/energized_ancient_rock_column.json
 75395ee34d545367bd2022bcd2edc19f35483609 assets/datanessence/models/item/essence_bomb.json
@@ -49,9 +48,7 @@ bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/item_po
 27f75bf72da4534b5632b55c6418115543a94343 assets/datanessence/models/item/lensing_crystal.json
 dc6b5004a06b5a6d174a99991c44a9c625c7fed5 assets/datanessence/models/item/logical_matrix.json
 fe1ce05b004a75716ba9ee13cc445e73c1ae74ff assets/datanessence/models/item/lunar_essence_bomb.json
-99afc64ed049bc46b414a369fffc06cf10a8c71c assets/datanessence/models/item/lunar_essence_crystal.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/lunar_essence_point.json
-175ece60830e71f0edaedaeb4f1177e7f19001ce assets/datanessence/models/item/lunar_essence_shard.json
 3d310e3313629f8d13026f2ae40006f83f86a491 assets/datanessence/models/item/lunar_essence_wire.json
 cf783901ea1679feb39315eeb19e67cea4923a2e assets/datanessence/models/item/music_disc_player.json
 003b02e930bd05d5cfe42cae5f989aa7e96afe2d assets/datanessence/models/item/music_disc_player_on.json
@@ -64,12 +61,10 @@ de272af4e4feac0b7f325c246f01dbdc0d6ea318 assets/datanessence/models/item/polishe
 54bfdfccf479e077ffb9710c8d4333bab9934d7c assets/datanessence/models/item/precision_lens.json
 c21e404c80d50f53fca78d073b54c48763738238 assets/datanessence/models/item/primitive_anti_gravity_pack.json
 51e08ca19295ad19da59f904f8712159db967e1b assets/datanessence/models/item/propeller.json
-2ff8b1dbc645a76d7df6bd6999d1dc223a95182c assets/datanessence/models/item/reflective_panel.json
 698c8b9885493fb32342dde3df3c643f7a9ea384 assets/datanessence/models/item/rod_mold.json
 1b09ec0be74ff44bbe133a0ef3f32cf87cde6661 assets/datanessence/models/item/speed_upgrade.json
 cccabab1270cb85664204724c134f6d86b2fe5a6 assets/datanessence/models/item/spire_glass.json
 aee2e6631d57b8fc41df275db6b27a783c52c54f assets/datanessence/models/item/thermometer.json
-db6f8934b23ed2aadc16819c6b9ea384859ed93a assets/datanessence/models/item/transformative_rod.json
 7545953a1981f70cdb6d9ccd399301b1df1e65d2 assets/datanessence/models/item/traversite_road_chunk.json
 e55bc425ec3b1f2a7eb2b139beb2dcedac11e59d assets/datanessence/models/item/traversite_road_slab.json
 1069bd8814b3b0918555a78b679a364f60ecaf88 assets/datanessence/models/item/traversite_road_stairs.json

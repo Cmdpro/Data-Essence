@@ -47,7 +47,6 @@
     "datanessence:lensing_crystal_ore",
     "datanessence:limited_item_buffer",
     "datanessence:lunar_essence_battery",
-    "datanessence:lunar_essence_crystal",
     "datanessence:lunar_essence_point",
     "datanessence:mineral_purification_chamber",
     "datanessence:natural_essence_battery",
@@ -70,7 +69,6 @@
     "datanessence:ancient_glyph_stone_makutuin",
     "datanessence:metal_shaper",
     "datanessence:dewlamp",
-    "datanessence:drying_table",
-    "datanessence:essence_derivation_spike"
+    "datanessence:drying_table"
   ]
 }
