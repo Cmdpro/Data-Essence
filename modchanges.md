@@ -15,6 +15,7 @@
 - Data Banks can no longer be relocated with mods like Carry On to preserve intended design
 - Lowered Vacuum's pickup volume
 - Improved the Item Filter
+- Improved the Auto-Fabricator
 
 ### Fixes
 - Adapted code to work with the code changes required by Databank 1.0.4

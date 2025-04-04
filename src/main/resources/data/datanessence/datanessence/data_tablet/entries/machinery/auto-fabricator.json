@@ -17,7 +17,10 @@
       "type": "datanessence:crafting",
       "recipes": [
         "datanessence:fabrication/machines/auto-fabricator"
-      ]
+      ],
+      "text": {
+        "translate": "data_tablet.pages.auto-fabricator.page2.text"
+      }
     }
   ],
   "name": {

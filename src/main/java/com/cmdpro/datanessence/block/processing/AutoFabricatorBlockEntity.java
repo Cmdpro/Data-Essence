@@ -273,7 +273,14 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, AutoFabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
+
+            for ( var lockedSlot : pBlockEntity.getLockable() ) {
+                if (!lockedSlot.locked)
+                    return;
+            }
+
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
+
             if (pBlockEntity.recipe != null && hasNotReachedStackLimit(pBlockEntity, pBlockEntity.recipe.getResultItem(pLevel.registryAccess()))) {
                 boolean enoughEssence = true;
                 for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
