@@ -4,6 +4,12 @@
     "datanessence:structure_protector",
     "datanessence:cryochamber",
     "datanessence:cryochamber_filler",
-    "datanessence:data_bank"
+    "datanessence:data_bank",
+    "datanessence:essence_point",
+    "datanessence:lunar_essence_point",
+    "datanessence:natural_essence_point",
+    "datanessence:exotic_essence_point",
+    "datanessence:item_point",
+    "datanessence:fluid_point"
   ]
 }
