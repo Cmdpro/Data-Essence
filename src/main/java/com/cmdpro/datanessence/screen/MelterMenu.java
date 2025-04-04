@@ -39,8 +39,7 @@ public class MelterMenu extends AbstractContainerMenu implements IDataNEssenceMe
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
-        this.addSlot(new SlotItemHandler(handler, 0, 84, 8));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 84, 8));
     }
 
     @Override

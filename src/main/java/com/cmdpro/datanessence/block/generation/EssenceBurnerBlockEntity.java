@@ -29,6 +29,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -69,14 +70,18 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    
 
     public EssenceBurnerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ESSENCE_BURNER.get(), pos, state);
         maxBurnTime = 1;
     }
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
+    }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
     }
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
@@ -126,7 +131,7 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
     public boolean lit;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceBurnerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
             pBlockEntity.lit = false;
             if (pBlockEntity.itemHandler.getStackInSlot(0).getItem() instanceof EssenceShard shard) {
                 boolean canFit = true;

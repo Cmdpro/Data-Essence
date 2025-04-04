@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.toasts;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.datatablet.Entry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.client.gui.GuiGraphics;
@@ -15,7 +16,7 @@ import net.minecraft.util.Mth;
 import java.util.List;
 
 public class CriticalDataToast implements Toast {
-    private static final ResourceLocation TEXTURE = ResourceLocation.withDefaultNamespace("toast/advancement");
+    private static final ResourceLocation TEXTURE = DataNEssence.locate("critical_data_toast");
     public Entry entry;
     public boolean playedSound;
     public CriticalDataToast(Entry entry) {

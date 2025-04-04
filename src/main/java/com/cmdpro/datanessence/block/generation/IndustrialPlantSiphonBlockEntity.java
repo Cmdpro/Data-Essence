@@ -30,6 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,16 +66,20 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    
 
     public IndustrialPlantSiphonBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), pos, state);
     }
 
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
 
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
@@ -121,7 +126,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
 
     public static void tick(Level world, BlockPos pos, BlockState state, IndustrialPlantSiphonBlockEntity tile) {
         if (!world.isClientSide()) {
-            BufferUtil.getItemsFromBuffersBelow(tile);
+            BufferUtil.getItemsFromBuffersBelow(tile, tile.itemHandler);
             if (tile.essenceGenerationTicks <= 0 ) {
                 tile.essenceGenerationTicks = tile.getEssenceProduced(tile);
                 tile.itemHandler.extractItem(0, 1, false);

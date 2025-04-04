@@ -54,11 +54,18 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(TagRegistry.Items.EXPLOSIVE_MATERIAL)
                 .add(Items.GUNPOWDER)
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "dusts/sulfur"));
+
+        this.tag(TagRegistry.Items.COPPER_PARTS)
+                .add(ItemRegistry.CAPACITANCE_PANEL.get())
+                .add(ItemRegistry.CONDUCTANCE_ROD.get())
+                .add(Items.COPPER_INGOT);
+
         this.tag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem())
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get().asItem())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get().asItem())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get().asItem());
+
         this.tag(TagRegistry.Items.POLISHED_OBSIDIAN_BLOCKS)
                 .addTag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get().asItem());
@@ -118,5 +125,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(Items.PEONY)
                 .add(Items.PINK_PETALS)
                 .add(Items.PINK_TULIP);
+
+        this.tag(TagRegistry.Items.HIDDEN_RESOURCES)
+                .add(ItemRegistry.LENSING_CRYSTAL.get())
+                .add(ItemRegistry.BONDING_POWDER.get());
     }
 }

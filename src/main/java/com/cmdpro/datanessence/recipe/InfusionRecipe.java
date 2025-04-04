@@ -20,20 +20,26 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
     private final ItemStack output;
     private final Ingredient input;
     private final ResourceLocation entry;
-    private final boolean allowIncomplete;
+    private final boolean allowIncomplete, showIncompleteInEMI;
     private final Map<ResourceLocation, Float> essenceCost;
 
     public InfusionRecipe(ItemStack output,
-                          Ingredient input, ResourceLocation entry, boolean allowIncomplete, Map<ResourceLocation, Float> essenceCost) {
+                          Ingredient input, ResourceLocation entry, boolean allowIncomplete, boolean showIncompleteInEMI, Map<ResourceLocation, Float> essenceCost) {
         this.output = output;
         this.input = input;
         this.entry = entry;
         this.allowIncomplete = allowIncomplete;
+        this.showIncompleteInEMI = showIncompleteInEMI;
         this.essenceCost = essenceCost;
     }
     @Override
     public boolean allowIncomplete() {
         return allowIncomplete;
+    }
+
+    @Override
+    public boolean showIncompleteInEMI() {
+        return showIncompleteInEMI;
     }
 
     @Override
@@ -87,6 +93,7 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
                 Ingredient.CODEC.fieldOf("input").forGetter(r -> r.input),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
                 Codec.BOOL.optionalFieldOf("allow_incomplete", false).forGetter((r) -> r.allowIncomplete),
+                Codec.BOOL.optionalFieldOf("show_incomplete_in_emi", false).forGetter((r) -> r.showIncompleteInEMI),
                 Codec.unboundedMap(ResourceLocation.CODEC, Codec.FLOAT).fieldOf("essenceCost").forGetter(r -> r.essenceCost)
         ).apply(instance, InfusionRecipe::new));
 
@@ -96,6 +103,7 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
                     Ingredient.CONTENTS_STREAM_CODEC.encode(buf, obj.input);
                     buf.writeResourceLocation(obj.entry);
                     buf.writeBoolean(obj.allowIncomplete);
+                    buf.writeBoolean(obj.showIncompleteInEMI);
                     buf.writeMap(obj.essenceCost, FriendlyByteBuf::writeResourceLocation, FriendlyByteBuf::writeFloat);
                 },
                 (buf) -> {
@@ -103,8 +111,9 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
                     Ingredient input = Ingredient.CONTENTS_STREAM_CODEC.decode(buf);
                     ResourceLocation entry = buf.readResourceLocation();
                     boolean allowIncomplete = buf.readBoolean();
-                    Map<ResourceLocation, Float> essenceCost = buf.readMap(FriendlyByteBuf::readResourceLocation, FriendlyByteBuf::readFloat);
-                    return new InfusionRecipe(output, input, entry, allowIncomplete, essenceCost);
+                    boolean showIncompleteInEMI = buf.readBoolean()
+;                    Map<ResourceLocation, Float> essenceCost = buf.readMap(FriendlyByteBuf::readResourceLocation, FriendlyByteBuf::readFloat);
+                    return new InfusionRecipe(output, input, entry, allowIncomplete, showIncompleteInEMI, essenceCost);
                 }
         );
 

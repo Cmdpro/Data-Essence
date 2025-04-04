@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -49,15 +50,19 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Ess
         }
     };
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
 
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     public void drops() {
         SimpleContainer inventory = getInv();
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    
 
     public ChargerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.CHARGER.get(), pos, state);

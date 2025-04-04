@@ -4,6 +4,11 @@
             "datanessence:critical_data_unlocked"
         ]
     },
+    "tier_advanced": {
+        "sounds": [
+            "minecraft:ui/toast/challenge_complete"
+        ]
+    },
     "entropic_processor_working": {
         "sounds": [
             "datanessence:grind"

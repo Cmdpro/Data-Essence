@@ -23,6 +23,6 @@
     "translate": "data_tablet.pages.automation.name"
   },
   "parents": [
-    "datanessence:fabricator"
+    "datanessence:basics/components"
   ]
 }

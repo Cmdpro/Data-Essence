@@ -7,7 +7,7 @@
     "C  "
   ],
   "key": {
-    "C": { "item": "datanessence:capacitance_panel" }
+    "C": { "item": "minecraft:copper_ingot" }
   },
   "result": { "id": "datanessence:conductance_rod", "count": 2 }
 }

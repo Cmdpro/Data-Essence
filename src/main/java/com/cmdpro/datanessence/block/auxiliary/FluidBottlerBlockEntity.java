@@ -42,6 +42,9 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
@@ -61,29 +64,24 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
             setChanged();
         }
     };
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     private final FluidTank fluidHandler = new FluidTank(4000);
-
     public void drops() {
         SimpleContainer inventory = getInv();
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IFluidHandler> lazyFluidHandler = Lazy.of(() -> fluidHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, outputItemHandler));
-
     public IFluidHandler getFluidHandler() {
-        return lazyFluidHandler.get();
+        return fluidHandler;
     }
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IItemHandler getOutputHandler() {
-        return lazyOutputHandler.get();
-    }
-    public IItemHandler getCombinedHandler() {
-        return lazyCombinedHandler.get();
+        return outputItemHandler;
     }
 
     public FluidBottlerBlockEntity(BlockPos pos, BlockState state) {
@@ -150,8 +148,8 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidBottlerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
-            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
+            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity, pBlockEntity.fluidHandler);
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 2.5) {
                 ItemStack stack = pBlockEntity.itemHandler.getStackInSlot(0);

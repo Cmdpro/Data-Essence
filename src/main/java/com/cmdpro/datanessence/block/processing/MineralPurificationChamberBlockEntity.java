@@ -88,22 +88,22 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IFluidHandler> lazyWaterHandler = Lazy.of(() -> waterFluidHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, outputItemHandler));
+    
+    
+    
 
     public IFluidHandler getWaterHandler() {
-        return lazyWaterHandler.get();
+        return waterFluidHandler;
     }
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IItemHandler getOutputHandler() {
-        return lazyOutputHandler.get();
+        return outputItemHandler;
     }
-    public IItemHandler getCombinedHandler() {
-        return lazyCombinedHandler.get();
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
     }
     public MineralPurificationChamberBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), pos, state);
@@ -181,8 +181,8 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, MineralPurificationChamberBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
-            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
+            BufferUtil.getFluidsFromBuffersBelow(pBlockEntity, pBlockEntity.waterFluidHandler);
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1 && pBlockEntity.waterFluidHandler.getFluidAmount() >= 250) {
                 if (pBlockEntity.recipe != null) {

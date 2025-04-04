@@ -24,5 +24,6 @@
     "translate": "data_tablet.pages.auto-fabricator.name"
   },
   "parents": [
-  ]
+  ],
+  "critical": true
 }

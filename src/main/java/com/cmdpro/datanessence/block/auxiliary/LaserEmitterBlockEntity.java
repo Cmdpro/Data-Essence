@@ -30,6 +30,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,10 +54,14 @@ public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    public IItemHandler getItemHandler() {
+        return itemHandler;
+    }
+    
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots());
         for (int i = 0; i < itemHandler.getSlots(); i++) {

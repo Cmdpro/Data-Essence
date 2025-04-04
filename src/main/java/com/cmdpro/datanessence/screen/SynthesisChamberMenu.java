@@ -41,12 +41,10 @@ public class SynthesisChamberMenu extends AbstractContainerMenu implements IData
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
-        LockableItemHandler handler2 = (LockableItemHandler)blockEntity.getItemHandler();
-        this.addSlot(new SlotItemHandler(handler2, 0, 62, 22));
-        this.addSlot(new SlotItemHandler(handler2, 1, 62, 45));
-        this.addSlot(new ModResultSlot(handler, 2, 116, 34));
-        this.addSlot(new DataDriveSlot(handler, 3, 152, 8));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 62, 22));
+        this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 1, 62, 45));
+        this.addSlot(new ModResultSlot(blockEntity.getOutputHandler(), 0, 116, 34));
+        this.addSlot(new DataDriveSlot(blockEntity.getDataDriveHandler(), 0, 152, 8));
     }
 
     @Override

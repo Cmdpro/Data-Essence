@@ -1,10 +1,9 @@
 {
   "add": [
-    "datanessence:fabricator",
-    "datanessence:test1",
-    "datanessence:test2"
+    "datanessence:tier_3/ecliptrum",
+    "datanessence:tier_3/lunar_essence_transfer",
+    "datanessence:tier_3/phenuan_material_studies_2"
   ],
   "remove":[
-    "datanessence:fabricator"
   ]
 }

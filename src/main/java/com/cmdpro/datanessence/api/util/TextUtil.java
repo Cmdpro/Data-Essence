@@ -7,13 +7,17 @@ import java.text.DecimalFormat;
 public class TextUtil {
     public static Component getFluidText(int amount) {
         float endAmount = amount;
-        String type = "mb";
+        String type = "millibucket";
         if (endAmount >= 1000f) {
             endAmount /= 1000f;
-            type = "b";
+            type = "bucket";
             if (endAmount >= 1000f) {
                 endAmount /= 1000f;
-                type = "kb";
+                type = "kilobucket";
+            }
+            if (endAmount >= 1000f) {
+                endAmount /= 1000f;
+                type = "megabucket";
             }
         }
         String num = String.valueOf(Math.round(endAmount));

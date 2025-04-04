@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:infusion",
+  "essenceCost": {
+    "datanessence:lunar_essence": 50
+  },
+  "entry": "datanessence:machinery/infuser",
+  "input": {
+    "item": "minecraft:grass_block",
+    "count": 1
+  },
+  "result": {
+    "id": "minecraft:mycelium",
+    "count": 1
+  }
+}

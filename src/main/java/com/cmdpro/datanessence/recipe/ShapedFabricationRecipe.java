@@ -36,14 +36,15 @@ import java.util.*;
 
 public class ShapedFabricationRecipe implements IFabricationRecipe {
     private final ResourceLocation entry;
-    private final boolean allowIncomplete;
+    private final boolean allowIncomplete, showIncompleteInEMI;
     private final Map<ResourceLocation, Float> essenceCost;
     final ShapedRecipePattern pattern;
     final ItemStack result;
 
-    public ShapedFabricationRecipe(ShapedRecipePattern pPattern, ItemStack pResult, ResourceLocation entry, boolean allowIncomplete, Map<ResourceLocation, Float> essenceCost) {
+    public ShapedFabricationRecipe(ShapedRecipePattern pPattern, ItemStack pResult, ResourceLocation entry, boolean allowIncomplete, boolean showIncompleteInEMI, Map<ResourceLocation, Float> essenceCost) {
         this.entry = entry;
         this.allowIncomplete = allowIncomplete;
+        this.showIncompleteInEMI = showIncompleteInEMI;
         this.essenceCost = essenceCost;
         this.pattern = pPattern;
         this.result = pResult;
@@ -53,6 +54,12 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
     public boolean allowIncomplete() {
         return allowIncomplete;
     }
+
+    @Override
+    public boolean showIncompleteInEMI() {
+        return showIncompleteInEMI;
+    }
+
     @Override
     public ItemStack getResultItem(HolderLookup.Provider pRegistryAccess) {
         return this.result;
@@ -122,6 +129,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
                 ItemStack.CODEC.fieldOf("result").forGetter(p_311730_ -> p_311730_.result),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
                 Codec.BOOL.optionalFieldOf("allow_incomplete", false).forGetter((r) -> r.allowIncomplete),
+                Codec.BOOL.optionalFieldOf("show_incomplete_in_emi", false).forGetter((r) -> r.showIncompleteInEMI),
                 Codec.unboundedMap(ResourceLocation.CODEC, Codec.FLOAT).fieldOf("essenceCost").forGetter(r -> r.essenceCost)
         ).apply(instance, ShapedFabricationRecipe::new));
 
@@ -131,6 +139,7 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
                     ItemStack.STREAM_CODEC.encode(buf, obj.result);
                     buf.writeResourceLocation(obj.entry);
                     buf.writeBoolean(obj.allowIncomplete);
+                    buf.writeBoolean(obj.showIncompleteInEMI);
                     buf.writeMap(obj.essenceCost, FriendlyByteBuf::writeResourceLocation, FriendlyByteBuf::writeFloat);
                 },
                 (buf) -> {
@@ -138,8 +147,9 @@ public class ShapedFabricationRecipe implements IFabricationRecipe {
                     ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buf);
                     ResourceLocation entry = buf.readResourceLocation();
                     boolean allowIncomplete = buf.readBoolean();
+                    boolean showIncompleteInEMI = buf.readBoolean();
                     Map<ResourceLocation, Float> essenceCost = buf.readMap(FriendlyByteBuf::readResourceLocation, FriendlyByteBuf::readFloat);
-                    return new ShapedFabricationRecipe(shapedrecipepattern, itemstack, entry, allowIncomplete, essenceCost);
+                    return new ShapedFabricationRecipe(shapedrecipepattern, itemstack, entry, allowIncomplete, showIncompleteInEMI, essenceCost);
                 }
         );
         public static final Serializer INSTANCE = new Serializer();

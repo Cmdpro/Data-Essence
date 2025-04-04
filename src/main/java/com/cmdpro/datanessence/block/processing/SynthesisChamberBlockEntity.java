@@ -96,22 +96,22 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IItemHandler> lazyDataDriveHandler = Lazy.of(() -> dataDriveHandler);
-    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, outputItemHandler, dataDriveHandler));
+    
+    
+    
 
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IItemHandler getDataDriveHandler() {
-        return lazyDataDriveHandler.get();
+        return dataDriveHandler;
     }
     public IItemHandler getOutputHandler() {
-        return lazyOutputHandler.get();
+        return outputItemHandler;
     }
-    public IItemHandler getCombinedHandler() {
-        return lazyCombinedHandler.get();
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, dataDriveHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
     }
 
     public SynthesisChamberBlockEntity(BlockPos pos, BlockState state) {
@@ -213,7 +213,7 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SynthesisChamberBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
             boolean resetWorkTime = true;
             if (pBlockEntity.recipe != null) {
                 boolean enoughEssence = true;

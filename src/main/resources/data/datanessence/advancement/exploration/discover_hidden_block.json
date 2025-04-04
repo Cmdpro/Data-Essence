@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:precision_lens"
+    },
+    "title": {
+      "translate": "advancements.datanessence.discover_hidden_block.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.discover_hidden_block.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:datanessence",
+  "criteria": {
+    "has_hidden_resource": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": "#datanessence:hidden_resources" } ] }
+    }
+  }
+}

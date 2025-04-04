@@ -67,4 +67,9 @@ public class EssenceSparkleParticle extends TextureSheetParticle {
             return new EssenceSparkleParticle(level, x, y, z, this.sprites, dx, dy, dz);
         }
     }
+
+    @Override
+    protected int getLightColor(float partialTick) {
+        return 15728880; // fullbright
+    }
 }

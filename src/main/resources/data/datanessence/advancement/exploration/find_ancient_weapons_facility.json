@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:snow_block"
+    },
+    "title": {
+      "translate": "advancements.datanessence.find_ancient_weapons_facility.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.find_ancient_weapons_facility.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:datanessence",
+  "criteria": {
+    "at_abandoned_factory": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "location": {
+            "structures": "datanessence:ancient_weapons_facility"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,14 @@
 package com.cmdpro.datanessence.minigames;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.CommonVariables;
 import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.cmdpro.datanessence.api.databank.Minigame;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import org.apache.commons.lang3.RandomUtils;
@@ -129,7 +132,7 @@ public class MinesweeperMinigame extends Minigame {
                 } else {
                     pGuiGraphics.blit(TEXTURE, x + (i.pos.x * 10), y + (i.pos.y * 10), 22, 0, 10, 10);
                     if (i.nearbyBombs > 0) {
-                        pGuiGraphics.drawCenteredString(Minecraft.getInstance().font, String.valueOf(i.nearbyBombs), x + (i.pos.x * 10) + 5, y + (i.pos.y * 10) + 1, 0xFFFFFFFF);
+                        pGuiGraphics.drawCenteredString(Minecraft.getInstance().font, Component.literal(String.valueOf(i.nearbyBombs)).withStyle(Style.EMPTY.withFont(CommonVariables.ANCIENT_FONT)), x + (i.pos.x * 10) + 5, y + (i.pos.y * 10) + 1, 0xFFFFFFFF);
                     }
                 }
             }

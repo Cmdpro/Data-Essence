@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:tethergrass"
+    },
+    "title": {
+      "translate": "advancements.datanessence.discover_tethergrass.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.discover_tethergrass.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:exploration/discover_hidden_block",
+  "criteria": {
+    "has_bonding_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:bonding_powder" ] } ] }
+    }
+  }
+}

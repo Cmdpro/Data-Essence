@@ -5,13 +5,14 @@
   },
   "entry": "datanessence:essence_manipulation/essence_transfer",
   "allow_incomplete": true,
+  "show_incomplete_in_emi": true,
   "pattern": [
     " C ",
     "ARA",
     " C "
   ],
   "key": {
-    "A": { "item": "minecraft:amethyst_shard" },
+    "A": { "item": "datanessence:essence_shard" },
     "R": { "item": "datanessence:conductance_rod" },
     "C": { "item": "minecraft:copper_ingot" }
   },

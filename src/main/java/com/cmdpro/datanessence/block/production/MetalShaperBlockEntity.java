@@ -102,22 +102,22 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IItemHandler> lazyMoldHandler = Lazy.of(() -> moldHandler);
-    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, outputItemHandler, moldHandler));
+    
+    
+    
 
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IItemHandler getMoldHandler() {
-        return lazyMoldHandler.get();
+        return moldHandler;
     }
     public IItemHandler getOutputHandler() {
-        return lazyOutputHandler.get();
+        return outputItemHandler;
     }
-    public IItemHandler getCombinedHandler() {
-        return lazyCombinedHandler.get();
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, moldHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
     }
 
     public MetalShaperBlockEntity(BlockPos pos, BlockState state) {
@@ -230,7 +230,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, MetalShaperBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
             boolean resetWorkTime = true;
             if (pBlockEntity.recipe != null) {
                 if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) > 0) {

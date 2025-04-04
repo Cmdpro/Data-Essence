@@ -37,11 +37,10 @@ public class FabricatorMenu extends AbstractContainerMenu implements IDataNEssen
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
         int i, j;
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 3; j++) {
-                this.addSlot(new SlotItemHandler(handler, j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
+                this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
             }
         }
     }

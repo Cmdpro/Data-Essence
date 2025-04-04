@@ -21,5 +21,10 @@
   ],
   "name": {
     "translate": "data_tablet.pages.essence.name"
-  }
+  },
+  "parents": [
+    "datanessence:essence_manipulation/essence_leech",
+    "datanessence:essence_manipulation/industrial_plant_siphon"
+  ],
+  "critical": true
 }

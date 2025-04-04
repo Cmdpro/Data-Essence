@@ -12,9 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.crafting.FluidIngredient;
 
 import java.util.Optional;
 
@@ -27,9 +25,10 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
     private final float essenceCost;
     private final ResourceLocation entry;
     private final boolean allowIncomplete;
+    private final boolean showIncompleteInEMI;
 
     public FluidMixingRecipe(FluidStack output,
-                             FluidStack input, Optional<FluidStack> input2, Optional<Ingredient> input3, int time, float essenceCost, ResourceLocation entry, boolean allowIncomplete) {
+                             FluidStack input, Optional<FluidStack> input2, Optional<Ingredient> input3, int time, float essenceCost, ResourceLocation entry, boolean allowIncomplete, boolean showIncompleteInEMI) {
         this.output = output;
         this.input = input;
         this.input2 = input2;
@@ -38,10 +37,16 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
         this.essenceCost = essenceCost;
         this.entry = entry;
         this.allowIncomplete = allowIncomplete;
+        this.showIncompleteInEMI = showIncompleteInEMI;
     }
     @Override
     public boolean allowIncomplete() {
         return allowIncomplete;
+    }
+
+    @Override
+    public boolean showIncompleteInEMI() {
+        return showIncompleteInEMI;
     }
 
     public float getEssenceCost() {
@@ -112,7 +117,8 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
                 Codec.INT.fieldOf("time").forGetter((r) -> r.time),
                 Codec.FLOAT.optionalFieldOf("essenceCost", 0f).forGetter(r -> r.essenceCost),
                 ResourceLocation.CODEC.fieldOf("entry").forGetter((r) -> r.entry),
-                Codec.BOOL.optionalFieldOf("allow_incomplete", false).forGetter((r) -> r.allowIncomplete)
+                Codec.BOOL.optionalFieldOf("allow_incomplete", false).forGetter((r) -> r.allowIncomplete),
+                Codec.BOOL.optionalFieldOf("show_incomplete_in_emi", false).forGetter((r) -> r.showIncompleteInEMI)
         ).apply(instance, FluidMixingRecipe::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, FluidMixingRecipe> STREAM_CODEC = StreamCodec.of(
@@ -127,6 +133,7 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
                     buf.writeFloat(obj.essenceCost);
                     buf.writeResourceLocation(obj.entry);
                     buf.writeBoolean(obj.allowIncomplete);
+                    buf.writeBoolean(obj.showIncompleteInEMI);
                 },
                 (buf) -> {
                     FluidStack output = FluidStack.STREAM_CODEC.decode(buf);
@@ -145,7 +152,8 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
                     float essenceCost = buf.readFloat();
                     ResourceLocation entry = buf.readResourceLocation();
                     boolean allowIncomplete = buf.readBoolean();
-                    return new FluidMixingRecipe(output, input, input2, input3, time, essenceCost, entry, allowIncomplete);
+                    boolean showIncompleteInEMI = buf.readBoolean();
+                    return new FluidMixingRecipe(output, input, input2, input3, time, essenceCost, entry, allowIncomplete, showIncompleteInEMI);
                 }
         );
 

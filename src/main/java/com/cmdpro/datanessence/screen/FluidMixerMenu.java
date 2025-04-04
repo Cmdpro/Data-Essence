@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.screen;
 
+import com.cmdpro.datanessence.screen.slot.DataDriveSlot;
 import com.cmdpro.datanessence.util.IDataNEssenceMenuHelper;
 import com.cmdpro.datanessence.block.processing.FluidMixerBlockEntity;
 import com.cmdpro.datanessence.registry.BlockRegistry;
@@ -37,9 +38,8 @@ public class FluidMixerMenu extends AbstractContainerMenu implements IDataNEssen
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
         this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), 0, 62, 33));
-        this.addSlot(new SlotItemHandler(handler, 1, 152, 8));
+        this.addSlot(new DataDriveSlot(blockEntity.getDataDriveHandler(), 0, 152, 8));
     }
 
     @Override

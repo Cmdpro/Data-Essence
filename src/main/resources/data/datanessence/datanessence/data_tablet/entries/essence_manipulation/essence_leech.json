@@ -27,5 +27,6 @@
   },
   "parents": [
     "datanessence:essence_manipulation/essence_burner"
-  ]
+  ],
+  "critical": true
 }

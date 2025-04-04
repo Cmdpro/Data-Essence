@@ -60,18 +60,18 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(itemHandler, outputItemHandler));
+    
+    
 
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IItemHandler getOutputHandler() {
-        return lazyOutputHandler.get();
+        return outputItemHandler;
     }
-    public IItemHandler getCombinedHandler() {
-        return lazyCombinedHandler.get();
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
     }
     public EssenceFurnaceBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ESSENCE_FURNACE.get(), pos, state);
@@ -150,7 +150,7 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceFurnaceBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
             boolean resetWorkTime = true;
             pBlockEntity.lit = false;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {

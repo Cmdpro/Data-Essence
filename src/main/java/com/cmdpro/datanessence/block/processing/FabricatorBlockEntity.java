@@ -39,6 +39,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -74,8 +75,12 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
             checkRecipes();
         }
     }
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
+    }
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public void checkRecipes() {
         Optional<RecipeHolder<IFabricationRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.FABRICATIONCRAFTING.get(), getCraftingInv().asCraftInput(), level);
@@ -101,7 +106,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
+    
 
     public FabricatorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FABRICATOR.get(), pos, state);

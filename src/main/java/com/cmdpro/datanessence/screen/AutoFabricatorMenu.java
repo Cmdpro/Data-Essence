@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.screen;
 
+import com.cmdpro.datanessence.screen.slot.DataDriveSlot;
+import com.cmdpro.datanessence.screen.slot.ModResultSlot;
 import com.cmdpro.datanessence.util.IDataNEssenceMenuHelper;
 import com.cmdpro.datanessence.block.processing.AutoFabricatorBlockEntity;
 import com.cmdpro.datanessence.api.LockableItemHandler;
@@ -39,16 +41,14 @@ public class AutoFabricatorMenu extends AbstractContainerMenu implements IDataNE
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = level.getCapability(Capabilities.ItemHandler.BLOCK, blockEntity.getBlockPos(), null);
-        LockableItemHandler handler2 = (LockableItemHandler)blockEntity.getItemHandler();
         int i, j;
         for (i = 0; i < 3; i++) {
             for (j = 0; j < 3; j++) {
-                this.addSlot(new SlotItemHandler(handler2, j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
+                this.addSlot(new SlotItemHandler(blockEntity.getItemHandler(), j + (i * 3), 54 + (j * 18), 17 + (i * 18)));
             }
         }
-        this.addSlot(new SlotItemHandler(handler, 9, 145, 35));
-        this.addSlot(new SlotItemHandler(handler, 10, 152, 4));
+        this.addSlot(new ModResultSlot(blockEntity.getOutputHandler(), 0, 145, 35));
+        this.addSlot(new DataDriveSlot(blockEntity.getDataDriveHandler(), 0, 152, 4));
     }
 
     @Override

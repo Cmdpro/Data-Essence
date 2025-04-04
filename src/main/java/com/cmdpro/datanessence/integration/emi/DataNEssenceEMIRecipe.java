@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.integration.emi;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import com.cmdpro.datanessence.recipe.IHasRequiredKnowledge;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
@@ -37,12 +38,12 @@ public abstract class DataNEssenceEMIRecipe implements EmiRecipe {
     }
 
     public boolean isUnlocked() {
-        return recipeUnlockEntry == null || hasData(recipeUnlockEntry);
+        return recipeUnlockEntry == null || hasData(recipeUnlockEntry, recipe);
     }
 
-    public boolean hasData(ResourceLocation dataEntry) {
-        Minecraft client = Minecraft.getInstance();
-        return ClientPlayerUnlockedEntries.getUnlocked().contains(dataEntry);
+    public boolean hasData(ResourceLocation dataEntry, ResourceLocation recipe) {
+        var dataLockedRecipe = (IHasRequiredKnowledge) getBackingRecipe().value();
+        return ClientPlayerUnlockedEntries.getUnlocked().contains(dataEntry) || ( ClientPlayerUnlockedEntries.getIncomplete().contains(dataEntry) && dataLockedRecipe.showIncompleteInEMI() );
     }
 
     public abstract void addUnlockedWidgets(WidgetHolder widgets);
@@ -51,8 +52,8 @@ public abstract class DataNEssenceEMIRecipe implements EmiRecipe {
     public void addWidgets(WidgetHolder widgets) {
         if (!isUnlocked()) {
             ResourceLocation background = DataNEssence.locate("textures/gui/emi_recipe_locked.png");
-            int lightColor = new Color(255, 150, 181).getRGB(); // blend between this and the dark one later.
-            int darkColor = new Color(242, 94, 161).getRGB();
+            int lightColor = 0xFFFF96B5;
+            int darkColor = 0xFFF25EA1;
 
             widgets.addTexture(background, 0, 0, 123, 60, 0, 0);
             widgets.addText(lockedText1, 123 - 4, 60 / 2, lightColor, false).horizontalAlign(TextWidget.Alignment.END);

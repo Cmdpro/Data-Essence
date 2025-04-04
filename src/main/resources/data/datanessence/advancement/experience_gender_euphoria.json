@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:traversite_road_chunk"
+    },
+    "title": {
+      "translate": "advancements.datanessence.experience_gender_euphoria.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.experience_gender_euphoria.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:datanessence",
+  "criteria": {
+    "has_gender_euphoria_effect": {
+      "trigger": "minecraft:effects_changed",
+      "conditions": { "effects": { "datanessence:gender_euphoria": {} } }
+    }
+  }
+}

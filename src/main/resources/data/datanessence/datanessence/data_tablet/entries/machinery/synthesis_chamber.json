@@ -27,5 +27,6 @@
   },
   "parents": [
     "datanessence:machinery/automation"
-  ]
+  ],
+  "critical": true
 }

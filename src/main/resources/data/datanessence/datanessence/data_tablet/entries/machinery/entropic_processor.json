@@ -44,7 +44,8 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:entropic_processing/wool_to_string"
+        "datanessence:entropic_processing/wool_to_string",
+        "datanessence:entropic_processing/clay_to_clay_balls"
       ]
     }
   ],

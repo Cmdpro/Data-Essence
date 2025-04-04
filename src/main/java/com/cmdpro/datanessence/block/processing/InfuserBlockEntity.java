@@ -93,22 +93,22 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    private Lazy<IItemHandler> lazyItemHandler = Lazy.of(() -> itemHandler);
-    private Lazy<IItemHandler> lazyDataDriveHandler = Lazy.of(() -> dataDriveHandler);
-    private Lazy<IItemHandler> lazyOutputHandler = Lazy.of(() -> outputItemHandler);
-    private Lazy<IItemHandler> lazyCombinedHandler = Lazy.of(() -> new CombinedInvWrapper(dataDriveHandler, itemHandler, outputItemHandler));
+    
+    
+    
 
     public IItemHandler getItemHandler() {
-        return lazyItemHandler.get();
+        return itemHandler;
     }
     public IItemHandler getDataDriveHandler() {
-        return lazyDataDriveHandler.get();
+        return dataDriveHandler;
     }
     public IItemHandler getOutputHandler() {
-        return lazyOutputHandler.get();
+        return outputItemHandler;
     }
-    public IItemHandler getCombinedHandler() {
-        return lazyCombinedHandler.get();
+    private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, dataDriveHandler, outputItemHandler);
+    public CombinedInvWrapper getCombinedInvWrapper() {
+        return combinedInvWrapper;
     }
     public InfuserBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.INFUSER.get(), pos, state);
@@ -187,7 +187,7 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, InfuserBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity);
+            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
             pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0);
             boolean shouldReset = true;
             if (pBlockEntity.recipe != null) {

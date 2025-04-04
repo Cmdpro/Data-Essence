@@ -1,6 +1,9 @@
-// 1.21.1	2025-03-07T14:34:26.595543357	Tags for minecraft:item mod id datanessence
+// 1.21.1	2025-04-03T13:46:23.518178898	Tags for minecraft:item mod id datanessence
 8cdb9e30481dbfb955c51d5218c4d55973aed710 data/c/tags/item/armors.json
+9cddc5879f2f9028a5231bdb7b779717113cfbe2 data/datanessence/tags/item/copper_parts.json
+4c3a766057d246f453b1a7c7afb1537bb62be05c data/datanessence/tags/item/ecliptrum_parts.json
 2de480fdf84933ba907798fa90de70b537e2b008 data/datanessence/tags/item/explosive_material.json
+9de9b5e4e88c0a0b61f74d3bcc4e8a85e2194ed1 data/datanessence/tags/item/hidden_resources.json
 f20021795384d03de093e8106f4c361eb069cd13 data/datanessence/tags/item/high_essence_plants.json
 76bfcdd7193340428adee6675df135c4100bc32d data/datanessence/tags/item/low_essence_plants.json
 e2da4e19973b7a1b57144263d080ccf9a0750636 data/datanessence/tags/item/makes_black_dye.json
