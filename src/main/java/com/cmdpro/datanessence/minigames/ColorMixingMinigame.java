@@ -16,6 +16,7 @@ import org.joml.Vector2i;
 import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,7 +42,16 @@ public class ColorMixingMinigame extends Minigame {
     }
     @Override
     public boolean isFinished() {
-        return getCurrentColor().equals(targetColor);
+        Color currentColor = getCurrentColor();
+        float[] targetHsv = Color.RGBtoHSB(targetColor.getRed(), targetColor.getGreen(), targetColor.getBlue(), null);
+        float[] currentHsv = Color.RGBtoHSB(getCurrentColor().getRed(), currentColor.getGreen(), currentColor.getBlue(), null);
+        int[] targetHsvInt = new int[3];
+        int[] currentHsvInt = new int[3];
+        for (int i = 0; i < 3; i++) {
+            targetHsvInt[i] = (int)(targetHsv[i]*100f);
+            currentHsvInt[i] = (int)(currentHsv[i]*100f);
+        }
+        return currentHsvInt[0] == targetHsvInt[0] && currentHsvInt[1] == targetHsvInt[1] && currentHsvInt[2] == targetHsvInt[2];
     }
     public Color getCurrentColor() {
         Color color = startColor;
