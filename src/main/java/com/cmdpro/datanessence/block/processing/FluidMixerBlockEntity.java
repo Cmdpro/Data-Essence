@@ -50,31 +50,24 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
+public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public AnimationState animState = new AnimationState();
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public FluidMixingRecipe recipe;
+    public boolean enoughEssence;
+    public float essenceCost;
+    public int workTime, maxWorkTime;
+    public ItemStack item;
 
     @Override
     public EssenceStorage getStorage() {
         return storage;
     }
-    private final LockableItemHandler itemHandler = new LockableItemHandler(1) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
             checkRecipes();
-        }
-
-        @Override
-        public void setLockedSlots() {
-            super.setLockedSlots();
-            setChanged();
-        }
-
-        @Override
-        public void setLocked(boolean locked) {
-            super.setLocked(locked);
-            setChanged();
         }
 
         @Override
@@ -101,6 +94,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
             checkRecipes();
         }
     }
+
     private final MultiFluidTank fluidHandler = new MultiFluidTankNoDuplicateFluids(List.of(new FluidTank(1000) { @Override protected void onContentsChanged() { checkRecipes(); } }, new FluidTank(1000) { @Override protected void onContentsChanged() { checkRecipes(); } }));
     private final FluidTank outputFluidHandler = new FluidTank(1000);
     public IFluidHandler getFluidHandler() {
@@ -113,9 +107,6 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    
-    
-    
 
     public IItemHandler getItemHandler() {
         return itemHandler;
@@ -131,9 +122,11 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     public CombinedInvWrapper getCombinedInvWrapper() {
         return combinedInvWrapper;
     }
+
     public FluidMixerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_MIXER.get(), pos, state);
     }
+
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
@@ -148,6 +141,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         fluidHandler.readFromNBT(pRegistries, tag.getCompound("fluidHandler"));
         outputFluidHandler.readFromNBT(pRegistries, tag.getCompound("outputFluidHandler"));
     }
+
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
@@ -170,6 +164,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         tag.putInt("workTime", workTime);
         super.saveAdditional(tag, pRegistries);
     }
+
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
@@ -180,7 +175,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
     }
-    public ItemStack item;
+
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots()+dataDriveHandler.getSlots());
         for (int i = 0; i < dataDriveHandler.getSlots(); i++) {
@@ -191,6 +186,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         }
         return inventory;
     }
+
     public RecipeInputWithFluid getCraftingInv() {
         RecipeInput inventory = new SingleRecipeInput(itemHandler.getStackInSlot(0));
         List<FluidStack> fluids = new ArrayList<>();
@@ -199,6 +195,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
         }
         return new RecipeInputWithFluid(inventory, fluids);
     }
+
     public void checkRecipes() {
         Optional<RecipeHolder<FluidMixingRecipe>> recipe = level.getRecipeManager().getRecipesFor(RecipeRegistry.FLUID_MIXING_TYPE.get(), getCraftingInv(), level).stream().filter((a) -> a.value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))).findFirst();
         if (recipe.isPresent()) {
@@ -215,11 +212,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
             this.recipe = null;
         }
     }
-    public FluidMixingRecipe recipe;
-    public boolean enoughEssence;
-    public float essenceCost;
-    public int workTime;
-    public int maxWorkTime;
+
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidMixerBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
@@ -259,11 +252,13 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
             recipe.ifPresentOrElse(recipeHolder -> pBlockEntity.recipe = recipeHolder.value(), () -> pBlockEntity.recipe = null);
         }
     }
+
     protected void updateBlock() {
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
+
     @Override
     public Component getDisplayName() {
         return Component.empty();
@@ -273,10 +268,5 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new FluidMixerMenu(pContainerId, pInventory, this);
-    }
-
-    @Override
-    public List<LockableItemHandler> getLockable() {
-        return List.of(itemHandler);
     }
 }

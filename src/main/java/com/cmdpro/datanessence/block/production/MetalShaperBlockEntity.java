@@ -47,15 +47,16 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
+public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     public AnimationState animState = new AnimationState();
     public AnimationDefinition anim;
+
     @Override
     public EssenceStorage getStorage() {
         return storage;
     }
-    private final LockableItemHandler itemHandler = new LockableItemHandler(1) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -63,22 +64,11 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         }
 
         @Override
-        public void setLockedSlots() {
-            super.setLockedSlots();
-            setChanged();
-        }
-
-        @Override
-        public void setLocked(boolean locked) {
-            super.setLocked(locked);
-            setChanged();
-        }
-
-        @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return super.isItemValid(slot, stack);
         }
     };
+
     private final ItemStackHandler moldHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -90,6 +80,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
             return stack.has(DataComponentRegistry.MOLD);
         }
     };
+
     private final ItemStackHandler outputItemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -102,9 +93,6 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    
-    
-    
 
     public IItemHandler getItemHandler() {
         return itemHandler;
@@ -146,6 +134,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         maxWorkTime = tag.getInt("maxWorkTime");
     }
+
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
@@ -166,6 +155,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         tag.putInt("workTime", workTime);
         super.saveAdditional(tag, pRegistries);
     }
+
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
         super.loadAdditional(nbt, pRegistries);
@@ -175,6 +165,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         workTime = nbt.getInt("workTime");
     }
+
     public ItemStack item;
     public SimpleContainer getInv() {
         SimpleContainer inventory = new SimpleContainer(itemHandler.getSlots()+outputItemHandler.getSlots()+moldHandler.getSlots());
@@ -272,10 +263,5 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new MetalShaperMenu(pContainerId, pInventory, this);
-    }
-
-    @Override
-    public List<LockableItemHandler> getLockable() {
-        return List.of(itemHandler);
     }
 }

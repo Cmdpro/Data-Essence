@@ -43,29 +43,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
+public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
     }
-    private final LockableItemHandler itemHandler = new LockableItemHandler(2) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
             checkRecipes();
-        }
-
-        @Override
-        public void setLockedSlots() {
-            super.setLockedSlots();
-            setChanged();
-        }
-
-        @Override
-        public void setLocked(boolean locked) {
-            super.setLocked(locked);
-            setChanged();
         }
 
         @Override
@@ -96,9 +84,6 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    
-    
-    
 
     public IItemHandler getItemHandler() {
         return itemHandler;
@@ -275,10 +260,5 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new SynthesisChamberMenu(pContainerId, pInventory, this);
-    }
-
-    @Override
-    public List<LockableItemHandler> getLockable() {
-        return List.of(itemHandler);
     }
 }

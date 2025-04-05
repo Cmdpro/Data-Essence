@@ -31,7 +31,6 @@ public class SynthesisChamberScreen extends AbstractContainerScreen<SynthesisCha
         super.init();
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        addRenderableWidget(new LockWidget(menu.blockEntity, (LockableItemHandler)menu.blockEntity.getItemHandler(), x+151, y+30));
     }
 
     public float time;
@@ -42,7 +41,6 @@ public class SynthesisChamberScreen extends AbstractContainerScreen<SynthesisCha
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
-        ClientRenderingUtil.renderLockedSlotBg(pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y, menu.slots);
         if (menu.blockEntity.maxWorkTime != -1) {
             pGuiGraphics.blit(TEXTURE, x + 82, y + 33, 221, 0, (int) (22f * ((float) menu.blockEntity.workTime / menu.blockEntity.maxWorkTime)), 17);
         }
