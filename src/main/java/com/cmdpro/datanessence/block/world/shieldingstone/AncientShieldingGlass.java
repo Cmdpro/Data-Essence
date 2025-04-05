@@ -16,7 +16,7 @@ public class AncientShieldingGlass extends TransparentBlock implements Shielding
     public AncientShieldingGlass() {
         super(Properties.of()
                 .requiresCorrectToolForDrops()
-                .strength(-1.0f, 1500f)
+                .strength(-1.0f, 360000f)
                 .sound(SoundType.GLASS)
                 .instrument(NoteBlockInstrument.HAT)
                 .noOcclusion()
@@ -28,7 +28,7 @@ public class AncientShieldingGlass extends TransparentBlock implements Shielding
 
     @Override
     protected float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
-        if (player instanceof FakePlayer && state.getBlock() instanceof ShieldingStone)
+        if (player instanceof FakePlayer)
             return 0.0f;
         int i = player.hasCorrectToolForDrops(state, player.level(), pos) ? 250 : 1500;
         return player.getDigSpeed(state, pos) / 2.0F / i;
