@@ -4,12 +4,16 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.c2s.PlayerSetItemHandlerLocked;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class LockWidget extends AbstractWidget {
@@ -48,6 +52,11 @@ public class LockWidget extends AbstractWidget {
     @Override
     protected void updateWidgetNarration(NarrationElementOutput pNarrationElementOutput) {
 
+    }
+
+    @Override
+    public void playDownSound(SoundManager handler) {
+        handler.play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
     }
 
 }
