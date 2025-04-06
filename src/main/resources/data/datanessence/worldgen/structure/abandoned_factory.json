@@ -1,6 +1,6 @@
 {
   "type": "minecraft:jigsaw",
-  "biomes": "#minecraft:is_ocean",
+  "biomes": "#datanessence:has_structure/abandoned_factory",
   "step": "surface_structures",
   "spawn_overrides": {},
   "terrain_adaptation": "none",
