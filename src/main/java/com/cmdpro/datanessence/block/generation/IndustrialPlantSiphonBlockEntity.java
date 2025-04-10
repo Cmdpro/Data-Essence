@@ -4,12 +4,14 @@ import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
+import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import com.cmdpro.datanessence.screen.IndustrialPlantSiphonMenu;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -27,18 +29,24 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.util.Lazy;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+import org.apache.commons.lang3.RandomUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.awt.*;
 
 public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public AnimationState animState = new AnimationState();
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
-    public static float essenceProduced = 2.0f; // how much does this generator make per work tick?
+    public static float essenceProducedFromLowValuePlants = 2.0f;
+    public static float essenceProducedFromMediumValuePlants = 4.0f;
+    public static float essenceProducedFromHighValuePlants = 8.0f;
     public float essenceGenerationTicks; // fuel timer
+    public float generationRate; // current generation rate
 
     @Override
     public EssenceStorage getStorage() {
@@ -90,6 +98,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         CompoundTag tag = pkt.getTag();
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         essenceGenerationTicks = tag.getFloat("EssenceGenerationTicks");
+        generationRate = tag.getFloat("GenerationRate");
     }
 
     @Override
@@ -97,6 +106,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         CompoundTag tag = new CompoundTag();
         tag.put("EssenceStorage", storage.toNbt());
         tag.putFloat("EssenceGenerationTicks", essenceGenerationTicks);
+        tag.putFloat("GenerationRate", generationRate);
         return tag;
     }
 
@@ -105,6 +115,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
         tag.put("EssenceStorage", storage.toNbt());
         tag.putFloat("EssenceGenerationTicks", essenceGenerationTicks);
+        tag.putFloat("GenerationRate", generationRate);
         super.saveAdditional(tag, pRegistries);
     }
 
@@ -114,6 +125,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         essenceGenerationTicks = nbt.getFloat("EssenceGenerationTicks");
+        generationRate = nbt.getFloat("GenerationRate");
     }
 
     public SimpleContainer getInv() {
@@ -128,13 +140,14 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         if (!world.isClientSide()) {
             BufferUtil.getItemsFromBuffersBelow(tile, tile.itemHandler);
             if (tile.essenceGenerationTicks <= 0 ) {
-                tile.essenceGenerationTicks = tile.getEssenceProduced(tile);
+                tile.essenceGenerationTicks = tile.getGenerationTicks(tile);
+                tile.generationRate = tile.getEssenceProduced(tile);
                 tile.itemHandler.extractItem(0, 1, false);
             }
 
             if (tile.essenceGenerationTicks > 0) {
-                if ( !(tile.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) + essenceProduced > tile.storage.getMaxEssence()) ) {
-                    tile.storage.addEssence(EssenceTypeRegistry.ESSENCE.get(), essenceProduced);
+                if ( !(tile.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) + tile.generationRate > tile.storage.getMaxEssence()) ) {
+                    tile.storage.addEssence(EssenceTypeRegistry.ESSENCE.get(), tile.generationRate);
                     tile.essenceGenerationTicks--;
                 }
             }
@@ -142,13 +155,23 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         }
     }
 
-    public float getEssenceProduced(IndustrialPlantSiphonBlockEntity tile) {
-        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.LOW_ESSENCE_PLANTS))
-            return DataNEssenceConfig.lowValuePlantEssence;
-        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.MEDIUM_ESSENCE_PLANTS))
-            return DataNEssenceConfig.mediumValuePlantEssence;
+    public float getGenerationTicks(IndustrialPlantSiphonBlockEntity tile) {
         if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.HIGH_ESSENCE_PLANTS))
             return DataNEssenceConfig.highValuePlantEssence;
+        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.MEDIUM_ESSENCE_PLANTS))
+            return DataNEssenceConfig.mediumValuePlantEssence;
+        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.LOW_ESSENCE_PLANTS))
+            return DataNEssenceConfig.lowValuePlantEssence;
+        return 0f;
+    }
+
+    public float getEssenceProduced(IndustrialPlantSiphonBlockEntity tile) {
+        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.HIGH_ESSENCE_PLANTS))
+            return essenceProducedFromHighValuePlants;
+        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.MEDIUM_ESSENCE_PLANTS))
+            return essenceProducedFromMediumValuePlants;
+        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.LOW_ESSENCE_PLANTS))
+            return essenceProducedFromLowValuePlants;
         return 0f;
     }
 

@@ -16,7 +16,7 @@ public class LuminousAncientShieldingStone extends Block implements ShieldingSto
     public LuminousAncientShieldingStone(int lightLevel) {
         super(Properties.of()
                 .requiresCorrectToolForDrops()
-                .strength(-1.0f, 1500f)
+                .strength(-1.0f, 360000f)
                 .sound(SoundType.DEEPSLATE_TILES)
                 .mapColor(MapColor.COLOR_PURPLE)
                 .instrument(NoteBlockInstrument.BASEDRUM)
@@ -25,7 +25,7 @@ public class LuminousAncientShieldingStone extends Block implements ShieldingSto
 
     @Override
     protected float getDestroyProgress(BlockState state, Player player, BlockGetter level, BlockPos pos) {
-        if (player instanceof FakePlayer && state.getBlock() instanceof ShieldingStone)
+        if (player instanceof FakePlayer)
             return 0.0f;
         int i = player.hasCorrectToolForDrops(state, player.level(), pos) ? 250 : 1500;
         return player.getDigSpeed(state, pos) / 2.0F / i;
