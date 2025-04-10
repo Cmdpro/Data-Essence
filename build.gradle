@@ -26,6 +26,21 @@ base {
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 jarJar.enable()
+def slimClassifier = 'slim'
+tasks.named('jar') {
+    archiveClassifier = slimClassifier
+}
+tasks.named('jarJar') {
+    archiveClassifier = ''
+}
+tasks.register('deleteSlimJar') {
+    doLast {
+        delete "$buildDir/libs/datanessence-${version}-${slimClassifier}.jar"
+    }
+    dependsOn tasks.named('jarJar')
+}
+build.configure { finalizedBy tasks.named('deleteSlimJar') }
+
 minecraft {
     accessTransformers {
         file('src/main/resources/META-INF/accesstransformer.cfg')
