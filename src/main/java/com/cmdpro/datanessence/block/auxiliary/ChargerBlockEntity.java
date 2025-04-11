@@ -128,10 +128,10 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Ess
                 if (maxEssence > 0 && ItemEssenceContainer.getSupportedEssenceTypes(stack).contains(essenceType)) {
                     float essence = ItemEssenceContainer.getEssence(stack, essenceType);
                     if (essence < maxEssence) {
-                        float fill = Math.min(maxEssence - essence, Math.min(5f, pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get())));
+                        float fill = Math.min(maxEssence - essence, Math.min(5f, pBlockEntity.getStorage().getEssence(i)));
                         if (fill > 0) {
                             ItemEssenceContainer.addEssence(stack, essenceType, fill);
-                            pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), fill);
+                            pBlockEntity.getStorage().removeEssence(i, fill);
                             pBlockEntity.charging = true;
                         }
                     }
