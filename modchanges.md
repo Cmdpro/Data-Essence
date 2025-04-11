@@ -7,3 +7,4 @@
 
 ### Fixes
 - Ancient Rock is now explosion resistant
+- Vacuum caused client lag upon collecting a lot of items at once
