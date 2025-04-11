@@ -22,6 +22,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,6 +39,9 @@ import java.util.List;
 
 public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public ItemStack item;
+
+
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -71,6 +75,7 @@ public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider
     }
     public LaserEmitterBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.LASER_EMITTER.get(), pos, state);
+        item = ItemStack.EMPTY;
     }
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
@@ -78,11 +83,16 @@ public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider
     }
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
-        storage.fromNbt(pkt.getTag());
+        CompoundTag tag = pkt.getTag();
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
+        item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
-        return storage.toNbt();
+        CompoundTag tag = new CompoundTag();
+        tag.put("EssenceStorage", storage.toNbt());
+        tag.put("item", item.saveOptional(pRegistries));
+        return tag;
     }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
@@ -103,11 +113,14 @@ public class LaserEmitterBlockEntity extends BlockEntity implements MenuProvider
         int oldRedstoneLevel = pBlockEntity.redstoneLevel;
         boolean updated = false;
         boolean drainsEssence = true;
+
         if (!(pBlockEntity.itemHandler.getStackInSlot(0).getItem() instanceof ILaserEmitterModule)) {
             drainsEssence = false;
         }
+
         if (!pLevel.isClientSide) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
+            pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0).copy();
         }
         if (pBlockEntity.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 0.5f || !drainsEssence) {
             float dist = 0;

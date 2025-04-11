@@ -24,6 +24,6 @@ public class AccelerationLens extends Item implements ILaserEmitterModule {
 
     @Override
     public int getBeamColor() {
-        return 0x35db30;
+        return 0x3afc44;
     }
 }

@@ -20,6 +20,6 @@ public class PrecisionLens extends Item implements ILaserEmitterModule {
 
     @Override
     public int getBeamColor() {
-        return 0x216fb8;
+        return 0x2a84fa;
     }
 }

@@ -25,7 +25,7 @@ public class LaserEmitterRenderer implements BlockEntityRenderer<LaserEmitterBlo
             poseStack.translate(0.5, 0.5, 0.5);
 
             int color = 0xe236ef;
-            if ( laserEmitter.getItemHandler().getStackInSlot(0).getItem() instanceof ILaserEmitterModule lens )
+            if ( laserEmitter.item.getItem() instanceof ILaserEmitterModule lens )
                 color = lens.getBeamColor();
 
             ClientDatabankUtils.renderAdvancedBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0f, laserEmitter.getLevel().getGameTime(), laserEmitter.getBlockPos().getCenter(), laserEmitter.end, new Color(color), 0.25f, 0.3f);

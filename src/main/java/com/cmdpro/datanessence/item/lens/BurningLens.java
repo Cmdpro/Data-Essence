@@ -20,6 +20,6 @@ public class BurningLens extends Item implements ILaserEmitterModule {
 
     @Override
     public int getBeamColor() {
-        return 0xf5701d;
+        return 0xfc7019;
     }
 }
