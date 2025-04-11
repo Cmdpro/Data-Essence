@@ -17,4 +17,9 @@ public class PrecisionLens extends Item implements ILaserEmitterModule {
     public int getRedstoneLevel(LaserEmitterBlockEntity ent, List<LivingEntity> entities) {
         return Math.clamp(0, 15, entities.size());
     }
+
+    @Override
+    public int getBeamColor() {
+        return 0x216fb8;
+    }
 }

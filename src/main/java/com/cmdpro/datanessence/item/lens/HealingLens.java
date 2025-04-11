@@ -14,4 +14,9 @@ public class HealingLens extends Item implements ILaserEmitterModule {
     public void applyToMob(LaserEmitterBlockEntity ent, LivingEntity entity) {
         entity.heal(0.1f);
     }
+
+    @Override
+    public int getBeamColor() {
+        return 0xe864b7;
+    }
 }

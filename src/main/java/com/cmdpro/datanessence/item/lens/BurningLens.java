@@ -17,4 +17,9 @@ public class BurningLens extends Item implements ILaserEmitterModule {
         }
         entity.hurt(entity.damageSources().inFire(), 1);
     }
+
+    @Override
+    public int getBeamColor() {
+        return 0xf5701d;
+    }
 }

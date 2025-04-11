@@ -21,4 +21,9 @@ public class AccelerationLens extends Item implements ILaserEmitterModule {
         Vector3f vec = ent.getBlockState().getValue(LaserEmitter.FACING).step();
         entity.push(vec.x, vec.y, vec.z);
     }
+
+    @Override
+    public int getBeamColor() {
+        return 0x35db30;
+    }
 }
