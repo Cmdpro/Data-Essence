@@ -63,8 +63,9 @@ public class ItemEssenceContainer {
         if (stack.has(DataComponentRegistry.ESSENCE_STORAGE)) {
             ItemEssenceContainer storage = stack.get(DataComponentRegistry.ESSENCE_STORAGE);
             if (storage.storedEssence.containsKey(type)) {
-                storage.storedEssence.put(type, Math.clamp(storage.storedEssence.get(type) + amount, 0, storage.totalEssence));
-                stack.set(DataComponentRegistry.ESSENCE_STORAGE, storage);
+                var essence = storage.storedEssence.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                essence.put(type, Math.clamp(storage.storedEssence.get(type) + amount, 0, storage.totalEssence));
+                stack.set(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(essence, storage.totalEssence));
             }
         }
     }
@@ -73,8 +74,9 @@ public class ItemEssenceContainer {
         if (stack.has(DataComponentRegistry.ESSENCE_STORAGE)) {
             ItemEssenceContainer storage = stack.get(DataComponentRegistry.ESSENCE_STORAGE);
             if (storage.storedEssence.containsKey(type)) {
-                storage.storedEssence.put(type, Math.clamp(storage.storedEssence.get(type) - amount, 0, storage.totalEssence));
-                stack.set(DataComponentRegistry.ESSENCE_STORAGE, storage);
+                var essence = storage.storedEssence.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                essence.put(type, Math.clamp(storage.storedEssence.get(type) - amount, 0, storage.totalEssence));
+                stack.set(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(essence, storage.totalEssence));
             }
         }
     }
