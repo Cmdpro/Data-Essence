@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:repulsion_rod"
+  },
+  "tier": 3,
+  "name": {
+    "translate": "data_tablet.pages.repulsion_rod.name"
+  },
+  "entry": "datanessence:tools/repulsion_rod"
+}

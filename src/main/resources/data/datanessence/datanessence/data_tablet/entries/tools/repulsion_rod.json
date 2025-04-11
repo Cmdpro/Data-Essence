@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "id": "datanessence:repulsion_rod"
+  },
+  "tab": "datanessence:tools",
+  "x": 1,
+  "y": 3,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.repulsion_rod.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/equipment/repulsion_rod"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.repulsion_rod.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.repulsion_rod.flavor"
+  },
+  "parents": [
+    "datanessence:machinery_transformation/ecliptrum",
+    "datanessence:tools/charger"
+  ]
+}

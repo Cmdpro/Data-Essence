@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:lunar_essence": 200
+  },
+  "entry": "datanessence:tools/repulsion_rod",
+  "pattern": [
+    " lL",
+    " Ml",
+    "R  "
+  ],
+  "key": {
+    "l": { "item": "datanessence:lensing_crystal" },
+    "R": { "item": "datanessence:transformative_rod" },
+    "M": { "item": "datanessence:logical_matrix" },
+    "L": { "item": "datanessence:lunar_essence_shard" }
+  },
+  "result": { "id": "datanessence:repulsion_rod" }
+}

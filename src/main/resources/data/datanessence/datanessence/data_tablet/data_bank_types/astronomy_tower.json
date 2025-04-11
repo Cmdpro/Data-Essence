@@ -2,7 +2,8 @@
   "add": [
     "datanessence:tier_3/ecliptrum",
     "datanessence:tier_3/lunar_essence_transfer",
-    "datanessence:tier_3/phenuan_material_studies_2"
+    "datanessence:tier_3/phenuan_material_studies_2",
+    "datanessence:tier_3/repulsion_rod"
   ],
   "remove":[
   ]
