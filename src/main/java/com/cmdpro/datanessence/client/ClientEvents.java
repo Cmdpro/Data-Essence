@@ -3,8 +3,9 @@ package com.cmdpro.datanessence.client;
 import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.databank.rendering.ShaderHelper;
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
-import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
@@ -26,6 +27,7 @@ import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -55,21 +57,9 @@ public class ClientEvents {
     }
     @SubscribeEvent
     public static void itemTooltip(ItemTooltipEvent event) {
-        float maxExoticEssence = EssenceChargeableItemUtil.getMaxExoticEssence(event.getItemStack());
-        if (maxExoticEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.exotic_essence_with_max", format(EssenceChargeableItemUtil.getExoticEssence(event.getItemStack())), format(maxExoticEssence)));
-        }
-        float maxNaturalEssence = EssenceChargeableItemUtil.getMaxNaturalEssence(event.getItemStack());
-        if (maxNaturalEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.natural_essence_with_max", format(EssenceChargeableItemUtil.getNaturalEssence(event.getItemStack())), format(maxNaturalEssence)));
-        }
-        float maxLunarEssence = EssenceChargeableItemUtil.getMaxLunarEssence(event.getItemStack());
-        if (maxLunarEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.lunar_essence_with_max", format(EssenceChargeableItemUtil.getLunarEssence(event.getItemStack())), format(maxLunarEssence)));
-        }
-        float maxEssence = EssenceChargeableItemUtil.getMaxEssence(event.getItemStack());
-        if (maxEssence > 0) {
-            event.getToolTip().add(1, Component.translatable("gui.essence_bar.essence_with_max", format(EssenceChargeableItemUtil.getEssence(event.getItemStack())), format(maxEssence)));
+        float maxEssence = ItemEssenceContainer.getMaxEssence(event.getItemStack());
+        for (ResourceLocation i : ItemEssenceContainer.getSupportedEssenceTypes(event.getItemStack())) {
+            event.getToolTip().add(1, Component.translatable(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i).tooltipKeyWithMax, format(ItemEssenceContainer.getEssence(event.getItemStack(), i)), format(maxEssence)));
         }
     }
     @SubscribeEvent

@@ -1,9 +1,12 @@
 package com.cmdpro.datanessence.item.equipment;
 
-import com.cmdpro.datanessence.api.util.item.EssenceChargeableItemUtil;
+import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -16,6 +19,8 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.common.Tags;
 
+import java.util.List;
+
 public class EssenceSword extends SwordItem {
     public static final Tier ESSENCE_SWORD = new SimpleTier(
             // The tag that determines what blocks this tool cannot break. See below for more information.
@@ -27,15 +32,16 @@ public class EssenceSword extends SwordItem {
             // Determines the repair ingredient of the tier. Use a supplier for lazy initializing.
             () -> Ingredient.of(Tags.Items.INGOTS_COPPER)
     );
+    public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
     public EssenceSword(Properties pProperties) {
-        super(ESSENCE_SWORD, pProperties.component(DataComponentRegistry.MAX_ESSENCE, 10000f));
+        super(ESSENCE_SWORD, pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 10000)));
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-        if (EssenceChargeableItemUtil.getEssence(stack) >= 10) {
-            EssenceChargeableItemUtil.drainEssence(stack, 10);
+        if (ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) >= 10) {
+            ItemEssenceContainer.removeEssence(stack, FUEL_ESSENCE_TYPE, 10);
             EssenceSlashProjectile slash = new EssenceSlashProjectile(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), pPlayer, pLevel);
             slash.setPos(slash.position().offsetRandom(pPlayer.getRandom(), 0.25f));
             pLevel.addFreshEntity(slash);

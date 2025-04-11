@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -9,6 +10,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -37,44 +39,9 @@ public class DataComponentRegistry {
             .networkSynchronized(ResourceLocation.STREAM_CODEC)
             .cacheEncoding()
     );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> ESSENCE = DATA_COMPONENTS.registerComponentType("essence", builder -> builder
-            .persistent(Codec.FLOAT)
-            .networkSynchronized(ByteBufCodecs.FLOAT)
-            .cacheEncoding()
-    );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> LUNAR_ESSENCE = DATA_COMPONENTS.registerComponentType("lunar_essence", builder -> builder
-            .persistent(Codec.FLOAT)
-            .networkSynchronized(ByteBufCodecs.FLOAT)
-            .cacheEncoding()
-    );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> NATURAL_ESSENCE = DATA_COMPONENTS.registerComponentType("natural_essence", builder -> builder
-            .persistent(Codec.FLOAT)
-            .networkSynchronized(ByteBufCodecs.FLOAT)
-            .cacheEncoding()
-    );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> EXOTIC_ESSENCE = DATA_COMPONENTS.registerComponentType("exotic_essence", builder -> builder
-            .persistent(Codec.FLOAT)
-            .networkSynchronized(ByteBufCodecs.FLOAT)
-            .cacheEncoding()
-    );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MAX_ESSENCE = DATA_COMPONENTS.registerComponentType("max_essence", builder -> builder
-            .persistent(Codec.FLOAT)
-            .networkSynchronized(ByteBufCodecs.FLOAT)
-            .cacheEncoding()
-    );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MAX_LUNAR_ESSENCE = DATA_COMPONENTS.registerComponentType("max_lunar_essence", builder -> builder
-            .persistent(Codec.FLOAT)
-            .networkSynchronized(ByteBufCodecs.FLOAT)
-            .cacheEncoding()
-    );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MAX_NATURAL_ESSENCE = DATA_COMPONENTS.registerComponentType("max_natural_essence", builder -> builder
-            .persistent(Codec.FLOAT)
-            .networkSynchronized(ByteBufCodecs.FLOAT)
-            .cacheEncoding()
-    );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> MAX_EXOTIC_ESSENCE = DATA_COMPONENTS.registerComponentType("max_exotic_essence", builder -> builder
-            .persistent(Codec.FLOAT)
-            .networkSynchronized(ByteBufCodecs.FLOAT)
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemEssenceContainer>> ESSENCE_STORAGE = DATA_COMPONENTS.registerComponentType("essence_storage", builder -> builder
+            .persistent(ItemEssenceContainer.CODEC.codec())
+            .networkSynchronized(ItemEssenceContainer.STREAM_CODEC)
             .cacheEncoding()
     );
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceKey<SoundEvent>>> PLAYING_MUSIC = DATA_COMPONENTS.registerComponentType("playing_sound", builder -> builder
