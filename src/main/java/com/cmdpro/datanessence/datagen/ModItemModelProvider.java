@@ -66,6 +66,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.HARMING_LENS, "lenses");
         simpleItemWithSubdirectory(ItemRegistry.HEALING_LENS, "lenses");
         simpleItemWithSubdirectory(ItemRegistry.PRECISION_LENS, "lenses");
+        simpleItemWithSubdirectory(ItemRegistry.ATTRACTING_LENS, "lenses");
 
         handheldItem(ItemRegistry.ESSENCE_REDIRECTOR);
         handheldItem(ItemRegistry.ESSENCE_SWORD);

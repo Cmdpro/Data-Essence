@@ -86,6 +86,7 @@
       "datanessence:synthesis/fluid_wire_synthesis",
       "datanessence:synthesis/item_wire_synthesis",
       "datanessence:synthesis/lens_acceleration",
+      "datanessence:synthesis/lens_attracting",
       "datanessence:synthesis/lens_burning",
       "datanessence:synthesis/lens_harming",
       "datanessence:synthesis/lens_healing",

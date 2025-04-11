@@ -13,6 +13,7 @@
   "datanessence.fluid_display.megabucket": "%1$sMB",
 
   "item.datanessence.acceleration_lens": "Laser Lens: Repelling",
+  "item.datanessence.attracting_lens": "Laser Lens: Attracting",
   "item.datanessence.bonding_powder": "Bonding Powder",
   "item.datanessence.burning_lens": "Laser Lens: Burning",
   "item.datanessence.capacitance_panel": "Capacitance Panel",
@@ -386,8 +387,8 @@
   "data_tablet.pages.itemworks.page1.text": "The transfer and routing of items is perhaps the most important aspect of running an Essence-driven factory, second only to Essence itself. To facilitate that, we have made Item Nodes and associated Wire that can transfer items wherever we require, building on existing designs.",
   "data_tablet.pages.itemworks.page2.text": " ◇ The linking order of nodes controls the direction of flow - sender to receiver.\n ◇ Intermediate nodes cannot send nor receive.",
   "data_tablet.pages.laser_emitter.name": "Essence Lasers",
-  "data_tablet.pages.laser_emitter.page1.text": "Focusing Essence into a concentrated beam provides interesting results we found useful for the manipulation of mobs. We devised a special device to do this very thing, with the added benefit that it may be given one of several Laser Lenses to alter the effect of the emitted beam.\n\nIt is to note that the Emitter requires a comparator to read the redstone signals it provides.",
-  "data_tablet.pages.laser_emitter.page2.text": " ◇ No Lens (does not require Essence): The Emitter produces a redstone signal when mobs touch the beam.\n ◇ Repelling: Mobs are pushed away from the Emitter.\n ◇ Burning: Mobs are ignited.\n ◇ Harming: Mobs are damaged.\n ◇ Healing: Mobs are healed.\n ◇ Precising: The Emitter emits redstone correspondent to the number of mobs the beam intersects with.",
+  "data_tablet.pages.laser_emitter.page1.text": "Focusing Essence into a concentrated beam yields useful results for manipulating mobs. We created a special device to do this very thing, with the added benefit that it may be given one of several Laser Lenses to alter the effect of the emitted beam.\n\nIt is to note that the Emitter requires a comparator to read the redstone signals it provides.",
+  "data_tablet.pages.laser_emitter.page2.text": " ◇ No Lens (does not require Essence): Emits redstone when mobs touch the beam.\n ◇ Repelling: Mobs are pushed away from the Emitter.\n ◇ Attracting: Mobs are moved towards the Emitter.\n ◇ Burning: Mobs are ignited.\n ◇ Harming: Mobs are damaged.\n ◇ Healing: Mobs are healed.\n ◇ Precising: Emits redstone correspondent to the number of mobs the beam intersects with, capped at 15.",
   "data_tablet.pages.limited_item_buffer.name": "Limited Item Buffer",
   "data_tablet.pages.limited_item_buffer.page1.text": "It is possible to modify the design of Item Buffers such that they only insert a small amount of items into a slot at once, instead of up to a stack. This is of immediate utility for working with the auto-fabricator, and similar constructs.",
   "data_tablet.pages.node_upgrades.name": "Node Upgrade Sigils",

@@ -24,6 +24,7 @@ public class ItemRegistry {
     public static final Supplier<Item> ACCELERATION_LENS = register("acceleration_lens", () -> new AccelerationLens(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> BURNING_LENS = register("burning_lens", () -> new BurningLens(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PRECISION_LENS = register("precision_lens", () -> new PrecisionLens(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ATTRACTING_LENS = register("attracting_lens", () -> new AttractingLens(new Item.Properties().stacksTo(1)));
 
     // Tools
     public static final Supplier<Item> ESSENCE_REDIRECTOR = register("essence_redirector", () -> new EssenceRedirector(new Item.Properties().stacksTo(1)));

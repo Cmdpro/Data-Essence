@@ -259,6 +259,7 @@ public class DataNEssence
             event.accept(ItemRegistry.HARMING_LENS.get());
             event.accept(ItemRegistry.HEALING_LENS.get());
             event.accept(ItemRegistry.ACCELERATION_LENS.get());
+            event.accept(ItemRegistry.ATTRACTING_LENS.get());
             event.accept(ItemRegistry.BURNING_LENS.get());
             event.accept(ItemRegistry.PRECISION_LENS.get());
             event.accept(ItemRegistry.SPEED_UPGRADE.get());
