@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.item.equipment;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.registry.ArmorMaterialRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -50,5 +51,20 @@ public class PrimitiveAntiGravityPack extends ArmorItem {
             builder.add(Attributes.SAFE_FALL_DISTANCE, FALL_HEIGHT_MODIFIER, EquipmentSlotGroup.CHEST);
         }
         return builder.build();
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) < ItemEssenceContainer.getMaxEssence(stack);
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        return Math.round( ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) * 13.0F / ItemEssenceContainer.getMaxEssence(stack));
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        return EssenceTypeRegistry.ESSENCE.get().color;
     }
 }

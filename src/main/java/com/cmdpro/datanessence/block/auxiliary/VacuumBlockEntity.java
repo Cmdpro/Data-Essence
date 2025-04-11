@@ -15,6 +15,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
+import org.apache.commons.lang3.RandomUtils;
 
 import java.awt.*;
 import java.util.List;
@@ -25,27 +26,30 @@ public class VacuumBlockEntity extends BlockEntity {
     }
     public static void tick(Level world, BlockPos pos, BlockState pState, VacuumBlockEntity pBlockEntity) {
         if (!world.isClientSide) {
-            List<ItemEntity> ents = world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(pos.getCenter(), 20, 20, 20));
-            for (ItemEntity i : ents) {
+            List<ItemEntity> itemsBeingSuckedUp = world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(pos.getCenter(), 20, 20, 20));
+            for (ItemEntity i : itemsBeingSuckedUp) {
                 i.setDeltaMovement(pos.getCenter().subtract(i.position()).normalize().multiply(0.2, 0.2, 0.2));
                 i.hasImpulse = true;
             }
-            List<ItemEntity> ents2 = world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(pos.getCenter(), 3, 3, 3));
+            List<ItemEntity> itemsBeingCollected = world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(pos.getCenter(), 3, 3, 3));
             IItemHandler itemHandler = world.getCapability(Capabilities.ItemHandler.BLOCK, pos.above(), Direction.DOWN);
             if (itemHandler != null) {
-                for (ItemEntity i : ents2) {
+                boolean collectedSomething = false;
+                for (ItemEntity i : itemsBeingCollected) {
                     ItemStack copy = i.getItem().copy();
                     if (!copy.isEmpty()) {
                         for (int o = 0; o < itemHandler.getSlots(); o++) {
                             ItemStack stack = itemHandler.getStackInSlot(o);
                             if (stack.is(copy.getItem()) || stack.isEmpty()) {
                                 copy = itemHandler.insertItem(o, copy, false);
-                                world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, 0.1f, world.random.nextFloat());
+                                collectedSomething = true;
                             }
                         }
                     }
                     i.setItem(copy);
                 }
+                if (collectedSomething)
+                    world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, RandomUtils.nextFloat(0.1f, 0.6f), world.random.nextFloat());
             }
         } else {
             Color[] enderColors = new Color[] { new Color(0x005c3c), new Color(0x033328), new Color(0x006653) };
