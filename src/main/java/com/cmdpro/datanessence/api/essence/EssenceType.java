@@ -14,14 +14,16 @@ public class EssenceType {
     public final int color;
     public final EssenceBarSpriteLocation tinyBarSprite, bigBarSprite;
     public final String tooltipKey;
+    public final String tooltipKeyWithMax;
 
-    public EssenceType(Component name, int tier, int color, String tooltipKey, EssenceBarSpriteLocation tinyBarSprite, EssenceBarSpriteLocation bigBarSprite) {
+    public EssenceType(Component name, int tier, int color, String tooltipKey, String tooltipKeyWithMax, EssenceBarSpriteLocation tinyBarSprite, EssenceBarSpriteLocation bigBarSprite) {
         this.name = name;
         this.tier = tier;
         this.color = color;
         this.tinyBarSprite = tinyBarSprite;
         this.bigBarSprite = bigBarSprite;
         this.tooltipKey = tooltipKey;
+        this.tooltipKeyWithMax = tooltipKeyWithMax;
     }
     public static EssenceBarSpriteLocation createLocation(ResourceLocation location, int x, int y) {
         return new EssenceBarSpriteLocation(location, x, y);
