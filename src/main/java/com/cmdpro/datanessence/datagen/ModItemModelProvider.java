@@ -72,6 +72,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         handheldItem(ItemRegistry.ESSENCE_REDIRECTOR);
         handheldItem(ItemRegistry.ESSENCE_SWORD);
         handheldItem(ItemRegistry.ILLUMINATION_ROD);
+        handheldItem(ItemRegistry.REPULSION_ROD);
 
         evenSimplerBlockItem(BlockRegistry.ESSENCE_CRYSTAL);
         evenSimplerBlockItem(BlockRegistry.LUNAR_ESSENCE_CRYSTAL);

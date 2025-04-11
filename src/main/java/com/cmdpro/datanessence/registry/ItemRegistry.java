@@ -37,6 +37,7 @@ public class ItemRegistry {
     public static final Supplier<Item> PRIMITIVE_ANTI_GRAVITY_PACK = register("primitive_anti_gravity_pack", () -> new PrimitiveAntiGravityPack(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> WARP_CAPSULE = register("warp_capsule", () -> new WarpCapsule(new Item.Properties()));
     public static final Supplier<Item> ILLUMINATION_ROD = register("illumination_rod", () -> new IlluminationRod(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> REPULSION_ROD = register("repulsion_rod", () -> new RepulsionRod(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> TRAVERSITE_TRUDGERS = register("traversite_trudgers", () -> new TraversiteTrudgers(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> HAMMER_AND_CHISEL = register("hammer_and_chisel", () -> new HammerAndChisel(new Item.Properties().stacksTo(1).durability(256)));
 

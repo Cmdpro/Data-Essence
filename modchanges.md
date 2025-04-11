@@ -5,3 +5,4 @@
 - Enabled Lunar Essence Wires, Nodes, Bombs, and Batteries
 - Added Astronomy Tower structure
 - Added Essence Derivation Spike generator
+- Added Repulsion Rod tool

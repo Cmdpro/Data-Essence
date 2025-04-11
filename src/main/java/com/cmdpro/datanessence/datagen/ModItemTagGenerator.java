@@ -59,6 +59,10 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ItemRegistry.CAPACITANCE_PANEL.get())
                 .add(ItemRegistry.CONDUCTANCE_ROD.get())
                 .add(Items.COPPER_INGOT);
+        this.tag(TagRegistry.Items.ECLIPTRUM_PARTS)
+                .add(ItemRegistry.TRANSFORMATIVE_ROD.get())
+                .add(ItemRegistry.REFLECTIVE_PANEL.get())
+                .add(ItemRegistry.ECLIPTRUM_INGOT.get());
 
         this.tag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem())

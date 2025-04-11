@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-26T15:33:05.49122021	Item Models: datanessence
+// 1.21.1	2025-04-10T05:27:19.236665286	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -65,6 +65,7 @@ de272af4e4feac0b7f325c246f01dbdc0d6ea318 assets/datanessence/models/item/polishe
 c21e404c80d50f53fca78d073b54c48763738238 assets/datanessence/models/item/primitive_anti_gravity_pack.json
 51e08ca19295ad19da59f904f8712159db967e1b assets/datanessence/models/item/propeller.json
 2ff8b1dbc645a76d7df6bd6999d1dc223a95182c assets/datanessence/models/item/reflective_panel.json
+6c770a58c82acbfb6dd8c2a4072267e32c2129aa assets/datanessence/models/item/repulsion_rod.json
 698c8b9885493fb32342dde3df3c643f7a9ea384 assets/datanessence/models/item/rod_mold.json
 1b09ec0be74ff44bbe133a0ef3f32cf87cde6661 assets/datanessence/models/item/speed_upgrade.json
 cccabab1270cb85664204724c134f6d86b2fe5a6 assets/datanessence/models/item/spire_glass.json
