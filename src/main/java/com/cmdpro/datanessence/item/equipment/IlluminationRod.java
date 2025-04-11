@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -69,5 +70,20 @@ public class IlluminationRod extends Item {
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.FAIL;
+    }
+
+    @Override
+    public boolean isBarVisible(ItemStack stack) {
+        return ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) < ItemEssenceContainer.getMaxEssence(stack);
+    }
+
+    @Override
+    public int getBarWidth(ItemStack stack) {
+        return Math.round( ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) * 13.0F / ItemEssenceContainer.getMaxEssence(stack));
+    }
+
+    @Override
+    public int getBarColor(ItemStack stack) {
+        return EssenceTypeRegistry.ESSENCE.get().color;
     }
 }
