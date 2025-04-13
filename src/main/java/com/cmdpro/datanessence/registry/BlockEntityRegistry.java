@@ -160,6 +160,10 @@ public class BlockEntityRegistry {
             register("exotic_essence_battery", () ->
                     BlockEntityType.Builder.of(ExoticEssenceBatteryBlockEntity::new,
                             BlockRegistry.EXOTIC_ESSENCE_BATTERY.get()).build(null));
+    public static final Supplier<BlockEntityType<CreativeEssenceBatteryBlockEntity>> CREATIVE_ESSENCE_BATTERY =
+            register("creative_essence_battery", () ->
+                    BlockEntityType.Builder.of(CreativeEssenceBatteryBlockEntity::new,
+                            BlockRegistry.CREATIVE_ESSENCE_BATTERY.get()).build(null));
     public static final Supplier<BlockEntityType<FluidTankBlockEntity>> FLUID_TANK =
             register("fluid_tank", () ->
                     BlockEntityType.Builder.of(FluidTankBlockEntity::new,

@@ -1,4 +1,4 @@
-// 1.21.1	2025-03-22T23:28:30.118167425	Block States: datanessence
+// 1.21.1	2025-04-13T13:47:37.630866772	Block States: datanessence
 4c3f8bc2b11e812a24d90295ef729dfe488c971c assets/datanessence/blockstates/aether_rune.json
 768dfda3826afab6ac2a48d49a2f703f413da50a assets/datanessence/blockstates/ancient_glyph_stone_blank.json
 a95f027a62699569a8ea8ed39de6b52e8c27d18f assets/datanessence/blockstates/ancient_glyph_stone_essence.json
@@ -9,6 +9,7 @@ ce4fbfb54eb2616987f8b0f0a94ec2698c1d0cd7 assets/datanessence/blockstates/ancient
 65eb7ec6d7eb8a68d62256fec022ab7148aa41c5 assets/datanessence/blockstates/ancient_rock_tiles.json
 c52098f8bb418070c8327220d4cb48cf86502aad assets/datanessence/blockstates/ancient_shelf.json
 df90340bd9bef3fede9f9b0fd8033c8768f4afee assets/datanessence/blockstates/ancient_window.json
+fc5e372032096f0b6fe7c7a3c898839ecda390f2 assets/datanessence/blockstates/creative_essence_battery.json
 953e9cbd96ebfd6ff3f5c84dd04babc7c64aa56b assets/datanessence/blockstates/crystalline_log.json
 13930bae2a863f337554802bc424a68121488478 assets/datanessence/blockstates/data_bank.json
 3593316e84b1a48df680d7c6ea5218fa3be57113 assets/datanessence/blockstates/deco_essence_buffer.json
@@ -58,6 +59,7 @@ f5ee9e3e5da78b12658b736732855417590f4103 assets/datanessence/models/block/ancien
 ccc6e4348045a65091b3f1be9700fff763c78113 assets/datanessence/models/block/ancient_shelf_empty2.json
 767c540cc6a65371f2b93dddf122862ede050a45 assets/datanessence/models/block/ancient_shelf_materials.json
 ce4d6f1b70c3bfeee0d534ea079ad9430e8be82e assets/datanessence/models/block/ancient_window.json
+8065e9478f6498c3ee1b10bedb3df2c329f92177 assets/datanessence/models/block/creative_essence_battery.json
 c07f62d3cb8c972760d18a32a73eb5d0c65429fc assets/datanessence/models/block/crystalline_log.json
 f80dda2b652793877ff095095cb455a34dc09111 assets/datanessence/models/block/crystalline_log_horizontal.json
 3db9abc37da691f9654449e923313d7ff2c9b7e2 assets/datanessence/models/block/data_bank.json
@@ -124,6 +126,7 @@ dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
 68c3dbb22b292fada84213b03d319a39f7423ea9 assets/datanessence/models/item/ancient_shelf.json
 347ab0099de380aff8da7c8c84ce8145de333727 assets/datanessence/models/item/ancient_window.json
+b8f4f0e3c33a1c6e5ef577f91611fd5ff3d1280e assets/datanessence/models/item/creative_essence_battery.json
 9b3ffaff4662ced17bed7e13cee4a0270bfcb688 assets/datanessence/models/item/data_bank.json
 5ca594a44ea4f9e1d7fa2a7a78f8cc86d7b43f08 assets/datanessence/models/item/engraved_polished_obsidian.json
 848b1acf1d73aa5f8eb41bb36262c4e5b5feec9f assets/datanessence/models/item/essence_battery.json
