@@ -2,6 +2,9 @@
 - Added charge meters for Essence-using tools such as the Illumination Rod
 - Gave all Laser Emitter lenses custom beam colors
 - Added Attracting Laser Lens
+- Added infinite essence battery, accessible via commands only
+- Added more "uncrafting" Entropic Processor recipes
+- Added more Infuser recipes, to make some vanilla resources easier to get or automateable - these are unlocked with a new data entry
 
 ### Changes
 - Buffed the Industrial Plant Siphon

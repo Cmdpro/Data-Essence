@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:infusion",
+  "essenceCost": {
+    "datanessence:essence": 50
+  },
+  "entry": "datanessence:machinery/industrial_infuser_processing",
+  "input": {
+    "item": "minecraft:gravel",
+    "count": 1
+  },
+  "result": {
+    "id": "minecraft:flint",
+    "count": 1
+  }
+}

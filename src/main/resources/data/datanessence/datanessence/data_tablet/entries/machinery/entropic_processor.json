@@ -45,7 +45,17 @@
       "type": "datanessence:crafting",
       "recipes": [
         "datanessence:entropic_processing/wool_to_string",
-        "datanessence:entropic_processing/clay_to_clay_balls"
+        "datanessence:entropic_processing/clay_to_clay_balls",
+        "datanessence:entropic_processing/honeycomb_block_to_honeycomb",
+        "datanessence:dripstone_to_pointed_dripstone"
+      ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:entropic_processing/bricks_to_clay",
+        "datanessence:entropic_processing/bricks_stairs_to_clay",
+        "datanessence:entropic_processing/bricks_slab_to_clay"
       ]
     }
   ],

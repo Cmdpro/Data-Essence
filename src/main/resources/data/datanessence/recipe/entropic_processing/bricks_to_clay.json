@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "minecraft:bricks" },
+  "time": 100,
+  "result": { "id": "minecraft:clay_ball", "count": 4 }
+}

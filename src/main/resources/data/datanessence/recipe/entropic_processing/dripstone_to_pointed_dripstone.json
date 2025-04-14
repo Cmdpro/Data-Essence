@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "minecraft:dripstone_block" },
+  "time": 100,
+  "result": { "id": "minecraft:pointed_dripstone", "count": 4 }
+}
