@@ -106,6 +106,7 @@
   "block.datanessence.charger": "Charger",
   "block.datanessence.chemical_node": "Chemical Node",
   "block.datanessence.computer": "Computer",
+  "block.datanessence.creative_essence_battery": "Infinite Essence Battery",
   "block.datanessence.data_bank": "Ancient Data Bank",
   "block.datanessence.data_bank.cannot_use": "You need a Data Tablet to make use of this.",
   "block.datanessence.deco_essence_buffer": "Essence Buffer (Decorative)",
