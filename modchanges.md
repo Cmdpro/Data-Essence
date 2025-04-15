@@ -5,6 +5,7 @@
 - Added infinite essence battery, accessible via commands only
 - Added more "uncrafting" Entropic Processor recipes
 - Added more Infuser recipes, to make some vanilla resources easier to get or automateable - these are unlocked with a new data entry
+- Added new Burrow structure, found in plains and forests - does not contain data, but has some loot and lore
 
 ### Changes
 - Buffed the Industrial Plant Siphon
