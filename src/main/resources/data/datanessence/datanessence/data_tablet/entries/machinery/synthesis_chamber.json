@@ -14,8 +14,16 @@
     },
     {
       "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.synthesis_chamber.page2.text"
+      },
       "recipes": [
-        "datanessence:fabrication/machines/synthesis_chamber",
+        "datanessence:fabrication/machines/synthesis_chamber"
+      ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
         "datanessence:synthesis/essence_wire_synthesis",
         "datanessence:synthesis/item_wire_synthesis",
         "datanessence:synthesis/fluid_wire_synthesis"

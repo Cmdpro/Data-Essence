@@ -12,6 +12,7 @@
 - Reworked code for Essence storage on items - will result in all existing tools having their storages cleared on updating
 - Changed the naming format of Laser Emitter lenses
 - Made Metal Shaper, Melter, and Essence Furnace slightly more expensive
+- Re-added Slot Locking to Synthesis Chamber
 
 ### Fixes
 - Ancient Rock is now explosion resistant
