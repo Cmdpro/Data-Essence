@@ -3,6 +3,12 @@
     {
       "type": "datanessence:text",
       "text": {
+        "translate": "computer.burrow.small_01.exploration_hint"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
         "translate": "computer.burrow.small_01.diary_01"
       }
     },
