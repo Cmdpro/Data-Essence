@@ -66,6 +66,7 @@ public class ModMessages {
         registrar.playToClient(EntrySync.TYPE, getNetworkCodec(EntrySync::read, EntrySync::write), Handler::handle);
         registrar.playToClient(DragonPartsSync.TYPE, getNetworkCodec(DragonPartsSync::read, DragonPartsSync::write), Handler::handle);
         registrar.playToClient(PlayBufferTransferParticle.TYPE, getNetworkCodec(PlayBufferTransferParticle::read, PlayBufferTransferParticle::write), Handler::handle);
+        registrar.playToClient(PingStructures.TYPE, getNetworkCodec(PingStructures::read, PingStructures::write), Handler::handle);
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigame.TYPE, getNetworkCodec(PlayerFinishDataBankMinigame::read, PlayerFinishDataBankMinigame::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveData.TYPE, getNetworkCodec(PlayerChangeDriveData::read, PlayerChangeDriveData::write), Handler::handle);

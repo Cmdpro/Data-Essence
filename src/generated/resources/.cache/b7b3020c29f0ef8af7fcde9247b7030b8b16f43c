@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-17T05:43:00.16862543	Item Models: datanessence
+// 1.21.1	2025-04-17T18:43:24.351011565	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -48,6 +48,7 @@ bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/item_po
 869463292549ed3104bcbbdcb698a2aa91206892 assets/datanessence/models/item/item_wire.json
 75ea606ceed228526a2b04991b5eee2b52311b7c assets/datanessence/models/item/lens.json
 27f75bf72da4534b5632b55c6418115543a94343 assets/datanessence/models/item/lensing_crystal.json
+4da20ddab6ae95b67a5aa7d1a8557cbe670f7b59 assets/datanessence/models/item/locator.json
 dc6b5004a06b5a6d174a99991c44a9c625c7fed5 assets/datanessence/models/item/logical_matrix.json
 fe1ce05b004a75716ba9ee13cc445e73c1ae74ff assets/datanessence/models/item/lunar_essence_bomb.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/lunar_essence_point.json

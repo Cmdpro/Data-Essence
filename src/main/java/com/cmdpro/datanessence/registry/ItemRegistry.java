@@ -84,6 +84,7 @@ public class ItemRegistry {
     public static final Supplier<Item> MUSIC_DISC_PLAYER = register("music_disc_player", () -> new MusicDiscPlayer(new Item.Properties().stacksTo(1).component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
     public static final Supplier<Item> TRAVERSITE_ROAD_CHUNK = register("traversite_road_chunk", () -> new TraversiteRoadChunk(new Item.Properties()));
     public static final Supplier<Item> SHRINK_RAY = register("shrink_ray", () -> new ShrinkRay(new Item.Properties()));
+    public static final Supplier<Item> LOCATOR = register("locator", () -> new Locator(new Item.Properties()));
 
     // Node Upgrades
     public static final Supplier<Item> SPEED_UPGRADE = register("speed_upgrade", () -> new SpeedNodeUpgrade(new Item.Properties(), 1));
