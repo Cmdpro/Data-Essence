@@ -29,6 +29,12 @@
         "datanessence:crafting/exciter",
         "datanessence:crafting/iron_drill"
       ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:crafting/heating_coil"
+      ]
     }
   ],
   "name": {

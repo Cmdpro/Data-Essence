@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-11T14:05:24.890218436	Item Models: datanessence
+// 1.21.1	2025-04-17T05:43:00.16862543	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -41,6 +41,7 @@ e7ed11614b8a776b431eb08293c8e6cb0aeaf7d4 assets/datanessence/models/item/genderf
 f5f3309e5c10ed2cbcc9f72edfa1da8ca74ab5d4 assets/datanessence/models/item/hammer_and_chisel.json
 65a017c6b809f40655cecc7e07b81aeee8ce8a80 assets/datanessence/models/item/harming_lens.json
 38024141123ce88a752e39c367a3ea1233632ca8 assets/datanessence/models/item/healing_lens.json
+ed44c3d436356b3a43821fe9a637cb8713979e4e assets/datanessence/models/item/heating_coil.json
 1b55d3de0db75e26ae39c281bed690c07d3c11a4 assets/datanessence/models/item/illumination_rod.json
 5313b5501bfd7b0ba522afb7c97fe13dac466acb assets/datanessence/models/item/iron_drill.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/item_point.json

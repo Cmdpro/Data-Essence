@@ -5,12 +5,13 @@
   "pattern": [
     "RIR",
     "P P",
-    "PPP"
+    "PHP"
   ],
   "key": {
     "P": { "item": "datanessence:capacitance_panel" },
     "I": { "item": "minecraft:iron_block" },
-    "R": { "item": "datanessence:conductance_rod" }
+    "R": { "item": "datanessence:conductance_rod" },
+    "H": { "item": "datanessence:heating_coil" }
   },
   "result": { "id": "datanessence:metal_shaper" }
 }
