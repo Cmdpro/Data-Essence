@@ -227,6 +227,7 @@ public class DataNEssence
             // Tools
             event.accept(ItemRegistry.DATA_TABLET.get());
             event.accept(ItemRegistry.ESSENCE_REDIRECTOR.get());
+            event.accept(ItemRegistry.LOCATOR.get());
             event.accept(ItemRegistry.DATA_DRIVE.get());
             event.accept(ItemRegistry.MOLD_PANEL.get());
             event.accept(ItemRegistry.MOLD_ROD.get());
