@@ -1,3 +1,4 @@
 [Sound Credits]
     grind.ogg: https://pixabay.com/sound-effects/gear-spinning-loop-6981/
     ui_click.ogg: https://freesound.org/people/josheb_policarpio/sounds/613407/
+    ping.ogg: https://pixabay.com/sound-effects/ping-43757/

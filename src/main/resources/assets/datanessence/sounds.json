@@ -15,6 +15,12 @@
         ],
         "subtitle": "subtitle.datanessence.entropic_processor_working"
     },
+    "locator_ping": {
+        "sounds": [
+            "datanessence:ping"
+        ],
+        "subtitle": "subtitle.datanessence.locator_ping"
+    },
     "ui_click": {
         "sounds": [
             "datanessence:ui_click"
