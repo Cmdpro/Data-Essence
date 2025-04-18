@@ -54,6 +54,7 @@
   "item.datanessence.lens": "Lens",
   "item.datanessence.lensing_crystal": "Lensing Crystal",
   "item.datanessence.limiter_upgrade": "Unique Upgrade Sigil: Limit",
+  "item.datanessence.locator": "Signal Tracker",
   "item.datanessence.logical_matrix": "Logical Matrix",
   "item.datanessence.lunar_essence_bomb": "Lunar Essence Bomb",
   "item.datanessence.lunar_essence_bomb.info": " ◇ Volatile! Can crystallize mobs that die to its explosions.",
@@ -556,7 +557,7 @@
   "tooltip.datanessence.save_and_exit_sneak": "Clear Saved Entry",
 
   "subtitle.datanessence.entropic_processor_working": "Entropic Processor grinds",
-  "subtitle.datanessence.locator_ping": "<Unnamed Structure Locator Tool> pings",
+  "subtitle.datanessence.locator_ping": "Signal Tracker pings",
 
   "tag.item.c.nuggets.coal": "Coal Nuggets",
   "tag.item.c.nuggets.diamond": "Diamond Nuggets",

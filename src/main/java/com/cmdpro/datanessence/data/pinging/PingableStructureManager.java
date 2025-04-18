@@ -12,22 +12,25 @@ import java.util.Map;
 
 public class PingableStructureManager extends SimpleJsonResourceReloadListener {
     protected static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().disableHtmlEscaping().create();
-
     public static PingableStructureManager instance;
+
     protected PingableStructureManager() {
         super(GSON, "datanessence/pingable_structures");
     }
+
     public static PingableStructureManager getOrCreateInstance() {
         if (instance == null) {
             instance = new PingableStructureManager();
         }
         return instance;
     }
+
     public static Map<ResourceLocation, PingableStructure> types;
+
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         types = new HashMap<>();
-        DataNEssence.LOGGER.info("Adding Data and Essence Pingable Structures");
+        DataNEssence.LOGGER.info("[DATANESSENCE] Adding Data and Essence Pingable Structures");
         for (Map.Entry<ResourceLocation, JsonElement> i : pObject.entrySet()) {
             ResourceLocation location = i.getKey();
             if (location.getPath().startsWith("_")) {
@@ -39,10 +42,11 @@ public class PingableStructureManager extends SimpleJsonResourceReloadListener {
                 PingableStructure data = serializer.read(i.getKey(), obj);
                 types.put(i.getKey(), data);
             } catch (IllegalArgumentException | JsonParseException e) {
-                DataNEssence.LOGGER.error("Parsing error loading pingable structure {}", location, e);
+                DataNEssence.LOGGER.error("[DATANESSENCE ERROR] Parsing error loading pingable structure {}", location, e);
             }
         }
-        DataNEssence.LOGGER.info("Loaded {} pingable structures", types.size());
+        DataNEssence.LOGGER.info("[DATANESSENCE] Loaded {} pingable structures", types.size());
     }
+
     public static PingableStructureSerializer serializer = new PingableStructureSerializer();
 }
