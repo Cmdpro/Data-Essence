@@ -135,7 +135,7 @@ public class ClientModEvents {
         });
 
         event.enqueueWork(() -> {
-            ItemProperties.register(ItemRegistry.MUSIC_DISC_PLAYER.get(), ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "playing"), (stack, level, entity, seed) -> {
+            ItemProperties.register(ItemRegistry.MUSIC_DISC_PLAYER.get(), DataNEssence.locate("playing"), (stack, level, entity, seed) -> {
                 if (stack.has(DataComponentRegistry.PLAYING_MUSIC)) {
                     return 1;
                 }

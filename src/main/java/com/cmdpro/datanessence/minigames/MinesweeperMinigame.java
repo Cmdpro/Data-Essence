@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MinesweeperMinigame extends Minigame {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/data_bank_minigames.png");
     public MinesweeperMinigame(int bombCount, int size) {
         this.bombCount = bombCount;
         this.size = size;

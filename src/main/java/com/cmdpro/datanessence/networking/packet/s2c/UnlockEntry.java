@@ -42,7 +42,7 @@ public record UnlockEntry(ResourceLocation unlocked, boolean incomplete) impleme
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<UnlockEntry> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "unlock_entry"));
+    public static final Type<UnlockEntry> TYPE = new Type<>(DataNEssence.locate("unlock_entry"));
 
     public static UnlockEntry read(RegistryFriendlyByteBuf buf) {
         ResourceLocation unlocked = buf.readResourceLocation();

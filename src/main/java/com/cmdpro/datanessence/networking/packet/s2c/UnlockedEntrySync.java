@@ -19,7 +19,7 @@ public record UnlockedEntrySync(List<ResourceLocation> unlocked, List<ResourceLo
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<UnlockedEntrySync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "unlocked_entry_sync"));
+    public static final Type<UnlockedEntrySync> TYPE = new Type<>(DataNEssence.locate("unlocked_entry_sync"));
 
     public static void write(RegistryFriendlyByteBuf buf, UnlockedEntrySync obj) {
         buf.writeCollection(obj.unlocked, FriendlyByteBuf::writeResourceLocation);

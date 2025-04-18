@@ -17,14 +17,14 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemStack;
 
 public class ChargerItemRenderer extends DatabankItemRenderer<ChargerItem> {
-    public static final ModelLayerLocation chargerLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "charger_item"), "main");
+    public static final ModelLayerLocation chargerLocation = new ModelLayerLocation(DataNEssence.locate("charger_item"), "main");
     public ChargerItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
         super(dispatcher, modelSet, new Model(modelSet.bakeLayer(chargerLocation)));
     }
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/charger.png");
+        return DataNEssence.locate("textures/block/charger.png");
     }
 
     public static class Model extends DatabankItemModel<ChargerItem> {
@@ -38,7 +38,7 @@ public class ChargerItemRenderer extends DatabankItemRenderer<ChargerItem> {
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "charger"));
+                model = DatabankModels.models.get(DataNEssence.locate("charger"));
                 hand = model.animations.get("hand").createAnimationDefinition();
             }
             return model;

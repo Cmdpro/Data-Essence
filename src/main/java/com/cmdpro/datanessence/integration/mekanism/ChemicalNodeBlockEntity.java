@@ -41,7 +41,7 @@ public class ChemicalNodeBlockEntity extends BaseCapabilityPointBlockEntity {
 
                 for (BlockPos j : i.getVertexList()) {
                     if (level.getBlockEntity(j) instanceof BaseCapabilityPointBlockEntity to2) {
-                        List<ChemicalStack> value = to2.getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "allowed_chemicals"), null);
+                        List<ChemicalStack> value = to2.getValue(DataNEssence.locate("allowed_chemicals"), null);
                         if (allowedChemicals == null) {
                             allowedChemicals = value;
                         } else if (value != null) {

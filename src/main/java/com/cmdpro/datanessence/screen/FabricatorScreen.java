@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FabricatorScreen extends AbstractContainerScreen<FabricatorMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/fabricator.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/fabricator.png");
     public FabricatorScreen(FabricatorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

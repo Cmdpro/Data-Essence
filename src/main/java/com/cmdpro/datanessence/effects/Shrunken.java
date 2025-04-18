@@ -11,7 +11,7 @@ public class Shrunken extends MobEffect {
     public Shrunken(MobEffectCategory pCategory, int pColor) {
         super(pCategory, pColor);
         addAttributeModifier(
-                Attributes.SCALE, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "effect.shrunken"), -0.5F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                Attributes.SCALE, DataNEssence.locate("effect.shrunken"), -0.5F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
     }
 }

@@ -26,7 +26,7 @@ public class DataNEssenceCoreShaders {
     }
     @SubscribeEvent
     public static void shaderRegistry(RegisterShadersEvent event) throws IOException {
-        event.registerShader(new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "warping_point"), DefaultVertexFormat.PARTICLE), shader -> { WARPING_POINT = shader; });
-        event.registerShader(new ShaderInstance(event.getResourceProvider(), ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "wires"), DefaultVertexFormat.POSITION_COLOR_NORMAL), shader -> { WIRES = shader; });
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), DataNEssence.locate("warping_point"), DefaultVertexFormat.PARTICLE), shader -> { WARPING_POINT = shader; });
+        event.registerShader(new ShaderInstance(event.getResourceProvider(), DataNEssence.locate("wires"), DefaultVertexFormat.POSITION_COLOR_NORMAL), shader -> { WIRES = shader; });
     }
 }

@@ -46,7 +46,7 @@ public class TextFileType extends ComputerFileType<TextFile> {
 
     @Override
     public ComputerFileIcon getIcon(TextFile file) {
-        return new ComputerFileIcon(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/computer.png"), 0, 166, 16, 16);
+        return new ComputerFileIcon(DataNEssence.locate("textures/gui/computer.png"), 0, 166, 16, 16);
     }
 
     @Override

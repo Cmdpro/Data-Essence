@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class MinigameRegistry {
-    public static final DeferredRegister<MinigameSerializer> MINIGAME_TYPES = DeferredRegister.create(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "minigames"), DataNEssence.MOD_ID);
+    public static final DeferredRegister<MinigameSerializer> MINIGAME_TYPES = DeferredRegister.create(DataNEssence.locate("minigames"), DataNEssence.MOD_ID);
 
     public static final Supplier<MinigameSerializer> MINESWEEPER = register("minesweeper", () -> new MinesweeperMinigameCreator.MinesweeperMinigameSerializer());
     public static final Supplier<MinigameSerializer> WIRE = register("wire", () -> new WireMinigameCreator.WireMinigameSerializer());

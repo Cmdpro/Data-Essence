@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ColorMixingMinigame extends Minigame {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/data_bank_minigames.png");
 
     public Color targetColor;
     public Color startColor;

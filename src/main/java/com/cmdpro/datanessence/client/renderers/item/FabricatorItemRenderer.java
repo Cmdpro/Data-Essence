@@ -17,14 +17,14 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemStack;
 
 public class FabricatorItemRenderer extends DatabankItemRenderer<FabricatorItem> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fabricator_item"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("fabricator_item"), "main");
     public FabricatorItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
         super(dispatcher, modelSet, new Model(modelSet.bakeLayer(modelLocation)));
     }
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/fabricator.png");
+        return DataNEssence.locate("textures/block/fabricator.png");
     }
 
     public static class Model extends DatabankItemModel<FabricatorItem> {
@@ -38,7 +38,7 @@ public class FabricatorItemRenderer extends DatabankItemRenderer<FabricatorItem>
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fabricator"));
+                model = DatabankModels.models.get(DataNEssence.locate("fabricator"));
                 hand = model.animations.get("hand").createAnimationDefinition();
             }
             return model;

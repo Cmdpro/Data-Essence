@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EnticingLureScreen extends AbstractContainerScreen<EnticingLureMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/enticing_lure.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/enticing_lure.png");
     public EnticingLureScreen(EnticingLureMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

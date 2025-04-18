@@ -11,7 +11,7 @@ public class GenderEuphoria extends MobEffect {
     public GenderEuphoria(MobEffectCategory pCategory, int pColor) {
         super(pCategory, pColor);
         addAttributeModifier(
-                Attributes.MOVEMENT_SPEED, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "effect.gender_euphoria"), 0.5F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
+                Attributes.MOVEMENT_SPEED, DataNEssence.locate("effect.gender_euphoria"), 0.5F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL
         );
     }
 }

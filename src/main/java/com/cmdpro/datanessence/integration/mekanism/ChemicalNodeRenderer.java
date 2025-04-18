@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class ChemicalNodeRenderer extends BaseCapabilityPointRenderer<ChemicalNodeBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "chemical_node"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("chemical_node"), "main");
 
     public ChemicalNodeRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model<>(rendererProvider.getModelSet().bakeLayer(modelLocation)));
@@ -15,6 +15,6 @@ public class ChemicalNodeRenderer extends BaseCapabilityPointRenderer<ChemicalNo
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/chemical_node.png");
+        return DataNEssence.locate("textures/block/chemical_node.png");
     }
 }

@@ -32,7 +32,7 @@ public record ComputerDataSync(ComputerData data) implements Message {
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<ComputerDataSync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "computer_data_sync"));
+    public static final Type<ComputerDataSync> TYPE = new Type<>(DataNEssence.locate("computer_data_sync"));
     private static class ClientHandler {
         public static void openScreen() {
             Minecraft.getInstance().setScreen(new ComputerScreen(Component.empty()));

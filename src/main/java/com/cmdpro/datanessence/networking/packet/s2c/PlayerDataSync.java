@@ -20,7 +20,7 @@ public record PlayerDataSync(Map<ResourceLocation, Boolean> unlockedEssences, Bl
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerDataSync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_data_sync"));
+    public static final Type<PlayerDataSync> TYPE = new Type<>(DataNEssence.locate("player_data_sync"));
 
     public static void write(RegistryFriendlyByteBuf buf, PlayerDataSync obj) {
         buf.writeMap(obj.unlockedEssences, FriendlyByteBuf::writeResourceLocation, FriendlyByteBuf::writeBoolean);

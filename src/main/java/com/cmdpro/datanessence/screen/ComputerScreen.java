@@ -110,7 +110,7 @@ public class ComputerScreen extends Screen {
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
     }
 
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/computer.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/computer.png");
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);

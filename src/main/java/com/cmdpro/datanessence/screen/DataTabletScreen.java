@@ -33,12 +33,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataTabletScreen extends Screen {
-    public static final ResourceLocation TEXTURE_FRAME = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_frame.png");
-    public static final ResourceLocation TEXTURE_MAIN = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet.png");
-    public static final ResourceLocation TEXTURE_PAGE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_page.png");
-    public static final ResourceLocation TEXTURE_CRAFTING = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
-    public static final ResourceLocation TEXTURE_CRAFTING2 = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting2.png");
-    public static final ResourceLocation TEXTURE_MISC = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_misc.png");
+    public static final ResourceLocation TEXTURE_FRAME = DataNEssence.locate("textures/gui/data_tablet_frame.png");
+    public static final ResourceLocation TEXTURE_MAIN = DataNEssence.locate("textures/gui/data_tablet.png");
+    public static final ResourceLocation TEXTURE_PAGE = DataNEssence.locate("textures/gui/data_tablet_page.png");
+    public static final ResourceLocation TEXTURE_CRAFTING = DataNEssence.locate("textures/gui/data_tablet_crafting.png");
+    public static final ResourceLocation TEXTURE_CRAFTING2 = DataNEssence.locate("textures/gui/data_tablet_crafting2.png");
+    public static final ResourceLocation TEXTURE_MISC = DataNEssence.locate("textures/gui/data_tablet_misc.png");
 
     public static int imageWidth = 256;
     public static int imageHeight = 166;

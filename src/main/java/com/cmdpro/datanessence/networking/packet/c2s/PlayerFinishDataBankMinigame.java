@@ -40,5 +40,5 @@ public record PlayerFinishDataBankMinigame(ResourceLocation entry) implements Me
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerFinishDataBankMinigame> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_finish_data_bank_minigame"));
+    public static final Type<PlayerFinishDataBankMinigame> TYPE = new Type<>(DataNEssence.locate("player_finish_data_bank_minigame"));
 }

@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TracesMinigame extends Minigame {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/data_bank_minigames.png");
     public TracesMinigame(Map<Vector2i, Tile> tiles, int size) {
         this.size = size;
         setupTiles();

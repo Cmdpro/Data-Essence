@@ -136,8 +136,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
                 ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
                         ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/music_disc_player"))
-                .override().predicate(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "playing"), 1).
-                model(getExistingFile(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "music_disc_player_on"))).end();
+                .override().predicate(DataNEssence.locate("playing"), 1).
+                model(getExistingFile(DataNEssence.locate("music_disc_player_on"))).end();
     }
     private ItemModelBuilder simpleItem(Supplier<Item> item) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
@@ -165,7 +165,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
     public void wallItem(Supplier<Block> block, Supplier<Block> baseBlock) {
         this.withExistingParent(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
-                .texture("wall",  ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
+                .texture("wall",  DataNEssence.locate("block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
     }
 
     private ItemModelBuilder handheldItem(Supplier<Item> item) {

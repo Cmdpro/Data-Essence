@@ -41,5 +41,5 @@ public record PlayerSetItemHandlerLocked(BlockPos blockPos, boolean locked) impl
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerSetItemHandlerLocked> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_set_item_handler_locked"));
+    public static final Type<PlayerSetItemHandlerLocked> TYPE = new Type<>(DataNEssence.locate("player_set_item_handler_locked"));
 }

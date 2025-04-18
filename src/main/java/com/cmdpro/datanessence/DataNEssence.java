@@ -70,7 +70,7 @@ public class DataNEssence
         FluidRegistry.FLUIDS.register(bus);
         PotionRegistry.POTIONS.register(bus);
         random = RandomSource.create();
-        HiddenBlockConditions.conditions.put(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
+        HiddenBlockConditions.conditions.put(DataNEssence.locate("entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
 
         if (hasMekanism)
             DataNEssence.LOGGER.info("[DATANESSENCE] Mekanism detected; enabling integration features. Careful with your reactors!");

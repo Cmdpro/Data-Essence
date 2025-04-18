@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MetalShaperScreen extends AbstractContainerScreen<MetalShaperMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/metal_shaper.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/metal_shaper.png");
     public MetalShaperScreen(MetalShaperMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

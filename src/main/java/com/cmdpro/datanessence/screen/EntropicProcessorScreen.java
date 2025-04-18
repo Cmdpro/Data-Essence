@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntropicProcessorScreen extends AbstractContainerScreen<EntropicProcessorMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/entropic_processor.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/entropic_processor.png");
     public EntropicProcessorScreen(EntropicProcessorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

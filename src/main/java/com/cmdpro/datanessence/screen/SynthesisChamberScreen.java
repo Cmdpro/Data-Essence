@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SynthesisChamberScreen extends AbstractContainerScreen<SynthesisChamberMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/synthesis_chamber.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/synthesis_chamber.png");
     public SynthesisChamberScreen(SynthesisChamberMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

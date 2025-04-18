@@ -9,13 +9,13 @@ import net.minecraft.resources.ResourceLocation;
 
 
 public class FluidPointRenderer extends BaseCapabilityPointRenderer<FluidPointBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fluid_point"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("fluid_point"), "main");
     public FluidPointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model<>(rendererProvider.getModelSet().bakeLayer(modelLocation)));
     }
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/fluid_point.png");
+        return DataNEssence.locate("textures/block/fluid_point.png");
     }
 }

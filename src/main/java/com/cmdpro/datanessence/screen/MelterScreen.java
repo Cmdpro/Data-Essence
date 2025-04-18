@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MelterScreen extends AbstractContainerScreen<MelterMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/melter.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/melter.png");
     public MelterScreen(MelterMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

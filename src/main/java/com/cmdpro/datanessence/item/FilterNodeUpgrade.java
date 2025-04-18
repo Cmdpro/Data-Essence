@@ -54,7 +54,7 @@ public class FilterNodeUpgrade extends Item implements INodeUpgrade {
 
     @Override
     public Object getValue(ItemStack upgrade, ResourceLocation id, Object originalValue, BlockEntity node) {
-        if (id.equals(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "allowed_itemstacks"))) {
+        if (id.equals(DataNEssence.locate("allowed_itemstacks"))) {
             ItemContainerContents handler = upgrade.get(DataComponents.CONTAINER);
             if (handler != null) {
                 if (handler.getSlots() > 0) {
@@ -66,7 +66,7 @@ public class FilterNodeUpgrade extends Item implements INodeUpgrade {
                 }
             }
         }
-        if (id.equals(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "allowed_fluidstacks"))) {
+        if (id.equals(DataNEssence.locate("allowed_fluidstacks"))) {
             ItemContainerContents handler = upgrade.get(DataComponents.CONTAINER);
             if (handler != null) {
                 if (handler.getSlots() > 0) {

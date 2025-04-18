@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 public class PingShader extends PostShaderInstance {
     @Override
     public ResourceLocation getShaderLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "shaders/post/ping.json");
+        return DataNEssence.locate("shaders/post/ping.json");
     }
 
     @Override

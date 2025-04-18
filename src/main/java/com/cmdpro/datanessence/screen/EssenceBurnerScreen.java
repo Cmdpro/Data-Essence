@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EssenceBurnerScreen extends AbstractContainerScreen<EssenceBurnerMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/essence_burner.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/essence_burner.png");
     public EssenceBurnerScreen(EssenceBurnerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

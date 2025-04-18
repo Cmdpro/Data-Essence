@@ -34,7 +34,7 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
                 List<ItemStack> allowedItemstacks = null;
                 for (BlockPos j : i.getVertexList()) {
                     if (level.getBlockEntity(j) instanceof BaseCapabilityPointBlockEntity ent2) {
-                        List<ItemStack> value = ent2.getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "allowed_itemstacks"), null);
+                        List<ItemStack> value = ent2.getValue(DataNEssence.locate("allowed_itemstacks"), null);
                         if (allowedItemstacks == null) {
                             allowedItemstacks = value;
                         } else if (value != null) {

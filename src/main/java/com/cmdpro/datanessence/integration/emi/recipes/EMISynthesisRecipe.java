@@ -48,7 +48,7 @@ public class EMISynthesisRecipe extends DataNEssenceEMIRecipe {
 
     @Override
     public void addUnlockedWidgets(WidgetHolder widgetHolder) {
-        ResourceLocation background = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting.png");
+        ResourceLocation background = DataNEssence.locate("textures/gui/data_tablet_crafting.png");
 
         widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 133, 76);
 

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChargerScreen extends AbstractContainerScreen<ChargerMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/charger.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/charger.png");
     public ChargerScreen(ChargerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

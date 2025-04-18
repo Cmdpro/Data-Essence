@@ -17,7 +17,7 @@ public record PlayerTierSync(int tier, boolean showIndicator) implements Message
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerTierSync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_tier_sync"));
+    public static final Type<PlayerTierSync> TYPE = new Type<>(DataNEssence.locate("player_tier_sync"));
 
     public static void write(RegistryFriendlyByteBuf pBuffer, PlayerTierSync obj) {
         pBuffer.writeInt(obj.tier);

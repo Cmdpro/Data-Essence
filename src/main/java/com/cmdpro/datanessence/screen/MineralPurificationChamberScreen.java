@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MineralPurificationChamberScreen extends AbstractContainerScreen<MineralPurificationChamberMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/mineral_purification_chamber.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/mineral_purification_chamber.png");
     public MineralPurificationChamberScreen(MineralPurificationChamberMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

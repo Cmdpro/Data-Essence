@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3;
 
 
 public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEntity> {
-    public static final ModelLayerLocation chargerLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "charger"), "main");
+    public static final ModelLayerLocation chargerLocation = new ModelLayerLocation(DataNEssence.locate("charger"), "main");
 
     public ChargerRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model(rendererProvider.getModelSet().bakeLayer(chargerLocation)));
@@ -60,7 +60,7 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/charger.png");
+        return DataNEssence.locate("textures/block/charger.png");
     }
 
     public static class Model extends DatabankBlockEntityModel<ChargerBlockEntity> {
@@ -79,7 +79,7 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "charger"));
+                model = DatabankModels.models.get(DataNEssence.locate("charger"));
                 idle_empty = model.animations.get("idle_empty").createAnimationDefinition();
                 orb_spin = model.animations.get("orb_spin").createAnimationDefinition();
                 retract_exciters = model.animations.get("retract_exciters").createAnimationDefinition();

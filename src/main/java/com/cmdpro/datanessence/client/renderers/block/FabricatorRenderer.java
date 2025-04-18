@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 
 public class FabricatorRenderer extends DatabankBlockEntityRenderer<FabricatorBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fabricator"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("fabricator"), "main");
     public FabricatorRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
     }
@@ -36,7 +36,7 @@ public class FabricatorRenderer extends DatabankBlockEntityRenderer<FabricatorBl
     }
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/fabricator.png");
+        return DataNEssence.locate("textures/block/fabricator.png");
     }
 
     public static class Model extends DatabankBlockEntityModel<FabricatorBlockEntity> {
@@ -50,7 +50,7 @@ public class FabricatorRenderer extends DatabankBlockEntityRenderer<FabricatorBl
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fabricator"));
+                model = DatabankModels.models.get(DataNEssence.locate("fabricator"));
                 idle = model.animations.get("idle").createAnimationDefinition();
                 ready = model.animations.get("ready").createAnimationDefinition();
             }

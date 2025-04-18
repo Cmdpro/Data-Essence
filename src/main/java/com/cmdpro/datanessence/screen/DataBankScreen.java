@@ -26,7 +26,7 @@ import java.util.*;
 import java.util.List;
 
 public class DataBankScreen extends Screen {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/data_bank.png");
     public DataBankScreen(Component pTitle) {
         super(pTitle);
         minigameCompletionWait = -1;

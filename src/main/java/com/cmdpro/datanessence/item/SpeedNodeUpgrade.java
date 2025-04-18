@@ -16,7 +16,7 @@ public class SpeedNodeUpgrade extends Item implements INodeUpgrade {
 
     @Override
     public Object getValue(ItemStack upgrade, ResourceLocation id, Object originalValue, BlockEntity node) {
-        if (id.equals(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "speed_multiplier"))) {
+        if (id.equals(DataNEssence.locate("speed_multiplier"))) {
             return ((float)originalValue)+multiplierAddition;
         }
         return originalValue;

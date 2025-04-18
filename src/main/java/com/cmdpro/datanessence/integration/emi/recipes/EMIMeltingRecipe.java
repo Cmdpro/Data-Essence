@@ -57,7 +57,7 @@ public class EMIMeltingRecipe implements EmiRecipe {
 
     @Override
     public void addWidgets(WidgetHolder widgetHolder) {
-        ResourceLocation background = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_tablet_crafting2.png");
+        ResourceLocation background = DataNEssence.locate("textures/gui/data_tablet_crafting2.png");
 
         widgetHolder.addTexture(background, 0, 0, getDisplayWidth(), getDisplayHeight(), 10, 196);
 

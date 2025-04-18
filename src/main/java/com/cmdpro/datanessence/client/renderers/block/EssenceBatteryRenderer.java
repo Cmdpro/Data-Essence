@@ -64,7 +64,7 @@ public class EssenceBatteryRenderer implements BlockEntityRenderer<EssenceBatter
         }
     }
     EntityRenderDispatcher renderDispatcher;
-    public static final ResourceLocation OVERLAY = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "block/essence_battery_overlay");
+    public static final ResourceLocation OVERLAY = DataNEssence.locate("block/essence_battery_overlay");
     public EssenceBatteryRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         renderDispatcher = rendererProvider.getEntityRenderer();
     }

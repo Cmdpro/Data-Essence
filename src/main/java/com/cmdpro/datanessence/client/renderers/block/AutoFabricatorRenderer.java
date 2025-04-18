@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 
 public class AutoFabricatorRenderer extends DatabankBlockEntityRenderer<AutoFabricatorBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "auto-fabricator"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("auto-fabricator"), "main");
     public AutoFabricatorRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
     }
@@ -36,7 +36,7 @@ public class AutoFabricatorRenderer extends DatabankBlockEntityRenderer<AutoFabr
     }
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/auto-fabricator.png");
+        return DataNEssence.locate("textures/block/auto-fabricator.png");
     }
 
     public static class Model extends DatabankBlockEntityModel<AutoFabricatorBlockEntity> {
@@ -50,7 +50,7 @@ public class AutoFabricatorRenderer extends DatabankBlockEntityRenderer<AutoFabr
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "auto-fabricator"));
+                model = DatabankModels.models.get(DataNEssence.locate("auto-fabricator"));
                 idle = model.animations.get("idle").createAnimationDefinition();
                 crafting = model.animations.get("crafting").createAnimationDefinition();
             }

@@ -20,7 +20,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 
 public class EntropicProcessorRenderer extends DatabankBlockEntityRenderer<EntropicProcessorBlockEntity>{
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entropic_processor"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("entropic_processor"), "main");
 
     public EntropicProcessorRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
@@ -48,7 +48,7 @@ public class EntropicProcessorRenderer extends DatabankBlockEntityRenderer<Entro
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/entropic_processor.png");
+        return DataNEssence.locate("textures/block/entropic_processor.png");
     }
 
     public static class Model extends DatabankBlockEntityModel<EntropicProcessorBlockEntity> {
@@ -63,7 +63,7 @@ public class EntropicProcessorRenderer extends DatabankBlockEntityRenderer<Entro
 
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entropic_processor"));
+                model = DatabankModels.models.get(DataNEssence.locate("entropic_processor"));
                 idle = model.animations.get("idle").createAnimationDefinition();
                 working = model.animations.get("working").createAnimationDefinition();
             }

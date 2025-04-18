@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ItemFilterScreen extends AbstractContainerScreen<ItemFilterMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/item_filter.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/item_filter.png");
     public ItemFilterScreen(ItemFilterMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         imageHeight = 202;

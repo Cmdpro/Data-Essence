@@ -17,7 +17,7 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemStack;
 
 public class FluidMixerItemRenderer extends DatabankItemRenderer<FluidMixerItem> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fluid_mixer_item"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("fluid_mixer_item"), "main");
 
     public FluidMixerItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
         super(dispatcher, modelSet, new FluidMixerItemRenderer.Model(modelSet.bakeLayer(modelLocation)));
@@ -25,7 +25,7 @@ public class FluidMixerItemRenderer extends DatabankItemRenderer<FluidMixerItem>
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/fluid_mixer.png");
+        return DataNEssence.locate("textures/block/fluid_mixer.png");
     }
 
     public static class Model extends DatabankItemModel<FluidMixerItem> {
@@ -41,7 +41,7 @@ public class FluidMixerItemRenderer extends DatabankItemRenderer<FluidMixerItem>
 
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fluid_mixer"));
+                model = DatabankModels.models.get(DataNEssence.locate("fluid_mixer"));
                 hand = model.animations.get("hand").createAnimationDefinition();
             }
             return model;

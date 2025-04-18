@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class WireMinigame extends Minigame {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank_minigames.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/data_bank_minigames.png");
     public WireMinigame(Map<Vector2i, Tile> tiles) {
         setupTiles();
         this.tiles.putAll(tiles);

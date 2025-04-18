@@ -16,7 +16,7 @@ public class TagRegistry {
         public static final TagKey<Block> HAMMER_AND_CHISEL_COLLECTABLE = tag("hammer_and_chisel_collectable"); // for the Hammer and Chisel tool
 
         private static TagKey<Block> tag(String name) {
-            return BlockTags.create(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, name));
+            return BlockTags.create(DataNEssence.locate(name));
         }
     }
     public static class Items {
@@ -58,12 +58,12 @@ public class TagRegistry {
         public static final TagKey<Item> HIDDEN_RESOURCES = tag ("hidden_resources");
 
         private static TagKey<Item> tag(String name) {
-            return ItemTags.create(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, name));
+            return ItemTags.create(DataNEssence.locate(name));
         }
     }
     public static class EntityTypes {
         private static TagKey<EntityType<?>> tag(String name) {
-            return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, name));
+            return TagKey.create(Registries.ENTITY_TYPE, DataNEssence.locate(name));
         }
     }
 }
