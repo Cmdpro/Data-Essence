@@ -12,6 +12,7 @@ import com.cmdpro.datanessence.api.MultiFluidTankNoDuplicateFluids;
 import com.cmdpro.datanessence.recipe.FluidMixingRecipe;
 import com.cmdpro.datanessence.recipe.RecipeInputWithFluid;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.FluidMixerMenu;
@@ -202,9 +203,13 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
             if (!recipe.get().value().equals(this.recipe)) {
                 workTime = 0;
             }
-            if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) || this.recipe.allowIncomplete())) {
-                this.recipe = recipe.get().value();
-                essenceCost = recipe.get().value().getEssenceCost();
+            if (dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_ID) && dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_INCOMPLETE)) {
+                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) || this.recipe.allowIncomplete())) {
+                    this.recipe = recipe.get().value();
+                    essenceCost = recipe.get().value().getEssenceCost();
+                } else {
+                    this.recipe = null;
+                }
             } else {
                 this.recipe = null;
             }

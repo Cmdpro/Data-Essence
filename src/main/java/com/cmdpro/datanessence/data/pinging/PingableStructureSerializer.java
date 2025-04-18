@@ -11,6 +11,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.Util;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.levelgen.structure.Structure;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Optional;
 
 public class PingableStructureSerializer {
     public static final Codec<ComputerFile> FILE_CODEC = DataNEssenceRegistries.COMPUTER_FILE_TYPES_REGISTRY.byNameCodec().dispatch(ComputerFile::getType, computerFileType -> computerFileType.getCodec());
@@ -34,6 +36,7 @@ public class PingableStructureSerializer {
     public static final MapCodec<PingableStructure> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             ResourceKey.codec(Registries.STRUCTURE).fieldOf("structure").forGetter((data) -> data.structure),
             ResourceKey.codec(Registries.ADVANCEMENT).fieldOf("advancement").forGetter((data) -> data.advancement),
+            ResourceKey.codec(Registries.ADVANCEMENT).optionalFieldOf("requiredAdvancement").forGetter((data) -> data.requiredAdvancement),
             Codec.INT.listOf().comapFlatMap(
                     integer -> Util.fixedSize(integer, 3)
                             .map(integers -> new Color(integers.get(0), integers.get(1), integers.get(2))),
@@ -47,16 +50,18 @@ public class PingableStructureSerializer {
     public static final StreamCodec<RegistryFriendlyByteBuf, PingableStructure> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
         pBuffer.writeResourceKey(pValue.structure);
         pBuffer.writeResourceKey(pValue.advancement);
+        pBuffer.writeOptional(pValue.requiredAdvancement, FriendlyByteBuf::writeResourceKey);
         pBuffer.writeInt(pValue.color1.getRGB());
         pBuffer.writeInt(pValue.color2.getRGB());
         PingableStructure.PingableStructureIcon.STREAM_CODEC.encode(pBuffer, pValue.icon);
     }, pBuffer -> {
         ResourceKey<Structure> structure = pBuffer.readResourceKey(Registries.STRUCTURE);
         ResourceKey<Advancement> advancement = pBuffer.readResourceKey(Registries.ADVANCEMENT);
+        Optional<ResourceKey<Advancement>> requiredAdvancement = pBuffer.readOptional((buf) -> buf.readResourceKey(Registries.ADVANCEMENT));
         int color1 = pBuffer.readInt();
         int color2 = pBuffer.readInt();
         PingableStructure.PingableStructureIcon icon = PingableStructure.PingableStructureIcon.STREAM_CODEC.decode(pBuffer);
-        PingableStructure data = new PingableStructure(structure, advancement, new Color(color1), new Color(color2), icon);
+        PingableStructure data = new PingableStructure(structure, advancement, requiredAdvancement, new Color(color1), new Color(color2), icon);
         return data;
     });
     public PingableStructure read(ResourceLocation entryId, JsonObject json) {

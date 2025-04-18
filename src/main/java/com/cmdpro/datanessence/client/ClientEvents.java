@@ -9,7 +9,7 @@ import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
-import com.cmdpro.datanessence.networking.packet.s2c.PingStructures;
+import com.cmdpro.datanessence.data.pinging.StructurePing;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.MobEffectRegistry;
@@ -139,7 +139,7 @@ public class ClientEvents {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null)
         {
-            for (Map.Entry<PingStructures.StructurePing, Integer> i : PingsGuiLayer.pings.entrySet().stream().toList()) {
+            for (Map.Entry<StructurePing, Integer> i : PingsGuiLayer.pings.entrySet().stream().toList()) {
                 if (i.getValue()-1 <= 0) {
                     PingsGuiLayer.pings.remove(i.getKey());
                 } else {

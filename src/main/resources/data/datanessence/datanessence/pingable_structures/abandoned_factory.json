@@ -1,0 +1,20 @@
+{
+  "structure": "datanessence:arekkos_vault",
+  "advancement": "datanessence:exploration/find_abandoned_factory",
+  "requiredAdvancement": "datanessence:datanessence",
+  "color1": [
+    175,
+    0,
+    175
+  ],
+  "color2": [
+    255,
+    0,
+    255
+  ],
+  "icon": {
+    "texture": "datanessence:textures/gui/structure_icons.png",
+    "u": 48,
+    "v": 0
+  }
+}

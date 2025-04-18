@@ -11,6 +11,7 @@ import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.recipe.*;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.SynthesisChamberMenu;
@@ -194,9 +195,13 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
             if (!recipe.get().value().equals(this.recipe)) {
                 workTime = 0;
             }
-            if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) || recipe.get().value().allowIncomplete())) {
-                this.recipe = recipe.get().value();
-                essenceCost = recipe.get().value().getEssenceCost();
+            if (dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_ID) && dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_INCOMPLETE)) {
+                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) || recipe.get().value().allowIncomplete())) {
+                    this.recipe = recipe.get().value();
+                    essenceCost = recipe.get().value().getEssenceCost();
+                } else {
+                    this.recipe = null;
+                }
             } else {
                 this.recipe = null;
             }
