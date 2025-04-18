@@ -6,8 +6,10 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
+import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.networking.packet.s2c.PingStructures;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.MobEffectRegistry;
@@ -41,6 +43,7 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 import java.text.DecimalFormat;
+import java.util.Map;
 
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
@@ -136,6 +139,13 @@ public class ClientEvents {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null)
         {
+            for (Map.Entry<PingStructures.StructurePing, Integer> i : PingsGuiLayer.pings.entrySet().stream().toList()) {
+                if (i.getValue()-1 <= 0) {
+                    PingsGuiLayer.pings.remove(i.getKey());
+                } else {
+                    PingsGuiLayer.pings.put(i.getKey(), i.getValue()-1);
+                }
+            }
             boolean playMusic = false;
             SoundEvent mus = null;
             if (Minecraft.getInstance().player != null) {
@@ -187,6 +197,8 @@ public class ClientEvents {
                     manager.play(musicDiscPlayerMusic);
                 }
             }
+        } else {
+            PingsGuiLayer.pings.clear();
         }
     }
 }

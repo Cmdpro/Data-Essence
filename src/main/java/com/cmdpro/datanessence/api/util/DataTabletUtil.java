@@ -2,16 +2,14 @@ package com.cmdpro.datanessence.api.util;
 
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceType;
-import com.cmdpro.datanessence.databank.DataBankEntries;
-import com.cmdpro.datanessence.databank.DataBankEntry;
+import com.cmdpro.datanessence.data.databank.DataBankEntries;
+import com.cmdpro.datanessence.data.databank.DataBankEntry;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
-import com.cmdpro.datanessence.datatablet.Entries;
-import com.cmdpro.datanessence.datatablet.Entry;
+import com.cmdpro.datanessence.data.datatablet.Entries;
+import com.cmdpro.datanessence.data.datatablet.Entry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;

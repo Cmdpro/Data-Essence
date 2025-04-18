@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.networking.packet.s2c;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.datatablet.*;
+import com.cmdpro.datanessence.data.datatablet.*;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import net.minecraft.client.Minecraft;

@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.api.datatablet;
 
 import com.cmdpro.datanessence.screen.DataTabletScreen;
-import com.cmdpro.datanessence.datatablet.pages.CraftingPage;
+import com.cmdpro.datanessence.data.datatablet.pages.CraftingPage;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.crafting.Recipe;
 

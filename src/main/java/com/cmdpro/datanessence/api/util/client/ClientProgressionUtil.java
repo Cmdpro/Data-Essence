@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.api.util.client;
 
 import com.cmdpro.datanessence.client.ClientModEvents;
-import com.cmdpro.datanessence.datatablet.Entry;
+import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.toasts.CriticalDataToast;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.chunk.SectionRenderDispatcher;

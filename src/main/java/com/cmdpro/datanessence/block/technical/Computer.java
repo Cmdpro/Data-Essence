@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block.technical;
 
 import com.cmdpro.datanessence.api.util.ComputerUtil;
-import com.cmdpro.datanessence.computers.ComputerTypeManager;
+import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionResult;

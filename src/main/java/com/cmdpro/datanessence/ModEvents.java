@@ -7,21 +7,23 @@ import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
-import com.cmdpro.datanessence.computers.ComputerTypeManager;
+import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
+import com.cmdpro.datanessence.data.pinging.PingableStructureManager;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
 import com.cmdpro.datanessence.networking.packet.s2c.EntrySync;
 import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.client.particle.RhombusParticleOptions;
 import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
+import com.cmdpro.datanessence.networking.packet.s2c.PingableSync;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockRegistry;
-import com.cmdpro.datanessence.databank.DataBankEntryManager;
-import com.cmdpro.datanessence.databank.DataBankTypeManager;
-import com.cmdpro.datanessence.datatablet.DataTabManager;
-import com.cmdpro.datanessence.datatablet.Entries;
-import com.cmdpro.datanessence.datatablet.Entry;
-import com.cmdpro.datanessence.datatablet.EntryManager;
+import com.cmdpro.datanessence.data.databank.DataBankEntryManager;
+import com.cmdpro.datanessence.data.databank.DataBankTypeManager;
+import com.cmdpro.datanessence.data.datatablet.DataTabManager;
+import com.cmdpro.datanessence.data.datatablet.Entries;
+import com.cmdpro.datanessence.data.datatablet.Entry;
+import com.cmdpro.datanessence.data.datatablet.EntryManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -228,6 +230,7 @@ public class ModEvents {
         event.addListener(DataBankEntryManager.getOrCreateInstance());
         event.addListener(DataBankTypeManager.getOrCreateInstance());
         event.addListener(ComputerTypeManager.getOrCreateInstance());
+        event.addListener(PingableStructureManager.getOrCreateInstance());
     }
     @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event) {
@@ -243,6 +246,7 @@ public class ModEvents {
     }
     protected static void syncToPlayer(ServerPlayer player) {
         ModMessages.sendToPlayer(new EntrySync(Entries.entries, Entries.tabs), player);
+        ModMessages.sendToPlayer(new PingableSync(PingableStructureManager.types), player);
     }
     @SubscribeEvent
     public static void onPlayerJoinWorld(EntityJoinLevelEvent event) {

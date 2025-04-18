@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.computers.ClientComputerData;
+import com.cmdpro.datanessence.data.computers.ClientComputerData;
 import com.cmdpro.datanessence.api.computer.ComputerFile;
 import com.cmdpro.datanessence.api.computer.ComputerFileType;
 import com.mojang.blaze3d.systems.RenderSystem;

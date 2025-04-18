@@ -1,12 +1,11 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.minigames.ColorMixingMinigameCreator;
-import com.cmdpro.datanessence.minigames.MinesweeperMinigameCreator;
-import com.cmdpro.datanessence.minigames.TracesMinigameCreator;
-import com.cmdpro.datanessence.minigames.WireMinigameCreator;
+import com.cmdpro.datanessence.data.minigames.ColorMixingMinigameCreator;
+import com.cmdpro.datanessence.data.minigames.MinesweeperMinigameCreator;
+import com.cmdpro.datanessence.data.minigames.TracesMinigameCreator;
+import com.cmdpro.datanessence.data.minigames.WireMinigameCreator;
 import com.cmdpro.datanessence.api.databank.MinigameSerializer;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;

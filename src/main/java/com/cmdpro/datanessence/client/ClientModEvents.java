@@ -6,6 +6,7 @@ import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.shaders.PingShader;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
@@ -39,10 +40,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.ClientHooks;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import org.joml.SimplexNoise;
 
@@ -50,6 +48,10 @@ import java.awt.*;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ClientModEvents {
+    @SubscribeEvent
+    public static void registerGuiLayers(RegisterGuiLayersEvent event) {
+        event.registerAboveAll(DataNEssence.locate("pings"), new PingsGuiLayer());
+    }
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityRegistry.FABRICATOR.get(), FabricatorRenderer::new);
