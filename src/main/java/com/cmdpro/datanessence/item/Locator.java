@@ -54,18 +54,21 @@ public class Locator extends Item {
                     Optional<Holder.Reference<Structure>> structure = registry.get().getHolder(i.getValue().structure);
                     if (structure.isPresent()) {
                         var result = serverLevel.getChunkSource().getGenerator().findNearestMapStructure(serverLevel, HolderSet.direct(structure.get()), pPlayer.blockPosition(), 50, false);
-                        boolean known = false;
-                        if (pPlayer instanceof ServerPlayer serverPlayer) {
-                            AdvancementHolder advancement = serverLevel.getServer().getAdvancements().get(i.getValue().advancement.location());
-                            if (advancement != null) {
-                                known = serverPlayer.getAdvancements().getOrStartProgress(advancement).isDone();
+                        if (result != null) {
+                            boolean known = false;
+                            if (pPlayer instanceof ServerPlayer serverPlayer) {
+                                AdvancementHolder advancement = serverLevel.getServer().getAdvancements().get(i.getValue().advancement.location());
+                                if (advancement != null) {
+                                    known = serverPlayer.getAdvancements().getOrStartProgress(advancement).isDone();
+                                }
                             }
+                            pings.add(new StructurePing(result.getFirst(), i.getKey(), known));
                         }
-                        pings.add(new StructurePing(result.getFirst(), i.getKey(), known));
                     }
                 }
             }
             ModMessages.sendToPlayer(new PingStructures(pings), (ServerPlayer)pPlayer);
+            pPlayer.getCooldowns().addCooldown(this, 20*10);
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
     }

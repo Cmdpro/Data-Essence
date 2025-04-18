@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.client.gui;
 
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.shaders.PostShaderManager;
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.data.pinging.PingableStructure;
 import com.cmdpro.datanessence.data.pinging.StructurePing;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -9,6 +10,7 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.joml.*;
@@ -45,8 +47,16 @@ public class PingsGuiLayer implements LayeredDraw.Layer {
                     gameTime = Minecraft.getInstance().level.getGameTime();
                 }
                 Color color = ColorUtil.blendColors(color1, color2, (Math.sin((gameTime+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks())/15f)+1f)/2f);
+                int u = icon.u;
+                int v = icon.v;
+                ResourceLocation texture = icon.texture;
+                if (!i.getKey().known) {
+                    u = 0;
+                    v = 0;
+                    texture = DataNEssence.locate("textures/gui/structure_icons.png");
+                }
                 guiGraphics.setColor(color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f, 1.0F);
-                guiGraphics.blit(icon.texture, x, y, icon.u, icon.v, 16, 16);
+                guiGraphics.blit(texture, x, y, u, v, 16, 16);
             }
         }
         guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
