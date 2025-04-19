@@ -1,0 +1,18 @@
+{
+  "files": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.generic.signal_from_mountains"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.ancient_weapons_facility_01.experiment_log_01",
+        "font": "datanessence:ancient"
+      },
+      "rtl": true
+    }
+  ]
+}
