@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.client;
 
+import com.cmdpro.databank.ClientDatabankUtils;
+import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.databank.rendering.ShaderHelper;
 import com.cmdpro.datanessence.DataNEssence;
@@ -7,6 +9,7 @@ import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
+import com.cmdpro.datanessence.data.pinging.PingableStructure;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.data.pinging.StructurePing;
@@ -23,9 +26,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -34,6 +39,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -41,10 +47,13 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import org.joml.Math;
 
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.Map;
 
+import static com.cmdpro.datanessence.client.gui.PingsGuiLayer.pings;
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID)
@@ -105,16 +114,38 @@ public class ClientEvents {
         DataNEssenceCoreShaders.WARPING_POINT.setSampler("DepthBuffer", tempRenderTarget.getDepthTextureId());
         DataNEssenceCoreShaders.WARPING_POINT.setSampler("ColorBuffer", tempRenderTarget.getColorTextureId());
         MultiBufferSource.BufferSource bufferSource = RenderHandler.createBufferSource();
-        event.getPoseStack().pushPose();
-        event.getPoseStack().translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
+        var poseStack = event.getPoseStack();
+
+        poseStack.pushPose();
+        poseStack.translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
         for (Entity i : Minecraft.getInstance().level.entitiesForRendering()) {
             if (i instanceof BlackHole hole) {
                 Vec3 pos = i.getBoundingBox().getCenter();
-                ClientRenderingUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, hole.getEntityData().get(BlackHole.SIZE), 16, 16);
-                ClientRenderingUtil.renderBlackHole(event.getPoseStack(), pos, bufferSource, -hole.getEntityData().get(BlackHole.SIZE), 16, 16);
+                ClientRenderingUtil.renderBlackHole(poseStack, pos, bufferSource, hole.getEntityData().get(BlackHole.SIZE), 16, 16);
+                ClientRenderingUtil.renderBlackHole(poseStack, pos, bufferSource, -hole.getEntityData().get(BlackHole.SIZE), 16, 16);
             }
         }
-        event.getPoseStack().popPose();
+        poseStack.popPose();
+
+        for (var i : PingsGuiLayer.pings.entrySet()) {
+            StructurePing ping = i.getKey();
+            Level world = Minecraft.getInstance().level;
+            Vec3 pos = ping.pos.getCenter();
+            Vec3 posLow = new Vec3(pos.x, world.getMinBuildHeight(), pos.z);
+            Vec3 posHigh = new Vec3(pos.x, world.getMaxBuildHeight(), pos.z);
+            PingableStructure structure = ping.getPingableStructure();
+            Color color1 = (ping.known) ? structure.color1 : new Color(0xB100B1);
+            Color color2 = (ping.known) ? structure.color2 : new Color(0xFF00FF);
+            long gameTime = 0;
+            if (Minecraft.getInstance().level != null)
+                gameTime = Minecraft.getInstance().level.getGameTime();
+            Color color = ColorUtil.blendColors(color1, color2, (Math.sin((gameTime+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks())/15f)+1f)/2f);
+
+            poseStack.pushPose();
+            poseStack.translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
+            ClientDatabankUtils.renderAdvancedBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, event.getPartialTick().getGameTimeDeltaPartialTick(true), 1f, gameTime, posLow, posHigh, color, 0.25f, 0.3f);
+            poseStack.popPose();
+        }
     }
     public static void copyBuffers() {
         if (tempRenderTarget == null) return;
@@ -139,11 +170,11 @@ public class ClientEvents {
         Minecraft mc = Minecraft.getInstance();
         if (mc.level != null)
         {
-            for (Map.Entry<StructurePing, Integer> i : PingsGuiLayer.pings.entrySet().stream().toList()) {
+            for (Map.Entry<StructurePing, Integer> i : pings.entrySet().stream().toList()) {
                 if (i.getValue()-1 <= 0) {
-                    PingsGuiLayer.pings.remove(i.getKey());
+                    pings.remove(i.getKey());
                 } else {
-                    PingsGuiLayer.pings.put(i.getKey(), i.getValue()-1);
+                    pings.put(i.getKey(), i.getValue()-1);
                 }
             }
             boolean playMusic = false;
@@ -198,7 +229,7 @@ public class ClientEvents {
                 }
             }
         } else {
-            PingsGuiLayer.pings.clear();
+            pings.clear();
         }
     }
 }

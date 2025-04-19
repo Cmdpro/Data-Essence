@@ -40,8 +40,8 @@ public class PingsGuiLayer implements LayeredDraw.Layer {
             if (screenPos != null) {
                 int x = (int) (screenPos.x) - 8;
                 int y = (int) (screenPos.y) - 8;
-                Color color1 = i.getKey().getPingableStructure().color1;
-                Color color2 = i.getKey().getPingableStructure().color2;
+                Color color1 = (ping.known) ? structure.color1 : new Color(0xB100B1);
+                Color color2 = (ping.known) ? structure.color2 : new Color(0xFF00FF);
                 long gameTime = 0;
                 if (Minecraft.getInstance().level != null) {
                     gameTime = Minecraft.getInstance().level.getGameTime();
