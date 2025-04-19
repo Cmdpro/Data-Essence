@@ -3,14 +3,14 @@
   "advancement": "datanessence:exploration/find_nature_outpost",
   "requiredAdvancement": "datanessence:datanessence",
   "color1": [
-    175,
-    0,
-    175
+    54,
+    171,
+    30
   ],
   "color2": [
+    92,
     255,
-    0,
-    255
+    121
   ],
   "icon": {
     "texture": "datanessence:textures/gui/structure_icons.png",

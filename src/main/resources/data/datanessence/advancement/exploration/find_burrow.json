@@ -1,0 +1,27 @@
+{
+  "display": {
+    "icon": {
+      "id": "minecraft:purple_bed"
+    },
+    "title": {
+      "translate": "advancements.datanessence.find_burrow.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.find_burrow.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:datanessence",
+  "criteria": {
+    "at_abandoned_factory": {
+      "trigger": "minecraft:location",
+      "conditions": {
+        "player": {
+          "location": {
+            "structures": "datanessence:burrows/small_01"
+          }
+        }
+      }
+    }
+  }
+}

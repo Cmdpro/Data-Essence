@@ -3,14 +3,14 @@
   "advancement": "datanessence:exploration/find_ancient_weapons_facility",
   "requiredAdvancement": "datanessence:datanessence",
   "color1": [
-    175,
-    0,
-    175
+    193,
+    34,
+    0
   ],
   "color2": [
-    255,
-    0,
-    255
+    233,
+    71,
+    99
   ],
   "icon": {
     "texture": "datanessence:textures/gui/structure_icons.png",

@@ -1,20 +1,20 @@
 {
-  "structure": "datanessence:abandoned_factory",
-  "advancement": "datanessence:exploration/find_abandoned_factory",
+  "structure": "datanessence:burrows/small_01",
+  "advancement": "datanessence:exploration/find_burrow",
   "requiredAdvancement": "datanessence:datanessence",
   "color1": [
-    169,
-    0,
-    215
+    57,
+    41,
+    220
   ],
   "color2": [
-    255,
-    111,
-    224
+    124,
+    144,
+    237
   ],
   "icon": {
     "texture": "datanessence:textures/gui/structure_icons.png",
-    "u": 48,
+    "u": 80,
     "v": 0
   }
 }

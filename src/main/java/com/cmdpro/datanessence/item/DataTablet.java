@@ -27,14 +27,18 @@ public class DataTablet extends Item {
                 DataTabletUtil.setTier(pPlayer, 1);
             }
 
-            // unlock starting entries
-            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/fabricator"), false);
-            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/essence_redirector"), false);
-            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/data_tablet"), false);
-            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("basics/structures"), false);
-            DataTabletUtil.unlockEntry(pPlayer, DataNEssence.locate("tools/decorative_blocks"), false);
+            unlockStartingEntries(pPlayer);
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
+    }
+
+    public void unlockStartingEntries(Player player) {
+        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/fabricator"), false);
+        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/essence_redirector"), false);
+        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/data_tablet"), false);
+        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/structures"), false);
+        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/locator"), false);
+        DataTabletUtil.unlockEntry(player, DataNEssence.locate("tools/decorative_blocks"), false);
     }
 
     public static class Client {

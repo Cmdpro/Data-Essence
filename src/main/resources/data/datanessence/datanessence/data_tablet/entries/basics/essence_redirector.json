@@ -27,8 +27,5 @@
   },
   "flavor": {
     "translate": "data_tablet.pages.essence_redirector.flavor"
-  },
-  "parents": [
-    "datanessence:basics/data_tablet"
-  ]
+  }
 }
