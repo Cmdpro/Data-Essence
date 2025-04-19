@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FluidMixerScreen extends AbstractContainerScreen<FluidMixerMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/fluid_mixer.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/fluid_mixer.png");
     public FluidMixerScreen(FluidMixerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

@@ -1,0 +1,42 @@
+{
+  "files": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.burrow.small_01.exploration_hint"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.burrow.small_01.diary_01"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.generic.poem_02",
+        "font": "datanessence:ancient"
+      },
+      "rtl": true
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.burrow.small_01.diary_02"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.burrow.small_01.diary_03"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.burrow.small_01.diary_04"
+      }
+    }
+  ]
+}

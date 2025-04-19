@@ -19,6 +19,6 @@ public class DamageTypeRegistry {
     public static final ResourceKey<DamageType> overheatFailure = damageType("overheat_failure");
 
     private static ResourceKey<DamageType> damageType(String name) {
-        return ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, name));
+        return ResourceKey.create(Registries.DAMAGE_TYPE, DataNEssence.locate(name));
     }
 }

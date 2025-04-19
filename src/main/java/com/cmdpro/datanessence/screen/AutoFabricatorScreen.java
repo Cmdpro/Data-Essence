@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AutoFabricatorScreen extends AbstractContainerScreen<AutoFabricatorMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/auto-fabricator.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/auto-fabricator.png");
     public AutoFabricatorScreen(AutoFabricatorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

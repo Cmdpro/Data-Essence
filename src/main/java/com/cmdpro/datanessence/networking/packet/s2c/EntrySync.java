@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.networking.packet.s2c;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.datatablet.*;
+import com.cmdpro.datanessence.data.datatablet.*;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import net.minecraft.client.Minecraft;
@@ -33,7 +33,7 @@ public record EntrySync(Map<ResourceLocation, Entry> entries, Map<ResourceLocati
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<EntrySync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry_sync"));
+    public static final Type<EntrySync> TYPE = new Type<>(DataNEssence.locate("entry_sync"));
 
     private static class ClientHandler {
         public static void handle(EntrySync packet) {

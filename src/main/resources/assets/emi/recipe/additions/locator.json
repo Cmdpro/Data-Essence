@@ -1,0 +1,7 @@
+{
+  "type": "emi:info",
+  "stacks": [
+    "item:datanessence:locator"
+  ],
+  "text": "emi.info.datanessence.signal_tracker"
+}

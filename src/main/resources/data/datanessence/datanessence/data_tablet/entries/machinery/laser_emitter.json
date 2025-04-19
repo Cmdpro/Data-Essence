@@ -24,13 +24,14 @@
       "recipes": [
         "datanessence:fabrication/machines/laser_emitter",
         "datanessence:synthesis/lens_acceleration",
-        "datanessence:synthesis/lens_burning",
-        "datanessence:synthesis/lens_harming"
+        "datanessence:synthesis/lens_attracting",
+        "datanessence:synthesis/lens_burning"
       ]
     },
     {
       "type": "datanessence:crafting",
       "recipes": [
+        "datanessence:synthesis/lens_harming",
         "datanessence:synthesis/lens_healing",
         "datanessence:synthesis/lens_precision"
       ]

@@ -1,0 +1,28 @@
+{
+  "icon": {
+    "id": "datanessence:locator"
+  },
+  "tab": "datanessence:basics",
+  "x": 2,
+  "y": -3,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.locator.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/equipment/locator"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.locator.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.locator.flavor"
+  }
+}

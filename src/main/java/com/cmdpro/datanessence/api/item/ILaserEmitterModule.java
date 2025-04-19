@@ -10,4 +10,10 @@ public interface ILaserEmitterModule {
     default int getRedstoneLevel(LaserEmitterBlockEntity ent, List<LivingEntity> entities) {
         return entities.size() > 0 ? 15 : 0;
     }
+
+    /**
+     * Determines the color of the laser beam when this lens is slotted into the block.
+     * @return integer color
+     */
+    int getBeamColor();
 }

@@ -7,7 +7,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
 public class EssenceType {
-    public static final ResourceLocation ESSENCE_BAR_LOCATION = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/essence_bars.png");
+    public static final ResourceLocation ESSENCE_BAR_LOCATION = DataNEssence.locate("textures/gui/essence_bars.png");
 
     public final Component name;
     public final int tier;

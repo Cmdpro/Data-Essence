@@ -3,7 +3,7 @@ package com.cmdpro.datanessence.screen;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.c2s.PlayerChangeDriveData;
-import com.cmdpro.datanessence.datatablet.Entry;
+import com.cmdpro.datanessence.data.datatablet.Entry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;

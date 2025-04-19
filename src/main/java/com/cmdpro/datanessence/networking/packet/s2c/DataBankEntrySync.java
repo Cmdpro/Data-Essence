@@ -3,9 +3,9 @@ package com.cmdpro.datanessence.networking.packet.s2c;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.screen.DataBankScreen;
-import com.cmdpro.datanessence.databank.DataBankEntries;
-import com.cmdpro.datanessence.databank.DataBankEntry;
-import com.cmdpro.datanessence.databank.DataBankEntrySerializer;
+import com.cmdpro.datanessence.data.databank.DataBankEntries;
+import com.cmdpro.datanessence.data.databank.DataBankEntry;
+import com.cmdpro.datanessence.data.databank.DataBankEntrySerializer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -36,7 +36,7 @@ public record DataBankEntrySync(Map<ResourceLocation, DataBankEntry> entries) im
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<DataBankEntrySync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "data_bank_entry_sync"));
+    public static final Type<DataBankEntrySync> TYPE = new Type<>(DataNEssence.locate("data_bank_entry_sync"));
     private static class ClientHandler {
         public static void openScreen() {
             Minecraft.getInstance().setScreen(new DataBankScreen(Component.empty()));

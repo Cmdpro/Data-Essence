@@ -9,7 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 public class GenderEuphoriaShader extends PostShaderInstance {
     @Override
     public ResourceLocation getShaderLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "shaders/post/gender_euphoria.json");
+        return DataNEssence.locate("shaders/post/gender_euphoria.json");
     }
     public float colorOffset;
     public float fade;

@@ -3,14 +3,14 @@ package com.cmdpro.datanessence.screen;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.databank.Minigame;
 import com.cmdpro.datanessence.api.databank.MinigameCreator;
-import com.cmdpro.datanessence.databank.DataBankEntries;
-import com.cmdpro.datanessence.databank.DataBankEntry;
+import com.cmdpro.datanessence.data.databank.DataBankEntries;
+import com.cmdpro.datanessence.data.databank.DataBankEntry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.c2s.PlayerFinishDataBankMinigame;
-import com.cmdpro.datanessence.datatablet.Entries;
-import com.cmdpro.datanessence.datatablet.Entry;
+import com.cmdpro.datanessence.data.datatablet.Entries;
+import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -26,7 +26,7 @@ import java.util.*;
 import java.util.List;
 
 public class DataBankScreen extends Screen {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/data_bank.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/data_bank.png");
     public DataBankScreen(Component pTitle) {
         super(pTitle);
         minigameCompletionWait = -1;

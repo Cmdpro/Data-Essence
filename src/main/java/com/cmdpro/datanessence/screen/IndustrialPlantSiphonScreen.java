@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IndustrialPlantSiphonScreen extends AbstractContainerScreen<IndustrialPlantSiphonMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/industrial_plant_siphon.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/industrial_plant_siphon.png");
     public IndustrialPlantSiphonScreen(IndustrialPlantSiphonMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

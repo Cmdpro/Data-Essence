@@ -1,11 +1,20 @@
 package com.cmdpro.datanessence.block.technical;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.ComputerUtil;
-import com.cmdpro.datanessence.computers.ComputerTypeManager;
+import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
+import com.cmdpro.datanessence.registry.ItemRegistry;
+import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -30,6 +39,8 @@ public class Computer extends Block implements EntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide) {
+            giveLocator(pLevel, pPos, pPlayer);
+
             if (pLevel.getBlockEntity(pPos) instanceof ComputerBlockEntity ent) {
                 if (ent.type != null && ComputerTypeManager.types.containsKey(ent.type)) {
                     ComputerUtil.openComputer(pPlayer, ComputerTypeManager.types.get(ent.type));
@@ -37,6 +48,24 @@ public class Computer extends Block implements EntityBlock {
             }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
+    }
+
+    public void giveLocator(Level world, BlockPos pos, Player player) {
+        ItemStack signalTracker = new ItemStack(ItemRegistry.LOCATOR.get(), 1);
+        ServerLevel serverWorld = ((ServerLevel) world);
+        boolean hasGottenDataTablet = false;
+
+        if ( player instanceof ServerPlayer serverPlayer ) {
+            AdvancementHolder advancement = serverWorld.getServer().getAdvancements().get(DataNEssence.locate("datanessence"));
+            if (advancement != null)
+                hasGottenDataTablet = serverPlayer.getAdvancements().getOrStartProgress(advancement).isDone();
+        }
+
+        if (!player.getInventory().contains(signalTracker) && !hasGottenDataTablet) {
+            player.addItem(signalTracker);
+            player.displayClientMessage(Component.translatable("block.datanessence.computer.obtain_signal_tracker"), true);
+            world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS);
+        }
     }
 
     @Override

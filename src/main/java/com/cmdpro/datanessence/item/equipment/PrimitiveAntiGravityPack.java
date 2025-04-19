@@ -20,8 +20,8 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class PrimitiveAntiGravityPack extends ArmorItem {
-    public static final ResourceLocation GRAVITY_ATTRIBUTE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "primitive_anti_gravity_pack_gravity");
-    public static final ResourceLocation FALL_HEIGHT_ATTRIBUTE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "primitive_anti_gravity_pack_fall_height");
+    public static final ResourceLocation GRAVITY_ATTRIBUTE = DataNEssence.locate("primitive_anti_gravity_pack_gravity");
+    public static final ResourceLocation FALL_HEIGHT_ATTRIBUTE = DataNEssence.locate("primitive_anti_gravity_pack_fall_height");
     public static final AttributeModifier GRAVITY_MODIFIER = new AttributeModifier(GRAVITY_ATTRIBUTE, -0.8, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     public static final AttributeModifier FALL_HEIGHT_MODIFIER = new AttributeModifier(FALL_HEIGHT_ATTRIBUTE, 0.8, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");

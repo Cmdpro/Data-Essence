@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:infusion",
+  "essenceCost": {
+    "datanessence:essence": 500
+  },
+  "entry": "datanessence:machinery/industrial_infuser_processing",
+  "input": {
+    "item": "minecraft:ancient_debris",
+    "count": 1
+  },
+  "result": {
+    "id": "minecraft:netherite_scrap",
+    "count": 2
+  }
+}

@@ -53,6 +53,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.MOLD_ROD);
         simpleItem(ItemRegistry.MOLD_PANEL);
         simpleItem(ItemRegistry.HAMMER_AND_CHISEL);
+        simpleItem(ItemRegistry.LOCATOR);
         simpleItem(ItemRegistry.ECLIPTRUM_INGOT);
 
         simpleItemWithSubdirectory(ItemRegistry.ESSENCE_WIRE, "wires");
@@ -68,6 +69,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.HARMING_LENS, "lenses");
         simpleItemWithSubdirectory(ItemRegistry.HEALING_LENS, "lenses");
         simpleItemWithSubdirectory(ItemRegistry.PRECISION_LENS, "lenses");
+        simpleItemWithSubdirectory(ItemRegistry.ATTRACTING_LENS, "lenses");
 
         handheldItem(ItemRegistry.ESSENCE_REDIRECTOR);
         handheldItem(ItemRegistry.ESSENCE_SWORD);
@@ -104,6 +106,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.WIRE_SPOOL, "components");
         simpleItemWithSubdirectory(ItemRegistry.IRON_DRILL, "components");
         simpleItemWithSubdirectory(ItemRegistry.EXCITER, "components");
+        simpleItemWithSubdirectory(ItemRegistry.HEATING_COIL, "components");
         simpleItemWithSubdirectory(ItemRegistry.TRANSFORMATIVE_ROD, "components");
         simpleItemWithSubdirectory(ItemRegistry.REFLECTIVE_PANEL, "components");
 
@@ -139,8 +142,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
                 ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
                         ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/music_disc_player"))
-                .override().predicate(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "playing"), 1).
-                model(getExistingFile(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "music_disc_player_on"))).end();
+                .override().predicate(DataNEssence.locate("playing"), 1).
+                model(getExistingFile(DataNEssence.locate("music_disc_player_on"))).end();
     }
     private ItemModelBuilder simpleItem(Supplier<Item> item) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
@@ -168,7 +171,7 @@ public class ModItemModelProvider extends ItemModelProvider {
     }
     public void wallItem(Supplier<Block> block, Supplier<Block> baseBlock) {
         this.withExistingParent(BuiltInRegistries.BLOCK.getKey(block.get()).getPath(), mcLoc("block/wall_inventory"))
-                .texture("wall",  ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
+                .texture("wall",  DataNEssence.locate("block/" + BuiltInRegistries.BLOCK.getKey(baseBlock.get()).getPath()));
     }
 
     private ItemModelBuilder handheldItem(Supplier<Item> item) {

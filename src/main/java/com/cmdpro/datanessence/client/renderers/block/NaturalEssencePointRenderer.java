@@ -9,13 +9,13 @@ import net.minecraft.resources.ResourceLocation;
 
 
 public class NaturalEssencePointRenderer extends BaseEssencePointRenderer<NaturalEssencePointBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "natural_essence_point"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("natural_essence_point"), "main");
     public NaturalEssencePointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model<>(rendererProvider.getModelSet().bakeLayer(modelLocation)));
     }
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/natural_essence_point.png");
+        return DataNEssence.locate("textures/block/natural_essence_point.png");
     }
 }

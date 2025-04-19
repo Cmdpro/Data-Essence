@@ -46,5 +46,5 @@ public record PlayerChangeDriveData(ResourceLocation entry, boolean incomplete, 
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerChangeDriveData> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_change_data_drive_data"));
+    public static final Type<PlayerChangeDriveData> TYPE = new Type<>(DataNEssence.locate("player_change_data_drive_data"));
 }

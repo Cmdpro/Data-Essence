@@ -38,7 +38,7 @@ public class ChemicalNodeItemRenderer extends DatabankItemRenderer<ChemicalNodeI
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "essence_point"));
+                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
                 hand = model.animations.get("hand").createAnimationDefinition();
             }
             return model;

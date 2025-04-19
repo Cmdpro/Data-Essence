@@ -107,7 +107,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "essence_point"));
+                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
                 idle = model.animations.get("idle").createAnimationDefinition();
             }
             return model;

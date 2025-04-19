@@ -1,0 +1,11 @@
+{
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 100
+  },
+  "input": { "item": "datanessence:lens" },
+  "input2": { "item": "minecraft:string" },
+  "time": 100,
+  "result": { "id": "datanessence:attracting_lens", "count": 1 },
+  "entry": "datanessence:machinery/laser_emitter"
+}

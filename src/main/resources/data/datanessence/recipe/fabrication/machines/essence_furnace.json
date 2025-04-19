@@ -5,11 +5,11 @@
   "pattern": [
     "PPP",
     "P P",
-    "PWP"
+    "PHP"
   ],
   "key": {
     "P": { "item": "datanessence:capacitance_panel" },
-    "W": { "item": "datanessence:essence_wire" }
+    "H": { "item": "datanessence:heating_coil" }
   },
   "result": { "id": "datanessence:essence_furnace", "count": 1 }
 }

@@ -106,7 +106,7 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "essence_point"));
+                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
                 idle = model.animations.get("idle").createAnimationDefinition();
             }
             return model;

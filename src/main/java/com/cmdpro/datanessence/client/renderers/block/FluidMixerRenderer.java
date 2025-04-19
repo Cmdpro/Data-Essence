@@ -14,7 +14,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class FluidMixerRenderer extends DatabankBlockEntityRenderer<FluidMixerBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fluid_mixer"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("fluid_mixer"), "main");
 
     public FluidMixerRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new FluidMixerRenderer.Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
@@ -22,7 +22,7 @@ public class FluidMixerRenderer extends DatabankBlockEntityRenderer<FluidMixerBl
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/fluid_mixer.png");
+        return DataNEssence.locate("textures/block/fluid_mixer.png");
     }
 
     public static class Model extends DatabankBlockEntityModel<FluidMixerBlockEntity> {
@@ -37,7 +37,7 @@ public class FluidMixerRenderer extends DatabankBlockEntityRenderer<FluidMixerBl
 
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "fluid_mixer"));
+                model = DatabankModels.models.get(DataNEssence.locate("fluid_mixer"));
                 idle = model.animations.get("idle").createAnimationDefinition();
                 working = model.animations.get("working").createAnimationDefinition();
             }

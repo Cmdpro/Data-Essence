@@ -36,12 +36,12 @@ public abstract class Genderfluid {
     public static final IClientFluidTypeExtensions EXTENSIONS = new IClientFluidTypeExtensions() {
         @Override
         public ResourceLocation getStillTexture() {
-            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "block/fluid/genderfluid_still");
+            return DataNEssence.locate("block/fluid/genderfluid_still");
         }
 
         @Override
         public ResourceLocation getFlowingTexture() {
-            return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "block/fluid/genderfluid_flowing");
+            return DataNEssence.locate("block/fluid/genderfluid_flowing");
         }
     };
     private static BaseFlowingFluid.Properties properties() {

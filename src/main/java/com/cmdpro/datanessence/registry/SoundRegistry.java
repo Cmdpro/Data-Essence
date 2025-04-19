@@ -17,6 +17,8 @@ public class SoundRegistry {
             () -> SoundEvent.createVariableRangeEvent(DataNEssence.locate("tier_advanced")));
     public static final Supplier<SoundEvent> ENTROPIC_PROCESSOR_WORKING = SOUND_EVENTS.register("entropic_processor_working",
             () -> SoundEvent.createVariableRangeEvent(DataNEssence.locate("entropic_processor_working")));
+    public static final Supplier<SoundEvent> LOCATOR_PING = SOUND_EVENTS.register("locator_ping",
+            () -> SoundEvent.createVariableRangeEvent(DataNEssence.locate("locator_ping")));
     public static final Supplier<SoundEvent> UI_CLICK = SOUND_EVENTS.register("ui_click",
             () -> SoundEvent.createVariableRangeEvent(DataNEssence.locate("ui_click")));
     public static final Supplier<SoundEvent> UNDER_THE_SKY = SOUND_EVENTS.register("under_the_sky",

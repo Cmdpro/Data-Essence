@@ -4,10 +4,10 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
-import com.cmdpro.datanessence.databank.DataBankEntries;
-import com.cmdpro.datanessence.databank.DataBankEntry;
-import com.cmdpro.datanessence.datatablet.Entries;
-import com.cmdpro.datanessence.datatablet.Entry;
+import com.cmdpro.datanessence.data.databank.DataBankEntries;
+import com.cmdpro.datanessence.data.databank.DataBankEntry;
+import com.cmdpro.datanessence.data.datatablet.Entries;
+import com.cmdpro.datanessence.data.datatablet.Entry;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
@@ -40,5 +40,5 @@ public record PlayerFinishDataBankMinigame(ResourceLocation entry) implements Me
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<PlayerFinishDataBankMinigame> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "player_finish_data_bank_minigame"));
+    public static final Type<PlayerFinishDataBankMinigame> TYPE = new Type<>(DataNEssence.locate("player_finish_data_bank_minigame"));
 }

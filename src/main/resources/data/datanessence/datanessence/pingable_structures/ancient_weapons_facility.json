@@ -1,0 +1,20 @@
+{
+  "structure": "datanessence:ancient_weapons_facility",
+  "advancement": "datanessence:exploration/find_ancient_weapons_facility",
+  "requiredAdvancement": "datanessence:datanessence",
+  "color1": [
+    193,
+    34,
+    0
+  ],
+  "color2": [
+    233,
+    71,
+    99
+  ],
+  "icon": {
+    "texture": "datanessence:textures/gui/structure_icons.png",
+    "u": 64,
+    "v": 0
+  }
+}

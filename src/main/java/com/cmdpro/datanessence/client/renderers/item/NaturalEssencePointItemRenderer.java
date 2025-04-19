@@ -17,14 +17,14 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemStack;
 
 public class NaturalEssencePointItemRenderer extends DatabankItemRenderer<NaturalEssencePointItem> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "natural_essence_point_item"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("natural_essence_point_item"), "main");
     public NaturalEssencePointItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
         super(dispatcher, modelSet, new Model(modelSet.bakeLayer(modelLocation)));
     }
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/natural_essence_point.png");
+        return DataNEssence.locate("textures/block/natural_essence_point.png");
     }
 
     public static class Model extends DatabankItemModel<NaturalEssencePointItem> {
@@ -38,7 +38,7 @@ public class NaturalEssencePointItemRenderer extends DatabankItemRenderer<Natura
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "essence_point"));
+                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
                 hand = model.animations.get("hand").createAnimationDefinition();
             }
             return model;

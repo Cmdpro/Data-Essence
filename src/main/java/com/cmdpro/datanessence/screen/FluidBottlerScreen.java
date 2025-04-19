@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FluidBottlerScreen extends AbstractContainerScreen<FluidBottlerMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/fluid_bottler.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/fluid_bottler.png");
     public FluidBottlerScreen(FluidBottlerMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

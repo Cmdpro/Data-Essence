@@ -215,6 +215,9 @@ public class BlockRegistry {
     public static final Supplier<Block> EXOTIC_ESSENCE_BATTERY = register("exotic_essence_battery",
             () -> new ExoticEssenceBattery(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> CREATIVE_ESSENCE_BATTERY = register("creative_essence_battery",
+            () -> new CreativeEssenceBattery(MACHINE_PROPERTIES),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_TANK = register("fluid_tank",
             () -> new FluidTank(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

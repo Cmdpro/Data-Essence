@@ -15,10 +15,10 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 
 @EventBusSubscriber(modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataNEssenceRegistries {
-    public static ResourceKey<Registry<PageSerializer>> PAGE_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "page_types"));
-    public static ResourceKey<Registry<MinigameSerializer>> MINIGAME_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "minigames"));
-    public static ResourceKey<Registry<ComputerFileType>> COMPUTER_FILE_TYPES_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "computer_file_types"));
-    public static ResourceKey<Registry<EssenceType>> ESSENCE_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "essence_types"));
+    public static ResourceKey<Registry<PageSerializer>> PAGE_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(DataNEssence.locate("page_types"));
+    public static ResourceKey<Registry<MinigameSerializer>> MINIGAME_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(DataNEssence.locate("minigames"));
+    public static ResourceKey<Registry<ComputerFileType>> COMPUTER_FILE_TYPES_REGISTRY_KEY = ResourceKey.createRegistryKey(DataNEssence.locate("computer_file_types"));
+    public static ResourceKey<Registry<EssenceType>> ESSENCE_TYPE_REGISTRY_KEY = ResourceKey.createRegistryKey(DataNEssence.locate("essence_types"));
     public static Registry<PageSerializer> PAGE_TYPE_REGISTRY = new RegistryBuilder<>(PAGE_TYPE_REGISTRY_KEY).sync(true).create();
     public static Registry<MinigameSerializer> MINIGAME_TYPE_REGISTRY = new RegistryBuilder<>(MINIGAME_TYPE_REGISTRY_KEY).sync(true).create();
     public static Registry<ComputerFileType> COMPUTER_FILE_TYPES_REGISTRY = new RegistryBuilder<>(COMPUTER_FILE_TYPES_REGISTRY_KEY).sync(true).create();

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " C ",
+    "WOW",
+    " C "
+  ],
+  "key": {
+    "C": { "item": "datanessence:conductance_rod" },
+    "W": { "item": "datanessence:essence_wire" },
+    "O": { "item": "datanessence:polished_obsidian" }
+  },
+  "result": { "id": "datanessence:heating_coil", "count": 2 }
+}

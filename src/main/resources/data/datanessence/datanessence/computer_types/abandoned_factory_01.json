@@ -1,0 +1,26 @@
+{
+  "files": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.generic.signal_from_mountains"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.abandoned_factory_01.report_01",
+        "font": "datanessence:ancient"
+      },
+      "rtl": true
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "computer.abandoned_factory_01.report_02",
+        "font": "datanessence:ancient"
+      },
+      "rtl": true
+    }
+  ]
+}

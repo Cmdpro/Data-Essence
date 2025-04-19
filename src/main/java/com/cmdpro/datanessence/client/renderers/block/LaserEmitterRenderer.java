@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
 import com.cmdpro.databank.ClientDatabankUtils;
+import com.cmdpro.datanessence.api.item.ILaserEmitterModule;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -16,24 +17,29 @@ import java.awt.*;
 
 public class LaserEmitterRenderer implements BlockEntityRenderer<LaserEmitterBlockEntity> {
     @Override
-    public void render(LaserEmitterBlockEntity pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, int pPackedOverlay) {
-        if (pBlockEntity.end != null) {
-            Vec3 pos = pBlockEntity.getBlockPos().getCenter();
-            pPoseStack.pushPose();
-            pPoseStack.translate(-pos.x, -pos.y, -pos.z);
-            pPoseStack.translate(0.5, 0.5, 0.5);
-            ClientDatabankUtils.renderAdvancedBeaconBeam(pPoseStack, pBuffer, BeaconRenderer.BEAM_LOCATION, pPartialTick, 1.0f, pBlockEntity.getLevel().getGameTime(), pBlockEntity.getBlockPos().getCenter(), pBlockEntity.end, new Color(0xe236ef), 0.25f, 0.3f);
-            pPoseStack.popPose();
+    public void render(LaserEmitterBlockEntity laserEmitter, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+        if (laserEmitter.end != null) {
+            Vec3 pos = laserEmitter.getBlockPos().getCenter();
+            poseStack.pushPose();
+            poseStack.translate(-pos.x, -pos.y, -pos.z);
+            poseStack.translate(0.5, 0.5, 0.5);
+
+            int color = 0xe236ef;
+            if ( laserEmitter.item.getItem() instanceof ILaserEmitterModule lens )
+                color = lens.getBeamColor();
+
+            ClientDatabankUtils.renderAdvancedBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0f, laserEmitter.getLevel().getGameTime(), laserEmitter.getBlockPos().getCenter(), laserEmitter.end, new Color(color), 0.25f, 0.3f);
+            poseStack.popPose();
         }
     }
 
     @Override
-    public AABB getRenderBoundingBox(LaserEmitterBlockEntity blockEntity) {
-        if (blockEntity.end != null) {
-            AABB bounds = AABB.encapsulatingFullBlocks(blockEntity.getBlockPos(), BlockPos.containing(blockEntity.end));
+    public AABB getRenderBoundingBox(LaserEmitterBlockEntity laserEmitter) {
+        if (laserEmitter.end != null) {
+            AABB bounds = AABB.encapsulatingFullBlocks(laserEmitter.getBlockPos(), BlockPos.containing(laserEmitter.end));
             return bounds;
         } else {
-            return BlockEntityRenderer.super.getRenderBoundingBox(blockEntity);
+            return BlockEntityRenderer.super.getRenderBoundingBox(laserEmitter);
         }
     }
 

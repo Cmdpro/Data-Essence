@@ -4,8 +4,8 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
 import com.cmdpro.datanessence.networking.Message;
-import com.cmdpro.datanessence.datatablet.Entries;
-import com.cmdpro.datanessence.datatablet.Entry;
+import com.cmdpro.datanessence.data.datatablet.Entries;
+import com.cmdpro.datanessence.data.datatablet.Entry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -42,7 +42,7 @@ public record UnlockEntry(ResourceLocation unlocked, boolean incomplete) impleme
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<UnlockEntry> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "unlock_entry"));
+    public static final Type<UnlockEntry> TYPE = new Type<>(DataNEssence.locate("unlock_entry"));
 
     public static UnlockEntry read(RegistryFriendlyByteBuf buf) {
         ResourceLocation unlocked = buf.readResourceLocation();

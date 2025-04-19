@@ -22,8 +22,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
-    public static final ModelLayerLocation hornsLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "horns"), "main");
-    public static final ResourceLocation hornsTexture = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/entity/horns.png");
+    public static final ModelLayerLocation hornsLocation = new ModelLayerLocation(DataNEssence.locate("horns"), "main");
+    public static final ResourceLocation hornsTexture = DataNEssence.locate("textures/entity/horns.png");
     private final HornsModel<T> hornsModel;
     public HornsLayer(RenderLayerParent<T, M> pRenderer, EntityModelSet pModelSet) {
         super(pRenderer);
@@ -53,7 +53,7 @@ public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "horns"));
+                model = DatabankModels.models.get(DataNEssence.locate("horns"));
             }
             return model;
         }

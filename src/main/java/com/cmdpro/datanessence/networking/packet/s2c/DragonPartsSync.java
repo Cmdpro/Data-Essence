@@ -29,7 +29,7 @@ public record DragonPartsSync(int id, boolean horns, boolean tail, boolean wings
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<DragonPartsSync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "dragon_parts_sync"));
+    public static final Type<DragonPartsSync> TYPE = new Type<>(DataNEssence.locate("dragon_parts_sync"));
 
     public static DragonPartsSync read(RegistryFriendlyByteBuf buf) {
         int id = buf.readInt();

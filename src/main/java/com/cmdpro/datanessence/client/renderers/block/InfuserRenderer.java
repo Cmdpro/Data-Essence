@@ -19,7 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 
 public class InfuserRenderer extends DatabankBlockEntityRenderer<InfuserBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "infuser"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("infuser"), "main");
     public InfuserRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
     }
@@ -36,7 +36,7 @@ public class InfuserRenderer extends DatabankBlockEntityRenderer<InfuserBlockEnt
     }
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/infuser.png");
+        return DataNEssence.locate("textures/block/infuser.png");
     }
 
     public static class Model extends DatabankBlockEntityModel<InfuserBlockEntity> {
@@ -51,7 +51,7 @@ public class InfuserRenderer extends DatabankBlockEntityRenderer<InfuserBlockEnt
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "infuser"));
+                model = DatabankModels.models.get(DataNEssence.locate("infuser"));
                 idle = model.animations.get("idle").createAnimationDefinition();
                 active = model.animations.get("active").createAnimationDefinition();
                 deactivated = model.animations.get("deactivated").createAnimationDefinition();

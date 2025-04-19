@@ -17,14 +17,14 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemStack;
 
 public class InfuserItemRenderer extends DatabankItemRenderer<InfuserItem> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "infuser_item"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("infuser_item"), "main");
     public InfuserItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
         super(dispatcher, modelSet, new Model(modelSet.bakeLayer(modelLocation)));
     }
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/infuser.png");
+        return DataNEssence.locate("textures/block/infuser.png");
     }
 
     public static class Model extends DatabankItemModel<InfuserItem> {
@@ -38,7 +38,7 @@ public class InfuserItemRenderer extends DatabankItemRenderer<InfuserItem> {
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "infuser"));
+                model = DatabankModels.models.get(DataNEssence.locate("infuser"));
                 hand = model.animations.get("hand").createAnimationDefinition();
             }
             return model;

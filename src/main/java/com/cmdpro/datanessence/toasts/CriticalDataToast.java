@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.toasts;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.datatablet.Entry;
+import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -9,7 +9,6 @@ import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 

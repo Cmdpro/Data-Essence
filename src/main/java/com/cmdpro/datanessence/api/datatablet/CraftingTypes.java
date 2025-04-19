@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.api.datatablet;
 
-import com.cmdpro.datanessence.datatablet.pages.crafting.types.*;
+import com.cmdpro.datanessence.data.datatablet.pages.crafting.types.*;
 
 import java.util.ArrayList;
 import java.util.List;

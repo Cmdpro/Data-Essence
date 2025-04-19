@@ -16,4 +16,9 @@ public class HarmingLens extends Item implements ILaserEmitterModule {
     public void applyToMob(LaserEmitterBlockEntity ent, LivingEntity entity) {
         entity.hurt(entity.damageSources().source(DamageTypeRegistry.laser), 2.5f);
     }
+
+    @Override
+    public int getBeamColor() {
+        return 0x381657;
+    }
 }

@@ -11,6 +11,7 @@ import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.recipe.*;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.SynthesisChamberMenu;
@@ -43,13 +44,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, ILockableContainer {
     public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
     }
-    private final ItemStackHandler itemHandler = new ItemStackHandler(2) {
+
+    private final LockableItemHandler itemHandler = new LockableItemHandler(2) {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -57,10 +59,23 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         }
 
         @Override
+        public void setLockedSlots() {
+            super.setLockedSlots();
+            setChanged();
+        }
+
+        @Override
+        public void setLocked(boolean locked) {
+            super.setLocked(locked);
+            setChanged();
+        }
+
+        @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return super.isItemValid(slot, stack);
         }
     };
+
     private final ItemStackHandler dataDriveHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -180,9 +195,13 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
             if (!recipe.get().value().equals(this.recipe)) {
                 workTime = 0;
             }
-            if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) || recipe.get().value().allowIncomplete())) {
-                this.recipe = recipe.get().value();
-                essenceCost = recipe.get().value().getEssenceCost();
+            if (dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_ID) && dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_INCOMPLETE)) {
+                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) || recipe.get().value().allowIncomplete())) {
+                    this.recipe = recipe.get().value();
+                    essenceCost = recipe.get().value().getEssenceCost();
+                } else {
+                    this.recipe = null;
+                }
             } else {
                 this.recipe = null;
             }
@@ -198,7 +217,14 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SynthesisChamberBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
+
+            for ( var lockedSlot : pBlockEntity.getLockable() ) {
+                if (!lockedSlot.locked)
+                    return;
+            }
+
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
+
             boolean resetWorkTime = true;
             if (pBlockEntity.recipe != null) {
                 boolean enoughEssence = true;
@@ -260,5 +286,10 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new SynthesisChamberMenu(pContainerId, pInventory, this);
+    }
+
+    @Override
+    public List<LockableItemHandler> getLockable() {
+        return List.of(itemHandler);
     }
 }

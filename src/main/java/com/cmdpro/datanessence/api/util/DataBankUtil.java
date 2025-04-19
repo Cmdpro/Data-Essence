@@ -2,8 +2,8 @@ package com.cmdpro.datanessence.api.util;
 
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.DataBankEntrySync;
-import com.cmdpro.datanessence.databank.DataBankEntries;
-import com.cmdpro.datanessence.databank.DataBankEntry;
+import com.cmdpro.datanessence.data.databank.DataBankEntries;
+import com.cmdpro.datanessence.data.databank.DataBankEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;

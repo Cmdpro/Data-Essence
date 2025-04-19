@@ -17,7 +17,7 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemStack;
 
 public class EntropicProcessorItemRenderer extends DatabankItemRenderer<EntropicProcessorItem> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entropic_processor_item"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("entropic_processor_item"), "main");
 
     public EntropicProcessorItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
         super(dispatcher, modelSet, new Model(modelSet.bakeLayer(modelLocation)));
@@ -25,7 +25,7 @@ public class EntropicProcessorItemRenderer extends DatabankItemRenderer<Entropic
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/entropic_processor.png");
+        return DataNEssence.locate("textures/block/entropic_processor.png");
     }
 
     public static class Model extends DatabankItemModel<EntropicProcessorItem> {
@@ -41,7 +41,7 @@ public class EntropicProcessorItemRenderer extends DatabankItemRenderer<Entropic
 
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entropic_processor"));
+                model = DatabankModels.models.get(DataNEssence.locate("entropic_processor"));
                 hand = model.animations.get("hand").createAnimationDefinition();
             }
             return model;

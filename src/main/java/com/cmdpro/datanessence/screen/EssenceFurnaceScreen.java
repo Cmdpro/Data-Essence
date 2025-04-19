@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EssenceFurnaceScreen extends AbstractContainerScreen<EssenceFurnaceMenu> {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/essence_furnace.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/essence_furnace.png");
     public EssenceFurnaceScreen(EssenceFurnaceMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }

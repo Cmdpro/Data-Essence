@@ -1,16 +1,15 @@
 package com.cmdpro.datanessence.networking.packet.s2c;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.computers.ClientComputerData;
-import com.cmdpro.datanessence.computers.ComputerData;
-import com.cmdpro.datanessence.computers.ComputerTypeSerializer;
+import com.cmdpro.datanessence.data.computers.ClientComputerData;
+import com.cmdpro.datanessence.data.computers.ComputerData;
+import com.cmdpro.datanessence.data.computers.ComputerTypeSerializer;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.screen.ComputerScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
 public record ComputerDataSync(ComputerData data) implements Message {
@@ -32,7 +31,7 @@ public record ComputerDataSync(ComputerData data) implements Message {
     public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
-    public static final Type<ComputerDataSync> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "computer_data_sync"));
+    public static final Type<ComputerDataSync> TYPE = new Type<>(DataNEssence.locate("computer_data_sync"));
     private static class ClientHandler {
         public static void openScreen() {
             Minecraft.getInstance().setScreen(new ComputerScreen(Component.empty()));

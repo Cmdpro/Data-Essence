@@ -110,6 +110,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.CHEMICAL_NODE.get());
         dropSelf(BlockRegistry.DEWLAMP.get());
         dropSelf(BlockRegistry.DRYING_TABLE.get());
+        this.add(BlockRegistry.CREATIVE_ESSENCE_BATTERY.get(),
+                block -> noDrop());
         dropSelf(BlockRegistry.ESSENCE_DERIVATION_SPIKE.get());
 
         this.add(BlockRegistry.TETHERGRASS.get(),

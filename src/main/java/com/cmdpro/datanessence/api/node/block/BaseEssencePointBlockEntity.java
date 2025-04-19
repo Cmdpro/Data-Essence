@@ -65,10 +65,10 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
         return value;
     }
     public float getFinalSpeed(float value) {
-        return value*getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "speed_multiplier"), 1f);
+        return value*getValue(DataNEssence.locate("speed_multiplier"), 1f);
     }
     public int getFinalSpeed(int value) {
-        return (int)(value*getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "speed_multiplier"), 1f));
+        return (int)(value*getValue(DataNEssence.locate("speed_multiplier"), 1f));
     }
 
     public BaseEssencePointBlockEntity(BlockEntityType<?> pType, BlockPos pPos, BlockState pBlockState) {

@@ -17,7 +17,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class LockWidget extends AbstractWidget {
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/gui/widgets.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/widgets.png");
     public BlockEntity entity;
     public LockableItemHandler handler;
     public LockWidget(BlockEntity entity, LockableItemHandler handler, int pX, int pY) {

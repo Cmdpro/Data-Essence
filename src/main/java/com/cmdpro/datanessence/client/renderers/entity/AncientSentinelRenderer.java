@@ -15,13 +15,13 @@ import net.minecraft.resources.ResourceLocation;
 
 
 public class AncientSentinelRenderer extends MobRenderer<AncientSentinel, AncientSentinelRenderer.Model<AncientSentinel>> {
-    public static final ModelLayerLocation ancientSentinelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "ancient_sentinel"), "main");
+    public static final ModelLayerLocation ancientSentinelLocation = new ModelLayerLocation(DataNEssence.locate("ancient_sentinel"), "main");
     public AncientSentinelRenderer(EntityRendererProvider.Context p_272933_) {
         super(p_272933_, new Model<>(p_272933_.bakeLayer(ancientSentinelLocation)), 0.5F);
     }
     @Override
     public ResourceLocation getTextureLocation(AncientSentinel instance) {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/entity/ancient_sentinel.png");
+        return DataNEssence.locate("textures/entity/ancient_sentinel.png");
     }
 
     public static class Model<T extends AncientSentinel> extends HierarchicalModel<T> {
@@ -36,7 +36,7 @@ public class AncientSentinelRenderer extends MobRenderer<AncientSentinel, Ancien
         public static DatabankEntityModel model;
         public static DatabankEntityModel getModel() {
             if (model == null) {
-                model = DatabankModels.models.get(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "ancient_sentinel"));
+                model = DatabankModels.models.get(DataNEssence.locate("ancient_sentinel"));
                 idle = model.animations.get("idle").createAnimationDefinition();
             }
             return model;

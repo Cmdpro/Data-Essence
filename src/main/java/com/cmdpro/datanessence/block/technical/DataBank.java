@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block.technical;
 
 import com.cmdpro.datanessence.api.util.DataBankUtil;
-import com.cmdpro.datanessence.databank.DataBankTypeManager;
+import com.cmdpro.datanessence.data.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

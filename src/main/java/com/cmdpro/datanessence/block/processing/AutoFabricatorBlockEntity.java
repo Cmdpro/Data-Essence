@@ -13,6 +13,7 @@ import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.IHasRequiredKnowledge;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.AutoFabricatorMenu;
@@ -182,9 +183,11 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
     }
     public boolean tryCraft() {
         if (recipe instanceof IHasRequiredKnowledge recipe) {
-            if (!recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))) {
-                if (DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) && !recipe.allowIncomplete()) {
-                    return false;
+            if (dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_ID) && dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_INCOMPLETE)) {
+                if (!recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))) {
+                    if (DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) && !recipe.allowIncomplete()) {
+                        return false;
+                    }
                 }
             }
         }

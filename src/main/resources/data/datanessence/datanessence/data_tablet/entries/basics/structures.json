@@ -3,8 +3,8 @@
     "id": "datanessence:data_bank"
   },
   "tab": "datanessence:basics",
-  "x": 0,
-  "y": -4,
+  "x": -2,
+  "y": -3,
   "pages": [
     {
       "type": "datanessence:text",

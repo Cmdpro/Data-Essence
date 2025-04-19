@@ -1,0 +1,34 @@
+{
+  "icon": {
+    "id": "minecraft:redstone"
+  },
+  "tab": "datanessence:machinery",
+  "x": 0,
+  "y": 3,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.industrial_infuser_processing.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:infusion/ancient_debris_doubling",
+        "datanessence:infusion/glowstone",
+        "datanessence:infusion/gravel_extraction",
+        "datanessence:infusion/redstone"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.industrial_infuser_processing.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.industrial_infuser_processing.flavor"
+  },
+  "parents": [
+    "datanessence:machinery/infuser"
+  ]
+}

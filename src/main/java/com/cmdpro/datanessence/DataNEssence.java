@@ -3,10 +3,9 @@ package com.cmdpro.datanessence;
 import com.cmdpro.databank.hiddenblock.HiddenBlockConditions;
 import com.cmdpro.datanessence.block.transmission.ItemFilter;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
-import com.cmdpro.datanessence.hiddenblock.EntryCondition;
+import com.cmdpro.datanessence.data.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -70,7 +69,7 @@ public class DataNEssence
         FluidRegistry.FLUIDS.register(bus);
         PotionRegistry.POTIONS.register(bus);
         random = RandomSource.create();
-        HiddenBlockConditions.conditions.put(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
+        HiddenBlockConditions.conditions.put(DataNEssence.locate("entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
 
         if (hasMekanism)
             DataNEssence.LOGGER.info("[DATANESSENCE] Mekanism detected; enabling integration features. Careful with your reactors!");
@@ -227,6 +226,7 @@ public class DataNEssence
             // Tools
             event.accept(ItemRegistry.DATA_TABLET.get());
             event.accept(ItemRegistry.ESSENCE_REDIRECTOR.get());
+            event.accept(ItemRegistry.LOCATOR.get());
             event.accept(ItemRegistry.DATA_DRIVE.get());
             event.accept(ItemRegistry.MOLD_PANEL.get());
             event.accept(ItemRegistry.MOLD_ROD.get());
@@ -261,6 +261,7 @@ public class DataNEssence
             event.accept(ItemRegistry.HARMING_LENS.get());
             event.accept(ItemRegistry.HEALING_LENS.get());
             event.accept(ItemRegistry.ACCELERATION_LENS.get());
+            event.accept(ItemRegistry.ATTRACTING_LENS.get());
             event.accept(ItemRegistry.BURNING_LENS.get());
             event.accept(ItemRegistry.PRECISION_LENS.get());
             event.accept(ItemRegistry.SPEED_UPGRADE.get());
@@ -277,6 +278,7 @@ public class DataNEssence
             event.accept(ItemRegistry.LOGICAL_MATRIX.get());
             event.accept(ItemRegistry.PROPELLER.get());
             event.accept(ItemRegistry.EXCITER.get());
+            event.accept(ItemRegistry.HEATING_COIL.get());
             event.accept(ItemRegistry.IRON_DRILL.get());
             event.accept(ItemRegistry.ECLIPTRUM_INGOT.get());
             event.accept(ItemRegistry.REFLECTIVE_PANEL.get());

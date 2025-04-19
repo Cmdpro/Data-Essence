@@ -5,12 +5,12 @@
   "pattern": [
     "O O",
     "OOO",
-    "CWC"
+    "CHC"
   ],
   "key": {
     "O": { "item": "datanessence:polished_obsidian" },
     "C": { "item": "minecraft:copper_ingot" },
-    "W": { "item": "datanessence:essence_wire" }
+    "H": { "item": "datanessence:heating_coil" }
   },
   "result": { "id": "datanessence:melter" }
 }

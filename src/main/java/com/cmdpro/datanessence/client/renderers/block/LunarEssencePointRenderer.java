@@ -9,13 +9,13 @@ import net.minecraft.resources.ResourceLocation;
 
 
 public class LunarEssencePointRenderer extends BaseEssencePointRenderer<LunarEssencePointBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "lunar_essence_point"), "main");
+    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("lunar_essence_point"), "main");
     public LunarEssencePointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
         super(new Model<>(rendererProvider.getModelSet().bakeLayer(modelLocation)));
     }
 
     @Override
     public ResourceLocation getTextureLocation() {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/block/lunar_essence_point.png");
+        return DataNEssence.locate("textures/block/lunar_essence_point.png");
     }
 }

@@ -31,7 +31,7 @@ public class ArmorMaterialRegistry {
             SoundEvents.ARMOR_EQUIP_GENERIC,
             () -> Ingredient.of(Tags.Items.INGOTS_COPPER), List.of(
                     new ArmorMaterial.Layer(
-                            ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "primitive_anti_gravity_pack")
+                            DataNEssence.locate("primitive_anti_gravity_pack")
                     )
             ),
             0,
@@ -46,7 +46,7 @@ public class ArmorMaterialRegistry {
             SoundEvents.ARMOR_EQUIP_LEATHER,
             () -> Ingredient.of(Tags.Items.LEATHERS), List.of(
             new ArmorMaterial.Layer(
-                    ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "traversite_trudgers")
+                    DataNEssence.locate("traversite_trudgers")
             )
     ),
             0,

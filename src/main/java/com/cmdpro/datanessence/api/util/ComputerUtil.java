@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.api.util;
 
-import com.cmdpro.datanessence.computers.ComputerData;
+import com.cmdpro.datanessence.data.computers.ComputerData;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.ComputerDataSync;
 import net.minecraft.server.level.ServerPlayer;

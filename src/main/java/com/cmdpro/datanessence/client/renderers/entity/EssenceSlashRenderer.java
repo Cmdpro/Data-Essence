@@ -58,6 +58,6 @@ public class EssenceSlashRenderer extends EntityRenderer<EssenceSlashProjectile>
         );
     }
     public ResourceLocation getTextureLocation(EssenceSlashProjectile pEntity) {
-        return ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "textures/entity/essence_slash.png");
+        return DataNEssence.locate("textures/entity/essence_slash.png");
     }
 }

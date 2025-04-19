@@ -24,6 +24,7 @@ public class ItemRegistry {
     public static final Supplier<Item> ACCELERATION_LENS = register("acceleration_lens", () -> new AccelerationLens(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> BURNING_LENS = register("burning_lens", () -> new BurningLens(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> PRECISION_LENS = register("precision_lens", () -> new PrecisionLens(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ATTRACTING_LENS = register("attracting_lens", () -> new AttractingLens(new Item.Properties().stacksTo(1)));
 
     // Tools
     public static final Supplier<Item> ESSENCE_REDIRECTOR = register("essence_redirector", () -> new EssenceRedirector(new Item.Properties().stacksTo(1)));
@@ -31,6 +32,7 @@ public class ItemRegistry {
     public static final Supplier<Item> MOLD_ROD = register("rod_mold", () -> new Item(new Item.Properties().component(DataComponentRegistry.MOLD, DataNEssence.locate("metal_shaping/conductance_rod"))));
     public static final Supplier<Item> MOLD_PANEL = register("panel_mold", () -> new Item(new Item.Properties().component(DataComponentRegistry.MOLD, DataNEssence.locate("metal_shaping/capacitance_panel"))));
     public static final Supplier<Item> THERMOMETER = register("thermometer", () -> new Thermometer(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> LOCATOR = register("locator", () -> new Locator(new Item.Properties().stacksTo(1)));
 
     // Equipment
     public static final Supplier<Item> ESSENCE_SWORD = register("essence_sword", () -> new EssenceSword(new Item.Properties().stacksTo(1)));
@@ -72,6 +74,7 @@ public class ItemRegistry {
     public static final Supplier<Item> BONDING_POWDER = register("bonding_powder", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> IRON_DRILL = register("iron_drill", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> EXCITER = register("exciter", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> HEATING_COIL = register("heating_coil", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> ECLIPTRUM_INGOT = register("ecliptrum_ingot", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> TRANSFORMATIVE_ROD = register("transformative_rod", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> REFLECTIVE_PANEL = register("reflective_panel", () -> new Item(new Item.Properties()));

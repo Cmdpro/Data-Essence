@@ -35,7 +35,7 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
                 List<FluidStack> allowedFluidstacks = null;
                 for (BlockPos j : i.getVertexList()) {
                     if (level.getBlockEntity(j) instanceof BaseCapabilityPointBlockEntity ent2) {
-                        List<FluidStack> value = ent2.getValue(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "allowed_fluidstacks"), null);
+                        List<FluidStack> value = ent2.getValue(DataNEssence.locate("allowed_fluidstacks"), null);
                         if (allowedFluidstacks == null) {
                             allowedFluidstacks = value;
                         } else if (value != null) {
