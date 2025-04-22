@@ -27,7 +27,7 @@ public class DataTabManager extends SimpleJsonResourceReloadListener {
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         Entries.tabs.clear();
-        DataNEssence.LOGGER.info("Adding Data and Essence Tabs");
+        DataNEssence.LOGGER.info("[DATANESSENCE] Adding Data Tablet Tabs");
         for (Map.Entry<ResourceLocation, JsonElement> i : pObject.entrySet()) {
             ResourceLocation location = i.getKey();
             if (location.getPath().startsWith("_")) {
@@ -40,11 +40,12 @@ public class DataTabManager extends SimpleJsonResourceReloadListener {
                     continue;
                 }
                 Entries.tabs.put(i.getKey(), tab);
+                DataNEssence.LOGGER.info("[DATANESSENCE] Successfully added tab {}", location);
             } catch (IllegalArgumentException | JsonParseException e) {
-                DataNEssence.LOGGER.error("Parsing error loading entry {}", location, e);
+                DataNEssence.LOGGER.error("[DATANESSENCE ERROR] Parsing error loading tab {}", location, e);
             }
         }
-        DataNEssence.LOGGER.info("Loaded {} tabs", Entries.tabs.size());
+        DataNEssence.LOGGER.info("[DATANESSENCE] Loaded {} Data Tablet Tabs", Entries.tabs.size());
     }
     public static DataTabSerializer serializer = new DataTabSerializer();
     protected DataTab deserializeTab(ResourceLocation id, JsonObject json) {

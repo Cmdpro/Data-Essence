@@ -30,7 +30,7 @@ public class DataBankTypeManager extends SimpleJsonResourceReloadListener {
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         types = new HashMap<>();
         Map<ResourceLocation, ResourceLocation[]> removals = new HashMap<>();
-        DataNEssence.LOGGER.info("Adding Data and Essence Data Bank Types");
+        DataNEssence.LOGGER.info("[DATANESSENCE] Adding Data Bank Types");
         for (Map.Entry<ResourceLocation, JsonElement> i : pObject.entrySet()) {
             ResourceLocation location = i.getKey();
             if (location.getPath().startsWith("_")) {
@@ -50,8 +50,9 @@ public class DataBankTypeManager extends SimpleJsonResourceReloadListener {
                     removals2.addAll(List.of(removals.getOrDefault(i.getKey(), new ResourceLocation[0])));
                     removals.put(i.getKey(), removals2.toArray(new ResourceLocation[0]));
                 }
+                DataNEssence.LOGGER.info("[DATANESSENCE] Successfully added entry {}", location);
             } catch (IllegalArgumentException | JsonParseException e) {
-                DataNEssence.LOGGER.error("Parsing error loading data bank type {}", location, e);
+                DataNEssence.LOGGER.error("[DATANESSENCE] Parsing error loading data bank type {}", location, e);
             }
         }
         for (Map.Entry<ResourceLocation, ResourceLocation[]> i : removals.entrySet()) {
@@ -60,7 +61,7 @@ public class DataBankTypeManager extends SimpleJsonResourceReloadListener {
             idsList.removeAll(List.of(ids));
             types.put(i.getKey(), idsList.toArray(new ResourceLocation[0]));
         }
-        DataNEssence.LOGGER.info("Loaded {} data bank types", types.size());
+        DataNEssence.LOGGER.info("[DATANESSENCE] Loaded {} Data Bank Types", types.size());
     }
     public static DataBankTypeSerializer serializer = new DataBankTypeSerializer();
 }
