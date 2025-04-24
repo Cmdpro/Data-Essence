@@ -70,7 +70,7 @@ public class Locator extends Item {
             }
             ModMessages.sendToPlayer(new PingStructures(pings), (ServerPlayer)pPlayer);
             ModMessages.sendToPlayersNear(new CreatePingShader(pPlayer.position()), serverLevel, pPlayer.position(), 128);
-            //pPlayer.getCooldowns().addCooldown(this, 20*10);
+            pPlayer.getCooldowns().addCooldown(this, 20*10);
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
     }
