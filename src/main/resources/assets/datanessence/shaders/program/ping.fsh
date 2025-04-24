@@ -7,6 +7,7 @@ uniform float time;
 uniform mat4 invViewMat;
 uniform mat4 invProjMat;
 uniform vec3 CameraPosition;
+uniform vec3 PingPosition;
 
 in vec2 texCoord;
 in vec2 oneTexel;
@@ -40,7 +41,7 @@ void main() {
     float range = 1;
     vec3 color = vec3(1.0, 0.0, 1.0);
     vec3 world = worldPos(texture(DiffuseDepthSampler, texCoord).r);
-    float dist = distance(world.xz, CameraPosition.xz);
+    float dist = distance(world.xz, PingPosition.xz);
     float blend = 0.0;
     if (dist >= targetDist-(range/2) && dist <= targetDist+(range/2)) {
         blend = 1.0-(time/5.0);
