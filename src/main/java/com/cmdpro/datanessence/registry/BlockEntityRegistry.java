@@ -19,6 +19,7 @@ import com.cmdpro.datanessence.block.technical.DataBankBlockEntity;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberBlockEntity;
 import com.cmdpro.datanessence.block.transmission.*;
+import com.cmdpro.datanessence.block.world.LunarCrystalSeedBlockEntity;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -217,6 +218,10 @@ public class BlockEntityRegistry {
             register("essence_derivation_spike", () ->
                     BlockEntityType.Builder.of(EssenceDerivationSpikeBlockEntity::new,
                             BlockRegistry.ESSENCE_DERIVATION_SPIKE.get()).build(null));
+    public static final Supplier<BlockEntityType<LunarCrystalSeedBlockEntity>> LUNAR_CRYSTAL_SEED =
+            register("lunar_crystal_seed", () ->
+                    BlockEntityType.Builder.of(LunarCrystalSeedBlockEntity::new,
+                            BlockRegistry.LUNAR_CRYSTAL_SEED.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

@@ -79,6 +79,9 @@ public class BlockRegistry {
     public static final Supplier<Block> CRYSTALLINE_LEAVES = register("crystalline_leaves",
             () -> new CrystallineLeaves(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).emissiveRendering(BlockRegistry::always).lightLevel(state -> 5).sound(SoundType.AMETHYST)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> LUNAR_CRYSTAL_SEED = register("lunar_crystal_seed",
+            () -> new LunarCrystalSeed(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",

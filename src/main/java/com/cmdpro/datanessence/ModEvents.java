@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.data.pinging.PingableStructureManager;
+import com.cmdpro.datanessence.entity.LunarStrike;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
 import com.cmdpro.datanessence.networking.packet.s2c.EntrySync;
@@ -24,7 +25,9 @@ import com.cmdpro.datanessence.data.datatablet.DataTabManager;
 import com.cmdpro.datanessence.data.datatablet.Entries;
 import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.data.datatablet.EntryManager;
+import com.cmdpro.datanessence.registry.EntityRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,7 +37,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
@@ -217,6 +222,30 @@ public class ModEvents {
                         if (!event.getEntity().isHolding(block.getRequiredWire())) {
                             event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                             PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
+                        }
+                    }
+                }
+            }
+            if (LunarStrike.canSpawnStrikesForPlayer(event.getEntity())) {
+                if (event.getEntity().level().isNight() && event.getEntity().level().getMoonPhase() == 0) {
+                    event.getEntity().setData(AttachmentTypeRegistry.TICKS_UNTIL_LUNAR_STRIKE, event.getEntity().getData(AttachmentTypeRegistry.TICKS_UNTIL_LUNAR_STRIKE) - 1);
+                    if (event.getEntity().getData(AttachmentTypeRegistry.TICKS_UNTIL_LUNAR_STRIKE) <= 0) {
+                        event.getEntity().setData(AttachmentTypeRegistry.TICKS_UNTIL_LUNAR_STRIKE, (int) (event.getEntity().getRandom().nextIntBetweenInclusive(1000, 1400)));
+                        Vec3 pos = event.getEntity().position().add(event.getEntity().getRandom().nextIntBetweenInclusive(-48, 48), 0, event.getEntity().getRandom().nextIntBetweenInclusive(-48, 48));
+                        pos = pos.add(0, event.getEntity().level().getMaxBuildHeight() - pos.y, 0);
+                        BlockPos blockPos = BlockPos.containing(pos);
+                        boolean valid = false;
+                        while (pos.y > event.getEntity().level().getMinBuildHeight()) {
+                            BlockPos below = blockPos.below();
+                            BlockState state = event.getEntity().level().getBlockState(below);
+                            if (!state.isAir()) {
+                                valid = state.isFaceSturdy(event.getEntity().level(), below, Direction.UP) && event.getEntity().level().getBlockState(blockPos).canBeReplaced();
+                                break;
+                            }
+                            blockPos = below;
+                        }
+                        if (valid) {
+                            LunarStrike.strike(event.getEntity().level(), blockPos.getBottomCenter());
                         }
                     }
                 }

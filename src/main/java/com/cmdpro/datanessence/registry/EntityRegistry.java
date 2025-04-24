@@ -19,6 +19,7 @@ public class EntityRegistry {
     public static final Supplier<EntityType<AncientSentinel>> ANCIENT_SENTINEL = register("ancient_sentinel", () -> EntityType.Builder.of((EntityType.EntityFactory<AncientSentinel>) AncientSentinel::new, MobCategory.MONSTER).sized(1.25F, 1.875F).build(DataNEssence.MOD_ID + ":" + "ancient_sentinel"));
     public static final Supplier<EntityType<AncientSentinelProjectile>> ANCIENT_SENTINEL_PROJECTILE = ENTITY_TYPES.register("ancient_sentinel_projectile", () -> EntityType.Builder.of((EntityType.EntityFactory<AncientSentinelProjectile>) AncientSentinelProjectile::new, MobCategory.MISC).sized(0.25F, 0.25F).build(DataNEssence.MOD_ID + ":" + "ancient_sentinel_projectile"));
     public static final Supplier<EntityType<EssenceSlashProjectile>> ESSENCE_SLASH_PROJECTILE = ENTITY_TYPES.register("essence_slash", () -> EntityType.Builder.of((EntityType.EntityFactory<EssenceSlashProjectile>) EssenceSlashProjectile::new, MobCategory.MISC).sized(1f, 1f).build(DataNEssence.MOD_ID + ":" + "essence_slash"));
+    public static final Supplier<EntityType<LunarStrike>> LUNAR_STRIKE = ENTITY_TYPES.register("lunar_strike", () -> EntityType.Builder.of((EntityType.EntityFactory<LunarStrike>) LunarStrike::new, MobCategory.MISC).sized(1f, 1f).build(DataNEssence.MOD_ID + ":" + "lunar_strike"));
 
     private static <T extends EntityType<?>> Supplier<T> register(final String name, final Supplier<T> entity) {
         return ENTITY_TYPES.register(name, entity);

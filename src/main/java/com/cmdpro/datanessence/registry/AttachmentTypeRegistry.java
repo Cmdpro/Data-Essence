@@ -31,10 +31,6 @@ public class AttachmentTypeRegistry {
 
     public static final Supplier<AttachmentType<Integer>> TIER =
             register("tier", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).copyOnDeath().build());
-    public static final Supplier<AttachmentType<Optional<BlockEntity>>> LINK_FROM =
-            register("link_from", () -> AttachmentType.builder(() -> Optional.ofNullable((BlockEntity)null)).build());
-    public static final Supplier<AttachmentType<Optional<StructureProtectorBlockEntity>>> BINDING_STRUCTURE_CONTROLLER =
-            register("binding_structure_controller", () -> AttachmentType.builder(() -> Optional.ofNullable((StructureProtectorBlockEntity)null)).build());
     public static final Supplier<AttachmentType<HashMap<ResourceLocation, Boolean>>> UNLOCKED_ESSENCES =
             register("unlocked_essences", () -> AttachmentType.builder(() -> new HashMap<ResourceLocation, Boolean>()).serialize(Codec.unboundedMap(ResourceLocation.CODEC, Codec.BOOL).xmap(HashMap::new, HashMap::new)).copyOnDeath().build());
     public static final Supplier<AttachmentType<Boolean>> HAS_HORNS =
@@ -49,6 +45,13 @@ public class AttachmentTypeRegistry {
     public static final Supplier<AttachmentType<ArrayList<ResourceLocation>>> INCOMPLETE =
             register("incomplete", () -> AttachmentType.builder(() -> new ArrayList<ResourceLocation>()).serialize(
                     ResourceLocation.CODEC.listOf().xmap(ArrayList::new, (a) -> a.stream().toList())).copyOnDeath().build());
+
+    public static final Supplier<AttachmentType<Integer>> TICKS_UNTIL_LUNAR_STRIKE =
+            register("ticks_until_lunar_strike", () -> AttachmentType.builder(() -> 300).build());
+    public static final Supplier<AttachmentType<Optional<BlockEntity>>> LINK_FROM =
+            register("link_from", () -> AttachmentType.builder(() -> Optional.ofNullable((BlockEntity)null)).build());
+    public static final Supplier<AttachmentType<Optional<StructureProtectorBlockEntity>>> BINDING_STRUCTURE_CONTROLLER =
+            register("binding_structure_controller", () -> AttachmentType.builder(() -> Optional.ofNullable((StructureProtectorBlockEntity)null)).build());
 
     private static <T extends AttachmentType<?>> Supplier<T> register(final String name, final Supplier<T> attachment) {
         return ATTACHMENT_TYPES.register(name, attachment);

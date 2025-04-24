@@ -304,6 +304,7 @@ public class DataNEssence
             event.accept(BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get());
             event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
             event.accept(BlockRegistry.TETHERGRASS.get());
+            event.accept(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
             //event.accept(BlockRegistry.SPIRE_GLASS.get());
             //event.accept(BlockRegistry.CRYSTALLINE_LOG.get());
             //event.accept(BlockRegistry.CRYSTALLINE_LEAVES.get());
