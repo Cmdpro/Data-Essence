@@ -167,9 +167,9 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
                     dryingTable.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 0.5f);
 
                     if (dryingTable.workTime >= dryingTable.recipe.getTime()) {
+                        dryingTable.fluidHandler.drain(dryingTable.recipe.getInput(), IFluidHandler.FluidAction.EXECUTE);
                         dryingTable.outputItemHandler.insertItem(0, assembled, false);
                         dryingTable.itemHandler.extractItem(0, 1, false);
-                        dryingTable.fluidHandler.drain(dryingTable.recipe.getInput(), IFluidHandler.FluidAction.EXECUTE);
                         dryingTable.workTime = 0;
                     }
                     dryingTable.updateBlock();
