@@ -313,6 +313,7 @@ public class DataNEssence
             event.accept(BlockRegistry.ESSENCE_BURNER.get());
             event.accept(BlockRegistry.ESSENCE_LEECH.get());
             event.accept(BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get());
+            event.accept(BlockRegistry.ESSENCE_DERIVATION_SPIKE.get());
 
             // Machines
             event.accept(BlockRegistry.FABRICATOR.get());
