@@ -63,7 +63,7 @@ public class RepulsionRod extends Item {
             double vy = ang.y*r2+0.45;
             double vz = ang.z*r2;
 
-            var particle = ( world.random.nextInt() % 2 == 0 ) ? new RhombusParticleOptions(color, true) : new SmallCircleParticleOptions(color, true);
+            var particle = ( world.random.nextInt() % 2 == 0 ) ? new RhombusParticleOptions().setColor(color).setAdditive(true) : new SmallCircleParticleOptions().setColor(color).setAdditive(true);
             world.addParticle(particle, x, y-0.45, z, vx, vy, vz);
         }
 
