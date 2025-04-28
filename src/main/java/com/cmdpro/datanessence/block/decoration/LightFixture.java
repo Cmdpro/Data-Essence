@@ -38,7 +38,7 @@ public class LightFixture extends Block implements RedirectorInteractable {
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
         Vec3 offset = new Vec3(RandomUtils.nextFloat(0, 0.8f)-0.4f, RandomUtils.nextFloat(0, 0.8f)-0.4f, RandomUtils.nextFloat(0, 0.8f)-0.4f);
-        pLevel.addParticle(new MoteParticleOptions(new Color(0xFFD360), true), pPos.getCenter().x+offset.x, pPos.getCenter().y+offset.y, pPos.getCenter().z+offset.z, 0.0D, 0.0D, 0.0D);
+        pLevel.addParticle(new MoteParticleOptions().setColor(new Color(0xFFD360)).setAdditive(true), pPos.getCenter().x+offset.x, pPos.getCenter().y+offset.y, pPos.getCenter().z+offset.z, 0.0D, 0.0D, 0.0D);
     }
 
     @Override

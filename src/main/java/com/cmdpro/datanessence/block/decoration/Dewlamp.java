@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.decoration;
 
-import com.cmdpro.datanessence.client.particle.CircleParticleOptionsAdditive;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
 import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -44,7 +44,7 @@ public class Dewlamp extends Block {
 
         // center light
         world.addParticle(
-                new CircleParticleOptionsAdditive(color), true, pos.getCenter().x, pos.getCenter().y+0.15, pos.getCenter().z, 0.0, 0.0, 0.0
+                new CircleParticleOptions().setColor(color).setAdditive(true), true, pos.getCenter().x, pos.getCenter().y+0.15, pos.getCenter().z, 0.0, 0.0, 0.0
         );
 
         // light dew
@@ -56,7 +56,7 @@ public class Dewlamp extends Block {
                 double d2 = axis == Direction.Axis.Y ? 0.5 + d0 * (double)direction.getStepY() : (double)random.nextFloat();
                 double d3 = axis == Direction.Axis.Z ? 0.5 + d0 * (double)direction.getStepZ() : (double)random.nextFloat();
                 world.addParticle(
-                        new MoteParticleOptions(color, true, lifetime, 1f, 0.04f), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, horizontalVelocity, 0, horizontalVelocity
+                        new MoteParticleOptions().setColor(color).setAdditive(true).setLifetime(lifetime).setFriction(1f).setGravity(0.04f), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, horizontalVelocity, 0, horizontalVelocity
                 );
             }
         }

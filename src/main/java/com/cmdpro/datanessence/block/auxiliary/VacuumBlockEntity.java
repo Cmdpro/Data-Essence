@@ -67,11 +67,11 @@ public class VacuumBlockEntity extends BlockEntity {
             Vec3 vel3 = pos.getCenter().subtract(pos3).add(0.0f, 0.08f, 0.0f);
             Color color3 = redstoneColors[world.random.nextIntBetweenInclusive(0, redstoneColors.length-1)];
 
-            world.addParticle(new RhombusParticleOptions(color1, false), pos1.x, pos1.y, pos1.z, vel1.x, vel1.y, vel1.z);
-            world.addParticle(new SmallCircleParticleOptions(color2, false), pos2.x, pos2.y, pos2.z, vel2.x, vel2.y, vel2.z);
+            world.addParticle(new RhombusParticleOptions().setColor(color1), pos1.x, pos1.y, pos1.z, vel1.x, vel1.y, vel1.z);
+            world.addParticle(new SmallCircleParticleOptions().setColor(color2), pos2.x, pos2.y, pos2.z, vel2.x, vel2.y, vel2.z);
             if (world.random.nextInt() % 3 == 0)
             {
-                world.addParticle(new MoteParticleOptions(color3, true), pos3.x, pos3.y, pos3.z, vel3.x, vel3.y, vel3.z);
+                world.addParticle(new MoteParticleOptions().setColor(color3).setAdditive(true), pos3.x, pos3.y, pos3.z, vel3.x, vel3.y, vel3.z);
             }
         }
     }

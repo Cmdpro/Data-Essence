@@ -31,7 +31,7 @@ public class CrystallineLeaves extends TransparentBlock {
                 double d2 = direction$axis == Direction.Axis.Y ? 0.5 + 0.5625 * (double)direction.getStepY() : (double)random.nextFloat();
                 double d3 = direction$axis == Direction.Axis.Z ? 0.5 + 0.5625 * (double)direction.getStepZ() : (double)random.nextFloat();
                 world.addParticle(
-                        new MoteParticleOptions(color, true, 40), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, 0.0, -0.01, 0.0
+                        new MoteParticleOptions().setColor(color).setAdditive(true).setLifetime(40), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, 0.0, -0.01, 0.0
                 );
             }
         }

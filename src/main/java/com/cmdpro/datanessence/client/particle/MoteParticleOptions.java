@@ -12,83 +12,11 @@ import net.minecraft.util.ExtraCodecs;
 
 import java.awt.*;
 
-public class MoteParticleOptions implements ParticleOptions {
-    public Color color;
-    public boolean additive;
-    public int lifetime;
-    public float friction;
-    public float gravity;
-
-    public MoteParticleOptions(Color color, boolean additive) {
-        this.color = color;
-        this.additive = additive;
-        this.lifetime = 20;
-        this.friction = 0.8f;
-        this.gravity = 0f;
-    }
-
-    public MoteParticleOptions(Color color, boolean additive, int lifetime) {
-        this.color = color;
-        this.additive = additive;
-        this.lifetime = lifetime;
-        this.friction = 0.8f;
-        this.gravity = 0f;
-    }
-
-    public MoteParticleOptions(Color color, boolean additive, int lifetime, float friction) {
-        this.color = color;
-        this.additive = additive;
-        this.lifetime = lifetime;
-        this.friction = friction;
-        this.gravity = 0f;
-    }
-
-    public MoteParticleOptions(Color color, boolean additive, int lifetime, float friction, float gravity) {
-        this.color = color;
-        this.additive = additive;
-        this.lifetime = lifetime;
-        this.friction = friction;
-        this.gravity = gravity;
-    }
-
+public class MoteParticleOptions extends ConfigurableParticleOptions implements ParticleOptions {
     @Override
     public ParticleType<?> getType() {
         return ParticleRegistry.MOTE.get();
     }
-
-    public static final MapCodec<MoteParticleOptions> CODEC = RecordCodecBuilder.mapCodec((builder) -> {
-        return builder.group(ExtraCodecs.ARGB_COLOR_CODEC.fieldOf("color").forGetter((particle) -> {
-            return particle.color.getRGB();
-        }), Codec.BOOL.fieldOf("additive").forGetter((particle) -> {
-            return particle.additive;
-        }), Codec.INT.fieldOf("lifetime").forGetter((particle) -> {
-            return particle.lifetime;
-        }), Codec.FLOAT.fieldOf("friction").forGetter((particle) -> {
-            return particle.friction;
-        }), Codec.FLOAT.fieldOf("gravity").forGetter((particle) -> {
-            return particle.gravity;
-        })).apply(builder, (color, additive, lifetime, friction, gravity) -> new MoteParticleOptions(new Color(color), additive, lifetime, friction, gravity));
-    });
-
-
-    public static final StreamCodec<RegistryFriendlyByteBuf, MoteParticleOptions> STREAM_CODEC = StreamCodec.of((buf, options) -> {
-        buf.writeInt(options.color.getRed());
-        buf.writeInt(options.color.getGreen());
-        buf.writeInt(options.color.getBlue());
-        buf.writeInt(options.color.getAlpha());
-        buf.writeBoolean(options.additive);
-        buf.writeInt(options.lifetime);
-        buf.writeFloat(options.friction);
-        buf.writeFloat(options.gravity);
-    }, (buf) -> {
-        int r = buf.readInt();
-        int g = buf.readInt();
-        int b = buf.readInt();
-        int a = buf.readInt();
-        boolean additive = buf.readBoolean();
-        int lifetime = buf.readInt();
-        float friction = buf.readFloat();
-        float gravity = buf.readFloat();
-        return new MoteParticleOptions(new Color(r, g, b, a), additive, lifetime, friction, gravity);
-    });
+    public static final MapCodec<MoteParticleOptions> CODEC = createCodec(MoteParticleOptions::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, MoteParticleOptions> STREAM_CODEC = createStreamCodec(MoteParticleOptions::new);
 }

@@ -201,8 +201,6 @@ public class ClientModEvents {
                 EssenceSparkleParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.CIRCLE.get(),
                 CircleParticle.Provider::new);
-        Minecraft.getInstance().particleEngine.register(ParticleRegistry.CIRCLE_ADDITIVE.get(),
-                CircleParticleAdditive.Provider::new);
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.RHOMBUS.get(),
                 RhombusParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.SMALL_CIRCLE.get(),
