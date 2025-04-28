@@ -14,20 +14,20 @@ public class MoteParticle extends TextureSheetParticle {
                            SpriteSet spriteSet, double xd, double yd, double zd, MoteParticleOptions options) {
         super(level, xCoord, yCoord, zCoord, xd, yd, zd);
 
-        this.friction = options.friction;
         this.xd = xd;
         this.yd = yd;
         this.zd = zd;
         this.quadSize *= 0.85F;
         maxQuadSize = this.quadSize;
-        this.lifetime = options.lifetime;
-        this.gravity = options.gravity;
         this.setSpriteFromAge(spriteSet);
 
         this.rCol = (float)options.color.getRed()/255f;
         this.gCol = (float)options.color.getGreen()/255f;
         this.bCol = (float)options.color.getBlue()/255f;
         this.alpha = (float)options.color.getAlpha()/255f;
+        this.friction = options.friction;
+        this.lifetime = options.lifetime;
+        this.gravity = options.gravity;
         this.hasPhysics = true;
         this.options = options;
     }
@@ -35,6 +35,10 @@ public class MoteParticle extends TextureSheetParticle {
     @Override
     public void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
         super.render(RenderHandler.createBufferSource().getBuffer(options.additive ? RenderTypeHandler.ADDITIVE_PARTICLE : RenderTypeHandler.TRANSPARENT_PARTICLE), pRenderInfo, pPartialTicks);
+    }
+    @Override
+    public ParticleRenderType getRenderType() {
+        return options.additive ? CircleParticle.ADDITIVE : ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
     @Override
     public void tick() {
@@ -46,10 +50,6 @@ public class MoteParticle extends TextureSheetParticle {
         this.quadSize = (-(1/(float)lifetime) * age + 1)* maxQuadSize;
     }
 
-    @Override
-    public ParticleRenderType getRenderType() {
-        return CircleParticleAdditive.ADDITIVE;
-    }
     public static class Provider implements ParticleProvider<MoteParticleOptions> {
         private final SpriteSet sprites;
 

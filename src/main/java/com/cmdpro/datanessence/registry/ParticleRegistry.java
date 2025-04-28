@@ -30,19 +30,6 @@ public class ParticleRegistry {
                     return CircleParticleOptions.STREAM_CODEC;
                 }
             });
-    public static final Supplier<ParticleType> CIRCLE_ADDITIVE =
-            register("circle_additive", () -> new ParticleType<CircleParticleOptionsAdditive>(false) {
-
-                @Override
-                public MapCodec<CircleParticleOptionsAdditive> codec() {
-                    return CircleParticleOptionsAdditive.CODEC;
-                }
-
-                @Override
-                public StreamCodec<? super RegistryFriendlyByteBuf, CircleParticleOptionsAdditive> streamCodec() {
-                    return CircleParticleOptionsAdditive.STREAM_CODEC;
-                }
-            });
     public static final Supplier<ParticleType> RHOMBUS =
             register("rhombus", () -> new ParticleType<RhombusParticleOptions>(false) {
 

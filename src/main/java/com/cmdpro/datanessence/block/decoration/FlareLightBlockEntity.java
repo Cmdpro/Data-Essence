@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.decoration;
 
-import com.cmdpro.datanessence.client.particle.CircleParticleOptionsAdditive;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.client.Minecraft;
@@ -29,7 +29,7 @@ public class FlareLightBlockEntity extends BlockEntity {
         public static void spawnParticles(Vec3 pos) {
             Vec3 dir = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.01f, 0.1f, 0.01f);
             Vec3 offset = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.01f, 0.1f, 0.01f);
-            Minecraft.getInstance().particleEngine.createParticle(new CircleParticleOptionsAdditive(new Color(EssenceTypeRegistry.ESSENCE.get().getColor())), pos.x + offset.x, pos.y + offset.y, pos.z + offset.z, dir.x, dir.y, dir.z);
+            Minecraft.getInstance().particleEngine.createParticle(new CircleParticleOptions().setColor(new Color(EssenceTypeRegistry.ESSENCE.get().getColor())).setAdditive(true), pos.x + offset.x, pos.y + offset.y, pos.z + offset.z, dir.x, dir.y, dir.z);
         }
     }
 }

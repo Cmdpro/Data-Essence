@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.entity;
 
-import com.cmdpro.datanessence.client.particle.CircleParticleOptionsAdditive;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -172,7 +172,7 @@ public class AncientSentinelProjectile extends Projectile {
         public static void particle(Vec3 pos, Level level) {
             for (int i = 0; i < 3; i++) {
                 Vec3 offset = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.1f, 0.1f, 0.1f);
-                level.addParticle(new CircleParticleOptionsAdditive(Color.getHSBColor((float) (level.getGameTime() % 100) / 100f, 1f, 1f)), pos.x + offset.x, pos.y + offset.y, pos.z + offset.z, 0, 0, 0);
+                level.addParticle(new CircleParticleOptions().setColor(Color.getHSBColor((float) (level.getGameTime() % 100) / 100f, 1f, 1f)).setAdditive(true), pos.x + offset.x, pos.y + offset.y, pos.z + offset.z, 0, 0, 0);
             }
         }
     }

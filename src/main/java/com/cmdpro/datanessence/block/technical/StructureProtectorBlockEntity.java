@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.technical;
 
-import com.cmdpro.datanessence.client.particle.CircleParticleOptionsAdditive;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.client.Minecraft;
@@ -79,7 +79,7 @@ public class StructureProtectorBlockEntity extends BlockEntity {
             for (int i = 0; i < 5; i++) {
                 Vec3 dir = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.1f, 0.1f, 0.1f);
                 Vec3 offset = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.1f, 0.1f, 0.1f);
-                Minecraft.getInstance().particleEngine.createParticle(new CircleParticleOptionsAdditive(Color.getHSBColor((float) (Minecraft.getInstance().level.getGameTime() % 100) / 100f, 1f, 1f)), pos.x + offset.x, pos.y + offset.y, pos.z + offset.z, dir.x, dir.y, dir.z);
+                Minecraft.getInstance().particleEngine.createParticle(new CircleParticleOptions().setColor(Color.getHSBColor((float) (Minecraft.getInstance().level.getGameTime() % 100) / 100f, 1f, 1f)).setAdditive(true), pos.x + offset.x, pos.y + offset.y, pos.z + offset.z, dir.x, dir.y, dir.z);
             }
         }
     }

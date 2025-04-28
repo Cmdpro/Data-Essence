@@ -11,32 +11,11 @@ import net.minecraft.util.ExtraCodecs;
 
 import java.awt.*;
 
-public class CircleParticleOptions implements ParticleOptions {
-    public Color color;
-    public CircleParticleOptions(Color color) {
-        this.color = color;
-    }
+public class CircleParticleOptions extends ConfigurableParticleOptions implements ParticleOptions {
     @Override
     public ParticleType<?> getType() {
         return ParticleRegistry.CIRCLE.get();
     }
-
-    public static final MapCodec<CircleParticleOptions> CODEC = RecordCodecBuilder.mapCodec((builder) -> {
-        return builder.group(ExtraCodecs.ARGB_COLOR_CODEC.fieldOf("color").forGetter((particle) -> {
-            return particle.color.getRGB();
-        })).apply(builder, (color) -> new CircleParticleOptions(new Color(color)));
-    });
-
-    public static final StreamCodec<RegistryFriendlyByteBuf, CircleParticleOptions> STREAM_CODEC = StreamCodec.of((buf, options) -> {
-        buf.writeInt(options.color.getRed());
-        buf.writeInt(options.color.getGreen());
-        buf.writeInt(options.color.getBlue());
-        buf.writeInt(options.color.getAlpha());
-    }, (buf) -> {
-        int r = buf.readInt();
-        int g = buf.readInt();
-        int b = buf.readInt();
-        int a = buf.readInt();
-        return new CircleParticleOptions(new Color(r, g, b, a));
-    });
+    public static final MapCodec<CircleParticleOptions> CODEC = createCodec(CircleParticleOptions::new);
+    public static final StreamCodec<RegistryFriendlyByteBuf, CircleParticleOptions> STREAM_CODEC = createStreamCodec(CircleParticleOptions::new);
 }
