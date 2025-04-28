@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.item;
 
 import com.cmdpro.datanessence.data.pinging.PingableStructureManager;
 import com.cmdpro.datanessence.networking.ModMessages;
+import com.cmdpro.datanessence.networking.packet.s2c.CreatePingShader;
 import com.cmdpro.datanessence.networking.packet.s2c.PingStructures;
 import com.cmdpro.datanessence.data.pinging.StructurePing;
 import com.cmdpro.datanessence.registry.SoundRegistry;
@@ -68,6 +69,7 @@ public class Locator extends Item {
                 }
             }
             ModMessages.sendToPlayer(new PingStructures(pings), (ServerPlayer)pPlayer);
+            ModMessages.sendToPlayersNear(new CreatePingShader(pPlayer.position()), serverLevel, pPlayer.position(), 128);
             pPlayer.getCooldowns().addCooldown(this, 20*10);
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);

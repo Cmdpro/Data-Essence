@@ -37,6 +37,17 @@ public class DataTabletUtil {
         }
     }
 
+    public static void removeEntry(Player player, ResourceLocation id) {
+        Entry entryToRemove = Entries.entries.get(id);
+        List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
+
+        if (entryToRemove != null && entryToRemove.isUnlockedServer(player) && unlockedEntries.contains(id)) {
+            unlockedEntries.remove(id);
+            PlayerDataUtil.updateUnlockedEntries((ServerPlayer)player);
+            checkForTierUpgrades(player);
+        }
+    }
+
     public static void unlockEntryAndParents(Player player, ResourceLocation entry, boolean incomplete) {
         Entry entry2 = Entries.entries.get(entry);
         List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);

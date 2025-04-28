@@ -27,7 +27,7 @@ public class ComputerTypeManager extends SimpleJsonResourceReloadListener {
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         types = new HashMap<>();
-        DataNEssence.LOGGER.info("Adding Data and Essence Computer Types");
+        DataNEssence.LOGGER.info("[DATANESSENCE] Adding Computer Types");
         for (Map.Entry<ResourceLocation, JsonElement> i : pObject.entrySet()) {
             ResourceLocation location = i.getKey();
             if (location.getPath().startsWith("_")) {
@@ -38,11 +38,12 @@ public class ComputerTypeManager extends SimpleJsonResourceReloadListener {
                 JsonObject obj = i.getValue().getAsJsonObject();
                 ComputerData data = serializer.read(i.getKey(), obj);
                 types.put(i.getKey(), data);
+                DataNEssence.LOGGER.info("[DATANESSENCE] Successfully added computer type {}", location);
             } catch (IllegalArgumentException | JsonParseException e) {
-                DataNEssence.LOGGER.error("Parsing error loading computer type {}", location, e);
+                DataNEssence.LOGGER.error("[DATANESSENCE] Parsing error loading computer type {}", location, e);
             }
         }
-        DataNEssence.LOGGER.info("Loaded {} computer types", types.size());
+        DataNEssence.LOGGER.info("[DATANESSENCE] Loaded {} computer types", types.size());
     }
     public static ComputerTypeSerializer serializer = new ComputerTypeSerializer();
 }

@@ -27,7 +27,7 @@ public class EntryManager extends SimpleJsonResourceReloadListener {
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         Entries.entries.clear();
-        DataNEssence.LOGGER.info("Adding Data and Essence Entries");
+        DataNEssence.LOGGER.info("[DATANESSENCE] Adding Data Tablet Entries");
         for (Map.Entry<ResourceLocation, JsonElement> i : pObject.entrySet()) {
             ResourceLocation location = i.getKey();
             if (location.getPath().startsWith("_")) {
@@ -40,15 +40,16 @@ public class EntryManager extends SimpleJsonResourceReloadListener {
                     continue;
                 }
                 Entries.entries.put(i.getKey(), entry);
+                DataNEssence.LOGGER.info("[DATANESSENCE] Successfully added entry {}", location);
             } catch (IllegalArgumentException | JsonParseException e) {
-                DataNEssence.LOGGER.error("Parsing error loading entry {}", location, e);
+                DataNEssence.LOGGER.error("[DATANESSENCE ERROR] Parsing error loading entry {}", location, e);
             }
         }
-        DataNEssence.LOGGER.info("Loaded {} entries", Entries.entries.size());
+        DataNEssence.LOGGER.info("[DATANESSENCE] Loaded {} Data Tablet Entries", Entries.entries.size());
         for (Entry i : Entries.entries.values()) {
             for (Entry o : Entries.entries.values()) {
                 if(i != o && i.x == o.x && i.y == o.y && i.tab.equals(o.tab)) {
-                    DataNEssence.LOGGER.warn("Entry \"" + i.id + "\" is overlapping with entry \"" + o.id + "\"");
+                    DataNEssence.LOGGER.warn("[DATANESSENCE] Data Tablet Entry \"" + i.id + "\" is overlapping with entry \"" + o.id + "\"");
                 }
             }
             i.updateParentEntries();

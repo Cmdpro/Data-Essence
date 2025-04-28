@@ -27,7 +27,7 @@ public class DataBankEntryManager extends SimpleJsonResourceReloadListener {
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {
         DataBankEntries.entries.clear();
-        DataNEssence.LOGGER.info("Adding Data and Essence Data Bank Entries");
+        DataNEssence.LOGGER.info("[DATANESSENCE] Adding Data Bank Entries");
         for (Map.Entry<ResourceLocation, JsonElement> i : pObject.entrySet()) {
             ResourceLocation location = i.getKey();
             if (location.getPath().startsWith("_")) {
@@ -40,11 +40,12 @@ public class DataBankEntryManager extends SimpleJsonResourceReloadListener {
                     continue;
                 }
                 DataBankEntries.entries.put(i.getKey(), entry);
+                DataNEssence.LOGGER.info("[DATANESSENCE] Successfully added entry {}", location);
             } catch (IllegalArgumentException | JsonParseException e) {
-                DataNEssence.LOGGER.error("Parsing error loading data bank entry {}", location, e);
+                DataNEssence.LOGGER.error("[DATANESSENCE ERROR] Parsing error loading data bank entry {}", location, e);
             }
         }
-        DataNEssence.LOGGER.info("Loaded {} data bank entries", DataBankEntries.entries.size());
+        DataNEssence.LOGGER.info("[DATANESSENCE] Loaded {} Data Bank Entries", DataBankEntries.entries.size());
     }
     public static DataBankEntrySerializer serializer = new DataBankEntrySerializer();
     protected DataBankEntry deserializeEntry(ResourceLocation id, JsonObject json) {

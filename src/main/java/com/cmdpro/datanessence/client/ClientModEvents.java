@@ -153,8 +153,6 @@ public class ClientModEvents {
         PostShaderManager.addShader(progressionShader);
         genderEuphoriaShader = new GenderEuphoriaShader();
         PostShaderManager.addShader(genderEuphoriaShader);
-        pingShader = new PingShader();
-        PostShaderManager.addShader(pingShader);
     }
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
@@ -201,7 +199,6 @@ public class ClientModEvents {
     }
     public static PostShaderInstance progressionShader;
     public static PostShaderInstance genderEuphoriaShader;
-    public static PostShaderInstance pingShader;
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.ESSENCE_SPARKLE.get(),

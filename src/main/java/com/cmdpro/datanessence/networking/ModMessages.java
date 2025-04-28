@@ -9,7 +9,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.LogicalSide;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -68,6 +71,7 @@ public class ModMessages {
         registrar.playToClient(PlayBufferTransferParticle.TYPE, getNetworkCodec(PlayBufferTransferParticle::read, PlayBufferTransferParticle::write), Handler::handle);
         registrar.playToClient(PingStructures.TYPE, getNetworkCodec(PingStructures::read, PingStructures::write), Handler::handle);
         registrar.playToClient(PingableSync.TYPE, getNetworkCodec(PingableSync::read, PingableSync::write), Handler::handle);
+        registrar.playToClient(CreatePingShader.TYPE, getNetworkCodec(CreatePingShader::read, CreatePingShader::write), Handler::handle);
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigame.TYPE, getNetworkCodec(PlayerFinishDataBankMinigame::read, PlayerFinishDataBankMinigame::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveData.TYPE, getNetworkCodec(PlayerChangeDriveData::read, PlayerChangeDriveData::write), Handler::handle);
@@ -84,6 +88,9 @@ public class ModMessages {
 
     public static <T extends Message> void sendToPlayer(T message, ServerPlayer player) {
         PacketDistributor.sendToPlayer(player, message);
+    }
+    public static <T extends Message> void sendToPlayersNear(T message, ServerLevel level, Vec3 position, float radius) {
+        PacketDistributor.sendToPlayersNear(level, null, position.x, position.y, position.z, radius, message);
     }
     public static <T extends Message> void sendToPlayersTrackingEntityAndSelf(T message, ServerPlayer player) {
         PacketDistributor.sendToPlayersTrackingEntityAndSelf(player, message);
