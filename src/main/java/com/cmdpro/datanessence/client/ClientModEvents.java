@@ -222,13 +222,12 @@ public class ClientModEvents {
         }, BlockRegistry.SPIRE_GLASS.get());
         event.register((pState, pLevel, pPos, pTintIndex) -> {
             if (pPos != null) {
-                double d = 1;
-                double n = 7;
                 double x = pPos.getX();
                 double y = pPos.getY();
                 double z = pPos.getZ();
 
-                float hue = (float) (y/(n*2)+(d*z/(n*6)+0.5+0.5*Math.sin((d*x)/(n*2))));
+                // y position / 14 + {z pos / 42 + 0.5} + { 0.5sin(x pos / 14)}
+                float hue = (float) ((y/14)+((z/42)+0.5+0.5*Math.sin(x/14)));
                 return Color.getHSBColor( hue, 0.8f, 1f ).getRGB();
             } else {
                 float blendAmount = Minecraft.getInstance().levelRenderer.getTicks()+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
