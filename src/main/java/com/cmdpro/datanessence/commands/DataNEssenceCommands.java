@@ -14,10 +14,13 @@ import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.commands.arguments.selector.EntitySelector;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,10 +33,34 @@ public class DataNEssenceCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher){
         dispatcher.register(Commands.literal(DataNEssence.MOD_ID)
                 .requires(source -> source.hasPermission(4))
-                .then(Commands.literal("reset_learned")
-                        .executes((command) -> {
-                            return resetlearned(command);
-                        })
+                .then(Commands.literal("entry")
+                        .then(Commands.argument("target", EntityArgument.player())
+                        // /datanessence entry <id || all> <true/false> [true/false]
+                        // <resource location of entry OR all> <whether to grant or revoke it> [incomplete status; must default to false]
+                        .then(Commands.literal("reset_all")
+                                .executes((command) -> {
+                                    return resetlearned(command);
+                                })
+                        )
+                        .then(Commands.literal("unlock_all")
+                                .executes(command -> {
+                                    return unlockall(command);
+                                })
+                        )
+                        .then(Commands.literal("set")
+                                .then(Commands.argument("id", ResourceLocationArgument.id())
+                                        .suggests((stack, builder) -> {
+                                            return SharedSuggestionProvider.suggest(Entries.entries.keySet().stream().map(ResourceLocation::toString), builder);
+                                        })
+                                        .then(Commands.argument("set", BoolArgumentType.bool())
+                                                .executes((command -> {
+                                                    return modifyEntries(command, false);
+                                                }))
+                                                .then(Commands.argument("incomplete", BoolArgumentType.bool())
+                                                    .executes((command -> {
+                                                    return modifyEntries(command, true);
+                                                }))))))
+                        )
                 )
                 .then(Commands.literal("set_tier")
                         .then(Commands.argument("tier", IntegerArgumentType.integer(0))
@@ -41,16 +68,6 @@ public class DataNEssenceCommands {
                                     return settier(command);
                                 }))
 
-                )
-                .then(Commands.literal("unlock")
-                        .then(Commands.argument("id", ResourceLocationArgument.id())
-                                .suggests((stack, builder) -> {
-                                    return SharedSuggestionProvider.suggest(Entries.entries.keySet().stream().map(ResourceLocation::toString), builder);
-                                })
-                                .then(Commands.argument("incomplete", BoolArgumentType.bool())
-                                .executes((command -> {
-                                    return unlock(command);
-                                }))))
                 )
                 .then(Commands.literal("check_entry_overlaps")
                         .executes(command -> {
@@ -63,11 +80,6 @@ public class DataNEssenceCommands {
                         }).executes(command -> {
                             return givedragonpart(command);
                         }))
-                )
-                .then(Commands.literal("unlock_all")
-                        .executes(command -> {
-                            return unlockall(command);
-                        })
                 )
                 .then(Commands.literal("maximize")
                         .executes(command -> {
@@ -96,7 +108,13 @@ public class DataNEssenceCommands {
     }
     private static int givedragonpart(CommandContext<CommandSourceStack> command) {
         if(command.getSource().getEntity() instanceof Player) {
-            Player player = (Player) command.getSource().getEntity();
+            Player player;
+            try {
+                player = command.getArgument("target", EntitySelector.class).findSinglePlayer(command.getSource());
+            } catch (CommandSyntaxException e) {
+                throw new RuntimeException(e);
+            }
+
             String part = command.getArgument("part", String.class);
             if (part.equals("horns")) {
                 player.setData(AttachmentTypeRegistry.HAS_HORNS, true);
@@ -129,7 +147,13 @@ public class DataNEssenceCommands {
     }
     private static int resetlearned(CommandContext<CommandSourceStack> command){
         if(command.getSource().getEntity() instanceof Player) {
-            Player player = (Player) command.getSource().getEntity();
+            Player player;
+            try {
+                player = command.getArgument("target", EntitySelector.class).findSinglePlayer(command.getSource());
+            } catch (CommandSyntaxException e) {
+                throw new RuntimeException(e);
+            }
+
             List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
             unlockedEntries.clear();
             List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
@@ -146,34 +170,57 @@ public class DataNEssenceCommands {
         }
         return Command.SINGLE_SUCCESS;
     }
-    private static int unlock(CommandContext<CommandSourceStack> command){
+
+
+    private static int modifyEntries(CommandContext<CommandSourceStack> command, boolean hasAllArgs){
         if(command.getSource().getEntity() instanceof Player) {
-            Player player = (Player) command.getSource().getEntity();
+            Player player;
+            try {
+                player = command.getArgument("target", EntitySelector.class).findSinglePlayer(command.getSource());
+            } catch (CommandSyntaxException e) {
+                throw new RuntimeException(e);
+            }
+
             ResourceLocation entry = command.getArgument("id", ResourceLocation.class);
-            boolean incomplete = command.getArgument("incomplete", Boolean.class);
+            boolean set = command.getArgument("set", Boolean.class);
+            boolean incomplete = (hasAllArgs) ? command.getArgument("incomplete", Boolean.class) : false;
+
             if (Entries.entries.containsKey(entry)) {
                 Entry entry2 = Entries.entries.get(entry);
                 if (!entry2.incomplete && incomplete) {
-                    command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_has_no_incomplete", entry.toString()));
+                    command.getSource().sendFailure(Component.translatable("commands.datanessence.entry.entry_has_no_incomplete", entry.toString()));
                     return 0;
                 }
                 List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
-                if (!unlockedEntries.contains(entry)) {
-                    DataTabletUtil.unlockEntryAndParents(player, entry, incomplete);
-                    command.getSource().sendSuccess(() -> {
-                        return Component.translatable("commands.datanessence.unlock.unlock_entry", entry.toString(), player.getName());
-                    }, true);
+                if (set) {
+                    if (!unlockedEntries.contains(entry)) {
+                        DataTabletUtil.unlockEntryAndParents(player, entry, incomplete);
+                        command.getSource().sendSuccess(() -> {
+                            return Component.translatable("commands.datanessence.entry.unlock_entry", entry.toString(), player.getName());
+                        }, true);
+                    } else {
+                        command.getSource().sendFailure(Component.translatable("commands.datanessence.entry.entry_already_unlocked", entry.toString(), player.getName()));
+                        return 0;
+                    }
                 } else {
-                    command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_already_unlocked", entry.toString(), player.getName()));
-                    return 0;
+                    if (unlockedEntries.contains(entry)) {
+                        DataTabletUtil.removeEntry(player, entry);
+                        command.getSource().sendSuccess(() -> {
+                            return Component.translatable("commands.datanessence.entry.remove_entry", entry.toString(), player.getName());
+                        }, true);
+                    } else {
+                        command.getSource().sendFailure(Component.translatable("commands.datanessence.entry.entry_not_learned_in_the_first_place", entry.toString(), player.getName()));
+                        return 0;
+                    }
                 }
             } else {
-                command.getSource().sendFailure(Component.translatable("commands.datanessence.unlock.entry_doesnt_exist", entry.toString()));
+                command.getSource().sendFailure(Component.translatable("commands.datanessence.entry.entry_doesnt_exist", entry.toString()));
                 return 0;
             }
         }
         return Command.SINGLE_SUCCESS;
     }
+
     private static int unlockall(CommandContext<CommandSourceStack> command){
         if(command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();
