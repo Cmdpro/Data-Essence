@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
@@ -14,6 +15,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.common.SimpleTier;
@@ -23,18 +25,16 @@ import java.util.List;
 
 public class EssenceSword extends SwordItem {
     public static final Tier ESSENCE_SWORD = new SimpleTier(
-            // The tag that determines what blocks this tool cannot break. See below for more information.
             BlockTags.INCORRECT_FOR_IRON_TOOL,
-            250,
+            750,
             6.0F,
             2.0F,
             14,
-            // Determines the repair ingredient of the tier. Use a supplier for lazy initializing.
             () -> Ingredient.of(Tags.Items.INGOTS_COPPER)
     );
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
     public EssenceSword(Properties pProperties) {
-        super(ESSENCE_SWORD, pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 10000)));
+        super(ESSENCE_SWORD, pProperties.attributes(SwordItem.createAttributes(ESSENCE_SWORD, 3, -2.4F)).component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 10000)));
     }
 
     @Override
