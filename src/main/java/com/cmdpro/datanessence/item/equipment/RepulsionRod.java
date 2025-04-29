@@ -69,19 +69,4 @@ public class RepulsionRod extends Item {
 
         return InteractionResult.SUCCESS;
     }
-
-    @Override
-    public boolean isBarVisible(ItemStack stack) {
-        return ItemEssenceContainer.getEssence(stack, LUNAR) < ItemEssenceContainer.getMaxEssence(stack);
-    }
-
-    @Override
-    public int getBarWidth(ItemStack stack) {
-        return Math.round( ItemEssenceContainer.getEssence(stack, LUNAR) * 13.0F / ItemEssenceContainer.getMaxEssence(stack));
-    }
-
-    @Override
-    public int getBarColor(ItemStack stack) {
-        return EssenceTypeRegistry.LUNAR_ESSENCE.get().color;
-    }
 }
