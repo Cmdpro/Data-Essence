@@ -14,10 +14,7 @@ import net.neoforged.neoforge.client.IItemDecorator;
 import java.util.List;
 
 public class ItemDecorators {
-    public static final IItemDecorator defaultDecorations = (guiGraphics, font, stack, xOffset, yOffset) -> {
-        return renderEssenceBar(guiGraphics, font, stack, xOffset, yOffset);
-    };
-    public static boolean renderEssenceBar(GuiGraphics guiGraphics, Font font, ItemStack stack, int xOffset, int yOffset) {
+    public static final IItemDecorator essenceBarDecoration = (guiGraphics, font, stack, xOffset, yOffset) -> {
         if (!stack.isEmpty()) {
             if (stack.has(DataComponentRegistry.ESSENCE_STORAGE)) {
                 ItemEssenceContainer essenceStorage = stack.get(DataComponentRegistry.ESSENCE_STORAGE);
@@ -44,5 +41,5 @@ public class ItemDecorators {
             }
         }
         return false;
-    }
+    };
 }
