@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block.world;
 
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
-import com.cmdpro.datanessence.client.particle.CircleParticleOptionsAdditive;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
 import com.cmdpro.datanessence.entity.LunarStrike;
 import com.cmdpro.datanessence.registry.*;
 import net.minecraft.client.Minecraft;
@@ -120,7 +120,7 @@ public class LunarCrystalSeedBlockEntity extends BlockEntity {
         }
         public void addParticles(Level level, Vec3 center) {
             Vec3 vec = center.add(offset);
-            level.addParticle(new CircleParticleOptionsAdditive(new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().color)), vec.x, vec.y, vec.z, 0, 0, 0);
+            level.addParticle(new CircleParticleOptions().setColor(new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().color)).setAdditive(true), vec.x, vec.y, vec.z, 0, 0, 0);
         }
         public void queueDeletion() {
             deletionQueued = true;
