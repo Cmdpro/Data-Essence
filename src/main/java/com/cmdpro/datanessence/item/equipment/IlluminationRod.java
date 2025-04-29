@@ -71,19 +71,4 @@ public class IlluminationRod extends Item {
         }
         return InteractionResult.FAIL;
     }
-
-    @Override
-    public boolean isBarVisible(ItemStack stack) {
-        return ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) < ItemEssenceContainer.getMaxEssence(stack);
-    }
-
-    @Override
-    public int getBarWidth(ItemStack stack) {
-        return Math.round( ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) * 13.0F / ItemEssenceContainer.getMaxEssence(stack));
-    }
-
-    @Override
-    public int getBarColor(ItemStack stack) {
-        return EssenceTypeRegistry.ESSENCE.get().color;
-    }
 }
