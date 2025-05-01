@@ -12,6 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class GameRendererMixin {
     @Inject(method = "resize", at = @At(value = "TAIL"), remap = false)
     private void resize(int pWidth, int pHeight, CallbackInfo ci) {
-        ClientEvents.tempRenderTarget.resize(pWidth, pHeight, Minecraft.ON_OSX);
+        if (ClientEvents.tempRenderTarget != null) {
+            ClientEvents.tempRenderTarget.resize(pWidth, pHeight, Minecraft.ON_OSX);
+        }
     }
 }

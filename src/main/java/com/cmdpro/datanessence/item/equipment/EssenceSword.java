@@ -40,12 +40,14 @@ public class EssenceSword extends SwordItem {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
-        if (ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) >= 10) {
-            ItemEssenceContainer.removeEssence(stack, FUEL_ESSENCE_TYPE, 10);
-            EssenceSlashProjectile slash = new EssenceSlashProjectile(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), pPlayer, pLevel);
-            slash.setPos(slash.position().offsetRandom(pPlayer.getRandom(), 0.25f));
-            pLevel.addFreshEntity(slash);
-            pPlayer.getCooldowns().addCooldown(pPlayer.getItemInHand(pUsedHand).getItem(), 20);
+        if (!pLevel.isClientSide) {
+            if (ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) >= 10) {
+                ItemEssenceContainer.removeEssence(stack, FUEL_ESSENCE_TYPE, 10);
+                EssenceSlashProjectile slash = new EssenceSlashProjectile(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), pPlayer, pLevel);
+                slash.setPos(slash.position().offsetRandom(pPlayer.getRandom(), 0.25f));
+                pLevel.addFreshEntity(slash);
+                pPlayer.getCooldowns().addCooldown(this, 20);
+            }
         }
         return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
     }

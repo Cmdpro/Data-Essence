@@ -4,10 +4,12 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.node.CapabilityNodeNetworks;
 import com.cmdpro.datanessence.api.node.EssenceNodeNetworks;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
+import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -33,6 +35,8 @@ public class AttachmentTypeRegistry {
             register("tier", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).copyOnDeath().build());
     public static final Supplier<AttachmentType<Optional<BlockEntity>>> LINK_FROM =
             register("link_from", () -> AttachmentType.builder(() -> Optional.ofNullable((BlockEntity)null)).build());
+    public static final Supplier<AttachmentType<Optional<GrapplingHook.GrapplingHookData>>> GRAPPLING_HOOK_DATA =
+            register("grappling_hook_data", () -> AttachmentType.builder(() -> Optional.ofNullable((GrapplingHook.GrapplingHookData)null)).build());
     public static final Supplier<AttachmentType<Optional<StructureProtectorBlockEntity>>> BINDING_STRUCTURE_CONTROLLER =
             register("binding_structure_controller", () -> AttachmentType.builder(() -> Optional.ofNullable((StructureProtectorBlockEntity)null)).build());
     public static final Supplier<AttachmentType<HashMap<ResourceLocation, Boolean>>> UNLOCKED_ESSENCES =

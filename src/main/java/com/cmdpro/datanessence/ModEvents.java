@@ -15,6 +15,7 @@ import com.cmdpro.datanessence.networking.packet.s2c.EntrySync;
 import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.client.particle.RhombusParticleOptions;
 import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
+import com.cmdpro.datanessence.networking.packet.s2c.GrapplingHookSync;
 import com.cmdpro.datanessence.networking.packet.s2c.PingableSync;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockRegistry;
@@ -196,6 +197,7 @@ public class ModEvents {
 
         if (player instanceof ServerPlayer serverPlayer && target instanceof Player targetPlayer) {
             ModMessages.sendToPlayer(new DragonPartsSync(target.getId(), targetPlayer.getData(AttachmentTypeRegistry.HAS_HORNS), targetPlayer.getData(AttachmentTypeRegistry.HAS_TAIL), targetPlayer.getData(AttachmentTypeRegistry.HAS_WINGS)), serverPlayer);
+            ModMessages.sendToPlayer(new GrapplingHookSync(target.getId(), targetPlayer.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null)), serverPlayer);
         }
     }
     @SubscribeEvent

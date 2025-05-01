@@ -11,11 +11,10 @@ import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.data.pinging.PingableStructure;
 import com.cmdpro.datanessence.entity.BlackHole;
+import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.data.pinging.StructurePing;
-import com.cmdpro.datanessence.registry.DataComponentRegistry;
-import com.cmdpro.datanessence.registry.ItemRegistry;
-import com.cmdpro.datanessence.registry.MobEffectRegistry;
+import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.pipeline.RenderTarget;
@@ -23,6 +22,7 @@ import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -31,6 +31,7 @@ import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -38,6 +39,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -48,6 +50,8 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.joml.Math;
+import org.joml.Vector3d;
+import org.joml.Vector3f;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -89,6 +93,17 @@ public class ClientEvents {
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
                 ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, ClientPlayerData.getLinkColor());
                 event.getPoseStack().popPose();
+            }
+            for (Player i : Minecraft.getInstance().level.players()) {
+                GrapplingHook.GrapplingHookData grapplingHookData = i.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
+                if (grapplingHookData != null) {
+                    Vec3 pos = event.getCamera().getPosition();
+                    Vec3 pos1 = grapplingHookData.pos;
+                    Vec3 pos2 = i.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
+                    event.getPoseStack().pushPose();
+                    event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
+                    ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, new Color(EssenceTypeRegistry.ESSENCE.get().color));                    event.getPoseStack().popPose();
+                }
             }
             if (!ShaderHelper.shouldUseAlternateRendering()) {
                 renderObjects(event);
@@ -179,9 +194,21 @@ public class ClientEvents {
             }
             boolean playMusic = false;
             SoundEvent mus = null;
-            if (Minecraft.getInstance().player != null) {
-                for (int index = 0; index < Minecraft.getInstance().player.getInventory().getContainerSize(); index++) {
-                    ItemStack slot = Minecraft.getInstance().player.getInventory().getItem(index);
+            if (mc.player != null) {
+                GrapplingHook.GrapplingHookData grapplingHookData = mc.player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
+                if (grapplingHookData != null) {
+                    Vector3d direction = new Vector3d(grapplingHookData.pos.subtract(mc.player.position()).toVector3f()).normalize();
+                    double theta = direction.angle(new Vector3d(0, 1, 0));
+                    DataNEssence.LOGGER.info(direction + "|" + Math.toDegrees(theta));
+                    double centripetalAcceleration = mc.player.getDeltaMovement().lengthSqr()/grapplingHookData.distance;
+                    double mass = 1;
+                    double gravity = mc.player.getGravity();
+                    Vector3d tension = new Vector3d(direction).mul(mass * (centripetalAcceleration + gravity * Math.cos(theta)));
+                    Vector3d force = new Vector3d(tension).div(mass);
+                    mc.player.setDeltaMovement(mc.player.getDeltaMovement().add(force.x, force.y, force.z));
+                }
+                for (int index = 0; index < mc.player.getInventory().getContainerSize(); index++) {
+                    ItemStack slot = mc.player.getInventory().getItem(index);
                     if (slot.is(ItemRegistry.MUSIC_DISC_PLAYER.get())) {
                         ResourceKey<SoundEvent> key = slot.get(DataComponentRegistry.PLAYING_MUSIC);
                         if (key != null) {
