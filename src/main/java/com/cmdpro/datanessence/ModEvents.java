@@ -223,6 +223,9 @@ public class ModEvents {
                     }
                 }
             }
+            if (event.getEntity().getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
+                event.getEntity().resetFallDistance();
+            }
         }
     }
     @SubscribeEvent
