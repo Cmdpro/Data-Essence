@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.block.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.data.pinging.PingableStructureManager;
+import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
 import com.cmdpro.datanessence.networking.packet.s2c.EntrySync;
@@ -225,6 +226,10 @@ public class ModEvents {
             }
             if (event.getEntity().getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
                 event.getEntity().resetFallDistance();
+                if (!event.getEntity().isHolding((stack) -> stack.getItem() instanceof GrapplingHook)) {
+                    event.getEntity().setData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA, Optional.empty());
+                    ModMessages.sendToPlayersTrackingEntityAndSelf(new GrapplingHookSync(event.getEntity().getId(), null), (ServerPlayer) event.getEntity());
+                }
             }
         }
     }
