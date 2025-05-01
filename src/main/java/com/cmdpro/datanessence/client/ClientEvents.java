@@ -109,7 +109,7 @@ public class ClientEvents {
                 }
             }
             if (mc.player != null) {
-                if (mc.player.isHolding((stack) -> stack.getItem() instanceof GrapplingHook) && mc.player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isEmpty()) {
+                if (mc.player.isHolding((stack) -> stack.getItem() instanceof GrapplingHook && ItemEssenceContainer.getEssence(stack, GrapplingHook.FUEL_ESSENCE_TYPE) >= 5) && mc.player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isEmpty()) {
                     HitResult hit = mc.player.pick(35, 0, false);
                     if (hit.getType() != HitResult.Type.MISS) {
                         Vec3 pos = event.getCamera().getPosition();

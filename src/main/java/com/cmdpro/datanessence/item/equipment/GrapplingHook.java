@@ -41,6 +41,7 @@ public class GrapplingHook extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
+        boolean success = pPlayer.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent() || ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) >= 5;
         if (!pLevel.isClientSide) {
             if (pPlayer.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
                 pPlayer.setData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA, Optional.empty());
@@ -59,7 +60,10 @@ public class GrapplingHook extends Item {
                 }
             }
         }
-        return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
+        if (success) {
+            return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
+        }
+        return super.use(pLevel, pPlayer, pUsedHand);
     }
     public static class GrapplingHookData {
         public Vec3 pos;
