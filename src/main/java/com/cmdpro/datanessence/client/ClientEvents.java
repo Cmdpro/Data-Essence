@@ -42,6 +42,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -80,21 +81,22 @@ public class ClientEvents {
     }
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
+        Minecraft mc = Minecraft.getInstance();
         if (tempRenderTarget == null) {
-            tempRenderTarget = new TextureTarget(Minecraft.getInstance().getMainRenderTarget().width, Minecraft.getInstance().getMainRenderTarget().height, true, Minecraft.ON_OSX);
+            tempRenderTarget = new TextureTarget(mc.getMainRenderTarget().width, mc.getMainRenderTarget().height, true, Minecraft.ON_OSX);
         }
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
             MultiBufferSource.BufferSource bufferSource = RenderHandler.createBufferSource();
             if (ClientPlayerData.getLinkPos() != null) {
                 Vec3 pos = event.getCamera().getPosition();
                 Vec3 pos1 = ClientPlayerData.getLinkPos().getCenter();
-                Vec3 pos2 = Minecraft.getInstance().player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
+                Vec3 pos2 = mc.player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                 event.getPoseStack().pushPose();
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
                 ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, ClientPlayerData.getLinkColor());
                 event.getPoseStack().popPose();
             }
-            for (Player i : Minecraft.getInstance().level.players()) {
+            for (Player i : mc.level.players()) {
                 GrapplingHook.GrapplingHookData grapplingHookData = i.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
                 if (grapplingHookData != null) {
                     Vec3 pos = event.getCamera().getPosition();
@@ -102,7 +104,24 @@ public class ClientEvents {
                     Vec3 pos2 = i.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                     event.getPoseStack().pushPose();
                     event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                    ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, new Color(EssenceTypeRegistry.ESSENCE.get().color));                    event.getPoseStack().popPose();
+                    ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, new Color(EssenceTypeRegistry.ESSENCE.get().color), 0.05d);
+                    event.getPoseStack().popPose();
+                }
+            }
+            if (mc.player != null) {
+                if (mc.player.isHolding((stack) -> stack.getItem() instanceof GrapplingHook) && mc.player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isEmpty()) {
+                    HitResult hit = mc.player.pick(35, 0, false);
+                    if (hit.getType() != HitResult.Type.MISS) {
+                        Vec3 pos = event.getCamera().getPosition();
+                        Vec3 pos1 = hit.getLocation();
+                        Vec3 pos2 = mc.player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
+                        event.getPoseStack().pushPose();
+                        event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
+                        Color color = new Color(EssenceTypeRegistry.ESSENCE.get().color);
+                        color = new Color(color.getRed(), color.getGreen(), color.getBlue(), 150);
+                        ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color, 0.05d);
+                        event.getPoseStack().popPose();
+                    }
                 }
             }
             if (!ShaderHelper.shouldUseAlternateRendering()) {
@@ -119,8 +138,8 @@ public class ClientEvents {
                 RenderSystem.getModelViewStack().popMatrix();
                 RenderSystem.applyModelViewMatrix();
             }
-            if (Minecraft.getInstance().player != null) {
-                ClientModEvents.genderEuphoriaShader.setActive(Minecraft.getInstance().player.hasEffect(MobEffectRegistry.GENDER_EUPHORIA));
+            if (mc.player != null) {
+                ClientModEvents.genderEuphoriaShader.setActive(mc.player.hasEffect(MobEffectRegistry.GENDER_EUPHORIA));
             }
         }
     }

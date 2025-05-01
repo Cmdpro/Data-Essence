@@ -48,7 +48,7 @@ public class GrapplingHook extends Item {
             } else {
                 if (ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) >= 5) {
                     ItemEssenceContainer.removeEssence(stack, FUEL_ESSENCE_TYPE, 5);
-                    HitResult hit = pPlayer.pick(25, 0, false);
+                    HitResult hit = pPlayer.pick(35, 0, false);
                     if (hit.getType() != HitResult.Type.MISS) {
                         Vec3 pos = hit.getLocation();
                         double distance = pos.distanceTo(pPlayer.position());
