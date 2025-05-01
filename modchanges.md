@@ -5,3 +5,4 @@
 ### Fixes
 - Fixed a crash that would occur if a Drying Table used up the last of its input item
 - Fixed the Essence Sword not functioning as a sword
+- Likely fixed a crash when trying to use the signal tracker in multiplayer
