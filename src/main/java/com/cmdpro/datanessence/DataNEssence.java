@@ -25,6 +25,7 @@ import org.apache.commons.lang3.IntegerRange;
 import org.slf4j.Logger;
 
 import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasMekanism;
+import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasOpalescence;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod("datanessence")
@@ -75,6 +76,8 @@ public class DataNEssence
 
         if (hasMekanism)
             DataNEssence.LOGGER.info("[DATANESSENCE] Mekanism detected; enabling integration features. Careful with your reactors!");
+        if (hasOpalescence)
+            DataNEssence.LOGGER.info("[DATANESSENCE] Opalescence detected; enabling integration features. I hear this rock is a favorite of dragons!");
     }
 
     @SubscribeEvent
@@ -355,6 +358,8 @@ public class DataNEssence
             event.accept(BlockRegistry.TRAVERSITE_ROAD.get());
             event.accept(BlockRegistry.TRAVERSITE_ROAD_STAIRS.get());
             event.accept(BlockRegistry.TRAVERSITE_ROAD_SLAB.get());
+            if (hasOpalescence)
+                event.accept(BlockRegistry.TRAVERSITE_ROAD_OPAL.get());
 
             // Decoration
             event.accept(BlockRegistry.POLISHED_OBSIDIAN.get());

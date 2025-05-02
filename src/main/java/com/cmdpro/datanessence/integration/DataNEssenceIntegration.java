@@ -9,6 +9,7 @@ import net.neoforged.neoforge.capabilities.BlockCapability;
 
 public class DataNEssenceIntegration {
     public static boolean hasMekanism = ModList.get().isLoaded("mekanism");
+    public static boolean hasOpalescence = ModList.get().isLoaded("opalescence");
 
     public static BlockCapability<IChemicalHandler, Direction> BLOCK_CHEMICAL = hasMekanism ? BlockCapability.createSided(ResourceLocation.fromNamespaceAndPath(MekanismAPI.MEKANISM_MODID, "chemical_handler"), IChemicalHandler.class) : null;
 }

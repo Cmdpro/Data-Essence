@@ -26,6 +26,7 @@ import com.cmdpro.datanessence.client.renderers.layer.WingsLayer;
 import com.cmdpro.datanessence.screen.*;
 import com.cmdpro.datanessence.client.shaders.GenderEuphoriaShader;
 import com.cmdpro.datanessence.client.shaders.ProgressionShader;
+import net.mariu73.opalescence.block.OpalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -43,6 +44,8 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 import org.joml.SimplexNoise;
 
 import java.awt.*;
+
+import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasOpalescence;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ClientModEvents {
@@ -244,6 +247,15 @@ public class ClientModEvents {
             }
             return 0xFFFFFFFF;
         }, BlockRegistry.TETHERGRASS.get());
+
+        if (hasOpalescence) {
+            event.register((pState, pLevel, pPos, pTintIndex) -> {
+                if (pPos != null) {
+                    return OpalBlock.getBlockColor(pState, pLevel, pPos, pTintIndex);
+                }
+                return 0xFFFFFFFF;
+            }, BlockRegistry.TRAVERSITE_ROAD_OPAL.get());
+        }
     }
     @SubscribeEvent
     public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
