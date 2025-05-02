@@ -4,6 +4,7 @@ import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
+import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.data.pinging.StructurePing;
 import com.cmdpro.datanessence.networking.Message;
 import net.minecraft.client.Minecraft;
@@ -35,9 +36,11 @@ public record CreatePingShader(Vec3 position) implements Message {
     public static final Type<CreatePingShader> TYPE = new Type<>(DataNEssence.locate("create_ping_shader"));
     private static class ClientHandler {
         public static void startShader(Vec3 position) {
-            PostShaderInstance shader = new com.cmdpro.datanessence.client.shaders.PingShader(position.toVector3f());
-            shader.setActive(true);
-            PostShaderManager.addShader(shader);
+            if (DataNEssenceClientConfig.pingShader) {
+                PostShaderInstance shader = new com.cmdpro.datanessence.client.shaders.PingShader(position.toVector3f());
+                shader.setActive(true);
+                PostShaderManager.addShader(shader);
+            }
         }
     }
 }

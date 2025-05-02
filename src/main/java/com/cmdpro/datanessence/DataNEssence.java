@@ -2,6 +2,7 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.databank.hiddenblock.HiddenBlockConditions;
 import com.cmdpro.datanessence.block.transmission.ItemFilter;
+import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.data.hiddenblock.EntryCondition;
 import com.cmdpro.datanessence.registry.*;
@@ -46,6 +47,7 @@ public class DataNEssence
     {
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
         modLoadingContext.getActiveContainer().registerConfig(ModConfig.Type.COMMON, DataNEssenceConfig.COMMON_SPEC, "datanessence.toml");
+        modLoadingContext.getActiveContainer().registerConfig(ModConfig.Type.CLIENT, DataNEssenceClientConfig.CLIENT_SPEC, "datanessence-client.toml");
         ItemRegistry.ITEMS.register(bus);
         MenuRegistry.MENUS.register(bus);
         RecipeRegistry.RECIPES.register(bus);

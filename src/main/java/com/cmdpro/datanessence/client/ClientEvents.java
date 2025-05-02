@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
+import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.data.pinging.PingableStructure;
 import com.cmdpro.datanessence.entity.BlackHole;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
@@ -139,7 +140,7 @@ public class ClientEvents {
                 RenderSystem.applyModelViewMatrix();
             }
             if (mc.player != null) {
-                ClientModEvents.genderEuphoriaShader.setActive(mc.player.hasEffect(MobEffectRegistry.GENDER_EUPHORIA));
+                ClientModEvents.genderEuphoriaShader.setActive(DataNEssenceClientConfig.genderEuphoriaShader && mc.player.hasEffect(MobEffectRegistry.GENDER_EUPHORIA));
             }
         }
     }
