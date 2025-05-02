@@ -245,7 +245,8 @@ public class ModEvents {
                             blockPos = below;
                         }
                         if (valid) {
-                            LunarStrike.strike(event.getEntity().level(), blockPos.getBottomCenter());
+                            LunarStrike strike = new LunarStrike(EntityRegistry.LUNAR_STRIKE.get(), blockPos.getBottomCenter(), event.getEntity().level());
+                            event.getEntity().level().addFreshEntity(strike);
                         }
                     }
                 }
