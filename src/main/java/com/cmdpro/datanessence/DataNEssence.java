@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.block.transmission.ItemFilter;
 import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.data.hiddenblock.EntryCondition;
+import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.component.DataComponents;
@@ -74,6 +75,7 @@ public class DataNEssence
         random = RandomSource.create();
         HiddenBlockConditions.conditions.put(DataNEssence.locate("entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
 
+        DataNEssenceIntegration.init();
         if (hasMekanism)
             DataNEssence.LOGGER.info("[DATANESSENCE] Mekanism detected; enabling integration features. Careful with your reactors!");
         if (hasOpalescence)

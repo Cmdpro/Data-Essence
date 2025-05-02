@@ -5,7 +5,7 @@
     "texture": "datanessence:block/deco/crystalline_leaves",
     "overlay": "datanessence:block/deco/crystalline_leaves_overlay"
   },
-  "render_type": "minecraft:translucent",
+  "render_type": "minecraft:cutout",
   "elements": [
     {
       "from": [ 0, 0, 0 ],

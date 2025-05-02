@@ -5,6 +5,7 @@
     "texture": "opalescence:block/opal",
     "overlay": "datanessence:block/traversite_road_opal_overlay"
   },
+  "render_type": "minecraft:translucent",
   "elements": [
     {
       "from": [ 0, 0, 0 ],

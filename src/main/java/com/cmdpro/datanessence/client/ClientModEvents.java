@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemDecorators;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.fluid.Genderfluid;
+import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItemRenderer;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
@@ -247,14 +248,13 @@ public class ClientModEvents {
             }
             return 0xFFFFFFFF;
         }, BlockRegistry.TETHERGRASS.get());
-
         if (hasOpalescence) {
             event.register((pState, pLevel, pPos, pTintIndex) -> {
                 if (pPos != null) {
-                    return OpalBlock.getBlockColor(pState, pLevel, pPos, pTintIndex);
+                    return DataNEssenceIntegration.OpalescenseIntegration.getOpalBlockColor(pState, pLevel, pPos, pTintIndex);
                 }
                 return 0xFFFFFFFF;
-            }, BlockRegistry.TRAVERSITE_ROAD_OPAL.get());
+            }, BlockRegistry.TRAVERSITE_ROAD_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
         }
     }
     @SubscribeEvent
@@ -267,5 +267,8 @@ public class ClientModEvents {
             float blendAmount = Minecraft.getInstance().levelRenderer.getTicks()+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
             return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 1f, 1f).getRGB();
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
+        if (hasOpalescence) {
+            event.register(DataNEssenceIntegration.OpalescenseIntegration::getOpalItemColor, BlockRegistry.TRAVERSITE_ROAD_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
+        }
     }
 }
