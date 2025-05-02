@@ -1,6 +1,7 @@
 ### Changes
 - Improved the effect for pings from the Signal Tracker
 - Overhauled the entry manipulation commands
+- Added client config options which allow you to turn off specific shaders
 
 ### Fixes
 - Fixed a crash that would occur if a Drying Table used up the last of its input item
