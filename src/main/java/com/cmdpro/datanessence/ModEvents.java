@@ -10,12 +10,14 @@ import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.data.pinging.PingableStructureManager;
 import com.cmdpro.datanessence.entity.LunarStrike;
+import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
 import com.cmdpro.datanessence.networking.packet.s2c.EntrySync;
 import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.client.particle.RhombusParticleOptions;
 import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
+import com.cmdpro.datanessence.networking.packet.s2c.GrapplingHookSync;
 import com.cmdpro.datanessence.networking.packet.s2c.PingableSync;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockRegistry;
@@ -201,6 +203,7 @@ public class ModEvents {
 
         if (player instanceof ServerPlayer serverPlayer && target instanceof Player targetPlayer) {
             ModMessages.sendToPlayer(new DragonPartsSync(target.getId(), targetPlayer.getData(AttachmentTypeRegistry.HAS_HORNS), targetPlayer.getData(AttachmentTypeRegistry.HAS_TAIL), targetPlayer.getData(AttachmentTypeRegistry.HAS_WINGS)), serverPlayer);
+            ModMessages.sendToPlayer(new GrapplingHookSync(target.getId(), targetPlayer.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null)), serverPlayer);
         }
     }
     @SubscribeEvent
@@ -249,6 +252,13 @@ public class ModEvents {
                             event.getEntity().level().addFreshEntity(strike);
                         }
                     }
+                }
+            }
+            if (event.getEntity().getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
+                event.getEntity().resetFallDistance();
+                if (!event.getEntity().isHolding((stack) -> stack.getItem() instanceof GrapplingHook)) {
+                    event.getEntity().setData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA, Optional.empty());
+                    ModMessages.sendToPlayersTrackingEntityAndSelf(new GrapplingHookSync(event.getEntity().getId(), null), (ServerPlayer) event.getEntity());
                 }
             }
         }

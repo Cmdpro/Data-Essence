@@ -92,9 +92,11 @@ public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client
         return Math.pow(lerp, Math.log(Math.abs(dY) + 3));
     }
     public static void renderLine(VertexConsumer consumer, PoseStack stack, Vec3 pointA, Vec3 pointB, Color color) {
+        renderLine(consumer, stack, pointA, pointB, color, 0.3d);
+    }
+    public static void renderLine(VertexConsumer consumer, PoseStack stack, Vec3 pointA, Vec3 pointB, Color color, double sag) {
         int segmentCount = 32;
         List<Vec3> segments = new ArrayList<>();
-        double sag = 0.3;
         Vec3 sagOrigin = pointA.y < pointB.y ? pointA : pointB;
         Vec3 sagTarget = pointA.y < pointB.y ? pointB : pointA;
         Vec3 diff = sagTarget.subtract(sagOrigin);

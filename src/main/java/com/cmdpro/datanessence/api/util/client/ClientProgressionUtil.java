@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.api.util.client;
 
 import com.cmdpro.datanessence.client.ClientModEvents;
+import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.toasts.CriticalDataToast;
 import net.minecraft.client.Minecraft;
@@ -13,8 +14,10 @@ public class ClientProgressionUtil {
     }
 
     public static void progressionShader() {
-        ClientModEvents.progressionShader.time = 0;
-        ClientModEvents.progressionShader.setActive(true);
+        if (DataNEssenceClientConfig.progressionShader) {
+            ClientModEvents.progressionShader.time = 0;
+            ClientModEvents.progressionShader.setActive(true);
+        }
     }
 
     public static void updateWorld() {

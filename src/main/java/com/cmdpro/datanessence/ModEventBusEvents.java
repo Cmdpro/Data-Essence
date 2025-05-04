@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.entity.AncientSentinel;
 import com.cmdpro.datanessence.registry.EntityRegistry;
@@ -24,6 +25,9 @@ public class ModEventBusEvents {
         ModConfig config = event.getConfig();
         if (config.getSpec() == DataNEssenceConfig.COMMON_SPEC) {
             DataNEssenceConfig.bake(config);
+        }
+        if (config.getSpec() == DataNEssenceClientConfig.CLIENT_SPEC) {
+            DataNEssenceClientConfig.bake(config);
         }
     }
     @SubscribeEvent

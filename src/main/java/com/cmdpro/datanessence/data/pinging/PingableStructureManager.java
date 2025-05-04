@@ -25,7 +25,7 @@ public class PingableStructureManager extends SimpleJsonResourceReloadListener {
         return instance;
     }
 
-    public static Map<ResourceLocation, PingableStructure> types;
+    public static Map<ResourceLocation, PingableStructure> types = new HashMap<>();
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> pObject, ResourceManager pResourceManager, ProfilerFiller pProfiler) {

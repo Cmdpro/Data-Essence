@@ -2,8 +2,10 @@ package com.cmdpro.datanessence;
 
 import com.cmdpro.databank.hiddenblock.HiddenBlockConditions;
 import com.cmdpro.datanessence.block.transmission.ItemFilter;
+import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.data.hiddenblock.EntryCondition;
+import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.component.DataComponents;
@@ -24,6 +26,7 @@ import org.apache.commons.lang3.IntegerRange;
 import org.slf4j.Logger;
 
 import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasMekanism;
+import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasOpalescence;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod("datanessence")
@@ -46,6 +49,7 @@ public class DataNEssence
     {
         ModLoadingContext modLoadingContext = ModLoadingContext.get();
         modLoadingContext.getActiveContainer().registerConfig(ModConfig.Type.COMMON, DataNEssenceConfig.COMMON_SPEC, "datanessence.toml");
+        modLoadingContext.getActiveContainer().registerConfig(ModConfig.Type.CLIENT, DataNEssenceClientConfig.CLIENT_SPEC, "datanessence-client.toml");
         ItemRegistry.ITEMS.register(bus);
         MenuRegistry.MENUS.register(bus);
         RecipeRegistry.RECIPES.register(bus);
@@ -71,8 +75,11 @@ public class DataNEssence
         random = RandomSource.create();
         HiddenBlockConditions.conditions.put(DataNEssence.locate("entry"), EntryCondition.EntryConditionSerializer.INSTANCE);
 
+        DataNEssenceIntegration.init();
         if (hasMekanism)
             DataNEssence.LOGGER.info("[DATANESSENCE] Mekanism detected; enabling integration features. Careful with your reactors!");
+        if (hasOpalescence)
+            DataNEssence.LOGGER.info("[DATANESSENCE] Opalescence detected; enabling integration features. I hear this rock is a favorite of dragons!");
     }
 
     @SubscribeEvent
@@ -362,6 +369,8 @@ public class DataNEssence
             event.accept(BlockRegistry.TRAVERSITE_ROAD.get());
             event.accept(BlockRegistry.TRAVERSITE_ROAD_STAIRS.get());
             event.accept(BlockRegistry.TRAVERSITE_ROAD_SLAB.get());
+            if (hasOpalescence)
+                event.accept(BlockRegistry.TRAVERSITE_ROAD_OPAL.get());
 
             // Decoration
             event.accept(BlockRegistry.POLISHED_OBSIDIAN.get());

@@ -163,6 +163,8 @@ dependencies {
     compileOnly "mekanism:Mekanism:${mekanism_version}:api"
     localRuntime "mekanism:Mekanism:${mekanism_version}"
 
+    implementation "curse.maven:opalescence-1255577:6485811"
+
     implementation('org.jgrapht:jgrapht-core:1.5.2')
     jarJar (group: 'org.jgrapht', name: 'jgrapht-core', version: '[1.5.2,)')
     implementation('org.jheaps:jheaps:0.14')

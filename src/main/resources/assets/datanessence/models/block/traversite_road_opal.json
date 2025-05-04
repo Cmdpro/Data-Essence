@@ -1,11 +1,11 @@
 {
   "parent": "block/cube",
   "textures": {
-    "particle": "datanessence:block/deco/crystalline_leaves",
-    "texture": "datanessence:block/deco/crystalline_leaves",
-    "overlay": "datanessence:block/deco/crystalline_leaves_overlay"
+    "particle": "datanessence:block/traversite_road",
+    "texture": "opalescence:block/opal",
+    "overlay": "datanessence:block/traversite_road_opal_overlay"
   },
-  "render_type": "minecraft:cutout",
+  "render_type": "minecraft:translucent",
   "elements": [
     {
       "from": [ 0, 0, 0 ],

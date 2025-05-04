@@ -11,6 +11,7 @@ import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.renderers.entity.LunarStrikeRenderer;
 import com.cmdpro.datanessence.client.shaders.PingShader;
 import com.cmdpro.datanessence.fluid.Genderfluid;
+import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItemRenderer;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
@@ -28,6 +29,7 @@ import com.cmdpro.datanessence.client.renderers.layer.WingsLayer;
 import com.cmdpro.datanessence.screen.*;
 import com.cmdpro.datanessence.client.shaders.GenderEuphoriaShader;
 import com.cmdpro.datanessence.client.shaders.ProgressionShader;
+import net.mariu73.opalescence.block.OpalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -47,6 +49,8 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 import org.joml.SimplexNoise;
 
 import java.awt.*;
+
+import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasOpalescence;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public class ClientModEvents {
@@ -181,6 +185,7 @@ public class ClientModEvents {
         event.register(ItemRegistry.ILLUMINATION_ROD.get(), ItemDecorators.essenceBarDecoration);
         event.register(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get(), ItemDecorators.essenceBarDecoration);
         event.register(ItemRegistry.REPULSION_ROD.get(), ItemDecorators.essenceBarDecoration);
+        event.register(ItemRegistry.GRAPPLING_HOOK.get(), ItemDecorators.essenceBarDecoration);
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
@@ -251,6 +256,14 @@ public class ClientModEvents {
             }
             return 0xFFFFFFFF;
         }, BlockRegistry.TETHERGRASS.get());
+        if (hasOpalescence) {
+            event.register((pState, pLevel, pPos, pTintIndex) -> {
+                if (pPos != null) {
+                    return DataNEssenceIntegration.OpalescenseIntegration.getOpalBlockColor(pState, pLevel, pPos, pTintIndex);
+                }
+                return 0xFFFFFFFF;
+            }, BlockRegistry.TRAVERSITE_ROAD_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
+        }
     }
     @SubscribeEvent
     public static void registerItemColorHandlers(RegisterColorHandlersEvent.Item event) {
@@ -262,5 +275,8 @@ public class ClientModEvents {
             float blendAmount = Minecraft.getInstance().levelRenderer.getTicks()+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks();
             return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 1f, 1f).getRGB();
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
+        if (hasOpalescence) {
+            event.register(DataNEssenceIntegration.OpalescenseIntegration::getOpalItemColor, BlockRegistry.TRAVERSITE_ROAD_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
+        }
     }
 }

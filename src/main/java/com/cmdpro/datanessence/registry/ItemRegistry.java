@@ -42,6 +42,7 @@ public class ItemRegistry {
     public static final Supplier<Item> REPULSION_ROD = register("repulsion_rod", () -> new RepulsionRod(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> TRAVERSITE_TRUDGERS = register("traversite_trudgers", () -> new TraversiteTrudgers(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> HAMMER_AND_CHISEL = register("hammer_and_chisel", () -> new HammerAndChisel(new Item.Properties().stacksTo(1).durability(256)));
+    public static final Supplier<Item> GRAPPLING_HOOK = register("grapping_hook", () -> new GrapplingHook(new Item.Properties().stacksTo(1)));
 
     // Essence Shards
     public static final Supplier<Item> ESSENCE_SHARD = register("essence_shard", () -> new EssenceShard(new Item.Properties(), Map.of(EssenceTypeRegistry.ESSENCE, 100f)));
