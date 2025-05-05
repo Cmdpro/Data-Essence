@@ -250,6 +250,7 @@ public class DataNEssence
             event.accept(ItemRegistry.ILLUMINATION_ROD.get());
             event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
             event.accept(ItemRegistry.TRAVERSITE_TRUDGERS.get());
+            event.accept(ItemRegistry.GRAPPLING_HOOK.get());
 
 
             // Wires
@@ -360,8 +361,11 @@ public class DataNEssence
             event.accept(BlockRegistry.TRAVERSITE_ROAD.get());
             event.accept(BlockRegistry.TRAVERSITE_ROAD_STAIRS.get());
             event.accept(BlockRegistry.TRAVERSITE_ROAD_SLAB.get());
-            if (hasOpalescence)
+            if (hasOpalescence) {
                 event.accept(BlockRegistry.TRAVERSITE_ROAD_OPAL.get());
+                event.accept(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
+                event.accept(BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get());
+            }
 
             // Decoration
             event.accept(BlockRegistry.POLISHED_OBSIDIAN.get());

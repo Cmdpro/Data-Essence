@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "opalescence"
+    }
+  ],
+  "icon": {
+    "id": "datanessence:traversite_road_opal"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.opalescent_traversite_road.name"
+  },
+  "entry": "datanessence:tools/mod_integration_opalescence"
+}

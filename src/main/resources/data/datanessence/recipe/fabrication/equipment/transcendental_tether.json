@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 250
+  },
+  "entry": "datanessence:tools/transcendental_tether",
+  "pattern": [
+    " OB",
+    "CEO",
+    "BC "
+  ],
+  "key": {
+    "B": { "item": "datanessence:bonding_powder" },
+    "C": { "item": "datanessence:patterned_copper" },
+    "E": { "item": "datanessence:essence_shard" },
+    "O": { "item": "datanessence:polished_obsidian" }
+  },
+  "result": { "id": "datanessence:transcendental_tether" }
+}

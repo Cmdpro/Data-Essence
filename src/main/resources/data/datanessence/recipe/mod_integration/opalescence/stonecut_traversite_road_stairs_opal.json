@@ -1,0 +1,11 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "opalescence"
+    }
+  ],
+  "type": "minecraft:stonecutting",
+  "ingredient": { "item": "datanessence:traversite_road_opal" },
+  "result": { "id": "datanessence:traversite_road_stairs_opal", "count": 1 }
+}

@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "opalescence"
+    }
+  ],
+  "icon": {
+    "id": "datanessence:traversite_road_opal"
+  },
+  "tab": "datanessence:tools",
+  "x": 4,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:traversite_road_opal"},
+      "text": {
+        "translate": "data_tablet.pages.opalescent_traversite_road.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:mod_integration/opalescence/traversite_road_opal"
+      ]
+    }
+  ],
+  "flavor": {
+    "translate": "data_tablet.pages.opalescent_traversite_road.flavor"
+  },
+  "name": {
+    "translate": "data_tablet.pages.opalescent_traversite_road.name"
+  },
+  "parents": [
+    "datanessence:tools/traversite_road"
+  ]
+}

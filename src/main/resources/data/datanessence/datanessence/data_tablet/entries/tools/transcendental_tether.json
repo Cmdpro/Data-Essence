@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "id": "datanessence:transcendental_tether"
+  },
+  "tab": "datanessence:tools",
+  "x": -2,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:transcendental_tether"
+      },
+      "text": {
+        "translate": "data_tablet.pages.transcendental_tether.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/equipment/transcendental_tether"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.transcendental_tether.name"
+  },
+  "parents": [
+    "datanessence:tools/charger",
+    "datanessence:basics/plants"
+  ]
+}

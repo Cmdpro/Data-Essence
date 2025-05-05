@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "opalescence"
+    }
+  ],
+  "type": "datanessence:infusion",
+  "essenceCost": {
+    "datanessence:essence": 50
+  },
+  "entry": "datanessence:tools/traversite_road_opal",
+  "input": {
+    "item": "opalescence:opal",
+    "count": 1
+  },
+  "result": {
+    "id": "datanessence:traversite_road_opal",
+    "count": 1
+  }
+}

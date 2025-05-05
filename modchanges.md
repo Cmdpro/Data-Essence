@@ -1,5 +1,6 @@
 ### Additions
-- Mod integration with Opalescence, adding an opal variant of Traversite Road 
+- Mod integration with Opalescence, adding an opal variant of Traversite Road
+- The Transcendental Tether, a Tier 2 grappling hook-esque tool
 
 ### Changes
 - Improved the effect for pings from the Signal Tracker
