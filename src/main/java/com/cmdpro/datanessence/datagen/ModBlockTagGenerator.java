@@ -93,6 +93,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.METAL_SHAPER.get())
                 .add(BlockRegistry.DEWLAMP.get())
                 .add(BlockRegistry.DRYING_TABLE.get())
+                .add(BlockRegistry.TRAVERSITE_ROAD_OPAL.get())
+                .add(BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get())
+                .add(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
+                .add(BlockRegistry.DRYING_TABLE.get())
                 .add(BlockRegistry.ESSENCE_DERIVATION_SPIKE.get())
                 .add(BlockRegistry.LUNAR_CRYSTAL_SEED.get())
                 .add(BlockRegistry.ECLIPTRUM_BLOCK.get());
