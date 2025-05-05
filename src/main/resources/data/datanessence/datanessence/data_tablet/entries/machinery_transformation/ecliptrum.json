@@ -20,7 +20,8 @@
       "recipes": [
         "datanessence:synthesis/ecliptrum_ingot",
         "datanessence:crafting/reflective_panel",
-        "datanessence:crafting/transformative_rod"
+        "datanessence:crafting/transformative_rod",
+        "datanessence:crafting/ecliptrum_compacting"
       ]
     }
   ],

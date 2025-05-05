@@ -47,6 +47,7 @@
     "datanessence:lensing_crystal_ore",
     "datanessence:limited_item_buffer",
     "datanessence:lunar_essence_battery",
+    "datanessence:lunar_essence_crystal",
     "datanessence:lunar_essence_point",
     "datanessence:mineral_purification_chamber",
     "datanessence:natural_essence_battery",
@@ -72,6 +73,10 @@
     "datanessence:drying_table",
     "datanessence:traversite_road_opal",
     "datanessence:traversite_road_slab_opal",
-    "datanessence:traversite_road_stairs_opal"
+    "datanessence:traversite_road_stairs_opal",
+    "datanessence:drying_table",
+    "datanessence:essence_derivation_spike",
+    "datanessence:lunar_crystal_seed",
+    "datanessence:ecliptrum_block"
   ]
 }
