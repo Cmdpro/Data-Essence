@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:transcendental_tether"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.transcendental_tether.name"
+  },
+  "entry": "datanessence:tools/transcendental_tether"
+}

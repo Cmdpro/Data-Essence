@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "opalescence"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "T  ",
+    "TT ",
+    "TTT"
+  ],
+  "key": {
+    "T": { "item": "datanessence:traversite_road_opal" }
+  },
+  "result": { "id": "datanessence:traversite_road_stairs_opal", "count": 4 }
+}
