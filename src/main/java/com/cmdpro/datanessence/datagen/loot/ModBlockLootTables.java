@@ -114,6 +114,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 block -> noDrop());
         dropSelf(BlockRegistry.ESSENCE_DERIVATION_SPIKE.get());
         dropSelf(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
+        dropSelf(BlockRegistry.ECLIPTRUM_BLOCK.get());
 
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));

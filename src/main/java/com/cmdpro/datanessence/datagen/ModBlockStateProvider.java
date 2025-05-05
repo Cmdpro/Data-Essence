@@ -52,6 +52,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         pillarDecoBlock(BlockRegistry.POLISHED_OBSIDIAN_TRACT);
         decoBlock(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN);
         decoBlock(BlockRegistry.PATTERNED_COPPER);
+        decoBlock(BlockRegistry.ECLIPTRUM_BLOCK);
         transparentDecoBlockWithItem(BlockRegistry.FLUIDIC_GLASS);
         decoBlock(BlockRegistry.AETHER_RUNE);
 

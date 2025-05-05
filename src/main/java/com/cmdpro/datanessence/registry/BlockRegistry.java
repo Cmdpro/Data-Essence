@@ -326,6 +326,11 @@ public class BlockRegistry {
             () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
+    // Ecliptrum Deco
+    public static final Supplier<Block> ECLIPTRUM_BLOCK = register("ecliptrum_block",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).mapColor(MapColor.COLOR_YELLOW)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
     // Misc Deco
     public static final Supplier<Block> FLARE_LIGHT = registerBlock("flare_light",
             () -> new FlareLight(
