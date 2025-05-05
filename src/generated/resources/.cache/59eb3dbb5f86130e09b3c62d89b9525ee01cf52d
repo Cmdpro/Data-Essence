@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-13T13:47:37.628926325	Loot Tables
+// 1.21.1	2025-05-05T02:55:01.555528747	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -74,6 +74,9 @@ aca436e4c49a253ff47202ccea5ec753aec5a73d data/datanessence/loot_table/blocks/pol
 c86060a8bee40be4014b0d4ef5328b1f9b6f2250 data/datanessence/loot_table/blocks/synthesis_chamber.json
 a18959e3b6e8284ae969ac3db3a191ba210e4ff3 data/datanessence/loot_table/blocks/tethergrass.json
 dbb37b98d7b947a9b52acc93133a797f6831bbea data/datanessence/loot_table/blocks/traversite_road.json
+aec80a3c6bdd9f592c46cba9faeb1c8298ab9415 data/datanessence/loot_table/blocks/traversite_road_opal.json
 ab605e4e3a9b61ab410ec5432357313df82357db data/datanessence/loot_table/blocks/traversite_road_slab.json
+655c9a718b212c895dd73792586c583116e48635 data/datanessence/loot_table/blocks/traversite_road_slab_opal.json
 09f699ac4c5e1ef56306e338be39495e4734015f data/datanessence/loot_table/blocks/traversite_road_stairs.json
+4cbc2175b2fe6caaaa5c1453c4ad50a6ad16fd04 data/datanessence/loot_table/blocks/traversite_road_stairs_opal.json
 79520676cdef899226b1394203ad881f5c962d41 data/datanessence/loot_table/blocks/vacuum.json

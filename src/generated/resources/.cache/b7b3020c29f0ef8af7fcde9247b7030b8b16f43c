@@ -1,4 +1,4 @@
-// 1.21.1	2025-04-17T18:43:24.351011565	Item Models: datanessence
+// 1.21.1	2025-05-05T02:55:01.554834356	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -69,6 +69,7 @@ c21e404c80d50f53fca78d073b54c48763738238 assets/datanessence/models/item/primiti
 cccabab1270cb85664204724c134f6d86b2fe5a6 assets/datanessence/models/item/spire_glass.json
 aee2e6631d57b8fc41df275db6b27a783c52c54f assets/datanessence/models/item/thermometer.json
 7545953a1981f70cdb6d9ccd399301b1df1e65d2 assets/datanessence/models/item/traversite_road_chunk.json
+3563b8f292d972bb80ee6ae81acee7b02e90db8d assets/datanessence/models/item/traversite_road_opal.json
 e55bc425ec3b1f2a7eb2b139beb2dcedac11e59d assets/datanessence/models/item/traversite_road_slab.json
 1069bd8814b3b0918555a78b679a364f60ecaf88 assets/datanessence/models/item/traversite_road_stairs.json
 286c4712fa70bd60839c9c3a0acf83e4ea11cafd assets/datanessence/models/item/traversite_trudgers.json

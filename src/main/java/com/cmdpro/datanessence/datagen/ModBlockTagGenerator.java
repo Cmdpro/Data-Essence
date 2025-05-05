@@ -91,7 +91,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get())
                 .add(BlockRegistry.METAL_SHAPER.get())
                 .add(BlockRegistry.DEWLAMP.get())
-                .add(BlockRegistry.DRYING_TABLE.get());
+                .add(BlockRegistry.DRYING_TABLE.get())
+                .add(BlockRegistry.TRAVERSITE_ROAD_OPAL.get())
+                .add(BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get())
+                .add(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
