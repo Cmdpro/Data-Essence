@@ -34,6 +34,7 @@ import java.util.Optional;
 
 public class GrapplingHook extends Item {
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
+    public static float ESSENCE_COST = 5f;
     public GrapplingHook(Properties pProperties) {
         super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 1000)));
     }
@@ -47,8 +48,8 @@ public class GrapplingHook extends Item {
                 pPlayer.setData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA, Optional.empty());
                 ModMessages.sendToPlayersTrackingEntityAndSelf(new GrapplingHookSync(pPlayer.getId(), null), (ServerPlayer) pPlayer);
             } else {
-                if (ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) >= 5) {
-                    ItemEssenceContainer.removeEssence(stack, FUEL_ESSENCE_TYPE, 5);
+                if (ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) >= ESSENCE_COST) {
+                    ItemEssenceContainer.removeEssence(stack, FUEL_ESSENCE_TYPE, ESSENCE_COST);
                     HitResult hit = pPlayer.pick(35, 0, false);
                     if (hit.getType() != HitResult.Type.MISS) {
                         Vec3 pos = hit.getLocation();
