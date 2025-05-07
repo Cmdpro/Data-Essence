@@ -219,7 +219,7 @@ public class ClientEvents {
                 if (grapplingHookData != null) {
                     Vector3d direction = new Vector3d(grapplingHookData.pos.subtract(mc.player.position()).toVector3f()).normalize();
                     double theta = direction.angle(new Vector3d(0, 1, 0));
-                    double centripetalAcceleration = mc.player.getDeltaMovement().lengthSqr()/grapplingHookData.distance;
+                    double centripetalAcceleration = mc.player.getDeltaMovement().lengthSqr() / (1d+grapplingHookData.distance);
                     double mass = 1;
                     double gravity = mc.player.getGravity();
                     Vector3d tension = new Vector3d(direction).mul(mass * (centripetalAcceleration + gravity * Math.cos(theta)));
