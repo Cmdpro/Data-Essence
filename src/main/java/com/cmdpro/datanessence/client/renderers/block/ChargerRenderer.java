@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.client.renderers.block;
 
 import com.cmdpro.databank.model.DatabankEntityModel;
 import com.cmdpro.databank.model.DatabankModels;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.databank.model.blockentity.BlockEntityKeyframeAnimations;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
@@ -64,13 +65,6 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
     }
 
     public static class Model extends DatabankBlockEntityModel<ChargerBlockEntity> {
-        public static AnimationDefinition idle_empty;
-        public static AnimationDefinition orb_spin;
-        public static AnimationDefinition orb_rise;
-        public static AnimationDefinition extend_exciters;
-        public static AnimationDefinition retract_exciters;
-        public static AnimationDefinition idle_exciters_out;
-        public static AnimationDefinition orb_fall;
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {
@@ -80,13 +74,6 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
         public static DatabankEntityModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("charger"));
-                idle_empty = model.animations.get("idle_empty").createAnimationDefinition();
-                orb_spin = model.animations.get("orb_spin").createAnimationDefinition();
-                retract_exciters = model.animations.get("retract_exciters").createAnimationDefinition();
-                idle_exciters_out = model.animations.get("idle_exciters_out").createAnimationDefinition();
-                extend_exciters = model.animations.get("extend_exciters").createAnimationDefinition();
-                orb_rise = model.animations.get("orb_rise").createAnimationDefinition();
-                orb_fall = model.animations.get("orb_fall").createAnimationDefinition();
             }
             return model;
         }
@@ -95,55 +82,30 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
             return getModel().createLayerDefinition();
         }
         public void setupAnim(ChargerBlockEntity pEntity) {
-            pEntity.animState.startIfStopped((int)getAgeInTicks());
-            AnimationDefinition tempAnim = null;
-            AnimationDefinition anim = pEntity.anim;
+            DatabankAnimationState state = pEntity.animState;
             if (!pEntity.item.isEmpty()) {
-                if (anim == (idle_empty)) {
-                    tempAnim = extend_exciters;
-                }
-                if (anim == (extend_exciters) && BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime())) {
-                    tempAnim = idle_exciters_out;
+                if (state.isCurrentAnim("idle_empty")) {
+                    state.setAnim("extend_exciters");
                 }
                 if (pEntity.charging) {
-                    if (anim == (idle_exciters_out)) {
-                        tempAnim = orb_rise;
-                    }
-                    if (anim == (orb_rise) && BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime())) {
-                        tempAnim = orb_spin;
+                    if (state.isCurrentAnim("idle_exciters_out")) {
+                        state.setAnim("orb_rise");
                     }
                 } else {
-                    if (anim == (orb_spin) || anim == (orb_rise)) {
-                        tempAnim = orb_fall;
-                    }
-                    if (anim == (orb_fall) && BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime())) {
-                        tempAnim = idle_exciters_out;
+                    if (state.isCurrentAnim("orb_spin") || state.isCurrentAnim("orb_rise")) {
+                        state.setAnim("orb_fall");
                     }
                 }
             } else {
-                if (anim == (orb_spin) || anim == (orb_rise)) {
-                    tempAnim = orb_fall;
-                } else if (anim == (idle_exciters_out) || anim == (extend_exciters) || (anim == (orb_fall) && BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime()))) {
-                    tempAnim = retract_exciters;
-                } else if ((anim != (retract_exciters) && anim != (orb_fall)) || BlockEntityKeyframeAnimations.isDone(anim, pEntity.animState.getAccumulatedTime())) {
-                    tempAnim = idle_empty;
+                if (state.isCurrentAnim("orb_spin") || state.isCurrentAnim("orb_rise")) {
+                    state.setAnim("orb_fall");
+                } else if ((state.isCurrentAnim("idle_exciters_out")) || ((state.isCurrentAnim("extend_exciters") || state.isCurrentAnim("orb_fall")) && state.isDone())) {
+                    state.setAnim("retract_exciters");
                 }
             }
-            if (tempAnim != null) {
-                this.updateAnim(pEntity, pEntity.animState, tempAnim);
-                this.animate(pEntity.animState, tempAnim);
-            } else if (anim != null) {
-                this.updateAnim(pEntity, pEntity.animState, anim);
-                this.animate(pEntity.animState, anim);
-            }
-        }
-
-        protected void updateAnim(ChargerBlockEntity entity, AnimationState pAnimationState, AnimationDefinition pAnimationDefinition) {
-            if (entity.anim != pAnimationDefinition) {
-                pAnimationState.stop();
-                pAnimationState.start((int)getAgeInTicks());
-                entity.anim = pAnimationDefinition;
-            }
+            state.updateAnimDefinitions(model);
+            state.update();
+            this.animate(state.state, state.getAnim().definition);
         }
 
         @Override
