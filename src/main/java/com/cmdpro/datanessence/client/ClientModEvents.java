@@ -7,6 +7,7 @@ import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemDecorators;
+import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.renderers.entity.LunarStrikeRenderer;
 import com.cmdpro.datanessence.client.shaders.PingShader;
@@ -17,6 +18,7 @@ import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItemRenderer;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
 import com.cmdpro.datanessence.item.blockitem.*;
 import com.cmdpro.datanessence.client.particle.*;
+import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.client.renderers.block.*;
 import com.cmdpro.datanessence.client.renderers.entity.AncientSentinelRenderer;
@@ -149,6 +151,20 @@ public class ClientModEvents {
             ItemProperties.register(ItemRegistry.MUSIC_DISC_PLAYER.get(), DataNEssence.locate("playing"), (stack, level, entity, seed) -> {
                 if (stack.has(DataComponentRegistry.PLAYING_MUSIC)) {
                     return 1;
+                }
+                return 0;
+            });
+            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("charged"), (stack, level, entity, seed) -> {
+                if (stack.has(DataComponentRegistry.ESSENCE_STORAGE) && ItemEssenceContainer.getEssence(stack, GrapplingHook.FUEL_ESSENCE_TYPE) >= GrapplingHook.ESSENCE_COST) {
+                    return 1;
+                }
+                return 0;
+            });
+            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("using"), (stack, level, entity, seed) -> {
+                if (entity != null) {
+                    if (entity.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
+                        return 1;
+                    }
                 }
                 return 0;
             });

@@ -136,6 +136,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         essencePoint(BlockRegistry.CHEMICAL_NODE);
 
         musicDiscPlayer(ItemRegistry.MUSIC_DISC_PLAYER);
+        grapplingHook(ItemRegistry.GRAPPLING_HOOK);
 
     }
     private ItemModelBuilder musicDiscPlayer(Supplier<Item> item) {
@@ -150,6 +151,20 @@ public class ModItemModelProvider extends ItemModelProvider {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
                 ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
                 ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
+    }
+    private ItemModelBuilder grapplingHook(Supplier<Item> item) {
+        ItemModelBuilder using = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_use",
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_use"));
+        ItemModelBuilder charged = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()))
+                .override().predicate(DataNEssence.locate("using"), 1).model(using).end();
+
+        return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_empty",
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                        ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_empty"))
+                .override().predicate(DataNEssence.locate("charged"), 1).model(charged).end();
     }
     private ItemModelBuilder simpleItemWithSubdirectory(Supplier<Item> item, String subdirectory) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),

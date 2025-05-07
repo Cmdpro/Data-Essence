@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "datanessence:item/transcendental_tether_use"
+  }
+}
