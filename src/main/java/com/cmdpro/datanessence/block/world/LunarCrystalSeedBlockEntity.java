@@ -1,23 +1,23 @@
 package com.cmdpro.datanessence.block.world;
 
-import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
-import com.cmdpro.datanessence.entity.LunarStrike;
+import com.cmdpro.datanessence.networking.ModMessages;
+import com.cmdpro.datanessence.networking.packet.s2c.ParticleBurst;
 import com.cmdpro.datanessence.registry.*;
-import net.minecraft.client.Minecraft;
+import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import org.apache.commons.lang3.RandomUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -29,45 +29,59 @@ public class LunarCrystalSeedBlockEntity extends BlockEntity {
     public LunarCrystalSeedBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.LUNAR_CRYSTAL_SEED.get(), pos, state);
     }
-    public int time;
+    public int crystalSpawnTime;
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        tag.putInt("time", time);
+        tag.putInt("crystalSpawnTime", crystalSpawnTime);
         super.saveAdditional(tag, pRegistries);
     }
     @Override
     public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
-        time = nbt.getInt("time");
+        crystalSpawnTime = nbt.getInt("crystalSpawnTime");
         super.loadAdditional(nbt, pRegistries);
     }
-
+    public void resetCrystalSpawnTime() {
+        crystalSpawnTime = level.getRandom().nextIntBetweenInclusive(6*20, 8*20);
+    }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, LunarCrystalSeedBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide) {
-            pBlockEntity.time++;
-            if (pBlockEntity.time >= 120*20) {
+            if (pBlockEntity.crystalSpawnTime <= 0) {
+                pBlockEntity.resetCrystalSpawnTime();
+            }
+            pBlockEntity.crystalSpawnTime--;
+            if (pLevel.isDay() && pLevel.getBrightness(LightLayer.SKY, pPos) > 3) {
+                ModMessages.sendToPlayersNear(new ParticleBurst(pPos.getCenter(), new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().color), 100, 0.75f), (ServerLevel)pLevel, pPos.getCenter(), 64);
                 pLevel.removeBlock(pPos, false);
             }
-            if (pBlockEntity.time % 40 == 0) {
-                if (pLevel.getRandom().nextInt(5) == 0) {
-                    for (int i = 0; i < 5; i++) {
-                        BlockPos pos = pPos.offset(pLevel.getRandom().nextIntBetweenInclusive(-3, 3), pLevel.getRandom().nextIntBetweenInclusive(-3, 3), pLevel.getRandom().nextIntBetweenInclusive(-3, 3));
-                        if (pLevel.getBlockState(pos).canBeReplaced()) {
-                            boolean valid = false;
-                            BlockState state = BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get().defaultBlockState();
-                            Collection<Direction> directionsToTry = Direction.allShuffled(pLevel.getRandom());
-                            for (Direction j : directionsToTry) {
-                                BlockPos relative = pos.relative(j.getOpposite());
-                                if (pLevel.getBlockState(relative).isFaceSturdy(pLevel, relative, j)) {
-                                    state = state.setValue(LunarEssenceCrystal.FACING, j);
-                                    valid = true;
-                                    break;
-                                }
-                            }
-                            if (valid) {
-                                pLevel.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS);
-                                pLevel.setBlockAndUpdate(pos, state);
-                            }
+            if (pBlockEntity.crystalSpawnTime <= 0) {
+                pBlockEntity.resetCrystalSpawnTime();
+                List<BlockPos> locations = new ArrayList<>();
+                for (int x = -3; x <= 3; x++) {
+                    for (int y = -3; y <= 3; y++) {
+                        for (int z = -3; z <= 3; z++) {
+                            locations.add(new BlockPos(x, 0, z));
                         }
+                    }
+                }
+                Util.shuffle(locations, pLevel.getRandom());
+                for (BlockPos i : locations) {
+                    BlockPos pos = pPos.offset(i);
+                    boolean valid = false;
+                    BlockState state = BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get().defaultBlockState();
+                    Collection<Direction> directionsToTry = Direction.allShuffled(pLevel.getRandom());
+                    for (Direction j : directionsToTry) {
+                        BlockPos relative = pos.relative(j.getOpposite());
+                        if (pLevel.getBlockState(relative).isFaceSturdy(pLevel, relative, j)) {
+                            state = state.setValue(LunarEssenceCrystal.FACING, j);
+                            valid = true;
+                            break;
+                        }
+                    }
+                    if (valid) {
+                        ModMessages.sendToPlayersNear(new ParticleBurst(pos.getCenter(), new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().color), 25, 0.1f), (ServerLevel)pLevel, pPos.getCenter(), 64);
+                        pLevel.playSound(null, pos, SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS);
+                        pLevel.setBlockAndUpdate(pos, state);
+                        break;
                     }
                 }
             }

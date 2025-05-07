@@ -73,6 +73,7 @@ public class ModMessages {
         registrar.playToClient(PingableSync.TYPE, getNetworkCodec(PingableSync::read, PingableSync::write), Handler::handle);
         registrar.playToClient(CreatePingShader.TYPE, getNetworkCodec(CreatePingShader::read, CreatePingShader::write), Handler::handle);
         registrar.playToClient(GrapplingHookSync.TYPE, getNetworkCodec(GrapplingHookSync::read, GrapplingHookSync::write), Handler::handle);
+        registrar.playToClient(ParticleBurst.TYPE, getNetworkCodec(ParticleBurst::read, ParticleBurst::write), Handler::handle);
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigame.TYPE, getNetworkCodec(PlayerFinishDataBankMinigame::read, PlayerFinishDataBankMinigame::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveData.TYPE, getNetworkCodec(PlayerChangeDriveData::read, PlayerChangeDriveData::write), Handler::handle);
