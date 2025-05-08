@@ -1,5 +1,86 @@
 {
   "animations": {
+      "idle": {
+      "length": 0,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "spike",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -16,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_1",
+          "target": "scale",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -1,
+                -1,
+                -1
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "spike_extension",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -10,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_2",
+          "target": "scale",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -1,
+                -1,
+                -1
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring_3",
+          "target": "scale",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -1,
+                -1,
+                -1
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
     "extend_spike": {
       "length": 1.25,
       "looping": false,

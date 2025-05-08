@@ -42,10 +42,11 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
         return coolantTank;
     }
 
-    public DatabankAnimationState animState = new DatabankAnimationState("retract_spike")
+    public DatabankAnimationState animState = new DatabankAnimationState("idle")
+            .addAnim(new DatabankAnimationDefinition("idle", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationDefinition("rotate_rings", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationDefinition("extend_spike", (state, anim) -> {}, (state, anim) -> state.setAnim("rotate_rings")))
-            .addAnim(new DatabankAnimationDefinition("retract_spike", (state, anim) -> {}, (state, anim) -> {}));
+            .addAnim(new DatabankAnimationDefinition("retract_spike", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")));
 
 
     public EssenceDerivationSpikeBlockEntity(BlockPos pos, BlockState blockState) {

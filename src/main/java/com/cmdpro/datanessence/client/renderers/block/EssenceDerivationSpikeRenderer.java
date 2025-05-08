@@ -49,7 +49,7 @@ public class EssenceDerivationSpikeRenderer extends DatabankBlockEntityRenderer<
         public void setupAnim(EssenceDerivationSpikeBlockEntity spike) {
             DatabankAnimationState state = spike.animState;
 
-            if ( spike.hasRedstone && spike.hasStructure && !spike.isBroken )
+            if ( (spike.hasRedstone && spike.hasStructure && !spike.isBroken) && state.isCurrentAnim("idle") )
                 state.setAnim("extend_spike");
             if ( state.isCurrentAnim("extend_spike") && state.isDone() )
                 state.setAnim("rotate_rings");
