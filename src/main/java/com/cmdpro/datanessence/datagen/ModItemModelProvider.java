@@ -87,13 +87,14 @@ public class ModItemModelProvider extends ItemModelProvider {
         evenSimplerBlockItem(BlockRegistry.SPIRE_GLASS);
         evenSimplerBlockItem(BlockRegistry.CRYSTALLINE_LEAVES);
         evenSimplerBlockItem(BlockRegistry.CRYSTALLINE_LOG);
-        evenSimplerBlockItem(BlockRegistry.TRAVERSITE_ROAD_OPAL);
 
         evenSimplerBlockItem(BlockRegistry.POLISHED_OBSIDIAN_COLUMN);
         evenSimplerBlockItem(BlockRegistry.POLISHED_OBSIDIAN_TRACT);
 
         evenSimplerBlockItem(BlockRegistry.TRAVERSITE_ROAD_STAIRS);
         evenSimplerBlockItem(BlockRegistry.TRAVERSITE_ROAD_SLAB);
+        evenSimplerBlockItem(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL);
+        evenSimplerBlockItem(BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL);
 
         simpleItemWithSubdirectory(ItemRegistry.CONDUCTANCE_ROD, "components");
         simpleItemWithSubdirectory(ItemRegistry.CAPACITANCE_PANEL, "components");

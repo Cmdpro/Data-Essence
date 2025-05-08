@@ -1,0 +1,12 @@
+{
+  "parent": "datanessence:block/outer_stairs_tinted_overlay",
+  "textures": {
+    "bottom": "opalescence:block/opal",
+    "bottomoverlay": "datanessence:block/traversite_road_opal_overlay",
+    "particle": "datanessence:block/traversite_road",
+    "side": "opalescence:block/opal",
+    "sideoverlay": "datanessence:block/traversite_road_opal_overlay",
+    "top": "opalescence:block/opal",
+    "topoverlay": "datanessence:block/traversite_road_opal_overlay"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "datanessence:block/cube_all_tinted_overlay",
+  "textures": {
+    "all": "opalescence:block/opal",
+    "overlay": "datanessence:block/traversite_road_opal_overlay",
+    "particle": "datanessence:block/traversite_road"
+  }
+}

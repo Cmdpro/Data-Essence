@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "datanessence:block/traversite_road_slab_opal"
+    },
+    "type=double": {
+      "model": "datanessence:block/traversite_road_opal"
+    },
+    "type=top": {
+      "model": "datanessence:block/traversite_road_slab_opal_top"
+    }
+  }
+}
