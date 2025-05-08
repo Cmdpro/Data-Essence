@@ -161,6 +161,7 @@
   "block.datanessence.laser_emitter": "Laser Emitter",
   "block.datanessence.lensing_crystal_ore": "Lensing Crystal Ore",
   "block.datanessence.limited_item_buffer": "Item Buffer (Limited)",
+  "block.datanessence.lunar_crystal_seed": "Lunar Crystal Seed",
   "block.datanessence.lunar_essence_battery": "Lunar Essence Battery",
   "block.datanessence.lunar_essence_battery.amount": " ◇ Battery holds %1$s/%2$s Lunar Essence.",
   "block.datanessence.lunar_essence_crystal": "Lunar Essence Crystal",
@@ -344,6 +345,8 @@
   "data_tablet.pages.industrial_plant_siphon.name": "Industrial Plant Siphon",
   "data_tablet.pages.industrial_plant_siphon.page1.text": "The life of the world is not limited to creatures - nature, too, bears Essence of a kind. We can use our machinery to siphon Industrial Essence from nature, yielding a far more readily sustainable source than crystals or monsters.\n\nIt does, however, seem that common plants provide far less Essence than rarer, more magically attuned ones....",
   "data_tablet.pages.industrial_plant_siphon.page2.text": " ◇ Power source: Plants.\n ◇ Coolant: None.\n ◇ Requires consumables: Plants/leaves/crops.\n ◇ Risks: None.",
+  "data_tablet.pages.lunar_essence_battery.name": "Lunar Essence Batteries",
+  "data_tablet.pages.lunar_essence_battery.page1.text": "Like the Industrial Essence Battery that came before it, this Battery is a modified Essence Buffer that can only hold Lunar Essence, but a considerable quantity of it. Its visual design is markedly different from its predecessor, featuring a window to view the contents instead of its storage matrix being visible throughout.",
   "data_tablet.pages.lunar_essence_transfer.name": "Lunar Essence Transfer",
   "data_tablet.pages.lunar_essence_transfer.page1.text": "As we have Wires and Nodes for Industrial Essence, the same basic design carries over to Lunar Essence, as well. However, instead of copper for the nodes, they instead must be plated with Ecliptrum. The wires, curiously, work satisfactorily as-is, though of course needing a different coating material.",
 

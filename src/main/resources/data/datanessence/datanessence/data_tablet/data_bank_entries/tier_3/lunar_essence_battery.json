@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:lunar_essence_battery"
+  },
+  "tier": 3,
+  "name": {
+    "translate": "data_tablet.pages.lunar_essence_battery.name"
+  },
+  "entry": "datanessence:essence_manipulation/lunar_essence_battery"
+}

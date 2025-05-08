@@ -1,0 +1,29 @@
+{
+  "icon": {
+    "id": "datanessence:lunar_essence_battery"
+  },
+  "tab": "datanessence:essence_manipulation",
+  "x": -3,
+  "y": -1,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.lunar_essence_battery.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/lunar_essence_battery"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.lunar_essence_battery.name"
+  },
+  "parents": [
+    "datanessence:essence_manipulation/essence_battery",
+    "datanessence:machinery_transformation/ecliptrum"
+  ]
+}

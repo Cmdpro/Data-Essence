@@ -85,6 +85,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.CHEMICAL_NODE.get(), ChemicalNodeRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.DRYING_TABLE.get(), DryingTableRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_DERIVATION_SPIKE.get(), EssenceDerivationSpikeRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.LUNAR_ESSENCE_BATTERY.get(), LunarEssenceBatteryRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {

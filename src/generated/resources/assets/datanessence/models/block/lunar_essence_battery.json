@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "datanessence:block/lunar_essence_battery_end",
+    "side": "datanessence:block/lunar_essence_battery_side"
+  }
+}

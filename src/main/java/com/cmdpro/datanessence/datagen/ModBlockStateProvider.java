@@ -64,6 +64,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         fluidCollector(BlockRegistry.FLUID_SPILLER);
         laserEmitter(BlockRegistry.LASER_EMITTER);
         essenceBattery(BlockRegistry.ESSENCE_BATTERY);
+        essenceBattery(BlockRegistry.LUNAR_ESSENCE_BATTERY);
         itemFilter(BlockRegistry.ITEM_FILTER);
         crystallineLog(BlockRegistry.CRYSTALLINE_LOG);
         essenceLeech(BlockRegistry.ESSENCE_LEECH);

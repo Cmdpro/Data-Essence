@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:lunar_essence": 200
+  },
+  "entry": "datanessence:essence_manipulation/lunar_essence_battery",
+  "pattern": [
+    "TOT",
+    "SBS",
+    "TOT"
+  ],
+  "key": {
+    "O": { "item": "datanessence:polished_obsidian" },
+    "T": { "item": "datanessence:transformative_rod" },
+    "S": { "item": "datanessence:lunar_essence_shard" },
+    "B": { "item": "datanessence:essence_buffer" }
+  },
+  "result": { "id": "datanessence:lunar_essence_battery" }
+}
