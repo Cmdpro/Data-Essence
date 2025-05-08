@@ -230,10 +230,12 @@ public class DataBankScreen extends Screen {
 
     @Override
     public void onClose() {
-        if (screenType == 0) {
-            super.onClose();
-        } else {
-            screenType = 0;
+        if (minigameCompletionWait == -1) {
+            if (screenType == 0) {
+                super.onClose();
+            } else {
+                screenType = 0;
+            }
         }
     }
 

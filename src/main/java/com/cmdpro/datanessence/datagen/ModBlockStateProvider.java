@@ -5,7 +5,9 @@ import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.production.FluidCollector;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
 import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.google.gson.JsonObject;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -79,6 +81,66 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         stairsBlock((StairBlock)BlockRegistry.TRAVERSITE_ROAD_STAIRS.get(), DataNEssence.locate("block/traversite_road"));
         slabBlock((SlabBlock) BlockRegistry.TRAVERSITE_ROAD_SLAB.get(), DataNEssence.locate("block/traversite_road"), DataNEssence.locate("block/traversite_road"));
+
+        blockWithItemTintedOverlay(BlockRegistry.TRAVERSITE_ROAD_OPAL, ResourceLocation.fromNamespaceAndPath("opalescence", "block/opal"), DataNEssence.locate("block/traversite_road_opal_overlay"), DataNEssence.locate("block/traversite_road"));
+        stairsBlockTintedOverlay((StairBlock)BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get(), ResourceLocation.fromNamespaceAndPath("opalescence", "block/opal"), DataNEssence.locate("block/traversite_road_opal_overlay"), DataNEssence.locate("block/traversite_road"));
+        slabBlockTintedOverlay((SlabBlock) BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get(), DataNEssence.locate("block/traversite_road_opal"), ResourceLocation.fromNamespaceAndPath("opalescence", "block/opal"), DataNEssence.locate("block/traversite_road_opal_overlay"), DataNEssence.locate("block/traversite_road"));
+    }
+    public void slabBlockTintedOverlay(SlabBlock block, ResourceLocation doubleSlab, ResourceLocation texture, ResourceLocation overlay, ResourceLocation particle) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(block);
+        ModelFile slab = models().withExistingParent(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/slab_tinted_overlay"))
+                .texture("side", texture)
+                .texture("bottom", texture)
+                .texture("top", texture)
+                .texture("sideoverlay", overlay)
+                .texture("bottomoverlay", overlay)
+                .texture("topoverlay", overlay)
+                .texture("particle", particle);
+        ModelFile slabTop = models().withExistingParent(loc.getPath() + "_top", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/slab_top_tinted_overlay"))
+                .texture("side", texture)
+                .texture("bottom", texture)
+                .texture("top", texture)
+                .texture("sideoverlay", overlay)
+                .texture("bottomoverlay", overlay)
+                .texture("topoverlay", overlay)
+                .texture("particle", particle);
+        slabBlock(block, slab, slabTop, models().getExistingFile(doubleSlab));
+    }
+    private void stairsBlockTintedOverlay(StairBlock block, ResourceLocation texture, ResourceLocation overlay, ResourceLocation particle) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(block);
+        ModelFile stairs = models().withExistingParent(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/stairs_tinted_overlay"))
+                .texture("side", texture)
+                .texture("bottom", texture)
+                .texture("top", texture)
+                .texture("sideoverlay", overlay)
+                .texture("bottomoverlay", overlay)
+                .texture("topoverlay", overlay)
+                .texture("particle", particle);
+        ModelFile stairsInner = models().withExistingParent(loc.getPath() + "_inner", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/inner_stairs_tinted_overlay"))
+                .texture("side", texture)
+                .texture("bottom", texture)
+                .texture("top", texture)
+                .texture("sideoverlay", overlay)
+                .texture("bottomoverlay", overlay)
+                .texture("topoverlay", overlay)
+                .texture("particle", particle);
+        ModelFile stairsOuter = models().withExistingParent(loc.getPath() + "_outer", ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/outer_stairs_tinted_overlay"))
+                .texture("side", texture)
+                .texture("bottom", texture)
+                .texture("top", texture)
+                .texture("sideoverlay", overlay)
+                .texture("bottomoverlay", overlay)
+                .texture("topoverlay", overlay)
+                .texture("particle", particle);
+        stairsBlock(block, stairs, stairsInner, stairsOuter);
+    }
+    private void blockWithItemTintedOverlay(Supplier<Block> blockRegistryObject, ResourceLocation texture, ResourceLocation overlay, ResourceLocation particle) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ModelFile cube = models().withExistingParent(loc.getPath(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/cube_all_tinted_overlay"))
+                .texture("all", texture)
+                .texture("overlay", overlay)
+                .texture("particle", particle);
+        simpleBlockWithItem(blockRegistryObject.get(), cube);
     }
 
     private void blockWithItem(Supplier<Block> blockRegistryObject) {

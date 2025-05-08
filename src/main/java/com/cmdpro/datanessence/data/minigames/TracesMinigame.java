@@ -82,14 +82,42 @@ public class TracesMinigame extends Minigame {
     public Tile getTile(Vector2d pos) {
         return tiles.get(new Vector2i((int)Math.floor(pos.x/10d), (int)Math.floor(pos.y/10d)));
     }
+
+    @Override
+    public void tick() {
+        super.tick();
+        time++;
+    }
+
+    private int time;
     @Override
     public void render(DataBankScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y) {
+        boolean allConnectedToEnds = true;
+        List<Vector2i> pathedTiles = new ArrayList<>();
+        for (Tile i : tiles.values()) {
+            if (i.type == 1 && !isConnectedToEnd(i)) {
+                allConnectedToEnds = false;
+            }
+            if (i.type == 1) {
+                pathedTiles.addAll(i.path);
+            }
+        }
         for (Tile i : tiles.values()) {
             if (i.type == 0) {
                 if (pMouseX >= x + (i.pos.x * 10) && pMouseY >= y + (i.pos.y * 10) && pMouseX <= x + (i.pos.x * 10) + 9 && pMouseY <= y + (i.pos.y * 10) + 9) {
                     pGuiGraphics.blit(TEXTURE, x + (i.pos.x * 10), y + (i.pos.y * 10), 33, 11, 10, 10);
                 } else {
                     pGuiGraphics.blit(TEXTURE, x + (i.pos.x * 10), y + (i.pos.y * 10), 22, 11, 10, 10);
+                }
+                if (allConnectedToEnds) {
+                    if (!pathedTiles.contains(i.pos)) {
+                        float[] originalColor = RenderSystem.getShaderColor().clone();
+                        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1f-((((float)Math.sin(Math.toRadians((time+pPartialTick)*4f))/2f)+1f)/2f));
+                        RenderSystem.enableBlend();
+                        pGuiGraphics.blit(TEXTURE, x + (i.pos.x * 10) + 4, y + (i.pos.y * 10) + 2, 44, 0, 2, 6);
+                        RenderSystem.setShaderColor(originalColor[0], originalColor[1], originalColor[2], originalColor[3]);
+                        RenderSystem.disableBlend();
+                    }
                 }
             } else if (i.type == 1) {
                 if (pMouseX >= x + (i.pos.x * 10) && pMouseY >= y + (i.pos.y * 10) && pMouseX <= x + (i.pos.x * 10) + 9 && pMouseY <= y + (i.pos.y * 10) + 9) {

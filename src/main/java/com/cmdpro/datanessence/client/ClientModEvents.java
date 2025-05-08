@@ -275,7 +275,9 @@ public class ClientModEvents {
         if (hasOpalescence) {
             event.register((pState, pLevel, pPos, pTintIndex) -> {
                 if (pPos != null) {
-                    return DataNEssenceIntegration.OpalescenseIntegration.getOpalBlockColor(pState, pLevel, pPos, pTintIndex);
+                    if (pTintIndex == 0) {
+                        return DataNEssenceIntegration.OpalescenseIntegration.getOpalBlockColor(pState, pLevel, pPos, pTintIndex);
+                    }
                 }
                 return 0xFFFFFFFF;
             }, BlockRegistry.TRAVERSITE_ROAD_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
@@ -292,7 +294,7 @@ public class ClientModEvents {
             return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 1f, 1f).getRGB();
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
         if (hasOpalescence) {
-            event.register(DataNEssenceIntegration.OpalescenseIntegration::getOpalItemColor, BlockRegistry.TRAVERSITE_ROAD_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
+            event.register((stack, tintIndex) -> tintIndex == 0 ? DataNEssenceIntegration.OpalescenseIntegration.getOpalItemColor(stack, tintIndex) : 0xFFFFFFFF, BlockRegistry.TRAVERSITE_ROAD_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get(), BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
         }
     }
 }
