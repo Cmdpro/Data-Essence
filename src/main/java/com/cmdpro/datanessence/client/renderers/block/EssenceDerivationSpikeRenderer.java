@@ -5,15 +5,15 @@ import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
+
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.generation.derivationspike.EssenceDerivationSpikeBlockEntity;
-import net.minecraft.client.animation.AnimationDefinition;
+
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.AnimationState;
 
 public class EssenceDerivationSpikeRenderer extends DatabankBlockEntityRenderer<EssenceDerivationSpikeBlockEntity> {
     public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("essence_derivation_spike"), "main");

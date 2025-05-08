@@ -15,7 +15,6 @@ import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 
-import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -23,7 +22,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -36,7 +34,6 @@ import org.jetbrains.annotations.NotNull;
 public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements EssenceBlockEntity, Overheatable {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 2000f);
     public int cooldown, temperature;
-    public AnimationDefinition anim;
     public boolean isBroken, hasStructure, hasRedstone;
     final Multiblock structure = MultiblockManager.multiblocks.get(DataNEssence.locate("generators/essence_derivation_spike"));
 
