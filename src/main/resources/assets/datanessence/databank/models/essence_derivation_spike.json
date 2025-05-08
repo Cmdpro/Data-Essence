@@ -2,7 +2,7 @@
   "animations": {
       "idle": {
       "length": 0,
-      "looping": false,
+      "looping": true,
       "animation": [
         {
           "bone": "spike",
