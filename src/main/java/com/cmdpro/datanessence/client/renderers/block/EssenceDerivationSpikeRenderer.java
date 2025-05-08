@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.client.renderers.block;
 
 import com.cmdpro.databank.model.DatabankEntityModel;
 import com.cmdpro.databank.model.DatabankModels;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 import com.cmdpro.datanessence.DataNEssence;
@@ -28,9 +29,6 @@ public class EssenceDerivationSpikeRenderer extends DatabankBlockEntityRenderer<
 
     public static class Model extends DatabankBlockEntityModel<EssenceDerivationSpikeBlockEntity> {
         public static DatabankEntityModel model;
-        public static AnimationDefinition rotateRings;
-        public static AnimationDefinition extendSpike;
-        public static AnimationDefinition retractSpike;
         private final ModelPart root;
 
         public Model(ModelPart root) {
@@ -40,9 +38,6 @@ public class EssenceDerivationSpikeRenderer extends DatabankBlockEntityRenderer<
         public static DatabankEntityModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("essence_derivation_spike"));
-                rotateRings = model.animations.get("rotate_rings").createAnimationDefinition();
-                extendSpike = model.animations.get("extend_spike").createAnimationDefinition();
-                retractSpike = model.animations.get("retract_spike").createAnimationDefinition();
             }
             return model;
         }
@@ -52,28 +47,16 @@ public class EssenceDerivationSpikeRenderer extends DatabankBlockEntityRenderer<
         }
 
         public void setupAnim(EssenceDerivationSpikeBlockEntity spike) {
-            spike.animState.startIfStopped((int) getAgeInTicks());
-            AnimationDefinition anim;
-
-            // TODO extendSpike needs to play, fix animations
+            DatabankAnimationState state = spike.animState;
 
             if ( spike.hasRedstone && spike.hasStructure && !spike.isBroken )
-                anim = rotateRings;
-            else
-                anim = retractSpike;
+                state.setAnim("extend_spike");
+            if ( state.isCurrentAnim("extend_spike") && state.isDone() )
+                state.setAnim("rotate_rings");
 
-            if ( anim != spike.anim )
-                updateAnim(spike, spike.animState, anim);
-
-            this.animate(spike.animState, anim, 1.0f);
-        }
-
-        protected void updateAnim(EssenceDerivationSpikeBlockEntity entity, AnimationState state, AnimationDefinition definition) {
-            if (entity.anim != definition) {
-                state.stop();
-                state.start((int)getAgeInTicks());
-                entity.anim = definition;
-            }
+            state.updateAnimDefinitions(model);
+            state.update();
+            this.animate(state.state, state.getAnim().definition);
         }
 
         @Override

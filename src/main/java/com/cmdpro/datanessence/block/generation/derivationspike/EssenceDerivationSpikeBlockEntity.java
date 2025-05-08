@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.generation.derivationspike;
 
+import com.cmdpro.databank.model.animation.DatabankAnimationDefinition;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.databank.multiblock.Multiblock;
 import com.cmdpro.databank.multiblock.MultiblockManager;
 import com.cmdpro.databank.temperature.TemperatureUtil;
@@ -35,7 +37,6 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 2000f);
     public int cooldown, temperature;
     public AnimationDefinition anim;
-    public AnimationState animState = new AnimationState();
     public boolean isBroken, hasStructure, hasRedstone;
     final Multiblock structure = MultiblockManager.multiblocks.get(DataNEssence.locate("generators/essence_derivation_spike"));
 
@@ -43,6 +44,12 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
     public IFluidHandler getFluidHandler() {
         return coolantTank;
     }
+
+    public DatabankAnimationState animState = new DatabankAnimationState("retract_spike")
+            .addAnim(new DatabankAnimationDefinition("rotate_rings", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationDefinition("extend_spike", (state, anim) -> {}, (state, anim) -> state.setAnim("rotate_rings")))
+            .addAnim(new DatabankAnimationDefinition("retract_spike", (state, anim) -> {}, (state, anim) -> {}));
+
 
     public EssenceDerivationSpikeBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistry.ESSENCE_DERIVATION_SPIKE.get(), pos, blockState);
