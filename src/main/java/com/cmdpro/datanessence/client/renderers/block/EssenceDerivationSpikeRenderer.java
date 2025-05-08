@@ -51,6 +51,8 @@ public class EssenceDerivationSpikeRenderer extends DatabankBlockEntityRenderer<
 
             if ( (spike.hasRedstone && spike.hasStructure && !spike.isBroken) && state.isCurrentAnim("idle") )
                 state.setAnim("extend_spike");
+            if ( (!spike.hasRedstone || !spike.hasStructure || spike.isBroken) && state.isCurrentAnim("rotate_rings") )
+                state.setAnim("retract_spike");
 
             state.updateAnimDefinitions(model);
             state.update();

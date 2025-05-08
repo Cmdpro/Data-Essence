@@ -19,6 +19,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -89,7 +91,7 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
             spike.hasStructure = spike.structure.checkMultiblock(world, pos);
             if (spike.hasStructure) {
 
-                if (spike.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < spike.getStorage().getMaxEssence() && spike.cooldown <= 0 && !spike.isBroken && spike.isRedstonePowered()) {
+                if (spike.isRedstonePowered() && spike.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < spike.getStorage().getMaxEssence() && spike.cooldown <= 0 && !spike.isBroken) {
 
                     for (LivingEntity entity : world.getEntitiesOfClass(LivingEntity.class, AABB.ofSize(pos.getCenter().add(0, 1, 0), 11, 3, 11))) {
                         if (entity.isAlive())
@@ -130,8 +132,6 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
         tag.putInt("cooldown", cooldown);
         tag.putInt("Temp", temperature);
         tag.putBoolean("IsBroken", isBroken);
-        tag.putBoolean("Multi", hasStructure);
-        tag.putBoolean("Redstone", hasRedstone);
         tag.put("EssenceStorage", storage.toNbt());
     }
 
@@ -142,7 +142,28 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
         cooldown = nbt.getInt("cooldown");
         temperature = nbt.getInt("Temp");
         isBroken = nbt.getBoolean("IsBroken");
-        hasRedstone = nbt.getBoolean("Redstone");
-        hasStructure = nbt.getBoolean("Multi");
+    }
+
+    public ClientboundBlockEntityDataPacket getUpdatePacket(){
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
+        CompoundTag tag = pkt.getTag();
+        storage.fromNbt(tag.getCompound("EssenceStorage"));
+        isBroken = tag.getBoolean("IsBroken");
+        hasStructure = tag.getBoolean("Multi");
+        hasRedstone = tag.getBoolean("Redstone");
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        CompoundTag tag = new CompoundTag();
+        tag.put("EssenceStorage", storage.toNbt());
+        tag.putBoolean("IsBroken", isBroken);
+        tag.putBoolean("Multi", hasStructure);
+        tag.putBoolean("Redstone", hasRedstone);
+        return tag;
     }
 }
