@@ -217,7 +217,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                         itemstack1.grow(itemstack.getCount());
                         itemHandler.setStackInSlot(i1, itemstack1);
                     } else {
-                        ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, stack);
+                        ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, itemstack1);
                         level.addFreshEntity(entity);
                     }
                 }
