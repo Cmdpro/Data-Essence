@@ -113,13 +113,15 @@ public class ClientEvents {
                 if (mc.player.isHolding((stack) -> stack.getItem() instanceof GrapplingHook && ItemEssenceContainer.getEssence(stack, GrapplingHook.FUEL_ESSENCE_TYPE) >= 5) && mc.player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isEmpty()) {
                     HitResult hit = mc.player.pick(35, 0, false);
                     if (hit.getType() != HitResult.Type.MISS) {
+                        long gameTime = mc.level.getGameTime();
+                        float fade = (Math.sin((gameTime+Minecraft.getInstance().getTimer().getGameTimeDeltaTicks())/15f)+1f)/2f;
                         Vec3 pos = event.getCamera().getPosition();
                         Vec3 pos1 = hit.getLocation();
                         Vec3 pos2 = mc.player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                         event.getPoseStack().pushPose();
                         event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
                         Color color = new Color(EssenceTypeRegistry.ESSENCE.get().color);
-                        color = new Color(color.getRed(), color.getGreen(), color.getBlue(), 150);
+                        color = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int)((0.5f-(fade/4))*255));
                         ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color, 0.05d);
                         event.getPoseStack().popPose();
                     }
