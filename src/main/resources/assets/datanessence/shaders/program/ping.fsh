@@ -37,14 +37,14 @@ vec3 worldPos(float depth) {
     return CameraPosition + worldSpacePosition.xyz;
 }
 void main() {
-    float targetDist = time*25;
-    float range = 1;
+    float targetDist = time*50;
+    float range = 3;
     vec3 color = vec3(1.0, 0.0, 1.0);
     vec3 world = worldPos(texture(DiffuseDepthSampler, texCoord).r);
     float dist = distance(world.xz, PingPosition.xz);
     float blend = 0.0;
     if (dist >= targetDist-(range/2) && dist <= targetDist+(range/2)) {
-        blend = 1.0-(time/5.0);
+        blend = ((dist - (targetDist-(range/2)))/range)*(1.0-(time/5.0));
     }
     fragColor = mix(texture(DiffuseSampler, texCoord), vec4(color, 1), blend);
 }
