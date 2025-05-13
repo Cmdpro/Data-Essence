@@ -572,7 +572,7 @@
   "advancements.datanessence.use_data_drive.title": "Providing Patterns",
   "advancements.datanessence.use_data_drive.description": "Make use of a Data Drive for assigning recipes to your machines.",
 
-  "tooltip.datanessence.progression_requirement": "Progression Requirement",
+  "tooltip.datanessence.progression_requirement": " ◇ Further experimentation is needed.",
   "tooltip.datanessence.toggle_lock": "Toggle Slot Locking",
   "tooltip.datanessence.save_and_exit": "Save and Exit",
   "tooltip.datanessence.save_and_exit_sneak": "Clear Saved Entry",

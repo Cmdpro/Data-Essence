@@ -306,8 +306,8 @@ public class DataTabletScreen extends Screen {
                                 if (mouseY >= ((entry.y * 20) - 10) + offsetY + y && mouseY <= ((entry.y * 20) + 10) + offsetY + y) {
                                     if (entry.isIncompleteClient()) {
                                         tooltip = entry.flavor.equals(Component.empty())
-                                                ? List.of(entry.name.getVisualOrderText(), Component.translatable("tooltip.datanessence.progression_requirement").copy().withStyle(ChatFormatting.BOLD, ChatFormatting.RED).getVisualOrderText())
-                                                : List.of(entry.name.getVisualOrderText(), entry.flavor.copy().withStyle(ChatFormatting.ITALIC).withColor(EssenceTypeRegistry.ESSENCE.get().getColor()).getVisualOrderText(), Component.translatable("tooltip.datanessence.progression_requirement").copy().withStyle(ChatFormatting.BOLD, ChatFormatting.RED).getVisualOrderText());
+                                                ? List.of(entry.name.getVisualOrderText(), Component.translatable("tooltip.datanessence.progression_requirement").copy().withStyle(ChatFormatting.ITALIC, ChatFormatting.LIGHT_PURPLE).getVisualOrderText())
+                                                : List.of(entry.name.getVisualOrderText(), entry.flavor.copy().withStyle(ChatFormatting.ITALIC).withColor(EssenceTypeRegistry.ESSENCE.get().getColor()).getVisualOrderText(), Component.translatable("tooltip.datanessence.progression_requirement").copy().withStyle(ChatFormatting.ITALIC, ChatFormatting.LIGHT_PURPLE).getVisualOrderText());
                                     } else
                                         tooltip = entry.flavor.equals(Component.empty())
                                             ? List.of(entry.name.getVisualOrderText())
