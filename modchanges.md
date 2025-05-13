@@ -3,6 +3,7 @@
 
 ### Changes
 - Tweaked wording of the Item Filter entry
+- Improved the ping effect
 
 ### Fixes
 - Fixed an issue where the Auto-Fabricator would void remainders
