@@ -9,6 +9,8 @@ import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
+import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.data.pinging.PingableStructure;
 import com.cmdpro.datanessence.entity.BlackHole;
@@ -52,6 +54,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import org.apache.commons.lang3.RandomUtils;
 import org.joml.Math;
 import org.joml.Vector3d;
 import org.joml.Vector3f;
@@ -206,6 +209,7 @@ public class ClientEvents {
     public static void onClientTick(ClientTickEvent.Post event)
     {
         Minecraft mc = Minecraft.getInstance();
+        var player = mc.player;
         if (mc.level != null)
         {
             for (Map.Entry<StructurePing, Integer> i : pings.entrySet().stream().toList()) {
@@ -217,20 +221,20 @@ public class ClientEvents {
             }
             boolean playMusic = false;
             SoundEvent mus = null;
-            if (mc.player != null) {
-                GrapplingHook.GrapplingHookData grapplingHookData = mc.player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
+            if (player != null) {
+                GrapplingHook.GrapplingHookData grapplingHookData = player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
                 if (grapplingHookData != null) {
-                    Vector3d direction = new Vector3d(grapplingHookData.pos.subtract(mc.player.position()).toVector3f()).normalize();
+                    Vector3d direction = new Vector3d(grapplingHookData.pos.subtract(player.position()).toVector3f()).normalize();
                     double theta = direction.angle(new Vector3d(0, 1, 0));
-                    double centripetalAcceleration = mc.player.getDeltaMovement().lengthSqr() / (1d+grapplingHookData.distance);
+                    double centripetalAcceleration = player.getDeltaMovement().lengthSqr() / (1d+grapplingHookData.distance);
                     double mass = 1;
-                    double gravity = mc.player.getGravity();
+                    double gravity = player.getGravity();
                     Vector3d tension = new Vector3d(direction).mul(mass * (centripetalAcceleration + gravity * Math.cos(theta)));
                     Vector3d force = new Vector3d(tension).div(mass);
-                    mc.player.setDeltaMovement(mc.player.getDeltaMovement().add(force.x, force.y, force.z));
+                    player.setDeltaMovement(player.getDeltaMovement().add(force.x, force.y, force.z));
                 }
-                for (int index = 0; index < mc.player.getInventory().getContainerSize(); index++) {
-                    ItemStack slot = mc.player.getInventory().getItem(index);
+                for (int index = 0; index < player.getInventory().getContainerSize(); index++) {
+                    ItemStack slot = player.getInventory().getItem(index);
                     if (slot.is(ItemRegistry.MUSIC_DISC_PLAYER.get())) {
                         ResourceKey<SoundEvent> key = slot.get(DataComponentRegistry.PLAYING_MUSIC);
                         if (key != null) {
@@ -243,8 +247,23 @@ public class ClientEvents {
                         }
                     }
                 }
-                if (AntiGravityPack.shouldRemoveGravity(mc.player)) {
-                    mc.player.setDeltaMovement(mc.player.getDeltaMovement().multiply(1, 0, 1));
+                if (AntiGravityPack.shouldRemoveGravity(player)) {
+                    player.setDeltaMovement(player.getDeltaMovement().multiply(1, 0, 1));
+
+                    var random = mc.level.getRandom();
+                    int lifetime = RandomUtils.nextInt(10, 60);
+
+                    for (int i = 0; i < 5; i++) {
+                        float hOff = random.nextFloat() * 0.1f;
+                        hOff = random.nextInt() % 2 == 0 ? hOff : -hOff;
+                        float xVel = random.nextFloat() * 0.08f;
+                        xVel = random.nextInt() % 2 == 0 ? xVel : -xVel;
+                        float zVel = random.nextFloat() * 0.08f;
+                        zVel = random.nextInt() % 2 == 0 ? zVel : -zVel;
+
+                        var fx = new CircleParticleOptions().setFriction(1f).setLifetime(lifetime).setAdditive(true).setColor(new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().getColor()));
+                        mc.particleEngine.createParticle(fx, player.position().x+hOff, player.position().y+hOff, player.position().z+hOff, xVel, -1, zVel);
+                    }
                 }
             }
             SoundManager manager = mc.getSoundManager();
