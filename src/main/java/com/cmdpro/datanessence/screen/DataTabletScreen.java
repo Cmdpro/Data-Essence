@@ -20,6 +20,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.phys.Vec2;
@@ -303,7 +304,13 @@ public class DataTabletScreen extends Screen {
                         if (entry.isVisibleClient()) {
                             if (mouseX >= ((entry.x * 20) - 10) + offsetX + x && mouseX <= ((entry.x * 20) + 10) + offsetX + x) {
                                 if (mouseY >= ((entry.y * 20) - 10) + offsetY + y && mouseY <= ((entry.y * 20) + 10) + offsetY + y) {
-                                    tooltip = entry.flavor.equals(Component.empty())
+                                    if (entry.isIncompleteClient()) {
+                                        Component progressionRequirement = Component.translatable("tooltip.datanessence.progression_requirement").copy().withStyle(ChatFormatting.ITALIC).withColor(0xFFff61ca);
+                                        tooltip = entry.flavor.equals(Component.empty())
+                                                ? List.of(entry.name.getVisualOrderText(), progressionRequirement.getVisualOrderText())
+                                                : List.of(entry.name.getVisualOrderText(), entry.flavor.copy().withStyle(ChatFormatting.ITALIC).withColor(EssenceTypeRegistry.ESSENCE.get().getColor()).getVisualOrderText(), progressionRequirement.getVisualOrderText());
+                                    } else
+                                        tooltip = entry.flavor.equals(Component.empty())
                                             ? List.of(entry.name.getVisualOrderText())
                                             : List.of(entry.name.getVisualOrderText(), entry.flavor.copy().withStyle(ChatFormatting.ITALIC).withColor(EssenceTypeRegistry.ESSENCE.get().getColor()).getVisualOrderText());
                                     break;
