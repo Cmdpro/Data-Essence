@@ -7,7 +7,7 @@ import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.block.generation.derivationspike.EssenceDerivationSpikeBlockEntity;
+import com.cmdpro.datanessence.block.generation.EssenceDerivationSpikeBlockEntity;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

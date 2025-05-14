@@ -1,6 +1,5 @@
-package com.cmdpro.datanessence.block.generation.derivationspike;
+package com.cmdpro.datanessence.block.generation;
 
-import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;

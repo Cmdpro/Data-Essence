@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.block.generation.derivationspike;
+package com.cmdpro.datanessence.block.generation;
 
 import com.cmdpro.databank.model.animation.DatabankAnimationDefinition;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
@@ -88,7 +88,11 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
 
     public static void tick(Level world, BlockPos pos, BlockState state, EssenceDerivationSpikeBlockEntity spike) {
         if (!world.isClientSide()) {
+            boolean hadStructure = spike.hasStructure;
             spike.hasStructure = spike.structure.checkMultiblock(world, pos);
+            if (hadStructure && !spike.hasStructure) {
+                spike.updateBlock();
+            }
             if (spike.hasStructure) {
 
                 if (spike.isRedstonePowered() && spike.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) < spike.getStorage().getMaxEssence() && spike.cooldown <= 0 && !spike.isBroken) {

@@ -6,7 +6,7 @@ import com.cmdpro.datanessence.block.decoration.FlareLightBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphonBlockEntity;
-import com.cmdpro.datanessence.block.generation.derivationspike.EssenceDerivationSpikeBlockEntity;
+import com.cmdpro.datanessence.block.generation.EssenceDerivationSpikeBlockEntity;
 import com.cmdpro.datanessence.block.processing.*;
 import com.cmdpro.datanessence.block.production.EssenceBreakerBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
