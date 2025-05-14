@@ -124,6 +124,14 @@ public class ModBlockLootTables extends BlockLootSubProvider {
 
         this.add(BlockRegistry.AREKKO.get(),
                 block -> createArekkoDrops(BlockRegistry.AREKKO.get(), Items.BONE));
+        this.add(BlockRegistry.FROZEN_MOONLIGHT.get(), block -> createFrozenMoonlightDrops(block, ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get()));
+    }
+    protected LootTable.Builder createFrozenMoonlightDrops(Block pBlock, Item item) {
+        return createSilkTouchDispatchTable(pBlock,
+                this.applyExplosionDecay(pBlock,
+                        LootItem.lootTableItem(item)
+                                .apply(SetItemCountFunction.setCount(UniformGenerator.between(2.0F, 4.0F)))
+                                .apply(ApplyBonusCount.addOreBonusCount(this.registries.holderOrThrow(Enchantments.FORTUNE)))));
     }
     protected LootTable.Builder createEssenceCrystalDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,

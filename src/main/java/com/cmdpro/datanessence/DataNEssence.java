@@ -297,6 +297,7 @@ public class DataNEssence
             event.accept(ItemRegistry.EMERALD_SHARD.get());
             event.accept(ItemRegistry.COAL_LUMP.get());
             event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
+            event.accept(ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get());
 
             // Buckets
             event.accept(ItemRegistry.GENDERFLUID_BUCKET.get());
@@ -313,6 +314,7 @@ public class DataNEssence
             event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
             event.accept(BlockRegistry.TETHERGRASS.get());
             event.accept(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
+            event.accept(BlockRegistry.FROZEN_MOONLIGHT.get());
             //event.accept(BlockRegistry.SPIRE_GLASS.get());
             //event.accept(BlockRegistry.CRYSTALLINE_LOG.get());
             //event.accept(BlockRegistry.CRYSTALLINE_LEAVES.get());

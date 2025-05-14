@@ -99,7 +99,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.DRYING_TABLE.get())
                 .add(BlockRegistry.ESSENCE_DERIVATION_SPIKE.get())
                 .add(BlockRegistry.LUNAR_CRYSTAL_SEED.get())
-                .add(BlockRegistry.ECLIPTRUM_BLOCK.get());
+                .add(BlockRegistry.ECLIPTRUM_BLOCK.get())
+                .add(BlockRegistry.FROZEN_MOONLIGHT.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())

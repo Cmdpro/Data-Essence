@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:ice_spikes",
+  "features": "datanessence:moonlight_ice_spike",
+  "step": "surface_structures"
+}

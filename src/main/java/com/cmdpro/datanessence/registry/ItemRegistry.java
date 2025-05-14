@@ -79,6 +79,7 @@ public class ItemRegistry {
     public static final Supplier<Item> ECLIPTRUM_INGOT = register("ecliptrum_ingot", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> TRANSFORMATIVE_ROD = register("transformative_rod", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> REFLECTIVE_PANEL = register("reflective_panel", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> FROZEN_MOONLIGHT_CHUNK = register("frozen_moonlight_chunk", () -> new Item(new Item.Properties()));
 
     // Ore Processing Intermediates and Nuggets
     public static final Supplier<Item> COPPER_NUGGET = register("copper_nugget", () -> new Item(new Item.Properties()));

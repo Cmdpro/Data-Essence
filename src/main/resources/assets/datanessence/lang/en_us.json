@@ -92,6 +92,7 @@
   "item.datanessence.under_the_sky_music_disc": "Music Disc",
   "item.datanessence.warp_capsule": "Warp Capsule",
   "item.datanessence.wire_spool": "Wire Spool",
+  "item.datanessence.frozen_moonlight_chunk": "Frozen Moonlight Chunk",
 
   "block.datanessence.aether_rune": "Aether Rune",
   "block.datanessence.ancient_glyph_stone_blank": "Ancient Rock Panel",
@@ -193,6 +194,7 @@
   "block.datanessence.vacuum": "Vacuum",
   "block.datanessence.cryochamber": "Cryochamber",
   "block.datanessence.cryochamber_filler": "Cryochamber",
+  "block.datanessence.frozen_moonlight": "Frozen Moonlight",
 
   "entity.datanessence.essence_bomb": "Industrial Essence Bomb",
   "entity.datanessence.lunar_essence_bomb": "Lunar Essence Bomb",

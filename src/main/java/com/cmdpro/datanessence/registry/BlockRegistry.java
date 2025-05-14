@@ -82,6 +82,9 @@ public class BlockRegistry {
     public static final Supplier<Block> LUNAR_CRYSTAL_SEED = register("lunar_crystal_seed",
             () -> new LunarCrystalSeed(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE).emissiveRendering(BlockRegistry::always).lightLevel(state -> 3).noOcclusion()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> FROZEN_MOONLIGHT = register("frozen_moonlight",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_ICE)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",
