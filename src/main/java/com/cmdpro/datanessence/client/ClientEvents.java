@@ -12,6 +12,7 @@ import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.data.pinging.PingableStructure;
 import com.cmdpro.datanessence.entity.BlackHole;
+import com.cmdpro.datanessence.item.equipment.AntiGravityPack;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.data.pinging.StructurePing;
@@ -241,6 +242,9 @@ public class ClientEvents {
                             }
                         }
                     }
+                }
+                if (AntiGravityPack.shouldRemoveGravity(mc.player)) {
+                    mc.player.setDeltaMovement(mc.player.getDeltaMovement().multiply(1, 0, 1));
                 }
             }
             SoundManager manager = mc.getSoundManager();

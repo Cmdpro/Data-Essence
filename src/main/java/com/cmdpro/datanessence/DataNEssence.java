@@ -253,6 +253,7 @@ public class DataNEssence
             event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
             event.accept(ItemRegistry.TRAVERSITE_TRUDGERS.get());
             event.accept(ItemRegistry.GRAPPLING_HOOK.get());
+            event.accept(ItemRegistry.ANTI_GRAVITY_PACK.get());
 
 
             // Wires

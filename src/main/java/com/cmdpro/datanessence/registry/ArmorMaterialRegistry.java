@@ -30,10 +30,24 @@ public class ArmorMaterialRegistry {
             15,
             SoundEvents.ARMOR_EQUIP_GENERIC,
             () -> Ingredient.of(Tags.Items.INGOTS_COPPER), List.of(
-                    new ArmorMaterial.Layer(
-                            DataNEssence.locate("primitive_anti_gravity_pack")
-                    )
-            ),
+            new ArmorMaterial.Layer(
+                    DataNEssence.locate("primitive_anti_gravity_pack")
+            )
+    ),
+            0,
+            0
+    ));
+    public static final Holder<ArmorMaterial> ANTI_GRAVITY_PACK = register("anti_gravity_pack", () -> new ArmorMaterial(
+            Util.make(new EnumMap<>(ArmorItem.Type.class), map -> {
+                map.put(ArmorItem.Type.CHESTPLATE, 2);
+            }),
+            15,
+            SoundEvents.ARMOR_EQUIP_GENERIC,
+            () -> Ingredient.of(ItemRegistry.ECLIPTRUM_INGOT.get()), List.of(
+            new ArmorMaterial.Layer(
+                    DataNEssence.locate("anti_gravity_pack")
+            )
+    ),
             0,
             0
     ));
