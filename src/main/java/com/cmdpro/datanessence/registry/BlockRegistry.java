@@ -21,7 +21,7 @@ import com.cmdpro.datanessence.block.technical.DataBank;
 import com.cmdpro.datanessence.block.technical.StructureProtector;
 import com.cmdpro.datanessence.block.technical.cryochamber.Cryochamber;
 import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberBlockItem;
-import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberFiller;
+import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberRouter;
 import com.cmdpro.datanessence.block.transmission.*;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.block.transmission.ExoticEssencePoint;
@@ -229,9 +229,9 @@ public class BlockRegistry {
             () -> new Arekko(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).noOcclusion()));
     public static final Supplier<Block> CRYOCHAMBER = register("cryochamber",
             () -> new Cryochamber(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()),
-            object -> () -> new CryochamberBlockItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CRYOCHAMBER_FILLER = registerBlock("cryochamber_filler",
-            () -> new CryochamberFiller(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()));
+            () -> new CryochamberRouter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()));
 
     // Utility Blocks
     public static final Supplier<Block> TRAVERSITE_ROAD = register("traversite_road",

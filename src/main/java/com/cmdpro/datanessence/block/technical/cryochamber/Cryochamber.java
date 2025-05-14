@@ -1,7 +1,10 @@
 package com.cmdpro.datanessence.block.technical.cryochamber;
 
+import com.cmdpro.databank.megablock.BasicMegablockCore;
+import com.cmdpro.databank.megablock.MegablockShape;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -19,7 +22,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class Cryochamber extends Block implements EntityBlock {
+public class Cryochamber extends BasicMegablockCore implements EntityBlock {
     private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
 
     @Override
@@ -35,46 +38,19 @@ public class Cryochamber extends Block implements EntityBlock {
     }
 
     @Override
-    public @Nullable BlockState getStateForPlacement(BlockPlaceContext context) {
-        if (!context.getLevel().getBlockState(context.getClickedPos().above()).canBeReplaced(context)) {
-            return null;
-        }
-        if (!context.getLevel().getBlockState(context.getClickedPos().above().above()).canBeReplaced(context)) {
-            return null;
-        }
-        return super.getStateForPlacement(context);
-    }
-
-    @Override
-    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        if (!level.getBlockState(pos.above()).is(BlockRegistry.CRYOCHAMBER_FILLER.get())) {
-            return false;
-        }
-        if (!level.getBlockState(pos.above().above()).is(BlockRegistry.CRYOCHAMBER_FILLER.get())) {
-            return false;
-        }
-        return super.canSurvive(state, level, pos);
-    }
-
-    @Override
     protected void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston) {
-        if (level.getBlockState(pos.above()).canBeReplaced()) {
-            level.setBlockAndUpdate(pos.above(), BlockRegistry.CRYOCHAMBER_FILLER.get().defaultBlockState());
-            level.setBlockAndUpdate(pos.above().above(), BlockRegistry.CRYOCHAMBER_FILLER.get().defaultBlockState().setValue(CryochamberFiller.SECTION, CryochamberFiller.Section.TOP));
-        }
         super.onPlace(state, level, pos, oldState, movedByPiston);
+        BlockState above = level.getBlockState(pos.above());
+        if (above.is(getRouterBlock())) {
+            above = above.setValue(CryochamberRouter.INVISIBLE, false);
+            level.setBlockAndUpdate(pos.above(), above);
+        }
     }
 
     @Override
     public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
         super.destroy(level, pos, state);
         if (level instanceof ServerLevel serverLevel) {
-            if (level.getBlockState(pos.above()).is(BlockRegistry.CRYOCHAMBER_FILLER.get())) {
-                level.destroyBlock(pos.above(), true);
-            }
-            if (level.getBlockState(pos.above().above()).is(BlockRegistry.CRYOCHAMBER_FILLER.get())) {
-                level.destroyBlock(pos.above().above(), true);
-            }
             serverLevel.setBlockAndUpdate(pos, BlockRegistry.AREKKO.get().defaultBlockState());
         }
     }
@@ -82,5 +58,15 @@ public class Cryochamber extends Block implements EntityBlock {
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new CryochamberBlockEntity(pos, state);
+    }
+
+    @Override
+    public MegablockShape getMegablockShape() {
+        return new MegablockShape(Vec3i.ZERO, new Vec3i(0, 2, 0));
+    }
+
+    @Override
+    public Block getRouterBlock() {
+        return BlockRegistry.CRYOCHAMBER_FILLER.get();
     }
 }
