@@ -80,6 +80,10 @@ public class ItemRegistry {
     public static final Supplier<Item> ECLIPTRUM_INGOT = register("ecliptrum_ingot", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> TRANSFORMATIVE_ROD = register("transformative_rod", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> REFLECTIVE_PANEL = register("reflective_panel", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> ECLIPTRUM_COG = register("ecliptrum_cog", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> ECLIPTRUM_COG_ASSEMBLY_2X = register("ecliptrum_cog_assembly_2x", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> ECLIPTRUM_COG_ASSEMBLY_4X = register("ecliptrum_cog_assembly_4x", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> EXTRICATION_ROD = register("extrication_rod", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> FROZEN_MOONLIGHT_CHUNK = register("frozen_moonlight_chunk", () -> new Item(new Item.Properties()));
 
     // Ore Processing Intermediates and Nuggets

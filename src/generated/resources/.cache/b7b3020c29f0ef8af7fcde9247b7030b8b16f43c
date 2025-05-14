@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-08T01:26:29.529404293	Item Models: datanessence
+// 1.21.1	2025-05-14T09:31:12.500150387	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -22,6 +22,9 @@ d7143cba0a3221569cc1595af65cd714d785cc89 assets/datanessence/models/item/data_ta
 cc8ad366cb50cc565afd44ec81025784569113c0 assets/datanessence/models/item/deco_fluid_buffer.json
 649ebbd5fb39366d57ca9fdeda86c510f0aa80fa assets/datanessence/models/item/deco_item_buffer.json
 6122c17dc068aea2a720c8ab78ec3a725285f2a9 assets/datanessence/models/item/diamond_shard.json
+d378c40d72e67a00d5c2708d784bde77fd005463 assets/datanessence/models/item/ecliptrum_cog.json
+a80444c528fd25850a1755e5a8ec4609e23de91b assets/datanessence/models/item/ecliptrum_cog_assembly_2x.json
+cf57da3771348ff16645629021423e352f4c2224 assets/datanessence/models/item/ecliptrum_cog_assembly_4x.json
 fb227363ffeddcd931ae86674b701922b22763fb assets/datanessence/models/item/ecliptrum_ingot.json
 6b75af815e799d6d97dff366182e471862d08cf1 assets/datanessence/models/item/emerald_shard.json
 01ca71e378e64e9e02886d014639a6bf22ebad8b assets/datanessence/models/item/energized_ancient_rock_column.json
@@ -35,6 +38,7 @@ b373f009203404901822d57b9c55e629c6534e1c assets/datanessence/models/item/essence
 6b8f708d916b305e027c88bb21f80121030130bc assets/datanessence/models/item/exotic_essence_bomb.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/exotic_essence_point.json
 0973a25710a93f8da7bc1c96b160a5219a2f1447 assets/datanessence/models/item/exotic_essence_wire.json
+489ad8b7b2282909376d61d3adbb4053a507821c assets/datanessence/models/item/extrication_rod.json
 d747ed713b2de5e004d4e19bfe914756bf68d6a3 assets/datanessence/models/item/filter_upgrade.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/fluid_point.json
 f356571ca7c924ca20dabcdac766bc379c05608e assets/datanessence/models/item/fluid_wire.json

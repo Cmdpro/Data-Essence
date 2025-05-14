@@ -2,6 +2,9 @@
   "values": [
     "datanessence:transformative_rod",
     "datanessence:reflective_panel",
-    "datanessence:ecliptrum_ingot"
+    "datanessence:ecliptrum_ingot",
+    "datanessence:ecliptrum_cog",
+    "datanessence:ecliptrum_cog_assembly_2x",
+    "datanessence:ecliptrum_cog_assembly_4x"
   ]
 }

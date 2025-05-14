@@ -251,10 +251,9 @@ public class DataNEssence
             // Exploration Tools
             event.accept(ItemRegistry.WARP_CAPSULE.get());
             event.accept(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get());
+            event.accept(ItemRegistry.ANTI_GRAVITY_PACK.get());
             event.accept(ItemRegistry.TRAVERSITE_TRUDGERS.get());
             event.accept(ItemRegistry.GRAPPLING_HOOK.get());
-            event.accept(ItemRegistry.ANTI_GRAVITY_PACK.get());
-
 
             // Wires
             event.accept(ItemRegistry.ESSENCE_WIRE.get());
@@ -281,6 +280,7 @@ public class DataNEssence
             event.accept(ItemRegistry.LUNAR_ESSENCE_SHARD.get());
             event.accept(ItemRegistry.LENSING_CRYSTAL.get());
             event.accept(ItemRegistry.BONDING_POWDER.get());
+            event.accept(ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get());
             event.accept(ItemRegistry.CAPACITANCE_PANEL.get());
             event.accept(ItemRegistry.CONDUCTANCE_ROD.get());
             event.accept(ItemRegistry.WIRE_SPOOL.get());
@@ -288,17 +288,20 @@ public class DataNEssence
             event.accept(ItemRegistry.PROPELLER.get());
             event.accept(ItemRegistry.EXCITER.get());
             event.accept(ItemRegistry.HEATING_COIL.get());
+            event.accept(ItemRegistry.EXTRICATION_ROD.get());
             event.accept(ItemRegistry.IRON_DRILL.get());
             event.accept(ItemRegistry.ECLIPTRUM_INGOT.get());
             event.accept(ItemRegistry.REFLECTIVE_PANEL.get());
             event.accept(ItemRegistry.TRANSFORMATIVE_ROD.get());
+            event.accept(ItemRegistry.ECLIPTRUM_COG.get());
+            event.accept(ItemRegistry.ECLIPTRUM_COG_ASSEMBLY_2X.get());
+            event.accept(ItemRegistry.ECLIPTRUM_COG_ASSEMBLY_4X.get());
             event.accept(ItemRegistry.LENS.get());
             event.accept(ItemRegistry.COPPER_NUGGET.get());
             event.accept(ItemRegistry.DIAMOND_SHARD.get());
             event.accept(ItemRegistry.EMERALD_SHARD.get());
             event.accept(ItemRegistry.COAL_LUMP.get());
             event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
-            event.accept(ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get());
 
             // Buckets
             event.accept(ItemRegistry.GENDERFLUID_BUCKET.get());

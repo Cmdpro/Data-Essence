@@ -1,6 +1,6 @@
 {
   "icon": {
-    "id": "datanessence:essence_leech"
+    "id": "datanessence:essence_derivation_spike"
   },
   "tab": "datanessence:essence_manipulation",
   "x": -1,
@@ -18,7 +18,8 @@
         "translate": "data_tablet.pages.essence_derivation_spike.page2.text"
       },
       "recipes": [
-        "datanessence:fabrication/essence_derivation_spike"
+        "datanessence:fabrication/essence_derivation_spike",
+        "datanessence:fabrication/extrication_rod"
       ]
     },
     {
@@ -33,6 +34,7 @@
     "translate": "data_tablet.pages.essence_derivation_spike.flavor"
   },
   "parents": [
-    "datanessence:essence_manipulation/essence_leech"
+    "datanessence:essence_manipulation/essence_leech",
+    "datanessence:machinery_transformation/ecliptrum"
   ]
 }

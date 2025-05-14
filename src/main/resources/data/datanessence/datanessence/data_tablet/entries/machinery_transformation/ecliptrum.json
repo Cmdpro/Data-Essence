@@ -23,6 +23,15 @@
         "datanessence:crafting/transformative_rod",
         "datanessence:crafting/ecliptrum_compacting"
       ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:crafting/ecliptrum_decompacting",
+        "datanessence:crafting/ecliptrum_cog",
+        "datanessence:crafting/ecliptrum_cog_assembly_2x",
+        "datanessence:crafting/ecliptrum_cog_assembly_4x"
+      ]
     }
   ],
   "name": {

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "datanessence:item/components/ecliptrum_cog_assembly_4x"
+  }
+}

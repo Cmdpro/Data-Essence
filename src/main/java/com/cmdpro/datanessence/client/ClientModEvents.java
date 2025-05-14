@@ -146,6 +146,7 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(ChemicalNodeRenderer.modelLocation, ChemicalNodeRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(ChemicalNodeItemRenderer.modelLocation, ChemicalNodeItemRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(EssenceDerivationSpikeRenderer.modelLocation, EssenceDerivationSpikeRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EssenceDerivationSpikeItemRenderer.modelLocation, EssenceDerivationSpikeItemRenderer.Model::createLayer);
         });
 
         event.enqueueWork(() -> {
@@ -195,6 +196,7 @@ public class ClientModEvents {
         event.registerItem(MetalShaperItem.extensions(), BlockRegistry.METAL_SHAPER.get().asItem());
         event.registerItem(IndustrialPlantSiphonItem.extensions(), BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get().asItem());
         event.registerItem(ChemicalNodeItem.extensions(), BlockRegistry.CHEMICAL_NODE.get().asItem());
+        event.registerItem(EssenceDerivationSpikeItem.extensions(), BlockRegistry.ESSENCE_DERIVATION_SPIKE.get().asItem());
     }
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {

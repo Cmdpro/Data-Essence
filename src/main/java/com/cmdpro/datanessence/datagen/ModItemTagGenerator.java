@@ -62,7 +62,10 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(TagRegistry.Items.ECLIPTRUM_PARTS)
                 .add(ItemRegistry.TRANSFORMATIVE_ROD.get())
                 .add(ItemRegistry.REFLECTIVE_PANEL.get())
-                .add(ItemRegistry.ECLIPTRUM_INGOT.get());
+                .add(ItemRegistry.ECLIPTRUM_INGOT.get())
+                .add(ItemRegistry.ECLIPTRUM_COG.get())
+                .add(ItemRegistry.ECLIPTRUM_COG_ASSEMBLY_2X.get())
+                .add(ItemRegistry.ECLIPTRUM_COG_ASSEMBLY_4X.get());
 
         this.tag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem())

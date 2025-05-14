@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " C ",
+    "CCC",
+    " C "
+  ],
+  "key": {
+    "C": { "item": "datanessence:ecliptrum_ingot" }
+  },
+  "result": { "id": "datanessence:ecliptrum_cog", "count": 3 }
+}

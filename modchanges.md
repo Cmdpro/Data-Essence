@@ -6,3 +6,5 @@
 - Added Astronomy Tower structure
 - Added Essence Derivation Spike generator
 - Added Repulsion Rod tool
+- Added Frozen Moonlight resource
+- Added Antigravity Pack tool
