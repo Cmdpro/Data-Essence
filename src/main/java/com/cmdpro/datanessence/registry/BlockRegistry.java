@@ -305,7 +305,7 @@ public class BlockRegistry {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LIGHT_FIXTURE = register("essence_light_fixture",
-            () -> new LightFixture(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().noCollission().lightLevel((blockState) -> { return 15;})),
+            () -> new LightFixture(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).instabreak().noOcclusion().noCollission().lightLevel((blockState) -> { return 15;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Copper Deco
