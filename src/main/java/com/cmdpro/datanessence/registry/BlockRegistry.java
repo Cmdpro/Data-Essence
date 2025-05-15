@@ -37,6 +37,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.GameMasterBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -222,7 +223,7 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CREATIVE_ESSENCE_BATTERY = register("creative_essence_battery",
             () -> new CreativeEssenceBattery(MACHINE_PROPERTIES),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+            object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_TANK = register("fluid_tank",
             () -> new FluidTank(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -230,13 +231,13 @@ public class BlockRegistry {
     // Technical Blocks
     public static final Supplier<Block> STRUCTURE_PROTECTOR = register("structure_protector",
             () -> new StructureProtector(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().instabreak().noCollission()),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+            object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> DATA_BANK = register("data_bank",
             () -> new DataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+            object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> COMPUTER = register("computer",
             () -> new Computer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+            object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AREKKO = registerBlock("arekko",
             () -> new Arekko(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).noOcclusion()));
     public static final Supplier<Block> CRYOCHAMBER = register("cryochamber",
