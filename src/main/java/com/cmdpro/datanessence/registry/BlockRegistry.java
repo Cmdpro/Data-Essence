@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.block.*;
 
 import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.decoration.Dewlamp;
+import com.cmdpro.datanessence.block.decoration.EssenceBridge;
 import com.cmdpro.datanessence.block.decoration.FlareLight;
 import com.cmdpro.datanessence.block.decoration.LightFixture;
 import com.cmdpro.datanessence.block.fluid.GenderfluidBlock;
@@ -232,6 +233,9 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CRYOCHAMBER_FILLER = registerBlock("cryochamber_filler",
             () -> new CryochamberRouter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()));
+    public static final Supplier<Block> ESSENCE_BRIDGE = register("essence_bridge",
+            () -> new EssenceBridge(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(-1.0F, 3600000.0F).noOcclusion()),
+            object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
 
     // Utility Blocks
     public static final Supplier<Block> TRAVERSITE_ROAD = register("traversite_road",
