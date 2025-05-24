@@ -33,7 +33,8 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:crafting/heating_coil"
+        "datanessence:crafting/heating_coil",
+        "datanessence:crafting/copper_shell"
       ]
     }
   ],

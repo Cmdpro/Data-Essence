@@ -1,5 +1,6 @@
 ### Additions
 - Incomplete entries show a tooltip indicating their importance, making them even more obviously relevant than they already were
+- Added Synthesis recipe for Essence Bombs and associated Copper Shell crafting item
 
 ### Changes
 - Tweaked wording of the Item Filter entry

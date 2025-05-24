@@ -16,7 +16,8 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:fabrication/equipment/essence_bomb"
+        "datanessence:fabrication/equipment/essence_bomb",
+        "datanessence:synthesis/essence_bomb"
       ]
     }
   ],

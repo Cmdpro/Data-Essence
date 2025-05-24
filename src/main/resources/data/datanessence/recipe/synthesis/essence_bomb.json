@@ -1,0 +1,11 @@
+{
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 10
+  },
+  "input": { "item": "datanessence:copper_shell" },
+  "input2": { "tag": "datanessence:explosive_material" },
+  "time": 100,
+  "result": { "id": "datanessence:essence_bomb", "count": 4 },
+  "entry": "datanessence:machinery/synthesis_chamber"
+}

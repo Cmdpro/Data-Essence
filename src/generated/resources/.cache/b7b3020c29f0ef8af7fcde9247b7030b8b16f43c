@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-07T21:30:08.0520673	Item Models: datanessence
+// 1.21.1	2025-05-24T04:54:53.939721751	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -14,6 +14,7 @@ e7f029c4f5164c07c443b669fd62693caf9269ed assets/datanessence/models/item/chemica
 8b9e2c57a53dcbd1e4739dbc91816f453a28034e assets/datanessence/models/item/cognizant_cube.json
 b6c82037e00eab08aae76abb6beed0dba346f6f1 assets/datanessence/models/item/conductance_rod.json
 c3c0760c3af5a570d1881f9d39c9ea1e6365a125 assets/datanessence/models/item/copper_nugget.json
+0710ff96a3a99077a7c8dc2add5bf1578c20e65c assets/datanessence/models/item/copper_shell.json
 b049f51dd812ef55ac756e6f812c6eaadab93f17 assets/datanessence/models/item/crystalline_leaves.json
 af4074867d63d021aaf265ed71092e62a6b48ac8 assets/datanessence/models/item/crystalline_log.json
 d1b94c9c04798703c014833bebc4d726319a86db assets/datanessence/models/item/data_drive.json
