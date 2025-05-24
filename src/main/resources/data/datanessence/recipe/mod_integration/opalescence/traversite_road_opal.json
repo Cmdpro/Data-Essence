@@ -9,7 +9,7 @@
   "essenceCost": {
     "datanessence:essence": 50
   },
-  "entry": "datanessence:tools/traversite_road_opal",
+  "entry": "datanessence:tools/mod_integration_opalescence",
   "input": {
     "item": "opalescence:opal",
     "count": 1
