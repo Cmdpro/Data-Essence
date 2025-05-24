@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " C ",
+    "C C",
+    " C "
+  ],
+  "key": {
+    "C": { "item": "datanessence:capacitance_panel" }
+  },
+  "result": { "id": "datanessence:copper_shell" }
+}

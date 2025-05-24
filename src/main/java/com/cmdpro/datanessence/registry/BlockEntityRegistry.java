@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.auxiliary.*;
+import com.cmdpro.datanessence.block.decoration.EssenceBridgeBlockEntity;
 import com.cmdpro.datanessence.block.decoration.FlareLightBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
@@ -214,6 +215,10 @@ public class BlockEntityRegistry {
             register("drying_table", () ->
                     BlockEntityType.Builder.of(DryingTableBlockEntity::new,
                             BlockRegistry.DRYING_TABLE.get()).build(null));
+    public static final Supplier<BlockEntityType<EssenceBridgeBlockEntity>> ESSENCE_BRIDGE =
+            register("essence_bridge", () ->
+                    BlockEntityType.Builder.of(EssenceBridgeBlockEntity::new,
+                            BlockRegistry.ESSENCE_BRIDGE.get()).build(null));
     public static final Supplier<BlockEntityType<EssenceDerivationSpikeBlockEntity>> ESSENCE_DERIVATION_SPIKE =
             register("essence_derivation_spike", () ->
                     BlockEntityType.Builder.of(EssenceDerivationSpikeBlockEntity::new,

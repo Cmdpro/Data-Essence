@@ -84,12 +84,15 @@ public class ClientEvents {
             event.getToolTip().add(1, Component.translatable(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i).tooltipKeyWithMax, format(ItemEssenceContainer.getEssence(event.getItemStack(), i)), format(maxEssence)));
         }
     }
+    public static float time;
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         Minecraft mc = Minecraft.getInstance();
         if (tempRenderTarget == null) {
             tempRenderTarget = new TextureTarget(mc.getMainRenderTarget().width, mc.getMainRenderTarget().height, true, Minecraft.ON_OSX);
         }
+        float shaderTime = time + (Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true) / 20f);
+        DataNEssenceCoreShaders.ESSENCE_BRIDGE.safeGetUniform("Time").set(shaderTime);
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
             MultiBufferSource.BufferSource bufferSource = RenderHandler.createBufferSource();
             if (ClientPlayerData.getLinkPos() != null) {
@@ -208,6 +211,7 @@ public class ClientEvents {
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event)
     {
+        time += 1/20f;
         Minecraft mc = Minecraft.getInstance();
         var player = mc.player;
         if (mc.level != null)
