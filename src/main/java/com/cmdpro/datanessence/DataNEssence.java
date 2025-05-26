@@ -12,6 +12,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
@@ -24,6 +25,8 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 import org.apache.commons.lang3.IntegerRange;
 import org.slf4j.Logger;
+
+import java.util.List;
 
 import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasMekanism;
 import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasOpalescence;
@@ -162,8 +165,6 @@ public class DataNEssence
             }
             return null;
         });
-        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
-        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.FILTER_UPGRADE.get());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.METAL_SHAPER.get(), (o, direction) -> {
             if (direction == null) {
                 return o.getCombinedInvWrapper();
@@ -171,7 +172,6 @@ public class DataNEssence
             return o.getOutputHandler();
         });
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
-        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.FILTER_UPGRADE.get());
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (o, direction) -> {
             return o.getOutputHandler();
         });
@@ -223,6 +223,19 @@ public class DataNEssence
             }
             return null;
         });
+
+
+
+        //TODO: REMOVE IN A FEW UPDATES, THIS IS TO NOT BREAK EXISTING FACTORIES
+        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> {
+            if (stack.has(DataComponents.CONTAINER)) {
+                ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
+                if (contents != null && contents.getSlots() >= 1) {
+                    stack.set(DataComponentRegistry.FILTER_STACK, ItemContainerContents.fromItems(List.of(contents.getStackInSlot(0))));
+                }
+            }
+            return null;
+        }, ItemRegistry.FILTER_UPGRADE.get());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {

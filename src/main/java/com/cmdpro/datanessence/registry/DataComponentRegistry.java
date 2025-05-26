@@ -11,6 +11,8 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -47,6 +49,11 @@ public class DataComponentRegistry {
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceKey<SoundEvent>>> PLAYING_MUSIC = DATA_COMPONENTS.registerComponentType("playing_sound", builder -> builder
             .persistent(ResourceKey.codec(Registries.SOUND_EVENT))
             .networkSynchronized(ResourceKey.streamCodec(Registries.SOUND_EVENT))
+            .cacheEncoding()
+    );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> FILTER_STACK = DATA_COMPONENTS.registerComponentType("filter_stack", builder -> builder
+            .persistent(ItemContainerContents.CODEC)
+            .networkSynchronized(ItemContainerContents.STREAM_CODEC)
             .cacheEncoding()
     );
 }

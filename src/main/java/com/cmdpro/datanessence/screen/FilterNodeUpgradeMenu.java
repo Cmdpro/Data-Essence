@@ -1,18 +1,24 @@
 package com.cmdpro.datanessence.screen;
 
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.MenuRegistry;
 import com.cmdpro.datanessence.screen.slot.UnclickableInventorySlot;
+import com.cmdpro.datanessence.screen.slot.UnuseableSlot;
 import com.cmdpro.datanessence.util.IDataNEssenceMenuHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
+
+import java.util.List;
 
 public class FilterNodeUpgradeMenu extends AbstractContainerMenu implements IDataNEssenceMenuHelper {
     @Override
@@ -28,14 +34,25 @@ public class FilterNodeUpgradeMenu extends AbstractContainerMenu implements IDat
     public FilterNodeUpgradeMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.getSlot(extraData.readInt()).get());
     }
+    Slot slot;
     public FilterNodeUpgradeMenu(int pContainerId, Inventory inv, ItemStack stack) {
         super(MenuRegistry.FILTER_NODE_UPGRADE_MENU.get(), pContainerId);
         this.stack = stack;
         this.level = inv.player.level();
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
-        IItemHandler handler = stack.getCapability(Capabilities.ItemHandler.ITEM);
-        this.addSlot(new SlotItemHandler(handler, 0, 80, 34));
+        slot = this.addSlot(new UnuseableSlot(80, 34));
+    }
+
+    @Override
+    public void clicked(int slotId, int button, ClickType clickType, Player player) {
+        super.clicked(slotId, button, clickType, player);
+        if (slotId == slots.indexOf(slot)) {
+            if (clickType.equals(ClickType.PICKUP) || clickType.equals(ClickType.SWAP)) {
+                ItemStack carried = getCarried();
+                stack.set(DataComponentRegistry.FILTER_STACK.get(), ItemContainerContents.fromItems(List.of(carried)));
+            }
+        }
     }
 
     @Override

@@ -7,8 +7,11 @@
 - Improved the ping effect
 - Updated the Cryochamber to use the new databank megablock system
 - Made the block item for Creative Essence Batteries, Structure Protectors, Data Banks, and Computers a game master block item to stop them from being placed in survival if somehow obtained
+- Made filter upgrade sigils not take the item you want to filter
+- Made filter upgrade sigils show what they filter in the tooltip
 
 ### Fixes
 - Fixed an issue where the Auto-Fabricator would void remainders
 - Fixed incorrect texture offset of Auto-Fabricator progress bar
 - Fixed Opalescent Traversite Road (Opalescence integration) being unobtainable in survival
+- Fixed a duplication issue with the filter upgrade sigils
