@@ -15,3 +15,5 @@
 - Fixed incorrect texture offset of Auto-Fabricator progress bar
 - Fixed Opalescent Traversite Road (Opalescence integration) being unobtainable in survival
 - Fixed a duplication issue with the filter upgrade sigils
+- Fixed the Transcendental Tether being able to softlock you
+- Fixed a bug where you could manage to ascend into the sky with the Transcendental Tether
