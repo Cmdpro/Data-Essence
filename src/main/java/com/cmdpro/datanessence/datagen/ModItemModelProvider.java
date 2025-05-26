@@ -149,18 +149,37 @@ public class ModItemModelProvider extends ItemModelProvider {
                 ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
     }
     private ItemModelBuilder grapplingHook(Supplier<Item> item) {
+        ItemModelBuilder usingTrans = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_use_trans",
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_use_trans"));
+
+        ItemModelBuilder chargedTrans = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_charged_trans",
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()) + "_trans");
+
+        ItemModelBuilder emptyTrans = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_trans",
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_empty_trans"));
+
+
+
         ItemModelBuilder using = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_use",
                 ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
                 ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_use"));
-        ItemModelBuilder charged = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
-                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
-                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()))
-                .override().predicate(DataNEssence.locate("using"), 1).model(using).end();
 
-        return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_empty",
+        ItemModelBuilder charged = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_charged",
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                        ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
+
+        ItemModelBuilder empty = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
                 ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
                         ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_empty"))
-                .override().predicate(DataNEssence.locate("charged"), 1).model(charged).end();
+                .override().predicate(DataNEssence.locate("trans"), 0).predicate(DataNEssence.locate("charged"), 1).predicate(DataNEssence.locate("using"), 0).model(charged).end()
+                .override().predicate(DataNEssence.locate("trans"), 0).predicate(DataNEssence.locate("charged"), 1).predicate(DataNEssence.locate("using"), 1).model(using).end()
+                .override().predicate(DataNEssence.locate("trans"), 1).predicate(DataNEssence.locate("charged"), 0).predicate(DataNEssence.locate("using"), 0).model(emptyTrans).end()
+                .override().predicate(DataNEssence.locate("trans"), 1).predicate(DataNEssence.locate("charged"), 1).predicate(DataNEssence.locate("using"), 0).model(chargedTrans).end()
+                .override().predicate(DataNEssence.locate("trans"), 1).predicate(DataNEssence.locate("charged"), 1).predicate(DataNEssence.locate("using"), 1).model(usingTrans).end();
+        return empty;
     }
     private ItemModelBuilder simpleItemWithSubdirectory(Supplier<Item> item, String subdirectory) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),

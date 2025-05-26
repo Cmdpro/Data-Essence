@@ -162,6 +162,13 @@ public class ClientModEvents {
                 }
                 return 0;
             });
+            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("trans"), (stack, level, entity, seed) -> {
+                if (GrapplingHook.isTrans(stack)) {
+                    return 1; // :D
+                } else {
+                    return 0; // :(
+                }
+            });
         });
 
         progressionShader = new ProgressionShader();

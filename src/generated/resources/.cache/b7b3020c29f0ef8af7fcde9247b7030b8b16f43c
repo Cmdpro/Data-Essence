@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-24T04:54:53.939721751	Item Models: datanessence
+// 1.21.1	2025-05-25T22:37:05.191513871	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -69,9 +69,12 @@ c21e404c80d50f53fca78d073b54c48763738238 assets/datanessence/models/item/primiti
 1b09ec0be74ff44bbe133a0ef3f32cf87cde6661 assets/datanessence/models/item/speed_upgrade.json
 cccabab1270cb85664204724c134f6d86b2fe5a6 assets/datanessence/models/item/spire_glass.json
 aee2e6631d57b8fc41df275db6b27a783c52c54f assets/datanessence/models/item/thermometer.json
-4f996728d33c26dbfb1c37cef2e62d6c2e6e3186 assets/datanessence/models/item/transcendental_tether.json
-39321cd6ecb6128101cc83512e5ad2b645cb29df assets/datanessence/models/item/transcendental_tether_empty.json
+b9583cee79580754dd2c5a61c7188603f95b0429 assets/datanessence/models/item/transcendental_tether.json
+2d0ba36a76b055e82688d0a0780411bebf86731c assets/datanessence/models/item/transcendental_tether_charged.json
+32c97259da7d063fca03f07a7174f9757704811e assets/datanessence/models/item/transcendental_tether_charged_trans.json
+610470bbd532a4fff4e4a800c069dc6141bdcd30 assets/datanessence/models/item/transcendental_tether_trans.json
 6afd076d5fc37813a3f2a24fe0dc020c72e77f71 assets/datanessence/models/item/transcendental_tether_use.json
+5d365d44a9bd3b44fdf96411b8590329d76646f8 assets/datanessence/models/item/transcendental_tether_use_trans.json
 7545953a1981f70cdb6d9ccd399301b1df1e65d2 assets/datanessence/models/item/traversite_road_chunk.json
 e55bc425ec3b1f2a7eb2b139beb2dcedac11e59d assets/datanessence/models/item/traversite_road_slab.json
 c59e3defdbb8ac0274beed11eb09856a7af108e4 assets/datanessence/models/item/traversite_road_slab_opal.json

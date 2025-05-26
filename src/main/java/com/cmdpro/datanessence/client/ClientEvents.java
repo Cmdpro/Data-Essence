@@ -23,7 +23,6 @@ import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -31,8 +30,6 @@ import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -53,7 +50,6 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.joml.Math;
 import org.joml.Vector3d;
-import org.joml.Vector3f;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -95,9 +91,12 @@ public class ClientEvents {
                 Vec3 pos = event.getCamera().getPosition();
                 Vec3 pos1 = ClientPlayerData.getLinkPos().getCenter();
                 Vec3 pos2 = mc.player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
+                Color color = ClientPlayerData.getLinkColor();
+                Color transColor = GrapplingHook.getTransitionColor(mc.player, event.getPartialTick());
+                color = transColor != null ? transColor : color;
                 event.getPoseStack().pushPose();
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, ClientPlayerData.getLinkColor());
+                ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color);
                 event.getPoseStack().popPose();
             }
             for (Player i : mc.level.players()) {
@@ -106,9 +105,12 @@ public class ClientEvents {
                     Vec3 pos = event.getCamera().getPosition();
                     Vec3 pos1 = grapplingHookData.pos;
                     Vec3 pos2 = i.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
+                    Color color = new Color(EssenceTypeRegistry.ESSENCE.get().color);
+                    Color transColor = GrapplingHook.getTransitionColor(i, event.getPartialTick());
+                    color = transColor != null ? transColor : color;
                     event.getPoseStack().pushPose();
                     event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                    ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, new Color(EssenceTypeRegistry.ESSENCE.get().color), 0.05d);
+                    ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color, 0.05d);
                     event.getPoseStack().popPose();
                 }
             }
@@ -124,6 +126,8 @@ public class ClientEvents {
                         event.getPoseStack().pushPose();
                         event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
                         Color color = new Color(EssenceTypeRegistry.ESSENCE.get().color);
+                        Color transColor = GrapplingHook.getTransitionColor(mc.player, event.getPartialTick());
+                        color = transColor != null ? transColor : color;
                         color = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int)((0.5f-(fade/4))*255));
                         ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color, 0.05d);
                         event.getPoseStack().popPose();
