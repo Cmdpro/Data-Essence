@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.GrapplingHookSync;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,27 +30,8 @@ public class GrapplingHook extends Item {
     public GrapplingHook(Properties pProperties) {
         super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 1000)));
     }
-    public static Color getTransitionColor(Player player, DeltaTracker partialTick) {
-        boolean shouldTrans = player.isHolding(GrapplingHook::isTrans);
-        Color color = null;
-        if (shouldTrans) {
-            Color blue = new Color(0xff6ab3fc);
-            Color white = new Color(0xffffffff);
-            Color pink = new Color(0xfffc92bb);
-            int transitionTicks = 200;
-            float transitionProgress = (player.level().getGameTime() % transitionTicks)+partialTick.getGameTimeDeltaPartialTick(true);
-            transitionProgress = transitionProgress/(transitionTicks/4f);
-            if (transitionProgress <= 1f) {
-                color = ColorUtil.blendColors(blue, white, transitionProgress);
-            } else if (transitionProgress <= 2f) {
-                color = ColorUtil.blendColors(white, pink, transitionProgress-1f);
-            } else if (transitionProgress <= 3f) {
-                color = ColorUtil.blendColors(pink, white, transitionProgress-2f);
-            } else if (transitionProgress <= 4f) {
-                color = ColorUtil.blendColors(white, blue, transitionProgress-3f);
-            }
-        }
-        return color;
+    public Color getHookColor(Player player, ItemStack stack, float partialTick) {
+        return new Color(EssenceTypeRegistry.ESSENCE.get().color);
     }
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
@@ -77,9 +59,6 @@ public class GrapplingHook extends Item {
             return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
         }
         return super.use(pLevel, pPlayer, pUsedHand);
-    }
-    public static boolean isTrans(ItemStack stack) {
-        return stack.getItem() instanceof GrapplingHook && stack.getHoverName().getString().equalsIgnoreCase("trans tether");
     }
     public static class GrapplingHookData {
         public Vec3 pos;

@@ -162,13 +162,6 @@ public class ClientModEvents {
                 }
                 return 0;
             });
-            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("trans"), (stack, level, entity, seed) -> {
-                if (GrapplingHook.isTrans(stack)) {
-                    return 1; // :D
-                } else {
-                    return 0; // :(
-                }
-            });
         });
 
         progressionShader = new ProgressionShader();
@@ -202,6 +195,7 @@ public class ClientModEvents {
         event.register(ItemRegistry.ILLUMINATION_ROD.get(), ItemDecorators.essenceBarDecoration);
         event.register(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get(), ItemDecorators.essenceBarDecoration);
         event.register(ItemRegistry.GRAPPLING_HOOK.get(), ItemDecorators.essenceBarDecoration);
+        event.register(ItemRegistry.TRANS_GRAPPLING_HOOK.get(), ItemDecorators.essenceBarDecoration);
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {

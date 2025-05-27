@@ -92,8 +92,6 @@ public class ClientEvents {
                 Vec3 pos1 = ClientPlayerData.getLinkPos().getCenter();
                 Vec3 pos2 = mc.player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                 Color color = ClientPlayerData.getLinkColor();
-                Color transColor = GrapplingHook.getTransitionColor(mc.player, event.getPartialTick());
-                color = transColor != null ? transColor : color;
                 event.getPoseStack().pushPose();
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
                 ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color);
@@ -105,9 +103,13 @@ public class ClientEvents {
                     Vec3 pos = event.getCamera().getPosition();
                     Vec3 pos1 = grapplingHookData.pos;
                     Vec3 pos2 = i.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
-                    Color color = new Color(EssenceTypeRegistry.ESSENCE.get().color);
-                    Color transColor = GrapplingHook.getTransitionColor(i, event.getPartialTick());
-                    color = transColor != null ? transColor : color;
+                    Color color = new Color(255, 255, 255);
+                    float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
+                    if (i.getMainHandItem().getItem() instanceof GrapplingHook hook) {
+                        color = hook.getHookColor(i, i.getMainHandItem(), partialTick);
+                    } else if (i.getOffhandItem().getItem() instanceof GrapplingHook hook) {
+                        color = hook.getHookColor(i, i.getOffhandItem(), partialTick);
+                    }
                     event.getPoseStack().pushPose();
                     event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
                     ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color, 0.05d);
@@ -125,9 +127,13 @@ public class ClientEvents {
                         Vec3 pos2 = mc.player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                         event.getPoseStack().pushPose();
                         event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                        Color color = new Color(EssenceTypeRegistry.ESSENCE.get().color);
-                        Color transColor = GrapplingHook.getTransitionColor(mc.player, event.getPartialTick());
-                        color = transColor != null ? transColor : color;
+                        Color color = Color.WHITE;
+                        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
+                        if (mc.player.getMainHandItem().getItem() instanceof GrapplingHook hook) {
+                            color = hook.getHookColor(mc.player, mc.player.getMainHandItem(), partialTick);
+                        } else if (mc.player.getOffhandItem().getItem() instanceof GrapplingHook hook) {
+                            color = hook.getHookColor(mc.player, mc.player.getOffhandItem(), partialTick);
+                        }
                         color = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int)((0.5f-(fade/4))*255));
                         ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color, 0.05d);
                         event.getPoseStack().popPose();
