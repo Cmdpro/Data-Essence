@@ -35,6 +35,7 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.api.distmarker.Dist;
@@ -148,20 +149,10 @@ public class ClientModEvents {
                 }
                 return 0;
             });
-            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("charged"), (stack, level, entity, seed) -> {
-                if (stack.has(DataComponentRegistry.ESSENCE_STORAGE) && ItemEssenceContainer.getEssence(stack, GrapplingHook.FUEL_ESSENCE_TYPE) >= GrapplingHook.ESSENCE_COST) {
-                    return 1;
-                }
-                return 0;
-            });
-            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("using"), (stack, level, entity, seed) -> {
-                if (entity != null) {
-                    if (entity.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
-                        return 1;
-                    }
-                }
-                return 0;
-            });
+            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("charged"), chargedGrapplingHookProperty);
+            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("using"), usingGrapplingHookProperty);
+            ItemProperties.register(ItemRegistry.TRANS_GRAPPLING_HOOK.get(), DataNEssence.locate("charged"), chargedGrapplingHookProperty);
+            ItemProperties.register(ItemRegistry.TRANS_GRAPPLING_HOOK.get(), DataNEssence.locate("using"), usingGrapplingHookProperty);
         });
 
         progressionShader = new ProgressionShader();
@@ -169,6 +160,20 @@ public class ClientModEvents {
         genderEuphoriaShader = new GenderEuphoriaShader();
         PostShaderManager.addShader(genderEuphoriaShader);
     }
+    public static final ItemPropertyFunction usingGrapplingHookProperty = (stack, level, entity, seed) -> {
+        if (entity != null) {
+            if (entity.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
+                return 1;
+            }
+        }
+        return 0;
+    };
+    public static final ItemPropertyFunction chargedGrapplingHookProperty = (stack, level, entity, seed) -> {
+        if (stack.has(DataComponentRegistry.ESSENCE_STORAGE) && ItemEssenceContainer.getEssence(stack, GrapplingHook.FUEL_ESSENCE_TYPE) >= GrapplingHook.ESSENCE_COST) {
+            return 1;
+        }
+        return 0;
+    };
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(Genderfluid.EXTENSIONS, FluidRegistry.GENDERFLUID_TYPE.get());
