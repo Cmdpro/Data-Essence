@@ -50,7 +50,7 @@ public record PlayGenderfluidTransitionEffect(BlockPos pos, Vec3 itemPos) implem
 
         RandomSource random = level.getRandom();
         float speedMult = 0.75f;
-        player.level().playSound(player, pos, SoundEvents.ALLAY_THROW, SoundSource.PLAYERS, 1f, 1f);
+        player.level().playSound(player, pos, SoundEvents.EVOKER_CAST_SPELL, SoundSource.PLAYERS, 1f, 1f);
         Vec3 pos = new Vec3(itemPos.x, this.pos.getCenter().add(0, 0.5, 0).y, itemPos.z);
         for (int i = 0; i < 10; i++) {
             level.addParticle(new RhombusParticleOptions().setColor(new Color(0xff6ab3fc)).setAdditive(true), pos.x, pos.y, pos.z, ((random.nextFloat()*2f)-1f)*speedMult, ((random.nextFloat()*2f)-1f)*speedMult, ((random.nextFloat()*2f)-1f)*speedMult);
