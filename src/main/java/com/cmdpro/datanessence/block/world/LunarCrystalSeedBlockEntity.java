@@ -59,7 +59,10 @@ public class LunarCrystalSeedBlockEntity extends BlockEntity {
                 for (int x = -3; x <= 3; x++) {
                     for (int y = -3; y <= 3; y++) {
                         for (int z = -3; z <= 3; z++) {
-                            locations.add(new BlockPos(x, y, z));
+                            BlockPos blockPos = new BlockPos(x, y, z);
+                            if (pLevel.getBlockState(blockPos.offset(pPos)).canBeReplaced()) {
+                                locations.add(blockPos);
+                            }
                         }
                     }
                 }
