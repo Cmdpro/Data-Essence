@@ -130,6 +130,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
+        maxTime = tag.getInt("maxTime");
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -138,6 +139,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         tag.put("item", item.saveOptional(pRegistries));
         tag.putInt("craftingProgress", craftingProgress);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
+        tag.putInt("maxTime", maxTime);
         return tag;
     }
 
@@ -224,6 +226,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
     public boolean enoughEssence;
     public Map<ResourceLocation, Float> essenceCost;
     public int craftingProgress;
+    public int maxTime;
     public <I extends RecipeInput, T extends Recipe<I>> Optional<RecipeHolder<T>> getRecipeFor(
             RecipeType<T> type, Level level, I input
     ) {
@@ -249,14 +252,17 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
             this.recipe = recipe;
             if (recipe instanceof IFabricationRecipe recipe2) {
                 essenceCost = recipe2.getEssenceCost();
+                maxTime = recipe2.getTime();
             } else {
                 essenceCost = new HashMap<>();
+                maxTime = 20;
             }
             item = recipe.getResultItem(level.registryAccess());
         } else {
             this.recipe = null;
             essenceCost = null;
             item = ItemStack.EMPTY;
+            maxTime = 20;
         }
     }
     @Override
@@ -290,7 +296,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                     pBlockEntity.craftingProgress++;
                     for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                         EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                        pBlockEntity.storage.removeEssence(type, i.getValue()/50f);
+                        pBlockEntity.storage.removeEssence(type, i.getValue()/pBlockEntity.maxTime);
                     }
                 } else {
                     pBlockEntity.craftingProgress = -1;
@@ -298,7 +304,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
             } else {
                 pBlockEntity.craftingProgress = -1;
             }
-            if (pBlockEntity.craftingProgress >= 50) {
+            if (pBlockEntity.craftingProgress >= pBlockEntity.maxTime) {
                 pBlockEntity.tryCraft();
                 pBlockEntity.craftingProgress = 0;
             }

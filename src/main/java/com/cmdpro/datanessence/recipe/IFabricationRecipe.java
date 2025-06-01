@@ -20,4 +20,5 @@ public interface IFabricationRecipe extends Recipe<CraftingInput>, IHasRequiredK
     default ItemStack getToastSymbol() {
         return new ItemStack(BlockRegistry.FABRICATOR.get());
     }
+    int getTime();
 }

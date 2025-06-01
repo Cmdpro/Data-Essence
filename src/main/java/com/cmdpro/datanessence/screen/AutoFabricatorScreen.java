@@ -43,7 +43,7 @@ public class AutoFabricatorScreen extends AbstractContainerScreen<AutoFabricator
         int y = (height - imageHeight) / 2;
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
         ClientRenderingUtil.renderLockedSlotBg(pGuiGraphics, pPartialTick, pMouseX, pMouseY, x, y, menu.slots);
-        pGuiGraphics.blit(TEXTURE, x+111, y+34, 221, 0, (int)(22f*((float)menu.blockEntity.craftingProgress/50f)), 17);
+        pGuiGraphics.blit(TEXTURE, x+111, y+34, 221, 0, (int)(22f*((float)menu.blockEntity.craftingProgress/menu.blockEntity.maxTime)), 17);
         ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
         ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+19, y+17, EssenceTypeRegistry.LUNAR_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.LUNAR_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
         ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+30, y+17, EssenceTypeRegistry.NATURAL_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());

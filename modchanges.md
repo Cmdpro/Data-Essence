@@ -11,6 +11,9 @@
 - Made filter upgrade sigils not take the item you want to filter
 - Made filter upgrade sigils show what they filter in the tooltip
 - Remodelled the Fabricator
+- Changed the item output displays
+- Made Fabricator crafting take time (Auto-Fabricator tweaked to follow the Fabricator crafting times)
+- Made the Fabricator unable to store any essence except industrial
 
 ### Fixes
 - Fixed an issue where the Auto-Fabricator would void remainders
