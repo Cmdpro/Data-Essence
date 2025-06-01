@@ -10,6 +10,7 @@
 - Made the block item for Creative Essence Batteries, Structure Protectors, Data Banks, and Computers a game master block item to stop them from being placed in survival if somehow obtained
 - Made filter upgrade sigils not take the item you want to filter
 - Made filter upgrade sigils show what they filter in the tooltip
+- Remodelled the Fabricator
 
 ### Fixes
 - Fixed an issue where the Auto-Fabricator would void remainders
