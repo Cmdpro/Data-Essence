@@ -95,8 +95,10 @@ public class DataBankScreen extends Screen {
             }
         }
         if (pButton == 1 && screenType == 1) {
-            screenType = 0;
-            return true;
+            if (minigameCompletionWait == -1) {
+                screenType = 0;
+                return true;
+            }
         }
         return false;
     }

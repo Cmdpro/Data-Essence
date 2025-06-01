@@ -50,6 +50,7 @@ public class DataTabletScreen extends Screen {
     public int page;
     public int ticks;
     public DataTab currentTab;
+    public boolean scrolling;
 
     public DataTabletScreen(Component pTitle) {
         super(pTitle);
@@ -82,6 +83,7 @@ public class DataTabletScreen extends Screen {
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
         screenType = 2;
         clickedEntry = entry;
+        scrollbarPixels = 0;
         page = 0;
         return true;
     }
@@ -143,9 +145,20 @@ public class DataTabletScreen extends Screen {
             return true;
         }
         if (pButton == 0 && screenType == 2) {
+            if (clickedEntry.getPagesClient().length > 0) {
+                int scrollbarX = x+247;
+                int scrollbarY = y+10;
+                scrollbarY += scrollbarPixels;
+                boolean scrollbarHovered = pMouseX >= scrollbarX && pMouseY >= scrollbarY && pMouseX <= scrollbarX + 3 && pMouseY <= scrollbarY + 7;
+                if (scrollbarHovered) {
+                    scrolling = true;
+                    return true;
+                }
+            }
             if (pMouseX >= (x+imageWidth)+6 && pMouseX <= (x+imageWidth)+18) {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
                     if (clickedEntry.getPagesClient().length > page+1) {
+                        scrollbarPixels = 0;
                         page += 1;
                         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
                         return true;
@@ -155,6 +168,7 @@ public class DataTabletScreen extends Screen {
             if (pMouseX >= x-18 && pMouseX <= x-6) {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
                     if (page > 0) {
+                        scrollbarPixels = 0;
                         page -= 1;
                         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
                         return true;
@@ -185,6 +199,14 @@ public class DataTabletScreen extends Screen {
     }
 
     @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        if (button == 0) {
+            scrolling = false;
+        }
+        return false;
+    }
+
+    @Override
     public void tick() {
         super.tick();
         ticks++;
@@ -194,6 +216,32 @@ public class DataTabletScreen extends Screen {
                 battery = 1;
             }
         }
+    }
+
+    @Override
+    public void mouseMoved(double mouseX, double mouseY) {
+        super.mouseMoved(mouseX, mouseY);
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+        if (scrolling) {
+            if (clickedEntry.getPagesClient().length > 0) {
+                int scrollbarY = y + 10;
+                int scrollbarArea = 140;
+                scrollbarPixels = ((Math.clamp(0, scrollbarArea, mouseY-scrollbarY)));
+            }
+        }
+    }
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+        if (screenType == 2) {
+            if (clickedEntry.getPagesClient().length > 0) {
+                int scrollbarArea = 140;
+                int scrollMax = Math.max(0, clickedEntry.pages[page].getMaxScrollY() - (imageHeight - 3));
+                double scrollSpeed = 20/((float)scrollMax/50f);
+                scrollbarPixels = ((Math.clamp(0, scrollbarArea, scrollbarPixels - (scrollY * scrollSpeed))));
+            }
+        }
+        return false;
     }
 
     protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
@@ -358,12 +406,29 @@ public class DataTabletScreen extends Screen {
             graphics.drawString(Minecraft.getInstance().font, (int)Math.ceil(battery) + "%", x + 24, y + 5, 0xff96b5);
         }
     }
+
+    public double scrollbarPixels;
     public static float battery = 100;
     public void drawPage(Page page, GuiGraphics graphics, float pPartialTick, int mouseX, int mouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        page.render(this, graphics, pPartialTick, mouseX, mouseY, x, y);
+        int scrollbarArea = 140;
+        int scrollMax = Math.max(0, page.getMaxScrollY()-(imageHeight-3));
+        int scrollShift = (int)(((float)scrollbarPixels/(float)scrollbarArea)*scrollMax);
+        page.render(this, graphics, pPartialTick, mouseX, mouseY, x, y - scrollShift);
         graphics.disableScissor();
+        if (scrollMax > 0) {
+            graphics.blit(TEXTURE_PAGE, x + 246, y + 7, 25, 166, 5, 5);
+            for (int i = 0; i < 142; i++) {
+                graphics.blit(TEXTURE_PAGE, x + 246, y + 12 + i, 25, 171, 5, 1);
+            }
+            graphics.blit(TEXTURE_PAGE, x + 246, y + 154, 25, 184, 5, 5);
+            int scrollbarX = x + 247;
+            int scrollbarY = y + 10;
+            scrollbarY += scrollbarPixels;
+            boolean scrollbarHovered = mouseX >= scrollbarX && mouseY >= scrollbarY && mouseX <= scrollbarX + 3 && mouseY <= scrollbarY + 7;
+            graphics.blit(TEXTURE_PAGE, scrollbarX, scrollbarY, 31, scrollbarHovered || scrolling ? 177 : 170, 3, 7);
+        }
         if (this.page+1 < clickedEntry.getPagesClient().length) {
             int shift = 0;
             if (mouseX >= (x+imageWidth)+6 && mouseX <= (x+imageWidth)+18) {

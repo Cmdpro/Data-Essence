@@ -26,20 +26,25 @@ public class TextPage extends Page {
     }
     @Override
     public void render(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset) {
-        MutableComponent component = this.text.copy();
-        List<FormattedText> text = Minecraft.getInstance().font.getSplitter().splitLines(component, DataTabletScreen.imageWidth - 8, Style.EMPTY);
+        List<FormattedText> text = Minecraft.getInstance().font.getSplitter().splitLines(this.text, DataTabletScreen.imageWidth - 22, Style.EMPTY);
         int offsetY = 0;
         for (FormattedText i : text) {
-            int x = xOffset + 4;
+            int x = xOffset + 11;
             FormattedCharSequence formattedCharSequence = FormattedBidiReorder.reorder(i, Language.getInstance().isDefaultRightToLeft());
             if (rtl) {
-                x = xOffset+((DataTabletScreen.imageWidth - 4)-Minecraft.getInstance().font.width(i));
+                x = xOffset+((DataTabletScreen.imageWidth - 11)-Minecraft.getInstance().font.width(i));
                 SubStringSource substr = SubStringSource.create(i, UCharacter::getMirror, (str) -> str);
                 formattedCharSequence = FormattedCharSequence.composite(substr.substring(0, substr.getPlainText().length(), true));
             }
             pGuiGraphics.drawString(Minecraft.getInstance().font, formattedCharSequence, x, yOffset + 4 + offsetY + textYOffset(), 0xFFFFFFFF);
             offsetY += Minecraft.getInstance().font.lineHeight+2;
         }
+    }
+
+    @Override
+    public int getMaxScrollY() {
+        List<FormattedText> text = Minecraft.getInstance().font.getSplitter().splitLines(this.text, DataTabletScreen.imageWidth - 22, Style.EMPTY);
+        return ((Minecraft.getInstance().font.lineHeight+2)*text.size())+textYOffset()+4;
     }
 
     @Override

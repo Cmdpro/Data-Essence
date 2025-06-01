@@ -10,4 +10,7 @@ public abstract class Page {
     public boolean onClick(DataTabletScreen screen, double pMouseX, double pMouseY, int pButton, int xOffset, int yOffset) {
         return false;
     }
+    public int getMaxScrollY() {
+        return -1;
+    }
 }

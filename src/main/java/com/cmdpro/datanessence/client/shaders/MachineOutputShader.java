@@ -78,9 +78,9 @@ public class MachineOutputShader extends PostShaderInstance {
         RenderSystem.depthMask(true);
         getMachineOutputTarget().clear(Minecraft.ON_OSX);
         getMachineOutputTarget().copyDepthFrom(Minecraft.getInstance().getMainRenderTarget());
-        getMachineOutputTarget().bindWrite(false);
+        getMachineOutputTarget().bindWrite(true);
         createMachineOutputBufferSource().endBatch();
-        Minecraft.getInstance().getMainRenderTarget().bindWrite(false);
+        Minecraft.getInstance().getMainRenderTarget().bindWrite(true);
         RenderSystem.depthMask(false);
     }
 }

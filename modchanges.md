@@ -2,6 +2,7 @@
 - Incomplete entries show a tooltip indicating their importance, making them even more obviously relevant than they already were
 - Added Synthesis recipe for Essence Bombs and associated Copper Shell crafting item
 - Added a secret with genderfluid :3
+- Added scrolling to the data tablet
 
 ### Changes
 - Tweaked wording of the Item Filter entry
@@ -22,3 +23,4 @@
 - Fixed a duplication issue with the filter upgrade sigils
 - Fixed the Transcendental Tether being able to softlock you
 - Fixed a bug where you could manage to ascend into the sky with the Transcendental Tether
+- Fixed you being able to still exit out of a databank minigame after completion during the ending with right click
