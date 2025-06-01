@@ -7,6 +7,7 @@
     "GBG",
     "B B"
   ],
+  "time": 60,
   "key": {
     "B": { "item": "datanessence:bonding_powder" },
     "G": { "item": "minecraft:glowstone_dust" }

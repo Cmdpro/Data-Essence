@@ -4,6 +4,7 @@
   "entry": "datanessence:essence_manipulation/essence_burner",
   "allow_incomplete": true,
   "show_incomplete_in_emi": true,
+  "time": 40,
   "pattern": [
     "CCC",
     "O O",

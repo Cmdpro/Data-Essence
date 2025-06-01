@@ -9,6 +9,7 @@
     "E E",
     "ROR"
   ],
+  "time": 100,
   "key": {
     "C": { "item": "datanessence:capacitance_panel" },
     "E": { "item": "datanessence:exciter" },

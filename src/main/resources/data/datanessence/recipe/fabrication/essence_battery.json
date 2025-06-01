@@ -3,6 +3,7 @@
   "essenceCost": {
     "datanessence:essence": 50
   },
+  "time": 200,
   "entry": "datanessence:essence_manipulation/essence_battery",
   "pattern": [
     "COC",

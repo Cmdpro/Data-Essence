@@ -6,6 +6,7 @@
     "PIP",
     "R R"
   ],
+  "time": 60,
   "key": {
     "R": { "item": "datanessence:conductance_rod" },
     "I": { "item": "minecraft:iron_ingot" },

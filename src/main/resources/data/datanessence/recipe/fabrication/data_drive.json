@@ -3,6 +3,7 @@
   "essenceCost": {
     "datanessence:essence": 5
   },
+  "time": 60,
   "entry": "datanessence:machinery/automation",
   "pattern": [
     "RLC"

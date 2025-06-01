@@ -9,6 +9,7 @@
     "CEO",
     "BC "
   ],
+  "time": 200,
   "key": {
     "B": { "item": "datanessence:bonding_powder" },
     "C": { "item": "datanessence:patterned_copper" },

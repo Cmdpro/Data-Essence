@@ -9,6 +9,7 @@
     " E ",
     "R  "
   ],
+  "time": 60,
   "key": {
     "E": { "item": "datanessence:essence_shard" },
     "R": { "item": "datanessence:conductance_rod" }

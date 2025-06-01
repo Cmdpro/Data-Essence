@@ -7,6 +7,7 @@
     " R ",
     " C "
   ],
+  "time": 40,
   "key": {
     "C": { "item": "minecraft:copper_ingot" },
     "R": { "item": "datanessence:conductance_rod" }

@@ -8,6 +8,7 @@
     "gAg",
     "CLC"
   ],
+  "time": 100,
   "key": {
     "C": { "item": "datanessence:capacitance_panel" },
     "L": { "item": "datanessence:logical_matrix" },

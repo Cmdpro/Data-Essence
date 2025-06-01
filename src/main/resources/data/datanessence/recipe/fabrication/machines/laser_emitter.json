@@ -9,6 +9,7 @@
     "IEI",
     "IRI"
   ],
+  "time": 60,
   "key": {
     "I": { "item": "minecraft:iron_ingot" },
     "L": { "item": "datanessence:lens" },

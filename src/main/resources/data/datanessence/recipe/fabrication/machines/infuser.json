@@ -9,6 +9,7 @@
     "R R",
     "COC"
   ],
+  "time": 40,
   "key": {
     "C": { "item": "datanessence:capacitance_panel" },
     "R": { "item": "datanessence:conductance_rod" },

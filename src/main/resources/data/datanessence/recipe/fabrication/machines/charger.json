@@ -6,6 +6,7 @@
     "ESE",
     "POP"
   ],
+  "time": 100,
   "key": {
     "E": { "item": "datanessence:exciter" },
     "S": { "item": "datanessence:essence_shard" },

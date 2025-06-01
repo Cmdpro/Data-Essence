@@ -9,6 +9,7 @@
     "PEP",
     "BP "
   ],
+  "time": 100,
   "key": {
     "P": { "item": "datanessence:polished_obsidian" },
     "B": { "item": "datanessence:bonding_powder" },
