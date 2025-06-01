@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemDecorators;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
+import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
@@ -159,7 +160,13 @@ public class ClientModEvents {
         PostShaderManager.addShader(progressionShader);
         genderEuphoriaShader = new GenderEuphoriaShader();
         PostShaderManager.addShader(genderEuphoriaShader);
+        machineOutputShader = new MachineOutputShader();
+        PostShaderManager.addShader(machineOutputShader);
+        machineOutputShader.setActive(true);
     }
+    public static PostShaderInstance progressionShader;
+    public static PostShaderInstance genderEuphoriaShader;
+    public static PostShaderInstance machineOutputShader;
     public static final ItemPropertyFunction usingGrapplingHookProperty = (stack, level, entity, seed) -> {
         if (entity != null) {
             if (entity.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
@@ -225,8 +232,6 @@ public class ClientModEvents {
         event.register(MenuRegistry.MELTER_MENU.get(), MelterScreen::new);
         event.register(MenuRegistry.DRYING_TABLE_MENU.get(), DryingTableScreen::new);
     }
-    public static PostShaderInstance progressionShader;
-    public static PostShaderInstance genderEuphoriaShader;
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.ESSENCE_SPARKLE.get(),

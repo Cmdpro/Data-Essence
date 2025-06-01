@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.mixin.client;
 
 import com.cmdpro.datanessence.client.ClientEvents;
+import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,5 +16,6 @@ public abstract class GameRendererMixin {
         if (ClientEvents.tempRenderTarget != null) {
             ClientEvents.tempRenderTarget.resize(pWidth, pHeight, Minecraft.ON_OSX);
         }
+        MachineOutputShader.getMachineOutputTarget().resize(pWidth, pHeight, Minecraft.ON_OSX);
     }
 }
