@@ -32,6 +32,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -74,9 +75,9 @@ public class ModEvents {
                         }
                     }
                 } else {
-                    ent.level().addParticle(new RhombusParticleOptions().setColor(new Color(0xff6ab3fc)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
-                    ent.level().addParticle(new MoteParticleOptions().setColor(new Color(0xffffffff)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
-                    ent.level().addParticle(new SmallCircleParticleOptions().setColor(new Color(0xfffc92bb)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
+                    ent.level().addParticle(new RhombusParticleOptions().setColor(new Color(0xff6ab3fc)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f), 0.25, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f));
+                    ent.level().addParticle(new MoteParticleOptions().setColor(new Color(0xffffffff)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f), 0.25, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f));
+                    ent.level().addParticle(new SmallCircleParticleOptions().setColor(new Color(0xfffc92bb)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f), 0.25, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f));
                 }
             } else {
                 if (!ent.level().isClientSide) {

@@ -7,6 +7,7 @@ import net.minecraft.commands.arguments.blocks.BlockInput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -23,14 +24,14 @@ public class CalciteSpireFeature extends Feature<NoneFeatureConfiguration> {
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> pContext) {
         Vec3i offset = new Vec3i(8+pContext.random().nextIntBetweenInclusive(-4, 4), 0, 8+pContext.random().nextIntBetweenInclusive(-4, 4));
-        float height = 50*(pContext.random().nextFloat()+0.5f);
-        float spiralSize = (pContext.random().nextFloat()*0.25f)+0.75f;
-        float dirChange = pContext.random().nextBoolean() ? -(5+(pContext.random().nextFloat()*10)) : 5+(pContext.random().nextFloat()*5);
+        float height = 50*(Mth.nextFloat(pContext.random(), 0.5f, 1.5f));
+        float spiralSize = Mth.nextFloat(pContext.random(), 0.75f, 1f);
+        float dirChange = pContext.random().nextBoolean() ? Mth.nextFloat(pContext.random(), -15f, -5f) : Mth.nextFloat(pContext.random(), 5f, 10f);
         BlockPos origin = pContext.level().getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, pContext.origin().offset(offset));
         if (!pContext.level().getBlockState(origin.below()).getFluidState().isEmpty()) {
             return false;
         }
-        float dir = pContext.random().nextFloat()*360;
+        float dir = Mth.nextFloat(pContext.random(), 0f, 360f);
         for (int y = -5; y <= height; y++) {
             float range = ((height-y)/10f);
             if (y < 0) {

@@ -14,6 +14,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -53,9 +54,9 @@ public record PlayGenderfluidTransitionEffect(BlockPos pos, Vec3 itemPos) implem
         player.level().playSound(player, pos, SoundEvents.EVOKER_CAST_SPELL, SoundSource.PLAYERS, 1f, 1f);
         Vec3 pos = new Vec3(itemPos.x, this.pos.getCenter().add(0, 0.5, 0).y, itemPos.z);
         for (int i = 0; i < 10; i++) {
-            level.addParticle(new RhombusParticleOptions().setColor(new Color(0xff6ab3fc)).setAdditive(true), pos.x, pos.y, pos.z, ((random.nextFloat()*2f)-1f)*speedMult, ((random.nextFloat()*2f)-1f)*speedMult, ((random.nextFloat()*2f)-1f)*speedMult);
-            level.addParticle(new MoteParticleOptions().setColor(new Color(0xffffffff)).setAdditive(true), pos.x, pos.y, pos.z, ((random.nextFloat()*2f)-1f)*speedMult, ((random.nextFloat()*2f)-1f)*speedMult, ((random.nextFloat()*2f)-1f)*speedMult);
-            level.addParticle(new SmallCircleParticleOptions().setColor(new Color(0xfffc92bb)).setAdditive(true), pos.x, pos.y, pos.z, ((random.nextFloat()*2f)-1f)*speedMult, ((random.nextFloat()*2f)-1f)*speedMult, ((random.nextFloat()*2f)-1f)*speedMult);
+            level.addParticle(new RhombusParticleOptions().setColor(new Color(0xff6ab3fc)).setAdditive(true), pos.x, pos.y, pos.z, Mth.nextFloat(random, -speedMult, speedMult), Mth.nextFloat(random, -speedMult, speedMult), Mth.nextFloat(random, -speedMult, speedMult));
+            level.addParticle(new MoteParticleOptions().setColor(new Color(0xffffffff)).setAdditive(true), pos.x, pos.y, pos.z, Mth.nextFloat(random, -speedMult, speedMult), Mth.nextFloat(random, -speedMult, speedMult), Mth.nextFloat(random, -speedMult, speedMult));
+            level.addParticle(new SmallCircleParticleOptions().setColor(new Color(0xfffc92bb)).setAdditive(true), pos.x, pos.y, pos.z, Mth.nextFloat(random, -speedMult, speedMult), Mth.nextFloat(random, -speedMult, speedMult), Mth.nextFloat(random, -speedMult, speedMult));
         }
         for (int i = 0; i < 16; i++) {
             Vec2 dir = new Vec2((float)Math.sin(Math.toRadians(i*(360f/16f))), (float)Math.cos(Math.toRadians(i*(360f/16f))));

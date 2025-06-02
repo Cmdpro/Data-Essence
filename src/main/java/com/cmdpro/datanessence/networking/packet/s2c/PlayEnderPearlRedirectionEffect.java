@@ -14,6 +14,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -65,7 +66,7 @@ public record PlayEnderPearlRedirectionEffect(List<BlockPos> path) implements Me
                     int maxShifts = (int) (currentCenter.distanceTo(nextCenter) / 0.25);
                     for (int j = 0; j < maxShifts; j++) {
                         Vec3 shifted = currentCenter.lerp(nextCenter, (float) j / (float) maxShifts);
-                        Vec3 speed = new Vec3((random.nextFloat() * 2f) - 1f, (random.nextFloat() * 2f) - 1f, (random.nextFloat() * 2f) - 1f).scale(0.1);
+                        Vec3 speed = new Vec3(Mth.nextFloat(random, -0.1f, 0.1f), Mth.nextFloat(random, -0.1f, 0.1f), Mth.nextFloat(random, -0.1f, 0.1f));
                         level.addParticle(ParticleTypes.REVERSE_PORTAL, true, shifted.x, shifted.y, shifted.z, speed.x, speed.y, speed.z);
                     }
                 }

@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.block.generation;
 
 import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
 import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -53,7 +54,7 @@ public class EssenceLeech extends Block implements EntityBlock {
 
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        Vec3 offset = new Vec3(RandomUtils.nextFloat(0, 0.8f)-0.4f, RandomUtils.nextFloat(0, 0.8f)-0.4f, RandomUtils.nextFloat(0, 0.8f)-0.4f);
+        Vec3 offset = new Vec3(Mth.nextFloat(random, -0.4f, 0.4f), Mth.nextFloat(random, -0.4f, 0.4f), Mth.nextFloat(random, -0.4f, 0.4f));
         world.addParticle(new CircleParticleOptions().setColor(new Color(255, random.nextInt(255), 255)).setAdditive(true), pos.getCenter().x+offset.x, pos.getCenter().y+0.6, pos.getCenter().z+offset.z, 0.0D, 0.07D, 0.0D);
     }
 }

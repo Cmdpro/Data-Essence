@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
 import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -35,8 +36,8 @@ public class Dewlamp extends Block {
 
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        float hue = RandomUtils.nextFloat(0f, 1f);
-        int lifetime = RandomUtils.nextInt(60, 180);
+        float hue = Mth.nextFloat(random, 0f, 1f);
+        int lifetime = random.nextIntBetweenInclusive(60, 180);
         Color color = new Color( Color.HSBtoRGB(hue, 0.8f, 1f) );
         double d0 = 0.2; // 0.5625;
         float horizontalVelocity = random.nextFloat() * 0.02f;
