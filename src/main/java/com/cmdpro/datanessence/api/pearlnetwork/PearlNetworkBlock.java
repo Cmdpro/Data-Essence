@@ -33,7 +33,7 @@ public class PearlNetworkBlock extends Block {
         super(properties);
     }
     public static Color getColor() {
-        return new Color(12, 87, 38);
+        return new Color(122, 92, 255);
     }
     public static Item getLinkItem() {
         return ItemRegistry.ESSENCE_REDIRECTOR.get();

@@ -40,7 +40,7 @@ public class EnderPearlCaptureBlockEntity extends PearlNetworkBlockEntity {
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EnderPearlCaptureBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide) {
-            List<ThrownEnderpearl> pearls = pLevel.getEntitiesOfClass(ThrownEnderpearl.class, AABB.ofSize(pPos.getCenter(), 10, 10, 10));
+            List<ThrownEnderpearl> pearls = pLevel.getEntitiesOfClass(ThrownEnderpearl.class, AABB.ofSize(pPos.getCenter(), 5, 5, 5));
             if (!pearls.isEmpty()) {
                 BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ENDER_PEARL_NETWORKS);
                 ShortestPathAlgorithm.SingleSourcePaths<BlockPos, DefaultEdge> paths = networks.path.getPaths(pPos);
