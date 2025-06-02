@@ -3,15 +3,16 @@
 - Added Synthesis recipe for Essence Bombs and associated Copper Shell crafting item
 - Added a secret with genderfluid :3
 - Added scrolling to the data tablet
+- Added a few pages of the first of the in-game lore books, acquirable at Nature Outposts as a data entry
 
 ### Changes
-- Tweaked wording of the Item Filter entry
+- Tweaked several entries, including Item Filter, Data Tablet, Fabrication, and Infuser
 - Improved the ping effect
 - Updated the Cryochamber to use the new databank megablock system
 - Made the block item for Creative Essence Batteries, Structure Protectors, Data Banks, and Computers a game master block item to stop them from being placed in survival if somehow obtained
 - Made filter upgrade sigils not take the item you want to filter
 - Made filter upgrade sigils show what they filter in the tooltip
-- Remodelled the Fabricator
+- Remodelled the Fabricator and the Infuser
 - Changed the item output displays
 - Made Fabricator crafting take time (Auto-Fabricator tweaked to follow the Fabricator crafting times)
 - Made the Fabricator unable to store any essence except industrial

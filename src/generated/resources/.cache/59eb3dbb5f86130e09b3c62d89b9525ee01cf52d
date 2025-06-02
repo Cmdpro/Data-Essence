@@ -1,4 +1,4 @@
-// 1.21.1	2025-05-24T04:54:53.94135407	Loot Tables
+// 1.21.1	2025-06-02T01:24:19.028886746	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -25,6 +25,9 @@ fea2a941c650615615e90e27482b9b2032ee71e8 data/datanessence/loot_table/blocks/cry
 d780424182f390bb85712d7baf184b36886bae45 data/datanessence/loot_table/blocks/deco_item_buffer.json
 93ca4ae06d5943c0e12e40c4b9c86fc0bd6453e9 data/datanessence/loot_table/blocks/dewlamp.json
 7288802b6e50232d520c8c45606c8191edb282a4 data/datanessence/loot_table/blocks/drying_table.json
+8505fb84433c5aa9ceab4cf73710b90c9a92ab79 data/datanessence/loot_table/blocks/ender_pearl_capture.json
+3ad9e315d0252b390ca3f1b6c913fa46dded899b data/datanessence/loot_table/blocks/ender_pearl_destination.json
+1056cd854c12e8a4d34612ee49d05b6bc40023ac data/datanessence/loot_table/blocks/ender_pearl_relay.json
 29cf93937134563596a438a411dbb8811fa8cc92 data/datanessence/loot_table/blocks/energized_ancient_rock_column.json
 b4e06af3b19028f6e283a59c3f045a5cf5d3020d data/datanessence/loot_table/blocks/engraved_polished_obsidian.json
 b5cfbe5adbc39553904bbf0be1a5cf945eb66357 data/datanessence/loot_table/blocks/enticing_lure.json

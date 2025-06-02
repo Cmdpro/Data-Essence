@@ -113,6 +113,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
         dropSelf(BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get());
         dropSelf(BlockRegistry.ESSENCE_BRIDGE.get()); // TODO maybe? i just needed to get datagen operational ~Eset
+        dropSelf(BlockRegistry.ENDER_PEARL_DESTINATION.get());
+        dropSelf(BlockRegistry.ENDER_PEARL_RELAY.get());
+        dropSelf(BlockRegistry.ENDER_PEARL_CAPTURE.get());
         this.add(BlockRegistry.CREATIVE_ESSENCE_BATTERY.get(),
                 block -> noDrop());
 

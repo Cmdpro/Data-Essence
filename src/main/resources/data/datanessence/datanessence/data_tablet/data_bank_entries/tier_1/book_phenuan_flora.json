@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:sprite_book_flora"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.book_flora_survey.name"
+  },
+  "entry": "datanessence:lore/book_phenuan_flora"
+}
