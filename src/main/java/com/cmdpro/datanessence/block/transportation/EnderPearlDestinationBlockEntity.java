@@ -26,4 +26,9 @@ public class EnderPearlDestinationBlockEntity extends PearlNetworkBlockEntity {
     public EnderPearlDestinationBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistry.ENDER_PEARL_DESTINATION.get(), pos, blockState);
     }
+
+    @Override
+    public Vec3 getLinkShift() {
+        return new Vec3(0, -0.5, 0);
+    }
 }

@@ -20,7 +20,7 @@ import org.jgrapht.graph.DefaultEdge;
 import java.util.Set;
 
 public class EnderPearlRelay extends PearlNetworkBlock implements EntityBlock {
-    private static final VoxelShape SHAPE = Block.box(4.0D, 4.0D, 4.0D, 12.0D, 12.0D, 12.0D);
+    private static final VoxelShape SHAPE = Block.box(2.0D, 2.0D, 2.0D, 14.0D, 14.0D, 14.0D);
 
     public EnderPearlRelay(Properties properties) {
         super(properties);

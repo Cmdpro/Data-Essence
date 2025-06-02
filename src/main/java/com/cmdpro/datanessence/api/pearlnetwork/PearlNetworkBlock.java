@@ -56,15 +56,13 @@ public class PearlNetworkBlock extends Block {
                         }
                     } else {
                         if (canConnectTo(linkFrom.get())) {
-                            if (linkFrom.get().getBlockState().getBlock() instanceof PearlNetworkBlock other) {
+                            if (linkFrom.get() instanceof PearlNetworkBlockEntity other) {
                                 if (ent != linkFrom.get() && (ent.link.isEmpty() || !ent.link.contains(linkFrom.get().getBlockPos()))) {
-                                    if (linkFrom.get() instanceof PearlNetworkBlockEntity linkFrom2) {
-                                        networks.graph.addEdge(linkFrom2.getBlockPos(), pPos);
-                                        linkFrom2.updateBlock();
-                                        pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                                        PlayerDataUtil.updateData((ServerPlayer) pPlayer);
-                                        pLevel.playSound(null, pPos, SoundEvents.CROSSBOW_LOADING_END.value(), SoundSource.BLOCKS, 1f, 1.1f);
-                                    }
+                                    networks.graph.addEdge(other.getBlockPos(), pPos);
+                                    other.updateBlock();
+                                    pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                                    PlayerDataUtil.updateData((ServerPlayer) pPlayer);
+                                    pLevel.playSound(null, pPos, SoundEvents.CROSSBOW_LOADING_END.value(), SoundSource.BLOCKS, 1f, 1.1f);
                                 }
                             }
                         }
@@ -80,14 +78,14 @@ public class PearlNetworkBlock extends Block {
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (pState.getBlock() != pNewState.getBlock()) {
-            if (pLevel.getBlockEntity(pPos) instanceof BaseCapabilityPointBlockEntity) {
+            if (pLevel.getBlockEntity(pPos) instanceof PearlNetworkBlockEntity) {
                 BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ENDER_PEARL_NETWORKS);
                 Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
                 for (DefaultEdge i : edges) {
                     BlockPos pos = networks.graph.getEdgeSource(i);
                     networks.graph.removeEdge(i);
                     if (!pos.equals(pPos)) {
-                        if (pLevel.getBlockEntity(pos) instanceof BaseCapabilityPointBlockEntity ent) {
+                        if (pLevel.getBlockEntity(pos) instanceof PearlNetworkBlockEntity ent) {
                             ent.updateBlock();
                         }
                     }

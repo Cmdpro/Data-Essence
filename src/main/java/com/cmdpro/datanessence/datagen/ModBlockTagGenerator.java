@@ -94,7 +94,10 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.DRYING_TABLE.get())
                 .add(BlockRegistry.TRAVERSITE_ROAD_OPAL.get())
                 .add(BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get())
-                .add(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
+                .add(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get())
+                .add(BlockRegistry.ENDER_PEARL_CAPTURE.get())
+                .add(BlockRegistry.ENDER_PEARL_RELAY.get())
+                .add(BlockRegistry.ENDER_PEARL_DESTINATION.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())

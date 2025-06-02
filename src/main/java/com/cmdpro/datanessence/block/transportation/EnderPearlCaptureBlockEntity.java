@@ -38,7 +38,7 @@ public class EnderPearlCaptureBlockEntity extends PearlNetworkBlockEntity {
             if (!pearls.isEmpty()) {
                 BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ENDER_PEARL_NETWORKS);
                 ShortestPathAlgorithm.SingleSourcePaths<BlockPos, DefaultEdge> paths = networks.path.getPaths(pPos);
-                List<GraphPath<BlockPos, DefaultEdge>> ends = networks.graph.vertexSet().stream().filter((vertex) -> pLevel.isLoaded(vertex) && networks.graph.edgesOf(vertex).stream().noneMatch((edge) -> networks.graph.getEdgeSource(edge).equals(vertex)) && paths.getPath(vertex) != null).map(paths::getPath).toList();
+                List<GraphPath<BlockPos, DefaultEdge>> ends = networks.graph.vertexSet().stream().filter((vertex) -> pLevel.isLoaded(vertex) && networks.graph.edgesOf(vertex).stream().noneMatch((edge) -> networks.graph.getEdgeSource(edge).equals(vertex)) && paths.getPath(vertex) != null).map(paths::getPath).filter((i) -> pLevel.getBlockEntity(i.getEndVertex()) instanceof EnderPearlDestinationBlockEntity).toList();
                 if (!ends.isEmpty()) {
                     for (ThrownEnderpearl i : pearls) {
                         Entity owner = i.getOwner();

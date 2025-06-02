@@ -35,7 +35,6 @@ public class EnderPearlRelayRenderer extends DatabankBlockEntityRenderer<EnderPe
 
     public static class Model extends DatabankBlockEntityModel<EnderPearlRelayBlockEntity> {
         public static AnimationDefinition idle;
-        public static AnimationDefinition crafting;
         private final ModelPart root;
 
         public Model(ModelPart pRoot) {

@@ -81,6 +81,9 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.CHEMICAL_NODE.get(), ChemicalNodeRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.DRYING_TABLE.get(), DryingTableRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_BRIDGE.get(), EssenceBridgeRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_CAPTURE.get(), EnderPearlCaptureRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_RELAY.get(), EnderPearlRelayRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_DESTINATION.get(), EnderPearlDestinationRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -139,6 +142,12 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(CryochamberRenderer.modelLocation, CryochamberRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(ChemicalNodeRenderer.modelLocation, ChemicalNodeRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(ChemicalNodeItemRenderer.modelLocation, ChemicalNodeItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlCaptureRenderer.modelLocation, EnderPearlCaptureRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlCaptureItemRenderer.modelLocation, EnderPearlCaptureItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlRelayRenderer.modelLocation, EnderPearlRelayRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlRelayItemRenderer.modelLocation, EnderPearlRelayItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlDestinationRenderer.modelLocation, EnderPearlDestinationRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlDestinationItemRenderer.modelLocation, EnderPearlDestinationItemRenderer.Model::createLayer);
         });
 
         event.enqueueWork(() -> {
@@ -198,6 +207,9 @@ public class ClientModEvents {
         event.registerItem(AnimatedBlockItemUtil.createExtensions(MetalShaperItemRenderer::new), BlockRegistry.METAL_SHAPER.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createExtensions(IndustrialPlantSiphonItemRenderer::new), BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createExtensions(ChemicalNodeItemRenderer::new), BlockRegistry.CHEMICAL_NODE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlCaptureItemRenderer::new), BlockRegistry.ENDER_PEARL_CAPTURE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlRelayItemRenderer::new), BlockRegistry.ENDER_PEARL_RELAY.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlDestinationItemRenderer::new), BlockRegistry.ENDER_PEARL_DESTINATION.get().asItem());
     }
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {
