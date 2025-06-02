@@ -35,9 +35,12 @@ public class PearlNetworkBlock extends Block {
     public static Color getColor() {
         return new Color(12, 87, 38);
     }
+    public static Item getLinkItem() {
+        return ItemRegistry.ESSENCE_REDIRECTOR.get();
+    }
     @Override
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
-        Item requiredItem = ItemRegistry.ESSENCE_REDIRECTOR.get();
+        Item requiredItem = getLinkItem();
         boolean success = pPlayer.getItemInHand(pHand).is(requiredItem);
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);

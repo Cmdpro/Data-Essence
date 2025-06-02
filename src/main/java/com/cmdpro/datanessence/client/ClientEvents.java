@@ -7,6 +7,8 @@ import com.cmdpro.databank.rendering.ShaderHelper;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
@@ -23,6 +25,7 @@ import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -40,6 +43,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
@@ -88,13 +92,24 @@ public class ClientEvents {
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
             MultiBufferSource.BufferSource bufferSource = RenderHandler.createBufferSource();
             if (ClientPlayerData.getLinkPos() != null) {
+                BlockEntity blockEntity = mc.level.getBlockEntity(ClientPlayerData.getLinkPos());
                 Vec3 pos = event.getCamera().getPosition();
                 Vec3 pos1 = ClientPlayerData.getLinkPos().getCenter();
                 Vec3 pos2 = mc.player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                 Color color = ClientPlayerData.getLinkColor();
                 event.getPoseStack().pushPose();
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color);
+                if (blockEntity instanceof PearlNetworkBlockEntity ent) {
+                    Vec3 currentPos = pos1;
+                    Vec3 target = pos2;
+                    VertexConsumer vertexConsumer = RenderHandler.createBufferSource().getBuffer(DataNEssenceRenderTypes.WIRES);
+                    Vec3 normal = currentPos.subtract(target).normalize();
+                    vertexConsumer.addVertex(event.getPoseStack().last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(color.getRGB()).setNormal(event.getPoseStack().last(), (float) normal.x, (float) normal.y, (float) normal.z);
+                    currentPos = target;
+                    vertexConsumer.addVertex(event.getPoseStack().last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(color.getRGB()).setNormal(event.getPoseStack().last(), (float) normal.x, (float) normal.y, (float) normal.z);
+                } else {
+                    ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color);
+                }
                 event.getPoseStack().popPose();
             }
             for (Player i : mc.level.players()) {

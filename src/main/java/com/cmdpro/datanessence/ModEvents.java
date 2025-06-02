@@ -3,6 +3,8 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.api.block.TraversiteBlock;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePoint;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.block.transportation.TraversiteRoad;
@@ -218,6 +220,12 @@ public class ModEvents {
                     }
                     if (ent.get().getBlockState().getBlock() instanceof BaseCapabilityPoint block) {
                         if (!event.getEntity().isHolding(block.getRequiredWire())) {
+                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
+                        }
+                    }
+                    if (ent.get().getBlockState().getBlock() instanceof PearlNetworkBlock block) {
+                        if (!event.getEntity().isHolding(PearlNetworkBlock.getLinkItem())) {
                             event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                             PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                         }
