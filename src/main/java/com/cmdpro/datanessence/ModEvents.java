@@ -5,7 +5,7 @@ import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePoint;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
-import com.cmdpro.datanessence.block.TraversiteRoad;
+import com.cmdpro.datanessence.block.transportation.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.data.pinging.PingableStructureManager;

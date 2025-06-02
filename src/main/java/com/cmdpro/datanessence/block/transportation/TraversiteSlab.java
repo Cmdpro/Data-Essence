@@ -1,9 +1,6 @@
-package com.cmdpro.datanessence.block;
+package com.cmdpro.datanessence.block.transportation;
 
-import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.block.TraversiteBlock;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 
 public class TraversiteSlab extends SlabBlock implements TraversiteBlock {
