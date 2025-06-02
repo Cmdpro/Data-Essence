@@ -5,6 +5,7 @@
 - Added scrolling to the data tablet
 - Added a few pages of the first of the in-game lore books, acquirable at Nature Outposts as a data entry
 - Added a default entry that clarifies behaviour of hidden blocks (such as Tethergrass, Lensing Crystal Ore)
+- Added a helpful visual for structure protector bounds
 
 ### Changes
 - Tweaked several entries, including Item Filter, Data Tablet, Fabrication, and Infuser
@@ -28,3 +29,4 @@
 - Fixed the Transcendental Tether being able to softlock you
 - Fixed a bug where you could manage to ascend into the sky with the Transcendental Tether
 - Fixed you being able to still exit out of a databank minigame after completion during the ending with right click
+- Fixed structure protectors not rotating with structures

@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
+import com.cmdpro.datanessence.block.technical.StructureProtector;
 import com.cmdpro.datanessence.block.transportation.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
@@ -29,6 +30,7 @@ import com.cmdpro.datanessence.data.datatablet.Entries;
 import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.data.datatablet.EntryManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -91,17 +93,25 @@ public class ModEvents {
         if (!event.getLevel().isClientSide()) {
             if (!event.getLevel().getBlockState(event.getPos()).is(BlockRegistry.STRUCTURE_PROTECTOR.get())) {
                 event.getEntity().getData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER).ifPresent((binding) -> {
-                    if (binding.bindProcess == 1) {
-                        event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.select_pos_2"));
-                        binding.offsetCorner1 = event.getPos().offset(binding.getBlockPos().multiply(-1));
-                        binding.bindProcess = 2;
-                    } else if (binding.bindProcess == 2) {
-                        if (!binding.offsetCorner1.offset(binding.getBlockPos()).equals(event.getPos())) {
-                            binding.offsetCorner2 = event.getPos().offset(binding.getBlockPos().multiply(-1));
-                            binding.bindProcess = 0;
-                            event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.finished"));
-                            event.getEntity().removeData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER);
+                    if (binding.getLevel() != null) {
+                        if (binding.bindProcess == 1) {
+                            event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.select_pos_2"));
+                            binding.offsetCorner1 = event.getPos().offset(binding.getBlockPos().multiply(-1));
+                            binding.getLevel().setBlock(binding.getBlockPos(), binding.getBlockState().setValue(StructureProtector.FACING, Direction.NORTH), 3);
+                            binding.bindProcess = 2;
+                            binding.updateBlock();
+                        } else if (binding.bindProcess == 2) {
+                            if (!binding.offsetCorner1.offset(binding.getBlockPos()).equals(event.getPos())) {
+                                binding.offsetCorner2 = event.getPos().offset(binding.getBlockPos().multiply(-1));
+                                binding.getLevel().setBlock(binding.getBlockPos(), binding.getBlockState().setValue(StructureProtector.FACING, Direction.NORTH), 3);
+                                binding.bindProcess = 0;
+                                event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.finished"));
+                                event.getEntity().removeData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER);
+                                binding.updateBlock();
+                            }
                         }
+                    } else {
+                        event.getEntity().removeData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER);
                     }
                 });
             }
@@ -117,7 +127,7 @@ public class ModEvents {
                     if (((Level) event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                         List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                         for (StructureProtectorBlockEntity i : ents) {
-                            AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
+                            AABB aabb = AABB.encapsulatingFullBlocks(i.getCorner1(), i.getCorner2());
                             if (aabb.contains(event.getPos().getCenter())) {
                                 event.setCanceled(true);
                                 break;
@@ -142,7 +152,7 @@ public class ModEvents {
                 if (((Level)event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                     List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                     for (StructureProtectorBlockEntity i : ents) {
-                        AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
+                        AABB aabb = AABB.encapsulatingFullBlocks(i.getCorner1(), i.getCorner2());
                         if (aabb.contains(event.getPos().getCenter())) {
                             event.setCanceled(true);
                             break;
@@ -160,7 +170,7 @@ public class ModEvents {
                 List<BlockPos> toRemove = new ArrayList<>();
                 for (BlockPos i : event.getExplosion().getToBlow()) {
                     for (StructureProtectorBlockEntity o : ents) {
-                        AABB aabb = AABB.encapsulatingFullBlocks(o.offsetCorner1.offset(o.getBlockPos()), o.offsetCorner2.offset(o.getBlockPos()));
+                        AABB aabb = AABB.encapsulatingFullBlocks(o.getCorner1(), o.getCorner2());
                         if (aabb.contains(i.getCenter())) {
                             toRemove.add(i);
                             break;
@@ -184,7 +194,7 @@ public class ModEvents {
                 if (((Level)event.getEntity().level()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                     List<StructureProtectorBlockEntity> ents = ((Level) event.getEntity().level()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                     for (StructureProtectorBlockEntity i : ents) {
-                        AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
+                        AABB aabb = AABB.encapsulatingFullBlocks(i.getCorner1(), i.getCorner2());
                         if (aabb.contains(event.getPos().getCenter())) {
                             event.setCanceled(true);
                             break;

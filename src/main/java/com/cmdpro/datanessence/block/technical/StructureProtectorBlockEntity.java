@@ -5,11 +5,16 @@ import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -53,28 +58,105 @@ public class StructureProtectorBlockEntity extends BlockEntity {
             }
         }
     }
-
+    public Rotation getRotation(Direction direction) {
+        Rotation rot = Rotation.NONE;
+        if (direction.equals(Direction.EAST)) {
+            rot = Rotation.CLOCKWISE_90;
+        }
+        if (direction.equals(Direction.SOUTH)) {
+            rot = Rotation.CLOCKWISE_180;
+        }
+        if (direction.equals(Direction.WEST)) {
+            rot = Rotation.COUNTERCLOCKWISE_90;
+        }
+        return rot;
+    }
+    public Rotation getRotation() {
+        return getRotation(getBlockState().getValue(StructureProtector.FACING));
+    }
+    public BlockPos getCorner1() {
+        if (offsetCorner1 == null) {
+            return null;
+        }
+        return getBlockPos().offset(offsetCorner1.rotate(getRotation()));
+    }
+    public BlockPos getCorner2() {
+        if (offsetCorner2 == null) {
+            return null;
+        }
+        return getBlockPos().offset(offsetCorner2.rotate(getRotation()));
+    }
+    @Override
+    public ClientboundBlockEntityDataPacket getUpdatePacket(){
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+    @Override
+    public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries) {
+        CompoundTag tag = pkt.getTag();
+        if (tag.contains("offsetCorner1X") && tag.contains("offsetCorner1Y") && tag.contains("offsetCorner1Z")) {
+            offsetCorner1 = new BlockPos(tag.getInt("offsetCorner1X"), tag.getInt("offsetCorner1Y"), tag.getInt("offsetCorner1Z"));
+        } else {
+            offsetCorner1 = null;
+        }
+        if (tag.contains("offsetCorner2X") && tag.contains("offsetCorner2Y") && tag.contains("offsetCorner2Z")) {
+            offsetCorner2 = new BlockPos(tag.getInt("offsetCorner2X"), tag.getInt("offsetCorner2Y"), tag.getInt("offsetCorner2Z"));
+        } else {
+            offsetCorner2 = null;
+        }
+    }
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
+        CompoundTag tag = new CompoundTag();
+        if (offsetCorner1 != null) {
+            tag.putInt("offsetCorner1X", offsetCorner1.getX());
+            tag.putInt("offsetCorner1Y", offsetCorner1.getY());
+            tag.putInt("offsetCorner1Z", offsetCorner1.getZ());
+        }
+        if (offsetCorner2 != null) {
+            tag.putInt("offsetCorner2X", offsetCorner2.getX());
+            tag.putInt("offsetCorner2Y", offsetCorner2.getY());
+            tag.putInt("offsetCorner2Z", offsetCorner2.getZ());
+        }
+        return tag;
+    }
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
-        tag.putInt("offsetCorner1X", offsetCorner1.getX());
-        tag.putInt("offsetCorner1Y", offsetCorner1.getY());
-        tag.putInt("offsetCorner1Z", offsetCorner1.getZ());
-        tag.putInt("offsetCorner2X", offsetCorner2.getX());
-        tag.putInt("offsetCorner2Y", offsetCorner2.getY());
-        tag.putInt("offsetCorner2Z", offsetCorner2.getZ());
+        if (offsetCorner1 != null) {
+            tag.putInt("offsetCorner1X", offsetCorner1.getX());
+            tag.putInt("offsetCorner1Y", offsetCorner1.getY());
+            tag.putInt("offsetCorner1Z", offsetCorner1.getZ());
+        }
+        if (offsetCorner2 != null) {
+            tag.putInt("offsetCorner2X", offsetCorner2.getX());
+            tag.putInt("offsetCorner2Y", offsetCorner2.getY());
+            tag.putInt("offsetCorner2Z", offsetCorner2.getZ());
+        }
         super.saveAdditional(tag, pRegistries);
     }
     @Override
-    public void loadAdditional(CompoundTag nbt, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(nbt, pRegistries);
-        offsetCorner1 = new BlockPos(nbt.getInt("offsetCorner1X"), nbt.getInt("offsetCorner1Y"), nbt.getInt("offsetCorner1Z"));
-        offsetCorner2 = new BlockPos(nbt.getInt("offsetCorner2X"), nbt.getInt("offsetCorner2Y"), nbt.getInt("offsetCorner2Z"));
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(tag, pRegistries);
+        if (tag.contains("offsetCorner1X") && tag.contains("offsetCorner1Y") && tag.contains("offsetCorner1Z")) {
+            offsetCorner1 = new BlockPos(tag.getInt("offsetCorner1X"), tag.getInt("offsetCorner1Y"), tag.getInt("offsetCorner1Z"));
+        } else {
+            offsetCorner1 = null;
+        }
+        if (tag.contains("offsetCorner2X") && tag.contains("offsetCorner2Y") && tag.contains("offsetCorner2Z")) {
+            offsetCorner2 = new BlockPos(tag.getInt("offsetCorner2X"), tag.getInt("offsetCorner2Y"), tag.getInt("offsetCorner2Z"));
+        } else {
+            offsetCorner2 = null;
+        }
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, StructureProtectorBlockEntity pBlockEntity) {
         if (pLevel.isClientSide) {
             ClientHandler.spawnParticles(pLevel.random, pPos.getCenter());
         }
+    }
+    public void updateBlock() {
+        BlockState blockState = level.getBlockState(this.getBlockPos());
+        this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
+        this.setChanged();
     }
     private static class ClientHandler {
         public static void spawnParticles(RandomSource random, Vec3 pos) {
