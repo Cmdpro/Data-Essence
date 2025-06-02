@@ -16,6 +16,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.AABB;
 
 public class EnderPearlRelayRenderer extends DatabankBlockEntityRenderer<EnderPearlRelayBlockEntity> implements PearlNetworkBlockRenderHelper {
     public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("ender_pearl_relay"), "main");
@@ -31,6 +32,10 @@ public class EnderPearlRelayRenderer extends DatabankBlockEntityRenderer<EnderPe
     @Override
     public ResourceLocation getTextureLocation() {
         return DataNEssence.locate("textures/block/ender_pearl_relay.png");
+    }
+    @Override
+    public AABB getRenderBoundingBox(EnderPearlRelayBlockEntity blockEntity) {
+        return AABB.INFINITE;
     }
 
     public static class Model extends DatabankBlockEntityModel<EnderPearlRelayBlockEntity> {

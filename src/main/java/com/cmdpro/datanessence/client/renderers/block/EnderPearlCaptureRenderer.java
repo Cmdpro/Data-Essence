@@ -26,6 +26,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class EnderPearlCaptureRenderer extends DatabankBlockEntityRenderer<EnderPearlCaptureBlockEntity> implements PearlNetworkBlockRenderHelper {
@@ -46,6 +47,10 @@ public class EnderPearlCaptureRenderer extends DatabankBlockEntityRenderer<Ender
     @Override
     public ResourceLocation getTextureLocation() {
         return DataNEssence.locate("textures/block/ender_pearl_capture.png");
+    }
+    @Override
+    public AABB getRenderBoundingBox(EnderPearlCaptureBlockEntity blockEntity) {
+        return AABB.INFINITE;
     }
     public void rotateStack(Direction facing, PoseStack poseStack) {
         Vec3 rotateAround = new Vec3(0.5, 0.5, 0.5);

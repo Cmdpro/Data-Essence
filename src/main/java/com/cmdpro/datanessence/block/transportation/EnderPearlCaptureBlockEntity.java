@@ -10,6 +10,7 @@ import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -20,6 +21,7 @@ import net.minecraft.world.entity.projectile.ThrownEnderpearl;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.RandomUtils;
@@ -42,7 +44,10 @@ public class EnderPearlCaptureBlockEntity extends PearlNetworkBlockEntity {
             if (!pearls.isEmpty()) {
                 BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ENDER_PEARL_NETWORKS);
                 ShortestPathAlgorithm.SingleSourcePaths<BlockPos, DefaultEdge> paths = networks.path.getPaths(pPos);
-                List<GraphPath<BlockPos, DefaultEdge>> ends = networks.graph.vertexSet().stream().filter((vertex) -> pLevel.isLoaded(vertex) && networks.graph.edgesOf(vertex).stream().noneMatch((edge) -> networks.graph.getEdgeSource(edge).equals(vertex)) && paths.getPath(vertex) != null).map(paths::getPath).filter((i) -> pLevel.getBlockEntity(i.getEndVertex()) instanceof EnderPearlDestinationBlockEntity).toList();
+                List<GraphPath<BlockPos, DefaultEdge>> ends = networks.graph.vertexSet().stream()
+                        .filter((vertex) -> networks.graph.edgesOf(vertex).stream().noneMatch((edge) -> networks.graph.getEdgeSource(edge).equals(vertex)) && paths.getPath(vertex) != null)
+                        .map(paths::getPath)
+                        .filter((i) -> pLevel.getBlockEntity(i.getEndVertex()) instanceof EnderPearlDestinationBlockEntity).toList();
                 if (!ends.isEmpty()) {
                     for (ThrownEnderpearl i : pearls) {
                         Entity owner = i.getOwner();
