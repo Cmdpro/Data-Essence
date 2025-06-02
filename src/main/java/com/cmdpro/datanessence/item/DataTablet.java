@@ -36,6 +36,7 @@ public class DataTablet extends Item {
         DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/fabricator"), false);
         DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/essence_redirector"), false);
         DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/data_tablet"), false);
+        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/hidden_blocks"), false);
         DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/structures"), false);
         DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/locator"), false);
         DataTabletUtil.unlockEntry(player, DataNEssence.locate("tools/decorative_blocks"), false);

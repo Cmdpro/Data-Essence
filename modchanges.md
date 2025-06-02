@@ -4,6 +4,7 @@
 - Added a secret with genderfluid :3
 - Added scrolling to the data tablet
 - Added a few pages of the first of the in-game lore books, acquirable at Nature Outposts as a data entry
+- Added a default entry that clarifies behaviour of hidden blocks (such as Tethergrass, Lensing Crystal Ore)
 
 ### Changes
 - Tweaked several entries, including Item Filter, Data Tablet, Fabrication, and Infuser
@@ -17,6 +18,7 @@
 - Made Fabricator crafting take time (Auto-Fabricator tweaked to follow the Fabricator crafting times)
 - Made the Fabricator unable to store any essence except industrial
 - Did some tweaks to the code that shouldn't affect gameplay
+- Arekko now gives you a Signal Tracker in addition to a Data Tablet if you did not already have one
 
 ### Fixes
 - Fixed an issue where the Auto-Fabricator would void remainders
