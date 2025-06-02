@@ -1,0 +1,55 @@
+package com.cmdpro.datanessence.block.transportation;
+
+import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
+import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.projectile.ThrownEnderpearl;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import org.apache.commons.lang3.RandomUtils;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
+import org.jgrapht.graph.DefaultEdge;
+
+import java.awt.*;
+import java.util.List;
+
+public class EnderPearlCaptureBlockEntity extends PearlNetworkBlockEntity {
+    public AnimationState animState = new AnimationState();
+    public EnderPearlCaptureBlockEntity(BlockPos pos, BlockState blockState) {
+        super(BlockEntityRegistry.ENDER_PEARL_CAPTURE.get(), pos, blockState);
+    }
+
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EnderPearlCaptureBlockEntity pBlockEntity) {
+        if (!pLevel.isClientSide) {
+            List<ThrownEnderpearl> pearls = pLevel.getEntitiesOfClass(ThrownEnderpearl.class, AABB.ofSize(pPos.getCenter(), 10, 10, 10));
+            if (!pearls.isEmpty()) {
+                BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ENDER_PEARL_NETWORKS);
+                ShortestPathAlgorithm.SingleSourcePaths<BlockPos, DefaultEdge> paths = networks.path.getPaths(pPos);
+                List<GraphPath<BlockPos, DefaultEdge>> ends = networks.graph.vertexSet().stream().filter((vertex) -> pLevel.isLoaded(vertex) && networks.graph.edgesOf(vertex).stream().noneMatch((edge) -> networks.graph.getEdgeSource(edge).equals(vertex)) && paths.getPath(vertex) != null).map(paths::getPath).toList();
+                if (!ends.isEmpty()) {
+                    for (ThrownEnderpearl i : pearls) {
+                        Entity owner = i.getOwner();
+                        GraphPath<BlockPos, DefaultEdge> end = ends.get(owner.getRandom().nextInt(0, ends.size()));
+                        Vec3 pos = end.getEndVertex().getCenter();
+                        owner.teleportTo(pos.x, pos.y, pos.z);
+                        pLevel.playSound(null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
+                        i.remove(Entity.RemovalReason.DISCARDED);
+                    }
+                }
+            }
+        }
+    }
+}

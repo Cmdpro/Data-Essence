@@ -26,14 +26,10 @@ import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.block.transmission.ExoticEssencePoint;
 import com.cmdpro.datanessence.block.transmission.LunarEssencePoint;
 import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
-import com.cmdpro.datanessence.block.transportation.TraversiteRoad;
-import com.cmdpro.datanessence.block.transportation.TraversiteSlab;
-import com.cmdpro.datanessence.block.transportation.TraversiteStairs;
+import com.cmdpro.datanessence.block.transportation.*;
 import com.cmdpro.datanessence.block.world.*;
 import com.cmdpro.datanessence.block.world.shieldingstone.*;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
-import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
-import com.cmdpro.datanessence.item.blockitem.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -88,21 +84,21 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INDUSTRIAL_PLANT_SIPHON = register("industrial_plant_siphon",
             () -> new IndustrialPlantSiphon(MACHINE_PROPERTIES),
-            object -> () -> new IndustrialPlantSiphonItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Machines
     public static final Supplier<Block> FABRICATOR = register("fabricator",
             () -> new Fabricator(MACHINE_PROPERTIES),
-            object -> () -> new FabricatorItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INFUSER = register("infuser",
             () -> new Infuser(MACHINE_PROPERTIES),
-            object -> () -> new InfuserItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_COLLECTOR = register("fluid_collector",
             () -> new FluidCollector(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_MIXER = register("fluid_mixer",
             () -> new FluidMixer(MACHINE_PROPERTIES),
-            object -> () -> new FluidMixerItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> MINERAL_PURIFICATION_CHAMBER = register("mineral_purification_chamber",
             () -> new MineralPurificationChamber(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -117,7 +113,7 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENTROPIC_PROCESSOR = register("entropic_processor",
             () -> new EntropicProcessor(MACHINE_PROPERTIES),
-            object -> () -> new EntropicProcessorItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SYNTHESIS_CHAMBER = register("synthesis_chamber",
             () -> new SynthesisChamber(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -129,10 +125,10 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CHARGER = register("charger",
             () -> new Charger(MACHINE_PROPERTIES),
-            object -> () -> new ChargerItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AUTO_FABRICATOR = register("auto-fabricator",
             () -> new AutoFabricator(MACHINE_PROPERTIES),
-            object -> () -> new AutoFabricatorItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENTICING_LURE = register("enticing_lure",
             () -> new EnticingLure(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -144,7 +140,7 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> METAL_SHAPER = register("metal_shaper",
             () -> new MetalShaper(MACHINE_PROPERTIES),
-            object -> () -> new MetalShaperItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> MELTER = register("melter",
             () -> new Melter(MACHINE_PROPERTIES),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -178,25 +174,25 @@ public class BlockRegistry {
     // Nodes
     public static final Supplier<Block> ESSENCE_POINT = register("essence_point",
             () -> new EssencePoint(MACHINE_PROPERTIES),
-            object -> () -> new EssencePointItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LUNAR_ESSENCE_POINT = register("lunar_essence_point",
             () -> new LunarEssencePoint(MACHINE_PROPERTIES),
-            object -> () -> new LunarEssencePointItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> NATURAL_ESSENCE_POINT = register("natural_essence_point",
             () -> new NaturalEssencePoint(MACHINE_PROPERTIES),
-            object -> () -> new NaturalEssencePointItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> EXOTIC_ESSENCE_POINT = register("exotic_essence_point",
             () -> new ExoticEssencePoint(MACHINE_PROPERTIES),
-            object -> () -> new ExoticEssencePointItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_POINT = register("fluid_point",
             () -> new FluidPoint(MACHINE_PROPERTIES),
-            object -> () -> new FluidPointItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ITEM_POINT = register("item_point",
             () -> new ItemPoint(MACHINE_PROPERTIES),
-            object -> () -> new ItemPointItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CHEMICAL_NODE = register("chemical_node",
             () -> new ChemicalNode(MACHINE_PROPERTIES),
-            object -> () -> new ChemicalNodeItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Storage
     public static final Supplier<Block> ESSENCE_BATTERY = register("essence_battery",
@@ -239,7 +235,7 @@ public class BlockRegistry {
             () -> new EssenceBridge(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).strength(-1.0F, 3600000.0F).noOcclusion()),
             object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
 
-    // Utility Blocks
+    // Transportation Blocks
     public static final Supplier<Block> TRAVERSITE_ROAD = register("traversite_road",
             () -> new TraversiteRoad(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().strength(2.0f), 2),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -258,6 +254,16 @@ public class BlockRegistry {
     public static final Supplier<Block> TRAVERSITE_ROAD_SLAB_OPAL = register("traversite_road_slab_opal",
             () -> new TraversiteSlab(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().strength(2.0f), 2),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ENDER_PEARL_CAPTURE = register("ender_pearl_capture",
+            () -> new EnderPearlCapture(MACHINE_PROPERTIES),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ENDER_PEARL_DESTINATION = register("ender_pearl_destination",
+            () -> new EnderPearlDestination(MACHINE_PROPERTIES),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ENDER_PEARL_RELAY = register("ender_pearl_relay",
+            () -> new EnderPearlRelay(MACHINE_PROPERTIES),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
 
     // Ancient Rock
     public static final Supplier<Block> ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks",

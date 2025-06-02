@@ -15,6 +15,7 @@
 - Changed the item output displays
 - Made Fabricator crafting take time (Auto-Fabricator tweaked to follow the Fabricator crafting times)
 - Made the Fabricator unable to store any essence except industrial
+- Did some tweaks to the code that shouldn't affect gameplay
 
 ### Fixes
 - Fixed an issue where the Auto-Fabricator would void remainders

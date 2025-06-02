@@ -3,6 +3,8 @@ package com.cmdpro.datanessence.api.util;
 import com.cmdpro.databank.DatabankUtils;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.PlayerDataSync;
 import com.cmdpro.datanessence.networking.packet.s2c.PlayerTierSync;
@@ -29,6 +31,8 @@ public class PlayerDataUtil {
                 linkColor = linkFrom2.linkColor();
             } else if (linkFromEntity.get() instanceof BaseCapabilityPointBlockEntity linkFrom2) {
                 linkColor = linkFrom2.linkColor();
+            } else if (linkFromEntity.get() instanceof PearlNetworkBlockEntity linkFrom2) {
+                linkColor = PearlNetworkBlock.getColor();
             }
         }
         ModMessages.sendToPlayer(new PlayerDataSync(PlayerDataUtil.getUnlockedEssences(player), linkFrom, linkColor), (player));

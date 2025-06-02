@@ -1,9 +1,8 @@
 package com.cmdpro.datanessence.api.node.block;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.node.EssenceNodeNetworks;
+import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
-import com.cmdpro.datanessence.api.node.CapabilityNodeNetworks;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,7 +26,6 @@ import org.jgrapht.graph.DefaultEdge;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -80,7 +78,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         super.onLoad();
         if (level != null) {
             if (!level.isClientSide) {
-                CapabilityNodeNetworks networks = level.getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
+                BlockPosNetworks networks = level.getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
                 if (!networks.graph.containsVertex(getBlockPos())) {
                     networks.graph.addVertex(getBlockPos());
                 }
@@ -110,7 +108,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
             if (pBlockEntity.link == null) {
                 pBlockEntity.updateLinks();
             }
-            CapabilityNodeNetworks networks = pLevel.getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
+            BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
             Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
             if (edges.stream().noneMatch((edge) -> networks.graph.getEdgeTarget(edge).equals(pPos)) && !edges.isEmpty()) {
                 ShortestPathAlgorithm.SingleSourcePaths<BlockPos, DefaultEdge> paths = networks.path.getPaths(pPos);
@@ -130,7 +128,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
             link = new ArrayList<>();
         }
         link.clear();
-        CapabilityNodeNetworks networks = level.getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
+        BlockPosNetworks networks = level.getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
         if (networks.graph.containsVertex(getBlockPos())) {
             for (DefaultEdge i : networks.graph.edgesOf(getBlockPos())) {
                 if (networks.graph.getEdgeSource(i).equals(getBlockPos())) {

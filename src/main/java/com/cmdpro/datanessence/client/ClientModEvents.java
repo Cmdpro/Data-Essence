@@ -8,14 +8,13 @@ import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemDecorators;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
+import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
-import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItemRenderer;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
-import com.cmdpro.datanessence.item.blockitem.*;
 import com.cmdpro.datanessence.client.particle.*;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.registry.*;
@@ -30,7 +29,6 @@ import com.cmdpro.datanessence.client.renderers.layer.WingsLayer;
 import com.cmdpro.datanessence.screen.*;
 import com.cmdpro.datanessence.client.shaders.GenderEuphoriaShader;
 import com.cmdpro.datanessence.client.shaders.ProgressionShader;
-import net.mariu73.opalescence.block.OpalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -185,21 +183,21 @@ public class ClientModEvents {
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(Genderfluid.EXTENSIONS, FluidRegistry.GENDERFLUID_TYPE.get());
 
-        event.registerItem(AutoFabricatorItem.extensions(), BlockRegistry.AUTO_FABRICATOR.get().asItem());
-        event.registerItem(ChargerItem.extensions(), BlockRegistry.CHARGER.get().asItem());
-        event.registerItem(EntropicProcessorItem.extensions(), BlockRegistry.ENTROPIC_PROCESSOR.get().asItem());
-        event.registerItem(EssencePointItem.extensions(), BlockRegistry.ESSENCE_POINT.get().asItem());
-        event.registerItem(ExoticEssencePointItem.extensions(), BlockRegistry.EXOTIC_ESSENCE_POINT.get().asItem());
-        event.registerItem(FabricatorItem.extensions(), BlockRegistry.FABRICATOR.get().asItem());
-        event.registerItem(FluidPointItem.extensions(), BlockRegistry.FLUID_POINT.get().asItem());
-        event.registerItem(InfuserItem.extensions(), BlockRegistry.INFUSER.get().asItem());
-        event.registerItem(ItemPointItem.extensions(), BlockRegistry.ITEM_POINT.get().asItem());
-        event.registerItem(LunarEssencePointItem.extensions(), BlockRegistry.LUNAR_ESSENCE_POINT.get().asItem());
-        event.registerItem(NaturalEssencePointItem.extensions(), BlockRegistry.NATURAL_ESSENCE_POINT.get().asItem());
-        event.registerItem(FluidMixerItem.extensions(), BlockRegistry.FLUID_MIXER.get().asItem());
-        event.registerItem(MetalShaperItem.extensions(), BlockRegistry.METAL_SHAPER.get().asItem());
-        event.registerItem(IndustrialPlantSiphonItem.extensions(), BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get().asItem());
-        event.registerItem(ChemicalNodeItem.extensions(), BlockRegistry.CHEMICAL_NODE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(AutoFabricatorItemRenderer::new), BlockRegistry.AUTO_FABRICATOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(ChargerItemRenderer::new), BlockRegistry.CHARGER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EntropicProcessorItemRenderer::new), BlockRegistry.ENTROPIC_PROCESSOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EssencePointItemRenderer::new), BlockRegistry.ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(ExoticEssencePointItemRenderer::new), BlockRegistry.EXOTIC_ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(FabricatorItemRenderer::new), BlockRegistry.FABRICATOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(FluidPointItemRenderer::new), BlockRegistry.FLUID_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(InfuserItemRenderer::new), BlockRegistry.INFUSER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(ItemPointItemRenderer::new), BlockRegistry.ITEM_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(LunarEssencePointItemRenderer::new), BlockRegistry.LUNAR_ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(NaturalEssencePointItemRenderer::new), BlockRegistry.NATURAL_ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(FluidMixerItemRenderer::new), BlockRegistry.FLUID_MIXER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(MetalShaperItemRenderer::new), BlockRegistry.METAL_SHAPER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(IndustrialPlantSiphonItemRenderer::new), BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(ChemicalNodeItemRenderer::new), BlockRegistry.CHEMICAL_NODE.get().asItem());
     }
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {

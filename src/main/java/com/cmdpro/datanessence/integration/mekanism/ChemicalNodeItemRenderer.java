@@ -13,9 +13,10 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 
-public class ChemicalNodeItemRenderer extends DatabankItemRenderer<ChemicalNodeItem> {
+public class ChemicalNodeItemRenderer extends DatabankItemRenderer<BlockItem> {
     public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("chemical_node_item"), "main");
 
     public ChemicalNodeItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
@@ -27,7 +28,7 @@ public class ChemicalNodeItemRenderer extends DatabankItemRenderer<ChemicalNodeI
         return DataNEssence.locate("textures/block/chemical_node.png");
     }
 
-    public static class Model extends DatabankItemModel<ChemicalNodeItem> {
+    public static class Model extends DatabankItemModel<BlockItem> {
         public static AnimationDefinition hand;
         public AnimationState animState = new AnimationState();
         private final ModelPart root;

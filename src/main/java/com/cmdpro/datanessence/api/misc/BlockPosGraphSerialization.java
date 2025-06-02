@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.api.node;
+package com.cmdpro.datanessence.api.misc;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -9,21 +9,21 @@ import org.jgrapht.graph.DefaultEdge;
 import java.util.ArrayList;
 import java.util.List;
 
-class NodeGraphSerialization {
-    protected static class SerializationEdge {
+public class BlockPosGraphSerialization {
+    public static class SerializationEdge {
         public BlockPos source;
         public BlockPos target;
         public SerializationEdge(BlockPos source, BlockPos target) {
             this.source = source;
             this.target = target;
         }
-        protected static final Codec<SerializationEdge> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+        public static final Codec<SerializationEdge> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
                 BlockPos.CODEC.fieldOf("source").forGetter((edge) -> edge.source),
                 BlockPos.CODEC.fieldOf("target").forGetter((edge) -> edge.target)
         ).apply(instance, SerializationEdge::new));
     }
-    protected static class SerializationGraph {
-        protected static final Codec<SerializationGraph> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+    public static class SerializationGraph {
+        public static final Codec<SerializationGraph> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
                 BlockPos.CODEC.listOf().fieldOf("vertices").forGetter((graph) -> graph.vertices),
                 SerializationEdge.CODEC.listOf().fieldOf("edges").forGetter((graph) -> graph.edges)
         ).apply(instance, SerializationGraph::new));

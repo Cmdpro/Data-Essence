@@ -1,8 +1,7 @@
 package com.cmdpro.datanessence.api.node.block;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.node.CapabilityNodeNetworks;
-import com.cmdpro.datanessence.api.node.EssenceNodeNetworks;
+import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.core.BlockPos;
@@ -21,7 +20,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.neoforged.neoforge.items.ItemStackHandler;
-import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.graph.DefaultEdge;
@@ -79,7 +77,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
         super.onLoad();
         if (level != null) {
             if (!level.isClientSide) {
-                EssenceNodeNetworks networks = level.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+                BlockPosNetworks networks = level.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
                 if (!networks.graph.containsVertex(getBlockPos())) {
                     networks.graph.addVertex(getBlockPos());
                 }
@@ -110,7 +108,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
             if (pBlockEntity.link == null) {
                 pBlockEntity.updateLinks();
             }
-            EssenceNodeNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+            BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
             Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
             if (edges.stream().noneMatch((edge) -> networks.graph.getEdgeTarget(edge).equals(pPos)) && !edges.isEmpty()) {
                 ShortestPathAlgorithm.SingleSourcePaths<BlockPos, DefaultEdge> paths = networks.path.getPaths(pPos);
@@ -130,7 +128,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
             link = new ArrayList<>();
         }
         link.clear();
-        EssenceNodeNetworks networks = level.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+        BlockPosNetworks networks = level.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
         if (networks.graph.containsVertex(getBlockPos())) {
             for (DefaultEdge i : networks.graph.edgesOf(getBlockPos())) {
                 if (networks.graph.getEdgeSource(i).equals(getBlockPos())) {

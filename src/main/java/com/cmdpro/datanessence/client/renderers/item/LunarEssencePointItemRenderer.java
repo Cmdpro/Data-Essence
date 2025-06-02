@@ -5,7 +5,6 @@ import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.item.DatabankItemModel;
 import com.cmdpro.databank.model.item.DatabankItemRenderer;
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.item.blockitem.LunarEssencePointItem;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -14,9 +13,10 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 
-public class LunarEssencePointItemRenderer extends DatabankItemRenderer<LunarEssencePointItem> {
+public class LunarEssencePointItemRenderer extends DatabankItemRenderer<BlockItem> {
     public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("lunar_essence_point_item"), "main");
     public LunarEssencePointItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
         super(dispatcher, modelSet, new Model(modelSet.bakeLayer(modelLocation)));
@@ -27,7 +27,7 @@ public class LunarEssencePointItemRenderer extends DatabankItemRenderer<LunarEss
         return DataNEssence.locate("textures/block/lunar_essence_point.png");
     }
 
-    public static class Model extends DatabankItemModel<LunarEssencePointItem> {
+    public static class Model extends DatabankItemModel<BlockItem> {
         public static AnimationDefinition hand;
         public AnimationState animState = new AnimationState();
         private final ModelPart root;
