@@ -2,7 +2,6 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.block.SpreadingPlant;
-import com.cmdpro.datanessence.block.*;
 
 import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.decoration.Dewlamp;
@@ -27,6 +26,9 @@ import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.block.transmission.ExoticEssencePoint;
 import com.cmdpro.datanessence.block.transmission.LunarEssencePoint;
 import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
+import com.cmdpro.datanessence.block.transportation.TraversiteRoad;
+import com.cmdpro.datanessence.block.transportation.TraversiteSlab;
+import com.cmdpro.datanessence.block.transportation.TraversiteStairs;
 import com.cmdpro.datanessence.block.world.*;
 import com.cmdpro.datanessence.block.world.shieldingstone.*;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
