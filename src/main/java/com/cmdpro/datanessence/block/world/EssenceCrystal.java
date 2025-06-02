@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.world;
 import com.cmdpro.datanessence.registry.ParticleRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -65,7 +66,7 @@ public class EssenceCrystal extends Block {
     }
     @Override
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
-        Vec3 offset = new Vec3(RandomUtils.nextFloat(0, 0.8f)-0.4f, RandomUtils.nextFloat(0, 0.8f)-0.4f, RandomUtils.nextFloat(0, 0.8f)-0.4f);
+        Vec3 offset = new Vec3(Mth.nextFloat(pRandom, -0.4f, 0.4f), Mth.nextFloat(pRandom, -0.4f, 0.4f), Mth.nextFloat(pRandom, -0.4f, 0.4f));
         pLevel.addParticle(ParticleRegistry.ESSENCE_SPARKLE.get(), pPos.getCenter().x+offset.x, pPos.getCenter().y+offset.y, pPos.getCenter().z+offset.z, 0.0D, 0.0D, 0.0D);
     }
     @Override

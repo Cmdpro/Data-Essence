@@ -7,6 +7,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -71,14 +73,14 @@ public class StructureProtectorBlockEntity extends BlockEntity {
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, StructureProtectorBlockEntity pBlockEntity) {
         if (pLevel.isClientSide) {
-            ClientHandler.spawnParticles(pPos.getCenter());
+            ClientHandler.spawnParticles(pLevel.random, pPos.getCenter());
         }
     }
     private static class ClientHandler {
-        public static void spawnParticles(Vec3 pos) {
+        public static void spawnParticles(RandomSource random, Vec3 pos) {
             for (int i = 0; i < 5; i++) {
-                Vec3 dir = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.1f, 0.1f, 0.1f);
-                Vec3 offset = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.1f, 0.1f, 0.1f);
+                Vec3 dir = new Vec3(Mth.nextFloat(random, -1f, 1f), Mth.nextFloat(random, -1f, 1f), Mth.nextFloat(random, -1f, 1f)).normalize().multiply(0.1f, 0.1f, 0.1f);
+                Vec3 offset = new Vec3(Mth.nextFloat(random, -1f, 1f), Mth.nextFloat(random, -1f, 1f), Mth.nextFloat(random, -1f, 1f)).normalize().multiply(0.1f, 0.1f, 0.1f);
                 Minecraft.getInstance().particleEngine.createParticle(new CircleParticleOptions().setColor(Color.getHSBColor((float) (Minecraft.getInstance().level.getGameTime() % 100) / 100f, 1f, 1f)).setAdditive(true), pos.x + offset.x, pos.y + offset.y, pos.z + offset.z, dir.x, dir.y, dir.z);
             }
         }

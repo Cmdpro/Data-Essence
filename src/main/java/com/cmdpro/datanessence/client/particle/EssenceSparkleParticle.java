@@ -7,6 +7,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
 import org.apache.commons.lang3.RandomUtils;
 
 public class EssenceSparkleParticle extends TextureSheetParticle {
@@ -30,7 +31,7 @@ public class EssenceSparkleParticle extends TextureSheetParticle {
         this.bCol = 1f;
         this.alpha = 1f;
         this.hasPhysics = false;
-        rot = RandomUtils.nextFloat(0f, 2f)-1f;
+        rot = Mth.nextFloat(level.random, -1f, 1f);
     }
 
     @Override

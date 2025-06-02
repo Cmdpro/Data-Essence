@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.world;
 import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.TransparentBlock;
@@ -19,7 +20,7 @@ public class CrystallineLeaves extends TransparentBlock {
 
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        float hue = RandomUtils.nextFloat(0f, 1f);
+        float hue = Mth.nextFloat(random, 0f, 1f);
         Color color = new Color( Color.HSBtoRGB(hue, 0.8f, 1f) );
         double d0 = 0.5625;
 
