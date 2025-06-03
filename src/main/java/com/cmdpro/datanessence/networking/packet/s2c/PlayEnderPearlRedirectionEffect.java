@@ -58,16 +58,20 @@ public record PlayEnderPearlRedirectionEffect(List<BlockPos> path) implements Me
             level.playSound(player, startCenter.x, startCenter.y, startCenter.z, SoundEvents.ENDER_EYE_DEATH, SoundSource.PLAYERS);
             level.playSound(player, endCenter.x, endCenter.y, endCenter.z, SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
             if (path.size() >= 2) {
+                int range = 64;
                 for (int i = 0; i < path.size() - 1; i++) {
                     BlockPos current = path.get(i);
                     BlockPos next = path.get(i + 1);
                     Vec3 currentCenter = current.getCenter();
                     Vec3 nextCenter = next.getCenter();
-                    int maxShifts = (int) (currentCenter.distanceTo(nextCenter) / 0.25);
-                    for (int j = 0; j < maxShifts; j++) {
-                        Vec3 shifted = currentCenter.lerp(nextCenter, (float) j / (float) maxShifts);
-                        Vec3 speed = new Vec3(Mth.nextFloat(random, -0.1f, 0.1f), Mth.nextFloat(random, -0.1f, 0.1f), Mth.nextFloat(random, -0.1f, 0.1f));
-                        level.addParticle(ParticleTypes.REVERSE_PORTAL, true, shifted.x, shifted.y, shifted.z, speed.x, speed.y, speed.z);
+                    boolean inRange = endCenter.distanceTo(currentCenter) <= range || endCenter.distanceTo(nextCenter) <= range;
+                    if (inRange) {
+                        int maxShifts = (int) (currentCenter.distanceTo(nextCenter) / 0.25);
+                        for (int j = 0; j < maxShifts; j++) {
+                            Vec3 shifted = currentCenter.lerp(nextCenter, (float) j / (float) maxShifts);
+                            Vec3 speed = new Vec3(Mth.nextFloat(random, -0.1f, 0.1f), Mth.nextFloat(random, -0.1f, 0.1f), Mth.nextFloat(random, -0.1f, 0.1f));
+                            level.addParticle(ParticleTypes.REVERSE_PORTAL, true, shifted.x, shifted.y, shifted.z, speed.x, speed.y, speed.z);
+                        }
                     }
                 }
             }
