@@ -24,7 +24,7 @@ import org.jgrapht.graph.DefaultEdge;
 import java.util.Set;
 
 public class EnderPearlDestination extends PearlNetworkBlock implements EntityBlock {
-    private static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 3.0D, 15.0D);
+    private static final VoxelShape SHAPE = Block.box(1.0D, 0.0D, 1.0D, 15.0D, 2.0D, 15.0D);
 
     public EnderPearlDestination(Properties properties) {
         super(properties);
