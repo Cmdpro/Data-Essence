@@ -31,9 +31,9 @@ public class DataComponentRegistry {
             .networkSynchronized(ResourceLocation.STREAM_CODEC)
             .cacheEncoding()
     );
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> DATA_INCOMPLETE = DATA_COMPONENTS.registerComponentType("data_incomplete", builder -> builder
-            .persistent(Codec.BOOL)
-            .networkSynchronized(ByteBufCodecs.BOOL)
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> DATA_INCOMPLETE = DATA_COMPONENTS.registerComponentType("data_incomplete", builder -> builder
+            .persistent(Codec.INT)
+            .networkSynchronized(ByteBufCodecs.INT)
             .cacheEncoding()
     );
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> MOLD = DATA_COMPONENTS.registerComponentType("mold", builder -> builder

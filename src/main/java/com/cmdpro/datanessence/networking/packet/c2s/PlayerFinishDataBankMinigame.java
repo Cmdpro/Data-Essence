@@ -26,8 +26,7 @@ public record PlayerFinishDataBankMinigame(ResourceLocation entry) implements Me
         DataBankEntry entry2 = DataBankEntries.entries.get(entry);
         if (entry2 != null) {
             if (entry2.tier <= player.getData(AttachmentTypeRegistry.TIER)) {
-                Entry entry3 = Entries.entries.get(entry2.entry);
-                DataTabletUtil.unlockEntry(player, entry2.entry, entry3.incomplete);
+                DataTabletUtil.unlockEntry(player, entry2.entry, 0);
             }
         }
     }

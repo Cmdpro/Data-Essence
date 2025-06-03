@@ -43,7 +43,7 @@ public abstract class DataNEssenceEMIRecipe implements EmiRecipe {
 
     public boolean hasData(ResourceLocation dataEntry, ResourceLocation recipe) {
         var dataLockedRecipe = (IHasRequiredKnowledge) getBackingRecipe().value();
-        return ClientPlayerUnlockedEntries.getUnlocked().contains(dataEntry) || ( ClientPlayerUnlockedEntries.getIncomplete().contains(dataEntry) && dataLockedRecipe.showIncompleteInEMI() );
+        return ClientPlayerUnlockedEntries.getUnlocked().contains(dataEntry) || ( ClientPlayerUnlockedEntries.getIncomplete().containsKey(dataEntry) && ClientPlayerUnlockedEntries.getIncomplete().get(dataEntry) >= dataLockedRecipe.getCompletionStage());
     }
 
     public abstract void addUnlockedWidgets(WidgetHolder widgets);

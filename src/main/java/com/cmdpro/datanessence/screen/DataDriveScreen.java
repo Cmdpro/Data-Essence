@@ -17,7 +17,7 @@ public class DataDriveScreen extends DataTabletScreen {
     public boolean offhand;
     @Override
     public boolean clickEntry(Entry entry) {
-        ModMessages.sendToServer(new PlayerChangeDriveData(entry.id, !ClientPlayerUnlockedEntries.getUnlocked().contains(entry.id) && ClientPlayerUnlockedEntries.getIncomplete().contains(entry.id), offhand));
+        ModMessages.sendToServer(new PlayerChangeDriveData(entry.id, entry.getIncompleteStageClient(), offhand));
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
         onClose();
         return true;

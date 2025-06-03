@@ -27,14 +27,19 @@
   "name": {
     "translate": "data_tablet.pages.plants.name"
   },
-  "incomplete": true,
-  "completion_advancement": "datanessence:exploration/discover_tethergrass",
-  "incomplete_pages": [
+  "completion_stages": [
     {
-      "type": "datanessence:text",
-      "text": {
-        "translate": "data_tablet.pages.plants.page1.incomplete_text"
-      }
+      "completion_advancements": [
+        "datanessence:exploration/discover_tethergrass"
+      ],
+      "pages": [
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.plants.page1.incomplete_text"
+          }
+        }
+      ]
     }
   ]
 }

@@ -145,7 +145,7 @@ public class DataTabletScreen extends Screen {
             return true;
         }
         if (pButton == 0 && screenType == 2) {
-            if (clickedEntry.getPagesClient().length > 0) {
+            if (!clickedEntry.getPagesClient().isEmpty()) {
                 int scrollbarX = x+247;
                 int scrollbarY = y+10;
                 scrollbarY += scrollbarPixels;
@@ -157,7 +157,7 @@ public class DataTabletScreen extends Screen {
             }
             if (pMouseX >= (x+imageWidth)+6 && pMouseX <= (x+imageWidth)+18) {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
-                    if (clickedEntry.getPagesClient().length > page+1) {
+                    if (clickedEntry.getPagesClient().size() > page+1) {
                         scrollbarPixels = 0;
                         page += 1;
                         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
@@ -177,7 +177,7 @@ public class DataTabletScreen extends Screen {
             }
             if (pMouseX >= x+1 && pMouseX <= x+imageWidth-1) {
                 if (pMouseY >= y + 1 && pMouseY <= y + imageHeight - 1) {
-                    return clickedEntry.pages[page].onClick(this, pMouseX, pMouseY, pButton, x, y);
+                    return clickedEntry.getPagesClient().get(page).onClick(this, pMouseX, pMouseY, pButton, x, y);
                 }
             }
             if (pMouseX >= x+imageWidth && pMouseX <= x+imageWidth+17 && pMouseY >= y+10 && pMouseY <= y+10+21) {
@@ -224,7 +224,7 @@ public class DataTabletScreen extends Screen {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         if (scrolling) {
-            if (clickedEntry.getPagesClient().length > 0) {
+            if (!clickedEntry.getPagesClient().isEmpty()) {
                 int scrollbarY = y + 10;
                 int scrollbarArea = 139;
                 scrollbarPixels = ((Math.clamp(0, scrollbarArea, mouseY-scrollbarY)));
@@ -234,9 +234,9 @@ public class DataTabletScreen extends Screen {
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         if (screenType == 2) {
-            if (clickedEntry.getPagesClient().length > 0) {
+            if (!clickedEntry.getPagesClient().isEmpty()) {
                 int scrollbarArea = 139;
-                int scrollMax = Math.max(0, clickedEntry.pages[page].getMaxScrollY() - (imageHeight - 3));
+                int scrollMax = Math.max(0, clickedEntry.getPagesClient().get(page).getMaxScrollY() - (imageHeight - 3));
                 double scrollSpeed = 20/((float)scrollMax/50f);
                 scrollbarPixels = ((Math.clamp(0, scrollbarArea, scrollbarPixels - (scrollY * scrollSpeed))));
             }
@@ -318,8 +318,8 @@ public class DataTabletScreen extends Screen {
         } else if (screenType == 1) {
 
         } else if (screenType == 2) {
-            if (clickedEntry.getPagesClient().length > 0) {
-                drawPage(clickedEntry.getPagesClient()[page], graphics, delta, mouseX, mouseY);
+            if (!clickedEntry.getPagesClient().isEmpty()) {
+                drawPage(clickedEntry.getPagesClient().get(page), graphics, delta, mouseX, mouseY);
             }
         }
         graphics.disableScissor();
@@ -352,15 +352,17 @@ public class DataTabletScreen extends Screen {
                         if (entry.isVisibleClient()) {
                             if (mouseX >= ((entry.x * 20) - 10) + offsetX + x && mouseX <= ((entry.x * 20) + 10) + offsetX + x) {
                                 if (mouseY >= ((entry.y * 20) - 10) + offsetY + y && mouseY <= ((entry.y * 20) + 10) + offsetY + y) {
+                                    Component name = entry.getName(entry.getIncompleteStageClient());;
+                                    Component flavor = entry.getFlavor(entry.getIncompleteStageClient());
                                     if (entry.isIncompleteClient()) {
                                         Component progressionRequirement = Component.translatable("tooltip.datanessence.progression_requirement").copy().withStyle(ChatFormatting.ITALIC).withColor(0xFFff61ca);
-                                        tooltip = entry.flavor.equals(Component.empty())
-                                                ? List.of(entry.name.getVisualOrderText(), progressionRequirement.getVisualOrderText())
-                                                : List.of(entry.name.getVisualOrderText(), entry.flavor.copy().withStyle(ChatFormatting.ITALIC).withColor(EssenceTypeRegistry.ESSENCE.get().getColor()).getVisualOrderText(), progressionRequirement.getVisualOrderText());
+                                        tooltip = flavor.equals(Component.empty())
+                                                ? List.of(name.getVisualOrderText(), progressionRequirement.getVisualOrderText())
+                                                : List.of(name.getVisualOrderText(), flavor.copy().withStyle(ChatFormatting.ITALIC).withColor(EssenceTypeRegistry.ESSENCE.get().getColor()).getVisualOrderText(), progressionRequirement.getVisualOrderText());
                                     } else
-                                        tooltip = entry.flavor.equals(Component.empty())
-                                            ? List.of(entry.name.getVisualOrderText())
-                                            : List.of(entry.name.getVisualOrderText(), entry.flavor.copy().withStyle(ChatFormatting.ITALIC).withColor(EssenceTypeRegistry.ESSENCE.get().getColor()).getVisualOrderText());
+                                        tooltip = flavor.equals(Component.empty())
+                                            ? List.of(name.getVisualOrderText())
+                                            : List.of(name.getVisualOrderText(), flavor.copy().withStyle(ChatFormatting.ITALIC).withColor(EssenceTypeRegistry.ESSENCE.get().getColor()).getVisualOrderText());
                                     break;
                                 }
                             }
@@ -381,7 +383,7 @@ public class DataTabletScreen extends Screen {
                 graphics.renderTooltip(Minecraft.getInstance().font, tooltip, mouseX, mouseY);
             }
         } else if (screenType == 2) {
-            graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.name, x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
+            graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.getName(clickedEntry.getIncompleteStageClient()), x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
             if (mouseX >= x+imageWidth && mouseX <= x+imageWidth+17 && mouseY >= y+10 && mouseY <= y+10+21) {
                 Component tooltip = !Screen.hasShiftDown() ? Component.translatable("tooltip.datanessence.save_and_exit") : Component.translatable("tooltip.datanessence.save_and_exit_sneak");
                 graphics.renderTooltip(Minecraft.getInstance().font, tooltip, mouseX, mouseY);
@@ -429,7 +431,7 @@ public class DataTabletScreen extends Screen {
             boolean scrollbarHovered = mouseX >= scrollbarX && mouseY >= scrollbarY && mouseX <= scrollbarX + 3 && mouseY <= scrollbarY + 7;
             graphics.blit(TEXTURE_PAGE, scrollbarX, scrollbarY, 31, scrollbarHovered || scrolling ? 177 : 170, 3, 7);
         }
-        if (this.page+1 < clickedEntry.getPagesClient().length) {
+        if (this.page+1 < clickedEntry.getPagesClient().size()) {
             int shift = 0;
             if (mouseX >= (x+imageWidth)+6 && mouseX <= (x+imageWidth)+18) {
                 if (mouseY >= y + ((imageHeight / 2) - 20) && mouseY <= y + ((imageHeight / 2) + 20)) {
@@ -547,7 +549,7 @@ public class DataTabletScreen extends Screen {
                         }
                     }
                     pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166+entryShift, 20, 20);
-                    pGuiGraphics.renderItem(i.icon, x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
+                    pGuiGraphics.renderItem(i.getIcon(i.getIncompleteStageClient()), x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
 
                     if (i.isIncompleteClient()) {
                         pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) + 5) + (int) offsetX, y + ((i.y * 20) + 5) + (int) offsetY, 0, 186+incompleteShift, 11, 10);

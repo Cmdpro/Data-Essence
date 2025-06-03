@@ -36,7 +36,7 @@ public class DataTablet extends Item {
 
     public void unlockStartingEntries(Player player) {
         for (Entry i : Entries.entries.values().stream().filter((entry) -> entry.isDefault).toList()) {
-            DataTabletUtil.unlockEntryAndParents(player, i.id, i.incomplete);
+            DataTabletUtil.unlockEntryAndParents(player, i.id, 0);
         }
     }
 

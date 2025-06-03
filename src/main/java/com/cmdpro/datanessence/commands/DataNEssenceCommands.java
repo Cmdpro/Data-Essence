@@ -156,7 +156,7 @@ public class DataNEssenceCommands {
 
             List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
             unlockedEntries.clear();
-            List<ResourceLocation> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE);
+            HashMap<ResourceLocation, Integer> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE_STAGES);
             incompleteEntries.clear();
             HashMap<ResourceLocation, Boolean> unlockedEssences = player.getData(AttachmentTypeRegistry.UNLOCKED_ESSENCES);
             unlockedEssences.clear();
@@ -180,21 +180,19 @@ public class DataNEssenceCommands {
             } catch (CommandSyntaxException e) {
                 throw new RuntimeException(e);
             }
-
             ResourceLocation entry = command.getArgument("id", ResourceLocation.class);
-            boolean set = command.getArgument("set", Boolean.class);
-            boolean incomplete = (hasAllArgs) ? command.getArgument("incomplete", Boolean.class) : false;
-
             if (Entries.entries.containsKey(entry)) {
+                boolean set = command.getArgument("set", Boolean.class);
                 Entry entry2 = Entries.entries.get(entry);
-                if (!entry2.incomplete && incomplete) {
-                    command.getSource().sendFailure(Component.translatable("commands.datanessence.entry.entry_has_no_incomplete", entry.toString()));
+                int completionStage = (hasAllArgs) ? command.getArgument("completion_stage", Integer.class) : entry2.completionStages.size();
+                if (entry2.completionStages.size() < completionStage) {
+                    command.getSource().sendFailure(Component.translatable("commands.datanessence.entry.entry_not_enough_stages", entry.toString(), completionStage));
                     return 0;
                 }
                 List<ResourceLocation> unlockedEntries = player.getData(AttachmentTypeRegistry.UNLOCKED);
                 if (set) {
                     if (!unlockedEntries.contains(entry)) {
-                        DataTabletUtil.unlockEntryAndParents(player, entry, incomplete);
+                        DataTabletUtil.unlockEntryAndParents(player, entry, completionStage);
                         command.getSource().sendSuccess(() -> {
                             return Component.translatable("commands.datanessence.entry.unlock_entry", entry.toString(), player.getName());
                         }, true);
@@ -225,7 +223,7 @@ public class DataNEssenceCommands {
         if(command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();
             for (Entry i : Entries.entries.values()) {
-                DataTabletUtil.unlockEntryAndParents(player, i.id, false);
+                DataTabletUtil.unlockEntryAndParents(player, i.id, i.completionStages.size());
             }
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.unlock_all", player.getName());
@@ -248,7 +246,7 @@ public class DataNEssenceCommands {
             }, true);
 
             for (Entry entry : Entries.entries.values()) {
-                DataTabletUtil.unlockEntryAndParents(player, entry.id, false);
+                DataTabletUtil.unlockEntryAndParents(player, entry.id, entry.completionStages.size());
             }
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.unlock_all", player.getName());

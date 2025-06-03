@@ -54,7 +54,7 @@ public class DataBankScreen extends Screen {
             List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
             entries.sort(Comparator.comparingInt((a) -> a.tier));
             for (DataBankEntry i : entries) {
-                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry)) {
+                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
                     if (entry == null || !isUnlocked(entry)) {
                         continue;
@@ -183,9 +183,9 @@ public class DataBankScreen extends Screen {
         if (screenType == 1) {
             if (minigameProgress >= minigames.length) {
                 Entry entry = Entries.entries.get(clickedEntry.entry);
-                if (entry.incomplete) {
-                    if (!ClientPlayerUnlockedEntries.getIncomplete().contains(clickedEntry.entry)) {
-                        ClientPlayerUnlockedEntries.getIncomplete().add(clickedEntry.entry);
+                if (!entry.completionStages.isEmpty()) {
+                    if (!ClientPlayerUnlockedEntries.getIncomplete().containsKey(clickedEntry.entry)) {
+                        ClientPlayerUnlockedEntries.getIncomplete().put(clickedEntry.entry, 0);
                     }
                 } else {
                     if (!ClientPlayerUnlockedEntries.getUnlocked().contains(clickedEntry.entry)) {
@@ -289,7 +289,7 @@ public class DataBankScreen extends Screen {
             entries.sort(Comparator.comparingInt((a) -> a.tier));
 
             for (DataBankEntry i : entries) {
-                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry)) {
+                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
                     if (entry == null || !isUnlocked(entry)) {
                         continue;
@@ -310,7 +310,7 @@ public class DataBankScreen extends Screen {
             }
             boolean anyUnfinished = false;
             for (DataBankEntry i : entries) {
-                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry)) {
+                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
                     if (entry == null || isUnlocked(entry)) {
                         anyUnfinished = true;
@@ -356,8 +356,7 @@ public class DataBankScreen extends Screen {
         List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
         entries.sort(Comparator.comparingInt((a) -> a.tier));
         for (DataBankEntry i : entries) {
-
-            if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().contains(i.entry)) {
+            if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
                 Entry entry = Entries.entries.get(i.entry);
                 if (entry == null || !isUnlocked(entry)) {
                     continue;

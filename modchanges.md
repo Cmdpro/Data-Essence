@@ -21,6 +21,7 @@
 - Made the Fabricator unable to store any essence except industrial
 - Did some tweaks to the code that shouldn't affect gameplay
 - Arekko now gives you a Signal Tracker in addition to a Data Tablet if you did not already have one
+- Improved incomplete entries to use completion stages instead of the old system
 
 ### Fixes
 - Fixed an issue where the Auto-Fabricator would void remainders

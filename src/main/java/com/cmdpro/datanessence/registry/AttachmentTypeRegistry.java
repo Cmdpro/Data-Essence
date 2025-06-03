@@ -49,9 +49,9 @@ public class AttachmentTypeRegistry {
     public static final Supplier<AttachmentType<ArrayList<ResourceLocation>>> UNLOCKED =
             register("unlocked", () -> AttachmentType.builder(() -> new ArrayList<ResourceLocation>()).serialize(
                     ResourceLocation.CODEC.listOf().xmap(ArrayList::new, (a) -> a.stream().toList())).copyOnDeath().build());
-    public static final Supplier<AttachmentType<ArrayList<ResourceLocation>>> INCOMPLETE =
-            register("incomplete", () -> AttachmentType.builder(() -> new ArrayList<ResourceLocation>()).serialize(
-                    ResourceLocation.CODEC.listOf().xmap(ArrayList::new, (a) -> a.stream().toList())).copyOnDeath().build());
+    public static final Supplier<AttachmentType<HashMap<ResourceLocation, Integer>>> INCOMPLETE_STAGES =
+            register("incomplete_stages", () -> AttachmentType.builder(() -> new HashMap<ResourceLocation, Integer>()).serialize(
+                    Codec.unboundedMap(ResourceLocation.CODEC, Codec.INT).xmap(HashMap::new, (a) -> a)).copyOnDeath().build());
 
     private static <T extends AttachmentType<?>> Supplier<T> register(final String name, final Supplier<T> attachment) {
         return ATTACHMENT_TYPES.register(name, attachment);

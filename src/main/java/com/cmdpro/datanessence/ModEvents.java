@@ -55,10 +55,12 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import org.spongepowered.asm.mixin.injection.struct.InjectorGroupInfo;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @EventBusSubscriber(modid = DataNEssence.MOD_ID)
@@ -290,15 +292,15 @@ public class ModEvents {
     }
     @SubscribeEvent
     public static void onPlayerAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
-        List<ResourceLocation> entries = new ArrayList<>();
-        for (ResourceLocation i : event.getEntity().getData(AttachmentTypeRegistry.INCOMPLETE)) {
-            Entry entry = Entries.entries.get(i);
-            if (entry.completionAdvancement.equals(event.getAdvancement().id())) {
-                entries.add(i);
+        List<Entry> entries = new ArrayList<>();
+        for (Map.Entry<ResourceLocation, Integer> i : event.getEntity().getData(AttachmentTypeRegistry.INCOMPLETE_STAGES).entrySet()) {
+            Entry entry = Entries.entries.get(i.getKey());
+            if (entry.completionStages.get(entry.getIncompleteStageServer(event.getEntity())).completionAdvancements.contains(event.getAdvancement().id())) {
+                entries.add(entry);
             }
         }
-        for (ResourceLocation i : entries) {
-            DataTabletUtil.unlockEntry(event.getEntity(), i, false);
+        for (Entry i : entries) {
+            DataTabletUtil.unlockEntry(event.getEntity(), i.id, i.getIncompleteStageServer(event.getEntity())+1);
         }
     }
 }

@@ -27,9 +27,13 @@ public class DataDrive extends Item {
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
         if (pStack.has(DataComponentRegistry.DATA_ID)) {
-            pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.loaded", Entries.entries.get(pStack.get(DataComponentRegistry.DATA_ID)).name).withStyle(ChatFormatting.GRAY));
-            if (pStack.getOrDefault(DataComponentRegistry.DATA_INCOMPLETE, false)) {
-                pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.incomplete").withStyle(ChatFormatting.GRAY));
+            Entry entry = Entries.entries.get(pStack.get(DataComponentRegistry.DATA_ID));
+            int stage = pStack.getOrDefault(DataComponentRegistry.DATA_INCOMPLETE, entry.completionStages.size());
+            pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.loaded", entry.getName(stage)).withStyle(ChatFormatting.GRAY));
+            if (pStack.has(DataComponentRegistry.DATA_INCOMPLETE)) {
+                if (stage < entry.completionStages.size()) {
+                    pTooltipComponents.add(Component.translatable("item.datanessence.data_drive.incomplete", stage, entry.completionStages.size()).withStyle(ChatFormatting.GRAY));
+                }
             }
         }
         else {
@@ -52,7 +56,7 @@ public class DataDrive extends Item {
         }
         return null;
     }
-    public static Boolean getEntryIncomplete(ItemStack stack) {
+    public static Integer getEntryCompletionStage(ItemStack stack) {
         if (stack != null) {
             if (stack.has(DataComponentRegistry.DATA_ID)) {
                 return stack.get(DataComponentRegistry.DATA_INCOMPLETE);

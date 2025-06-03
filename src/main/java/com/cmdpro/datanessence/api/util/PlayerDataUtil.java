@@ -39,12 +39,12 @@ public class PlayerDataUtil {
     }
 
     public static void updateUnlockedEntries(ServerPlayer player) {
-        ModMessages.sendToPlayer(new UnlockedEntrySync(player.getData(AttachmentTypeRegistry.UNLOCKED), player.getData(AttachmentTypeRegistry.INCOMPLETE)), (player));
+        ModMessages.sendToPlayer(new UnlockedEntrySync(player.getData(AttachmentTypeRegistry.UNLOCKED), player.getData(AttachmentTypeRegistry.INCOMPLETE_STAGES)), (player));
         DatabankUtils.updateHiddenBlocks(player);
     }
 
-    public static void unlockEntry(ServerPlayer player, ResourceLocation entry, boolean incomplete) {
-        ModMessages.sendToPlayer(new UnlockEntry(entry, incomplete), (player));
+    public static void unlockEntry(ServerPlayer player, ResourceLocation entry, int completionStage) {
+        ModMessages.sendToPlayer(new UnlockEntry(entry, completionStage), (player));
         DatabankUtils.updateHiddenBlocks(player);
     }
 

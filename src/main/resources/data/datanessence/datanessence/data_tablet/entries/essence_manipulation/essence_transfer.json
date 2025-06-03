@@ -29,20 +29,25 @@
   },
   "parents": [
   ],
-  "incomplete": true,
-  "completion_advancement": "datanessence:progression/acquire_essence_node_and_wire",
-  "incomplete_pages": [
+  "completion_stages": [
     {
-      "type": "datanessence:text",
-      "text": {
-        "translate": "data_tablet.pages.essence_transfer.page1.incomplete_text"
-      }
-    },
-    {
-      "type": "datanessence:crafting",
-      "recipes": [
-        "datanessence:fabrication/points/essence_point",
-        "datanessence:fabrication/wires/essence_wire"
+      "completion_advancements": [
+        "datanessence:progression/acquire_essence_node_and_wire"
+      ],
+      "pages": [
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.essence_transfer.page1.incomplete_text"
+          }
+        },
+        {
+          "type": "datanessence:crafting",
+          "recipes": [
+            "datanessence:fabrication/points/essence_point",
+            "datanessence:fabrication/wires/essence_wire"
+          ]
+        }
       ]
     }
   ]

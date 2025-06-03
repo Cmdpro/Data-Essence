@@ -181,7 +181,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
                             if (ent.recipe instanceof IFabricationRecipe) {
                                 fabricationRecipe = (IFabricationRecipe) ent.recipe;
                             }
-                            if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry(), fabricationRecipe.allowIncomplete())) {
+                            if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry(), fabricationRecipe.getCompletionStage())) {
                                 ent.time = 0;
                                 pLevel.playSound(null, pPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 2, 1);
                             } else {

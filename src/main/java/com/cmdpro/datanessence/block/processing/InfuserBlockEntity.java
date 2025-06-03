@@ -202,7 +202,7 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
                     Entry entry = DataDrive.getEntry(pBlockEntity.dataDriveHandler.getStackInSlot(0));
                     if (entry != null) {
                         if (pBlockEntity.dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_ID) && pBlockEntity.dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_INCOMPLETE)) {
-                            if (pBlockEntity.recipe == null || (pBlockEntity.recipe.getEntry().equals(entry.id) && (!DataDrive.getEntryIncomplete(pBlockEntity.dataDriveHandler.getStackInSlot(0)) || pBlockEntity.recipe.allowIncomplete()))) {
+                            if (pBlockEntity.recipe == null || (pBlockEntity.recipe.getEntry().equals(entry.id) && DataDrive.getEntryCompletionStage(pBlockEntity.dataDriveHandler.getStackInSlot(0)) >= pBlockEntity.recipe.getCompletionStage())) {
                                 if (hasNotReachedStackLimit(pBlockEntity, pBlockEntity.recipe.getResultItem(pLevel.registryAccess()))) {
                                     for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
                                         EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());

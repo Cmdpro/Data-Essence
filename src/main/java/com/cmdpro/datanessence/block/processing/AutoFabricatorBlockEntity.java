@@ -39,7 +39,6 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
@@ -186,10 +185,12 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
     public boolean tryCraft() {
         if (recipe instanceof IHasRequiredKnowledge recipe) {
             if (dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_ID) && dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_INCOMPLETE)) {
-                if (!recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))) {
-                    if (DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) && !recipe.allowIncomplete()) {
+                if (recipe.getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0)))) {
+                    if (DataDrive.getEntryCompletionStage(dataDriveHandler.getStackInSlot(0)) < recipe.getCompletionStage()) {
                         return false;
                     }
+                } else {
+                    return false;
                 }
             }
         }
