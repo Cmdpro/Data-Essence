@@ -18,5 +18,6 @@
   },
   "flavor": {
     "translate": "data_tablet.pages.hidden_blocks.flavor"
-  }
+  },
+  "is_default": true
 }

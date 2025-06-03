@@ -226,7 +226,7 @@ public class DataTabletScreen extends Screen {
         if (scrolling) {
             if (clickedEntry.getPagesClient().length > 0) {
                 int scrollbarY = y + 10;
-                int scrollbarArea = 140;
+                int scrollbarArea = 139;
                 scrollbarPixels = ((Math.clamp(0, scrollbarArea, mouseY-scrollbarY)));
             }
         }
@@ -235,7 +235,7 @@ public class DataTabletScreen extends Screen {
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
         if (screenType == 2) {
             if (clickedEntry.getPagesClient().length > 0) {
-                int scrollbarArea = 140;
+                int scrollbarArea = 139;
                 int scrollMax = Math.max(0, clickedEntry.pages[page].getMaxScrollY() - (imageHeight - 3));
                 double scrollSpeed = 20/((float)scrollMax/50f);
                 scrollbarPixels = ((Math.clamp(0, scrollbarArea, scrollbarPixels - (scrollY * scrollSpeed))));
@@ -412,7 +412,7 @@ public class DataTabletScreen extends Screen {
     public void drawPage(Page page, GuiGraphics graphics, float pPartialTick, int mouseX, int mouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        int scrollbarArea = 140;
+        int scrollbarArea = 139;
         int scrollMax = Math.max(0, page.getMaxScrollY()-(imageHeight-3));
         int scrollShift = (int)(((float)scrollbarPixels/(float)scrollbarArea)*scrollMax);
         page.render(this, graphics, pPartialTick, mouseX, mouseY, x, y - scrollShift);

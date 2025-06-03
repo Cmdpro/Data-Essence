@@ -27,5 +27,6 @@
   },
   "flavor": {
     "translate": "data_tablet.pages.essence_redirector.flavor"
-  }
+  },
+  "is_default": true
 }

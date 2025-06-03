@@ -54,8 +54,9 @@ public class EntrySerializer {
             ResourceLocation.CODEC.fieldOf("tab").forGetter((entry) -> entry.tab),
             Codec.BOOL.optionalFieldOf("incomplete", false).forGetter((entry) -> entry.incomplete),
             PAGE_CODEC.listOf().optionalFieldOf("incomplete_pages", new ArrayList<>()).forGetter((entry) -> Arrays.stream(entry.incompletePages).toList()),
-            ResourceLocation.CODEC.optionalFieldOf("completion_advancement", ResourceLocation.fromNamespaceAndPath("", "")).forGetter((entry) -> entry.completionAdvancement)
-    ).apply(instance, (icon, x, y, name, flavor, parents, pages, critical, tab, incomplete, incompletePages, completionAdvancement) -> new Entry(null, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, flavor, critical, incomplete, incompletePages.toArray(new Page[0]), completionAdvancement)));
+            ResourceLocation.CODEC.optionalFieldOf("completion_advancement", ResourceLocation.fromNamespaceAndPath("", "")).forGetter((entry) -> entry.completionAdvancement),
+            Codec.BOOL.optionalFieldOf("is_default", false).forGetter((entry) -> entry.isDefault)
+    ).apply(instance, (icon, x, y, name, flavor, parents, pages, critical, tab, incomplete, incompletePages, completionAdvancement, isDefault) -> new Entry(null, tab, icon, x, y, pages.toArray(new Page[0]), parents.toArray(new ResourceLocation[0]), name, flavor, critical, incomplete, incompletePages.toArray(new Page[0]), completionAdvancement, isDefault)));
     public static final Codec<Optional<WithConditions<Entry>>> CODEC = ConditionalOps.createConditionalCodecWithConditions(ORIGINAL_CODEC.codec());
     public static final StreamCodec<RegistryFriendlyByteBuf, Entry> STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
         pBuffer.writeResourceLocation(pValue.id);
@@ -75,6 +76,7 @@ public class EntrySerializer {
         pBuffer.writeBoolean(pValue.incomplete);
         pBuffer.writeCollection(Arrays.stream(pValue.incompletePages).toList(), (pBuffer1, pValue1) -> PAGE_STREAM_CODEC.encode((RegistryFriendlyByteBuf)pBuffer1, pValue1));
         pBuffer.writeResourceLocation(pValue.completionAdvancement);
+        pBuffer.writeBoolean(pValue.isDefault);
     }, pBuffer -> {
         ResourceLocation id = pBuffer.readResourceLocation();
         int x = pBuffer.readInt();
@@ -89,6 +91,7 @@ public class EntrySerializer {
         boolean incomplete = pBuffer.readBoolean();
         Page[] incompletePages = pBuffer.readList((pBuffer1) -> PAGE_STREAM_CODEC.decode((RegistryFriendlyByteBuf)pBuffer1)).toArray(new Page[0]);
         ResourceLocation completionAdvancement = pBuffer.readResourceLocation();
-        return new Entry(id, tab, icon, x, y, pages, parents.toArray(new ResourceLocation[0]), name, flavor, critical, incomplete, incompletePages, completionAdvancement);
+        boolean isDefault = pBuffer.readBoolean();
+        return new Entry(id, tab, icon, x, y, pages, parents.toArray(new ResourceLocation[0]), name, flavor, critical, incomplete, incompletePages, completionAdvancement, isDefault);
     });
 }

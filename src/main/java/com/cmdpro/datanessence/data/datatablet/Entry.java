@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Entry {
 
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, Component flavor, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, Component flavor, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement, boolean isDefault) {
         this.id = id;
         this.icon = new ItemStack(icon);
         this.x = x;
@@ -28,8 +28,9 @@ public class Entry {
         this.incomplete = incomplete;
         this.incompletePages = incompletePages;
         this.completionAdvancement = completionAdvancement;
+        this.isDefault = isDefault;
     }
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, Component flavor, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, Component flavor, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement, boolean isDefault) {
         this.id = id;
         this.icon = icon;
         this.x = x;
@@ -43,6 +44,7 @@ public class Entry {
         this.incomplete = incomplete;
         this.incompletePages = incompletePages;
         this.completionAdvancement = completionAdvancement;
+        this.isDefault = isDefault;
     }
     public Page[] getPagesClient() {
         return isIncompleteClient() ? incompletePages : pages;
@@ -105,4 +107,5 @@ public class Entry {
     public boolean incomplete;
     public Page[] incompletePages;
     public ResourceLocation completionAdvancement;
+    public boolean isDefault;
 }

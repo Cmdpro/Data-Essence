@@ -6,6 +6,7 @@
 - Added a few pages of the first of the in-game lore books, acquirable at Nature Outposts as a data entry
 - Added a default entry that clarifies behaviour of hidden blocks (such as Tethergrass, Lensing Crystal Ore)
 - Added a helpful visual for structure protector bounds
+- Added "is_default" field to data tablet entries for if an entry should be given automatically
 
 ### Changes
 - Tweaked several entries, including Item Filter, Data Tablet, Fabrication, and Infuser
