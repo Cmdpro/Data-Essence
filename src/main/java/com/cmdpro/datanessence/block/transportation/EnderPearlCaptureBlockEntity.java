@@ -55,8 +55,8 @@ public class EnderPearlCaptureBlockEntity extends PearlNetworkBlockEntity {
                         Vec3 pos = end.getEndVertex().getCenter();
                         owner.teleportTo(pos.x, pos.y, pos.z);
                         List<BlockPos> vertexes = end.getVertexList();
-                        PlayEnderPearlRedirectionEffect message = new PlayEnderPearlRedirectionEffect(vertexes);
                         for (ServerPlayer j : ((ServerLevel)pLevel).players()) {
+                            PlayEnderPearlRedirectionEffect message = new PlayEnderPearlRedirectionEffect(vertexes.stream().filter((block) -> block.getCenter().distanceTo(pos) <= 64).toList());
                             boolean canSend = false;
                             for (BlockPos k : vertexes) {
                                 if (j.position().distanceTo(k.getCenter()) <= 128) {
