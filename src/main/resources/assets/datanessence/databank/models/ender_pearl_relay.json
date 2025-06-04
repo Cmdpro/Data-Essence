@@ -22,7 +22,7 @@
       ]
     },
     "idle": {
-      "length": 0,
+      "length": 2,
       "looping": true,
       "animation": [
         {
@@ -39,6 +39,72 @@
               "interpolation": "linear"
             }
           ]
+        },
+        {
+          "bone": "ring",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                360,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "crystal",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.6666666666666666,
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.4166666666666667,
+              "target": [
+                0,
+                -0.5,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
         }
       ]
     }
@@ -53,13 +119,13 @@
       ],
       "offset": [
         0,
-        24,
+        25,
         0
       ],
       "isCube": false,
       "children": [
         {
-          "name": "cube",
+          "name": "ring",
           "rotation": [
             0,
             0,
@@ -67,149 +133,105 @@
           ],
           "offset": [
             0,
-            -2,
-            -5
+            -9,
+            0
           ],
-          "isCube": true,
-          "texOffset": [
-            24,
-            24
-          ],
-          "mirror": false,
-          "origin": [
-            -4,
-            -2,
-            -1
-          ],
-          "dimensions": [
-            10,
-            2,
-            2
-          ],
-          "inflate": 0
+          "isCube": false,
+          "children": [
+            {
+              "name": "ring",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -5,
+                -1.5,
+                -5
+              ],
+              "dimensions": [
+                10,
+                3,
+                10
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "ring insert",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                64,
+                9
+              ],
+              "mirror": false,
+              "origin": [
+                3,
+                1.5,
+                3
+              ],
+              "dimensions": [
+                -6,
+                -3,
+                -6
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "ring filigree",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0.5,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                32,
+                5
+              ],
+              "mirror": false,
+              "origin": [
+                -4,
+                -4,
+                -4
+              ],
+              "dimensions": [
+                8,
+                7,
+                8
+              ],
+              "inflate": 0
+            }
+          ]
         },
         {
-          "name": "cube1",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            -2,
-            -2,
-            5
-          ],
-          "isCube": true,
-          "texOffset": [
-            24,
-            28
-          ],
-          "mirror": false,
-          "origin": [
-            -4,
-            -2,
-            -1
-          ],
-          "dimensions": [
-            10,
-            2,
-            2
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube2",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            -3,
-            -2,
-            3
-          ],
-          "isCube": true,
-          "texOffset": [
-            0,
-            0
-          ],
-          "mirror": false,
-          "origin": [
-            -3,
-            -2,
-            -9
-          ],
-          "dimensions": [
-            2,
-            2,
-            10
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube3",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            7,
-            -2,
-            5
-          ],
-          "isCube": true,
-          "texOffset": [
-            0,
-            12
-          ],
-          "mirror": false,
-          "origin": [
-            -3,
-            -2,
-            -9
-          ],
-          "dimensions": [
-            2,
-            2,
-            10
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube4",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            7,
-            -12,
-            5
-          ],
-          "isCube": true,
-          "texOffset": [
-            24,
-            0
-          ],
-          "mirror": false,
-          "origin": [
-            -3,
-            -2,
-            -9
-          ],
-          "dimensions": [
-            2,
-            2,
-            10
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube5",
+          "name": "crystal",
           "rotation": [
             0,
             0,
@@ -217,236 +239,42 @@
           ],
           "offset": [
             0,
-            -12,
-            -5
-          ],
-          "isCube": true,
-          "texOffset": [
-            0,
-            36
-          ],
-          "mirror": false,
-          "origin": [
-            -4,
-            -2,
-            -1
-          ],
-          "dimensions": [
-            10,
-            2,
-            2
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube6",
-          "rotation": [
-            0,
-            0,
+            -9,
             0
           ],
-          "offset": [
-            -3,
-            -12,
-            3
-          ],
-          "isCube": true,
-          "texOffset": [
-            0,
-            24
-          ],
-          "mirror": false,
-          "origin": [
-            -3,
-            -2,
-            -9
-          ],
-          "dimensions": [
-            2,
-            2,
-            10
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube7",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            -2,
-            -12,
-            5
-          ],
-          "isCube": true,
-          "texOffset": [
-            24,
-            32
-          ],
-          "mirror": false,
-          "origin": [
-            -4,
-            -2,
-            -1
-          ],
-          "dimensions": [
-            10,
-            2,
-            2
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube8",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            7,
-            -4,
-            5
-          ],
-          "isCube": true,
-          "texOffset": [
-            24,
-            36
-          ],
-          "mirror": false,
-          "origin": [
-            -3,
-            -8,
-            -1
-          ],
-          "dimensions": [
-            2,
-            8,
-            2
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube9",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            7,
-            -4,
-            -5
-          ],
-          "isCube": true,
-          "texOffset": [
-            32,
-            36
-          ],
-          "mirror": false,
-          "origin": [
-            -3,
-            -8,
-            -1
-          ],
-          "dimensions": [
-            2,
-            8,
-            2
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube10",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            -3,
-            -4,
-            -5
-          ],
-          "isCube": true,
-          "texOffset": [
-            0,
-            40
-          ],
-          "mirror": false,
-          "origin": [
-            -3,
-            -8,
-            -1
-          ],
-          "dimensions": [
-            2,
-            8,
-            2
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube11",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            -3,
-            -4,
-            5
-          ],
-          "isCube": true,
-          "texOffset": [
-            8,
-            40
-          ],
-          "mirror": false,
-          "origin": [
-            -3,
-            -8,
-            -1
-          ],
-          "dimensions": [
-            2,
-            8,
-            2
-          ],
-          "inflate": 0
-        },
-        {
-          "name": "cube12",
-          "rotation": [
-            0,
-            0,
-            0
-          ],
-          "offset": [
-            1,
-            -4,
-            2
-          ],
-          "isCube": true,
-          "texOffset": [
-            24,
-            12
-          ],
-          "mirror": false,
-          "origin": [
-            -4,
-            -7,
-            -5
-          ],
-          "dimensions": [
-            6,
-            6,
-            6
-          ],
-          "inflate": 0
+          "isCube": false,
+          "children": [
+            {
+              "name": "cube",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "texOffset": [
+                0,
+                13
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -6,
+                -1.5
+              ],
+              "dimensions": [
+                3,
+                12,
+                3
+              ],
+              "inflate": 0
+            }
+          ]
         }
       ]
     }

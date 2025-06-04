@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 40
+  },
+  "time": 60,
+  "entry": "datanessence:tools/ender_redirection_network",
+  "pattern": [
+    "OCO",
+    "CLC",
+    "OCO"
+  ],
+  "key": {
+    "L": { "item": "datanessence:lensing_crystal" },
+    "C": { "item": "datanessence:conductance_rod" },
+    "O": { "item": "datanessence:polished_obsidian" }
+  },
+  "result": { "id": "datanessence:ender_pearl_capture" }
+}

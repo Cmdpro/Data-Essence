@@ -371,7 +371,10 @@ public class DataNEssence
             //event.accept(BlockRegistry.EXOTIC_ESSENCE_BATTERY.get());
             event.accept(BlockRegistry.FLUID_TANK.get());
 
-            // Utility Blocks
+            // Transportation Blocks
+            event.accept(BlockRegistry.ENDER_PEARL_CAPTURE.get());
+            event.accept(BlockRegistry.ENDER_PEARL_RELAY.get());
+            event.accept(BlockRegistry.ENDER_PEARL_DESTINATION.get());
             event.accept(BlockRegistry.TRAVERSITE_ROAD.get());
             event.accept(BlockRegistry.TRAVERSITE_ROAD_STAIRS.get());
             event.accept(BlockRegistry.TRAVERSITE_ROAD_SLAB.get());
