@@ -8,15 +8,15 @@ import com.cmdpro.databank.shaders.PostShaderManager;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemDecorators;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
+import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.renderers.entity.LunarStrikeRenderer;
 import com.cmdpro.datanessence.client.shaders.PingShader;
+import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
-import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItem;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItemRenderer;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
-import com.cmdpro.datanessence.item.blockitem.*;
 import com.cmdpro.datanessence.client.particle.*;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.registry.*;
@@ -31,12 +31,12 @@ import com.cmdpro.datanessence.client.renderers.layer.WingsLayer;
 import com.cmdpro.datanessence.screen.*;
 import com.cmdpro.datanessence.client.shaders.GenderEuphoriaShader;
 import com.cmdpro.datanessence.client.shaders.ProgressionShader;
-import net.mariu73.opalescence.block.OpalBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.client.resources.PlayerSkin;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -85,6 +85,10 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.CHEMICAL_NODE.get(), ChemicalNodeRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.DRYING_TABLE.get(), DryingTableRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_BRIDGE.get(), EssenceBridgeRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_CAPTURE.get(), EnderPearlCaptureRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_RELAY.get(), EnderPearlRelayRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_DESTINATION.get(), EnderPearlDestinationRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.STRUCTURE_PROTECTOR.get(), StructureProtectorRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_DERIVATION_SPIKE.get(), EssenceDerivationSpikeRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.LUNAR_ESSENCE_BATTERY.get(), LunarEssenceBatteryRenderer::new);
     }
@@ -146,6 +150,12 @@ public class ClientModEvents {
             ClientHooks.registerLayerDefinition(CryochamberRenderer.modelLocation, CryochamberRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(ChemicalNodeRenderer.modelLocation, ChemicalNodeRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(ChemicalNodeItemRenderer.modelLocation, ChemicalNodeItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlCaptureRenderer.modelLocation, EnderPearlCaptureRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlCaptureItemRenderer.modelLocation, EnderPearlCaptureItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlRelayRenderer.modelLocation, EnderPearlRelayRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlRelayItemRenderer.modelLocation, EnderPearlRelayItemRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlDestinationRenderer.modelLocation, EnderPearlDestinationRenderer.Model::createLayer);
+            ClientHooks.registerLayerDefinition(EnderPearlDestinationItemRenderer.modelLocation, EnderPearlDestinationItemRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(EssenceDerivationSpikeRenderer.modelLocation, EssenceDerivationSpikeRenderer.Model::createLayer);
             ClientHooks.registerLayerDefinition(EssenceDerivationSpikeItemRenderer.modelLocation, EssenceDerivationSpikeItemRenderer.Model::createLayer);
         });
@@ -157,31 +167,59 @@ public class ClientModEvents {
                 }
                 return 0;
             });
-            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("charged"), (stack, level, entity, seed) -> {
-                if (stack.has(DataComponentRegistry.ESSENCE_STORAGE) && ItemEssenceContainer.getEssence(stack, GrapplingHook.FUEL_ESSENCE_TYPE) >= GrapplingHook.ESSENCE_COST) {
-                    return 1;
-                }
-                return 0;
-            });
-            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("using"), (stack, level, entity, seed) -> {
-                if (entity != null) {
-                    if (entity.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
-                        return 1;
-                    }
-                }
-                return 0;
-            });
+            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("charged"), chargedGrapplingHookProperty);
+            ItemProperties.register(ItemRegistry.GRAPPLING_HOOK.get(), DataNEssence.locate("using"), usingGrapplingHookProperty);
+            ItemProperties.register(ItemRegistry.TRANS_GRAPPLING_HOOK.get(), DataNEssence.locate("charged"), chargedGrapplingHookProperty);
+            ItemProperties.register(ItemRegistry.TRANS_GRAPPLING_HOOK.get(), DataNEssence.locate("using"), usingGrapplingHookProperty);
         });
 
         progressionShader = new ProgressionShader();
         PostShaderManager.addShader(progressionShader);
         genderEuphoriaShader = new GenderEuphoriaShader();
         PostShaderManager.addShader(genderEuphoriaShader);
+        machineOutputShader = new MachineOutputShader();
+        PostShaderManager.addShader(machineOutputShader);
+        machineOutputShader.setActive(true);
     }
+    public static PostShaderInstance progressionShader;
+    public static PostShaderInstance genderEuphoriaShader;
+    public static PostShaderInstance machineOutputShader;
+    public static final ItemPropertyFunction usingGrapplingHookProperty = (stack, level, entity, seed) -> {
+        if (entity != null) {
+            if (entity.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
+                return 1;
+            }
+        }
+        return 0;
+    };
+    public static final ItemPropertyFunction chargedGrapplingHookProperty = (stack, level, entity, seed) -> {
+        if (stack.has(DataComponentRegistry.ESSENCE_STORAGE) && ItemEssenceContainer.getEssence(stack, GrapplingHook.FUEL_ESSENCE_TYPE) >= GrapplingHook.ESSENCE_COST) {
+            return 1;
+        }
+        return 0;
+    };
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(Genderfluid.EXTENSIONS, FluidRegistry.GENDERFLUID_TYPE.get());
 
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(AutoFabricatorItemRenderer::new), BlockRegistry.AUTO_FABRICATOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(ChargerItemRenderer::new), BlockRegistry.CHARGER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EntropicProcessorItemRenderer::new), BlockRegistry.ENTROPIC_PROCESSOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EssencePointItemRenderer::new), BlockRegistry.ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(ExoticEssencePointItemRenderer::new), BlockRegistry.EXOTIC_ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(FabricatorItemRenderer::new), BlockRegistry.FABRICATOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(FluidPointItemRenderer::new), BlockRegistry.FLUID_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(InfuserItemRenderer::new), BlockRegistry.INFUSER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(ItemPointItemRenderer::new), BlockRegistry.ITEM_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(LunarEssencePointItemRenderer::new), BlockRegistry.LUNAR_ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(NaturalEssencePointItemRenderer::new), BlockRegistry.NATURAL_ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(FluidMixerItemRenderer::new), BlockRegistry.FLUID_MIXER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(MetalShaperItemRenderer::new), BlockRegistry.METAL_SHAPER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(IndustrialPlantSiphonItemRenderer::new), BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(ChemicalNodeItemRenderer::new), BlockRegistry.CHEMICAL_NODE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlCaptureItemRenderer::new), BlockRegistry.ENDER_PEARL_CAPTURE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlRelayItemRenderer::new), BlockRegistry.ENDER_PEARL_RELAY.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlDestinationItemRenderer::new), BlockRegistry.ENDER_PEARL_DESTINATION.get().asItem());
         event.registerItem(AutoFabricatorItem.extensions(), BlockRegistry.AUTO_FABRICATOR.get().asItem());
         event.registerItem(ChargerItem.extensions(), BlockRegistry.CHARGER.get().asItem());
         event.registerItem(EntropicProcessorItem.extensions(), BlockRegistry.ENTROPIC_PROCESSOR.get().asItem());
@@ -206,6 +244,7 @@ public class ClientModEvents {
         event.register(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get(), ItemDecorators.essenceBarDecoration);
         event.register(ItemRegistry.REPULSION_ROD.get(), ItemDecorators.essenceBarDecoration);
         event.register(ItemRegistry.GRAPPLING_HOOK.get(), ItemDecorators.essenceBarDecoration);
+        event.register(ItemRegistry.TRANS_GRAPPLING_HOOK.get(), ItemDecorators.essenceBarDecoration);
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {
@@ -230,8 +269,6 @@ public class ClientModEvents {
         event.register(MenuRegistry.MELTER_MENU.get(), MelterScreen::new);
         event.register(MenuRegistry.DRYING_TABLE_MENU.get(), DryingTableScreen::new);
     }
-    public static PostShaderInstance progressionShader;
-    public static PostShaderInstance genderEuphoriaShader;
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.ESSENCE_SPARKLE.get(),

@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.registry;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.entity.*;
 import com.cmdpro.datanessence.fluid.Genderfluid;
+import com.cmdpro.datanessence.fluid.GenderfluidType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -31,6 +32,7 @@ public class FluidRegistry {
             .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
             .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
             .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH)));
+    public static final Supplier<FluidType> GENDERFLUID_TYPE = registerType("genderfluid", GenderfluidType::new);
     private static <T extends Fluid> Supplier<T> register(final String name, final Supplier<T> entity) {
         return FLUIDS.register(name, entity);
     }

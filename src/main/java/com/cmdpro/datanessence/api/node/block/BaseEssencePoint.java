@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.api.node.block;
 
-import com.cmdpro.datanessence.api.node.EssenceNodeNetworks;
+import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
@@ -33,7 +33,6 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 
 import java.util.Optional;
@@ -94,7 +93,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (pState.getBlock() != pNewState.getBlock()) {
             if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity) {
-                EssenceNodeNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+                BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
                 Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
                 for (DefaultEdge i : edges) {
                     BlockPos pos = networks.graph.getEdgeSource(i);
@@ -131,7 +130,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof BaseEssencePointBlockEntity ent) {
                 if (pPlayer.getItemInHand(pHand).is(getRequiredWire())) {
-                    EssenceNodeNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+                    BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
                     Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
                     Optional<BlockEntity> linkFrom = pPlayer.getData(AttachmentTypeRegistry.LINK_FROM);
                     if (!linkFrom.isPresent()) {
@@ -195,7 +194,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
             if (entity instanceof BaseEssencePointBlockEntity ent) {
                 if (pPlayer.isShiftKeyDown()) {
-                    EssenceNodeNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+                    BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
                     Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
                     if (edges.stream().anyMatch((edge) -> networks.graph.getEdgeSource(edge).equals(pPos))) {
                         for (DefaultEdge i : edges) {

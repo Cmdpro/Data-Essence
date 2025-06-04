@@ -2,13 +2,21 @@
   "parent": "minecraft:item/generated",
   "overrides": [
     {
+      "model": "datanessence:item/transcendental_tether_charged",
+      "predicate": {
+        "datanessence:charged": 1.0,
+        "datanessence:using": 0.0
+      }
+    },
+    {
       "model": "datanessence:item/transcendental_tether_use",
       "predicate": {
+        "datanessence:charged": 1.0,
         "datanessence:using": 1.0
       }
     }
   ],
   "textures": {
-    "layer0": "datanessence:item/transcendental_tether"
+    "layer0": "datanessence:item/transcendental_tether_empty"
   }
 }

@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -49,17 +50,17 @@ public class VacuumBlockEntity extends BlockEntity {
                     i.setItem(copy);
                 }
                 if (collectedSomething)
-                    world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, RandomUtils.nextFloat(0.1f, 0.6f), world.random.nextFloat());
+                    world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, Mth.nextFloat(world.random, 0.1f, 0.6f), world.random.nextFloat());
             }
         } else {
             Color[] enderColors = new Color[] { new Color(0x005c3c), new Color(0x033328), new Color(0x006653) };
             Color[] redstoneColors = new Color[] { new Color(0xE51F1F), new Color(0x9D0624), new Color(0xF14E32) };
 
-            Vec3 pos1 = pos.getCenter().add(world.random.nextFloat()-0.5f, world.random.nextFloat()-0.5f, world.random.nextFloat()-0.5f);
+            Vec3 pos1 = pos.getCenter().add(Mth.nextFloat(world.random, -0.5f, 0.5f), Mth.nextFloat(world.random, -0.5f, 0.5f), Mth.nextFloat(world.random, -0.5f, 0.5f));
             Vec3 vel1 = pos.getCenter().subtract(pos1).multiply(0.4f, 0.1f, 0.2f);
             Color color1 = enderColors[world.random.nextIntBetweenInclusive(0, enderColors.length-1)];
 
-            Vec3 pos2 = pos.getCenter().add(world.random.nextFloat()-0.5f, world.random.nextFloat()-0.5f, world.random.nextFloat()-0.5f);
+            Vec3 pos2 = pos.getCenter().add(Mth.nextFloat(world.random, -0.5f, 0.5f), Mth.nextFloat(world.random, -0.5f, 0.5f), Mth.nextFloat(world.random, -0.5f, 0.5f));
             Vec3 vel2 = pos.getCenter().subtract(pos2).multiply(0.4f, 0.1f, 0.2f);
             Color color2 = enderColors[world.random.nextIntBetweenInclusive(0, enderColors.length-1)];
 

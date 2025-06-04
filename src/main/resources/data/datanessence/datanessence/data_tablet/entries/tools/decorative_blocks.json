@@ -59,5 +59,6 @@
   },
   "parents": [
     "datanessence:basics/fabricator"
-  ]
+  ],
+  "is_default": true
 }

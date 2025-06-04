@@ -20,6 +20,9 @@ import com.cmdpro.datanessence.block.technical.DataBankBlockEntity;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberBlockEntity;
 import com.cmdpro.datanessence.block.transmission.*;
+import com.cmdpro.datanessence.block.transportation.EnderPearlCaptureBlockEntity;
+import com.cmdpro.datanessence.block.transportation.EnderPearlDestinationBlockEntity;
+import com.cmdpro.datanessence.block.transportation.EnderPearlRelayBlockEntity;
 import com.cmdpro.datanessence.block.world.LunarCrystalSeedBlockEntity;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -219,6 +222,18 @@ public class BlockEntityRegistry {
             register("essence_bridge", () ->
                     BlockEntityType.Builder.of(EssenceBridgeBlockEntity::new,
                             BlockRegistry.ESSENCE_BRIDGE.get()).build(null));
+    public static final Supplier<BlockEntityType<EnderPearlCaptureBlockEntity>> ENDER_PEARL_CAPTURE =
+            register("ender_pearl_capture", () ->
+                    BlockEntityType.Builder.of(EnderPearlCaptureBlockEntity::new,
+                            BlockRegistry.ENDER_PEARL_CAPTURE.get()).build(null));
+    public static final Supplier<BlockEntityType<EnderPearlDestinationBlockEntity>> ENDER_PEARL_DESTINATION =
+            register("ender_pearl_destination", () ->
+                    BlockEntityType.Builder.of(EnderPearlDestinationBlockEntity::new,
+                            BlockRegistry.ENDER_PEARL_DESTINATION.get()).build(null));
+    public static final Supplier<BlockEntityType<EnderPearlRelayBlockEntity>> ENDER_PEARL_RELAY =
+            register("ender_pearl_relay", () ->
+                    BlockEntityType.Builder.of(EnderPearlRelayBlockEntity::new,
+                            BlockRegistry.ENDER_PEARL_RELAY.get()).build(null));
     public static final Supplier<BlockEntityType<EssenceDerivationSpikeBlockEntity>> ESSENCE_DERIVATION_SPIKE =
             register("essence_derivation_spike", () ->
                     BlockEntityType.Builder.of(EssenceDerivationSpikeBlockEntity::new,

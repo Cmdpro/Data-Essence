@@ -26,19 +26,24 @@
   "name": {
     "translate": "data_tablet.pages.essence_burner.name"
   },
-  "incomplete": true,
-  "completion_advancement": "datanessence:progression/place_essence_burner",
-  "incomplete_pages": [
+  "completion_stages": [
     {
-      "type": "datanessence:text",
-      "text": {
-        "translate": "data_tablet.pages.essence_burner.page1.incomplete_text"
-      }
-    },
-    {
-      "type": "datanessence:crafting",
-      "recipes": [
-        "datanessence:fabrication/essence_burner"
+      "completion_advancements": [
+        "datanessence:progression/place_essence_burner"
+      ],
+      "pages": [
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.essence_burner.page1.incomplete_text"
+          }
+        },
+        {
+          "type": "datanessence:crafting",
+          "recipes": [
+            "datanessence:fabrication/essence_burner"
+          ]
+        }
       ]
     }
   ]

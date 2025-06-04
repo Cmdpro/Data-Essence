@@ -48,7 +48,7 @@ import java.util.*;
 
 public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public AnimationState animState = new AnimationState();
-    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
+    public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
         return storage;
@@ -89,6 +89,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
             this.recipe = recipe.get().value();
             essenceCost = recipe.get().value().getEssenceCost();
             item = recipe.get().value().getResultItem(level.registryAccess());
+            maxTime = recipe.get().value().getTime();
         } else {
             Optional<RecipeHolder<CraftingRecipe>> recipe2 = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, getCraftingInv().asCraftInput(), level);
             if (recipe2.isPresent()) {
@@ -100,6 +101,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
                 essenceCost = null;
                 item = ItemStack.EMPTY;
             }
+            maxTime = 20;
         }
     }
     public void drops() {
@@ -122,12 +124,16 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
         CompoundTag tag = pkt.getTag();
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
+        time = tag.getInt("time");
+        maxTime = tag.getInt("maxTime");
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
         tag.put("EssenceStorage", storage.toNbt());
         tag.put("item", item.saveOptional(pRegistries));
+        tag.putInt("time", time);
+        tag.putInt("maxTime", maxTime);
         return tag;
     }
 
@@ -135,6 +141,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
         tag.put("inventory", itemHandler.serializeNBT(pRegistries));
         tag.put("EssenceStorage", storage.toNbt());
+        tag.putInt("time", time);
         super.saveAdditional(tag, pRegistries);
     }
     @Override
@@ -142,6 +149,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
         super.loadAdditional(nbt, pRegistries);
         itemHandler.deserializeNBT(pRegistries, nbt.getCompound("inventory"));
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
+        time = nbt.getInt("time");
     }
     public ItemStack item;
     public SimpleContainer getInv() {
@@ -164,79 +172,102 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
         if (!pLevel.isClientSide) {
             if (blockEntity instanceof FabricatorBlockEntity ent) {
-                if (ent.recipe != null) {
-                    if (ent.enoughEssence) {
-                        IFabricationRecipe fabricationRecipe = null;
-                        if (ent.recipe instanceof IFabricationRecipe) {
-                            fabricationRecipe = (IFabricationRecipe) ent.recipe;
-                        }
-                        CraftingInput craftingInput = ent.getCraftingInv().asCraftInput();
-                        if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry(), fabricationRecipe.allowIncomplete())) {
-                            ItemStack stack = ent.recipe.assemble(craftingInput, pLevel.registryAccess()).copy();
-                            NonNullList<ItemStack> remaining = ent.recipe.getRemainingItems(craftingInput);
-                            int left = ent.getCraftingInv().asPositionedCraftInput().left();
-                            int top = ent.getCraftingInv().asPositionedCraftInput().top();
-                            int craftWidth = 3;
-                            for (int k = 0; k < craftingInput.height(); k++) {
-                                for (int l = 0; l < craftingInput.width(); l++) {
-                                    int i1 = l + left + (k + top) * craftWidth;
-                                    ItemStack itemstack = ent.itemHandler.getStackInSlot(i1);
-                                    ItemStack itemstack1 = remaining.get(l + k * craftingInput.width());
-                                    if (!itemstack.isEmpty()) {
-                                        ent.itemHandler.extractItem(i1, 1, false);
-                                        itemstack =  ent.itemHandler.getStackInSlot(i1);
-                                    }
-
-                                    if (!itemstack1.isEmpty()) {
-                                        if (itemstack.isEmpty()) {
-                                            ent.itemHandler.setStackInSlot(i1, itemstack1);
-                                        } else if (ItemStack.isSameItemSameComponents(itemstack, itemstack1)) {
-                                            itemstack1.grow(itemstack.getCount());
-                                            ent.itemHandler.setStackInSlot(i1, itemstack1);
-                                        } else {
-                                            ItemEntity entity = new ItemEntity(pLevel, (float) pPos.getX() + 0.5f, (float) pPos.getY() + 1f, (float) pPos.getZ() + 0.5f, stack);
-                                            pLevel.addFreshEntity(entity);
-                                        }
-                                    }
-                                }
+                if (ent.time >= 0) {
+                    ent.time = -1;
+                } else {
+                    if (ent.recipe != null) {
+                        if (ent.enoughEssence) {
+                            IFabricationRecipe fabricationRecipe = null;
+                            if (ent.recipe instanceof IFabricationRecipe) {
+                                fabricationRecipe = (IFabricationRecipe) ent.recipe;
                             }
-                            if (ent.essenceCost != null) {
-                                for (Map.Entry<ResourceLocation, Float> i : ent.essenceCost.entrySet()) {
-                                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                                    ent.storage.removeEssence(type, i.getValue());
-                                }
+                            if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry(), fabricationRecipe.getCompletionStage())) {
+                                ent.time = 0;
+                                pLevel.playSound(null, pPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 2, 1);
+                            } else {
+                                pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.dont_know_how"));
                             }
-                            ItemEntity entity = new ItemEntity(pLevel, (float) pPos.getX() + 0.5f, (float) pPos.getY() + 1f, (float) pPos.getZ() + 0.5f, stack);
-                            pLevel.addFreshEntity(entity);
-                            pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
                         } else {
-                            pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.dont_know_how"));
+                            pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.not_enough_essence"));
                         }
-                    } else {
-                        pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.not_enough_essence"));
                     }
                 }
             }
         }
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
+    public void tryCraft() {
+        CraftingInput craftingInput = getCraftingInv().asCraftInput();
+        ItemStack stack = recipe.assemble(craftingInput, level.registryAccess()).copy();
+        NonNullList<ItemStack> remaining = recipe.getRemainingItems(craftingInput);
+        int left = getCraftingInv().asPositionedCraftInput().left();
+        int top = getCraftingInv().asPositionedCraftInput().top();
+        int craftWidth = 3;
+        for (int k = 0; k < craftingInput.height(); k++) {
+            for (int l = 0; l < craftingInput.width(); l++) {
+                int i1 = l + left + (k + top) * craftWidth;
+                ItemStack itemstack = itemHandler.getStackInSlot(i1);
+                ItemStack itemstack1 = remaining.get(l + k * craftingInput.width());
+                if (!itemstack.isEmpty()) {
+                    itemHandler.extractItem(i1, 1, false);
+                    itemstack = itemHandler.getStackInSlot(i1);
+                }
+
+                if (!itemstack1.isEmpty()) {
+                    if (itemstack.isEmpty()) {
+                        itemHandler.setStackInSlot(i1, itemstack1);
+                    } else if (ItemStack.isSameItemSameComponents(itemstack, itemstack1)) {
+                        itemstack1.grow(itemstack.getCount());
+                        itemHandler.setStackInSlot(i1, itemstack1);
+                    } else {
+                        ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, stack);
+                        level.addFreshEntity(entity);
+                    }
+                }
+            }
+        }
+        if (essenceCost != null) {
+            for (Map.Entry<ResourceLocation, Float> i : essenceCost.entrySet()) {
+                EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                storage.removeEssence(type, i.getValue());
+            }
+        }
+        ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, stack);
+        level.addFreshEntity(entity);
+        level.playSound(null, getBlockPos(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
+    }
+    public int time;
+    public int maxTime;
     public Recipe<CraftingInput> recipe;
     public boolean enoughEssence;
     public Map<ResourceLocation, Float> essenceCost;
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
-            if (pBlockEntity.essenceCost != null) {
+            if (pBlockEntity.recipe != null) {
                 boolean enoughEssence = true;
-                for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
-                    EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                    if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
-                        enoughEssence = false;
+                if (pBlockEntity.essenceCost != null) {
+                    for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                        EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                        if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
+                            enoughEssence = false;
+                        }
                     }
                 }
                 pBlockEntity.enoughEssence = enoughEssence;
+                if (pBlockEntity.recipe.matches(pBlockEntity.getCraftingInv().asCraftInput(), pBlockEntity.level)) {
+                    if (pBlockEntity.time != -1) {
+                        pBlockEntity.time++;
+                    }
+                } else {
+                    pBlockEntity.time = -1;
+                }
             } else {
-                pBlockEntity.enoughEssence = true;
+                pBlockEntity.time = -1;
+            }
+            if (pBlockEntity.time >= pBlockEntity.maxTime) {
+                pBlockEntity.tryCraft();
+                pBlockEntity.time = 0;
             }
             pBlockEntity.updateBlock();
         }

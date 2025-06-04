@@ -6,6 +6,7 @@
     "RER",
     "ROR"
   ],
+  "time": 40,
   "key": {
     "R": { "item": "datanessence:conductance_rod" },
     "E": { "item": "minecraft:emerald" },

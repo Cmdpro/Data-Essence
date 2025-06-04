@@ -24,5 +24,6 @@
   },
   "flavor": {
     "translate": "data_tablet.pages.locator.flavor"
-  }
+  },
+  "is_default": true
 }

@@ -74,6 +74,8 @@ public class ModMessages {
         registrar.playToClient(CreatePingShader.TYPE, getNetworkCodec(CreatePingShader::read, CreatePingShader::write), Handler::handle);
         registrar.playToClient(GrapplingHookSync.TYPE, getNetworkCodec(GrapplingHookSync::read, GrapplingHookSync::write), Handler::handle);
         registrar.playToClient(ParticleBurst.TYPE, getNetworkCodec(ParticleBurst::read, ParticleBurst::write), Handler::handle);
+        registrar.playToClient(PlayGenderfluidTransitionEffect.TYPE, getNetworkCodec(PlayGenderfluidTransitionEffect::read, PlayGenderfluidTransitionEffect::write), Handler::handle);
+        registrar.playToClient(PlayEnderPearlRedirectionEffect.TYPE, getNetworkCodec(PlayEnderPearlRedirectionEffect::read, PlayEnderPearlRedirectionEffect::write), Handler::handle);
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigame.TYPE, getNetworkCodec(PlayerFinishDataBankMinigame::read, PlayerFinishDataBankMinigame::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveData.TYPE, getNetworkCodec(PlayerChangeDriveData::read, PlayerChangeDriveData::write), Handler::handle);

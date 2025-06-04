@@ -30,5 +30,6 @@
   },
   "flavor": {
     "translate": "data_tablet.pages.fabricator.flavor"
-  }
+  },
+  "is_default": true
 }

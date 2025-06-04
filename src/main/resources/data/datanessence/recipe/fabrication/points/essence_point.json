@@ -4,8 +4,7 @@
     "datanessence:essence": 0
   },
   "entry": "datanessence:essence_manipulation/essence_transfer",
-  "allow_incomplete": true,
-  "show_incomplete_in_emi": true,
+  "completion_stage": 0,
   "pattern": [
     "RAR",
     " O "

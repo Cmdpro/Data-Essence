@@ -7,13 +7,15 @@ import com.cmdpro.datanessence.networking.Message;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
+import java.util.HashMap;
 import java.util.List;
 
-public record UnlockedEntrySync(List<ResourceLocation> unlocked, List<ResourceLocation> incomplete) implements Message {
+public record UnlockedEntrySync(List<ResourceLocation> unlocked, HashMap<ResourceLocation, Integer> incomplete) implements Message {
 
     @Override
     public Type<? extends CustomPacketPayload> type() {
@@ -23,7 +25,7 @@ public record UnlockedEntrySync(List<ResourceLocation> unlocked, List<ResourceLo
 
     public static void write(RegistryFriendlyByteBuf buf, UnlockedEntrySync obj) {
         buf.writeCollection(obj.unlocked, FriendlyByteBuf::writeResourceLocation);
-        buf.writeCollection(obj.incomplete, FriendlyByteBuf::writeResourceLocation);
+        buf.writeMap(obj.incomplete, FriendlyByteBuf::writeResourceLocation, FriendlyByteBuf::writeInt);
     }
 
     @Override
@@ -34,7 +36,7 @@ public record UnlockedEntrySync(List<ResourceLocation> unlocked, List<ResourceLo
 
     public static UnlockedEntrySync read(RegistryFriendlyByteBuf buf) {
         List<ResourceLocation> unlocked = buf.readList(ResourceLocation.STREAM_CODEC);
-        List<ResourceLocation> incomplete = buf.readList(ResourceLocation.STREAM_CODEC);
+        HashMap<ResourceLocation, Integer> incomplete = new HashMap<>(buf.readMap(ResourceLocation.STREAM_CODEC, ByteBufCodecs.INT));
         return new UnlockedEntrySync(unlocked, incomplete);
     }
 }

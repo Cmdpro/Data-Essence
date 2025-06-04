@@ -1,0 +1,23 @@
+{
+  "icon": {
+    "id": "datanessence:lensing_crystal_ore"
+  },
+  "tab": "datanessence:basics",
+  "x": 0,
+  "y": -4,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.hidden_blocks.page1.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.hidden_blocks.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.hidden_blocks.flavor"
+  },
+  "is_default": true
+}

@@ -4,6 +4,5 @@ import net.minecraft.resources.ResourceLocation;
 
 public interface IHasRequiredKnowledge {
     public ResourceLocation getEntry();
-    public boolean allowIncomplete();
-    public boolean showIncompleteInEMI();
+    public int getCompletionStage();
 }

@@ -1,0 +1,36 @@
+{
+  "icon": {
+    "id": "datanessence:ender_pearl_capture"
+  },
+  "tab": "datanessence:tools",
+  "x": -5,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:ender_pearl_relay"
+      },
+      "text": {
+        "translate": "data_tablet.pages.ender_redirection_network.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/utilities/ender_pearl_capture",
+        "datanessence:fabrication/utilities/ender_pearl_relay",
+        "datanessence:fabrication/utilities/ender_pearl_destination"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.ender_redirection_network.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.ender_redirection_network.flavor"
+  },
+  "parents": [
+    "datanessence:basics/lensing_crystals"
+  ]
+}

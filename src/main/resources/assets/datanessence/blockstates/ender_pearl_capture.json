@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "datanessence:block/ender_pearl_relay",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "datanessence:block/ender_pearl_relay",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "datanessence:block/ender_pearl_relay",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "datanessence:block/ender_pearl_relay",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "datanessence:block/ender_pearl_relay"
+    },
+    "facing=west": {
+      "model": "datanessence:block/ender_pearl_relay",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

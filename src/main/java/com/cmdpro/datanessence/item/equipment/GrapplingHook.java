@@ -1,34 +1,26 @@
 package com.cmdpro.datanessence.item.equipment;
 
+import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
-import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
 import com.cmdpro.datanessence.networking.packet.s2c.GrapplingHookSync;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
-import com.cmdpro.datanessence.registry.EntityRegistry;
-import net.minecraft.client.gui.screens.EditServerScreen;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
-import net.minecraft.world.item.Tier;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.SimpleTier;
-import net.neoforged.neoforge.common.Tags;
 
+import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +30,9 @@ public class GrapplingHook extends Item {
     public GrapplingHook(Properties pProperties) {
         super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 1000)));
     }
-
+    public Color getHookColor(Player player, ItemStack stack, float partialTick) {
+        return new Color(EssenceTypeRegistry.ESSENCE.get().color);
+    }
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);

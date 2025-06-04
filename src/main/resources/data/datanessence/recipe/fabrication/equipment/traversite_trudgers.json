@@ -9,6 +9,7 @@
     " L ",
     "T T"
   ],
+  "time": 200,
   "key": {
     "T": { "item": "datanessence:traversite_road" },
     "W": { "item": "minecraft:light_blue_wool" },

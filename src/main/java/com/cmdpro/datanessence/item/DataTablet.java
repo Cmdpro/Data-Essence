@@ -2,6 +2,8 @@ package com.cmdpro.datanessence.item;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
+import com.cmdpro.datanessence.data.datatablet.Entries;
+import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -33,12 +35,9 @@ public class DataTablet extends Item {
     }
 
     public void unlockStartingEntries(Player player) {
-        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/fabricator"), false);
-        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/essence_redirector"), false);
-        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/data_tablet"), false);
-        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/structures"), false);
-        DataTabletUtil.unlockEntry(player, DataNEssence.locate("basics/locator"), false);
-        DataTabletUtil.unlockEntry(player, DataNEssence.locate("tools/decorative_blocks"), false);
+        for (Entry i : Entries.entries.values().stream().filter((entry) -> entry.isDefault).toList()) {
+            DataTabletUtil.unlockEntryAndParents(player, i.id, 0);
+        }
     }
 
     public static class Client {

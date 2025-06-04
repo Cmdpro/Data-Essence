@@ -8,6 +8,7 @@
     "PP",
     "RP"
   ],
+  "time": 40,
   "key": {
     "P": { "item": "datanessence:capacitance_panel" },
     "R": { "item": "datanessence:conductance_rod" }

@@ -9,6 +9,7 @@
     " MG",
     "R  "
   ],
+  "time": 200,
   "key": {
     "G": { "item": "minecraft:glowstone_dust" },
     "R": { "item": "datanessence:conductance_rod" },

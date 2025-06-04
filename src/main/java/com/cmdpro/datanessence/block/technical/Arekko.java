@@ -48,10 +48,17 @@ public class Arekko extends Block implements EntityBlock {
     protected InteractionResult useWithoutItem(BlockState state, Level world, BlockPos pos, Player player, BlockHitResult result) {
         if (!world.isClientSide()) {
             ItemStack dataTablet = new ItemStack(ItemRegistry.DATA_TABLET.get(), 1);
+            ItemStack signalTracker = new ItemStack(ItemRegistry.LOCATOR.get(), 1);
             if (!player.getInventory().contains(dataTablet)) {
                 player.addItem(dataTablet);
                 world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS);
                 player.displayClientMessage(Component.translatable("block.datanessence.arekko.obtain_data_tablet"), true);
+                return InteractionResult.sidedSuccess(world.isClientSide());
+            }
+            if (!player.getInventory().contains(signalTracker)) {
+                player.addItem(signalTracker);
+                world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS);
+                player.displayClientMessage(Component.translatable("block.datanessence.arekko.obtain_signal_tracker"), true);
                 return InteractionResult.sidedSuccess(world.isClientSide());
             }
             player.displayClientMessage(Component.translatable("block.datanessence.arekko.nothing_left"), true);

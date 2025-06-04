@@ -3,8 +3,10 @@ package com.cmdpro.datanessence.item;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
 import com.cmdpro.datanessence.block.transmission.ItemPointBlockEntity;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.screen.FilterNodeUpgradeMenu;
 import com.cmdpro.datanessence.screen.MusicDiscPlayerMenu;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -17,6 +19,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.JukeboxPlayable;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -32,6 +35,25 @@ public class FilterNodeUpgrade extends Item implements INodeUpgrade {
         super(pProperties);
     }
 
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        ItemContainerContents handler = stack.get(DataComponentRegistry.FILTER_STACK);
+        if (handler != null && handler.getSlots() >= 1) {
+            ItemStack filterStack = handler.getStackInSlot(0);
+            tooltipComponents.addAll(getTooltipForFilter(filterStack));
+        }
+    }
+    public List<Component> getTooltipForFilter(ItemStack filterStack) {
+        Optional<FluidStack> fluid = FluidUtil.getFluidContained(filterStack);
+        if (fluid.isPresent()) {
+            return List.of(applyFilterTooltipStyle(fluid.get().getHoverName()));
+        }
+        return List.of(applyFilterTooltipStyle(filterStack.getHoverName()));
+    }
+    public Component applyFilterTooltipStyle(Component component) {
+        return component.copy().withStyle(ChatFormatting.LIGHT_PURPLE);
+    }
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (!pLevel.isClientSide) {
@@ -55,7 +77,7 @@ public class FilterNodeUpgrade extends Item implements INodeUpgrade {
     @Override
     public Object getValue(ItemStack upgrade, ResourceLocation id, Object originalValue, BlockEntity node) {
         if (id.equals(DataNEssence.locate("allowed_itemstacks"))) {
-            ItemContainerContents handler = upgrade.get(DataComponents.CONTAINER);
+            ItemContainerContents handler = upgrade.get(DataComponentRegistry.FILTER_STACK);
             if (handler != null) {
                 if (handler.getSlots() > 0) {
                     if (handler.getStackInSlot(0).isEmpty()) {
@@ -67,7 +89,7 @@ public class FilterNodeUpgrade extends Item implements INodeUpgrade {
             }
         }
         if (id.equals(DataNEssence.locate("allowed_fluidstacks"))) {
-            ItemContainerContents handler = upgrade.get(DataComponents.CONTAINER);
+            ItemContainerContents handler = upgrade.get(DataComponentRegistry.FILTER_STACK);
             if (handler != null) {
                 if (handler.getSlots() > 0) {
                     if (handler.getStackInSlot(0).isEmpty()) {

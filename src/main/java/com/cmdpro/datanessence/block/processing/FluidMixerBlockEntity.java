@@ -4,9 +4,7 @@ import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.item.DataDrive;
-import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.api.MultiFluidTank;
 import com.cmdpro.datanessence.api.MultiFluidTankNoDuplicateFluids;
 import com.cmdpro.datanessence.recipe.FluidMixingRecipe;
@@ -36,7 +34,6 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
@@ -47,7 +44,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -204,7 +200,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
                 workTime = 0;
             }
             if (dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_ID) && dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_INCOMPLETE)) {
-                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && (!DataDrive.getEntryIncomplete(dataDriveHandler.getStackInSlot(0)) || this.recipe.allowIncomplete())) {
+                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && DataDrive.getEntryCompletionStage(dataDriveHandler.getStackInSlot(0)) >= this.recipe.getCompletionStage()) {
                     this.recipe = recipe.get().value();
                     essenceCost = recipe.get().value().getEssenceCost();
                 } else {

@@ -4,6 +4,8 @@ import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -134,8 +136,8 @@ public class AncientSentinelProjectile extends Projectile {
                     Vec3 pos = position();
                     pos = pos.subtract(getDeltaMovement().x*(i/3d), getDeltaMovement().y*(i/3d), getDeltaMovement().z*(i/3d));
                     pos = pos.add(0, getBoundingBox().getYsize() / 2f, 0);
-                    pos = pos.add(RandomUtils.nextFloat(0, 0.2f) - 0.1f, RandomUtils.nextFloat(0, 0.2f) - 0.1f, RandomUtils.nextFloat(0, 0.2f) - 0.1f);
-                    ClientMethods.particle(pos, level());
+                    pos = pos.add(Mth.nextFloat(random, -0.1f, 0.1f), Mth.nextFloat(random, -0.1f, 0.1f), Mth.nextFloat(random, -0.1f, 0.1f));
+                    ClientMethods.particle(random, pos, level());
                 }
             }
         }
@@ -169,9 +171,9 @@ public class AncientSentinelProjectile extends Projectile {
         remove(RemovalReason.KILLED);
     }
     public static class ClientMethods {
-        public static void particle(Vec3 pos, Level level) {
+        public static void particle(RandomSource random, Vec3 pos, Level level) {
             for (int i = 0; i < 3; i++) {
-                Vec3 offset = new Vec3(RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f, RandomUtils.nextFloat(0f, 2f) - 1f).normalize().multiply(0.1f, 0.1f, 0.1f);
+                Vec3 offset = new Vec3(Mth.nextFloat(random, -1f, 1f), Mth.nextFloat(random, -1f, 1f), Mth.nextFloat(random, -1f, 1f)).normalize().multiply(0.1f, 0.1f, 0.1f);
                 level.addParticle(new CircleParticleOptions().setColor(Color.getHSBColor((float) (level.getGameTime() % 100) / 100f, 1f, 1f)).setAdditive(true), pos.x + offset.x, pos.y + offset.y, pos.z + offset.z, 0, 0, 0);
             }
         }

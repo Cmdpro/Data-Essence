@@ -32,6 +32,8 @@ public class RecipeRegistry {
             registerSerializer("melting", () -> MeltingRecipe.Serializer.INSTANCE);
     public static final Supplier<RecipeSerializer<DryingRecipe>> DRYING =
             registerSerializer("drying", () -> DryingRecipe.Serializer.INSTANCE);
+    public static final Supplier<RecipeSerializer<GenderfluidTransitionRecipe>> GENDERFLUID_TRANSITION =
+            registerSerializer("genderfluid_transition", () -> GenderfluidTransitionRecipe.Serializer.INSTANCE);
 
     public static final Supplier<RecipeType<FluidMixingRecipe>> FLUID_MIXING_TYPE =
             registerBasicRecipeType("fluid_mixing");
@@ -51,6 +53,8 @@ public class RecipeRegistry {
             registerBasicRecipeType("melting");
     public static final Supplier<RecipeType<DryingRecipe>> DRYING_TYPE =
             registerBasicRecipeType("drying");
+    public static final Supplier<RecipeType<GenderfluidTransitionRecipe>> GENDERFLUID_TRANSITION_TYPE =
+            registerBasicRecipeType("genderfluid_transition");
 
     private static <T extends RecipeType<?>> Supplier<T> registerType(final String name, final Supplier<T> recipe) {
         return RECIPE_TYPES.register(name, recipe);

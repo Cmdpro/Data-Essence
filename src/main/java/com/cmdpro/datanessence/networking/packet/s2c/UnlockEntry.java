@@ -12,15 +12,13 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-public record UnlockEntry(ResourceLocation unlocked, boolean incomplete) implements Message {
+public record UnlockEntry(ResourceLocation unlocked, int completionStage) implements Message {
     @Override
     public void handleClient(Minecraft minecraft, Player player) {
         Entry entry = Entries.entries.get(unlocked);
         if (entry != null) {
-            if (incomplete) {
-                if (!ClientPlayerUnlockedEntries.getIncomplete().contains(unlocked)) {
-                    ClientPlayerUnlockedEntries.getIncomplete().add(unlocked);
-                }
+            if (entry.completionStages.size() > completionStage) {
+                ClientPlayerUnlockedEntries.getIncomplete().put(unlocked, completionStage);
             } else {
                 ClientPlayerUnlockedEntries.getIncomplete().remove(unlocked);
                 if (!ClientPlayerUnlockedEntries.getUnlocked().contains(unlocked)) {
@@ -36,7 +34,7 @@ public record UnlockEntry(ResourceLocation unlocked, boolean incomplete) impleme
 
     public static void write(RegistryFriendlyByteBuf pBuffer, UnlockEntry obj) {
         pBuffer.writeResourceLocation(obj.unlocked);
-        pBuffer.writeBoolean(obj.incomplete);
+        pBuffer.writeInt(obj.completionStage);
     }
     @Override
     public Type<? extends CustomPacketPayload> type() {
@@ -46,8 +44,8 @@ public record UnlockEntry(ResourceLocation unlocked, boolean incomplete) impleme
 
     public static UnlockEntry read(RegistryFriendlyByteBuf buf) {
         ResourceLocation unlocked = buf.readResourceLocation();
-        boolean incomplete = buf.readBoolean();
-        return new UnlockEntry(unlocked, incomplete);
+        int completionStage = buf.readInt();
+        return new UnlockEntry(unlocked, completionStage);
     }
 
 }

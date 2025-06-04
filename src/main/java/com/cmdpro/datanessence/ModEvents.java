@@ -3,9 +3,12 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.api.block.TraversiteBlock;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePoint;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
-import com.cmdpro.datanessence.block.TraversiteRoad;
+import com.cmdpro.datanessence.block.technical.StructureProtector;
+import com.cmdpro.datanessence.block.transportation.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.data.pinging.PingableStructureManager;
@@ -34,6 +37,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -57,11 +61,13 @@ import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import org.spongepowered.asm.mixin.injection.struct.InjectorGroupInfo;
 import org.w3c.dom.Attr;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @EventBusSubscriber(modid = DataNEssence.MOD_ID)
@@ -80,9 +86,9 @@ public class ModEvents {
                         }
                     }
                 } else {
-                    ent.level().addParticle(new RhombusParticleOptions().setColor(new Color(0xff6ab3fc)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
-                    ent.level().addParticle(new MoteParticleOptions().setColor(new Color(0xffffffff)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
-                    ent.level().addParticle(new SmallCircleParticleOptions().setColor(new Color(0xfffc92bb)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, (ent.getRandom().nextFloat()/2)-0.25, 0.25, (ent.getRandom().nextFloat()/2)-0.25);
+                    ent.level().addParticle(new RhombusParticleOptions().setColor(new Color(0xff6ab3fc)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f), 0.25, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f));
+                    ent.level().addParticle(new MoteParticleOptions().setColor(new Color(0xffffffff)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f), 0.25, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f));
+                    ent.level().addParticle(new SmallCircleParticleOptions().setColor(new Color(0xfffc92bb)).setAdditive(true), ent.position().x, ent.position().y, ent.position().z, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f), 0.25, Mth.nextFloat(ent.getRandom(), -0.25f, 0.25f));
                 }
             } else {
                 if (!ent.level().isClientSide) {
@@ -96,17 +102,25 @@ public class ModEvents {
         if (!event.getLevel().isClientSide()) {
             if (!event.getLevel().getBlockState(event.getPos()).is(BlockRegistry.STRUCTURE_PROTECTOR.get())) {
                 event.getEntity().getData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER).ifPresent((binding) -> {
-                    if (binding.bindProcess == 1) {
-                        event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.select_pos_2"));
-                        binding.offsetCorner1 = event.getPos().offset(binding.getBlockPos().multiply(-1));
-                        binding.bindProcess = 2;
-                    } else if (binding.bindProcess == 2) {
-                        if (!binding.offsetCorner1.offset(binding.getBlockPos()).equals(event.getPos())) {
-                            binding.offsetCorner2 = event.getPos().offset(binding.getBlockPos().multiply(-1));
-                            binding.bindProcess = 0;
-                            event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.finished"));
-                            event.getEntity().removeData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER);
+                    if (binding.getLevel() != null) {
+                        if (binding.bindProcess == 1) {
+                            event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.select_pos_2"));
+                            binding.offsetCorner1 = event.getPos().offset(binding.getBlockPos().multiply(-1));
+                            binding.getLevel().setBlock(binding.getBlockPos(), binding.getBlockState().setValue(StructureProtector.FACING, Direction.NORTH), 3);
+                            binding.bindProcess = 2;
+                            binding.updateBlock();
+                        } else if (binding.bindProcess == 2) {
+                            if (!binding.offsetCorner1.offset(binding.getBlockPos()).equals(event.getPos())) {
+                                binding.offsetCorner2 = event.getPos().offset(binding.getBlockPos().multiply(-1));
+                                binding.getLevel().setBlock(binding.getBlockPos(), binding.getBlockState().setValue(StructureProtector.FACING, Direction.NORTH), 3);
+                                binding.bindProcess = 0;
+                                event.getEntity().sendSystemMessage(Component.translatable("block.datanessence.structure_protector.finished"));
+                                event.getEntity().removeData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER);
+                                binding.updateBlock();
+                            }
                         }
+                    } else {
+                        event.getEntity().removeData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER);
                     }
                 });
             }
@@ -122,7 +136,7 @@ public class ModEvents {
                     if (((Level) event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                         List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                         for (StructureProtectorBlockEntity i : ents) {
-                            AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
+                            AABB aabb = AABB.encapsulatingFullBlocks(i.getCorner1(), i.getCorner2());
                             if (aabb.contains(event.getPos().getCenter())) {
                                 event.setCanceled(true);
                                 break;
@@ -147,7 +161,7 @@ public class ModEvents {
                 if (((Level)event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                     List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                     for (StructureProtectorBlockEntity i : ents) {
-                        AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
+                        AABB aabb = AABB.encapsulatingFullBlocks(i.getCorner1(), i.getCorner2());
                         if (aabb.contains(event.getPos().getCenter())) {
                             event.setCanceled(true);
                             break;
@@ -165,7 +179,7 @@ public class ModEvents {
                 List<BlockPos> toRemove = new ArrayList<>();
                 for (BlockPos i : event.getExplosion().getToBlow()) {
                     for (StructureProtectorBlockEntity o : ents) {
-                        AABB aabb = AABB.encapsulatingFullBlocks(o.offsetCorner1.offset(o.getBlockPos()), o.offsetCorner2.offset(o.getBlockPos()));
+                        AABB aabb = AABB.encapsulatingFullBlocks(o.getCorner1(), o.getCorner2());
                         if (aabb.contains(i.getCenter())) {
                             toRemove.add(i);
                             break;
@@ -189,7 +203,7 @@ public class ModEvents {
                 if (((Level)event.getEntity().level()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                     List<StructureProtectorBlockEntity> ents = ((Level) event.getEntity().level()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                     for (StructureProtectorBlockEntity i : ents) {
-                        AABB aabb = AABB.encapsulatingFullBlocks(i.offsetCorner1.offset(i.getBlockPos()), i.offsetCorner2.offset(i.getBlockPos()));
+                        AABB aabb = AABB.encapsulatingFullBlocks(i.getCorner1(), i.getCorner2());
                         if (aabb.contains(event.getPos().getCenter())) {
                             event.setCanceled(true);
                             break;
@@ -226,6 +240,12 @@ public class ModEvents {
                     }
                     if (ent.get().getBlockState().getBlock() instanceof BaseCapabilityPoint block) {
                         if (!event.getEntity().isHolding(block.getRequiredWire())) {
+                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
+                        }
+                    }
+                    if (ent.get().getBlockState().getBlock() instanceof PearlNetworkBlock block) {
+                        if (!event.getEntity().isHolding(PearlNetworkBlock.getLinkItem())) {
                             event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                             PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                         }
@@ -304,15 +324,15 @@ public class ModEvents {
     }
     @SubscribeEvent
     public static void onPlayerAdvancement(AdvancementEvent.AdvancementEarnEvent event) {
-        List<ResourceLocation> entries = new ArrayList<>();
-        for (ResourceLocation i : event.getEntity().getData(AttachmentTypeRegistry.INCOMPLETE)) {
-            Entry entry = Entries.entries.get(i);
-            if (entry.completionAdvancement.equals(event.getAdvancement().id())) {
-                entries.add(i);
+        List<Entry> entries = new ArrayList<>();
+        for (Map.Entry<ResourceLocation, Integer> i : event.getEntity().getData(AttachmentTypeRegistry.INCOMPLETE_STAGES).entrySet()) {
+            Entry entry = Entries.entries.get(i.getKey());
+            if (entry.completionStages.get(entry.getIncompleteStageServer(event.getEntity())).completionAdvancements.contains(event.getAdvancement().id())) {
+                entries.add(entry);
             }
         }
-        for (ResourceLocation i : entries) {
-            DataTabletUtil.unlockEntry(event.getEntity(), i, false);
+        for (Entry i : entries) {
+            DataTabletUtil.unlockEntry(event.getEntity(), i.id, i.getIncompleteStageServer(event.getEntity())+1);
         }
     }
 }

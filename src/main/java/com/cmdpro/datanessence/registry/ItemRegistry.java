@@ -4,7 +4,6 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.EssenceShard;
 import com.cmdpro.datanessence.api.item.FuelItem;
 import com.cmdpro.datanessence.item.*;
-import com.cmdpro.datanessence.item.blockitem.*;
 import com.cmdpro.datanessence.item.equipment.*;
 import com.cmdpro.datanessence.item.lens.*;
 import net.minecraft.core.component.DataComponents;
@@ -43,6 +42,7 @@ public class ItemRegistry {
     public static final Supplier<Item> TRAVERSITE_TRUDGERS = register("traversite_trudgers", () -> new TraversiteTrudgers(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> HAMMER_AND_CHISEL = register("hammer_and_chisel", () -> new HammerAndChisel(new Item.Properties().stacksTo(1).durability(256)));
     public static final Supplier<Item> GRAPPLING_HOOK = register("transcendental_tether", () -> new GrapplingHook(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> TRANS_GRAPPLING_HOOK = register("trans_tether", () -> new TransGrapplingHook(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ANTI_GRAVITY_PACK = register("anti_gravity_pack", () -> new AntiGravityPack(new Item.Properties().stacksTo(1)));
 
     // Essence Shards
@@ -108,6 +108,9 @@ public class ItemRegistry {
 
     // Buckets
     public static final Supplier<Item> GENDERFLUID_BUCKET = register("genderfluid_bucket", () -> new BucketItem(FluidRegistry.GENDERFLUID.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
+
+    // "Sprite" items, whose only use should be for rendering a given icon somewhere that only items are allowed to
+    public static final Supplier<Item> SPRITE_BOOK_FLORA = register("sprite_book_flora", () -> new Item(new Item.Properties()));
 
     private static <T extends Item> Supplier<T> register(final String name, final Supplier<T> item) {
         return ITEMS.register(name, item);

@@ -7,6 +7,7 @@
     "RCD",
     "CC "
   ],
+  "time": 60,
   "key": {
     "C": { "item": "datanessence:capacitance_panel" },
     "R": { "item": "minecraft:redstone" },

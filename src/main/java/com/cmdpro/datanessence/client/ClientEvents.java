@@ -7,6 +7,8 @@ import com.cmdpro.databank.rendering.ShaderHelper;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
+import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
@@ -26,7 +28,7 @@ import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.math.Axis;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -34,8 +36,6 @@ import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -46,6 +46,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
@@ -57,7 +58,6 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.apache.commons.lang3.RandomUtils;
 import org.joml.Math;
 import org.joml.Vector3d;
-import org.joml.Vector3f;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -96,12 +96,24 @@ public class ClientEvents {
         if (event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_WEATHER)) {
             MultiBufferSource.BufferSource bufferSource = RenderHandler.createBufferSource();
             if (ClientPlayerData.getLinkPos() != null) {
+                BlockEntity blockEntity = mc.level.getBlockEntity(ClientPlayerData.getLinkPos());
                 Vec3 pos = event.getCamera().getPosition();
                 Vec3 pos1 = ClientPlayerData.getLinkPos().getCenter();
                 Vec3 pos2 = mc.player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
+                Color color = ClientPlayerData.getLinkColor();
                 event.getPoseStack().pushPose();
                 event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, ClientPlayerData.getLinkColor());
+                if (blockEntity instanceof PearlNetworkBlockEntity ent) {
+                    Vec3 currentPos = pos1;
+                    Vec3 target = pos2;
+                    VertexConsumer vertexConsumer = RenderHandler.createBufferSource().getBuffer(DataNEssenceRenderTypes.WIRES);
+                    Vec3 normal = currentPos.subtract(target).normalize();
+                    vertexConsumer.addVertex(event.getPoseStack().last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(color.getRGB()).setNormal(event.getPoseStack().last(), (float) normal.x, (float) normal.y, (float) normal.z);
+                    currentPos = target;
+                    vertexConsumer.addVertex(event.getPoseStack().last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(color.getRGB()).setNormal(event.getPoseStack().last(), (float) normal.x, (float) normal.y, (float) normal.z);
+                } else {
+                    ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color);
+                }
                 event.getPoseStack().popPose();
             }
             for (Player i : mc.level.players()) {
@@ -110,9 +122,16 @@ public class ClientEvents {
                     Vec3 pos = event.getCamera().getPosition();
                     Vec3 pos1 = grapplingHookData.pos;
                     Vec3 pos2 = i.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
+                    Color color = new Color(255, 255, 255);
+                    float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
+                    if (i.getMainHandItem().getItem() instanceof GrapplingHook hook) {
+                        color = hook.getHookColor(i, i.getMainHandItem(), partialTick);
+                    } else if (i.getOffhandItem().getItem() instanceof GrapplingHook hook) {
+                        color = hook.getHookColor(i, i.getOffhandItem(), partialTick);
+                    }
                     event.getPoseStack().pushPose();
                     event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                    ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, new Color(EssenceTypeRegistry.ESSENCE.get().color), 0.05d);
+                    ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color, 0.05d);
                     event.getPoseStack().popPose();
                 }
             }
@@ -127,7 +146,13 @@ public class ClientEvents {
                         Vec3 pos2 = mc.player.getRopeHoldPosition(event.getPartialTick().getGameTimeDeltaPartialTick(true));
                         event.getPoseStack().pushPose();
                         event.getPoseStack().translate(-pos.x, -pos.y, -pos.z);
-                        Color color = new Color(EssenceTypeRegistry.ESSENCE.get().color);
+                        Color color = Color.WHITE;
+                        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(true);
+                        if (mc.player.getMainHandItem().getItem() instanceof GrapplingHook hook) {
+                            color = hook.getHookColor(mc.player, mc.player.getMainHandItem(), partialTick);
+                        } else if (mc.player.getOffhandItem().getItem() instanceof GrapplingHook hook) {
+                            color = hook.getHookColor(mc.player, mc.player.getOffhandItem(), partialTick);
+                        }
                         color = new Color(color.getRed(), color.getGreen(), color.getBlue(), (int)((0.5f-(fade/4))*255));
                         ClientRenderingUtil.renderLine(bufferSource.getBuffer(DataNEssenceRenderTypes.WIRES), event.getPoseStack(), pos1, pos2, color, 0.05d);
                         event.getPoseStack().popPose();
@@ -228,6 +253,22 @@ public class ClientEvents {
             if (player != null) {
                 GrapplingHook.GrapplingHookData grapplingHookData = player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
                 if (grapplingHookData != null) {
+                    if (mc.player.position().distanceTo(grapplingHookData.pos) > 0) {
+                        Vector3d direction = new Vector3d(grapplingHookData.pos.subtract(mc.player.position()).toVector3f()).normalize();
+                        double theta = direction.angle(new Vector3d(0, 1, 0));
+                        double angle = Math.toDegrees(theta);
+                        double distanceToUp = Math.abs(180-(angle > 180 ? 180-(angle-180) : angle));
+                        double intensity = 1d;
+                        if (distanceToUp <= 90) {
+                            intensity = distanceToUp/90d;
+                        }
+                        double centripetalAcceleration = mc.player.getDeltaMovement().lengthSqr() / (1d + grapplingHookData.distance);
+                        double mass = 1;
+                        double gravity = mc.player.getGravity();
+                        Vector3d tension = new Vector3d(direction).mul(mass * (centripetalAcceleration + gravity * Math.cos(theta)));
+                        Vector3d force = new Vector3d(tension).div(mass);
+                        mc.player.setDeltaMovement(mc.player.getDeltaMovement().add(new Vec3(force.x, force.y > 0 ? force.y*intensity : force.y, force.z)));
+                    }
                     Vector3d direction = new Vector3d(grapplingHookData.pos.subtract(player.position()).toVector3f()).normalize();
                     double theta = direction.angle(new Vector3d(0, 1, 0));
                     double centripetalAcceleration = player.getDeltaMovement().lengthSqr() / (1d+grapplingHookData.distance);

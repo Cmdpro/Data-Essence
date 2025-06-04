@@ -1,15 +1,12 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.node.CapabilityNodeNetworks;
-import com.cmdpro.datanessence.api.node.EssenceNodeNetworks;
+import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.mojang.serialization.Codec;
-import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -25,10 +22,12 @@ public class AttachmentTypeRegistry {
     public static final Supplier<AttachmentType<ArrayList<StructureProtectorBlockEntity>>> STRUCTURE_CONTROLLERS =
             register("structure_controllers", () -> AttachmentType.builder(() -> new ArrayList<StructureProtectorBlockEntity>()).build());
 
-    public static final Supplier<AttachmentType<EssenceNodeNetworks>> ESSENCE_NODE_NETWORKS =
-            register("essence_node_networks", () -> AttachmentType.builder(() -> new EssenceNodeNetworks(new DefaultDirectedGraph<>(DefaultEdge.class))).serialize(EssenceNodeNetworks.CODEC).build());
-    public static final Supplier<AttachmentType<CapabilityNodeNetworks>> CAPABILITY_NODE_NETWORKS =
-            register("capability_node_networks", () -> AttachmentType.builder(() -> new CapabilityNodeNetworks(new DefaultDirectedGraph<>(DefaultEdge.class))).serialize(CapabilityNodeNetworks.CODEC).build());
+    public static final Supplier<AttachmentType<BlockPosNetworks>> ESSENCE_NODE_NETWORKS =
+            register("essence_node_networks", () -> AttachmentType.builder(() -> new BlockPosNetworks(new DefaultDirectedGraph<>(DefaultEdge.class))).serialize(BlockPosNetworks.CODEC).build());
+    public static final Supplier<AttachmentType<BlockPosNetworks>> CAPABILITY_NODE_NETWORKS =
+            register("capability_node_networks", () -> AttachmentType.builder(() -> new BlockPosNetworks(new DefaultDirectedGraph<>(DefaultEdge.class))).serialize(BlockPosNetworks.CODEC).build());
+    public static final Supplier<AttachmentType<BlockPosNetworks>> ENDER_PEARL_NETWORKS =
+            register("ender_pearl_networks", () -> AttachmentType.builder(() -> new BlockPosNetworks(new DefaultDirectedGraph<>(DefaultEdge.class))).serialize(BlockPosNetworks.CODEC).build());
 
 
     public static final Supplier<AttachmentType<Integer>> TIER =
@@ -50,6 +49,9 @@ public class AttachmentTypeRegistry {
     public static final Supplier<AttachmentType<ArrayList<ResourceLocation>>> UNLOCKED =
             register("unlocked", () -> AttachmentType.builder(() -> new ArrayList<ResourceLocation>()).serialize(
                     ResourceLocation.CODEC.listOf().xmap(ArrayList::new, (a) -> a.stream().toList())).copyOnDeath().build());
+    public static final Supplier<AttachmentType<HashMap<ResourceLocation, Integer>>> INCOMPLETE_STAGES =
+            register("incomplete_stages", () -> AttachmentType.builder(() -> new HashMap<ResourceLocation, Integer>()).serialize(
+                    Codec.unboundedMap(ResourceLocation.CODEC, Codec.INT).xmap(HashMap::new, (a) -> a)).copyOnDeath().build());
     public static final Supplier<AttachmentType<ArrayList<ResourceLocation>>> INCOMPLETE =
             register("incomplete", () -> AttachmentType.builder(() -> new ArrayList<ResourceLocation>()).serialize(
                     ResourceLocation.CODEC.listOf().xmap(ArrayList::new, (a) -> a.stream().toList())).copyOnDeath().build());

@@ -7,7 +7,8 @@
   "y": 2,
   "pages": [
     {
-      "type": "datanessence:text",
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:infuser" },
       "text": {
         "translate": "data_tablet.pages.infuser.page1.text"
       }

@@ -2,6 +2,7 @@
   "type": "datanessence:shaped_fabrication_recipe",
   "essenceCost": { "datanessence:essence": 25 },
   "entry": "datanessence:essence_manipulation/essence_leech",
+  "time": 200,
   "pattern": [
     "PIP",
     "RSR",

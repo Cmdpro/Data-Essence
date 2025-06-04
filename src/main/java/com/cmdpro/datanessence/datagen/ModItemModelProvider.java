@@ -71,6 +71,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.PRECISION_LENS, "lenses");
         simpleItemWithSubdirectory(ItemRegistry.ATTRACTING_LENS, "lenses");
 
+        simpleItemWithSubdirectory(ItemRegistry.SPRITE_BOOK_FLORA, "sprites");
+
         handheldItem(ItemRegistry.ESSENCE_REDIRECTOR);
         handheldItem(ItemRegistry.ESSENCE_SWORD);
         handheldItem(ItemRegistry.ILLUMINATION_ROD);
@@ -143,6 +145,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         musicDiscPlayer(ItemRegistry.MUSIC_DISC_PLAYER);
         grapplingHook(ItemRegistry.GRAPPLING_HOOK);
+        grapplingHook(ItemRegistry.TRANS_GRAPPLING_HOOK);
 
     }
     private ItemModelBuilder musicDiscPlayer(Supplier<Item> item) {
@@ -162,15 +165,17 @@ public class ModItemModelProvider extends ItemModelProvider {
         ItemModelBuilder using = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_use",
                 ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
                 ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_use"));
-        ItemModelBuilder charged = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
-                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
-                ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()))
-                .override().predicate(DataNEssence.locate("using"), 1).model(using).end();
 
-        return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_empty",
+        ItemModelBuilder charged = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_charged",
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                        ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
+
+        ItemModelBuilder empty = withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),
                 ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
                         ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath() + "_empty"))
-                .override().predicate(DataNEssence.locate("charged"), 1).model(charged).end();
+                .override().predicate(DataNEssence.locate("charged"), 1).predicate(DataNEssence.locate("using"), 0).model(charged).end()
+                .override().predicate(DataNEssence.locate("charged"), 1).predicate(DataNEssence.locate("using"), 1).model(using).end();
+        return empty;
     }
     private ItemModelBuilder simpleItemWithSubdirectory(Supplier<Item> item, String subdirectory) {
         return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).getPath(),

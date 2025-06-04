@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Entry {
 
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, Component flavor, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemLike icon, int x, int y, List<Page> pages, List<ResourceLocation> parents, Component name, Component flavor, boolean critical, List<CompletionStage> completionStages, boolean isDefault) {
         this.id = id;
         this.icon = new ItemStack(icon);
         this.x = x;
@@ -25,11 +25,10 @@ public class Entry {
         this.flavor = flavor;
         this.critical = critical;
         this.tab = tab;
-        this.incomplete = incomplete;
-        this.incompletePages = incompletePages;
-        this.completionAdvancement = completionAdvancement;
+        this.completionStages = completionStages;
+        this.isDefault = isDefault;
     }
-    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, Page[] pages, ResourceLocation[] parents, Component name, Component flavor, boolean critical, boolean incomplete, Page[] incompletePages, ResourceLocation completionAdvancement) {
+    public Entry(ResourceLocation id, ResourceLocation tab, ItemStack icon, int x, int y, List<Page> pages, List<ResourceLocation> parents, Component name, Component flavor, boolean critical, List<CompletionStage> completionStages, boolean isDefault) {
         this.id = id;
         this.icon = icon;
         this.x = x;
@@ -40,18 +39,29 @@ public class Entry {
         this.flavor = flavor;
         this.critical = critical;
         this.tab = tab;
-        this.incomplete = incomplete;
-        this.incompletePages = incompletePages;
-        this.completionAdvancement = completionAdvancement;
+        this.completionStages = completionStages;
+        this.isDefault = isDefault;
     }
-    public Page[] getPagesClient() {
-        return isIncompleteClient() ? incompletePages : pages;
+    public ItemStack getIcon(int stage) {
+        return isIncomplete(stage) ? completionStages.get(stage).iconOverride.orElse(icon) : icon;
+    }
+    public Component getName(int stage) {
+        return isIncomplete(stage) ? completionStages.get(stage).nameOverride.orElse(name) : name;
+    }
+    public Component getFlavor(int stage) {
+        return isIncomplete(stage) ? completionStages.get(stage).flavorOverride.orElse(flavor) : flavor;
+    }
+    public List<Page> getPagesClient() {
+        return isIncompleteClient() ? completionStages.get(getIncompleteStageClient()).pages : pages;
+    }
+    public int getIncompleteStageClient() {
+        return ClientPlayerUnlockedEntries.getIncomplete().getOrDefault(id, ClientPlayerUnlockedEntries.getUnlocked().contains(id) ? completionStages.size() : 0);
     }
     public boolean isIncompleteClient() {
-        return ClientPlayerUnlockedEntries.getIncomplete().contains(id);
+        return isIncomplete(getIncompleteStageClient());
     }
     public boolean isVisibleClient() {
-        return isUnlockedClient() && (ClientPlayerUnlockedEntries.getUnlocked().contains(id) || ClientPlayerUnlockedEntries.getIncomplete().contains(id));
+        return isUnlockedClient() && (ClientPlayerUnlockedEntries.getUnlocked().contains(id) || ClientPlayerUnlockedEntries.getIncomplete().containsKey(id));
     }
     public boolean isUnlockedClient() {
         boolean unlocked = true;
@@ -74,11 +84,20 @@ public class Entry {
         }
         return unlocked;
     }
+    public int getIncompleteStageServer(Player player) {
+        return player.getData(AttachmentTypeRegistry.INCOMPLETE_STAGES).getOrDefault(id, player.getData(AttachmentTypeRegistry.UNLOCKED).contains(id) ? completionStages.size() : 0);
+    }
+    public boolean isIncompleteServer(Player player) {
+        return isIncomplete(getIncompleteStageServer(player));
+    }
+    public boolean isIncomplete(int stage) {
+        return stage < completionStages.size();
+    }
     public ResourceLocation tab;
-    public Entry[] getParentEntries() {
+    public List<Entry> getParentEntries() {
         return parentEntries;
     }
-    public void setParentEntries(ResourceLocation[] entry) {
+    public void setParentEntries(List<ResourceLocation> entry) {
         this.parents = entry;
         updateParentEntries();
     }
@@ -89,7 +108,7 @@ public class Entry {
                 parentEntries.add(Entries.entries.get(i));
             }
         }
-        this.parentEntries = parentEntries.toArray(new Entry[0]);
+        this.parentEntries = parentEntries;
         return !parentEntries.isEmpty();
     }
     public boolean critical;
@@ -99,10 +118,9 @@ public class Entry {
     public ResourceLocation id;
     public int x;
     public int y;
-    public Page[] pages;
-    public ResourceLocation[] parents;
-    private Entry[] parentEntries;
-    public boolean incomplete;
-    public Page[] incompletePages;
-    public ResourceLocation completionAdvancement;
+    public List<Page> pages;
+    public List<ResourceLocation> parents;
+    private List<Entry> parentEntries;
+    public List<CompletionStage> completionStages;
+    public boolean isDefault;
 }
