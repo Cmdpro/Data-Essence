@@ -6,7 +6,6 @@ import com.cmdpro.databank.model.item.DatabankItemModel;
 import com.cmdpro.databank.model.item.DatabankItemRenderer;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.item.blockitem.EssenceDerivationSpikeItem;
 
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.model.geom.EntityModelSet;
@@ -16,9 +15,10 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 
-public class EssenceDerivationSpikeItemRenderer extends DatabankItemRenderer<EssenceDerivationSpikeItem> {
+public class EssenceDerivationSpikeItemRenderer extends DatabankItemRenderer<BlockItem> {
     public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("essence_derivation_spike_item"), "main");
     public EssenceDerivationSpikeItemRenderer(BlockEntityRenderDispatcher dispatcher, EntityModelSet modelSet) {
         super(dispatcher, modelSet, new Model(modelSet.bakeLayer(modelLocation)));
@@ -29,7 +29,7 @@ public class EssenceDerivationSpikeItemRenderer extends DatabankItemRenderer<Ess
         return DataNEssence.locate("textures/block/essence_derivation_spike.png");
     }
 
-    public static class Model extends DatabankItemModel<EssenceDerivationSpikeItem> {
+    public static class Model extends DatabankItemModel<BlockItem> {
         public static AnimationDefinition hand;
         public AnimationState animState = new AnimationState();
         private final ModelPart root;

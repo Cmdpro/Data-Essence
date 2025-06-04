@@ -94,10 +94,9 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INDUSTRIAL_PLANT_SIPHON = register("industrial_plant_siphon",
             () -> new IndustrialPlantSiphon(MACHINE_PROPERTIES),
-            object -> () -> new IndustrialPlantSiphonItem(object.get(), new Item.Properties()));
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_DERIVATION_SPIKE = register("essence_derivation_spike",
             () -> new EssenceDerivationSpike(MACHINE_PROPERTIES),
-            object -> () -> new EssenceDerivationSpikeItem(object.get(), new Item.Properties()));
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Machines

@@ -98,7 +98,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get())
                 .add(BlockRegistry.ENDER_PEARL_CAPTURE.get())
                 .add(BlockRegistry.ENDER_PEARL_RELAY.get())
-                .add(BlockRegistry.ENDER_PEARL_DESTINATION.get());
+                .add(BlockRegistry.ENDER_PEARL_DESTINATION.get())
                 .add(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get())
                 .add(BlockRegistry.DRYING_TABLE.get())
                 .add(BlockRegistry.ESSENCE_DERIVATION_SPIKE.get())

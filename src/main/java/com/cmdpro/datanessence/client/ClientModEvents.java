@@ -220,22 +220,7 @@ public class ClientModEvents {
         event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlCaptureItemRenderer::new), BlockRegistry.ENDER_PEARL_CAPTURE.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlRelayItemRenderer::new), BlockRegistry.ENDER_PEARL_RELAY.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlDestinationItemRenderer::new), BlockRegistry.ENDER_PEARL_DESTINATION.get().asItem());
-        event.registerItem(AutoFabricatorItem.extensions(), BlockRegistry.AUTO_FABRICATOR.get().asItem());
-        event.registerItem(ChargerItem.extensions(), BlockRegistry.CHARGER.get().asItem());
-        event.registerItem(EntropicProcessorItem.extensions(), BlockRegistry.ENTROPIC_PROCESSOR.get().asItem());
-        event.registerItem(EssencePointItem.extensions(), BlockRegistry.ESSENCE_POINT.get().asItem());
-        event.registerItem(ExoticEssencePointItem.extensions(), BlockRegistry.EXOTIC_ESSENCE_POINT.get().asItem());
-        event.registerItem(FabricatorItem.extensions(), BlockRegistry.FABRICATOR.get().asItem());
-        event.registerItem(FluidPointItem.extensions(), BlockRegistry.FLUID_POINT.get().asItem());
-        event.registerItem(InfuserItem.extensions(), BlockRegistry.INFUSER.get().asItem());
-        event.registerItem(ItemPointItem.extensions(), BlockRegistry.ITEM_POINT.get().asItem());
-        event.registerItem(LunarEssencePointItem.extensions(), BlockRegistry.LUNAR_ESSENCE_POINT.get().asItem());
-        event.registerItem(NaturalEssencePointItem.extensions(), BlockRegistry.NATURAL_ESSENCE_POINT.get().asItem());
-        event.registerItem(FluidMixerItem.extensions(), BlockRegistry.FLUID_MIXER.get().asItem());
-        event.registerItem(MetalShaperItem.extensions(), BlockRegistry.METAL_SHAPER.get().asItem());
-        event.registerItem(IndustrialPlantSiphonItem.extensions(), BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get().asItem());
-        event.registerItem(ChemicalNodeItem.extensions(), BlockRegistry.CHEMICAL_NODE.get().asItem());
-        event.registerItem(EssenceDerivationSpikeItem.extensions(), BlockRegistry.ESSENCE_DERIVATION_SPIKE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createExtensions(EssenceDerivationSpikeItemRenderer::new), BlockRegistry.ESSENCE_DERIVATION_SPIKE.get().asItem());
     }
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {

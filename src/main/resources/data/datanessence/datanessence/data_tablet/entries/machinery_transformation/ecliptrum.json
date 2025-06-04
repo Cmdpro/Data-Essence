@@ -44,14 +44,19 @@
     "datanessence:machinery/synthesis_chamber"
   ],
   "critical": true,
-  "incomplete": true,
-  "completion_advancement": "datanessence:progression/acquire_ecliptrum",
-  "incomplete_pages": [
+  "completion_stages": [
     {
-      "type": "datanessence:text",
-      "text": {
-        "translate": "data_tablet.pages.ecliptrum.page1.incomplete_text"
-      }
+      "completion_advancements": [
+        "datanessence:progression/acquire_ecliptrum"
+      ],
+      "pages": [
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.ecliptrum.page1.incomplete_text"
+          }
+        }
+      ]
     }
   ]
 }
