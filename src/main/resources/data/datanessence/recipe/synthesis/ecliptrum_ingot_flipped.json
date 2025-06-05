@@ -8,5 +8,5 @@
   "time": 200,
   "result": { "id": "datanessence:ecliptrum_ingot", "count": 2 },
   "entry": "datanessence:machinery_transformation/ecliptrum",
-  "allow_incomplete": true
+  "completion_stage": 0
 }
