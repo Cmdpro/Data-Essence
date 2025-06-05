@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
@@ -22,9 +22,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 
 public class AutoFabricatorRenderer extends DatabankBlockEntityRenderer<AutoFabricatorBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("auto-fabricator"), "main");
     public AutoFabricatorRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
+        super(new Model());
     }
 
     @Override
@@ -37,44 +36,31 @@ public class AutoFabricatorRenderer extends DatabankBlockEntityRenderer<AutoFabr
         Minecraft.getInstance().getItemRenderer().renderStatic(pBlockEntity.item, ItemDisplayContext.GUI, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, pPoseStack, MachineOutputShader.createMachineOutputBufferSource(), pBlockEntity.getLevel(), 0);
         pPoseStack.popPose();
     }
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return DataNEssence.locate("textures/block/auto-fabricator.png");
-    }
 
     public static class Model extends DatabankBlockEntityModel<AutoFabricatorBlockEntity> {
-        public static AnimationDefinition idle;
-        public static AnimationDefinition crafting;
-        private final ModelPart root;
+        public DatabankModel model;
 
-        public Model(ModelPart pRoot) {
-            this.root = pRoot.getChild("root");
-        }
-        public static DatabankEntityModel model;
-        public static DatabankEntityModel getModel() {
-            if (model == null) {
-                model = DatabankModels.models.get(DataNEssence.locate("auto-fabricator"));
-                idle = model.animations.get("idle").createAnimationDefinition();
-                crafting = model.animations.get("crafting").createAnimationDefinition();
-            }
-            return model;
-        }
-
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-        public void setupAnim(AutoFabricatorBlockEntity pEntity) {
-            pEntity.animState.startIfStopped((int)getAgeInTicks());
-            if (pEntity.craftingProgress >= 0) {
-                this.animate(pEntity.animState, crafting, 1.0f);
-            } else {
-                this.animate(pEntity.animState, idle, 1.0f);
-            }
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return DataNEssence.locate("textures/block/auto-fabricator.png");
         }
 
         @Override
-        public ModelPart root() {
-            return root;
+        public void setupModelPose(AutoFabricatorBlockEntity pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
+            if (pEntity.craftingProgress >= 0) {
+                pEntity.animState.setAnim("crafting");
+            } else {
+                pEntity.animState.setAnim("idle");
+            }
+            animate(pEntity.animState);
+        }
+
+        public DatabankModel getModel() {
+            if (model == null) {
+                model = DatabankModels.models.get(DataNEssence.locate("auto-fabricator"));
+            }
+            return model;
         }
     }
 }

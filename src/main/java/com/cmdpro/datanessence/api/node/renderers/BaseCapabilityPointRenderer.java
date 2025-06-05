@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.api.node.renderers;
 
 import com.cmdpro.databank.ClientDatabankUtils;
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
@@ -51,7 +51,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             pPoseStack.popPose();
         }
         Color color = pBlockEntity.linkColor();
-        pBufferSource.getBuffer(getModel().renderType.apply(getTextureLocation()));
+        pBufferSource.getBuffer(getModel().getRenderType(pBlockEntity));
         AttachFace face = pBlockEntity.getBlockState().getValue(EssencePoint.FACE);
         Direction facing = pBlockEntity.getBlockState().getValue(EssencePoint.FACING);
         rotateStack(face, facing, pPoseStack);
@@ -98,32 +98,28 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         return AABB.INFINITE;
     }
     public static class Model<T extends BaseCapabilityPointBlockEntity> extends DatabankBlockEntityModel<T> {
-        public static AnimationDefinition idle;
-        private final ModelPart root;
-
-        public Model(ModelPart pRoot) {
-            this.root = pRoot.getChild("root");
-        }
-        public static DatabankEntityModel model;
-        public static DatabankEntityModel getModel() {
-            if (model == null) {
-                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
-                idle = model.animations.get("idle").createAnimationDefinition();
-            }
-            return model;
-        }
-
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-        public void setupAnim(T pEntity) {
-            pEntity.animState.startIfStopped((int)getAgeInTicks());
-            this.animate(pEntity.animState, idle, 1.0f);
+        public ResourceLocation texture;
+        public Model(ResourceLocation texture) {
+            this.texture = texture;
         }
 
         @Override
-        public ModelPart root() {
-            return root;
+        public ResourceLocation getTextureLocation() {
+            return texture;
+        }
+
+        @Override
+        public void setupModelPose(BaseCapabilityPointBlockEntity pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
+            animate(pEntity.animState);
+        }
+
+        public DatabankModel model;
+        public DatabankModel getModel() {
+            if (model == null) {
+                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
+            }
+            return model;
         }
     }
 }

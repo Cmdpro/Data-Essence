@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
@@ -19,9 +19,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 
 public class InfuserRenderer extends DatabankBlockEntityRenderer<InfuserBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("infuser"), "main");
     public InfuserRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
+        super(new Model());
     }
 
     @Override
@@ -34,50 +33,33 @@ public class InfuserRenderer extends DatabankBlockEntityRenderer<InfuserBlockEnt
         Minecraft.getInstance().getItemRenderer().renderStatic(pBlockEntity.item, ItemDisplayContext.GUI, pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 0);
         pPoseStack.popPose();
     }
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return DataNEssence.locate("textures/block/infuser.png");
-    }
 
     public static class Model extends DatabankBlockEntityModel<InfuserBlockEntity> {
-        public static AnimationDefinition idle;
-        public static AnimationDefinition active;
-        public static AnimationDefinition deactivated;
-        private final ModelPart root;
-
-        public Model(ModelPart pRoot) {
-            this.root = pRoot.getChild("root");
-        }
-        public static DatabankEntityModel model;
-        public static DatabankEntityModel getModel() {
+        public DatabankModel model;
+        public DatabankModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("infuser"));
-                idle = model.animations.get("idle").createAnimationDefinition();
-                active = model.animations.get("active").createAnimationDefinition();
-                deactivated = model.animations.get("deactivated").createAnimationDefinition();
             }
             return model;
         }
-
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-        public void setupAnim(InfuserBlockEntity pEntity) {
-            pEntity.animState.startIfStopped((int)getAgeInTicks());
-            if (!pEntity.item.isEmpty()) {
-                if (pEntity.workTime >= 0) {
-                    this.animate(pEntity.animState, active, 1.0f);
-                } else {
-                    this.animate(pEntity.animState, idle, 1.0f);
-                }
-            } else {
-                this.animate(pEntity.animState, deactivated, 1.0f);
-            }
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return DataNEssence.locate("textures/block/infuser.png");
         }
 
         @Override
-        public ModelPart root() {
-            return root;
+        public void setupModelPose(InfuserBlockEntity pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
+            if (!pEntity.item.isEmpty()) {
+                if (pEntity.workTime >= 0) {
+                    pEntity.animState.setAnim("active");
+                } else {
+                    pEntity.animState.setAnim("idle");
+                }
+            } else {
+                pEntity.animState.setAnim("deactivated");
+            }
+            animate(pEntity.animState);
         }
     }
 }

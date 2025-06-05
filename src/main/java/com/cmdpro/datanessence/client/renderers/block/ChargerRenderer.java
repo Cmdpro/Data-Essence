@@ -1,9 +1,8 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
-import com.cmdpro.databank.model.blockentity.BlockEntityKeyframeAnimations;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 import com.cmdpro.datanessence.DataNEssence;
@@ -26,10 +25,8 @@ import net.minecraft.world.phys.Vec3;
 
 
 public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEntity> {
-    public static final ModelLayerLocation chargerLocation = new ModelLayerLocation(DataNEssence.locate("charger"), "main");
-
     public ChargerRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(rendererProvider.getModelSet().bakeLayer(chargerLocation)));
+        super(new Model());
     }
 
     @Override
@@ -59,29 +56,18 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
         poseStack.popPose();
     }
 
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return DataNEssence.locate("textures/block/charger.png");
-    }
 
     public static class Model extends DatabankBlockEntityModel<ChargerBlockEntity> {
-        private final ModelPart root;
+        public DatabankModel model;
 
-        public Model(ModelPart pRoot) {
-            this.root = pRoot.getChild("root");
-        }
-        public static DatabankEntityModel model;
-        public static DatabankEntityModel getModel() {
-            if (model == null) {
-                model = DatabankModels.models.get(DataNEssence.locate("charger"));
-            }
-            return model;
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return DataNEssence.locate("textures/block/charger.png");
         }
 
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-        public void setupAnim(ChargerBlockEntity pEntity) {
+        @Override
+        public void setupModelPose(ChargerBlockEntity pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
             DatabankAnimationState state = pEntity.animState;
             if (!pEntity.item.isEmpty()) {
                 if (state.isCurrentAnim("idle_empty")) {
@@ -103,14 +89,14 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
                     state.setAnim("retract_exciters");
                 }
             }
-            state.updateAnimDefinitions(model);
-            state.update();
-            this.animate(state.state, state.getAnim().definition);
+            animate(pEntity.animState);
         }
 
-        @Override
-        public ModelPart root() {
-            return root;
+        public DatabankModel getModel() {
+            if (model == null) {
+                model = DatabankModels.models.get(DataNEssence.locate("charger"));
+            }
+            return model;
         }
     }
 }

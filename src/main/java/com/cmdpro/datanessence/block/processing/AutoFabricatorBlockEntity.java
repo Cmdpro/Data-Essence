@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
@@ -48,7 +50,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
-    public AnimationState animState = new AnimationState();
+    public DatabankAnimationState animState = new DatabankAnimationState("idle")
+            .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationReference("crafting", (state, anim) -> {}, (state, anim) -> {}));
     private final LockableItemHandler itemHandler = new LockableItemHandler(9) {
         @Override
         protected void onContentsChanged(int slot) {

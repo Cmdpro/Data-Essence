@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.transportation;
 
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
@@ -21,8 +23,9 @@ import org.jgrapht.graph.DefaultEdge;
 
 import java.util.List;
 
-public class EnderPearlDestinationBlockEntity extends PearlNetworkBlockEntity {
-    public AnimationState animState = new AnimationState();
+public class EnderPearlDestinationBlockEntity extends PearlNetworkBlockEntity {public DatabankAnimationState animState = new DatabankAnimationState("idle")
+        .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}));
+
     public EnderPearlDestinationBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistry.ENDER_PEARL_DESTINATION.get(), pos, blockState);
     }

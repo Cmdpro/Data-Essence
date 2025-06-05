@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.transportation;
 
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
@@ -9,6 +11,7 @@ import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.SectionPos;
 import net.minecraft.server.level.ServerLevel;
@@ -33,7 +36,9 @@ import java.awt.*;
 import java.util.List;
 
 public class EnderPearlCaptureBlockEntity extends PearlNetworkBlockEntity {
-    public AnimationState animState = new AnimationState();
+    public DatabankAnimationState animState = new DatabankAnimationState("idle")
+            .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}));
+
     public EnderPearlCaptureBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistry.ENDER_PEARL_CAPTURE.get(), pos, blockState);
     }

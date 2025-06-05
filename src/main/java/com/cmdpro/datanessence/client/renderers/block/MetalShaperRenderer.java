@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
@@ -22,17 +22,11 @@ import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+import org.checkerframework.common.value.qual.IntVal;
 
 public class MetalShaperRenderer extends DatabankBlockEntityRenderer<MetalShaperBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("metal_shaper"), "main");
-
     public MetalShaperRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return DataNEssence.locate("textures/block/metal_shaper.png");
+        super(new Model());
     }
 
     @Override
@@ -65,53 +59,27 @@ public class MetalShaperRenderer extends DatabankBlockEntityRenderer<MetalShaper
     }
 
     public static class Model extends DatabankBlockEntityModel<MetalShaperBlockEntity> {
-        public static DatabankEntityModel model;
-        public static AnimationDefinition idle;
-        public static AnimationDefinition raisePress;
-        public static AnimationDefinition lowerPress;
-        private final ModelPart root;
-
-        public Model(ModelPart root) {
-            this.root = root.getChild("root");
-        }
-
-        public static DatabankEntityModel getModel() {
+        public DatabankModel model;
+        public DatabankModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("metal_shaper"));
-                idle = model.animations.get("idle").createAnimationDefinition();
-                raisePress = model.animations.get("raise press").createAnimationDefinition();
-                lowerPress = model.animations.get("lower press").createAnimationDefinition();
             }
             return model;
         }
-
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-
-        public void setupAnim(MetalShaperBlockEntity pEntity) {
-            pEntity.animState.startIfStopped((int)getAgeInTicks());
-            AnimationDefinition anim;
+        @Override
+        public void setupModelPose(MetalShaperBlockEntity pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
             if (pEntity.workTime >= 0 && pEntity.workTime <= pEntity.maxWorkTime-15) {
-                anim = lowerPress;
+                pEntity.animState.setAnim("lower_press");
             } else {
-                anim = raisePress;
+                pEntity.animState.setAnim("raise_press");
             }
-            if (anim != pEntity.anim) {
-                this.updateAnim(pEntity, pEntity.animState, anim);
-            }
-            this.animate(pEntity.animState, pEntity.anim, 1.0f);
-        }
-        protected void updateAnim(MetalShaperBlockEntity entity, AnimationState pAnimationState, AnimationDefinition pAnimationDefinition) {
-            if (entity.anim != pAnimationDefinition) {
-                pAnimationState.stop();
-                pAnimationState.start((int)getAgeInTicks());
-                entity.anim = pAnimationDefinition;
-            }
+            animate(pEntity.animState);
         }
         @Override
-        public ModelPart root() {
-            return root;
+        public ResourceLocation getTextureLocation() {
+            return DataNEssence.locate("textures/block/metal_shaper.png");
         }
+
     }
 }

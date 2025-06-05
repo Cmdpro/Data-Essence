@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.entity;
 
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.registry.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -27,8 +29,8 @@ import net.minecraft.world.phys.Vec3;
 
 
 public class AncientSentinel extends Monster implements RangedAttackMob {
-
-    public AnimationState animState = new AnimationState();
+    public DatabankAnimationState animState = new DatabankAnimationState("idle")
+            .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}));
     public AncientSentinel(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
     }

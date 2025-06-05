@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.production;
 
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
@@ -49,7 +51,10 @@ import java.util.Optional;
 
 public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
-    public AnimationState animState = new AnimationState();
+    public DatabankAnimationState animState = new DatabankAnimationState("idle")
+            .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationReference("raise_press", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationReference("lower_press", (state, anim) -> {}, (state, anim) -> {}));
     public AnimationDefinition anim;
 
     @Override

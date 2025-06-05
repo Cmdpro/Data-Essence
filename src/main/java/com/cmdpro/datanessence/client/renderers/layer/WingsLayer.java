@@ -1,7 +1,11 @@
 package com.cmdpro.datanessence.client.renderers.layer;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
+import com.cmdpro.databank.model.ModelPose;
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
+import com.cmdpro.databank.model.entity.DatabankEntityModel;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -23,68 +27,61 @@ import net.minecraft.world.entity.player.Player;
 import org.joml.Vector3f;
 
 public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
-    public static final ModelLayerLocation wingsLocation = new ModelLayerLocation(DataNEssence.locate("wings"), "main");
     public static final ResourceLocation wingsTexture = DataNEssence.locate("textures/entity/wings.png");
-    private final WingsModel<T> wingsModel;
+    private final WingsModel wingsModel;
     public WingsLayer(RenderLayerParent<T, M> pRenderer, EntityModelSet pModelSet) {
         super(pRenderer);
-        this.wingsModel = new WingsModel<>(pModelSet.bakeLayer(wingsLocation));
+        this.wingsModel = new WingsModel();
     }
 
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_WINGS) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_WINGS)) {
             pPoseStack.pushPose();
-            this.wingsModel.root().getAllParts().forEach(ModelPart::resetPose);
-            this.wingsModel.root.copyFrom(this.getParentModel().body);
-            this.wingsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
-            VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
-                    pBuffer, RenderType.armorCutoutNoCull(wingsTexture), false
-            );
-            this.wingsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY);
+            this.wingsModel.setupPose(pLivingEntity, pPartialTick, this.getParentModel().body);
+            this.wingsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
             pPoseStack.popPose();
         }
     }
-    public class WingsModel<T extends Player> extends HierarchicalModel<T> {
-        public AnimationState animState = new AnimationState();
-        public static AnimationDefinition idle;
-
-        public static AnimationDefinition fly;
-        private final ModelPart root;
-
-        public WingsModel(ModelPart rootPart) {
-            this.root = rootPart.getChild("root");
-        }
-        public static DatabankEntityModel model;
-        public static DatabankEntityModel getModel() {
-            if (model == null) {
-                model = DatabankModels.models.get(DataNEssence.locate("wings"));
-                fly = model.animations.get("fly").createAnimationDefinition();
-                idle = model.animations.get("idle").createAnimationDefinition();
-            }
-            return model;
-        }
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-        public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-            animState.startIfStopped(pEntity.tickCount);
-            if (pEntity.getAbilities().flying) {
-                this.animate(animState, fly, pAgeInTicks, 1.0f);
-            } else {
-                this.animate(animState, idle, pAgeInTicks, 1.0f);
-            }
-        }
-        private static final Vector3f ANIMATION_VECTOR_CACHE = new Vector3f();
+    public class WingsModel extends DatabankEntityModel<Player> {
+        public DatabankAnimationState animState = new DatabankAnimationState("idle")
+                .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
+                .addAnim(new DatabankAnimationReference("fly", (state, anim) -> {}, (state, anim) -> {}));
+        public DatabankModel model;
 
         @Override
-        public ModelPart root() {
-            return root;
+        public RenderType getRenderType(net.minecraft.world.entity.player.Player obj) {
+            return RenderType.armorCutoutNoCull(wingsTexture);
         }
 
-        protected void animate(AnimationState pAnimationState, AnimationDefinition pAnimationDefinition, float pAgeInTicks, float pSpeed) {
-            pAnimationState.updateTime(pAgeInTicks, pSpeed);
-            pAnimationState.ifStarted(p_233392_ -> KeyframeAnimations.animate(this, pAnimationDefinition, p_233392_.getAccumulatedTime(), 1.0F, ANIMATION_VECTOR_CACHE));
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return wingsTexture;
+        }
+
+        @Override
+        public void setupModelPose(Player player, float partialTick) {
+            if (player.getAbilities().flying) {
+                animState.setAnim("fly");
+            } else {
+                animState.setAnim("idle");
+            }
+            animate(animState);
+        }
+        public void setupPose(Player player, float partialTick, ModelPart connectedTo) {
+            setupModelPose(player, partialTick);
+            ModelPose.ModelPosePart root = modelPose.stringToPart.get("root");
+            root.scale = new Vector3f(connectedTo.xScale, connectedTo.yScale, connectedTo.zScale);
+            root.rotation = new Vector3f(connectedTo.xRot, connectedTo.yRot, connectedTo.zRot);
+            root.pos = new Vector3f(connectedTo.x, connectedTo.y, connectedTo.z);
+        }
+
+        public DatabankModel getModel() {
+            if (model == null) {
+                model = DatabankModels.models.get(DataNEssence.locate("wings"));
+                animState.updateAnimDefinitions(getModel());
+            }
+            return model;
         }
     }
 }
