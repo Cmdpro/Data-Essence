@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
@@ -30,9 +30,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class EnderPearlCaptureRenderer extends DatabankBlockEntityRenderer<EnderPearlCaptureBlockEntity> implements PearlNetworkBlockRenderHelper {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("ender_pearl_capture"), "main");
     public EnderPearlCaptureRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
+        super(new Model());
     }
 
     @Override
@@ -43,10 +42,6 @@ public class EnderPearlCaptureRenderer extends DatabankBlockEntityRenderer<Ender
         super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
         pPoseStack.popPose();
         renderPearlConnections(pBlockEntity, pPoseStack);
-    }
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return DataNEssence.locate("textures/block/ender_pearl_capture.png");
     }
     @Override
     public AABB getRenderBoundingBox(EnderPearlCaptureBlockEntity blockEntity) {
@@ -72,32 +67,23 @@ public class EnderPearlCaptureRenderer extends DatabankBlockEntityRenderer<Ender
     }
 
     public static class Model extends DatabankBlockEntityModel<EnderPearlCaptureBlockEntity> {
-        public static AnimationDefinition idle;
-        private final ModelPart root;
-
-        public Model(ModelPart pRoot) {
-            this.root = pRoot.getChild("root");
-        }
-        public static DatabankEntityModel model;
-        public static DatabankEntityModel getModel() {
+        public DatabankModel model;
+        public DatabankModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("ender_pearl_capture"));
-                idle = model.animations.get("idle").createAnimationDefinition();
             }
             return model;
         }
 
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-        public void setupAnim(EnderPearlCaptureBlockEntity pEntity) {
-            pEntity.animState.startIfStopped((int)getAgeInTicks());
-            this.animate(pEntity.animState, idle, 1.0f);
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return DataNEssence.locate("textures/block/ender_pearl_capture.png");
         }
 
         @Override
-        public ModelPart root() {
-            return root;
+        public void setupModelPose(EnderPearlCaptureBlockEntity pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
+            animate(pEntity.animState);
         }
     }
 }

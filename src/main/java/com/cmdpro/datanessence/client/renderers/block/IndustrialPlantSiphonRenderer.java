@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
@@ -21,15 +21,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 
 public class IndustrialPlantSiphonRenderer extends DatabankBlockEntityRenderer<IndustrialPlantSiphonBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("industrial_plant_siphon"), "main");
-
     public IndustrialPlantSiphonRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return DataNEssence.locate("textures/block/industrial_plant_siphon.png");
+        super(new Model());
     }
 
     @Override
@@ -50,40 +43,28 @@ public class IndustrialPlantSiphonRenderer extends DatabankBlockEntityRenderer<I
     }
 
     public static class Model extends DatabankBlockEntityModel<IndustrialPlantSiphonBlockEntity> {
-        public static DatabankEntityModel model;
-        public static AnimationDefinition idle;
-        public static AnimationDefinition working;
-        private final ModelPart root;
-
-        public Model(ModelPart root) {
-            this.root = root.getChild("root");
-        }
-
-        public static DatabankEntityModel getModel() {
-            if (model == null) {
-                model = DatabankModels.models.get(DataNEssence.locate("industrial_plant_siphon"));
-                idle = model.animations.get("idle").createAnimationDefinition();
-                working = model.animations.get("working").createAnimationDefinition();
-            }
-            return model;
-        }
-
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-
-        public void setupAnim(IndustrialPlantSiphonBlockEntity pEntity) {
-            if (pEntity.essenceGenerationTicks > 0 && !(pEntity.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) + pEntity.generationRate > pEntity.storage.getMaxEssence())) {
-                this.animate(pEntity.animState, working, 1.0f);
-            } else {
-                this.animate(pEntity.animState, idle, 1.0f);
-            }
-            pEntity.animState.startIfStopped((int)getAgeInTicks());
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return DataNEssence.locate("textures/block/industrial_plant_siphon.png");
         }
 
         @Override
-        public ModelPart root() {
-            return root;
+        public void setupModelPose(IndustrialPlantSiphonBlockEntity pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
+            if (pEntity.essenceGenerationTicks > 0 && !(pEntity.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) + pEntity.generationRate > pEntity.storage.getMaxEssence())) {
+                pEntity.animState.setAnim("working");
+            } else {
+                pEntity.animState.setAnim("idle");
+            }
+            animate(pEntity.animState);
+        }
+
+        public DatabankModel model;
+        public DatabankModel getModel() {
+            if (model == null) {
+                model = DatabankModels.models.get(DataNEssence.locate("industrial_plant_siphon"));
+            }
+            return model;
         }
     }
 }

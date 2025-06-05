@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.api.node.block;
 
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
@@ -30,7 +32,9 @@ import java.util.List;
 import java.util.Set;
 
 public abstract class BaseEssencePointBlockEntity extends BlockEntity {
-    public AnimationState animState = new AnimationState();
+    public DatabankAnimationState animState = new DatabankAnimationState("idle")
+            .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}));
+
     public List<BlockPos> link;
     public final ItemStackHandler universalUpgrade = new ItemStackHandler(1) {
         @Override

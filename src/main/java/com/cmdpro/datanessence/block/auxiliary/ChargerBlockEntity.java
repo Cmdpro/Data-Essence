@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
 import com.cmdpro.databank.model.animation.DatabankAnimationDefinition;
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
@@ -42,13 +43,13 @@ import java.util.List;
 
 public class ChargerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public DatabankAnimationState animState = new DatabankAnimationState("idle_empty")
-            .addAnim(new DatabankAnimationDefinition("idle_empty", (state, anim) -> {}, (state, anim) -> {}))
-            .addAnim(new DatabankAnimationDefinition("orb_spin", (state, anim) -> {}, (state, anim) -> {}))
-            .addAnim(new DatabankAnimationDefinition("orb_rise", (state, anim) -> {}, (state, anim) -> state.setAnim("orb_spin")))
-            .addAnim(new DatabankAnimationDefinition("extend_exciters", (state, anim) -> {}, (state, anim) -> state.setAnim("idle_exciters_out")))
-            .addAnim(new DatabankAnimationDefinition("retract_exciters", (state, anim) -> {}, (state, anim) -> state.setAnim("idle_empty")))
-            .addAnim(new DatabankAnimationDefinition("idle_exciters_out", (state, anim) -> {}, (state, anim) -> {}))
-            .addAnim(new DatabankAnimationDefinition("orb_fall", (state, anim) -> {}, (state, anim) -> state.setAnim("idle_exciters_out")));
+            .addAnim(new DatabankAnimationReference("idle_empty", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationReference("orb_spin", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationReference("orb_rise", (state, anim) -> {}, (state, anim) -> state.setAnim("orb_spin")))
+            .addAnim(new DatabankAnimationReference("extend_exciters", (state, anim) -> {}, (state, anim) -> state.setAnim("idle_exciters_out")))
+            .addAnim(new DatabankAnimationReference("retract_exciters", (state, anim) -> {}, (state, anim) -> state.setAnim("idle_empty")))
+            .addAnim(new DatabankAnimationReference("idle_exciters_out", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationReference("orb_fall", (state, anim) -> {}, (state, anim) -> state.setAnim("idle_exciters_out")));
     public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {

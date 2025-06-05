@@ -1,7 +1,7 @@
 {
   "animations": {
     "hand": {
-      "length": 0,
+      "length": 0.041666666666666664,
       "looping": true,
       "animation": [
         {
@@ -432,7 +432,7 @@
               "timestamp": 0,
               "target": [
                 0.6,
-                0.3999999999999999,
+                0.4,
                 1
               ],
               "interpolation": "linear"
@@ -460,7 +460,7 @@
       ]
     },
     "idle_exciters_out": {
-      "length": 0,
+      "length": 0.041666666666666664,
       "looping": true,
       "animation": [
         {
@@ -831,7 +831,7 @@
               "timestamp": 1.25,
               "target": [
                 0.6,
-                0.3999999999999999,
+                0.4,
                 1
               ],
               "interpolation": "linear"
@@ -913,7 +913,7 @@
       ]
     },
     "idle_empty": {
-      "length": 0,
+      "length": 0.041666666666666664,
       "looping": true,
       "animation": [
         {
@@ -954,7 +954,7 @@
               "timestamp": 0,
               "target": [
                 0.6,
-                0.3999999999999999,
+                0.4,
                 1
               ],
               "interpolation": "linear"
@@ -1023,6 +1023,7 @@
         0
       ],
       "isCube": false,
+      "isMesh": false,
       "children": [
         {
           "name": "base",
@@ -1037,6 +1038,7 @@
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "baseplate",
@@ -1051,6 +1053,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 0
@@ -1081,6 +1084,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 16
@@ -1111,6 +1115,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 24,
                 16
@@ -1141,6 +1146,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 28
@@ -1171,6 +1177,7 @@
                 8
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 16,
                 28
@@ -1203,6 +1210,7 @@
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "orb",
@@ -1217,6 +1225,7 @@
                 5.551115123125783e-17
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 32
@@ -1249,6 +1258,7 @@
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "right_extension",
@@ -1263,6 +1273,7 @@
                 0
               ],
               "isCube": false,
+              "isMesh": false,
               "children": [
                 {
                   "name": "filaments",
@@ -1277,6 +1288,7 @@
                     0
                   ],
                   "isCube": true,
+                  "isMesh": false,
                   "texOffset": [
                     8,
                     39
@@ -1307,6 +1319,7 @@
                     0
                   ],
                   "isCube": true,
+                  "isMesh": false,
                   "texOffset": [
                     32,
                     35
@@ -1339,6 +1352,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 22,
                 32
@@ -1371,6 +1385,7 @@
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "base1",
@@ -1385,6 +1400,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 12,
                 32
@@ -1415,6 +1431,7 @@
                 0
               ],
               "isCube": false,
+              "isMesh": false,
               "children": [
                 {
                   "name": "rod1",
@@ -1429,6 +1446,7 @@
                     0
                   ],
                   "isCube": true,
+                  "isMesh": false,
                   "texOffset": [
                     32,
                     28
@@ -1459,6 +1477,7 @@
                     0
                   ],
                   "isCube": true,
+                  "isMesh": false,
                   "texOffset": [
                     1,
                     39

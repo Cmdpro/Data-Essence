@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
@@ -20,10 +20,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.phys.Vec3;
 
 public class EntropicProcessorRenderer extends DatabankBlockEntityRenderer<EntropicProcessorBlockEntity>{
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("entropic_processor"), "main");
-
     public EntropicProcessorRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
+        super(new Model());
     }
 
     @Override
@@ -46,45 +44,29 @@ public class EntropicProcessorRenderer extends DatabankBlockEntityRenderer<Entro
         super.render(entropicProcessor, pPartialTick, poseStack, pBufferSource, pPackedLight, pPackedOverlay);
     }
 
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return DataNEssence.locate("textures/block/entropic_processor.png");
-    }
 
     public static class Model extends DatabankBlockEntityModel<EntropicProcessorBlockEntity> {
-        public static DatabankEntityModel model;
-        public static AnimationDefinition idle;
-        public static AnimationDefinition working;
-        private final ModelPart root;
-
-        public Model(ModelPart root) {
-            this.root = root.getChild("root");
-        }
-
-        public static DatabankEntityModel getModel() {
+        public DatabankModel model;
+        public DatabankModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("entropic_processor"));
-                idle = model.animations.get("idle").createAnimationDefinition();
-                working = model.animations.get("working").createAnimationDefinition();
             }
             return model;
         }
-
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-        public void setupAnim(EntropicProcessorBlockEntity pEntity) {
-            pEntity.animState.startIfStopped((int)getAgeInTicks());
-            if (pEntity.workTime >= 0) {
-                this.animate(pEntity.animState, working, 1.0f);
-            } else {
-                this.animate(pEntity.animState, idle, 1.0f);
-            }
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return DataNEssence.locate("textures/block/entropic_processor.png");
         }
 
         @Override
-        public ModelPart root() {
-            return root;
+        public void setupModelPose(EntropicProcessorBlockEntity pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
+            if (pEntity.workTime >= 0) {
+                pEntity.animState.setAnim("working");
+            } else {
+                pEntity.animState.setAnim("idle");
+            }
+            animate(pEntity.animState);
         }
     }
 }

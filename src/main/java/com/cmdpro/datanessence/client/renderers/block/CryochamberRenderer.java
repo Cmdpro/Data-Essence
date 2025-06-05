@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
@@ -16,10 +16,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 
 public class CryochamberRenderer extends DatabankBlockEntityRenderer<CryochamberBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("dead_makutuin_cryochamber"), "main");
-
     public CryochamberRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model(rendererProvider.getModelSet().bakeLayer(modelLocation)));
+        super(new Model());
     }
 
     @Override
@@ -30,39 +28,25 @@ public class CryochamberRenderer extends DatabankBlockEntityRenderer<Cryochamber
         pPoseStack.popPose();
     }
 
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return DataNEssence.locate("textures/block/dead_makutuin.png");
-    }
 
     public static class Model extends DatabankBlockEntityModel<CryochamberBlockEntity> {
-        public static DatabankEntityModel model;
-        public static AnimationDefinition cryosleeping;
-        private final ModelPart root;
-
-        public Model(ModelPart root) {
-            this.root = root.getChild("root");
-        }
-
-        public static DatabankEntityModel getModel() {
-            if (model == null) {
-                model = DatabankModels.models.get(DataNEssence.locate("dead_makutuin"));
-                cryosleeping = model.animations.get("cryosleeping").createAnimationDefinition();
-            }
-            return model;
-        }
-
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-        public void setupAnim(CryochamberBlockEntity pEntity) {
-            pEntity.animState.startIfStopped((int)getAgeInTicks());
-            this.animate(pEntity.animState, cryosleeping, 1.0f);
+        public DatabankModel model;
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return DataNEssence.locate("textures/block/dead_makutuin.png");
         }
 
         @Override
-        public ModelPart root() {
-            return root;
+        public void setupModelPose(CryochamberBlockEntity pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
+            animate(pEntity.animState);
+        }
+
+        public DatabankModel getModel() {
+            if (model == null) {
+                model = DatabankModels.models.get(DataNEssence.locate("dead_makutuin"));
+            }
+            return model;
         }
     }
 }

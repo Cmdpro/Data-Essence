@@ -9,13 +9,7 @@ import net.minecraft.resources.ResourceLocation;
 
 
 public class ExoticEssencePointRenderer extends BaseEssencePointRenderer<ExoticEssencePointBlockEntity> {
-    public static final ModelLayerLocation modelLocation = new ModelLayerLocation(DataNEssence.locate("essence_point"), "main");
     public ExoticEssencePointRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model<>(rendererProvider.getModelSet().bakeLayer(modelLocation)));
-    }
-
-    @Override
-    public ResourceLocation getTextureLocation() {
-        return DataNEssence.locate("textures/block/exotic_essence_point.png");
+        super(new Model<>(DataNEssence.locate("textures/block/exotic_essence_point.png")));
     }
 }

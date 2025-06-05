@@ -15,7 +15,6 @@ import com.cmdpro.datanessence.client.shaders.PingShader;
 import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
-import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeItemRenderer;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
 import com.cmdpro.datanessence.client.particle.*;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
@@ -24,7 +23,6 @@ import com.cmdpro.datanessence.client.renderers.block.*;
 import com.cmdpro.datanessence.client.renderers.entity.AncientSentinelRenderer;
 import com.cmdpro.datanessence.client.renderers.entity.EmptyEntityRenderer;
 import com.cmdpro.datanessence.client.renderers.entity.EssenceSlashRenderer;
-import com.cmdpro.datanessence.client.renderers.item.*;
 import com.cmdpro.datanessence.client.renderers.layer.HornsLayer;
 import com.cmdpro.datanessence.client.renderers.layer.TailLayer;
 import com.cmdpro.datanessence.client.renderers.layer.WingsLayer;
@@ -114,53 +112,6 @@ public class ClientModEvents {
         EntityRenderers.register(EntityRegistry.LUNAR_STRIKE.get(), LunarStrikeRenderer::new);
 
         event.enqueueWork(() -> {
-            ClientHooks.registerLayerDefinition(WingsLayer.wingsLocation, WingsLayer.WingsModel::createLayer);
-            ClientHooks.registerLayerDefinition(HornsLayer.hornsLocation, HornsLayer.HornsModel::createLayer);
-            ClientHooks.registerLayerDefinition(TailLayer.tailLocation, TailLayer.TailModel::createLayer);
-            ClientHooks.registerLayerDefinition(AncientSentinelRenderer.ancientSentinelLocation, AncientSentinelRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(AutoFabricatorRenderer.modelLocation, AutoFabricatorRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(AutoFabricatorItemRenderer.autoFabricatorLocation, AutoFabricatorItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(ChargerRenderer.chargerLocation, ChargerRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(ChargerItemRenderer.chargerLocation, ChargerItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EssencePointItemRenderer.modelLocation, EssencePointItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EssencePointRenderer.modelLocation, EssencePointRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(LunarEssencePointItemRenderer.modelLocation, LunarEssencePointItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(LunarEssencePointRenderer.modelLocation, LunarEssencePointRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(NaturalEssencePointItemRenderer.modelLocation, NaturalEssencePointItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(NaturalEssencePointRenderer.modelLocation, NaturalEssencePointRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(ExoticEssencePointItemRenderer.modelLocation, ExoticEssencePointItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(ExoticEssencePointRenderer.modelLocation, ExoticEssencePointRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(ItemPointItemRenderer.modelLocation, ItemPointItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(ItemPointRenderer.modelLocation, ItemPointRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(FluidPointItemRenderer.modelLocation, FluidPointItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(FluidPointRenderer.modelLocation, FluidPointRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(FabricatorItemRenderer.modelLocation, FabricatorItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(FabricatorRenderer.modelLocation, FabricatorRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(InfuserItemRenderer.modelLocation, InfuserItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(InfuserRenderer.modelLocation, InfuserRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EntropicProcessorRenderer.modelLocation, EntropicProcessorRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EntropicProcessorItemRenderer.modelLocation, EntropicProcessorItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(FluidMixerRenderer.modelLocation, FluidMixerRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(FluidMixerItemRenderer.modelLocation, FluidMixerItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(ArekkoRenderer.modelLocation, ArekkoRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(MetalShaperRenderer.modelLocation, MetalShaperRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(MetalShaperItemRenderer.modelLocation, MetalShaperItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(IndustrialPlantSiphonRenderer.modelLocation, IndustrialPlantSiphonRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(IndustrialPlantSiphonItemRenderer.modelLocation, IndustrialPlantSiphonItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(CryochamberRenderer.modelLocation, CryochamberRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(ChemicalNodeRenderer.modelLocation, ChemicalNodeRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(ChemicalNodeItemRenderer.modelLocation, ChemicalNodeItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EnderPearlCaptureRenderer.modelLocation, EnderPearlCaptureRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EnderPearlCaptureItemRenderer.modelLocation, EnderPearlCaptureItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EnderPearlRelayRenderer.modelLocation, EnderPearlRelayRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EnderPearlRelayItemRenderer.modelLocation, EnderPearlRelayItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EnderPearlDestinationRenderer.modelLocation, EnderPearlDestinationRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EnderPearlDestinationItemRenderer.modelLocation, EnderPearlDestinationItemRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EssenceDerivationSpikeRenderer.modelLocation, EssenceDerivationSpikeRenderer.Model::createLayer);
-            ClientHooks.registerLayerDefinition(EssenceDerivationSpikeItemRenderer.modelLocation, EssenceDerivationSpikeItemRenderer.Model::createLayer);
-        });
-
-        event.enqueueWork(() -> {
             ItemProperties.register(ItemRegistry.MUSIC_DISC_PLAYER.get(), DataNEssence.locate("playing"), (stack, level, entity, seed) -> {
                 if (stack.has(DataComponentRegistry.PLAYING_MUSIC)) {
                     return 1;
@@ -202,25 +153,24 @@ public class ClientModEvents {
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(Genderfluid.EXTENSIONS, FluidRegistry.GENDERFLUID_TYPE.get());
 
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(AutoFabricatorItemRenderer::new), BlockRegistry.AUTO_FABRICATOR.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(ChargerItemRenderer::new), BlockRegistry.CHARGER.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(EntropicProcessorItemRenderer::new), BlockRegistry.ENTROPIC_PROCESSOR.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(EssencePointItemRenderer::new), BlockRegistry.ESSENCE_POINT.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(ExoticEssencePointItemRenderer::new), BlockRegistry.EXOTIC_ESSENCE_POINT.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(FabricatorItemRenderer::new), BlockRegistry.FABRICATOR.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(FluidPointItemRenderer::new), BlockRegistry.FLUID_POINT.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(InfuserItemRenderer::new), BlockRegistry.INFUSER.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(ItemPointItemRenderer::new), BlockRegistry.ITEM_POINT.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(LunarEssencePointItemRenderer::new), BlockRegistry.LUNAR_ESSENCE_POINT.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(NaturalEssencePointItemRenderer::new), BlockRegistry.NATURAL_ESSENCE_POINT.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(FluidMixerItemRenderer::new), BlockRegistry.FLUID_MIXER.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(MetalShaperItemRenderer::new), BlockRegistry.METAL_SHAPER.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(IndustrialPlantSiphonItemRenderer::new), BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(ChemicalNodeItemRenderer::new), BlockRegistry.CHEMICAL_NODE.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlCaptureItemRenderer::new), BlockRegistry.ENDER_PEARL_CAPTURE.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlRelayItemRenderer::new), BlockRegistry.ENDER_PEARL_RELAY.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(EnderPearlDestinationItemRenderer::new), BlockRegistry.ENDER_PEARL_DESTINATION.get().asItem());
-        event.registerItem(AnimatedBlockItemUtil.createExtensions(EssenceDerivationSpikeItemRenderer::new), BlockRegistry.ESSENCE_DERIVATION_SPIKE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/auto-fabricator.png"), DataNEssence.locate("auto-fabricator")), BlockRegistry.AUTO_FABRICATOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/charger.png"), DataNEssence.locate("charger")), BlockRegistry.CHARGER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/entropic_processor.png"), DataNEssence.locate("entropic_processor")), BlockRegistry.ENTROPIC_PROCESSOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/essence_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/exotic_essence_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.EXOTIC_ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/fabricator.png"), DataNEssence.locate("fabricator")), BlockRegistry.FABRICATOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/fluid_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.FLUID_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/infuser.png"), DataNEssence.locate("infuser")), BlockRegistry.INFUSER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/item_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.ITEM_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/lunar_essence_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.LUNAR_ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/natural_essence_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.NATURAL_ESSENCE_POINT.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/fluid_mixer.png"), DataNEssence.locate("fluid_mixer")), BlockRegistry.FLUID_MIXER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/metal_shaper.png"), DataNEssence.locate("metal_shaper")), BlockRegistry.METAL_SHAPER.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/industrial_plant_siphon.png"), DataNEssence.locate("industrial_plant_siphon")), BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/chemical_node.png"), DataNEssence.locate("essence_point")), BlockRegistry.CHEMICAL_NODE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_capture.png"), DataNEssence.locate("ender_pearl_capture")), BlockRegistry.ENDER_PEARL_CAPTURE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_relay.png"), DataNEssence.locate("ender_pearl_relay")), BlockRegistry.ENDER_PEARL_RELAY.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_destination.png"), DataNEssence.locate("ender_pearl_destination")), BlockRegistry.ENDER_PEARL_DESTINATION.get().asItem());
     }
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {

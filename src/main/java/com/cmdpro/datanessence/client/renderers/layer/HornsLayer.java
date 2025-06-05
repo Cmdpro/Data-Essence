@@ -1,7 +1,9 @@
 package com.cmdpro.datanessence.client.renderers.layer;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
+import com.cmdpro.databank.model.ModelPose;
+import com.cmdpro.databank.model.entity.DatabankEntityModel;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -20,56 +22,55 @@ import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import org.joml.Vector3f;
 
 public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
-    public static final ModelLayerLocation hornsLocation = new ModelLayerLocation(DataNEssence.locate("horns"), "main");
     public static final ResourceLocation hornsTexture = DataNEssence.locate("textures/entity/horns.png");
-    private final HornsModel<T> hornsModel;
+    private final HornsModel hornsModel;
     public HornsLayer(RenderLayerParent<T, M> pRenderer, EntityModelSet pModelSet) {
         super(pRenderer);
-        this.hornsModel = new HornsModel<>(pModelSet.bakeLayer(hornsLocation));
+        this.hornsModel = new HornsModel();
     }
 
     @Override
     public void render(PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTick, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_HORNS) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_HORNS)) {
             pPoseStack.pushPose();
-            this.hornsModel.root.copyFrom(this.getParentModel().head);
-            this.hornsModel.setupAnim(pLivingEntity, pLimbSwing, pLimbSwingAmount, pAgeInTicks, pNetHeadYaw, pHeadPitch);
-            VertexConsumer vertexconsumer = ItemRenderer.getArmorFoilBuffer(
-                    pBuffer, RenderType.armorCutoutNoCull(hornsTexture), false
-            );
-            this.hornsModel.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY);
+            this.hornsModel.setupPose(pLivingEntity, pPartialTick, this.getParentModel().head);
+            this.hornsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
             pPoseStack.popPose();
         }
     }
-    public class HornsModel<T extends Player> extends HierarchicalModel<T> {
-        private final ModelPart root;
+    public class HornsModel extends DatabankEntityModel<Player> {
+        public DatabankModel model;
 
-        public HornsModel(ModelPart pRoot) {
-            this.root = pRoot.getChild("root");
+        @Override
+        public RenderType getRenderType(Player obj) {
+            return RenderType.armorCutoutNoCull(hornsTexture);
         }
 
-        public static DatabankEntityModel model;
-        public static DatabankEntityModel getModel() {
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return hornsTexture;
+        }
+
+        @Override
+        public void setupModelPose(Player player, float partialTick) {
+            modelPose = getModel().createModelPose();
+        }
+        public void setupPose(Player player, float partialTick, ModelPart connectedTo) {
+            setupModelPose(player, partialTick);
+            ModelPose.ModelPosePart root = modelPose.stringToPart.get("root");
+            root.scale = new Vector3f(connectedTo.xScale, connectedTo.yScale, connectedTo.zScale);
+            root.rotation = new Vector3f(connectedTo.xRot, connectedTo.yRot, connectedTo.zRot);
+            root.pos = new Vector3f(connectedTo.x, connectedTo.y, connectedTo.z);
+        }
+
+        public DatabankModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("horns"));
             }
             return model;
-        }
-
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-
-        @Override
-        public ModelPart root() {
-            return root;
-        }
-
-        @Override
-        public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-
         }
     }
 }

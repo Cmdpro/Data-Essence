@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
@@ -48,7 +50,10 @@ import java.util.List;
 import java.util.Optional;
 
 public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
-    public AnimationState animState = new AnimationState();
+    public DatabankAnimationState animState = new DatabankAnimationState("idle")
+            .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationReference("working", (state, anim) -> {}, (state, anim) -> {}));
+
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     public FluidMixingRecipe recipe;
     public boolean enoughEssence;

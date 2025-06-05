@@ -1,7 +1,10 @@
 package com.cmdpro.datanessence.client.renderers.entity;
 
-import com.cmdpro.databank.model.DatabankEntityModel;
+import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
+import com.cmdpro.databank.model.entity.DatabankEntityModel;
+import com.cmdpro.databank.model.entity.DatabankLivingEntityModel;
+import com.cmdpro.databank.model.entity.DatabankLivingEntityRenderer;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.entity.AncientSentinel;
 import net.minecraft.client.animation.AnimationDefinition;
@@ -12,50 +15,41 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec2;
 
 
-public class AncientSentinelRenderer extends MobRenderer<AncientSentinel, AncientSentinelRenderer.Model<AncientSentinel>> {
-    public static final ModelLayerLocation ancientSentinelLocation = new ModelLayerLocation(DataNEssence.locate("ancient_sentinel"), "main");
+public class AncientSentinelRenderer extends DatabankLivingEntityRenderer<AncientSentinel> {
     public AncientSentinelRenderer(EntityRendererProvider.Context p_272933_) {
-        super(p_272933_, new Model<>(p_272933_.bakeLayer(ancientSentinelLocation)), 0.5F);
+        super(p_272933_, new Model(), 0.5F);
     }
+
     @Override
-    public ResourceLocation getTextureLocation(AncientSentinel instance) {
+    public ResourceLocation getTextureLocation(AncientSentinel pEntity) {
         return DataNEssence.locate("textures/entity/ancient_sentinel.png");
     }
 
-    public static class Model<T extends AncientSentinel> extends HierarchicalModel<T> {
-        public static AnimationDefinition idle;
-        private final ModelPart root;
-        private final ModelPart head;
-
-        public Model(ModelPart pRoot) {
-            this.root = pRoot.getChild("root");
-            this.head = root.getChild("body").getChild("head");
-        }
-        public static DatabankEntityModel model;
-        public static DatabankEntityModel getModel() {
+    public static class Model extends DatabankLivingEntityModel<AncientSentinel> {
+        public DatabankModel model;
+        public DatabankModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("ancient_sentinel"));
-                idle = model.animations.get("idle").createAnimationDefinition();
             }
             return model;
         }
-
-        public static LayerDefinition createLayer() {
-            return getModel().createLayerDefinition();
-        }
-        public void setupAnim(T pEntity, float pLimbSwing, float pLimbSwingAmount, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
-            this.root().getAllParts().forEach(ModelPart::resetPose);
-            this.head.xRot = pHeadPitch * (float) (Math.PI / 180.0);
-            this.head.yRot = pNetHeadYaw * (float) (Math.PI / 180.0);
-            pEntity.animState.startIfStopped(pEntity.tickCount);
-            this.animate(pEntity.animState, idle, pAgeInTicks, 1.0f);
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return DataNEssence.locate("textures/entity/ancient_sentinel.png");
         }
 
         @Override
-        public ModelPart root() {
-            return root;
+        public void setupModelPose(AncientSentinel pEntity, float partialTick) {
+            pEntity.animState.updateAnimDefinitions(getModel());
+            animate(pEntity.animState);
+            Vec2 rot = new Vec2(Mth.lerp(partialTick, pEntity.xRotO, pEntity.getXRot()), Mth.rotLerp(partialTick, pEntity.yHeadRotO, pEntity.yHeadRot));
+            float bodyRot = Mth.rotLerp(partialTick, pEntity.yBodyRotO, pEntity.yBodyRot);
+            modelPose.stringToPart.get("head").rotation.x = rot.x * (float) (Math.PI / 180.0);
+            modelPose.stringToPart.get("head").rotation.y = (rot.y+bodyRot+180) * (float) (Math.PI / 180.0);
         }
     }
 }
