@@ -3,6 +3,6 @@
 	"parent": "builtin/entity",
 	"texture_size": [64, 64],
 	"textures": {
-		"particle": "block/ender_pearl_capture"
+		"particle": "datanessence:block/deco/polished_obsidian"
 	}
 }
