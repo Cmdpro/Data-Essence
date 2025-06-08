@@ -21,7 +21,7 @@ public class EnticingLureRenderer implements BlockEntityRenderer<EnticingLureBlo
         poseStack.translate(0.5d, 1.0d, 0.5d);
         poseStack.mulPose(Axis.YP.rotationDegrees(lure.getLevel().getLevelData().getGameTime() % 360)); // TODO rotate like the ChC item fabricator
         poseStack.scale(0.25F, 0.25F, 0.25F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.GUI, packedLight, packedOverlay, poseStack, bufferSource, lure.getLevel(), 0);
+        Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, lure.getLevel(), 0);
         poseStack.popPose();
     }
 

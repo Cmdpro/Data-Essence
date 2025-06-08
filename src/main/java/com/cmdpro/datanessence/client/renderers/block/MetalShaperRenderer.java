@@ -52,7 +52,7 @@ public class MetalShaperRenderer extends DatabankBlockEntityRenderer<MetalShaper
         poseStack.translate(0.5d, 0.2d, 0.5d);
         poseStack.mulPose(Axis.XP.rotationDegrees(-90));
         poseStack.scale(0.5F, 0.5F, 0.5F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.GUI, pPackedLight, pPackedOverlay, poseStack, pBufferSource, metalShaper.getLevel(), 0);
+        Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, poseStack, pBufferSource, metalShaper.getLevel(), 0);
         poseStack.popPose();
 
         super.render(metalShaper, pPartialTick, poseStack, pBufferSource, pPackedLight, pPackedOverlay);

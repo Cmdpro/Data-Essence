@@ -37,7 +37,7 @@ public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
         if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_HORNS) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_HORNS)) {
             pPoseStack.pushPose();
             this.hornsModel.setupPose(pLivingEntity, pPartialTick, this.getParentModel().head);
-            this.hornsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+            this.hornsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, false);
             pPoseStack.popPose();
         }
     }

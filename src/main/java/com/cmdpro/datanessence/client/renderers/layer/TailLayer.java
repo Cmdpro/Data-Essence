@@ -36,7 +36,7 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
         if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_TAIL) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_TAIL)) {
             pPoseStack.pushPose();
             this.tailModel.setupPose(pLivingEntity, pPartialTick, this.getParentModel().body);
-            this.tailModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+            this.tailModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, false);
             pPoseStack.popPose();
         }
     }

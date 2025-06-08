@@ -33,7 +33,7 @@ public class AutoFabricatorRenderer extends DatabankBlockEntityRenderer<AutoFabr
         pPoseStack.translate(0.5D, 0.5D, 0.5D);
         pPoseStack.mulPose(Axis.YP.rotationDegrees(pBlockEntity.getLevel().getLevelData().getGameTime() % 360));
         pPoseStack.scale(0.25F, 0.25F, 0.25F);
-        Minecraft.getInstance().getItemRenderer().renderStatic(pBlockEntity.item, ItemDisplayContext.GUI, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, pPoseStack, MachineOutputShader.createMachineOutputBufferSource(), pBlockEntity.getLevel(), 0);
+        Minecraft.getInstance().getItemRenderer().renderStatic(pBlockEntity.item, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, pPoseStack, MachineOutputShader.createMachineOutputBufferSource(), pBlockEntity.getLevel(), 0);
         pPoseStack.popPose();
     }
 

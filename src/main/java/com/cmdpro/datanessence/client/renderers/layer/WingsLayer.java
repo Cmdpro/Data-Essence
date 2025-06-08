@@ -39,7 +39,7 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
         if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_WINGS) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_WINGS)) {
             pPoseStack.pushPose();
             this.wingsModel.setupPose(pLivingEntity, pPartialTick, this.getParentModel().body);
-            this.wingsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+            this.wingsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, false);
             pPoseStack.popPose();
         }
     }
