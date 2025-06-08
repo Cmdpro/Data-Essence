@@ -88,7 +88,7 @@ public class BlockRegistry {
 
     // Machines
     public static final Supplier<Block> FABRICATOR = register("fabricator",
-            () -> new Fabricator(MACHINE_PROPERTIES),
+            () -> new Fabricator(MACHINE_PROPERTIES.lightLevel((blockState) -> { return 4;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INFUSER = register("infuser",
             () -> new Infuser(MACHINE_PROPERTIES),
