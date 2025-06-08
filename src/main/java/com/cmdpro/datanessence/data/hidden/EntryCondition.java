@@ -1,15 +1,19 @@
-package com.cmdpro.datanessence.data.hiddenblock;
+package com.cmdpro.datanessence.data.hidden;
 
-import com.cmdpro.databank.hiddenblock.HiddenBlockConditions;
+import com.cmdpro.databank.DatabankUtils;
+import com.cmdpro.databank.hidden.HiddenCondition;
 import com.cmdpro.datanessence.data.datatablet.Entries;
 import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.player.Player;
 
-public class EntryCondition extends HiddenBlockConditions.HiddenBlockCondition {
+public class EntryCondition extends HiddenCondition {
     public ResourceLocation entry;
     public int completionStage;
     public EntryCondition(ResourceLocation entry, int completionStage) {
@@ -31,13 +35,16 @@ public class EntryCondition extends HiddenBlockConditions.HiddenBlockCondition {
     public Serializer getSerializer() {
         return EntryConditionSerializer.INSTANCE;
     }
-    public static class EntryConditionSerializer extends HiddenBlockConditions.HiddenBlockCondition.Serializer {
+    public static class EntryConditionSerializer extends HiddenCondition.Serializer<EntryCondition> {
         public static final EntryConditionSerializer INSTANCE = new EntryConditionSerializer();
+        public static final MapCodec<EntryCondition> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                ResourceLocation.CODEC.fieldOf("entry").forGetter((condition) -> condition.entry),
+                Codec.INT.optionalFieldOf("completion_stage", -1).forGetter((condition) -> condition.completionStage)
+        ).apply(instance, EntryCondition::new));
+
         @Override
-        public HiddenBlockConditions.HiddenBlockCondition deserialize(JsonObject jsonObject) {
-            ResourceLocation entry = ResourceLocation.tryParse(jsonObject.get("entry").getAsString());
-            int completionStage = GsonHelper.getAsInt(jsonObject, "completionStage", -1);
-            return new EntryCondition(entry, completionStage);
+        public MapCodec<EntryCondition> codec() {
+            return CODEC;
         }
     }
 }

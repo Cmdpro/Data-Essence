@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.datatablet.PageSerializer;
 import com.cmdpro.datanessence.data.datatablet.pages.serializers.CraftingPageSerializer;
 import com.cmdpro.datanessence.data.datatablet.pages.serializers.ItemPageSerializer;
@@ -11,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class PageTypeRegistry {
-    public static final DeferredRegister<PageSerializer> PAGE_TYPES = DeferredRegister.create(DataNEssence.locate("page_types"), DataNEssence.MOD_ID);
+    public static final DeferredRegister<PageSerializer> PAGE_TYPES = DeferredRegister.create(DataNEssenceRegistries.PAGE_TYPE_REGISTRY_KEY, DataNEssence.MOD_ID);
 
     public static final Supplier<CraftingPageSerializer> CRAFTINGPAGE = register("crafting", () -> CraftingPageSerializer.INSTANCE);
     public static final Supplier<TextPageSerializer> TEXTPAGE = register("text", () -> TextPageSerializer.INSTANCE);

@@ -1,0 +1,12 @@
+{
+  "condition": {
+    "type": "datanessence:entry",
+    "entry": "datanessence:basics/plants",
+    "completion_stage": 0
+  },
+  "type": {
+    "type": "databank:block",
+    "hidden_as": "minecraft:short_grass",
+    "original": "datanessence:tethergrass"
+  }
+}

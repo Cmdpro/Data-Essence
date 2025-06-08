@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.data.minigames.ColorMixingMinigameCreator;
 import com.cmdpro.datanessence.data.minigames.MinesweeperMinigameCreator;
 import com.cmdpro.datanessence.data.minigames.TracesMinigameCreator;
@@ -11,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class MinigameRegistry {
-    public static final DeferredRegister<MinigameSerializer> MINIGAME_TYPES = DeferredRegister.create(DataNEssence.locate("minigames"), DataNEssence.MOD_ID);
+    public static final DeferredRegister<MinigameSerializer> MINIGAME_TYPES = DeferredRegister.create(DataNEssenceRegistries.MINIGAME_TYPE_REGISTRY_KEY, DataNEssence.MOD_ID);
 
     public static final Supplier<MinigameSerializer> MINESWEEPER = register("minesweeper", () -> new MinesweeperMinigameCreator.MinesweeperMinigameSerializer());
     public static final Supplier<MinigameSerializer> WIRE = register("wire", () -> new WireMinigameCreator.WireMinigameSerializer());

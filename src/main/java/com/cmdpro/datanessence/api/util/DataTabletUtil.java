@@ -103,7 +103,7 @@ public class DataTabletUtil {
             }
             PlayerDataUtil.unlockEntry((ServerPlayer) player, entry, finalIncompleteStage);
             for (Entry i : entry2.getParentEntries()) {
-                DataTabletUtil.unlockEntryAndParents(player, i.id, 0);
+                DataTabletUtil.unlockEntryAndParents(player, i.id, i.completionStages.size());
             }
         }
         checkForTierUpgrades(player);

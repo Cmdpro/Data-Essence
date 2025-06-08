@@ -222,9 +222,13 @@ public class DataNEssenceCommands {
     private static int unlockall(CommandContext<CommandSourceStack> command){
         if(command.getSource().getEntity() instanceof Player) {
             Player player = (Player) command.getSource().getEntity();
-            for (Entry i : Entries.entries.values()) {
-                DataTabletUtil.unlockEntryAndParents(player, i.id, i.completionStages.size());
-            }
+            List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
+            HashMap<ResourceLocation, Integer> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE_STAGES);
+            incompleteEntries.clear();
+            unlocked.clear();
+            unlocked.addAll(Entries.entries.values().stream().map((i) -> i.id).toList());
+            PlayerDataUtil.updateUnlockedEntries((ServerPlayer) player);
+            DataTabletUtil.checkForTierUpgrades(player);
             command.getSource().sendSuccess(() -> {
                 return Component.translatable("commands.datanessence.unlock_all", player.getName());
             }, true);

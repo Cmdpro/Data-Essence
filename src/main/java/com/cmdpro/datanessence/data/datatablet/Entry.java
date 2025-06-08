@@ -85,7 +85,7 @@ public class Entry {
         return unlocked;
     }
     public int getIncompleteStageServer(Player player) {
-        return player.getData(AttachmentTypeRegistry.INCOMPLETE_STAGES).getOrDefault(id, player.getData(AttachmentTypeRegistry.UNLOCKED).contains(id) ? completionStages.size() : 0);
+        return player.getData(AttachmentTypeRegistry.INCOMPLETE_STAGES).getOrDefault(id, player.getData(AttachmentTypeRegistry.UNLOCKED).contains(id) ? completionStages.size() : -1);
     }
     public boolean isIncompleteServer(Player player) {
         return isIncomplete(getIncompleteStageServer(player));
