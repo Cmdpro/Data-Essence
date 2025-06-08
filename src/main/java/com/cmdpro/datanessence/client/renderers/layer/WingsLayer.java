@@ -24,6 +24,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
@@ -39,7 +40,7 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
         if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_WINGS) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_WINGS)) {
             pPoseStack.pushPose();
             this.wingsModel.setupPose(pLivingEntity, pPartialTick, this.getParentModel().body);
-            this.wingsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, false);
+            this.wingsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, new Vec3(1, 1, 1));
             pPoseStack.popPose();
         }
     }
