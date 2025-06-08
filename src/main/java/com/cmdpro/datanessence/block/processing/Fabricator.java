@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.datanessence.api.block.RedirectorInteractable;
+import com.cmdpro.datanessence.item.equipment.EssenceRedirector;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -83,6 +84,14 @@ public class Fabricator extends Block implements EntityBlock, RedirectorInteract
         }
 
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (stack.getItem() instanceof EssenceRedirector) {
+            return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
+        }
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Nullable
