@@ -1,0 +1,39 @@
+{
+  "icon": {
+    "id": "datanessence:frozen_moonlight"
+  },
+  "tab": "datanessence:basics",
+  "critical": true,
+  "x": 3,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:frozen_moonlight_chunk" },
+      "text": {
+        "translate": "data_tablet.pages.frozen_moonlight.page1.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.frozen_moonlight.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.frozen_moonlight.flavor"
+  },
+  "completion_stages": [
+    {
+      "completion_advancements": [
+        "datanessence:exploration/discover_frozen_moonlight"
+      ],
+      "pages": [
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.frozen_moonlight.page1.incomplete_text"
+          }
+        }
+      ]
+    }
+  ]
+}

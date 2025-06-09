@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-04T02:30:06.168954171	Item Models: datanessence
+// 1.21.1	2025-06-09T09:53:43.830980848	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -43,6 +43,7 @@ bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/exotic_
 d747ed713b2de5e004d4e19bfe914756bf68d6a3 assets/datanessence/models/item/filter_upgrade.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/fluid_point.json
 f356571ca7c924ca20dabcdac766bc379c05608e assets/datanessence/models/item/fluid_wire.json
+4c8fe32c079b66eb77b0135aeebad1272c05ad6d assets/datanessence/models/item/frozen_moonlight_chunk.json
 e7ed11614b8a776b431eb08293c8e6cb0aeaf7d4 assets/datanessence/models/item/genderfluid_bucket.json
 f5f3309e5c10ed2cbcc9f72edfa1da8ca74ab5d4 assets/datanessence/models/item/hammer_and_chisel.json
 65a017c6b809f40655cecc7e07b81aeee8ce8a80 assets/datanessence/models/item/harming_lens.json

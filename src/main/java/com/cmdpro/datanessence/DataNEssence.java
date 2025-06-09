@@ -290,8 +290,8 @@ public class DataNEssence
             event.accept(ItemRegistry.ESSENCE_SHARD.get());
             event.accept(ItemRegistry.LUNAR_ESSENCE_SHARD.get());
             event.accept(ItemRegistry.LENSING_CRYSTAL.get());
-            event.accept(ItemRegistry.BONDING_POWDER.get());
             event.accept(ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get());
+            event.accept(ItemRegistry.BONDING_POWDER.get());
             event.accept(ItemRegistry.CAPACITANCE_PANEL.get());
             event.accept(ItemRegistry.CONDUCTANCE_ROD.get());
             event.accept(ItemRegistry.WIRE_SPOOL.get());
@@ -328,9 +328,9 @@ public class DataNEssence
             event.accept(BlockRegistry.ESSENCE_CRYSTAL.get());
             event.accept(BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get());
             event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+            event.accept(BlockRegistry.FROZEN_MOONLIGHT.get());
             event.accept(BlockRegistry.TETHERGRASS.get());
             event.accept(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
-            event.accept(BlockRegistry.FROZEN_MOONLIGHT.get());
             //event.accept(BlockRegistry.SPIRE_GLASS.get());
             //event.accept(BlockRegistry.CRYSTALLINE_LOG.get());
             //event.accept(BlockRegistry.CRYSTALLINE_LEAVES.get());

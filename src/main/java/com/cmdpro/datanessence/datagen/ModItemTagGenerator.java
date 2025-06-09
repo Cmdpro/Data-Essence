@@ -27,6 +27,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider pProvider) {
         this.tag(Tags.Items.ARMORS)
                 .add(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get())
+                .add(ItemRegistry.ANTI_GRAVITY_PACK.get())
                 .add(ItemRegistry.TRAVERSITE_TRUDGERS.get());
 
         this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES)
@@ -135,6 +136,7 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
         this.tag(TagRegistry.Items.HIDDEN_RESOURCES)
                 .add(ItemRegistry.LENSING_CRYSTAL.get())
-                .add(ItemRegistry.BONDING_POWDER.get());
+                .add(ItemRegistry.BONDING_POWDER.get())
+                .add(ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get());
     }
 }
