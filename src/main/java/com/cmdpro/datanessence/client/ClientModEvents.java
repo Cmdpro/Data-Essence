@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.client;
 
 import com.cmdpro.databank.ClientDatabankUtils;
 import com.cmdpro.databank.DatabankUtils;
+import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.shaders.PostShaderInstance;
 import com.cmdpro.databank.shaders.PostShaderManager;
@@ -242,7 +243,7 @@ public class ClientModEvents {
             }
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
         event.register((pState, pLevel, pPos, pTintIndex) -> {
-            Block block = ClientDatabankUtils.getHiddenBlock(pState.getBlock());
+            Block block = BlockHiddenType.getHiddenBlockClient(pState.getBlock());
             if (block != null) {
                 return Minecraft.getInstance().getBlockColors().getColor(DatabankUtils.changeBlockType(pState, block), pLevel, pPos, pTintIndex);
             }

@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.block.RedirectorInteractable;
+import com.cmdpro.datanessence.item.equipment.EssenceRedirector;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -7,6 +9,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -23,7 +26,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class Fabricator extends Block implements EntityBlock {
+public class Fabricator extends Block implements EntityBlock, RedirectorInteractable {
     public Fabricator(Properties properties) {
         super(properties);
     }
@@ -55,6 +58,20 @@ public class Fabricator extends Block implements EntityBlock {
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
+
+    @Override
+    public boolean onRedirectorUse(UseOnContext context) {
+        Level world = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        BlockState state = world.getBlockState(pos);
+        Player player = context.getPlayer();
+        InteractionHand hand = context.getHand();
+        if (world.getBlockEntity(pos) instanceof FabricatorBlockEntity fabricator) {
+            FabricatorBlockEntity.use(state, world, pos, player, hand);
+        }
+        return true;
+    }
+
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide()) {
@@ -70,12 +87,11 @@ public class Fabricator extends Block implements EntityBlock {
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
-        if (pPlayer.isHolding(ItemRegistry.ESSENCE_REDIRECTOR.get())) {
-            FabricatorBlockEntity.use(pState, pLevel, pPos, pPlayer, pHand, pHitResult);
-            return ItemInteractionResult.sidedSuccess(pLevel.isClientSide());
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (stack.getItem() instanceof EssenceRedirector) {
+            return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
         }
-        return super.useItemOn(pStack, pState, pLevel, pPos, pPlayer, pHand, pHitResult);
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Nullable

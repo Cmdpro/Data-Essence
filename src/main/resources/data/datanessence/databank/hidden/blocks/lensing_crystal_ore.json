@@ -1,0 +1,12 @@
+{
+  "condition": {
+    "type": "datanessence:entry",
+    "entry": "datanessence:basics/lensing_crystals",
+    "completion_stage": 0
+  },
+  "type": {
+    "type": "databank:block",
+    "hidden_as": "minecraft:stone",
+    "original": "datanessence:lensing_crystal_ore"
+  }
+}

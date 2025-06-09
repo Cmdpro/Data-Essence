@@ -62,7 +62,7 @@ public class DryingTableRenderer implements BlockEntityRenderer<DryingTableBlock
             poseStack.translate(0.5d, 0.85d, 0.5d);
             //poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getLevel().getLevelData().getGameTime() % 360));
             poseStack.scale(0.5f, 0.5f, 0.5f);
-            Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.GUI, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
+            Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
             poseStack.popPose();
         }
     }

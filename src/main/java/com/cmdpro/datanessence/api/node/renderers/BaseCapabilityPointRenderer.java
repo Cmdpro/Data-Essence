@@ -61,7 +61,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         pPoseStack.translate(0, 0, -0.15);
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(pBlockEntity.getLevel().getLevelData().getGameTime() % 360));
         pPoseStack.scale(0.75F, 0.75F, 0.75F);
-        ClientDatabankUtils.renderItemWithColor(pBlockEntity.uniqueUpgrade.getStackInSlot(0), ItemDisplayContext.GUI, false, pPoseStack, pBufferSource, LightTexture.FULL_BRIGHT, pPackedOverlay, color, pBlockEntity.getLevel());
+        ClientDatabankUtils.renderItemWithColor(pBlockEntity.uniqueUpgrade.getStackInSlot(0), ItemDisplayContext.FIXED, false, pPoseStack, pBufferSource, LightTexture.FULL_BRIGHT, pPackedOverlay, color, pBlockEntity.getLevel());
         pPoseStack.popPose();
         pPoseStack.pushPose();
         pPoseStack.translate(0.5, 0.5, 0.5);
@@ -69,7 +69,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         pPoseStack.translate(0, 0, -0.3);
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(-(pBlockEntity.getLevel().getLevelData().getGameTime() % 360)));
         pPoseStack.scale(0.5F, 0.5F, 0.5F);
-        ClientDatabankUtils.renderItemWithColor(pBlockEntity.universalUpgrade.getStackInSlot(0), ItemDisplayContext.GUI, false, pPoseStack, pBufferSource, LightTexture.FULL_BRIGHT, pPackedOverlay, color, pBlockEntity.getLevel());
+        ClientDatabankUtils.renderItemWithColor(pBlockEntity.universalUpgrade.getStackInSlot(0), ItemDisplayContext.FIXED, false, pPoseStack, pBufferSource, LightTexture.FULL_BRIGHT, pPackedOverlay, color, pBlockEntity.getLevel());
         pPoseStack.popPose();
         super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
     }

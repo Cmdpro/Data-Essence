@@ -172,8 +172,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
         CraftingContainer inventory = new NonMenuCraftingContainer(items, 3, 3);
         return inventory;
     }
-    public static InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                                        Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
+    public static InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand) {
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
         if (!pLevel.isClientSide) {
             if (blockEntity instanceof FabricatorBlockEntity ent) {

@@ -50,7 +50,9 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class BlockRegistry {
-    public static final BlockBehaviour.Properties MACHINE_PROPERTIES = BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f);
+    public static BlockBehaviour.Properties getMachineProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f);
+    }
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK,
             DataNEssence.MOD_ID);
@@ -87,13 +89,13 @@ public class BlockRegistry {
 
     // Generators
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",
-            () -> new EssenceBurner(MACHINE_PROPERTIES),
+            () -> new EssenceBurner(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_LEECH = register("essence_leech",
-            () -> new EssenceLeech(MACHINE_PROPERTIES),
+            () -> new EssenceLeech(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INDUSTRIAL_PLANT_SIPHON = register("industrial_plant_siphon",
-            () -> new IndustrialPlantSiphon(MACHINE_PROPERTIES),
+            () -> new IndustrialPlantSiphon(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_DERIVATION_SPIKE = register("essence_derivation_spike",
             () -> new EssenceDerivationSpike(MACHINE_PROPERTIES),
@@ -101,130 +103,130 @@ public class BlockRegistry {
 
     // Machines
     public static final Supplier<Block> FABRICATOR = register("fabricator",
-            () -> new Fabricator(MACHINE_PROPERTIES),
+            () -> new Fabricator(getMachineProperties().lightLevel((blockState) -> { return 4;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INFUSER = register("infuser",
-            () -> new Infuser(MACHINE_PROPERTIES),
+            () -> new Infuser(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_COLLECTOR = register("fluid_collector",
-            () -> new FluidCollector(MACHINE_PROPERTIES),
+            () -> new FluidCollector(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_MIXER = register("fluid_mixer",
-            () -> new FluidMixer(MACHINE_PROPERTIES),
+            () -> new FluidMixer(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> MINERAL_PURIFICATION_CHAMBER = register("mineral_purification_chamber",
-            () -> new MineralPurificationChamber(MACHINE_PROPERTIES),
+            () -> new MineralPurificationChamber(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> VACUUM = register("vacuum",
-            () -> new Vacuum(MACHINE_PROPERTIES.lightLevel((blockState) -> { return 3;})),
+            () -> new Vacuum(getMachineProperties().lightLevel((blockState) -> { return 3;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LASER_EMITTER = register("laser_emitter",
-            () -> new LaserEmitter(MACHINE_PROPERTIES),
+            () -> new LaserEmitter(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_BOTTLER = register("fluid_bottler",
-            () -> new FluidBottler(MACHINE_PROPERTIES),
+            () -> new FluidBottler(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENTROPIC_PROCESSOR = register("entropic_processor",
-            () -> new EntropicProcessor(MACHINE_PROPERTIES),
+            () -> new EntropicProcessor(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SYNTHESIS_CHAMBER = register("synthesis_chamber",
-            () -> new SynthesisChamber(MACHINE_PROPERTIES),
+            () -> new SynthesisChamber(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_FURNACE = register("essence_furnace",
-            () -> new EssenceFurnace(MACHINE_PROPERTIES),
+            () -> new EssenceFurnace(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_SPILLER = register("fluid_spiller",
-            () -> new FluidSpiller(MACHINE_PROPERTIES),
+            () -> new FluidSpiller(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CHARGER = register("charger",
-            () -> new Charger(MACHINE_PROPERTIES),
+            () -> new Charger(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AUTO_FABRICATOR = register("auto-fabricator",
-            () -> new AutoFabricator(MACHINE_PROPERTIES),
+            () -> new AutoFabricator(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENTICING_LURE = register("enticing_lure",
-            () -> new EnticingLure(MACHINE_PROPERTIES),
+            () -> new EnticingLure(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ITEM_FILTER = register("item_filter",
-            () -> new ItemFilter(MACHINE_PROPERTIES),
+            () -> new ItemFilter(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ESSENCE_BREAKER = register("essence_breaker",
-            () -> new EssenceBreaker(MACHINE_PROPERTIES),
+            () -> new EssenceBreaker(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> METAL_SHAPER = register("metal_shaper",
-            () -> new MetalShaper(MACHINE_PROPERTIES),
+            () -> new MetalShaper(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> MELTER = register("melter",
-            () -> new Melter(MACHINE_PROPERTIES),
+            () -> new Melter(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> DRYING_TABLE = register("drying_table",
-            () -> new DryingTable(MACHINE_PROPERTIES),
+            () -> new DryingTable(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers
     public static final Supplier<Block> ESSENCE_BUFFER = register("essence_buffer",
-            () -> new EssenceBuffer(MACHINE_PROPERTIES),
+            () -> new EssenceBuffer(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ITEM_BUFFER = register("item_buffer",
-            () -> new ItemBuffer(MACHINE_PROPERTIES),
+            () -> new ItemBuffer(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LIMITED_ITEM_BUFFER = register("limited_item_buffer",
-            () -> new LimitedItemBuffer(MACHINE_PROPERTIES),
+            () -> new LimitedItemBuffer(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_BUFFER = register("fluid_buffer",
-            () -> new FluidBuffer(MACHINE_PROPERTIES),
+            () -> new FluidBuffer(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> DECO_ESSENCE_BUFFER = register("deco_essence_buffer",
-            () -> new RotatedPillarBlock(MACHINE_PROPERTIES),
+            () -> new RotatedPillarBlock(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> DECO_FLUID_BUFFER = register("deco_fluid_buffer",
-            () -> new RotatedPillarBlock(MACHINE_PROPERTIES),
+            () -> new RotatedPillarBlock(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> DECO_ITEM_BUFFER = register("deco_item_buffer",
-            () -> new RotatedPillarBlock(MACHINE_PROPERTIES),
+            () -> new RotatedPillarBlock(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Nodes
     public static final Supplier<Block> ESSENCE_POINT = register("essence_point",
-            () -> new EssencePoint(MACHINE_PROPERTIES),
+            () -> new EssencePoint(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LUNAR_ESSENCE_POINT = register("lunar_essence_point",
-            () -> new LunarEssencePoint(MACHINE_PROPERTIES),
+            () -> new LunarEssencePoint(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> NATURAL_ESSENCE_POINT = register("natural_essence_point",
-            () -> new NaturalEssencePoint(MACHINE_PROPERTIES),
+            () -> new NaturalEssencePoint(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> EXOTIC_ESSENCE_POINT = register("exotic_essence_point",
-            () -> new ExoticEssencePoint(MACHINE_PROPERTIES),
+            () -> new ExoticEssencePoint(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_POINT = register("fluid_point",
-            () -> new FluidPoint(MACHINE_PROPERTIES),
+            () -> new FluidPoint(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ITEM_POINT = register("item_point",
-            () -> new ItemPoint(MACHINE_PROPERTIES),
+            () -> new ItemPoint(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CHEMICAL_NODE = register("chemical_node",
-            () -> new ChemicalNode(MACHINE_PROPERTIES),
+            () -> new ChemicalNode(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Storage
     public static final Supplier<Block> ESSENCE_BATTERY = register("essence_battery",
-            () -> new EssenceBattery(MACHINE_PROPERTIES),
+            () -> new EssenceBattery(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LUNAR_ESSENCE_BATTERY = register("lunar_essence_battery",
-            () -> new LunarEssenceBattery(MACHINE_PROPERTIES),
+            () -> new LunarEssenceBattery(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> NATURAL_ESSENCE_BATTERY = register("natural_essence_battery",
-            () -> new NaturalEssenceBattery(MACHINE_PROPERTIES),
+            () -> new NaturalEssenceBattery(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> EXOTIC_ESSENCE_BATTERY = register("exotic_essence_battery",
-            () -> new ExoticEssenceBattery(MACHINE_PROPERTIES),
+            () -> new ExoticEssenceBattery(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CREATIVE_ESSENCE_BATTERY = register("creative_essence_battery",
-            () -> new CreativeEssenceBattery(MACHINE_PROPERTIES),
+            () -> new CreativeEssenceBattery(getMachineProperties()),
             object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_TANK = register("fluid_tank",
-            () -> new FluidTank(MACHINE_PROPERTIES),
+            () -> new FluidTank(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Technical Blocks
@@ -268,13 +270,13 @@ public class BlockRegistry {
             () -> new TraversiteSlab(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().strength(2.0f), 2),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENDER_PEARL_CAPTURE = register("ender_pearl_capture",
-            () -> new EnderPearlCapture(MACHINE_PROPERTIES),
+            () -> new EnderPearlCapture(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENDER_PEARL_DESTINATION = register("ender_pearl_destination",
-            () -> new EnderPearlDestination(MACHINE_PROPERTIES),
+            () -> new EnderPearlDestination(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENDER_PEARL_RELAY = register("ender_pearl_relay",
-            () -> new EnderPearlRelay(MACHINE_PROPERTIES),
+            () -> new EnderPearlRelay(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
 

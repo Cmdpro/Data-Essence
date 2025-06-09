@@ -1,9 +1,0 @@
-{
-  "condition": "datanessence:entry",
-  "conditionData": {
-    "entry": "datanessence:basics/plants",
-    "completionRequired": false
-  },
-  "hiddenAs": "minecraft:short_grass",
-  "originalBlock": "datanessence:tethergrass"
-}
