@@ -172,6 +172,7 @@ public class ClientModEvents {
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_capture.png"), DataNEssence.locate("ender_pearl_capture")), BlockRegistry.ENDER_PEARL_CAPTURE.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_relay.png"), DataNEssence.locate("ender_pearl_relay")), BlockRegistry.ENDER_PEARL_RELAY.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_destination.png"), DataNEssence.locate("ender_pearl_destination")), BlockRegistry.ENDER_PEARL_DESTINATION.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/essence_derivation_spike.png"), DataNEssence.locate("essence_derivation_spike")), BlockRegistry.ESSENCE_DERIVATION_SPIKE.get().asItem());
     }
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {

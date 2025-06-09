@@ -1,6 +1,6 @@
 package com.cmdpro.datanessence.block.generation;
 
-import com.cmdpro.databank.model.animation.DatabankAnimationDefinition;
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.databank.multiblock.Multiblock;
 import com.cmdpro.databank.multiblock.MultiblockManager;
@@ -45,10 +45,10 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
     }
 
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
-            .addAnim(new DatabankAnimationDefinition("idle", (state, anim) -> {}, (state, anim) -> {}))
-            .addAnim(new DatabankAnimationDefinition("rotate_rings", (state, anim) -> {}, (state, anim) -> {}))
-            .addAnim(new DatabankAnimationDefinition("extend_spike", (state, anim) -> {}, (state, anim) -> state.setAnim("rotate_rings")))
-            .addAnim(new DatabankAnimationDefinition("retract_spike", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")));
+            .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationReference("rotate_rings", (state, anim) -> {}, (state, anim) -> {}))
+            .addAnim(new DatabankAnimationReference("extend_spike", (state, anim) -> {}, (state, anim) -> state.setAnim("rotate_rings")))
+            .addAnim(new DatabankAnimationReference("retract_spike", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")));
 
 
     public EssenceDerivationSpikeBlockEntity(BlockPos pos, BlockState blockState) {
