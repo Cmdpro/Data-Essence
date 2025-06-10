@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.integration.emi.recipes;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.integration.emi.DataNEssenceEMIPlugin;
 import com.cmdpro.datanessence.integration.emi.DataNEssenceEMIRecipe;
 import com.cmdpro.datanessence.integration.emi.widgets.EssenceBarWidget;
@@ -71,6 +72,6 @@ public class EMIFluidMixingRecipe extends DataNEssenceEMIRecipe {
         widgetHolder.addSlot(outputs.get(0), 77, 21).recipeContext(this).drawBack(false);
 
         // Essence bars
-        widgetHolder.add(new EssenceBarWidget(5, 19, EssenceTypeRegistry.ESSENCE.get(), essenceCost));
+        widgetHolder.add(new EssenceBarWidget(5, 19, EssenceTypeRegistry.ESSENCE.get(), essenceCost, 1000f, EssenceBarBackgroundTypes.INDUSTRIAL));
     }
 }

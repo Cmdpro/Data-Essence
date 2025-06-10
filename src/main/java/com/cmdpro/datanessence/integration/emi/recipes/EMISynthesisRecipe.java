@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.integration.emi.recipes;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.integration.emi.DataNEssenceEMIPlugin;
 import com.cmdpro.datanessence.integration.emi.DataNEssenceEMIRecipe;
@@ -59,9 +60,9 @@ public class EMISynthesisRecipe extends DataNEssenceEMIRecipe {
         widgetHolder.addSlot(outputs.get(0), 81, 21).recipeContext(this).drawBack(false);
 
         // Essence bars
-        widgetHolder.add(new EssenceBarWidget(5, 6, EssenceTypeRegistry.ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.ESSENCE.get(), 0f)));
-        widgetHolder.add(new EssenceBarWidget(13, 6, EssenceTypeRegistry.LUNAR_ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.LUNAR_ESSENCE.get(), 0f)));
-        widgetHolder.add(new EssenceBarWidget(5, 32, EssenceTypeRegistry.NATURAL_ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.NATURAL_ESSENCE.get(), 0f)));
-        widgetHolder.add(new EssenceBarWidget(13, 32, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.EXOTIC_ESSENCE.get(), 0f)));
+        widgetHolder.add(new EssenceBarWidget(5, 6, EssenceTypeRegistry.ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.ESSENCE.get(), 0f), 1000f, EssenceBarBackgroundTypes.INDUSTRIAL));
+        widgetHolder.add(new EssenceBarWidget(13, 6, EssenceTypeRegistry.LUNAR_ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.LUNAR_ESSENCE.get(), 0f), 1000f, EssenceBarBackgroundTypes.INDUSTRIAL));
+        widgetHolder.add(new EssenceBarWidget(5, 32, EssenceTypeRegistry.NATURAL_ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.NATURAL_ESSENCE.get(), 0f), 1000f, EssenceBarBackgroundTypes.INDUSTRIAL));
+        widgetHolder.add(new EssenceBarWidget(13, 32, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.EXOTIC_ESSENCE.get(), 0f), 1000f, EssenceBarBackgroundTypes.INDUSTRIAL));
     }
 }

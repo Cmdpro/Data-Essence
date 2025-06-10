@@ -1,7 +1,10 @@
 package com.cmdpro.datanessence.integration.emi.widgets;
 
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundType;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import dev.emi.emi.api.widget.Bounds;
@@ -18,11 +21,15 @@ public class EssenceBarWidget extends Widget {
     public int x;
     public int y;
     public float cost;
-    public EssenceBarWidget(int x, int y, EssenceType type, float cost) {
+    public float max;
+    public EssenceBarBackgroundType backgroundType;
+    public EssenceBarWidget(int x, int y, EssenceType type, float cost, float max, EssenceBarBackgroundType backgroundType) {
         this.type = type;
         this.cost = cost;
         this.x = x;
         this.y = y;
+        this.max = max;
+        this.backgroundType = backgroundType;
     }
     @Override
     public Bounds getBounds() {
@@ -31,11 +38,7 @@ public class EssenceBarWidget extends Widget {
 
     @Override
     public void render(GuiGraphics draw, int mouseX, int mouseY, float delta) {
-        int u = type.getTinyBarSprite().x;
-        int v = type.getTinyBarSprite().y;
-        if (cost > 0) {
-            draw.blit(type.getTinyBarSprite().texture, x, y+22 - (int) Math.ceil(22f * (cost / 1000f)), u, v + 22 - (int) Math.ceil(22f * (cost / 1000f)), 3, (int) Math.ceil(22f * (cost / 1000f)));
-        }
+        ClientEssenceBarUtil.drawEssenceBarTiny(draw, x, y, type, cost, max, EssenceBarBackgroundTypes.INDUSTRIAL);
     }
 
     @Override

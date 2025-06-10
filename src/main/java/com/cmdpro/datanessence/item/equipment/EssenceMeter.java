@@ -17,6 +17,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Comparator;
+
 public class EssenceMeter extends Item {
     public static MachineEssenceValueSync.MachineEssenceValue currentMachineEssenceValue;
     public EssenceMeter(Properties properties) {
@@ -34,7 +36,7 @@ public class EssenceMeter extends Item {
                 var storage = machine.getStorage();
                 var component = Component.translatable("item.datanessence.essence_meter.contains");
 
-                for (EssenceType type : storage.getSupportedEssenceTypes()) {
+                for (EssenceType type : storage.getSupportedEssenceTypes().stream().sorted(Comparator.comparing((i) -> i.tier)).toList()) {
                     component.append("\n  " + storage.getEssence(type) + " / " + storage.getMaxEssence() + " ");
                     component.append( ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(type), false) ? type.getName() : Component.translatable("datanessence.essence_types.unknown"));
                 }
