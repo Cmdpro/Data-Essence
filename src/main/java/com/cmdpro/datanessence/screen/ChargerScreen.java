@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -29,22 +30,15 @@ public class ChargerScreen extends AbstractContainerScreen<ChargerMenu> {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
-        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
-        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+19, y+17, EssenceTypeRegistry.LUNAR_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.LUNAR_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
-        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+30, y+17, EssenceTypeRegistry.NATURAL_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
-        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+41, y+17, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.EXOTIC_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
-        if (ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false)) {
-            pGuiGraphics.blit(TEXTURE, x+7, y+6, 177, 0, 9, 9);
-        }
-        if (ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get()), false)) {
-            pGuiGraphics.blit(TEXTURE, x+18, y+6, 188, 0, 9, 9);
-        }
-        if (ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.NATURAL_ESSENCE.get()), false)) {
-            pGuiGraphics.blit(TEXTURE, x+29, y+6, 199, 0, 9, 9);
-        }
-        if (ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.EXOTIC_ESSENCE.get()), false)) {
-            pGuiGraphics.blit(TEXTURE, x+40, y+6, 210, 0, 9, 9);
-        }
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+19, y+17, EssenceTypeRegistry.LUNAR_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.LUNAR_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+30, y+17, EssenceTypeRegistry.NATURAL_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.NATURAL_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+41, y+17, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.EXOTIC_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
+
+        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+7, y+6, EssenceTypeRegistry.ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false));
+        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+18, y+6, EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get()), false));
+        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+29, y+6, EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.NATURAL_ESSENCE.get()), false));
+        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+40, y+6, EssenceTypeRegistry.EXOTIC_ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.EXOTIC_ESSENCE.get()), false));
     }
 
     @Override

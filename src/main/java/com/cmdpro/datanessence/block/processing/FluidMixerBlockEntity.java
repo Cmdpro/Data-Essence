@@ -205,7 +205,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
                 workTime = 0;
             }
             if (dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_ID) && dataDriveHandler.getStackInSlot(0).has(DataComponentRegistry.DATA_INCOMPLETE)) {
-                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && DataDrive.getEntryCompletionStage(dataDriveHandler.getStackInSlot(0)) >= this.recipe.getCompletionStage()) {
+                if (recipe.get().value().getEntry().equals(DataDrive.getEntryId(dataDriveHandler.getStackInSlot(0))) && DataDrive.getEntryCompletionStage(dataDriveHandler.getStackInSlot(0)) >= recipe.get().value().getCompletionStage()) {
                     this.recipe = recipe.get().value();
                     essenceCost = recipe.get().value().getEssenceCost();
                 } else {

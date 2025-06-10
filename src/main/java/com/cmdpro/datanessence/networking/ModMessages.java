@@ -4,6 +4,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.networking.packet.c2s.PlayerChangeDriveData;
 import com.cmdpro.datanessence.networking.packet.c2s.PlayerFinishDataBankMinigame;
 import com.cmdpro.datanessence.networking.packet.c2s.PlayerSetItemHandlerLocked;
+import com.cmdpro.datanessence.networking.packet.c2s.RequestMachineEssenceValue;
 import com.cmdpro.datanessence.networking.packet.s2c.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -76,10 +77,12 @@ public class ModMessages {
         registrar.playToClient(ParticleBurst.TYPE, getNetworkCodec(ParticleBurst::read, ParticleBurst::write), Handler::handle);
         registrar.playToClient(PlayGenderfluidTransitionEffect.TYPE, getNetworkCodec(PlayGenderfluidTransitionEffect::read, PlayGenderfluidTransitionEffect::write), Handler::handle);
         registrar.playToClient(PlayEnderPearlRedirectionEffect.TYPE, getNetworkCodec(PlayEnderPearlRedirectionEffect::read, PlayEnderPearlRedirectionEffect::write), Handler::handle);
+        registrar.playToClient(MachineEssenceValueSync.TYPE, getNetworkCodec(MachineEssenceValueSync::read, MachineEssenceValueSync::write), Handler::handle);
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigame.TYPE, getNetworkCodec(PlayerFinishDataBankMinigame::read, PlayerFinishDataBankMinigame::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveData.TYPE, getNetworkCodec(PlayerChangeDriveData::read, PlayerChangeDriveData::write), Handler::handle);
         registrar.playToServer(PlayerSetItemHandlerLocked.TYPE, getNetworkCodec(PlayerSetItemHandlerLocked::read, PlayerSetItemHandlerLocked::write), Handler::handle);
+        registrar.playToServer(RequestMachineEssenceValue.TYPE, getNetworkCodec(RequestMachineEssenceValue::read, RequestMachineEssenceValue::write), Handler::handle);
     }
 
     public static <T extends Message> StreamCodec<RegistryFriendlyByteBuf, T> getNetworkCodec(Handler.Reader<T> reader, Handler.Writer<T> writer) {

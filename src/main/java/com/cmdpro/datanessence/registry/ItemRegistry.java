@@ -32,6 +32,7 @@ public class ItemRegistry {
     public static final Supplier<Item> MOLD_PANEL = register("panel_mold", () -> new Item(new Item.Properties().component(DataComponentRegistry.MOLD, DataNEssence.locate("metal_shaping/capacitance_panel"))));
     public static final Supplier<Item> THERMOMETER = register("thermometer", () -> new Thermometer(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> LOCATOR = register("locator", () -> new Locator(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ESSENCE_METER = register("essence_meter", () -> new EssenceMeter(new Item.Properties().stacksTo(1)));
 
     // Equipment
     public static final Supplier<Item> ESSENCE_SWORD = register("essence_sword", () -> new EssenceSword(new Item.Properties().stacksTo(1)));

@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -42,13 +43,11 @@ public class DryingTableScreen extends AbstractContainerScreen<DryingTableMenu> 
         guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
 
         if (menu.blockEntity.workTime >= 0 && menu.blockEntity.maxWorkTime != -1) {
-            guiGraphics.blit(TEXTURE, x + 81, y + 28, 188, 0, 14, (int) Math.ceil(14f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxWorkTime)));
+            guiGraphics.blit(TEXTURE, x + 81, y + 28, 177, 0, 14, (int) Math.ceil(14f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxWorkTime)));
         }
 
-        ClientEssenceBarUtil.drawEssenceBar(guiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
-        if (ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false)) {
-            guiGraphics.blit(TEXTURE, x+7, y+6, 177, 0, 9, 9);
-        }
+        ClientEssenceBarUtil.drawEssenceBar(guiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
+        ClientEssenceBarUtil.drawEssenceIcon(guiGraphics, x+7, y+6, EssenceTypeRegistry.ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false));
     }
 
     @Override

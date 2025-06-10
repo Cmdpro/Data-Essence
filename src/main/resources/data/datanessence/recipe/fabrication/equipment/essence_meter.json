@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 20
+  },
+  "entry": "datanessence:basics/essence_meter",
+  "pattern": [
+    " C ",
+    "CLC",
+    "CEC"
+  ],
+  "time": 40,
+  "key": {
+    "C": { "item": "datanessence:capacitance_panel" },
+    "E": { "item": "datanessence:essence_shard" },
+    "L": { "item": "datanessence:logical_matrix" }
+  },
+  "result": { "id": "datanessence:essence_meter" }
+}

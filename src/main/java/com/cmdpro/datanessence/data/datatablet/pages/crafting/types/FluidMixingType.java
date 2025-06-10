@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.data.datatablet.pages.crafting.types;
 
 import com.cmdpro.datanessence.api.datatablet.CraftingType;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.data.datatablet.pages.CraftingPage;
 import com.cmdpro.datanessence.recipe.FluidMixingRecipe;
@@ -20,7 +21,7 @@ public class FluidMixingType extends CraftingType {
             pGuiGraphics.blit(DataTabletScreen.TEXTURE_CRAFTING, xOffset + x, yOffset + y, 10, 76, 123, 60);
             page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(BlockRegistry.FLUID_MIXER.get()), xOffset + x + 78, yOffset + y + 43, pMouseX, pMouseY);
 
-            ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x + 5, yOffset + y + 19, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost(), 1000);
+            ClientEssenceBarUtil.drawEssenceBarTiny(pGuiGraphics, xOffset + x + 5, yOffset + y + 19, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost(), 1000, EssenceBarBackgroundTypes.INDUSTRIAL);
             Component essence = ClientEssenceBarUtil.getEssenceBarTooltipTiny(pMouseX, pMouseY, xOffset + x + 5, yOffset + y + 19, EssenceTypeRegistry.ESSENCE.get(), recipe2.getEssenceCost());
             if (essence != null) {
                 page.tooltipToShow.clear();

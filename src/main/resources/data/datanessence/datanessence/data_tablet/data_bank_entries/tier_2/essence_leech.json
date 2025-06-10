@@ -3,6 +3,49 @@
     "id": "datanessence:essence_leech"
   },
   "tier": 2,
+  "minigames": [
+    {
+      "type": "datanessence:wire",
+      "tiles": [
+        {
+          "x": 7,
+          "y": 9,
+          "type": 1,
+          "essence": 0
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "type": 1,
+          "essence": 1
+        },
+        {
+          "x": 7,
+          "y": 1,
+          "type": 2,
+          "essence": 0
+        },
+        {
+          "x": 7,
+          "y": 11,
+          "type": 2,
+          "essence": 1
+        },
+        {
+          "x": 11,
+          "y": 2,
+          "type": 3,
+          "essence": 1
+        },
+        {
+          "x": 3,
+          "y": 11,
+          "type": 3,
+          "essence": 0
+        }
+      ]
+    }
+  ],
   "name": {
     "translate": "data_tablet.pages.essence_leech.name"
   },

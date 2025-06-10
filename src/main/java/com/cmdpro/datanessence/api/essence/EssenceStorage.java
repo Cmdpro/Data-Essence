@@ -3,6 +3,9 @@ package com.cmdpro.datanessence.api.essence;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Math;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * Implement this to define something that can store Essence.
  */
@@ -67,4 +70,6 @@ public interface EssenceStorage {
      * @return storage
      */
     EssenceStorage getStorage();
+
+    Set<EssenceType> getSupportedEssenceTypes();
 }

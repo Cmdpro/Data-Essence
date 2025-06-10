@@ -3,6 +3,49 @@
     "id": "datanessence:industrial_plant_siphon"
   },
   "tier": 2,
+  "minigames": [
+    {
+      "type": "datanessence:wire",
+      "tiles": [
+        {
+          "x": 1,
+          "y": 1,
+          "type": 1,
+          "essence": 0
+        },
+        {
+          "x": 13,
+          "y": 13,
+          "type": 1,
+          "essence": 1
+        },
+        {
+          "x": 12,
+          "y": 12,
+          "type": 2,
+          "essence": 0
+        },
+        {
+          "x": 2,
+          "y": 2,
+          "type": 2,
+          "essence": 1
+        },
+        {
+          "x": 1,
+          "y": 12,
+          "type": 3,
+          "essence": 0
+        },
+        {
+          "x": 13,
+          "y": 2,
+          "type": 3,
+          "essence": 1
+        }
+      ]
+    }
+  ],
   "name": {
     "translate": "data_tablet.pages.industrial_plant_siphon.name"
   },

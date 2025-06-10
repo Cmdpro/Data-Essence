@@ -1,0 +1,31 @@
+{
+  "icon": {
+    "id": "datanessence:essence_meter"
+  },
+  "tab": "datanessence:basics",
+  "x": 3,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:essence_meter"
+      },
+      "text": {
+        "translate": "data_tablet.pages.essence_meter.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/equipment/essence_meter"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.essence_meter.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.essence_meter.flavor"
+  }
+}

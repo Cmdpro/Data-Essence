@@ -3,12 +3,16 @@ package com.cmdpro.datanessence.client;
 import com.cmdpro.databank.ClientDatabankUtils;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.rendering.RenderHandler;
+import com.cmdpro.databank.rendering.RenderProjectionUtil;
 import com.cmdpro.databank.rendering.ShaderHelper;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
-import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
+import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
@@ -16,10 +20,14 @@ import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.data.pinging.PingableStructure;
 import com.cmdpro.datanessence.entity.BlackHole;
+import com.cmdpro.datanessence.item.equipment.EssenceMeter;
 import com.cmdpro.datanessence.item.equipment.AntiGravityPack;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.data.pinging.StructurePing;
+import com.cmdpro.datanessence.networking.ModMessages;
+import com.cmdpro.datanessence.networking.packet.c2s.RequestMachineEssenceValue;
+import com.cmdpro.datanessence.networking.packet.s2c.MachineEssenceValueSync;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceRenderTypes;
@@ -29,6 +37,7 @@ import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -36,18 +45,22 @@ import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -61,7 +74,8 @@ import org.joml.Vector3d;
 
 import java.awt.*;
 import java.text.DecimalFormat;
-import java.util.Map;
+import java.util.*;
+import java.util.List;
 
 import static com.cmdpro.datanessence.client.gui.PingsGuiLayer.pings;
 import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
@@ -158,6 +172,48 @@ public class ClientEvents {
                         event.getPoseStack().popPose();
                     }
                 }
+                if (mc.hitResult instanceof BlockHitResult blockHitResult) {
+                    if (mc.player.isHolding((item) -> item.getItem() instanceof EssenceMeter)) {
+                        if (EssenceMeter.currentMachineEssenceValue != null && EssenceMeter.currentMachineEssenceValue.pos.equals(blockHitResult.getBlockPos())) {
+                            if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity) {
+                                List<EssenceType> supported = EssenceMeter.currentMachineEssenceValue.values.keySet().stream().sorted(Comparator.comparing((i) -> i.tier)).toList();
+                                Map<EssenceType, Float> values = EssenceMeter.currentMachineEssenceValue.values;
+                                float max = EssenceMeter.currentMachineEssenceValue.maxValue;
+                                float shift = -(supported.size() - 1f) / 2f;
+                                int width = 13 * supported.size();
+                                int height = 54 + 11;
+                                float worldWidth = width / 96f;
+                                float worldHeight = height / 96f;
+                                RenderProjectionUtil.project((graphics) -> {
+                                    float shift2 = shift;
+                                    for (EssenceType i : supported) {
+                                        ClientEssenceBarUtil.drawEssenceIcon(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)), 0, i, EssenceBarBackgroundTypes.INDUSTRIAL, false, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), false));
+                                        ClientEssenceBarUtil.drawEssenceBar(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)) + 1, 12, i, values.get(i), max, EssenceBarBackgroundTypes.INDUSTRIAL);
+                                        shift2 += 1;
+                                    }
+                                }, (poseStack) -> {
+                                    Vec3 center = blockHitResult.getBlockPos().getCenter();
+                                    Vec2 angle = calculateRotationVector(center, Minecraft.getInstance().player.getEyePosition());
+                                    if (mc.player.getEyePosition().y >= center.y + 0.5) {
+                                        center = center.add(0, 1, 0);
+                                    } else if (mc.player.getEyePosition().y <= center.y - 0.5) {
+                                        center = center.add(0, -1, 0);
+                                    } else {
+                                        Direction direction = Direction.fromYRot(angle.y);
+                                        center = center.add(direction.getStepX(), 0, direction.getStepZ());
+                                    }
+                                    poseStack.pushPose();
+                                    poseStack.translate(center.x, center.y, center.z);
+                                    poseStack.pushPose();
+                                    poseStack.mulPose(Axis.YP.rotationDegrees(-angle.y + 180));
+                                }, (poseStack) -> {
+                                    poseStack.popPose();
+                                    poseStack.popPose();
+                                }, bufferSource, new Vec3(-worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, -worldHeight / 2f, 0), new Vec3(-worldWidth / 2f, -worldHeight / 2f, 0), width, height);
+                            }
+                        }
+                    }
+                }
             }
             if (!ShaderHelper.shouldUseAlternateRendering()) {
                 renderObjects(event);
@@ -177,6 +233,16 @@ public class ClientEvents {
                 ClientModEvents.genderEuphoriaShader.setActive(DataNEssenceClientConfig.genderEuphoriaShader && mc.player.hasEffect(MobEffectRegistry.GENDER_EUPHORIA));
             }
         }
+    }
+    private static Vec2 calculateRotationVector(Vec3 pVec, Vec3 pTarget) {
+        double d0 = pTarget.x - pVec.x;
+        double d1 = pTarget.y - pVec.y;
+        double d2 = pTarget.z - pVec.z;
+        double d3 = java.lang.Math.sqrt(d0 * d0 + d2 * d2);
+        return new Vec2(
+                Mth.wrapDegrees((float)(-(Mth.atan2(d1, d3) * (double)(180F / (float) java.lang.Math.PI)))),
+                Mth.wrapDegrees((float)(Mth.atan2(d2, d0) * (double)(180F / (float) java.lang.Math.PI)) - 90.0F)
+        );
     }
     private static void renderObjects(RenderLevelStageEvent event) {
         copyBuffers();
@@ -250,6 +316,15 @@ public class ClientEvents {
             }
             boolean playMusic = false;
             SoundEvent mus = null;
+            if (mc.player != null) {
+                if (mc.hitResult instanceof BlockHitResult blockHitResult) {
+                    if (mc.player.isHolding((item) -> item.getItem() instanceof EssenceMeter)) {
+                        if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity) {
+                            ModMessages.sendToServer(new RequestMachineEssenceValue(blockHitResult.getBlockPos()));
+                        }
+                    }
+                }
+                GrapplingHook.GrapplingHookData grapplingHookData = mc.player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
             if (player != null) {
                 GrapplingHook.GrapplingHookData grapplingHookData = player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
                 if (grapplingHookData != null) {

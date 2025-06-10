@@ -86,14 +86,6 @@ public class Fabricator extends Block implements EntityBlock, RedirectorInteract
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
 
-    @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
-        if (stack.getItem() instanceof EssenceRedirector) {
-            return ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION;
-        }
-        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
-    }
-
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {

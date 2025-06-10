@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -33,11 +34,9 @@ public class FabricatorScreen extends AbstractContainerScreen<FabricatorMenu> {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.25f);
         pGuiGraphics.renderItem(menu.blockEntity.item, x+145, y+35);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1F);
-        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
-        if (ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false)) {
-            pGuiGraphics.blit(TEXTURE, x+7, y+6, 177, 0, 9, 9);
-        }
-        pGuiGraphics.blit(TEXTURE, x+111, y+34, 222, 0, (int)(22f*((float)menu.blockEntity.time/menu.blockEntity.maxTime)), 17);
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
+        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+7, y+6, EssenceTypeRegistry.ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false));
+        pGuiGraphics.blit(TEXTURE, x+110, y+34, 177, 0, (int)(22f*((float)menu.blockEntity.time/menu.blockEntity.maxTime)), 17);
         time += pPartialTick;
     }
 
