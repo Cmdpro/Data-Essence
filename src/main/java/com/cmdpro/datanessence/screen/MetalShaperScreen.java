@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -38,12 +39,10 @@ public class MetalShaperScreen extends AbstractContainerScreen<MetalShaperMenu> 
         int y = (height - imageHeight) / 2;
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
         if (menu.blockEntity.workTime >= 0 && menu.blockEntity.maxWorkTime != -1) {
-            pGuiGraphics.blit(TEXTURE, x + 82, y + 27, 188, 0, 12, (int) Math.ceil(15f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxWorkTime)));
+            pGuiGraphics.blit(TEXTURE, x + 82, y + 27, 177, 0, 12, (int) Math.ceil(15f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxWorkTime)));
         }
-        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
-        if (ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false)) {
-            pGuiGraphics.blit(TEXTURE, x+7, y+6, 177, 0, 9, 9);
-        }
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
+        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+7, y+6, EssenceTypeRegistry.ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false));
     }
 
     @Override

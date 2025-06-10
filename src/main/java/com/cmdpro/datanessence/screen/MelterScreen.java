@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.screen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -39,12 +40,10 @@ public class MelterScreen extends AbstractContainerScreen<MelterMenu> {
         int y = (height - imageHeight) / 2;
         pGuiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
         if (menu.blockEntity.workTime >= 0 && menu.blockEntity.maxTime != -1) {
-            pGuiGraphics.blit(TEXTURE, x + 111, y + 17, 188, 0, 4, (int) Math.ceil(40f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxTime)));
+            pGuiGraphics.blit(TEXTURE, x + 111, y + 17, 177, 0, 4, (int) Math.ceil(40f * ((float)menu.blockEntity.workTime / menu.blockEntity.maxTime)));
         }
-        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence());
-        if (ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false)) {
-            pGuiGraphics.blit(TEXTURE, x+7, y+6, 177, 0, 9, 9);
-        }
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
+        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+7, y+6, EssenceTypeRegistry.ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false));
     }
 
     @Override
