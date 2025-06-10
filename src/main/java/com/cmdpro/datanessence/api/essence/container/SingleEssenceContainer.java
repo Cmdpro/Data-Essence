@@ -7,6 +7,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Set;
+
 /**
  * A container that can store a single type of Essence.
  */
@@ -88,5 +90,9 @@ public class SingleEssenceContainer implements EssenceStorage {
     public void fromNbt(@NotNull CompoundTag tag) {
         float storedAmount = tag.getFloat("Amount");
         this.storedEssence = storedAmount;
+    }
+    @Override
+    public Set<EssenceType> getSupportedEssenceTypes() {
+        return Set.of(storedType);
     }
 }

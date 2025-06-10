@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence;
 
+import com.cmdpro.datanessence.api.block.RedirectorInteractable;
 import com.cmdpro.datanessence.api.block.TraversiteBlock;
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePoint;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
@@ -12,6 +14,8 @@ import com.cmdpro.datanessence.block.transportation.TraversiteRoad;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.data.computers.ComputerTypeManager;
 import com.cmdpro.datanessence.data.pinging.PingableStructureManager;
+import com.cmdpro.datanessence.item.equipment.EssenceMeter;
+import com.cmdpro.datanessence.item.equipment.EssenceRedirector;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
@@ -35,6 +39,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -51,6 +57,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDestroyBlockEvent;
 import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.event.level.ExplosionEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
@@ -116,6 +123,21 @@ public class ModEvents {
                         event.getEntity().removeData(AttachmentTypeRegistry.BINDING_STRUCTURE_CONTROLLER);
                     }
                 });
+            }
+        }
+    }
+    @SubscribeEvent
+    public static void useItemOnBlockEvent(UseItemOnBlockEvent event) {
+        if (event.getUsePhase() == UseItemOnBlockEvent.UsePhase.BLOCK) {
+            if (event.getItemStack().getItem() instanceof EssenceMeter) {
+                if (event.getLevel().getBlockEntity(event.getPos()) instanceof EssenceBlockEntity) {
+                    event.cancelWithResult(ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION);
+                }
+            }
+            if (event.getItemStack().getItem() instanceof EssenceRedirector) {
+                if (event.getLevel().getBlockState(event.getPos()).getBlock() instanceof RedirectorInteractable) {
+                    event.cancelWithResult(ItemInteractionResult.SKIP_DEFAULT_BLOCK_INTERACTION);
+                }
             }
         }
     }

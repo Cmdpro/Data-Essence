@@ -100,6 +100,7 @@ public class MultiEssenceContainer implements EssenceStorage {
         return this;
     }
 
+    @Override
     public Set<EssenceType> getSupportedEssenceTypes() {
         return this.storedEssence.keySet();
     }

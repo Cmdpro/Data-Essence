@@ -54,9 +54,12 @@ public class ClientEssenceBarUtil {
         }
     }
     public static void drawEssenceIcon(GuiGraphics graphics, int x, int y, EssenceType type) {
-        drawEssenceIcon(graphics, x, y, type, null, true);
+        drawEssenceIcon(graphics, x, y, type, null, false, true);
     }
     public static void drawEssenceIcon(GuiGraphics graphics, int x, int y, EssenceType type, EssenceBarBackgroundType backgroundType, boolean unlocked) {
+        drawEssenceIcon(graphics, x, y, type, backgroundType, true, unlocked);
+    }
+    public static void drawEssenceIcon(GuiGraphics graphics, int x, int y, EssenceType type, EssenceBarBackgroundType backgroundType, boolean drawBackground, boolean unlocked) {
         if (!unlocked && backgroundType == null) {
             return;
         }
@@ -68,7 +71,7 @@ public class ClientEssenceBarUtil {
             u = backgroundType.unknownIconSprite.x;
             v = backgroundType.unknownIconSprite.y;
         }
-        if (backgroundType != null) {
+        if (backgroundType != null && drawBackground) {
             graphics.blit(backgroundType.iconSprite.texture, x, y, backgroundType.iconSprite.x, backgroundType.iconSprite.y, 9, 9);
         }
         graphics.blit(texture, x, y, u, v, 9, 9);
