@@ -10,3 +10,5 @@
 ### Fixes
 - Adapted to some small databank tweaks
 - Fixed Fluid Mixer crashing
+- Fixed Fabricator not consuming Essence when crafting
+- Fixed incorrect offset of Fabricator progress bar

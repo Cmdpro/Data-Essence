@@ -2,6 +2,7 @@
   "creativemodetab.datanessence_blocks": "Data & Essence: Blocks",
   "creativemodetab.datanessence_items": "Data & Essence: Items",
 
+  "datanessence.essence_types.unknown": "???",
   "datanessence.essence_types.essence": "Industrial Essence",
   "datanessence.essence_types.lunar_essence": "Lunar Essence",
   "datanessence.essence_types.natural_essence": "Natural Essence",
@@ -301,6 +302,9 @@
   "data_tablet.pages.essence_crystals.name": "Essence Crystals",
   "data_tablet.pages.essence_crystals.page1.text": "Deposits of raw Essence Crystal appear inside caves. At time of data upload, their origins are unclear, but we suspect whatever formed them was once a natural process. Regardless, when mined, a whole Crystal shatters into several smaller Shards, proving immeasurably helpful for the first step into working with Essence.",
   "data_tablet.pages.essence_crystals.page2.text": "Amethyst proves able to be converted into Essence Shards in an Infuser should supplies run low. This procedure does not consume less Essence than a Shard produces, lest any novice researchers get any ideas.",
+  "data_tablet.pages.essence_meter.flavor": " ◇ Taking a peek",
+  "data_tablet.pages.essence_meter.name": "Measuring Essence",
+  "data_tablet.pages.essence_meter.page1.text": "Not all of our machines and constructs report their stored Essence in easily intuitive ways, or at all - and sometimes one wants a readout without actually checking on the machine in question. Thus, this tool: a measuring device for Essence stored within blocks.",
   "data_tablet.pages.essence_redirector.flavor": " ◇ Is it a wrench?",
   "data_tablet.pages.essence_redirector.name": "Essence Redirector",
   "data_tablet.pages.essence_redirector.page1.text": "The Essence Redirector is a finely-tuned manipulation tool that can interface with Essence and associated mechanisms. It is primarily used to activate and configure devices and machines - where applicable, such use is noted in the given machine's entry.\n\nThe tool may also be capable of simple interaction in other fields of technology, owing to its allegedly \"wrench-like\" nature.",
@@ -311,7 +315,6 @@
   "data_tablet.pages.hidden_blocks.flavor": " ◇ They seek what they can not find",
   "data_tablet.pages.hidden_blocks.name": "Hidden Resources",
   "data_tablet.pages.hidden_blocks.page1.text": "Some resources in the world cannot be seen with untrained eyes, and attempts to identify - and much less collect - them will fail. Throughout one's progression as a researcher, one might come across data entries that detail how to spot these things among the mundane. Once such an entry is acquired, that researcher will be able to identify and harvest the associated resource *personally* - replacements for tools, such as so-called \"spells\", are likely to not work.\n\nHidden resources come in two forms: plants - which generally are farmable - and ores - which generally are not, but their yields may be. Methods of block breaking that are not crafted with lensing crystals will be unable to successfully harvest either.",
-
   "data_tablet.pages.lensing_crystals.name": "Lensing Crystals",
   "data_tablet.pages.lensing_crystals.page1.incomplete_text": "We theorize that, similarly to our own realm, there exist deposits of a crystal we can use as a far more potent alternative to amethyst. It is likely to occur around sea level, we suspect.",
   "data_tablet.pages.lensing_crystals.page1.text": "Near-invisible to the untrained eye, these crystals occur in small deposits underground, around sea level. They possess incredible precision and efficacy when used to focus energy or as a lens, owing them their name. They bear similarities to crystals that occur in our own realm, though these ones thankfully do not require special tools we can no longer construct to find.",

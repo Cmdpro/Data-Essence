@@ -36,7 +36,7 @@ public class FabricatorScreen extends AbstractContainerScreen<FabricatorMenu> {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1F);
         ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
         ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+7, y+6, EssenceTypeRegistry.ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false));
-        pGuiGraphics.blit(TEXTURE, x+111, y+34, 177, 0, (int)(22f*((float)menu.blockEntity.time/menu.blockEntity.maxTime)), 17);
+        pGuiGraphics.blit(TEXTURE, x+110, y+34, 177, 0, (int)(22f*((float)menu.blockEntity.time/menu.blockEntity.maxTime)), 17);
         time += pPartialTick;
     }
 

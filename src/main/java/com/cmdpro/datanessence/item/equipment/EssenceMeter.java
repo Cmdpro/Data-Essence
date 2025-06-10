@@ -1,9 +1,10 @@
 package com.cmdpro.datanessence.item.equipment;
 
+import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.networking.packet.s2c.MachineEssenceValueSync;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.network.chat.Component;
@@ -35,7 +36,7 @@ public class EssenceMeter extends Item {
 
                 for (EssenceType type : storage.getSupportedEssenceTypes()) {
                     component.append("\n  " + storage.getEssence(type) + " / " + storage.getMaxEssence() + " ");
-                    component.append(type.getName());
+                    component.append( ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(type), false) ? type.getName() : Component.translatable("datanessence.essence_types.unknown"));
                 }
 
                 player.sendSystemMessage(component);

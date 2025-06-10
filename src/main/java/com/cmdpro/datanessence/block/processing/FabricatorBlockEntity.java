@@ -207,6 +207,14 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
         int left = getCraftingInv().asPositionedCraftInput().left();
         int top = getCraftingInv().asPositionedCraftInput().top();
         int craftWidth = 3;
+
+        if (essenceCost != null) {
+            for (Map.Entry<ResourceLocation, Float> cost : essenceCost.entrySet()) {
+                EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(cost.getKey());
+                storage.removeEssence(type, cost.getValue());
+            }
+        }
+
         for (int k = 0; k < craftingInput.height(); k++) {
             for (int l = 0; l < craftingInput.width(); l++) {
                 int i1 = l + left + (k + top) * craftWidth;
@@ -230,12 +238,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
                 }
             }
         }
-        if (essenceCost != null) {
-            for (Map.Entry<ResourceLocation, Float> i : essenceCost.entrySet()) {
-                EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                storage.removeEssence(type, i.getValue());
-            }
-        }
+
         ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, stack);
         level.addFreshEntity(entity);
         level.playSound(null, getBlockPos(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
@@ -245,9 +248,10 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
     public Recipe<CraftingInput> recipe;
     public boolean enoughEssence;
     public Map<ResourceLocation, Float> essenceCost;
+
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get()));
             if (pBlockEntity.recipe != null) {
                 boolean enoughEssence = true;
                 if (pBlockEntity.essenceCost != null) {

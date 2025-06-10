@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:essence_meter"
+  },
+  "tier": 1,
+  "name": {
+    "translate": "data_tablet.pages.essence_meter.name"
+  },
+  "entry": "datanessence:basics/essence_meter"
+}
