@@ -5,14 +5,12 @@ import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.databank.rendering.RenderProjectionUtil;
 import com.cmdpro.databank.rendering.ShaderHelper;
-import com.cmdpro.databank.worldgui.WorldGui;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceBarBackgroundTypes;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
-import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
@@ -24,6 +22,9 @@ import com.cmdpro.datanessence.item.equipment.EssenceMeter;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.data.pinging.StructurePing;
+import com.cmdpro.datanessence.networking.ModMessages;
+import com.cmdpro.datanessence.networking.packet.c2s.RequestMachineEssenceValue;
+import com.cmdpro.datanessence.networking.packet.s2c.MachineEssenceValueSync;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceRenderTypes;
@@ -35,14 +36,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.FogRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -67,9 +66,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.joml.Math;
-import org.joml.Matrix3f;
 import org.joml.Vector3d;
-import org.joml.Vector3f;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -173,39 +170,43 @@ public class ClientEvents {
                 }
                 if (mc.hitResult instanceof BlockHitResult blockHitResult) {
                     if (mc.player.isHolding((item) -> item.getItem() instanceof EssenceMeter)) {
-                        if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity essenceBlockEntity) {
-                            List<EssenceType> supported = essenceBlockEntity.getStorage().getSupportedEssenceTypes().stream().sorted(Comparator.comparing((i) -> i.tier)).toList();
-                            float shift = -(supported.size() - 1f) / 2f;
-                            int width = 13 * supported.size();
-                            int height = 54 + 11;
-                            float worldWidth = width / 96f;
-                            float worldHeight = height / 96f;
-                            RenderProjectionUtil.project((graphics) -> {
-                                float shift2 = shift;
-                                for (EssenceType i : supported) {
-                                    ClientEssenceBarUtil.drawEssenceIcon(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)), 0, i, EssenceBarBackgroundTypes.INDUSTRIAL, false, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), false));
-                                    ClientEssenceBarUtil.drawEssenceBar(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)) + 1, 12, i, essenceBlockEntity.getStorage().getEssence(i), essenceBlockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
-                                    shift2 += 1;
-                                }
-                            }, (poseStack) -> {
-                                Vec3 center = blockHitResult.getBlockPos().getCenter();
-                                Vec2 angle = calculateRotationVector(center, Minecraft.getInstance().player.getEyePosition());
-                                if (mc.player.getEyePosition().y >= center.y+0.5) {
-                                    center = center.add(0, 1, 0);
-                                } else if (mc.player.getEyePosition().y <= center.y-0.5) {
-                                    center = center.add(0, -1, 0);
-                                } else {
-                                    Direction direction = Direction.fromYRot(angle.y);
-                                    center = center.add(direction.getStepX(), 0, direction.getStepZ());
-                                }
-                                poseStack.pushPose();
-                                poseStack.translate(center.x, center.y, center.z);
-                                poseStack.pushPose();
-                                poseStack.mulPose(Axis.YP.rotationDegrees(-angle.y + 180));
-                            }, (poseStack) -> {
-                                poseStack.popPose();
-                                poseStack.popPose();
-                            }, bufferSource, new Vec3(-worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, -worldHeight / 2f, 0), new Vec3(-worldWidth / 2f, -worldHeight / 2f, 0), width, height);
+                        if (EssenceMeter.currentMachineEssenceValue != null && EssenceMeter.currentMachineEssenceValue.pos.equals(blockHitResult.getBlockPos())) {
+                            if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity) {
+                                List<EssenceType> supported = EssenceMeter.currentMachineEssenceValue.values.keySet().stream().sorted(Comparator.comparing((i) -> i.tier)).toList();
+                                Map<EssenceType, Float> values = EssenceMeter.currentMachineEssenceValue.values;
+                                float max = EssenceMeter.currentMachineEssenceValue.maxValue;
+                                float shift = -(supported.size() - 1f) / 2f;
+                                int width = 13 * supported.size();
+                                int height = 54 + 11;
+                                float worldWidth = width / 96f;
+                                float worldHeight = height / 96f;
+                                RenderProjectionUtil.project((graphics) -> {
+                                    float shift2 = shift;
+                                    for (EssenceType i : supported) {
+                                        ClientEssenceBarUtil.drawEssenceIcon(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)), 0, i, EssenceBarBackgroundTypes.INDUSTRIAL, false, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), false));
+                                        ClientEssenceBarUtil.drawEssenceBar(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)) + 1, 12, i, values.get(i), max, EssenceBarBackgroundTypes.INDUSTRIAL);
+                                        shift2 += 1;
+                                    }
+                                }, (poseStack) -> {
+                                    Vec3 center = blockHitResult.getBlockPos().getCenter();
+                                    Vec2 angle = calculateRotationVector(center, Minecraft.getInstance().player.getEyePosition());
+                                    if (mc.player.getEyePosition().y >= center.y + 0.5) {
+                                        center = center.add(0, 1, 0);
+                                    } else if (mc.player.getEyePosition().y <= center.y - 0.5) {
+                                        center = center.add(0, -1, 0);
+                                    } else {
+                                        Direction direction = Direction.fromYRot(angle.y);
+                                        center = center.add(direction.getStepX(), 0, direction.getStepZ());
+                                    }
+                                    poseStack.pushPose();
+                                    poseStack.translate(center.x, center.y, center.z);
+                                    poseStack.pushPose();
+                                    poseStack.mulPose(Axis.YP.rotationDegrees(-angle.y + 180));
+                                }, (poseStack) -> {
+                                    poseStack.popPose();
+                                    poseStack.popPose();
+                                }, bufferSource, new Vec3(-worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, -worldHeight / 2f, 0), new Vec3(-worldWidth / 2f, -worldHeight / 2f, 0), width, height);
+                            }
                         }
                     }
                 }
@@ -311,6 +312,13 @@ public class ClientEvents {
             boolean playMusic = false;
             SoundEvent mus = null;
             if (mc.player != null) {
+                if (mc.hitResult instanceof BlockHitResult blockHitResult) {
+                    if (mc.player.isHolding((item) -> item.getItem() instanceof EssenceMeter)) {
+                        if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity) {
+                            ModMessages.sendToServer(new RequestMachineEssenceValue(blockHitResult.getBlockPos()));
+                        }
+                    }
+                }
                 GrapplingHook.GrapplingHookData grapplingHookData = mc.player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
                 if (grapplingHookData != null) {
                     if (mc.player.position().distanceTo(grapplingHookData.pos) > 0) {
