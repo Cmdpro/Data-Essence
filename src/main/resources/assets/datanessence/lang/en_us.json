@@ -34,6 +34,8 @@
   "item.datanessence.emerald_shard": "Emerald Shard",
   "item.datanessence.essence_bomb": "Industrial Essence Bomb",
   "item.datanessence.essence_bomb.info": " ◇ Volatile! Explodes when thrown.",
+  "item.datanessence.essence_meter": "Essence Meter",
+  "item.datanessence.essence_meter.contains": "Measured the following Essence inside this block: ",
   "item.datanessence.essence_redirector": "Essence Redirector",
   "item.datanessence.essence_shard": "Industrial Essence Shard",
   "item.datanessence.essence_sword": "Essence Sword",
