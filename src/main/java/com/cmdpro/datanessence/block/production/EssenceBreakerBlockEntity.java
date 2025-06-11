@@ -73,4 +73,12 @@ public class EssenceBreakerBlockEntity extends BlockEntity implements EssenceBlo
         interval = tag.getInt("BreakInterval");
         super.loadAdditional(tag, provider);
     }
+    @Override
+    public float getMeterSideLength(Direction direction) {
+        Direction facing = getBlockState().getValue(EssenceBreaker.FACING);
+        if (direction.equals(facing)) {
+            return EssenceBlockEntity.super.getMeterSideLength(direction)*1.5f;
+        }
+        return EssenceBlockEntity.super.getMeterSideLength(direction);
+    }
 }

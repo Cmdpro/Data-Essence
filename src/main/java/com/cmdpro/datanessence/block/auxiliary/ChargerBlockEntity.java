@@ -17,6 +17,7 @@ import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.ChargerMenu;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -165,5 +166,15 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Ess
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new ChargerMenu(pContainerId, pInventory, this);
+    }
+
+    @Override
+    public float getMeterSideLength(Direction direction) {
+        if (!charging) {
+            if (direction.equals(Direction.UP)) {
+                return -0.25f;
+            }
+        }
+        return EssenceBlockEntity.super.getMeterSideLength(direction);
     }
 }
