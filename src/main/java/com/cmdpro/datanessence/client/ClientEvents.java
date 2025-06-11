@@ -324,8 +324,6 @@ public class ClientEvents {
                         }
                     }
                 }
-                GrapplingHook.GrapplingHookData grapplingHookData = mc.player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
-            if (player != null) {
                 GrapplingHook.GrapplingHookData grapplingHookData = player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
                 if (grapplingHookData != null) {
                     if (mc.player.position().distanceTo(grapplingHookData.pos) > 0) {
@@ -344,14 +342,6 @@ public class ClientEvents {
                         Vector3d force = new Vector3d(tension).div(mass);
                         mc.player.setDeltaMovement(mc.player.getDeltaMovement().add(new Vec3(force.x, force.y > 0 ? force.y*intensity : force.y, force.z)));
                     }
-                    Vector3d direction = new Vector3d(grapplingHookData.pos.subtract(player.position()).toVector3f()).normalize();
-                    double theta = direction.angle(new Vector3d(0, 1, 0));
-                    double centripetalAcceleration = player.getDeltaMovement().lengthSqr() / (1d+grapplingHookData.distance);
-                    double mass = 1;
-                    double gravity = player.getGravity();
-                    Vector3d tension = new Vector3d(direction).mul(mass * (centripetalAcceleration + gravity * Math.cos(theta)));
-                    Vector3d force = new Vector3d(tension).div(mass);
-                    player.setDeltaMovement(player.getDeltaMovement().add(force.x, force.y, force.z));
                 }
                 for (int index = 0; index < player.getInventory().getContainerSize(); index++) {
                     ItemStack slot = player.getInventory().getItem(index);
