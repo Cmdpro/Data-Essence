@@ -16,6 +16,7 @@ import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -85,6 +86,9 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
         hasRedstone = this.getLevel().hasNeighborSignal(pos);
         return hasRedstone;
     }
+    public boolean isAbleToWork() {
+        return(hasRedstone && hasStructure && !isBroken);
+    }
 
     public static void tick(Level world, BlockPos pos, BlockState state, EssenceDerivationSpikeBlockEntity spike) {
         if (!world.isClientSide()) {
@@ -122,6 +126,16 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
                 spike.updateBlock();
             }
         }
+    }
+
+    @Override
+    public float getMeterSideLength(Direction direction) {
+        if (direction.equals(Direction.UP)) {
+            if (isAbleToWork()) {
+                return EssenceBlockEntity.super.getMeterSideLength(direction)*4.25f;
+            }
+        }
+        return EssenceBlockEntity.super.getMeterSideLength(direction);
     }
 
     protected void updateBlock() {
