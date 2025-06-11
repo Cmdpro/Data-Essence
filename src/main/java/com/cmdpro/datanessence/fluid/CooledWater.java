@@ -66,44 +66,6 @@ public class CooledWater extends ModFluidType {
                     .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                     .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH));
         }
-
-        @Override
-        public void setItemMovement(ItemEntity entity) {
-            super.setItemMovement(entity);
-            Level level = entity.level();
-            if (!level.isClientSide) {
-                RecipeInput input = new SingleRecipeInput(entity.getItem());
-                Optional<RecipeHolder<GenderfluidTransitionRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeRegistry.GENDERFLUID_TRANSITION_TYPE.get(), input, level);
-                if (recipe.isPresent()) {
-                    ItemStack result = recipe.get().value().assemble(input, level.registryAccess());
-                    ItemStack entityItem = entity.getItem();
-                    DataComponentPatch resultComponents = result.getComponentsPatch();
-                    DataComponentPatch entityComponents = entityItem.getComponentsPatch();
-                    ItemStack finalItem = new ItemStack(result.getItem());
-                    finalItem.setCount(result.getCount() * entityItem.getCount());
-                    if (recipe.get().value().getMergeComponents()) {
-                        copyComponents(entityComponents, finalItem);
-                    }
-                    copyComponents(resultComponents, finalItem);
-                    entity.setItem(finalItem);
-                    entity.setDeltaMovement(entity.getDeltaMovement().x, 0.5, entity.getDeltaMovement().z);
-                    ModMessages.sendToPlayersNear(new PlayGenderfluidTransitionEffect(entity.blockPosition(), entity.position()), (ServerLevel)level, entity.blockPosition().getCenter(), 128);
-                }
-            }
-        }
-        private static <T> void copyComponents(DataComponentPatch from, ItemStack to) {
-            for (Map.Entry<DataComponentType<?>, Optional<?>> i : from.entrySet()) {
-                if (i.getValue().isPresent()) {
-                    copyComponent(i.getKey(), from, to);
-                }
-            }
-        }
-        private static <T> void copyComponent(DataComponentType<T> type, DataComponentPatch from, ItemStack to) {
-            Optional<? extends T> value = from.get(type);
-            if (value != null && value.isPresent()) {
-                to.set(type, value.get());
-            }
-        }
     }
 
     public abstract static class CooledWaterFluid {
