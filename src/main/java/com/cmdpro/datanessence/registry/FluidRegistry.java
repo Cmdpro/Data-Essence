@@ -34,5 +34,6 @@ public class FluidRegistry {
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerFluidType(Genderfluid.GenderfluidFluid.EXTENSIONS, FluidRegistry.GENDERFLUID.type.get());
+        event.registerFluidType(CooledWater.CooledWaterFluid.EXTENSIONS, FluidRegistry.COOLED_WATER.type.get());
     }
 }
