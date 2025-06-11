@@ -9,10 +9,7 @@ import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphonBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceDerivationSpikeBlockEntity;
 import com.cmdpro.datanessence.block.processing.*;
-import com.cmdpro.datanessence.block.production.EssenceBreakerBlockEntity;
-import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
-import com.cmdpro.datanessence.block.production.FluidSpillerBlockEntity;
-import com.cmdpro.datanessence.block.production.MetalShaperBlockEntity;
+import com.cmdpro.datanessence.block.production.*;
 import com.cmdpro.datanessence.block.storage.*;
 import com.cmdpro.datanessence.block.technical.ArekkoBlockEntity;
 import com.cmdpro.datanessence.block.technical.ComputerBlockEntity;
@@ -242,6 +239,10 @@ public class BlockEntityRegistry {
             register("lunar_crystal_seed", () ->
                     BlockEntityType.Builder.of(LunarCrystalSeedBlockEntity::new,
                             BlockRegistry.LUNAR_CRYSTAL_SEED.get()).build(null));
+    public static final Supplier<BlockEntityType<CrystallineCradleBlockEntity>> CRYSTALLINE_CRADLE =
+            register("crystalline_cradle", () ->
+                    BlockEntityType.Builder.of(CrystallineCradleBlockEntity::new,
+                            BlockRegistry.CRYSTALLINE_CRADLE.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {

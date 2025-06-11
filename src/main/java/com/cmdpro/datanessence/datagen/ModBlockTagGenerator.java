@@ -104,7 +104,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.ESSENCE_DERIVATION_SPIKE.get())
                 .add(BlockRegistry.LUNAR_CRYSTAL_SEED.get())
                 .add(BlockRegistry.ECLIPTRUM_BLOCK.get())
-                .add(BlockRegistry.FROZEN_MOONLIGHT.get());
+                .add(BlockRegistry.FROZEN_MOONLIGHT.get())
+                .add(BlockRegistry.CRYSTALLINE_CRADLE.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
@@ -136,5 +137,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
+        this.tag(TagRegistry.Blocks.CRYSTALLINE_CRADLE_BREAKABLE)
+                .add(BlockRegistry.ESSENCE_CRYSTAL.get())
+                .add(BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get());
     }
 }

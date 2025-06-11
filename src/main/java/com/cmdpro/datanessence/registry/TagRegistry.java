@@ -14,6 +14,7 @@ public class TagRegistry {
     public static class Blocks {
         public static final TagKey<Block> BUFFER_DETECTION_PASS = tag("buffer_detection_pass");
         public static final TagKey<Block> HAMMER_AND_CHISEL_COLLECTABLE = tag("hammer_and_chisel_collectable"); // for the Hammer and Chisel tool
+        public static final TagKey<Block> CRYSTALLINE_CRADLE_BREAKABLE = tag("crystalline_cradle_breakable");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(DataNEssence.locate(name));

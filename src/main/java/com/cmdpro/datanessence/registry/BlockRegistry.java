@@ -185,6 +185,9 @@ public class BlockRegistry {
     public static final Supplier<Block> DECO_ITEM_BUFFER = register("deco_item_buffer",
             () -> new RotatedPillarBlock(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> CRYSTALLINE_CRADLE = register("crystalline_cradle",
+            () -> new CrystallineCradle(getMachineProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Nodes
     public static final Supplier<Block> ESSENCE_POINT = register("essence_point",
