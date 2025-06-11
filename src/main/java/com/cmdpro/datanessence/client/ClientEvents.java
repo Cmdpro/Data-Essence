@@ -175,7 +175,7 @@ public class ClientEvents {
                 if (mc.hitResult instanceof BlockHitResult blockHitResult) {
                     if (mc.player.isHolding((item) -> item.getItem() instanceof EssenceMeter)) {
                         if (EssenceMeter.currentMachineEssenceValue != null && EssenceMeter.currentMachineEssenceValue.pos.equals(blockHitResult.getBlockPos())) {
-                            if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity) {
+                            if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity essenceBlockEntity) {
                                 List<EssenceType> supported = EssenceMeter.currentMachineEssenceValue.values.keySet().stream().sorted(Comparator.comparing((i) -> i.tier)).toList();
                                 Map<EssenceType, Float> values = EssenceMeter.currentMachineEssenceValue.values;
                                 float max = EssenceMeter.currentMachineEssenceValue.maxValue;
@@ -194,13 +194,14 @@ public class ClientEvents {
                                 }, (poseStack) -> {
                                     Vec3 center = blockHitResult.getBlockPos().getCenter();
                                     Vec2 angle = calculateRotationVector(center, Minecraft.getInstance().player.getEyePosition());
-                                    if (mc.player.getEyePosition().y >= center.y + 0.5) {
-                                        center = center.add(0, 1, 0);
-                                    } else if (mc.player.getEyePosition().y <= center.y - 0.5) {
-                                        center = center.add(0, -1, 0);
+                                    if (mc.player.getEyePosition().y >= center.y + essenceBlockEntity.getMeterSideLength(Direction.UP)) {
+                                        center = center.add(0, (essenceBlockEntity.getMeterSideLength(Direction.UP)+essenceBlockEntity.getMeterRenderOffset(Direction.UP)), 0);
+                                    } else if (mc.player.getEyePosition().y <= center.y - essenceBlockEntity.getMeterSideLength(Direction.DOWN)) {
+                                        center = center.add(0, -(essenceBlockEntity.getMeterSideLength(Direction.DOWN)+essenceBlockEntity.getMeterRenderOffset(Direction.DOWN)), 0);
                                     } else {
                                         Direction direction = Direction.fromYRot(angle.y);
-                                        center = center.add(direction.getStepX(), 0, direction.getStepZ());
+                                        float offset = (essenceBlockEntity.getMeterSideLength(direction)+essenceBlockEntity.getMeterRenderOffset(direction));
+                                        center = center.add(direction.getStepX()*offset, 0, direction.getStepZ()*offset);
                                     }
                                     poseStack.pushPose();
                                     poseStack.translate(center.x, center.y, center.z);

@@ -16,6 +16,7 @@ import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.MetalShaperMenu;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -254,6 +255,15 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
             pBlockEntity.updateBlock();
         }
     }
+
+    @Override
+    public float getMeterSideLength(Direction direction) {
+        if (direction.equals(Direction.UP)) {
+            return EssenceBlockEntity.super.getMeterSideLength(direction)*1.5f;
+        }
+        return EssenceBlockEntity.super.getMeterSideLength(direction);
+    }
+
     protected void updateBlock() {
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
