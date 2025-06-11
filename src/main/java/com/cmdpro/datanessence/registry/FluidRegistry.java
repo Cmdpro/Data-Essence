@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.fluid.CooledWater;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.fluid.ModFluidRegistryObject;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,6 +18,7 @@ public class FluidRegistry {
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, DataNEssence.MOD_ID);
 
     public static final ModFluidRegistryObject GENDERFLUID = ModFluidRegistryObject.register("genderfluid", new Genderfluid());
+    public static final ModFluidRegistryObject COOLED_WATER = ModFluidRegistryObject.register("cooled_water", new CooledWater());
 
     private static <T extends Fluid> Supplier<T> register(final String name, final Supplier<T> entity) {
         return FLUIDS.register(name, entity);
