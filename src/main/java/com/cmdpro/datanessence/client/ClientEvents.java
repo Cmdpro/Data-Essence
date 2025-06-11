@@ -190,11 +190,19 @@ public class ClientEvents {
                                 }, (poseStack) -> {
                                     Vec3 center = blockHitResult.getBlockPos().getCenter();
                                     Vec2 angle = calculateRotationVector(center, Minecraft.getInstance().player.getEyePosition());
+                                    boolean horizontal = true;
                                     if (mc.player.getEyePosition().y >= center.y + essenceBlockEntity.getMeterSideLength(Direction.UP)) {
-                                        center = center.add(0, (essenceBlockEntity.getMeterSideLength(Direction.UP)+essenceBlockEntity.getMeterRenderOffset(Direction.UP)), 0);
+                                        if (mc.level.getBlockState(blockHitResult.getBlockPos().above()).isAir()) {
+                                            center = center.add(0, (essenceBlockEntity.getMeterSideLength(Direction.UP)+essenceBlockEntity.getMeterRenderOffset(Direction.UP)), 0);
+                                            horizontal = false;
+                                        }
                                     } else if (mc.player.getEyePosition().y <= center.y - essenceBlockEntity.getMeterSideLength(Direction.DOWN)) {
-                                        center = center.add(0, -(essenceBlockEntity.getMeterSideLength(Direction.DOWN)+essenceBlockEntity.getMeterRenderOffset(Direction.DOWN)), 0);
-                                    } else {
+                                        if (mc.level.getBlockState(blockHitResult.getBlockPos().below()).isAir()) {
+                                            center = center.add(0, -(essenceBlockEntity.getMeterSideLength(Direction.DOWN) + essenceBlockEntity.getMeterRenderOffset(Direction.DOWN)), 0);
+                                            horizontal = false;
+                                        }
+                                    }
+                                    if (horizontal) {
                                         Direction direction = Direction.fromYRot(angle.y);
                                         float offset = (essenceBlockEntity.getMeterSideLength(direction)+essenceBlockEntity.getMeterRenderOffset(direction));
                                         center = center.add(direction.getStepX()*offset, 0, direction.getStepZ()*offset);

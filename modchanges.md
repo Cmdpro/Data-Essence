@@ -3,3 +3,4 @@
 
 ### Changes
 - Metal Shaper, Essence Breaker, and Charger now show the essence meter at a better position
+- Made the Essence Meter default to horizontal if the vertical positions are covered
