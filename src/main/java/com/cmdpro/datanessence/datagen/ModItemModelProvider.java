@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.FluidRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -135,7 +136,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         simpleItem(ItemRegistry.LENSING_CRYSTAL);
         simpleItem(ItemRegistry.BONDING_POWDER);
-        simpleItem(ItemRegistry.GENDERFLUID_BUCKET);
+        simpleItem(FluidRegistry.GENDERFLUID.bucket::get);
         simpleItem(ItemRegistry.FROZEN_MOONLIGHT_CHUNK);
 
         essencePoint(BlockRegistry.LUNAR_ESSENCE_POINT);

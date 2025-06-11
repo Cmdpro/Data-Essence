@@ -8,7 +8,6 @@ import com.cmdpro.datanessence.block.decoration.Dewlamp;
 import com.cmdpro.datanessence.block.decoration.EssenceBridge;
 import com.cmdpro.datanessence.block.decoration.FlareLight;
 import com.cmdpro.datanessence.block.decoration.LightFixture;
-import com.cmdpro.datanessence.block.fluid.GenderfluidBlock;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphon;
@@ -30,6 +29,7 @@ import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
 import com.cmdpro.datanessence.block.transportation.*;
 import com.cmdpro.datanessence.block.world.*;
 import com.cmdpro.datanessence.block.world.shieldingstone.*;
+import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -362,10 +362,6 @@ public class BlockRegistry {
     public static final Supplier<Block> DEWLAMP = register("dewlamp",
             () -> new Dewlamp(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN).noOcclusion().noCollission().lightLevel((blockState) -> { return 5;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-
-    // Fluids
-    public static final Supplier<LiquidBlock> GENDERFLUID = registerBlock("genderfluid", () -> new GenderfluidBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.WATER).mapColor(DyeColor.BLACK)));
-
     private static <T extends Block> Supplier<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {
         return BLOCKS.register(name, block);
