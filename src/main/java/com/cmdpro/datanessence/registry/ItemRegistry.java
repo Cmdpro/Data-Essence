@@ -96,9 +96,6 @@ public class ItemRegistry {
     // Music Discs
     public static final Supplier<Item> UNDER_THE_SKY_MUSIC_DISC = register("under_the_sky_music_disc", () -> new Item(new Item.Properties().stacksTo(1).rarity(Rarity.RARE).jukeboxPlayable(JukeboxSongRegistry.UNDER_THE_SKY)));
 
-    // Buckets
-    public static final Supplier<Item> GENDERFLUID_BUCKET = register("genderfluid_bucket", () -> new BucketItem(FluidRegistry.GENDERFLUID.get(), new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
-
     // "Sprite" items, whose only use should be for rendering a given icon somewhere that only items are allowed to
     public static final Supplier<Item> SPRITE_BOOK_FLORA = register("sprite_book_flora", () -> new Item(new Item.Properties()));
 

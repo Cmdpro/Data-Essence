@@ -1,6 +1,5 @@
 package com.cmdpro.datanessence.client;
 
-import com.cmdpro.databank.ClientDatabankUtils;
 import com.cmdpro.databank.DatabankUtils;
 import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import com.cmdpro.databank.rendering.ColorUtil;
@@ -40,7 +39,6 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.ClientHooks;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import org.joml.SimplexNoise;
@@ -145,7 +143,7 @@ public class ClientModEvents {
     };
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        event.registerFluidType(Genderfluid.EXTENSIONS, FluidRegistry.GENDERFLUID_TYPE.get());
+        event.registerFluidType(Genderfluid.GenderfluidFluid.EXTENSIONS, FluidRegistry.GENDERFLUID.type.get());
 
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/auto-fabricator.png"), DataNEssence.locate("auto-fabricator")), BlockRegistry.AUTO_FABRICATOR.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/charger.png"), DataNEssence.locate("charger")), BlockRegistry.CHARGER.get().asItem());

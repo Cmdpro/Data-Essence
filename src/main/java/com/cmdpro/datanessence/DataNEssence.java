@@ -306,7 +306,7 @@ public class DataNEssence
             event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
 
             // Buckets
-            event.accept(ItemRegistry.GENDERFLUID_BUCKET.get());
+            event.accept(FluidRegistry.GENDERFLUID.bucket.get());
 
             // Loot Items
             event.accept(ItemRegistry.COGNIZANT_CUBE.get());
