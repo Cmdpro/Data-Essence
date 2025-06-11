@@ -150,8 +150,6 @@ public class ClientModEvents {
     };
     @SubscribeEvent
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
-        event.registerFluidType(Genderfluid.GenderfluidFluid.EXTENSIONS, FluidRegistry.GENDERFLUID.type.get());
-
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/auto-fabricator.png"), DataNEssence.locate("auto-fabricator")), BlockRegistry.AUTO_FABRICATOR.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/charger.png"), DataNEssence.locate("charger")), BlockRegistry.CHARGER.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/entropic_processor.png"), DataNEssence.locate("entropic_processor")), BlockRegistry.ENTROPIC_PROCESSOR.get().asItem());
