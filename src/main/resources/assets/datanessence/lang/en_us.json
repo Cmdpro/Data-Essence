@@ -123,6 +123,7 @@
   "block.datanessence.computer": "Computer",
   "block.datanessence.computer.obtain_signal_tracker": "A strange device falls out of one of this Computer's compartments as you touch it.",
   "block.datanessence.creative_essence_battery": "Infinite Essence Battery",
+  "block.datanessence.crystalline_cradle": "Crystalline Cradle",
   "block.datanessence.data_bank": "Ancient Data Bank",
   "block.datanessence.data_bank.cannot_use": "You need a Data Tablet to make use of this.",
   "block.datanessence.deco_essence_buffer": "Essence Buffer (Decorative)",

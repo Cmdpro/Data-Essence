@@ -16,6 +16,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.NoteBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -31,8 +32,8 @@ public class CrystallineCradleBlockEntity extends BlockEntity implements Essence
     public int destroyTicks;
     public int visualDestroyTicks;
     // sixth note on every line does not play; but they are needed for positioning
-    private final float[] notes = {0.7f, 0.79f, 0.89f, 1.05f, 1.41f, 1.0f,
-                                   1.41f, 1.05f, 1.33f, 1.41f, 1.58f, 1.0f};
+    private final int[] notes = {6, 8, 10, 13, 18, 12,
+                                 18, 13, 17, 18, 20, 12};
     private int currentNote;
 
     public CrystallineCradleBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -103,7 +104,7 @@ public class CrystallineCradleBlockEntity extends BlockEntity implements Essence
             if (tile.destroyTicks < tile.maxDestroyTicks) {
                 tile.destroyTicks++;
                 if (tile.destroyTicks % 5 == 0) {
-                    world.playSound(null, pos, SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f-((float)tile.destroyTicks/(float)tile.maxDestroyTicks), tile.notes[tile.currentNote]);
+                    world.playSound(null, pos, SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f-((float)tile.destroyTicks/(float)tile.maxDestroyTicks), NoteBlock.getPitchFromNote(tile.notes[tile.currentNote]));
                     tile.currentNote++;
                     if (tile.currentNote >= tile.notes.length)
                         tile.currentNote = 0;
