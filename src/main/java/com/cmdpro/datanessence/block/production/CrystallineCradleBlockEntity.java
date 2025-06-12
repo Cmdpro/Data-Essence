@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.production;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
@@ -14,7 +15,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,22 +22,28 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 public class CrystallineCradleBlockEntity extends BlockEntity implements EssenceBlockEntity {
-    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+    public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 2000);
     private final float breakCost = 25f;
     public int interval;
-
-    public CrystallineCradleBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(BlockEntityRegistry.CRYSTALLINE_CRADLE.get(), pPos, pBlockState);
-    }
     public final float destroyRange = 6f;
     public final int maxDestroyTicks = 30;
     public final int visualMinTicks = 15;
     public int destroyTicks;
     public int visualDestroyTicks;
+    // sixth note on every line does not play; but they are needed for positioning
+    private final float[] notes = {0.7f, 0.79f, 0.89f, 1.05f, 1.41f, 1.0f,
+                                   1.41f, 1.05f, 1.33f, 1.41f, 1.58f, 1.0f};
+    private int currentNote;
+
+    public CrystallineCradleBlockEntity(BlockPos pPos, BlockState pBlockState) {
+        super(BlockEntityRegistry.CRYSTALLINE_CRADLE.get(), pPos, pBlockState);
+    }
+
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
     }
+
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries){
         CompoundTag tag = pkt.getTag();
@@ -50,21 +56,22 @@ public class CrystallineCradleBlockEntity extends BlockEntity implements Essence
         tag.putInt("destroyTicks", destroyTicks);
         return tag;
     }
+
     protected void updateBlock() {
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
+
     @Override
     public EssenceStorage getStorage() {
         return storage;
     }
-    private float pitch;
+
     public static void tick(Level world, BlockPos pos, BlockState state, CrystallineCradleBlockEntity tile) {
         if (!world.isClientSide()) {
             if (!world.hasNeighborSignal(pos)) {
                 if (tile.interval <= 0) {
-                    tile.pitch = Mth.nextFloat(world.random, 1.25f, 1.75f);
                     tile.destroyTicks = 0;
                     tile.updateBlock();
                     tile.interval = 100;
@@ -96,7 +103,10 @@ public class CrystallineCradleBlockEntity extends BlockEntity implements Essence
             if (tile.destroyTicks < tile.maxDestroyTicks) {
                 tile.destroyTicks++;
                 if (tile.destroyTicks % 5 == 0) {
-                    world.playSound(null, pos, SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f-((float)tile.destroyTicks/(float)tile.maxDestroyTicks), tile.pitch);
+                    world.playSound(null, pos, SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f-((float)tile.destroyTicks/(float)tile.maxDestroyTicks), tile.notes[tile.currentNote]);
+                    tile.currentNote++;
+                    if (tile.currentNote >= tile.notes.length)
+                        tile.currentNote = 0;
                 }
             }
         } else {
@@ -105,12 +115,15 @@ public class CrystallineCradleBlockEntity extends BlockEntity implements Essence
             }
         }
     }
+
     public float getDestroyRange() {
         return ((float)destroyTicks/(float)maxDestroyTicks)*destroyRange;
     }
+
     public float getVisualDestroyRange(float partialTick) {
         return (((float)visualDestroyTicks+partialTick)/(float)maxDestroyTicks)*destroyRange;
     }
+
     @Override
     public void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider provider) {
         tag.put("EssenceStorage", storage.toNbt());
