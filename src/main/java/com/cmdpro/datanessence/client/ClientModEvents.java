@@ -10,6 +10,7 @@ import com.cmdpro.datanessence.api.item.ItemDecorators;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
+import com.cmdpro.datanessence.client.renderers.entity.AncientCombatUnitRenderer;
 import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
@@ -102,6 +103,7 @@ public class ClientModEvents {
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL.get(), AncientSentinelRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL_PROJECTILE.get(), EmptyEntityRenderer::new);
         EntityRenderers.register(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), EssenceSlashRenderer::new);
+        EntityRenderers.register(EntityRegistry.ANCIENT_COMBAT_UNIT.get(), AncientCombatUnitRenderer::new);
 
         event.enqueueWork(() -> {
             ItemProperties.register(ItemRegistry.MUSIC_DISC_PLAYER.get(), DataNEssence.locate("playing"), (stack, level, entity, seed) -> {

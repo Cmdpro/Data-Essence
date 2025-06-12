@@ -3,6 +3,7 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.entity.AncientSentinel;
+import com.cmdpro.datanessence.entity.ancientcombatunit.AncientCombatUnit;
 import com.cmdpro.datanessence.registry.EntityRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -19,6 +20,7 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void entityAttributeEvent(EntityAttributeCreationEvent event) {
         event.put(EntityRegistry.ANCIENT_SENTINEL.get(), AncientSentinel.setAttributes());
+        event.put(EntityRegistry.ANCIENT_COMBAT_UNIT.get(), AncientCombatUnit.setAttributes());
     }
     @SubscribeEvent
     public static void onModConfigEvent(ModConfigEvent event) {

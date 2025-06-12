@@ -1,0 +1,2807 @@
+{
+  "animations": {
+    "idle": {
+      "length": 0.25,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "arm1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -52.5,
+                0,
+                -10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "head",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "walk": {
+      "length": 1,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "body",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -1,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "leg2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                15,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                -15,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                15,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "leg1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -20,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                20,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -20,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "leg1lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "head",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                20,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        }
+      ]
+    },
+    "spin": {
+      "length": 1.5,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "body",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                27.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "leg2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.20833,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "leg2lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "leg1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -12.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.20833,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "leg1lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -10
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.125,
+              "target": [
+                0,
+                0,
+                -100
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.29167,
+              "target": [
+                0,
+                0,
+                -100
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.41667,
+              "target": [
+                0,
+                0,
+                -110
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.58333,
+              "target": [
+                0,
+                0,
+                -90
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                25,
+                -90
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.20833,
+              "target": [
+                0,
+                25,
+                -90
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.375,
+              "target": [
+                0,
+                25,
+                -90
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                0,
+                0,
+                -10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "sword",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33333,
+              "target": [
+                -180,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                -187.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.41667,
+              "target": [
+                -180,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.16667,
+              "target": [
+                -180,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.33333,
+              "target": [
+                -360,
+                0,
+                -180
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "sword",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.20833,
+              "target": [
+                0,
+                5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33333,
+              "target": [
+                0,
+                5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.41667,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.16667,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                10
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33333,
+              "target": [
+                0,
+                0,
+                80
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                80
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                80
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.20833,
+              "target": [
+                0,
+                0,
+                10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "head",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                11.2431373143,
+                27.0477958128,
+                5.1652432874
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.20833,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "root",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                360,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.08333,
+              "target": [
+                0,
+                375,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.20833,
+              "target": [
+                0,
+                360,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        }
+      ]
+    },
+    "slashes": {
+      "length": 1.75,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "body",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                12.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.6666666666666666,
+              "target": [
+                0,
+                12.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                0,
+                -15,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                -15,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.1666666666666667,
+              "target": [
+                0,
+                25,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                0,
+                25,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.75,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -52.5,
+                0,
+                -10
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                163.5041515596,
+                69.381701201,
+                -145.7341654771
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                163.5041515596,
+                69.381701201,
+                -145.7341654771
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.9583333333333334,
+              "target": [
+                163.5041515596,
+                69.381701201,
+                -145.7341654771
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                173.6811058598,
+                -24.7042779788,
+                -127.5928246266
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                -6.3188941402,
+                -24.7042779788,
+                -127.5928246266
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.25,
+              "target": [
+                4.2788851941,
+                -25.1117793057,
+                -152.4313350221
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.375,
+              "target": [
+                -6.3188941402,
+                -24.7042779788,
+                -127.5928246266
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5416666666666667,
+              "target": [
+                -52.5,
+                0,
+                -10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "sword",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -127.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.6666666666666666,
+              "target": [
+                0,
+                -127.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.9583333333333334,
+              "target": [
+                0,
+                -127.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                10
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                -169.3183521379,
+                6.493053085,
+                109.4073080439
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                -169.3183521379,
+                6.493053085,
+                109.4073080439
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.6666666666666666,
+              "target": [
+                -169.3183521379,
+                6.493053085,
+                109.4073080439
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -169.3183521379,
+                6.493053085,
+                109.4073080439
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                -169.3183521379,
+                6.493053085,
+                109.4073080439
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.75,
+              "target": [
+                0,
+                0,
+                10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "sword2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                122.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                122.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                0,
+                122.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.75,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "head",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                10,
+                12.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                11.2141612449,
+                -29.3392380016,
+                -7.7341388274
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.9583333333333334,
+              "target": [
+                11.2141612449,
+                -29.3392380016,
+                -7.7341388274
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.0833333333333333,
+              "target": [
+                3.7161477278,
+                44.3578450785,
+                7.4981032862
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                3.7161477278,
+                44.3578450785,
+                7.4981032862
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.75,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2main",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                125,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                125,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                -27.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                0,
+                -27.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.75,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1main",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -67.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.6666666666666666,
+              "target": [
+                0,
+                -67.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.7916666666666666,
+              "target": [
+                0,
+                97.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.9583333333333334,
+              "target": [
+                0,
+                97.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "heavy_slash": {
+      "length": 1.125,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "arm1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0.25,
+              "target": [
+                -71.7672930056,
+                81.9937490203,
+                -109.4310318436
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                -71.7672930056,
+                81.9937490203,
+                -109.4310318436
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                -52.5,
+                0,
+                -10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0.25,
+              "target": [
+                107.2227695967,
+                -83.2932382231,
+                -75.2772304007
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                107.2227695967,
+                -83.2932382231,
+                -75.2772304007
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                107.2227695967,
+                -83.2932382231,
+                -75.2772304007
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                0,
+                10
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2lower",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "head",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                20,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5833333333333334,
+              "target": [
+                25,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                25,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "body",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                -1,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -1,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5833333333333334,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "sword2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -32.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "leg2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0.25,
+              "target": [
+                20,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                20,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5833333333333334,
+              "target": [
+                -17.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                -17.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "leg1",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0.25,
+              "target": [
+                -15,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                -15,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5833333333333334,
+              "target": [
+                20,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                20,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm1main",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -37.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5833333333333334,
+              "target": [
+                0,
+                -110,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                0,
+                -110,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "arm2main",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                37.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5833333333333334,
+              "target": [
+                0,
+                110,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
+              "target": [
+                0,
+                110,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.125,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        24,
+        0
+      ],
+      "isCube": false,
+      "isMesh": false,
+      "children": [
+        {
+          "name": "body",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            -12,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "cube",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                4,
+                0,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                32,
+                36
+              ],
+              "mirror": false,
+              "origin": [
+                -7,
+                -13,
+                -2
+              ],
+              "dimensions": [
+                6,
+                13,
+                4
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "arm1",
+              "rotation": [
+                0,
+                0,
+                1.5707963267948966
+              ],
+              "offset": [
+                4,
+                -11,
+                0
+              ],
+              "isCube": false,
+              "isMesh": false,
+              "children": [
+                {
+                  "name": "arm1main",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": false,
+                  "isMesh": false,
+                  "children": [
+                    {
+                      "name": "cube1",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        0,
+                        1,
+                        0
+                      ],
+                      "isCube": true,
+                      "isMesh": false,
+                      "texOffset": [
+                        38,
+                        24
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        -1,
+                        -2,
+                        -1
+                      ],
+                      "dimensions": [
+                        6,
+                        2,
+                        2
+                      ],
+                      "inflate": 0
+                    },
+                    {
+                      "name": "arm1lower",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        5,
+                        0,
+                        0
+                      ],
+                      "isCube": false,
+                      "isMesh": false,
+                      "children": [
+                        {
+                          "name": "cube2",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            1,
+                            1,
+                            0
+                          ],
+                          "isCube": true,
+                          "isMesh": false,
+                          "texOffset": [
+                            38,
+                            0
+                          ],
+                          "mirror": false,
+                          "origin": [
+                            -1,
+                            -2,
+                            -1
+                          ],
+                          "dimensions": [
+                            8,
+                            2,
+                            2
+                          ],
+                          "inflate": 0
+                        },
+                        {
+                          "name": "sword",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            6,
+                            0,
+                            0
+                          ],
+                          "isCube": false,
+                          "isMesh": false,
+                          "children": [
+                            {
+                              "name": "cube3",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                38,
+                                8
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -1,
+                                -2,
+                                -2
+                              ],
+                              "dimensions": [
+                                2,
+                                2,
+                                6
+                              ],
+                              "inflate": -0.01
+                            },
+                            {
+                              "name": "cube4",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                1,
+                                -6
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                52,
+                                32
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -2,
+                                -3,
+                                3
+                              ],
+                              "dimensions": [
+                                4,
+                                4,
+                                1
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "cube5",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                -1,
+                                1.5,
+                                -7
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                0,
+                                0
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                0,
+                                -2,
+                                -13
+                              ],
+                              "dimensions": [
+                                2,
+                                1,
+                                17
+                              ],
+                              "inflate": 0
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "arm2",
+              "rotation": [
+                0,
+                0,
+                -1.5707963267948966
+              ],
+              "offset": [
+                -4,
+                -11,
+                0
+              ],
+              "isCube": false,
+              "isMesh": false,
+              "children": [
+                {
+                  "name": "arm2main",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": false,
+                  "isMesh": false,
+                  "children": [
+                    {
+                      "name": "cube6",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        -4,
+                        1,
+                        0
+                      ],
+                      "isCube": true,
+                      "isMesh": false,
+                      "texOffset": [
+                        38,
+                        28
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        -1,
+                        -2,
+                        -1
+                      ],
+                      "dimensions": [
+                        6,
+                        2,
+                        2
+                      ],
+                      "inflate": 0
+                    },
+                    {
+                      "name": "arm2lower",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        -5,
+                        0,
+                        0
+                      ],
+                      "isCube": false,
+                      "isMesh": false,
+                      "children": [
+                        {
+                          "name": "cube7",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            -7,
+                            1,
+                            0
+                          ],
+                          "isCube": true,
+                          "isMesh": false,
+                          "texOffset": [
+                            38,
+                            4
+                          ],
+                          "mirror": false,
+                          "origin": [
+                            -1,
+                            -2,
+                            -1
+                          ],
+                          "dimensions": [
+                            8,
+                            2,
+                            2
+                          ],
+                          "inflate": 0
+                        },
+                        {
+                          "name": "sword2",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            -6,
+                            0,
+                            0
+                          ],
+                          "isCube": false,
+                          "isMesh": false,
+                          "children": [
+                            {
+                              "name": "cube8",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                1,
+                                0
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                38,
+                                16
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -1,
+                                -2,
+                                -2
+                              ],
+                              "dimensions": [
+                                2,
+                                2,
+                                6
+                              ],
+                              "inflate": -0.01
+                            },
+                            {
+                              "name": "cube9",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                1,
+                                -6
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                52,
+                                37
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -2,
+                                -3,
+                                3
+                              ],
+                              "dimensions": [
+                                4,
+                                4,
+                                1
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "cube10",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                -1,
+                                1.5,
+                                -7
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                0,
+                                18
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                0,
+                                -2,
+                                -13
+                              ],
+                              "dimensions": [
+                                2,
+                                1,
+                                17
+                              ],
+                              "inflate": 0
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "head",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -13,
+                0
+              ],
+              "isCube": false,
+              "isMesh": false,
+              "children": [
+                {
+                  "name": "cube11",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": true,
+                  "isMesh": false,
+                  "texOffset": [
+                    0,
+                    36
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -4,
+                    -8,
+                    -4
+                  ],
+                  "dimensions": [
+                    8,
+                    8,
+                    8
+                  ],
+                  "inflate": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leg2",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            2,
+            -12,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "cube12",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                5,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                24,
+                52
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -5,
+                -1
+              ],
+              "dimensions": [
+                2,
+                5,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "leg2lower",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                5,
+                0
+              ],
+              "isCube": false,
+              "isMesh": false,
+              "children": [
+                {
+                  "name": "cube13",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    7,
+                    0
+                  ],
+                  "isCube": true,
+                  "isMesh": false,
+                  "texOffset": [
+                    8,
+                    52
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    -7,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    7,
+                    2
+                  ],
+                  "inflate": 0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "leg1",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -2,
+            -12,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "cube14",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                5,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                16,
+                52
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -5,
+                -1
+              ],
+              "dimensions": [
+                2,
+                5,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "leg1lower",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                5,
+                0
+              ],
+              "isCube": false,
+              "isMesh": false,
+              "children": [
+                {
+                  "name": "cube15",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    7,
+                    0
+                  ],
+                  "isCube": true,
+                  "isMesh": false,
+                  "texOffset": [
+                    0,
+                    52
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    -7,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    7,
+                    2
+                  ],
+                  "inflate": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    64,
+    64
+  ]
+}
