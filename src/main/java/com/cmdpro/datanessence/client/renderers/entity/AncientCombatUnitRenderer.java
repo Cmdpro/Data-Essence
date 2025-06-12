@@ -46,8 +46,9 @@ public class AncientCombatUnitRenderer extends DatabankLivingEntityRenderer<Anci
             animate(pEntity.animState);
             if (pEntity.animState.isCurrentAnim("idle") || pEntity.animState.isCurrentAnim("walk")) {
                 Vec2 rot = new Vec2(Mth.lerp(partialTick, pEntity.xRotO, pEntity.getXRot()), Mth.rotLerp(partialTick, pEntity.yHeadRotO, pEntity.yHeadRot));
+                float bodyRot = Mth.rotLerp(partialTick, pEntity.yBodyRotO, pEntity.yBodyRot);
                 modelPose.stringToPart.get("head").rotation.x = rot.x * (float) (Math.PI / 180.0);
-                modelPose.stringToPart.get("head").rotation.y = (rot.y + 180) * (float) (Math.PI / 180.0);
+                modelPose.stringToPart.get("head").rotation.y = (rot.y+bodyRot+180) * (float) (Math.PI / 180.0);
             }
         }
 
