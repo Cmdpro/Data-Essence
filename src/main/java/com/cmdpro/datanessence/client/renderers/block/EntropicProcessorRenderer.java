@@ -29,18 +29,15 @@ public class EntropicProcessorRenderer extends DatabankBlockEntityRenderer<Entro
         Direction facing = entropicProcessor.getBlockState().getValue(EntropicProcessor.FACING);
         Vec3 rotateAround = new Vec3(0.5, 0.5, 0.5);
 
-        if (facing.equals(Direction.NORTH)) {
+        if (facing.equals(Direction.NORTH))
             poseStack.rotateAround(Axis.YP.rotationDegrees(0), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
-        }
-        if (facing.equals(Direction.SOUTH)) {
-            poseStack.rotateAround(Axis.YP.rotationDegrees(0), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
-        }
-        if (facing.equals(Direction.EAST)) {
+        if (facing.equals(Direction.SOUTH))
+            poseStack.rotateAround(Axis.YP.rotationDegrees(180), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
+        if (facing.equals(Direction.EAST))
             poseStack.rotateAround(Axis.YP.rotationDegrees(-90), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
-        }
-        if (facing.equals(Direction.WEST)) {
-            poseStack.rotateAround(Axis.YP.rotationDegrees(-90), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
-        }
+        if (facing.equals(Direction.WEST))
+            poseStack.rotateAround(Axis.YP.rotationDegrees(90), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
+
         super.render(entropicProcessor, pPartialTick, poseStack, pBufferSource, pPackedLight, pPackedOverlay);
     }
 

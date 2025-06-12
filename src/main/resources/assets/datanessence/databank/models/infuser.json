@@ -47,10 +47,11 @@
       ],
       "offset": [
         0,
-        24,
+        0,
         0
       ],
       "isCube": false,
+      "isMesh": false,
       "children": [
         {
           "name": "base bottom",
@@ -65,6 +66,7 @@
             0
           ],
           "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             18
@@ -72,7 +74,7 @@
           "mirror": false,
           "origin": [
             -8,
-            -2,
+            0,
             -8
           ],
           "dimensions": [
@@ -91,10 +93,11 @@
           ],
           "offset": [
             0,
-            -14,
+            14,
             0
           ],
           "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             0
@@ -102,7 +105,7 @@
           "mirror": false,
           "origin": [
             -8,
-            -2,
+            0,
             -8
           ],
           "dimensions": [
@@ -120,19 +123,20 @@
             0
           ],
           "offset": [
-            6,
-            -12,
+            -6,
+            12,
             -6
           ],
           "isCube": true,
+          "isMesh": false,
           "texOffset": [
             64,
             48
           ],
           "mirror": false,
           "origin": [
-            -1,
-            -2,
+            11,
+            4,
             11
           ],
           "dimensions": [
@@ -151,10 +155,11 @@
           ],
           "offset": [
             0,
-            -2,
+            2,
             -6
           ],
           "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             38
@@ -162,7 +167,7 @@
           "mirror": false,
           "origin": [
             -7,
-            -12,
+            0,
             -1
           ],
           "dimensions": [
@@ -181,10 +186,11 @@
           ],
           "offset": [
             0,
-            -2,
+            2,
             8
           ],
           "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             38
@@ -192,7 +198,7 @@
           "mirror": false,
           "origin": [
             -7,
-            -12,
+            0,
             -1
           ],
           "dimensions": [
@@ -206,15 +212,16 @@
           "name": "filigree2",
           "rotation": [
             0,
-            -1.5707963267948966,
+            1.5707963267948966,
             0
           ],
           "offset": [
-            -8,
-            -2,
+            8,
+            2,
             0
           ],
           "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             38
@@ -222,7 +229,7 @@
           "mirror": false,
           "origin": [
             -7,
-            -12,
+            0,
             -1
           ],
           "dimensions": [
@@ -236,15 +243,16 @@
           "name": "filigree3",
           "rotation": [
             0,
-            -1.5707963267948966,
+            1.5707963267948966,
             0
           ],
           "offset": [
-            6,
-            -2,
+            -6,
+            2,
             0
           ],
           "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             38
@@ -252,7 +260,7 @@
           "mirror": false,
           "origin": [
             -7,
-            -12,
+            0,
             -1
           ],
           "dimensions": [

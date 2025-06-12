@@ -78,7 +78,7 @@
               "interpolation": "smooth"
             },
             {
-              "timestamp": 0.6666666666666666,
+              "timestamp": 0.66667,
               "target": [
                 0,
                 0.5,
@@ -87,7 +87,7 @@
               "interpolation": "smooth"
             },
             {
-              "timestamp": 1.4166666666666667,
+              "timestamp": 1.41667,
               "target": [
                 0,
                 -0.5,
@@ -119,10 +119,11 @@
       ],
       "offset": [
         0,
-        25,
+        -1,
         0
       ],
       "isCube": false,
+      "isMesh": false,
       "children": [
         {
           "name": "ring",
@@ -133,10 +134,11 @@
           ],
           "offset": [
             0,
-            -9,
+            9,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "ring",
@@ -151,6 +153,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 0
@@ -181,6 +184,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 64,
                 9
@@ -207,10 +211,11 @@
               ],
               "offset": [
                 0,
-                0.5,
+                -0.5,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 32,
                 5
@@ -218,7 +223,7 @@
               "mirror": false,
               "origin": [
                 -4,
-                -4,
+                -3,
                 -4
               ],
               "dimensions": [
@@ -239,10 +244,11 @@
           ],
           "offset": [
             0,
-            -9,
+            9,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "cube",
@@ -257,6 +263,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 13
