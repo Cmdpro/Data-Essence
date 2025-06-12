@@ -37,7 +37,10 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
         if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_TAIL) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_TAIL)) {
             pPoseStack.pushPose();
             this.tailModel.setupPose(pLivingEntity, pPartialTick, this.getParentModel().body);
+            pPoseStack.pushPose();
+            pPoseStack.scale(1, -1, 1);
             this.tailModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, new Vec3(1, 1, 1));
+            pPoseStack.popPose();
             pPoseStack.popPose();
         }
     }
@@ -65,7 +68,7 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
             ModelPose.ModelPosePart root = modelPose.stringToPart.get("root");
             root.scale = new Vector3f(connectedTo.xScale, connectedTo.yScale, connectedTo.zScale);
             root.rotation = new Vector3f(connectedTo.xRot, connectedTo.yRot, connectedTo.zRot);
-            root.pos = new Vector3f(connectedTo.x, connectedTo.y, connectedTo.z);
+            root.pos = new Vector3f(connectedTo.x, -connectedTo.y, connectedTo.z);
         }
 
         public DatabankModel getModel() {

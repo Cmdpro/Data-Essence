@@ -40,7 +40,10 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
         if (pLivingEntity.hasData(AttachmentTypeRegistry.HAS_WINGS) && pLivingEntity.getData(AttachmentTypeRegistry.HAS_WINGS)) {
             pPoseStack.pushPose();
             this.wingsModel.setupPose(pLivingEntity, pPartialTick, this.getParentModel().body);
+            pPoseStack.pushPose();
+            pPoseStack.scale(-1, -1, -1);
             this.wingsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, new Vec3(1, 1, 1));
+            pPoseStack.popPose();
             pPoseStack.popPose();
         }
     }
@@ -74,7 +77,7 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
             ModelPose.ModelPosePart root = modelPose.stringToPart.get("root");
             root.scale = new Vector3f(connectedTo.xScale, connectedTo.yScale, connectedTo.zScale);
             root.rotation = new Vector3f(connectedTo.xRot, connectedTo.yRot, connectedTo.zRot);
-            root.pos = new Vector3f(connectedTo.x, connectedTo.y, connectedTo.z);
+            root.pos = new Vector3f(connectedTo.x, -connectedTo.y, connectedTo.z-3f);
         }
 
         public DatabankModel getModel() {

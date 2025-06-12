@@ -269,10 +269,11 @@
       ],
       "offset": [
         0,
-        24,
+        0,
         0
       ],
       "isCube": false,
+      "isMesh": false,
       "children": [
         {
           "name": "base",
@@ -287,6 +288,7 @@
             0
           ],
           "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             0
@@ -294,7 +296,7 @@
           "mirror": false,
           "origin": [
             -8,
-            -3,
+            0,
             -8
           ],
           "dimensions": [
@@ -317,6 +319,7 @@
             0
           ],
           "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             19
@@ -324,7 +327,7 @@
           "mirror": false,
           "origin": [
             -5,
-            -6,
+            3,
             -5
           ],
           "dimensions": [
@@ -338,20 +341,21 @@
           "name": "arm",
           "rotation": [
             0,
-            0.7853981633974483,
+            -0.7853981633974483,
             0
           ],
           "offset": [
-            -3.5,
-            -5,
+            3.5,
+            5,
             -3.5
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "cube",
               "rotation": [
-                0.7853981633974483,
+                -0.7853981633974483,
                 0,
                 0
               ],
@@ -361,6 +365,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 28,
                 32
@@ -368,7 +373,7 @@
               "mirror": false,
               "origin": [
                 -1,
-                -6,
+                0,
                 -1
               ],
               "dimensions": [
@@ -381,7 +386,7 @@
             {
               "name": "cube1",
               "rotation": [
-                0.7853981633974483,
+                -0.7853981633974483,
                 0,
                 0
               ],
@@ -391,6 +396,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 30,
                 12
@@ -398,7 +404,7 @@
               "mirror": false,
               "origin": [
                 0,
-                -8,
+                0,
                 -1
               ],
               "dimensions": [
@@ -419,15 +425,16 @@
           ],
           "offset": [
             0,
-            -5,
+            5,
             4.25
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "cube2",
               "rotation": [
-                -0.7853981633974483,
+                0.7853981633974483,
                 0,
                 0
               ],
@@ -437,6 +444,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 19
@@ -444,7 +452,7 @@
               "mirror": false,
               "origin": [
                 -1,
-                -6,
+                0,
                 -1
               ],
               "dimensions": [
@@ -457,7 +465,7 @@
             {
               "name": "cube3",
               "rotation": [
-                -2.356194490192345,
+                2.356194490192345,
                 0,
                 3.141592653589793
               ],
@@ -467,6 +475,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 30,
                 12
@@ -474,7 +483,7 @@
               "mirror": false,
               "origin": [
                 0,
-                -8,
+                0,
                 -1
               ],
               "dimensions": [
@@ -490,21 +499,22 @@
           "name": "arm3",
           "rotation": [
             0,
-            3.141592653589793,
+            -3.141592653589793,
             0
           ],
           "offset": [
-            4.25,
-            -5,
+            -4.25,
+            5,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "cube4",
               "rotation": [
                 0,
-                1.5707963267948966,
+                -1.5707963267948966,
                 -0.7853981633974483
               ],
               "offset": [
@@ -513,6 +523,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 30,
                 12
@@ -520,7 +531,7 @@
               "mirror": false,
               "origin": [
                 0,
-                -8,
+                0,
                 -1
               ],
               "dimensions": [
@@ -543,6 +554,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 36
@@ -550,7 +562,7 @@
               "mirror": false,
               "origin": [
                 -1,
-                -6,
+                0,
                 -1
               ],
               "dimensions": [
@@ -571,16 +583,17 @@
           ],
           "offset": [
             0,
-            -14,
+            14,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "cube6",
               "rotation": [
                 0,
-                -0.7853981633974483,
+                0.7853981633974483,
                 0.7853981633974483
               ],
               "offset": [
@@ -589,6 +602,7 @@
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 0

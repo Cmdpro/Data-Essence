@@ -35,18 +35,15 @@ public class MetalShaperRenderer extends DatabankBlockEntityRenderer<MetalShaper
         Vec3 rotateAround = new Vec3(0.5, 0.5, 0.5);
         ItemStack item = metalShaper.getItemHandler().getStackInSlot(0);
 
-        if (facing.equals(Direction.NORTH)) {
-            poseStack.rotateAround(Axis.YP.rotationDegrees(180), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
-        }
-        if (facing.equals(Direction.SOUTH)) {
+        if (facing.equals(Direction.NORTH))
             poseStack.rotateAround(Axis.YP.rotationDegrees(0), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
-        }
-        if (facing.equals(Direction.EAST)) {
-            poseStack.rotateAround(Axis.YP.rotationDegrees(90), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
-        }
-        if (facing.equals(Direction.WEST)) {
+        if (facing.equals(Direction.SOUTH))
+            poseStack.rotateAround(Axis.YP.rotationDegrees(180), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
+        if (facing.equals(Direction.EAST))
             poseStack.rotateAround(Axis.YP.rotationDegrees(-90), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
-        }
+        if (facing.equals(Direction.WEST))
+            poseStack.rotateAround(Axis.YP.rotationDegrees(90), (float) rotateAround.x, (float) rotateAround.y, (float) rotateAround.z);
+
 
         poseStack.pushPose();
         poseStack.translate(0.5d, 0.2d, 0.5d);

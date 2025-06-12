@@ -140,7 +140,7 @@
       ],
       "offset": [
         0,
-        24,
+        0,
         0
       ],
       "isCube": false,
@@ -170,7 +170,7 @@
               ],
               "offset": [
                 0,
-                -10,
+                10,
                 0
               ],
               "isCube": true,
@@ -182,7 +182,7 @@
               "mirror": false,
               "origin": [
                 -4,
-                -2,
+                -1,
                 -4
               ],
               "dimensions": [
@@ -201,7 +201,7 @@
               ],
               "offset": [
                 0,
-                -12,
+                12,
                 0
               ],
               "isCube": true,
@@ -213,7 +213,7 @@
               "mirror": false,
               "origin": [
                 -2,
-                -10,
+                0,
                 -2
               ],
               "dimensions": [
@@ -246,7 +246,7 @@
           "mirror": false,
           "origin": [
             -8,
-            -3,
+            0,
             -7
           ],
           "dimensions": [
@@ -264,8 +264,8 @@
             0
           ],
           "offset": [
-            -7,
-            -3,
+            7,
+            3,
             0
           ],
           "isCube": true,
@@ -277,7 +277,7 @@
           "mirror": false,
           "origin": [
             -1,
-            -13,
+            0,
             -5
           ],
           "dimensions": [
@@ -295,8 +295,8 @@
             0
           ],
           "offset": [
-            -5,
-            -14,
+            5,
+            14,
             0
           ],
           "isCube": true,
@@ -307,7 +307,7 @@
           ],
           "mirror": false,
           "origin": [
-            -1,
+            -2,
             -2,
             -5
           ],
@@ -326,8 +326,8 @@
             0
           ],
           "offset": [
-            7,
-            -3,
+            -7,
+            3,
             0
           ],
           "isCube": true,
@@ -339,7 +339,7 @@
           "mirror": false,
           "origin": [
             -1,
-            -13,
+            0,
             -5
           ],
           "dimensions": [
@@ -357,8 +357,8 @@
             0
           ],
           "offset": [
-            4,
-            -14,
+            -4,
+            14,
             0
           ],
           "isCube": true,
@@ -369,7 +369,7 @@
           ],
           "mirror": false,
           "origin": [
-            -1,
+            -2,
             -2,
             -5
           ],
@@ -388,8 +388,8 @@
             0
           ],
           "offset": [
-            -5,
-            -13,
+            5,
+            13,
             0
           ],
           "isCube": true,
@@ -400,8 +400,8 @@
           ],
           "mirror": false,
           "origin": [
-            -1,
-            -2,
+            -11,
+            0,
             -1
           ],
           "dimensions": [
