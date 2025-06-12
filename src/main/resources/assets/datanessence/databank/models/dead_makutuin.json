@@ -11,9 +11,9 @@
             {
               "timestamp": 0,
               "target": [
-                -97.52832079643167,
-                4.957116789917109,
-                -0.6542642738377253
+                -97.528320796,
+                4.95711679,
+                -0.654264274
               ],
               "interpolation": "linear"
             }
@@ -57,7 +57,7 @@
               "timestamp": 0,
               "target": [
                 1,
-                -21.29999999999999,
+                -21.3,
                 11
               ],
               "interpolation": "linear"
@@ -71,9 +71,9 @@
             {
               "timestamp": 0,
               "target": [
-                -165.6936722599362,
-                5.684223786208349,
-                -91.40419996537639
+                -165.69367226,
+                5.684223786,
+                -91.404199965
               ],
               "interpolation": "linear"
             }
@@ -101,9 +101,9 @@
             {
               "timestamp": 0,
               "target": [
-                -100.17733307108301,
-                -1.6235998682477657,
-                94.92583221507994
+                -100.177333071,
+                -1.623599868,
+                94.925832215
               ],
               "interpolation": "linear"
             }
@@ -131,9 +131,9 @@
             {
               "timestamp": 0,
               "target": [
-                -81.7253681763259,
-                19.506445531723784,
-                4.504320254954564
+                -81.725368176,
+                19.506445532,
+                4.504320255
               ],
               "interpolation": "linear"
             }
@@ -161,9 +161,9 @@
             {
               "timestamp": 0,
               "target": [
-                -82.4884662400018,
-                2.4407037106680036,
-                0.5414265722342861
+                -82.48846624,
+                2.440703711,
+                0.541426572
               ],
               "interpolation": "linear"
             }
@@ -197,9 +197,9 @@
             {
               "timestamp": 0,
               "target": [
-                4.9810693937001815,
-                0.43523000247023447,
-                -4.9810693937001815
+                4.981069394,
+                0.435230002,
+                -4.981069394
               ],
               "interpolation": "linear"
             }
@@ -242,9 +242,9 @@
             {
               "timestamp": 0,
               "target": [
-                -16.806327740063807,
-                -5.684223786208349,
-                -11.404199965376847
+                -16.80632774,
+                -5.684223786,
+                -11.404199965
               ],
               "interpolation": "linear"
             }
@@ -257,9 +257,9 @@
             {
               "timestamp": 0,
               "target": [
-                4.9810693937001815,
-                0.43523000247023447,
-                -4.9810693937001815
+                4.981069394,
+                0.435230002,
+                -4.981069394
               ],
               "interpolation": "linear"
             }
@@ -278,10 +278,11 @@
       ],
       "offset": [
         0,
-        24,
+        0,
         0
       ],
       "isCube": false,
+      "isMesh": false,
       "children": [
         {
           "name": "LeftLeg",
@@ -291,11 +292,12 @@
             0
           ],
           "offset": [
-            1.9,
-            -12,
+            -1.9,
+            12,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "Left Leg",
@@ -305,19 +307,20 @@
                 0
               ],
               "offset": [
-                -1.9,
-                12,
+                1.9,
+                -12,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 16,
                 48
               ],
               "mirror": false,
               "origin": [
-                -0.10000000000000009,
-                -12,
+                -3.9,
+                0,
                 -2
               ],
               "dimensions": [
@@ -335,19 +338,20 @@
                 0
               ],
               "offset": [
-                -1.9,
-                12,
+                1.9,
+                -12,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 48
               ],
               "mirror": false,
               "origin": [
-                -0.10000000000000009,
-                -12,
+                -3.9,
+                0,
                 -2
               ],
               "dimensions": [
@@ -367,11 +371,12 @@
             0
           ],
           "offset": [
-            -1.9,
-            -12,
+            1.9,
+            12,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "Right Leg",
@@ -381,19 +386,20 @@
                 0
               ],
               "offset": [
-                1.9,
-                12,
+                -1.9,
+                -12,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 16
               ],
               "mirror": false,
               "origin": [
-                -3.9,
-                -12,
+                -0.10000000000000009,
+                0,
                 -2
               ],
               "dimensions": [
@@ -411,19 +417,20 @@
                 0
               ],
               "offset": [
-                1.9,
-                12,
+                -1.9,
+                -12,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 32
               ],
               "mirror": false,
               "origin": [
-                -3.9,
-                -12,
+                -0.10000000000000009,
+                0,
                 -2
               ],
               "dimensions": [
@@ -443,11 +450,12 @@
             0
           ],
           "offset": [
-            5,
-            -22,
+            -5,
+            22,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "Left Arm",
@@ -457,19 +465,20 @@
                 0
               ],
               "offset": [
-                -5,
-                22,
+                5,
+                -22,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 32,
                 48
               ],
               "mirror": false,
               "origin": [
-                4,
-                -24,
+                -7,
+                12,
                 -2
               ],
               "dimensions": [
@@ -487,19 +496,20 @@
                 0
               ],
               "offset": [
-                -5,
-                22,
+                5,
+                -22,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 48,
                 48
               ],
               "mirror": false,
               "origin": [
-                4,
-                -24,
+                -7,
+                12,
                 -2
               ],
               "dimensions": [
@@ -517,19 +527,20 @@
                 0
               ],
               "offset": [
-                1,
+                -1,
                 0,
                 3
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 56,
                 16
               ],
               "mirror": false,
               "origin": [
-                -1,
-                -2,
+                0,
+                -9,
                 -1
               ],
               "dimensions": [
@@ -549,11 +560,12 @@
             0
           ],
           "offset": [
-            -5,
-            -22,
+            5,
+            22,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "Right Arm",
@@ -563,19 +575,20 @@
                 0
               ],
               "offset": [
-                5,
-                22,
+                -5,
+                -22,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 40,
                 16
               ],
               "mirror": false,
               "origin": [
-                -7,
-                -24,
+                4,
+                12,
                 -2
               ],
               "dimensions": [
@@ -593,19 +606,20 @@
                 0
               ],
               "offset": [
-                5,
-                22,
+                -5,
+                -22,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 40,
                 32
               ],
               "mirror": false,
               "origin": [
-                -7,
-                -24,
+                4,
+                12,
                 -2
               ],
               "dimensions": [
@@ -628,14 +642,15 @@
                 3
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 56,
                 16
               ],
               "mirror": false,
               "origin": [
-                -1,
-                -2,
+                0,
+                -9,
                 -1
               ],
               "dimensions": [
@@ -656,10 +671,11 @@
           ],
           "offset": [
             0,
-            -24,
+            24,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "Body",
@@ -670,10 +686,11 @@
               ],
               "offset": [
                 0,
-                24,
+                -24,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 16,
                 16
@@ -681,7 +698,7 @@
               "mirror": false,
               "origin": [
                 -4,
-                -24,
+                12,
                 -2
               ],
               "dimensions": [
@@ -700,10 +717,11 @@
               ],
               "offset": [
                 0,
-                24,
+                -24,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 16,
                 32
@@ -711,7 +729,7 @@
               "mirror": false,
               "origin": [
                 -4,
-                -24,
+                12,
                 -2
               ],
               "dimensions": [
@@ -732,10 +750,11 @@
           ],
           "offset": [
             0,
-            -24,
+            24,
             0
           ],
           "isCube": false,
+          "isMesh": false,
           "children": [
             {
               "name": "Head",
@@ -746,10 +765,11 @@
               ],
               "offset": [
                 0,
-                24,
+                -24,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 0
@@ -757,7 +777,7 @@
               "mirror": false,
               "origin": [
                 -4,
-                -32,
+                24,
                 -4
               ],
               "dimensions": [
@@ -776,10 +796,11 @@
               ],
               "offset": [
                 0,
-                24,
+                -24,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 32,
                 0
@@ -787,7 +808,7 @@
               "mirror": false,
               "origin": [
                 -4,
-                -32,
+                24,
                 -4
               ],
               "dimensions": [
@@ -801,15 +822,16 @@
               "name": "Head Feathers R",
               "rotation": [
                 0,
-                0.3490658503988659,
+                -0.3490658503988659,
                 0
               ],
               "offset": [
-                -4.5,
-                -3,
+                4.5,
+                3,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 0
@@ -817,7 +839,7 @@
               "mirror": false,
               "origin": [
                 -1,
-                -3,
+                -2,
                 -1
               ],
               "dimensions": [
@@ -831,15 +853,16 @@
               "name": "Head Feathers L",
               "rotation": [
                 0,
-                -0.3490658503988659,
+                0.3490658503988659,
                 0
               ],
               "offset": [
-                4.5,
-                -3,
+                -4.5,
+                3,
                 0
               ],
               "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 4,
                 0
@@ -847,7 +870,7 @@
               "mirror": false,
               "origin": [
                 -1,
-                -3,
+                -2,
                 -1
               ],
               "dimensions": [
