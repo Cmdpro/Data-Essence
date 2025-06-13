@@ -1,0 +1,17 @@
+{
+  "icon": {
+    "id": "datanessence:crystalline_cradle"
+  },
+  "tier": 3,
+  "name": {
+    "translate": "data_tablet.pages.crystalline_cradle.name"
+  },
+  "minigames": [
+    {
+      "type": "datanessence:minesweeper",
+      "bombs": 5,
+      "size": 3
+    }
+  ],
+  "entry": "datanessence:machinery_transformation/crystalline_cradle"
+}

@@ -1,0 +1,23 @@
+{
+  "icon": {
+    "id": "datanessence:lunar_essence_crystal"
+  },
+  "tab": "datanessence:basics",
+  "critical": true,
+  "x": 0,
+  "y": 4,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:lunar_essence_shard"
+      },
+      "text": {
+        "translate": "data_tablet.pages.lunar_strikes.page1.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.lunar_strikes.name"
+  }
+}

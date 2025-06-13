@@ -8,3 +8,4 @@
 - Added Repulsion Rod tool
 - Added Frozen Moonlight resource
 - Added Antigravity Pack tool
+- Added Crystalline Cradle machine
