@@ -42,7 +42,7 @@ public class ModFluidRegistryObject {
         Supplier<LiquidBlock> block = () -> type.createBlock(obj);
         Supplier<Item> bucket = type.hasBucket() ? () -> type.createBucket(obj) : null;
 
-        obj.source = fluidRegistry.register(name + "_source", source);
+        obj.source = fluidRegistry.register(name, source);
         obj.flowing = fluidRegistry.register(name + "_flowing", flowing);
         obj.type = fluidTypeRegistry.register(name, fluidType);
         obj.block = blockRegistry.register(name, block);

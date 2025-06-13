@@ -39,7 +39,6 @@ public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
             pPoseStack.pushPose();
             this.hornsModel.setupPose(pLivingEntity, pPartialTick, this.getParentModel().head);
             pPoseStack.pushPose();
-            pPoseStack.scale(1, -1, 1);
             this.hornsModel.render(pLivingEntity, pPartialTick, pPoseStack, pBuffer, pPackedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF, new Vec3(1, 1, 1));
             pPoseStack.popPose();
             pPoseStack.popPose();
@@ -66,8 +65,8 @@ public class HornsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
             setupModelPose(player, partialTick);
             ModelPose.ModelPosePart root = modelPose.stringToPart.get("root");
             root.scale = new Vector3f(connectedTo.xScale, connectedTo.yScale, connectedTo.zScale);
-            root.rotation = new Vector3f(-connectedTo.xRot, connectedTo.yRot, -connectedTo.zRot);
-            root.pos = new Vector3f(connectedTo.x, -connectedTo.y, connectedTo.z);
+            root.rotation = new Vector3f(-connectedTo.xRot+(float)Math.toRadians(180), -connectedTo.yRot, connectedTo.zRot);
+            root.pos = new Vector3f(connectedTo.x, connectedTo.y, connectedTo.z);
         }
 
         public DatabankModel getModel() {

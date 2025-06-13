@@ -31,6 +31,12 @@ public class EnderPearlDestinationBlockEntity extends PearlNetworkBlockEntity {p
     }
 
     @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
+    @Override
     public Vec3 getLinkShift() {
         return new Vec3(0, -0.5, 0);
     }

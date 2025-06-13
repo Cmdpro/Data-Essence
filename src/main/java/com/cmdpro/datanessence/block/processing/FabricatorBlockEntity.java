@@ -81,6 +81,11 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
             checkRecipes();
         }
     }
+    @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
     private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler);
     public CombinedInvWrapper getCombinedInvWrapper() {
         return combinedInvWrapper;
