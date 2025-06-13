@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.entity.ancientcombatunit;
 
 import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
+import com.cmdpro.databank.model.animation.DatabankEntityAnimationState;
 import com.cmdpro.datanessence.entity.BlackHole;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
@@ -40,9 +41,7 @@ import java.util.Optional;
 
 
 public class AncientCombatUnit extends Monster {
-    public DatabankAnimationState animState = new DatabankAnimationState("idle") {
-
-    }.addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
+    public DatabankAnimationState animState = new DatabankEntityAnimationState("idle", this).addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("walk", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("spin", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
             .addAnim(new DatabankAnimationReference("slashes", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
@@ -52,6 +51,13 @@ public class AncientCombatUnit extends Monster {
     );
     public AncientCombatUnit(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
+        animState.setLevel(level);
+    }
+
+    @Override
+    protected void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
     }
 
     public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(AncientCombatUnit.class, EntityDataSerializers.STRING);
