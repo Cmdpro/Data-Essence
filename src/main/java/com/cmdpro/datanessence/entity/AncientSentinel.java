@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.entity;
 
 import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
+import com.cmdpro.databank.model.animation.DatabankEntityAnimationState;
 import com.cmdpro.datanessence.registry.EntityRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -29,10 +30,11 @@ import net.minecraft.world.phys.Vec3;
 
 
 public class AncientSentinel extends Monster implements RangedAttackMob {
-    public DatabankAnimationState animState = new DatabankAnimationState("idle")
+    public DatabankAnimationState animState = new DatabankEntityAnimationState("idle", this)
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}));
     public AncientSentinel(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
+        animState.setLevel(level);
     }
     public static AttributeSupplier setAttributes() {
         return Monster.createMobAttributes()
@@ -41,6 +43,13 @@ public class AncientSentinel extends Monster implements RangedAttackMob {
                 .add(Attributes.ATTACK_SPEED, 0f)
                 .add(Attributes.MOVEMENT_SPEED, 0f).build();
     }
+
+    @Override
+    protected void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
     protected void registerGoals() {
         this.goalSelector.addGoal(2, new RangedAttackGoal(this, 1.0D, 30, 15));
         this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 8.0F));
