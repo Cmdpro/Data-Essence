@@ -73,11 +73,12 @@ public class WingsLayer<T extends Player, M extends HumanoidModel<T>> extends Re
             animate(animState);
         }
         public void setupPose(Player player, float partialTick, ModelPart connectedTo) {
+            animState.setLevel(player.level());
             setupModelPose(player, partialTick);
             ModelPose.ModelPosePart root = modelPose.stringToPart.get("root");
             root.scale = new Vector3f(connectedTo.xScale, connectedTo.yScale, connectedTo.zScale);
-            root.rotation = new Vector3f(connectedTo.xRot, connectedTo.yRot, connectedTo.zRot);
-            root.pos = new Vector3f(connectedTo.x, -connectedTo.y, connectedTo.z-3f);
+            root.rotation = new Vector3f(connectedTo.xRot, connectedTo.yRot+(float)Math.toRadians(180), connectedTo.zRot);
+            root.pos = new Vector3f(connectedTo.x, -connectedTo.y, connectedTo.z);
         }
 
         public DatabankModel getModel() {

@@ -76,8 +76,13 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    
-    
+
+
+    @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
 
     public IItemHandler getItemHandler() {
         return itemHandler;
