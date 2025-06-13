@@ -286,6 +286,12 @@ public class AncientCombatUnit extends Monster {
         return super.hurt(source, finalAmount);
     }
 
+
+    @Override
+    protected boolean canRide(Entity vehicle) {
+        return false;
+    }
+
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
