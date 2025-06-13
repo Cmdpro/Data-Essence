@@ -4,7 +4,9 @@ import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.databank.model.animation.DatabankEntityAnimationState;
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.util.CollisionTestCube;
 import com.cmdpro.datanessence.entity.BlackHole;
+import com.cmdpro.datanessence.entity.ShockwaveEntity;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -31,10 +33,12 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.animal.sniffer.Sniffer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.ShieldItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -76,7 +80,8 @@ public class AncientCombatUnit extends Monster {
             .addAnim(new DatabankAnimationReference("slam_loop", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("slam_pre", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("slam", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
-            .addAnim(new DatabankAnimationReference("stun", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")));
+            .addAnim(new DatabankAnimationReference("stun", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
+            .addAnim(new DatabankAnimationReference("blink", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")));
     private final ServerBossEvent bossEvent = new ServerBossEvent(
             this.getDisplayName(), BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.PROGRESS
     );
@@ -254,8 +259,8 @@ public class AncientCombatUnit extends Monster {
             playSound(SoundEvents.PLAYER_TELEPORT);
             Vec3 pos = targetValue.position();
             pos = pos.add(0, 6, 0);
-            lookAtTarget(targetValue);
             teleportTo(pos.x, pos.y, pos.z);
+            lookAtTarget(targetValue);
         }
         slamAirTime = 20;
         slamWasOnGround = false;
@@ -350,8 +355,8 @@ public class AncientCombatUnit extends Monster {
                             Vec3 pos = targetValue.position();
                             Vec3 diff = pos.multiply(1, 0, 1).vectorTo(this.position().multiply(1, 0, 1));
                             pos = pos.add(diff.normalize().scale(teleportToPlayerDist));
-                            lookAtTarget(targetValue);
                             teleportTo(pos.x, pos.y, pos.z);
+                            lookAtTarget(targetValue);
                         }
                     }
                 }
@@ -363,9 +368,9 @@ public class AncientCombatUnit extends Monster {
                         if ((attackCooldown - DEFAULT_COOLDOWN) % 20 == 19) {
                             if (getTarget() != null) {
                                 Vec3 pos = getTarget().position();
-                                pos = pos.add(pos.multiply(1, 0, 1).vectorTo(this.position().multiply(1, 0, 1)).normalize().reverse());
-                                lookAtTarget();
+                                pos = pos.add(pos.multiply(1, 0, 1).vectorTo(this.position().multiply(1, 0, 1)).normalize().scale(2).reverse());
                                 teleportTo(pos.x, pos.y, pos.z);
+                                lookAtTarget();
                                 playSound(SoundEvents.PLAYER_TELEPORT);
                                 slashDelays = List.of(12);
                                 slashDamage = 15;
@@ -400,11 +405,13 @@ public class AncientCombatUnit extends Monster {
                             float distance = Math.min(getTarget().distanceTo(this) - 1.5f, 10f);
                             Vec3 pos = position();
                             pos = pos.add(pos.multiply(1, 0, 1).vectorTo(getTarget().position().multiply(1, 0, 1)).normalize().scale(distance));
-                            lookAtTarget();
                             teleportTo(pos.x, pos.y, pos.z);
+                            lookAtTarget();
                             playSound(SoundEvents.PLAYER_TELEPORT);
                             blinks--;
                             attackCooldown = DEFAULT_COOLDOWN + 45;
+                            anim = "blink";
+                            force = true;
                         }
                     }
                 }
@@ -450,6 +457,10 @@ public class AncientCombatUnit extends Monster {
                                         }
                                     }
                                 });
+                                ShockwaveEntity shockwave = new ShockwaveEntity(this, level(), 15f, getPhase() >= 2 ? ((1f/20f)*2.5f) : ((1f/20f)*5), 10, 1f, ShockwaveEntity.LIVING_GROUNDED);
+                                shockwave.setPos(position().add(0, 0.1, 0));
+                                shockwave.ignoreInvincibility = true;
+                                level().addFreshEntity(shockwave);
                             }
                             if (slams > 0) {
                                 if (attackCooldown - DEFAULT_COOLDOWN <= 25) {
@@ -479,15 +490,20 @@ public class AncientCombatUnit extends Monster {
             List<Integer> slashDelaysNew = new ArrayList<>();
             for (int i : slashDelays) {
                 if (i - 1 <= 0) {
+                    if (!attack.equals("blink_behind")) {
+                        lookAtTarget();
+                    }
                     playSound(SoundEvents.WITCH_THROW);
-                    AABB hit = AABB.ofSize(getBoundingBox().getCenter().add(getLookAngle().scale(1.5f)), 5, 6, 5);
-                    level().getEntitiesOfClass(LivingEntity.class, hit).forEach((j) -> {
+                    float rot = (float)java.lang.Math.toRadians((-getYRot()-90)+45);
+                    CollisionTestCube hit = new CollisionTestCube(AABB.ofSize(getBoundingBox().getCenter().add(new Vec3(1, 0, 1).yRot(rot).scale(1.5f)), 3f, 6, 3f));
+                    hit.rotation.rotateY((float)Math.toRadians(getYRot()));
+                    List<LivingEntity> hitEntities = hit.getEntitiesOfClass(LivingEntity.class, level(), true);
+                    hitEntities.forEach((j) -> {
                         if (j != this) {
                             j.invulnerableTime = 0;
                             j.hurt(damageSources().mobAttack(this), slashDamage);
                         }
                     });
-                    lookAtTarget();
                     if (slashType.equals("normal")) {
                         if (getTarget() != null) {
                             Vec3 pos = position().multiply(1, 0, 1).vectorTo(getTarget().position().multiply(1, 0, 1)).normalize().scale(0.75f);
