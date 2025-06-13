@@ -153,7 +153,7 @@ public class AncientCombatUnit extends Monster {
         }
     }
     public List<? extends Player> getFightPlayers() {
-        return this.level().players().stream().filter((i) -> !i.isDeadOrDying() && i.distanceTo(this) <= 128).toList();
+        return this.level().players().stream().filter((i) -> !i.isDeadOrDying() && !i.isSpectator() && !i.isCreative() && i.distanceTo(this) <= 128).toList();
     }
     public boolean canMove() {
         return attackCooldown <= 50;
@@ -271,9 +271,41 @@ public class AncientCombatUnit extends Monster {
         return super.isNoGravity() || slamAirTime > 0;
     }
 
+    private boolean wouldBeInWall(Vec3 pos) {
+        Vec3 currentPos = position();
+        boolean inWall = false;
+        setPos(pos);
+        if (isInWall()) {
+            inWall = true;
+        }
+        setPos(currentPos);
+        return inWall;
+    }
+
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (source.is(DamageTypes.FALL)) {
+            return false;
+        }
+        if (source.is(DamageTypes.IN_WALL)) {
+            Optional<? extends Player> target = getFightPlayers().stream().sorted(Comparator.comparing((i) -> i.distanceTo(this))).findFirst();
+            if (target.isPresent()) {
+                Player targetValue = target.get();
+                setTarget(targetValue);
+                playSound(SoundEvents.PLAYER_TELEPORT);
+                Vec3 pos = targetValue.position();
+                Vec3 currentPos = position();
+                if (!wouldBeInWall(new Vec3(pos.x, currentPos.y, currentPos.z))) {
+                    teleportTo(pos.x, currentPos.y, currentPos.z);
+                } else if (!wouldBeInWall(new Vec3(currentPos.x, currentPos.y, pos.z))) {
+                    teleportTo(currentPos.x, currentPos.y, pos.z);
+                } else if (wouldBeInWall(new Vec3(pos.x, currentPos.y, pos.z))) {
+                    teleportTo(pos.x, currentPos.y, pos.z);
+                } else {
+                    teleportTo(pos.x, pos.y, pos.z);
+                }
+                lookAtTarget(targetValue);
+            }
             return false;
         }
         float finalAmount = Math.clamp(amount, 0f, 15f);
@@ -285,7 +317,6 @@ public class AncientCombatUnit extends Monster {
         }
         return super.hurt(source, finalAmount);
     }
-
 
     @Override
     protected boolean canRide(Entity vehicle) {
@@ -322,7 +353,7 @@ public class AncientCombatUnit extends Monster {
                     blinks = 3;
                     teleportToPlayerMaxDist = 6;
                     teleportToPlayer = true;
-                    teleportToPlayerDist = 2;
+                    teleportToPlayerDist = 1;
                 }
                 if (attackId.equals("spin")) {
                     attackCooldown = DEFAULT_COOLDOWN + 30;
@@ -409,7 +440,7 @@ public class AncientCombatUnit extends Monster {
                                 slashType = "heavy";
                             }
                         } else if (blinks > 0) {
-                            float distance = Math.min(getTarget().distanceTo(this) - 1.5f, 10f);
+                            float distance = Math.min(getTarget().distanceTo(this) - 1f, 10f);
                             Vec3 pos = position();
                             pos = pos.add(pos.multiply(1, 0, 1).vectorTo(getTarget().position().multiply(1, 0, 1)).normalize().scale(distance));
                             teleportTo(pos.x, pos.y, pos.z);
@@ -427,7 +458,7 @@ public class AncientCombatUnit extends Monster {
                         playSound(SoundEvents.WITCH_THROW);
                         AABB hit = AABB.ofSize(getBoundingBox().getCenter(), 6, 6, 6);
                         level().getEntitiesOfClass(Entity.class, hit).forEach((j) -> {
-                            if (j != this) {
+                            if (!(j instanceof AncientCombatUnit)) {
                                 if (j instanceof Projectile projectile) {
                                     projectile.setDeltaMovement(projectile.position().vectorTo(hit.getCenter()).normalize().reverse().scale(projectile.getDeltaMovement().length()));
                                 } else if (j instanceof LivingEntity livingEntity) {
@@ -457,14 +488,14 @@ public class AncientCombatUnit extends Monster {
                                 ((ServerLevel) level()).sendParticles(ParticleTypes.EXPLOSION_EMITTER, position().x, position().y, position().z, 1, 0, 0, 0, 0);
                                 AABB hit = AABB.ofSize(position(), 5, 6, 5);
                                 level().getEntitiesOfClass(Entity.class, hit).forEach((j) -> {
-                                    if (j != this) {
+                                    if (!(j instanceof AncientCombatUnit)) {
                                         if (j instanceof LivingEntity livingEntity) {
                                             j.invulnerableTime = 0;
                                             livingEntity.hurt(damageSources().mobAttack(this), 20);
                                         }
                                     }
                                 });
-                                ShockwaveEntity shockwave = new ShockwaveEntity(this, level(), 15f, getPhase() >= 2 ? ((1f/20f)*2.5f) : ((1f/20f)*5), 10, 1f, ShockwaveEntity.LIVING_GROUNDED);
+                                ShockwaveEntity shockwave = new ShockwaveEntity(this, level(), 15f, getPhase() >= 2 ? ((1f/20f)*2.5f) : ((1f/20f)*5), 10, 1f, (entity) -> !(entity instanceof AncientCombatUnit) && entity.onGround());
                                 shockwave.setPos(position().add(0, 0.1, 0));
                                 shockwave.ignoreInvincibility = true;
                                 level().addFreshEntity(shockwave);
@@ -502,11 +533,11 @@ public class AncientCombatUnit extends Monster {
                     }
                     playSound(SoundEvents.WITCH_THROW);
                     float rot = (float)java.lang.Math.toRadians((-getYRot()-90)+45);
-                    CollisionTestCube hit = new CollisionTestCube(AABB.ofSize(getBoundingBox().getCenter().add(new Vec3(1, 0, 1).yRot(rot).scale(1.5f)), 3f, 6, 3f));
+                    CollisionTestCube hit = new CollisionTestCube(AABB.ofSize(getBoundingBox().getCenter().add(new Vec3(1, 0, 1).yRot(rot).scale(1f)), 4f, 6, 4f));
                     hit.rotation.rotateY((float)Math.toRadians(getYRot()));
                     List<LivingEntity> hitEntities = hit.getEntitiesOfClass(LivingEntity.class, level(), true);
                     hitEntities.forEach((j) -> {
-                        if (j != this) {
+                        if (!(j instanceof AncientCombatUnit)) {
                             j.invulnerableTime = 0;
                             j.hurt(damageSources().mobAttack(this), slashDamage);
                         }
