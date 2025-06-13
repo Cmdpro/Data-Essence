@@ -276,13 +276,14 @@ public class AncientCombatUnit extends Monster {
         if (source.is(DamageTypes.FALL)) {
             return false;
         }
+        float finalAmount = Math.clamp(amount, 0f, 15f);
         if (stunTicks <= 0) {
-            stunHealth -= amount;
+            stunHealth -= finalAmount;
             if (stunHealth <= 0) {
                 stun();
             }
         }
-        return super.hurt(source, amount);
+        return super.hurt(source, finalAmount);
     }
 
     @Override
