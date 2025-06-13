@@ -100,8 +100,13 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
 
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-    
-    
+
+
+    @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
     
 
     public IItemHandler getItemHandler() {

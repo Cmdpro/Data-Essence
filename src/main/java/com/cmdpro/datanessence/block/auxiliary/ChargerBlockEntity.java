@@ -51,6 +51,13 @@ public class ChargerBlockEntity extends BlockEntity implements MenuProvider, Ess
             .addAnim(new DatabankAnimationReference("retract_exciters", (state, anim) -> {}, (state, anim) -> state.setAnim("idle_empty")))
             .addAnim(new DatabankAnimationReference("idle_exciters_out", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("orb_fall", (state, anim) -> {}, (state, anim) -> state.setAnim("idle_exciters_out")));
+
+    @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
     public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {

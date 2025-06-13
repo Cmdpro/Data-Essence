@@ -49,7 +49,7 @@ public class AncientSentinelRenderer extends DatabankLivingEntityRenderer<Ancien
             Vec2 rot = new Vec2(Mth.lerp(partialTick, pEntity.xRotO, pEntity.getXRot()), Mth.rotLerp(partialTick, pEntity.yHeadRotO, pEntity.yHeadRot));
             float bodyRot = Mth.rotLerp(partialTick, pEntity.yBodyRotO, pEntity.yBodyRot);
             modelPose.stringToPart.get("head").rotation.x = rot.x * (float) (Math.PI / 180.0);
-            modelPose.stringToPart.get("head").rotation.y = (rot.y+bodyRot+180) * (float) (Math.PI / 180.0);
+            modelPose.stringToPart.get("head").rotation.y = (rot.y-bodyRot) * (float) (Math.PI / 180.0);
         }
     }
 }

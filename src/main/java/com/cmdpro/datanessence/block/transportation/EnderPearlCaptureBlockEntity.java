@@ -43,6 +43,12 @@ public class EnderPearlCaptureBlockEntity extends PearlNetworkBlockEntity {
         super(BlockEntityRegistry.ENDER_PEARL_CAPTURE.get(), pos, blockState);
     }
 
+    @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EnderPearlCaptureBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide) {
             List<ThrownEnderpearl> pearls = pLevel.getEntitiesOfClass(ThrownEnderpearl.class, AABB.ofSize(pPos.getCenter(), 5, 5, 5));

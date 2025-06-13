@@ -62,6 +62,12 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     public ItemStack item;
 
     @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
+    @Override
     public EssenceStorage getStorage() {
         return storage;
     }

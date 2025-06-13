@@ -58,6 +58,12 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
         return storage;
     }
 
+    @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
     private final ItemStackHandler itemHandler = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
