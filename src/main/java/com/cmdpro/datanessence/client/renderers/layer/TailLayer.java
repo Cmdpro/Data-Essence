@@ -64,6 +64,7 @@ public class TailLayer<T extends Player, M extends HumanoidModel<T>> extends Ren
             animate(animState);
         }
         public void setupPose(Player player, float partialTick, ModelPart connectedTo) {
+            animState.setLevel(player.level());
             setupModelPose(player, partialTick);
             ModelPose.ModelPosePart root = modelPose.stringToPart.get("root");
             root.scale = new Vector3f(connectedTo.xScale, connectedTo.yScale, connectedTo.zScale);

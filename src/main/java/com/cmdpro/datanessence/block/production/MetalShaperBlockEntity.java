@@ -59,6 +59,12 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
     public AnimationDefinition anim;
 
     @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
+    @Override
     public EssenceStorage getStorage() {
         return storage;
     }

@@ -53,6 +53,12 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
     public float generationRate; // current generation rate
 
     @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
+    @Override
     public EssenceStorage getStorage() {
         return storage;
     }

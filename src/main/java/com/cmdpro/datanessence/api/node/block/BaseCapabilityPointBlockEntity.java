@@ -35,6 +35,12 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}));
 
+    @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
     public List<BlockPos> link;
     public final ItemStackHandler universalUpgrade = new ItemStackHandler(1) {
         @Override
