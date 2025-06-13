@@ -856,7 +856,7 @@
       ]
     },
     "slashes": {
-      "length": 1.75,
+      "length": 1.875,
       "looping": false,
       "animation": [
         {
@@ -882,25 +882,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.375,
-              "target": [
-                0,
-                0,
-                0
-              ],
-              "interpolation": "linear"
-            },
-            {
               "timestamp": 0.5,
               "target": [
                 0,
-                12.5,
+                0,
                 0
               ],
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.66667,
+              "timestamp": 0.625,
               "target": [
                 0,
                 12.5,
@@ -909,7 +900,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.75,
+              "timestamp": 0.7916666666666666,
+              "target": [
+                0,
+                12.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.875,
               "target": [
                 0,
                 -15,
@@ -918,7 +918,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1,
+              "timestamp": 1.125,
               "target": [
                 0,
                 -15,
@@ -927,7 +927,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.16667,
+              "timestamp": 1.2916666666666667,
               "target": [
                 0,
                 25,
@@ -936,7 +936,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.5,
+              "timestamp": 1.625,
               "target": [
                 0,
                 25,
@@ -945,7 +945,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.75,
+              "timestamp": 1.875,
               "target": [
                 0,
                 0,
@@ -978,7 +978,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.375,
+              "timestamp": 0.5,
               "target": [
                 163.5041515596,
                 69.381701201,
@@ -987,7 +987,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.95833,
+              "timestamp": 1.0833333333333333,
               "target": [
                 163.5041515596,
                 69.381701201,
@@ -996,7 +996,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1,
+              "timestamp": 1.125,
               "target": [
                 173.6811058598,
                 -24.7042779788,
@@ -1005,7 +1005,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.125,
+              "timestamp": 1.25,
               "target": [
                 -6.3188941402,
                 -24.7042779788,
@@ -1014,7 +1014,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.25,
+              "timestamp": 1.375,
               "target": [
                 4.2788851941,
                 -25.1117793057,
@@ -1023,7 +1023,7 @@
               "interpolation": "smooth"
             },
             {
-              "timestamp": 1.375,
+              "timestamp": 1.5,
               "target": [
                 -6.3188941402,
                 -24.7042779788,
@@ -1032,7 +1032,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.54167,
+              "timestamp": 1.6666666666666667,
               "target": [
                 -52.5,
                 0,
@@ -1080,25 +1080,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.375,
-              "target": [
-                0,
-                0,
-                0
-              ],
-              "interpolation": "linear"
-            },
-            {
               "timestamp": 0.5,
               "target": [
                 0,
-                -127.5,
+                0,
                 0
               ],
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.66667,
+              "timestamp": 0.625,
               "target": [
                 0,
                 -127.5,
@@ -1107,7 +1098,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.95833,
+              "timestamp": 0.7916666666666666,
               "target": [
                 0,
                 -127.5,
@@ -1116,7 +1107,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.125,
+              "timestamp": 1.0833333333333333,
+              "target": [
+                0,
+                -127.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.25,
               "target": [
                 0,
                 0,
@@ -1149,7 +1149,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.375,
+              "timestamp": 0.5,
               "target": [
                 -169.3183521379,
                 6.493053085,
@@ -1158,7 +1158,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.66667,
+              "timestamp": 0.7916666666666666,
               "target": [
                 -169.3183521379,
                 6.493053085,
@@ -1167,7 +1167,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1,
+              "timestamp": 1.125,
               "target": [
                 -169.3183521379,
                 6.493053085,
@@ -1176,7 +1176,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.5,
+              "timestamp": 1.625,
               "target": [
                 -169.3183521379,
                 6.493053085,
@@ -1185,7 +1185,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.75,
+              "timestamp": 1.875,
               "target": [
                 0,
                 0,
@@ -1233,25 +1233,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.375,
-              "target": [
-                0,
-                0,
-                0
-              ],
-              "interpolation": "linear"
-            },
-            {
               "timestamp": 0.5,
               "target": [
                 0,
-                122.5,
+                0,
                 0
               ],
               "interpolation": "linear"
             },
             {
-              "timestamp": 1,
+              "timestamp": 0.625,
               "target": [
                 0,
                 122.5,
@@ -1260,7 +1251,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.5,
+              "timestamp": 1.125,
               "target": [
                 0,
                 122.5,
@@ -1269,7 +1260,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.75,
+              "timestamp": 1.625,
+              "target": [
+                0,
+                122.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.875,
               "target": [
                 0,
                 0,
@@ -1302,7 +1302,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.375,
+              "timestamp": 0.5,
               "target": [
                 0,
                 0,
@@ -1311,7 +1311,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.5,
+              "timestamp": 0.625,
               "target": [
                 10,
                 12.5,
@@ -1320,7 +1320,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.75,
+              "timestamp": 0.875,
               "target": [
                 11.2141612449,
                 -29.3392380016,
@@ -1329,7 +1329,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.95833,
+              "timestamp": 1.0833333333333333,
               "target": [
                 11.2141612449,
                 -29.3392380016,
@@ -1338,7 +1338,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.08333,
+              "timestamp": 1.2083333333333333,
               "target": [
                 3.7161477278,
                 44.3578450785,
@@ -1347,7 +1347,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.5,
+              "timestamp": 1.625,
               "target": [
                 3.7161477278,
                 44.3578450785,
@@ -1356,7 +1356,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.75,
+              "timestamp": 1.875,
               "target": [
                 10,
                 0,
@@ -1389,25 +1389,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.375,
-              "target": [
-                0,
-                0,
-                0
-              ],
-              "interpolation": "linear"
-            },
-            {
               "timestamp": 0.5,
               "target": [
                 0,
-                125,
+                0,
                 0
               ],
               "interpolation": "linear"
             },
             {
-              "timestamp": 1,
+              "timestamp": 0.625,
               "target": [
                 0,
                 125,
@@ -1419,13 +1410,13 @@
               "timestamp": 1.125,
               "target": [
                 0,
-                -27.5,
+                125,
                 0
               ],
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.5,
+              "timestamp": 1.25,
               "target": [
                 0,
                 -27.5,
@@ -1434,7 +1425,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.75,
+              "timestamp": 1.625,
+              "target": [
+                0,
+                -27.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.875,
               "target": [
                 0,
                 0,
@@ -1467,25 +1467,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.375,
-              "target": [
-                0,
-                0,
-                0
-              ],
-              "interpolation": "linear"
-            },
-            {
               "timestamp": 0.5,
               "target": [
                 0,
-                -67.5,
+                0,
                 0
               ],
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.66667,
+              "timestamp": 0.625,
               "target": [
                 0,
                 -67.5,
@@ -1494,7 +1485,16 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.79167,
+              "timestamp": 0.7916666666666666,
+              "target": [
+                0,
+                -67.5,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.9166666666666666,
               "target": [
                 0,
                 97.5,
@@ -1503,7 +1503,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 0.95833,
+              "timestamp": 1.0833333333333333,
               "target": [
                 0,
                 97.5,
@@ -1512,7 +1512,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1,
+              "timestamp": 1.125,
               "target": [
                 0,
                 0,
@@ -1521,7 +1521,7 @@
               "interpolation": "linear"
             },
             {
-              "timestamp": 1.25,
+              "timestamp": 1.375,
               "target": [
                 0,
                 0,
