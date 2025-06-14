@@ -81,7 +81,8 @@ public class AncientCombatUnit extends Monster {
             .addAnim(new DatabankAnimationReference("slam_pre", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("slam", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
             .addAnim(new DatabankAnimationReference("stun", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
-            .addAnim(new DatabankAnimationReference("blink", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")));
+            .addAnim(new DatabankAnimationReference("blink", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
+            .addAnim(new DatabankAnimationReference("exploding", (state, anim) -> {}, (state, anim) -> {}));
     private final ServerBossEvent bossEvent = new ServerBossEvent(
             this.getDisplayName(), BossEvent.BossBarColor.PURPLE, BossEvent.BossBarOverlay.PROGRESS
     );
@@ -198,7 +199,7 @@ public class AncientCombatUnit extends Monster {
     @Override
     public void tick() {
         if (stunTicks > 0) {
-            setDeltaMovement(0, 0, 0);
+            setDeltaMovement(0, getDeltaMovement().y > 0 ? 0 : getDeltaMovement().y, 0);
         }
         super.tick();
         if (level().isClientSide) {
@@ -259,6 +260,7 @@ public class AncientCombatUnit extends Monster {
             playSound(SoundEvents.PLAYER_TELEPORT);
             Vec3 pos = targetValue.position();
             pos = pos.add(0, 6, 0);
+            setDeltaMovement(0, 0, 0);
             teleportTo(pos.x, pos.y, pos.z);
             lookAtTarget(targetValue);
         }
@@ -268,7 +270,9 @@ public class AncientCombatUnit extends Monster {
 
     @Override
     public boolean isNoGravity() {
-        return super.isNoGravity() || slamAirTime > 0;
+        return super.isNoGravity() ||
+                slamAirTime > 0 ||
+                ("blink_behind".equals(attack) && attackCooldown > DEFAULT_COOLDOWN);
     }
 
     private boolean wouldBeInWall(Vec3 pos) {
@@ -281,6 +285,10 @@ public class AncientCombatUnit extends Monster {
         setPos(currentPos);
         return inWall;
     }
+    public boolean finale;
+    public int finaleTicks;
+    public int finaleProgress;
+    public int finaleStage;
 
     @Override
     public boolean hurt(DamageSource source, float amount) {
@@ -308,14 +316,33 @@ public class AncientCombatUnit extends Monster {
             }
             return false;
         }
-        float finalAmount = Math.clamp(amount, 0f, 15f);
-        if (stunTicks <= 0) {
-            stunHealth -= finalAmount;
-            if (stunHealth <= 0) {
-                stun();
+        if (finale) {
+            return false;
+        }
+        if (!source.is(DamageTypes.GENERIC_KILL)) {
+            float finalAmount = Math.clamp(amount, 0f, 15f);
+            boolean potentialFinale = false;
+            if (getHealth()-finalAmount <= 0) {
+                finalAmount = getHealth()-1f;
+                potentialFinale = true;
+            }
+            if (super.hurt(source, finalAmount)) {
+                if (potentialFinale) {
+                    finale = true;
+                } else {
+                    if (stunTicks <= 0) {
+                        stunHealth -= finalAmount;
+                        if (stunHealth <= 0) {
+                            stun();
+                        }
+                    }
+                }
+                return true;
+            } else {
+                return false;
             }
         }
-        return super.hurt(source, finalAmount);
+        return super.hurt(source, amount);
     }
 
     @Override
@@ -332,57 +359,154 @@ public class AncientCombatUnit extends Monster {
         if (stunTicks <= 0) {
             String anim = animState.getAnim() == null ? animState.defaultAnim : animState.getAnim().id;
             boolean force = false;
-            attackCooldown--;
-            if (attackCooldown <= 0) {
-                attackCooldown = DEFAULT_COOLDOWN;
-                attackExclusions = new ArrayList<>();
-                boolean teleportToPlayer = false;
-                float teleportToPlayerDist = 0;
-                float teleportToPlayerMaxDist = Float.MAX_VALUE;
-                List<String> attacks = new ArrayList<>();
-                attacks.add("slashes");
-                attacks.add("spin");
-                attacks.add("slam");
-                if (getPhase() >= 2) {
-                    attacks.add("blink_behind");
-                }
-                int attack = random.nextIntBetweenInclusive(0, attacks.size() - 1);
-                String attackId = attacks.get(attack);
-                if (attackId.equals("slashes")) {
-                    attackCooldown = DEFAULT_COOLDOWN + 35;
-                    blinks = 3;
-                    teleportToPlayerMaxDist = 6;
-                    teleportToPlayer = true;
-                    teleportToPlayerDist = 1;
-                }
-                if (attackId.equals("spin")) {
-                    attackCooldown = DEFAULT_COOLDOWN + 30;
-                    anim = "spin";
-                    force = true;
-                    teleportToPlayer = true;
-                    teleportToPlayerDist = 2;
-                }
-                if (attackId.equals("blink_behind")) {
-                    attackCooldown = DEFAULT_COOLDOWN + (20 * 3);
-                    Optional<? extends Player> target = getFightPlayers().stream().sorted(Comparator.comparing((i) -> i.distanceTo(this))).findFirst();
-                    if (target.isPresent()) {
-                        Player targetValue = target.get();
-                        setTarget(targetValue);
-                    }
-                }
-                if (attackId.equals("slam")) {
-                    startSlam();
-                    attackCooldown = DEFAULT_COOLDOWN + 30;
-                    slams = 2;
+            if (!finale) {
+                attackCooldown--;
+                if (attackCooldown <= 0) {
+                    attackCooldown = DEFAULT_COOLDOWN;
+                    attackExclusions = new ArrayList<>();
+                    boolean teleportToPlayer = false;
+                    float teleportToPlayerDist = 0;
+                    float teleportToPlayerMaxDist = Float.MAX_VALUE;
+                    List<String> attacks = new ArrayList<>();
+                    attacks.add("slashes");
+                    attacks.add("spin");
+                    attacks.add("slam");
                     if (getPhase() >= 2) {
-                        slams = 4;
+                        attacks.add("blink_behind");
                     }
-                    anim = "slam_pre";
-                    force = true;
-                    slams--;
+                    int attack = random.nextIntBetweenInclusive(0, attacks.size() - 1);
+                    String attackId = attacks.get(attack);
+                    if (attackId.equals("slashes")) {
+                        attackCooldown = DEFAULT_COOLDOWN + 35;
+                        blinks = 3;
+                        teleportToPlayerMaxDist = 6;
+                        teleportToPlayer = true;
+                        teleportToPlayerDist = 1;
+                    }
+                    if (attackId.equals("spin")) {
+                        attackCooldown = DEFAULT_COOLDOWN + 30;
+                        anim = "spin";
+                        force = true;
+                        teleportToPlayer = true;
+                        teleportToPlayerDist = 2;
+                    }
+                    if (attackId.equals("blink_behind")) {
+                        attackCooldown = DEFAULT_COOLDOWN + (20 * 3);
+                        Optional<? extends Player> target = getFightPlayers().stream().sorted(Comparator.comparing((i) -> i.distanceTo(this))).findFirst();
+                        if (target.isPresent()) {
+                            Player targetValue = target.get();
+                            setTarget(targetValue);
+                        }
+                    }
+                    if (attackId.equals("slam")) {
+                        startSlam();
+                        attackCooldown = DEFAULT_COOLDOWN + 30;
+                        slams = 2;
+                        if (getPhase() >= 2) {
+                            slams = 4;
+                        }
+                        anim = "slam_pre";
+                        force = true;
+                        slams--;
+                    }
+                    this.attack = attackId;
+                    if (teleportToPlayer) {
+                        Optional<? extends Player> target = getFightPlayers().stream().sorted(Comparator.comparing((i) -> i.distanceTo(this))).findFirst();
+                        if (target.isPresent()) {
+                            Player targetValue = target.get();
+                            setTarget(targetValue);
+                            if (targetValue.distanceTo(this) <= teleportToPlayerMaxDist) {
+                                playSound(SoundEvents.PLAYER_TELEPORT);
+                                Vec3 pos = targetValue.position();
+                                Vec3 diff = pos.multiply(1, 0, 1).vectorTo(this.position().multiply(1, 0, 1));
+                                pos = pos.add(diff.normalize().scale(teleportToPlayerDist));
+                                teleportTo(pos.x, pos.y, pos.z);
+                                lookAtTarget(targetValue);
+                            }
+                        }
+                    }
                 }
-                this.attack = attackId;
-
+            } else {
+                if (attackCooldown > 0) {
+                    attackCooldown--;
+                }
+                boolean teleportToPlayer = false;
+                float teleportToPlayerMaxDist = Float.MAX_VALUE;
+                float teleportToPlayerDist = 0;
+                finaleTicks++;
+                if (finaleStage == 0) {
+                    if (finaleTicks >= 60) {
+                        finaleStage = 1;
+                        finaleTicks = 0;
+                    }
+                }
+                if (finaleStage >= 1) {
+                    if (finaleStage <= 3) {
+                        if (finaleProgress == 0) {
+                            startSlam();
+                            attackCooldown = DEFAULT_COOLDOWN + 30;
+                            slams = 3;
+                            anim = "slam_pre";
+                            force = true;
+                            attack = "slam";
+                            slams--;
+                            finaleProgress++;
+                        }
+                        if (finaleProgress == 2) {
+                            if (finaleStage % 2 == 0) {
+                                attack = "blink_behind";
+                                attackCooldown = DEFAULT_COOLDOWN + (20 * 3);
+                                Optional<? extends Player> target = getFightPlayers().stream().sorted(Comparator.comparing((i) -> i.distanceTo(this))).findFirst();
+                                if (target.isPresent()) {
+                                    Player targetValue = target.get();
+                                    setTarget(targetValue);
+                                }
+                            } else {
+                                attackCooldown = DEFAULT_COOLDOWN + 30;
+                                anim = "spin";
+                                force = true;
+                                attack = "spin";
+                                teleportToPlayer = true;
+                                teleportToPlayerDist = 2;
+                            }
+                            finaleProgress++;
+                        }
+                        if (finaleProgress == 3) {
+                            if (attackCooldown <= DEFAULT_COOLDOWN) {
+                                finaleProgress = 0;
+                                finaleStage++;
+                                finaleTicks = 0;
+                            }
+                        }
+                    } else {
+                        if (finaleProgress == 0) {
+                            anim = "exploding";
+                            force = true;
+                            finaleProgress = 1;
+                        }
+                        if (finaleProgress == 1) {
+                            if (finaleTicks >= 90) {
+                                playSound(SoundEvents.GENERIC_EXPLODE.value());
+                                playSound(SoundEvents.WITHER_DEATH);
+                                ((ServerLevel) level()).sendParticles(ParticleTypes.EXPLOSION_EMITTER, position().x, position().y, position().z, 4, 0, 0, 0, 0);
+                                AABB hit = AABB.ofSize(getBoundingBox().getCenter(), 5, 5, 5);
+                                level().getEntitiesOfClass(Entity.class, hit).forEach((j) -> {
+                                    if (!(j instanceof AncientCombatUnit)) {
+                                        if (j instanceof LivingEntity livingEntity) {
+                                            j.invulnerableTime = 0;
+                                            livingEntity.hurt(damageSources().mobAttack(this), 15);
+                                            if (livingEntity instanceof Player) {
+                                                livingEntity.hurtMarked = true;
+                                            }
+                                            livingEntity.setDeltaMovement(livingEntity.position().vectorTo(position()).multiply(1, 0, 1).normalize().scale(-4f).add(0, 1, 0));
+                                        }
+                                    }
+                                });
+                                remove(RemovalReason.KILLED);
+                            }
+                        }
+                    }
+                }
                 if (teleportToPlayer) {
                     Optional<? extends Player> target = getFightPlayers().stream().sorted(Comparator.comparing((i) -> i.distanceTo(this))).findFirst();
                     if (target.isPresent()) {
@@ -399,7 +523,6 @@ public class AncientCombatUnit extends Monster {
                     }
                 }
             }
-
             if (attack != null) {
                 if (attack.equals("blink_behind")) {
                     if (attackCooldown > DEFAULT_COOLDOWN) {
@@ -407,6 +530,7 @@ public class AncientCombatUnit extends Monster {
                             if (getTarget() != null) {
                                 Vec3 pos = getTarget().position();
                                 pos = pos.add(pos.multiply(1, 0, 1).vectorTo(this.position().multiply(1, 0, 1)).normalize().scale(2).reverse());
+                                setDeltaMovement(0, 0, 0);
                                 teleportTo(pos.x, pos.y, pos.z);
                                 lookAtTarget();
                                 playSound(SoundEvents.PLAYER_TELEPORT);
@@ -419,7 +543,6 @@ public class AncientCombatUnit extends Monster {
                         }
                     }
                 }
-
                 if (attack.equals("slashes") && attackCooldown == DEFAULT_COOLDOWN + 35) {
                     if (getTarget() != null) {
                         if (getTarget().distanceTo(this) <= 6) {
@@ -495,10 +618,25 @@ public class AncientCombatUnit extends Monster {
                                         }
                                     }
                                 });
-                                ShockwaveEntity shockwave = new ShockwaveEntity(this, level(), 15f, getPhase() >= 2 ? ((1f/20f)*2.5f) : ((1f/20f)*5), 10, 1f, (entity) -> !(entity instanceof AncientCombatUnit) && entity.onGround());
-                                shockwave.setPos(position().add(0, 0.1, 0));
-                                shockwave.ignoreInvincibility = true;
-                                level().addFreshEntity(shockwave);
+                                if (getPhase() >= 2) {
+                                    ShockwaveEntity shockwave = new ShockwaveEntity(this, level(), 15f, (1f / 20f) * 2.5f, 10, 1f, (entity) -> !(entity instanceof AncientCombatUnit) && entity.onGround());
+                                    shockwave.setPos(position().add(0, 0.1, 0));
+                                    shockwave.ignoreInvincibility = true;
+                                    level().addFreshEntity(shockwave);
+                                    ShockwaveEntity shockwave2 = new ShockwaveEntity(this, level(), 15f, (1f / 20f) * 7.5f, 10, 1f, (entity) -> !(entity instanceof AncientCombatUnit) && entity.onGround());
+                                    shockwave2.setPos(position().add(0, 0.1, 0));
+                                    shockwave2.ignoreInvincibility = true;
+                                    level().addFreshEntity(shockwave2);
+                                }
+                                if (getPhase() < 2 || finale) {
+                                    ShockwaveEntity shockwave = new ShockwaveEntity(this, level(), 15f, (1f / 20f) * 5, 10, 1f, (entity) -> !(entity instanceof AncientCombatUnit) && entity.onGround());
+                                    shockwave.setPos(position().add(0, 0.1, 0));
+                                    shockwave.ignoreInvincibility = true;
+                                    level().addFreshEntity(shockwave);
+                                }
+                                if (finale && slams <= 0) {
+                                    finaleProgress++;
+                                }
                             }
                             if (slams > 0) {
                                 if (attackCooldown - DEFAULT_COOLDOWN <= 25) {
@@ -524,7 +662,6 @@ public class AncientCombatUnit extends Monster {
                     }
                 }
             }
-
             List<Integer> slashDelaysNew = new ArrayList<>();
             for (int i : slashDelays) {
                 if (i - 1 <= 0) {
@@ -532,9 +669,9 @@ public class AncientCombatUnit extends Monster {
                         lookAtTarget();
                     }
                     playSound(SoundEvents.WITCH_THROW);
-                    float rot = (float)java.lang.Math.toRadians((-getYRot()-90)+45);
+                    float rot = (float) java.lang.Math.toRadians((-getYRot() - 90) + 45);
                     CollisionTestCube hit = new CollisionTestCube(AABB.ofSize(getBoundingBox().getCenter().add(new Vec3(1, 0, 1).yRot(rot).scale(1f)), 4f, 6, 4f));
-                    hit.rotation.rotateY((float)Math.toRadians(getYRot()));
+                    hit.rotation.rotateY((float) Math.toRadians(getYRot()));
                     List<LivingEntity> hitEntities = hit.getEntitiesOfClass(LivingEntity.class, level(), true);
                     hitEntities.forEach((j) -> {
                         if (!(j instanceof AncientCombatUnit)) {
