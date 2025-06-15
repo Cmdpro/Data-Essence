@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.entity.ShockwaveEntity;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.culling.Frustum;
@@ -40,7 +41,7 @@ public class ShockwaveRenderer extends EntityRenderer<ShockwaveEntity> {
 
         poseStack.pushPose();
         RenderSystem.enableBlend();
-        renderQuad(bufferSource.getBuffer(RenderType.entityTranslucent(getTextureLocation(shockwave))), poseStack, -1*range, 0, -1*range, 1*range, 0, 1*range, 0, 0, 1, 1, packedLight, OverlayTexture.NO_OVERLAY, color.getRGB());
+        renderQuad(bufferSource.getBuffer(RenderType.entityTranslucent(getTextureLocation(shockwave))), poseStack, -1*range, 0, -1*range, 1*range, 0, 1*range, 0, 0, 1, 1, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, color.getRGB());
         RenderSystem.disableBlend();
         poseStack.popPose();
     }
