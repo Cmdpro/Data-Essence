@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -65,7 +66,7 @@ public class FluidCollectorBlockEntity extends BlockEntity implements EssenceBlo
                         if (pBlockEntity.fluidHandler.fill(stack, IFluidHandler.FluidAction.SIMULATE) > 0) {
                             pBlockEntity.fluidHandler.fill(stack, IFluidHandler.FluidAction.EXECUTE);
                             pLevel.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
-                            pLevel.playSound(null, pPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 2f, 0.75f);
+                            pLevel.playSound(null, pPos, SoundRegistry.FLUID_COLLECTOR_FILL.value(), SoundSource.BLOCKS, 2f, 1f);
                             pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 25);
                             pBlockEntity.cooldown = 20;
                         }
@@ -76,7 +77,7 @@ public class FluidCollectorBlockEntity extends BlockEntity implements EssenceBlo
             }
 
             if (pBlockEntity.soundTick <= 0) {
-                pLevel.playSound(null, pPos, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 0.25f, 1.5f);
+                pLevel.playSound(null, pPos, SoundRegistry.FLUID_COLLECTOR_TICK.value(), SoundSource.BLOCKS, 0.25f, 1f);
                 pBlockEntity.soundTick = 17; // 18 desyncs eventually. 16 is too fast. 17 seems okay - on the low chance it matches up anyway :p
             }
             else { pBlockEntity.soundTick -= 1; }

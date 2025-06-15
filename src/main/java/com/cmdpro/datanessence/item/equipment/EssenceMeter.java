@@ -42,7 +42,7 @@ public class EssenceMeter extends Item {
                 }
 
                 player.sendSystemMessage(component);
-                player.playNotifySound(SoundRegistry.UI_CLICK.get(), SoundSource.PLAYERS, 1.0f, 1.0f);
+                player.playNotifySound(SoundRegistry.UI_CLICK.value(), SoundSource.PLAYERS, 1.0f, 1.0f);
             }
             return InteractionResult.SUCCESS;
         }

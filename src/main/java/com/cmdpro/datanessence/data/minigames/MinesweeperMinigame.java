@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.data.minigames;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.CommonVariables;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.cmdpro.datanessence.api.databank.Minigame;
 import net.minecraft.client.Minecraft;
@@ -195,16 +196,16 @@ public class MinesweeperMinigame extends Minigame {
     }
     public class Client {
         public static void placeFlag() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.WOOL_PLACE, 1f, 1f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.MINESWEEPER_PLACE_FLAG.value(), 1f, 1f));
         }
         public static void removeFlag() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.WOOL_BREAK, 1f, 1f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.MINESWEEPER_REMOVE_FLAG.value(), 1f, 1f));
         }
         public static void breakTile() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.STONE_BREAK, 1f, 1f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.MINESWEEPER_BREAK.value(), 1f, 1f));
         }
         public static void explode() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.GENERIC_EXPLODE.value(), 1f, 1f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.MINESWEEPER_EXPLODE.value(), 1f, 1f));
         }
     }
 }

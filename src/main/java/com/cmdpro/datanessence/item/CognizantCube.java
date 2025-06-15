@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.item;
 
 import com.cmdpro.datanessence.api.CommonVariables;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.player.LocalPlayer;
@@ -86,7 +87,7 @@ public class CognizantCube extends Item {
         super.onUseTick(pLevel, pLivingEntity, pStack, pRemainingUseDuration);
         if (!pLevel.isClientSide) {
             if (pRemainingUseDuration % 6 == 0) {
-                pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.STONE_BREAK, SoundSource.PLAYERS);
+                pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.COGNIZANT_CUBE_SHAKE.value(), SoundSource.PLAYERS);
             }
         }
     }
@@ -94,7 +95,7 @@ public class CognizantCube extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity) {
         if (!pLevel.isClientSide) {
-            pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS);
+            pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.COGNIZANT_CUBE_MESSAGE.value(), SoundSource.PLAYERS);
             if (pLivingEntity instanceof Player player) {
                 Component msg = results.get(RandomUtils.nextInt(0, results.size()));
                 if (RandomUtils.nextInt(0, 25) == 0) {

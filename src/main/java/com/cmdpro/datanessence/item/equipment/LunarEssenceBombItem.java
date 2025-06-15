@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.item.equipment;
 import com.cmdpro.datanessence.entity.ThrownExoticEssenceBombProjectile;
 import com.cmdpro.datanessence.entity.ThrownLunarEssenceBombProjectile;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.network.chat.Component;
@@ -41,7 +42,7 @@ public class LunarEssenceBombItem extends Item implements ProjectileItem {
 
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pHand) {
         ItemStack itemstack = pPlayer.getItemInHand(pHand);
-        pLevel.playSound((Player)null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.SNOWBALL_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
+        pLevel.playSound((Player)null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundRegistry.LUNAR_ESSENCE_BOMB_THROW.value(), SoundSource.PLAYERS, 0.5F, 0.4F / (pLevel.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!pLevel.isClientSide) {
             ThrownLunarEssenceBombProjectile bomb = new ThrownLunarEssenceBombProjectile(pPlayer, pLevel);
             bomb.setItem(itemstack);

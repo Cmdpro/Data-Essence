@@ -56,7 +56,7 @@ public class LockWidget extends AbstractWidget {
 
     @Override
     public void playDownSound(SoundManager handler) {
-        handler.play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+        handler.play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
     }
 
 }

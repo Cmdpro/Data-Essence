@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
 import com.cmdpro.datanessence.client.particle.RhombusParticleOptions;
 import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
 import com.cmdpro.datanessence.networking.Message;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -55,7 +56,7 @@ public record PlayEnderPearlRedirectionEffect(List<BlockPos> path) implements Me
             Vec3 startCenter = start.getCenter();
             Vec3 endCenter = end.getCenter();
 
-            level.playSound(player, startCenter.x, startCenter.y, startCenter.z, SoundEvents.ENDER_EYE_DEATH, SoundSource.PLAYERS);
+            level.playSound(player, startCenter.x, startCenter.y, startCenter.z, SoundRegistry.ENDER_PEARL_ABSORB.value(), SoundSource.PLAYERS);
             level.playSound(player, endCenter.x, endCenter.y, endCenter.z, SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
             if (path.size() >= 2) {
                 for (int i = 0; i < path.size() - 1; i++) {
