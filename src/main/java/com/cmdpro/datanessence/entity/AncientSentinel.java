@@ -4,6 +4,7 @@ import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.databank.model.animation.DatabankEntityAnimationState;
 import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -60,7 +61,7 @@ public class AncientSentinel extends Monster implements RangedAttackMob {
 
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
-        playSound(SoundEvents.IRON_GOLEM_STEP);
+        playSound(SoundRegistry.ANCIENT_SENTINEL_WALK.value());
     }
 
     protected SoundEvent getAmbientSound() {
@@ -68,11 +69,11 @@ public class AncientSentinel extends Monster implements RangedAttackMob {
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return SoundEvents.IRON_GOLEM_HURT;
+        return SoundRegistry.ANCIENT_SENTINEL_HURT.value();
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.IRON_GOLEM_DEATH;
+        return SoundRegistry.ANCIENT_SENTINEL_DEATH.value();
     }
     protected float getSoundVolume() {
         return 0.2F;
@@ -93,7 +94,7 @@ public class AncientSentinel extends Monster implements RangedAttackMob {
         double d2 = pTarget.getZ() - this.getZ();
         Vec3 vec = new Vec3(d0, d1, d2).normalize();
         projectile.setDeltaMovement(vec.multiply(0.5f, 0.5f, 0.5f));
-        this.playSound(SoundEvents.BLAZE_SHOOT, 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
+        this.playSound(SoundRegistry.ANCIENT_SENTINEL_SHOOT.value(), 1.0F, 1.0F / (this.getRandom().nextFloat() * 0.4F + 0.8F));
         this.level().addFreshEntity(projectile);
     }
 }

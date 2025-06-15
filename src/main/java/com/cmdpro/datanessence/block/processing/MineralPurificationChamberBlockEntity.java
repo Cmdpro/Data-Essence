@@ -10,6 +10,7 @@ import com.cmdpro.datanessence.recipe.MineralPurificationRecipe;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
 import com.cmdpro.datanessence.screen.MineralPurificationChamberMenu;
 import net.minecraft.core.BlockPos;
@@ -197,8 +198,7 @@ public class MineralPurificationChamberBlockEntity extends BlockEntity implement
                             pBlockEntity.outputItemHandler.insertItem(0, assembled, false);
                             pBlockEntity.outputItemHandler.insertItem(1, assembled2, false);
                             pBlockEntity.itemHandler.extractItem(0, 1, false);
-                            pLevel.playSound(null, pPos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS, 1, 1);
-                            pLevel.playSound(null, pPos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 2, 3);
+                            pLevel.playSound(null, pPos, SoundRegistry.MINERAL_PURIFICATION_CHAMBER_CRAFT.value(), SoundSource.BLOCKS, 1, 1);
                             pBlockEntity.workTime = 0;
                         }
                     }

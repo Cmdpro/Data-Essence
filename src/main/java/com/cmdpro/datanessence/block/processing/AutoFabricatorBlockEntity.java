@@ -14,10 +14,7 @@ import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.IHasRequiredKnowledge;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
-import com.cmdpro.datanessence.registry.BlockEntityRegistry;
-import com.cmdpro.datanessence.registry.DataComponentRegistry;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
-import com.cmdpro.datanessence.registry.RecipeRegistry;
+import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.AutoFabricatorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -229,7 +226,7 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
             }
         }
         outputItemHandler.insertItem(0, stack, false);
-        level.playSound(null, worldPosition, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
+        level.playSound(null, worldPosition, SoundRegistry.AUTO_FABRICATOR_CRAFT.value(), SoundSource.BLOCKS, 2, 1);
         return true;
     }
     public Recipe<CraftingInput> recipe;

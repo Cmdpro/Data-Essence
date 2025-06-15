@@ -80,7 +80,7 @@ public class DataTabletScreen extends Screen {
     }
 
     public boolean clickEntry(Entry entry) {
-        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
         screenType = 2;
         clickedEntry = entry;
         scrollbarPixels = 0;
@@ -92,7 +92,7 @@ public class DataTabletScreen extends Screen {
         currentTab = tab;
         offsetX = (imageWidth/2);
         offsetY = (imageHeight/2);
-        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
         return true;
     }
 
@@ -125,7 +125,7 @@ public class DataTabletScreen extends Screen {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
                     if (this.tabPage+2 < getSortedTabs().size()/6) {
                         tabPage += 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
                         return true;
                     }
                 }
@@ -134,7 +134,7 @@ public class DataTabletScreen extends Screen {
                 if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
                     if (tabPage > 0) {
                         tabPage -= 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
                         return true;
                     }
                 }
@@ -160,7 +160,7 @@ public class DataTabletScreen extends Screen {
                     if (clickedEntry.getPagesClient().size() > page+1) {
                         scrollbarPixels = 0;
                         page += 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
                         return true;
                     }
                 }
@@ -170,7 +170,7 @@ public class DataTabletScreen extends Screen {
                     if (page > 0) {
                         scrollbarPixels = 0;
                         page -= 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
                         return true;
                     }
                 }
@@ -184,12 +184,12 @@ public class DataTabletScreen extends Screen {
                 if (Screen.hasShiftDown()) {
                     savedEntry = null;
                     savedPage = 0;
-                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
                 }
                 else {
                     savedEntry = clickedEntry.id;
                     savedPage = page;
-                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+                    Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
                     super.onClose();
                 }
                 return true;

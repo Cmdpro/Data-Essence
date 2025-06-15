@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.block.auxiliary;
 
 import com.cmdpro.datanessence.client.particle.*;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
@@ -50,7 +51,7 @@ public class VacuumBlockEntity extends BlockEntity {
                     i.setItem(copy);
                 }
                 if (collectedSomething)
-                    world.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS, Mth.nextFloat(world.random, 0.1f, 0.6f), world.random.nextFloat());
+                    world.playSound(null, pos, SoundRegistry.VACUUM_PICKUP.value(), SoundSource.BLOCKS, Mth.nextFloat(world.random, 0.1f, 0.6f), world.random.nextFloat());
             }
         } else {
             Color[] enderColors = new Color[] { new Color(0x005c3c), new Color(0x033328), new Color(0x006653) };
