@@ -8,12 +8,9 @@ import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.registry.BlockEntityRegistry;
+import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
-import com.cmdpro.datanessence.registry.DataComponentRegistry;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
-import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.InfuserMenu;
 import com.cmdpro.datanessence.data.datatablet.Entry;
 import net.minecraft.core.BlockPos;
@@ -223,7 +220,7 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
                                         ItemStack stack = pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()).copy();
                                         pBlockEntity.outputItemHandler.insertItem(0, stack, false);
                                         pBlockEntity.itemHandler.extractItem(0, 1, false);
-                                        pLevel.playSound(null, pPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
+                                        pLevel.playSound(null, pPos, SoundRegistry.INFUSER_CRAFT.value(), SoundSource.BLOCKS, 2, 1);
                                         pBlockEntity.workTime = 0;
                                     } else {
                                         pBlockEntity.workTime++;

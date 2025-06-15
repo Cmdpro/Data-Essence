@@ -57,7 +57,7 @@ public class ArmorMaterialRegistry {
                 map.put(ArmorItem.Type.BOOTS, 1);
             }),
             15,
-            SoundEvents.ARMOR_EQUIP_LEATHER,
+            SoundRegistry.EQUIP_TRAVERSITE_TRUDGERS,
             () -> Ingredient.of(Tags.Items.LEATHERS), List.of(
             new ArmorMaterial.Layer(
                     DataNEssence.locate("traversite_trudgers")
