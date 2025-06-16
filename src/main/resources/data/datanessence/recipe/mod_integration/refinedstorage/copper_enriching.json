@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "refinedstorage"
+    }
+  ],
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 20
+  },
+  "time": 40,
+  "entry": "datanessence:basics/mod_integration_refinedstorage",
+  "pattern": [
+    "CCC",
+    "CQC",
+    "CCC"
+  ],
+  "key": {
+    "C": { "item": "minecraft:copper_ingot" },
+    "Q": { "tag": "c:gems/quartz" }
+  },
+  "result": { "id": "refinedstorage:quartz_enriched_copper", "count": 9 }
+}
