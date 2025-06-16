@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.registry;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.block.SpreadingPlant;
 
+import com.cmdpro.datanessence.block.DirectionalPillarBlock;
 import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.decoration.Dewlamp;
 import com.cmdpro.datanessence.block.decoration.EssenceBridge;
@@ -20,6 +21,8 @@ import com.cmdpro.datanessence.block.technical.DataBank;
 import com.cmdpro.datanessence.block.technical.StructureProtector;
 import com.cmdpro.datanessence.block.technical.cryochamber.Cryochamber;
 import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberRouter;
+import com.cmdpro.datanessence.block.technical.empty_cryochamber.EmptyCryochamber;
+import com.cmdpro.datanessence.block.technical.empty_cryochamber.EmptyCryochamberRouter;
 import com.cmdpro.datanessence.block.transmission.*;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.block.transmission.ExoticEssencePoint;
@@ -304,7 +307,7 @@ public class BlockRegistry {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> POLISHED_OBSIDIAN_COLUMN = register("polished_obsidian_column",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new DirectionalPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENGRAVED_POLISHED_OBSIDIAN = register("engraved_polished_obsidian",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
@@ -313,7 +316,7 @@ public class BlockRegistry {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> POLISHED_OBSIDIAN_TRACT = register("polished_obsidian_tract",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new DirectionalPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AETHER_RUNE = register("aether_rune",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
@@ -344,6 +347,11 @@ public class BlockRegistry {
     public static final Supplier<Block> DEWLAMP = register("dewlamp",
             () -> new Dewlamp(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN).noOcclusion().noCollission().lightLevel((blockState) -> { return 5;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> EMPTY_CRYOCHAMBER = register("empty_cryochamber",
+            () -> new EmptyCryochamber(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> EMPTY_CRYOCHAMBER_ROUTER = registerBlock("empty_cryochamber_router",
+            () -> new EmptyCryochamberRouter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()));
     private static <T extends Block> Supplier<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {
         return BLOCKS.register(name, block);

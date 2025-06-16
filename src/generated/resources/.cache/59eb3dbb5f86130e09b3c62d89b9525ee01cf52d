@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-02T01:24:19.028886746	Loot Tables
+// 1.21.1	2025-06-15T22:47:17.7018159	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -25,6 +25,8 @@ fea2a941c650615615e90e27482b9b2032ee71e8 data/datanessence/loot_table/blocks/cry
 d780424182f390bb85712d7baf184b36886bae45 data/datanessence/loot_table/blocks/deco_item_buffer.json
 93ca4ae06d5943c0e12e40c4b9c86fc0bd6453e9 data/datanessence/loot_table/blocks/dewlamp.json
 7288802b6e50232d520c8c45606c8191edb282a4 data/datanessence/loot_table/blocks/drying_table.json
+d81f82439ca385e3e04b57a872e0406317b7d95d data/datanessence/loot_table/blocks/empty_cryochamber.json
+d988d482a8db548a1332611c94246f260b847565 data/datanessence/loot_table/blocks/empty_cryochamber_router.json
 8505fb84433c5aa9ceab4cf73710b90c9a92ab79 data/datanessence/loot_table/blocks/ender_pearl_capture.json
 3ad9e315d0252b390ca3f1b6c913fa46dded899b data/datanessence/loot_table/blocks/ender_pearl_destination.json
 1056cd854c12e8a4d34612ee49d05b6bc40023ac data/datanessence/loot_table/blocks/ender_pearl_relay.json
@@ -45,6 +47,7 @@ cf1808b270b378eeac641aed9d59037a516e120c data/datanessence/loot_table/blocks/ess
 3b776b2d30cb9c0fb7ade18c7f7bf11acd280c89 data/datanessence/loot_table/blocks/exotic_essence_battery.json
 e872ba657276f7b578577d7f6f39c9a5112a6898 data/datanessence/loot_table/blocks/exotic_essence_point.json
 cc264d7f4e88e760ab31df3690efb2e3342c0a44 data/datanessence/loot_table/blocks/fabricator.json
+351474a0ce3cb81331aa54fdfd5c70575c10d690 data/datanessence/loot_table/blocks/fluidic_glass.json
 e1c242131171262fc09d6b3a382070f06850d4c9 data/datanessence/loot_table/blocks/fluid_bottler.json
 691617552f5f77219e22e1ab9ac805f869fec2de data/datanessence/loot_table/blocks/fluid_buffer.json
 0519c7bd1877f649a5a8a95eb1c592f96ab49c70 data/datanessence/loot_table/blocks/fluid_collector.json
@@ -52,7 +55,6 @@ e1c242131171262fc09d6b3a382070f06850d4c9 data/datanessence/loot_table/blocks/flu
 f2a29214b3a71ca945068d1c8409c2bced4dcaec data/datanessence/loot_table/blocks/fluid_point.json
 fcbdf81a9730cd95fb91e6786a932853ae148da5 data/datanessence/loot_table/blocks/fluid_spiller.json
 a63c22d76b677d9f5d4b6212d1011f4d3f31c962 data/datanessence/loot_table/blocks/fluid_tank.json
-351474a0ce3cb81331aa54fdfd5c70575c10d690 data/datanessence/loot_table/blocks/fluidic_glass.json
 21f5ad05e5229616ea951d95ad1307af1b7f1539 data/datanessence/loot_table/blocks/industrial_plant_siphon.json
 b8d2fa9097bae3a836da7acd662de09e9d889ee9 data/datanessence/loot_table/blocks/infuser.json
 26c69dcff1defc45669115decebc18f32b791f08 data/datanessence/loot_table/blocks/item_buffer.json
