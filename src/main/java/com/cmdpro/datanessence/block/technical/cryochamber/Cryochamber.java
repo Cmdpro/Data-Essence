@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block.technical.cryochamber;
 
 import com.cmdpro.databank.megablock.BasicMegablockCore;
+import com.cmdpro.databank.megablock.MegablockCoreUtil;
 import com.cmdpro.databank.megablock.MegablockShape;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
@@ -46,12 +47,11 @@ public class Cryochamber extends BasicMegablockCore implements EntityBlock {
             level.setBlockAndUpdate(pos.above(), above);
         }
     }
-
     @Override
-    public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
-        super.destroy(level, pos, state);
-        if (level instanceof ServerLevel serverLevel) {
-            serverLevel.setBlockAndUpdate(pos, BlockRegistry.AREKKO.get().defaultBlockState());
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        super.onRemove(state, level, pos, newState, movedByPiston);
+        if (state.getBlock() != newState.getBlock()) {
+            level.setBlockAndUpdate(pos, BlockRegistry.AREKKO.get().defaultBlockState());
         }
     }
 
