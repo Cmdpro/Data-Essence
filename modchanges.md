@@ -11,3 +11,4 @@
 - Fixed incorrect cryochamber data in Arekko's Vault
 - Made all sounds in the mod work properly instead of just calling vanilla sounds
 - Fixed cryochambers not spawning arekko if you broke any block except the core
+- Fixed shaders being weird if a vanilla mc shader was active

@@ -25,5 +25,5 @@ void main() {
         blend /= 2.0;
         color /= 2.0;
     }
-    fragColor = mix(texture(DiffuseSampler, texCoord), vec4(color.rgb, 1), blend);
+    fragColor = vec4(mix(texture(DiffuseSampler, texCoord).rgb, color.rgb, blend), 1.0);
 }
