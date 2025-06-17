@@ -1,7 +1,12 @@
 {
-  "parent": "minecraft:block/cube_column",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "end": "datanessence:block/deco/polished_obsidian_column_vertical",
-    "side": "datanessence:block/deco/polished_obsidian_column_side"
+    "down": "datanessence:block/deco/polished_obsidian_column_vertical",
+    "east": "datanessence:block/deco/polished_obsidian_column_side",
+    "north": "datanessence:block/deco/polished_obsidian_column_side",
+    "particle": "datanessence:block/deco/polished_obsidian_column_side",
+    "south": "datanessence:block/deco/polished_obsidian_column_side",
+    "up": "datanessence:block/deco/polished_obsidian_column_vertical",
+    "west": "datanessence:block/deco/polished_obsidian_column_side"
   }
 }

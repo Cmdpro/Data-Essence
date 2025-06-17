@@ -199,6 +199,8 @@
   "block.datanessence.vacuum": "Vacuum",
   "block.datanessence.cryochamber": "Cryochamber",
   "block.datanessence.cryochamber_filler": "Cryochamber",
+  "block.datanessence.empty_cryochamber": "Empty Cryochamber",
+  "block.datanessence.empty_cryochamber_router": "Empty Cryochamber Router",
 
   "entity.datanessence.essence_bomb": "Industrial Essence Bomb",
   "entity.datanessence.lunar_essence_bomb": "Lunar Essence Bomb",
@@ -365,6 +367,8 @@
   "data_tablet.pages.integration_ae2.page1.text": "We have discovered a meteor, inside of which was a series of strange circuit presses and sky blue crystals. From this salvage we were able to make a form of networked control and storage system. The data of hundreds of thousands of items etched onto crystalline disks; traveling across neuronic pathways of glowing purple; decomposition and reformation. However, the process by which many of the fundamental materials for this system are acquired left much to be desired, and so innovation was required.",
   "data_tablet.pages.integration_mekanism.name": "Integration: Mekanism",
   "data_tablet.pages.integration_mekanism.page1.text": "Some of our squadron have been experimenting with advanced machinery that operates on electricity. They seem to have developed a sort of fascination for it, so to ensure that their primary objective remains clear, I have tasked them with developing constructs that interface with such machinery. So far, their developments have produced a kind of Node and Wire that is able to transfer Chemicals, which will surely neaten those messes they call factories.",
+  "data_tablet.pages.integration_refinedstorage.name": "Integration: Refined Storage",
+  "data_tablet.pages.integration_refinedstorage.page1.text": "We have discovered schematics for a networked storage system, where items and fluids are stored and referenced digitally on a giant computer. We quickly noticed inefficiencies in the proposed recipes for creating the materials for such a system, and so have stepped in with our own innovations to somewhat ease the process of construction.",
 
   "_comment.data_tablet_pages.machinery": "Machinery and Processing (tiers 1 and 2) category texts.",
   "data_tablet.pages.auto-fabricator.flavor": " ◇ Autocrafting the autocrafter",

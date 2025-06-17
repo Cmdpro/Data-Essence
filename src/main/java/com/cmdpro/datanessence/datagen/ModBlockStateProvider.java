@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.block.DirectionalPillarBlock;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.production.FluidCollector;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
@@ -212,7 +213,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void ancientDecoCubeColumn(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
-        axisBlock((RotatedPillarBlock)blockRegistryObject.get(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath()), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_vertical"));
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_side");
+        ResourceLocation vertical = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_vertical");
+        BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", side)
+                .texture("east", side)
+                .texture("north", side)
+                .texture("down", vertical)
+                .texture("up", vertical)
+                .texture("south", side)
+                .texture("particle", side);
+        simpleBlockItem(blockRegistryObject.get(), model);
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.EAST).modelForState().modelFile(model).rotationY(90).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.NORTH).modelForState().modelFile(model).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.UP).modelForState().modelFile(model).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.DOWN).modelForState().modelFile(model).rotationX(180).addModel();
     }
     private void bufferBlock(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
@@ -228,7 +246,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void pillarDecoBlock(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
-        axisBlock((RotatedPillarBlock)blockRegistryObject.get(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_side"), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_vertical"));
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_side");
+        ResourceLocation vertical = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_vertical");
+        BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", side)
+                .texture("east", side)
+                .texture("north", side)
+                .texture("down", vertical)
+                .texture("up", vertical)
+                .texture("south", side)
+                .texture("particle", side);
+        simpleBlockItem(blockRegistryObject.get(), model);
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.EAST).modelForState().modelFile(model).rotationY(90).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.NORTH).modelForState().modelFile(model).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.UP).modelForState().modelFile(model).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.DOWN).modelForState().modelFile(model).rotationX(180).addModel();
     }
     private void essenceLeech(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
