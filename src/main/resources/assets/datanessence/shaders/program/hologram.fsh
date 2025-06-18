@@ -1,7 +1,7 @@
 #version 150
 
 uniform sampler2D DiffuseSampler;
-uniform sampler2D MachineOutputSampler;
+uniform sampler2D HologramSampler;
 uniform float time;
 
 in vec2 texCoord;
@@ -11,7 +11,7 @@ out vec4 fragColor;
 
 void main() {
     vec2 texShift = vec2(sin(((texCoord.y*360.0)*90.0)+((time/20.0)*45.0))*(oneTexel.x*2.0), 0);
-    vec4 color = texture(MachineOutputSampler, texCoord+texShift);
+    vec4 color = texture(HologramSampler, texCoord+texShift);
     float blend = color.a;
     if (blend > 0.0) {
         blend /= 1.25;

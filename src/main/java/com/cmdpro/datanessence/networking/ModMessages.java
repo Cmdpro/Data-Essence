@@ -77,6 +77,7 @@ public class ModMessages {
         registrar.playToClient(PlayGenderfluidTransitionEffect.TYPE, getNetworkCodec(PlayGenderfluidTransitionEffect::read, PlayGenderfluidTransitionEffect::write), Handler::handle);
         registrar.playToClient(PlayEnderPearlRedirectionEffect.TYPE, getNetworkCodec(PlayEnderPearlRedirectionEffect::read, PlayEnderPearlRedirectionEffect::write), Handler::handle);
         registrar.playToClient(MachineEssenceValueSync.TYPE, getNetworkCodec(MachineEssenceValueSync::read, MachineEssenceValueSync::write), Handler::handle);
+        registrar.playToClient(AddScannedOre.TYPE, getNetworkCodec(AddScannedOre::read, AddScannedOre::write), Handler::handle);
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigame.TYPE, getNetworkCodec(PlayerFinishDataBankMinigame::read, PlayerFinishDataBankMinigame::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveData.TYPE, getNetworkCodec(PlayerChangeDriveData::read, PlayerChangeDriveData::write), Handler::handle);

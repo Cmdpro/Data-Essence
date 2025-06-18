@@ -2,7 +2,6 @@
 
 uniform sampler2D DiffuseSampler;
 uniform sampler2D DiffuseDepthSampler;
-uniform float colorOffset;
 uniform float time;
 uniform mat4 invViewMat;
 uniform mat4 invProjMat;

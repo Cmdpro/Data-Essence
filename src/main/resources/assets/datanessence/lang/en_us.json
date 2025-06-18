@@ -628,6 +628,8 @@
   "subtitle.datanessence.block.ender_pearl_capture.absorb": "Ender Pearl gets absorbed",
 
   "subtitle.datanessence.item.signal_tracker.ping": "Signal Tracker pings",
+  "subtitle.datanessence.item.ore_scanner.ping": "Mineral Locator pings",
+  "subtitle.datanessence.item.ore_scanner.scan_ore": "Mineral Locator finds ore",
   "subtitle.datanessence.item.warp_capsule.use": "Warp Capsule teleports",
   "subtitle.datanessence.item.warp_capsule.fail": "Warp Capsule fails",
   "subtitle.datanessence.item.traversite_trudgers.equip": "Traversite Trudgers rustle",
