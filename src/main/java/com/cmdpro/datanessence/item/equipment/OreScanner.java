@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.item.equipment;
 
+import com.cmdpro.databank.DatabankUtils;
+import com.cmdpro.databank.hidden.types.BlockHiddenType;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.data.pinging.PingableStructureManager;
@@ -27,6 +29,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.Structure;
 import net.minecraft.world.phys.AABB;
 
@@ -52,7 +56,12 @@ public class OreScanner extends Item {
                 AABB bounds = AABB.ofSize(pPlayer.getBoundingBox().getCenter(), 32, 32, 32);
                 HashMap<BlockPos, Integer> ores = new HashMap<>();
                 for (BlockPos i : BlockPos.betweenClosed(BlockPos.containing(bounds.getMinPosition()), BlockPos.containing(bounds.getMaxPosition()))) {
-                    if (pLevel.getBlockState(i).is(TagRegistry.Blocks.SCANNABLE_ORES)) {
+                    BlockState state = pLevel.getBlockState(i);
+                    Block hiddenBlock = BlockHiddenType.getHiddenBlock(state.getBlock(), pPlayer);
+                    if (hiddenBlock != null) {
+                        state = DatabankUtils.changeBlockType(state, hiddenBlock);
+                    }
+                    if (state.is(TagRegistry.Blocks.SCANNABLE_ORES)) {
                         ores.put(new BlockPos(i), (int)(bounds.getCenter().distanceTo(i.getCenter())*2f));
                     }
                 }
