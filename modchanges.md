@@ -7,6 +7,7 @@
 - Made Ancient Rock Columns, Energized Ancient Rock Columns, Polished Obsidian Columns and Polished Obsidian Tracts use a facing property instead of an axis property (will make old worlds have all of these facing up as a side effect)
 - Made Cryochambers able to be rotated
 - Moved some tags to datagen
+- Changed default fluid node transfer rate to 125mB/t
 
 ### Fixes
 - Fixed the Frozen Researcher's incorrect pose
