@@ -17,7 +17,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Math;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,33 +100,37 @@ public class ShockwaveEntity extends Entity implements TraceableEntity {
             speed = getEntityData().get(SIZE_SPEED);
             size += speed;
         } else {
-            for (Entity i : level().getEntitiesOfClass(Entity.class, AABB.ofSize(position().add(0, 0.5, 0), size*2, 4, size*2))) {
-                if (i.equals(owner)) {
-                    continue;
-                }
-                if (!selector.isValid(i)) {
-                    continue;
-                }
-                if (attackExclusions.contains(i)) {
-                    continue;
-                }
-                Vec3 vec = i.position().multiply(1, 0, 1).vectorTo(position().multiply(1, 0, 1)).normalize();
-                Vec3 closest = i.position().add(vec.scale(0.4));
-                Vec3 furthest = i.position().add(vec.scale(-0.4));
-                if (closest.multiply(1, 0, 1).distanceTo(position().multiply(1, 0, 1)) <= size
-                        && furthest.multiply(1, 0, 1).distanceTo(position().multiply(1, 0, 1)) >= size) {
-                    if (ignoreInvincibility) {
-                        i.invulnerableTime = 0;
+            float range = size + speed;
+            float alpha = 1f - Math.clamp(range / maxSize, 0f, 1f);
+            if (alpha > 0.1) {
+                for (Entity i : level().getEntitiesOfClass(Entity.class, AABB.ofSize(position().add(0, 0.5, 0), size * 2, 4, size * 2))) {
+                    if (i.equals(owner)) {
+                        continue;
                     }
-                    if (i.hurt(damageSource, damage)) {
+                    if (!selector.isValid(i)) {
+                        continue;
+                    }
+                    if (attackExclusions.contains(i)) {
+                        continue;
+                    }
+                    Vec3 vec = i.position().multiply(1, 0, 1).vectorTo(position().multiply(1, 0, 1)).normalize();
+                    Vec3 closest = i.position().add(vec.scale(0.4));
+                    Vec3 furthest = i.position().add(vec.scale(-0.4));
+                    if (closest.multiply(1, 0, 1).distanceTo(position().multiply(1, 0, 1)) <= size
+                            && furthest.multiply(1, 0, 1).distanceTo(position().multiply(1, 0, 1)) >= size) {
                         if (ignoreInvincibility) {
-                            attackExclusions.add(i);
+                            i.invulnerableTime = 0;
                         }
+                        if (i.hurt(damageSource, damage)) {
+                            if (ignoreInvincibility) {
+                                attackExclusions.add(i);
+                            }
+                        }
+                        if (i instanceof Player) {
+                            i.hurtMarked = true;
+                        }
+                        i.setDeltaMovement(i.getDeltaMovement().x, launchVelocity, i.getDeltaMovement().z);
                     }
-                    if (i instanceof Player) {
-                        i.hurtMarked = true;
-                    }
-                    i.setDeltaMovement(i.getDeltaMovement().x, launchVelocity, i.getDeltaMovement().z);
                 }
             }
 
