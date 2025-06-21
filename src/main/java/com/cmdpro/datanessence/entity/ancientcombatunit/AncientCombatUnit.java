@@ -6,6 +6,8 @@ import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.databank.model.animation.DatabankEntityAnimationState;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.entity.ShockwaveEntity;
+import com.cmdpro.datanessence.networking.ModMessages;
+import com.cmdpro.datanessence.networking.packet.s2c.PlayAncientCombatUnitBlinkEffect;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -250,6 +252,7 @@ public class AncientCombatUnit extends Monster {
             Vec3 pos = targetValue.position();
             pos = pos.add(0, 6, 0);
             setDeltaMovement(0, 0, 0);
+            playBlink(position(), pos, false);
             teleportTo(pos.x, pos.y, pos.z);
             lookAtTarget(targetValue);
         }
@@ -339,6 +342,14 @@ public class AncientCombatUnit extends Monster {
         return false;
     }
 
+    public void playBlink(Vec3 from, Vec3 to, boolean curve) {
+        double centerOffset = getBoundingBox().getYsize()/2d;
+        playBlinkFromCenter(from.add(0, centerOffset, 0), to.add(0, centerOffset, 0), curve);
+    }
+    public void playBlinkFromCenter(Vec3 from, Vec3 to, boolean curve) {
+        ModMessages.sendToPlayersNear(new PlayAncientCombatUnitBlinkEffect(from, to, curve), (ServerLevel)level(), to, 128);
+    }
+
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
@@ -409,6 +420,7 @@ public class AncientCombatUnit extends Monster {
                                 Vec3 pos = targetValue.position();
                                 Vec3 diff = pos.multiply(1, 0, 1).vectorTo(this.position().multiply(1, 0, 1));
                                 pos = pos.add(diff.normalize().scale(teleportToPlayerDist));
+                                playBlink(position(), pos, false);
                                 teleportTo(pos.x, pos.y, pos.z);
                                 lookAtTarget(targetValue);
                             }
@@ -506,6 +518,7 @@ public class AncientCombatUnit extends Monster {
                             Vec3 pos = targetValue.position();
                             Vec3 diff = pos.multiply(1, 0, 1).vectorTo(this.position().multiply(1, 0, 1));
                             pos = pos.add(diff.normalize().scale(teleportToPlayerDist));
+                            playBlink(position(), pos, false);
                             teleportTo(pos.x, pos.y, pos.z);
                             lookAtTarget(targetValue);
                         }
@@ -520,6 +533,7 @@ public class AncientCombatUnit extends Monster {
                                 Vec3 pos = getTarget().position();
                                 pos = pos.add(pos.multiply(1, 0, 1).vectorTo(this.position().multiply(1, 0, 1)).normalize().scale(2).reverse());
                                 setDeltaMovement(0, 0, 0);
+                                playBlink(position(), pos, true);
                                 teleportTo(pos.x, pos.y, pos.z);
                                 lookAtTarget();
                                 playSound(SoundEvents.PLAYER_TELEPORT);
@@ -555,6 +569,7 @@ public class AncientCombatUnit extends Monster {
                             float distance = Math.min(getTarget().distanceTo(this) - 1f, 10f);
                             Vec3 pos = position();
                             pos = pos.add(pos.multiply(1, 0, 1).vectorTo(getTarget().position().multiply(1, 0, 1)).normalize().scale(distance));
+                            playBlink(position(), pos, false);
                             teleportTo(pos.x, pos.y, pos.z);
                             lookAtTarget();
                             playSound(SoundEvents.PLAYER_TELEPORT);
