@@ -20,12 +20,14 @@ import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.data.pinging.PingableStructure;
 import com.cmdpro.datanessence.entity.BlackHole;
+import com.cmdpro.datanessence.entity.ancientcombatunit.AncientCombatUnit;
 import com.cmdpro.datanessence.item.equipment.EssenceMeter;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.data.pinging.StructurePing;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.c2s.RequestMachineEssenceValue;
+import com.cmdpro.datanessence.networking.packet.s2c.AddScannedOre;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceCoreShaders;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceRenderTypes;
@@ -247,6 +249,7 @@ public class ClientEvents {
             }
             if (mc.player != null) {
                 ClientModEvents.genderEuphoriaShader.setActive(DataNEssenceClientConfig.genderEuphoriaShader && mc.player.hasEffect(MobEffectRegistry.GENDER_EUPHORIA));
+                ClientModEvents.ancientCombatUnitSpectateShader.setActive(mc.player.isSpectator() && mc.getCameraEntity() instanceof AncientCombatUnit);
             }
         }
     }

@@ -11,8 +11,7 @@ import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.renderers.entity.*;
-import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
-import com.cmdpro.datanessence.client.shaders.OrePingShader;
+import com.cmdpro.datanessence.client.shaders.*;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
@@ -24,8 +23,6 @@ import com.cmdpro.datanessence.client.renderers.layer.HornsLayer;
 import com.cmdpro.datanessence.client.renderers.layer.TailLayer;
 import com.cmdpro.datanessence.client.renderers.layer.WingsLayer;
 import com.cmdpro.datanessence.screen.*;
-import com.cmdpro.datanessence.client.shaders.GenderEuphoriaShader;
-import com.cmdpro.datanessence.client.shaders.ProgressionShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
@@ -127,11 +124,14 @@ public class ClientModEvents {
         orePingShader = new OrePingShader();
         PostShaderManager.addShader(orePingShader);
         orePingShader.setActive(true);
+        ancientCombatUnitSpectateShader = new AncientCombatUnitSpectateShader();
+        PostShaderManager.addShader(ancientCombatUnitSpectateShader);
     }
     public static PostShaderInstance progressionShader;
     public static PostShaderInstance genderEuphoriaShader;
     public static PostShaderInstance machineOutputShader;
     public static PostShaderInstance orePingShader;
+    public static PostShaderInstance ancientCombatUnitSpectateShader;
     public static final ItemPropertyFunction usingGrapplingHookProperty = (stack, level, entity, seed) -> {
         if (entity != null) {
             if (entity.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
