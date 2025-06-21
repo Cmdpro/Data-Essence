@@ -19,6 +19,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.BossEvent;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -35,10 +36,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import org.joml.Quaternionf;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -68,6 +71,7 @@ public class AncientCombatUnit extends Monster {
             .addAnim(new DatabankAnimationReference("spin", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
             .addAnim(new DatabankAnimationReference("slashes", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
             .addAnim(new DatabankAnimationReference("heavy_slash", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
+            .addAnim(new DatabankAnimationReference("dash_slash", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
             .addAnim(new DatabankAnimationReference("slam_loop", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("slam_pre", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("slam", (state, anim) -> {}, (state, anim) -> state.setAnim("idle")))
@@ -237,6 +241,7 @@ public class AncientCombatUnit extends Monster {
     private int slamAirTime = 0;
     private boolean slamWasOnGround;
     private float stunHealth;
+    private Vec3 dashTarget;
 
     public void playAnim(String string, boolean force) {
         animState.setAnim(string);
@@ -349,6 +354,55 @@ public class AncientCombatUnit extends Monster {
     public void playBlinkFromCenter(Vec3 from, Vec3 to, boolean curve) {
         ModMessages.sendToPlayersNear(new PlayAncientCombatUnitBlinkEffect(from, to, curve), (ServerLevel)level(), to, 128);
     }
+    private static Vec2 calculateRotationVector(Vec3 pVec, Vec3 pTarget) {
+        double d0 = pTarget.x - pVec.x;
+        double d1 = pTarget.y - pVec.y;
+        double d2 = pTarget.z - pVec.z;
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        return new Vec2(
+                Mth.wrapDegrees((float)(-(Mth.atan2(d1, d3) * (double)(180F / (float)Math.PI)))),
+                Mth.wrapDegrees((float)(Mth.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F)
+        );
+    }
+    public void dash(Vec3 targetPos, float distancePast) {
+        Vec3 target = targetPos.multiply(1, 0, 1).add(0, getEyePosition().y, 0);
+        lookAt(EntityAnchorArgument.Anchor.EYES, target);
+        getLookControl().setLookAt(target);
+        setYHeadRot(getYRot());
+
+        entityData.set(INSTANT_X_ROTATION, getXRot(), true);
+        entityData.set(INSTANT_Y_ROTATION, getYRot(), true);
+
+        hasImpulse = true;
+
+        Vec3 movementVec = position().multiply(1, 0, 1).vectorTo(targetPos.multiply(1, 0, 1)).normalize();
+        Vec3 startPos = targetPos;
+        Vec3 finalPos = targetPos;
+        for (float i = 0; i < distancePast; i += 0.25f) {
+            Vec3 pos = startPos.add(movementVec.scale(i));
+            if (!wouldBeInWall(pos)) {
+                finalPos = pos;
+            } else {
+                break;
+            }
+        }
+        playBlink(position(), finalPos, false);
+        AABB aabb = AABB.ofSize(position().lerp(finalPos, 0.5f).add(0, getBoundingBox().getYsize()/2f, 0), getBoundingBox().getXsize(), getBoundingBox().getYsize(), position().distanceTo(finalPos)*2f);
+        Quaternionf rotation = new Quaternionf();
+        Vec2 angle = calculateRotationVector(position(), finalPos);
+        rotation.rotateY((float) Math.toRadians(-angle.y + 180));
+        rotation.rotateX((float)Math.toRadians(-angle.x));
+        CollisionTestCube hit = new CollisionTestCube(aabb, rotation);
+        List<LivingEntity> hitEntities = hit.getEntitiesOfClass(LivingEntity.class, level());
+        hitEntities.forEach((j) -> {
+            if (!(j instanceof AncientCombatUnit)) {
+                j.invulnerableTime = 0;
+                j.hurt(damageSources().mobAttack(this), 15);
+            }
+        });
+        teleportTo(finalPos.x, finalPos.y, finalPos.z);
+        playSound(SoundEvents.WITCH_THROW);
+    }
 
     @Override
     protected void customServerAiStep() {
@@ -373,13 +427,12 @@ public class AncientCombatUnit extends Monster {
                     attacks.add("slam");
                     if (getPhase() >= 2) {
                         attacks.add("blink_behind");
+                        attacks.add("dash");
                     }
                     int attack = random.nextIntBetweenInclusive(0, attacks.size() - 1);
                     String attackId = attacks.get(attack);
                     if (attackId.equals("slashes")) {
                         attackCooldown = DEFAULT_COOLDOWN + 35;
-                        blinks = 3;
-                        teleportToPlayerMaxDist = 6;
                         teleportToPlayer = true;
                         teleportToPlayerDist = 1;
                     }
@@ -409,6 +462,14 @@ public class AncientCombatUnit extends Monster {
                         force = true;
                         slams--;
                     }
+                    if (attackId.equals("dash")) {
+                        attackCooldown = DEFAULT_COOLDOWN + 50;
+                        anim = "dash_slash";
+                        force = true;
+                        teleportToPlayer = true;
+                        teleportToPlayerDist = 6;
+                        blinks = 3;
+                    }
                     this.attack = attackId;
                     if (teleportToPlayer) {
                         Optional<? extends Player> target = getFightPlayers().stream().sorted(Comparator.comparing((i) -> i.distanceTo(this))).findFirst();
@@ -423,6 +484,9 @@ public class AncientCombatUnit extends Monster {
                                 playBlink(position(), pos, false);
                                 teleportTo(pos.x, pos.y, pos.z);
                                 lookAtTarget(targetValue);
+                            }
+                            if (attackId.equals("dash")) {
+                                dashTarget = getTarget().position();
                             }
                         }
                     }
@@ -463,12 +527,18 @@ public class AncientCombatUnit extends Monster {
                                     setTarget(targetValue);
                                 }
                             } else {
-                                attackCooldown = DEFAULT_COOLDOWN + 30;
-                                anim = "spin";
+                                attackCooldown = DEFAULT_COOLDOWN + 50;
+                                attack = "dash";
+                                anim = "dash_slash";
                                 force = true;
-                                attack = "spin";
                                 teleportToPlayer = true;
-                                teleportToPlayerDist = 2;
+                                teleportToPlayerDist = 6;
+                                blinks = 2;
+                                Optional<? extends Player> target = getFightPlayers().stream().sorted(Comparator.comparing((i) -> i.distanceTo(this))).findFirst();
+                                if (target.isPresent()) {
+                                    Player targetValue = target.get();
+                                    setTarget(targetValue);
+                                }
                             }
                             finaleProgress++;
                         }
@@ -522,6 +592,9 @@ public class AncientCombatUnit extends Monster {
                             teleportTo(pos.x, pos.y, pos.z);
                             lookAtTarget(targetValue);
                         }
+                        if (attack.equals("dash")) {
+                            dashTarget = getTarget().position();
+                        }
                     }
                 }
             }
@@ -546,25 +619,51 @@ public class AncientCombatUnit extends Monster {
                         }
                     }
                 }
+                if (attack.equals("dash")) {
+                    if (getTarget() != null) {
+                        if (attackCooldown == DEFAULT_COOLDOWN + 35) {
+                            if (dashTarget != null) {
+                                dash(dashTarget, 5);
+                            }
+                        }
+                        if (attackCooldown >= DEFAULT_COOLDOWN + 40) {
+                            dashTarget = getTarget().position();
+                        }
+                        if (attackCooldown == DEFAULT_COOLDOWN + 25) {
+                            if (blinks > 0) {
+                                blinks--;
+                                attackCooldown = DEFAULT_COOLDOWN + 50;
+                                anim = "dash_slash";
+                                force = true;
+                                dashTarget = getTarget().position();
+                                Vec3 finalPos = dashTarget;
+                                Vec3 movementVec = Vec3.directionFromRotation(0, blinks*90);
+                                float distance = 6;
+                                for (float i = 0; i < distance; i += 0.25f) {
+                                    Vec3 pos = dashTarget.add(movementVec.scale(i));
+                                    if (!wouldBeInWall(pos)) {
+                                        finalPos = pos;
+                                    } else {
+                                        break;
+                                    }
+                                }
+                                playBlink(position(), finalPos, true);
+                                teleportTo(finalPos.x, finalPos.y, finalPos.z);
+                                lookAtTarget();
+                            }
+                        }
+                    }
+                }
                 if (attack.equals("slashes") && attackCooldown == DEFAULT_COOLDOWN + 35) {
                     if (getTarget() != null) {
                         if (getTarget().distanceTo(this) <= 6) {
-                            if (blinks >= 3) {
-                                lookAtTarget();
-                                blinks = 0;
-                                anim = "slashes";
-                                force = true;
-                                slashDelays = List.of(13, 18, 25);
-                                slashDamage = 10;
-                                slashType = "normal";
-                            } else {
-                                lookAtTarget();
-                                anim = "heavy_slash";
-                                force = true;
-                                slashDelays = List.of(12);
-                                slashDamage = 20;
-                                slashType = "heavy";
-                            }
+                            lookAtTarget();
+                            blinks = 0;
+                            anim = "slashes";
+                            force = true;
+                            slashDelays = List.of(13, 18, 25);
+                            slashDamage = 10;
+                            slashType = "normal";
                         } else if (blinks > 0) {
                             float distance = Math.min(getTarget().distanceTo(this) - 1f, 10f);
                             Vec3 pos = position();
