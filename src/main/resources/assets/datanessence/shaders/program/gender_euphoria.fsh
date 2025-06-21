@@ -106,5 +106,5 @@ void main() {
     blend *= 1-clamp(distance(world, CameraPosition)/50, 0, 1);
     float actualFade = sin(radians(fade*(360/5)));
     blend *= (actualFade*0.25)+0.75;
-    fragColor = mix(texture(DiffuseSampler, texCoord), vec4(color, 1), blend);
+    fragColor = vec4(mix(texture(DiffuseSampler, texCoord).rgb, color, blend), 1.0);
 }

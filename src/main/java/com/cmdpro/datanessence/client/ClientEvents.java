@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence.client;
 
 import com.cmdpro.databank.ClientDatabankUtils;
+import com.cmdpro.databank.Databank;
+import com.cmdpro.databank.multiblock.Multiblock;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.databank.rendering.RenderProjectionUtil;
@@ -32,15 +34,25 @@ import com.mojang.blaze3d.pipeline.TextureTarget;
 import com.mojang.blaze3d.platform.GlConst;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.FogRenderer;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.client.sounds.SoundManager;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -53,6 +65,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.*;
 import net.neoforged.api.distmarker.Dist;
@@ -60,6 +74,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import org.joml.Math;
 import org.joml.Vector3d;
@@ -314,6 +329,23 @@ public class ClientEvents {
                     pings.put(i.getKey(), i.getValue()-1);
                 }
             }
+            if (mc.player != null) {
+                boolean playedASound = false;
+                for (Map.Entry<BlockPos, Integer> i : AddScannedOre.scanned.entrySet().stream().toList()) {
+                    int value = i.getValue() - 1;
+                    if (i.getValue() > 0 && value <= 0) {
+                        if (!playedASound) {
+                            mc.level.playSound(mc.player, i.getKey(), SoundRegistry.SCAN_ORE.value(), SoundSource.PLAYERS, 1f, 1f);
+                            playedASound = true;
+                        }
+                    }
+                    if (value <= -100) {
+                        AddScannedOre.scanned.remove(i.getKey());
+                    } else {
+                        AddScannedOre.scanned.put(i.getKey(), value);
+                    }
+                }
+            }
             boolean playMusic = false;
             SoundEvent mus = null;
             if (mc.player != null) {
@@ -393,6 +425,7 @@ public class ClientEvents {
             }
         } else {
             pings.clear();
+            AddScannedOre.scanned.clear();
         }
     }
 }

@@ -4,7 +4,7 @@
   ],
   "passes": [
     {
-      "name": "datanessence:machine_output",
+      "name": "datanessence:hologram",
       "intarget": "minecraft:main",
       "outtarget": "final",
       "uniforms": [

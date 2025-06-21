@@ -12,6 +12,7 @@ import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.renderers.entity.*;
 import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
+import com.cmdpro.datanessence.client.shaders.OrePingShader;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
@@ -123,10 +124,14 @@ public class ClientModEvents {
         machineOutputShader = new MachineOutputShader();
         PostShaderManager.addShader(machineOutputShader);
         machineOutputShader.setActive(true);
+        orePingShader = new OrePingShader();
+        PostShaderManager.addShader(orePingShader);
+        orePingShader.setActive(true);
     }
     public static PostShaderInstance progressionShader;
     public static PostShaderInstance genderEuphoriaShader;
     public static PostShaderInstance machineOutputShader;
+    public static PostShaderInstance orePingShader;
     public static final ItemPropertyFunction usingGrapplingHookProperty = (stack, level, entity, seed) -> {
         if (entity != null) {
             if (entity.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {

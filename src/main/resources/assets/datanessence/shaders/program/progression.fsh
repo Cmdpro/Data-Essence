@@ -53,8 +53,8 @@ void main() {
     hsv.g = clamp(hsv.g*saturation, 0, 1);
     color.rgb = hsv2rgb(hsv);
     if (time >= 14.0) {
-        fragColor = mix(color, origColor, 1.0-(time-14.0));
+        fragColor = vec4(mix(color.rgb, origColor.rgb, 1.0-(time-14.0)), 1.0);
     } else {
-        fragColor = color;
+        fragColor = vec4(color.rgb, 1.0);
     }
 }

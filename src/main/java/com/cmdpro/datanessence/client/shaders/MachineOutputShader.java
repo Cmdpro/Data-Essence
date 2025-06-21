@@ -24,12 +24,12 @@ import java.util.SequencedMap;
 public class MachineOutputShader extends PostShaderInstance {
     @Override
     public ResourceLocation getShaderLocation() {
-        return DataNEssence.locate("shaders/post/machine_output.json");
+        return DataNEssence.locate("shaders/post/hologram.json");
     }
     @Override
     public void setUniforms(PostPass instance) {
         super.setUniforms(instance);
-        instance.getEffect().setSampler("MachineOutputSampler", getMachineOutputTarget()::getColorTextureId);
+        instance.getEffect().setSampler("HologramSampler", getMachineOutputTarget()::getColorTextureId);
     }
     private static RenderTarget machineOutputTarget;
     public static RenderTarget getMachineOutputTarget() {

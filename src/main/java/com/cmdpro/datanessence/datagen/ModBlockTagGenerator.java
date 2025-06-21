@@ -131,5 +131,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
+        this.tag(Tags.Blocks.ORES)
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+        this.tag(Tags.Blocks.ORES_IN_GROUND_STONE)
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+        this.tag(TagRegistry.Blocks.SCANNABLE_ORES)
+                .addTag(Tags.Blocks.ORES)
+                .add(BlockRegistry.ESSENCE_CRYSTAL.get());
     }
 }
