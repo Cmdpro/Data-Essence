@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "end": "datanessence:block/deco/polished_obsidian_column_vertical",
-    "side": "datanessence:block/deco/polished_obsidian_column_side"
-  }
-}

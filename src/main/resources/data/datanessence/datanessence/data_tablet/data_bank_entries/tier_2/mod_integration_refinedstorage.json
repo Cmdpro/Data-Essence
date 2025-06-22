@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "refinedstorage"
+    }
+  ],
+  "icon": {
+    "id": "refinedstorage:quartz_enriched_iron"
+  },
+  "tier": 2,
+  "name": {
+    "translate": "data_tablet.pages.integration_refinedstorage.name"
+  },
+  "entry": "datanessence:basics/mod_integration_refinedstorage",
+  "parents": [
+    "datanessence:machinery/synthesis_chamber"
+  ]
+}

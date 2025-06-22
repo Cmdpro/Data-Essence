@@ -1,7 +1,12 @@
 {
-  "parent": "minecraft:block/cube_column",
+  "parent": "minecraft:block/cube",
   "textures": {
-    "end": "datanessence:block/deco/ancient/ancient_rock_column_vertical",
-    "side": "datanessence:block/deco/ancient/ancient_rock_column"
+    "down": "datanessence:block/deco/ancient/ancient_rock_column_vertical",
+    "east": "datanessence:block/deco/ancient/ancient_rock_column_side",
+    "north": "datanessence:block/deco/ancient/ancient_rock_column_side",
+    "particle": "datanessence:block/deco/ancient/ancient_rock_column_side",
+    "south": "datanessence:block/deco/ancient/ancient_rock_column_side",
+    "up": "datanessence:block/deco/ancient/ancient_rock_column_vertical",
+    "west": "datanessence:block/deco/ancient/ancient_rock_column_side"
   }
 }

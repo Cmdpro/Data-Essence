@@ -19,7 +19,7 @@ public class DataNEssenceConfig {
     }
     public DataNEssenceConfig(ModConfigSpec.Builder builder) {
         builder.push("balancing");
-        fluidPointTransferValue = buildInteger(builder, "fluidNodeTransfer", "all", 50, 1, 1000000, "How much should a fluid node transfer? (Also applies to chemical nodes if Mekanism is installed)");
+        fluidPointTransferValue = buildInteger(builder, "fluidNodeTransfer", "all", 125, 1, 1000000, "How much should a fluid node transfer? (Also applies to chemical nodes if Mekanism is installed)"); // 125mB should cap out at 2B once 16x speed upgrade exists
         essencePointTransferValue = buildInteger(builder, "essenceNodeTransfer", "all", 50, 1, 1000000, "How much should an essence node transfer? (Applies to all essence node types)");
         itemPointTransferValue = buildInteger(builder, "itemNodeTransfer", "all", 4, 1, 64, "How much should an item node transfer?");
         essenceBatteryMaxValue = buildInteger(builder, "essenceBatteryMax", "all", 10000, 1, 1000000, "How much should an essence battery hold? (Applies to all essence battery types)");
@@ -37,7 +37,7 @@ public class DataNEssenceConfig {
     private static ModConfigSpec.DoubleValue buildDouble(ModConfigSpec.Builder builder, String name, String category, double defaultValue, double min, double max, String comment) {
         return builder.comment(comment).translation(name).defineInRange(name, defaultValue, min, max);
     }
-    public static int fluidPointTransfer = 50;
+    public static int fluidPointTransfer = 125;
     public static int essencePointTransfer = 50;
     public static int itemPointTransfer = 4;
     public static int essenceBatteryMax = 50;

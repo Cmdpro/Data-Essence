@@ -1,8 +1,8 @@
 {
   "blend": {
     "func": "add",
-    "srcrgb": "srcalpha",
-    "dstrgb": "1-srcalpha"
+    "srcrgb": "one",
+    "dstrgb": "zero"
   },
   "vertex": "sobel",
   "fragment": "datanessence:progression",

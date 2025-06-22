@@ -35,6 +35,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.COMPUTER.get())
                 .add(BlockRegistry.CRYOCHAMBER.get())
                 .add(BlockRegistry.CRYOCHAMBER_FILLER.get())
+                .add(BlockRegistry.EMPTY_CRYOCHAMBER.get())
+                .add(BlockRegistry.EMPTY_CRYOCHAMBER_ROUTER.get())
                 .add(BlockRegistry.DATA_BANK.get())
                 .add(BlockRegistry.DECO_ESSENCE_BUFFER.get())
                 .add(BlockRegistry.DECO_FLUID_BUFFER.get())
@@ -140,5 +142,12 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(TagRegistry.Blocks.CRYSTALLINE_CRADLE_BREAKABLE)
                 .add(BlockRegistry.ESSENCE_CRYSTAL.get())
                 .add(BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get());
+        this.tag(Tags.Blocks.ORES)
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+        this.tag(Tags.Blocks.ORES_IN_GROUND_STONE)
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+        this.tag(TagRegistry.Blocks.SCANNABLE_ORES)
+                .addTag(Tags.Blocks.ORES)
+                .add(BlockRegistry.ESSENCE_CRYSTAL.get());
     }
 }

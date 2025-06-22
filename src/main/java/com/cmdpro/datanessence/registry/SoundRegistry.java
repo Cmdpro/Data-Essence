@@ -26,6 +26,8 @@ public class SoundRegistry {
 
     //Items
     public static final Holder<SoundEvent> LOCATOR_PING = createBasicSound("item.signal_tracker.ping");
+    public static final Holder<SoundEvent> ORE_SCANNER_PING = createBasicSound("item.ore_scanner.ping");
+    public static final Holder<SoundEvent> SCAN_ORE = createBasicSound("item.ore_scanner.scan_ore");
     public static final Holder<SoundEvent> WARP_CAPSULE_USE = createBasicSound("item.warp_capsule.use");
     public static final Holder<SoundEvent> WARP_CAPSULE_FAIL = createBasicSound("item.warp_capsule.fail");
     public static final Holder<SoundEvent> EQUIP_TRAVERSITE_TRUDGERS = createBasicSound("item.traversite_trudgers.equip");

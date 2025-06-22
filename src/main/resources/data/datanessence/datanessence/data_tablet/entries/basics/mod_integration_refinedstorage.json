@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "refinedstorage"
+    }
+  ],
+  "icon": {
+    "id": "refinedstorage:quartz_enriched_iron"
+  },
+  "tab": "datanessence:basics",
+  "x": 1,
+  "y": 4,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.integration_refinedstorage.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:mod_integration/refinedstorage/copper_enriching",
+        "datanessence:mod_integration/refinedstorage/iron_enriching",
+        "datanessence:mod_integration/refinedstorage/silicon_synthesis"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.integration_refinedstorage.name"
+  }
+}

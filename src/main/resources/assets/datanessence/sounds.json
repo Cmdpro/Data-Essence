@@ -21,6 +21,18 @@
         ],
         "subtitle": "subtitle.datanessence.item.signal_tracker.ping"
     },
+    "item.ore_scanner.ping": {
+        "sounds": [
+            "datanessence:item/signal_tracker/ping"
+        ],
+        "subtitle": "subtitle.datanessence.item.ore_scanner.ping"
+    },
+    "item.ore_scanner.scan_ore": {
+        "sounds": [
+            "minecraft:block/amethyst/resonate4"
+        ],
+        "subtitle": "subtitle.datanessence.item.ore_scanner.scan_ore"
+    },
     "ui_click": {
         "sounds": [
             "datanessence:ui/ui_click"
