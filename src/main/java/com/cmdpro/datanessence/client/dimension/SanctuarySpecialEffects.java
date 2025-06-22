@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence.client.dimension;
 
 import com.cmdpro.databank.rendering.ColorUtil;
+import com.cmdpro.databank.rendering.RenderHandler;
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -10,6 +12,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.CubicSampler;
 import net.minecraft.util.Mth;
@@ -114,7 +117,7 @@ public class SanctuarySpecialEffects extends DimensionSpecialEffects {
         return false;
     }
 
-    public static final Color NIGHT_COLOR = new Color(0x080018);
+    public static final Color NIGHT_COLOR = new Color(0x05000C);
 
     public Vec3 getSkyColor(ClientLevel level, Vec3 pos, float partialTick) {
         float f = level.getTimeOfDay(partialTick);
@@ -244,6 +247,7 @@ public class SanctuarySpecialEffects extends DimensionSpecialEffects {
         bufferbuilder1.addVertex(matrix4f1, f12, -100.0F, -f12).setUv(f13, f14);
         bufferbuilder1.addVertex(matrix4f1, -f12, -100.0F, -f12).setUv(f15, f14);
         BufferUploader.drawWithShader(bufferbuilder1.buildOrThrow());
+
         float f10 = level.getStarBrightness(partialTick) * f11;
         if (f10 > 0.0F) {
             RenderSystem.setShaderColor(f10, f10, f10, f10);
@@ -255,9 +259,25 @@ public class SanctuarySpecialEffects extends DimensionSpecialEffects {
         }
 
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.disableBlend();
-        RenderSystem.defaultBlendFunc();
+
         poseStack.popPose();
+        poseStack.pushPose();
+        RenderSystem.enableBlend();
+        RenderSystem.defaultBlendFunc();
+        poseStack.mulPose(Axis.ZP.rotationDegrees(55));
+        poseStack.mulPose(Axis.YP.rotationDegrees(level.getTimeOfDay(partialTick) * 360.0F));
+        poseStack.translate(0, -25, 0);
+        poseStack.pushPose();
+        poseStack.scale(150, 150, 150);
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, DataNEssence.locate("textures/vfx/sanctuary_ring.png"));
+        BufferBuilder bufferbuilder = tesselator.begin(VertexFormat.Mode.QUADS, DefaultVertexFormat.POSITION_TEX);
+        renderQuad(bufferbuilder, poseStack, -1, 0, -1, 1, 0, 1, 0, 0, 1, 1);
+        BufferUploader.drawWithShader(bufferbuilder.buildOrThrow());
+        poseStack.popPose();
+        poseStack.popPose();
+
+        RenderSystem.disableBlend();
         RenderSystem.setShaderColor(0.0F, 0.0F, 0.0F, 1.0F);
         double d0 = mc.player.getEyePosition(partialTick).y - level.getLevelData().getHorizonHeight(level);
         if (d0 < 0.0) {
@@ -272,5 +292,22 @@ public class SanctuarySpecialEffects extends DimensionSpecialEffects {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.depthMask(true);
         return true;
+    }
+
+    private static void drawVertex(VertexConsumer builder, PoseStack poseStack, float x, float y, float z, float u, float v) {
+        builder.addVertex(poseStack.last().pose(), x, y, z)
+                .setUv(u, v);
+    }
+
+    private static void renderQuad(VertexConsumer builder, PoseStack poseStack, float x0, float y0, float z0, float x1, float y1, float z1, float u0, float v0, float u1, float v1) {
+        drawVertex(builder, poseStack, x0, y0, z0, u0, v0);
+        drawVertex(builder, poseStack, x0, y1, z1, u0, v1);
+        drawVertex(builder, poseStack, x1, y1, z1, u1, v1);
+        drawVertex(builder, poseStack, x1, y0, z0, u1, v0);
+/*
+        drawVertex(builder, poseStack, x1, y0, z0, u1, v0);
+        drawVertex(builder, poseStack, x1, y1, z1, u1, v1);
+        drawVertex(builder, poseStack, x0, y1, z1, u0, v1);
+        drawVertex(builder, poseStack, x0, y0, z0, u0, v0);*/
     }
 }
