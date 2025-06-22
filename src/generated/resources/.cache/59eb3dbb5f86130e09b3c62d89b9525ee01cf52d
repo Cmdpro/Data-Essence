@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-11T19:28:03.0459163	Loot Tables
+// 1.21.1	2025-06-22T08:46:30.6226002	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -27,6 +27,8 @@ d780424182f390bb85712d7baf184b36886bae45 data/datanessence/loot_table/blocks/dec
 93ca4ae06d5943c0e12e40c4b9c86fc0bd6453e9 data/datanessence/loot_table/blocks/dewlamp.json
 7288802b6e50232d520c8c45606c8191edb282a4 data/datanessence/loot_table/blocks/drying_table.json
 5d88c8c994a9de801ce06617b87357a9cbdb94bf data/datanessence/loot_table/blocks/ecliptrum_block.json
+d81f82439ca385e3e04b57a872e0406317b7d95d data/datanessence/loot_table/blocks/empty_cryochamber.json
+d988d482a8db548a1332611c94246f260b847565 data/datanessence/loot_table/blocks/empty_cryochamber_router.json
 8505fb84433c5aa9ceab4cf73710b90c9a92ab79 data/datanessence/loot_table/blocks/ender_pearl_capture.json
 3ad9e315d0252b390ca3f1b6c913fa46dded899b data/datanessence/loot_table/blocks/ender_pearl_destination.json
 1056cd854c12e8a4d34612ee49d05b6bc40023ac data/datanessence/loot_table/blocks/ender_pearl_relay.json

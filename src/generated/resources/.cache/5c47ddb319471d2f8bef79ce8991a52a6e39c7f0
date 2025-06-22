@@ -1,5 +1,9 @@
-// 1.21.1	2025-06-09T09:15:40.928604831	Tags for minecraft:item mod id datanessence
+// 1.21.1	2025-06-22T08:46:30.6205971	Tags for minecraft:item mod id datanessence
 6c535869521b0c74d6241ff85c362261d86fdce7 data/c/tags/item/armors.json
+b03db77a8d1040df181e14f47be358e5eac3c699 data/c/tags/item/gems.json
+ac195e282e4703c47ee41d5d79d0c5de41486f0e data/c/tags/item/glass_blocks.json
+a5ab46f2889dd83377b3d7ac98b8b276744df4ff data/c/tags/item/music_discs.json
+996d46cdbe1a5472c2d32602774b628a4277ea4b data/c/tags/item/ores_in_ground/stone.json
 9cddc5879f2f9028a5231bdb7b779717113cfbe2 data/datanessence/tags/item/copper_parts.json
 b6b03a21d136e9b0f763e8677953913c0247be1b data/datanessence/tags/item/ecliptrum_parts.json
 2de480fdf84933ba907798fa90de70b537e2b008 data/datanessence/tags/item/explosive_material.json
