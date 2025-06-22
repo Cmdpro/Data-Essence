@@ -19,7 +19,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
     public ModBlockLootTables(HolderLookup.Provider provider) {
@@ -127,6 +126,12 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
         dropSelf(BlockRegistry.ECLIPTRUM_BLOCK.get());
         dropSelf(BlockRegistry.CRYSTALLINE_CRADLE.get());
+        dropSelf(BlockRegistry.SANCTUARY_GRASS_BLOCK.get());
+        dropSelf(BlockRegistry.SANCTUARY_DIRT.get());
+        this.add(BlockRegistry.TALL_SANCTUARY_GRASS.get(),
+                block -> createGrassDrops(BlockRegistry.TALL_SANCTUARY_GRASS.get()));
+        this.add(BlockRegistry.SANCTUARY_GRASS.get(),
+                block -> createGrassDrops(BlockRegistry.SANCTUARY_GRASS.get()));
 
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));

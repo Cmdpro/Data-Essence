@@ -17,6 +17,8 @@ public class ParticleRegistry {
             DataNEssence.MOD_ID);
     public static final Supplier<SimpleParticleType> ESSENCE_SPARKLE =
             register("essence_sparkle", () -> new SimpleParticleType(false));
+    public static final Supplier<SimpleParticleType> SANCTUARY_SPARKLE =
+            register("sanctuary_sparkle", () -> new SimpleParticleType(false));
     public static final Supplier<ParticleType> CIRCLE =
             register("circle", () -> new ParticleType<CircleParticleOptions>(false) {
 

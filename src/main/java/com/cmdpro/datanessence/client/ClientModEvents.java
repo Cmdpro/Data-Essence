@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemDecorators;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
+import com.cmdpro.datanessence.client.dimension.SanctuarySpecialEffects;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.renderers.entity.LunarStrikeRenderer;
 import com.cmdpro.datanessence.client.shaders.PingShader;
@@ -57,6 +58,10 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerGuiLayers(RegisterGuiLayersEvent event) {
         event.registerAboveAll(DataNEssence.locate("pings"), new PingsGuiLayer());
+    }
+    @SubscribeEvent
+    public static void registerDimensionSpecialEffects(RegisterDimensionSpecialEffectsEvent event) {
+        event.register(DataNEssence.locate("sanctuary"), new SanctuarySpecialEffects());
     }
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
@@ -220,6 +225,8 @@ public class ClientModEvents {
                 SmallCircleParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.MOTE.get(),
                 MoteParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(ParticleRegistry.SANCTUARY_SPARKLE.get(),
+                SanctuarySparkleParticle.Provider::new);
     }
     @SubscribeEvent
     public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {

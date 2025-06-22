@@ -149,5 +149,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(TagRegistry.Blocks.SCANNABLE_ORES)
                 .addTag(Tags.Blocks.ORES)
                 .add(BlockRegistry.ESSENCE_CRYSTAL.get());
+        this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(BlockRegistry.SANCTUARY_GRASS_BLOCK.get())
+                .add(BlockRegistry.SANCTUARY_DIRT.get());
+        this.tag(BlockTags.DIRT)
+                .add(BlockRegistry.SANCTUARY_GRASS_BLOCK.get())
+                .add(BlockRegistry.SANCTUARY_DIRT.get());
     }
 }

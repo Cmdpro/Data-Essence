@@ -150,10 +150,8 @@
                 "then_run": {
                   "type": "minecraft:block",
                   "result_state": {
-                    "Name": "minecraft:grass_block",
-                    "Properties": {
-                      "snowy": "false"
-                    }
+                    "Name": "datanessence:sanctuary_grass_block",
+                    "Properties": {}
                   }
                 }
               }
@@ -183,7 +181,7 @@
                 "then_run": {
                   "type": "minecraft:block",
                   "result_state": {
-                    "Name": "minecraft:dirt"
+                    "Name": "datanessence:sanctuary_dirt"
                   }
                 }
               },

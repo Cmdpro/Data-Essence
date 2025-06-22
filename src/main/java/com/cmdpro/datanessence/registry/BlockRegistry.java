@@ -32,13 +32,11 @@ import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
 import com.cmdpro.datanessence.block.transportation.*;
 import com.cmdpro.datanessence.block.world.*;
 import com.cmdpro.datanessence.block.world.shieldingstone.*;
-import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.GameMasterBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -88,6 +86,18 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FROZEN_MOONLIGHT = register("frozen_moonlight",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_ICE)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SANCTUARY_GRASS_BLOCK = register("sanctuary_grass_block",
+            () -> new SanctuaryGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SANCTUARY_DIRT = register("sanctuary_dirt",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> TALL_SANCTUARY_GRASS = register("tall_sanctuary_grass",
+            () -> new TallSanctuaryGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SANCTUARY_GRASS = register("sanctuary_grass",
+            () -> new SanctuaryGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators

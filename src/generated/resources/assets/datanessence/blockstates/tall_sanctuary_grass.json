@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "datanessence:block/tall_sanctuary_grass_lower"
+    },
+    "half=upper": {
+      "model": "datanessence:block/tall_sanctuary_grass_upper"
+    }
+  }
+}
