@@ -16,7 +16,7 @@
             ],
             "continentalness": [
               -1,
-              -0.25
+              -0.075
             ],
             "erosion": 0,
             "weirdness": 0,
@@ -33,7 +33,7 @@
               0
             ],
             "continentalness": [
-              -0.25,
+              -0.075,
               1
             ],
             "erosion": 0,
@@ -51,7 +51,7 @@
               1
             ],
             "continentalness": [
-              -0.25,
+              -0.075,
               1
             ],
             "erosion": 0,

@@ -128,6 +128,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.CRYSTALLINE_CRADLE.get());
         dropSelf(BlockRegistry.SANCTUARY_GRASS_BLOCK.get());
         dropSelf(BlockRegistry.SANCTUARY_DIRT.get());
+        dropSelf(BlockRegistry.SANCTUARY_SAND.get());
+        dropSelf(BlockRegistry.DEEP_SANCTUARY_SAND.get());
         this.add(BlockRegistry.TALL_SANCTUARY_GRASS.get(),
                 block -> createGrassDrops(BlockRegistry.TALL_SANCTUARY_GRASS.get()));
         this.add(BlockRegistry.SANCTUARY_GRASS.get(),

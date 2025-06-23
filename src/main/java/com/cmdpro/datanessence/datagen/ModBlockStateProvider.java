@@ -82,6 +82,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(BlockRegistry.SANCTUARY_DIRT);
         tallGrass(BlockRegistry.TALL_SANCTUARY_GRASS);
         grass(BlockRegistry.SANCTUARY_GRASS);
+        blockWithItem(BlockRegistry.SANCTUARY_SAND);
+        blockWithItem(BlockRegistry.DEEP_SANCTUARY_SAND);
 
         transparentBlockWithItemAndTint(BlockRegistry.SPIRE_GLASS);
 

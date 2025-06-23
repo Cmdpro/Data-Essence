@@ -99,6 +99,12 @@ public class BlockRegistry {
     public static final Supplier<Block> SANCTUARY_GRASS = register("sanctuary_grass",
             () -> new SanctuaryGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SANCTUARY_SAND = register("sanctuary_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> DEEP_SANCTUARY_SAND = register("deep_sanctuary_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",

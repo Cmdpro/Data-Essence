@@ -1,5 +1,5 @@
 {
-  "sea_level": 80,
+  "sea_level": 100,
   "disable_mob_generation": false,
   "aquifers_enabled": true,
   "ore_veins_enabled": true,
@@ -84,34 +84,68 @@
     "final_density": {
       "type": "minecraft:add",
       "argument1": {
-        "type": "minecraft:mul",
-        "argument1": "datanessence:sanctuary",
-        "argument2": {
-          "type": "minecraft:clamp",
-          "input": {
-            "type": "minecraft:noise",
-            "noise": "minecraft:continentalness_large",
-            "xz_scale": 0.5,
-            "y_scale": 0
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:mul",
+            "argument1": "datanessence:sanctuary",
+            "argument2": 0.75
           },
-          "min": 0.25,
-          "max": 1
-        }
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": {
+                "type": "minecraft:mul",
+                "argument1": {
+                  "type": "minecraft:clamp",
+                  "input": {
+                    "type": "minecraft:noise",
+                    "noise": "minecraft:continentalness_large",
+                    "xz_scale": 0.5,
+                    "y_scale": 0
+                  },
+                  "min": -1,
+                  "max": 0
+                },
+                "argument2": -1
+              },
+              "argument2": -1
+            },
+            "argument2": -1.35
+          }
+        },
+        "argument2": 0.25
       },
       "argument2": {
         "type": "minecraft:mul",
         "argument1": {
-          "type": "minecraft:clamp",
-          "input": {
-            "type": "minecraft:noise",
-            "noise": "minecraft:continentalness_large",
-            "xz_scale": 0.5,
-            "y_scale": 0
+          "type": "minecraft:mul",
+          "argument1": {
+            "type": "minecraft:clamp",
+            "input": {
+              "type": "minecraft:mul",
+              "argument1": {
+                "type": "minecraft:noise",
+                "noise": "minecraft:continentalness_large",
+                "xz_scale": 0.5,
+                "y_scale": 0
+              },
+              "argument2": 8
+            },
+            "min": -1,
+            "max": 0
           },
-          "min": -1,
-          "max": 0
+          "argument2": {
+            "type": "minecraft:y_clamped_gradient",
+            "from_y": 40,
+            "to_y": 30,
+            "from_value": 1,
+            "to_value": 0
+          }
         },
-        "argument2": 1
+        "argument2": 2
       }
     },
     "vein_toggle": 0,
@@ -186,10 +220,32 @@
                 }
               },
               {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "minecraft:sand"
-                }
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:y_above",
+                      "anchor": {
+                        "absolute": 65
+                      },
+                      "surface_depth_multiplier": 0,
+                      "add_stone_depth": false
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "datanessence:sanctuary_sand"
+                      }
+                    }
+                  },
+                  {
+                    "type": "minecraft:block",
+                    "result_state": {
+                      "Name": "datanessence:deep_sanctuary_sand"
+                    }
+                  }
+                ]
               }
             ]
           }
