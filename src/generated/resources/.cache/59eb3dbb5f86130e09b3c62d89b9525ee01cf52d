@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-24T06:59:28.663208	Loot Tables
+// 1.21.1	2025-06-24T08:52:51.3146498	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -11,6 +11,7 @@ d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_table/blocks/anc
 c174468894a2a7f8e1f2e811feab6cfa278fefac data/datanessence/loot_table/blocks/ancient_window.json
 3831944dfafd2bf28a5d34fa89acc5400cb969a9 data/datanessence/loot_table/blocks/arekko.json
 6c75f698c678f430658ac40cbf4955f45e52655c data/datanessence/loot_table/blocks/auto-fabricator.json
+6e785f9f9cab31d1ca93dcbcb630a78ccfe9ab4b data/datanessence/loot_table/blocks/blue_pearlescent_sand.json
 ea5364fdf6f40dd1dc50b2354226d4977911b8b1 data/datanessence/loot_table/blocks/charger.json
 2f8cce94dad3d191cc14cdd1797ab11600ee1783 data/datanessence/loot_table/blocks/chemical_node.json
 d84e5950a8f59623f762d05a19464f398db0fccd data/datanessence/loot_table/blocks/computer.json
@@ -62,6 +63,7 @@ f2a29214b3a71ca945068d1c8409c2bced4dcaec data/datanessence/loot_table/blocks/flu
 fcbdf81a9730cd95fb91e6786a932853ae148da5 data/datanessence/loot_table/blocks/fluid_spiller.json
 a63c22d76b677d9f5d4b6212d1011f4d3f31c962 data/datanessence/loot_table/blocks/fluid_tank.json
 1577d152226c444acac2d71b852435b0b23c3b72 data/datanessence/loot_table/blocks/frozen_moonlight.json
+885f1f5dfa0dd37b664a0df798997e5828e1e3d1 data/datanessence/loot_table/blocks/green_pearlescent_sand.json
 21f5ad05e5229616ea951d95ad1307af1b7f1539 data/datanessence/loot_table/blocks/industrial_plant_siphon.json
 b8d2fa9097bae3a836da7acd662de09e9d889ee9 data/datanessence/loot_table/blocks/infuser.json
 26c69dcff1defc45669115decebc18f32b791f08 data/datanessence/loot_table/blocks/item_buffer.json
@@ -86,6 +88,7 @@ fd2e4b1a9190655e502e9db90752954b3ca1d625 data/datanessence/loot_table/blocks/min
 7c4d6d7955e31056158296db8728ed874c6ead2d data/datanessence/loot_table/blocks/polished_obsidian_bricks.json
 aca436e4c49a253ff47202ccea5ec753aec5a73d data/datanessence/loot_table/blocks/polished_obsidian_column.json
 83e11803edcd7003827fcc04fca9477d6b66c850 data/datanessence/loot_table/blocks/polished_obsidian_tract.json
+24e471f0e6adb4df47e9a0b9f7489fa5a8a60d3d data/datanessence/loot_table/blocks/red_pearlescent_sand.json
 b68dabf5aaa38a09a8b718834adb9019b84a04fa data/datanessence/loot_table/blocks/sanctuary_dirt.json
 8dea2dfcca0dbe30dda0e2764191526ed25eb98f data/datanessence/loot_table/blocks/sanctuary_grass.json
 42f0d8f3bef9a1a59103f03fe3396c287a67a18c data/datanessence/loot_table/blocks/sanctuary_grass_block.json

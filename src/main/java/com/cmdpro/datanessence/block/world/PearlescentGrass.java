@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.block.world;
 
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.ParticleRegistry;
+import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
@@ -12,6 +13,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.LiquidBlockContainer;
 import net.minecraft.world.level.block.TallGrassBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -50,5 +52,12 @@ public class PearlescentGrass extends TallGrassBlock implements LiquidBlockConta
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
         return state.is(BlockTags.SAND);
+    }
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        if (!level.getBlockState(pos.below()).is(TagRegistry.Blocks.SANCTUARY_SAND)) {
+            return false;
+        }
+        return super.canSurvive(state, level, pos);
     }
 }

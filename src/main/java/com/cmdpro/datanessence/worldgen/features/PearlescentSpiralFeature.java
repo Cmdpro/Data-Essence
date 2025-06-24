@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.worldgen.features;
 
 import com.cmdpro.datanessence.block.world.PearlescentSpiral;
 import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.TagRegistry;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -19,7 +20,7 @@ public class PearlescentSpiralFeature extends Feature<NoneFeatureConfiguration> 
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> pContext) {
         int height = (int)(25f*(Mth.nextFloat(pContext.random(), 0.5f, 1.5f)));
         BlockPos origin = pContext.origin();
-        if (!pContext.level().getBlockState(origin.below()).is(BlockRegistry.DEEP_SANCTUARY_SAND.get()) || !isValid(pContext.level(), origin)) {
+        if (!pContext.level().getBlockState(origin.below()).is(TagRegistry.Blocks.SANCTUARY_SAND) || !isValid(pContext.level(), origin)) {
             return false;
         }
         BlockState[] potentialStates = new BlockState[] {

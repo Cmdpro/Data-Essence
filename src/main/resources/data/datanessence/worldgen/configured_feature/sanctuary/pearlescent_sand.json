@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:simple_random_selector",
+  "config": {
+    "features": [
+      "datanessence:sanctuary/red_pearlescent_sand",
+      "datanessence:sanctuary/green_pearlescent_sand",
+      "datanessence:sanctuary/blue_pearlescent_sand"
+    ]
+  }
+}

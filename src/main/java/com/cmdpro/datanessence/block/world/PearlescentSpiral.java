@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block.world;
 
 import com.cmdpro.databank.megablock.MegablockCoreUtil;
+import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -86,7 +87,7 @@ public class PearlescentSpiral extends Block implements LiquidBlockContainer {
 
     @Override
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        if (!level.getBlockState(pos.below()).is(this) && !level.getBlockState(pos.below()).is(BlockTags.SAND)) {
+        if (!level.getBlockState(pos.below()).is(this) && !level.getBlockState(pos.below()).is(TagRegistry.Blocks.SANCTUARY_SAND)) {
             return false;
         }
         return super.canSurvive(state, level, pos);

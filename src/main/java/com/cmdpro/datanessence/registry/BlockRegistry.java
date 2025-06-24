@@ -123,6 +123,15 @@ public class BlockRegistry {
     public static final Supplier<Block> YELLOW_PEARLESCENT_GRASS = register("yellow_pearlescent_grass",
             () -> new PearlescentGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> RED_PEARLESCENT_SAND = register("red_pearlescent_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> GREEN_PEARLESCENT_SAND = register("green_pearlescent_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> BLUE_PEARLESCENT_SAND = register("blue_pearlescent_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",

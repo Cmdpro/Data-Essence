@@ -137,6 +137,9 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.CYAN_PEARLESCENT_SPIRAL.get());
         dropSelf(BlockRegistry.MAGENTA_PEARLESCENT_SPIRAL.get());
         dropSelf(BlockRegistry.YELLOW_PEARLESCENT_SPIRAL.get());
+        dropSelf(BlockRegistry.RED_PEARLESCENT_SAND.get());
+        dropSelf(BlockRegistry.GREEN_PEARLESCENT_SAND.get());
+        dropSelf(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
         this.add(BlockRegistry.TALL_SANCTUARY_GRASS.get(),
                 block -> createSpecialGrassDrops(BlockRegistry.TALL_SANCTUARY_GRASS.get(), Items.AIR));
         this.add(BlockRegistry.SANCTUARY_GRASS.get(),

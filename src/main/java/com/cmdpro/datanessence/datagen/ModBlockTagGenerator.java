@@ -153,12 +153,28 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.SANCTUARY_GRASS_BLOCK.get())
                 .add(BlockRegistry.SANCTUARY_DIRT.get())
                 .add(BlockRegistry.SANCTUARY_SAND.get())
-                .add(BlockRegistry.DEEP_SANCTUARY_SAND.get());
+                .add(BlockRegistry.DEEP_SANCTUARY_SAND.get())
+                .add(BlockRegistry.RED_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
         this.tag(BlockTags.DIRT)
                 .add(BlockRegistry.SANCTUARY_GRASS_BLOCK.get())
                 .add(BlockRegistry.SANCTUARY_DIRT.get());
         this.tag(BlockTags.SAND)
                 .add(BlockRegistry.SANCTUARY_SAND.get())
-                .add(BlockRegistry.DEEP_SANCTUARY_SAND.get());
+                .add(BlockRegistry.DEEP_SANCTUARY_SAND.get())
+                .add(BlockRegistry.RED_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
+        this.tag(TagRegistry.Blocks.PEARLESCENT_SAND)
+                .add(BlockRegistry.RED_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
+        this.tag(TagRegistry.Blocks.SANCTUARY_SAND)
+                .add(BlockRegistry.SANCTUARY_SAND.get())
+                .add(BlockRegistry.DEEP_SANCTUARY_SAND.get())
+                .add(BlockRegistry.RED_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
     }
 }

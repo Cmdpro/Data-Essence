@@ -91,6 +91,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         grass(BlockRegistry.MAGENTA_PEARLESCENT_GRASS);
         pearlescentSpiral(BlockRegistry.YELLOW_PEARLESCENT_SPIRAL);
         grass(BlockRegistry.YELLOW_PEARLESCENT_GRASS);
+        blockWithItem(BlockRegistry.RED_PEARLESCENT_SAND);
+        blockWithItem(BlockRegistry.GREEN_PEARLESCENT_SAND);
+        blockWithItem(BlockRegistry.BLUE_PEARLESCENT_SAND);
 
         transparentBlockWithItemAndTint(BlockRegistry.SPIRE_GLASS);
 
