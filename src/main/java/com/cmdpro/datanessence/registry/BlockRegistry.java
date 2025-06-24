@@ -105,10 +105,22 @@ public class BlockRegistry {
     public static final Supplier<Block> DEEP_SANCTUARY_SAND = register("deep_sanctuary_sand",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> PEARLESCENT_SPIRAL = register("pearlescent_spiral",
+    public static final Supplier<Block> CYAN_PEARLESCENT_SPIRAL = register("cyan_pearlescent_spiral",
             () -> new PearlescentSpiral(BlockBehaviour.Properties.ofFullCopy(Blocks.KELP).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 12)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> PEARLESCENT_GRASS = register("pearlescent_grass",
+    public static final Supplier<Block> CYAN_PEARLESCENT_GRASS = register("cyan_pearlescent_grass",
+            () -> new PearlescentGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> MAGENTA_PEARLESCENT_SPIRAL = register("magenta_pearlescent_spiral",
+            () -> new PearlescentSpiral(BlockBehaviour.Properties.ofFullCopy(Blocks.KELP).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 12)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> MAGENTA_PEARLESCENT_GRASS = register("magenta_pearlescent_grass",
+            () -> new PearlescentGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> YELLOW_PEARLESCENT_SPIRAL = register("yellow_pearlescent_spiral",
+            () -> new PearlescentSpiral(BlockBehaviour.Properties.ofFullCopy(Blocks.KELP).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 12)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> YELLOW_PEARLESCENT_GRASS = register("yellow_pearlescent_grass",
             () -> new PearlescentGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 

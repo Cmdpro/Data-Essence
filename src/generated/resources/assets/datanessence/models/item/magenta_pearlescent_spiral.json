@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "datanessence:block/pearlescent_spiral"
+    "layer0": "datanessence:block/magenta_pearlescent_spiral"
   }
 }

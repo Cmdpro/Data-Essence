@@ -85,8 +85,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         grass(BlockRegistry.SANCTUARY_GRASS);
         blockWithItem(BlockRegistry.SANCTUARY_SAND);
         blockWithItem(BlockRegistry.DEEP_SANCTUARY_SAND);
-        pearlescentSpiral(BlockRegistry.PEARLESCENT_SPIRAL);
-        grass(BlockRegistry.PEARLESCENT_GRASS);
+        pearlescentSpiral(BlockRegistry.CYAN_PEARLESCENT_SPIRAL);
+        grass(BlockRegistry.CYAN_PEARLESCENT_GRASS);
+        pearlescentSpiral(BlockRegistry.MAGENTA_PEARLESCENT_SPIRAL);
+        grass(BlockRegistry.MAGENTA_PEARLESCENT_GRASS);
+        pearlescentSpiral(BlockRegistry.YELLOW_PEARLESCENT_SPIRAL);
+        grass(BlockRegistry.YELLOW_PEARLESCENT_GRASS);
 
         transparentBlockWithItemAndTint(BlockRegistry.SPIRE_GLASS);
 
@@ -99,10 +103,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void pearlescentSpiral(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ResourceLocation base = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_base");
         ResourceLocation middle = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath());
         ResourceLocation upper = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top");
-        ModelFile.ExistingModelFile lowerModel = models().getExistingFile(loc.withSuffix("_base"));
-        ModelFile.ExistingModelFile lowerTopModel = models().getExistingFile(loc.withSuffix("_base_top"));
+        BlockModelBuilder lowerModel = models().withExistingParent(loc.getPath() + "_base", DataNEssence.locate("block/pearlescent_spiral_base"));
+        lowerModel.texture("0", middle);
+        lowerModel.texture("1", base);
+        lowerModel.texture("particle", middle);
+        BlockModelBuilder lowerTopModel = models().withExistingParent(loc.getPath() + "_base_top", DataNEssence.locate("block/pearlescent_spiral_base_top"));
+        lowerTopModel.texture("0", upper);
+        lowerTopModel.texture("1", base);
+        lowerTopModel.texture("particle", middle);
         BlockModelBuilder middleModel = models().cross(loc.getPath(), middle);
         middleModel.renderType("cutout");
         BlockModelBuilder upperModel = models().cross(loc.getPath() + "_upper", upper);

@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:pearlescent_spiral"
+          "name": "datanessence:magenta_pearlescent_spiral"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "datanessence:blocks/pearlescent_spiral"
+  "random_sequence": "datanessence:blocks/magenta_pearlescent_spiral"
 }

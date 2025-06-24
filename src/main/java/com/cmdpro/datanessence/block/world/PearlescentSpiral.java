@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.world;
 import com.cmdpro.databank.megablock.MegablockCoreUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
@@ -10,6 +11,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.GrowingPlantBodyBlock;
 import net.minecraft.world.level.block.LiquidBlockContainer;
@@ -80,6 +82,14 @@ public class PearlescentSpiral extends Block implements LiquidBlockContainer {
             }
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    @Override
+    protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
+        if (!level.getBlockState(pos.below()).is(this) && !level.getBlockState(pos.below()).is(BlockTags.SAND)) {
+            return false;
+        }
+        return super.canSurvive(state, level, pos);
     }
 
     @Override

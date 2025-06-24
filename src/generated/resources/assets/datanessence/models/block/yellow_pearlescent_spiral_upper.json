@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "datanessence:block/pearlescent_spiral"
+    "cross": "datanessence:block/yellow_pearlescent_spiral_top"
   }
 }

@@ -134,13 +134,19 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.SANCTUARY_DIRT.get());
         dropSelf(BlockRegistry.SANCTUARY_SAND.get());
         dropSelf(BlockRegistry.DEEP_SANCTUARY_SAND.get());
-        dropSelf(BlockRegistry.PEARLESCENT_SPIRAL.get());
+        dropSelf(BlockRegistry.CYAN_PEARLESCENT_SPIRAL.get());
+        dropSelf(BlockRegistry.MAGENTA_PEARLESCENT_SPIRAL.get());
+        dropSelf(BlockRegistry.YELLOW_PEARLESCENT_SPIRAL.get());
         this.add(BlockRegistry.TALL_SANCTUARY_GRASS.get(),
                 block -> createSpecialGrassDrops(BlockRegistry.TALL_SANCTUARY_GRASS.get(), Items.AIR));
         this.add(BlockRegistry.SANCTUARY_GRASS.get(),
                 block -> createSpecialGrassDrops(BlockRegistry.SANCTUARY_GRASS.get(), Items.AIR));
-        this.add(BlockRegistry.PEARLESCENT_GRASS.get(),
-                block -> createSpecialGrassDrops(BlockRegistry.PEARLESCENT_GRASS.get(), Items.AIR));
+        this.add(BlockRegistry.CYAN_PEARLESCENT_GRASS.get(),
+                block -> createSpecialGrassDrops(BlockRegistry.CYAN_PEARLESCENT_GRASS.get(), Items.AIR));
+        this.add(BlockRegistry.MAGENTA_PEARLESCENT_GRASS.get(),
+                block -> createSpecialGrassDrops(BlockRegistry.MAGENTA_PEARLESCENT_GRASS.get(), Items.AIR));
+        this.add(BlockRegistry.YELLOW_PEARLESCENT_GRASS.get(),
+                block -> createSpecialGrassDrops(BlockRegistry.YELLOW_PEARLESCENT_GRASS.get(), Items.AIR));
 
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));

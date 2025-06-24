@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "part=bottom": {
+      "model": "datanessence:block/magenta_pearlescent_spiral_base"
+    },
+    "part=bottom_top": {
+      "model": "datanessence:block/magenta_pearlescent_spiral_base_top"
+    },
+    "part=middle": {
+      "model": "datanessence:block/magenta_pearlescent_spiral"
+    },
+    "part=top": {
+      "model": "datanessence:block/magenta_pearlescent_spiral_upper"
+    }
+  }
+}
