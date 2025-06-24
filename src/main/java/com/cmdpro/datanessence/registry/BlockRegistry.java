@@ -105,6 +105,12 @@ public class BlockRegistry {
     public static final Supplier<Block> DEEP_SANCTUARY_SAND = register("deep_sanctuary_sand",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> PEARLESCENT_SPIRAL = register("pearlescent_spiral",
+            () -> new PearlescentSpiral(BlockBehaviour.Properties.ofFullCopy(Blocks.KELP).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 12)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> PEARLESCENT_GRASS = register("pearlescent_grass",
+            () -> new PearlescentGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",

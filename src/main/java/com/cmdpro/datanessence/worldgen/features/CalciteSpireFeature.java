@@ -23,11 +23,10 @@ public class CalciteSpireFeature extends Feature<NoneFeatureConfiguration> {
     }
     @Override
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> pContext) {
-        Vec3i offset = new Vec3i(8+pContext.random().nextIntBetweenInclusive(-4, 4), 0, 8+pContext.random().nextIntBetweenInclusive(-4, 4));
         float height = 50*(Mth.nextFloat(pContext.random(), 0.5f, 1.5f));
         float spiralSize = Mth.nextFloat(pContext.random(), 0.75f, 1f);
         float dirChange = pContext.random().nextBoolean() ? Mth.nextFloat(pContext.random(), -15f, -5f) : Mth.nextFloat(pContext.random(), 5f, 10f);
-        BlockPos origin = pContext.level().getHeightmapPos(Heightmap.Types.WORLD_SURFACE_WG, pContext.origin().offset(offset));
+        BlockPos origin = pContext.origin();
         if (!pContext.level().getBlockState(origin.below()).getFluidState().isEmpty()) {
             return false;
         }

@@ -1,0 +1,20 @@
+{
+  "feature": "datanessence:sanctuary/pearlescent_spiral",
+  "placement": [
+    {
+      "type": "minecraft:count",
+      "count": {
+        "type": "minecraft:uniform",
+        "min_inclusive": 2,
+        "max_inclusive": 5
+      }
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "OCEAN_FLOOR_WG"
+    },
+    {
+      "type": "minecraft:in_square"
+    }
+  ]
+}
