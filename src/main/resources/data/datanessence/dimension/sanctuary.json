@@ -20,7 +20,10 @@
             ],
             "erosion": 0,
             "weirdness": 0,
-            "depth": 0,
+            "depth": [
+              -2,
+              0
+            ],
             "offset": 0
           }
         },
@@ -38,7 +41,31 @@
             ],
             "erosion": 0,
             "weirdness": 0,
-            "depth": 0,
+            "depth": [
+              -2,
+              0
+            ],
+            "offset": 0
+          }
+        },
+        {
+          "biome": "datanessence:sanctuary/astral_caverns",
+          "parameters": {
+            "temperature": 0,
+            "humidity": [
+              -1,
+              1
+            ],
+            "continentalness": [
+              -1,
+              1
+            ],
+            "erosion": 0,
+            "weirdness": 0,
+            "depth": [
+              0,
+              1
+            ],
             "offset": 0
           }
         }

@@ -107,7 +107,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.LUNAR_CRYSTAL_SEED.get())
                 .add(BlockRegistry.ECLIPTRUM_BLOCK.get())
                 .add(BlockRegistry.FROZEN_MOONLIGHT.get())
-                .add(BlockRegistry.CRYSTALLINE_CRADLE.get());
+                .add(BlockRegistry.CRYSTALLINE_CRADLE.get())
+                .add(BlockRegistry.ASTRAL_GOOP.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
@@ -115,6 +116,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get())
                 .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+        this.tag(BlockTags.NEEDS_IRON_TOOL)
+                .add(BlockRegistry.ASTRAL_GOOP.get());
         this.tag(TagRegistry.Blocks.BUFFER_DETECTION_PASS)
                 .add(BlockRegistry.ITEM_BUFFER.get())
                 .add(BlockRegistry.FLUID_BUFFER.get())
@@ -176,5 +179,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.RED_PEARLESCENT_SAND.get())
                 .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
                 .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
+        this.tag(TagRegistry.Blocks.SANCTUARY_CARVER_REPLACEABLES)
+                .add(BlockRegistry.ASTRAL_GOOP.get());
     }
 }

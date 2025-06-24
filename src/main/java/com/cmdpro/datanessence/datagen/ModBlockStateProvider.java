@@ -94,6 +94,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(BlockRegistry.RED_PEARLESCENT_SAND);
         blockWithItem(BlockRegistry.GREEN_PEARLESCENT_SAND);
         blockWithItem(BlockRegistry.BLUE_PEARLESCENT_SAND);
+        blockWithItem(BlockRegistry.ASTRAL_GOOP);
 
         transparentBlockWithItemAndTint(BlockRegistry.SPIRE_GLASS);
 

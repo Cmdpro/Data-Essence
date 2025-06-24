@@ -132,6 +132,9 @@ public class BlockRegistry {
     public static final Supplier<Block> BLUE_PEARLESCENT_SAND = register("blue_pearlescent_sand",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ASTRAL_GOOP = register("astral_goop",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE).sound(SoundType.SLIME_BLOCK)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
     public static final Supplier<Block> ESSENCE_BURNER = register("essence_burner",

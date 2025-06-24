@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-24T08:52:51.3178289	Block States: datanessence
+// 1.21.1	2025-06-24T12:11:43.2219366	Block States: datanessence
 4c3f8bc2b11e812a24d90295ef729dfe488c971c assets/datanessence/blockstates/aether_rune.json
 768dfda3826afab6ac2a48d49a2f703f413da50a assets/datanessence/blockstates/ancient_glyph_stone_blank.json
 a95f027a62699569a8ea8ed39de6b52e8c27d18f assets/datanessence/blockstates/ancient_glyph_stone_essence.json
@@ -9,6 +9,7 @@ d89311d641015fafdc822366c2558d17f3cd7375 assets/datanessence/blockstates/ancient
 65eb7ec6d7eb8a68d62256fec022ab7148aa41c5 assets/datanessence/blockstates/ancient_rock_tiles.json
 c52098f8bb418070c8327220d4cb48cf86502aad assets/datanessence/blockstates/ancient_shelf.json
 df90340bd9bef3fede9f9b0fd8033c8768f4afee assets/datanessence/blockstates/ancient_window.json
+6305fc3c3b42f15c5a5f66f955502e06de4c6c77 assets/datanessence/blockstates/astral_goop.json
 2db199438275145b4964f55c4a6260e65a46f3e7 assets/datanessence/blockstates/blue_pearlescent_sand.json
 fc5e372032096f0b6fe7c7a3c898839ecda390f2 assets/datanessence/blockstates/creative_essence_battery.json
 953e9cbd96ebfd6ff3f5c84dd04babc7c64aa56b assets/datanessence/blockstates/crystalline_log.json
@@ -79,6 +80,7 @@ f0d97e3b50d645529c4c9185764defb82b533ad0 assets/datanessence/models/block/ancien
 ccc6e4348045a65091b3f1be9700fff763c78113 assets/datanessence/models/block/ancient_shelf_empty2.json
 767c540cc6a65371f2b93dddf122862ede050a45 assets/datanessence/models/block/ancient_shelf_materials.json
 ce4d6f1b70c3bfeee0d534ea079ad9430e8be82e assets/datanessence/models/block/ancient_window.json
+bed2ac5c54bd9a69d968f597ef9b93ec7afbde8d assets/datanessence/models/block/astral_goop.json
 ea5361bd765c9efb0eedfc08fb5ac317df1fad91 assets/datanessence/models/block/blue_pearlescent_sand.json
 8065e9478f6498c3ee1b10bedb3df2c329f92177 assets/datanessence/models/block/creative_essence_battery.json
 c07f62d3cb8c972760d18a32a73eb5d0c65429fc assets/datanessence/models/block/crystalline_log.json
@@ -178,6 +180,7 @@ dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient
 c74fb21f4d2daf49174cb24c1cf29793e24e8158 assets/datanessence/models/item/ancient_rock_tiles.json
 68c3dbb22b292fada84213b03d319a39f7423ea9 assets/datanessence/models/item/ancient_shelf.json
 347ab0099de380aff8da7c8c84ce8145de333727 assets/datanessence/models/item/ancient_window.json
+8861ac346aef60b78732b31844ce055a3878a586 assets/datanessence/models/item/astral_goop.json
 8ca17174a4d9245d0ffa8ba5587bb5674ae118fc assets/datanessence/models/item/blue_pearlescent_sand.json
 b8f4f0e3c33a1c6e5ef577f91611fd5ff3d1280e assets/datanessence/models/item/creative_essence_battery.json
 a8c7d461799420c2ee054b9cdae26cea5a6804c6 assets/datanessence/models/item/cyan_pearlescent_grass.json

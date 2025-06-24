@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-24T08:52:51.3146498	Loot Tables
+// 1.21.1	2025-06-24T12:11:43.2202669	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 7748c29c622850254e32ce5ae1361dac87a5c527 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 b3cadd643ccfedcbf71935cb487051ee824dcbd8 data/datanessence/loot_table/blocks/ancient_glyph_stone_essence.json
@@ -10,6 +10,7 @@ d4136013b79785a30810f9a54f7306bd451e2904 data/datanessence/loot_table/blocks/anc
 9957a0fc34cdc9ad8a7a9de8617427a662548c4c data/datanessence/loot_table/blocks/ancient_shelf.json
 c174468894a2a7f8e1f2e811feab6cfa278fefac data/datanessence/loot_table/blocks/ancient_window.json
 3831944dfafd2bf28a5d34fa89acc5400cb969a9 data/datanessence/loot_table/blocks/arekko.json
+5a2bd21f6dbba416f498bba59a65b45c3245fca7 data/datanessence/loot_table/blocks/astral_goop.json
 6c75f698c678f430658ac40cbf4955f45e52655c data/datanessence/loot_table/blocks/auto-fabricator.json
 6e785f9f9cab31d1ca93dcbcb630a78ccfe9ab4b data/datanessence/loot_table/blocks/blue_pearlescent_sand.json
 ea5364fdf6f40dd1dc50b2354226d4977911b8b1 data/datanessence/loot_table/blocks/charger.json

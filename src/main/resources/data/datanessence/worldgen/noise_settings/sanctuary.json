@@ -69,7 +69,13 @@
       "y_scale": 0
     },
     "erosion": "minecraft:overworld/erosion",
-    "depth": "minecraft:overworld/depth",
+    "depth": {
+      "type": "minecraft:y_clamped_gradient",
+      "from_y": 256,
+      "to_y": -128,
+      "from_value": -2,
+      "to_value": 1
+    },
     "ridges": "minecraft:overworld/ridges",
     "initial_density_without_jaggedness": {
       "type": "minecraft:interpolated",
@@ -154,103 +160,123 @@
   },
   "spawn_target": [],
   "surface_rule": {
-    "type": "minecraft:condition",
-    "if_true": {
-      "type": "minecraft:above_preliminary_surface"
-    },
-    "then_run": {
-      "type": "minecraft:sequence",
-      "sequence": [
-        {
-          "type": "minecraft:condition",
-          "if_true": {
-            "type": "minecraft:stone_depth",
-            "offset": 0,
-            "surface_type": "floor",
-            "add_surface_depth": false,
-            "secondary_depth_range": 0
-          },
-          "then_run": {
-            "type": "minecraft:sequence",
-            "sequence": [
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:water",
-                  "offset": 0,
-                  "surface_depth_multiplier": 0,
-                  "add_stone_depth": false
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "datanessence:sanctuary_grass_block",
-                    "Properties": {}
-                  }
-                }
-              }
-            ]
-          }
+    "type": "minecraft:sequence",
+    "sequence": [
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:above_preliminary_surface"
         },
-        {
-          "type": "minecraft:condition",
-          "if_true": {
-            "type": "minecraft:stone_depth",
-            "offset": 5,
-            "surface_type": "floor",
-            "add_surface_depth": false,
-            "secondary_depth_range": 0
-          },
-          "then_run": {
-            "type": "minecraft:sequence",
-            "sequence": [
-              {
-                "type": "minecraft:condition",
-                "if_true": {
-                  "type": "minecraft:water",
-                  "offset": 0,
-                  "surface_depth_multiplier": 0,
-                  "add_stone_depth": false
-                },
-                "then_run": {
-                  "type": "minecraft:block",
-                  "result_state": {
-                    "Name": "datanessence:sanctuary_dirt"
-                  }
-                }
+        "then_run": {
+          "type": "minecraft:sequence",
+          "sequence": [
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:stone_depth",
+                "offset": 0,
+                "surface_type": "floor",
+                "add_surface_depth": false,
+                "secondary_depth_range": 0
               },
-              {
+              "then_run": {
                 "type": "minecraft:sequence",
                 "sequence": [
                   {
                     "type": "minecraft:condition",
                     "if_true": {
-                      "type": "minecraft:y_above",
-                      "anchor": {
-                        "absolute": 65
-                      },
+                      "type": "minecraft:water",
+                      "offset": 0,
                       "surface_depth_multiplier": 0,
                       "add_stone_depth": false
                     },
                     "then_run": {
                       "type": "minecraft:block",
                       "result_state": {
-                        "Name": "datanessence:sanctuary_sand"
+                        "Name": "datanessence:sanctuary_grass_block",
+                        "Properties": {}
                       }
-                    }
-                  },
-                  {
-                    "type": "minecraft:block",
-                    "result_state": {
-                      "Name": "datanessence:deep_sanctuary_sand"
                     }
                   }
                 ]
               }
-            ]
+            },
+            {
+              "type": "minecraft:condition",
+              "if_true": {
+                "type": "minecraft:stone_depth",
+                "offset": 5,
+                "surface_type": "floor",
+                "add_surface_depth": false,
+                "secondary_depth_range": 0
+              },
+              "then_run": {
+                "type": "minecraft:sequence",
+                "sequence": [
+                  {
+                    "type": "minecraft:condition",
+                    "if_true": {
+                      "type": "minecraft:water",
+                      "offset": 0,
+                      "surface_depth_multiplier": 0,
+                      "add_stone_depth": false
+                    },
+                    "then_run": {
+                      "type": "minecraft:block",
+                      "result_state": {
+                        "Name": "datanessence:sanctuary_dirt"
+                      }
+                    }
+                  },
+                  {
+                    "type": "minecraft:sequence",
+                    "sequence": [
+                      {
+                        "type": "minecraft:condition",
+                        "if_true": {
+                          "type": "minecraft:y_above",
+                          "anchor": {
+                            "absolute": 65
+                          },
+                          "surface_depth_multiplier": 0,
+                          "add_stone_depth": false
+                        },
+                        "then_run": {
+                          "type": "minecraft:block",
+                          "result_state": {
+                            "Name": "datanessence:sanctuary_sand"
+                          }
+                        }
+                      },
+                      {
+                        "type": "minecraft:block",
+                        "result_state": {
+                          "Name": "datanessence:deep_sanctuary_sand"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "minecraft:condition",
+        "if_true": {
+          "type": "minecraft:biome",
+          "biome_is": [
+            "datanessence:sanctuary/astral_caverns"
+          ]
+        },
+        "then_run": {
+          "type": "minecraft:block",
+          "result_state": {
+            "Name": "datanessence:astral_goop"
           }
         }
-      ]
-    }
+      }
+    ]
   }
 }
