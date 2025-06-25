@@ -141,15 +141,6 @@ public class OrePingShader extends PostShaderInstance {
             VertexConsumer buffer = bufferSource.getBuffer(type);
             Minecraft.getInstance().getBlockRenderer().renderBatched(block, pos, BLOCK_AND_TINT_GETTER, stack, buffer, false, Minecraft.getInstance().level.random, ModelData.EMPTY, type);
         }
-        if (block.getBlock() instanceof EntityBlock) {
-            BlockEntity be = Minecraft.getInstance().level.getBlockEntity(pos);
-            if (be != null) {
-                BlockEntityRenderer<BlockEntity> renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher().getRenderer(be);
-                if (renderer != null) {
-                    renderer.render(be, partialTick.getGameTimeDeltaTicks(), stack, bufferSource, 0xF000F0, OverlayTexture.NO_OVERLAY);
-                }
-            }
-        }
         stack.popPose();
     }
     private static final BlockAndTintGetter BLOCK_AND_TINT_GETTER = new BlockAndTintGetter() {
