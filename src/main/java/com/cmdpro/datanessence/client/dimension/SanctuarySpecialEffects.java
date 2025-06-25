@@ -104,7 +104,7 @@ public class SanctuarySpecialEffects extends DimensionSpecialEffects {
     }
 
     public SanctuarySpecialEffects() {
-        super(192.0F, true, SkyType.NONE, false, false);
+        super(256f, true, SkyType.NONE, false, false);
     }
 
     @Override
