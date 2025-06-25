@@ -24,6 +24,9 @@
   "name": {
     "translate": "data_tablet.pages.decorative_buffers.name"
   },
+  "flavor": {
+    "translate": "data_tablet.pages.decorative_buffers.flavor"
+  },
   "parents": [
     "datanessence:tools/decorative_blocks",
     "datanessence:machinery/buffers"
