@@ -180,6 +180,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
                 .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
         this.tag(TagRegistry.Blocks.SANCTUARY_CARVER_REPLACEABLES)
-                .add(BlockRegistry.ASTRAL_GOOP.get());
+                .add(BlockRegistry.ASTRAL_GOOP.get())
+                .add(Blocks.STONE);
     }
 }

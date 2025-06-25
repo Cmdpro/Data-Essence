@@ -2,9 +2,6 @@
   "feature": "datanessence:sanctuary/calcite_spire",
   "placement": [
     {
-      "type": "minecraft:in_square"
-    },
-    {
       "type": "minecraft:heightmap",
       "heightmap": "WORLD_SURFACE_WG"
     },
@@ -14,7 +11,7 @@
         "type": "minecraft:weighted_list",
         "distribution": [
           {
-            "weight": 25,
+            "weight": 20,
             "data": 0
           },
           {

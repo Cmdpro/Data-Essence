@@ -70,7 +70,7 @@ public class BlockRegistry {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_ORE)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SPIRE_GLASS = register("spire_glass",
-            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> TETHERGRASS = register("tethergrass",
             () -> new SpreadingPlant(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).lightLevel((blockState) -> { return 5;})),

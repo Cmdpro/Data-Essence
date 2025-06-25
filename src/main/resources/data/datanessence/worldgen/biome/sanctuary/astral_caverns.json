@@ -14,7 +14,7 @@
   "spawn_costs": {},
   "carvers": {
     "air": [
-
+      "datanessence:sanctuary/sanctuary_cave"
     ]
   },
   "features": [

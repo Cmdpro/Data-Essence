@@ -12,7 +12,11 @@
   },
   "spawners": {},
   "spawn_costs": {},
-  "carvers": {},
+  "carvers": {
+    "air": [
+      "datanessence:sanctuary/sanctuary_cave"
+    ]
+  },
   "features": [
     [
       "minecraft:ore_dirt",
