@@ -46,7 +46,7 @@ public class CriticalDataToast implements Toast {
         }
         if (!this.playedSound && pTimeSinceLastVisible > 0L) {
             this.playedSound = true;
-            pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.CRITICAL_DATA_UNLOCKED.get(), 1.0F, 1.0F));
+            pToastComponent.getMinecraft().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.CRITICAL_DATA_UNLOCKED.value(), 1.0F, 1.0F));
         }
 
         pGuiGraphics.renderFakeItem(entry.icon, 8, 8);

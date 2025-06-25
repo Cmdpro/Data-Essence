@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.item.equipment;
 
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
@@ -46,7 +47,7 @@ public class HammerAndChisel extends Item {
     }
 
     public void playSound(Level world, BlockPos target) {
-        world.playSound(null, target, SoundEvents.ANVIL_BREAK, SoundSource.PLAYERS, 1f, 2f);
+        world.playSound(null, target, SoundRegistry.HAMMER_AND_CHISEL_MINE.value(), SoundSource.PLAYERS, 1f, 1f);
     }
 
     @Override

@@ -138,5 +138,14 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ItemRegistry.LENSING_CRYSTAL.get())
                 .add(ItemRegistry.BONDING_POWDER.get())
                 .add(ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get());
+
+        this.tag(Tags.Items.ORES_IN_GROUND_STONE)
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get().asItem());
+        this.tag(Tags.Items.GEMS)
+                .add(ItemRegistry.LENSING_CRYSTAL.get());
+        this.tag(Tags.Items.GLASS_BLOCKS)
+                .add(BlockRegistry.SPIRE_GLASS.get().asItem());
+        this.tag(Tags.Items.MUSIC_DISCS)
+                .add(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC.get());
     }
 }

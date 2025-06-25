@@ -157,7 +157,7 @@ repositories {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
-    implementation "blank:databank-1.0.8"
+    implementation "blank:databank-1.1.0"
     implementation "com.eliotlash.mclib:mclib:20"
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     localRuntime "dev.emi:emi-neoforge:${emi_version}"

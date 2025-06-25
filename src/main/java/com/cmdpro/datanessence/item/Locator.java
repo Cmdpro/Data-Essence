@@ -36,7 +36,7 @@ public class Locator extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (!pLevel.isClientSide) {
-            pLevel.playSound(null, pPlayer.blockPosition(), SoundRegistry.LOCATOR_PING.get(), SoundSource.PLAYERS);
+            pLevel.playSound(null, pPlayer.blockPosition(), SoundRegistry.LOCATOR_PING.value(), SoundSource.PLAYERS);
             List<StructurePing> pings = new ArrayList<>();
             ServerLevel serverLevel = ((ServerLevel)pLevel);
             for (var i : PingableStructureManager.types.entrySet()) {

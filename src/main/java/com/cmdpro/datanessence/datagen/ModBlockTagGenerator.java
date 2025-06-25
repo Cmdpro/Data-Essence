@@ -35,6 +35,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.COMPUTER.get())
                 .add(BlockRegistry.CRYOCHAMBER.get())
                 .add(BlockRegistry.CRYOCHAMBER_FILLER.get())
+                .add(BlockRegistry.EMPTY_CRYOCHAMBER.get())
+                .add(BlockRegistry.EMPTY_CRYOCHAMBER_ROUTER.get())
                 .add(BlockRegistry.DATA_BANK.get())
                 .add(BlockRegistry.DECO_ESSENCE_BUFFER.get())
                 .add(BlockRegistry.DECO_FLUID_BUFFER.get())
@@ -105,7 +107,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.LUNAR_CRYSTAL_SEED.get())
                 .add(BlockRegistry.ECLIPTRUM_BLOCK.get())
                 .add(BlockRegistry.FROZEN_MOONLIGHT.get())
-                .add(BlockRegistry.CRYSTALLINE_CRADLE.get());
+                .add(BlockRegistry.CRYSTALLINE_CRADLE.get())
+                .add(BlockRegistry.ASTRAL_GOOP.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
@@ -113,6 +116,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get())
                 .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+        this.tag(BlockTags.NEEDS_IRON_TOOL)
+                .add(BlockRegistry.ASTRAL_GOOP.get());
         this.tag(TagRegistry.Blocks.BUFFER_DETECTION_PASS)
                 .add(BlockRegistry.ITEM_BUFFER.get())
                 .add(BlockRegistry.FLUID_BUFFER.get())
@@ -140,5 +145,41 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(TagRegistry.Blocks.CRYSTALLINE_CRADLE_BREAKABLE)
                 .add(BlockRegistry.ESSENCE_CRYSTAL.get())
                 .add(BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get());
+        this.tag(Tags.Blocks.ORES)
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+        this.tag(Tags.Blocks.ORES_IN_GROUND_STONE)
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
+        this.tag(TagRegistry.Blocks.SCANNABLE_ORES)
+                .addTag(Tags.Blocks.ORES)
+                .add(BlockRegistry.ESSENCE_CRYSTAL.get());
+        this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
+                .add(BlockRegistry.SANCTUARY_GRASS_BLOCK.get())
+                .add(BlockRegistry.SANCTUARY_DIRT.get())
+                .add(BlockRegistry.SANCTUARY_SAND.get())
+                .add(BlockRegistry.DEEP_SANCTUARY_SAND.get())
+                .add(BlockRegistry.RED_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
+        this.tag(BlockTags.DIRT)
+                .add(BlockRegistry.SANCTUARY_GRASS_BLOCK.get())
+                .add(BlockRegistry.SANCTUARY_DIRT.get());
+        this.tag(BlockTags.SAND)
+                .add(BlockRegistry.SANCTUARY_SAND.get())
+                .add(BlockRegistry.DEEP_SANCTUARY_SAND.get())
+                .add(BlockRegistry.RED_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
+        this.tag(TagRegistry.Blocks.PEARLESCENT_SAND)
+                .add(BlockRegistry.RED_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
+        this.tag(TagRegistry.Blocks.SANCTUARY_SAND)
+                .add(BlockRegistry.SANCTUARY_SAND.get())
+                .add(BlockRegistry.DEEP_SANCTUARY_SAND.get())
+                .add(BlockRegistry.RED_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
+                .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
+        this.tag(TagRegistry.Blocks.SANCTUARY_CARVER_REPLACEABLES)
+                .add(BlockRegistry.ASTRAL_GOOP.get());
     }
 }

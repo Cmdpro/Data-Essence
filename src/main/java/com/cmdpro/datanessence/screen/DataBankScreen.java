@@ -75,7 +75,7 @@ public class DataBankScreen extends Screen {
                                 minigames2.add(o.createMinigame());
                             }
                             minigames = minigames2.toArray(new Minigame[0]);
-                            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.get(), 1.0F));
+                            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
                             return true;
                         }
                     }

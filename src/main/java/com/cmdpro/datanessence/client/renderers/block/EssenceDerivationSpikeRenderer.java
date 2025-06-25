@@ -25,9 +25,9 @@ public class EssenceDerivationSpikeRenderer extends DatabankBlockEntityRenderer<
         @Override
         public void setupModelPose(EssenceDerivationSpikeBlockEntity pEntity, float partialTick) {
             pEntity.animState.updateAnimDefinitions(getModel());
-            if (pEntity.isAbleToWork() && pEntity.animState.isCurrentAnim("idle") )
+            if (pEntity.isAbleToWork() && pEntity.animState.isCurrentAnim("idle") && !pEntity.animState.isCurrentAnim("extend_spike"))
                 pEntity.animState.setAnim("extend_spike");
-            if (!pEntity.isAbleToWork() && pEntity.animState.isCurrentAnim("rotate_rings") )
+            if (!pEntity.isAbleToWork() && pEntity.animState.isCurrentAnim("rotate_rings") && !pEntity.animState.isCurrentAnim("retract_spike"))
                 pEntity.animState.setAnim("retract_spike");
             animate(pEntity.animState);
         }

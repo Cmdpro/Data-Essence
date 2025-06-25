@@ -4,13 +4,21 @@
       "type": "databank:blockstate",
       "state": "datanessence:polished_obsidian_bricks"
     },
-    "x": {
+    "n": {
       "type": "databank:blockstate",
-      "state": "datanessence:polished_obsidian_tract[axis=x]"
+      "state": "datanessence:polished_obsidian_tract[facing=north]"
     },
-    "z": {
+    "e": {
       "type": "databank:blockstate",
-      "state": "datanessence:polished_obsidian_tract[axis=z]"
+      "state": "datanessence:polished_obsidian_tract[facing=east]"
+    },
+    "s": {
+      "type": "databank:blockstate",
+      "state": "datanessence:polished_obsidian_tract[facing=south]"
+    },
+    "w": {
+      "type": "databank:blockstate",
+      "state": "datanessence:polished_obsidian_tract[facing=west]"
     },
     "1": {
       "type": "databank:blockstate",
@@ -20,9 +28,9 @@
   "layers": [
     [
       "*bbb*",
-      "bbzbb",
-      "bx*xb",
-      "bbzbb",
+      "bbsbb",
+      "be*wb",
+      "bbnbb",
       "*bbb*"
     ],
     [

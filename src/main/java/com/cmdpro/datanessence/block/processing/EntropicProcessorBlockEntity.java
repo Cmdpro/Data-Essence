@@ -239,7 +239,7 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     private static class ClientHandler {
         public SoundInstance workingSound;
         public void createWorkingSound(BlockPos pos) {
-            workingSound = new SimpleSoundInstance(SoundRegistry.ENTROPIC_PROCESSOR_WORKING.get(), SoundSource.BLOCKS, 0.5f, 1.25f, SoundInstance.createUnseededRandom(), pos);
+            workingSound = new SimpleSoundInstance(SoundRegistry.ENTROPIC_PROCESSOR_WORKING.value(), SoundSource.BLOCKS, 0.5f, 1.25f, SoundInstance.createUnseededRandom(), pos);
         }
         public void startSound() {
             Minecraft.getInstance().getSoundManager().play(workingSound);

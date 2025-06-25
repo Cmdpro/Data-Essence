@@ -57,6 +57,12 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
     }
 
     @Override
+    public void setLevel(Level level) {
+        super.setLevel(level);
+        animState.setLevel(level);
+    }
+
+    @Override
     public EssenceStorage getStorage() {
         return storage;
     }
@@ -93,7 +99,7 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
     public static void tick(Level world, BlockPos pos, BlockState state, EssenceDerivationSpikeBlockEntity spike) {
         if (!world.isClientSide()) {
             boolean hadStructure = spike.hasStructure;
-            spike.hasStructure = spike.structure.checkMultiblock(world, pos);
+            spike.hasStructure = spike.structure.checkMultiblockAll(world, pos);
             if (hadStructure && !spike.hasStructure) {
                 spike.updateBlock();
             }

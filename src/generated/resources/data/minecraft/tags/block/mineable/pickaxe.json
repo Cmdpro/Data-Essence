@@ -13,6 +13,8 @@
     "datanessence:computer",
     "datanessence:cryochamber",
     "datanessence:cryochamber_filler",
+    "datanessence:empty_cryochamber",
+    "datanessence:empty_cryochamber_router",
     "datanessence:data_bank",
     "datanessence:deco_essence_buffer",
     "datanessence:deco_fluid_buffer",
@@ -83,6 +85,7 @@
     "datanessence:lunar_crystal_seed",
     "datanessence:ecliptrum_block",
     "datanessence:frozen_moonlight",
-    "datanessence:crystalline_cradle"
+    "datanessence:crystalline_cradle",
+    "datanessence:astral_goop"
   ]
 }

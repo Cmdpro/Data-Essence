@@ -9,10 +9,12 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemDecorators;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
+import com.cmdpro.datanessence.client.dimension.SanctuarySpecialEffects;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.renderers.entity.LunarStrikeRenderer;
 import com.cmdpro.datanessence.client.shaders.PingShader;
 import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
+import com.cmdpro.datanessence.client.shaders.OrePingShader;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
@@ -56,6 +58,10 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerGuiLayers(RegisterGuiLayersEvent event) {
         event.registerAboveAll(DataNEssence.locate("pings"), new PingsGuiLayer());
+    }
+    @SubscribeEvent
+    public static void registerDimensionSpecialEffects(RegisterDimensionSpecialEffectsEvent event) {
+        event.register(DataNEssence.locate("sanctuary"), new SanctuarySpecialEffects());
     }
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
@@ -131,10 +137,14 @@ public class ClientModEvents {
         machineOutputShader = new MachineOutputShader();
         PostShaderManager.addShader(machineOutputShader);
         machineOutputShader.setActive(true);
+        orePingShader = new OrePingShader();
+        PostShaderManager.addShader(orePingShader);
+        orePingShader.setActive(true);
     }
     public static PostShaderInstance progressionShader;
     public static PostShaderInstance genderEuphoriaShader;
     public static PostShaderInstance machineOutputShader;
+    public static PostShaderInstance orePingShader;
     public static final ItemPropertyFunction usingGrapplingHookProperty = (stack, level, entity, seed) -> {
         if (entity != null) {
             if (entity.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
@@ -215,6 +225,8 @@ public class ClientModEvents {
                 SmallCircleParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.MOTE.get(),
                 MoteParticle.Provider::new);
+        Minecraft.getInstance().particleEngine.register(ParticleRegistry.SANCTUARY_SPARKLE.get(),
+                SanctuarySparkleParticle.Provider::new);
     }
     @SubscribeEvent
     public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {

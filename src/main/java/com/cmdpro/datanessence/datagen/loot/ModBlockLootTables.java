@@ -3,23 +3,26 @@ package com.cmdpro.datanessence.datagen.loot;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
     public ModBlockLootTables(HolderLookup.Provider provider) {
@@ -50,6 +53,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(BlockRegistry.CRYOCHAMBER.get(),
                 block -> noDrop());
         this.add(BlockRegistry.CRYOCHAMBER_FILLER.get(),
+                block -> noDrop());
+        this.add(BlockRegistry.EMPTY_CRYOCHAMBER.get(),
+                block -> noDrop());
+        this.add(BlockRegistry.EMPTY_CRYOCHAMBER_ROUTER.get(),
                 block -> noDrop());
         this.add(BlockRegistry.ESSENCE_CRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemRegistry.ESSENCE_SHARD.get()));
         this.add(BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemRegistry.LUNAR_ESSENCE_SHARD.get()));
@@ -123,6 +130,27 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
         dropSelf(BlockRegistry.ECLIPTRUM_BLOCK.get());
         dropSelf(BlockRegistry.CRYSTALLINE_CRADLE.get());
+        dropSelf(BlockRegistry.SANCTUARY_GRASS_BLOCK.get());
+        dropSelf(BlockRegistry.SANCTUARY_DIRT.get());
+        dropSelf(BlockRegistry.SANCTUARY_SAND.get());
+        dropSelf(BlockRegistry.DEEP_SANCTUARY_SAND.get());
+        dropSelf(BlockRegistry.CYAN_PEARLESCENT_SPIRAL.get());
+        dropSelf(BlockRegistry.MAGENTA_PEARLESCENT_SPIRAL.get());
+        dropSelf(BlockRegistry.YELLOW_PEARLESCENT_SPIRAL.get());
+        dropSelf(BlockRegistry.RED_PEARLESCENT_SAND.get());
+        dropSelf(BlockRegistry.GREEN_PEARLESCENT_SAND.get());
+        dropSelf(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
+        dropSelf(BlockRegistry.ASTRAL_GOOP.get());
+        this.add(BlockRegistry.TALL_SANCTUARY_GRASS.get(),
+                block -> createSpecialGrassDrops(BlockRegistry.TALL_SANCTUARY_GRASS.get(), Items.AIR));
+        this.add(BlockRegistry.SANCTUARY_GRASS.get(),
+                block -> createSpecialGrassDrops(BlockRegistry.SANCTUARY_GRASS.get(), Items.AIR));
+        this.add(BlockRegistry.CYAN_PEARLESCENT_GRASS.get(),
+                block -> createSpecialGrassDrops(BlockRegistry.CYAN_PEARLESCENT_GRASS.get(), Items.AIR));
+        this.add(BlockRegistry.MAGENTA_PEARLESCENT_GRASS.get(),
+                block -> createSpecialGrassDrops(BlockRegistry.MAGENTA_PEARLESCENT_GRASS.get(), Items.AIR));
+        this.add(BlockRegistry.YELLOW_PEARLESCENT_GRASS.get(),
+                block -> createSpecialGrassDrops(BlockRegistry.YELLOW_PEARLESCENT_GRASS.get(), Items.AIR));
 
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));
@@ -130,6 +158,18 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(BlockRegistry.AREKKO.get(),
                 block -> createArekkoDrops(BlockRegistry.AREKKO.get(), Items.BONE));
         this.add(BlockRegistry.FROZEN_MOONLIGHT.get(), block -> createFrozenMoonlightDrops(block, ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get()));
+    }
+    protected LootTable.Builder createSpecialGrassDrops(Block block, Item seeds) {
+        HolderLookup.RegistryLookup<Enchantment> registrylookup = this.registries.lookupOrThrow(Registries.ENCHANTMENT);
+        return this.createShearsDispatchTable(
+                block,
+                (LootPoolEntryContainer.Builder<?>)this.applyExplosionDecay(
+                        block,
+                        LootItem.lootTableItem(seeds)
+                                .when(LootItemRandomChanceCondition.randomChance(0.125F))
+                                .apply(ApplyBonusCount.addUniformBonusCount(registrylookup.getOrThrow(Enchantments.FORTUNE), 2))
+                )
+        );
     }
     protected LootTable.Builder createFrozenMoonlightDrops(Block pBlock, Item item) {
         return createSilkTouchDispatchTable(pBlock,

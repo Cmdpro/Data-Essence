@@ -1,9 +1,11 @@
 package com.cmdpro.datanessence.block.technical.cryochamber;
 
 import com.cmdpro.databank.megablock.BasicMegablockCore;
+import com.cmdpro.databank.megablock.MegablockCoreUtil;
 import com.cmdpro.databank.megablock.MegablockShape;
 import com.cmdpro.datanessence.registry.BlockRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -11,18 +13,19 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class Cryochamber extends BasicMegablockCore implements EntityBlock {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
 
     @Override
@@ -31,6 +34,7 @@ public class Cryochamber extends BasicMegablockCore implements EntityBlock {
     }
     public Cryochamber(Properties pProperties) {
         super(pProperties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
     @Override
     public RenderShape getRenderShape(BlockState pState) {
@@ -46,12 +50,11 @@ public class Cryochamber extends BasicMegablockCore implements EntityBlock {
             level.setBlockAndUpdate(pos.above(), above);
         }
     }
-
     @Override
-    public void destroy(LevelAccessor level, BlockPos pos, BlockState state) {
-        super.destroy(level, pos, state);
-        if (level instanceof ServerLevel serverLevel) {
-            serverLevel.setBlockAndUpdate(pos, BlockRegistry.AREKKO.get().defaultBlockState());
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
+        super.onRemove(state, level, pos, newState, movedByPiston);
+        if (state.getBlock() != newState.getBlock()) {
+            level.setBlockAndUpdate(pos, BlockRegistry.AREKKO.get().defaultBlockState());
         }
     }
 
@@ -68,5 +71,21 @@ public class Cryochamber extends BasicMegablockCore implements EntityBlock {
     @Override
     public Block getRouterBlock() {
         return BlockRegistry.CRYOCHAMBER_FILLER.get();
+    }
+
+    public BlockState rotate(BlockState pState, Rotation pRotation) {
+        return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
+    }
+
+    public BlockState getStateForPlacement(BlockPlaceContext pContext) {
+        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+    }
+    public BlockState mirror(BlockState pState, Mirror pMirror) {
+        return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+    }
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        super.createBlockStateDefinition(pBuilder);
+        pBuilder.add(FACING);
     }
 }

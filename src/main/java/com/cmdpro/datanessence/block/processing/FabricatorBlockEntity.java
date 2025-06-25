@@ -15,6 +15,7 @@ import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.FabricatorMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -192,7 +193,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
                             }
                             if (fabricationRecipe == null || DataTabletUtil.playerHasEntry(pPlayer, fabricationRecipe.getEntry(), fabricationRecipe.getCompletionStage())) {
                                 ent.time = 0;
-                                pLevel.playSound(null, pPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 2, 1);
+                                pLevel.playSound(null, pPos, SoundRegistry.FABRICATOR_START.value(), SoundSource.BLOCKS, 2, 1);
                             } else {
                                 pPlayer.sendSystemMessage(Component.translatable("block.datanessence.fabricator.dont_know_how"));
                             }
@@ -246,7 +247,7 @@ public class FabricatorBlockEntity extends BlockEntity implements MenuProvider, 
 
         ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, stack);
         level.addFreshEntity(entity);
-        level.playSound(null, getBlockPos(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 2, 1);
+        level.playSound(null, getBlockPos(), SoundRegistry.FABRICATOR_CRAFT.value(), SoundSource.BLOCKS, 2, 1);
     }
     public int time;
     public int maxTime;

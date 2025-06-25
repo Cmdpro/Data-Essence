@@ -1,18 +1,18 @@
 package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.block.DirectionalPillarBlock;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.production.FluidCollector;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
+import com.cmdpro.datanessence.block.world.PearlescentSpiral;
 import com.cmdpro.datanessence.registry.BlockRegistry;
-import com.google.gson.JsonObject;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.neoforged.neoforge.client.model.generators.*;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -79,6 +79,23 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(BlockRegistry.FROZEN_MOONLIGHT);
         blockWithItem(BlockRegistry.CREATIVE_ESSENCE_BATTERY);
 
+        sanctuaryGrassBlock(BlockRegistry.SANCTUARY_GRASS_BLOCK);
+        blockWithItem(BlockRegistry.SANCTUARY_DIRT);
+        tallGrass(BlockRegistry.TALL_SANCTUARY_GRASS);
+        grass(BlockRegistry.SANCTUARY_GRASS);
+        blockWithItem(BlockRegistry.SANCTUARY_SAND);
+        blockWithItem(BlockRegistry.DEEP_SANCTUARY_SAND);
+        pearlescentSpiral(BlockRegistry.CYAN_PEARLESCENT_SPIRAL);
+        grass(BlockRegistry.CYAN_PEARLESCENT_GRASS);
+        pearlescentSpiral(BlockRegistry.MAGENTA_PEARLESCENT_SPIRAL);
+        grass(BlockRegistry.MAGENTA_PEARLESCENT_GRASS);
+        pearlescentSpiral(BlockRegistry.YELLOW_PEARLESCENT_SPIRAL);
+        grass(BlockRegistry.YELLOW_PEARLESCENT_GRASS);
+        blockWithItem(BlockRegistry.RED_PEARLESCENT_SAND);
+        blockWithItem(BlockRegistry.GREEN_PEARLESCENT_SAND);
+        blockWithItem(BlockRegistry.BLUE_PEARLESCENT_SAND);
+        blockWithItem(BlockRegistry.ASTRAL_GOOP);
+
         transparentBlockWithItemAndTint(BlockRegistry.SPIRE_GLASS);
 
         stairsBlock((StairBlock)BlockRegistry.TRAVERSITE_ROAD_STAIRS.get(), DataNEssence.locate("block/traversite_road"));
@@ -87,6 +104,73 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItemTintedOverlay(BlockRegistry.TRAVERSITE_ROAD_OPAL, ResourceLocation.fromNamespaceAndPath("opalescence", "block/opal"), DataNEssence.locate("block/traversite_road_opal_overlay"), DataNEssence.locate("block/traversite_road"));
         stairsBlockTintedOverlay((StairBlock)BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get(), ResourceLocation.fromNamespaceAndPath("opalescence", "block/opal"), DataNEssence.locate("block/traversite_road_opal_overlay"), DataNEssence.locate("block/traversite_road"));
         slabBlockTintedOverlay((SlabBlock) BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get(), DataNEssence.locate("block/traversite_road_opal"), ResourceLocation.fromNamespaceAndPath("opalescence", "block/opal"), DataNEssence.locate("block/traversite_road_opal_overlay"), DataNEssence.locate("block/traversite_road"));
+    }
+    private void pearlescentSpiral(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ResourceLocation base = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_base");
+        ResourceLocation middle = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath());
+        ResourceLocation upper = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top");
+        BlockModelBuilder lowerModel = models().withExistingParent(loc.getPath() + "_base", DataNEssence.locate("block/pearlescent_spiral_base"));
+        lowerModel.texture("0", middle);
+        lowerModel.texture("1", base);
+        lowerModel.texture("particle", middle);
+        BlockModelBuilder lowerTopModel = models().withExistingParent(loc.getPath() + "_base_top", DataNEssence.locate("block/pearlescent_spiral_base_top"));
+        lowerTopModel.texture("0", upper);
+        lowerTopModel.texture("1", base);
+        lowerTopModel.texture("particle", middle);
+        BlockModelBuilder middleModel = models().cross(loc.getPath(), middle);
+        middleModel.renderType("cutout");
+        BlockModelBuilder upperModel = models().cross(loc.getPath() + "_upper", upper);
+        upperModel.renderType("cutout");
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(PearlescentSpiral.PART, PearlescentSpiral.Part.BOTTOM).modelForState().modelFile(lowerModel).addModel()
+                .partialState().with(PearlescentSpiral.PART, PearlescentSpiral.Part.BOTTOM_TOP).modelForState().modelFile(lowerTopModel).addModel()
+                .partialState().with(PearlescentSpiral.PART, PearlescentSpiral.Part.MIDDLE).modelForState().modelFile(middleModel).addModel()
+                .partialState().with(PearlescentSpiral.PART, PearlescentSpiral.Part.TOP).modelForState().modelFile(upperModel).addModel();
+        itemModels().withExistingParent(loc.getPath(),
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                middle);
+    }
+    private void tallGrass(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ResourceLocation lower = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_lower");
+        ResourceLocation upper = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_upper");
+        BlockModelBuilder lowerModel = models().cross(loc.getPath() + "_lower", lower);
+        lowerModel.renderType("cutout");
+        BlockModelBuilder upperModel = models().cross(loc.getPath() + "_upper", upper);
+        upperModel.renderType("cutout");
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.LOWER).modelForState().modelFile(lowerModel).addModel()
+                .partialState().with(DoublePlantBlock.HALF, DoubleBlockHalf.UPPER).modelForState().modelFile(upperModel).addModel();
+        itemModels().withExistingParent(loc.getPath(),
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                upper);
+    }
+    private void grass(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath());
+        BlockModelBuilder model = models().cross(loc.getPath(), texture);
+        model.renderType("cutout");
+        simpleBlock(blockRegistryObject.get(), model);
+        itemModels().withExistingParent(loc.getPath(),
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                texture);
+    }
+    private void sanctuaryGrassBlock(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side");
+        ResourceLocation top = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top");
+        ResourceLocation bottom = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/sanctuary_dirt");
+        BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", side)
+                .texture("east", side)
+                .texture("north", side)
+                .texture("down", bottom)
+                .texture("up", top)
+                .texture("south", side)
+                .texture("particle", top);
+        simpleBlock(blockRegistryObject.get(), model);
+        simpleBlockItem(blockRegistryObject.get(), model);
     }
     public void slabBlockTintedOverlay(SlabBlock block, ResourceLocation doubleSlab, ResourceLocation texture, ResourceLocation overlay, ResourceLocation particle) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(block);
@@ -215,7 +299,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void ancientDecoCubeColumn(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
-        axisBlock((RotatedPillarBlock)blockRegistryObject.get(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath()), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_vertical"));
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_side");
+        ResourceLocation vertical = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/ancient/" + loc.getPath() + "_vertical");
+        BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", side)
+                .texture("east", side)
+                .texture("north", side)
+                .texture("down", vertical)
+                .texture("up", vertical)
+                .texture("south", side)
+                .texture("particle", side);
+        simpleBlockItem(blockRegistryObject.get(), model);
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.EAST).modelForState().modelFile(model).rotationY(90).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.NORTH).modelForState().modelFile(model).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.UP).modelForState().modelFile(model).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.DOWN).modelForState().modelFile(model).rotationX(180).addModel();
     }
     private void bufferBlock(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
@@ -231,7 +332,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void pillarDecoBlock(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
-        axisBlock((RotatedPillarBlock)blockRegistryObject.get(), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_side"), ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_vertical"));
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_side");
+        ResourceLocation vertical = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/deco/" + loc.getPath() + "_vertical");
+        BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
+                .texture("west", side)
+                .texture("east", side)
+                .texture("north", side)
+                .texture("down", vertical)
+                .texture("up", vertical)
+                .texture("south", side)
+                .texture("particle", side);
+        simpleBlockItem(blockRegistryObject.get(), model);
+        getVariantBuilder(blockRegistryObject.get())
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.EAST).modelForState().modelFile(model).rotationY(90).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.NORTH).modelForState().modelFile(model).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.SOUTH).modelForState().modelFile(model).rotationY(180).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.WEST).modelForState().modelFile(model).rotationY(270).rotationX(90).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.UP).modelForState().modelFile(model).addModel()
+                .partialState().with(DirectionalPillarBlock.FACING, Direction.DOWN).modelForState().modelFile(model).rotationX(180).addModel();
     }
     private void essenceLeech(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());

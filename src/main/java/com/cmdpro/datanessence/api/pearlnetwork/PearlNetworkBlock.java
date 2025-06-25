@@ -8,6 +8,7 @@ import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -52,7 +53,7 @@ public class PearlNetworkBlock extends Block {
                         if (canConnectFrom()) {
                             pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.of(ent));
                             PlayerDataUtil.updateData((ServerPlayer) pPlayer);
-                            pLevel.playSound(null, pPos, SoundEvents.DYE_USE, SoundSource.BLOCKS, 1f, 1.1f);
+                            pLevel.playSound(null, pPos, SoundRegistry.PEARL_NETWORK_LINK_FROM.value(), SoundSource.BLOCKS, 1f, 1f);
                         }
                     } else {
                         if (canConnectTo(linkFrom.get())) {
@@ -62,7 +63,7 @@ public class PearlNetworkBlock extends Block {
                                     other.updateBlock();
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
-                                    pLevel.playSound(null, pPos, SoundEvents.CROSSBOW_LOADING_END.value(), SoundSource.BLOCKS, 1f, 1.1f);
+                                    pLevel.playSound(null, pPos, SoundRegistry.PEARL_NETWORK_LINK_TO.value(), SoundSource.BLOCKS, 1f, 1f);
                                 }
                             }
                         }

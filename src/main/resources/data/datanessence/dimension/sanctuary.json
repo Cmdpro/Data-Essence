@@ -16,11 +16,14 @@
             ],
             "continentalness": [
               -1,
-              -0.25
+              -0.075
             ],
             "erosion": 0,
             "weirdness": 0,
-            "depth": 0,
+            "depth": [
+              -2,
+              0
+            ],
             "offset": 0
           }
         },
@@ -30,33 +33,39 @@
             "temperature": 0,
             "humidity": [
               -1,
-              0
+              1
             ],
             "continentalness": [
-              -0.25,
+              -0.075,
               1
             ],
             "erosion": 0,
             "weirdness": 0,
-            "depth": 0,
+            "depth": [
+              -2,
+              0
+            ],
             "offset": 0
           }
         },
         {
-          "biome": "datanessence:sanctuary/sanctuary_forest",
+          "biome": "datanessence:sanctuary/astral_caverns",
           "parameters": {
             "temperature": 0,
             "humidity": [
-              0,
+              -1,
               1
             ],
             "continentalness": [
-              -0.25,
+              -1,
               1
             ],
             "erosion": 0,
             "weirdness": 0,
-            "depth": 0,
+            "depth": [
+              0,
+              1
+            ],
             "offset": 0
           }
         }

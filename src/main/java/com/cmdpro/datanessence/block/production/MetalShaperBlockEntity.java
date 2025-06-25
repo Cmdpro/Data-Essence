@@ -9,10 +9,7 @@ import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.recipe.MetalShaperRecipe;
-import com.cmdpro.datanessence.registry.BlockEntityRegistry;
-import com.cmdpro.datanessence.registry.DataComponentRegistry;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
-import com.cmdpro.datanessence.registry.RecipeRegistry;
+import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.MetalShaperMenu;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.core.BlockPos;
@@ -242,7 +239,7 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
                         resetWorkTime = false;
                         // working vfx
                         if (pLevel.random.nextInt() % 20 == 0) {
-                            pLevel.playSound(null, pPos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.4f, 0.75f);
+                            pLevel.playSound(null, pPos, SoundRegistry.METAL_SHAPER_CRAFTING.value(), SoundSource.BLOCKS, 0.4f, 1f);
                             ((ServerLevel) pLevel).sendParticles(ParticleTypes.SMOKE, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, 5, 0, 0, 0, 0);
                         }
                         pBlockEntity.workTime++;

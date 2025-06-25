@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -61,7 +62,7 @@ public class FluidSpillerBlockEntity extends BlockEntity implements EssenceBlock
                         if (pBlockEntity.fluidHandler.getFluidAmount() >= 1000) {
                             pBlockEntity.fluidHandler.drain(stack, IFluidHandler.FluidAction.EXECUTE);
                             pLevel.setBlockAndUpdate(pos, stack.getFluid().defaultFluidState().createLegacyBlock());
-                            pLevel.playSound(null, pPos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 2, 1);
+                            pLevel.playSound(null, pPos, SoundRegistry.FLUID_SPILLER_EMPTY.value(), SoundSource.BLOCKS, 2, 1);
                             pBlockEntity.getStorage().removeEssence(EssenceTypeRegistry.ESSENCE.get(), 25);
                         }
                     }

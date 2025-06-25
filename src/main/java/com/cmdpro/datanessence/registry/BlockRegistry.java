@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.registry;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.block.SpreadingPlant;
 
+import com.cmdpro.datanessence.block.DirectionalPillarBlock;
 import com.cmdpro.datanessence.block.auxiliary.*;
 import com.cmdpro.datanessence.block.decoration.Dewlamp;
 import com.cmdpro.datanessence.block.decoration.EssenceBridge;
@@ -21,6 +22,8 @@ import com.cmdpro.datanessence.block.technical.DataBank;
 import com.cmdpro.datanessence.block.technical.StructureProtector;
 import com.cmdpro.datanessence.block.technical.cryochamber.Cryochamber;
 import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberRouter;
+import com.cmdpro.datanessence.block.technical.empty_cryochamber.EmptyCryochamber;
+import com.cmdpro.datanessence.block.technical.empty_cryochamber.EmptyCryochamberRouter;
 import com.cmdpro.datanessence.block.transmission.*;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.block.transmission.ExoticEssencePoint;
@@ -29,13 +32,11 @@ import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
 import com.cmdpro.datanessence.block.transportation.*;
 import com.cmdpro.datanessence.block.world.*;
 import com.cmdpro.datanessence.block.world.shieldingstone.*;
-import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.GameMasterBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -85,6 +86,54 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FROZEN_MOONLIGHT = register("frozen_moonlight",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_ICE)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SANCTUARY_GRASS_BLOCK = register("sanctuary_grass_block",
+            () -> new SanctuaryGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SANCTUARY_DIRT = register("sanctuary_dirt",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIRT)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> TALL_SANCTUARY_GRASS = register("tall_sanctuary_grass",
+            () -> new TallSanctuaryGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SANCTUARY_GRASS = register("sanctuary_grass",
+            () -> new SanctuaryGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SANCTUARY_SAND = register("sanctuary_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> DEEP_SANCTUARY_SAND = register("deep_sanctuary_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> CYAN_PEARLESCENT_SPIRAL = register("cyan_pearlescent_spiral",
+            () -> new PearlescentSpiral(BlockBehaviour.Properties.ofFullCopy(Blocks.KELP).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 12)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> CYAN_PEARLESCENT_GRASS = register("cyan_pearlescent_grass",
+            () -> new PearlescentGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> MAGENTA_PEARLESCENT_SPIRAL = register("magenta_pearlescent_spiral",
+            () -> new PearlescentSpiral(BlockBehaviour.Properties.ofFullCopy(Blocks.KELP).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 12)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> MAGENTA_PEARLESCENT_GRASS = register("magenta_pearlescent_grass",
+            () -> new PearlescentGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> YELLOW_PEARLESCENT_SPIRAL = register("yellow_pearlescent_spiral",
+            () -> new PearlescentSpiral(BlockBehaviour.Properties.ofFullCopy(Blocks.KELP).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 12)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> YELLOW_PEARLESCENT_GRASS = register("yellow_pearlescent_grass",
+            () -> new PearlescentGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> RED_PEARLESCENT_SAND = register("red_pearlescent_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> GREEN_PEARLESCENT_SAND = register("green_pearlescent_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> BLUE_PEARLESCENT_SAND = register("blue_pearlescent_sand",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.SAND)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ASTRAL_GOOP = register("astral_goop",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE).sound(SoundType.SLIME_BLOCK)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Generators
@@ -320,7 +369,7 @@ public class BlockRegistry {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> POLISHED_OBSIDIAN_COLUMN = register("polished_obsidian_column",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new DirectionalPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENGRAVED_POLISHED_OBSIDIAN = register("engraved_polished_obsidian",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
@@ -329,7 +378,7 @@ public class BlockRegistry {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> POLISHED_OBSIDIAN_TRACT = register("polished_obsidian_tract",
-            () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new DirectionalPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AETHER_RUNE = register("aether_rune",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
@@ -365,6 +414,11 @@ public class BlockRegistry {
     public static final Supplier<Block> DEWLAMP = register("dewlamp",
             () -> new Dewlamp(BlockBehaviour.Properties.ofFullCopy(Blocks.LANTERN).noOcclusion().noCollission().lightLevel((blockState) -> { return 5;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> EMPTY_CRYOCHAMBER = register("empty_cryochamber",
+            () -> new EmptyCryochamber(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> EMPTY_CRYOCHAMBER_ROUTER = registerBlock("empty_cryochamber_router",
+            () -> new EmptyCryochamberRouter(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()));
     private static <T extends Block> Supplier<T> registerBlock(final String name,
                                                                      final Supplier<? extends T> block) {
         return BLOCKS.register(name, block);

@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.item.equipment;
 
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -64,17 +65,16 @@ public class WarpCapsule extends Item {
             if (pLivingEntity instanceof Player player) {
                 DimensionTransition dimensiontransition = findRespawnPositionAndUseSpawnBlock((ServerPlayer) player, DimensionTransition.DO_NOTHING);
                 if (player.level().dimension().equals(dimensiontransition.newLevel().dimension()) && player.position().distanceTo(dimensiontransition.pos()) <= 10000) {
-                    pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS);
-                    pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
+                    pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.WARP_CAPSULE_USE.value(), SoundSource.PLAYERS);
                     Vec3 vec3 = dimensiontransition.pos();
                     player.teleportTo(vec3.x, vec3.y, vec3.z);
-                    pLevel.playSound(null, BlockPos.containing(vec3), SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.PLAYERS);
-                    pLevel.playSound(null, BlockPos.containing(vec3), SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);pStack.consume(1, player);
+                    pLevel.playSound(null, BlockPos.containing(vec3), SoundRegistry.WARP_CAPSULE_USE.value(), SoundSource.PLAYERS);
+                    pStack.consume(1, player);
                 } else {
-                    pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS);
+                    pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.WARP_CAPSULE_FAIL.value(), SoundSource.PLAYERS);
                 }
             } else {
-                pLevel.playSound(null, pLivingEntity.blockPosition(), SoundEvents.DISPENSER_FAIL, SoundSource.PLAYERS);
+                pLevel.playSound(null, pLivingEntity.blockPosition(), SoundRegistry.WARP_CAPSULE_FAIL.value(), SoundSource.PLAYERS);
             }
         }
         return pStack;

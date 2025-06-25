@@ -15,6 +15,10 @@ public class TagRegistry {
         public static final TagKey<Block> BUFFER_DETECTION_PASS = tag("buffer_detection_pass");
         public static final TagKey<Block> HAMMER_AND_CHISEL_COLLECTABLE = tag("hammer_and_chisel_collectable"); // for the Hammer and Chisel tool
         public static final TagKey<Block> CRYSTALLINE_CRADLE_BREAKABLE = tag("crystalline_cradle_breakable");
+        public static final TagKey<Block> SCANNABLE_ORES = tag("scannable_ores");
+        public static final TagKey<Block> PEARLESCENT_SAND = tag("pearlescent_sand");
+        public static final TagKey<Block> SANCTUARY_SAND = tag("sanctuary_sand");
+        public static final TagKey<Block> SANCTUARY_CARVER_REPLACEABLES = tag("sanctuary_caver_replaceables");
 
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(DataNEssence.locate(name));

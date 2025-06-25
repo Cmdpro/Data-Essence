@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.data.minigames;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.databank.Minigame;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
@@ -184,7 +185,7 @@ public class ColorMixingMinigame extends Minigame {
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK.value(), 1f, 1f));
         }
         public static void paint() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.INK_SAC_USE, 1f, 1f));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.COLOR_MIXING_MIX.value(), 1f, 1f));
         }
     }
 }

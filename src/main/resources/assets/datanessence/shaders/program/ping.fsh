@@ -2,7 +2,6 @@
 
 uniform sampler2D DiffuseSampler;
 uniform sampler2D DiffuseDepthSampler;
-uniform float colorOffset;
 uniform float time;
 uniform mat4 invViewMat;
 uniform mat4 invProjMat;
@@ -46,5 +45,5 @@ void main() {
     if (dist >= targetDist-(range/2) && dist <= targetDist+(range/2)) {
         blend = ((dist - (targetDist-(range/2)))/range)*(1.0-(time/5.0));
     }
-    fragColor = mix(texture(DiffuseSampler, texCoord), vec4(color, 1), blend);
+    fragColor = vec4(mix(texture(DiffuseSampler, texCoord).rgb, color, blend), 1.0);
 }

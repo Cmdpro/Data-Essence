@@ -3,12 +3,12 @@
   "downfall": 0,
   "has_precipitation": false,
   "effects": {
-    "sky_color": 15509247,
+    "sky_color": 13674239,
     "fog_color": 8032747,
-    "water_color": 3114743,
-    "water_fog_color": 3824230,
-    "grass_color": 1747762,
-    "foliage_color": 1747762
+    "water_color": 3519743,
+    "water_fog_color": 20618,
+    "grass_color": 13223679,
+    "foliage_color": 13223679
   },
   "spawners": {},
   "spawn_costs": {},
@@ -42,8 +42,8 @@
       "minecraft:ore_copper"
     ],
     [
-      "minecraft:patch_grass_plain",
-      "minecraft:patch_tall_grass_2"
+      "datanessence:sanctuary/tall_sanctuary_grass_patch",
+      "datanessence:sanctuary/sanctuary_grass_patch"
     ],
     [
       "datanessence:sanctuary/calcite_spire"
