@@ -1,0 +1,36 @@
+{
+  "icon": {
+    "id": "datanessence:mineral_finding_rod"
+  },
+  "tab": "datanessence:tools",
+  "x": 2,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:mineral_finding_rod" },
+      "text": {
+        "translate": "data_tablet.pages.mineral_finding_rod.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.mineral_finding_rod.page2.text"
+      },
+      "recipes": [
+        "datanessence:fabrication/equipment/mineral_finding_rod"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.mineral_finding_rod.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.mineral_finding_rod.flavor"
+  },
+  "parents": [
+    "datanessence:basics/lensing_crystals",
+    "datanessence:tools/charger"
+  ]
+}
