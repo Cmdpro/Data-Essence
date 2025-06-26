@@ -26,6 +26,7 @@ import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Math;
+import org.joml.Vector2i;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -79,6 +80,12 @@ public class DataTabletScreen extends Screen {
         return false;
     }
 
+    public boolean clickEntry(Entry entry, int button) {
+        if (button != 0) {
+            return false;
+        }
+        return clickEntry(entry);
+    }
     public boolean clickEntry(Entry entry) {
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
         screenType = 2;
@@ -100,42 +107,45 @@ public class DataTabletScreen extends Screen {
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        if (pButton == 0 && screenType == 0) {
+        if (screenType == 0) {
             if (pMouseX >= x && pMouseY >= y && pMouseX <= x+imageWidth && pMouseY <= y+imageHeight) {
                 for (Entry entry : Entries.entries.values()) {
-                    if (entry.tab.equals(currentTab.id) && entry.isVisibleClient()) {
-                        if (pMouseX >= ((entry.x * 20) - 10) + offsetX + x && pMouseX <= ((entry.x * 20) + 10) + offsetX + x) {
-                            if (pMouseY >= ((entry.y * 20) - 10) + offsetY + y && pMouseY <= ((entry.y * 20) + 10) + offsetY + y) {
-                                return clickEntry(entry);
+                    if (entry.tab.equals(currentTab.id) && isEntryUnlocked(entry)) {
+                        Vector2i entryPosition = getEntryPosition(entry);
+                        if (pMouseX >= ((entryPosition.x * 20) - 10) + offsetX + x && pMouseX <= ((entryPosition.x * 20) + 10) + offsetX + x) {
+                            if (pMouseY >= ((entryPosition.y * 20) - 10) + offsetY + y && pMouseY <= ((entryPosition.y * 20) + 10) + offsetY + y) {
+                                return clickEntry(entry, pButton);
                             }
                         }
                     }
                 }
             }
-            int o = 0;
-            for (DataTab tab : getCurrentTabs()) {
-                int x2 = x+(o >= 6 ? 255 : -21);
-                int y2 = y+8+((o%6)*24);
-                if (pMouseX >= x2 && pMouseY >= y2 && pMouseX <= x2+21 && pMouseY <= y2+20) {
-                    return clickTab(tab);
+            if (pButton == 0) {
+                int o = 0;
+                for (DataTab tab : getCurrentTabs()) {
+                    int x2 = x + (o >= 6 ? 255 : -21);
+                    int y2 = y + 8 + ((o % 6) * 24);
+                    if (pMouseX >= x2 && pMouseY >= y2 && pMouseX <= x2 + 21 && pMouseY <= y2 + 20) {
+                        return clickTab(tab);
+                    }
+                    o++;
                 }
-                o++;
-            }
-            if (pMouseX >= (x+imageWidth)+30 && pMouseX <= (x+imageWidth)+42) {
-                if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
-                    if (this.tabPage+2 < getSortedTabs().size()/6) {
-                        tabPage += 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
-                        return true;
+                if (pMouseX >= (x + imageWidth) + 30 && pMouseX <= (x + imageWidth) + 42) {
+                    if (pMouseY >= y + ((imageHeight / 2) - 20) && pMouseY <= y + ((imageHeight / 2) + 20)) {
+                        if (this.tabPage + 2 < getSortedTabs().size() / 6) {
+                            tabPage += 1;
+                            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
+                            return true;
+                        }
                     }
                 }
-            }
-            if (pMouseX >= x-42 && pMouseX <= x-30) {
-                if (pMouseY >= y+((imageHeight/2)-20) && pMouseY <= y+((imageHeight/2)+20)) {
-                    if (tabPage > 0) {
-                        tabPage -= 1;
-                        Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
-                        return true;
+                if (pMouseX >= x - 42 && pMouseX <= x - 30) {
+                    if (pMouseY >= y + ((imageHeight / 2) - 20) && pMouseY <= y + ((imageHeight / 2) + 20)) {
+                        if (tabPage > 0) {
+                            tabPage -= 1;
+                            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
+                            return true;
+                        }
                     }
                 }
             }
@@ -210,12 +220,17 @@ public class DataTabletScreen extends Screen {
     public void tick() {
         super.tick();
         ticks++;
-        if (SpecialConditionHandler.isAprilFools()) {
-            battery -= ((1f / 20f) / 5f) * (Math.clamp(0, 1, (battery / 100f) * 3));///30f;
-            if (battery < 1) {
-                battery = 1;
+        if (canHaveBattery()) {
+            if (SpecialConditionHandler.isAprilFools()) {
+                battery -= ((1f / 20f) / 5f) * (Math.clamp(0, 1, (battery / 100f) * 3));///30f;
+                if (battery < 1) {
+                    battery = 1;
+                }
             }
         }
+    }
+    public boolean canHaveBattery() {
+        return true;
     }
 
     @Override
@@ -349,12 +364,13 @@ public class DataTabletScreen extends Screen {
             if (mouseX >= x && mouseY >= y && mouseX <= x+imageWidth && mouseY <= y+imageHeight) {
                 for (Entry entry : Entries.entries.values()) {
                     if (entry.tab.equals(currentTab.id)) {
-                        if (entry.isVisibleClient()) {
-                            if (mouseX >= ((entry.x * 20) - 10) + offsetX + x && mouseX <= ((entry.x * 20) + 10) + offsetX + x) {
-                                if (mouseY >= ((entry.y * 20) - 10) + offsetY + y && mouseY <= ((entry.y * 20) + 10) + offsetY + y) {
-                                    Component name = entry.getName(entry.getIncompleteStageClient());;
-                                    Component flavor = entry.getFlavor(entry.getIncompleteStageClient());
-                                    if (entry.isIncompleteClient()) {
+                        if (isEntryUnlocked(entry)) {
+                            Vector2i entryPosition = getEntryPosition(entry);
+                            if (mouseX >= ((entryPosition.x * 20) - 10) + offsetX + x && mouseX <= ((entryPosition.x * 20) + 10) + offsetX + x) {
+                                if (mouseY >= ((entryPosition.y * 20) - 10) + offsetY + y && mouseY <= ((entryPosition.y * 20) + 10) + offsetY + y) {
+                                    Component name = entry.getName(getEntryCompletionStage(entry));
+                                    Component flavor = entry.getFlavor(getEntryCompletionStage(entry));
+                                    if (entry.isIncomplete(getEntryCompletionStage(entry))) {
                                         Component progressionRequirement = Component.translatable("tooltip.datanessence.progression_requirement").copy().withStyle(ChatFormatting.ITALIC).withColor(0xFFff61ca);
                                         tooltip = flavor.equals(Component.empty())
                                                 ? List.of(name.getVisualOrderText(), progressionRequirement.getVisualOrderText())
@@ -383,7 +399,7 @@ public class DataTabletScreen extends Screen {
                 graphics.renderTooltip(Minecraft.getInstance().font, tooltip, mouseX, mouseY);
             }
         } else if (screenType == 2) {
-            graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.getName(clickedEntry.getIncompleteStageClient()), x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
+            graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.getName(getEntryCompletionStage(clickedEntry)), x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
             if (mouseX >= x+imageWidth && mouseX <= x+imageWidth+17 && mouseY >= y+10 && mouseY <= y+10+21) {
                 Component tooltip = !Screen.hasShiftDown() ? Component.translatable("tooltip.datanessence.save_and_exit") : Component.translatable("tooltip.datanessence.save_and_exit_sneak");
                 graphics.renderTooltip(Minecraft.getInstance().font, tooltip, mouseX, mouseY);
@@ -456,22 +472,19 @@ public class DataTabletScreen extends Screen {
     public void drawLines(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        GlStateManager._depthMask(false);
-        GlStateManager._disableCull();
-        RenderSystem.setShader(GameRenderer::getRendertypeLinesShader);
-        Tesselator tess = RenderSystem.renderThreadTesselator();
-        RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
-        long time = System.currentTimeMillis() / 50;
+        /*
         for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
-                if (i.isVisibleClient()) {
-                    for (Entry o : i.getParentEntries()) {
+                if (isEntryUnlocked(i)) {
+                    for (Entry o : getEntryParentEntries(i)) {
                         if (o.tab.equals(currentTab.id)) {
+                            Vector2i entry1Pos = getEntryPosition(i);
+                            Vector2i entry2Pos = getEntryPosition(o);
                             BufferBuilder buf = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
-                            int x1 = x + ((o.x * 20)) + (int) offsetX;
-                            int y1 = y + ((o.y * 20)) + (int) offsetY;
-                            int x2 = x + ((i.x * 20)) + (int) offsetX;
-                            int y2 = y + ((i.y * 20)) + (int) offsetY;
+                            int x1 = x + ((entry2Pos.x * 20)) + (int) offsetX;
+                            int y1 = y + ((entry2Pos.y * 20)) + (int) offsetY;
+                            int x2 = x + ((entry1Pos.x * 20)) + (int) offsetX;
+                            int y2 = y + ((entry1Pos.y * 20)) + (int) offsetY;
                             Vec2 vec = new Vec2(x1-x2, y1-y2).normalized();
                             buf.addVertex(x1, y1, 0.0F).setColor(201, 13, 139, 255).setNormal(vec.x, vec.y, 0);
                             buf.addVertex(x2, y2, 0.0F).setColor(201, 13, 139, 255).setNormal(vec.x, vec.y, 0);
@@ -480,44 +493,64 @@ public class DataTabletScreen extends Screen {
                     }
                 }
             }
-        }
+        }*/
         for (Entry destinationEntry : Entries.entries.values()) {
-            if (destinationEntry.tab.equals(currentTab.id) && destinationEntry.isVisibleClient()) {
-                for (Entry sourceEntry : destinationEntry.getParentEntries()) {
+            if (destinationEntry.tab.equals(currentTab.id) && isEntryUnlocked(destinationEntry)) {
+                for (Entry sourceEntry : getEntryParentEntries(destinationEntry)) {
                     if (sourceEntry.tab.equals(currentTab.id)) {
-                        int sourceX = x + (sourceEntry.x * 20) + (int) offsetX;
-                        int sourceY = y + (sourceEntry.y * 20) + (int) offsetY;
-                        int destinationX = x + (destinationEntry.x * 20) + (int) offsetX;
-                        int destinationY = y + (destinationEntry.y * 20) + (int) offsetY;
+                        Vector2i entry1Pos = getEntryPosition(destinationEntry);
+                        Vector2i entry2Pos = getEntryPosition(sourceEntry);
+                        int sourceX = x + (entry1Pos.x * 20) + (int) offsetX;
+                        int sourceY = y + (entry1Pos.y * 20) + (int) offsetY;
+                        int destinationX = x + (entry2Pos.x * 20) + (int) offsetX;
+                        int destinationY = y + (entry2Pos.y * 20) + (int) offsetY;
 
-                        Vec3 origin = new Vec3(sourceX, sourceY, 0);
-                        Vec3 line = new Vec3(origin.x - destinationX, origin.y - destinationY, 0);
-                        int lineSegments = (int) Math.ceil(line.length() / 1);
-                        int activeSegment = lineSegments-(int)(time % lineSegments);
-                        Vec3 segmentIteration = new Vec3(line.x / lineSegments, line.y / lineSegments, line.z / lineSegments);
-
-                        for (int i = lineSegments; i >= 0; i--) {
-                            double lx = origin.x();
-                            double ly = origin.y();
-                            origin = origin.subtract(segmentIteration);
-                            Vec2 normal = new Vec2((float) (origin.x - lx), (float) (origin.y - ly)).normalized();
-                            float blendSize = 8;
-                            float blend = Math.clamp(0f, 1f, (blendSize-Math.abs((float)i-(float)activeSegment))/blendSize);
-                            int color = ColorUtil.blendColors(new Color(17, 20, 38, 255), new Color(70, 216, 252, 255), blend).getRGB();
-                            BufferBuilder builder = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
-                            builder.addVertex((float) lx, (float) ly, 0).setColor(color).setNormal(normal.x, normal.y, 0);
-                            builder.addVertex((float) origin.x, (float) origin.y, 0).setColor(color).setNormal(normal.x, normal.y, 0);
-                            BufferUploader.drawWithShader(builder.buildOrThrow());
-                        }
+                        drawLine(sourceX, sourceY, destinationX, destinationY, sourceEntry, destinationEntry, pPartialTick, pMouseX, pMouseY);
                     }
                 }
             }
         }
 
+    }
+
+    public void drawLine(int sourceX, int sourceY, int destinationX, int destinationY, Entry sourceEntry, Entry destinationEntry, float partialTick, int mouseX, int mouseY) {
+        long time = System.currentTimeMillis() / 50;
+        Vec3 origin = new Vec3(sourceX, sourceY, 0);
+        Vec3 line = new Vec3(origin.x - destinationX, origin.y - destinationY, 0);
+        int lineSegments = (int) Math.ceil(line.length() / 1);
+        if (lineSegments > 0) {
+            Tesselator tess = RenderSystem.renderThreadTesselator();
+            RenderSystem.setShader(GameRenderer::getRendertypeLinesShader);
+            RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
+            GlStateManager._depthMask(false);
+            GlStateManager._disableCull();
+            int activeSegment = lineSegments - (int) (time % lineSegments);
+            Vec3 segmentIteration = new Vec3(line.x / lineSegments, line.y / lineSegments, line.z / lineSegments);
+
+            for (int i = lineSegments; i >= 0; i--) {
+                double lx = origin.x();
+                double ly = origin.y();
+                origin = origin.subtract(segmentIteration);
+                Vec2 normal = new Vec2((float) (origin.x - lx), (float) (origin.y - ly)).normalized();
+                float blendSize = 8;
+                float blend = Math.clamp(0f, 1f, (blendSize - Math.abs((float) i - (float) activeSegment)) / blendSize);
+                int color = ColorUtil.blendColors(getLineColor1(sourceEntry, destinationEntry, partialTick, mouseX, mouseY), getLineColor2(sourceEntry, destinationEntry, partialTick, mouseX, mouseY), blend).getRGB();
+                BufferBuilder builder = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
+                builder.addVertex((float) lx, (float) ly, 0).setColor(color).setNormal(normal.x, normal.y, 0);
+                builder.addVertex((float) origin.x, (float) origin.y, 0).setColor(color).setNormal(normal.x, normal.y, 0);
+                BufferUploader.drawWithShader(builder.buildOrThrow());
+            }
+        }
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         GlStateManager._enableCull();
         GlStateManager._depthMask(true);
         RenderSystem.lineWidth(1);
+    }
+    public Color getLineColor1(Entry source, Entry destination, float pPartialTick, int pMouseX, int pMouseY) {
+        return new Color(17, 20, 38, 255);
+    }
+    public Color getLineColor2(Entry source, Entry destination, float pPartialTick, int pMouseX, int pMouseY) {
+        return new Color(70, 216, 252, 255);
     }
 
     public List<DataTab> getSortedTabs() {
@@ -537,25 +570,41 @@ public class DataTabletScreen extends Screen {
         drawLines(pGuiGraphics, pPartialTick, pMouseX, pMouseY);
         for (Entry i : Entries.entries.values()) {
             if (i.tab.equals(currentTab.id)) {
-                if (i.isVisibleClient()) {
+                if (isEntryUnlocked(i)) {
+                    Vector2i entryPosition = getEntryPosition(i);
                     int entryShift = 0;
                     int incompleteShift = 0;
                     if (pMouseX >= x && pMouseY >= y && pMouseX <= x+imageWidth && pMouseY <= y+imageHeight) {
-                        if (pMouseX >= ((i.x * 20) - 10) + offsetX + x && pMouseX <= ((i.x * 20) + 10) + offsetX + x) {
-                            if (pMouseY >= ((i.y * 20) - 10) + offsetY + y && pMouseY <= ((i.y * 20) + 10) + offsetY + y) {
+                        if (pMouseX >= ((entryPosition.x * 20) - 10) + offsetX + x && pMouseX <= ((entryPosition.x * 20) + 10) + offsetX + x) {
+                            if (pMouseY >= ((entryPosition.y * 20) - 10) + offsetY + y && pMouseY <= ((entryPosition.y * 20) + 10) + offsetY + y) {
                                 entryShift = 40;
                                 incompleteShift = 10;
                             }
                         }
                     }
-                    pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) - 10) + (int) offsetX, y + ((i.y * 20) - 10) + (int) offsetY, 0, 166+entryShift, 20, 20);
-                    pGuiGraphics.renderItem(i.getIcon(i.getIncompleteStageClient()), x + ((i.x * 20) - 8) + (int) offsetX, y + ((i.y * 20) - 8) + (int) offsetY);
+                    pGuiGraphics.blit(TEXTURE_MAIN, x + ((entryPosition.x * 20) - 10) + (int) offsetX, y + ((entryPosition.y * 20) - 10) + (int) offsetY, 0, 166+entryShift, 20, 20);
+                    pGuiGraphics.renderItem(i.getIcon(getEntryCompletionStage(i)), x + ((entryPosition.x * 20) - 8) + (int) offsetX, y + ((entryPosition.y * 20) - 8) + (int) offsetY);
 
-                    if (i.isIncompleteClient()) {
-                        pGuiGraphics.blit(TEXTURE_MAIN, x + ((i.x * 20) + 5) + (int) offsetX, y + ((i.y * 20) + 5) + (int) offsetY, 0, 186+incompleteShift, 11, 10);
+                    if (i.isIncomplete(getEntryCompletionStage(i))) {
+                        pGuiGraphics.blit(TEXTURE_MAIN, x + ((entryPosition.x * 20) + 5) + (int) offsetX, y + ((entryPosition.y * 20) + 5) + (int) offsetY, 0, 186+incompleteShift, 11, 10);
                     }
                 }
             }
         }
+    }
+    public Vector2i getEntryPosition(Entry entry) {
+        return new Vector2i(entry.x, entry.y);
+    }
+    public boolean isEntryUnlocked(Entry entry) {
+        return entry.isVisibleClient();
+    }
+    public int getEntryCompletionStage(Entry entry) {
+        return entry.getIncompleteStageClient();
+    }
+    public List<Entry> getEntryParentEntries(Entry entry) {
+        return entry.getParentEntries();
+    }
+    public List<ResourceLocation> getEntryParents(Entry entry) {
+        return entry.parents;
     }
 }
