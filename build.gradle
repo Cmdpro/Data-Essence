@@ -116,41 +116,11 @@ configurations {
 }
 
 repositories {
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-    maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-
-    // Put repositories for dependencies here
-    // ForgeGradle automatically adds the Forge maven and Maven Central for you
-
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
     flatDir {
         dir 'libs'
     }
-    maven {
-        name = 'GeckoLib'
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-        content {
-            includeGroupByRegex("software\\.bernie.*")
-            includeGroup("com.eliotlash.mclib")
-        }
-    }
-    maven { url 'https://maven.blamejared.com' }
-    maven {
-        url = "https://maven.theillusivec4.top/"
-    }
-    maven { url = "https://maven.terraformersmc.com/" }
-    maven {
-        url = "https://api.modrinth.com/maven"
-    }
+    maven { url = "https://maven.terraformersmc.com/" } // EMI
+    maven { url = "https://api.modrinth.com/maven" } // Sodium, Iris, Opalescence, Pastel
     maven { url = 'https://modmaven.dev/' } // Mekanism
     mavenCentral()
 }
@@ -158,18 +128,19 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
     implementation "blank:databank-1.1.0"
-    implementation "com.eliotlash.mclib:mclib:20"
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     localRuntime "dev.emi:emi-neoforge:${emi_version}"
 
     implementation "maven.modrinth:iris:1.8.1+1.21.1-neoforge"
     implementation "maven.modrinth:sodium:mc1.21.1-0.6.7-neoforge"
 
+    // Compats
     compileOnly "mekanism:Mekanism:${mekanism_version}:api"
     localRuntime "mekanism:Mekanism:${mekanism_version}"
+    implementation "maven.modrinth:opalescence:1.0.2b"
+    implementation "maven.modrinth:pastel-mod:${pastel_version}"
 
-    implementation "curse.maven:opalescence-1255577:6485811"
-
+    //
     implementation('org.jgrapht:jgrapht-core:1.5.2')
     jarJar (group: 'org.jgrapht', name: 'jgrapht-core', version: '[1.5.2,)')
     implementation('org.jheaps:jheaps:0.14')
