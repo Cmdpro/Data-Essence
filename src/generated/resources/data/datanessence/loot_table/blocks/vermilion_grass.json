@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:sanctuary_grass_block"
+          "name": "datanessence:vermilion_grass"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "datanessence:blocks/sanctuary_grass_block"
+  "random_sequence": "datanessence:blocks/vermilion_grass"
 }

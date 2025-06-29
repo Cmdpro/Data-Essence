@@ -130,7 +130,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
         dropSelf(BlockRegistry.ECLIPTRUM_BLOCK.get());
         dropSelf(BlockRegistry.CRYSTALLINE_CRADLE.get());
-        dropSelf(BlockRegistry.SANCTUARY_GRASS_BLOCK.get());
+        dropSelf(BlockRegistry.SANCTUARY_VERMILION_GRASS_BLOCK.get());
         dropSelf(BlockRegistry.SANCTUARY_DIRT.get());
         dropSelf(BlockRegistry.SANCTUARY_SAND.get());
         dropSelf(BlockRegistry.DEEP_SANCTUARY_SAND.get());

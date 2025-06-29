@@ -153,7 +153,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .addTag(Tags.Blocks.ORES)
                 .add(BlockRegistry.ESSENCE_CRYSTAL.get());
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL)
-                .add(BlockRegistry.SANCTUARY_GRASS_BLOCK.get())
+                .add(BlockRegistry.SANCTUARY_VERMILION_GRASS_BLOCK.get())
                 .add(BlockRegistry.SANCTUARY_DIRT.get())
                 .add(BlockRegistry.SANCTUARY_SAND.get())
                 .add(BlockRegistry.DEEP_SANCTUARY_SAND.get())
@@ -161,7 +161,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.GREEN_PEARLESCENT_SAND.get())
                 .add(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
         this.tag(BlockTags.DIRT)
-                .add(BlockRegistry.SANCTUARY_GRASS_BLOCK.get())
+                .add(BlockRegistry.SANCTUARY_VERMILION_GRASS_BLOCK.get())
                 .add(BlockRegistry.SANCTUARY_DIRT.get());
         this.tag(BlockTags.SAND)
                 .add(BlockRegistry.SANCTUARY_SAND.get())

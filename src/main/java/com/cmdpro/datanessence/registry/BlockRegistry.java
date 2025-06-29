@@ -87,7 +87,7 @@ public class BlockRegistry {
     public static final Supplier<Block> FROZEN_MOONLIGHT = register("frozen_moonlight",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_ICE)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> SANCTUARY_GRASS_BLOCK = register("sanctuary_grass_block",
+    public static final Supplier<Block> SANCTUARY_VERMILION_GRASS_BLOCK = register("vermilion_grass",
             () -> new SanctuaryGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SANCTUARY_DIRT = register("sanctuary_dirt",

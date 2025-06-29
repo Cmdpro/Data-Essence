@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "datanessence:block/sanctuary_dirt",
+    "east": "datanessence:block/sanctuary/vermilion_grass_side",
+    "north": "datanessence:block/sanctuary/vermilion_grass_side",
+    "particle": "datanessence:block/sanctuary/vermilion_grass_top",
+    "south": "datanessence:block/sanctuary/vermilion_grass_side",
+    "up": "datanessence:block/sanctuary/vermilion_grass_top",
+    "west": "datanessence:block/sanctuary/vermilion_grass_side"
+  }
+}

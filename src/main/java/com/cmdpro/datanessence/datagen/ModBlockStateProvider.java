@@ -79,7 +79,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(BlockRegistry.FROZEN_MOONLIGHT);
         blockWithItem(BlockRegistry.CREATIVE_ESSENCE_BATTERY);
 
-        sanctuaryGrassBlock(BlockRegistry.SANCTUARY_GRASS_BLOCK);
+        sanctuaryGrassBlock(BlockRegistry.SANCTUARY_VERMILION_GRASS_BLOCK);
         blockWithItem(BlockRegistry.SANCTUARY_DIRT);
         tallGrass(BlockRegistry.TALL_SANCTUARY_GRASS);
         grass(BlockRegistry.SANCTUARY_GRASS);
@@ -158,8 +158,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
     }
     private void sanctuaryGrassBlock(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
-        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side");
-        ResourceLocation top = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top");
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/sanctuary/" + loc.getPath() + "_side");
+        ResourceLocation top = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/sanctuary/" + loc.getPath() + "_top");
         ResourceLocation bottom = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/sanctuary_dirt");
         BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
                 .texture("west", side)

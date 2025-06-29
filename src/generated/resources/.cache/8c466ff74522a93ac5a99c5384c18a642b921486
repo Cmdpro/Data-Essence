@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-25T15:32:58.8472427	Tags for minecraft:block mod id datanessence
+// 1.21.1	2025-06-29T07:32:19.026583647	Tags for minecraft:block mod id datanessence
 996d46cdbe1a5472c2d32602774b628a4277ea4b data/c/tags/block/ores.json
 996d46cdbe1a5472c2d32602774b628a4277ea4b data/c/tags/block/ores_in_ground/stone.json
 ef9266be182f366d768a314813fb2741fff739ae data/datanessence/tags/block/buffer_detection_pass.json
@@ -8,9 +8,9 @@ e041c2dd3bfdcc54892f8ba408961e738498dd18 data/datanessence/tags/block/hammer_and
 971e15ddfa79925125df022a4551cf9e1135ec5a data/datanessence/tags/block/sanctuary_carver_replaceables.json
 34b23849ced6a3bb3270fa1f6a8d8ad01d2a238e data/datanessence/tags/block/sanctuary_sand.json
 4c3682f5e42440e319d85b71f1babbbc53619a35 data/datanessence/tags/block/scannable_ores.json
-1795f3a681e9f7c0223c4eeaf838a2c30c46fff1 data/minecraft/tags/block/dirt.json
+3266d2cd543e1f9d7adacd2f8d0f27de446d51a5 data/minecraft/tags/block/dirt.json
 ddc223343d8ab7497a11ee4b75040795989f979f data/minecraft/tags/block/mineable/pickaxe.json
-f992d9aeefbc16882aab234d47f97c7898dcfd4e data/minecraft/tags/block/mineable/shovel.json
+a953f6eaf95c69b9326b6c480a8eaf6371fec9a7 data/minecraft/tags/block/mineable/shovel.json
 ac466dd784c12d07e50d84d15e14c6127b91ae5a data/minecraft/tags/block/needs_diamond_tool.json
 3a24e3b9664b6a5b9638a754a5ff3b4343db5578 data/minecraft/tags/block/needs_iron_tool.json
 34b23849ced6a3bb3270fa1f6a8d8ad01d2a238e data/minecraft/tags/block/sand.json
