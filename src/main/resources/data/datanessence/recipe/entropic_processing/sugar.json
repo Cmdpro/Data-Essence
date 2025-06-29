@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "minecraft:sugar_cane" },
+  "time": 150,
+  "result": { "id": "minecraft:sugar", "count": 2 }
+}

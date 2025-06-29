@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 500
+  },
+  "entry": "datanessence:tools/mineral_finding_rod",
+  "pattern": [
+    "  L",
+    " M ",
+    "R  "
+  ],
+  "time": 240,
+  "key": {
+    "R": { "item": "datanessence:conductance_rod" },
+    "M": { "item": "datanessence:logical_matrix" },
+    "L": { "item": "datanessence:lensing_crystal" }
+  },
+  "result": { "id": "datanessence:mineral_finding_rod" }
+}

@@ -27,9 +27,11 @@
       "recipes": [
         "datanessence:entropic_processing/stone_to_cobble",
         "datanessence:entropic_processing/cobble_to_gravel",
-        "datanessence:entropic_processing/gravel_to_sand",
-        "datanessence:entropic_processing/bone_meal"
-      ]
+        "datanessence:entropic_processing/gravel_to_sand"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.entropic_processor.page3.text"
+      }
     },
     {
       "type": "datanessence:crafting",
@@ -44,11 +46,26 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
+        "datanessence:entropic_processing/bone_meal",
+        "datanessence:entropic_processing/sugar"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.entropic_processor.page5.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
         "datanessence:entropic_processing/wool_to_string",
         "datanessence:entropic_processing/clay_to_clay_balls",
         "datanessence:entropic_processing/honeycomb_block_to_honeycomb",
-        "datanessence:dripstone_to_pointed_dripstone"
-      ]
+        "datanessence:entropic_processing/dripstone_to_pointed_dripstone",
+        "datanessence:entropic_processing/glowstone_block_to_dust",
+        "datanessence:entropic_processing/quartz_blocks_to_nether_quartz"
+      ],
+      "text": {
+        "translate": "data_tablet.pages.entropic_processor.page6.text"
+      }
     },
     {
       "type": "datanessence:crafting",

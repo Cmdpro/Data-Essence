@@ -45,7 +45,7 @@ public class ItemRegistry {
     public static final Supplier<Item> GRAPPLING_HOOK = register("transcendental_tether", () -> new GrapplingHook(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> TRANS_GRAPPLING_HOOK = register("trans_tether", () -> new TransGrapplingHook(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ANTI_GRAVITY_PACK = register("anti_gravity_pack", () -> new AntiGravityPack(new Item.Properties().stacksTo(1)));
-    public static final Supplier<Item> ORE_SCANNER = register("ore_scanner", () -> new OreScanner(new Item.Properties().stacksTo(1)));
+    public static final Supplier<Item> ORE_SCANNER = register("mineral_finding_rod", () -> new OreScanner(new Item.Properties().stacksTo(1)));
 
     // Essence Shards
     public static final Supplier<Item> ESSENCE_SHARD = register("essence_shard", () -> new EssenceShard(new Item.Properties(), Map.of(EssenceTypeRegistry.ESSENCE, 100f)));
