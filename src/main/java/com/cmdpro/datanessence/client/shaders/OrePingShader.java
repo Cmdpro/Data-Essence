@@ -129,13 +129,6 @@ public class OrePingShader extends PostShaderInstance {
         }
         stack.pushPose();
         stack.translate(pos.getX(), pos.getY(), pos.getZ());
-        BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-        FluidState fluidState = block.getFluidState();
-        if (!fluidState.isEmpty()) {
-            RenderType layer = ItemBlockRenderTypes.getRenderLayer(fluidState);
-            VertexConsumer buffer = bufferSource.getBuffer(layer);
-            blockRenderer.renderLiquid(pos, BLOCK_AND_TINT_GETTER, buffer, block, fluidState);
-        }
         if (block.getRenderShape() != RenderShape.INVISIBLE) {
             RenderType type = RenderType.SOLID;
             VertexConsumer buffer = bufferSource.getBuffer(type);
