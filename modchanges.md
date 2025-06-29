@@ -6,3 +6,4 @@
 
 ### Fixes
 - Fixed the Mineral Locator effect glitching out by making its scanning not render fluid states
+- Added additional protection from render types other than solid being used to the Mineral Locator effect

@@ -223,7 +223,7 @@ public class OrePingShader extends PostShaderInstance {
 
         @Override
         public VertexConsumer getBuffer(RenderType type) {
-            return super.getBuffer(HologramRenderType.remap(type));
+            return super.getBuffer(HologramRenderType.remap(RenderType.SOLID));
         }
     }
 
