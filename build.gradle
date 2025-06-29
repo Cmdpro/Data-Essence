@@ -127,6 +127,14 @@ repositories {
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
+    // Libraries & Core Integrations
+    implementation('org.jgrapht:jgrapht-core:1.5.2')
+    jarJar (group: 'org.jgrapht', name: 'jgrapht-core', version: '[1.5.2,)')
+    implementation('org.jheaps:jheaps:0.14')
+    jarJar (group: 'org.jheaps', name: 'jheaps', version: '[0.14,)')
+    implementation('org.apfloat:apfloat:1.14.0')
+    jarJar (group: 'org.apfloat', name: 'apfloat', version: '[1.14.0,)')
+
     implementation "blank:databank-1.1.0"
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     localRuntime "dev.emi:emi-neoforge:${emi_version}"
@@ -139,14 +147,6 @@ dependencies {
     localRuntime "mekanism:Mekanism:${mekanism_version}"
     implementation "maven.modrinth:opalescence:1.0.2b"
     implementation "maven.modrinth:pastel-mod:${pastel_version}"
-
-    //
-    implementation('org.jgrapht:jgrapht-core:1.5.2')
-    jarJar (group: 'org.jgrapht', name: 'jgrapht-core', version: '[1.5.2,)')
-    implementation('org.jheaps:jheaps:0.14')
-    jarJar (group: 'org.jheaps', name: 'jheaps', version: '[0.14,)')
-    implementation('org.apfloat:apfloat:1.14.0')
-    jarJar (group: 'org.apfloat', name: 'apfloat', version: '[1.14.0,)')
 }
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
