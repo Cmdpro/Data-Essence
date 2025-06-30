@@ -32,6 +32,7 @@ tasks.named('jar') {
 }
 tasks.named('jarJar') {
     archiveClassifier = ''
+
 }
 tasks.register('deleteSlimJar') {
     doLast {
@@ -66,9 +67,11 @@ runs {
 
         modSource project.sourceSets.main
         dependencies {
-            runtime('org.jgrapht:jgrapht-core:1.5.2')
-            runtime('org.jheaps:jheaps:0.14')
-            runtime('org.apfloat:apfloat:1.14.0')
+            if (pastel_enabled != "true") {
+                runtime('org.jgrapht:jgrapht-core:1.5.2')
+                runtime('org.jheaps:jheaps:0.14')
+                runtime('org.apfloat:apfloat:1.14.0')
+            }
         }
     }
 
@@ -124,6 +127,7 @@ repositories {
     maven { url = 'https://modmaven.dev/' } // Mekanism
     mavenCentral()
 }
+
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
@@ -144,9 +148,18 @@ dependencies {
 
     // Compats
     compileOnly "mekanism:Mekanism:${mekanism_version}:api"
-    localRuntime "mekanism:Mekanism:${mekanism_version}"
+    if (mekanism_enabled == "true") {
+        localRuntime "mekanism:Mekanism:${mekanism_version}"
+    }
     implementation "maven.modrinth:opalescence:1.0.2b"
-    //implementation "maven.modrinth:pastel-mod:${pastel_version}"
+    if (pastel_enabled == "true") {
+        implementation "maven.modrinth:pastel-mod:${pastel_version}"
+        runtimeOnly "maven.modrinth:modonomicon:1.21.1-1.114.4"
+        runtimeOnly "maven.modrinth:curios:9.5.1+1.21.1"
+        runtimeOnly "maven.modrinth:cloth-config:15.0.140+neoforge"
+    } else {
+        compileOnly "maven.modrinth:pastel-mod:${pastel_version}"
+    }
 }
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [
