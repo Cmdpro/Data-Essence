@@ -14,21 +14,24 @@ import net.minecraft.world.level.ItemLike;
 
 public class DataTab {
 
-    public DataTab(ResourceLocation id, ItemLike icon, Component name, DataTabPlacement placement) {
+    public DataTab(ResourceLocation id, ItemLike icon, Component name, boolean alwaysShown, DataTabPlacement placement) {
         this.id = id;
         this.icon = new ItemStack(icon);
         this.name = name;
+        this.alwaysShown = alwaysShown;
         this.placement = placement;
     }
-    public DataTab(ResourceLocation id, ItemStack icon, Component name, DataTabPlacement placement) {
+    public DataTab(ResourceLocation id, ItemStack icon, Component name, boolean alwaysShown, DataTabPlacement placement) {
         this.id = id;
         this.icon = icon;
         this.name = name;
+        this.alwaysShown = alwaysShown;
         this.placement = placement;
     }
     public Component name;
     public ItemStack icon;
     public ResourceLocation id;
+    public boolean alwaysShown;
     public DataTabPlacement placement;
     public record DataTabPlacement(ResourceLocation placeBefore, ResourceLocation placeAfter) {
         public static final ResourceLocation IGNORED = DataNEssence.locate("ignored");

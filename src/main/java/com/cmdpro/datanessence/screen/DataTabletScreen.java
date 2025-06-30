@@ -561,6 +561,10 @@ public class DataTabletScreen extends Screen {
         List<DataTab> sorted = getSortedTabs();
         List<DataTab> visible = new ArrayList<>();
         for (DataTab i : sorted.stream().toList()) {
+            if (i.alwaysShown) {
+                visible.add(i);
+                continue;
+            }
             for (Entry j : Entries.entries.values()) {
                 if (isEntryUnlocked(j)) {
                     if (j.tab.equals(i.id)) {

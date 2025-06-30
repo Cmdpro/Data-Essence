@@ -1,8 +1,11 @@
 ### Additions
 - Added Entropic Processor recipes for sugar, glowstone block to dust, and quartz block to nether quartz
+- Added the "always_shown" field to data tabs if the tab is wanted to be shown even when empty
 
 ### Changes
 - Updated Entropic Processor entry with recipe page layout changes and additional descriptions
+- Replaced priority in data tabs with a new placement object
+- Made data tabs not shown if there is no entries in them
 
 ### Fixes
 - Fixed the Mineral Locator effect glitching out by making its scanning not render fluid states
