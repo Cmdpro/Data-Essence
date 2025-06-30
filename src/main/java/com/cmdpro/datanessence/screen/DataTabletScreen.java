@@ -554,7 +554,7 @@ public class DataTabletScreen extends Screen {
     }
 
     public List<DataTab> getSortedTabs() {
-        return Entries.tabs.values().stream().sorted((a, b) -> Integer.compare(b.priority, a.priority)).toList();
+        return Entries.tabsSorted;
     }
     public List<DataTab> getCurrentTabs() {
         List<DataTab> tabs = new ArrayList<>();
