@@ -472,28 +472,6 @@ public class DataTabletScreen extends Screen {
     public void drawLines(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        /*
-        for (Entry i : Entries.entries.values()) {
-            if (i.tab.equals(currentTab.id)) {
-                if (isEntryUnlocked(i)) {
-                    for (Entry o : getEntryParentEntries(i)) {
-                        if (o.tab.equals(currentTab.id)) {
-                            Vector2i entry1Pos = getEntryPosition(i);
-                            Vector2i entry2Pos = getEntryPosition(o);
-                            BufferBuilder buf = tess.begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
-                            int x1 = x + ((entry2Pos.x * 20)) + (int) offsetX;
-                            int y1 = y + ((entry2Pos.y * 20)) + (int) offsetY;
-                            int x2 = x + ((entry1Pos.x * 20)) + (int) offsetX;
-                            int y2 = y + ((entry1Pos.y * 20)) + (int) offsetY;
-                            Vec2 vec = new Vec2(x1-x2, y1-y2).normalized();
-                            buf.addVertex(x1, y1, 0.0F).setColor(201, 13, 139, 255).setNormal(vec.x, vec.y, 0);
-                            buf.addVertex(x2, y2, 0.0F).setColor(201, 13, 139, 255).setNormal(vec.x, vec.y, 0);
-                            BufferUploader.drawWithShader(buf.buildOrThrow());
-                        }
-                    }
-                }
-            }
-        }*/
         for (Entry destinationEntry : Entries.entries.values()) {
             if (destinationEntry.tab.equals(currentTab.id) && isEntryUnlocked(destinationEntry)) {
                 for (Entry sourceEntry : getEntryParentEntries(destinationEntry)) {
@@ -524,7 +502,7 @@ public class DataTabletScreen extends Screen {
             RenderSystem.lineWidth(2f*(float)Minecraft.getInstance().getWindow().getGuiScale());
             GlStateManager._depthMask(false);
             GlStateManager._disableCull();
-            int activeSegment = lineSegments - (int) (time % lineSegments);
+            int activeSegment = (int) (time % lineSegments);
             Vec3 segmentIteration = new Vec3(line.x / lineSegments, line.y / lineSegments, line.z / lineSegments);
 
             for (int i = lineSegments; i >= 0; i--) {
