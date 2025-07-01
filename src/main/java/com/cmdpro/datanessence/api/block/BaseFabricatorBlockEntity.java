@@ -250,7 +250,7 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseFabricatorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get()));
+            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, pBlockEntity.getSupportedEssenceTypes());
             if (pBlockEntity.recipe != null) {
                 boolean enoughEssence = true;
                 if (pBlockEntity.essenceCost != null) {
