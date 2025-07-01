@@ -50,6 +50,6 @@ public class LunariumBlockEntity extends BaseFabricatorBlockEntity implements Me
 
     @Override
     public float getMaxEssence() {
-        return 1000;
+        return 2000;
     }
 }

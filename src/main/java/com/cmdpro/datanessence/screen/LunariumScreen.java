@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LunariumScreen extends AbstractContainerScreen<LunariumMenu> {
-    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/fabricator.png");
+    public static final ResourceLocation TEXTURE = DataNEssence.locate("textures/gui/lunarium.png");
     public LunariumScreen(LunariumMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
@@ -34,10 +34,10 @@ public class LunariumScreen extends AbstractContainerScreen<LunariumMenu> {
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 0.25f);
         pGuiGraphics.renderItem(menu.blockEntity.item, x+145, y+35);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1F);
-        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
-        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+7, y+6, EssenceTypeRegistry.ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false));
-        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+19, y+17, EssenceTypeRegistry.LUNAR_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.LUNAR_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.INDUSTRIAL);
-        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+18, y+6, EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceBarBackgroundTypes.INDUSTRIAL, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get()), false));
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+8, y+17, EssenceTypeRegistry.ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.LUNAR);
+        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+7, y+6, EssenceTypeRegistry.ESSENCE.get(), EssenceBarBackgroundTypes.LUNAR, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()), false));
+        ClientEssenceBarUtil.drawEssenceBar(pGuiGraphics, x+19, y+17, EssenceTypeRegistry.LUNAR_ESSENCE.get(), menu.blockEntity.getStorage().getEssence(EssenceTypeRegistry.LUNAR_ESSENCE.get()), menu.blockEntity.getStorage().getMaxEssence(), EssenceBarBackgroundTypes.LUNAR);
+        ClientEssenceBarUtil.drawEssenceIcon(pGuiGraphics, x+18, y+6, EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceBarBackgroundTypes.LUNAR, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get()), false));
         pGuiGraphics.blit(TEXTURE, x+110, y+34, 177, 0, (int)(22f*((float)menu.blockEntity.time/menu.blockEntity.maxTime)), 17);
         time += pPartialTick;
     }
