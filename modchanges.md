@@ -9,3 +9,4 @@
 - Added Frozen Moonlight resource
 - Added Antigravity Pack tool
 - Added Crystalline Cradle machine
+- Added Lunarium machine

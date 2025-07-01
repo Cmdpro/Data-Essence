@@ -1,0 +1,35 @@
+{
+  "icon": {
+    "id": "datanessence:lunarium"
+  },
+  "tab": "datanessence:basics",
+  "x": -2,
+  "y": 1,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:lunarium"
+      },
+      "text": {
+        "translate": "data_tablet.pages.lunarium.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/lunarium"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.lunarium.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.lunarium.flavor"
+  },
+  "parents": [
+    "datanessence:basics/fabricator",
+    "datanessence:machinery_transformation/ecliptrum"
+  ]
+}

@@ -345,6 +345,7 @@ public class DataNEssence
 
             // Machines
             event.accept(BlockRegistry.FABRICATOR.get());
+            event.accept(BlockRegistry.LUNARIUM.get());
             event.accept(BlockRegistry.INFUSER.get());
             event.accept(BlockRegistry.FLUID_COLLECTOR.get());
             event.accept(BlockRegistry.FLUID_SPILLER.get());

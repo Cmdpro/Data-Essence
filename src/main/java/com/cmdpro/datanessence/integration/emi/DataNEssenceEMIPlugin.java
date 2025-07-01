@@ -30,6 +30,7 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
     public static final ResourceLocation EMI_ICONS = ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID,"textures/gui/emi_icons.png");
 
     public static final EmiStack FABRICATOR_WORKSTATION = EmiStack.of(BlockRegistry.FABRICATOR.get());
+    public static final EmiStack LUNARIUM_WORKSTATION = EmiStack.of(BlockRegistry.LUNARIUM.get());
     public static final EmiStack AUTO_FABRICATOR_WORKSTATION = EmiStack.of(BlockRegistry.AUTO_FABRICATOR.get());
     public static final EmiStack INFUSER_WORKSTATION = EmiStack.of(BlockRegistry.INFUSER.get());
     public static final EmiStack ENTROPIC_PROCESSER_WORKSTATION = EmiStack.of(BlockRegistry.ENTROPIC_PROCESSOR.get());
@@ -70,6 +71,7 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
 
         // Ours
         emiRegistry.addWorkstation(FABRICATION, FABRICATOR_WORKSTATION);
+        emiRegistry.addWorkstation(FABRICATION, LUNARIUM_WORKSTATION);
         emiRegistry.addWorkstation(FABRICATION, AUTO_FABRICATOR_WORKSTATION);
         emiRegistry.addWorkstation(INFUSION, INFUSER_WORKSTATION);
         emiRegistry.addWorkstation(ENTROPIC_PROCESSING, ENTROPIC_PROCESSER_WORKSTATION);
