@@ -10,7 +10,7 @@
     "datanessence:essence": 20
   },
   "time": 40,
-  "entry": "datanessence:basics/mod_integration_refinedstorage",
+  "entry": "datanessence:mod_integration/refinedstorage",
   "pattern": [
     "III",
     "IQI",

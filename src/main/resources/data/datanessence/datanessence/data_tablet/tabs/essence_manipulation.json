@@ -5,5 +5,7 @@
   "name": {
     "translate": "data_tablet.tabs.essence_manipulation.name"
   },
-  "priority": 4
+  "placement": {
+    "place_after": "datanessence:basics"
+  }
 }

@@ -12,7 +12,7 @@
   "name": {
     "translate": "data_tablet.pages.integration_ae2.name"
   },
-  "entry": "datanessence:basics/mod_integration_ae2",
+  "entry": "datanessence:mod_integration/ae2",
   "parents": [
     "datanessence:machinery/entropic_processor",
     "datanessence:machinery/synthesis_chamber"

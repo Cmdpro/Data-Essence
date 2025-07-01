@@ -13,5 +13,5 @@
   "input2": { "tag": "minecraft:sand" },
   "time": 100,
   "result": { "id": "ae2:silicon", "count": 2 },
-  "entry": "datanessence:basics/mod_integration_ae2"
+  "entry": "datanessence:mod_integration/ae2"
 }

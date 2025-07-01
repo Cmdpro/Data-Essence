@@ -554,13 +554,28 @@ public class DataTabletScreen extends Screen {
     }
 
     public List<DataTab> getSortedTabs() {
-        return Entries.tabs.values().stream().sorted((a, b) -> Integer.compare(b.priority, a.priority)).toList();
+        return Entries.tabsSorted;
     }
     public List<DataTab> getCurrentTabs() {
         List<DataTab> tabs = new ArrayList<>();
         List<DataTab> sorted = getSortedTabs();
-        for (int i = tabPage*6; i < Math.min(sorted.size(), (tabPage*6)+12); i++) {
-            tabs.add(sorted.get(i));
+        List<DataTab> visible = new ArrayList<>();
+        for (DataTab i : sorted.stream().toList()) {
+            if (i.alwaysShown) {
+                visible.add(i);
+                continue;
+            }
+            for (Entry j : Entries.entries.values()) {
+                if (isEntryUnlocked(j)) {
+                    if (j.tab.equals(i.id)) {
+                        visible.add(i);
+                        break;
+                    }
+                }
+            }
+        }
+        for (int i = tabPage*6; i < Math.min(visible.size(), (tabPage*6)+12); i++) {
+            tabs.add(visible.get(i));
         }
         return tabs;
     }

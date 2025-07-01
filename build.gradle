@@ -32,6 +32,7 @@ tasks.named('jar') {
 }
 tasks.named('jarJar') {
     archiveClassifier = ''
+
 }
 tasks.register('deleteSlimJar') {
     doLast {
@@ -66,9 +67,11 @@ runs {
 
         modSource project.sourceSets.main
         dependencies {
-            runtime('org.jgrapht:jgrapht-core:1.5.2')
-            runtime('org.jheaps:jheaps:0.14')
-            runtime('org.apfloat:apfloat:1.14.0')
+            if (pastel_enabled != "true") {
+                runtime('org.jgrapht:jgrapht-core:1.5.2')
+                runtime('org.jheaps:jheaps:0.14')
+                runtime('org.apfloat:apfloat:1.14.0')
+            }
         }
     }
 
@@ -116,49 +119,27 @@ configurations {
 }
 
 repositories {
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-    maven {
-        url "https://cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
-
-    // Put repositories for dependencies here
-    // ForgeGradle automatically adds the Forge maven and Maven Central for you
-
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
     flatDir {
         dir 'libs'
     }
-    maven {
-        name = 'GeckoLib'
-        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-        content {
-            includeGroupByRegex("software\\.bernie.*")
-            includeGroup("com.eliotlash.mclib")
-        }
-    }
-    maven { url 'https://maven.blamejared.com' }
-    maven {
-        url = "https://maven.theillusivec4.top/"
-    }
-    maven { url = "https://maven.terraformersmc.com/" }
-    maven {
-        url = "https://api.modrinth.com/maven"
-    }
+    maven { url = "https://maven.terraformersmc.com/" } // EMI
+    maven { url = "https://api.modrinth.com/maven" } // Sodium, Iris, Opalescence, Pastel
     maven { url = 'https://modmaven.dev/' } // Mekanism
     mavenCentral()
 }
+
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
 
+    // Libraries & Core Integrations
+    implementation('org.jgrapht:jgrapht-core:1.5.2')
+    jarJar (group: 'org.jgrapht', name: 'jgrapht-core', version: '[1.5.2,)')
+    implementation('org.jheaps:jheaps:0.14')
+    jarJar (group: 'org.jheaps', name: 'jheaps', version: '[0.14,)')
+    implementation('org.apfloat:apfloat:1.14.0')
+    jarJar (group: 'org.apfloat', name: 'apfloat', version: '[1.14.0,)')
+
     implementation "blank:databank-1.1.0"
-    implementation "com.eliotlash.mclib:mclib:20"
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     localRuntime "dev.emi:emi-neoforge:${emi_version}"
 
@@ -166,17 +147,20 @@ dependencies {
     implementation "maven.modrinth:sodium:mc1.21.1-0.6.7-neoforge"
     implementation "maven.modrinth:jade:15.9.2+neoforge"
 
+    // Compats
     compileOnly "mekanism:Mekanism:${mekanism_version}:api"
-    localRuntime "mekanism:Mekanism:${mekanism_version}"
-
-    implementation "curse.maven:opalescence-1255577:6485811"
-
-    implementation('org.jgrapht:jgrapht-core:1.5.2')
-    jarJar (group: 'org.jgrapht', name: 'jgrapht-core', version: '[1.5.2,)')
-    implementation('org.jheaps:jheaps:0.14')
-    jarJar (group: 'org.jheaps', name: 'jheaps', version: '[0.14,)')
-    implementation('org.apfloat:apfloat:1.14.0')
-    jarJar (group: 'org.apfloat', name: 'apfloat', version: '[1.14.0,)')
+    if (mekanism_enabled == "true") {
+        localRuntime "mekanism:Mekanism:${mekanism_version}"
+    }
+    implementation "maven.modrinth:opalescence:1.0.2b"
+    if (pastel_enabled == "true") {
+        implementation "maven.modrinth:pastel-mod:${pastel_version}"
+        runtimeOnly "maven.modrinth:modonomicon:1.21.1-1.114.4"
+        runtimeOnly "maven.modrinth:curios:9.5.1+1.21.1"
+        runtimeOnly "maven.modrinth:cloth-config:15.0.140+neoforge"
+    } else {
+        compileOnly "maven.modrinth:pastel-mod:${pastel_version}"
+    }
 }
 tasks.withType(ProcessResources).configureEach {
     var replaceProperties = [

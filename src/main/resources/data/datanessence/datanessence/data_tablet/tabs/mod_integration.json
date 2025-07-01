@@ -1,0 +1,11 @@
+{
+  "icon": {
+    "id": "datanessence:essence_redirector"
+  },
+  "name": {
+    "translate": "data_tablet.tabs.mod_integration.name"
+  },
+  "placement": {
+    "place_after": "datanessence:tools"
+  }
+}

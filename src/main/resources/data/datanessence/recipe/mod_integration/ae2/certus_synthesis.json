@@ -13,5 +13,5 @@
   "input2": { "item": "ae2:certus_quartz_dust" },
   "time": 120,
   "result": { "id": "ae2:certus_quartz_crystal", "count": 2 },
-  "entry": "datanessence:basics/mod_integration_ae2"
+  "entry": "datanessence:mod_integration/ae2"
 }

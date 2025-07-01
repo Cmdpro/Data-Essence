@@ -12,5 +12,5 @@
   "name": {
     "translate": "data_tablet.pages.opalescent_traversite_road.name"
   },
-  "entry": "datanessence:tools/mod_integration_opalescence"
+  "entry": "datanessence:mod_integration/opalescence"
 }

@@ -5,5 +5,7 @@
   "name": {
     "translate": "data_tablet.tabs.basics.name"
   },
-  "priority": 5
+  "placement": {
+    "place_before": "datanessence:all"
+  }
 }

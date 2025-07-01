@@ -8,9 +8,9 @@
   "icon": {
     "id": "refinedstorage:quartz_enriched_iron"
   },
-  "tab": "datanessence:basics",
-  "x": 1,
-  "y": 4,
+  "tab": "datanessence:mod_integration",
+  "x": 0,
+  "y": -1,
   "pages": [
     {
       "type": "datanessence:text",
