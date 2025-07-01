@@ -9,7 +9,7 @@
   "essenceCost": {
     "datanessence:essence": 50
   },
-  "entry": "datanessence:tools/mod_integration_opalescence",
+  "entry": "datanessence:mod_integration/opalescence",
   "input": {
     "item": "opalescence:opal",
     "count": 1

@@ -12,5 +12,5 @@
   "name": {
     "translate": "data_tablet.pages.integration_mekanism.name"
   },
-  "entry": "datanessence:basics/mod_integration_mekanism"
+  "entry": "datanessence:mod_integration/mekanism"
 }

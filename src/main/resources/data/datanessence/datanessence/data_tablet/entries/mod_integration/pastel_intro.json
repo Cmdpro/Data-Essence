@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pastel"
+    }
+  ],
+  "icon": {
+    "id": "pastel:amethyst_powder"
+  },
+  "tab": "datanessence:mod_integration",
+  "x": 0,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.integration_pastel_intro.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.integration_pastel_intro.page2.text"
+      },
+      "recipes": [
+        "datanessence:mod_integration/pastel/entropic_processing/amethyst_shard"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.integration_pastel_intro.name"
+  }
+}

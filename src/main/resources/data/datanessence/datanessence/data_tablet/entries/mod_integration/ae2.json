@@ -8,9 +8,9 @@
   "icon": {
     "id": "ae2:charged_certus_quartz_crystal"
   },
-  "tab": "datanessence:basics",
+  "tab": "datanessence:mod_integration",
   "x": 0,
-  "y": 4,
+  "y": 1,
   "pages": [
     {
       "type": "datanessence:text",
