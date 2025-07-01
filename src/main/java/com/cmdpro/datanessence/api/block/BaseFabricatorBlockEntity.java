@@ -174,7 +174,7 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
     public static InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand) {
         BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
         if (!pLevel.isClientSide) {
-            if (blockEntity instanceof FabricatorBlockEntity ent) {
+            if (blockEntity instanceof BaseFabricatorBlockEntity ent) {
                 if (ent.time >= 0) {
                     ent.time = -1;
                 } else {
