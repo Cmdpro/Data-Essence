@@ -213,6 +213,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.INDUSTRIAL_PLANT_SIPHON_MENU.get(), IndustrialPlantSiphonScreen::new);
         event.register(MenuRegistry.MELTER_MENU.get(), MelterScreen::new);
         event.register(MenuRegistry.DRYING_TABLE_MENU.get(), DryingTableScreen::new);
+        event.register(MenuRegistry.LUNARIUM_MENU.get(), LunariumScreen::new);
     }
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {

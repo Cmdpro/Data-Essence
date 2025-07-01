@@ -154,6 +154,9 @@ public class BlockRegistry {
     public static final Supplier<Block> FABRICATOR = register("fabricator",
             () -> new Fabricator(getMachineProperties().lightLevel((blockState) -> { return 4;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> LUNARIUM = register("lunarium",
+            () -> new Lunarium(getMachineProperties().lightLevel((blockState) -> { return 4;})),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> INFUSER = register("infuser",
             () -> new Infuser(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

@@ -243,6 +243,10 @@ public class BlockEntityRegistry {
             register("crystalline_cradle", () ->
                     BlockEntityType.Builder.of(CrystallineCradleBlockEntity::new,
                             BlockRegistry.CRYSTALLINE_CRADLE.get()).build(null));
+    public static final Supplier<BlockEntityType<LunariumBlockEntity>> LUNARIUM =
+            register("lunarium", () ->
+                    BlockEntityType.Builder.of(LunariumBlockEntity::new,
+                            BlockRegistry.LUNARIUM.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {
