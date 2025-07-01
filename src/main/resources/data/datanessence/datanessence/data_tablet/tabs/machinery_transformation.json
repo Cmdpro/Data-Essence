@@ -5,5 +5,8 @@
   "name": {
     "translate": "data_tablet.tabs.machinery_transformation.name"
   },
-  "priority": 2
+  "placement": {
+    "place_after": "datanessence:machinery",
+    "place_before": "datanessence:tools"
+  }
 }
