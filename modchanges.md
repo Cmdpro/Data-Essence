@@ -8,8 +8,10 @@
 - Replaced priority in data tabs with a new placement object
 - Made data tabs not shown if there is no entries in them
 - Moved mod compatibility data entries to a new Mod Integration tab - you will have to relearn such data
+- Moved the fabricator logic to a separate abstract class
 
 ### Fixes
 - Fixed the Mineral Locator effect glitching out by making its scanning not render fluid states
 - Added additional protection from render types other than solid being used to the Mineral Locator effect
 - Fixed the recipes for Mekanism integration Chemical Nodes and Wires loading when Mek is not loaded
+- Fixed the data tablet entry lines moving the wrong way

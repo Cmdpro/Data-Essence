@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.block.BaseFabricatorBlock;
+import com.cmdpro.datanessence.api.block.BaseFabricatorBlockEntity;
 import com.cmdpro.datanessence.api.block.RedirectorInteractable;
 import com.cmdpro.datanessence.item.equipment.EssenceRedirector;
 import com.cmdpro.datanessence.registry.ItemRegistry;
@@ -26,7 +28,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class Fabricator extends Block implements EntityBlock, RedirectorInteractable {
+public class Fabricator extends BaseFabricatorBlock {
     public Fabricator(Properties properties) {
         super(properties);
     }
@@ -49,30 +51,6 @@ public class Fabricator extends Block implements EntityBlock, RedirectorInteract
         return ent;
     }
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (pState.getBlock() != pNewState.getBlock()) {
-            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-            if (blockEntity instanceof FabricatorBlockEntity) {
-                ((FabricatorBlockEntity) blockEntity).drops();
-            }
-        }
-        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
-    }
-
-    @Override
-    public boolean onRedirectorUse(UseOnContext context) {
-        Level world = context.getLevel();
-        BlockPos pos = context.getClickedPos();
-        BlockState state = world.getBlockState(pos);
-        Player player = context.getPlayer();
-        InteractionHand hand = context.getHand();
-        if (world.getBlockEntity(pos) instanceof FabricatorBlockEntity fabricator) {
-            FabricatorBlockEntity.use(state, world, pos, player, hand);
-        }
-        return true;
-    }
-
-    @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide()) {
             BlockEntity entity = pLevel.getBlockEntity(pPos);
@@ -84,15 +62,5 @@ public class Fabricator extends Block implements EntityBlock, RedirectorInteract
         }
 
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
-    }
-
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return (lvl, pos, st, blockEntity) -> {
-            if (blockEntity instanceof FabricatorBlockEntity ent) {
-                FabricatorBlockEntity.tick(lvl, pos, st, ent);
-            }
-        };
     }
 }
