@@ -230,7 +230,7 @@ public class BlockRegistry {
             () -> new Computer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),
             object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AREKKO = registerBlock("arekko",
-            () -> new Arekko(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).noOcclusion()));
+            () -> new Arekko(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).noOcclusion().noCollission()));
     public static final Supplier<Block> CRYOCHAMBER = register("cryochamber",
             () -> new Cryochamber(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

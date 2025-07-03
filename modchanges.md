@@ -10,6 +10,7 @@
 - Moved mod compatibility data entries to a new Mod Integration tab - you will have to relearn such data
 - Moved the fabricator logic to a separate abstract class
 - Moved the data bank logic to a separate abstract class
+- Arekko no longer has collision
 
 ### Fixes
 - Fixed the Mineral Locator effect glitching out by making its scanning not render fluid states
