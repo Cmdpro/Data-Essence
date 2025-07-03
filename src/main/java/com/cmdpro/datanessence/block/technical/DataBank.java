@@ -1,11 +1,13 @@
 package com.cmdpro.datanessence.block.technical;
 
+import com.cmdpro.datanessence.api.block.BaseDataBankBlock;
 import com.cmdpro.datanessence.api.util.DataBankUtil;
 import com.cmdpro.datanessence.data.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,7 +24,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class DataBank extends Block implements EntityBlock {
+public class DataBank extends BaseDataBankBlock implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public DataBank(Properties pProperties) {
         super(pProperties);
@@ -31,20 +33,23 @@ public class DataBank extends Block implements EntityBlock {
     private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
-        if (!pLevel.isClientSide) {
-            if (pLevel.getBlockEntity(pPos) instanceof DataBankBlockEntity ent) {
-                if (ent.type != null) {
-                    if ( pPlayer.getInventory().contains(new ItemStack(ItemRegistry.DATA_TABLET.get(), 1)) ) {
-                        DataBankUtil.sendDataBankEntries(pPlayer, DataBankTypeManager.types.get(ent.type));
-                    }
-                    else {
-                        pPlayer.displayClientMessage(Component.translatable("block.datanessence.data_bank.cannot_use"), true);
-                    }
-                }
+    public ResourceLocation[] getEntries(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+        if (pLevel.getBlockEntity(pPos) instanceof DataBankBlockEntity ent) {
+            if (ent.type != null) {
+                return DataBankTypeManager.types.get(ent.type);
             }
         }
-        return InteractionResult.sidedSuccess(pLevel.isClientSide());
+        return new ResourceLocation[0];
+    }
+
+    @Override
+    public boolean isOkayToOpen(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
+        if (pLevel.getBlockEntity(pPos) instanceof DataBankBlockEntity ent) {
+            if (ent.type == null) {
+                return false;
+            }
+        }
+        return super.isOkayToOpen(pState, pLevel, pPos, pPlayer, pHitResult);
     }
 
     @Override
