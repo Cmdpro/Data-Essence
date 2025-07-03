@@ -1,5 +1,9 @@
 {
   "key": {
+    "p": {
+      "type": "databank:blockstate",
+      "state": "datanessence:polished_obsidian"
+    },
     "b": {
       "type": "databank:blockstate",
       "state": "datanessence:polished_obsidian_bricks"
@@ -27,11 +31,11 @@
   },
   "layers": [
     [
-      "*bbb*",
-      "bbsbb",
-      "be*wb",
+      "*bpb*",
       "bbnbb",
-      "*bbb*"
+      "pw*ep",
+      "bbsbb",
+      "*bpb*"
     ],
     [
       "*****",
