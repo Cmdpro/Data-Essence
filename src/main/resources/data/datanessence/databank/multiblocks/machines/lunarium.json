@@ -1,0 +1,86 @@
+{
+  "key": {
+    "p": {
+      "type": "databank:blockstate",
+      "state": "datanessence:polished_obsidian"
+    },
+    "c": {
+      "type": "databank:blockstate",
+      "state": "datanessence:engraved_polished_obsidian"
+    },
+    "C": {
+      "type": "databank:blockstate",
+      "state": "datanessence:polished_obsidian_column[facing=up]"
+    },
+    "e": {
+      "type": "databank:blockstate",
+      "state": "datanessence:ecliptrum_block"
+    },
+    "1": {
+      "type": "databank:blockstate",
+      "state": "datanessence:lunarium"
+    }
+  },
+  "layers": [
+    [
+      "ppp***ppp",
+      "p*******p",
+      "p*******p",
+      "****p****",
+      "***p*p***",
+      "****p****",
+      "p*******p",
+      "p*******p",
+      "ppp***ppp"
+    ],
+    [
+      "c*c***c*c",
+      "*********",
+      "c*******c",
+      "*********",
+      "****1****",
+      "*********",
+      "c*******c",
+      "*********",
+      "c*c***c*c"
+    ],
+    [
+      "C*******C",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "C*******C"
+    ],
+    [
+      "C*******C",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "C*******C"
+    ],
+    [
+      "e*******e",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "*********",
+      "e*******e"
+    ]
+  ],
+  "center": [
+    -4,
+    -1,
+    -4
+  ]
+}

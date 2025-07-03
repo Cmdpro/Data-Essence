@@ -20,6 +20,10 @@
       "recipes": [
         "datanessence:fabrication/lunarium"
       ]
+    },
+    {
+      "type": "datanessence:multiblock",
+      "multiblock": "datanessence:machines/lunarium"
     }
   ],
   "name": {
