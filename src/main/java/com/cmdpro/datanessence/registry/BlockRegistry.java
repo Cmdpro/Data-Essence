@@ -17,7 +17,7 @@ import com.cmdpro.datanessence.block.production.*;
 import com.cmdpro.datanessence.block.storage.*;
 import com.cmdpro.datanessence.block.technical.Arekko;
 import com.cmdpro.datanessence.block.technical.Computer;
-import com.cmdpro.datanessence.block.technical.DataBank;
+import com.cmdpro.datanessence.block.technical.AncientDataBank;
 import com.cmdpro.datanessence.block.technical.StructureProtector;
 import com.cmdpro.datanessence.block.technical.cryochamber.Cryochamber;
 import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberRouter;
@@ -31,13 +31,11 @@ import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
 import com.cmdpro.datanessence.block.transportation.*;
 import com.cmdpro.datanessence.block.world.*;
 import com.cmdpro.datanessence.block.world.shieldingstone.*;
-import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.GameMasterBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -152,6 +150,9 @@ public class BlockRegistry {
     public static final Supplier<Block> DRYING_TABLE = register("drying_table",
             () -> new DryingTable(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> DATA_BANK = register("player_data_bank",
+            () -> new DataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().lightLevel((blockState) -> { return 4;})),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers
     public static final Supplier<Block> ESSENCE_BUFFER = register("essence_buffer",
@@ -223,8 +224,8 @@ public class BlockRegistry {
     public static final Supplier<Block> STRUCTURE_PROTECTOR = register("structure_protector",
             () -> new StructureProtector(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().instabreak().noCollission()),
             object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> DATA_BANK = register("data_bank",
-            () -> new DataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),
+    public static final Supplier<Block> ANCIENT_DATA_BANK = register("data_bank",
+            () -> new AncientDataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),
             object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> COMPUTER = register("computer",
             () -> new Computer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),

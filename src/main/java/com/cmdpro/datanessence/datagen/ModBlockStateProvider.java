@@ -6,9 +6,6 @@ import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.production.FluidCollector;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitter;
 import com.cmdpro.datanessence.registry.BlockRegistry;
-import com.google.gson.JsonObject;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -59,7 +56,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         decoBlock(BlockRegistry.AETHER_RUNE);
 
         essenceBurner(BlockRegistry.ESSENCE_BURNER);
-        dataBank(BlockRegistry.DATA_BANK);
+        dataBank(BlockRegistry.ANCIENT_DATA_BANK);
         fluidCollector(BlockRegistry.FLUID_COLLECTOR);
         fluidCollector(BlockRegistry.FLUID_SPILLER);
         laserEmitter(BlockRegistry.LASER_EMITTER);

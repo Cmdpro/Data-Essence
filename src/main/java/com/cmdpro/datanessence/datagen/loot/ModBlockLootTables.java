@@ -19,7 +19,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
     public ModBlockLootTables(HolderLookup.Provider provider) {
@@ -43,7 +42,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.DECO_ESSENCE_BUFFER.get());
         dropSelf(BlockRegistry.DECO_ITEM_BUFFER.get());
         dropSelf(BlockRegistry.DECO_FLUID_BUFFER.get());
-        this.add(BlockRegistry.DATA_BANK.get(),
+        this.add(BlockRegistry.ANCIENT_DATA_BANK.get(),
                 block -> noDrop());
         this.add(BlockRegistry.COMPUTER.get(),
                 block -> noDrop());
