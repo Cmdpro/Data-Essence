@@ -66,6 +66,7 @@ public class ClientModEvents {
     @SubscribeEvent
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityRegistry.FABRICATOR.get(), FabricatorRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.LUNARIUM.get(), LunariumRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_POINT.get(), EssencePointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.LUNAR_ESSENCE_POINT.get(), LunarEssencePointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.NATURAL_ESSENCE_POINT.get(), NaturalEssencePointRenderer::new);
@@ -167,6 +168,7 @@ public class ClientModEvents {
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/essence_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.ESSENCE_POINT.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/exotic_essence_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.EXOTIC_ESSENCE_POINT.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/fabricator.png"), DataNEssence.locate("fabricator")), BlockRegistry.FABRICATOR.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/lunarium.png"), DataNEssence.locate("lunarium")), BlockRegistry.LUNARIUM.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/fluid_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.FLUID_POINT.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/infuser.png"), DataNEssence.locate("infuser")), BlockRegistry.INFUSER.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/item_point.png"), DataNEssence.locate("essence_point")), BlockRegistry.ITEM_POINT.get().asItem());

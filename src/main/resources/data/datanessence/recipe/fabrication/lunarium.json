@@ -1,0 +1,23 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 1000
+  },
+  "time": 240,
+  "entry": "datanessence:basics/lunarium",
+  "completion_stage": 0,
+  "pattern": [
+    "RLR",
+    "GSG",
+    "OsO"
+  ],
+  "key": {
+    "R": { "item": "datanessence:transformative_rod" },
+    "L": { "item": "datanessence:lensing_crystal" },
+    "O": { "item": "datanessence:polished_obsidian" },
+    "G": { "item": "datanessence:ecliptrum_cog_assembly_2x" },
+    "S": { "item": "datanessence:essence_shard" },
+    "s": { "item": "datanessence:lunar_essence_shard" }
+  },
+  "result": { "id": "datanessence:lunarium" }
+}

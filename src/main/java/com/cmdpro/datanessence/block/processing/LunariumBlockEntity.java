@@ -21,17 +21,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class LunariumBlockEntity extends BaseFabricatorBlockEntity implements MenuProvider {
-    public DatabankAnimationState animState = new DatabankAnimationState("idle")
-            .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
-            .addAnim(new DatabankAnimationReference("ready", (state, anim) -> {}, (state, anim) -> {}));
+    public DatabankAnimationState animState = new DatabankAnimationState("pose")
+            .addAnim(new DatabankAnimationReference("pose", (state, anim) -> {}, (state, anim) -> {}));
+
     @Override
     public void setLevel(Level level) {
         super.setLevel(level);
         animState.setLevel(level);
     }
+
     public LunariumBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.LUNARIUM.get(), pos, state);
     }
+
     @Override
     public Component getDisplayName() {
         return Component.empty();

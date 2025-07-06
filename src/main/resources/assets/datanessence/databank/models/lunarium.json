@@ -1,0 +1,1358 @@
+{
+  "animations": {
+    "pose": {
+      "length": 2,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "upper_arm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -12.2685816573,
+                13.6417208478,
+                61.6654300492
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "elbow",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -25
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "forearm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -4.4622381686,
+                -9.7255162639,
+                -70.776644338
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "wrist",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -15.0936379352,
+                -1.6989941652,
+                -399.5853339991
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "upper_arm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -10.5906149761,
+                6.6782042959,
+                31.8803377061
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "elbow2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -5
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "forearm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -12.7341466794,
+                7.993651232,
+                -43.3934119244
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "wrist2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                9.7724261511,
+                11.4356298201,
+                -34.0191582308
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                8.1925230243,
+                12.6083678689,
+                -41.5934052305
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                9.7724261511,
+                11.4356298201,
+                -34.0191582308
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "crystal",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                -45,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                -90,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "crystal",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                -0.75,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        }
+      ]
+    },
+    "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "upper_arm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -12.2685816573,
+                13.6417208478,
+                61.6654300492
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "elbow",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -25
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "forearm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -4.4622381686,
+                -9.7255162639,
+                -70.776644338
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "wrist",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -15.1817966278,
+                -0.3925210654,
+                -394.7581293392
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "upper_arm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -10.5906149761,
+                6.6782042959,
+                31.8803377061
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "elbow2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -5
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "forearm2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -12.7341466794,
+                7.993651232,
+                -43.3934119244
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "wrist2",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                10.7285831217,
+                10.5452905894,
+                -29.0070271956
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "isCube": false,
+      "isMesh": false,
+      "children": [
+        {
+          "name": "base",
+          "rotation": [
+            0,
+            0.7853981633974483,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            0
+          ],
+          "mirror": false,
+          "origin": [
+            -7,
+            0,
+            -7
+          ],
+          "dimensions": [
+            14,
+            5,
+            14
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "base1",
+          "rotation": [
+            0,
+            0.7853981633974483,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            19
+          ],
+          "mirror": false,
+          "origin": [
+            -5,
+            5,
+            -5
+          ],
+          "dimensions": [
+            10,
+            4,
+            10
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "base crafting grid",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -0.5,
+            9,
+            -0.5
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            33
+          ],
+          "mirror": false,
+          "origin": [
+            -4,
+            -4,
+            -4
+          ],
+          "dimensions": [
+            9,
+            6,
+            9
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "arm_north",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            2,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "shoulder",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0.5,
+                -10
+              ],
+              "isCube": false,
+              "isMesh": false,
+              "children": [
+                {
+                  "name": "shoulder",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    -0.5,
+                    0
+                  ],
+                  "isCube": true,
+                  "isMesh": false,
+                  "texOffset": [
+                    50,
+                    30
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    3,
+                    2
+                  ],
+                  "inflate": 0
+                },
+                {
+                  "name": "upper_arm",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    -0.5,
+                    0
+                  ],
+                  "isCube": false,
+                  "isMesh": false,
+                  "children": [
+                    {
+                      "name": "upper arm",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        0,
+                        2,
+                        0
+                      ],
+                      "isCube": true,
+                      "isMesh": false,
+                      "texOffset": [
+                        12,
+                        48
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        0,
+                        -2,
+                        -2
+                      ],
+                      "dimensions": [
+                        0,
+                        13,
+                        3
+                      ],
+                      "inflate": 0
+                    },
+                    {
+                      "name": "elbow",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        0,
+                        14,
+                        -0.5
+                      ],
+                      "isCube": false,
+                      "isMesh": false,
+                      "children": [
+                        {
+                          "name": "elbow",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            -0.5,
+                            0,
+                            1
+                          ],
+                          "isCube": true,
+                          "isMesh": false,
+                          "texOffset": [
+                            24,
+                            48
+                          ],
+                          "mirror": false,
+                          "origin": [
+                            0,
+                            -2,
+                            -3
+                          ],
+                          "dimensions": [
+                            1,
+                            4,
+                            4
+                          ],
+                          "inflate": 0
+                        },
+                        {
+                          "name": "forearm",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "isCube": false,
+                          "isMesh": false,
+                          "children": [
+                            {
+                              "name": "forearm",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                3,
+                                0.5
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                36,
+                                44
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                0,
+                                -3,
+                                -2
+                              ],
+                              "dimensions": [
+                                0,
+                                15,
+                                3
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "wrist",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                15,
+                                0
+                              ],
+                              "isCube": false,
+                              "isMesh": false,
+                              "children": [
+                                {
+                                  "name": "wrist",
+                                  "rotation": [
+                                    0,
+                                    0,
+                                    0
+                                  ],
+                                  "offset": [
+                                    0,
+                                    0,
+                                    0
+                                  ],
+                                  "isCube": true,
+                                  "isMesh": false,
+                                  "texOffset": [
+                                    50,
+                                    40
+                                  ],
+                                  "mirror": false,
+                                  "origin": [
+                                    -1,
+                                    -1,
+                                    -1
+                                  ],
+                                  "dimensions": [
+                                    2,
+                                    2,
+                                    2
+                                  ],
+                                  "inflate": 0
+                                },
+                                {
+                                  "name": "hand",
+                                  "rotation": [
+                                    0,
+                                    0,
+                                    0
+                                  ],
+                                  "offset": [
+                                    0,
+                                    0,
+                                    0
+                                  ],
+                                  "isCube": true,
+                                  "isMesh": false,
+                                  "texOffset": [
+                                    36,
+                                    33
+                                  ],
+                                  "mirror": false,
+                                  "origin": [
+                                    -1,
+                                    1,
+                                    -2.5
+                                  ],
+                                  "dimensions": [
+                                    2,
+                                    6,
+                                    5
+                                  ],
+                                  "inflate": 0
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "arm_south",
+          "rotation": [
+            0,
+            -3.141592653589793,
+            0
+          ],
+          "offset": [
+            0,
+            2,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "shoulder2",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0.5,
+                -10
+              ],
+              "isCube": false,
+              "isMesh": false,
+              "children": [
+                {
+                  "name": "shoulder1",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    -0.5,
+                    0
+                  ],
+                  "isCube": true,
+                  "isMesh": false,
+                  "texOffset": [
+                    50,
+                    35
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    -1,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    3,
+                    2
+                  ],
+                  "inflate": 0
+                },
+                {
+                  "name": "upper_arm2",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    -0.5,
+                    0
+                  ],
+                  "isCube": false,
+                  "isMesh": false,
+                  "children": [
+                    {
+                      "name": "upper arm1",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        0,
+                        2,
+                        0
+                      ],
+                      "isCube": true,
+                      "isMesh": false,
+                      "texOffset": [
+                        18,
+                        48
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        0,
+                        -2,
+                        -2
+                      ],
+                      "dimensions": [
+                        0,
+                        13,
+                        3
+                      ],
+                      "inflate": 0
+                    },
+                    {
+                      "name": "elbow2",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        0,
+                        14,
+                        -0.5
+                      ],
+                      "isCube": false,
+                      "isMesh": false,
+                      "children": [
+                        {
+                          "name": "elbow1",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            -0.5,
+                            0,
+                            1
+                          ],
+                          "isCube": true,
+                          "isMesh": false,
+                          "texOffset": [
+                            48,
+                            44
+                          ],
+                          "mirror": false,
+                          "origin": [
+                            0,
+                            -2,
+                            -3
+                          ],
+                          "dimensions": [
+                            1,
+                            4,
+                            4
+                          ],
+                          "inflate": 0
+                        },
+                        {
+                          "name": "forearm2",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            0,
+                            1,
+                            0
+                          ],
+                          "isCube": false,
+                          "isMesh": false,
+                          "children": [
+                            {
+                              "name": "forearm1",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                3,
+                                0.5
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                42,
+                                44
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                0,
+                                -3,
+                                -2
+                              ],
+                              "dimensions": [
+                                0,
+                                15,
+                                3
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "wrist2",
+                              "rotation": [
+                                0,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                15,
+                                0
+                              ],
+                              "isCube": false,
+                              "isMesh": false,
+                              "children": [
+                                {
+                                  "name": "wrist1",
+                                  "rotation": [
+                                    0,
+                                    0,
+                                    0
+                                  ],
+                                  "offset": [
+                                    0,
+                                    0,
+                                    0
+                                  ],
+                                  "isCube": true,
+                                  "isMesh": false,
+                                  "texOffset": [
+                                    48,
+                                    52
+                                  ],
+                                  "mirror": false,
+                                  "origin": [
+                                    -1,
+                                    -1,
+                                    -1
+                                  ],
+                                  "dimensions": [
+                                    2,
+                                    2,
+                                    2
+                                  ],
+                                  "inflate": 0
+                                },
+                                {
+                                  "name": "hand1",
+                                  "rotation": [
+                                    0,
+                                    0,
+                                    0
+                                  ],
+                                  "offset": [
+                                    0,
+                                    0,
+                                    0
+                                  ],
+                                  "isCube": true,
+                                  "isMesh": false,
+                                  "texOffset": [
+                                    40,
+                                    19
+                                  ],
+                                  "mirror": false,
+                                  "origin": [
+                                    -1,
+                                    1,
+                                    -2.5
+                                  ],
+                                  "dimensions": [
+                                    2,
+                                    6,
+                                    5
+                                  ],
+                                  "inflate": 0
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "crystal",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            27,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "cube",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                0,
+                48
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -4,
+                -1.5
+              ],
+              "dimensions": [
+                3,
+                8,
+                3
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "pyramid",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                4,
+                0
+              ],
+              "isCube": false,
+              "isMesh": true,
+              "faces": [
+                [
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 43,
+                    "v": 33
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 43,
+                    "v": 30
+                  },
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 40,
+                    "v": 30
+                  },
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 40,
+                    "v": 33
+                  }
+                ],
+                [
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 54,
+                    "v": 22.8028
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 57,
+                    "v": 22.8028
+                  },
+                  {
+                    "x": 0,
+                    "y": 1,
+                    "z": 0,
+                    "u": 55.5,
+                    "v": 21
+                  }
+                ],
+                [
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 46,
+                    "v": 31.8028
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 49,
+                    "v": 31.8028
+                  },
+                  {
+                    "x": 0,
+                    "y": 1,
+                    "z": 0,
+                    "u": 47.5,
+                    "v": 30
+                  }
+                ],
+                [
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 54,
+                    "v": 20.8028
+                  },
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 57,
+                    "v": 20.8028
+                  },
+                  {
+                    "x": 0,
+                    "y": 1,
+                    "z": 0,
+                    "u": 55.5,
+                    "v": 19
+                  }
+                ],
+                [
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 54,
+                    "v": 24.8028
+                  },
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 57,
+                    "v": 24.8028
+                  },
+                  {
+                    "x": 0,
+                    "y": 1,
+                    "z": 0,
+                    "u": 55.5,
+                    "v": 23
+                  }
+                ]
+              ]
+            },
+            {
+              "name": "pyramid1",
+              "rotation": [
+                -3.141592653589793,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -4,
+                0
+              ],
+              "isCube": false,
+              "isMesh": true,
+              "faces": [
+                [
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 46,
+                    "v": 33
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 46,
+                    "v": 30
+                  },
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 43,
+                    "v": 30
+                  },
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 43,
+                    "v": 33
+                  }
+                ],
+                [
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 56,
+                    "v": 1.8028
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 59,
+                    "v": 1.8028
+                  },
+                  {
+                    "x": 0,
+                    "y": 1,
+                    "z": 0,
+                    "u": 57.5,
+                    "v": 0
+                  }
+                ],
+                [
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 54,
+                    "v": 26.8028
+                  },
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 57,
+                    "v": 26.8028
+                  },
+                  {
+                    "x": 0,
+                    "y": 1,
+                    "z": 0,
+                    "u": 55.5,
+                    "v": 25
+                  }
+                ],
+                [
+                  {
+                    "x": 1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 54,
+                    "v": 28.8028
+                  },
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 57,
+                    "v": 28.8028
+                  },
+                  {
+                    "x": 0,
+                    "y": 1,
+                    "z": 0,
+                    "u": 55.5,
+                    "v": 27
+                  }
+                ],
+                [
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": -1.5,
+                    "u": 56,
+                    "v": 3.8028
+                  },
+                  {
+                    "x": -1.5,
+                    "y": 0,
+                    "z": 1.5,
+                    "u": 59,
+                    "v": 3.8028
+                  },
+                  {
+                    "x": 0,
+                    "y": 1,
+                    "z": 0,
+                    "u": 57.5,
+                    "v": 2
+                  }
+                ]
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    64,
+    64
+  ]
+}

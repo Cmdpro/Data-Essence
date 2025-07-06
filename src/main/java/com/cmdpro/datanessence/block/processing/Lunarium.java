@@ -22,15 +22,16 @@ public class Lunarium extends BaseFabricatorBlock {
         super(properties);
     }
 
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape SHAPE = Shapes.join(Block.box(2.5, 0, 2.5, 13.5, 5, 13.5), Block.box(3.5, 5, 3.5, 12.5, 11, 12.5), BooleanOp.OR);
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
         return SHAPE;
     }
+
     @Override
     public RenderShape getRenderShape(BlockState pState) {
-        return RenderShape.MODEL;
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 
     @Nullable
@@ -39,6 +40,7 @@ public class Lunarium extends BaseFabricatorBlock {
         LunariumBlockEntity ent = new LunariumBlockEntity(pPos, pState);
         return ent;
     }
+
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         if (!pLevel.isClientSide()) {

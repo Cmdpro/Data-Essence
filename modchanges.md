@@ -10,3 +10,4 @@
 - Added Antigravity Pack tool
 - Added Crystalline Cradle machine
 - Added Lunarium machine
+- Added enhanced Speed node upgrade sigil that boosts a node's transfer rate by 4x

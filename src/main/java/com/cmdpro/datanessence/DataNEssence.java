@@ -286,6 +286,7 @@ public class DataNEssence
             event.accept(ItemRegistry.BURNING_LENS.get());
             event.accept(ItemRegistry.PRECISION_LENS.get());
             event.accept(ItemRegistry.SPEED_UPGRADE.get());
+            event.accept(ItemRegistry.SPEED_UPGRADE_2.get());
             event.accept(ItemRegistry.FILTER_UPGRADE.get());
 
             // Materials

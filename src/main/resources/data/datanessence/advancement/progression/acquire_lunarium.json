@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:lunarium"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_lunarium.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_lunarium.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_lunar_essence_shard",
+  "criteria": {
+    "has_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:lunarium" ] } ] }
+    }
+  }
+}

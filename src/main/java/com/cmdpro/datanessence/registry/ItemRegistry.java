@@ -103,6 +103,7 @@ public class ItemRegistry {
 
     // Node Upgrades
     public static final Supplier<Item> SPEED_UPGRADE = register("speed_upgrade", () -> new SpeedNodeUpgrade(new Item.Properties(), 1));
+    public static final Supplier<Item> SPEED_UPGRADE_2 = register("speed_upgrade_2", () -> new SpeedNodeUpgrade(new Item.Properties(), 3));
     public static final Supplier<Item> FILTER_UPGRADE = register("filter_upgrade", () -> new FilterNodeUpgrade(new Item.Properties().component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));
 
     // Music Discs

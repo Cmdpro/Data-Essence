@@ -5,6 +5,7 @@
   "tab": "datanessence:basics",
   "x": -2,
   "y": 1,
+  "critical": true,
   "pages": [
     {
       "type": "datanessence:item",
@@ -34,6 +35,28 @@
   },
   "parents": [
     "datanessence:basics/fabricator",
-    "datanessence:machinery_transformation/ecliptrum"
+    "datanessence:machinery_transformation/ecliptrum",
+    "datanessence:basics/lunar_strikes"
+  ],
+  "completion_stages": [
+    {
+      "completion_advancements": [
+        "datanessence:progression/acquire_lunarium"
+      ],
+      "pages": [
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.lunarium.page1.incomplete_text"
+          }
+        },
+        {
+          "type": "datanessence:crafting",
+          "recipes": [
+            "datanessence:fabrication/lunarium"
+          ]
+        }
+      ]
+    }
   ]
 }
