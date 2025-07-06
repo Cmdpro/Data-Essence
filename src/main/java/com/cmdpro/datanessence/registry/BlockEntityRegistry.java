@@ -13,7 +13,7 @@ import com.cmdpro.datanessence.block.production.*;
 import com.cmdpro.datanessence.block.storage.*;
 import com.cmdpro.datanessence.block.technical.ArekkoBlockEntity;
 import com.cmdpro.datanessence.block.technical.ComputerBlockEntity;
-import com.cmdpro.datanessence.block.technical.DataBankBlockEntity;
+import com.cmdpro.datanessence.block.technical.AncientDataBankBlockEntity;
 import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
 import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberBlockEntity;
 import com.cmdpro.datanessence.block.transmission.*;
@@ -143,8 +143,12 @@ public class BlockEntityRegistry {
             register("fluid_buffer", () ->
                     BlockEntityType.Builder.of(FluidBufferBlockEntity::new,
                             BlockRegistry.FLUID_BUFFER.get()).build(null));
-    public static final Supplier<BlockEntityType<DataBankBlockEntity>> DATA_BANK =
+    public static final Supplier<BlockEntityType<AncientDataBankBlockEntity>> ANCIENT_DATA_BANK =
             register("data_bank", () ->
+                    BlockEntityType.Builder.of(AncientDataBankBlockEntity::new,
+                            BlockRegistry.ANCIENT_DATA_BANK.get()).build(null));
+    public static final Supplier<BlockEntityType<DataBankBlockEntity>> DATA_BANK =
+            register("player_data_bank", () ->
                     BlockEntityType.Builder.of(DataBankBlockEntity::new,
                             BlockRegistry.DATA_BANK.get()).build(null));
     public static final Supplier<BlockEntityType<EssenceBatteryBlockEntity>> ESSENCE_BATTERY =

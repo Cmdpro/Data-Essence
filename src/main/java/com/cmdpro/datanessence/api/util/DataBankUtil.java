@@ -15,7 +15,10 @@ public class DataBankUtil {
     public static void sendDataBankEntries(ServerPlayer player, ResourceLocation[] ids) {
         Map<ResourceLocation, DataBankEntry> entries = new HashMap<>();
         for (ResourceLocation i : ids) {
-            entries.put(i, DataBankEntries.entries.get(i));
+            DataBankEntry entry = DataBankEntries.entries.get(i);
+            if (entry != null) {
+                entries.put(i, entry);
+            }
         }
         ModMessages.sendToPlayer(new DataBankEntrySync(entries), (player));
     }

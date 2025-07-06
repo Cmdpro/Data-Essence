@@ -59,7 +59,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         decoBlock(BlockRegistry.AETHER_RUNE);
 
         essenceBurner(BlockRegistry.ESSENCE_BURNER);
-        dataBank(BlockRegistry.DATA_BANK);
+        dataBank(BlockRegistry.ANCIENT_DATA_BANK);
         fluidCollector(BlockRegistry.FLUID_COLLECTOR);
         fluidCollector(BlockRegistry.FLUID_SPILLER);
         laserEmitter(BlockRegistry.LASER_EMITTER);
