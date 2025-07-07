@@ -20,5 +20,6 @@ Eventually you may unlock enough entries to advance in Tier, garnering more entr
 ### Primary developers
 - **Cmdpro/Cimdy**: Programming lead
 - **Eset Kalenko**: Design lead - [Eset's KoFi](https://ko-fi.com/esetkalenko)
+- **Fuzzy**: Music lead
 ### Contributors
 - **DavidRarria09**: Music contributions ("UnderTheSky" music disc)

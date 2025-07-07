@@ -2,6 +2,7 @@
 - Added Entropic Processor recipes for sugar, glowstone block to dust, and quartz block to nether quartz
 - Added the "always_shown" field to data tabs if the tab is wanted to be shown even when empty
 - Added simple Pastel compat; subject to be expanded and/or changed as that mod grows
+- Added work melody to Fabricator
 
 ### Changes
 - Updated Entropic Processor entry with recipe page layout changes and additional descriptions
@@ -11,6 +12,7 @@
 - Moved the fabricator logic to a separate abstract class
 - Moved the data bank logic to a separate abstract class
 - Arekko no longer has collision
+- Changed Fabricator finish crafting noise to amethyst breaking
 
 ### Fixes
 - Fixed the Mineral Locator effect glitching out by making its scanning not render fluid states

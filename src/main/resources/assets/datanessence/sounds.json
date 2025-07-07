@@ -1,4 +1,16 @@
 {
+    "ost.factory_loops.fabricator": {
+        "sounds": [
+            "datanessence:ost/factory_loops/fabricator"
+        ],
+        "stream": true
+    },
+    "ost.factory_loops.lunarium": {
+        "sounds": [
+            "datanessence:ost/factory_loops/lunarium"
+        ],
+        "stream": true
+    },
     "critical_data_unlocked": {
         "sounds": [
             "datanessence:critical_data_unlocked"
@@ -38,6 +50,7 @@
             "datanessence:ui/ui_click"
         ]
     },
+
     "music.under_the_sky": {
         "sounds": [
             "datanessence:music/under_the_sky"
@@ -112,9 +125,10 @@
     },
     "block.auto_fabricator.craft": {
         "sounds": [
-            "block/enchantment_table/enchant1",
-            "block/enchantment_table/enchant2",
-            "block/enchantment_table/enchant3"
+            "block/amethyst_cluster/break1",
+            "block/amethyst_cluster/break2",
+            "block/amethyst_cluster/break3",
+            "block/amethyst_cluster/break4"
         ],
         "subtitle": "subtitle.datanessence.block.auto_fabricator.craft"
     },
@@ -129,9 +143,10 @@
     },
     "block.fabricator.craft": {
         "sounds": [
-            "block/enchantment_table/enchant1",
-            "block/enchantment_table/enchant2",
-            "block/enchantment_table/enchant3"
+            "block/amethyst_cluster/break1",
+            "block/amethyst_cluster/break2",
+            "block/amethyst_cluster/break3",
+            "block/amethyst_cluster/break4"
         ],
         "subtitle": "subtitle.datanessence.block.fabricator.craft"
     },
