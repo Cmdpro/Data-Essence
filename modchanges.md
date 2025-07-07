@@ -13,6 +13,7 @@
 - Moved the data bank logic to a separate abstract class
 - Arekko no longer has collision
 - Changed Fabricator finish crafting noise to amethyst breaking
+- Adjusted several fabrication recipe times
 
 ### Fixes
 - Fixed the Mineral Locator effect glitching out by making its scanning not render fluid states
