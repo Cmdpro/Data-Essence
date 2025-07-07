@@ -64,7 +64,7 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
         super.tick(world, pos, state, baseFabricator);
 
         if (baseFabricator instanceof FabricatorBlockEntity fabricator && world.isClientSide()) {
-            if (fabricator.time >= 0) {
+            if (fabricator.time >= 0 && fabricator.essenceCost != null) {
                 if (!fabricator.clientHandler.isSoundPlaying()) {
                     fabricator.clientHandler.startSound();
                 }
