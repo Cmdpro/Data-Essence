@@ -55,7 +55,7 @@ public abstract class BaseFabricatorBlock extends Block implements EntityBlock, 
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return (lvl, pos, st, blockEntity) -> {
             if (blockEntity instanceof BaseFabricatorBlockEntity ent) {
-                BaseFabricatorBlockEntity.tick(lvl, pos, st, ent);
+                ent.tick(lvl, pos, st, ent);
             }
         };
     }

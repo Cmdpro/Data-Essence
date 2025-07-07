@@ -69,6 +69,10 @@ public class SoundRegistry {
     //Music
     public static final Holder<SoundEvent> UNDER_THE_SKY = createBasicSound("music.under_the_sky");
 
+    // Factory Loops
+    public static final Holder<SoundEvent> FABRICATOR_LOOP = createBasicSound("ost.factory_loops.fabricator");
+    public static final Holder<SoundEvent> LUNARIUM_LOOP = createBasicSound("ost.factory_loops.lunarium");
+
     public static Holder<SoundEvent> createBasicSound(String name) {
         return SOUND_EVENTS.register(name,
                 () -> SoundEvent.createVariableRangeEvent(DataNEssence.locate(name)));
