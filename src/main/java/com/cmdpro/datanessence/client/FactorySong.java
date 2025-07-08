@@ -32,7 +32,7 @@ import java.util.List;
 public class FactorySong {
     public static final HashMap<ResourceLocation, FactoryLoop> FACTORY_LOOPS = new HashMap<>();
     public static void addFactorySongSound(ResourceLocation id) {
-        FACTORY_LOOPS.put(id, new FactorySong.FactoryLoop(new FactorySong.FactorySoundInstance(id, SoundSource.BLOCKS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), true, 0, SoundInstance.Attenuation.NONE, 0.0, 0.0, 0.0, true)));
+        FACTORY_LOOPS.put(id, new FactorySong.FactoryLoop(new FactorySong.FactorySoundInstance(id, SoundSource.BLOCKS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), false, 0, SoundInstance.Attenuation.NONE, 0.0, 0.0, 0.0, true)));
     }
     public static FactoryLoop getLoop(SoundEvent event) {
         return FACTORY_LOOPS.get(event.getLocation());
