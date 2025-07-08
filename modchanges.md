@@ -1,3 +1,4 @@
+## Music Update - Song of the Factory
 ### Additions
 - Added Entropic Processor recipes for sugar, glowstone block to dust, and quartz block to nether quartz
 - Added the "always_shown" field to data tabs if the tab is wanted to be shown even when empty
