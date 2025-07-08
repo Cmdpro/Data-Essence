@@ -3,7 +3,9 @@ package com.cmdpro.datanessence.block.generation;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
+import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
 import com.cmdpro.datanessence.client.ClientEvents;
+import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
@@ -27,7 +29,6 @@ public class EssenceLeechBlockEntity extends BlockEntity implements EssenceBlock
         return storage;
     }
     public int cooldown;
-    private ClientHandler clientHandler;
 
     public EssenceLeechBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ESSENCE_LEECH.get(), pos, state);
@@ -60,32 +61,21 @@ public class EssenceLeechBlockEntity extends BlockEntity implements EssenceBlock
             } else {
                 pBlockEntity.cooldown -= 1;
             }
-        }
-        else {
-            if (!pBlockEntity.clientHandler.isSoundPlaying() && ClientEvents.FactorySongPointer <= 0) {
-                pBlockEntity.clientHandler.startSound();
-            }
+        } else {
+            ClientHandler.markFactorySong(pPos);
         }
     }
 
     @Override
     public void onLoad() {
         super.onLoad();
-        if (level.isClientSide)
-            clientHandler = new ClientHandler();
     }
 
     private static class ClientHandler {
-        SoundInstance workingSound = SoundRegistry.FACTORY_LOOPS.get(SoundRegistry.LEECH_LOOP.value().getLocation());
+        static FactorySong.FactoryLoop workingSound = FactorySong.getLoop(SoundRegistry.LEECH_LOOP.value());
 
-        public void startSound() {
-            Minecraft.getInstance().getSoundManager().play(workingSound);
-        }
-        public void stopSound() {
-            Minecraft.getInstance().getSoundManager().stop(workingSound);
-        }
-        public boolean isSoundPlaying() {
-            return Minecraft.getInstance().getSoundManager().isActive(workingSound);
+        public static void markFactorySong(BlockPos pos) {
+            workingSound.addSource(pos);
         }
     }
 }

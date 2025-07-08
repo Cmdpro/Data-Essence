@@ -96,26 +96,6 @@ import static com.mojang.blaze3d.platform.GlConst.GL_DRAW_FRAMEBUFFER;
 
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID)
 public class ClientEvents {
-    public static int FactorySongPointer;
-
-    @SubscribeEvent
-    public static void incrementFactorySongPointer(ClientTickEvent.Post event) {
-        Minecraft client = Minecraft.getInstance();
-        SoundManager soundManager = client.getSoundManager();
-        boolean playing = false;
-
-        for (var sound : SoundRegistry.FACTORY_LOOPS.values()) {
-
-            if (soundManager.isActive(sound))
-                playing = true;
-        }
-
-        if (playing && !client.isPaused())
-            FactorySongPointer++;
-        if (FactorySongPointer > 612 || !playing) // 612 ticks = 30s + 600ms
-            FactorySongPointer = 0;
-    }
-
     public static RenderTarget tempRenderTarget;
     private static String format(float number) {
         DecimalFormat format = new DecimalFormat("#.0");

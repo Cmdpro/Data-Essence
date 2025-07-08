@@ -1,16 +1,24 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.client.FactorySong;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class SoundRegistry {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, DataNEssence.MOD_ID);
@@ -73,7 +81,6 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> UNDER_THE_SKY = createBasicSound("music.under_the_sky");
 
     // Factory Loops
-    public static final HashMap<ResourceLocation, SoundInstance> FACTORY_LOOPS = new HashMap<>();
     public static final Holder<SoundEvent> FABRICATOR_LOOP = createBasicFactoryLoopSound("ost.factory_loops.fabricator");
     public static final Holder<SoundEvent> LUNARIUM_LOOP = createBasicFactoryLoopSound("ost.factory_loops.lunarium");
     public static final Holder<SoundEvent> LEECH_LOOP = createBasicFactoryLoopSound("ost.factory_loops.essence_leech");
@@ -87,7 +94,9 @@ public class SoundRegistry {
     public static Holder<SoundEvent> createBasicFactoryLoopSound(String name) {
         var identifier = DataNEssence.locate(name);
         var sound = SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(identifier));
-        FACTORY_LOOPS.put(identifier,  new SimpleSoundInstance(identifier, SoundSource.BLOCKS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), true, 0, SoundInstance.Attenuation.NONE, 0.0, 0.0, 0.0, true));
+        if (Dist.CLIENT.isClient()) {
+            FactorySong.addFactorySongSound(identifier);
+        }
         return sound;
     }
 }

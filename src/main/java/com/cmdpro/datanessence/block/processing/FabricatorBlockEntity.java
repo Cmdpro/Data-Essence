@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.block.BaseFabricatorBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.client.ClientEvents;
+import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
@@ -30,7 +31,6 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("ready", (state, anim) -> {}, (state, anim) -> {}));
-    private ClientHandler clientHandler;
 
     @Override
     public void setLevel(Level level) {
@@ -67,13 +67,7 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
 
         if (baseFabricator instanceof FabricatorBlockEntity fabricator && world.isClientSide()) {
             if (fabricator.time >= 0 && fabricator.essenceCost != null) {
-                if (!fabricator.clientHandler.isSoundPlaying() && ClientEvents.FactorySongPointer <= 0) {
-                    fabricator.clientHandler.startSound();
-                }
-            } else {
-                if (fabricator.clientHandler.isSoundPlaying()) {
-                    fabricator.clientHandler.stopSound();
-                }
+                ClientHandler.markFactorySong(pos);
             }
         }
     }
@@ -81,24 +75,14 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
     @Override
     public void onLoad() {
         super.onLoad();
-        if (level.isClientSide) {
-            clientHandler = new ClientHandler();
-        } else {
-            checkRecipes();
-        }
+        checkRecipes();
     }
 
     private static class ClientHandler {
-        SoundInstance industrialSound = SoundRegistry.FACTORY_LOOPS.get(SoundRegistry.FABRICATOR_LOOP.value().getLocation());
+        static FactorySong.FactoryLoop industrialSound = FactorySong.getLoop(SoundRegistry.FABRICATOR_LOOP.value());
 
-        public void startSound() {
-            Minecraft.getInstance().getSoundManager().play(industrialSound);
-        }
-        public void stopSound() {
-            Minecraft.getInstance().getSoundManager().stop(industrialSound);
-        }
-        public boolean isSoundPlaying() {
-            return Minecraft.getInstance().getSoundManager().isActive(industrialSound);
+        public static void markFactorySong(BlockPos pos) {
+            industrialSound.addSource(pos);
         }
     }
 }
