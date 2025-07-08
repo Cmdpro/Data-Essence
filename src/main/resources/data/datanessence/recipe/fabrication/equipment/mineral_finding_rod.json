@@ -9,7 +9,7 @@
     " M ",
     "R  "
   ],
-  "time": 240,
+  "time": 300,
   "key": {
     "R": { "item": "datanessence:conductance_rod" },
     "M": { "item": "datanessence:logical_matrix" },

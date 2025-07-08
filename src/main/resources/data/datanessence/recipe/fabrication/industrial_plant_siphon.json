@@ -7,7 +7,7 @@
     "OIC",
     "OOO"
   ],
-  "time": 100,
+  "time": 200,
   "key": {
     "C": { "item": "datanessence:conductance_rod" },
     "O": { "item": "datanessence:polished_obsidian" },
