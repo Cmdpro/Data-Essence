@@ -15,11 +15,13 @@ import net.neoforged.neoforge.capabilities.BlockCapability;
 public class DataNEssenceIntegration {
     public static boolean hasMekanism;
     public static boolean hasOpalescence;
+    public static boolean hasPastel;
 
     public static BlockCapability<IChemicalHandler, Direction> BLOCK_CHEMICAL = hasMekanism ? BlockCapability.createSided(ResourceLocation.fromNamespaceAndPath(MekanismAPI.MEKANISM_MODID, "chemical_handler"), IChemicalHandler.class) : null;
     public static void init() {
         hasMekanism = ModList.get().isLoaded("mekanism");
         hasOpalescence = ModList.get().isLoaded("opalescence");
+        hasPastel = ModList.get().isLoaded("pastel");
     }
     public static class OpalescenseIntegration {
         public static int getOpalBlockColor(BlockState state, BlockAndTintGetter blockAndTintGetter, BlockPos pos, int tintIndex) {

@@ -1,13 +1,16 @@
 package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
+import java.util.HashMap;
 
 public class SoundRegistry {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, DataNEssence.MOD_ID);
@@ -70,11 +73,21 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> UNDER_THE_SKY = createBasicSound("music.under_the_sky");
 
     // Factory Loops
-    public static final Holder<SoundEvent> FABRICATOR_LOOP = createBasicSound("ost.factory_loops.fabricator");
-    public static final Holder<SoundEvent> LUNARIUM_LOOP = createBasicSound("ost.factory_loops.lunarium");
+    public static final HashMap<ResourceLocation, SoundInstance> FACTORY_LOOPS = new HashMap<>();
+    public static final Holder<SoundEvent> FABRICATOR_LOOP = createBasicFactoryLoopSound("ost.factory_loops.fabricator");
+    public static final Holder<SoundEvent> LUNARIUM_LOOP = createBasicFactoryLoopSound("ost.factory_loops.lunarium");
+    public static final Holder<SoundEvent> LEECH_LOOP = createBasicFactoryLoopSound("ost.factory_loops.essence_leech");
+    public static final Holder<SoundEvent> DERIVATION_SPIKE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.essence_derivation_spike");
 
     public static Holder<SoundEvent> createBasicSound(String name) {
         return SOUND_EVENTS.register(name,
                 () -> SoundEvent.createVariableRangeEvent(DataNEssence.locate(name)));
+    }
+
+    public static Holder<SoundEvent> createBasicFactoryLoopSound(String name) {
+        var identifier = DataNEssence.locate(name);
+        var sound = SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(identifier));
+        FACTORY_LOOPS.put(identifier,  new SimpleSoundInstance(identifier, SoundSource.BLOCKS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), true, 0, SoundInstance.Attenuation.NONE, 0.0, 0.0, 0.0, true));
+        return sound;
     }
 }

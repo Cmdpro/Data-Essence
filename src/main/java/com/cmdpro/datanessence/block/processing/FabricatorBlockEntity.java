@@ -2,8 +2,10 @@ package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.block.BaseFabricatorBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.client.ClientEvents;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
@@ -65,7 +67,7 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
 
         if (baseFabricator instanceof FabricatorBlockEntity fabricator && world.isClientSide()) {
             if (fabricator.time >= 0 && fabricator.essenceCost != null) {
-                if (!fabricator.clientHandler.isSoundPlaying()) {
+                if (!fabricator.clientHandler.isSoundPlaying() && ClientEvents.FactorySongPointer <= 0) {
                     fabricator.clientHandler.startSound();
                 }
             } else {
@@ -81,25 +83,22 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
         super.onLoad();
         if (level.isClientSide) {
             clientHandler = new ClientHandler();
-            clientHandler.createWorkingSound(getBlockPos());
         } else {
             checkRecipes();
         }
     }
 
     private static class ClientHandler {
-        public SoundInstance workingSound;
-        public void createWorkingSound(BlockPos pos) {
-            workingSound = new SimpleSoundInstance(SoundRegistry.FABRICATOR_LOOP.value(), SoundSource.BLOCKS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), pos);
-        }
+        SoundInstance industrialSound = SoundRegistry.FACTORY_LOOPS.get(SoundRegistry.FABRICATOR_LOOP.value().getLocation());
+
         public void startSound() {
-            Minecraft.getInstance().getSoundManager().play(workingSound);
+            Minecraft.getInstance().getSoundManager().play(industrialSound);
         }
         public void stopSound() {
-            Minecraft.getInstance().getSoundManager().stop(workingSound);
+            Minecraft.getInstance().getSoundManager().stop(industrialSound);
         }
         public boolean isSoundPlaying() {
-            return Minecraft.getInstance().getSoundManager().isActive(workingSound);
+            return Minecraft.getInstance().getSoundManager().isActive(industrialSound);
         }
     }
 }

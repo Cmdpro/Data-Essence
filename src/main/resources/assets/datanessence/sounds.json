@@ -11,6 +11,18 @@
         ],
         "stream": true
     },
+    "ost.factory_loops.essence_leech": {
+        "sounds": [
+            "datanessence:ost/factory_loops/essence_leech"
+        ],
+        "stream": true
+    },
+    "ost.factory_loops.essence_derivation_spike": {
+        "sounds": [
+            "datanessence:ost/factory_loops/essence_derivation_spike"
+        ],
+        "stream": true
+    },
     "critical_data_unlocked": {
         "sounds": [
             "datanessence:critical_data_unlocked"
