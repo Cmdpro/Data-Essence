@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.client;
 
 import com.cmdpro.databank.ClientDatabankUtils;
 import com.cmdpro.databank.Databank;
+import com.cmdpro.databank.misc.RenderingUtil;
 import com.cmdpro.databank.multiblock.Multiblock;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.rendering.RenderHandler;
@@ -301,7 +302,7 @@ public class ClientEvents {
 
             poseStack.pushPose();
             poseStack.translate(-event.getCamera().getPosition().x, -event.getCamera().getPosition().y, -event.getCamera().getPosition().z);
-            ClientDatabankUtils.renderAdvancedBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, event.getPartialTick().getGameTimeDeltaPartialTick(true), 1f, gameTime, posLow, posHigh, color, 0.25f, 0.3f);
+            RenderingUtil.renderAdvancedBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, event.getPartialTick().getGameTimeDeltaPartialTick(true), 1f, gameTime, posLow, posHigh, color, 0.25f, 0.3f);
             poseStack.popPose();
         }
     }

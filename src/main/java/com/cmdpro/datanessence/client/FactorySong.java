@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.client;
 
+import com.cmdpro.databank.misc.SoundUtil;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.mixin.client.ChannelMixin;
 import com.cmdpro.datanessence.mixin.client.SoundEngineMixin;
@@ -56,20 +57,13 @@ public class FactorySong {
             } else if (sound.getSourceCount() > 0) {
                 currentPlaying = true;
                 Minecraft.getInstance().getSoundManager().play(sound.sound);
-                ChannelAccess.ChannelHandle handle = ((SoundEngineMixin)getSoundEngine()).getInstanceToChannel().get(sound.sound);
                 float time = ((float)FactorySongPointer)/20f;
-                handle.execute((channel) -> {
-                    int source = ((ChannelMixin) channel).getSource();
-                    AL10.alSourcef(source, AL11.AL_SEC_OFFSET, time);
-                });
+                SoundUtil.setTime(sound.sound, time);
             }
             if (currentPlaying) {
                 playing = true;
-                ChannelAccess.ChannelHandle handle = ((SoundEngineMixin)getSoundEngine()).getInstanceToChannel().get(sound.sound);
                 float volume = sound.sound.getDynamicVolume(sound.sound.getVolume());
-                handle.execute((channel) -> {
-                    channel.setVolume(volume);
-                });
+                SoundUtil.modifySound(sound.sound, (channel) -> channel.setVolume(volume));
             }
             sound.clearSources();
         }
@@ -78,9 +72,6 @@ public class FactorySong {
             FactorySongPointer++;
         if (FactorySongPointer > 612 || !playing) // 612 ticks = 30s + 600ms
             FactorySongPointer = 0;
-    }
-    private static SoundEngine getSoundEngine() {
-        return ((SoundManagerMixin)Minecraft.getInstance().getSoundManager()).getSoundEngine();
     }
     public static class FactoryLoop {
         public FactorySoundInstance sound;
