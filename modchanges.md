@@ -1,9 +1,10 @@
 ## Music Update - Song of the Factory
 ### Additions
+- Added the Song of the Factory - major machines now play synchronized melodies when making or using Essence; build up your factory and watch the Song grow with it
+- Added synchronized music system
 - Added Entropic Processor recipes for sugar, glowstone block to dust, and quartz block to nether quartz
 - Added the "always_shown" field to data tabs if the tab is wanted to be shown even when empty
 - Added simple Pastel compat; subject to be expanded and/or changed as that mod grows
-- Added work melody to Fabricator
 
 ### Changes
 - Updated Entropic Processor entry with recipe page layout changes and additional descriptions
