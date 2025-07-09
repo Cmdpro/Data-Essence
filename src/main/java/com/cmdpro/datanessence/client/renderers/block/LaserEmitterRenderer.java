@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.client.renderers.block;
 
 import com.cmdpro.databank.ClientDatabankUtils;
+import com.cmdpro.databank.misc.RenderingUtil;
 import com.cmdpro.datanessence.api.item.ILaserEmitterModule;
 import com.cmdpro.datanessence.block.auxiliary.LaserEmitterBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -28,7 +29,7 @@ public class LaserEmitterRenderer implements BlockEntityRenderer<LaserEmitterBlo
             if ( laserEmitter.item.getItem() instanceof ILaserEmitterModule lens )
                 color = lens.getBeamColor();
 
-            ClientDatabankUtils.renderAdvancedBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0f, laserEmitter.getLevel().getGameTime(), laserEmitter.getBlockPos().getCenter(), laserEmitter.end, new Color(color), 0.25f, 0.3f);
+            RenderingUtil.renderAdvancedBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0f, laserEmitter.getLevel().getGameTime(), laserEmitter.getBlockPos().getCenter(), laserEmitter.end, new Color(color), 0.25f, 0.3f);
             poseStack.popPose();
         }
     }

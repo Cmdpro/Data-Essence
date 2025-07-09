@@ -2,8 +2,11 @@ package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.block.BaseFabricatorBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.client.ClientEvents;
+import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
@@ -28,7 +31,6 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("ready", (state, anim) -> {}, (state, anim) -> {}));
-    private ClientHandler clientHandler;
 
     @Override
     public void setLevel(Level level) {
@@ -65,13 +67,7 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
 
         if (baseFabricator instanceof FabricatorBlockEntity fabricator && world.isClientSide()) {
             if (fabricator.time >= 0 && fabricator.essenceCost != null) {
-                if (!fabricator.clientHandler.isSoundPlaying()) {
-                    fabricator.clientHandler.startSound();
-                }
-            } else {
-                if (fabricator.clientHandler.isSoundPlaying()) {
-                    fabricator.clientHandler.stopSound();
-                }
+                ClientHandler.markFactorySong(pos);
             }
         }
     }
@@ -79,27 +75,14 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
     @Override
     public void onLoad() {
         super.onLoad();
-        if (level.isClientSide) {
-            clientHandler = new ClientHandler();
-            clientHandler.createWorkingSound(getBlockPos());
-        } else {
-            checkRecipes();
-        }
+        checkRecipes();
     }
 
     private static class ClientHandler {
-        public SoundInstance workingSound;
-        public void createWorkingSound(BlockPos pos) {
-            workingSound = new SimpleSoundInstance(SoundRegistry.FABRICATOR_LOOP.value(), SoundSource.BLOCKS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), pos);
-        }
-        public void startSound() {
-            Minecraft.getInstance().getSoundManager().play(workingSound);
-        }
-        public void stopSound() {
-            Minecraft.getInstance().getSoundManager().stop(workingSound);
-        }
-        public boolean isSoundPlaying() {
-            return Minecraft.getInstance().getSoundManager().isActive(workingSound);
+        static FactorySong.FactoryLoop industrialSound = FactorySong.getLoop(SoundRegistry.FABRICATOR_LOOP.value());
+
+        public static void markFactorySong(BlockPos pos) {
+            industrialSound.addSource(pos);
         }
     }
 }

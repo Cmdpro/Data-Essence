@@ -35,6 +35,7 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -281,7 +282,7 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
     }
     protected void updateBlock() {
         BlockState blockState = level.getBlockState(this.getBlockPos());
-        this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
+        this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, Block.UPDATE_ALL);
         this.setChanged();
     }
     private static boolean hasNotReachedStackLimit(BaseFabricatorBlockEntity entity) {
