@@ -17,6 +17,15 @@
     "datanessence:ancient_window",
     "datanessence:ancient_glyph_stone_blank",
     "datanessence:ancient_glyph_stone_makutuin",
-    "datanessence:ancient_glyph_stone_essence"
+    "datanessence:ancient_glyph_stone_essence",
+    "datanessence:ancient_lantern_shieldless",
+    "datanessence:ancient_rock_bricks_shieldless",
+    "datanessence:ancient_rock_column_shieldless",
+    "datanessence:ancient_rock_tiles_shieldless",
+    "datanessence:ancient_shelf_shieldless",
+    "datanessence:ancient_window_shieldless",
+    "datanessence:ancient_glyph_stone_blank_shieldless",
+    "datanessence:ancient_glyph_stone_essence_shieldless",
+    "datanessence:ancient_glyph_stone_makutuin_shieldless"
   ]
 }

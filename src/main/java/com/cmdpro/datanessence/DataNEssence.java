@@ -415,6 +415,16 @@ public class DataNEssence
             event.accept(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK.get());
             event.accept(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get());
             event.accept(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_COLUMN.get());
+            event.accept(BlockRegistry.SHIELDLESS_ENERGIZED_ANCIENT_ROCK_COLUMN.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_LANTERN.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_BRICKS.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_TILES.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_SHELF.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_WINDOW.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get());
             event.accept(BlockRegistry.COMPUTER.get());
             event.accept(BlockRegistry.ANCIENT_DATA_BANK.get());
         }

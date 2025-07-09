@@ -99,7 +99,16 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get())
                 .add(BlockRegistry.ENDER_PEARL_CAPTURE.get())
                 .add(BlockRegistry.ENDER_PEARL_RELAY.get())
-                .add(BlockRegistry.ENDER_PEARL_DESTINATION.get());
+                .add(BlockRegistry.ENDER_PEARL_DESTINATION.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_LANTERN.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_BRICKS.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_COLUMN.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_TILES.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_SHELF.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_WINDOW.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get())
@@ -130,7 +139,16 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.ANCIENT_WINDOW.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get())
-                .add(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
+                .add(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_LANTERN.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_BRICKS.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_COLUMN.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_TILES.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_SHELF.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_WINDOW.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get())
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get());
         this.tag(Tags.Blocks.ORES)
                 .add(BlockRegistry.LENSING_CRYSTAL_ORE.get());
         this.tag(Tags.Blocks.ORES_IN_GROUND_STONE)

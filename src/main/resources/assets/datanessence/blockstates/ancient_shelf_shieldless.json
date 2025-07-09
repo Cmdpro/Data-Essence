@@ -1,0 +1,24 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "datanessence:block/ancient_shelf_books"
+      },
+      {
+        "model": "datanessence:block/ancient_shelf_books2"
+      },
+      {
+        "model": "datanessence:block/ancient_shelf_bottles"
+      },
+      {
+        "model": "datanessence:block/ancient_shelf_empty"
+      },
+      {
+        "model": "datanessence:block/ancient_shelf_empty2"
+      },
+      {
+        "model": "datanessence:block/ancient_shelf_materials"
+      }
+    ]
+  }
+}

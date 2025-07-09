@@ -5,6 +5,7 @@
 - Added Entropic Processor recipes for sugar, glowstone block to dust, and quartz block to nether quartz
 - Added the "always_shown" field to data tabs if the tab is wanted to be shown even when empty
 - Added simple Pastel compat; subject to be expanded and/or changed as that mod grows
+- Added new variant of Ancient Rock blocks to prevent using the old, now structure-only Ancient Rock as a cheese method for other mods
 
 ### Changes
 - Updated Entropic Processor entry with recipe page layout changes and additional descriptions
@@ -16,6 +17,9 @@
 - Arekko no longer has collision
 - Changed Fabricator finish crafting noise to amethyst breaking
 - Adjusted several fabrication recipe times
+- Ancient Rock renamed to Shielding Rock
+- Shielding Rock now drops non-unbreakable Ancient Rock no matter what
+- Shielding Rock can no longer be relocated with other mods
 
 ### Fixes
 - Fixed the Mineral Locator effect glitching out by making its scanning not render fluid states

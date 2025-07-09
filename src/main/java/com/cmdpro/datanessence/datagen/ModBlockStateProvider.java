@@ -42,6 +42,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
         ancientDecoBlockWithItem(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN);
         ancientDecoBlockWithItem(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE);
 
+        parentedBlockWithItem(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_BRICKS, DataNEssence.locate("ancient_rock_bricks"));
+        parentedBlockWithItem(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_TILES, DataNEssence.locate("ancient_rock_tiles"));
+        parentedBlockWithItem(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_COLUMN, DataNEssence.locate("ancient_rock_column"));
+        parentedBlockWithItem(BlockRegistry.SHIELDLESS_ENERGIZED_ANCIENT_ROCK_COLUMN, DataNEssence.locate("energized_ancient_rock_column"));
+        parentedBlockWithItem(BlockRegistry.SHIELDLESS_ANCIENT_LANTERN, DataNEssence.locate("ancient_lantern"));
+        //parentedBlockWithItem(BlockRegistry.SHIELDLESS_ANCIENT_SHELF, DataNEssence.locate("ancient_shelf")); // does not gen properly, multi-model block. done manually for now
+        parentedBlockWithItem(BlockRegistry.SHIELDLESS_ANCIENT_WINDOW, DataNEssence.locate("ancient_window"));
+        parentedBlockWithItem(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK, DataNEssence.locate("ancient_glyph_stone_blank"));
+        parentedBlockWithItem(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE, DataNEssence.locate("ancient_glyph_stone_essence"));
+        parentedBlockWithItem(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN, DataNEssence.locate("ancient_glyph_stone_makutuin"));
+
         bufferDecoBlock(BlockRegistry.DECO_ESSENCE_BUFFER);
         bufferDecoBlock(BlockRegistry.DECO_ITEM_BUFFER);
         bufferDecoBlock(BlockRegistry.DECO_FLUID_BUFFER);
@@ -456,5 +467,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
         BlockModelBuilder model = models().getBuilder(loc.getPath())
                 .texture("particle", particle);
         simpleBlock(blockRegistryObject.get(), model);
+    }
+
+    private void parentedBlock(Supplier<Block> blockRegistryObject, ResourceLocation parent) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        simpleBlock(blockRegistryObject.get(), models().withExistingParent(loc.getPath(), parent));
+    }
+
+    private void parentedBlockWithItem(Supplier<Block> blockRegistryObject, ResourceLocation parent) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        simpleBlockWithItem(blockRegistryObject.get(), models().withExistingParent(loc.getPath(), parent));
     }
 }

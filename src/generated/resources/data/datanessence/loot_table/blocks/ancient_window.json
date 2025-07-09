@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:ancient_window"
+          "name": "datanessence:ancient_window_shieldless"
         }
       ],
       "rolls": 1.0

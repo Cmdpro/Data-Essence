@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:energized_ancient_rock_column"
+          "name": "datanessence:energized_ancient_rock_column_shieldless"
         }
       ],
       "rolls": 1.0

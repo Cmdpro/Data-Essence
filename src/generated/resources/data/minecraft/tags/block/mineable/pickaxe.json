@@ -77,6 +77,15 @@
     "datanessence:traversite_road_stairs_opal",
     "datanessence:ender_pearl_capture",
     "datanessence:ender_pearl_relay",
-    "datanessence:ender_pearl_destination"
+    "datanessence:ender_pearl_destination",
+    "datanessence:ancient_lantern_shieldless",
+    "datanessence:ancient_rock_bricks_shieldless",
+    "datanessence:ancient_rock_column_shieldless",
+    "datanessence:ancient_rock_tiles_shieldless",
+    "datanessence:ancient_shelf_shieldless",
+    "datanessence:ancient_window_shieldless",
+    "datanessence:ancient_glyph_stone_blank_shieldless",
+    "datanessence:ancient_glyph_stone_essence_shieldless",
+    "datanessence:ancient_glyph_stone_makutuin_shieldless"
   ]
 }

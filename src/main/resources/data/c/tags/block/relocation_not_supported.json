@@ -11,6 +11,16 @@
     "datanessence:exotic_essence_point",
     "datanessence:item_point",
     "datanessence:fluid_point",
-    "datanessence:chemical_node"
+    "datanessence:chemical_node",
+    "datanessence:ancient_rock_bricks",
+    "datanessence:ancient_rock_tiles",
+    "datanessence:ancient_rock_column",
+    "datanessence:energized_ancient_rock_column",
+    "datanessence:ancient_glyph_stone_blank",
+    "datanessence:ancient_glyph_stone_makutuin",
+    "datanessence:ancient_glyph_stone_essence",
+    "datanessence:ancient_lantern",
+    "datanessence:ancient_shelf",
+    "datanessence:ancient_window"
   ]
 }
