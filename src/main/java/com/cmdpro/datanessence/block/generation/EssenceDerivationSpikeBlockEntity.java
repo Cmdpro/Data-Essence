@@ -11,10 +11,12 @@ import com.cmdpro.datanessence.api.block.Overheatable;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
+import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -131,6 +133,9 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
                 }
                 spike.updateBlock();
             }
+        } else {
+            if (spike.isAbleToWork())
+                ClientHandler.markFactorySong(pos);
         }
     }
 
@@ -189,5 +194,15 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
         tag.putBoolean("Multi", hasStructure);
         tag.putBoolean("Redstone", hasRedstone);
         return tag;
+    }
+
+    private static class ClientHandler {
+        static FactorySong.FactoryLoop leechSound = FactorySong.getLoop(SoundRegistry.LEECH_LOOP.value());
+        static FactorySong.FactoryLoop spikeSound = FactorySong.getLoop(SoundRegistry.DERIVATION_SPIKE_LOOP.value());
+
+        public static void markFactorySong(BlockPos pos) {
+            leechSound.addSource(pos);
+            spikeSound.addSource(pos);
+        }
     }
 }
