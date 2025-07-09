@@ -2,12 +2,11 @@ package com.cmdpro.datanessence.block.production;
 
 import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
-import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
-import com.cmdpro.datanessence.api.misc.ILockableContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
+import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.recipe.MetalShaperRecipe;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.MetalShaperMenu;
@@ -22,12 +21,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -37,7 +34,6 @@ import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
@@ -45,7 +41,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Optional;
 
 public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
@@ -256,6 +251,9 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
                 pBlockEntity.workTime = -1;
             }
             pBlockEntity.updateBlock();
+        } else {
+            if (pBlockEntity.workTime >= 0)
+                ClientHandler.markFactorySong(pPos);
         }
     }
 
@@ -281,5 +279,13 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new MetalShaperMenu(pContainerId, pInventory, this);
+    }
+
+    private static class ClientHandler {
+        static FactorySong.FactoryLoop workingSound = FactorySong.getLoop(SoundRegistry.METAL_SHAPER_LOOP.value());
+
+        public static void markFactorySong(BlockPos pos) {
+            workingSound.addSource(pos);
+        }
     }
 }

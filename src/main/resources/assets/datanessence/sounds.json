@@ -11,6 +11,18 @@
         ],
         "stream": true
     },
+    "ost.factory_loops.agricore": {
+        "sounds": [
+            "datanessence:ost/factory_loops/agricore"
+        ],
+        "stream": true
+    },
+    "ost.factory_loops.starforge": {
+        "sounds": [
+            "datanessence:ost/factory_loops/starforge"
+        ],
+        "stream": true
+    },
     "ost.factory_loops.essence_leech": {
         "sounds": [
             "datanessence:ost/factory_loops/essence_leech"
@@ -20,6 +32,12 @@
     "ost.factory_loops.essence_derivation_spike": {
         "sounds": [
             "datanessence:ost/factory_loops/essence_derivation_spike"
+        ],
+        "stream": true
+    },
+    "ost.factory_loops.metal_shaper": {
+        "sounds": [
+            "datanessence:ost/factory_loops/metal_shaper"
         ],
         "stream": true
     },

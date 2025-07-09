@@ -83,8 +83,11 @@ public class SoundRegistry {
     // Factory Loops
     public static final Holder<SoundEvent> FABRICATOR_LOOP = createBasicFactoryLoopSound("ost.factory_loops.fabricator");
     public static final Holder<SoundEvent> LUNARIUM_LOOP = createBasicFactoryLoopSound("ost.factory_loops.lunarium");
+    public static final Holder<SoundEvent> AGRICORE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.agricore");
+    public static final Holder<SoundEvent> STARFORGE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.starforge");
     public static final Holder<SoundEvent> LEECH_LOOP = createBasicFactoryLoopSound("ost.factory_loops.essence_leech");
     public static final Holder<SoundEvent> DERIVATION_SPIKE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.essence_derivation_spike");
+    public static final Holder<SoundEvent> METAL_SHAPER_LOOP = createBasicFactoryLoopSound("ost.factory_loops.metal_shaper");
 
     public static Holder<SoundEvent> createBasicSound(String name) {
         return SOUND_EVENTS.register(name,
