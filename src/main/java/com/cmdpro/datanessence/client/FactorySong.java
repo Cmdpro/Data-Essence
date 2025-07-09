@@ -46,6 +46,8 @@ public class FactorySong {
         SoundManager soundManager = client.getSoundManager();
         boolean playing = false;
 
+        List<SoundInstance> toSync = new ArrayList<>();
+
         for (var sound : FactorySong.FACTORY_LOOPS.values()) {
             boolean currentPlaying = false;
             if (soundManager.isActive(sound.sound)) {
@@ -57,8 +59,7 @@ public class FactorySong {
             } else if (sound.getSourceCount() > 0) {
                 currentPlaying = true;
                 Minecraft.getInstance().getSoundManager().play(sound.sound);
-                float time = ((float)FactorySongPointer)/20f;
-                SoundUtil.setTime(sound.sound, time);
+                toSync.add(sound.sound);
             }
             if (currentPlaying) {
                 playing = true;
@@ -72,6 +73,11 @@ public class FactorySong {
             FactorySongPointer++;
         if (FactorySongPointer > 612 || !playing) // 612 ticks = 30s + 600ms
             FactorySongPointer = 0;
+        
+        for (SoundInstance i : toSync) {
+            float time = ((float)FactorySongPointer)/20f;
+            SoundUtil.setTime(i, time);
+        }
     }
     public static class FactoryLoop {
         public FactorySoundInstance sound;
