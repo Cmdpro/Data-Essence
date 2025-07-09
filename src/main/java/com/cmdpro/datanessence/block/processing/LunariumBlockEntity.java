@@ -5,6 +5,7 @@ import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.block.BaseFabricatorBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceType;
+import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
@@ -62,31 +63,13 @@ public class LunariumBlockEntity extends BaseFabricatorBlockEntity implements Me
 
         if (baseFabricator instanceof LunariumBlockEntity lunarium && world.isClientSide()) {
             if (lunarium.time >= 0 && lunarium.essenceCost != null) {
-                if (!lunarium.clientHandler.isIndustrialSoundPlaying() && lunarium.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()))) {
-                    lunarium.clientHandler.startIndustrialSound();
+                if (lunarium.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get()))) {
+                    ClientHandler.markIndustrialFactorySong(pos);
                 }
-                if (!lunarium.clientHandler.isLunarSoundPlaying() && lunarium.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get()))) {
-                    lunarium.clientHandler.startLunarSound();
-                }
-            } else {
-                if (lunarium.clientHandler.isIndustrialSoundPlaying()) {
-                    lunarium.clientHandler.stopIndustrialSound();
-                }
-                if (lunarium.clientHandler.isLunarSoundPlaying()) {
-                    lunarium.clientHandler.stopLunarSound();
+                if (lunarium.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get()))) {
+                    ClientHandler.markLunarFactorySong(pos);
                 }
             }
-        }
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        if (level.isClientSide) {
-            clientHandler = new ClientHandler();
-            clientHandler.createWorkingSounds(getBlockPos());
-        } else {
-            checkRecipes();
         }
     }
 
@@ -96,31 +79,14 @@ public class LunariumBlockEntity extends BaseFabricatorBlockEntity implements Me
     }
 
     private static class ClientHandler {
-        public SoundInstance industrialWorkingSound;
-        public SoundInstance lunarWorkingSound;
+        static FactorySong.FactoryLoop industrialSound = FactorySong.getLoop(SoundRegistry.FABRICATOR_LOOP.value());
+        static FactorySong.FactoryLoop lunarSound = FactorySong.getLoop(SoundRegistry.LUNARIUM_LOOP.value());
 
-        public void createWorkingSounds(BlockPos pos) {
-            industrialWorkingSound = new SimpleSoundInstance(SoundRegistry.FABRICATOR_LOOP.value(), SoundSource.BLOCKS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), pos);
-            lunarWorkingSound = new SimpleSoundInstance(SoundRegistry.LUNARIUM_LOOP.value(), SoundSource.BLOCKS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), pos);
+        public static void markIndustrialFactorySong(BlockPos pos) {
+            industrialSound.addSource(pos);
         }
-
-        public void startIndustrialSound() {
-            Minecraft.getInstance().getSoundManager().play(industrialWorkingSound);
-        }
-        public void startLunarSound() {
-            Minecraft.getInstance().getSoundManager().play(lunarWorkingSound);
-        }
-        public void stopIndustrialSound() {
-            Minecraft.getInstance().getSoundManager().stop(industrialWorkingSound);
-        }
-        public void stopLunarSound() {
-            Minecraft.getInstance().getSoundManager().stop(lunarWorkingSound);
-        }
-        public boolean isIndustrialSoundPlaying() {
-            return Minecraft.getInstance().getSoundManager().isActive(industrialWorkingSound);
-        }
-        public boolean isLunarSoundPlaying() {
-            return Minecraft.getInstance().getSoundManager().isActive(lunarWorkingSound);
+        public static void markLunarFactorySong(BlockPos pos) {
+            lunarSound.addSource(pos);
         }
     }
 }
