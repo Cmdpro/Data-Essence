@@ -64,18 +64,11 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
     @Override
     public void tick(Level world, BlockPos pos, BlockState state, BaseFabricatorBlockEntity baseFabricator) {
         super.tick(world, pos, state, baseFabricator);
-
-        if (baseFabricator instanceof FabricatorBlockEntity fabricator && world.isClientSide()) {
-            if (fabricator.time >= 0 && fabricator.essenceCost != null) {
+        if (world.isClientSide()) {
+            if (baseFabricator.time >= 0 && baseFabricator.essenceCost != null) {
                 ClientHandler.markFactorySong(pos);
             }
         }
-    }
-
-    @Override
-    public void onLoad() {
-        super.onLoad();
-        checkRecipes();
     }
 
     private static class ClientHandler {

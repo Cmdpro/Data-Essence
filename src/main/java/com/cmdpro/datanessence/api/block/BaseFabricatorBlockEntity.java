@@ -45,10 +45,7 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class BaseFabricatorBlockEntity extends BlockEntity implements EssenceBlockEntity {
     public MultiEssenceContainer storage = new MultiEssenceContainer(getSupportedEssenceTypes(), getMaxEssence());
@@ -131,6 +128,16 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
         time = tag.getInt("time");
         maxTime = tag.getInt("maxTime");
+        if (tag.contains("essenceCost")) {
+            CompoundTag cost = tag.getCompound("essenceCost");
+            essenceCost = new HashMap<>();
+            for (String i : cost.getAllKeys()) {
+                ResourceLocation location = ResourceLocation.tryParse(i);
+                essenceCost.put(location, cost.getFloat(i));
+            }
+        } else {
+            essenceCost = null;
+        }
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -139,6 +146,13 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
         tag.put("item", item.saveOptional(pRegistries));
         tag.putInt("time", time);
         tag.putInt("maxTime", maxTime);
+        if (essenceCost != null) {
+            CompoundTag cost = new CompoundTag();
+            for (Map.Entry<ResourceLocation, Float> i : essenceCost.entrySet()) {
+                cost.putFloat(i.getKey().toString(), i.getValue());
+            }
+            tag.put("essenceCost", cost);
+        }
         return tag;
     }
 
