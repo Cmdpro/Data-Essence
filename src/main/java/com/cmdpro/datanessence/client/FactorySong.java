@@ -57,7 +57,7 @@ public class FactorySong {
             } else if (sound.getSourceCount() > 0) {
                 currentPlaying = true;
                 Minecraft.getInstance().getSoundManager().play(sound.sound);
-                float time = ((float)FactorySongPointer)/20f;
+                float time = ((float)FactorySongPointer+1)/20f;
                 SoundUtil.setTime(sound.sound, time);
             }
             if (currentPlaying) {
