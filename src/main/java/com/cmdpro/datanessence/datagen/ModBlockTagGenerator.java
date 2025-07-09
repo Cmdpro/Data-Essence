@@ -109,7 +109,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.SHIELDLESS_ANCIENT_WINDOW.get())
                 .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK.get())
                 .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get())
-                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get());
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get())
                 .add(BlockRegistry.ENDER_PEARL_DESTINATION.get())
                 .add(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get())
                 .add(BlockRegistry.DRYING_TABLE.get())
@@ -160,7 +160,7 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.SHIELDLESS_ANCIENT_WINDOW.get())
                 .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK.get())
                 .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get())
-                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get());
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get())
                 .add(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
         this.tag(TagRegistry.Blocks.CRYSTALLINE_CRADLE_BREAKABLE)
                 .add(BlockRegistry.ESSENCE_CRYSTAL.get())

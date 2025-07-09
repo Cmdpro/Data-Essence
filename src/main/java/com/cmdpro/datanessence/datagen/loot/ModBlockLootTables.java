@@ -32,6 +32,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
     @Override
     protected void generate() {
         dropSelf(BlockRegistry.FABRICATOR.get());
+        dropSelf(BlockRegistry.LUNARIUM.get());
         dropSelf(BlockRegistry.ESSENCE_POINT.get());
         dropSelf(BlockRegistry.LUNAR_ESSENCE_POINT.get());
         dropSelf(BlockRegistry.NATURAL_ESSENCE_POINT.get());
