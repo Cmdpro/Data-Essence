@@ -1,0 +1,23 @@
+{
+  "icon": {
+    "id": "datanessence:essence_shard"
+  },
+  "tab": "datanessence:basics",
+  "x": 0,
+  "y": 3,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.factory_song.page1.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.factory_song.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.factory_song.flavor"
+  },
+  "is_default": true
+}

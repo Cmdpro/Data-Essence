@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:ancient_lantern"
+          "name": "datanessence:ancient_lantern_shieldless"
         }
       ],
       "rolls": 1.0

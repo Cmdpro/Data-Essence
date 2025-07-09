@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "datanessence:ancient_rock_bricks",
+    "datanessence:ancient_rock_tiles",
+    "datanessence:ancient_rock_column",
+    "datanessence:energized_ancient_rock_column",
+    "datanessence:ancient_glyph_stone_blank",
+    "datanessence:ancient_glyph_stone_makutuin",
+    "datanessence:ancient_glyph_stone_essence",
+    "datanessence:ancient_lantern",
+    "datanessence:ancient_shelf",
+    "datanessence:ancient_window",
+    "datanessence:data_bank",
+    "datanessence:structure_protector"
+  ]
+}

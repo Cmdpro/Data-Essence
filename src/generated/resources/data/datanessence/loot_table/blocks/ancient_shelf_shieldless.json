@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:ancient_glyph_stone_makutuin_shieldless"
+          "name": "datanessence:ancient_shelf_shieldless"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "datanessence:blocks/ancient_glyph_stone_makutuin"
+  "random_sequence": "datanessence:blocks/ancient_shelf_shieldless"
 }

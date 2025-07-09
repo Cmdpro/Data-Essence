@@ -55,6 +55,10 @@ public class BlockRegistry {
         return BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f);
     }
 
+    public static BlockBehaviour.Properties getShieldlessAncientRockProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.DEEPSLATE_TILES).explosionResistance(360000f);
+    }
+
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK,
             DataNEssence.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = ItemRegistry.ITEMS;
@@ -338,7 +342,7 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
 
-    // Ancient Rock
+    // Shielding Rock - Structure-Only
     public static final Supplier<Block> ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks",
             AncientShieldingStone::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -368,6 +372,38 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_GLYPH_STONE_ESSENCE = register("ancient_glyph_stone_essence",
             AncientShieldingStone::new,
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
+    // Ancient Rock - Survival-Obtainable
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_ROCK_TILES = register("ancient_rock_tiles_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_ROCK_COLUMN = register("ancient_rock_column_shieldless",
+            () -> new DirectionalPillarBlock(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ENERGIZED_ANCIENT_ROCK_COLUMN = register("energized_ancient_rock_column_shieldless",
+            () -> new DirectionalPillarBlock(getShieldlessAncientRockProperties().lightLevel((blockState) -> { return 3;})),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_LANTERN = register("ancient_lantern_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties().lightLevel((blockState) -> { return 13;})),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_SHELF = register("ancient_shelf_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_WINDOW = register("ancient_window_shieldless",
+            () -> new TransparentBlock(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK = register("ancient_glyph_stone_blank_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE = register("ancient_glyph_stone_essence_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN = register("ancient_glyph_stone_makutuin_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Obsidian Deco

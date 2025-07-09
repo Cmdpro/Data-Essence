@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:ancient_glyph_stone_essence"
+          "name": "datanessence:ancient_glyph_stone_essence_shieldless"
         }
       ],
       "rolls": 1.0
