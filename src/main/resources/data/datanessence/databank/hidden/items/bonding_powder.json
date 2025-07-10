@@ -1,0 +1,16 @@
+{
+  "condition": {
+    "type": "datanessence:entry",
+    "entry": "datanessence:basics/plants",
+    "completion_stage": 0
+  },
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "datanessence:bonding_powder",
+    "original": "datanessence:bonding_powder",
+    "name_override": {
+      "translate": "hidden.datanessence.powder",
+      "font": "datanessence:ancient"
+    }
+  }
+}

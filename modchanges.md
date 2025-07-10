@@ -20,6 +20,7 @@
 - Ancient Rock renamed to Shielding Rock
 - Shielding Rock now drops non-unbreakable Ancient Rock no matter what
 - Shielding Rock can no longer be relocated with other mods
+- Hid the names of Industrial Essence Crystals/Shards, Lensing Crystals, and Bonding Powder before you have progressed
 
 ### Fixes
 - Fixed the Mineral Locator effect glitching out by making its scanning not render fluid states

@@ -274,6 +274,10 @@
   "item.minecraft.tipped_arrow.effect.gender_euphoria": "Arrow of Gender Euphoria",
   "item.minecraft.tipped_arrow.effect.long_gender_euphoria": "Arrow of Gender Euphoria",
 
+  "hidden.datanessence.powder": "strange powder substance",
+  "hidden.datanessence.shard": "weird shard",
+  "hidden.datanessence.crystal": "unusual sparkly crystal",
+
   "gui.widget.fluid":  "%3$s: %1$s/%2$smB",
   "gui.widget.fluid.without_max": "%2$s: %1$s",
 
