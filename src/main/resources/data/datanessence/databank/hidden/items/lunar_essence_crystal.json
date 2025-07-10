@@ -1,0 +1,15 @@
+{
+  "condition": {
+    "type": "datanessence:entry",
+    "entry": "datanessence:basics/lunar_strikes"
+  },
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "datanessence:lunar_essence_crystal",
+    "original": "datanessence:lunar_essence_crystal",
+    "name_override": {
+      "translate": "hidden.datanessence.crystal",
+      "font": "datanessence:ancient"
+    }
+  }
+}
