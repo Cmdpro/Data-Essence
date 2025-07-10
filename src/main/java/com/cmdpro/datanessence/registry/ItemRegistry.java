@@ -30,6 +30,8 @@ public class ItemRegistry {
     public static final Supplier<Item> DATA_DRIVE = register("data_drive", () -> new DataDrive(new Item.Properties()));
     public static final Supplier<Item> MOLD_ROD = register("rod_mold", () -> new Item(new Item.Properties().component(DataComponentRegistry.MOLD, DataNEssence.locate("metal_shaping/conductance_rod"))));
     public static final Supplier<Item> MOLD_PANEL = register("panel_mold", () -> new Item(new Item.Properties().component(DataComponentRegistry.MOLD, DataNEssence.locate("metal_shaping/capacitance_panel"))));
+    public static final Supplier<Item> ECLIPTRUM_MOLD_ROD = register("rod_mold_ecliptrum", () -> new Item(new Item.Properties().component(DataComponentRegistry.MOLD, DataNEssence.locate("metal_shaping/transformative_rod"))));
+    public static final Supplier<Item> ECLIPTRUM_MOLD_PANEL = register("panel_mold_ecliptrum", () -> new Item(new Item.Properties().component(DataComponentRegistry.MOLD, DataNEssence.locate("metal_shaping/reflective_panel"))));
     public static final Supplier<Item> THERMOMETER = register("thermometer", () -> new Thermometer(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> LOCATOR = register("locator", () -> new Locator(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> ESSENCE_METER = register("essence_meter", () -> new EssenceMeter(new Item.Properties().stacksTo(1)));
