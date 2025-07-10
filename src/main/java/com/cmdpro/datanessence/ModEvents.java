@@ -158,7 +158,7 @@ public class ModEvents {
                             AABB aabb = AABB.encapsulatingFullBlocks(i.getCorner1(), i.getCorner2());
                             if (aabb.contains(event.getPos().getCenter())) {
                                 event.setCanceled(true);
-                                event.getLevel().playSound(null, event.getPos(), SoundRegistry.STRUCTURE_PROTECTOR_REFRESH.value(), SoundSource.BLOCKS);
+                                event.getLevel().playSound(null, event.getPos(), SoundRegistry.STRUCTURE_PROTECTOR_REFRESH.value(), SoundSource.BLOCKS, 1.0f, ((Level) event.getLevel()).random.nextFloat());
                                 break;
                             }
                         }
