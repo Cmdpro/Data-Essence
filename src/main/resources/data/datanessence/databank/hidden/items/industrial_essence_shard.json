@@ -1,0 +1,15 @@
+{
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "datanessence:datanessence"
+  },
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "datanessence:essence_shard",
+    "original": "datanessence:essence_shard",
+    "name_override": {
+      "translate": "hidden.datanessence.shard",
+      "font": "datanessence:ancient"
+    }
+  }
+}

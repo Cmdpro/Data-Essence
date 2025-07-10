@@ -1,0 +1,16 @@
+{
+  "condition": {
+    "type": "datanessence:entry",
+    "entry": "datanessence:basics/lensing_crystals",
+    "completion_stage": 0
+  },
+  "type": {
+    "type": "databank:item",
+    "hidden_as": "datanessence:lensing_crystal",
+    "original": "datanessence:lensing_crystal",
+    "name_override": {
+      "translate": "hidden.datanessence.crystal",
+      "font": "datanessence:ancient"
+    }
+  }
+}
