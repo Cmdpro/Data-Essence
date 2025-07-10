@@ -6,6 +6,7 @@
 - Added the "always_shown" field to data tabs if the tab is wanted to be shown even when empty
 - Added simple Pastel compat; subject to be expanded and/or changed as that mod grows
 - Added new variant of Ancient Rock blocks to prevent using the old, now structure-only Ancient Rock as a cheese method for other mods
+- Added sound for deactivating (breaking) a Structure Protector
 
 ### Changes
 - Updated Entropic Processor entry with recipe page layout changes and additional descriptions
