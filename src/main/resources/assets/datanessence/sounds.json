@@ -57,6 +57,12 @@
         ],
         "subtitle": "subtitle.datanessence.block.entropic_processor.working"
     },
+    "block.structure_protector.deactivate": {
+        "sounds": [
+            "datanessence:block/structure_protector/deactivate"
+        ],
+        "subtitle": "subtitle.datanessence.block.structure_protector.deactivate"
+    },
     "item.signal_tracker.ping": {
         "sounds": [
             "datanessence:item/signal_tracker/ping"
