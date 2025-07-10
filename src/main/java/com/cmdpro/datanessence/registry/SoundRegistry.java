@@ -68,6 +68,7 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> METAL_SHAPER_CRAFTING = createBasicSound("block.metal_shaper.crafting");
     public static final Holder<SoundEvent> ENDER_PEARL_ABSORB = createBasicSound("block.ender_pearl_capture.absorb");
     public static final Holder<SoundEvent> STRUCTURE_PROTECTOR_DEACTIVATE = createBasicSound("block.structure_protector.deactivate");
+    public static final Holder<SoundEvent> STRUCTURE_PROTECTOR_REFRESH = createBasicSound("block.structure_protector.refresh");
 
     //Fluids
     public static final Holder<SoundEvent> GENDERFLUID_TRANSITION = createBasicSound("fluid.genderfluid.transition");

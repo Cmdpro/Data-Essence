@@ -35,11 +35,13 @@ import com.cmdpro.datanessence.data.datatablet.Entries;
 import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.data.datatablet.EntryManager;
 import com.cmdpro.datanessence.registry.ItemRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -156,6 +158,7 @@ public class ModEvents {
                             AABB aabb = AABB.encapsulatingFullBlocks(i.getCorner1(), i.getCorner2());
                             if (aabb.contains(event.getPos().getCenter())) {
                                 event.setCanceled(true);
+                                event.getLevel().playSound(null, event.getPos(), SoundRegistry.STRUCTURE_PROTECTOR_REFRESH.value(), SoundSource.BLOCKS);
                                 break;
                             }
                         }

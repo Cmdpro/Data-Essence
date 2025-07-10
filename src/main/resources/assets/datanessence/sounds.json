@@ -63,6 +63,12 @@
         ],
         "subtitle": "subtitle.datanessence.block.structure_protector.deactivate"
     },
+    "block.structure_protector.refresh": {
+        "sounds": [
+            "datanessence:block/structure_protector/refresh"
+        ],
+        "subtitle": "subtitle.datanessence.block.structure_protector.refresh"
+    },
     "item.signal_tracker.ping": {
         "sounds": [
             "datanessence:item/signal_tracker/ping"

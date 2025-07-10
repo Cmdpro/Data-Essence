@@ -23,4 +23,4 @@ Eventually you may unlock enough entries to advance in Tier, garnering more entr
 - **Fuzzy**: Music lead
 ### Contributors
 - **DavidRarria09**: Music contributions ("UnderTheSky" music disc)
-- **K King**: Sound contributions (Structure Protector deactivation noise)
+- **K King**: Sound contributions (Structure Protector noises)

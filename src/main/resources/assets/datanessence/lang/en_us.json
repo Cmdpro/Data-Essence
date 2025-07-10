@@ -656,6 +656,7 @@
   "subtitle.datanessence.block.metal_shaper.crafting": "Metal Shaper hisses",
   "subtitle.datanessence.block.ender_pearl_capture.absorb": "Ender Pearl gets absorbed",
   "subtitle.datanessence.block.structure_protector.deactivate": "Structure Protector's shield deactivates",
+  "subtitle.datanessence.block.structure_protector.refresh": "Structure Protector refreshes block",
 
   "subtitle.datanessence.item.signal_tracker.ping": "Signal Tracker pings",
   "subtitle.datanessence.item.ore_scanner.ping": "Mineral Locator pings",
