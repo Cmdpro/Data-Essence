@@ -47,6 +47,7 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> VACUUM_PICKUP = createBasicSound("block.vacuum.pickup");
     public static final Holder<SoundEvent> AUTO_FABRICATOR_CRAFT = createBasicSound("block.auto_fabricator.craft");
     public static final Holder<SoundEvent> FABRICATOR_START = createBasicSound("block.fabricator.start");
+    public static final Holder<SoundEvent> FABRICATOR_WORKING = createBasicSound("block.fabricator.working");
     public static final Holder<SoundEvent> FABRICATOR_CRAFT = createBasicSound("block.fabricator.craft");
     public static final Holder<SoundEvent> INFUSER_CRAFT = createBasicSound("block.infuser.craft");
     public static final Holder<SoundEvent> MINERAL_PURIFICATION_CHAMBER_CRAFT = createBasicSound("block.mineral_purification_chamber.craft");

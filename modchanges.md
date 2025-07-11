@@ -16,7 +16,7 @@
 - Moved the fabricator logic to a separate abstract class
 - Moved the data bank logic to a separate abstract class
 - Arekko no longer has collision
-- Changed Fabricator finish crafting noise to amethyst breaking
+- Changed Fabricator noises
 - Adjusted several fabrication recipe times
 - Ancient Rock renamed to Shielding Rock
 - Shielding Rock now drops non-unbreakable Ancient Rock no matter what
