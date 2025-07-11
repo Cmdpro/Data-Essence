@@ -263,35 +263,35 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
     public boolean enoughEssence;
     public Map<ResourceLocation, Float> essenceCost;
 
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseFabricatorBlockEntity pBlockEntity) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseFabricatorBlockEntity fabricator) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, pBlockEntity.getSupportedEssenceTypes());
-            if (pBlockEntity.recipe != null) {
+            BufferUtil.getEssenceFromBuffersBelow(fabricator, fabricator.getSupportedEssenceTypes());
+            if (fabricator.recipe != null) {
                 boolean enoughEssence = true;
-                if (pBlockEntity.essenceCost != null) {
-                    for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                if (fabricator.essenceCost != null) {
+                    for (Map.Entry<ResourceLocation, Float> i : fabricator.essenceCost.entrySet()) {
                         EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                        if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
+                        if (fabricator.storage.getEssence(type) < i.getValue()) {
                             enoughEssence = false;
                         }
                     }
                 }
-                pBlockEntity.enoughEssence = enoughEssence;
-                if (pBlockEntity.recipe.matches(pBlockEntity.getCraftingInv().asCraftInput(), pBlockEntity.level)) {
-                    if (pBlockEntity.time != -1) {
-                        pBlockEntity.time++;
+                fabricator.enoughEssence = enoughEssence;
+                if (fabricator.recipe.matches(fabricator.getCraftingInv().asCraftInput(), fabricator.level)) {
+                    if (fabricator.time != -1) {
+                        fabricator.time++;
                     }
                 } else {
-                    pBlockEntity.time = -1;
+                    fabricator.time = -1;
                 }
             } else {
-                pBlockEntity.time = -1;
+                fabricator.time = -1;
             }
-            if (pBlockEntity.time >= pBlockEntity.maxTime) {
-                pBlockEntity.tryCraft();
-                pBlockEntity.time = 0;
+            if (fabricator.time >= fabricator.maxTime) {
+                fabricator.tryCraft();
+                fabricator.time = 0;
             }
-            pBlockEntity.updateBlock();
+            fabricator.updateBlock();
         }
     }
     protected void updateBlock() {

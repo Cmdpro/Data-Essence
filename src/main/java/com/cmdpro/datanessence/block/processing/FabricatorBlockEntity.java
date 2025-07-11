@@ -62,10 +62,10 @@ public class FabricatorBlockEntity extends BaseFabricatorBlockEntity implements 
     }
 
     @Override
-    public void tick(Level world, BlockPos pos, BlockState state, BaseFabricatorBlockEntity baseFabricator) {
-        super.tick(world, pos, state, baseFabricator);
+    public void tick(Level world, BlockPos pos, BlockState state, BaseFabricatorBlockEntity fabricator) {
+        super.tick(world, pos, state, fabricator);
         if (world.isClientSide()) {
-            if (baseFabricator.time >= 0 && baseFabricator.essenceCost != null) {
+            if (fabricator.time >= 0 && fabricator.essenceCost != null) {
                 ClientHandler.markFactorySong(pos);
             }
         }

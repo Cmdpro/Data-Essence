@@ -7,13 +7,11 @@ import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
+import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.recipe.*;
-import com.cmdpro.datanessence.registry.BlockEntityRegistry;
-import com.cmdpro.datanessence.registry.DataComponentRegistry;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
-import com.cmdpro.datanessence.registry.RecipeRegistry;
+import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.SynthesisChamberMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -39,6 +37,7 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -129,6 +128,16 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         workTime = tag.getInt("workTime");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         maxWorkTime = tag.getInt("maxWorkTime");
+        if (tag.contains("essenceCost")) {
+            CompoundTag cost = tag.getCompound("essenceCost");
+            essenceCost = new HashMap<>();
+            for (String i : cost.getAllKeys()) {
+                ResourceLocation location = ResourceLocation.tryParse(i);
+                essenceCost.put(location, cost.getFloat(i));
+            }
+        } else {
+            essenceCost = null;
+        }
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -138,6 +147,13 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         tag.putInt("workTime", workTime);
         tag.putInt("maxWorkTime", recipe == null ? -1 : recipe.getTime());
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
+        if (essenceCost != null) {
+            CompoundTag cost = new CompoundTag();
+            for (Map.Entry<ResourceLocation, Float> i : essenceCost.entrySet()) {
+                cost.putFloat(i.getKey().toString(), i.getValue());
+            }
+            tag.put("essenceCost", cost);
+        }
         return tag;
     }
 
@@ -213,49 +229,52 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
     public Map<ResourceLocation, Float> essenceCost;
     public int workTime;
     public int maxWorkTime;
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SynthesisChamberBlockEntity pBlockEntity) {
+    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, SynthesisChamberBlockEntity synthesisChamber) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
+            BufferUtil.getEssenceFromBuffersBelow(synthesisChamber, List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()));
 
-            for ( var lockedSlot : pBlockEntity.getLockable() ) {
+            for ( var lockedSlot : synthesisChamber.getLockable() ) {
                 if (!lockedSlot.locked)
                     return;
             }
 
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
+            BufferUtil.getItemsFromBuffersBelow(synthesisChamber, synthesisChamber.itemHandler);
 
             boolean resetWorkTime = true;
-            if (pBlockEntity.recipe != null) {
+            if (synthesisChamber.recipe != null) {
                 boolean enoughEssence = true;
-                for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                for (Map.Entry<ResourceLocation, Float> i : synthesisChamber.essenceCost.entrySet()) {
                     EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                    if (pBlockEntity.storage.getEssence(type) < i.getValue()/pBlockEntity.recipe.getTime()) {
+                    if (synthesisChamber.storage.getEssence(type) < i.getValue()/synthesisChamber.recipe.getTime()) {
                         enoughEssence = false;
                     }
                 }
-                pBlockEntity.enoughEssence = enoughEssence;
+                synthesisChamber.enoughEssence = enoughEssence;
                 if (enoughEssence) {
-                    ItemStack result = pBlockEntity.recipe.getResultItem(pLevel.registryAccess());
-                    if (pBlockEntity.outputItemHandler.insertItem(0, result, true).isEmpty()) {
+                    ItemStack result = synthesisChamber.recipe.getResultItem(pLevel.registryAccess());
+                    if (synthesisChamber.outputItemHandler.insertItem(0, result, true).isEmpty()) {
                         resetWorkTime = false;
-                        pBlockEntity.workTime++;
-                        for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                        synthesisChamber.workTime++;
+                        for (Map.Entry<ResourceLocation, Float> i : synthesisChamber.essenceCost.entrySet()) {
                             EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                            pBlockEntity.storage.removeEssence(type, i.getValue()/pBlockEntity.recipe.getTime());
+                            synthesisChamber.storage.removeEssence(type, i.getValue()/synthesisChamber.recipe.getTime());
                         }
-                        if (pBlockEntity.workTime >= pBlockEntity.recipe.getTime()) {
-                            pBlockEntity.outputItemHandler.insertItem(0, pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess()), false);
-                            pBlockEntity.itemHandler.extractItem(0, 1, false);
-                            pBlockEntity.itemHandler.extractItem(1, 1, false);
-                            pBlockEntity.workTime = 0;
+                        if (synthesisChamber.workTime >= synthesisChamber.recipe.getTime()) {
+                            synthesisChamber.outputItemHandler.insertItem(0, synthesisChamber.recipe.assemble(synthesisChamber.getCraftingInv(), pLevel.registryAccess()), false);
+                            synthesisChamber.itemHandler.extractItem(0, 1, false);
+                            synthesisChamber.itemHandler.extractItem(1, 1, false);
+                            synthesisChamber.workTime = 0;
                         }
                     }
                 }
             }
             if (resetWorkTime) {
-                pBlockEntity.workTime = -1;
+                synthesisChamber.workTime = -1;
             }
-            pBlockEntity.updateBlock();
+            synthesisChamber.updateBlock();
+        } else {
+            if ((synthesisChamber.workTime >= 0) && synthesisChamber.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get())))
+                ClientHandler.markIndustrialFactorySong(pPos);
         }
     }
     protected void updateBlock() {
@@ -290,5 +309,13 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
     @Override
     public List<LockableItemHandler> getLockable() {
         return List.of(itemHandler);
+    }
+
+    private static class ClientHandler {
+        static FactorySong.FactoryLoop industrialSound = FactorySong.getLoop(SoundRegistry.SYNTHESIS_LOOP_INDUSTRIAL.value());
+
+        public static void markIndustrialFactorySong(BlockPos pos) {
+            industrialSound.addSource(pos);
+        }
     }
 }

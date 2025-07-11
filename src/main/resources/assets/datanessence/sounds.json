@@ -41,6 +41,18 @@
         ],
         "stream": true
     },
+    "ost.factory_loops.auto-fabricator": {
+        "sounds": [
+            "datanessence:ost/factory_loops/auto-fabricator"
+        ],
+        "stream": true
+    },
+    "ost.factory_loops.synthesis_industrial": {
+        "sounds": [
+            "datanessence:ost/factory_loops/synthesis_industrial"
+        ],
+        "stream": true
+    },
     "critical_data_unlocked": {
         "sounds": [
             "datanessence:critical_data_unlocked"
