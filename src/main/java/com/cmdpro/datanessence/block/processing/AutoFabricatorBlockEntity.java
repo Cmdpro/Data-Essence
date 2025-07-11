@@ -333,8 +333,10 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
             }
             pBlockEntity.updateBlock();
         } else {
-            if ((pBlockEntity.craftingProgress >= 0) && pBlockEntity.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get())))
-                ClientHandler.markIndustrialFactorySong(pPos);
+            if (pBlockEntity.craftingProgress >= 0 && pBlockEntity.essenceCost != null) {
+                if ( pBlockEntity.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get())) )
+                    ClientHandler.markIndustrialFactorySong(pPos);
+            }
         }
     }
     protected void updateBlock() {

@@ -273,8 +273,10 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
             }
             synthesisChamber.updateBlock();
         } else {
-            if ((synthesisChamber.workTime >= 0) && synthesisChamber.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get())))
-                ClientHandler.markIndustrialFactorySong(pPos);
+            if (synthesisChamber.workTime >= 0 && synthesisChamber.essenceCost != null) {
+                if ( synthesisChamber.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get())) )
+                    ClientHandler.markIndustrialFactorySong(pPos);
+            }
         }
     }
     protected void updateBlock() {
