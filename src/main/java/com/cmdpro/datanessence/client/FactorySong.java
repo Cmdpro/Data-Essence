@@ -48,35 +48,37 @@ public class FactorySong {
 
         List<SoundInstance> toSync = new ArrayList<>();
 
-        for (var sound : FactorySong.FACTORY_LOOPS.values()) {
-            boolean currentPlaying = false;
-            if (soundManager.isActive(sound.sound)) {
-                if (sound.getSourceCount() > 0) {
+        if (!(client.options.getSoundSourceVolume(SoundSource.BLOCKS) <= 0f)) {
+            for (var sound : FactorySong.FACTORY_LOOPS.values()) {
+                boolean currentPlaying = false;
+                if (soundManager.isActive(sound.sound)) {
+                    if (sound.getSourceCount() > 0) {
+                        currentPlaying = true;
+                    } else {
+                        soundManager.stop(sound.sound);
+                    }
+                } else if (sound.getSourceCount() > 0) {
                     currentPlaying = true;
-                } else {
-                    soundManager.stop(sound.sound);
+                    Minecraft.getInstance().getSoundManager().play(sound.sound);
+                    toSync.add(sound.sound);
                 }
-            } else if (sound.getSourceCount() > 0) {
-                currentPlaying = true;
-                Minecraft.getInstance().getSoundManager().play(sound.sound);
-                toSync.add(sound.sound);
+                if (currentPlaying) {
+                    playing = true;
+                    float volume = sound.sound.getDynamicVolume(sound.sound.getVolume());
+                    SoundUtil.modifySound(sound.sound, (channel) -> channel.setVolume(volume));
+                }
+                sound.clearSources();
             }
-            if (currentPlaying) {
-                playing = true;
-                float volume = sound.sound.getDynamicVolume(sound.sound.getVolume());
-                SoundUtil.modifySound(sound.sound, (channel) -> channel.setVolume(volume));
-            }
-            sound.clearSources();
-        }
 
-        if (playing && !client.isPaused())
-            FactorySongPointer++;
-        if (FactorySongPointer > 612 || !playing) // 612 ticks = 30s + 600ms
-            FactorySongPointer = 0;
-        
-        for (SoundInstance i : toSync) {
-            float time = ((float)FactorySongPointer)/20f;
-            SoundUtil.setTime(i, time);
+            if (playing && !client.isPaused())
+                FactorySongPointer++;
+            if (FactorySongPointer > 612 || !playing) // 612 ticks = 30s + 600ms
+                FactorySongPointer = 0;
+
+            for (SoundInstance i : toSync) {
+                float time = ((float) FactorySongPointer) / 20f;
+                SoundUtil.setTime(i, time);
+            }
         }
     }
     public static class FactoryLoop {
