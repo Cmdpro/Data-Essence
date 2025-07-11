@@ -29,3 +29,4 @@
 - Added additional protection from render types other than solid being used to the Mineral Locator effect
 - Fixed the recipes for Mekanism integration Chemical Nodes and Wires loading when Mek is not loaded
 - Fixed the data tablet entry lines moving the wrong way
+- Fixed column direction errors with structures
