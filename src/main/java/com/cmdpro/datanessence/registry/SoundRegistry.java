@@ -91,7 +91,7 @@ public class SoundRegistry {
     public static Holder<SoundEvent> createBasicFactoryLoopSound(String name) {
         var identifier = DataNEssence.locate(name);
         var sound = SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(identifier));
-        if (FMLEnvironment.dist == Dist.CLIENT) {
+        if (FMLEnvironment.dist.isClient()) {
             FactorySong.addFactorySongSound(identifier);
         }
         return sound;
