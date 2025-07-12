@@ -41,6 +41,18 @@
         ],
         "stream": true
     },
+    "ost.factory_loops.auto-fabricator": {
+        "sounds": [
+            "datanessence:ost/factory_loops/auto-fabricator"
+        ],
+        "stream": true
+    },
+    "ost.factory_loops.synthesis_industrial": {
+        "sounds": [
+            "datanessence:ost/factory_loops/synthesis_industrial"
+        ],
+        "stream": true
+    },
     "critical_data_unlocked": {
         "sounds": [
             "datanessence:critical_data_unlocked"
@@ -62,6 +74,12 @@
             "datanessence:block/structure_protector/deactivate"
         ],
         "subtitle": "subtitle.datanessence.block.structure_protector.deactivate"
+    },
+    "block.structure_protector.refresh": {
+        "sounds": [
+            "datanessence:block/structure_protector/refresh"
+        ],
+        "subtitle": "subtitle.datanessence.block.structure_protector.refresh"
     },
     "item.signal_tracker.ping": {
         "sounds": [
@@ -170,19 +188,18 @@
     },
     "block.fabricator.start": {
         "sounds": [
-            "entity/itemframe/add_item1",
-            "entity/itemframe/add_item2",
-            "entity/itemframe/add_item3",
-            "entity/itemframe/add_item4"
+            "datanessence:block/fabricator/start_craft"
         ],
         "subtitle": "subtitle.datanessence.block.fabricator.start"
     },
+    "block.fabricator.working": {
+        "sounds": [
+            "datanessence:block/fabricator/loop"
+        ]
+    },
     "block.fabricator.craft": {
         "sounds": [
-            "block/amethyst_cluster/break1",
-            "block/amethyst_cluster/break2",
-            "block/amethyst_cluster/break3",
-            "block/amethyst_cluster/break4"
+            "datanessence:block/fabricator/finish_craft"
         ],
         "subtitle": "subtitle.datanessence.block.fabricator.craft"
     },

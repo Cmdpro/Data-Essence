@@ -1,7 +1,5 @@
 package com.cmdpro.datanessence.api.block;
 
-import com.cmdpro.databank.model.animation.DatabankAnimationReference;
-import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
@@ -9,14 +7,13 @@ import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
-import com.cmdpro.datanessence.block.processing.FabricatorBlockEntity;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
-import com.cmdpro.datanessence.registry.BlockEntityRegistry;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
-import com.cmdpro.datanessence.screen.FabricatorMenu;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -28,9 +25,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
@@ -43,7 +38,6 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -72,10 +66,15 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
     @Override
     public void onLoad() {
         super.onLoad();
-        if (!level.isClientSide) {
+        if (level.isClientSide) {
+            clientHandler = new ClientHandler();
+            clientHandler.createWorkingSound(getBlockPos());
+        } else {
             checkRecipes();
         }
     }
+    private ClientHandler clientHandler;
+
     private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler);
     public CombinedInvWrapper getCombinedInvWrapper() {
         return combinedInvWrapper;
@@ -263,35 +262,43 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
     public boolean enoughEssence;
     public Map<ResourceLocation, Float> essenceCost;
 
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseFabricatorBlockEntity pBlockEntity) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseFabricatorBlockEntity fabricator) {
         if (!pLevel.isClientSide()) {
-            BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, pBlockEntity.getSupportedEssenceTypes());
-            if (pBlockEntity.recipe != null) {
+            BufferUtil.getEssenceFromBuffersBelow(fabricator, fabricator.getSupportedEssenceTypes());
+            if (fabricator.recipe != null) {
                 boolean enoughEssence = true;
-                if (pBlockEntity.essenceCost != null) {
-                    for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                if (fabricator.essenceCost != null) {
+                    for (Map.Entry<ResourceLocation, Float> i : fabricator.essenceCost.entrySet()) {
                         EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
-                        if (pBlockEntity.storage.getEssence(type) < i.getValue()) {
+                        if (fabricator.storage.getEssence(type) < i.getValue()) {
                             enoughEssence = false;
                         }
                     }
                 }
-                pBlockEntity.enoughEssence = enoughEssence;
-                if (pBlockEntity.recipe.matches(pBlockEntity.getCraftingInv().asCraftInput(), pBlockEntity.level)) {
-                    if (pBlockEntity.time != -1) {
-                        pBlockEntity.time++;
+                fabricator.enoughEssence = enoughEssence;
+                if (fabricator.recipe.matches(fabricator.getCraftingInv().asCraftInput(), fabricator.level)) {
+                    if (fabricator.time != -1) {
+                        fabricator.time++;
                     }
                 } else {
-                    pBlockEntity.time = -1;
+                    fabricator.time = -1;
                 }
             } else {
-                pBlockEntity.time = -1;
+                fabricator.time = -1;
             }
-            if (pBlockEntity.time >= pBlockEntity.maxTime) {
-                pBlockEntity.tryCraft();
-                pBlockEntity.time = 0;
+            if (fabricator.time >= fabricator.maxTime) {
+                fabricator.tryCraft();
+                fabricator.time = 0;
             }
-            pBlockEntity.updateBlock();
+            fabricator.updateBlock();
+        } else {
+            if (fabricator.time >= 0) {
+                if (!fabricator.clientHandler.isSoundPlaying())
+                    fabricator.clientHandler.startSound();
+            } else {
+                if (fabricator.clientHandler.isSoundPlaying())
+                    fabricator.clientHandler.stopSound();
+            }
         }
     }
     protected void updateBlock() {
@@ -301,5 +308,21 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
     }
     private static boolean hasNotReachedStackLimit(BaseFabricatorBlockEntity entity) {
         return entity.itemHandler.getStackInSlot(2).getCount() < entity.itemHandler.getStackInSlot(2).getMaxStackSize();
+    }
+
+    private static class ClientHandler {
+        public SoundInstance workingSound;
+        public void createWorkingSound(BlockPos pos) {
+            workingSound = new SimpleSoundInstance(SoundRegistry.FABRICATOR_WORKING.value().getLocation(), SoundSource.BLOCKS, 2f, 1f, SoundInstance.createUnseededRandom(), true, 0, SoundInstance.Attenuation.LINEAR, pos.getX(), pos.getY(), pos.getZ(), false);
+        }
+        public void startSound() {
+            Minecraft.getInstance().getSoundManager().play(workingSound);
+        }
+        public void stopSound() {
+            Minecraft.getInstance().getSoundManager().stop(workingSound);
+        }
+        public boolean isSoundPlaying() {
+            return Minecraft.getInstance().getSoundManager().isActive(workingSound);
+        }
     }
 }
