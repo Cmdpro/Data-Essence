@@ -6,6 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class SoundRegistry {
@@ -90,7 +91,7 @@ public class SoundRegistry {
     public static Holder<SoundEvent> createBasicFactoryLoopSound(String name) {
         var identifier = DataNEssence.locate(name);
         var sound = SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(identifier));
-        if (Dist.CLIENT.isClient()) {
+        if (FMLEnvironment.dist == Dist.CLIENT) {
             FactorySong.addFactorySongSound(identifier);
         }
         return sound;
