@@ -31,19 +31,22 @@ public class DataTabSerializer {
         pBuffer.writeResourceLocation(pValue.id);
         ItemStack.STREAM_CODEC.encode(pBuffer, pValue.icon);
         ComponentSerialization.STREAM_CODEC.encode(pBuffer, pValue.name);
-        pBuffer.writeInt(pValue.priority);
+        pBuffer.writeBoolean(pValue.alwaysShown);
+        DataTab.DataTabPlacement.STREAM_CODEC.encode(pBuffer, pValue.placement);
     }, (pBuffer) -> {
         ResourceLocation id = pBuffer.readResourceLocation();
         ItemStack icon = ItemStack.STREAM_CODEC.decode(pBuffer);
         Component name = ComponentSerialization.STREAM_CODEC.decode(pBuffer);
-        int priority = pBuffer.readInt();
-        DataTab entry = new DataTab(id, icon, name, priority);
+        boolean alwaysShown = pBuffer.readBoolean();
+        DataTab.DataTabPlacement placement = DataTab.DataTabPlacement.STREAM_CODEC.decode(pBuffer);
+        DataTab entry = new DataTab(id, icon, name, alwaysShown, placement);
         return entry;
     });
     public static final MapCodec<DataTab> ORIGINAL_CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
             ItemStack.CODEC.fieldOf("icon").forGetter((entry) -> entry.icon),
             ComponentSerialization.CODEC.fieldOf("name").forGetter((entry) -> entry.name),
-            Codec.INT.fieldOf("priority").forGetter((entry) -> entry.priority)
-    ).apply(instance, (icon, name, priority) -> new DataTab(null, icon, name, priority)));
+            Codec.BOOL.optionalFieldOf("always_shown", false).forGetter((entry) -> entry.alwaysShown),
+            DataTab.DataTabPlacement.CODEC.fieldOf("placement").forGetter((entry) -> entry.placement)
+    ).apply(instance, (icon, name, alwaysShown, placement) -> new DataTab(null, icon, name, alwaysShown, placement)));
     public static final Codec<Optional<WithConditions<DataTab>>> CODEC = ConditionalOps.createConditionalCodecWithConditions(ORIGINAL_CODEC.codec());
 }

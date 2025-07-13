@@ -8,5 +8,8 @@
     "LivingEntityMixin"
   ],
   "client": [
+    "client.SoundEngineMixin",
+    "client.ChannelMixin",
+    "client.SoundManagerMixin"
   ]
 }

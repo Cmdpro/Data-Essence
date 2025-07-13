@@ -8,9 +8,9 @@
   "icon": {
     "id": "mekanism:fluorite_gem"
   },
-  "tab": "datanessence:basics",
+  "tab": "datanessence:mod_integration",
   "x": 2,
-  "y": 4,
+  "y": -1,
   "pages": [
     {
       "type": "datanessence:text",

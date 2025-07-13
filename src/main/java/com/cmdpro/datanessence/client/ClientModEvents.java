@@ -174,6 +174,7 @@ public class ClientModEvents {
         event.register(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get(), ItemDecorators.essenceBarDecoration);
         event.register(ItemRegistry.GRAPPLING_HOOK.get(), ItemDecorators.essenceBarDecoration);
         event.register(ItemRegistry.TRANS_GRAPPLING_HOOK.get(), ItemDecorators.essenceBarDecoration);
+        event.register(ItemRegistry.ORE_SCANNER.get(), ItemDecorators.essenceBarDecoration);
     }
     @SubscribeEvent
     public static void registerMenuScreens(RegisterMenuScreensEvent event) {

@@ -8,9 +8,9 @@
   "icon": {
     "id": "datanessence:traversite_road_opal"
   },
-  "tab": "datanessence:tools",
-  "x": 4,
-  "y": 0,
+  "tab": "datanessence:mod_integration",
+  "x": -2,
+  "y": -1,
   "pages": [
     {
       "type": "datanessence:item",

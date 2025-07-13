@@ -17,7 +17,7 @@ import com.cmdpro.datanessence.block.production.*;
 import com.cmdpro.datanessence.block.storage.*;
 import com.cmdpro.datanessence.block.technical.Arekko;
 import com.cmdpro.datanessence.block.technical.Computer;
-import com.cmdpro.datanessence.block.technical.DataBank;
+import com.cmdpro.datanessence.block.technical.AncientDataBank;
 import com.cmdpro.datanessence.block.technical.StructureProtector;
 import com.cmdpro.datanessence.block.technical.cryochamber.Cryochamber;
 import com.cmdpro.datanessence.block.technical.cryochamber.CryochamberRouter;
@@ -31,13 +31,11 @@ import com.cmdpro.datanessence.block.transmission.NaturalEssencePoint;
 import com.cmdpro.datanessence.block.transportation.*;
 import com.cmdpro.datanessence.block.world.*;
 import com.cmdpro.datanessence.block.world.shieldingstone.*;
-import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.GameMasterBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
@@ -54,6 +52,10 @@ import java.util.function.Supplier;
 public class BlockRegistry {
     public static BlockBehaviour.Properties getMachineProperties() {
         return BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f);
+    }
+
+    public static BlockBehaviour.Properties getShieldlessAncientRockProperties() {
+        return BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.DEEPSLATE_TILES).explosionResistance(360000f);
     }
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK,
@@ -152,6 +154,9 @@ public class BlockRegistry {
     public static final Supplier<Block> DRYING_TABLE = register("drying_table",
             () -> new DryingTable(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> DATA_BANK = register("player_data_bank",
+            () -> new DataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().lightLevel((blockState) -> { return 4;})),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers
     public static final Supplier<Block> ESSENCE_BUFFER = register("essence_buffer",
@@ -223,14 +228,14 @@ public class BlockRegistry {
     public static final Supplier<Block> STRUCTURE_PROTECTOR = register("structure_protector",
             () -> new StructureProtector(BlockBehaviour.Properties.of().mapColor(MapColor.STONE).instrument(NoteBlockInstrument.BASEDRUM).noOcclusion().instabreak().noCollission()),
             object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> DATA_BANK = register("data_bank",
-            () -> new DataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),
+    public static final Supplier<Block> ANCIENT_DATA_BANK = register("data_bank",
+            () -> new AncientDataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),
             object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> COMPUTER = register("computer",
             () -> new Computer(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f, 3600000.0F).lightLevel((blockState) -> { return 4;})),
             object -> () -> new GameMasterBlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AREKKO = registerBlock("arekko",
-            () -> new Arekko(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).noOcclusion()));
+            () -> new Arekko(BlockBehaviour.Properties.ofFullCopy(Blocks.BONE_BLOCK).noOcclusion().noCollission()));
     public static final Supplier<Block> CRYOCHAMBER = register("cryochamber",
             () -> new Cryochamber(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -270,7 +275,7 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
 
-    // Ancient Rock
+    // Shielding Rock - Structure-Only
     public static final Supplier<Block> ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks",
             AncientShieldingStone::new,
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -300,6 +305,38 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ANCIENT_GLYPH_STONE_ESSENCE = register("ancient_glyph_stone_essence",
             AncientShieldingStone::new,
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
+    // Ancient Rock - Survival-Obtainable
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_ROCK_BRICKS = register("ancient_rock_bricks_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_ROCK_TILES = register("ancient_rock_tiles_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_ROCK_COLUMN = register("ancient_rock_column_shieldless",
+            () -> new DirectionalPillarBlock(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ENERGIZED_ANCIENT_ROCK_COLUMN = register("energized_ancient_rock_column_shieldless",
+            () -> new DirectionalPillarBlock(getShieldlessAncientRockProperties().lightLevel((blockState) -> { return 3;})),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_LANTERN = register("ancient_lantern_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties().lightLevel((blockState) -> { return 13;})),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_SHELF = register("ancient_shelf_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_WINDOW = register("ancient_window_shieldless",
+            () -> new TransparentBlock(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK = register("ancient_glyph_stone_blank_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE = register("ancient_glyph_stone_essence_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN = register("ancient_glyph_stone_makutuin_shieldless",
+            () -> new Block(getShieldlessAncientRockProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Obsidian Deco

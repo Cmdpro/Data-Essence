@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
+import com.cmdpro.datanessence.networking.packet.s2c.OpenEntryEditor;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.data.datatablet.Entries;
 import com.cmdpro.datanessence.data.datatablet.Entry;
@@ -85,7 +86,18 @@ public class DataNEssenceCommands {
                         .executes(command -> {
                             return maximize(command);
                         }))
+                .then(Commands.literal("dev")
+                        .then(Commands.literal("entry_editor")
+                                .executes(command -> {
+                                    return entryeditor(command);
+                                })))
         );
+    }
+    private static int entryeditor(CommandContext<CommandSourceStack> command) {
+        if (command.getSource().getEntity() instanceof ServerPlayer player) {
+            ModMessages.sendToPlayer(new OpenEntryEditor(), player);
+        }
+        return Command.SINGLE_SUCCESS;
     }
     private static int checkoverlaps(CommandContext<CommandSourceStack> command) {
         boolean foundIssues = false;

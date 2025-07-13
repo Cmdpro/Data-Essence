@@ -19,7 +19,6 @@ import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class ModBlockLootTables extends BlockLootSubProvider {
     public ModBlockLootTables(HolderLookup.Provider provider) {
@@ -43,7 +42,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.DECO_ESSENCE_BUFFER.get());
         dropSelf(BlockRegistry.DECO_ITEM_BUFFER.get());
         dropSelf(BlockRegistry.DECO_FLUID_BUFFER.get());
-        this.add(BlockRegistry.DATA_BANK.get(),
+        this.add(BlockRegistry.ANCIENT_DATA_BANK.get(),
                 block -> noDrop());
         this.add(BlockRegistry.COMPUTER.get(),
                 block -> noDrop());
@@ -56,11 +55,26 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(BlockRegistry.EMPTY_CRYOCHAMBER_ROUTER.get(),
                 block -> noDrop());
         this.add(BlockRegistry.ESSENCE_CRYSTAL.get(), block -> createEssenceCrystalDrops(block, ItemRegistry.ESSENCE_SHARD.get()));
-        dropSelf(BlockRegistry.ANCIENT_ROCK_COLUMN.get());
-        dropSelf(BlockRegistry.ANCIENT_ROCK_BRICKS.get());
-        dropSelf(BlockRegistry.ANCIENT_ROCK_TILES.get());
-        dropSelf(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN.get());
-        dropSelf(BlockRegistry.ANCIENT_LANTERN.get());
+        dropOther(BlockRegistry.ANCIENT_ROCK_COLUMN.get(), BlockRegistry.SHIELDLESS_ANCIENT_ROCK_COLUMN.get().asItem());
+        dropOther(BlockRegistry.ANCIENT_ROCK_BRICKS.get(), BlockRegistry.SHIELDLESS_ANCIENT_ROCK_BRICKS.get().asItem());
+        dropOther(BlockRegistry.ANCIENT_ROCK_TILES.get(), BlockRegistry.SHIELDLESS_ANCIENT_ROCK_TILES.get().asItem());
+        dropOther(BlockRegistry.ENERGIZED_ANCIENT_ROCK_COLUMN.get(), BlockRegistry.SHIELDLESS_ENERGIZED_ANCIENT_ROCK_COLUMN.get().asItem());
+        dropOther(BlockRegistry.ANCIENT_LANTERN.get(), BlockRegistry.SHIELDLESS_ANCIENT_LANTERN.get().asItem());
+        dropOther(BlockRegistry.ANCIENT_SHELF.get(), BlockRegistry.SHIELDLESS_ANCIENT_SHELF.get().asItem());
+        dropOther(BlockRegistry.ANCIENT_WINDOW.get(), BlockRegistry.SHIELDLESS_ANCIENT_WINDOW.get().asItem());
+        dropOther(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK.get(), BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK.get().asItem());
+        dropOther(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get(), BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get().asItem());
+        dropOther(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get(), BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get().asItem());
+        dropSelf(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_COLUMN.get());
+        dropSelf(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_BRICKS.get());
+        dropSelf(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_TILES.get());
+        dropSelf(BlockRegistry.SHIELDLESS_ENERGIZED_ANCIENT_ROCK_COLUMN.get());
+        dropSelf(BlockRegistry.SHIELDLESS_ANCIENT_LANTERN.get());
+        dropSelf(BlockRegistry.SHIELDLESS_ANCIENT_SHELF.get());
+        dropSelf(BlockRegistry.SHIELDLESS_ANCIENT_WINDOW.get());
+        dropSelf(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK.get());
+        dropSelf(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get());
+        dropSelf(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get());
         dropSelf(BlockRegistry.POLISHED_OBSIDIAN.get());
         dropSelf(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get());
         dropSelf(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get());
@@ -97,15 +111,10 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.ESSENCE_BREAKER.get());
         dropSelf(BlockRegistry.LIMITED_ITEM_BUFFER.get());
         dropSelf(BlockRegistry.SPIRE_GLASS.get());
-        dropSelf(BlockRegistry.ANCIENT_SHELF.get());
-        dropSelf(BlockRegistry.ANCIENT_WINDOW.get());
         dropSelf(BlockRegistry.METAL_SHAPER.get());
         dropSelf(BlockRegistry.LIGHT_FIXTURE.get());
         dropSelf(BlockRegistry.CRYSTALLINE_LEAVES.get());
         dropSelf(BlockRegistry.CRYSTALLINE_LOG.get());
-        dropSelf(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK.get());
-        dropSelf(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get());
-        dropSelf(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
         dropSelf(BlockRegistry.INDUSTRIAL_PLANT_SIPHON.get());
         dropSelf(BlockRegistry.MELTER.get());
         dropSelf(BlockRegistry.TRAVERSITE_ROAD_SLAB.get());
@@ -117,6 +126,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.TRAVERSITE_ROAD_STAIRS_OPAL.get());
         dropSelf(BlockRegistry.TRAVERSITE_ROAD_SLAB_OPAL.get());
         dropSelf(BlockRegistry.ESSENCE_BRIDGE.get()); // TODO maybe? i just needed to get datagen operational ~Eset
+        dropSelf(BlockRegistry.DATA_BANK.get());
         dropSelf(BlockRegistry.ENDER_PEARL_DESTINATION.get());
         dropSelf(BlockRegistry.ENDER_PEARL_RELAY.get());
         dropSelf(BlockRegistry.ENDER_PEARL_CAPTURE.get());

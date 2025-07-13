@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "datanessence:ancient_glyph_stone_blank_shieldless"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "datanessence:blocks/ancient_glyph_stone_blank_shieldless"
+}

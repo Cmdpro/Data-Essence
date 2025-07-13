@@ -129,26 +129,10 @@ public class OrePingShader extends PostShaderInstance {
         }
         stack.pushPose();
         stack.translate(pos.getX(), pos.getY(), pos.getZ());
-        BlockRenderDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
-        FluidState fluidState = block.getFluidState();
-        if (!fluidState.isEmpty()) {
-            RenderType layer = ItemBlockRenderTypes.getRenderLayer(fluidState);
-            VertexConsumer buffer = bufferSource.getBuffer(layer);
-            blockRenderer.renderLiquid(pos, BLOCK_AND_TINT_GETTER, buffer, block, fluidState);
-        }
         if (block.getRenderShape() != RenderShape.INVISIBLE) {
             RenderType type = RenderType.SOLID;
             VertexConsumer buffer = bufferSource.getBuffer(type);
             Minecraft.getInstance().getBlockRenderer().renderBatched(block, pos, BLOCK_AND_TINT_GETTER, stack, buffer, false, Minecraft.getInstance().level.random, ModelData.EMPTY, type);
-        }
-        if (block.getBlock() instanceof EntityBlock) {
-            BlockEntity be = Minecraft.getInstance().level.getBlockEntity(pos);
-            if (be != null) {
-                BlockEntityRenderer<BlockEntity> renderer = Minecraft.getInstance().getBlockEntityRenderDispatcher().getRenderer(be);
-                if (renderer != null) {
-                    renderer.render(be, partialTick.getGameTimeDeltaTicks(), stack, bufferSource, 0xF000F0, OverlayTexture.NO_OVERLAY);
-                }
-            }
         }
         stack.popPose();
     }
@@ -239,7 +223,7 @@ public class OrePingShader extends PostShaderInstance {
 
         @Override
         public VertexConsumer getBuffer(RenderType type) {
-            return super.getBuffer(HologramRenderType.remap(type));
+            return super.getBuffer(HologramRenderType.remap(RenderType.SOLID));
         }
     }
 

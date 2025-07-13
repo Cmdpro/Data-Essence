@@ -1,0 +1,12 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pastel"
+    }
+  ],
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "minecraft:amethyst_shard" },
+  "time": 100,
+  "result": { "id": "pastel:amethyst_powder", "count": 2 }
+}

@@ -1,0 +1,15 @@
+{
+  "condition": {
+    "type": "databank:advancement",
+    "advancement": "datanessence:datanessence"
+  },
+  "type": {
+    "type": "databank:block",
+    "hidden_as": "datanessence:essence_crystal",
+    "original": "datanessence:essence_crystal",
+    "name_override": {
+      "translate": "hidden.datanessence.crystal",
+      "font": "datanessence:ancient"
+    }
+  }
+}

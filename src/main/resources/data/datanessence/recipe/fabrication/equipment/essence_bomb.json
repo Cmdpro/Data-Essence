@@ -3,6 +3,7 @@
   "essenceCost": {
     "datanessence:essence": 10
   },
+  "time": 60,
   "entry": "datanessence:tools/essence_bombs",
   "pattern": [
     " C ",

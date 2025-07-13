@@ -6,6 +6,9 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.sounds.SimpleSoundInstance;
+import net.minecraft.client.sounds.SoundManager;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -19,6 +22,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 import org.apache.commons.lang3.IntegerRange;
@@ -26,8 +30,7 @@ import org.slf4j.Logger;
 
 import java.util.List;
 
-import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasMekanism;
-import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.hasOpalescence;
+import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.*;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod("datanessence")
@@ -81,6 +84,8 @@ public class DataNEssence
             DataNEssence.LOGGER.info("[DATANESSENCE] Mekanism detected; enabling integration features. Careful with your reactors!");
         if (hasOpalescence)
             DataNEssence.LOGGER.info("[DATANESSENCE] Opalescence detected; enabling integration features. I hear this rock is a favorite of dragons!");
+        if (hasPastel)
+            DataNEssence.LOGGER.info("[DATANESSENCE] Pastel detected; enabling integration features. Are you an Artist, or a Researcher, or both?");
     }
 
     @SubscribeEvent
@@ -410,8 +415,18 @@ public class DataNEssence
             event.accept(BlockRegistry.ANCIENT_GLYPH_STONE_BLANK.get());
             event.accept(BlockRegistry.ANCIENT_GLYPH_STONE_MAKUTUIN.get());
             event.accept(BlockRegistry.ANCIENT_GLYPH_STONE_ESSENCE.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_COLUMN.get());
+            event.accept(BlockRegistry.SHIELDLESS_ENERGIZED_ANCIENT_ROCK_COLUMN.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_LANTERN.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_BRICKS.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_ROCK_TILES.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_SHELF.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_WINDOW.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get());
+            event.accept(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get());
             event.accept(BlockRegistry.COMPUTER.get());
-            event.accept(BlockRegistry.DATA_BANK.get());
+            event.accept(BlockRegistry.ANCIENT_DATA_BANK.get());
         }
     }
 }

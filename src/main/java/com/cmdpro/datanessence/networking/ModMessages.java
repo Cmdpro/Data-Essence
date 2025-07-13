@@ -79,6 +79,7 @@ public class ModMessages {
         registrar.playToClient(MachineEssenceValueSync.TYPE, getNetworkCodec(MachineEssenceValueSync::read, MachineEssenceValueSync::write), Handler::handle);
         registrar.playToClient(PlayAncientCombatUnitBlinkEffect.TYPE, getNetworkCodec(PlayAncientCombatUnitBlinkEffect::read, PlayAncientCombatUnitBlinkEffect::write), Handler::handle);
         registrar.playToClient(AddScannedOre.TYPE, getNetworkCodec(AddScannedOre::read, AddScannedOre::write), Handler::handle);
+        registrar.playToClient(OpenEntryEditor.TYPE, getNetworkCodec(OpenEntryEditor::read, OpenEntryEditor::write), Handler::handle);
         //C2S
         registrar.playToServer(PlayerFinishDataBankMinigame.TYPE, getNetworkCodec(PlayerFinishDataBankMinigame::read, PlayerFinishDataBankMinigame::write), Handler::handle);
         registrar.playToServer(PlayerChangeDriveData.TYPE, getNetworkCodec(PlayerChangeDriveData::read, PlayerChangeDriveData::write), Handler::handle);

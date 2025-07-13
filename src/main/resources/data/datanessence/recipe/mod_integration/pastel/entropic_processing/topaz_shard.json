@@ -1,0 +1,12 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pastel"
+    }
+  ],
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "pastel:topaz_shard" },
+  "time": 100,
+  "result": { "id": "pastel:topaz_powder", "count": 2 }
+}

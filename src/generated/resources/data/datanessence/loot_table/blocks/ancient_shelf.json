@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:ancient_shelf"
+          "name": "datanessence:ancient_shelf_shieldless"
         }
       ],
       "rolls": 1.0

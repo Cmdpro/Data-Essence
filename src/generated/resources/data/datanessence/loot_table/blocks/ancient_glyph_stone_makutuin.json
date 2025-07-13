@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:ancient_glyph_stone_makutuin"
+          "name": "datanessence:ancient_glyph_stone_makutuin_shieldless"
         }
       ],
       "rolls": 1.0

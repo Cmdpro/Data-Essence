@@ -9,7 +9,7 @@
     "CRC",
     " P "
   ],
-  "time": 60,
+  "time": 100,
   "key": {
     "C": { "item": "datanessence:capacitance_panel" },
     "R": { "item": "datanessence:conductance_rod" },

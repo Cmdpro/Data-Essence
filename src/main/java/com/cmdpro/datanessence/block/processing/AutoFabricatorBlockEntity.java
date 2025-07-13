@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.api.misc.ILockableContainer;
+import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.api.LockableItemHandler;
 import com.cmdpro.datanessence.recipe.IFabricationRecipe;
@@ -24,10 +25,8 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -136,6 +135,16 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         craftingProgress = tag.getInt("craftingProgress");
         itemHandler.deserializeNBT(pRegistries, tag.getCompound("itemHandler"));
         maxTime = tag.getInt("maxTime");
+        if (tag.contains("essenceCost")) {
+            CompoundTag cost = tag.getCompound("essenceCost");
+            essenceCost = new HashMap<>();
+            for (String i : cost.getAllKeys()) {
+                ResourceLocation location = ResourceLocation.tryParse(i);
+                essenceCost.put(location, cost.getFloat(i));
+            }
+        } else {
+            essenceCost = null;
+        }
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -145,6 +154,13 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         tag.putInt("craftingProgress", craftingProgress);
         tag.put("itemHandler", itemHandler.serializeNBT(pRegistries));
         tag.putInt("maxTime", maxTime);
+        if (essenceCost != null) {
+            CompoundTag cost = new CompoundTag();
+            for (Map.Entry<ResourceLocation, Float> i : essenceCost.entrySet()) {
+                cost.putFloat(i.getKey().toString(), i.getValue());
+            }
+            tag.put("essenceCost", cost);
+        }
         return tag;
     }
 
@@ -316,6 +332,11 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
                 pBlockEntity.craftingProgress = 0;
             }
             pBlockEntity.updateBlock();
+        } else {
+            if (pBlockEntity.craftingProgress >= 0 && pBlockEntity.essenceCost != null) {
+                if ( pBlockEntity.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get())) )
+                    ClientHandler.markIndustrialFactorySong(pPos);
+            }
         }
     }
     protected void updateBlock() {
@@ -349,4 +370,13 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
     @Override
     public EssenceStorage getStorage() {
         return storage;
-    }}
+    }
+
+    private static class ClientHandler {
+        static FactorySong.FactoryLoop industrialSound = FactorySong.getLoop(SoundRegistry.AUTO_FABRICATOR_LOOP_INDUSTRIAL.value());
+
+        public static void markIndustrialFactorySong(BlockPos pos) {
+            industrialSound.addSource(pos);
+        }
+    }
+}

@@ -11,7 +11,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "datanessence:ancient_rock_tiles"
+          "name": "datanessence:ancient_rock_tiles_shieldless"
         }
       ],
       "rolls": 1.0

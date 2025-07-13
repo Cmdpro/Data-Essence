@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-10T12:06:48.594910846	Item Models: datanessence
+// 1.21.1	2025-06-25T02:23:40.29768483	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -55,6 +55,7 @@ dc6b5004a06b5a6d174a99991c44a9c625c7fed5 assets/datanessence/models/item/logical
 fe1ce05b004a75716ba9ee13cc445e73c1ae74ff assets/datanessence/models/item/lunar_essence_bomb.json
 bc5ec73f7a4bc15476a358397296a33a226350e3 assets/datanessence/models/item/lunar_essence_point.json
 3d310e3313629f8d13026f2ae40006f83f86a491 assets/datanessence/models/item/lunar_essence_wire.json
+340d3de4ab48c8337fa940393e5303f45b2ef977 assets/datanessence/models/item/mineral_finding_rod.json
 cf783901ea1679feb39315eeb19e67cea4923a2e assets/datanessence/models/item/music_disc_player.json
 003b02e930bd05d5cfe42cae5f989aa7e96afe2d assets/datanessence/models/item/music_disc_player_on.json
 d2ee51f8a1c9d8336e8e8d1102e25c8e7c4e4b25 assets/datanessence/models/item/natural_essence_bomb.json

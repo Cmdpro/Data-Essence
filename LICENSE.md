@@ -1,7 +1,8 @@
-Data & Essence has 2 licenses:
-All asset files within src/main/resources/assets/datanessence/textures/ are (c) 2024 by Eset Kalenko and are All Rights Reserved
-MIT License for the rest of the files
+Data & Essence's Assets are licensed differently than the code:
+1. All *asset files* within `src/main/resources/assets/datanessence/textures/` and `/models/` are (c) 2024 by Eset Kalenko and are **All Rights Reserved**.
+2. All *music files* within `src/main/resources/assets/datanessence/sounds/ost/` are (c) 2025 Fuzzy and are [**CC BY-NC-SA**](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
+The Code is licensed **MIT**:
 MIT License
 
 Copyright (c) 2024 Cmdpro
