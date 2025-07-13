@@ -22,6 +22,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class DataTablet extends Item {
     public DataTablet(Properties pProperties) {
         super(pProperties);
@@ -51,8 +54,9 @@ public class DataTablet extends Item {
             if (stack.is(ItemRegistry.DATA_TABLET.get()) && player.isShiftKeyDown()) {
                 if (!level.isClientSide) {
                     if (level.getBlockEntity(pos) instanceof DataBankBlockEntity ent) {
-                        player.sendSystemMessage(Component.literal("hello"));
-                        ent.data.addAll(player.getData(AttachmentTypeRegistry.UNLOCKED.get()).stream().filter((i) -> !ent.data.contains(i)).toList());
+                        List<ResourceLocation> entries = player.getData(AttachmentTypeRegistry.UNLOCKED.get()).stream().filter((i) -> !ent.data.contains(i)).toList();
+                        player.sendSystemMessage(Component.translatable("block.datanessence.player_data_bank.bind", entries.size()));
+                        ent.data.addAll(entries);
                     }
                 }
                 return InteractionResult.sidedSuccess(level.isClientSide());
