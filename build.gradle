@@ -139,7 +139,7 @@ dependencies {
     implementation('org.apfloat:apfloat:1.14.0')
     jarJar (group: 'org.apfloat', name: 'apfloat', version: '[1.14.0,)')
 
-    implementation "blank:databank-1.1.5"
+    implementation "blank:databank-1.1.5.1"
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     localRuntime "dev.emi:emi-neoforge:${emi_version}"
 
