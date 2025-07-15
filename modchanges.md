@@ -1,6 +1,7 @@
 ### Additions
 - Added a visual indicator of wire direction
 - Improved visuals on the Entropic Processor
+- Added a few Pastel plants to the Industrial Plant Siphon's fuel map
 
 ### Changes
 - Made the Industrial Plant Siphon use datamaps instead of tags
