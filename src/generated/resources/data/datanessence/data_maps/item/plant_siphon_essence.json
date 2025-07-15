@@ -1,0 +1,134 @@
+{
+  "values": {
+    "#c:crops": {
+      "amount_per_tick": 2.0,
+      "ticks": 20
+    },
+    "#c:seeds": {
+      "amount_per_tick": 2.0,
+      "ticks": 10
+    },
+    "#minecraft:flowers": {
+      "amount_per_tick": 2.0,
+      "ticks": 10
+    },
+    "#minecraft:leaves": {
+      "amount_per_tick": 2.0,
+      "ticks": 20
+    },
+    "#minecraft:saplings": {
+      "amount_per_tick": 2.0,
+      "ticks": 10
+    },
+    "datanessence:tethergrass": {
+      "amount_per_tick": 8.0,
+      "ticks": 100
+    },
+    "minecraft:bamboo": {
+      "amount_per_tick": 2.0,
+      "ticks": 10
+    },
+    "minecraft:chorus_flower": {
+      "amount_per_tick": 6.0,
+      "ticks": 60
+    },
+    "minecraft:chorus_fruit": {
+      "amount_per_tick": 4.0,
+      "ticks": 50
+    },
+    "minecraft:kelp": {
+      "amount_per_tick": 2.0,
+      "ticks": 10
+    },
+    "minecraft:pitcher_plant": {
+      "amount_per_tick": 4.0,
+      "ticks": 50
+    },
+    "minecraft:sea_pickle": {
+      "amount_per_tick": 2.0,
+      "ticks": 10
+    },
+    "minecraft:spore_blossom": {
+      "amount_per_tick": 4.0,
+      "ticks": 50
+    },
+    "minecraft:torchflower": {
+      "amount_per_tick": 4.0,
+      "ticks": 50
+    },
+    "minecraft:wither_rose": {
+      "amount_per_tick": 6.0,
+      "ticks": 50
+    },
+    "pastel:amaranth_bushel": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 4.0,
+      "ticks": 50
+    },
+    "pastel:amaranth_grains": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 4.0,
+      "ticks": 25
+    },
+    "pastel:germinated_jade_vine_bulb": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 8.0,
+      "ticks": 100
+    },
+    "pastel:jadeite_lotus_bulb": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 8.0,
+      "ticks": 100
+    },
+    "pastel:jadeite_lotus_flower": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 8.0,
+      "ticks": 100
+    },
+    "pastel:nephrite_blossom_bulb": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 8.0,
+      "ticks": 100
+    },
+    "pastel:vegetal": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 8.0,
+      "ticks": 100
+    }
+  }
+}
