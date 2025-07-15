@@ -6,14 +6,13 @@ import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
-import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
-import com.cmdpro.datanessence.config.DataNEssenceConfig;
+import com.cmdpro.datanessence.datamaps.DataNEssenceDatamaps;
+import com.cmdpro.datanessence.datamaps.PlantSiphonEssenceMap;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import com.cmdpro.datanessence.screen.IndustrialPlantSiphonMenu;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -23,7 +22,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -31,15 +29,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
-import org.apache.commons.lang3.RandomUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.awt.*;
 
 public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
@@ -72,7 +66,7 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             if (slot == 0) {
-                return stack.is(TagRegistry.Items.LOW_ESSENCE_PLANTS) || stack.is(TagRegistry.Items.MEDIUM_ESSENCE_PLANTS) || stack.is(TagRegistry.Items.HIGH_ESSENCE_PLANTS);
+                return stack.getItemHolder().getData(DataNEssenceDatamaps.PLANT_SIPHON_ESSENCE) != null;
             }
             return super.isItemValid(slot, stack);
         }
@@ -149,39 +143,34 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
     public static void tick(Level world, BlockPos pos, BlockState state, IndustrialPlantSiphonBlockEntity tile) {
         if (!world.isClientSide()) {
             BufferUtil.getItemsFromBuffersBelow(tile, tile.itemHandler);
-            if (tile.essenceGenerationTicks <= 0 ) {
-                tile.essenceGenerationTicks = tile.getGenerationTicks(tile);
-                tile.generationRate = tile.getEssenceProduced(tile);
-                tile.itemHandler.extractItem(0, 1, false);
-            }
-
             if (tile.essenceGenerationTicks > 0) {
                 if ( !(tile.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) + tile.generationRate > tile.storage.getMaxEssence()) ) {
                     tile.storage.addEssence(EssenceTypeRegistry.ESSENCE.get(), tile.generationRate);
                     tile.essenceGenerationTicks--;
                 }
             }
+            if (tile.essenceGenerationTicks <= 0 ) {
+                tile.essenceGenerationTicks = tile.getGenerationTicks(tile);
+                tile.generationRate = tile.getEssenceProduced(tile);
+                tile.itemHandler.extractItem(0, 1, false);
+            }
             tile.updateBlock();
         }
     }
 
     public float getGenerationTicks(IndustrialPlantSiphonBlockEntity tile) {
-        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.HIGH_ESSENCE_PLANTS))
-            return DataNEssenceConfig.highValuePlantEssence;
-        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.MEDIUM_ESSENCE_PLANTS))
-            return DataNEssenceConfig.mediumValuePlantEssence;
-        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.LOW_ESSENCE_PLANTS))
-            return DataNEssenceConfig.lowValuePlantEssence;
+        PlantSiphonEssenceMap map = tile.itemHandler.getStackInSlot(0).getItemHolder().getData(DataNEssenceDatamaps.PLANT_SIPHON_ESSENCE);
+        if (map != null) {
+            return map.ticks();
+        }
         return 0f;
     }
 
     public float getEssenceProduced(IndustrialPlantSiphonBlockEntity tile) {
-        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.HIGH_ESSENCE_PLANTS))
-            return essenceProducedFromHighValuePlants;
-        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.MEDIUM_ESSENCE_PLANTS))
-            return essenceProducedFromMediumValuePlants;
-        if (tile.itemHandler.getStackInSlot(0).is(TagRegistry.Items.LOW_ESSENCE_PLANTS))
-            return essenceProducedFromLowValuePlants;
+        PlantSiphonEssenceMap map = tile.itemHandler.getStackInSlot(0).getItemHolder().getData(DataNEssenceDatamaps.PLANT_SIPHON_ESSENCE);
+        if (map != null) {
+            return map.amountPerTick();
+        }
         return 0f;
     }
 

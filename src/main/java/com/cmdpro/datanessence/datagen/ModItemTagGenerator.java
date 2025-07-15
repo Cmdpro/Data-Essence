@@ -32,25 +32,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES)
                 .add(ItemRegistry.TRAVERSITE_TRUDGERS.get());
 
-        this.tag(TagRegistry.Items.LOW_ESSENCE_PLANTS)
-                .addTag(Tags.Items.CROPS)
-                .addTag(Tags.Items.SEEDS)
-                .addTag(ItemTags.LEAVES)
-                .addTag(ItemTags.FLOWERS)
-                .addTag(ItemTags.SAPLINGS)
-                .add(Items.BAMBOO)
-                .add(Items.KELP)
-                .add(Items.SEA_PICKLE);
-        this.tag(TagRegistry.Items.MEDIUM_ESSENCE_PLANTS)
-                .add(Items.CHORUS_FRUIT)
-                .add(Items.CHORUS_FLOWER)
-                .add(Items.WITHER_ROSE)
-                .add(Items.SPORE_BLOSSOM)
-                .add(Items.PITCHER_PLANT)
-                .add(Items.TORCHFLOWER);
-        this.tag(TagRegistry.Items.HIGH_ESSENCE_PLANTS)
-                .add(BlockRegistry.TETHERGRASS.get().asItem());
-
         this.tag(TagRegistry.Items.EXPLOSIVE_MATERIAL)
                 .add(Items.GUNPOWDER)
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "dusts/sulfur"));
