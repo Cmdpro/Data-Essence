@@ -557,6 +557,10 @@ public class DataTabletScreen extends Screen {
         }
         return tabs;
     }
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
