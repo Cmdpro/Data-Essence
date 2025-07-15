@@ -35,9 +35,9 @@ public class SpecialTooltips {
                 Color color = new Color(essence.color);
                 Color essenceColor = new Color((int)(color.getRed()), (int)(color.getGreen()), (int)(color.getBlue()), color.getAlpha());
                 Color numberColor = new Color((int)(color.getRed()), (int)(color.getGreen()), (int)(color.getBlue()), color.getAlpha());
-                Color textColor = new Color((int)(color.getRed()), (int)(color.getGreen()), (int)(color.getBlue()), color.getAlpha());
+                Color textColor = new Color(0xFFFF96B5); // 0xFFF25EA1
                 DecimalFormat format = new DecimalFormat("#.##");
-                event.getToolTip().add(Component.translatable("tooltip.datanessence.plant_siphon_display.text").withStyle(ChatFormatting.WHITE, ChatFormatting.ITALIC));
+                event.getToolTip().add(Component.translatable("tooltip.datanessence.plant_siphon_display.text").withStyle(ChatFormatting.ITALIC).withColor(0xFFF25EA1));
                 event.getToolTip().add(Component.translatable("tooltip.datanessence.plant_siphon_display.values", Component.literal(format.format(map.amountPerTick())).withColor(numberColor.getRGB()), Component.literal(String.valueOf(map.ticks())).withColor(numberColor.getRGB()), essence.name.copy().withColor(essenceColor.getRGB())).withColor(textColor.getRGB()));
             }
         });
