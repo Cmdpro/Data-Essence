@@ -15,6 +15,7 @@ import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -46,7 +47,12 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             for (BlockPos i : pBlockEntity.link) {
                 Vec3 target = i.getCenter();
                 VertexConsumer vertexConsumer = RenderHandler.createBufferSource().getBuffer(DataNEssenceRenderTypes.WIRES);
-                ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, pBlockEntity.linkColor());
+                float darken = 1.5f;
+                Color segColor1 = pBlockEntity.linkColor();
+                Color segColor2 = new Color((int)(segColor1.getRed()/darken), (int)(segColor1.getGreen()/darken), (int)(segColor1.getBlue()/darken), segColor1.getAlpha());
+                float ticks = (Minecraft.getInstance().level.getGameTime() % 8)+pPartialTick;
+                int currentSeg = (int)(ticks % 8);
+                ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, (seg) -> seg % 8 == currentSeg || seg % 8 == currentSeg-1 ? segColor1 : segColor2);
             }
             pPoseStack.popPose();
         }
