@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-17T20:53:26.7408533	Tags for minecraft:item mod id datanessence
+// 1.21.1	2025-07-15T13:10:22.2088237	Tags for minecraft:item mod id datanessence
 8cdb9e30481dbfb955c51d5218c4d55973aed710 data/c/tags/item/armors.json
 b03db77a8d1040df181e14f47be358e5eac3c699 data/c/tags/item/gems.json
 ac195e282e4703c47ee41d5d79d0c5de41486f0e data/c/tags/item/glass_blocks.json
@@ -7,8 +7,6 @@ a5ab46f2889dd83377b3d7ac98b8b276744df4ff data/c/tags/item/music_discs.json
 9cddc5879f2f9028a5231bdb7b779717113cfbe2 data/datanessence/tags/item/copper_parts.json
 2de480fdf84933ba907798fa90de70b537e2b008 data/datanessence/tags/item/explosive_material.json
 9de9b5e4e88c0a0b61f74d3bcc4e8a85e2194ed1 data/datanessence/tags/item/hidden_resources.json
-f20021795384d03de093e8106f4c361eb069cd13 data/datanessence/tags/item/high_essence_plants.json
-76bfcdd7193340428adee6675df135c4100bc32d data/datanessence/tags/item/low_essence_plants.json
 e2da4e19973b7a1b57144263d080ccf9a0750636 data/datanessence/tags/item/makes_black_dye.json
 c2970d27e5a1275fe94ef26dbbf72254cf7213bf data/datanessence/tags/item/makes_blue_dye.json
 e9c0fe6c8b8d86a35fa8aeb9acb5b5096c14209c data/datanessence/tags/item/makes_brown_dye.json
@@ -25,7 +23,6 @@ bce5073bf52115ba41d2a7876709ffc5ecdf34f7 data/datanessence/tags/item/makes_pink_
 170eff9dc5bad0c59ffeeef3adda2c8c4e4dd416 data/datanessence/tags/item/makes_red_dye.json
 351ab4f85e4a63b60a30bd4a83acfd133b7ee670 data/datanessence/tags/item/makes_white_dye.json
 73a0f0ef78ea29bdc25208fc70b485fbc5620512 data/datanessence/tags/item/makes_yellow_dye.json
-b481c771dec1a8da797b59abff9f2731e32319e8 data/datanessence/tags/item/medium_essence_plants.json
 42ff038bd87bd6f82af3e5d6052ff1efd5c3ff20 data/datanessence/tags/item/polished_obsidian_blocks.json
 31eda235128f989ef2d29da92810911ef5808946 data/datanessence/tags/item/shaped_polished_obsidian_blocks.json
 81ba9b55e5886431788b273e43d5d5f8555aa26e data/minecraft/tags/item/freeze_immune_wearables.json
