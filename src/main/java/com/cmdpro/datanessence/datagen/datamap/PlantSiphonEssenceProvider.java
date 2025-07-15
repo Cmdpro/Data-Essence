@@ -45,13 +45,15 @@ public class PlantSiphonEssenceProvider extends DataMapProvider {
                 .add(getHolder(Items.TORCHFLOWER), new PlantSiphonEssenceMap(50, 4), false)
                 .add(PastelItems.AMARANTH_GRAINS, new PlantSiphonEssenceMap(25, 4), false, new ModLoadedCondition("pastel"))
                 .add(getHolder(PastelBlocks.AMARANTH_BUSHEL.asItem()), new PlantSiphonEssenceMap(50, 4), false, new ModLoadedCondition("pastel"))
+                .add(PastelItems.NIGHTDEW_SPROUT, new PlantSiphonEssenceMap(50, 4), false, new ModLoadedCondition("pastel"))
 
                 .add(getHolder(BlockRegistry.TETHERGRASS.get().asItem()), new PlantSiphonEssenceMap(100, 8), false)
                 .add(PastelItems.VEGETAL, new PlantSiphonEssenceMap(100, 8), false, new ModLoadedCondition("pastel"))
                 .add(PastelItems.GERMINATED_JADE_VINE_BULB, new PlantSiphonEssenceMap(100, 8), false, new ModLoadedCondition("pastel"))
                 .add(getHolder(PastelBlocks.JADEITE_LOTUS_BULB.asItem()), new PlantSiphonEssenceMap(100, 8), false, new ModLoadedCondition("pastel"))
                 .add(getHolder(PastelBlocks.JADEITE_LOTUS_FLOWER.asItem()), new PlantSiphonEssenceMap(100, 8), false, new ModLoadedCondition("pastel"))
-                .add(getHolder(PastelBlocks.NEPHRITE_BLOSSOM_BULB.asItem()), new PlantSiphonEssenceMap(100, 8), false, new ModLoadedCondition("pastel"));
+                .add(getHolder(PastelBlocks.NEPHRITE_BLOSSOM_BULB.asItem()), new PlantSiphonEssenceMap(100, 8), false, new ModLoadedCondition("pastel"))
+                .add(PastelItems.NECTARDEW_BURGEON, new PlantSiphonEssenceMap(100, 16), false, new ModLoadedCondition("pastel"));
     }
     private Holder<Item> getHolder(Item item) {
         return BuiltInRegistries.ITEM.wrapAsHolder(item);

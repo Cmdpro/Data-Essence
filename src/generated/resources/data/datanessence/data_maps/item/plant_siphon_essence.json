@@ -110,6 +110,16 @@
       "amount_per_tick": 8.0,
       "ticks": 100
     },
+    "pastel:nectardew_burgeon": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 16.0,
+      "ticks": 100
+    },
     "pastel:nephrite_blossom_bulb": {
       "neoforge:conditions": [
         {
@@ -119,6 +129,16 @@
       ],
       "amount_per_tick": 8.0,
       "ticks": 100
+    },
+    "pastel:nightdew_sprout": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 4.0,
+      "ticks": 50
     },
     "pastel:vegetal": {
       "neoforge:conditions": [
