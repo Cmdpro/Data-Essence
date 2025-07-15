@@ -303,7 +303,7 @@ public class ModEvents {
         }
     }
     protected static void syncToPlayer(ServerPlayer player) {
-        ModMessages.sendToPlayer(new EntrySync(Entries.entries, Entries.tabs), player);
+        ModMessages.sendToPlayer(new EntrySync(Entries.entries, Entries.tabsSorted.stream().map((i) -> i.id).toList(), Entries.tabs), player);
         ModMessages.sendToPlayer(new PingableSync(PingableStructureManager.types), player);
     }
     @SubscribeEvent

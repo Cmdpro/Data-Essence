@@ -589,7 +589,7 @@ public class DataTabletScreen extends Screen {
         return new Vector2i(entry.x, entry.y);
     }
     public boolean isEntryUnlocked(Entry entry) {
-        return entry.isVisibleClient();
+        return entry.isDefault || entry.isVisibleClient();
     }
     public int getEntryCompletionStage(Entry entry) {
         return entry.getIncompleteStageClient();
