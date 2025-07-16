@@ -14,7 +14,7 @@ public class DataNEssenceDatamaps {
             DataNEssence.locate("plant_siphon_essence"),
             Registries.ITEM,
             PlantSiphonEssenceMap.CODEC
-    ).build();
+    ).synced(PlantSiphonEssenceMap.CODEC, true).build();
     @SubscribeEvent
     public static void registerDataMapTypes(RegisterDataMapTypesEvent event) {
         event.register(PLANT_SIPHON_ESSENCE);
