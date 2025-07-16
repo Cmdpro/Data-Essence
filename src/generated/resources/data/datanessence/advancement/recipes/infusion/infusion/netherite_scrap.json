@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_shard": {
+    "has_debris": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:amethyst_shard"
+            "items": "minecraft:ancient_debris"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "datanessence:infusion/lunar_essence_shard"
+        "recipe": "datanessence:infusion/netherite_scrap"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_shard"
+      "has_debris"
     ]
   ],
   "rewards": {
     "recipes": [
-      "datanessence:infusion/lunar_essence_shard"
+      "datanessence:infusion/netherite_scrap"
     ]
   }
 }

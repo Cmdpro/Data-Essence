@@ -1,0 +1,14 @@
+{
+  "type": "datanessence:infusion",
+  "entry": "datanessence:tools/traversite_road",
+  "essenceCost": {
+    "datanessence:essence": 50.0
+  },
+  "input": {
+    "item": "minecraft:diorite"
+  },
+  "result": {
+    "count": 1,
+    "id": "datanessence:traversite_road"
+  }
+}

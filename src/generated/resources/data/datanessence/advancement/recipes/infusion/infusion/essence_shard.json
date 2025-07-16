@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "datanessence:infusion/lunar_essence_shard"
+        "recipe": "datanessence:infusion/essence_shard"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "datanessence:infusion/lunar_essence_shard"
+      "datanessence:infusion/essence_shard"
     ]
   }
 }
