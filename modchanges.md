@@ -11,3 +11,4 @@
 - Fixed some entries and tabs not properly showing up on client on first data tablet open
 - Fixed data tablet pausing the game in singleplayer
 - Fixed Industrial Plant Siphon visually stopping for a tick on client when it finishes an item even if there is more
+- Fixed the entry set commands not being updated for completion stages

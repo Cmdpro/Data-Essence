@@ -6,6 +6,7 @@ import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
+import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
@@ -37,6 +38,14 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         super(model);
     }
 
+    private int getSegWithOffset(int seg, int offset) {
+        int segment = seg+offset;
+        if (segment < 0) {
+            segment = segment + 8;
+        }
+        segment = segment % 8;
+        return segment;
+    }
     @Override
     public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
         if (pBlockEntity.link != null) {
@@ -51,9 +60,15 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
                 float darken = 1.5f;
                 Color segColor1 = pBlockEntity.linkColor();
                 Color segColor2 = new Color((int)(segColor1.getRed()/darken), (int)(segColor1.getGreen()/darken), (int)(segColor1.getBlue()/darken), segColor1.getAlpha());
+                Color segColor3 = ColorUtil.blendColors(segColor1, segColor2, 0.35f);
                 float ticks = (Minecraft.getInstance().level.getGameTime() % 8)+pPartialTick;
                 int currentSeg = (int)(ticks % 8);
-                ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, (seg) -> 7-(seg % 8) == currentSeg || 7-(seg % 8) == currentSeg-1 ? segColor1 : segColor2);
+                ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, (seg) -> {
+                    if (7-(seg % 8) == getSegWithOffset(currentSeg, -2) || 7-(seg % 8) == getSegWithOffset(currentSeg, 1) % 8) {
+                        return segColor3;
+                    }
+                    return 7-(seg % 8) == currentSeg || 7-(seg % 8) == getSegWithOffset(currentSeg, -1) ? segColor1 : segColor2;
+                });
             }
             pPoseStack.popPose();
         }
