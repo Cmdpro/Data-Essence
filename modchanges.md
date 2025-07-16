@@ -1,16 +1,16 @@
 ### Additions
 - Added a visual indicator of wire direction
 - Improved visuals on the Entropic Processor
+- Improved visuals on the Infuser
 - Added a few Pastel plants to the Industrial Plant Siphon's fuel map
 - Added the ability to enable or disable physics and fullbright in configurable particle options (Internal)
-- Improved visuals on the Infuser
 - Added the ability for essence block entities to define a background type for essence meter (Internal)
-- Added indicator for unlocking data entries in Ancient Data Banks
+- Added downloading animation for unlocking data entries in Ancient Data Banks
 - Added fuel info tooltip when hovering over a valid fuel inside the Industrial Plant Siphon gui
 - Added colorblind config option, currently skips Color Mixing puzzles
 
 ### Changes
-- Made the Industrial Plant Siphon use datamaps instead of tags
+- Made the Industrial Plant Siphon use a datamap instead of tags; this means finer control over individual item values
 
 ### Fixes
 - Fixed crash from opening data tablet while playing on a dedicated server
