@@ -3,6 +3,7 @@
 - Improved visuals on the Entropic Processor
 - Added a few Pastel plants to the Industrial Plant Siphon's fuel map
 - Added the ability to enable or disable physics and fullbright in configurable particle options (Internal)
+- Improved visuals on the Infuser
 
 ### Changes
 - Made the Industrial Plant Siphon use datamaps instead of tags
