@@ -721,5 +721,6 @@
   "emi.datanessence.recipe_locked_line_2": "recipe reconstruction",
 
   "datanessence.configuration.balancing": "Balancing",
-  "datanessence.configuration.shaders": "Shaders"
+  "datanessence.configuration.shaders": "Shaders",
+  "datanessence.configuration.accessibility": "Accessibility"
 }
