@@ -2,6 +2,7 @@
 - Added a visual indicator of wire direction
 - Improved visuals on the Entropic Processor
 - Added a few Pastel plants to the Industrial Plant Siphon's fuel map
+- Added the ability to enable or disable physics and fullbright in configurable particle options (Internal)
 
 ### Changes
 - Made the Industrial Plant Siphon use datamaps instead of tags
@@ -12,3 +13,4 @@
 - Fixed data tablet pausing the game in singleplayer
 - Fixed Industrial Plant Siphon visually stopping for a tick on client when it finishes an item even if there is more
 - Fixed the entry set commands not being updated for completion stages
+- Fixed essence nodes being weird if you had the wires going straight up or down

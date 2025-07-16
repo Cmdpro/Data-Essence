@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.LightTexture;
 
 public class SmallCircleParticle extends TextureSheetParticle {
     public float startQuadSize;
@@ -28,7 +29,7 @@ public class SmallCircleParticle extends TextureSheetParticle {
         this.friction = options.friction;
         this.lifetime = options.lifetime;
         this.gravity = options.gravity;
-        this.hasPhysics = true;
+        this.hasPhysics = options.physics;
         this.options = options;
     }
     @Override
@@ -39,6 +40,15 @@ public class SmallCircleParticle extends TextureSheetParticle {
     public ParticleRenderType getRenderType() {
         return options.additive ? CircleParticle.ADDITIVE : ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
+
+    @Override
+    protected int getLightColor(float partialTick) {
+        if (options.fullbright) {
+            return LightTexture.FULL_BRIGHT;
+        }
+        return super.getLightColor(partialTick);
+    }
+
     @Override
     public void tick() {
         super.tick();

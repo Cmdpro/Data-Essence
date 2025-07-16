@@ -50,7 +50,7 @@ public record PlayBufferTransferParticle(BlockPos pos, Color color) implements M
                 double d2 = direction$axis == Direction.Axis.Y ? 0.5 + d0 * (double)direction.getStepY() : (double)random.nextFloat();
                 double d3 = direction$axis == Direction.Axis.Z ? 0.5 + d0 * (double)direction.getStepZ() : (double)random.nextFloat();
                 world.addParticle(
-                        new MoteParticleOptions().setColor(color).setAdditive(true).setLifetime(20), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, 0.0, 0.1, 0.0
+                        new MoteParticleOptions().setColor(color).setAdditive(true).setLifetime(20), (double)pos.getX() + d1, (double)pos.getY() + (d2/2), (double)pos.getZ() + d3, 0.0, 0.1, 0.0
                 );
             }
         }
