@@ -672,6 +672,8 @@
   "tooltip.datanessence.toggle_lock": "Toggle Slot Locking",
   "tooltip.datanessence.save_and_exit": "Save and Exit",
   "tooltip.datanessence.save_and_exit_sneak": "Clear Saved Entry",
+  "tooltip.datanessence.plant_siphon_display.text": "When used as Siphon Fuel:",
+  "tooltip.datanessence.plant_siphon_display.values": "  Produces %1$s %3$s for %2$s ticks",
 
 
   "subtitle.datanessence.block.entropic_processor.working": "Entropic Processor grinds",
@@ -748,5 +750,8 @@
   "emi.info.datanessence.hammer_and_chisel": "The Hammer and Chisel is a tool that can gather certain blocks, such as Obsidian and its derivatives, far more expeditiously than most other pieces of equipment. Use it on a suitable block to cause it to drop instantly.",
   "emi.info.datanessence.signal_tracker": "This device may at first be acquired from Computers inside of strange structures built from an otherworldly, purple rock. It seems to guide you to other, similar structures.",
   "emi.datanessence.recipe_locked_line_1": "Data insufficient for",
-  "emi.datanessence.recipe_locked_line_2": "recipe reconstruction"
+  "emi.datanessence.recipe_locked_line_2": "recipe reconstruction",
+
+  "datanessence.configuration.balancing": "Balancing",
+  "datanessence.configuration.shaders": "Shaders"
 }

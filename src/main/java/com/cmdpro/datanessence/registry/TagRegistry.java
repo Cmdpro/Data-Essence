@@ -25,11 +25,6 @@ public class TagRegistry {
         }
     }
     public static class Items {
-        // Industrial Plant Siphon fuels
-        public static final TagKey<Item> LOW_ESSENCE_PLANTS = tag("low_essence_plants");
-        public static final TagKey<Item> MEDIUM_ESSENCE_PLANTS = tag("medium_essence_plants");
-        public static final TagKey<Item> HIGH_ESSENCE_PLANTS = tag("high_essence_plants");
-
         // Block types
         public static final TagKey<Item> POLISHED_OBSIDIAN_BLOCKS = tag("polished_obsidian_blocks");
         public static final TagKey<Item> SHAPED_POLISHED_OBSIDIAN_BLOCKS = tag("shaped_polished_obsidian_blocks");

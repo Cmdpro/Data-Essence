@@ -11,10 +11,14 @@ import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.EntropicProcessorMenu;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.BreakingItemParticle;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -36,6 +40,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
@@ -119,6 +124,11 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
         maxTime = tag.getInt("maxTime");
+        if (tag.contains("item")) {
+            item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
+        } else {
+            item = null;
+        }
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -126,8 +136,12 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
         tag.putInt("maxTime", recipe == null ? -1 : recipe.getTime());
+        if (item != null) {
+            tag.put("item", item.saveOptional(pRegistries));
+        }
         return tag;
     }
+    public ItemStack item;
 
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider pRegistries) {
@@ -201,12 +215,17 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
             if (resetWorkTime) {
                 pBlockEntity.workTime = -1;
             }
-
+            pBlockEntity.item = pBlockEntity.itemHandler.getStackInSlot(0);
             pBlockEntity.updateBlock();
         } else {
             if (pBlockEntity.workTime >= 0) {
                 if (!pBlockEntity.clientHandler.isSoundPlaying()) {
                     pBlockEntity.clientHandler.startSound();
+                }
+                if (pBlockEntity.item != null && !pBlockEntity.item.isEmpty()) {
+                    Vec3 particlePos = pPos.getCenter().add(0, 0.25, 0);
+                    Vec3 particleSpeed = Vec3.directionFromRotation(0, pLevel.getRandom().nextIntBetweenInclusive(-180, 180)).scale(0.1).add(0, 0.25, 0);
+                    pLevel.addParticle(new ItemParticleOption(ParticleTypes.ITEM, pBlockEntity.item), particlePos.x, particlePos.y, particlePos.z, particleSpeed.x, particleSpeed.y, particleSpeed.z);
                 }
             } else {
                 if (pBlockEntity.clientHandler.isSoundPlaying()) {
