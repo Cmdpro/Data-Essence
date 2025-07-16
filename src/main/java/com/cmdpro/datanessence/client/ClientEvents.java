@@ -202,8 +202,8 @@ public class ClientEvents {
                                 RenderProjectionUtil.project((graphics) -> {
                                     float shift2 = shift;
                                     for (EssenceType i : supported) {
-                                        ClientEssenceBarUtil.drawEssenceIcon(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)), 0, i, EssenceBarBackgroundTypes.INDUSTRIAL, false, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), false));
-                                        ClientEssenceBarUtil.drawEssenceBar(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)) + 1, 12, i, values.get(i), max, EssenceBarBackgroundTypes.INDUSTRIAL);
+                                        ClientEssenceBarUtil.drawEssenceIcon(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)), 0, i, essenceBlockEntity.getMeterBackgroundType(), false, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), false));
+                                        ClientEssenceBarUtil.drawEssenceBar(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)) + 1, 12, i, values.get(i), max, essenceBlockEntity.getMeterBackgroundType());
                                         shift2 += 1;
                                     }
                                 }, (poseStack) -> {
