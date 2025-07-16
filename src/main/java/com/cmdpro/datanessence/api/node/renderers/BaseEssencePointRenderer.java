@@ -48,11 +48,12 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
     @Override
     public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
         if (pBlockEntity.link != null) {
-            Vec3 pos = pBlockEntity.getBlockPos().getCenter();
+            BlockPos blockPos = pBlockEntity.getBlockPos();
+            Vec3 pos = blockPos.getCenter();
             pPoseStack.pushPose();
             pPoseStack.translate(-pos.x, -pos.y, -pos.z);
             pPoseStack.translate(0.5, 0.5, 0.5);
-            Vec3 origin = pBlockEntity.getBlockPos().getCenter();
+            Vec3 origin = blockPos.getCenter();
             for (BlockPos i : pBlockEntity.link) {
                 Vec3 target = i.getCenter();
                 VertexConsumer vertexConsumer = RenderHandler.createBufferSource().getBuffer(DataNEssenceRenderTypes.WIRES);
@@ -67,7 +68,7 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
                         return segColor3;
                     }
                     return 7-(seg % 8) == currentSeg || 7-(seg % 8) == getSegWithOffset(currentSeg, -1) ? segColor1 : segColor2;
-                });
+                }, blockPos.getX() == i.getX() && blockPos.getZ() == i.getZ() ? 0 : 0.3);
             }
             pPoseStack.popPose();
         }

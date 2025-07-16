@@ -8,6 +8,8 @@ import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.api.essence.container.MultiEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
+import com.cmdpro.datanessence.client.particle.ConfigurableParticleOptions;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.item.DataDrive;
 import com.cmdpro.datanessence.recipe.InfusionRecipe;
@@ -34,15 +36,16 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public class InfuserBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
@@ -133,6 +136,16 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
         storage.fromNbt(tag.getCompound("EssenceStorage"));
         workTime = tag.getInt("workTime");
         item = ItemStack.parseOptional(pRegistries, tag.getCompound("item"));
+        if (tag.contains("essenceCost")) {
+            CompoundTag cost = tag.getCompound("essenceCost");
+            essenceCost = new HashMap<>();
+            for (String i : cost.getAllKeys()) {
+                ResourceLocation location = ResourceLocation.tryParse(i);
+                essenceCost.put(location, cost.getFloat(i));
+            }
+        } else {
+            essenceCost = null;
+        }
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -140,6 +153,13 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
         tag.put("EssenceStorage", storage.toNbt());
         tag.putInt("workTime", workTime);
         tag.put("item", item.saveOptional(pRegistries));
+        if (essenceCost != null) {
+            CompoundTag cost = new CompoundTag();
+            for (Map.Entry<ResourceLocation, Float> i : essenceCost.entrySet()) {
+                cost.putFloat(i.getKey().toString(), i.getValue());
+            }
+            tag.put("essenceCost", cost);
+        }
         return tag;
     }
 
@@ -237,6 +257,35 @@ public class InfuserBlockEntity extends BlockEntity implements MenuProvider, Ess
                 pBlockEntity.workTime = -1;
             }
             pBlockEntity.updateBlock();
+        } else {
+            if (pBlockEntity.workTime >= 0) {
+                if (pBlockEntity.essenceCost != null) {
+                    List<EssenceType> essences = new ArrayList<>();
+                    for (Map.Entry<ResourceLocation, Float> i : pBlockEntity.essenceCost.entrySet()) {
+                        if (i.getValue() > 0) {
+                            EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey());
+                            essences.add(type);
+                        }
+                    }
+                    if (!essences.isEmpty()) {
+                        if (essences.size() == 1) {
+                            ConfigurableParticleOptions options = new CircleParticleOptions().setFriction(0.8f).setColor(new Color(essences.getFirst().color)).setAdditive(false).setFullbright(true);
+                            Vec3 pos = pPos.getBottomCenter();
+                            Vec3 spd = pos.vectorTo(pPos.getCenter()).scale(0.2);
+                            pLevel.addParticle(options, pos.x, pos.y, pos.z, spd.x, spd.y, spd.z);
+                        } else {
+                            float rot = 45;
+                            for (EssenceType i : essences) {
+                                ConfigurableParticleOptions options = new CircleParticleOptions().setFriction(0.8f).setColor(new Color(i.color)).setAdditive(false).setFullbright(true);
+                                Vec3 pos = pPos.getBottomCenter().add(Vec3.directionFromRotation(0, rot).scale(0.4));
+                                Vec3 spd = pos.vectorTo(pPos.getCenter()).scale(0.2);
+                                pLevel.addParticle(options, pos.x, pos.y, pos.z, spd.x, spd.y, spd.z);
+                                rot += 360f / essences.size();
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     protected void updateBlock() {
