@@ -5,6 +5,9 @@
 - Added the ability to enable or disable physics and fullbright in configurable particle options (Internal)
 - Improved visuals on the Infuser
 - Added the ability for essence block entities to define a background type for essence meter (Internal)
+- Added indicator for unlocking data entries in Ancient Data Banks
+- Added fuel info tooltip when hovering over a valid fuel inside the Industrial Plant Siphon gui
+- Added colorblind config option, currently skips Color Mixing puzzles
 
 ### Changes
 - Made the Industrial Plant Siphon use datamaps instead of tags
