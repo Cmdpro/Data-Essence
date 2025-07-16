@@ -4,18 +4,16 @@ import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.block.BaseFabricatorBlockEntity;
+import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.LunariumMenu;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.sounds.SimpleSoundInstance;
-import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -29,7 +27,6 @@ import java.util.List;
 public class LunariumBlockEntity extends BaseFabricatorBlockEntity implements MenuProvider {
     public DatabankAnimationState animState = new DatabankAnimationState("pose")
             .addAnim(new DatabankAnimationReference("pose", (state, anim) -> {}, (state, anim) -> {}));
-    private ClientHandler clientHandler;
 
     @Override
     public void setLevel(Level level) {
@@ -71,6 +68,14 @@ public class LunariumBlockEntity extends BaseFabricatorBlockEntity implements Me
                 }
             }
         }
+    }
+
+    @Override
+    public float getMeterSideLength(Direction direction) {
+        if (direction.equals(Direction.UP)) {
+            return super.getMeterSideLength(direction)*2.8f;
+        }
+        return super.getMeterSideLength(direction);
     }
 
     @Override

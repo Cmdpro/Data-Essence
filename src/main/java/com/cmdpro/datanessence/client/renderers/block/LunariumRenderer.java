@@ -27,9 +27,9 @@ public class LunariumRenderer extends DatabankBlockEntityRenderer<LunariumBlockE
     public void render(LunariumBlockEntity lunarium, float pTick, PoseStack poseStack, MultiBufferSource buffers, int packedLight, int packedOverlay) {
         super.render(lunarium, pTick, poseStack, buffers, packedLight, packedOverlay);
         poseStack.pushPose();
-        poseStack.translate(0.5D, 1.5D, 0.5D);
+        poseStack.translate(0.5D, 1.1D, 0.5D);
         poseStack.mulPose(Axis.YP.rotationDegrees(lunarium.getLevel().getLevelData().getGameTime() % 360));
-        poseStack.scale(0.75F, 0.75F, 0.75F);
+        poseStack.scale(0.7F, 0.7F, 0.7F);
         Minecraft.getInstance().getItemRenderer().renderStatic(lunarium.item, ItemDisplayContext.FIXED, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, poseStack, MachineOutputShader.createMachineOutputBufferSource(), lunarium.getLevel(), 0);
         poseStack.popPose();
     }
