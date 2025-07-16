@@ -22,7 +22,7 @@ public class DataNEssenceClientConfig {
         progressionShaderValue = buildBoolean(builder, "progressionShader", true, "Should the progression shader be enabled?");
         builder.pop();
         builder.push("accessibility");
-        colorblindValue = buildBoolean(builder, "colorblind", false, "Should tweaks be made to hopefully help if you are colorblind?");
+        colorblindValue = buildBoolean(builder, "colorblind", false, "Should tweaks, such as bypassing certain color-dependent puzzles, be made to hopefully help if you are colorblind?");
         builder.pop();
     }
     private static ModConfigSpec.BooleanValue buildBoolean(ModConfigSpec.Builder builder, String name, boolean defaultValue, String comment) {
