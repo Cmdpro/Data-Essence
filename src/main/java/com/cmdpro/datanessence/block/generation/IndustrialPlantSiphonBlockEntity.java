@@ -40,9 +40,6 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("working", (state, anim) -> {}, (state, anim) -> {}));
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
-    public static float essenceProducedFromLowValuePlants = 2.0f;
-    public static float essenceProducedFromMediumValuePlants = 4.0f;
-    public static float essenceProducedFromHighValuePlants = 8.0f;
     public float essenceGenerationTicks; // fuel timer
     public float generationRate; // current generation rate
 
