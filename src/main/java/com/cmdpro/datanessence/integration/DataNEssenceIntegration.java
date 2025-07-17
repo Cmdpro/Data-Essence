@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.integration;
 
+import com.cmdpro.datanessence.DataNEssence;
 import mekanism.api.MekanismAPI;
 import mekanism.api.chemical.IChemicalHandler;
 import net.mariu73.opalescence.block.OpalBlock;
@@ -22,6 +23,13 @@ public class DataNEssenceIntegration {
         hasMekanism = ModList.get().isLoaded("mekanism");
         hasOpalescence = ModList.get().isLoaded("opalescence");
         hasPastel = ModList.get().isLoaded("pastel");
+
+        if (hasMekanism)
+            DataNEssence.LOGGER.info("[DATANESSENCE] Mekanism detected; enabling integration features. Careful with your reactors!");
+        if (hasOpalescence)
+            DataNEssence.LOGGER.info("[DATANESSENCE] Opalescence detected; enabling integration features. I hear this rock is a favorite of dragons!");
+        if (hasPastel)
+            DataNEssence.LOGGER.info("[DATANESSENCE] Pastel detected; enabling integration features. Are you an Artist, or a Researcher, or both?");
     }
     public static class OpalescenseIntegration {
         public static int getOpalBlockColor(BlockState state, BlockAndTintGetter blockAndTintGetter, BlockPos pos, int tintIndex) {
