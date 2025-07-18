@@ -227,7 +227,10 @@
 
   "jukebox_song.datanessence.under_the_sky": "DavidRarria09 - UnderTheSky",
 
-  "computer.arekkos_vault.clue": "...",
+  "computer.arekkos_vault.arekko_01": "[ CRYOSTASIS OVERVIEW ]\n ◇ Chamber 1: Empty\n ◇ Chamber 2: Arekko Bulok-Entee [Tier 8]\n\nNotes: Arekko insisted upon being sealed with their Data Tablet. This is a security risk - if the chamber is breached, all our collected knowledge goes into the hands of the would-be invader. They would not back down from this request however, so we begrudgingly allowed it.",
+  "computer.arekkos_vault.generic_01": "[ CRYOSTASIS OVERVIEW ]\n ◇ Idle. Awaiting Occupants.",
+  "computer.arekkos_vault.overseer_01": "We have managed to finish construction of this Vault, but there may not be enough time to gather as many top-tier researchers as can fit before... before the end. So far, only one has been interred. I have ordered a signal for more to be broadcast far and wide, hopefully reaching all of our people. I can only hope they listen.",
+  "computer.arekkos_vault.overseer_02": "lnur hoyyu. uvvk lnur fmaylbqk wayy oyuv. iqbuvkoyyx lv kvg gmakr vyl bquqobfmqb wmv qojqbyx qkgqbql fmoezqb wayy unhhafq gv iouu uqfbqgu gv kqw jqkqbogavk. bquqobfmqb uqqeql mviqhny. zng a hqob kv vkq wvbgmx yqhg vkfq gmqx worq. alqoy ah og yqoug 5 vb 6 bquqobfmqbu qkgqbql fmoezqbu. qkvnjm gv mviqhnyyx uinb uiqfaqu bqsasoy. gmau ugobg gv uvnkl aeivuuazyq.",
   "computer.arekkos_vault.log": "Cryostasis Reason: PRESERVATION\nOccupant: AREKKO BULOK-ENTEE\nAuthority: [REDACTED]\n\nNotes: Arekko requested to be sealed with their data tablet. Possible security risk in case of intruders?",
   "computer.abandoned_factory_01.report_01": "Ibvlnfgavk vnging ugozyq. Lqyasqbaqu vngjvakj gv Wqoivku Hofayagaqu wqqryx. Kqw raklu vh bquqobfm gvvyu ak ibvlnfgavk. Gmqx obq ugbvkjqb gmok evug vgmqbu. Hofayagaqu bqcnabq evbq okl evbq ibvgvgxiqu ibvlnfql gv ibvsq gmq gqfmkvyvjx. Uvvk wayy mosq gv qkyaug evbq moklu gv eoknhofgnbq gmqe.",
   "computer.abandoned_factory_01.report_02": "Cnvgo nkeqg hvb eokx wqqru. Wqoivku Bquqobfmqbu obq hnbavnu. Bqouvk... fveiyafogql. Uneeobadogavk ibvsqu lahhafnyg. Qyozvbogavk gvv baurx hvb uqouvkoy bqivbg. Vkq wvbl. Uozvgojq.",
