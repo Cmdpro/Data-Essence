@@ -1,3 +1,6 @@
+### Additions
+- Added Oritech integration for making its alloys in the Synthesis Chamber
+
 ### Changes
 - Moved mod integration log messages to the integration class (Internal)
 - Heavily edited Frozen Researcher Arekko's model
