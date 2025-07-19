@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "oritech"
+    }
+  ],
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 20
+  },
+  "input": { "tag": "c:ingots/iron" },
+  "input2": { "tag": "c:dusts/coal" },
+  "time": 100,
+  "result": { "id": "oritech:steel_ingot", "count": 2 },
+  "entry": "datanessence:mod_integration/oritech_alloying"
+}

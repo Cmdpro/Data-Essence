@@ -57,7 +57,7 @@ public class Dewlamp extends Block {
                 double d2 = axis == Direction.Axis.Y ? 0.5 + d0 * (double)direction.getStepY() : (double)random.nextFloat();
                 double d3 = axis == Direction.Axis.Z ? 0.5 + d0 * (double)direction.getStepZ() : (double)random.nextFloat();
                 world.addParticle(
-                        new MoteParticleOptions().setColor(color).setAdditive(true).setLifetime(lifetime).setFriction(1f).setGravity(0.04f), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, horizontalVelocity, 0, horizontalVelocity
+                        new MoteParticleOptions().setColor(color).setAdditive(true).setLifetime(lifetime).setFriction(1f).setGravity(0.04f).setPhysics(true), (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, horizontalVelocity, 0, horizontalVelocity
                 );
             }
         }

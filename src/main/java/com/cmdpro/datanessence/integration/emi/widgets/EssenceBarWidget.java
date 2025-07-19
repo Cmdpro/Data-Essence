@@ -38,7 +38,7 @@ public class EssenceBarWidget extends Widget {
 
     @Override
     public void render(GuiGraphics draw, int mouseX, int mouseY, float delta) {
-        ClientEssenceBarUtil.drawEssenceBarTiny(draw, x, y, type, cost, max, EssenceBarBackgroundTypes.INDUSTRIAL);
+        ClientEssenceBarUtil.drawEssenceBarTiny(draw, x, y, type, cost, max, backgroundType);
     }
 
     @Override

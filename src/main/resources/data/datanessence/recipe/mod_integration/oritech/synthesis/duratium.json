@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "oritech"
+    }
+  ],
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 20
+  },
+  "input": { "tag": "c:ingots/platinum" },
+  "input2": { "tag": "c:dusts/netherite" },
+  "time": 100,
+  "result": { "id": "oritech:duratium_ingot", "count": 2 },
+  "entry": "datanessence:mod_integration/oritech_alloying"
+}

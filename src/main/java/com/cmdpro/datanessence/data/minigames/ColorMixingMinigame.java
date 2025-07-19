@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.data.minigames;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.databank.Minigame;
+import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -38,6 +39,9 @@ public class ColorMixingMinigame extends Minigame {
     }
     @Override
     public boolean isFinished() {
+        if (DataNEssenceClientConfig.colorblind) {
+            return true;
+        }
         Color currentColor = getCurrentColor();
         float[] targetHsv = Color.RGBtoHSB(targetColor.getRed(), targetColor.getGreen(), targetColor.getBlue(), null);
         float[] currentHsv = Color.RGBtoHSB(getCurrentColor().getRed(), currentColor.getGreen(), currentColor.getBlue(), null);

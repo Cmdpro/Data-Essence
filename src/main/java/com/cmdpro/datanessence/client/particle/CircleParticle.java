@@ -9,6 +9,7 @@ import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 
@@ -35,8 +36,15 @@ public class CircleParticle extends TextureSheetParticle {
         this.friction = options.friction;
         this.lifetime = options.lifetime;
         this.gravity = options.gravity;
-        this.hasPhysics = true;
+        this.hasPhysics = options.physics;
         this.options = options;
+    }
+    @Override
+    protected int getLightColor(float partialTick) {
+        if (options.fullbright) {
+            return LightTexture.FULL_BRIGHT;
+        }
+        return super.getLightColor(partialTick);
     }
     @Override
     public void tick() {

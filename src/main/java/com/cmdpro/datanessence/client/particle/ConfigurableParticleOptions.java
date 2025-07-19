@@ -19,6 +19,8 @@ public abstract class ConfigurableParticleOptions implements ParticleOptions {
     public int lifetime = 20;
     public float friction = 0.8f;
     public float gravity = 0f;
+    public boolean physics = false;
+    public boolean fullbright = false;
     public ConfigurableParticleOptions setColor(Color color) {
         this.color = color;
         return this;
@@ -39,6 +41,14 @@ public abstract class ConfigurableParticleOptions implements ParticleOptions {
         this.gravity = gravity;
         return this;
     }
+    public ConfigurableParticleOptions setPhysics(boolean physics) {
+        this.physics = physics;
+        return this;
+    }
+    public ConfigurableParticleOptions setFullbright(boolean fullbright) {
+        this.fullbright = fullbright;
+        return this;
+    }
     public static <T extends ConfigurableParticleOptions> MapCodec<T> createCodec(Supplier<T> createInstance) {
         MapCodec<T> codec = RecordCodecBuilder.mapCodec((builder) -> {
             return builder.group(
@@ -46,8 +56,10 @@ public abstract class ConfigurableParticleOptions implements ParticleOptions {
                     Codec.BOOL.fieldOf("additive").forGetter((particle) -> particle.additive),
                     Codec.INT.fieldOf("lifetime").forGetter((particle) -> particle.lifetime),
                     Codec.FLOAT.fieldOf("friction").forGetter((particle) -> particle.friction),
-                    Codec.FLOAT.fieldOf("gravity").forGetter((particle) -> particle.gravity)
-            ).apply(builder, (color, additive, lifetime, friction, gravity) -> (T)createInstance.get().setColor(new Color(color)).setAdditive(additive).setLifetime(lifetime).setFriction(friction).setGravity(gravity));
+                    Codec.FLOAT.fieldOf("gravity").forGetter((particle) -> particle.gravity),
+                    Codec.BOOL.fieldOf("physics").forGetter((particle) -> particle.physics),
+                    Codec.BOOL.fieldOf("fullbright").forGetter((particle) -> particle.fullbright)
+            ).apply(builder, (color, additive, lifetime, friction, gravity, physics, fullbright) -> (T)createInstance.get().setColor(new Color(color)).setAdditive(additive).setLifetime(lifetime).setFriction(friction).setGravity(gravity).setPhysics(physics).setFullbright(fullbright));
         });
         return codec;
     }
@@ -59,13 +71,17 @@ public abstract class ConfigurableParticleOptions implements ParticleOptions {
             buf.writeInt(options.lifetime);
             buf.writeFloat(options.friction);
             buf.writeFloat(options.gravity);
+            buf.writeBoolean(options.physics);
+            buf.writeBoolean(options.fullbright);
         }, (buf) -> {
             int rgb = buf.readInt();
             boolean additive = buf.readBoolean();
             int lifetime = buf.readInt();
             float friction = buf.readFloat();
             float gravity = buf.readFloat();
-            return (T)createInstance.get().setColor(new Color(rgb)).setAdditive(additive).setLifetime(lifetime).setFriction(friction).setGravity(gravity);
+            boolean physics = buf.readBoolean();
+            boolean fullbright = buf.readBoolean();
+            return (T)createInstance.get().setColor(new Color(rgb)).setAdditive(additive).setLifetime(lifetime).setFriction(friction).setGravity(gravity).setPhysics(physics).setFullbright(fullbright);
         });
         return codec;
     }
