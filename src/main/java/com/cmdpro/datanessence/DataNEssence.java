@@ -328,16 +328,33 @@ public class DataNEssence
             event.accept(ItemRegistry.UNDER_THE_SKY_MUSIC_DISC.get());
         }
         if (event.getTabKey() == CreativeModeTabRegistry.getKey(CreativeModeTabRegistry.BLOCKS.get())) {
-            // World
+            // World - Phenua
             event.accept(BlockRegistry.ESSENCE_CRYSTAL.get());
             event.accept(BlockRegistry.LUNAR_ESSENCE_CRYSTAL.get());
             event.accept(BlockRegistry.LENSING_CRYSTAL_ORE.get());
             event.accept(BlockRegistry.FROZEN_MOONLIGHT.get());
             event.accept(BlockRegistry.TETHERGRASS.get());
             event.accept(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
-            //event.accept(BlockRegistry.SPIRE_GLASS.get());
-            //event.accept(BlockRegistry.CRYSTALLINE_LOG.get());
-            //event.accept(BlockRegistry.CRYSTALLINE_LEAVES.get());
+            // World - Sanctuary
+            event.accept(BlockRegistry.SANCTUARY_VERMILION_GRASS_BLOCK.get());
+            event.accept(BlockRegistry.SANCTUARY_DIRT.get());
+            event.accept(BlockRegistry.SANCTUARY_SAND.get());
+            event.accept(BlockRegistry.RED_PEARLESCENT_SAND.get());
+            event.accept(BlockRegistry.GREEN_PEARLESCENT_SAND.get());
+            event.accept(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
+            event.accept(BlockRegistry.DEEP_SANCTUARY_SAND.get());
+            event.accept(BlockRegistry.ASTRAL_GOOP.get());
+            event.accept(BlockRegistry.SANCTUARY_GRASS.get());
+            event.accept(BlockRegistry.TALL_SANCTUARY_GRASS.get());
+            event.accept(BlockRegistry.CYAN_PEARLESCENT_SPIRAL.get());
+            event.accept(BlockRegistry.MAGENTA_PEARLESCENT_SPIRAL.get());
+            event.accept(BlockRegistry.YELLOW_PEARLESCENT_SPIRAL.get());
+            event.accept(BlockRegistry.CYAN_PEARLESCENT_GRASS.get());
+            event.accept(BlockRegistry.MAGENTA_PEARLESCENT_GRASS.get());
+            event.accept(BlockRegistry.YELLOW_PEARLESCENT_GRASS.get());
+            event.accept(BlockRegistry.SPIRE_GLASS.get());
+            event.accept(BlockRegistry.CRYSTALLINE_LOG.get());
+            event.accept(BlockRegistry.CRYSTALLINE_LEAVES.get());
 
             // Generators
             event.accept(BlockRegistry.ESSENCE_BURNER.get());
