@@ -1,5 +1,6 @@
 ### Additions
 - Added Oritech integration for making its alloys in the Synthesis Chamber
+- Added Chinese translation (ChuijkYahus)
 
 ### Changes
 - Moved mod integration log messages to the integration class (Internal)
