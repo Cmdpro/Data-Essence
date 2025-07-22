@@ -12,6 +12,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ import java.util.List;
 public record PlayerChangeDriveData(ResourceLocation entry, int completionStage, boolean offhand) implements Message {
 
     @Override
-    public void handleServer(MinecraftServer server, ServerPlayer player) {
+    public void handleServer(MinecraftServer server, ServerPlayer player, IPayloadContext ctx) {
         List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
         HashMap<ResourceLocation, Integer> incomplete = player.getData(AttachmentTypeRegistry.INCOMPLETE_STAGES);
         if (unlocked.contains(entry) || incomplete.containsKey(entry)) {

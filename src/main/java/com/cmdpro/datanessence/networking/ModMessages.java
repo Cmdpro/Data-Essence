@@ -40,12 +40,12 @@ public class ModMessages {
         }
         public class Client {
             public static <T extends Message> void handle(T message, IPayloadContext ctx) {
-                message.handleClient(Minecraft.getInstance(), Minecraft.getInstance().player);
+                message.handleClient(Minecraft.getInstance(), Minecraft.getInstance().player, ctx);
             }
         }
         public class Server {
             public static <T extends Message> void handle(T message, IPayloadContext ctx) {
-                message.handleServer(ctx.player().getServer(), (ServerPlayer)ctx.player());
+                message.handleServer(ctx.player().getServer(), (ServerPlayer)ctx.player(), ctx);
             }
         }
         public abstract interface Reader<T extends Message> {

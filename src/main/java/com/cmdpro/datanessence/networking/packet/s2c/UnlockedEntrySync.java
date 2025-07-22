@@ -11,6 +11,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,7 +30,7 @@ public record UnlockedEntrySync(List<ResourceLocation> unlocked, HashMap<Resourc
     }
 
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         ClientPlayerUnlockedEntries.set(unlocked, incomplete);
         ClientRenderingUtil.updateWorld();
     }

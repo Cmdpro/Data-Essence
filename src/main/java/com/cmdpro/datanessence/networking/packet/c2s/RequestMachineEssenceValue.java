@@ -12,6 +12,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record RequestMachineEssenceValue(BlockPos blockPos) implements Message {
 
@@ -21,7 +22,7 @@ public record RequestMachineEssenceValue(BlockPos blockPos) implements Message {
     }
 
     @Override
-    public void handleServer(MinecraftServer server, ServerPlayer player) {
+    public void handleServer(MinecraftServer server, ServerPlayer player, IPayloadContext ctx) {
         MachineEssenceValueSync packet = MachineEssenceValueSync.create(player.level(), blockPos);
         if (packet != null) {
             ModMessages.sendToPlayer(packet, player);

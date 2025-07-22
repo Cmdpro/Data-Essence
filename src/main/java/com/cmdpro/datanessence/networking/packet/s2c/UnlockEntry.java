@@ -11,10 +11,11 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record UnlockEntry(ResourceLocation unlocked, int completionStage) implements Message {
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         Entry entry = Entries.entries.get(unlocked);
         if (entry != null) {
             if (entry.completionStages.size() > completionStage) {
