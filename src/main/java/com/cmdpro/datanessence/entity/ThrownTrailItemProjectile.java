@@ -11,6 +11,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.level.Level;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import java.awt.*;
 
@@ -27,6 +29,7 @@ public abstract class ThrownTrailItemProjectile extends ThrowableItemProjectile 
         super(entityType, shooter, level);
     }
     @Override
+    @OnlyIn(Dist.CLIENT)
     public void onClientRemoval() {
         super.onClientRemoval();
         TrailRender render = getTrail();

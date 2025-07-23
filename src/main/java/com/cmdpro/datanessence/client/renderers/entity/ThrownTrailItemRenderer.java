@@ -1,17 +1,17 @@
-package com.cmdpro.datanessence.client.renderers.block;
+package com.cmdpro.datanessence.client.renderers.entity;
 
 import com.cmdpro.databank.misc.TrailRender;
 import com.cmdpro.databank.rendering.RenderHandler;
+import com.cmdpro.datanessence.entity.EssenceSlashProjectile;
 import com.cmdpro.datanessence.entity.ThrownTrailItemProjectile;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 public class ThrownTrailItemRenderer extends ThrownItemRenderer<ThrownTrailItemProjectile> {
     public ThrownTrailItemRenderer(EntityRendererProvider.Context context, float scale, boolean fullBright) {
@@ -38,5 +38,9 @@ public class ThrownTrailItemRenderer extends ThrownItemRenderer<ThrownTrailItemP
             poseStack.popPose();
         }
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+    }
+    @Override
+    public boolean shouldRender(ThrownTrailItemProjectile livingEntity, Frustum camera, double camX, double camY, double camZ) {
+        return true;
     }
 }
