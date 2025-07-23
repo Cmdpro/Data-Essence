@@ -235,13 +235,6 @@ public class ClientModEvents {
                 return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 0.8f, 1f).getRGB();
             }
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
-        event.register((pState, pLevel, pPos, pTintIndex) -> {
-            Block block = BlockHiddenType.getHiddenBlockClient(pState.getBlock());
-            if (block != null) {
-                return Minecraft.getInstance().getBlockColors().getColor(DatabankUtils.changeBlockType(pState, block), pLevel, pPos, pTintIndex);
-            }
-            return 0xFFFFFFFF;
-        }, BlockRegistry.TETHERGRASS.get());
         if (hasOpalescence) {
             event.register((pState, pLevel, pPos, pTintIndex) -> {
                 if (pPos != null) {
