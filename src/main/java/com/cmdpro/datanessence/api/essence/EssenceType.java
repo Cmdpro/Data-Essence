@@ -1,10 +1,13 @@
 package com.cmdpro.datanessence.api.essence;
 
+import com.cmdpro.databank.misc.ColorGradient;
 import com.cmdpro.datanessence.DataNEssence;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+
+import java.awt.*;
 
 public class EssenceType {
     public static final ResourceLocation ESSENCE_BAR_LOCATION = DataNEssence.locate("textures/gui/essence_bars.png");
@@ -49,6 +52,13 @@ public class EssenceType {
     }
     public EssenceBarSpriteLocation getIconSprite() {
         return iconSprite;
+    }
+
+    public ColorGradient getThrowGradient() {
+        return new ColorGradient(
+                new Color(color),
+                new Color(255, 255, 255)
+        ).fadeAlpha(1, 0).fadeAlpha(0, 0, 1, 0.05f);
     }
     public static class EssenceBarSpriteLocation {
         public EssenceBarSpriteLocation(ResourceLocation texture, int x, int y) {

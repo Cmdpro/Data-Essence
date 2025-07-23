@@ -95,10 +95,10 @@ public class ClientModEvents {
     }
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
-        EntityRenderers.register(EntityRegistry.ESSENCE_BOMB.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(EntityRegistry.LUNAR_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(EntityRegistry.NATURAL_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(EntityRegistry.EXOTIC_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(EntityRegistry.ESSENCE_BOMB.get(), ThrownTrailItemRenderer::new);
+        EntityRenderers.register(EntityRegistry.LUNAR_ESSENCE_BOMB.get(), ThrownTrailItemRenderer::new);
+        EntityRenderers.register(EntityRegistry.NATURAL_ESSENCE_BOMB.get(), ThrownTrailItemRenderer::new);
+        EntityRenderers.register(EntityRegistry.EXOTIC_ESSENCE_BOMB.get(), ThrownTrailItemRenderer::new);
         EntityRenderers.register(EntityRegistry.BLACK_HOLE.get(), EmptyEntityRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL.get(), AncientSentinelRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL_PROJECTILE.get(), EmptyEntityRenderer::new);
