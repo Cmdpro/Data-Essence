@@ -4,4 +4,4 @@
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
-- Removed a workaround that is no longer needed because it now crashes with latest databank
+- Removed a workaround that is no longer needed
