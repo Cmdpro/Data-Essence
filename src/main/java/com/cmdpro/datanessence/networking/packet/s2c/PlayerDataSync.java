@@ -10,6 +10,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.awt.*;
 import java.util.Map;
@@ -49,7 +50,7 @@ public record PlayerDataSync(Map<ResourceLocation, Boolean> unlockedEssences, Bl
     }
 
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         ClientPlayerData.set(unlockedEssences, linkPos, linkColor);
     }
 }

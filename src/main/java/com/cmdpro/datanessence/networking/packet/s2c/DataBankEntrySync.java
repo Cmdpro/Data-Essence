@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.Map;
 
@@ -23,7 +24,7 @@ public record DataBankEntrySync(Map<ResourceLocation, DataBankEntry> entries) im
     }
 
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         DataBankEntries.clientEntries.clear();
         DataBankEntries.clientEntries.putAll(entries);
         ClientHandler.openScreen();

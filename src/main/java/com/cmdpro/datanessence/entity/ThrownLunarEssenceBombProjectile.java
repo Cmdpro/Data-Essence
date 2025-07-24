@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence.entity;
 
+import com.cmdpro.databank.misc.ColorGradient;
 import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.misc.LunarEssenceBombExplosion;
 import net.minecraft.network.protocol.game.ClientboundExplodePacket;
@@ -16,7 +18,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.common.extensions.ILevelExtension;
 
-public class ThrownLunarEssenceBombProjectile extends ThrowableItemProjectile {
+public class ThrownLunarEssenceBombProjectile extends ThrownTrailItemProjectile {
     public ThrownLunarEssenceBombProjectile(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -48,6 +50,10 @@ public class ThrownLunarEssenceBombProjectile extends ThrowableItemProjectile {
             }
             remove(RemovalReason.KILLED);
         }
+    }
+    @Override
+    public ColorGradient getGradient() {
+        return EssenceTypeRegistry.LUNAR_ESSENCE.get().getThrowGradient();
     }
 
 }

@@ -11,11 +11,11 @@ import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
 import com.cmdpro.datanessence.client.dimension.SanctuarySpecialEffects;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
+import com.cmdpro.datanessence.client.renderers.entity.ThrownTrailItemRenderer;
 import com.cmdpro.datanessence.client.renderers.entity.LunarStrikeRenderer;
 import com.cmdpro.datanessence.client.shaders.PingShader;
 import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
 import com.cmdpro.datanessence.client.shaders.OrePingShader;
-import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
 import com.cmdpro.datanessence.client.particle.*;
@@ -34,7 +34,6 @@ import com.cmdpro.datanessence.client.shaders.ProgressionShader;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.client.resources.PlayerSkin;
@@ -108,10 +107,10 @@ public class ClientModEvents {
     }
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
-        EntityRenderers.register(EntityRegistry.ESSENCE_BOMB.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(EntityRegistry.LUNAR_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(EntityRegistry.NATURAL_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(EntityRegistry.EXOTIC_ESSENCE_BOMB.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(EntityRegistry.ESSENCE_BOMB.get(), ThrownTrailItemRenderer::new);
+        EntityRenderers.register(EntityRegistry.LUNAR_ESSENCE_BOMB.get(), ThrownTrailItemRenderer::new);
+        EntityRenderers.register(EntityRegistry.NATURAL_ESSENCE_BOMB.get(), ThrownTrailItemRenderer::new);
+        EntityRenderers.register(EntityRegistry.EXOTIC_ESSENCE_BOMB.get(), ThrownTrailItemRenderer::new);
         EntityRenderers.register(EntityRegistry.BLACK_HOLE.get(), EmptyEntityRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL.get(), AncientSentinelRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL_PROJECTILE.get(), EmptyEntityRenderer::new);
@@ -256,13 +255,6 @@ public class ClientModEvents {
                 return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 0.8f, 1f).getRGB();
             }
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
-        event.register((pState, pLevel, pPos, pTintIndex) -> {
-            Block block = BlockHiddenType.getHiddenBlockClient(pState.getBlock());
-            if (block != null) {
-                return Minecraft.getInstance().getBlockColors().getColor(DatabankUtils.changeBlockType(pState, block), pLevel, pPos, pTintIndex);
-            }
-            return 0xFFFFFFFF;
-        }, BlockRegistry.TETHERGRASS.get());
         if (hasOpalescence) {
             event.register((pState, pLevel, pPos, pTintIndex) -> {
                 if (pPos != null) {

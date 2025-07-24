@@ -11,6 +11,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.awt.*;
 
@@ -36,7 +37,7 @@ public record PlayBufferTransferParticle(BlockPos pos, Color color) implements M
     }
 
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         Level world = player.level();
 
         RandomSource random = world.getRandom();

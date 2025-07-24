@@ -10,6 +10,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record PlayerTierSync(int tier, boolean showIndicator) implements Message {
 
@@ -31,7 +32,7 @@ public record PlayerTierSync(int tier, boolean showIndicator) implements Message
     }
 
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         ClientPlayerData.setTier(tier);
         if (showIndicator) {
             ClientRenderingUtil.progressionShader();

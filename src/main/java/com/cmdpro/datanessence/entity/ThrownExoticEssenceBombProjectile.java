@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence.entity;
 
+import com.cmdpro.databank.misc.ColorGradient;
 import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -9,7 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 
-public class ThrownExoticEssenceBombProjectile extends ThrowableItemProjectile {
+public class ThrownExoticEssenceBombProjectile extends ThrownTrailItemProjectile {
 
     public ThrownExoticEssenceBombProjectile(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -36,5 +38,9 @@ public class ThrownExoticEssenceBombProjectile extends ThrowableItemProjectile {
             level().addFreshEntity(blackHole);
             remove(RemovalReason.KILLED);
         }
+    }
+    @Override
+    public ColorGradient getGradient() {
+        return EssenceTypeRegistry.EXOTIC_ESSENCE.get().getThrowGradient();
     }
 }

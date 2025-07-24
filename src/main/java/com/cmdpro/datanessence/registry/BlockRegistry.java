@@ -394,7 +394,7 @@ public class BlockRegistry {
             () -> new Block(getShieldlessAncientRockProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SHIELDLESS_ANCIENT_WINDOW = register("ancient_window_shieldless",
-            () -> new TransparentBlock(getShieldlessAncientRockProperties()),
+            () -> new TransparentBlock(getShieldlessAncientRockProperties().noOcclusion().isViewBlocking(BlockRegistry::never).isSuffocating(BlockRegistry::never).isValidSpawn(BlockRegistry::never).isRedstoneConductor(BlockRegistry::never)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK = register("ancient_glyph_stone_blank_shieldless",
             () -> new Block(getShieldlessAncientRockProperties()),

@@ -10,6 +10,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record PlayerSetItemHandlerLocked(BlockPos blockPos, boolean locked) implements Message {
 
@@ -20,7 +21,7 @@ public record PlayerSetItemHandlerLocked(BlockPos blockPos, boolean locked) impl
     }
 
     @Override
-    public void handleServer(MinecraftServer server, ServerPlayer player) {
+    public void handleServer(MinecraftServer server, ServerPlayer player, IPayloadContext ctx) {
         if (player.level().getBlockEntity(blockPos) instanceof ILockableContainer lockable) {
             for (LockableItemHandler handler : lockable.getLockable()) {
                 handler.setLocked(locked);

@@ -15,13 +15,14 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public record MachineEssenceValueSync(BlockPos pos, Map<EssenceType, Float> values, float maxValue) implements Message {
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         EssenceMeter.currentMachineEssenceValue = new MachineEssenceValue(pos, values, maxValue);
     }
 
