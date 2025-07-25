@@ -1,6 +1,10 @@
 ### Additions
 - Added trails to Explosive Charges (also applied to the essence bombs that aren't survival accessible)
 - Added trails to Essence Slashes
+- Added new Data Bank minigame type, Laser
+
+### Changes
+- Essence Crystals entry requires a simple Laser puzzle to unlock
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
