@@ -330,8 +330,8 @@ public class LaserMinigame extends Minigame {
             if (getType() == TileType.SPLITTER) {
                 shouldStop = true;
                 if (beam.rotation == getRotation().getOpposite()) {
-                    Beam beam1 = Beam.buildBeam(minigame, new Vector2i(pos), beam.getColor(), getRotation().getRight(), new Vec2(0, 2), depth+1);
-                    Beam beam2 = Beam.buildBeam(minigame, new Vector2i(pos), beam.getColor(), getRotation().getLeft(), new Vec2(0, 2), depth+1);
+                    Beam beam1 = Beam.buildBeam(minigame, new Vector2i(pos), beam.getColor(), getRotation().getRight(), Vec2.ZERO, depth+1);
+                    Beam beam2 = Beam.buildBeam(minigame, new Vector2i(pos), beam.getColor(), getRotation().getLeft(), Vec2.ZERO, depth+1);
                     minigame.addBeam(beam1);
                     minigame.addBeam(beam2);
                 }
