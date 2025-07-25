@@ -11,6 +11,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.awt.*;
 
@@ -39,7 +40,7 @@ public record ParticleBurst(Vec3 pos, Color color, int amount, float speed) impl
     }
 
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         Level world = player.level();
 
         RandomSource random = world.getRandom();
