@@ -312,7 +312,7 @@ public class LaserMinigame extends Minigame {
             boolean reachedEnd = false;
             if (getType() == TileType.GOAL) {
                 shouldStop = true;
-                if (beam.color == color) {
+                if (beam.color == color && beam.rotation == getRotation().getOpposite()) {
                     reachedEnd = true;
                 }
             }
