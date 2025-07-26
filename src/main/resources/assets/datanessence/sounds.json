@@ -29,6 +29,12 @@
         ],
         "stream": true
     },
+    "ost.factory_loops.plant_siphon": {
+        "sounds": [
+            "datanessence:ost/factory_loops/plant_siphon"
+        ],
+        "stream": true
+    },
     "ost.factory_loops.essence_derivation_spike": {
         "sounds": [
             "datanessence:ost/factory_loops/essence_derivation_spike"
