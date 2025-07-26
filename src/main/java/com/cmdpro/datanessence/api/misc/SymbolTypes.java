@@ -32,5 +32,42 @@ public class SymbolTypes {
                 null
         ));
          */
+
+        // The Cities - also used to represent the seven colors
+        symbols.put(DataNEssence.locate("shar"), new SymbolType(
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 0, 0),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 0),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 16)
+        ));
+        symbols.put(DataNEssence.locate("besar"), new SymbolType(
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 0, 0),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 32),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 48)
+        ));
+        symbols.put(DataNEssence.locate("nula"), new SymbolType(
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 0, 0),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 64),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 80)
+        ));
+        symbols.put(DataNEssence.locate("eniro"), new SymbolType(
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 0, 0),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 96),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 112)
+        ));
+        symbols.put(DataNEssence.locate("ipari"), new SymbolType(
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 0, 0),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 128),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 144)
+        ));
+        symbols.put(DataNEssence.locate("koru"), new SymbolType(
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 0, 0),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 160),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 176)
+        ));
+        symbols.put(DataNEssence.locate("aru"), new SymbolType(
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 0, 0),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 192),
+                SymbolType.getSymbolLocation(SymbolType.SYMBOL_LOCATION, 32, 208)
+        ));
     }
 }
