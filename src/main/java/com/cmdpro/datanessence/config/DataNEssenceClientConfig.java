@@ -22,7 +22,7 @@ public class DataNEssenceClientConfig {
         progressionShaderValue = buildBoolean(builder, "progressionShader", true, "Should the progression shader be enabled?");
         builder.pop();
         builder.push("accessibility");
-        colorblindValue = buildBoolean(builder, "colorblind", false, "Should tweaks, such as bypassing certain color-dependent puzzles, be made to hopefully help if you are colorblind?");
+        colorAssistValue = buildBoolean(builder, "colorAssist", false, "Should color assist mode be enabled? When on, various tweaks to color-dependent puzzles will be made to hopefully help in their completion, or in the case of one puzzle, will be outright bypassed.");
         builder.pop();
     }
     private static ModConfigSpec.BooleanValue buildBoolean(ModConfigSpec.Builder builder, String name, boolean defaultValue, String comment) {
@@ -37,17 +37,17 @@ public class DataNEssenceClientConfig {
     public static boolean genderEuphoriaShader = true;
     public static boolean pingShader = true;
     public static boolean progressionShader = true;
-    public static boolean colorblind = false;
+    public static boolean colorAssist = false;
     public final ModConfigSpec.BooleanValue genderEuphoriaShaderValue;
     public final ModConfigSpec.BooleanValue pingShaderValue;
     public final ModConfigSpec.BooleanValue progressionShaderValue;
-    public final ModConfigSpec.BooleanValue colorblindValue;
+    public final ModConfigSpec.BooleanValue colorAssistValue;
     public static void bake(ModConfig config) {
         try {
             genderEuphoriaShader = CLIENT.genderEuphoriaShaderValue.get();
             pingShader = CLIENT.pingShaderValue.get();
             progressionShader = CLIENT.progressionShaderValue.get();
-            colorblind = CLIENT.colorblindValue.get();
+            colorAssist = CLIENT.colorAssistValue.get();
         } catch (Exception e) {
             DataNEssence.LOGGER.warn("[DATANESSENCE] Failed to load client config!");
             e.printStackTrace();
