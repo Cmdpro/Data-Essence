@@ -4,7 +4,7 @@
 - Added new Data Bank minigame type, Laser
 
 ### Changes
-- Essence Crystals entry requires a simple Laser puzzle to unlock
+- Essence Crystals, Essence Lasers, and Lensing Crystals entries require simple Laser puzzles to unlock
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be

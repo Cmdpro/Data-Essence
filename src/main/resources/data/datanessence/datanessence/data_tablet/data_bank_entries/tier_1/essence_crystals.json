@@ -7,7 +7,7 @@
     "translate": "data_tablet.pages.essence_crystals.name"
   },
   "entry": "datanessence:basics/essence_crystals",
-    "minigames": [
+  "minigames": [
     {
       "type": "datanessence:laser",
       "tiles": [

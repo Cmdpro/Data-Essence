@@ -410,7 +410,7 @@ public class LaserMinigame extends Minigame {
             UP("up", new Vector2i(0, -1), 0, 2, 3, 1),
             RIGHT("right", new Vector2i(1, 0), 90, 3, 0, 2),
             DOWN("down", new Vector2i(0, 1), 180, 0, 1, 3),
-            LEFT("left", new Vector2i(-1, 0), -90,1, 3, 0);
+            LEFT("left", new Vector2i(-1, 0), -90, 1, 2, 0);
             public final String name;
             public final Vector2i direction;
             public final float rotation;
