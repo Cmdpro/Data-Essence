@@ -16,9 +16,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
-public class DnEREcipeProvider extends RecipeProvider {
+public class DnERecipeProvider extends RecipeProvider {
 
-    public DnEREcipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+    public DnERecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }
 
