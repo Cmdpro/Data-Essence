@@ -39,7 +39,7 @@ public class ColorMixingMinigame extends Minigame {
     }
     @Override
     public boolean isFinished() {
-        if (DataNEssenceClientConfig.colorblind) {
+        if (DataNEssenceClientConfig.colorAssist) {
             return true;
         }
         Color currentColor = getCurrentColor();

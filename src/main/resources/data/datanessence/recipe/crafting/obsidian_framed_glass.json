@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "OGO",
+    "GGG",
+    "OGO"
+  ],
+  "key": {
+    "O": { "item": "datanessence:polished_obsidian" },
+    "G": { "item": "minecraft:glass" }
+  },
+  "result": { "id": "datanessence:obsidian_framed_glass", "count": 8 }
+}

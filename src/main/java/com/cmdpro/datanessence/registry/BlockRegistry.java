@@ -355,6 +355,12 @@ public class BlockRegistry {
     public static final Supplier<Block> POLISHED_OBSIDIAN_TRACT = register("polished_obsidian_tract",
             () -> new DirectionalPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> POLISHED_OBSIDIAN_TILES = register("polished_obsidian_tiles",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> OBSIDIAN_FRAMED_GLASS = register("obsidian_framed_glass",
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().isViewBlocking(BlockRegistry::never).isSuffocating(BlockRegistry::never).isValidSpawn(BlockRegistry::never).isRedstoneConductor(BlockRegistry::never)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AETHER_RUNE = register("aether_rune",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));

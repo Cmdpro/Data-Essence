@@ -1,0 +1,14 @@
+{
+  "type": "datanessence:infusion",
+  "entry": "datanessence:basics/essence_crystals",
+  "essenceCost": {
+    "datanessence:essence": 100.0
+  },
+  "input": {
+    "item": "minecraft:amethyst_shard"
+  },
+  "result": {
+    "count": 1,
+    "id": "datanessence:essence_shard"
+  }
+}

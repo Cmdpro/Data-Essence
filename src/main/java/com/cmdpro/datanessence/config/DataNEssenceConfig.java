@@ -19,11 +19,11 @@ public class DataNEssenceConfig {
     }
     public DataNEssenceConfig(ModConfigSpec.Builder builder) {
         builder.push("balancing");
-        fluidPointTransferValue = buildInteger(builder, "fluidNodeTransfer", 125, 1, 1000000, "How much should a fluid node transfer? (Also applies to chemical nodes if Mekanism is installed)"); // 125mB should cap out at 2B once 16x speed upgrade exists
-        essencePointTransferValue = buildInteger(builder, "essenceNodeTransfer", 50, 1, 1000000, "How much should an essence node transfer? (Applies to all essence node types)");
-        itemPointTransferValue = buildInteger(builder, "itemNodeTransfer", 4, 1, 64, "How much should an item node transfer?");
-        essenceBatteryMaxValue = buildInteger(builder, "essenceBatteryMax", 10000, 1, 1000000, "How much should an essence battery hold? (Applies to all essence battery types)");
-        maxNodeWiresValue = buildInteger(builder, "maxNodeWires", 4, 1, 50, "How much wires should nodes be able to have? (Applies to all nodes)");
+        fluidPointTransferValue = buildInteger(builder, "fluidNodeTransfer", 125, 1, 1000000, "The base, un-upgraded rate that Fluid Nodes can transfer, in mB per tick. (Also applies to Chemical Nodes if Mekanism is installed)"); // 125mB should cap out at 2B once 16x speed upgrade exists
+        essencePointTransferValue = buildInteger(builder, "essenceNodeTransfer", 50, 1, 1000000, "The base, un-upgraded rate that all Essence Nodes can transfer per tick.");
+        itemPointTransferValue = buildInteger(builder, "itemNodeTransfer", 4, 1, 64, "The base, un-upgraded rate that Item Nodes can transfer, in items per tick.");
+        essenceBatteryMaxValue = buildInteger(builder, "essenceBatteryMax", 10000, 1, 1000000, "The capacity for all Essence Batteries.");
+        maxNodeWiresValue = buildInteger(builder, "maxNodeWires", 4, 1, 50, "Connection limit for all Nodes - a Node cannot have more Wires than this.");
     }
     private static ModConfigSpec.BooleanValue buildBoolean(ModConfigSpec.Builder builder, String name, boolean defaultValue, String comment) {
         return builder.comment(comment).translation(name).define(name, defaultValue);

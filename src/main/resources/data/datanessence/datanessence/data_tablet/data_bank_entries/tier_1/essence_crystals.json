@@ -6,5 +6,53 @@
   "name": {
     "translate": "data_tablet.pages.essence_crystals.name"
   },
-  "entry": "datanessence:basics/essence_crystals"
+  "entry": "datanessence:basics/essence_crystals",
+  "minigames": [
+    {
+      "type": "datanessence:laser",
+      "tiles": [
+        {
+          "x": 12,
+          "y": 7,
+          "color": "red",
+          "type": "goal",
+          "rotation": "left"
+        },
+        {
+          "x": 2,
+          "y": 7,
+          "color": "red",
+          "type": "goal",
+          "rotation": "right"
+        },
+        {
+          "x": 12,
+          "y": 2,
+          "color": "red",
+          "type": "emitter",
+          "rotation": "down"
+        },
+        {
+          "x": 12,
+          "y": 4,
+          "color": "red",
+          "type": "mirror",
+          "rotation": "left"
+        },
+        {
+          "x": 7,
+          "y": 4,
+          "color": "red",
+          "type": "mirror",
+          "rotation": "left"
+        },
+        {
+          "x": 7,
+          "y": 7,
+          "type": "splitter",
+          "rotation": "up"
+        }
+      ]
+    }
+  ]
 }

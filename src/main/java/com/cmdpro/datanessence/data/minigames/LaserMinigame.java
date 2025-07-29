@@ -312,7 +312,7 @@ public class LaserMinigame extends Minigame {
             boolean reachedEnd = false;
             if (getType() == TileType.GOAL) {
                 shouldStop = true;
-                if (beam.color == color) {
+                if (beam.color == color && beam.rotation == getRotation().getOpposite()) {
                     reachedEnd = true;
                 }
             }
@@ -330,8 +330,8 @@ public class LaserMinigame extends Minigame {
             if (getType() == TileType.SPLITTER) {
                 shouldStop = true;
                 if (beam.rotation == getRotation().getOpposite()) {
-                    Beam beam1 = Beam.buildBeam(minigame, new Vector2i(pos), beam.getColor(), getRotation().getRight(), new Vec2(0, 2), depth+1);
-                    Beam beam2 = Beam.buildBeam(minigame, new Vector2i(pos), beam.getColor(), getRotation().getLeft(), new Vec2(0, 2), depth+1);
+                    Beam beam1 = Beam.buildBeam(minigame, new Vector2i(pos), beam.getColor(), getRotation().getRight(), Vec2.ZERO, depth+1);
+                    Beam beam2 = Beam.buildBeam(minigame, new Vector2i(pos), beam.getColor(), getRotation().getLeft(), Vec2.ZERO, depth+1);
                     minigame.addBeam(beam1);
                     minigame.addBeam(beam2);
                 }
@@ -410,7 +410,7 @@ public class LaserMinigame extends Minigame {
             UP("up", new Vector2i(0, -1), 0, 2, 3, 1),
             RIGHT("right", new Vector2i(1, 0), 90, 3, 0, 2),
             DOWN("down", new Vector2i(0, 1), 180, 0, 1, 3),
-            LEFT("left", new Vector2i(-1, 0), -90,1, 3, 0);
+            LEFT("left", new Vector2i(-1, 0), -90, 1, 2, 0);
             public final String name;
             public final Vector2i direction;
             public final float rotation;

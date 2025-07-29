@@ -6,11 +6,12 @@ import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
+import com.cmdpro.datanessence.client.FactorySong;
 import com.cmdpro.datanessence.datamaps.DataNEssenceDatamaps;
 import com.cmdpro.datanessence.datamaps.PlantSiphonEssenceMap;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
-import com.cmdpro.datanessence.registry.TagRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.IndustrialPlantSiphonMenu;
 
 import net.minecraft.core.BlockPos;
@@ -153,6 +154,10 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
             }
             tile.updateBlock();
         }
+        else {
+            if (tile.essenceGenerationTicks > 0 && !(tile.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) + tile.generationRate > tile.storage.getMaxEssence()) )
+                ClientHandler.markFactorySong(pos);
+        }
     }
 
     public float getGenerationTicks(IndustrialPlantSiphonBlockEntity tile) {
@@ -185,5 +190,13 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new IndustrialPlantSiphonMenu(pContainerId, pInventory, this);
+    }
+
+    private static class ClientHandler {
+        static FactorySong.FactoryLoop workingSound = FactorySong.getLoop(SoundRegistry.PLANT_SIPHON_LOOP.value());
+
+        public static void markFactorySong(BlockPos pos) {
+            workingSound.addSource(pos);
+        }
     }
 }
