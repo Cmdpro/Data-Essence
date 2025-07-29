@@ -26,7 +26,8 @@ public class CrystallineLeaves extends TransparentBlock {
 
         for (Direction direction : Direction.values()) {
             BlockPos blockpos = pos.relative(direction);
-            if (!world.getBlockState(blockpos).isSolidRender(world, blockpos)) {
+            BlockState dirState = world.getBlockState(blockpos);
+            if (!dirState.is(this) && !dirState.isSolidRender(world, blockpos)) {
                 Direction.Axis direction$axis = direction.getAxis();
                 double d1 = direction$axis == Direction.Axis.X ? 0.5 + 0.5625 * (double)direction.getStepX() : (double)random.nextFloat();
                 double d2 = direction$axis == Direction.Axis.Y ? 0.5 + 0.5625 * (double)direction.getStepY() : (double)random.nextFloat();
