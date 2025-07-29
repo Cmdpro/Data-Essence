@@ -1,0 +1,14 @@
+{
+  "type": "datanessence:infusion",
+  "entry": "datanessence:machinery/industrial_infuser_processing",
+  "essenceCost": {
+    "datanessence:essence": 100.0
+  },
+  "input": {
+    "item": "minecraft:glow_berries"
+  },
+  "result": {
+    "count": 2,
+    "id": "minecraft:glowstone_dust"
+  }
+}
