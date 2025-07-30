@@ -19,3 +19,4 @@
 - Removed a workaround that is no longer needed
 - Fixed Oritech integration Duratium synthesis requiring potentially-nonexistent netherite dust instead of netherite ingot
 - Fixed Mineral-Finding Rod not actually consuming Essence
+- Fixed Synthesis Chamber playing its Song when it should not be
