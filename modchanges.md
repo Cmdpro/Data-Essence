@@ -21,3 +21,4 @@
 - Fixed Mineral-Finding Rod not actually consuming Essence
 - Fixed Essence Wires sometimes not properly showing their direction
 - Fixed Synthesis Chamber playing its Song when it should not be
+- Fixed Data Banks not letting you in if your data tablet has any components
