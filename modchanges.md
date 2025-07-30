@@ -9,6 +9,8 @@
 ### Changes
 - Essence Crystals, Essence Lasers, and Lensing Crystals entries require simple Laser puzzles to unlock
 - Removed Polished Obsidian from Fluidic Glass's recipe (replaced with more Capacitance Panels)
+- Made Decorative Blocks entry's Color Mixing puzzle easier
+- Gave Color Mixing puzzles to Traversite Road and Genderfluid
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
