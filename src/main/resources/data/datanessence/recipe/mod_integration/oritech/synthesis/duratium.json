@@ -10,7 +10,7 @@
     "datanessence:essence": 20
   },
   "input": { "tag": "c:ingots/platinum" },
-  "input2": { "tag": "c:dusts/netherite" },
+  "input2": { "item": "minecraft:netherite_ingot" },
   "time": 100,
   "result": { "id": "oritech:duratium_ingot", "count": 2 },
   "entry": "datanessence:mod_integration/oritech_alloying"

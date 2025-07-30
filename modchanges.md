@@ -16,3 +16,4 @@
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
 - Removed a workaround that is no longer needed
+- Fixed Oritech integration Duratium synthesis requiring potentially-nonexistent netherite dust instead of netherite ingot
