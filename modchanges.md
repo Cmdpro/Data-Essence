@@ -12,8 +12,10 @@
 - Removed Polished Obsidian from Fluidic Glass's recipe (replaced with more Capacitance Panels)
 - Made Decorative Blocks entry's Color Mixing puzzle easier
 - Gave Color Mixing puzzles to Traversite Road and Genderfluid
+- Changed Mineral-Finding Rod's use cost to 50 (was 25)
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
 - Removed a workaround that is no longer needed
 - Fixed Oritech integration Duratium synthesis requiring potentially-nonexistent netherite dust instead of netherite ingot
+- Fixed Mineral-Finding Rod not actually consuming Essence
