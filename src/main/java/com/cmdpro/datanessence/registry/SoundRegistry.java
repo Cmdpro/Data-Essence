@@ -78,6 +78,7 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> AGRICORE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.agricore");
     public static final Holder<SoundEvent> STARFORGE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.starforge");
     public static final Holder<SoundEvent> LEECH_LOOP = createBasicFactoryLoopSound("ost.factory_loops.essence_leech");
+    public static final Holder<SoundEvent> PLANT_SIPHON_LOOP = createBasicFactoryLoopSound("ost.factory_loops.plant_siphon");
     public static final Holder<SoundEvent> DERIVATION_SPIKE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.essence_derivation_spike");
     public static final Holder<SoundEvent> METAL_SHAPER_LOOP = createBasicFactoryLoopSound("ost.factory_loops.metal_shaper");
     public static final Holder<SoundEvent> AUTO_FABRICATOR_LOOP_INDUSTRIAL = createBasicFactoryLoopSound("ost.factory_loops.auto-fabricator");

@@ -13,6 +13,7 @@ import com.cmdpro.datanessence.data.datatablet.Entries;
 import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -20,6 +21,8 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec2;
 
 import java.awt.*;
 import java.util.*;
@@ -40,8 +43,10 @@ public class DataBankScreen extends Screen {
     public Minigame[] minigames;
     public int minigameProgress;
     public int minigameCompletionWait;
+    public HashMap<ResourceLocation, Integer> downloading = new HashMap<>();
+    public static final int downloadTime = 20;
     public boolean isUnlocked(Entry entry) {
-        return entry.isUnlockedClient();
+        return downloading.containsKey(entry.id) || entry.isUnlockedClient();
     }
     @Override
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
@@ -54,9 +59,10 @@ public class DataBankScreen extends Screen {
             List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
             entries.sort(Comparator.comparingInt((a) -> a.tier));
             for (DataBankEntry i : entries) {
-                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
+                boolean isDownloading = downloading.containsKey(i.id);
+                if (isDownloading || i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
-                    if (entry == null || !isUnlocked(entry)) {
+                    if (entry == null || (!isUnlocked(entry) && !isDownloading)) {
                         continue;
                     }
                     if (i.tier != currentTier) {
@@ -65,6 +71,9 @@ public class DataBankScreen extends Screen {
                         x2 = 4;
                     }
                     x2 += 30;
+                    if (isDownloading) {
+                        continue;
+                    }
                     if (pMouseX >= (x2 - 10) + offsetX + x && pMouseX <= (x2 + 10) + offsetX + x) {
                         if (pMouseY >= (y2 - 10) + offsetY + y && pMouseY <= (y2 + 10) + offsetY + y) {
                             screenType = 1;
@@ -192,6 +201,7 @@ public class DataBankScreen extends Screen {
                         ClientPlayerUnlockedEntries.getUnlocked().add(clickedEntry.entry);
                     }
                 }
+                downloading.put(clickedEntry.id, downloadTime);
                 ModMessages.sendToServer(new PlayerFinishDataBankMinigame(clickedEntry.id));
                 screenType = 0;
             } else {
@@ -212,6 +222,13 @@ public class DataBankScreen extends Screen {
         } else {
             minigameCompletionWait = -1;
             minigames = null;
+        }
+        for (Map.Entry<ResourceLocation, Integer> i : downloading.entrySet().stream().toList()) {
+            if (i.getValue()-1 <= 0) {
+                downloading.remove(i.getKey());
+            } else {
+                downloading.put(i.getKey(), i.getValue()-1);
+            }
         }
     }
 
@@ -252,6 +269,14 @@ public class DataBankScreen extends Screen {
         renderBg(graphics, delta, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
+
+        // needed this to not be scissored
+        if (screenType == 1 && minigameProgress < minigames.length) {
+            // TODO make this only appear for a few seconds instead of all the time maybe?, and make the color cycle
+            var minigameName = Component.translatable(minigames[minigameProgress].getLocalizationKey());
+            graphics.drawCenteredString(Minecraft.getInstance().font, minigameName, x+(imageWidth/2), y-8, 0xffffff);
+        }
+
         graphics.enableScissor(x+3, y+3, x+imageWidth-3, y+imageHeight-3);
         if (screenType == 0) {
             drawEntries(graphics, delta, mouseX, mouseY);
@@ -269,6 +294,7 @@ public class DataBankScreen extends Screen {
             }
             graphics.blit(TEXTURE, x+26-10, y+26-10, 0, 166, 20, 20);
             graphics.renderItem(clickedEntry.icon, x+26-8, y+26-8);
+
             if (minigameCompletionWait > 0) {
                 Color fade = new Color(1f, 1f, 1f, 1f-((float)minigameCompletionWait/40f));
                 Color fade2 = new Color(0f, 0f, 0f, 1f-((float)minigameCompletionWait/40f));
@@ -289,9 +315,9 @@ public class DataBankScreen extends Screen {
             entries.sort(Comparator.comparingInt((a) -> a.tier));
 
             for (DataBankEntry i : entries) {
-                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
+                if (downloading.containsKey(i.id) || i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
-                    if (entry == null || !isUnlocked(entry)) {
+                    if (entry == null || (!isUnlocked(entry) && !downloading.containsKey(i.id))) {
                         continue;
                     }
                     if (i.tier != currentTier) {
@@ -310,7 +336,7 @@ public class DataBankScreen extends Screen {
             }
             boolean anyUnfinished = false;
             for (DataBankEntry i : entries) {
-                if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
+                if (downloading.containsKey(i.id) || i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
                     Entry entry = Entries.entries.get(i.entry);
                     if (entry == null || isUnlocked(entry)) {
                         anyUnfinished = true;
@@ -356,7 +382,7 @@ public class DataBankScreen extends Screen {
         List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
         entries.sort(Comparator.comparingInt((a) -> a.tier));
         for (DataBankEntry i : entries) {
-            if (i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
+            if (downloading.containsKey(i.id) || i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
                 Entry entry = Entries.entries.get(i.entry);
                 if (entry == null || !isUnlocked(entry)) {
                     continue;
@@ -369,6 +395,29 @@ public class DataBankScreen extends Screen {
                 x2 += 30;
                 pGuiGraphics.blit(TEXTURE, x + (x2 - 10) + (int) offsetX, y + (y2 - 10) + (int) offsetY, 0, 166, 20, 20);
                 pGuiGraphics.renderItem(i.icon, x + (x2 - 8) + (int) offsetX, y + (y2 - 8) + (int) offsetY);
+
+                if (downloading.containsKey(i.id)) {
+                    pGuiGraphics.pose().pushPose();
+                    pGuiGraphics.pose().translate(0, 0, 200);
+                    BufferBuilder builder = Tesselator.getInstance().begin(VertexFormat.Mode.TRIANGLE_FAN, DefaultVertexFormat.POSITION_COLOR);
+                    float radius = 8;
+                    Vec2 center = new Vec2((x + x2 + (int) offsetX), (y + y2 + (int) offsetY));
+                    Color color = new Color(0.75F, 0F, 0.75F, 0.5f);
+                    RenderSystem.enableBlend();
+                    RenderSystem.setShader(GameRenderer::getPositionColorShader);
+                    builder.addVertex(pGuiGraphics.pose().last(), center.x, center.y, 0).setColor(color.getRGB());
+                    for (int deg = (int)(360*(1f-Math.clamp(((float)downloading.get(i.id)-pPartialTick)/(float)downloadTime, 0f, 1f))); deg >= 0; deg--) {
+                        float rad = (deg - 90) / 180F * (float) Math.PI;
+                        builder.addVertex(pGuiGraphics.pose().last(), center.x + Mth.cos(rad) * radius, center.y + Mth.sin(rad) * radius, 0).setColor(color.getRGB());
+                    }
+                    builder.addVertex(pGuiGraphics.pose().last(), center.x, center.y, 0).setColor(color.getRGB());
+                    BufferUploader.drawWithShader(builder.buildOrThrow());
+                    RenderSystem.setShader(GameRenderer::getPositionTexShader);
+                    pGuiGraphics.blit(TEXTURE, (int)center.x-8, (int)center.y-8, 85, 166, 16, 16);
+                    RenderSystem.disableBlend();
+                    pGuiGraphics.pose().popPose();
+                }
+
                 if (tiers.containsKey(i.tier)) {
                     tiers.put(i.tier, tiers.get(i.tier)+1);
                 } else {

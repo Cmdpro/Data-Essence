@@ -57,7 +57,7 @@ public class DataNEssenceCommands {
                                                 .executes((command -> {
                                                     return modifyEntries(command, false);
                                                 }))
-                                                .then(Commands.argument("incomplete", BoolArgumentType.bool())
+                                                .then(Commands.argument("completion_stage", IntegerArgumentType.integer())
                                                     .executes((command -> {
                                                     return modifyEntries(command, true);
                                                 }))))))

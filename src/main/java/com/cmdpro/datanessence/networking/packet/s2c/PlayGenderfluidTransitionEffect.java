@@ -21,6 +21,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public record PlayGenderfluidTransitionEffect(BlockPos pos, Vec3 itemPos) implem
     }
 
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         Level level = player.level();
 
         RandomSource random = level.getRandom();

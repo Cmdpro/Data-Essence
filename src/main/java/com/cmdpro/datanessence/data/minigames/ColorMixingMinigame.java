@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.data.minigames;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.databank.Minigame;
+import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.DataBankScreen;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -38,6 +39,9 @@ public class ColorMixingMinigame extends Minigame {
     }
     @Override
     public boolean isFinished() {
+        if (DataNEssenceClientConfig.colorAssist) {
+            return true;
+        }
         Color currentColor = getCurrentColor();
         float[] targetHsv = Color.RGBtoHSB(targetColor.getRed(), targetColor.getGreen(), targetColor.getBlue(), null);
         float[] currentHsv = Color.RGBtoHSB(getCurrentColor().getRed(), currentColor.getGreen(), currentColor.getBlue(), null);
@@ -49,6 +53,12 @@ public class ColorMixingMinigame extends Minigame {
         }
         return currentHsvInt[0] == targetHsvInt[0] && currentHsvInt[1] == targetHsvInt[1] && currentHsvInt[2] == targetHsvInt[2];
     }
+
+    @Override
+    public String getLocalizationKey() {
+        return "data_tablet.databank_minigame_color_mixing";
+    }
+
     public Color getCurrentColor() {
         Color color = startColor;
         for (ColorMixingMinigameCreator.ColorMixingMinigameSerializer.ColorManipulation i : manipulations) {

@@ -32,25 +32,6 @@ public class ModItemTagGenerator extends ItemTagsProvider {
         this.tag(ItemTags.FREEZE_IMMUNE_WEARABLES)
                 .add(ItemRegistry.TRAVERSITE_TRUDGERS.get());
 
-        this.tag(TagRegistry.Items.LOW_ESSENCE_PLANTS)
-                .addTag(Tags.Items.CROPS)
-                .addTag(Tags.Items.SEEDS)
-                .addTag(ItemTags.LEAVES)
-                .addTag(ItemTags.FLOWERS)
-                .addTag(ItemTags.SAPLINGS)
-                .add(Items.BAMBOO)
-                .add(Items.KELP)
-                .add(Items.SEA_PICKLE);
-        this.tag(TagRegistry.Items.MEDIUM_ESSENCE_PLANTS)
-                .add(Items.CHORUS_FRUIT)
-                .add(Items.CHORUS_FLOWER)
-                .add(Items.WITHER_ROSE)
-                .add(Items.SPORE_BLOSSOM)
-                .add(Items.PITCHER_PLANT)
-                .add(Items.TORCHFLOWER);
-        this.tag(TagRegistry.Items.HIGH_ESSENCE_PLANTS)
-                .add(BlockRegistry.TETHERGRASS.get().asItem());
-
         this.tag(TagRegistry.Items.EXPLOSIVE_MATERIAL)
                 .add(Items.GUNPOWDER)
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "dusts/sulfur"));
@@ -64,7 +45,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem())
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get().asItem())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get().asItem())
-                .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get().asItem());
+                .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get().asItem())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_TILES.get().asItem());
 
         this.tag(TagRegistry.Items.POLISHED_OBSIDIAN_BLOCKS)
                 .addTag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
@@ -130,6 +112,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ItemRegistry.LENSING_CRYSTAL.get())
                 .add(ItemRegistry.BONDING_POWDER.get());
 
+        this.tag(Tags.Items.ORES)
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get().asItem());
         this.tag(Tags.Items.ORES_IN_GROUND_STONE)
                 .add(BlockRegistry.LENSING_CRYSTAL_ORE.get().asItem());
         this.tag(Tags.Items.GEMS)

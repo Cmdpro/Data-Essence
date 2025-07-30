@@ -6,5 +6,127 @@
   "name": {
     "translate": "data_tablet.pages.lensing_crystals.name"
   },
-  "entry": "datanessence:basics/lensing_crystals"
+  "entry": "datanessence:basics/lensing_crystals",
+  "minigames": [
+    {
+      "type": "datanessence:laser",
+      "tiles": [
+        {
+          "x": 7,
+          "y": 1,
+          "color": "white",
+          "type": "emitter",
+          "rotation": "down"
+        },
+        {
+          "x": 7,
+          "y": 7,
+          "color": "green",
+          "type": "emitter",
+          "rotation": "down"
+        },
+        {
+          "x": 7,
+          "y": 13,
+          "color": "white",
+          "type": "goal",
+          "rotation": "up"
+        },
+        {
+          "x": 4,
+          "y": 7,
+          "color": "green",
+          "type": "goal",
+          "rotation": "right"
+        },
+        {
+          "x": 10,
+          "y": 7,
+          "color": "green",
+          "type": "goal",
+          "rotation": "left"
+        },
+        {
+          "x": 1,
+          "y": 10,
+          "color": "blue",
+          "type": "goal",
+          "rotation": "right"
+        },
+        {
+          "x": 13,
+          "y": 10,
+          "color": "red",
+          "type": "goal",
+          "rotation": "left"
+        },
+        {
+          "x": 7,
+          "y": 3,
+          "type": "prism",
+          "rotation": "down"
+        },
+        {
+          "x": 7,
+          "y": 10,
+          "type": "prism",
+          "rotation": "down"
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "type": "splitter",
+          "rotation": "left"
+        },
+        {
+          "x": 3,
+          "y": 10,
+          "type": "splitter",
+          "rotation": "left"
+        },
+        {
+          "x": 11,
+          "y": 10,
+          "type": "splitter",
+          "rotation": "left"
+        },
+        {
+          "x": 3,
+          "y": 3,
+          "type": "mirror",
+          "rotation": "left"
+        },
+        {
+          "x": 11,
+          "y": 3,
+          "type": "mirror",
+          "rotation": "left"
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "type": "mirror",
+          "rotation": "left"
+        },
+        {
+          "x": 5,
+          "y": 5,
+          "type": "mirror",
+          "rotation": "left"
+        },
+        {
+          "x": 5,
+          "y": 7,
+          "type": "mirror",
+          "rotation": "left"
+        },
+        {
+          "x": 9,
+          "y": 7,
+          "type": "mirror",
+          "rotation": "left"
+        }
+      ]
+    }
+  ]
 }

@@ -8,10 +8,11 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record DragonPartsSync(int id, boolean horns, boolean tail, boolean wings) implements Message {
     @Override
-    public void handleClient(Minecraft minecraft, Player player) {
+    public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         if (player.level().getEntity(id) instanceof Player target) {
             target.setData(AttachmentTypeRegistry.HAS_HORNS, horns);
             target.setData(AttachmentTypeRegistry.HAS_TAIL, tail);

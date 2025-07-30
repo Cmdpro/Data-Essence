@@ -1,6 +1,8 @@
 package com.cmdpro.datanessence.entity;
 
+import com.cmdpro.databank.misc.ColorGradient;
 import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import com.cmdpro.datanessence.misc.NaturalEssenceBombExplosion;
 import net.minecraft.network.protocol.game.ClientboundExplodePacket;
@@ -15,7 +17,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.HitResult;
 
-public class ThrownNaturalEssenceBombProjectile extends ThrowableItemProjectile {
+public class ThrownNaturalEssenceBombProjectile extends ThrownTrailItemProjectile {
     public ThrownNaturalEssenceBombProjectile(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
     }
@@ -48,5 +50,9 @@ public class ThrownNaturalEssenceBombProjectile extends ThrowableItemProjectile 
             }
             remove(RemovalReason.KILLED);
         }
+    }
+    @Override
+    public ColorGradient getGradient() {
+        return EssenceTypeRegistry.NATURAL_ESSENCE.get().getThrowGradient();
     }
 }

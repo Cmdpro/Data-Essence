@@ -1,12 +1,13 @@
 package com.cmdpro.datanessence.datagen;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.datagen.recipe.DnERecipeProvider;
+import com.cmdpro.datanessence.datagen.datamap.PlantSiphonEssenceProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
@@ -26,9 +27,14 @@ public class DataGenerators {
         generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
         generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
 
+        generator.addProvider(event.includeServer(), new PlantSiphonEssenceProvider(packOutput, lookupProvider));
+
         ModBlockTagGenerator blockTagGenerator = generator.addProvider(event.includeServer(),
                 new ModBlockTagGenerator(packOutput, lookupProvider, existingFileHelper));
         generator.addProvider(event.includeServer(), new ModItemTagGenerator(packOutput, lookupProvider, blockTagGenerator.contentsGetter(), existingFileHelper));
         generator.addProvider(event.includeServer(), new ModEntityTagGenerator(packOutput, lookupProvider, existingFileHelper));
+
+        // Recipes
+        generator.addProvider(event.includeServer(), new DnERecipeProvider(packOutput, lookupProvider));
     }
 }

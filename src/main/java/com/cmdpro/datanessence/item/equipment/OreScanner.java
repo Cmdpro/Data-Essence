@@ -41,7 +41,7 @@ import java.util.Optional;
 
 public class OreScanner extends Item {
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
-    public static float ESSENCE_COST = 25f;
+    public static float ESSENCE_COST = 50f;
     public OreScanner(Properties pProperties) {
         super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 1000)));
     }
@@ -67,6 +67,7 @@ public class OreScanner extends Item {
                 }
                 ModMessages.sendToPlayer(new AddScannedOre(ores), (ServerPlayer)pPlayer);
                 pPlayer.getCooldowns().addCooldown(this, 20 * 10);
+                ItemEssenceContainer.removeEssence(stack, FUEL_ESSENCE_TYPE, ESSENCE_COST);
             }
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);

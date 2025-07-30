@@ -2,13 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "pattern": [
-    "LOL",
+    "LCL",
     "CGC",
-    "LOL"
+    "LCL"
   ],
   "key": {
     "C": { "item": "datanessence:capacitance_panel" },
-    "O": { "item": "datanessence:polished_obsidian" },
     "L": { "item": "minecraft:lapis_lazuli" },
     "G": { "item": "minecraft:glass" }
   },

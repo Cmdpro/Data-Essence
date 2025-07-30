@@ -13,6 +13,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public record PlayerFinishDataBankMinigame(ResourceLocation entry) implements Message {
 
@@ -22,7 +23,7 @@ public record PlayerFinishDataBankMinigame(ResourceLocation entry) implements Me
     }
 
     @Override
-    public void handleServer(MinecraftServer server, ServerPlayer player) {
+    public void handleServer(MinecraftServer server, ServerPlayer player, IPayloadContext ctx) {
         DataBankEntry entry2 = DataBankEntries.entries.get(entry);
         if (entry2 != null) {
             if (entry2.tier <= player.getData(AttachmentTypeRegistry.TIER)) {

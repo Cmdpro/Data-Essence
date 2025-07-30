@@ -21,6 +21,8 @@ import org.joml.Vector3f;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client.ClientProgressionUtil {
     public static void renderLockedSlotBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int x, int y, NonNullList<Slot> slots) {
@@ -94,11 +96,18 @@ public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client
     public static void renderLine(VertexConsumer consumer, PoseStack stack, Vec3 pointA, Vec3 pointB, Color color) {
         renderLine(consumer, stack, pointA, pointB, color, 0.3d);
     }
+    public static void renderLine(VertexConsumer consumer, PoseStack stack, Vec3 pointA, Vec3 pointB, Function<Integer, Color> color) {
+        renderLine(consumer, stack, pointA, pointB, color, 0.3d);
+    }
     public static void renderLine(VertexConsumer consumer, PoseStack stack, Vec3 pointA, Vec3 pointB, Color color, double sag) {
+        renderLine(consumer, stack, pointA, pointB, (seg) -> color, sag);
+    }
+    public static void renderLine(VertexConsumer consumer, PoseStack stack, Vec3 pointA, Vec3 pointB, Function<Integer, Color> color, double sag) {
         int segmentCount = 32;
         List<Vec3> segments = new ArrayList<>();
-        Vec3 sagOrigin = pointA.y < pointB.y ? pointA : pointB;
-        Vec3 sagTarget = pointA.y < pointB.y ? pointB : pointA;
+        boolean reversed = pointA.y < pointB.y;
+        Vec3 sagOrigin = reversed ? pointA : pointB;
+        Vec3 sagTarget = reversed ? pointB : pointA;
         Vec3 diff = sagTarget.subtract(sagOrigin);
         for (int i = 0; i < segmentCount; i++) {
             double startLerp = getFractionalLerp(i, segmentCount - 1);
@@ -110,11 +119,12 @@ public class ClientRenderingUtil extends com.cmdpro.datanessence.api.util.client
         if (!segments.isEmpty()) {
             Vec3 currentPos = segments.get(0);
             for (int i = 1; i < segments.size(); i++) {
+                Color segColor = color.apply(reversed ? segments.size()-i : i);
                 Vec3 targetPos = segments.get(i);
                 Vec3 normal = currentPos.subtract(targetPos).normalize();
-                consumer.addVertex(stack.last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(color.getRGB()).setNormal(stack.last(), (float) normal.x, (float) normal.y, (float) normal.z);
+                consumer.addVertex(stack.last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(segColor.getRGB()).setNormal(stack.last(), (float) normal.x, (float) normal.y, (float) normal.z);
                 currentPos = targetPos;
-                consumer.addVertex(stack.last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(color.getRGB()).setNormal(stack.last(), (float) normal.x, (float) normal.y, (float) normal.z);
+                consumer.addVertex(stack.last(), (float) currentPos.x, (float) currentPos.y, (float) currentPos.z).setColor(segColor.getRGB()).setNormal(stack.last(), (float) normal.x, (float) normal.y, (float) normal.z);
             }
         }
     }

@@ -13,4 +13,7 @@ public interface EssenceBlockEntity {
         }
         return 0.25f;
     }
+    default EssenceBarBackgroundType getMeterBackgroundType() {
+        return EssenceBarBackgroundTypes.INDUSTRIAL;
+    }
 }

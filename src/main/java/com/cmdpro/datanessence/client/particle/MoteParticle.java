@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Camera;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
+import net.minecraft.client.renderer.LightTexture;
 
 public class MoteParticle extends TextureSheetParticle {
     public float maxQuadSize;
@@ -28,13 +29,20 @@ public class MoteParticle extends TextureSheetParticle {
         this.friction = options.friction;
         this.lifetime = options.lifetime;
         this.gravity = options.gravity;
-        this.hasPhysics = true;
+        this.hasPhysics = options.physics;
         this.options = options;
     }
 
     @Override
     public void render(VertexConsumer pBuffer, Camera pRenderInfo, float pPartialTicks) {
         super.render(RenderHandler.createBufferSource().getBuffer(options.additive ? RenderTypeHandler.ADDITIVE_PARTICLE : RenderTypeHandler.TRANSPARENT_PARTICLE), pRenderInfo, pPartialTicks);
+    }
+    @Override
+    protected int getLightColor(float partialTick) {
+        if (options.fullbright) {
+            return LightTexture.FULL_BRIGHT;
+        }
+        return super.getLightColor(partialTick);
     }
     @Override
     public ParticleRenderType getRenderType() {

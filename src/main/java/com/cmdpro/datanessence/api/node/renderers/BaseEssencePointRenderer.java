@@ -6,6 +6,7 @@ import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
 import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
+import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
@@ -15,6 +16,7 @@ import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
 import com.cmdpro.datanessence.client.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.animation.AnimationDefinition;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
@@ -35,18 +37,38 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
     public BaseEssencePointRenderer(Model<T> model) {
         super(model);
     }
+    private int getSegWithOffset(int seg, int offset) {
+        int segment = seg+offset;
+        if (segment < 0) {
+            segment = segment + 8;
+        }
+        segment = segment % 8;
+        return segment;
+    }
     @Override
     public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
         if (pBlockEntity.link != null) {
-            Vec3 pos = pBlockEntity.getBlockPos().getCenter();
+            BlockPos blockPos = pBlockEntity.getBlockPos();
+            Vec3 pos = blockPos.getCenter();
             pPoseStack.pushPose();
             pPoseStack.translate(-pos.x, -pos.y, -pos.z);
             pPoseStack.translate(0.5, 0.5, 0.5);
-            Vec3 origin = pBlockEntity.getBlockPos().getCenter();
+            Vec3 origin = blockPos.getCenter();
             for (BlockPos i : pBlockEntity.link) {
                 Vec3 target = i.getCenter();
                 VertexConsumer vertexConsumer = RenderHandler.createBufferSource().getBuffer(DataNEssenceRenderTypes.WIRES);
-                ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, pBlockEntity.linkColor());
+                float darken = 1.5f;
+                Color segColor1 = pBlockEntity.linkColor();
+                Color segColor2 = new Color((int)(segColor1.getRed()/darken), (int)(segColor1.getGreen()/darken), (int)(segColor1.getBlue()/darken), segColor1.getAlpha());
+                Color segColor3 = ColorUtil.blendColors(segColor1, segColor2, 0.35f);
+                float ticks = (Minecraft.getInstance().level.getGameTime() % 8)+pPartialTick;
+                int currentSeg = (int)(ticks % 8);
+                ClientRenderingUtil.renderLine(vertexConsumer, pPoseStack, origin, target, (seg) -> {
+                    if (7-(seg % 8) == getSegWithOffset(currentSeg, -2) || 7-(seg % 8) == getSegWithOffset(currentSeg, 1) % 8) {
+                        return segColor3;
+                    }
+                    return 7-(seg % 8) == currentSeg || 7-(seg % 8) == getSegWithOffset(currentSeg, -1) ? segColor1 : segColor2;
+                }, blockPos.getX() == i.getX() && blockPos.getZ() == i.getZ() ? 0 : 0.3);
             }
             pPoseStack.popPose();
         }

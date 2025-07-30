@@ -78,6 +78,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.POLISHED_OBSIDIAN.get());
         dropSelf(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get());
         dropSelf(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get());
+        dropSelf(BlockRegistry.POLISHED_OBSIDIAN_TILES.get());
         dropSelf(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get());
         dropSelf(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get());
         dropSelf(BlockRegistry.TRAVERSITE_ROAD.get());
@@ -132,6 +133,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.ENDER_PEARL_CAPTURE.get());
         this.add(BlockRegistry.CREATIVE_ESSENCE_BATTERY.get(),
                 block -> noDrop());
+        dropSelf(BlockRegistry.OBSIDIAN_FRAMED_GLASS.get());
 
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));

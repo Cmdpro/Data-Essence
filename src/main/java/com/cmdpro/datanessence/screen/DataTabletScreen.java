@@ -557,6 +557,10 @@ public class DataTabletScreen extends Screen {
         }
         return tabs;
     }
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -589,7 +593,7 @@ public class DataTabletScreen extends Screen {
         return new Vector2i(entry.x, entry.y);
     }
     public boolean isEntryUnlocked(Entry entry) {
-        return entry.isVisibleClient();
+        return entry.isDefault || entry.isVisibleClient();
     }
     public int getEntryCompletionStage(Entry entry) {
         return entry.getIncompleteStageClient();

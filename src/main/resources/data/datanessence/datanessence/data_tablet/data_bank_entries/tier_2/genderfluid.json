@@ -6,5 +6,67 @@
   "name": {
     "translate": "data_tablet.pages.genderfluid.name"
   },
+  "minigames": [
+    {
+      "type": "datanessence:color_mixing",
+      "colorManipulations": [
+        {
+          "maxIntensity": 2,
+          "intensity": 1,
+          "color": [
+            255,
+            255,
+            0
+          ]
+        },
+        {
+          "maxIntensity": 2,
+          "intensity": 1,
+          "color": [
+            255,
+            0,
+            255
+          ]
+        }
+      ],
+      "startColor": [
+        255,
+        255,
+        255
+      ],
+      "maxManipulations": 10,
+      "colorLevels": 2
+    },
+    {
+      "type": "datanessence:color_mixing",
+      "colorManipulations": [
+        {
+          "maxIntensity": 4,
+          "intensity": 4,
+          "color": [
+            255,
+            0,
+            255
+          ]
+        },
+        {
+          "maxIntensity": 4,
+          "intensity": 3,
+          "color": [
+            0,
+            255,
+            255
+          ]
+        }
+      ],
+      "startColor": [
+        255,
+        255,
+        255
+      ],
+      "maxManipulations": 5,
+      "colorLevels": 4
+    }
+  ],
   "entry": "datanessence:tools/genderfluid"
 }
