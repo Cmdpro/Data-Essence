@@ -208,4 +208,9 @@ public class MinesweeperMinigame extends Minigame {
             Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.MINESWEEPER_EXPLODE.value(), 1f, 1f));
         }
     }
+
+    @Override
+    public String getLocalizationKey() {
+        return "data_tablet.databank_minigame_minesweeper";
+    }
 }

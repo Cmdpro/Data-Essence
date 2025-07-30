@@ -337,4 +337,9 @@ public class TracesMinigame extends Minigame {
     public class Client {
 
     }
+
+    @Override
+    public String getLocalizationKey() {
+        return "data_tablet.databank_minigame_traces";
+    }
 }

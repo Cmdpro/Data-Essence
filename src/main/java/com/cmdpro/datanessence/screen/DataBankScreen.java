@@ -269,6 +269,14 @@ public class DataBankScreen extends Screen {
         renderBg(graphics, delta, mouseX, mouseY);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
+
+        // needed this to not be scissored
+        if (screenType == 1 && minigameProgress < minigames.length) {
+            // TODO make this only appear for a few seconds instead of all the time maybe?, and make the color cycle
+            var minigameName = Component.translatable(minigames[minigameProgress].getLocalizationKey());
+            graphics.drawCenteredString(Minecraft.getInstance().font, minigameName, x+(imageWidth/2), y-8, 0xffffff);
+        }
+
         graphics.enableScissor(x+3, y+3, x+imageWidth-3, y+imageHeight-3);
         if (screenType == 0) {
             drawEntries(graphics, delta, mouseX, mouseY);
@@ -286,6 +294,7 @@ public class DataBankScreen extends Screen {
             }
             graphics.blit(TEXTURE, x+26-10, y+26-10, 0, 166, 20, 20);
             graphics.renderItem(clickedEntry.icon, x+26-8, y+26-8);
+
             if (minigameCompletionWait > 0) {
                 Color fade = new Color(1f, 1f, 1f, 1f-((float)minigameCompletionWait/40f));
                 Color fade2 = new Color(0f, 0f, 0f, 1f-((float)minigameCompletionWait/40f));

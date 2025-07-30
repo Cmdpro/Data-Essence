@@ -18,4 +18,6 @@ public abstract class Minigame {
     public void keyPressed(int pKeyCode, int pScanCode, int pModifiers) {}
     public void keyReleased(int pKeyCode, int pScanCode, int pModifiers) {}
     public abstract boolean isFinished();
+
+    public abstract String getLocalizationKey();
 }

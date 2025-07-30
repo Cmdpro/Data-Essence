@@ -53,6 +53,12 @@ public class ColorMixingMinigame extends Minigame {
         }
         return currentHsvInt[0] == targetHsvInt[0] && currentHsvInt[1] == targetHsvInt[1] && currentHsvInt[2] == targetHsvInt[2];
     }
+
+    @Override
+    public String getLocalizationKey() {
+        return "data_tablet.databank_minigame_color_mixing";
+    }
+
     public Color getCurrentColor() {
         Color color = startColor;
         for (ColorMixingMinigameCreator.ColorMixingMinigameSerializer.ColorManipulation i : manipulations) {
