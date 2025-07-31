@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "oritech"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:raw_materials/uranium" },
+    "time": 400,
+    "result": { "id": "oritech:uranium_dust", "count": 2 },
+    "nuggetResult": { "id": "oritech:small_uranium_dust", "count": 4 }
+}
