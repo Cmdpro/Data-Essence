@@ -6,6 +6,7 @@
 - Added Polished Obsidian Tiles variant
 - Added Obsidian-Framed Glass
 - Data Bank minigames now render their names
+- Added support for Oritech ores to the Mineral Purification Chamber
 
 ### Changes
 - Essence Crystals, Essence Lasers, and Lensing Crystals entries require simple Laser puzzles to unlock
@@ -16,6 +17,7 @@
 - Changed behaviour of ancient sentinel projectiles
 - Lowered ancient sentinel shoot delay slightly
 - Added a sound when ancient sentinel projectiles hit a block
+- Removed ticking noise from Fluid Collector
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
