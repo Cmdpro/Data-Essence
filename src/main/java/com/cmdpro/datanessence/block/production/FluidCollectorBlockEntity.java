@@ -29,7 +29,7 @@ public class FluidCollectorBlockEntity extends BlockEntity implements EssenceBlo
         return storage;
     }
     public int cooldown;
-    public int soundTick; // for texture animation-synced noise
+
     public FluidCollectorBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_COLLECTOR.get(), pos, state);
     }
@@ -43,7 +43,6 @@ public class FluidCollectorBlockEntity extends BlockEntity implements EssenceBlo
         tag.put("EssenceStorage", storage.toNbt());
         tag.put("fluid", fluidHandler.writeToNBT(pRegistries, new CompoundTag()));
         tag.putInt("cooldown", cooldown);
-        tag.putInt("SoundTick", soundTick);
         super.saveAdditional(tag, pRegistries);
     }
     @Override
@@ -52,7 +51,6 @@ public class FluidCollectorBlockEntity extends BlockEntity implements EssenceBlo
         fluidHandler.readFromNBT(pRegistries, nbt.getCompound("fluid"));
         storage.fromNbt(nbt.getCompound("EssenceStorage"));
         cooldown = nbt.getInt("cooldown");
-        soundTick = nbt.getInt("SoundTick");
     }
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidCollectorBlockEntity pBlockEntity) {
 
@@ -75,12 +73,6 @@ public class FluidCollectorBlockEntity extends BlockEntity implements EssenceBlo
             } else {
                 pBlockEntity.cooldown -= 1;
             }
-
-            if (pBlockEntity.soundTick <= 0) {
-                pLevel.playSound(null, pPos, SoundRegistry.FLUID_COLLECTOR_TICK.value(), SoundSource.BLOCKS, 0.25f, 1f);
-                pBlockEntity.soundTick = 17; // 18 desyncs eventually. 16 is too fast. 17 seems okay - on the low chance it matches up anyway :p
-            }
-            else { pBlockEntity.soundTick -= 1; }
         }
     }
 }

@@ -14,6 +14,7 @@
 - Made Decorative Blocks entry's Color Mixing puzzle easier
 - Gave Color Mixing puzzles to Traversite Road and Genderfluid
 - Changed Mineral-Finding Rod's use cost to 50 (was 25)
+- Removed ticking noise from Fluid Collector
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
