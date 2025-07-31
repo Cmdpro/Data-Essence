@@ -2,7 +2,7 @@ package com.cmdpro.datanessence.fluid;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.s2c.PlayGenderfluidTransitionEffect;
+import com.cmdpro.datanessence.networking.packet.s2c.vfx.PlayGenderfluidTransitionEffect;
 import com.cmdpro.datanessence.recipe.GenderfluidTransitionRecipe;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import net.minecraft.core.component.DataComponentPatch;
