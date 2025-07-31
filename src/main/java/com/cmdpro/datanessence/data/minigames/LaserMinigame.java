@@ -632,4 +632,9 @@ public class LaserMinigame extends Minigame {
             return name;
         }
     }
+
+    @Override
+    public String getLocalizationKey() {
+        return "data_tablet.databank_minigame_laser";
+    }
 }

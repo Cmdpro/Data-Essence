@@ -6,20 +6,15 @@ import com.cmdpro.datanessence.api.essence.EssenceType;
 import com.cmdpro.datanessence.block.transmission.EssenceBufferBlockEntity;
 import com.cmdpro.datanessence.block.transmission.FluidBufferBlockEntity;
 import com.cmdpro.datanessence.block.transmission.ItemBufferBlockEntity;
-import com.cmdpro.datanessence.api.LockableItemHandler;
-import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.s2c.PlayBufferTransferParticle;
+import com.cmdpro.datanessence.networking.packet.s2c.vfx.PlayBufferTransferParticle;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.joml.Math;
 
 import java.awt.*;
 

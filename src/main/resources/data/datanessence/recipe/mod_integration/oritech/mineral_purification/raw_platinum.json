@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "oritech"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "tag": "c:raw_materials/platinum" },
+    "time": 200,
+    "result": { "id": "oritech:platinum_ingot" },
+    "nuggetResult": { "id": "oritech:platinum_nugget", "count": 1 }
+}

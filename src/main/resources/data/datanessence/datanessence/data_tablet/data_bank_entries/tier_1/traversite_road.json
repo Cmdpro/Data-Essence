@@ -6,5 +6,37 @@
   "name": {
     "translate": "data_tablet.pages.traversite_road.name"
   },
+  "minigames": [
+    {
+      "type": "datanessence:color_mixing",
+      "colorManipulations": [
+        {
+          "maxIntensity": 2,
+          "intensity": 2,
+          "color": [
+            255,
+            255,
+            0
+          ]
+        },
+        {
+          "maxIntensity": 2,
+          "intensity": 1,
+          "color": [
+            0,
+            255,
+            255
+          ]
+        }
+      ],
+      "startColor": [
+        255,
+        255,
+        255
+      ],
+      "maxManipulations": 10,
+      "colorLevels": 2
+    }
+  ],
   "entry": "datanessence:tools/traversite_road"
 }
