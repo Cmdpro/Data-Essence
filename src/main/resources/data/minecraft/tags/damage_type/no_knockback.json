@@ -1,4 +1,5 @@
 {
+  "replace": false,
   "values": [
     "datanessence:essence_siphoned",
     "datanessence:laser",

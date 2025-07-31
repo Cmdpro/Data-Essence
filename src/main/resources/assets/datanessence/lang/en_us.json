@@ -695,6 +695,7 @@
   "subtitle.datanessence.entity.ancient_sentinel.hurt": "Ancient Sentinel hurts",
   "subtitle.datanessence.entity.ancient_sentinel.death": "Ancient Sentinel dies",
   "subtitle.datanessence.entity.ancient_sentinel.shoot": "Ancient Sentinel shoots",
+  "subtitle.datanessence.entity.ancient_sentinel_projectile.hit_block": "Ancient Sentinels projectile hits block",
 
 
   "tag.item.c.nuggets.coal": "Coal Nuggets",

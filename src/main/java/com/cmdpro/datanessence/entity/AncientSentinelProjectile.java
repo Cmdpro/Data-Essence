@@ -1,27 +1,44 @@
 package com.cmdpro.datanessence.entity;
 
+import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.block.TraversiteBlock;
+import com.cmdpro.datanessence.block.transportation.TraversiteRoad;
 import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
+import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
+import com.cmdpro.datanessence.client.particle.RhombusParticleOptions;
+import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.damagesource.DamageContainer;
 import net.neoforged.neoforge.event.EventHooks;
-import org.apache.commons.lang3.RandomUtils;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import javax.annotation.Nullable;
 import java.awt.*;
 
 public class AncientSentinelProjectile extends Projectile {
+
     public int time;
     public AncientSentinelProjectile(EntityType<AncientSentinelProjectile> entityType, Level world) {
         super(entityType, world);
@@ -37,11 +54,14 @@ public class AncientSentinelProjectile extends Projectile {
     }
     @Override
     protected void onHitBlock(BlockHitResult hit) {
+        float pitch = 1f;
         if (!hasAimed) {
             reAim();
         } else if (blockInvincibility <= 0) {
+            pitch = 0.75f;
             remove(RemovalReason.KILLED);
         }
+        level().playSound(null, blockPosition(), SoundRegistry.ANCIENT_SENTINEL_PROJECTILE_HIT_BLOCK.value(), SoundSource.HOSTILE, 1.0f, pitch);
         super.onHitBlock(hit);
     }
     @Override
@@ -67,14 +87,10 @@ public class AncientSentinelProjectile extends Projectile {
     }
     public int blockInvincibility;
     public void reAim() {
-        Player player = null;
-        for (Player i : level().getEntitiesOfClass(Player.class, AABB.ofSize(getBoundingBox().getCenter(), 30, 30, 30))) {
-            if (player == null || player.getEyePosition().distanceTo(getBoundingBox().getCenter()) > i.getEyePosition().distanceTo(getBoundingBox().getCenter())) {
-                player = i;
-            }
-        }
-        if (player != null) {
-            setDeltaMovement(player.getEyePosition().subtract(0, 0.1f, 0).subtract(getBoundingBox().getCenter()).normalize().multiply(0.5, 0.5, 0.5));
+        Entity entity = getOwner();
+        if (entity != null) {
+            double speed = getDeltaMovement().length()/2f;
+            setDeltaMovement(entity.getEyePosition().subtract(getBoundingBox().getCenter()).normalize().scale(speed));
             hasImpulse = true;
             hasAimed = true;
             blockInvincibility = 2;
@@ -148,12 +164,16 @@ public class AncientSentinelProjectile extends Projectile {
     protected void onHitEntity(EntityHitResult hit) {
         super.onHitEntity(hit);
         Entity entity = this.getOwner();
+        if (entity == hit.getEntity()) {
+            remove(RemovalReason.KILLED);
+            return;
+        }
         DamageSource damagesource;
         if (entity instanceof LivingEntity) {
-            damagesource = this.damageSources().source(DamageTypeRegistry.magicProjectile, this, entity);
+            damagesource = this.damageSources().source(DamageTypeRegistry.ancientProjectile, this, entity);
             ((LivingEntity)entity).setLastHurtMob(hit.getEntity());
         } else if (entity instanceof Player) {
-            damagesource = this.damageSources().source(DamageTypeRegistry.magicProjectile, this, entity);
+            damagesource = this.damageSources().source(DamageTypeRegistry.ancientProjectile, this, entity);
             ((LivingEntity)entity).setLastHurtMob(hit.getEntity());
         } else {
             damagesource = null;
@@ -161,7 +181,7 @@ public class AncientSentinelProjectile extends Projectile {
         boolean flag = hit.getEntity().getType() == EntityType.ENDERMAN;
         if (damagesource != null) {
             if (hit.getEntity() instanceof LivingEntity ent && entity instanceof LivingEntity) {
-                if (ent.hurt(damagesource, 5)) {
+                if (ent.hurt(damagesource, 2)) {
                     if (flag) {
                         return;
                     }

@@ -13,6 +13,9 @@
 - Made Decorative Blocks entry's Color Mixing puzzle easier
 - Gave Color Mixing puzzles to Traversite Road and Genderfluid
 - Changed Mineral-Finding Rod's use cost to 50 (was 25)
+- Changed behaviour of ancient sentinel projectiles
+- Lowered ancient sentinel shoot delay slightly
+- Added a sound when ancient sentinel projectiles hit a block
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
@@ -22,3 +25,4 @@
 - Fixed Essence Wires sometimes not properly showing their direction
 - Fixed Synthesis Chamber playing its Song when it should not be
 - Fixed Data Banks not letting you in if your data tablet has any components
+- Fixed the tag definitions for our damage types not having "replace": false
