@@ -21,6 +21,7 @@
 - Made ancient sentinel projectiles ignore shields, armor, enchantments like protection, and effects like resistance
 - Lowered damage of ancient sentinel projectiles
 - Removed ticking noise from Fluid Collector
+- Buffed Essence Leech by 5x
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
