@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.networking.packet.s2c;
+package com.cmdpro.datanessence.networking.packet.s2c.vfx;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
@@ -9,11 +9,9 @@ import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
