@@ -2,11 +2,13 @@
   "values": [
     "minecraft:obsidian",
     "minecraft:crying_obsidian",
+    "datanessence:obsidian_framed_glass",
     "datanessence:polished_obsidian",
     "datanessence:polished_obsidian_bricks",
     "datanessence:polished_obsidian_column",
     "datanessence:engraved_polished_obsidian",
     "datanessence:polished_obsidian_tract",
+    "datanessence:polished_obsidian_tiles",
     "datanessence:aether_rune",
     "datanessence:ancient_rock_column",
     "datanessence:energized_ancient_rock_column",

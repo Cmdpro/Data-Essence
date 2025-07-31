@@ -77,7 +77,8 @@ public class BlockRegistry {
             () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 6)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> TETHERGRASS = register("tethergrass",
-            () -> new SpreadingPlant(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).lightLevel((blockState) -> { return 5;})),
+            () -> new SpreadingPlant(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).lightLevel((blockState) -> { return 5;}),
+                    7, 10),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CRYSTALLINE_LOG = register("crystalline_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK)),
@@ -421,6 +422,12 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> POLISHED_OBSIDIAN_TRACT = register("polished_obsidian_tract",
             () -> new DirectionalPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> POLISHED_OBSIDIAN_TILES = register("polished_obsidian_tiles",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> OBSIDIAN_FRAMED_GLASS = register("obsidian_framed_glass",
+            () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().isViewBlocking(BlockRegistry::never).isSuffocating(BlockRegistry::never).isValidSpawn(BlockRegistry::never).isRedstoneConductor(BlockRegistry::never)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> AETHER_RUNE = register("aether_rune",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),

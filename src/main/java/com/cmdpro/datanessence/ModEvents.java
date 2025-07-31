@@ -253,29 +253,25 @@ public class ModEvents {
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Pre event) {
         if (!event.getEntity().level().isClientSide) {
+
             Optional<BlockEntity> ent = event.getEntity().getData(AttachmentTypeRegistry.LINK_FROM);
             if (ent.isPresent()) {
-                if (ent.get().getBlockPos().getCenter().distanceTo(event.getEntity().getBoundingBox().getCenter()) > 20) {
-                    event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                    PlayerDataUtil.updateData((ServerPlayer)event.getEntity());
-                } else {
-                    if (ent.get().getBlockState().getBlock() instanceof BaseEssencePoint block) {
-                        if (!event.getEntity().isHolding(block.getRequiredWire())) {
-                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
-                        }
+                if (ent.get().getBlockState().getBlock() instanceof BaseEssencePoint block) {
+                    if (!event.getEntity().isHolding(block.getRequiredWire())) {
+                        event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                        PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                     }
-                    if (ent.get().getBlockState().getBlock() instanceof BaseCapabilityPoint block) {
-                        if (!event.getEntity().isHolding(block.getRequiredWire())) {
-                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
-                        }
+                }
+                if (ent.get().getBlockState().getBlock() instanceof BaseCapabilityPoint block) {
+                    if (!event.getEntity().isHolding(block.getRequiredWire())) {
+                        event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                        PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                     }
-                    if (ent.get().getBlockState().getBlock() instanceof PearlNetworkBlock block) {
-                        if (!event.getEntity().isHolding(PearlNetworkBlock.getLinkItem())) {
-                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
-                        }
+                }
+                if (ent.get().getBlockState().getBlock() instanceof PearlNetworkBlock block) {
+                    if (!event.getEntity().isHolding(PearlNetworkBlock.getLinkItem())) {
+                        event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                        PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                     }
                 }
             }
@@ -304,6 +300,7 @@ public class ModEvents {
                     }
                 }
             }
+
             if (event.getEntity().getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
                 event.getEntity().resetFallDistance();
                 if (!event.getEntity().isHolding((stack) -> stack.getItem() instanceof GrapplingHook)) {

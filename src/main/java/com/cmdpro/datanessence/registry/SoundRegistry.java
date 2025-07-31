@@ -5,7 +5,6 @@ import com.cmdpro.datanessence.client.FactorySong;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -68,6 +67,7 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> ANCIENT_SENTINEL_HURT = createBasicSound("entity.ancient_sentinel.hurt");
     public static final Holder<SoundEvent> ANCIENT_SENTINEL_DEATH = createBasicSound("entity.ancient_sentinel.death");
     public static final Holder<SoundEvent> ANCIENT_SENTINEL_SHOOT = createBasicSound("entity.ancient_sentinel.shoot");
+    public static final Holder<SoundEvent> ANCIENT_SENTINEL_PROJECTILE_HIT_BLOCK = createBasicSound("entity.ancient_sentinel_projectile.hit_block");
 
     //Music
     public static final Holder<SoundEvent> UNDER_THE_SKY = createBasicSound("music.under_the_sky");
@@ -78,6 +78,7 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> AGRICORE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.agricore");
     public static final Holder<SoundEvent> STARFORGE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.starforge");
     public static final Holder<SoundEvent> LEECH_LOOP = createBasicFactoryLoopSound("ost.factory_loops.essence_leech");
+    public static final Holder<SoundEvent> PLANT_SIPHON_LOOP = createBasicFactoryLoopSound("ost.factory_loops.plant_siphon");
     public static final Holder<SoundEvent> DERIVATION_SPIKE_LOOP = createBasicFactoryLoopSound("ost.factory_loops.essence_derivation_spike");
     public static final Holder<SoundEvent> METAL_SHAPER_LOOP = createBasicFactoryLoopSound("ost.factory_loops.metal_shaper");
     public static final Holder<SoundEvent> AUTO_FABRICATOR_LOOP_INDUSTRIAL = createBasicFactoryLoopSound("ost.factory_loops.auto-fabricator");

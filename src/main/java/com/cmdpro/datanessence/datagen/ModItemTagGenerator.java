@@ -53,7 +53,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(BlockRegistry.POLISHED_OBSIDIAN_COLUMN.get().asItem())
                 .add(BlockRegistry.ENGRAVED_POLISHED_OBSIDIAN.get().asItem())
                 .add(BlockRegistry.POLISHED_OBSIDIAN_BRICKS.get().asItem())
-                .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get().asItem());
+                .add(BlockRegistry.POLISHED_OBSIDIAN_TRACT.get().asItem())
+                .add(BlockRegistry.POLISHED_OBSIDIAN_TILES.get().asItem());
 
         this.tag(TagRegistry.Items.POLISHED_OBSIDIAN_BLOCKS)
                 .addTag(TagRegistry.Items.SHAPED_POLISHED_OBSIDIAN_BLOCKS)
@@ -120,6 +121,8 @@ public class ModItemTagGenerator extends ItemTagsProvider {
                 .add(ItemRegistry.BONDING_POWDER.get())
                 .add(ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get());
 
+        this.tag(Tags.Items.ORES)
+                .add(BlockRegistry.LENSING_CRYSTAL_ORE.get().asItem());
         this.tag(Tags.Items.ORES_IN_GROUND_STONE)
                 .add(BlockRegistry.LENSING_CRYSTAL_ORE.get().asItem());
         this.tag(Tags.Items.GEMS)

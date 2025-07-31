@@ -15,9 +15,9 @@
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:infusion/ancient_debris",
-        "datanessence:infusion/glowstone",
-        "datanessence:infusion/flint",
+        "datanessence:infusion/netherite_scrap",
+        "datanessence:infusion/glowstone_dust",
+        "datanessence:infusion/gravel_extraction",
         "datanessence:infusion/redstone"
       ]
     }

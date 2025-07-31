@@ -47,7 +47,8 @@
       "type": "datanessence:crafting",
       "recipes": [
         "datanessence:entropic_processing/bone_meal",
-        "datanessence:entropic_processing/sugar"
+        "datanessence:entropic_processing/sugar",
+        "datanessence:entropic_processing/blaze_powder"
       ],
       "text": {
         "translate": "data_tablet.pages.entropic_processor.page5.text"
@@ -72,7 +73,9 @@
       "recipes": [
         "datanessence:entropic_processing/bricks_to_clay",
         "datanessence:entropic_processing/bricks_stairs_to_clay",
-        "datanessence:entropic_processing/bricks_slab_to_clay"
+        "datanessence:entropic_processing/bricks_slab_to_clay",
+        "datanessence:entropic_processing/sandstone_to_sand",
+        "datanessence:entropic_processing/red_sandstone_to_sand"
       ]
     }
   ],

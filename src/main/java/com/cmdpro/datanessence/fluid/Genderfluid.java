@@ -3,7 +3,7 @@ package com.cmdpro.datanessence.fluid;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.block.SpreadingPlant;
 import com.cmdpro.datanessence.networking.ModMessages;
-import com.cmdpro.datanessence.networking.packet.s2c.PlayGenderfluidTransitionEffect;
+import com.cmdpro.datanessence.networking.packet.s2c.vfx.PlayGenderfluidTransitionEffect;
 import com.cmdpro.datanessence.recipe.GenderfluidTransitionRecipe;
 import com.cmdpro.datanessence.registry.*;
 import net.minecraft.core.BlockPos;
@@ -22,13 +22,11 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
@@ -161,12 +159,12 @@ public class Genderfluid extends ModFluidType {
         @Override
         protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
             // in a volume of 9x3x9 centered around the fluid (as if you were hydrating farmland with it),
-            // randomly grow SpreadingPlants.
+            // grow SpreadingPlants somewhat often.
             for (BlockPos queryPos : BlockPos.betweenClosed(pos.offset(-4, -1, -4), pos.offset(4, 1, 4))) {
                 BlockState queryState = world.getBlockState(queryPos);
 
                 if (queryState.getBlock() instanceof SpreadingPlant plant) {
-                    plant.grow(queryState, world, queryPos, world.getRandom(), 7); // adjust maybe?
+                    plant.grow(queryState, world, queryPos, world.getRandom(), 3);
                 }
             }
         }
