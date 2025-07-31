@@ -20,6 +20,7 @@
 - Added a sound when ancient sentinel projectiles hit a block
 - Made ancient sentinel projectiles ignore shields, armor, enchantments like protection, and effects like resistance
 - Lowered damage of ancient sentinel projectiles
+- Changed ancient sentinel shoot sound
 - Removed ticking noise from Fluid Collector
 - Buffed Essence Leech by 5x
 - Buffed Tethergrass spreading and Genderfluid growth boost
