@@ -251,6 +251,9 @@
   "computer.generic.signal_from_mountains": "Our communications array has picked up a distress signal from the mountains. Our superior presumes the source is one of the preservation vaults we have heard were in construction, but the signal is too garbled to identify much else.",
   "computer.outpost_nature_01.access_log": "viqbogavku... kvbeoy.\nklogo zokr youg offquuql... [QBBVB - GAEQUGOEI FVBBNIGQL?].\nbqouvk hvb offquu: bqgbaqsoy vh qkgbx \"Aklnugbaoy Iyokg Uaimvk\" hvb bqugvbogavk vh uaimvk ivwqb iyokg.",
 
+  "death.attack.ancient_projectile": "%1$s could not handle %2$s's energy",
+  "death.attack.ancient_projectile.item": "%1$s could not handle the energy of %2$s's %3$s",
+  "death.attack.ancient_projectile.player": "%1$s could not handle %2$s's energy",
   "death.attack.black_hole": "%1$s was spaghettified",
   "death.attack.black_hole.item": "%2$s used %3$s to send %1$s to their spaghettification",
   "death.attack.black_hole.player": "%2$s made %1$s get spaghettified",
