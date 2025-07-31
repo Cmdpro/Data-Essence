@@ -159,12 +159,12 @@ public class Genderfluid extends ModFluidType {
         @Override
         protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
             // in a volume of 9x3x9 centered around the fluid (as if you were hydrating farmland with it),
-            // randomly grow SpreadingPlants.
+            // grow SpreadingPlants somewhat often.
             for (BlockPos queryPos : BlockPos.betweenClosed(pos.offset(-4, -1, -4), pos.offset(4, 1, 4))) {
                 BlockState queryState = world.getBlockState(queryPos);
 
                 if (queryState.getBlock() instanceof SpreadingPlant plant) {
-                    plant.grow(queryState, world, queryPos, world.getRandom(), 7); // adjust maybe?
+                    plant.grow(queryState, world, queryPos, world.getRandom(), 3);
                 }
             }
         }
