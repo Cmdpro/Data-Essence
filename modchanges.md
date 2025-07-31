@@ -18,6 +18,7 @@
 - Lowered ancient sentinel shoot delay slightly
 - Added a sound when ancient sentinel projectiles hit a block
 - Made ancient sentinel projectiles ignore shields, armor, enchantments like protection, and effects like resistance
+- Lowered damage of ancient sentinel projectiles
 - Removed ticking noise from Fluid Collector
 
 ### Fixes
