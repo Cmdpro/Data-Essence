@@ -22,6 +22,7 @@
 - Lowered damage of ancient sentinel projectiles
 - Removed ticking noise from Fluid Collector
 - Buffed Essence Leech by 5x
+- Buffed Tethergrass spreading and Genderfluid growth boost
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
@@ -32,3 +33,4 @@
 - Fixed Synthesis Chamber playing its Song when it should not be
 - Fixed Data Banks not letting you in if your data tablet has any components
 - Fixed the tag definitions for our damage types not having "replace": false
+- Fixed Drying Table zfighting with adjacent blocks

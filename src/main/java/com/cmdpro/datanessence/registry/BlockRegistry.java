@@ -73,7 +73,8 @@ public class BlockRegistry {
             () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> TETHERGRASS = register("tethergrass",
-            () -> new SpreadingPlant(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).lightLevel((blockState) -> { return 5;})),
+            () -> new SpreadingPlant(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).lightLevel((blockState) -> { return 5;}),
+                    7, 10),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CRYSTALLINE_LOG = register("crystalline_log",
             () -> new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK)),
