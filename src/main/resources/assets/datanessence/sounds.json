@@ -370,7 +370,7 @@
     },
     "entity.ancient_sentinel.shoot": {
         "sounds": [
-            "mob/ghast/fireball4"
+            "datanessence:entity/ancient_sentinel/shoot"
         ],
         "subtitle": "subtitle.datanessence.entity.ancient_sentinel.shoot"
     },
