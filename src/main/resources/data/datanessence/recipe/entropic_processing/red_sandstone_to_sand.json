@@ -2,5 +2,5 @@
   "type": "datanessence:entropic_processing",
   "input": { "tag": "c:sandstone/red_blocks" },
   "time": 100,
-  "result": { "id": "minecraft:red_sand", "count": 1 }
+  "result": { "id": "minecraft:red_sand", "count": 4 }
 }
