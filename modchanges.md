@@ -24,6 +24,7 @@
 - Buffed Essence Leech by 5x
 - Buffed Tethergrass spreading and Genderfluid growth boost
 - Update Chinese translation (ChujikYahus)
+- Changed how wire connection distance limit is set, and made it configurable (defaults to 24)
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be

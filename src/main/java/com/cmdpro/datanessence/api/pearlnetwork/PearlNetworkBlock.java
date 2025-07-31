@@ -58,7 +58,7 @@ public class PearlNetworkBlock extends Block {
                     } else {
                         if (canConnectTo(linkFrom.get())) {
                             if (linkFrom.get() instanceof PearlNetworkBlockEntity other) {
-                                if (ent != linkFrom.get() && (ent.link.isEmpty() || !ent.link.contains(linkFrom.get().getBlockPos()))) {
+                                if ((ent != linkFrom.get() && (ent.link.isEmpty() || !ent.link.contains(linkFrom.get().getBlockPos()))) && linkFrom.get().getBlockPos().closerThan(ent.getBlockPos(), DataNEssenceConfig.wireDistanceLimit)) {
                                     networks.graph.addEdge(other.getBlockPos(), pPos);
                                     other.updateBlock();
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());

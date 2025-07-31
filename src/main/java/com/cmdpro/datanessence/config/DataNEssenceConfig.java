@@ -24,6 +24,7 @@ public class DataNEssenceConfig {
         itemPointTransferValue = buildInteger(builder, "itemNodeTransfer", 4, 1, 64, "The base, un-upgraded rate that Item Nodes can transfer, in items per tick.");
         essenceBatteryMaxValue = buildInteger(builder, "essenceBatteryMax", 10000, 1, 1000000, "The capacity for all Essence Batteries.");
         maxNodeWiresValue = buildInteger(builder, "maxNodeWires", 4, 1, 50, "Connection limit for all Nodes - a Node cannot have more Wires than this.");
+        wireDistanceLimitValue = buildInteger(builder, "wireDistanceLimit", 24, 1, 64, "Distance limit for wire length, in blocks.");
     }
     private static ModConfigSpec.BooleanValue buildBoolean(ModConfigSpec.Builder builder, String name, boolean defaultValue, String comment) {
         return builder.comment(comment).translation(name).define(name, defaultValue);
@@ -39,11 +40,13 @@ public class DataNEssenceConfig {
     public static int itemPointTransfer = 4;
     public static int essenceBatteryMax = 50;
     public static int maxNodeWires = 4;
+    public static int wireDistanceLimit = 24;
     public final ModConfigSpec.IntValue fluidPointTransferValue;
     public final ModConfigSpec.IntValue essencePointTransferValue;
     public final ModConfigSpec.IntValue itemPointTransferValue;
     public final ModConfigSpec.IntValue essenceBatteryMaxValue;
     public final ModConfigSpec.IntValue maxNodeWiresValue;
+    public final ModConfigSpec.IntValue wireDistanceLimitValue;
     public static void bake(ModConfig config) {
         try {
             fluidPointTransfer = COMMON.fluidPointTransferValue.get();
@@ -51,6 +54,7 @@ public class DataNEssenceConfig {
             itemPointTransfer = COMMON.itemPointTransferValue.get();
             essenceBatteryMax = COMMON.essenceBatteryMaxValue.get();
             maxNodeWires = COMMON.maxNodeWiresValue.get();
+            wireDistanceLimit = COMMON.wireDistanceLimitValue.get();
         } catch (Exception e) {
             DataNEssence.LOGGER.warn("[DATANESSENCE] Failed to load config!");
             e.printStackTrace();
