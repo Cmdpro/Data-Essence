@@ -23,6 +23,7 @@
 - Removed ticking noise from Fluid Collector
 - Buffed Essence Leech by 5x
 - Buffed Tethergrass spreading and Genderfluid growth boost
+- Update Chinese translation (ChujikYahus)
 
 ### Fixes
 - Fixed Ancient Windows culling block faces they should not be
