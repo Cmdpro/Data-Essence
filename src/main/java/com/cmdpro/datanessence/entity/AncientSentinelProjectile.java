@@ -54,11 +54,11 @@ public class AncientSentinelProjectile extends Projectile {
     }
     @Override
     protected void onHitBlock(BlockHitResult hit) {
-        float pitch = 1f;
+        float pitch = Mth.nextFloat(getRandom(), 0.9f, 1.1f);
         if (!hasAimed) {
             reAim();
         } else if (blockInvincibility <= 0) {
-            pitch = 0.75f;
+            pitch *= 0.75f;
             remove(RemovalReason.KILLED);
         }
         level().playSound(null, blockPosition(), SoundRegistry.ANCIENT_SENTINEL_PROJECTILE_HIT_BLOCK.value(), SoundSource.HOSTILE, 1.0f, pitch);

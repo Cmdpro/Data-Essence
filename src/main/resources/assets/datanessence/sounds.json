@@ -376,9 +376,7 @@
     },
     "entity.ancient_sentinel_projectile.hit_block": {
         "sounds": [
-            "item/trident/pierce1",
-            "item/trident/pierce2",
-            "item/trident/pierce3"
+            "datanessence:entity/ancient_sentinel_projectile/hit_block"
         ],
         "subtitle": "subtitle.datanessence.entity.ancient_sentinel_projectile.hit_block"
     },
