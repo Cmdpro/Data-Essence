@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "tag": "c:sandstone/uncolored_blocks" },
+  "time": 100,
+  "result": { "id": "minecraft:sand", "count": 1 }
+}

@@ -7,6 +7,7 @@
 - Added Obsidian-Framed Glass
 - Data Bank minigames now render their names
 - Added support for Oritech ores to the Mineral Purification Chamber
+- Added Entropic Processor (Red) Sandstone -> (Red) Sand recipes
 
 ### Changes
 - Essence Crystals, Essence Lasers, and Lensing Crystals entries require simple Laser puzzles to unlock

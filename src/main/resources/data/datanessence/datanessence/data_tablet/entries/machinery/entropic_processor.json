@@ -72,7 +72,9 @@
       "recipes": [
         "datanessence:entropic_processing/bricks_to_clay",
         "datanessence:entropic_processing/bricks_stairs_to_clay",
-        "datanessence:entropic_processing/bricks_slab_to_clay"
+        "datanessence:entropic_processing/bricks_slab_to_clay",
+        "datanessence:entropic_processing/sandstone_to_sand",
+        "datanessence:entropic_processing/red_sandstone_to_sand"
       ]
     }
   ],
