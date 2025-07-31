@@ -1,15 +1,10 @@
-package com.cmdpro.datanessence.networking.packet.s2c;
+package com.cmdpro.datanessence.networking.packet.s2c.vfx;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
-import com.cmdpro.datanessence.client.particle.RhombusParticleOptions;
-import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.registry.SoundRegistry;
-import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -19,12 +14,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public record PlayEnderPearlRedirectionEffect(List<BlockPos> path) implements Message {

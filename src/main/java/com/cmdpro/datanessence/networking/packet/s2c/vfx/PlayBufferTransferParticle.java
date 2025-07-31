@@ -1,4 +1,4 @@
-package com.cmdpro.datanessence.networking.packet.s2c;
+package com.cmdpro.datanessence.networking.packet.s2c.vfx;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.client.particle.MoteParticleOptions;
