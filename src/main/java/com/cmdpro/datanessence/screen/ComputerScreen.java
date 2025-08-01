@@ -44,7 +44,6 @@ public class ComputerScreen extends Screen {
                 ComputerFileType.ComputerFileIcon icon = i.getType().getIcon(i);
                 if (pMouseX >= x+x2+2 && pMouseY >= y+y2+2 && pMouseX <= x+x2+2+icon.width && pMouseY <= y+y2+2+icon.height) {
                     file = i;
-                    file.resetTempData();
                     return true;
                 }
                 x2 += icon.width + 4;
