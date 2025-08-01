@@ -36,9 +36,25 @@
       "amount_per_tick": 4.0,
       "ticks": 50
     },
+    "minecraft:enchanted_golden_apple": {
+      "amount_per_tick": 16.0,
+      "ticks": 100
+    },
+    "minecraft:glow_berries": {
+      "amount_per_tick": 2.0,
+      "ticks": 20
+    },
+    "minecraft:golden_apple": {
+      "amount_per_tick": 4.0,
+      "ticks": 60
+    },
     "minecraft:kelp": {
       "amount_per_tick": 2.0,
       "ticks": 10
+    },
+    "minecraft:nether_wart": {
+      "amount_per_tick": 4.0,
+      "ticks": 25
     },
     "minecraft:pitcher_plant": {
       "amount_per_tick": 4.0,
@@ -51,6 +67,10 @@
     "minecraft:spore_blossom": {
       "amount_per_tick": 4.0,
       "ticks": 50
+    },
+    "minecraft:sweet_berries": {
+      "amount_per_tick": 2.0,
+      "ticks": 20
     },
     "minecraft:torchflower": {
       "amount_per_tick": 4.0,
