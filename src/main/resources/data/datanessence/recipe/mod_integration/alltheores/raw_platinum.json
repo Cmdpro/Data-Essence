@@ -7,7 +7,7 @@
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:raw_materials/platinum" },
-    "time": 200,
+    "time": 150,
     "result": { "id": "alltheores:platinum_ingot" },
     "nuggetResult": { "id": "alltheores:platinum_nugget", "count": 1 }
 }

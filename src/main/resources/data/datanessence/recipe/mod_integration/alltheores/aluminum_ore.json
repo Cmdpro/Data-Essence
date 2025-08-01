@@ -7,7 +7,7 @@
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:ores/aluminum" },
-    "time": 400,
+    "time": 300,
     "result": { "id": "alltheores:aluminum_ingot" },
     "nuggetResult": { "id": "alltheores:aluminum_nugget", "count": 2 }
 }

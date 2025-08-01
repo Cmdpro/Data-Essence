@@ -1,7 +1,7 @@
 {
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:ores/lapis" },
-    "time": 400,
+    "time": 300,
     "result": { "id": "minecraft:lapis_lazuli" },
     "nuggetResult": { "id": "minecraft:lapis_lazuli", "count": 2 }
 }

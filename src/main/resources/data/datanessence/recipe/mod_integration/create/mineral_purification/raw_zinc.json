@@ -6,8 +6,8 @@
         }
     ],
     "type": "datanessence:mineral_purification",
-    "input": { "tag": "c:ores/zinc" },
-    "time": 300,
+    "input": { "tag": "c:raw_materials/zinc" },
+    "time": 150,
     "result": { "id": "create:zinc_ingot" },
-    "nuggetResult": { "id": "create:zinc_nugget", "count": 2 }
+    "nuggetResult": { "id": "create:zinc_nugget", "count": 1 }
 }

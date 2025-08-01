@@ -583,6 +583,7 @@
   "emi.category.datanessence.metal_shaping": "Metal Shaping",
   "emi.category.datanessence.melting": "Melting",
   "emi.category.datanessence.drying": "Drying",
+  "emi.category.datanessence.mineral_purification": "Mineral Purification",
 
   "commands.datanessence.reset_learned": "Reset all of %1$s's unlocked entries.",
   "commands.datanessence.set_tier": "Set %2$s's tier to %1$s.",
@@ -736,6 +737,8 @@
   "emi.info.datanessence.signal_tracker": "This device may at first be acquired from Computers inside of strange structures built from an otherworldly, purple rock. It seems to guide you to other, similar structures.",
   "emi.datanessence.recipe_locked_line_1": "Data insufficient for",
   "emi.datanessence.recipe_locked_line_2": "recipe reconstruction",
+  "emi.datanessence.average_yield": "Average Yield:",
+  "emi.datanessence.nugget_mult": "x0-9",
 
   "datanessence.configuration.balancing": "Balancing",
   "datanessence.configuration.shaders": "Shaders",

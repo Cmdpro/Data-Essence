@@ -1,7 +1,7 @@
 {
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:ores/coal" },
-    "time": 400,
+    "time": 300,
     "result": { "id": "minecraft:coal" },
     "nuggetResult": { "id": "datanessence:coal_lump", "count": 2 }
 }
