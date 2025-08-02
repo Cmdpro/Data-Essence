@@ -7,6 +7,7 @@
 - Buffed Nether Wart's output in the Plant Siphon
 - Reduced Mineral Purification Chamber processing times by a quarter
 - Set all earlygame Essence-using tools' buffers to 2500
+- Renamed Fluid Tank to Fluid Bulb
 
 ### Fixes
 - Fixed Energized Shielding Rock Column being unbreakable
