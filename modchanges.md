@@ -6,3 +6,6 @@
 ### Changes
 - Buffed Nether Wart's output in the Plant Siphon
 - Reduced Mineral Purification Chamber processing times by a quarter
+
+### Fixes
+- Fixed Energized Shielding Rock Column being unbreakable
