@@ -43,7 +43,7 @@ public class OreScanner extends Item {
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
     public static float ESSENCE_COST = 50f;
     public OreScanner(Properties pProperties) {
-        super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 1000)));
+        super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 2500)));
     }
 
     @Override

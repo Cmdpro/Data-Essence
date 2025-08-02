@@ -34,7 +34,7 @@ public class EssenceSword extends SwordItem {
     );
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
     public EssenceSword(Properties pProperties) {
-        super(ESSENCE_SWORD, pProperties.attributes(SwordItem.createAttributes(ESSENCE_SWORD, 3, -2.4F)).component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 10000)));
+        super(ESSENCE_SWORD, pProperties.attributes(SwordItem.createAttributes(ESSENCE_SWORD, 3, -2.4F)).component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 2500)));
     }
 
     @Override
