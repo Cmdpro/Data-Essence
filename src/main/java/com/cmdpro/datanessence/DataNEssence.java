@@ -223,18 +223,6 @@ public class DataNEssence
             return null;
         });
 
-
-
-        //TODO: REMOVE IN A FEW UPDATES, THIS IS TO NOT BREAK EXISTING FACTORIES
-        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> {
-            if (stack.has(DataComponents.CONTAINER)) {
-                ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
-                if (contents != null && contents.getSlots() >= 1) {
-                    stack.set(DataComponentRegistry.FILTER_STACK, ItemContainerContents.fromItems(List.of(contents.getStackInSlot(0))));
-                }
-            }
-            return null;
-        }, ItemRegistry.FILTER_UPGRADE.get());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
