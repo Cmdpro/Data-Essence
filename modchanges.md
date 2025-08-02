@@ -11,3 +11,4 @@
 
 ### Fixes
 - Fixed Energized Shielding Rock Column being unbreakable
+- Fixed Entropic Processor's Cobble -> Gravel recipe not accepting other kinds of Cobblestone
