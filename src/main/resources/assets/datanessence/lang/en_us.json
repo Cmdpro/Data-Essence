@@ -494,7 +494,7 @@
   "data_tablet.pages.synthesis_chamber.page2.text": " ◇ Must have a loaded Data Drive inserted to know what to craft.\n ◇ Slots must be locked to perform crafts; locked slots will only accept items of the kind present when locking was toggled.",
   "data_tablet.pages.vacuum.name": "Item Collection",
   "data_tablet.pages.vacuum.page1.text": "Stabilizing a shattered ender pearl with a sturdy frame supplies enough force to suck up nearby items into itself. The frame directs the items to a container resting on top. Unlike many other machines, the ender pearl's force is enough to power it, and so it does not need Essence.",
-  "data_tablet.pages.vacuum.page2.text": " ◇ An inventory must be placed on top for it to insert into.",
+  "data_tablet.pages.vacuum.page2.text": " ◇ An inventory must be placed on top for it to insert into.\n ◇ When an Item Filter is placed above, will only try to collect items in its filters.",
 
   "_comment.data_tablet.pages.machinery_transformation": "Machinery and Transformation (tiers 3 and 4) category texts.",
   "data_tablet.pages.ecliptrum.flavor": " ◇ Reflective and transformative",
