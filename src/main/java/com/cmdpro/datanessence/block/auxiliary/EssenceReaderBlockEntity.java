@@ -72,7 +72,7 @@ public class EssenceReaderBlockEntity extends BlockEntity {
     }
     public Color getColor() {
         if (selected == null || selected.isEmpty()) {
-            return Color.BLACK;
+            return new Color(0x413257);
         }
         Color color = new Color(selected.stream().findFirst().orElseThrow().color);
         for (EssenceType i : selected) {
