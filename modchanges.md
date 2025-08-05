@@ -16,3 +16,4 @@
 - Fixed Entropic Processor's Cobble -> Gravel recipe not accepting other kinds of Cobblestone
 - Smoothed the rotations of all item renderers
 - Fixed a crash that can happen on the wires minigame
+- Fixed a dupe related to Hammer and Chisel-ing Structure Protected blocks
