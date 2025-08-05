@@ -1,9 +1,10 @@
 package com.cmdpro.datanessence.item.equipment;
 
+import com.cmdpro.datanessence.block.technical.StructureProtectorBlockEntity;
+import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -12,8 +13,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class HammerAndChisel extends Item {
 
@@ -34,11 +36,24 @@ public class HammerAndChisel extends Item {
         return false;
     }
 
+    public boolean isPositionStructureProtected(Level world, BlockPos pos) {
+        if ( world.hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS) ) {
+            List<StructureProtectorBlockEntity> protectors = world.getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
+            for (StructureProtectorBlockEntity thisProtector : protectors) {
+                AABB aabb = AABB.encapsulatingFullBlocks(thisProtector.getCorner1(), thisProtector.getCorner2());
+                if (aabb.contains(pos.getCenter())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     // Destroy this block with the hammer.
     public boolean hammerBlock(Level world, BlockPos target, ItemStack stack, Player player) {
         BlockState targetState = world.getBlockState(target);
 
-        if (targetState.is(TagRegistry.Blocks.HAMMER_AND_CHISEL_COLLECTABLE)) {
+        if (targetState.is(TagRegistry.Blocks.HAMMER_AND_CHISEL_COLLECTABLE) && !isPositionStructureProtected(world, target)) {
             stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
             world.destroyBlock(target, true);
             return true;
