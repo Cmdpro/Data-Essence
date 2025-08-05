@@ -82,10 +82,9 @@ public class FluidMixerRenderer extends DatabankBlockEntityRenderer<FluidMixerBl
             poseStack.pushPose();
             poseStack.translate(0.5d, 0.5f, 0.5d);
             poseStack.scale(0.65f, 0.65f, 0.65f);
-            if (blockEntity.animState.isCurrentAnim("working")) {
-                itemAngle = -(blockEntity.getLevel().getLevelData().getGameTime() % 360) - partialTick;
-                poseStack.mulPose(Axis.YP.rotationDegrees(itemAngle));
-            }
+            if (blockEntity.animState.isCurrentAnim("working"))
+                itemAngle = -((blockEntity.age + partialTick) / 20f / (float) (Math.PI * 2) * 360f);
+            poseStack.mulPose(Axis.YP.rotationDegrees(itemAngle));
 
             Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
             poseStack.popPose();
