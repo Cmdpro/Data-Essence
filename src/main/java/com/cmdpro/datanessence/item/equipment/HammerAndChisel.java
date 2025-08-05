@@ -6,7 +6,9 @@ import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -50,11 +52,11 @@ public class HammerAndChisel extends Item {
     }
 
     // Destroy this block with the hammer.
-    public boolean hammerBlock(Level world, BlockPos target, ItemStack stack, Player player) {
+    public boolean hammerBlock(Level world, BlockPos target, ItemStack stack, Player player, EquipmentSlot hand) {
         BlockState targetState = world.getBlockState(target);
 
         if (targetState.is(TagRegistry.Blocks.HAMMER_AND_CHISEL_COLLECTABLE) && !isPositionStructureProtected(world, target)) {
-            stack.hurtAndBreak(1, player, player.getEquipmentSlotForItem(stack));
+            stack.hurtAndBreak(1, player, hand);
             world.destroyBlock(target, true);
             return true;
         }
@@ -70,12 +72,13 @@ public class HammerAndChisel extends Item {
         Level world = context.getLevel();
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
+        var hand = context.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
 
         if (world.isClientSide())
             return InteractionResult.SUCCESS;
 
         // TODO make it so you need to click twice on the same block to destroy it, rather than just once.
-        if (hammerBlock(world, pos, context.getItemInHand(), player)) {
+        if (hammerBlock(world, pos, context.getItemInHand(), player, hand)) {
             playSound(world, pos);
             return InteractionResult.CONSUME;
         }
