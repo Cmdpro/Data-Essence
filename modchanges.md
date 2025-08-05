@@ -14,6 +14,7 @@
 - Retextured Cryochamber
 - Fluid Mixer's lava duplication recipe is now much, much faster and requires 200mB less Lava
 - Nodes do not require tools to break them
+- Halved crafting time of Wire Synthesis
 
 ### Fixes
 - Fixed Energized Shielding Rock Column being unbreakable
