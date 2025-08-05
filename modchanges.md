@@ -11,6 +11,7 @@
 - Set all earlygame Essence-using tools' buffers to 2500
 - Renamed Fluid Tank to Fluid Bulb
 - Retextured Cryochamber
+- Fluid Mixer's lava duplication recipe is now much, much faster and requires 200mB less Lava
 
 ### Fixes
 - Fixed Energized Shielding Rock Column being unbreakable
