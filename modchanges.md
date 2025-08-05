@@ -12,6 +12,7 @@
 - Renamed Fluid Tank to Fluid Bulb
 - Retextured Cryochamber
 - Fluid Mixer's lava duplication recipe is now much, much faster and requires 200mB less Lava
+- Nodes do not require tools to break them
 
 ### Fixes
 - Fixed Energized Shielding Rock Column being unbreakable

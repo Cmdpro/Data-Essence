@@ -54,6 +54,14 @@ public class BlockRegistry {
         return BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().strength(2.0f);
     }
 
+    public static BlockBehaviour.Properties getToollessMachineProperties() {
+        return BlockBehaviour.Properties.of()
+                .strength(2.0f, 6.0f)
+                .noOcclusion()
+                .sound(SoundType.COPPER)
+                .mapColor(MapColor.COLOR_ORANGE);
+    }
+
     public static BlockBehaviour.Properties getShieldlessAncientRockProperties() {
         return BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.DEEPSLATE_TILES).explosionResistance(360000f);
     }
@@ -158,9 +166,6 @@ public class BlockRegistry {
     public static final Supplier<Block> DATA_BANK = register("player_data_bank",
             () -> new DataBank(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK).noOcclusion().lightLevel((blockState) -> { return 4;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> ESSENCE_READER = register("essence_reader",
-            () -> new EssenceReader(getMachineProperties()),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Buffers
     public static final Supplier<Block> ESSENCE_BUFFER = register("essence_buffer",
@@ -187,25 +192,30 @@ public class BlockRegistry {
 
     // Nodes
     public static final Supplier<Block> ESSENCE_POINT = register("essence_point",
-            () -> new EssencePoint(getMachineProperties()),
+            () -> new EssencePoint(getToollessMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LUNAR_ESSENCE_POINT = register("lunar_essence_point",
-            () -> new LunarEssencePoint(getMachineProperties()),
+            () -> new LunarEssencePoint(getToollessMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> NATURAL_ESSENCE_POINT = register("natural_essence_point",
-            () -> new NaturalEssencePoint(getMachineProperties()),
+            () -> new NaturalEssencePoint(getToollessMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> EXOTIC_ESSENCE_POINT = register("exotic_essence_point",
-            () -> new ExoticEssencePoint(getMachineProperties()),
+            () -> new ExoticEssencePoint(getToollessMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUID_POINT = register("fluid_point",
-            () -> new FluidPoint(getMachineProperties()),
+            () -> new FluidPoint(getToollessMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ITEM_POINT = register("item_point",
-            () -> new ItemPoint(getMachineProperties()),
+            () -> new ItemPoint(getToollessMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> CHEMICAL_NODE = register("chemical_node",
-            () -> new ChemicalNode(getMachineProperties()),
+            () -> new ChemicalNode(getToollessMachineProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
+    // Redstone Components
+    public static final Supplier<Block> ESSENCE_READER = register("essence_reader",
+            () -> new EssenceReader(getToollessMachineProperties().instabreak()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Storage
