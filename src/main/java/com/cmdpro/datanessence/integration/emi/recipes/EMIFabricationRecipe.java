@@ -16,9 +16,11 @@ import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.google.common.collect.Lists;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import net.minecraft.world.item.ItemStack;
@@ -32,6 +34,7 @@ public class EMIFabricationRecipe extends DataNEssenceEMIRecipe {
     private final Map<EssenceType, Float> essenceCost;
     private final int width;
     private final int height;
+    private final int time;
 
     public EMIFabricationRecipe(ResourceLocation id, IFabricationRecipe recipe) {
         super(DataNEssenceEMIPlugin.FABRICATION, id, recipe.getEntry(), 123, 60);
@@ -52,6 +55,7 @@ public class EMIFabricationRecipe extends DataNEssenceEMIRecipe {
             width = 3;
             height = 3;
         }
+        this.time = recipe.getTime();
     }
 
     private static List<EmiIngredient> getIngredients(IFabricationRecipe recipe, boolean isShapeless) {
@@ -105,6 +109,7 @@ public class EMIFabricationRecipe extends DataNEssenceEMIRecipe {
 
         // Recipe output
         widgetHolder.addSlot(outputs.get(0), 97, 21).recipeContext(this).drawBack(false);
+        widgetHolder.addText(Component.translatable("emi.datanessence.time_seconds", (double) time / 20), 97, 44, 0xffffff, false).horizontalAlign(TextWidget.Alignment.CENTER);
 
         int sOff = 0;
         if (!shapeless) {

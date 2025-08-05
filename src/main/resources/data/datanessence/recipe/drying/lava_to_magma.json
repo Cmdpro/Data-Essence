@@ -3,7 +3,7 @@
   "time": 800,
   "input": {
     "id": "minecraft:lava",
-    "amount": 1000
+    "amount": 400
   },
   "additive": {
     "tag": "c:netherracks"

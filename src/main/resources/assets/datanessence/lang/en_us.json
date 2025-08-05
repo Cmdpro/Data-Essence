@@ -743,6 +743,8 @@
   "emi.datanessence.recipe_locked_line_2": "recipe reconstruction",
   "emi.datanessence.average_yield": "Average Yield:",
   "emi.datanessence.nugget_mult": "x0-9",
+  "emi.datanessence.time_ticks": "⌛: %1$st",
+  "emi.datanessence.time_seconds": "⌛: %1$ss",
 
   "datanessence.configuration.balancing": "Balancing",
   "datanessence.configuration.shaders": "Shaders",
