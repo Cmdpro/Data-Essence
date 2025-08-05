@@ -19,3 +19,4 @@
 - Smoothed the rotations of all item renderers
 - Fixed a crash that can happen on the wires minigame
 - Fixed a dupe related to Hammer and Chisel-ing Structure Protected blocks
+- Fixed edges of the Industrial Essence Battery glowing alongside the fill display
