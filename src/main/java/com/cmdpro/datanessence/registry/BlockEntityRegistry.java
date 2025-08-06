@@ -235,6 +235,10 @@ public class BlockEntityRegistry {
             register("ender_pearl_relay", () ->
                     BlockEntityType.Builder.of(EnderPearlRelayBlockEntity::new,
                             BlockRegistry.ENDER_PEARL_RELAY.get()).build(null));
+    public static final Supplier<BlockEntityType<EssenceReaderBlockEntity>> ESSENCE_READER =
+            register("essence_reader", () ->
+                    BlockEntityType.Builder.of(EssenceReaderBlockEntity::new,
+                            BlockRegistry.ESSENCE_READER.get()).build(null));
     public static final Supplier<BlockEntityType<EssenceDerivationSpikeBlockEntity>> ESSENCE_DERIVATION_SPIKE =
             register("essence_derivation_spike", () ->
                     BlockEntityType.Builder.of(EssenceDerivationSpikeBlockEntity::new,

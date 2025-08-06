@@ -7,7 +7,7 @@
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:raw_materials/nickel" },
-    "time": 200,
+    "time": 150,
     "result": { "id": "oritech:nickel_ingot" },
     "nuggetResult": { "id": "oritech:nickel_nugget", "count": 1 }
 }

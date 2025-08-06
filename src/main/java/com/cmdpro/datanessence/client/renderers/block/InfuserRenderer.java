@@ -29,7 +29,7 @@ public class InfuserRenderer extends DatabankBlockEntityRenderer<InfuserBlockEnt
         super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
         pPoseStack.pushPose();
         pPoseStack.translate(0.5D, 0.5D, 0.5D);
-        pPoseStack.mulPose(Axis.YP.rotationDegrees(pBlockEntity.getLevel().getLevelData().getGameTime() % 360));
+        pPoseStack.mulPose(Axis.YP.rotationDegrees((pBlockEntity.getLevel().getLevelData().getGameTime() % 360)+pPartialTick));
         pPoseStack.scale(0.25F, 0.25F, 0.25F);
         Minecraft.getInstance().getItemRenderer().renderStatic(pBlockEntity.item, ItemDisplayContext.FIXED, pBlockEntity.workTime >= 0 ? LightTexture.FULL_BRIGHT : pPackedLight, pPackedOverlay, pPoseStack, pBufferSource, pBlockEntity.getLevel(), 0);
         pPoseStack.popPose();

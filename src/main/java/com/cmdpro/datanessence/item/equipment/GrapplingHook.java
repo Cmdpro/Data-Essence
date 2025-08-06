@@ -28,7 +28,7 @@ public class GrapplingHook extends Item {
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
     public static float ESSENCE_COST = 5f;
     public GrapplingHook(Properties pProperties) {
-        super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 1000)));
+        super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 2500)));
     }
     public Color getHookColor(Player player, ItemStack stack, float partialTick) {
         return new Color(EssenceTypeRegistry.ESSENCE.get().color);

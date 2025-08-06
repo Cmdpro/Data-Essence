@@ -1,8 +1,5 @@
 package com.cmdpro.datanessence.data.pinging;
 
-import com.cmdpro.datanessence.api.DataNEssenceRegistries;
-import com.cmdpro.datanessence.api.computer.ComputerFile;
-import com.cmdpro.datanessence.api.computer.ComputerFileType;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
@@ -23,16 +20,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class PingableStructureSerializer {
-    public static final Codec<ComputerFile> FILE_CODEC = DataNEssenceRegistries.COMPUTER_FILE_TYPES_REGISTRY.byNameCodec().dispatch(ComputerFile::getType, computerFileType -> computerFileType.getCodec());
-    public static final StreamCodec<RegistryFriendlyByteBuf, ComputerFile> FILE_STREAM_CODEC = StreamCodec.of((pBuffer, pValue) -> {
-        pBuffer.writeResourceLocation(DataNEssenceRegistries.COMPUTER_FILE_TYPES_REGISTRY.getKey(pValue.getType()));
-        pValue.getType().getStreamCodec().encode(pBuffer, pValue);
-    }, pBuffer -> {
-        ResourceLocation type = pBuffer.readResourceLocation();
-        ComputerFileType minigameSerializer = DataNEssenceRegistries.COMPUTER_FILE_TYPES_REGISTRY.get(type);
-        ComputerFile page = (ComputerFile)minigameSerializer.getStreamCodec().decode(pBuffer);
-        return page;
-    });
     public static final MapCodec<PingableStructure> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             ResourceKey.codec(Registries.STRUCTURE).fieldOf("structure").forGetter((data) -> data.structure),
             ResourceKey.codec(Registries.ADVANCEMENT).fieldOf("advancement").forGetter((data) -> data.advancement),

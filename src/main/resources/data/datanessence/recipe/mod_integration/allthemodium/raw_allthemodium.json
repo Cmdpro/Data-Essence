@@ -7,7 +7,7 @@
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:raw_materials/allthemodium" },
-    "time": 200,
+    "time": 150,
     "result": { "id": "allthemodium:allthemodium_ingot" },
     "nuggetResult": { "id": "allthemodium:allthemodium_nugget", "count": 1 }
 }

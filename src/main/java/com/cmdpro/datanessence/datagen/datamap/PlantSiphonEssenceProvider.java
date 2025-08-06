@@ -36,6 +36,8 @@ public class PlantSiphonEssenceProvider extends DataMapProvider {
                 .add(getHolder(Items.BAMBOO), new PlantSiphonEssenceMap(10, 2), false)
                 .add(getHolder(Items.KELP), new PlantSiphonEssenceMap(10, 2), false)
                 .add(getHolder(Items.SEA_PICKLE), new PlantSiphonEssenceMap(10, 2), false)
+                .add(getHolder(Items.SWEET_BERRIES), new PlantSiphonEssenceMap(20, 2), false)
+                .add(getHolder(Items.GLOW_BERRIES), new PlantSiphonEssenceMap(20, 2), false)
 
                 .add(getHolder(Items.WITHER_ROSE), new PlantSiphonEssenceMap(50, 6), false)
                 .add(getHolder(Items.CHORUS_FLOWER), new PlantSiphonEssenceMap(60, 6), false)
@@ -43,11 +45,14 @@ public class PlantSiphonEssenceProvider extends DataMapProvider {
                 .add(getHolder(Items.SPORE_BLOSSOM), new PlantSiphonEssenceMap(50, 4), false)
                 .add(getHolder(Items.PITCHER_PLANT), new PlantSiphonEssenceMap(50, 4), false)
                 .add(getHolder(Items.TORCHFLOWER), new PlantSiphonEssenceMap(50, 4), false)
+                .add(getHolder(Items.NETHER_WART), new PlantSiphonEssenceMap(25, 4), false)
+                .add(getHolder(Items.GOLDEN_APPLE), new PlantSiphonEssenceMap(60, 4), false)
                 .add(PastelItems.AMARANTH_GRAINS, new PlantSiphonEssenceMap(25, 4), false, new ModLoadedCondition("pastel"))
                 .add(getHolder(PastelBlocks.AMARANTH_BUSHEL.asItem()), new PlantSiphonEssenceMap(50, 4), false, new ModLoadedCondition("pastel"))
                 .add(PastelItems.NIGHTDEW_SPROUT, new PlantSiphonEssenceMap(50, 4), false, new ModLoadedCondition("pastel"))
 
                 .add(getHolder(BlockRegistry.TETHERGRASS.get().asItem()), new PlantSiphonEssenceMap(100, 8), false)
+                .add(getHolder(Items.ENCHANTED_GOLDEN_APPLE), new PlantSiphonEssenceMap(100, 16), false)
                 .add(PastelItems.VEGETAL, new PlantSiphonEssenceMap(100, 8), false, new ModLoadedCondition("pastel"))
                 .add(PastelItems.GERMINATED_JADE_VINE_BULB, new PlantSiphonEssenceMap(100, 8), false, new ModLoadedCondition("pastel"))
                 .add(getHolder(PastelBlocks.JADEITE_LOTUS_BULB.asItem()), new PlantSiphonEssenceMap(100, 8), false, new ModLoadedCondition("pastel"))

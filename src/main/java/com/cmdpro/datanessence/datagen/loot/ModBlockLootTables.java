@@ -140,6 +140,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(BlockRegistry.CREATIVE_ESSENCE_BATTERY.get(),
                 block -> noDrop());
         dropSelf(BlockRegistry.OBSIDIAN_FRAMED_GLASS.get());
+        dropSelf(BlockRegistry.ESSENCE_READER.get());
         dropSelf(BlockRegistry.ESSENCE_DERIVATION_SPIKE.get());
         dropSelf(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
         dropSelf(BlockRegistry.ECLIPTRUM_BLOCK.get());

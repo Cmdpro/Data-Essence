@@ -7,7 +7,7 @@
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:raw_materials/lead" },
-    "time": 200,
+    "time": 150,
     "result": { "id": "alltheores:lead_ingot" },
     "nuggetResult": { "id": "alltheores:lead_nugget", "count": 1 }
 }

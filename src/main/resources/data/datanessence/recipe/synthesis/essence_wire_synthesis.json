@@ -5,7 +5,7 @@
   },
   "input": { "item": "datanessence:wire_spool" },
   "input2": { "item": "datanessence:essence_shard" },
-  "time": 100,
+  "time": 50,
   "result": { "id": "datanessence:essence_wire", "count": 4 },
   "entry": "datanessence:machinery/synthesis_chamber"
 }

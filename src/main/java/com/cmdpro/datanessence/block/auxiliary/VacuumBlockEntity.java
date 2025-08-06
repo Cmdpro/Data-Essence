@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
+import com.cmdpro.datanessence.block.transmission.ItemFilterBlockEntity;
 import com.cmdpro.datanessence.client.particle.*;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
@@ -30,8 +31,16 @@ public class VacuumBlockEntity extends BlockEntity {
         if (!world.isClientSide) {
             List<ItemEntity> itemsBeingSuckedUp = world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(pos.getCenter(), 20, 20, 20));
             for (ItemEntity i : itemsBeingSuckedUp) {
-                i.setDeltaMovement(pos.getCenter().subtract(i.position()).normalize().multiply(0.2, 0.2, 0.2));
-                i.hasImpulse = true;
+                var canGetSuckedUp = true;
+                if ( world.getBlockEntity(pos.above()) instanceof ItemFilterBlockEntity filter ) {
+                    if ( !pBlockEntity.doesItemMatchFilters(i.getItem(), filter) )
+                        canGetSuckedUp = false;
+                }
+
+                if (canGetSuckedUp) {
+                    i.setDeltaMovement(pos.getCenter().subtract(i.position()).normalize().multiply(0.2, 0.2, 0.2));
+                    i.hasImpulse = true;
+                }
             }
             List<ItemEntity> itemsBeingCollected = world.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(pos.getCenter(), 3, 3, 3));
             IItemHandler itemHandler = world.getCapability(Capabilities.ItemHandler.BLOCK, pos.above(), Direction.DOWN);
@@ -76,5 +85,14 @@ public class VacuumBlockEntity extends BlockEntity {
                 world.addParticle(new MoteParticleOptions().setColor(color3).setAdditive(true), pos3.x, pos3.y, pos3.z, vel3.x, vel3.y, vel3.z);
             }
         }
+    }
+
+    public boolean doesItemMatchFilters(ItemStack stack, ItemFilterBlockEntity filter) {
+        var filters = filter.getFilterHandler();
+        for ( int slot = 0; slot < filters.getSlots(); slot++ ) {
+            if ( filters.getStackInSlot(slot).is(stack.getItem()) )
+                return true;
+        }
+        return false;
     }
 }

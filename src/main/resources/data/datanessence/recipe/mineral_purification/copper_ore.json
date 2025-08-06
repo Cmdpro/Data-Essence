@@ -1,7 +1,7 @@
 {
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:ores/copper" },
-    "time": 400,
+    "time": 300,
     "result": { "id": "minecraft:copper_ingot" },
     "nuggetResult": { "id": "datanessence:copper_nugget", "count": 4 }
 }

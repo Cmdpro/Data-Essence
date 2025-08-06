@@ -9,6 +9,7 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemDecorators;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
+import com.cmdpro.datanessence.block.auxiliary.EssenceReader;
 import com.cmdpro.datanessence.client.dimension.SanctuarySpecialEffects;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.renderers.entity.ThrownTrailItemRenderer;
@@ -255,6 +256,7 @@ public class ClientModEvents {
                 return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 0.8f, 1f).getRGB();
             }
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
+        event.register(EssenceReader.COLOR_HANDLER, BlockRegistry.ESSENCE_READER.get());
         if (hasOpalescence) {
             event.register((pState, pLevel, pPos, pTintIndex) -> {
                 if (pPos != null) {

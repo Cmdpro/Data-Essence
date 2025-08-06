@@ -11,7 +11,9 @@ import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,6 +24,7 @@ public class EMIFluidMixingRecipe extends DataNEssenceEMIRecipe {
     private final EmiStack fluid1;
     private final EmiStack fluid2;
     private final float essenceCost;
+    private final int time;
 
     public EMIFluidMixingRecipe(ResourceLocation id, FluidMixingRecipe recipe) {
         super(DataNEssenceEMIPlugin.FLUID_MIXING, id, recipe.getEntry(), 123, 60);
@@ -42,6 +45,7 @@ public class EMIFluidMixingRecipe extends DataNEssenceEMIRecipe {
         };
         this.outputs = List.of(EmiStack.of(recipe.getOutput().getFluid(), recipe.getOutput().getAmount()));
         this.essenceCost = recipe.getEssenceCost();
+        this.time = recipe.getTime();
     }
 
     @Override
@@ -70,6 +74,7 @@ public class EMIFluidMixingRecipe extends DataNEssenceEMIRecipe {
         }
         // Output
         widgetHolder.addSlot(outputs.get(0), 77, 21).recipeContext(this).drawBack(false);
+        widgetHolder.addText(Component.translatable("emi.datanessence.time_seconds", (double) time / 20), 86, 44, 0xffffff, false).horizontalAlign(TextWidget.Alignment.CENTER);
 
         // Essence bars
         widgetHolder.add(new EssenceBarWidget(5, 19, EssenceTypeRegistry.ESSENCE.get(), essenceCost, 1000f, EssenceBarBackgroundTypes.INDUSTRIAL));

@@ -27,7 +27,7 @@ public class IlluminationRod extends Item {
 
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
     public IlluminationRod(Properties properties) {
-        super(properties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 5000)));
+        super(properties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 2500)));
     }
 
     // Returns true if a light block could be placed.

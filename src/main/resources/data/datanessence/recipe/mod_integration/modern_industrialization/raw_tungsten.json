@@ -7,7 +7,7 @@
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:raw_materials/tungsten" },
-    "time": 200,
+    "time": 150,
     "result": { "id": "modern_industrialization:tungsten_ingot" },
     "nuggetResult": { "id": "modern_industrialization:tungsten_nugget", "count": 1 }
 }

@@ -39,6 +39,7 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
     public static final EmiStack METAL_SHAPER_WORKSTATION = EmiStack.of(BlockRegistry.METAL_SHAPER.get());
     public static final EmiStack MELTER_WORKSTATION = EmiStack.of(BlockRegistry.MELTER.get());
     public static final EmiStack DRYING_TABLE_WORKSTATION = EmiStack.of(BlockRegistry.DRYING_TABLE.get());
+    public static final EmiStack MINERAL_PURIFICATION_CHAMBER_WORKSTATION = EmiStack.of(BlockRegistry.MINERAL_PURIFICATION_CHAMBER.get());
 
     public static final EmiRecipeCategory FABRICATION = new EmiRecipeCategory(DataNEssence.locate("fabrication"), FABRICATOR_WORKSTATION, new EmiTexture(EMI_ICONS, 0, 0, 16, 16));
     public static final EmiRecipeCategory INFUSION = new EmiRecipeCategory(DataNEssence.locate("infusion"), INFUSER_WORKSTATION, new EmiTexture(EMI_ICONS, 16, 0, 16, 16));
@@ -48,6 +49,7 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
     public static final EmiRecipeCategory METAL_SHAPING = new EmiRecipeCategory(DataNEssence.locate("metal_shaping"), METAL_SHAPER_WORKSTATION, new EmiTexture(EMI_ICONS, 80, 0, 16, 16));
     public static final EmiRecipeCategory MELTING = new EmiRecipeCategory(DataNEssence.locate("melting"), MELTER_WORKSTATION, new EmiTexture(EMI_ICONS, 96, 0, 16, 16));
     public static final EmiRecipeCategory DRYING = new EmiRecipeCategory(DataNEssence.locate("drying"), DRYING_TABLE_WORKSTATION, new EmiTexture(EMI_ICONS, 112, 0, 16, 16));
+    public static final EmiRecipeCategory MINERAL_PURIFICATION = new EmiRecipeCategory(DataNEssence.locate("mineral_purification"), MINERAL_PURIFICATION_CHAMBER_WORKSTATION, new EmiTexture(EMI_ICONS, 128, 0, 16, 16));
 
     // TODO this Essence Furnace should have a custom tooltip, because *polish*
     public static ItemStack ESSENCE_FURNACE = new ItemStack(BlockRegistry.ESSENCE_FURNACE.get().asItem());
@@ -63,6 +65,7 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
         emiRegistry.addCategory(METAL_SHAPING);
         emiRegistry.addCategory(MELTING);
         emiRegistry.addCategory(DRYING);
+        emiRegistry.addCategory(MINERAL_PURIFICATION);
 
         // Vanilla
         emiRegistry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING, FABRICATOR_WORKSTATION);
@@ -80,6 +83,7 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
         emiRegistry.addWorkstation(METAL_SHAPING, METAL_SHAPER_WORKSTATION);
         emiRegistry.addWorkstation(MELTING, MELTER_WORKSTATION);
         emiRegistry.addWorkstation(DRYING, DRYING_TABLE_WORKSTATION);
+        emiRegistry.addWorkstation(MINERAL_PURIFICATION, MINERAL_PURIFICATION_CHAMBER_WORKSTATION);
 
         RecipeManager manager = emiRegistry.getRecipeManager();
 
@@ -106,6 +110,9 @@ public class DataNEssenceEMIPlugin implements EmiPlugin {
         }
         for (RecipeHolder<DryingRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.DRYING_TYPE.get())) {
             emiRegistry.addRecipe(new EMIDryingRecipe(recipe.id(), recipe.value()));
+        }
+        for (RecipeHolder<MineralPurificationRecipe> recipe : manager.getAllRecipesFor(RecipeRegistry.MINERAL_PURIFICATION_TYPE.get())) {
+            emiRegistry.addRecipe(new EMIMineralPurificationRecipe(recipe.id(), recipe.value()));
         }
     }
 }
