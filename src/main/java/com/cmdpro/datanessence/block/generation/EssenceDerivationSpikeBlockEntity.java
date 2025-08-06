@@ -113,7 +113,7 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
                         if (entity.isAlive())
                             entity.hurt(entity.damageSources().source(DamageTypeRegistry.essenceSiphoned), 10);
                         if (!entity.isAlive()) {
-                            spike.getStorage().addEssence(EssenceTypeRegistry.ESSENCE.get(), Math.clamp((entity.getMaxHealth() * 4) * 5, 0f, 500f));
+                            spike.getStorage().addEssence(EssenceTypeRegistry.ESSENCE.get(), Math.clamp((entity.getMaxHealth() * 4) * 5, 0f, 1000f));
                             spike.temperature += 5;
                         }
                     }
