@@ -283,6 +283,7 @@ public class DataNEssence
             event.accept(ItemRegistry.LUNAR_ESSENCE_SHARD.get());
             event.accept(ItemRegistry.LENSING_CRYSTAL.get());
             event.accept(ItemRegistry.FROZEN_MOONLIGHT_CHUNK.get());
+            event.accept(ItemRegistry.TRANSFORMATIVE_GEL.get());
             event.accept(ItemRegistry.BONDING_POWDER.get());
             event.accept(ItemRegistry.CAPACITANCE_PANEL.get());
             event.accept(ItemRegistry.CONDUCTANCE_ROD.get());

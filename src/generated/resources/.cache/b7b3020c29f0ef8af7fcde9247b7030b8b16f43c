@@ -1,4 +1,4 @@
-// 1.21.1	2025-06-29T06:21:34.582414303	Item Models: datanessence
+// 1.21.1	2025-08-07T22:16:18.546454689	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -88,6 +88,7 @@ aee2e6631d57b8fc41df275db6b27a783c52c54f assets/datanessence/models/item/thermom
 7844fbb9a5a1f0708579583511df272e74c1bb49 assets/datanessence/models/item/transcendental_tether.json
 2d0ba36a76b055e82688d0a0780411bebf86731c assets/datanessence/models/item/transcendental_tether_charged.json
 6afd076d5fc37813a3f2a24fe0dc020c72e77f71 assets/datanessence/models/item/transcendental_tether_use.json
+1eeda08bd70b1e5d47fbb95b3ad4ccdf3033effd assets/datanessence/models/item/transformative_gel.json
 db6f8934b23ed2aadc16819c6b9ea384859ed93a assets/datanessence/models/item/transformative_rod.json
 7545953a1981f70cdb6d9ccd399301b1df1e65d2 assets/datanessence/models/item/traversite_road_chunk.json
 e55bc425ec3b1f2a7eb2b139beb2dcedac11e59d assets/datanessence/models/item/traversite_road_slab.json
