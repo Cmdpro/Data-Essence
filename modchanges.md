@@ -24,3 +24,4 @@
 - Fixed a dupe related to Hammer and Chisel-ing Structure Protected blocks
 - Fixed edges of the Industrial Essence Battery glowing alongside the fill display
 - Fixed Upgrade Sigils being voided upon breaking an upgraded node
+- Fixed Explosive Charge Synthesis requiring the Synthesis Chamber entry

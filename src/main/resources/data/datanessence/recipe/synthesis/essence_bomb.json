@@ -7,5 +7,5 @@
   "input2": { "tag": "datanessence:explosive_material" },
   "time": 100,
   "result": { "id": "datanessence:essence_bomb", "count": 4 },
-  "entry": "datanessence:machinery/synthesis_chamber"
+  "entry": "datanessence:tools/essence_bombs"
 }
