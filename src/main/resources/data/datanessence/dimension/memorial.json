@@ -1,0 +1,12 @@
+{
+  "type": "datanessence:memorial",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "datanessence:memorial",
+      "lakes": false,
+      "features": false,
+      "layers": []
+    }
+  }
+}
