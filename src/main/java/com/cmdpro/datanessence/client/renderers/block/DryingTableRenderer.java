@@ -18,6 +18,8 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 
+import static com.cmdpro.datanessence.util.RenderHelper.renderQuad;
+
 public class DryingTableRenderer implements BlockEntityRenderer<DryingTableBlockEntity> {
     EntityRenderDispatcher renderDispatcher;
 
@@ -65,20 +67,5 @@ public class DryingTableRenderer implements BlockEntityRenderer<DryingTableBlock
             Minecraft.getInstance().getItemRenderer().renderStatic(item, ItemDisplayContext.FIXED, packedLight, packedOverlay, poseStack, bufferSource, blockEntity.getLevel(), 0);
             poseStack.popPose();
         }
-    }
-
-    private static void drawVertex(VertexConsumer builder, PoseStack poseStack, float x, float y, float z, float u, float v, int packedLight, int color) {
-        builder.addVertex(poseStack.last().pose(), x, y, z)
-                .setColor(color)
-                .setUv(u, v)
-                .setLight(packedLight)
-                .setNormal(1, 0, 0);
-    }
-
-    private static void renderQuad(VertexConsumer builder, PoseStack poseStack, float x0, float y0, float z0, float x1, float y1, float z1, float u0, float v0, float u1, float v1, int packedLight, int color) {
-        drawVertex(builder, poseStack, x0, y0, z0, u0, v0, packedLight, color);
-        drawVertex(builder, poseStack, x0, y1, z1, u0, v1, packedLight, color);
-        drawVertex(builder, poseStack, x1, y1, z1, u1, v1, packedLight, color);
-        drawVertex(builder, poseStack, x1, y0, z0, u1, v0, packedLight, color);
     }
 }

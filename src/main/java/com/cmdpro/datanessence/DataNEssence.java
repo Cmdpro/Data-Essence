@@ -353,6 +353,9 @@ public class DataNEssence
             event.accept(BlockRegistry.FLUID_BUFFER.get());
             event.accept(BlockRegistry.LIMITED_ITEM_BUFFER.get());
 
+            // Redstone Components
+            event.accept(BlockRegistry.ESSENCE_READER.get());
+
             // Storage Blocks
             event.accept(BlockRegistry.ESSENCE_BATTERY.get());
             //event.accept(BlockRegistry.LUNAR_ESSENCE_BATTERY.get());

@@ -9,8 +9,10 @@ import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,12 +24,14 @@ public class EMIDryingRecipe implements EmiRecipe {
     private final EmiStack input;
     private final EmiIngredient additive;
     private final List<EmiStack> output;
+    private final int time;
 
     public EMIDryingRecipe(ResourceLocation id, DryingRecipe recipe) {
         this.id = id;
         this.input = EmiStack.of(recipe.getInput().getFluid(), recipe.getInput().getAmount());
         this.additive = recipe.getIngredients().isEmpty() ? null : EmiIngredient.of(recipe.getIngredients().get(0));
         this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())));
+        this.time = recipe.getTime();
     }
 
     @Override
@@ -77,6 +81,7 @@ public class EMIDryingRecipe implements EmiRecipe {
         }
         // Output
         widgets.addSlot(output.get(0), 73, 21).recipeContext(this).drawBack(false);
+        widgets.addText(Component.translatable("emi.datanessence.time_seconds", (double) time / 20), 82, 44, 0xffffff, false).horizontalAlign(TextWidget.Alignment.CENTER);
     }
 
 

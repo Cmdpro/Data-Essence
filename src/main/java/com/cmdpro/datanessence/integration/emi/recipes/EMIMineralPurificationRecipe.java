@@ -21,11 +21,13 @@ public class EMIMineralPurificationRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiStack> output;
+    private final int time;
 
     public EMIMineralPurificationRecipe(ResourceLocation id, MineralPurificationRecipe recipe) {
         this.id = id;
         this.input = recipe.getIngredients().stream().map(s -> EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())).toList();
         this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())), EmiStack.of(recipe.getNuggetOutput(Minecraft.getInstance().level.registryAccess())));
+        this.time = recipe.getTime();
     }
 
     @Override
@@ -79,6 +81,7 @@ public class EMIMineralPurificationRecipe implements EmiRecipe {
         widgets.addSlot(primary, 73, 14).recipeContext(this).drawBack(false);
         widgets.addSlot(secondary, 73, 38).recipeContext(this).drawBack(false);
         widgets.addTexture(emiIcons, 94, 43, 8, 8, 128, 16).tooltipText(List.of(Component.translatable("emi.datanessence.nugget_mult")));
+        widgets.addText(Component.translatable("emi.datanessence.time_seconds", (double) time / 20), 38, 50, 0xffffff, false).horizontalAlign(TextWidget.Alignment.CENTER);
 
     }
 }

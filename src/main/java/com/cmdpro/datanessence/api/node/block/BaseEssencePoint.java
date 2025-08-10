@@ -93,7 +93,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pMovedByPiston) {
         if (pState.getBlock() != pNewState.getBlock()) {
-            if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity) {
+            if (pLevel.getBlockEntity(pPos) instanceof BaseEssencePointBlockEntity node) {
                 BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
                 Set<DefaultEdge> edges = networks.graph.edgesOf(pPos);
                 for (DefaultEdge i : edges) {
@@ -105,6 +105,14 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                         if (pLevel.getBlockEntity(pos) instanceof BaseEssencePointBlockEntity ent) {
                             ent.updateBlock();
                         }
+                    }
+                    if ( node.uniqueUpgrade.getStackInSlot(0) != ItemStack.EMPTY ) {
+                        ItemEntity upgradeSigil = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, node.uniqueUpgrade.getStackInSlot(0).copy() );
+                        pLevel.addFreshEntity(upgradeSigil);
+                    }
+                    if ( node.universalUpgrade.getStackInSlot(0) != ItemStack.EMPTY ) {
+                        ItemEntity upgradeSigil = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, node.universalUpgrade.getStackInSlot(0).copy() );
+                        pLevel.addFreshEntity(upgradeSigil);
                     }
                 }
             }

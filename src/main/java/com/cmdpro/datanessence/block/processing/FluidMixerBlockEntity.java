@@ -60,6 +60,7 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     public float essenceCost;
     public int workTime, maxWorkTime;
     public ItemStack item;
+    public int age;
 
     @Override
     public void setLevel(Level level) {
@@ -226,6 +227,8 @@ public class FluidMixerBlockEntity extends BlockEntity implements MenuProvider, 
     }
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, FluidMixerBlockEntity pBlockEntity) {
+        pBlockEntity.age++;
+
         if (!pLevel.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);

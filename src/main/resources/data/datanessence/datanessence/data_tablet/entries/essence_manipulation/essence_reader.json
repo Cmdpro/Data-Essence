@@ -1,0 +1,31 @@
+{
+  "icon": {
+    "id": "datanessence:essence_reader"
+  },
+  "tab": "datanessence:essence_manipulation",
+  "x": 0,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.essence_reader.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/utilities/essence_reader"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.essence_reader.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.essence_reader.flavor"
+  },
+  "parents": [
+    "datanessence:buffers"
+  ]
+}

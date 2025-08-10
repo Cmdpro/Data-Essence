@@ -144,6 +144,8 @@ public class WireMinigame extends Minigame {
         super.mouseDragged(pMouseX, pMouseY, pButton, pDragX, pDragY);
         if (pButton == 0) {
             if (endLine != null) {
+                endLine.x = pMouseX;
+                endLine.y = pMouseY;
                 endLine.add(pDragX, pDragY);
             }
         }
@@ -153,29 +155,31 @@ public class WireMinigame extends Minigame {
     public void mouseReleased(double pMouseX, double pMouseY, int pButton) {
         if (pButton == 0) {
             endLine = new Vector2d(pMouseX, pMouseY);
-            if (startLine != null) {
-                Tile start = getTile(startLine);
-                Tile end = getTile(endLine);
-                if (start != end) {
-                    if (start != null && end != null) {
-                        if (start.essence == end.essence) {
-                            boolean invalid = false;
-                            Line2D line = new Line2D.Double((start.pos.x * 10) + 5, (start.pos.y * 10) + 5, (end.pos.x * 10) + 5, (end.pos.y * 10) + 5);
-                            for (Tile i : tiles.values()) {
-                                if (i.connectedTo != null) {
-                                    if (!i.connectedTo.equals(start.pos) && !i.pos.equals(end.pos)) {
-                                        Line2D line2 = new Line2D.Double((i.pos.x * 10) + 5, (i.pos.y * 10) + 5, (i.connectedTo.x * 10) + 5, (i.connectedTo.y * 10) + 5);
-                                        if (line.intersectsLine(line2)) {
-                                            invalid = true;
-                                            break;
+            if (getTile(endLine) != null) {
+                if (startLine != null) {
+                    Tile start = getTile(startLine);
+                    Tile end = getTile(endLine);
+                    if (start != end) {
+                        if (start != null && end != null) {
+                            if (start.essence == end.essence) {
+                                boolean invalid = false;
+                                Line2D line = new Line2D.Double((start.pos.x * 10) + 5, (start.pos.y * 10) + 5, (end.pos.x * 10) + 5, (end.pos.y * 10) + 5);
+                                for (Tile i : tiles.values()) {
+                                    if (i.connectedTo != null) {
+                                        if (!i.connectedTo.equals(start.pos) && !i.pos.equals(end.pos)) {
+                                            Line2D line2 = new Line2D.Double((i.pos.x * 10) + 5, (i.pos.y * 10) + 5, (i.connectedTo.x * 10) + 5, (i.connectedTo.y * 10) + 5);
+                                            if (line.intersectsLine(line2)) {
+                                                invalid = true;
+                                                break;
+                                            }
                                         }
                                     }
                                 }
-                            }
-                            if (!invalid) {
-                                if (start.connectedTo == null) {
-                                    if (end.type == 3 || end.type == 2) {
-                                        start.connectedTo = end.pos;
+                                if (!invalid) {
+                                    if (start.connectedTo == null) {
+                                        if (end.type == 3 || end.type == 2) {
+                                            start.connectedTo = end.pos;
+                                        }
                                     }
                                 }
                             }

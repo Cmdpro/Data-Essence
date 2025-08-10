@@ -3,7 +3,7 @@
   "essenceCost": 50,
   "fluid_input": {
     "id": "minecraft:lava",
-    "amount": 600
+    "amount": 400
   },
   "item_input": {
     "tag": "c:stones"
@@ -12,6 +12,6 @@
     "id": "minecraft:lava",
     "amount": 800
   },
-  "time": 100,
+  "time": 40,
   "entry": "datanessence:machinery/fluid_mixer"
 }
