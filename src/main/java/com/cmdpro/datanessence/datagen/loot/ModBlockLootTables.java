@@ -42,6 +42,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.FLUID_BUFFER.get());
         dropSelf(BlockRegistry.ITEM_POINT.get());
         dropSelf(BlockRegistry.FLUID_POINT.get());
+        dropSelf(BlockRegistry.RF_NODE.get());
         dropSelf(BlockRegistry.ESSENCE_CRYSTAL.get());
         dropSelf(BlockRegistry.ESSENCE_BURNER.get());
         dropSelf(BlockRegistry.DECO_ESSENCE_BUFFER.get());

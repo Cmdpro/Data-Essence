@@ -264,6 +264,7 @@ public class DataNEssence
             //event.accept(ItemRegistry.EXOTIC_ESSENCE_WIRE.get());
             event.accept(ItemRegistry.ITEM_WIRE.get());
             event.accept(ItemRegistry.FLUID_WIRE.get());
+            event.accept(ItemRegistry.RF_WIRE.get());
             if (hasMekanism)
                 event.accept(ItemRegistry.CHEMICAL_WIRE.get());
 
@@ -382,6 +383,7 @@ public class DataNEssence
             //event.accept(BlockRegistry.EXOTIC_ESSENCE_POINT.get());
             event.accept(BlockRegistry.ITEM_POINT.get());
             event.accept(BlockRegistry.FLUID_POINT.get());
+            event.accept(BlockRegistry.RF_NODE.get());
             if (hasMekanism)
                 event.accept(BlockRegistry.CHEMICAL_NODE.get());
             event.accept(BlockRegistry.ESSENCE_BUFFER.get());

@@ -96,6 +96,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_DERIVATION_SPIKE.get(), EssenceDerivationSpikeRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.LUNAR_ESSENCE_BATTERY.get(), LunarEssenceBatteryRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.CRYSTALLINE_CRADLE.get(), CrystallineCradleRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.RF_NODE.get(), RFNodeRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -182,6 +183,7 @@ public class ClientModEvents {
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_relay.png"), DataNEssence.locate("ender_pearl_relay")), BlockRegistry.ENDER_PEARL_RELAY.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_destination.png"), DataNEssence.locate("ender_pearl_destination")), BlockRegistry.ENDER_PEARL_DESTINATION.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/essence_derivation_spike.png"), DataNEssence.locate("essence_derivation_spike")), BlockRegistry.ESSENCE_DERIVATION_SPIKE.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/rf_node.png"), DataNEssence.locate("essence_point")), BlockRegistry.RF_NODE.get().asItem());
     }
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {

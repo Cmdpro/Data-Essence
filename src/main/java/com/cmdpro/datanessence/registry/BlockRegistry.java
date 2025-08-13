@@ -279,6 +279,9 @@ public class BlockRegistry {
     public static final Supplier<Block> CHEMICAL_NODE = register("chemical_node",
             () -> new ChemicalNode(getToollessMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> RF_NODE = register("rf_node",
+            () -> new RFNode(getToollessMachineProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Redstone Components
     public static final Supplier<Block> ESSENCE_READER = register("essence_reader",

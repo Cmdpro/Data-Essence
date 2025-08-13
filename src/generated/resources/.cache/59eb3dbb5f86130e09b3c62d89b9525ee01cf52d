@@ -1,4 +1,4 @@
-// 1.21.1	2025-08-07T22:16:18.547759188	Loot Tables
+// 1.21.1	2025-08-12T20:31:02.307313704	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 9609efe61385ebb3de54f11712e3baea7e1409d0 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 10297d9c29f46c19c997dfe74ad062c709006c22 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank_shieldless.json
@@ -105,6 +105,7 @@ aca436e4c49a253ff47202ccea5ec753aec5a73d data/datanessence/loot_table/blocks/pol
 b345fd285c83276051f10b7378461e809029f6a1 data/datanessence/loot_table/blocks/polished_obsidian_tiles.json
 83e11803edcd7003827fcc04fca9477d6b66c850 data/datanessence/loot_table/blocks/polished_obsidian_tract.json
 24e471f0e6adb4df47e9a0b9f7489fa5a8a60d3d data/datanessence/loot_table/blocks/red_pearlescent_sand.json
+01aeaf3f091d62c766c5fbc4b420ad423c219378 data/datanessence/loot_table/blocks/rf_node.json
 b68dabf5aaa38a09a8b718834adb9019b84a04fa data/datanessence/loot_table/blocks/sanctuary_dirt.json
 8dea2dfcca0dbe30dda0e2764191526ed25eb98f data/datanessence/loot_table/blocks/sanctuary_grass.json
 98a27b1ad9b76d43b7e5d83acb2ea6fcb0ce9f9a data/datanessence/loot_table/blocks/sanctuary_sand.json

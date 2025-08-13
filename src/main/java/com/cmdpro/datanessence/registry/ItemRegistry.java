@@ -61,6 +61,7 @@ public class ItemRegistry {
     public static final Supplier<Item> ITEM_WIRE = register("item_wire", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> FLUID_WIRE = register("fluid_wire", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> CHEMICAL_WIRE = register("chemical_wire", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> RF_WIRE = register("rf_wire", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> DATA_TABLET = register("data_tablet", () -> new DataTablet(new Item.Properties().stacksTo(1)));
 
     // Bombs

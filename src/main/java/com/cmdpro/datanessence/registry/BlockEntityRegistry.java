@@ -215,6 +215,10 @@ public class BlockEntityRegistry {
             register("chemical_node", () ->
                     BlockEntityType.Builder.of(ChemicalNodeBlockEntity::new,
                             BlockRegistry.CHEMICAL_NODE.get()).build(null));
+    public static final Supplier<BlockEntityType<RFNodeBlockEntity>> RF_NODE =
+            register("rf_node", () ->
+                    BlockEntityType.Builder.of(RFNodeBlockEntity::new,
+                            BlockRegistry.RF_NODE.get()).build(null));
     public static final Supplier<BlockEntityType<DryingTableBlockEntity>> DRYING_TABLE =
             register("drying_table", () ->
                     BlockEntityType.Builder.of(DryingTableBlockEntity::new,

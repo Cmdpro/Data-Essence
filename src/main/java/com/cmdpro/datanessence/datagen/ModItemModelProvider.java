@@ -66,6 +66,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.ITEM_WIRE, "wires");
         simpleItemWithSubdirectory(ItemRegistry.FLUID_WIRE, "wires");
         simpleItemWithSubdirectory(ItemRegistry.CHEMICAL_WIRE, "wires");
+        simpleItemWithSubdirectory(ItemRegistry.RF_WIRE, "wires");
 
         simpleItemWithSubdirectory(ItemRegistry.ACCELERATION_LENS, "lenses");
         simpleItemWithSubdirectory(ItemRegistry.BURNING_LENS, "lenses");
@@ -147,6 +148,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         essencePoint(BlockRegistry.ITEM_POINT);
         essencePoint(BlockRegistry.FLUID_POINT);
         essencePoint(BlockRegistry.CHEMICAL_NODE);
+        essencePoint(BlockRegistry.RF_NODE);
 
         musicDiscPlayer(ItemRegistry.MUSIC_DISC_PLAYER);
         grapplingHook(ItemRegistry.GRAPPLING_HOOK);
