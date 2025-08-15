@@ -125,7 +125,7 @@
   "block.datanessence.charger": "充能器",
   "block.datanessence.chemical_node": "化学品节点",
   "block.datanessence.computer": "电脑",
-  "block.datanessence.computer.obtain_signal_tracker": "在你触碰电脑时，它的某个槽位中掉出了一个奇怪的装置。",
+  "block.datanessence.computer.obtain_signal_tracker": "在你触碰电脑时，它的某个槽位掉出了一个奇怪的装置。",
   "block.datanessence.creative_essence_battery": "无限源质储库",
   "block.datanessence.data_bank": "古代数据库",
   "block.datanessence.data_bank.cannot_use": "你需要一块数据平板才能使用它。",
