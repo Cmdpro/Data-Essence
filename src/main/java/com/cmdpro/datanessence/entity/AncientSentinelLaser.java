@@ -20,6 +20,7 @@ import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.*;
 import net.neoforged.neoforge.event.EventHooks;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import javax.annotation.Nullable;
@@ -42,21 +43,27 @@ public class AncientSentinelLaser extends Entity {
         this.setDeltaMovement(shooter.getLookAngle());
     }
 
+    private boolean shot;
     private Vec3 end;
     @Override
     public void tick() {
         super.tick();
-        HitResult hit = getHit(10, false);
+        HitResult hit = getHit(20, false);
         end = hit.getLocation();
         time++;
         if (level().isClientSide) {
-            if (firstTick) {
+            if (!shot) {
                 ClientMethods.particle(getRandom(), end, level());
+                shot = true;
             }
         } else {
-            if (firstTick) {
-                CollisionTestCube cube = new CollisionTestCube(AABB.ofSize(position().lerp(end, 0.5f), 0.25, 0.25, position().distanceTo(end)));
-                cube.rotation.lookAlong(getDeltaMovement().toVector3f(), new Vector3f(0, 1, 0));
+            if (!shot) {
+                CollisionTestCube cube = new CollisionTestCube(AABB.ofSize(position().lerp(end, 0.5f), 0.5, 0.5, position().distanceTo(end)*2f));
+                Quaternionf rotation = new Quaternionf();
+                Vec2 angle = calculateRotationVector(position(), end);
+                rotation.rotateY((float) Math.toRadians(-angle.y + 180));
+                rotation.rotateX((float)Math.toRadians(-angle.x));
+                cube.rotation = rotation;
                 cube.getEntitiesOfClass(LivingEntity.class, level()).forEach((i) -> {
                     if (i != owner) {
                         DamageSource damagesource = null;
@@ -67,11 +74,23 @@ public class AncientSentinelLaser extends Entity {
                         i.hurt(damagesource, 5);
                     }
                 });
+                shot = true;
             }
             if (time >= maxTime) {
                 remove(RemovalReason.KILLED);
             }
         }
+    }
+
+    private static Vec2 calculateRotationVector(Vec3 pVec, Vec3 pTarget) {
+        double d0 = pTarget.x - pVec.x;
+        double d1 = pTarget.y - pVec.y;
+        double d2 = pTarget.z - pVec.z;
+        double d3 = Math.sqrt(d0 * d0 + d2 * d2);
+        return new Vec2(
+                Mth.wrapDegrees((float)(-(Mth.atan2(d1, d3) * (double)(180F / (float)Math.PI)))),
+                Mth.wrapDegrees((float)(Mth.atan2(d2, d0) * (double)(180F / (float)Math.PI)) - 90.0F)
+        );
     }
 
     public Vec3 getEnd() {

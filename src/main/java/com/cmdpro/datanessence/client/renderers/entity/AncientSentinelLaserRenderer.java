@@ -1,10 +1,12 @@
 package com.cmdpro.datanessence.client.renderers.entity;
 
 import com.cmdpro.databank.misc.RenderingUtil;
+import com.cmdpro.datanessence.entity.AncientSentinel;
 import com.cmdpro.datanessence.entity.AncientSentinelLaser;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -23,6 +25,10 @@ public class AncientSentinelLaserRenderer extends EntityRenderer<AncientSentinel
         return null;
     }
 
+    @Override
+    public boolean shouldRender(AncientSentinelLaser livingEntity, Frustum camera, double camX, double camY, double camZ) {
+        return true;
+    }
     @Override
     public void render(AncientSentinelLaser entity, float entityYaw, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);

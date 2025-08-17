@@ -11,10 +11,8 @@ import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.util.Mth;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -23,11 +21,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
@@ -95,6 +91,8 @@ public class AncientSentinel extends Monster {
         if (type == AttackType.LASER) {
             laserTarget = pTarget.getEyePosition();
             laserTime = 20;
+            getEntityData().set(LASER_TIME, laserTime, true);
+            getEntityData().set(LASER_TARGET, laserTarget.toVector3f(), true);
         } else if (type == AttackType.SHOOT) {
             AncientSentinelProjectile projectile = new AncientSentinelProjectile(EntityRegistry.ANCIENT_SENTINEL_PROJECTILE.get(), this, level());
             double d0 = pTarget.getX() - this.getX();
@@ -111,11 +109,24 @@ public class AncientSentinel extends Monster {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         super.defineSynchedData(builder);
         builder.define(LASER_TIME, -1);
-        builder.define(LASER_DIR, new Vector3f());
+        builder.define(LASER_TARGET, new Vector3f());
+    }
+
+    @Override
+    public void onSyncedDataUpdated(EntityDataAccessor<?> key) {
+        super.onSyncedDataUpdated(key);
+        if (key == LASER_TIME) {
+            maxLaserTime = getEntityData().get(LASER_TIME);
+            laserTime = maxLaserTime;
+        }
+        if (key == LASER_TARGET) {
+            Vector3f vec = getEntityData().get(LASER_TARGET);
+            laserTarget = new Vec3(vec.x, vec.y, vec.z);
+        }
     }
 
     public static final EntityDataAccessor<Integer> LASER_TIME = SynchedEntityData.defineId(AncientSentinel.class, EntityDataSerializers.INT);
-    public static final EntityDataAccessor<Vector3f> LASER_DIR = SynchedEntityData.defineId(AncientSentinel.class, EntityDataSerializers.VECTOR3);
+    public static final EntityDataAccessor<Vector3f> LASER_TARGET = SynchedEntityData.defineId(AncientSentinel.class, EntityDataSerializers.VECTOR3);
     @Override
     protected void customServerAiStep() {
         super.customServerAiStep();
@@ -127,17 +138,28 @@ public class AncientSentinel extends Monster {
             lookAt(EntityAnchorArgument.Anchor.EYES, laserTarget);
             if (laserTime == 0) {
                 AncientSentinelLaser laser = new AncientSentinelLaser(EntityRegistry.ANCIENT_SENTINEL_LASER.get(), this, level());
+                laser.setDeltaMovement(getEyePosition().vectorTo(laserTarget).normalize());
                 level().addFreshEntity(laser);
             }
         }
-        getEntityData().set(LASER_TIME, laserTime);
-        getEntityData().set(LASER_DIR, getEyePosition().vectorTo(laserTarget).normalize().toVector3f());
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if (level().isClientSide) {
+            if (laserTime >= 0) {
+                laserTime--;
+                lookAt(EntityAnchorArgument.Anchor.EYES, laserTarget);
+            }
+        }
     }
 
     public boolean canProgressInterval() {
-        return laserTime > 0;
+        return laserTime < 0;
     }
     public int laserTime = -1;
+    public int maxLaserTime = -1;
     public Vec3 laserTarget;
     protected static class SentinelAttackGoal extends Goal {
         private final Mob mob;
