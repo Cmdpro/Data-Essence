@@ -12,6 +12,7 @@ import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
 import com.cmdpro.datanessence.block.auxiliary.EssenceReader;
 import com.cmdpro.datanessence.client.dimension.SanctuarySpecialEffects;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
+import com.cmdpro.datanessence.client.renderers.entity.*;
 import com.cmdpro.datanessence.client.renderers.entity.ThrownTrailItemRenderer;
 import com.cmdpro.datanessence.client.renderers.entity.LunarStrikeRenderer;
 import com.cmdpro.datanessence.client.shaders.PingShader;
@@ -23,9 +24,6 @@ import com.cmdpro.datanessence.client.particle.*;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.client.renderers.block.*;
-import com.cmdpro.datanessence.client.renderers.entity.AncientSentinelRenderer;
-import com.cmdpro.datanessence.client.renderers.entity.EmptyEntityRenderer;
-import com.cmdpro.datanessence.client.renderers.entity.EssenceSlashRenderer;
 import com.cmdpro.datanessence.client.renderers.layer.HornsLayer;
 import com.cmdpro.datanessence.client.renderers.layer.TailLayer;
 import com.cmdpro.datanessence.client.renderers.layer.WingsLayer;
@@ -117,6 +115,7 @@ public class ClientModEvents {
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL.get(), AncientSentinelRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL_PROJECTILE.get(), EmptyEntityRenderer::new);
         EntityRenderers.register(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), EssenceSlashRenderer::new);
+        EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL_LASER.get(), AncientSentinelLaserRenderer::new);
         EntityRenderers.register(EntityRegistry.LUNAR_STRIKE.get(), LunarStrikeRenderer::new);
 
         event.enqueueWork(() -> {
