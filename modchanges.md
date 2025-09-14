@@ -1,5 +1,5 @@
 ### Additions
-- Added (Enchanted) Golden Apples, Sweet/Glow Berries, and more Pastel plantd to the Plant Siphon fuel map
+- Added (Enchanted) Golden Apples, Sweet/Glow Berries, and more Pastel plants to the Plant Siphon fuel map
 - Added EMI category for Mineral Purification Chamber recipes
 - Added crafting time display to all applicable EMI categories (machines with fixed processing times, e.g. Infuser, aren't applicable)
 - Added documentation about the Mineral Purification Chamber's yields to its Data Tablet entry
