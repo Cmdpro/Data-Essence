@@ -5,6 +5,7 @@
 - Added documentation about the Mineral Purification Chamber's yields to its Data Tablet entry
 - Added filtering capability to the Vacuum
 - Added Essence Reader redstone component
+- Added new alternate model for Nodes if they are acting as relays
 
 ### Changes
 - Buffed Nether Wart's output in the Plant Siphon
