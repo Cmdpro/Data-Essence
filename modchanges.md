@@ -1,25 +1,22 @@
 ### Additions
-- Added (Enchanted) Golden Apples and Sweet/Glow Berries to the Plant Siphon fuel map
+- Added (Enchanted) Golden Apples, Sweet/Glow Berries, and more Pastel plantd to the Plant Siphon fuel map
 - Added EMI category for Mineral Purification Chamber recipes
 - Added crafting time display to all applicable EMI categories (machines with fixed processing times, e.g. Infuser, aren't applicable)
 - Added documentation about the Mineral Purification Chamber's yields to its Data Tablet entry
 - Added filtering capability to the Vacuum
 - Added Essence Reader redstone component
 - Added new alternate model for Nodes if they are acting as relays
-- Added more Pastel plants to the Plant Siphon fuel map
 - Added Immersive Engineering ores to Mineral Purification Chamber
 
 ### Changes
-- Buffed Nether Wart's output in the Plant Siphon
+- Buffed output of Nether Wart and a certain Pastel seedling in the Plant Siphon
 - Reduced Mineral Purification Chamber processing times by a quarter
 - Set all earlygame Essence-using tools' buffers to 2500
 - Renamed Fluid Tank to Fluid Bulb
-- Retextured Cryochamber
+- Retextured Cryochamber and Traversite Road Chunk
 - Fluid Mixer's lava duplication recipe is now much, much faster and requires 200mB less Lava
 - Nodes do not require tools to break them
 - Halved crafting time of Wire Synthesis
-- Buffed a certain Pastel seedling's output in the Plant Siphon
-- Retextured Traversite Road Chunk
 
 ### Fixes
 - Fixed Energized Shielding Rock Column being unbreakable
