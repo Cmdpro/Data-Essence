@@ -7,6 +7,7 @@
 - Added Essence Reader redstone component
 - Added new alternate model for Nodes if they are acting as relays
 - Added more Pastel plants to the Plant Siphon fuel map
+- Added Immersive Engineering ores to Mineral Purification Chamber
 
 ### Changes
 - Buffed Nether Wart's output in the Plant Siphon
