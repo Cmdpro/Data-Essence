@@ -6,6 +6,7 @@
 - Added filtering capability to the Vacuum
 - Added Essence Reader redstone component
 - Added new alternate model for Nodes if they are acting as relays
+- Added more Pastel plants to the Plant Siphon fuel map
 
 ### Changes
 - Buffed Nether Wart's output in the Plant Siphon
@@ -16,6 +17,7 @@
 - Fluid Mixer's lava duplication recipe is now much, much faster and requires 200mB less Lava
 - Nodes do not require tools to break them
 - Halved crafting time of Wire Synthesis
+- Buffed a certain Pastel seedling's output in the Plant Siphon
 
 ### Fixes
 - Fixed Energized Shielding Rock Column being unbreakable

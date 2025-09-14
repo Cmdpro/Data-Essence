@@ -140,7 +140,8 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
         public DatabankModel model;
         public DatabankModel getModel() {
             if (model == null) {
-                model = /* something here to check which model should be used */ ? DatabankModels.models.get(DataNEssence.locate("essence_point") : DatabankModels.models.get(DataNEssence.locate("node_relay")););
+                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
+                //model = /* something here to check which model should be used */ ? DatabankModels.models.get(DataNEssence.locate("essence_point")) : DatabankModels.models.get(DataNEssence.locate("node_relay"));
             }
             return model;
         }
