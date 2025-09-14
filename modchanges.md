@@ -19,6 +19,7 @@
 - Nodes do not require tools to break them
 - Halved crafting time of Wire Synthesis
 - Buffed a certain Pastel seedling's output in the Plant Siphon
+- Retextured Traversite Road Chunk
 
 ### Fixes
 - Fixed Energized Shielding Rock Column being unbreakable
