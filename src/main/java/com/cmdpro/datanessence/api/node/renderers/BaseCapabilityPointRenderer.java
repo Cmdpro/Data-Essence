@@ -122,6 +122,8 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
     }
     public static class Model<T extends BaseCapabilityPointBlockEntity> extends DatabankBlockEntityModel<T> {
         public ResourceLocation texture;
+        public boolean isRelay; // as in BaseEssencePointRenderer, not currently set.
+
         public Model(ResourceLocation texture) {
             this.texture = texture;
         }
@@ -137,13 +139,8 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             animate(pEntity.animState);
         }
 
-        public DatabankModel model;
         public DatabankModel getModel() {
-            if (model == null) {
-                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
-                //model = /* something here to check which model should be used */ ? DatabankModels.models.get(DataNEssence.locate("essence_point")) : DatabankModels.models.get(DataNEssence.locate("node_relay"));
-            }
-            return model;
+            return isRelay ? DatabankModels.models.get(DataNEssence.locate("node_relay")) : DatabankModels.models.get(DataNEssence.locate("essence_point"));
         }
     }
 }

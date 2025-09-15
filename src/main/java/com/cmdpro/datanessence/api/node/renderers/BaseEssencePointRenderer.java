@@ -1,6 +1,5 @@
 package com.cmdpro.datanessence.api.node.renderers;
 
-import com.cmdpro.databank.ClientDatabankUtils;
 import com.cmdpro.databank.misc.RenderingUtil;
 import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
@@ -9,7 +8,6 @@ import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
@@ -17,9 +15,6 @@ import com.cmdpro.datanessence.client.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.animation.AnimationDefinition;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -122,6 +117,8 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
 
     public static class Model<T extends BaseEssencePointBlockEntity> extends DatabankBlockEntityModel<T> {
         public ResourceLocation texture;
+        public boolean isRelay; // not currently set anywhere. idk where to do so such that it runs every frame
+
         public Model(ResourceLocation texture) {
             this.texture = texture;
         }
@@ -137,13 +134,8 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             animate(pEntity.animState);
         }
 
-        public DatabankModel model;
         public DatabankModel getModel() {
-            if (model == null) {
-                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
-                //model = /* something here to check which model should be used */ ? DatabankModels.models.get(DataNEssence.locate("essence_point")) : DatabankModels.models.get(DataNEssence.locate("node_relay"));
-            }
-            return model;
+            return isRelay ? DatabankModels.models.get(DataNEssence.locate("node_relay")) : DatabankModels.models.get(DataNEssence.locate("essence_point"));
         }
     }
 

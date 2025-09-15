@@ -42,6 +42,8 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
     }
 
     public List<BlockPos> link;
+    public boolean isRelay;
+
     public final ItemStackHandler universalUpgrade = new ItemStackHandler(1) {
         @Override
         protected void onContentsChanged(int slot) {
@@ -96,23 +98,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         }
     }
     public abstract Color linkColor();
-    @Override
-    protected void saveAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        super.saveAdditional(pTag, pRegistries);
-        pTag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
-        pTag.put("universalUpgrade", universalUpgrade.serializeNBT(pRegistries));
-        ListTag list = new ListTag();
-        if (link != null) {
-            for (BlockPos target : link) {
-                CompoundTag blockpos = new CompoundTag();
-                blockpos.putInt("linkX", target.getX());
-                blockpos.putInt("linkY", target.getY());
-                blockpos.putInt("linkZ", target.getZ());
-                list.add(blockpos);
-            }
-        }
-        pTag.put("link", list);
-    }
+
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseCapabilityPointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
             if (pBlockEntity.link == null) {
@@ -127,6 +113,12 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
                 pBlockEntity.transfer(pBlockEntity, ends);
                 pBlockEntity.postTransferHooks(pBlockEntity, ends);
             }
+
+            // check if this node is a relay
+            var incoming = networks.graph.incomingEdgesOf(pPos);
+            var outgoing = networks.graph.outgoingEdgesOf(pPos);
+            pBlockEntity.isRelay = (!incoming.isEmpty() && !outgoing.isEmpty());
+
         } else {
             if (pBlockEntity.link == null) {
                 pBlockEntity.link = new ArrayList<>();
@@ -198,6 +190,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         }
         uniqueUpgrade.deserializeNBT(pRegistries, tag.getCompound("uniqueUpgrade"));
         universalUpgrade.deserializeNBT(pRegistries, tag.getCompound("universalUpgrade"));
+        isRelay = tag.getBoolean("Relay");
     }
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
@@ -215,6 +208,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         tag.put("link", list);
         tag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
         tag.put("universalUpgrade", universalUpgrade.serializeNBT(pRegistries));
+        tag.putBoolean("Relay", isRelay);
         return tag;
     }
     public void updateBlock() {
@@ -224,9 +218,9 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
         this.setChanged();
     }
     @Override
-    public void loadAdditional(CompoundTag pTag, HolderLookup.Provider pRegistries) {
-        super.loadAdditional(pTag, pRegistries);
-        ListTag list = (ListTag)pTag.get("link");
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider pRegistries) {
+        super.loadAdditional(tag, pRegistries);
+        ListTag list = (ListTag)tag.get("link");
         if (link == null) {
             link = new ArrayList<>();
         }
@@ -235,8 +229,27 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
             CompoundTag blockpos = (CompoundTag)i;
             link.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
         }
-        uniqueUpgrade.deserializeNBT(pRegistries, pTag.getCompound("uniqueUpgrade"));
-        universalUpgrade.deserializeNBT(pRegistries, pTag.getCompound("universalUpgrade"));
+        uniqueUpgrade.deserializeNBT(pRegistries, tag.getCompound("uniqueUpgrade"));
+        universalUpgrade.deserializeNBT(pRegistries, tag.getCompound("universalUpgrade"));
+        isRelay = tag.getBoolean("Relay");
     }
 
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider pRegistries) {
+        super.saveAdditional(tag, pRegistries);
+        tag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
+        tag.put("universalUpgrade", universalUpgrade.serializeNBT(pRegistries));
+        ListTag list = new ListTag();
+        if (link != null) {
+            for (BlockPos target : link) {
+                CompoundTag blockpos = new CompoundTag();
+                blockpos.putInt("linkX", target.getX());
+                blockpos.putInt("linkY", target.getY());
+                blockpos.putInt("linkZ", target.getZ());
+                list.add(blockpos);
+            }
+        }
+        tag.put("link", list);
+        tag.putBoolean("Relay", isRelay);
+    }
 }
