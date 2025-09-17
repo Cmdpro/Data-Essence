@@ -17,6 +17,7 @@ import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
+import com.cmdpro.datanessence.block.auxiliary.EssenceReaderBlockEntity;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.data.pinging.PingableStructure;
@@ -188,6 +189,42 @@ public class ClientEvents {
                     }
                 }
                 if (mc.hitResult instanceof BlockHitResult blockHitResult) {
+
+                    // Render the Essence Reader's selected essence above it
+                    if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceReaderBlockEntity reader) {
+                        Optional<EssenceType> type;
+                        if (reader.selectedEssences != null) {
+                            type = reader.selectedEssences.stream().findFirst();
+                        } else {
+                            type = Optional.empty();
+                        }
+
+                        int width = 10;
+                        int height = 10;
+                        float div = 24f;
+                        float worldWidth = width / div;
+                        float worldHeight = height / div;
+
+                        if (type.isPresent()) {
+                            RenderProjectionUtil.project((graphics) -> {
+                                ClientEssenceBarUtil.drawEssenceIcon(graphics, 0, 0, type.get());
+                            }, (poseStack) -> {
+                                Vec3 center = blockHitResult.getBlockPos().getCenter();
+                                Vec2 angle = calculateRotationVector(center, Minecraft.getInstance().player.getEyePosition());
+
+                                poseStack.pushPose();
+                                poseStack.translate(center.x, center.y+0.1d, center.z);
+                                poseStack.pushPose();
+                                poseStack.mulPose(Axis.YP.rotationDegrees(-angle.y + 180));
+                            }, (poseStack) -> {
+                                poseStack.popPose();
+                                poseStack.popPose();
+                            }, bufferSource, new Vec3(-worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, -worldHeight / 2f, 0), new Vec3(-worldWidth / 2f, -worldHeight / 2f, 0), width, height);
+                            ;
+                        }
+                    }
+
+                    // Essence Meter rendering
                     if (mc.player.isHolding((item) -> item.getItem() instanceof EssenceMeter)) {
                         if (EssenceMeter.currentMachineEssenceValue != null && EssenceMeter.currentMachineEssenceValue.pos.equals(blockHitResult.getBlockPos())) {
                             if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity essenceBlockEntity) {
