@@ -1,6 +1,5 @@
 package com.cmdpro.datanessence.api.node.renderers;
 
-import com.cmdpro.databank.ClientDatabankUtils;
 import com.cmdpro.databank.misc.RenderingUtil;
 import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
@@ -17,9 +16,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.animation.AnimationDefinition;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -34,18 +30,20 @@ import java.awt.*;
 
 
 public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointBlockEntity> extends DatabankBlockEntityRenderer<T> {
-    public BaseCapabilityPointRenderer(DatabankBlockEntityModel<T> model) {
+    public Model<T> model;
+    public RelayModel<T> relayModel;
+
+    public BaseCapabilityPointRenderer(Model<T> model, RelayModel<T> relayModel) {
         super(model);
+        this.model = model;
+        this.relayModel = relayModel;
     }
 
-    private int getSegWithOffset(int seg, int offset) {
-        int segment = seg+offset;
-        if (segment < 0) {
-            segment = segment + 8;
-        }
-        segment = segment % 8;
-        return segment;
+    @Override
+    public DatabankBlockEntityModel<T> getModel(T pBlockEntity) {
+        return pBlockEntity.isRelay ? relayModel : model;
     }
+
     @Override
     public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
         if (pBlockEntity.link != null) {
@@ -96,6 +94,16 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         pPoseStack.popPose();
         super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
     }
+
+    private int getSegWithOffset(int seg, int offset) {
+        int segment = seg+offset;
+        if (segment < 0) {
+            segment = segment + 8;
+        }
+        segment = segment % 8;
+        return segment;
+    }
+
     public void rotateStack(AttachFace face, Direction facing, PoseStack poseStack) {
         Vec3 rotateAround = new Vec3(0.5, 0.5, 0.5);
         if (face.equals(AttachFace.CEILING)) {
@@ -116,13 +124,14 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             }
         }
     }
+
     @Override
     public AABB getRenderBoundingBox(T blockEntity) {
         return AABB.INFINITE;
     }
+
     public static class Model<T extends BaseCapabilityPointBlockEntity> extends DatabankBlockEntityModel<T> {
         public ResourceLocation texture;
-        public boolean isRelay; // as in BaseEssencePointRenderer, not currently set.
 
         public Model(ResourceLocation texture) {
             this.texture = texture;
@@ -140,7 +149,19 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
         }
 
         public DatabankModel getModel() {
-            return isRelay ? DatabankModels.models.get(DataNEssence.locate("node_relay")) : DatabankModels.models.get(DataNEssence.locate("essence_point"));
+            return DatabankModels.models.get(DataNEssence.locate("essence_point"));
+        }
+    }
+
+    public static class RelayModel<T extends BaseCapabilityPointBlockEntity> extends Model<T> {
+
+        public RelayModel(ResourceLocation texture) {
+            super(texture);
+        }
+
+        @Override
+        public DatabankModel getModel() {
+            return DatabankModels.models.get(DataNEssence.locate("node_relay"));
         }
     }
 }
