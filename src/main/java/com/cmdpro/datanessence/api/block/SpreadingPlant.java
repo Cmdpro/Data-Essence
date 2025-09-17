@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.MushroomBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 
-public class SpreadingPlant extends Block {
+public class SpreadingPlant extends Block implements GenderfluidGrowable {
     public int spreadChance; // how often this plant grows by spreading, like mushrooms
     public int plantLimit; // how many plants can be in a 9x3x9 volume around the original plant before it will stop spreading
 
@@ -29,14 +29,7 @@ public class SpreadingPlant extends Block {
         grow(state, world, pos, random, spreadChance);
     }
 
-    /**
-     * Trigger a mushroom-like growth in this plant.
-     * @param state block state to operate on
-     * @param world world to operate in
-     * @param pos coords of the block
-     * @param random random source
-     * @param chance how often the growth may occur (works inverse of what one may intuit - smaller number is more frequent!)
-     */
+    @Override
     public void grow(BlockState state, ServerLevel world, BlockPos pos, RandomSource random, int chance) {
         if (random.nextInt(chance) == 0) {
 

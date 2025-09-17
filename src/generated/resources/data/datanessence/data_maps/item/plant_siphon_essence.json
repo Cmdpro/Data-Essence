@@ -107,6 +107,16 @@
           "modid": "pastel"
         }
       ],
+      "amount_per_tick": 12.0,
+      "ticks": 100
+    },
+    "pastel:jade_vine_petals": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
       "amount_per_tick": 8.0,
       "ticks": 100
     },
@@ -151,6 +161,16 @@
       "ticks": 100
     },
     "pastel:nightdew_sprout": {
+      "neoforge:conditions": [
+        {
+          "type": "neoforge:mod_loaded",
+          "modid": "pastel"
+        }
+      ],
+      "amount_per_tick": 4.0,
+      "ticks": 50
+    },
+    "pastel:quitoxic_reeds": {
       "neoforge:conditions": [
         {
           "type": "neoforge:mod_loaded",

@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.fluid;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.block.SpreadingPlant;
+import com.cmdpro.datanessence.api.block.GenderfluidGrowable;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.vfx.PlayGenderfluidTransitionEffect;
 import com.cmdpro.datanessence.recipe.GenderfluidTransitionRecipe;
@@ -159,11 +159,11 @@ public class Genderfluid extends ModFluidType {
         @Override
         protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
             // in a volume of 9x3x9 centered around the fluid (as if you were hydrating farmland with it),
-            // grow SpreadingPlants somewhat often.
+            // grow GenderfluidGrowables somewhat often.
             for (BlockPos queryPos : BlockPos.betweenClosed(pos.offset(-4, -1, -4), pos.offset(4, 1, 4))) {
                 BlockState queryState = world.getBlockState(queryPos);
 
-                if (queryState.getBlock() instanceof SpreadingPlant plant) {
+                if (queryState.getBlock() instanceof GenderfluidGrowable plant) {
                     plant.grow(queryState, world, queryPos, world.getRandom(), 3);
                 }
             }

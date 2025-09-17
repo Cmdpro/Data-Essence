@@ -227,11 +227,12 @@ public class AncientSentinel extends Monster {
             AttackType type = currentType;
             if (canSee) {
                 this.seeTime++;
-                if (distance <= MAX_SHOOT_DISTANCE) {
-                    type = AttackType.SHOOT;
-                } else {
-                    type = AttackType.LASER;
-                }
+                type = AttackType.SHOOT; // laser rendering still WIP
+//                if (distance <= MAX_SHOOT_DISTANCE) {
+//                    type = AttackType.SHOOT;
+//                } else {
+//                    type = AttackType.LASER;
+//                }
             } else {
                 this.seeTime = 0;
                 type = AttackType.NONE;

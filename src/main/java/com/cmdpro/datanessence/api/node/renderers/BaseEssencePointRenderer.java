@@ -1,6 +1,5 @@
 package com.cmdpro.datanessence.api.node.renderers;
 
-import com.cmdpro.databank.ClientDatabankUtils;
 import com.cmdpro.databank.misc.RenderingUtil;
 import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
@@ -9,7 +8,6 @@ import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.databank.rendering.RenderHandler;
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
 import com.cmdpro.datanessence.block.transmission.EssencePoint;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePointBlockEntity;
@@ -17,9 +15,6 @@ import com.cmdpro.datanessence.client.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.animation.AnimationDefinition;
-import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.BlockPos;
@@ -34,17 +29,20 @@ import java.awt.*;
 
 
 public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEntity> extends DatabankBlockEntityRenderer<T> {
-    public BaseEssencePointRenderer(Model<T> model) {
+    public Model<T> model;
+    public RelayModel<T> relayModel;
+
+    public BaseEssencePointRenderer(Model<T> model, RelayModel<T> relayModel) {
         super(model);
+        this.model = model;
+        this.relayModel = relayModel;
     }
-    private int getSegWithOffset(int seg, int offset) {
-        int segment = seg+offset;
-        if (segment < 0) {
-            segment = segment + 8;
-        }
-        segment = segment % 8;
-        return segment;
+
+    @Override
+    public DatabankBlockEntityModel<T> getModel(T pBlockEntity) {
+        return pBlockEntity.isRelay ? relayModel : model;
     }
+
     @Override
     public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
         if (pBlockEntity.link != null) {
@@ -73,7 +71,7 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             pPoseStack.popPose();
         }
         Color color = pBlockEntity.linkColor();
-        pBufferSource.getBuffer(getModel().getRenderType(pBlockEntity));
+        pBufferSource.getBuffer(getModel(pBlockEntity).getRenderType(pBlockEntity));
         AttachFace face = pBlockEntity.getBlockState().getValue(EssencePoint.FACE);
         Direction facing = pBlockEntity.getBlockState().getValue(EssencePoint.FACING);
         rotateStack(face, facing, pPoseStack);
@@ -95,6 +93,16 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
         pPoseStack.popPose();
         super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
     }
+
+    private int getSegWithOffset(int seg, int offset) {
+        int segment = seg+offset;
+        if (segment < 0) {
+            segment = segment + 8;
+        }
+        segment = segment % 8;
+        return segment;
+    }
+
     public void rotateStack(AttachFace face, Direction facing, PoseStack poseStack) {
         Vec3 rotateAround = new Vec3(0.5, 0.5, 0.5);
         if (face.equals(AttachFace.CEILING)) {
@@ -115,6 +123,7 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             }
         }
     }
+
     @Override
     public AABB getRenderBoundingBox(T blockEntity) {
         return AABB.INFINITE;
@@ -122,6 +131,7 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
 
     public static class Model<T extends BaseEssencePointBlockEntity> extends DatabankBlockEntityModel<T> {
         public ResourceLocation texture;
+
         public Model(ResourceLocation texture) {
             this.texture = texture;
         }
@@ -137,12 +147,21 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             animate(pEntity.animState);
         }
 
-        public DatabankModel model;
+        @Override
         public DatabankModel getModel() {
-            if (model == null) {
-                model = DatabankModels.models.get(DataNEssence.locate("essence_point"));
-            }
-            return model;
+            return DatabankModels.models.get(DataNEssence.locate("essence_point"));
+        }
+    }
+
+    public static class RelayModel<T extends BaseEssencePointBlockEntity> extends Model<T> {
+
+        public RelayModel(ResourceLocation texture) {
+            super(texture);
+        }
+
+        @Override
+        public DatabankModel getModel() {
+            return DatabankModels.models.get(DataNEssence.locate("node_relay"));
         }
     }
 
