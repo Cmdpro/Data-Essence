@@ -29,19 +29,25 @@ import java.awt.*;
 
 
 public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEntity> extends DatabankBlockEntityRenderer<T> {
-    public BaseEssencePointRenderer(Model<T> model) {
+    public boolean isRelay;
+    public Model model;
+    public RelayModel relayModel;
+
+    public BaseEssencePointRenderer(Model<T> model, RelayModel relayModel) {
         super(model);
+        this.model = model;
+        this.relayModel = relayModel;
     }
-    private int getSegWithOffset(int seg, int offset) {
-        int segment = seg+offset;
-        if (segment < 0) {
-            segment = segment + 8;
-        }
-        segment = segment % 8;
-        return segment;
+
+    @Override
+    public DatabankBlockEntityModel<T> getModel() {
+        return isRelay ? relayModel : model;
     }
+
     @Override
     public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
+        isRelay = pBlockEntity.isRelay;
+
         if (pBlockEntity.link != null) {
             BlockPos blockPos = pBlockEntity.getBlockPos();
             Vec3 pos = blockPos.getCenter();
@@ -90,6 +96,16 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
         pPoseStack.popPose();
         super.render(pBlockEntity, pPartialTick, pPoseStack, pBufferSource, pPackedLight, pPackedOverlay);
     }
+
+    private int getSegWithOffset(int seg, int offset) {
+        int segment = seg+offset;
+        if (segment < 0) {
+            segment = segment + 8;
+        }
+        segment = segment % 8;
+        return segment;
+    }
+
     public void rotateStack(AttachFace face, Direction facing, PoseStack poseStack) {
         Vec3 rotateAround = new Vec3(0.5, 0.5, 0.5);
         if (face.equals(AttachFace.CEILING)) {
@@ -110,6 +126,7 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             }
         }
     }
+
     @Override
     public AABB getRenderBoundingBox(T blockEntity) {
         return AABB.INFINITE;
@@ -117,7 +134,6 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
 
     public static class Model<T extends BaseEssencePointBlockEntity> extends DatabankBlockEntityModel<T> {
         public ResourceLocation texture;
-        public boolean isRelay; // not currently set anywhere. idk where to do so such that it runs every frame
 
         public Model(ResourceLocation texture) {
             this.texture = texture;
@@ -135,7 +151,18 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
         }
 
         public DatabankModel getModel() {
-            return isRelay ? DatabankModels.models.get(DataNEssence.locate("node_relay")) : DatabankModels.models.get(DataNEssence.locate("essence_point"));
+            return DatabankModels.models.get(DataNEssence.locate("essence_point"));
+        }
+    }
+
+    public static class RelayModel extends Model {
+
+        public RelayModel(ResourceLocation texture) {
+            super(texture);
+        }
+
+        public DatabankModel getModel() {
+            return DatabankModels.models.get(DataNEssence.locate("node_relay"));
         }
     }
 
