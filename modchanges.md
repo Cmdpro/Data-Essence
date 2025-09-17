@@ -27,3 +27,4 @@
 - Fixed edges of the Industrial Essence Battery glowing alongside the fill display
 - Fixed Upgrade Sigils being voided upon breaking an upgraded node
 - Fixed Explosive Charge Synthesis requiring the Synthesis Chamber entry
+- Fixed Chemical Nodes crashing due to null capability
