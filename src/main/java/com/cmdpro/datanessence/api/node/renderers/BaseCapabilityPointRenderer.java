@@ -74,7 +74,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             pPoseStack.popPose();
         }
         Color color = pBlockEntity.linkColor();
-        pBufferSource.getBuffer(getModel().getRenderType(pBlockEntity));
+        pBufferSource.getBuffer(getModel(pBlockEntity).getRenderType(pBlockEntity));
         AttachFace face = pBlockEntity.getBlockState().getValue(EssencePoint.FACE);
         Direction facing = pBlockEntity.getBlockState().getValue(EssencePoint.FACING);
         rotateStack(face, facing, pPoseStack);

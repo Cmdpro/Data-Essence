@@ -5,6 +5,8 @@ import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
+import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
+import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,10 +23,14 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.graph.DefaultEdge;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -43,6 +49,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
 
     public List<BlockPos> link;
     public boolean isRelay;
+    boolean wasRelay;
 
     public final ItemStackHandler universalUpgrade = new ItemStackHandler(1) {
         @Override
@@ -113,16 +120,27 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
                 pBlockEntity.transfer(pBlockEntity, ends);
                 pBlockEntity.postTransferHooks(pBlockEntity, ends);
             }
-
-            // check if this node is a relay
-            var incoming = networks.graph.incomingEdgesOf(pPos);
-            var outgoing = networks.graph.outgoingEdgesOf(pPos);
-            pBlockEntity.isRelay = (!incoming.isEmpty() && !outgoing.isEmpty());
-
         } else {
             if (pBlockEntity.link == null) {
                 pBlockEntity.link = new ArrayList<>();
             }
+            if (pBlockEntity.wasRelay != pBlockEntity.isRelay) {
+                Color color = pBlockEntity.linkColor();
+                for (int i = 0; i < 32; i++) {
+                    CircleParticleOptions options = new CircleParticleOptions();
+                    options.setColor(color);
+                    Vec3 center = pPos.getCenter();
+                    float angle = (360f/32f)*(float)i;
+                    Vector3f spd = new Vector3f((float)Math.sin(Math.toRadians(angle)), 0, (float)Math.cos(Math.toRadians(angle))).mul(0.2f);
+                    AttachFace attachFace = pState.getValue(BaseCapabilityPoint.FACE);
+                    Direction direction = pState.getValue(BaseCapabilityPoint.FACING);
+                    if (attachFace.equals(AttachFace.WALL)) {
+                        spd.rotate(direction.getRotation());
+                    }
+                    pLevel.addParticle(options, center.x, center.y, center.z, spd.x, spd.y, spd.z);
+                }
+            }
+            pBlockEntity.wasRelay = pBlockEntity.isRelay;
         }
     }
     public void updateLinks() {
@@ -213,6 +231,10 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
         return tag;
     }
     public void updateBlock() {
+        BlockPosNetworks networks = level.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
+        var incoming = networks.graph.incomingEdgesOf(getBlockPos());
+        var outgoing = networks.graph.outgoingEdgesOf(getBlockPos());
+        isRelay = (!incoming.isEmpty() && !outgoing.isEmpty());
         updateLinks();
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);

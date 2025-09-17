@@ -154,6 +154,7 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                                 if ((linkFrom.get() instanceof BaseEssencePointBlockEntity linkFrom2) && linkFrom.get().getBlockPos().closerThan(ent.getBlockPos(), DataNEssenceConfig.wireDistanceLimit)) {
                                     networks.graph.addEdge(linkFrom2.getBlockPos(), pPos);
                                     linkFrom2.updateBlock();
+                                    ent.updateBlock();
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                                     pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
@@ -211,6 +212,10 @@ public abstract class BaseEssencePoint extends Block implements EntityBlock {
                                 ItemEntity item = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, new ItemStack(getRequiredWire()));
                                 pLevel.addFreshEntity(item);
                                 networks.graph.removeEdge(i);
+                                BlockPos to = networks.graph.getEdgeTarget(i);
+                                if (pLevel.getBlockEntity(to) instanceof BaseEssencePointBlockEntity toEnt) {
+                                    toEnt.updateBlock();
+                                }
                             }
                         }
                         ent.updateBlock();

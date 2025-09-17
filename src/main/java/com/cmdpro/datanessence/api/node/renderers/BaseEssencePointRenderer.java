@@ -29,25 +29,22 @@ import java.awt.*;
 
 
 public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEntity> extends DatabankBlockEntityRenderer<T> {
-    public boolean isRelay;
-    public Model model;
-    public RelayModel relayModel;
+    public Model<T> model;
+    public RelayModel<T> relayModel;
 
-    public BaseEssencePointRenderer(Model<T> model, RelayModel relayModel) {
+    public BaseEssencePointRenderer(Model<T> model, RelayModel<T> relayModel) {
         super(model);
         this.model = model;
         this.relayModel = relayModel;
     }
 
     @Override
-    public DatabankBlockEntityModel<T> getModel() {
-        return isRelay ? relayModel : model;
+    public DatabankBlockEntityModel<T> getModel(T pBlockEntity) {
+        return pBlockEntity.isRelay ? relayModel : model;
     }
 
     @Override
     public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
-        isRelay = pBlockEntity.isRelay;
-
         if (pBlockEntity.link != null) {
             BlockPos blockPos = pBlockEntity.getBlockPos();
             Vec3 pos = blockPos.getCenter();
@@ -74,7 +71,7 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             pPoseStack.popPose();
         }
         Color color = pBlockEntity.linkColor();
-        pBufferSource.getBuffer(getModel().getRenderType(pBlockEntity));
+        pBufferSource.getBuffer(getModel(pBlockEntity).getRenderType(pBlockEntity));
         AttachFace face = pBlockEntity.getBlockState().getValue(EssencePoint.FACE);
         Direction facing = pBlockEntity.getBlockState().getValue(EssencePoint.FACING);
         rotateStack(face, facing, pPoseStack);
@@ -150,17 +147,19 @@ public abstract class BaseEssencePointRenderer<T extends BaseEssencePointBlockEn
             animate(pEntity.animState);
         }
 
+        @Override
         public DatabankModel getModel() {
             return DatabankModels.models.get(DataNEssence.locate("essence_point"));
         }
     }
 
-    public static class RelayModel extends Model {
+    public static class RelayModel<T extends BaseEssencePointBlockEntity> extends Model<T> {
 
         public RelayModel(ResourceLocation texture) {
             super(texture);
         }
 
+        @Override
         public DatabankModel getModel() {
             return DatabankModels.models.get(DataNEssence.locate("node_relay"));
         }
