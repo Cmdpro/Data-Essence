@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block.processing;
 
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
@@ -14,6 +15,7 @@ import com.cmdpro.datanessence.recipe.*;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.SynthesisChamberMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -42,7 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, ILockableContainer {
+public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, ILockableContainer, Machine {
     public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
@@ -319,5 +321,10 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
         public static void markIndustrialFactorySong(BlockPos pos) {
             industrialSound.addSource(pos);
         }
+    }
+
+    @Override
+    public List<Direction> getValidInputDirections() {
+        return List.of(Direction.DOWN, Direction.EAST, Direction.WEST);
     }
 }
