@@ -1,18 +1,18 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
 import com.cmdpro.datanessence.api.util.BufferUtil;
 import com.cmdpro.datanessence.recipe.DryingRecipe;
-import com.cmdpro.datanessence.recipe.EntropicProcessingRecipe;
-import com.cmdpro.datanessence.recipe.IFabricationRecipe;
 import com.cmdpro.datanessence.recipe.RecipeInputWithFluid;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.DryingTableMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -31,7 +31,6 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.common.util.Lazy;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
@@ -45,7 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class DryingTableBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+public class DryingTableBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, Machine {
 
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     public int workTime;
@@ -75,10 +74,6 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
         }
     };
 
-    
-    
-    
-
     public IFluidHandler getFluidHandler() {
         return fluidHandler;
     }
@@ -88,10 +83,12 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
     public IItemHandler getOutputHandler() {
         return outputItemHandler;
     }
+
     private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
     public CombinedInvWrapper getCombinedInvWrapper() {
         return combinedInvWrapper;
     }
+
     public DryingTableBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistry.DRYING_TABLE.get(), pos, blockState);
     }
@@ -232,5 +229,10 @@ public class DryingTableBlockEntity extends BlockEntity implements MenuProvider,
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
+    }
+
+    @Override
+    public List<Direction> getValidInputDirections() {
+        return List.of(Direction.DOWN, Direction.UP);
     }
 }

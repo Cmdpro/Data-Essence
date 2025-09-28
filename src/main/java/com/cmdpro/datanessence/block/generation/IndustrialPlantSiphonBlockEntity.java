@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.block.generation;
 
 import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
@@ -15,6 +16,7 @@ import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.IndustrialPlantSiphonMenu;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -36,7 +38,9 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+import java.util.List;
+
+public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, Machine {
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("working", (state, anim) -> {}, (state, anim) -> {}));
@@ -198,5 +202,10 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         public static void markFactorySong(BlockPos pos) {
             workingSound.addSource(pos);
         }
+    }
+
+    @Override
+    public List<Direction> getValidInputDirections() {
+        return List.of(Direction.DOWN, Direction.NORTH, Direction.EAST, Direction.WEST);
     }
 }

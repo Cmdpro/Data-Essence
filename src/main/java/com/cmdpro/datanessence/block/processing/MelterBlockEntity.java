@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
@@ -10,6 +11,7 @@ import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.cmdpro.datanessence.screen.MelterMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -36,9 +38,10 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
-public class MelterBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+public class MelterBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, Machine {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
     public EssenceStorage getStorage() {
@@ -221,5 +224,10 @@ public class MelterBlockEntity extends BlockEntity implements MenuProvider, Esse
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new MelterMenu(pContainerId, pInventory, this);
+    }
+
+    @Override
+    public List<Direction> getValidInputDirections() {
+        return List.of(Direction.DOWN, Direction.UP);
     }
 }
