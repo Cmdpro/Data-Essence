@@ -13,9 +13,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
@@ -44,6 +42,19 @@ public class AncientSentinel extends Monster {
                 .add(Attributes.ATTACK_DAMAGE, 0f)
                 .add(Attributes.ATTACK_SPEED, 0f)
                 .add(Attributes.MOVEMENT_SPEED, 0f).build();
+    }
+
+    public boolean isPercentDamage(Entity projectile, LivingEntity target) {
+        return target instanceof Player || (target instanceof OwnableEntity ownable && ownable.getOwner() != null && ownable.getOwner() instanceof Player);
+    }
+    public float getPercentDamage(Entity projectile, LivingEntity target) {
+        if (projectile instanceof AncientSentinelProjectile) {
+            return 1f/8f;
+        }
+        if (projectile instanceof AncientSentinelLaser) {
+            return 1f/4f;
+        }
+        return 0f;
     }
 
     @Override
@@ -227,12 +238,12 @@ public class AncientSentinel extends Monster {
             AttackType type = currentType;
             if (canSee) {
                 this.seeTime++;
-                type = AttackType.SHOOT; // laser rendering still WIP
-//                if (distance <= MAX_SHOOT_DISTANCE) {
-//                    type = AttackType.SHOOT;
-//                } else {
-//                    type = AttackType.LASER;
-//                }
+                type = AttackType.SHOOT;
+                if (distance <= MAX_SHOOT_DISTANCE) {
+                    type = AttackType.SHOOT;
+                } else {
+                    type = AttackType.LASER;
+                }
             } else {
                 this.seeTime = 0;
                 type = AttackType.NONE;
