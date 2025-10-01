@@ -162,5 +162,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(TagRegistry.Blocks.SCANNABLE_ORES)
                 .addTag(Tags.Blocks.ORES)
                 .add(BlockRegistry.ESSENCE_CRYSTAL.get());
+
+        this.tag(TagRegistry.Blocks.STRUCTURE_PROTECTOR_IGNORED)
+                .addTag(TagRegistry.Blocks.PUZZLE_COMPONENTS)
+                .add(BlockRegistry.STRUCTURE_PROTECTOR.get());
+
+        this.tag(TagRegistry.Blocks.PUZZLE_COMPONENTS);
     }
 }
