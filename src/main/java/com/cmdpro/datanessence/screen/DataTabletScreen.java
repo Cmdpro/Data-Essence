@@ -10,6 +10,7 @@ import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
+
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
@@ -20,7 +21,6 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.phys.Vec2;
@@ -36,6 +36,7 @@ public class DataTabletScreen extends Screen {
     public static final ResourceLocation TEXTURE_FRAME = DataNEssence.locate("textures/gui/data_tablet_frame.png");
     public static final ResourceLocation TEXTURE_MAIN = DataNEssence.locate("textures/gui/data_tablet.png");
     public static final ResourceLocation TEXTURE_PAGE = DataNEssence.locate("textures/gui/data_tablet_page.png");
+    public static final ResourceLocation TEXTURE_PUZZLE = DataNEssence.locate("textures/gui/data_tablet_puzzle.png");
     public static final ResourceLocation TEXTURE_CRAFTING = DataNEssence.locate("textures/gui/data_tablet_crafting.png");
     public static final ResourceLocation TEXTURE_CRAFTING2 = DataNEssence.locate("textures/gui/data_tablet_crafting2.png");
     public static final ResourceLocation TEXTURE_MISC = DataNEssence.locate("textures/gui/data_tablet_misc.png");
@@ -46,7 +47,7 @@ public class DataTabletScreen extends Screen {
     public static int savedPage;
     public double offsetX;
     public double offsetY;
-    public int screenType;
+    public ScreenType screenType;
     public Entry clickedEntry;
     public int page;
     public int ticks;
@@ -62,17 +63,19 @@ public class DataTabletScreen extends Screen {
             for (Entry i : Entries.entries.values()) {
                 if (i.id.equals(savedEntry)) {
                     clickedEntry = i;
-                    screenType = 2;
+                    screenType = ScreenType.ENTRY;
                     page = savedPage;
                     break;
                 }
             }
+        } else {
+            screenType = ScreenType.MAIN;
         }
     }
 
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
-        if (pButton == 0 && (screenType == 0 || screenType == 1)) {
+        if (pButton == 0 && screenType == ScreenType.MAIN) {
             offsetX += pDragX;
             offsetY += pDragY;
             return true;
@@ -86,9 +89,10 @@ public class DataTabletScreen extends Screen {
         }
         return clickEntry(entry);
     }
+
     public boolean clickEntry(Entry entry) {
         Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK.value(), 1.0F));
-        screenType = 2;
+        screenType = ScreenType.ENTRY;
         clickedEntry = entry;
         scrollbarPixels = 0;
         page = 0;
@@ -107,7 +111,7 @@ public class DataTabletScreen extends Screen {
     public boolean mouseClicked(double pMouseX, double pMouseY, int pButton) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        if (screenType == 0) {
+        if (screenType == ScreenType.MAIN) {
             if (pMouseX >= x && pMouseY >= y && pMouseX <= x+imageWidth && pMouseY <= y+imageHeight) {
                 for (Entry entry : Entries.entries.values()) {
                     if (entry.tab.equals(currentTab.id) && isEntryUnlocked(entry)) {
@@ -150,11 +154,11 @@ public class DataTabletScreen extends Screen {
                 }
             }
         }
-        if (pButton == 1 && screenType == 2) {
-            screenType = 0;
+        if (pButton == 1 && screenType == ScreenType.ENTRY) {
+            screenType = ScreenType.MAIN;
             return true;
         }
-        if (pButton == 0 && screenType == 2) {
+        if (pButton == 0 && screenType == ScreenType.ENTRY) {
             if (!clickedEntry.getPagesClient().isEmpty()) {
                 int scrollbarX = x+247;
                 int scrollbarY = y+10;
@@ -229,6 +233,7 @@ public class DataTabletScreen extends Screen {
             }
         }
     }
+
     public boolean canHaveBattery() {
         return true;
     }
@@ -246,9 +251,10 @@ public class DataTabletScreen extends Screen {
             }
         }
     }
+
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
-        if (screenType == 2) {
+        if (screenType == ScreenType.ENTRY) {
             if (!clickedEntry.getPagesClient().isEmpty()) {
                 int scrollbarArea = 139;
                 int scrollMax = Math.max(0, clickedEntry.getPagesClient().get(page).getMaxScrollY() - (imageHeight - 3));
@@ -275,19 +281,15 @@ public class DataTabletScreen extends Screen {
 
     @Override
     public void onClose() {
-        if (screenType != 2) {
+        if (screenType != ScreenType.ENTRY) {
             super.onClose();
         } else {
-            screenType = 0;
+            screenType = ScreenType.MAIN;
         }
     }
 
     public ResourceLocation getTextureToUse() {
-        if (screenType == 2) {
-            return TEXTURE_PAGE;
-        } else {
-            return TEXTURE_MAIN;
-        }
+        return screenType.texture;
     }
 
     public int tabPage = 0;
@@ -297,7 +299,7 @@ public class DataTabletScreen extends Screen {
         super.render(graphics, mouseX, mouseY, delta);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
-        if (screenType == 0) {
+        if (screenType == ScreenType.MAIN) {
             int o = 0;
             for (DataTab i : getCurrentTabs()) {
                 int shift = 0;
@@ -321,7 +323,7 @@ public class DataTabletScreen extends Screen {
 
         renderBg(graphics, delta, mouseX, mouseY);
         graphics.enableScissor(x+3, y+3, x+imageWidth-3, y+imageHeight-3);
-        if (screenType == 0) {
+        if (screenType == ScreenType.MAIN) {
             drawEntries(graphics, delta, mouseX, mouseY);
             graphics.pose().pushPose();
             graphics.pose().translate(0, 0, 399);
@@ -330,15 +332,13 @@ public class DataTabletScreen extends Screen {
             graphics.blit(getTextureToUse(), x+imageWidth-7, y+3, 52, 166, 4, 4);
             graphics.blit(getTextureToUse(), x+imageWidth-7, y+imageHeight-7, 52, 170, 4, 4);
             graphics.pose().popPose();
-        } else if (screenType == 1) {
-
-        } else if (screenType == 2) {
+        } else if (screenType == ScreenType.ENTRY) {
             if (!clickedEntry.getPagesClient().isEmpty()) {
                 drawPage(clickedEntry.getPagesClient().get(page), graphics, delta, mouseX, mouseY);
             }
         }
         graphics.disableScissor();
-        if (screenType == 0) {
+        if (screenType == ScreenType.MAIN) {
             graphics.drawCenteredString(Minecraft.getInstance().font, Component.translatable("data_tablet.tier", ClientPlayerData.getTier()), x+(imageWidth/2), y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
 
             if (this.tabPage+2 < getSortedTabs().size()/6) {
@@ -398,7 +398,7 @@ public class DataTabletScreen extends Screen {
             if (tooltip != null) {
                 graphics.renderTooltip(Minecraft.getInstance().font, tooltip, mouseX, mouseY);
             }
-        } else if (screenType == 2) {
+        } else if (screenType == ScreenType.ENTRY) {
             graphics.drawCenteredString(Minecraft.getInstance().font, clickedEntry.getName(getEntryCompletionStage(clickedEntry)), x+imageWidth/2, y-(Minecraft.getInstance().font.lineHeight+4), 0xFFc90d8b);
             if (mouseX >= x+imageWidth && mouseX <= x+imageWidth+17 && mouseY >= y+10 && mouseY <= y+10+21) {
                 Component tooltip = !Screen.hasShiftDown() ? Component.translatable("tooltip.datanessence.save_and_exit") : Component.translatable("tooltip.datanessence.save_and_exit_sneak");
@@ -524,9 +524,11 @@ public class DataTabletScreen extends Screen {
         GlStateManager._depthMask(true);
         RenderSystem.lineWidth(1);
     }
+
     public Color getLineColor1(Entry source, Entry destination, float pPartialTick, int pMouseX, int pMouseY) {
         return new Color(17, 20, 38, 255);
     }
+
     public Color getLineColor2(Entry source, Entry destination, float pPartialTick, int pMouseX, int pMouseY) {
         return new Color(70, 216, 252, 255);
     }
@@ -534,6 +536,7 @@ public class DataTabletScreen extends Screen {
     public List<DataTab> getSortedTabs() {
         return Entries.tabsSorted;
     }
+
     public List<DataTab> getCurrentTabs() {
         List<DataTab> tabs = new ArrayList<>();
         List<DataTab> sorted = getSortedTabs();
@@ -557,10 +560,12 @@ public class DataTabletScreen extends Screen {
         }
         return tabs;
     }
+
     @Override
     public boolean isPauseScreen() {
         return false;
     }
+
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -589,19 +594,37 @@ public class DataTabletScreen extends Screen {
             }
         }
     }
+
     public Vector2i getEntryPosition(Entry entry) {
         return new Vector2i(entry.x, entry.y);
     }
+
     public boolean isEntryUnlocked(Entry entry) {
         return entry.isDefault || entry.isVisibleClient();
     }
+
     public int getEntryCompletionStage(Entry entry) {
         return entry.getIncompleteStageClient();
     }
+
     public List<Entry> getEntryParentEntries(Entry entry) {
         return entry.getParentEntries();
     }
+
     public List<ResourceLocation> getEntryParents(Entry entry) {
         return entry.parents;
+    }
+
+    public enum ScreenType {
+        MAIN (TEXTURE_MAIN),
+        ENTRY (TEXTURE_PAGE),
+        PUZZLE (TEXTURE_PUZZLE),
+        NOTEBOOK (TEXTURE_PAGE); // future addition; for player's notes
+
+        final ResourceLocation texture;
+
+        ScreenType(ResourceLocation texture) {
+            this.texture = texture;
+        }
     }
 }
