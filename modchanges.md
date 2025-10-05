@@ -3,7 +3,7 @@
 
 ### Changes
 - Allowed all machines to accept item inputs on certain sides via non-buffer methods (sides that allow inputs are detailed in the Data Tablet)
-- Retextured Bonding Powder, the Data Tablet, Essence Redirector, Essence Sword, Lensing Crystal
+- Retextured Bonding Powder, Data Drive, Data Tablet, Essence Redirector, Essence Sword, Lensing Crystal
 - Edited animation timing of Signal Tracker
 
 ### Fixes
