@@ -36,7 +36,6 @@ public class DataTabletScreen extends Screen {
     public static final ResourceLocation TEXTURE_FRAME = DataNEssence.locate("textures/gui/data_tablet_frame.png");
     public static final ResourceLocation TEXTURE_MAIN = DataNEssence.locate("textures/gui/data_tablet.png");
     public static final ResourceLocation TEXTURE_PAGE = DataNEssence.locate("textures/gui/data_tablet_page.png");
-    public static final ResourceLocation TEXTURE_PUZZLE = DataNEssence.locate("textures/gui/data_tablet_puzzle.png");
     public static final ResourceLocation TEXTURE_CRAFTING = DataNEssence.locate("textures/gui/data_tablet_crafting.png");
     public static final ResourceLocation TEXTURE_CRAFTING2 = DataNEssence.locate("textures/gui/data_tablet_crafting2.png");
     public static final ResourceLocation TEXTURE_MISC = DataNEssence.locate("textures/gui/data_tablet_misc.png");
@@ -299,6 +298,7 @@ public class DataTabletScreen extends Screen {
         super.render(graphics, mouseX, mouseY, delta);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
+
         if (screenType == ScreenType.MAIN) {
             int o = 0;
             for (DataTab i : getCurrentTabs()) {
@@ -618,7 +618,6 @@ public class DataTabletScreen extends Screen {
     public enum ScreenType {
         MAIN (TEXTURE_MAIN),
         ENTRY (TEXTURE_PAGE),
-        PUZZLE (TEXTURE_PUZZLE),
         NOTEBOOK (TEXTURE_PAGE); // future addition; for player's notes
 
         final ResourceLocation texture;

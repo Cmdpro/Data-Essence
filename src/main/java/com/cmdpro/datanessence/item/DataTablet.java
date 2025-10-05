@@ -5,8 +5,10 @@ import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.block.auxiliary.DataBankBlockEntity;
 import com.cmdpro.datanessence.data.datatablet.Entries;
 import com.cmdpro.datanessence.data.datatablet.Entry;
+import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import com.cmdpro.datanessence.registry.ItemRegistry;
+import com.cmdpro.datanessence.screen.DataTabletPuzzleScreen;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -36,10 +38,10 @@ public class DataTablet extends Item {
         if (pLevel.isClientSide) {
             Client.openScreen();
         } else {
-            if (DataTabletUtil.getTier(pPlayer) <= 0) {
-                DataTabletUtil.setTier(pPlayer, 1);
+            if (DataTabletUtil.getTier(pPlayer) <= 0 /* && puzzle completed */) {
+                //DataTabletUtil.setTier(pPlayer, 1);
             }
-            unlockStartingEntries(pPlayer);
+            //unlockStartingEntries(pPlayer);
         }
         return InteractionResultHolder.sidedSuccess(stack, pLevel.isClientSide);
     }
@@ -73,7 +75,11 @@ public class DataTablet extends Item {
 
     public static class Client {
         public static void openScreen() {
-            Minecraft.getInstance().setScreen(new DataTabletScreen(Component.empty()));
+            if (ClientPlayerData.getTier() < 1) {
+                Minecraft.getInstance().setScreen(new DataTabletPuzzleScreen(Component.empty()));
+            } else {
+                Minecraft.getInstance().setScreen(new DataTabletScreen(Component.empty()));
+            }
         }
     }
 }
