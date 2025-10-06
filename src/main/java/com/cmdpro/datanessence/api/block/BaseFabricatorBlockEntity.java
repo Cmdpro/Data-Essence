@@ -215,7 +215,7 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
     }
     public void tryCraft() {
         CraftingInput craftingInput = getCraftingInv().asCraftInput();
-        ItemStack stack = recipe.assemble(craftingInput, level.registryAccess()).copy();
+        ItemStack result = recipe.assemble(craftingInput, level.registryAccess()).copy();
         NonNullList<ItemStack> remaining = recipe.getRemainingItems(craftingInput);
         int left = getCraftingInv().asPositionedCraftInput().left();
         int top = getCraftingInv().asPositionedCraftInput().top();
@@ -231,28 +231,24 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
         for (int k = 0; k < craftingInput.height(); k++) {
             for (int l = 0; l < craftingInput.width(); l++) {
                 int i1 = l + left + (k + top) * craftWidth;
-                ItemStack itemstack = itemHandler.getStackInSlot(i1);
-                ItemStack itemstack1 = remaining.get(l + k * craftingInput.width());
-                if (!itemstack.isEmpty()) {
+                ItemStack existingItem = itemHandler.getStackInSlot(i1);
+                ItemStack remainderItem = remaining.get(l + k * craftingInput.width());
+
+                if (!existingItem.isEmpty()) {
                     itemHandler.extractItem(i1, 1, false);
-                    itemstack = itemHandler.getStackInSlot(i1);
+                    existingItem = itemHandler.getStackInSlot(i1); // we re-check this slot after crafting
                 }
 
-                if (!itemstack1.isEmpty()) {
-                    if (itemstack.isEmpty()) {
-                        itemHandler.setStackInSlot(i1, itemstack1);
-                    } else if (ItemStack.isSameItemSameComponents(itemstack, itemstack1)) {
-                        itemstack1.grow(itemstack.getCount());
-                        itemHandler.setStackInSlot(i1, itemstack1);
-                    } else {
-                        ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, stack);
-                        level.addFreshEntity(entity);
-                    }
+                if (!existingItem.isEmpty()) {
+                    ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, remainderItem);
+                    level.addFreshEntity(entity);
+                } else {
+                    itemHandler.insertItem(i1, remainderItem, false);
                 }
             }
         }
 
-        ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, stack);
+        ItemEntity entity = new ItemEntity(level, (float) getBlockPos().getX() + 0.5f, (float) getBlockPos().getY() + 1f, (float) getBlockPos().getZ() + 0.5f, result);
         level.addFreshEntity(entity);
         level.playSound(null, getBlockPos(), SoundRegistry.FABRICATOR_CRAFT.value(), SoundSource.BLOCKS, 2, 1);
     }
