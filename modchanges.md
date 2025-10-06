@@ -1,5 +1,6 @@
 ### Additions
 - Added a block tag #datanessence:structure_protector_ignored, for blocks a Structure Protector will not cancel the placing/breaking of
+- Added distance display to the Signal Tracker
 
 ### Changes
 - Allowed all machines to accept item inputs on certain sides via non-buffer methods (sides that allow inputs are detailed in the Data Tablet)

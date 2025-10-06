@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.joml.*;
@@ -21,11 +22,13 @@ import java.util.HashMap;
 
 public class PingsGuiLayer implements LayeredDraw.Layer {
     public static HashMap<StructurePing, Integer> pings = new HashMap<>();
+
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
         RenderSystem.disableDepthTest();
         RenderSystem.depthMask(false);
         RenderSystem.enableBlend();
+
         for (var i : pings.entrySet()) {
             StructurePing ping = i.getKey();
             Vec3 pos = ping.pos.getCenter();
@@ -57,13 +60,22 @@ public class PingsGuiLayer implements LayeredDraw.Layer {
                 }
                 guiGraphics.setColor(color.getRed()/255f, color.getGreen()/255f, color.getBlue()/255f, 1.0F);
                 guiGraphics.blit(texture, x, y, u, v, 16, 16);
+
+                // distance
+                int distance = (int) Minecraft.getInstance().player.position().distanceTo(pos);
+                distance = distance < 100 ? Mth.roundToward(distance, 10) : Mth.roundToward(distance, 100);
+                var font = Minecraft.getInstance().font;
+                String text = distance+"m";
+                guiGraphics.drawString(font, text, (x+8) - font.width(text) / 2, y+17, color.getRGB(), false);
             }
         }
+
         guiGraphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.disableBlend();
         RenderSystem.depthMask(true);
         RenderSystem.enableDepthTest();
     }
+
     public static Vec2 worldPosToTexCoord(Vector3f worldPos, int width, int height) {
         Matrix4f viewMat = PostShaderManager.viewStackMatrix;
         Matrix4f projMat = Minecraft.getInstance().gameRenderer.getProjectionMatrix(Minecraft.getInstance().options.fov().get());
