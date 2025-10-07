@@ -7,7 +7,7 @@
 - Retextured Bonding Powder, Data Tablet, Essence Redirector, Essence Sword, Lensing Crystal
 - Tweaked several other sprites
 - Edited animation timing of Signal Tracker
-- Renamed Essence Sword to Lightslash Kukri, and tweaked its functionality
+- Renamed Essence Sword to Lightslash Blade, and tweaked its functionality
 
 ### Fixes
 - Fixed Essence Burner voiding fuel remainders (e.g. buckets); it now expels them out into the world

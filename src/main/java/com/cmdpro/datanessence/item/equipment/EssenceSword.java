@@ -94,7 +94,7 @@ public class EssenceSword extends SwordItem implements AdjustableAttributes {
     @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        tooltipComponents.add(Component.translatable("item.datanessence.essence_sword.tooltip_1", COST_HIT).withStyle(Style.EMPTY.withColor(EssenceTypeRegistry.ESSENCE.get().getColor())));
-        tooltipComponents.add(Component.translatable("item.datanessence.essence_sword.tooltip_2", COST_SLASH).withStyle(Style.EMPTY.withColor(EssenceTypeRegistry.ESSENCE.get().getColor())));
+        tooltipComponents.add(Component.translatable("item.datanessence.essence_sword.tooltip_1", Component.literal(String.valueOf(COST_HIT)).withColor(0xFFFF96B5) ).withStyle(Style.EMPTY.withColor(EssenceTypeRegistry.ESSENCE.get().getColor())));
+        tooltipComponents.add(Component.translatable("item.datanessence.essence_sword.tooltip_2", Component.literal(String.valueOf(COST_SLASH)).withColor(0xFFFF96B5) ).withStyle(Style.EMPTY.withColor(EssenceTypeRegistry.ESSENCE.get().getColor())));
     }
 }
