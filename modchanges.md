@@ -7,7 +7,9 @@
 - Retextured Bonding Powder, Data Tablet, Essence Redirector, Essence Sword, Lensing Crystal
 - Tweaked several other sprites
 - Edited animation timing of Signal Tracker
+- Renamed Essence Sword to Lightslash Kukri, and tweaked its functionality
 
 ### Fixes
 - Fixed Essence Burner voiding fuel remainders (e.g. buckets); it now expels them out into the world
 - Fixed (Auto-)Fabricators' issues with crafting remainders (e.g. buckets, bottles) again
+- Fabricators do nothing and log a warning if their current recipe has an empty result or empty ingredients

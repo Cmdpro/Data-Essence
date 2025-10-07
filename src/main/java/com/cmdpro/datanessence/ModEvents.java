@@ -3,6 +3,7 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.api.block.RedirectorInteractable;
 import com.cmdpro.datanessence.api.block.TraversiteBlock;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.item.AdjustableAttributes;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePoint;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
@@ -52,6 +53,7 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDestroyBlockEvent;
@@ -319,6 +321,14 @@ public class ModEvents {
         }
         for (Entry i : entries) {
             DataTabletUtil.unlockEntry(event.getEntity(), i.id, i.getIncompleteStageServer(event.getEntity())+1);
+        }
+    }
+
+    // for tools/items/etc whose attributes can change over time
+    @SubscribeEvent
+    public static void adjustItemAttributes(ItemAttributeModifierEvent event) {
+        if (event.getItemStack().getItem() instanceof AdjustableAttributes item) {
+            item.adjustAttributes(event);
         }
     }
 }

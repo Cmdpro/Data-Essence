@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.api.block;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
@@ -17,6 +18,7 @@ import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -116,6 +118,7 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
         super(type, pos, state);
         item = ItemStack.EMPTY;
     }
+
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
         return ClientboundBlockEntityDataPacket.create(this);
@@ -258,10 +261,22 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
     public boolean enoughEssence;
     public Map<ResourceLocation, Float> essenceCost;
 
-    public void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseFabricatorBlockEntity fabricator) {
-        if (!pLevel.isClientSide()) {
+    /** Some modpacks contain broken recipes with empty ingredients or empty results.
+     * Because that results in an Incredibly Annoying barrage of sounds from this block, let's just not do anything when that happens.
+     * Those packs should really prevent such recipes existing in the first place, but....
+     @return True if the recipe is not broken (i.e. does not have either an empty result item, or a totally empty set of input items)**/
+    public boolean isNotTryingToCraftBrokenRecipe() {
+        var isBroken = (recipe.getResultItem(level.registryAccess()).isEmpty() || recipe.getIngredients().stream().allMatch(Ingredient::hasNoItems));
+        if (isBroken && !level.isClientSide)
+            DataNEssence.LOGGER.warn("[DATANESSENCE] Fabricator at {}, {}, {} is trying to craft \"{}\", which has an erroneously empty ingredient list or result! It is highly advised to correct or remove this recipe to prevent further errors.", this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), recipe);
+        return !isBroken;
+    }
+
+    public void tick(Level world, BlockPos pPos, BlockState pState, BaseFabricatorBlockEntity fabricator) {
+        if (!world.isClientSide()) {
             BufferUtil.getEssenceFromBuffersBelow(fabricator, fabricator.getSupportedEssenceTypes());
-            if (fabricator.recipe != null) {
+            if (fabricator.recipe != null && isNotTryingToCraftBrokenRecipe()) {
+
                 boolean enoughEssence = true;
                 if (fabricator.essenceCost != null) {
                     for (Map.Entry<ResourceLocation, Float> i : fabricator.essenceCost.entrySet()) {
@@ -288,7 +303,7 @@ public abstract class BaseFabricatorBlockEntity extends BlockEntity implements E
             }
             fabricator.updateBlock();
         } else {
-            if (fabricator.time >= 0) {
+            if (fabricator.time >= 0 && ( fabricator.recipe != null && isNotTryingToCraftBrokenRecipe())) {
                 if (!fabricator.clientHandler.isSoundPlaying())
                     fabricator.clientHandler.startSound();
             } else {
