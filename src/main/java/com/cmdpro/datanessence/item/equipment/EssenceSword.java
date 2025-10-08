@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -74,6 +75,11 @@ public class EssenceSword extends SwordItem implements AdjustableAttributes {
     @Override
     public boolean canPerformAction(ItemStack stack, net.neoforged.neoforge.common.ItemAbility itemAbility) {
         return ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) >= COST_HIT && super.canPerformAction(stack, itemAbility);
+    }
+
+    @Override
+    public boolean onLeftClickEntity(ItemStack stack, Player player, Entity entity) {
+        return (ItemEssenceContainer.getEssence(stack, FUEL_ESSENCE_TYPE) < COST_HIT);
     }
 
     @Override

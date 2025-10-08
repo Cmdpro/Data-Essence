@@ -25,6 +25,9 @@ public class ModItemTagGenerator extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+        this.tag(Tags.Items.TOOLS_WRENCH)
+                .add(ItemRegistry.ESSENCE_REDIRECTOR.get());
+
         this.tag(Tags.Items.ARMORS)
                 .add(ItemRegistry.PRIMITIVE_ANTI_GRAVITY_PACK.get())
                 .add(ItemRegistry.TRAVERSITE_TRUDGERS.get());
