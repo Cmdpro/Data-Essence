@@ -147,7 +147,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
         dropSelf(BlockRegistry.ECLIPTRUM_BLOCK.get());
         dropSelf(BlockRegistry.CRYSTALLINE_CRADLE.get());
-        dropSelf(BlockRegistry.SANCTUARY_VERMILION_GRASS_BLOCK.get());
+        dropSelf(BlockRegistry.VERMILION_GRASS_BLOCK.get());
         dropSelf(BlockRegistry.SANCTUARY_DIRT.get());
         dropSelf(BlockRegistry.SANCTUARY_SAND.get());
         dropSelf(BlockRegistry.DEEP_SANCTUARY_SAND.get());
@@ -160,8 +160,8 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.ASTRAL_GOOP.get());
         this.add(BlockRegistry.TALL_SANCTUARY_GRASS.get(),
                 block -> createSpecialGrassDrops(BlockRegistry.TALL_SANCTUARY_GRASS.get(), Items.AIR));
-        this.add(BlockRegistry.SANCTUARY_GRASS.get(),
-                block -> createSpecialGrassDrops(BlockRegistry.SANCTUARY_GRASS.get(), Items.AIR));
+        this.add(BlockRegistry.VERMILION_SPROUT.get(),
+                block -> createSpecialGrassDrops(BlockRegistry.VERMILION_SPROUT.get(), Items.AIR));
         this.add(BlockRegistry.CYAN_PEARLESCENT_GRASS.get(),
                 block -> createSpecialGrassDrops(BlockRegistry.CYAN_PEARLESCENT_GRASS.get(), Items.AIR));
         this.add(BlockRegistry.MAGENTA_PEARLESCENT_GRASS.get(),

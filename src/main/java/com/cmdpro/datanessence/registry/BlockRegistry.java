@@ -100,7 +100,7 @@ public class BlockRegistry {
     public static final Supplier<Block> FROZEN_MOONLIGHT = register("frozen_moonlight",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.PACKED_ICE)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> SANCTUARY_VERMILION_GRASS_BLOCK = register("vermilion_grass",
+    public static final Supplier<Block> VERMILION_GRASS_BLOCK = register("vermilion_grass",
             () -> new SanctuaryGrassBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SANCTUARY_DIRT = register("sanctuary_dirt",
@@ -109,7 +109,7 @@ public class BlockRegistry {
     public static final Supplier<Block> TALL_SANCTUARY_GRASS = register("tall_sanctuary_grass",
             () -> new TallSanctuaryGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.TALL_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
-    public static final Supplier<Block> SANCTUARY_GRASS = register("sanctuary_grass",
+    public static final Supplier<Block> VERMILION_SPROUT = register("vermilion_sprout",
             () -> new SanctuaryGrass(BlockBehaviour.Properties.ofFullCopy(Blocks.SHORT_GRASS).emissiveRendering(BlockRegistry::always).lightLevel((state) -> 3)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> SANCTUARY_SAND = register("sanctuary_sand",

@@ -233,6 +233,7 @@
   "block.datanessence.empty_cryochamber": "Empty Cryochamber",
   "block.datanessence.empty_cryochamber_router": "Empty Cryochamber Router",
   "block.datanessence.vermilion_grass": "Vermilion Grass",
+  "block.datanessence.vermilion_sprout": "Vermilion Sprout",
   "block.datanessence.player_data_bank": "Data Bank",
   "block.datanessence.player_data_bank.receive": "%1$s entries taken",
   "block.datanessence.player_data_bank.bind": "%1$s entries bound",

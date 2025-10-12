@@ -93,10 +93,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(BlockRegistry.FROZEN_MOONLIGHT);
         blockWithItem(BlockRegistry.CREATIVE_ESSENCE_BATTERY);
 
-        sanctuaryGrassBlock(BlockRegistry.SANCTUARY_VERMILION_GRASS_BLOCK);
+        sanctuaryGrassBlock(BlockRegistry.VERMILION_GRASS_BLOCK);
         blockWithItem(BlockRegistry.SANCTUARY_DIRT);
         tallGrass(BlockRegistry.TALL_SANCTUARY_GRASS);
-        grass(BlockRegistry.SANCTUARY_GRASS);
+        sanctuaryGrass(BlockRegistry.VERMILION_SPROUT);
         blockWithItem(BlockRegistry.SANCTUARY_SAND);
         blockWithItem(BlockRegistry.DEEP_SANCTUARY_SAND);
         pearlescentSpiral(BlockRegistry.CYAN_PEARLESCENT_SPIRAL);
@@ -163,6 +163,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
     private void grass(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
         ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath());
+        BlockModelBuilder model = models().cross(loc.getPath(), texture);
+        model.renderType("cutout");
+        simpleBlock(blockRegistryObject.get(), model);
+        itemModels().withExistingParent(loc.getPath(),
+                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
+                texture);
+    }
+    private void sanctuaryGrass(Supplier<Block> blockRegistryObject) {
+        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
+        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/sanctuary/" + loc.getPath());
         BlockModelBuilder model = models().cross(loc.getPath(), texture);
         model.renderType("cutout");
         simpleBlock(blockRegistryObject.get(), model);

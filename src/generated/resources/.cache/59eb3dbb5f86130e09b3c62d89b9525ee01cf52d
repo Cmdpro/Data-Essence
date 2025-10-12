@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-12T15:50:29.250841749	Loot Tables
+// 1.21.1	2025-10-12T17:56:06.548112311	Loot Tables
 8a85700f294ec15ec1248a1449114b14eab3e2da data/datanessence/loot_table/blocks/aether_rune.json
 9609efe61385ebb3de54f11712e3baea7e1409d0 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank.json
 10297d9c29f46c19c997dfe74ad062c709006c22 data/datanessence/loot_table/blocks/ancient_glyph_stone_blank_shieldless.json
@@ -108,7 +108,6 @@ b345fd285c83276051f10b7378461e809029f6a1 data/datanessence/loot_table/blocks/pol
 24e471f0e6adb4df47e9a0b9f7489fa5a8a60d3d data/datanessence/loot_table/blocks/red_pearlescent_sand.json
 01aeaf3f091d62c766c5fbc4b420ad423c219378 data/datanessence/loot_table/blocks/rf_node.json
 b68dabf5aaa38a09a8b718834adb9019b84a04fa data/datanessence/loot_table/blocks/sanctuary_dirt.json
-8dea2dfcca0dbe30dda0e2764191526ed25eb98f data/datanessence/loot_table/blocks/sanctuary_grass.json
 98a27b1ad9b76d43b7e5d83acb2ea6fcb0ce9f9a data/datanessence/loot_table/blocks/sanctuary_sand.json
 770c9798fe9e4ae46f0aefadfcc1179cca81b156 data/datanessence/loot_table/blocks/spire_glass.json
 551d36c40595eabcbf647193dbc5537770278255 data/datanessence/loot_table/blocks/structure_protector.json
@@ -123,5 +122,6 @@ ab605e4e3a9b61ab410ec5432357313df82357db data/datanessence/loot_table/blocks/tra
 4cbc2175b2fe6caaaa5c1453c4ad50a6ad16fd04 data/datanessence/loot_table/blocks/traversite_road_stairs_opal.json
 79520676cdef899226b1394203ad881f5c962d41 data/datanessence/loot_table/blocks/vacuum.json
 60d3f9ce8c66c217521101901a03424244e3e536 data/datanessence/loot_table/blocks/vermilion_grass.json
+c7cf74417bd64df18cafe0f6d162e0d3d436f3d9 data/datanessence/loot_table/blocks/vermilion_sprout.json
 6a6f9cb53d8618b18c656eb862190792df2930bc data/datanessence/loot_table/blocks/yellow_pearlescent_grass.json
 7dd3e247cdb7c4d45fcf65335d21492dc2f65f55 data/datanessence/loot_table/blocks/yellow_pearlescent_spiral.json

@@ -6,12 +6,10 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
-import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
@@ -27,8 +25,6 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
 import org.apache.commons.lang3.IntegerRange;
 import org.slf4j.Logger;
-
-import java.util.List;
 
 import static com.cmdpro.datanessence.integration.DataNEssenceIntegration.*;
 
@@ -355,7 +351,7 @@ public class DataNEssence
             event.accept(BlockRegistry.TETHERGRASS.get());
             event.accept(BlockRegistry.LUNAR_CRYSTAL_SEED.get());
             // World - Sanctuary
-            event.accept(BlockRegistry.SANCTUARY_VERMILION_GRASS_BLOCK.get());
+            event.accept(BlockRegistry.VERMILION_GRASS_BLOCK.get());
             event.accept(BlockRegistry.SANCTUARY_DIRT.get());
             event.accept(BlockRegistry.SANCTUARY_SAND.get());
             event.accept(BlockRegistry.RED_PEARLESCENT_SAND.get());
@@ -363,7 +359,7 @@ public class DataNEssence
             event.accept(BlockRegistry.BLUE_PEARLESCENT_SAND.get());
             event.accept(BlockRegistry.DEEP_SANCTUARY_SAND.get());
             event.accept(BlockRegistry.ASTRAL_GOOP.get());
-            event.accept(BlockRegistry.SANCTUARY_GRASS.get());
+            event.accept(BlockRegistry.VERMILION_SPROUT.get());
             event.accept(BlockRegistry.TALL_SANCTUARY_GRASS.get());
             event.accept(BlockRegistry.CYAN_PEARLESCENT_SPIRAL.get());
             event.accept(BlockRegistry.MAGENTA_PEARLESCENT_SPIRAL.get());
