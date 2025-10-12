@@ -275,6 +275,7 @@ public class DataNEssence
             //event.accept(ItemRegistry.NATURAL_ESSENCE_BOMB.get());
             //event.accept(ItemRegistry.EXOTIC_ESSENCE_BOMB.get());
             event.accept(ItemRegistry.ESSENCE_SWORD.get());
+            event.accept(ItemRegistry.ENERGY_RIFLE.get());
             // Rods
             event.accept(ItemRegistry.ILLUMINATION_ROD.get());
             event.accept(ItemRegistry.REPULSION_ROD.get());

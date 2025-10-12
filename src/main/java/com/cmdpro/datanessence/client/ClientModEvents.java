@@ -118,6 +118,7 @@ public class ClientModEvents {
         EntityRenderers.register(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), EssenceSlashRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL_LASER.get(), AncientSentinelLaserRenderer::new);
         EntityRenderers.register(EntityRegistry.LUNAR_STRIKE.get(), LunarStrikeRenderer::new);
+        EntityRenderers.register(EntityRegistry.RIFLE_LASER.get(), RifleLaserRenderer::new);
 
         event.enqueueWork(() -> {
             ItemProperties.register(ItemRegistry.MUSIC_DISC_PLAYER.get(), DataNEssence.locate("playing"), (stack, level, entity, seed) -> {

@@ -49,5 +49,15 @@ public class DataNEssenceRenderTypes extends RenderType {
                     .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
                     .createCompositeState(false)
     ), false);
+    public static final RenderType SOLID_COLOR = RenderTypeHandler.registerRenderType(create(DataNEssence.MOD_ID + ":solid_color",
+            DefaultVertexFormat.POSITION_COLOR,
+            VertexFormat.Mode.QUADS,
+            1536,
+            false,
+            false,
+            RenderType.CompositeState.builder()
+                    .setShaderState(RenderType.POSITION_COLOR_SHADER)
+                    .createCompositeState(false)
+    ), false);
 
 }
