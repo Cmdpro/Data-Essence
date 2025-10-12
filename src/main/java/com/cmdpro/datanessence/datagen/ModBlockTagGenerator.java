@@ -110,7 +110,8 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
                 .add(BlockRegistry.SHIELDLESS_ANCIENT_WINDOW.get())
                 .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_BLANK.get())
                 .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get())
-                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get());
+                .add(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_MAKUTUIN.get())
+                .add(BlockRegistry.COPPER_VENT.get());
         this.tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(BlockRegistry.OBSIDIAN_FRAMED_GLASS.get())
                 .add(BlockRegistry.POLISHED_OBSIDIAN.get())
