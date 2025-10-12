@@ -48,6 +48,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.DECO_ESSENCE_BUFFER.get());
         dropSelf(BlockRegistry.DECO_ITEM_BUFFER.get());
         dropSelf(BlockRegistry.DECO_FLUID_BUFFER.get());
+        dropSelf(BlockRegistry.COPPER_VENT.get());
         this.add(BlockRegistry.ANCIENT_DATA_BANK.get(),
                 block -> noDrop());
         this.add(BlockRegistry.COMPUTER.get(),

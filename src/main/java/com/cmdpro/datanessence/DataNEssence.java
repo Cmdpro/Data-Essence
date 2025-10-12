@@ -456,6 +456,7 @@ public class DataNEssence
             event.accept(BlockRegistry.DEWLAMP.get());
             event.accept(BlockRegistry.PATTERNED_COPPER.get());
             event.accept(BlockRegistry.ECLIPTRUM_BLOCK.get());
+            event.accept(BlockRegistry.COPPER_VENT.get());
             event.accept(BlockRegistry.DECO_ESSENCE_BUFFER.get());
             event.accept(BlockRegistry.DECO_ITEM_BUFFER.get());
             event.accept(BlockRegistry.DECO_FLUID_BUFFER.get());

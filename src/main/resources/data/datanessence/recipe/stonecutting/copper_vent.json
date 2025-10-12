@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": { "item": "datanessence:patterned_copper" },
+  "result": { "id": "datanessence:copper_vent", "count": 1 }
+}

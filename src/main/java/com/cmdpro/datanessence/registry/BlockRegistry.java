@@ -456,6 +456,9 @@ public class BlockRegistry {
     public static final Supplier<Block> PATTERNED_COPPER = register("patterned_copper",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> COPPER_VENT = register("copper_vent",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_BLOCK)),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> FLUIDIC_GLASS = register("fluidic_glass",
             () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GLASS)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
