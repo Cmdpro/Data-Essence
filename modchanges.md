@@ -1,4 +1,4 @@
-## Midgame - Lunar Update
+## Transformative Ancestors - Midgame Update
 ### Additions
 - Added Ecliptrum material
 - Added Lunar Essence Shards and Crystal
