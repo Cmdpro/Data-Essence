@@ -193,7 +193,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 .texture("up", top)
                 .texture("south", side)
                 .texture("particle", top);
-        simpleBlock(blockRegistryObject.get(), model);
+        simpleBlock(blockRegistryObject.get(), model); // TODO random rotations e.g. vanilla grass block
         simpleBlockItem(blockRegistryObject.get(), model);
     }
     public void slabBlockTintedOverlay(SlabBlock block, ResourceLocation doubleSlab, ResourceLocation texture, ResourceLocation overlay, ResourceLocation particle) {
