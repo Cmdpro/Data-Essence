@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.processing;
 import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
@@ -18,6 +19,7 @@ import com.cmdpro.datanessence.recipe.NonMenuCraftingContainer;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.screen.AutoFabricatorMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -45,7 +47,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity {
+public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvider, ILockableContainer, EssenceBlockEntity, Machine {
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("crafting", (state, anim) -> {}, (state, anim) -> {}));
@@ -378,5 +380,10 @@ public class AutoFabricatorBlockEntity extends BlockEntity implements MenuProvid
         public static void markIndustrialFactorySong(BlockPos pos) {
             industrialSound.addSource(pos);
         }
+    }
+
+    @Override
+    public List<Direction> getValidInputDirections() {
+        return List.of(Direction.DOWN, Direction.UP);
     }
 }

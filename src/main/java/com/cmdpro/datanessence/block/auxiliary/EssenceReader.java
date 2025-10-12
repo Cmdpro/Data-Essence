@@ -1,10 +1,5 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
-import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
-import com.cmdpro.datanessence.api.essence.EssenceStorage;
-import com.cmdpro.datanessence.api.essence.EssenceType;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
@@ -24,28 +19,14 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
 
 public class EssenceReader extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 5, 16);
-    public static final BlockColor COLOR_HANDLER = (pState, pLevel, pPos, pTintIndex) -> {
-        if (pPos != null && pLevel != null) {
-            if (pTintIndex == 1) {
-                if (pLevel.getBlockEntity(pPos) instanceof EssenceReaderBlockEntity reader) {
-                    return reader.getColor().getRGB();
-                }
-            }
-        }
-        return 0xFFFFFFFF;
-    };
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {

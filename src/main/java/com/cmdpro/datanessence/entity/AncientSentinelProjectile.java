@@ -181,7 +181,9 @@ public class AncientSentinelProjectile extends Projectile {
         boolean flag = hit.getEntity().getType() == EntityType.ENDERMAN;
         if (damagesource != null) {
             if (hit.getEntity() instanceof LivingEntity ent && entity instanceof LivingEntity) {
-                if (ent.hurt(damagesource, 2)) {
+                boolean isPercent = getOwner() instanceof AncientSentinel sentinel && sentinel.isPercentDamage(this, ent);
+                float percent = isPercent ? getOwner() instanceof AncientSentinel sentinel ? sentinel.getPercentDamage(this, ent) : 0 : 0;
+                if (ent.hurt(damagesource, isPercent ? ent.getMaxHealth()*percent : 2)) {
                     if (flag) {
                         return;
                     }

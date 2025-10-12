@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.block.processing;
 import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.DataNEssenceRegistries;
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
@@ -22,10 +23,8 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.*;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -47,7 +46,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class InfuserBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+public class InfuserBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, Machine {
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("active", (state, anim) -> {}, (state, anim) -> {}))

@@ -28,8 +28,7 @@ import com.cmdpro.datanessence.client.particle.RhombusParticleOptions;
 import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
 import com.cmdpro.datanessence.networking.packet.s2c.GrapplingHookSync;
 import com.cmdpro.datanessence.networking.packet.s2c.PingableSync;
-import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
-import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.data.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.data.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.data.datatablet.DataTabManager;
@@ -157,7 +156,7 @@ public class ModEvents {
     public static void preventBreakingProtectedBlocks(BlockEvent.BreakEvent event) {
 
         if (!event.getPlayer().isCreative()) {
-            if (!event.getLevel().getBlockState(event.getPos()).is(BlockRegistry.STRUCTURE_PROTECTOR.get())) {
+            if (!event.getLevel().getBlockState(event.getPos()).is( TagRegistry.Blocks.STRUCTURE_PROTECTOR_IGNORED )) {
                 if (!event.getLevel().isClientSide()) {
                     if (((Level) event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                         List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
@@ -177,14 +176,10 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void preventPlacingInProtectedZone(BlockEvent.EntityPlaceEvent event) {
-        boolean creative = false;
-        if (event.getEntity() instanceof Player player) {
-            if (player.isCreative()) {
-                creative = true;
-            }
-        }
+        boolean creative = event.getEntity() instanceof Player player && player.isCreative(); // ...this does not block fake players does it? should it? ~Eset
+
         if (!creative) {
-            if (!event.getLevel().isClientSide()) {
+            if (!event.getLevel().isClientSide() && !event.getPlacedBlock().is( TagRegistry.Blocks.STRUCTURE_PROTECTOR_IGNORED ) ) {
                 if (((Level)event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                     List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                     for (StructureProtectorBlockEntity i : ents) {
@@ -198,6 +193,7 @@ public class ModEvents {
             }
         }
     }
+
     @SubscribeEvent
     public static void onExplosion(ExplosionEvent.Detonate event) {
         if (!event.getLevel().isClientSide()) {

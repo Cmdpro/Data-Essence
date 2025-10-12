@@ -1,6 +1,7 @@
 package com.cmdpro.datanessence.block.generation;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
@@ -12,12 +13,14 @@ import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.EssenceBurnerMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.*;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -37,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, Machine {
     public MultiEssenceContainer storage = new MultiEssenceContainer(List.of(EssenceTypeRegistry.ESSENCE.get(), EssenceTypeRegistry.LUNAR_ESSENCE.get(), EssenceTypeRegistry.NATURAL_ESSENCE.get(), EssenceTypeRegistry.EXOTIC_ESSENCE.get()), 1000);
     @Override
     public EssenceStorage getStorage() {
@@ -129,48 +132,56 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
         return inventory;
     }
     public boolean lit;
-    public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EssenceBurnerBlockEntity pBlockEntity) {
-        if (!pLevel.isClientSide()) {
-            BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
-            pBlockEntity.lit = false;
-            if (pBlockEntity.itemHandler.getStackInSlot(0).getItem() instanceof EssenceShard shard) {
-                boolean canFit = true;
+    public static void tick(Level world, BlockPos pos, BlockState pState, EssenceBurnerBlockEntity burner) {
+        if (!world.isClientSide()) {
+            BufferUtil.getItemsFromBuffersBelow(burner, burner.itemHandler);
+            burner.lit = false;
+            if (burner.itemHandler.getStackInSlot(0).getItem() instanceof EssenceShard shard) {
+                boolean hasSpaceToGenerate = true;
                 for (Map.Entry<Supplier<EssenceType>, Float> i : shard.essence.entrySet()) {
-                    if (pBlockEntity.storage.getEssence(i.getKey().get())+i.getValue() > pBlockEntity.storage.getMaxEssence()) {
-                        canFit = false;
+                    if (burner.storage.getEssence(i.getKey().get())+i.getValue() > burner.storage.getMaxEssence()) {
+                        hasSpaceToGenerate = false;
                         break;
                     }
                 }
-                if (pBlockEntity.burnTime <= 0) {
-                    pBlockEntity.essenceBurnCooldown = 0;
-                    if (canFit) {
-                        if (pBlockEntity.itemHandler.getStackInSlot(1).getBurnTime(RecipeType.SMELTING) > 0) {
-                            pBlockEntity.maxBurnTime = pBlockEntity.itemHandler.getStackInSlot(1).getBurnTime(RecipeType.SMELTING);
-                            pBlockEntity.itemHandler.extractItem(1, 1, false);
-                            pBlockEntity.burnTime = pBlockEntity.maxBurnTime;
-                            pBlockEntity.lit = true;
+                if (burner.burnTime <= 0) {
+                    burner.essenceBurnCooldown = 0;
+                    if (hasSpaceToGenerate) {
+                        var fuel = burner.itemHandler.getStackInSlot(1);
+
+                        if (fuel.getBurnTime(RecipeType.SMELTING) > 0) {
+                            burner.maxBurnTime = fuel.getBurnTime(RecipeType.SMELTING);
+                            burner.itemHandler.extractItem(1, 1, false);
+
+                            if ( fuel.hasCraftingRemainingItem() ) {
+                                var remainder = fuel.getCraftingRemainingItem();
+                                world.addFreshEntity(new ItemEntity(world, pos.getCenter().x, pos.getCenter().y+0.6, pos.getCenter().z, remainder));
+                            }
+
+                            burner.burnTime = burner.maxBurnTime;
+                            burner.lit = true;
                         }
                     }
                 } else {
-                    pBlockEntity.lit = true;
-                    pBlockEntity.essenceBurnCooldown--;
-                    pBlockEntity.burnTime--;
-                    if (pBlockEntity.essenceBurnCooldown <= 0) {
-                        if (canFit) {
-                            pBlockEntity.itemHandler.extractItem(0, 1, false);
+                    burner.lit = true;
+                    burner.essenceBurnCooldown--;
+                    burner.burnTime--;
+                    if (burner.essenceBurnCooldown <= 0) {
+                        if (hasSpaceToGenerate) {
+                            burner.itemHandler.extractItem(0, 1, false);
                             for (Map.Entry<Supplier<EssenceType>, Float> i : shard.essence.entrySet()) {
-                                pBlockEntity.storage.addEssence(i.getKey().get(), i.getValue());
+                                burner.storage.addEssence(i.getKey().get(), i.getValue());
                             }
-                            pBlockEntity.essenceBurnCooldown = 50;
+                            burner.essenceBurnCooldown = 50;
                         }
                     }
                 }
             }
-            if (pBlockEntity.lit != pState.getValue(EssenceBurner.LIT)) {
-                BlockState state = pState.setValue(EssenceBurner.LIT, pBlockEntity.lit);
-                pBlockEntity.level.setBlock(pPos, state, 3);
+            if (burner.lit != pState.getValue(EssenceBurner.LIT)) {
+                BlockState state = pState.setValue(EssenceBurner.LIT, burner.lit);
+                burner.level.setBlock(pos, state, 3);
             }
-            pBlockEntity.updateBlock();
+            burner.updateBlock();
         }
     }
     protected void updateBlock() {
@@ -187,5 +198,10 @@ public class EssenceBurnerBlockEntity extends BlockEntity implements MenuProvide
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new EssenceBurnerMenu(pContainerId, pInventory, this);
+    }
+
+    @Override
+    public List<Direction> getValidInputDirections() {
+        return List.of(Direction.DOWN, Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST);
     }
 }

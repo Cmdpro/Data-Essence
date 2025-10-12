@@ -208,5 +208,11 @@ public class ModBlockTagGenerator extends BlockTagsProvider {
         this.tag(TagRegistry.Blocks.SANCTUARY_CARVER_REPLACEABLES)
                 .add(BlockRegistry.ASTRAL_GOOP.get())
                 .add(Blocks.STONE);
+
+        this.tag(TagRegistry.Blocks.STRUCTURE_PROTECTOR_IGNORED)
+                .addTag(TagRegistry.Blocks.PUZZLE_COMPONENTS)
+                .add(BlockRegistry.STRUCTURE_PROTECTOR.get());
+
+        this.tag(TagRegistry.Blocks.PUZZLE_COMPONENTS);
     }
 }

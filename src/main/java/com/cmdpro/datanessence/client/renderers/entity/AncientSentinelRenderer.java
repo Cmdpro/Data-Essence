@@ -49,7 +49,7 @@ public class AncientSentinelRenderer extends DatabankLivingEntityRenderer<Ancien
         int shootTime = pEntity.laserTime;
         if (shootTime >= 0) {
             Vec3 end = getEnd(pEntity);
-            float scale = Math.clamp((float)shootTime/(float)pEntity.maxLaserTime, 0f, 1f);
+            float scale = Math.clamp((float)(shootTime+partialTick)/(float)pEntity.maxLaserTime, 0f, 1f);
 
             poseStack.pushPose();
             double d0 = Mth.lerp(partialTick, pEntity.xOld, pEntity.getX());
@@ -58,7 +58,7 @@ public class AncientSentinelRenderer extends DatabankLivingEntityRenderer<Ancien
             Vec3 posOffset = new Vec3(d0, d1, d2).subtract(pEntity.position());
             Vec3 pos = pEntity.position().add(posOffset);
             poseStack.translate(-pos.x, -pos.y, -pos.z);
-            RenderingUtil.renderAdvancedBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0f, pEntity.level().getGameTime(), pEntity.getEyePosition(), end, AncientSentinelLaser.getColor(pEntity.level()), 0, 0.5f*scale);
+            AncientSentinelLaserRenderer.renderBeam(poseStack, bufferSource, true, pEntity.getEyePosition(), end, pEntity.level().getGameTime(), partialTick, 0.1f*scale);
             poseStack.popPose();
         }
     }

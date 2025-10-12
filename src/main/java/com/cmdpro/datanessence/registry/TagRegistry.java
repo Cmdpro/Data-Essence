@@ -20,6 +20,9 @@ public class TagRegistry {
         public static final TagKey<Block> SANCTUARY_SAND = tag("sanctuary_sand");
         public static final TagKey<Block> SANCTUARY_CARVER_REPLACEABLES = tag("sanctuary_carver_replaceables");
 
+        public static final TagKey<Block> PUZZLE_COMPONENTS = tag("puzzle_components"); // blocks used in in-world structure puzzles
+        public static final TagKey<Block> STRUCTURE_PROTECTOR_IGNORED = tag("structure_protector_ignored");
+
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(DataNEssence.locate(name));
         }
