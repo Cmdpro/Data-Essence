@@ -8,6 +8,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 
 public class RFNodeRenderer extends BaseCapabilityPointRenderer<RFNodeBlockEntity> {
     public RFNodeRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        super(new Model<>(DataNEssence.locate("textures/block/rf_node.png")));
+        super(new Model<>(DataNEssence.locate("textures/block/rf_node.png")), new RelayModel<>(DataNEssence.locate("textures/block/rf_node.png")));
     }
 }
