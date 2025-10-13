@@ -10,6 +10,7 @@
 - Edited animation timing of Signal Tracker
 - Renamed Essence Sword to Lightslash Blade, and tweaked its functionality
 - Tagged the Essence Redirector as a wrench
+- Added diamond and emerald to Mineral-Finding Rod's recipe
 
 ### Fixes
 - Fixed Essence Burner voiding fuel remainders (e.g. buckets); it now expels them out into the world
