@@ -93,10 +93,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(BlockRegistry.FROZEN_MOONLIGHT);
         blockWithItem(BlockRegistry.CREATIVE_ESSENCE_BATTERY);
 
-        sanctuaryGrassBlock(BlockRegistry.VERMILION_GRASS_BLOCK);
+        grassBlock(BlockRegistry.VERMILION_GRASS_BLOCK);
         blockWithItem(BlockRegistry.SANCTUARY_DIRT);
         tallGrass(BlockRegistry.TALL_SANCTUARY_GRASS);
-        sanctuaryGrass(BlockRegistry.VERMILION_SPROUT);
+        grass(BlockRegistry.VERMILION_SPROUT);
         blockWithItem(BlockRegistry.SANCTUARY_SAND);
         blockWithItem(BlockRegistry.DEEP_SANCTUARY_SAND);
         pearlescentSpiral(BlockRegistry.CYAN_PEARLESCENT_SPIRAL);
@@ -170,20 +170,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
                 texture);
     }
-    private void sanctuaryGrass(Supplier<Block> blockRegistryObject) {
+    private void grassBlock(Supplier<Block> blockRegistryObject) {
         ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
-        ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/sanctuary/" + loc.getPath());
-        BlockModelBuilder model = models().cross(loc.getPath(), texture);
-        model.renderType("cutout");
-        simpleBlock(blockRegistryObject.get(), model);
-        itemModels().withExistingParent(loc.getPath(),
-                ResourceLocation.withDefaultNamespace("item/generated")).texture("layer0",
-                texture);
-    }
-    private void sanctuaryGrassBlock(Supplier<Block> blockRegistryObject) {
-        ResourceLocation loc = BuiltInRegistries.BLOCK.getKey(blockRegistryObject.get());
-        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/sanctuary/" + loc.getPath() + "_side");
-        ResourceLocation top = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/sanctuary/" + loc.getPath() + "_top");
+        ResourceLocation side = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_side");
+        ResourceLocation top = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/" + loc.getPath() + "_top");
         ResourceLocation bottom = ResourceLocation.fromNamespaceAndPath(loc.getNamespace(), ModelProvider.BLOCK_FOLDER + "/sanctuary_dirt");
         BlockModelBuilder model = models().withExistingParent(loc.getPath(), ModelProvider.BLOCK_FOLDER + "/cube")
                 .texture("west", side)

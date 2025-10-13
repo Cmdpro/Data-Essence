@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "datanessence:block/sanctuary/vermilion_sprout"
+    "layer0": "datanessence:block/vermilion_sprout"
   }
 }

@@ -2,6 +2,6 @@
   "parent": "minecraft:block/cross",
   "render_type": "minecraft:cutout",
   "textures": {
-    "cross": "datanessence:block/sanctuary/vermilion_sprout"
+    "cross": "datanessence:block/vermilion_sprout"
   }
 }
