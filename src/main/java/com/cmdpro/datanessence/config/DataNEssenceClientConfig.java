@@ -29,7 +29,7 @@ public class DataNEssenceClientConfig {
         builder.pop();
 
         builder.comment("Particular sound settings that we cannot easily add to the ingame menu.").push("sounds");
-        factorySongVolumeValue = buildInteger(builder, "factorySongVolume", 100, 0, 100, "Volume at which the Factory Song will play, in percent. Setting this to 0 disables the Song.");
+        factorySongVolumeValue = buildInteger(builder, "factorySongVolume", 100, 0, 200, "Volume at which the Factory Song will play, in percent. Setting this to 0 disables the Song.");
         builder.pop();
     }
 
