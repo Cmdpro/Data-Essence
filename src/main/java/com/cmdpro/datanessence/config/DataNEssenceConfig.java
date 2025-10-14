@@ -19,7 +19,7 @@ public class DataNEssenceConfig {
     }
 
     public DataNEssenceConfig(ModConfigSpec.Builder builder) {
-        builder.push("balancing").comment("Values able to be adjusted to fit your modpack's balance, or personal tastes.");
+        builder.comment("Values able to be adjusted to fit your modpack's balance, or personal tastes.").push("balancing");
         fluidPointTransferValue = buildInteger(builder, "fluidNodeTransfer", 125, 1, 1000000, "The base, un-upgraded rate that Fluid Nodes can transfer, in mB per tick. (Also applies to Chemical Nodes if Mekanism is installed)"); // 125mB should cap out at 2B once 16x speed upgrade exists
         essencePointTransferValue = buildInteger(builder, "essenceNodeTransfer", 50, 1, 1000000, "The base, un-upgraded rate that all Essence Nodes can transfer per tick.");
         itemPointTransferValue = buildInteger(builder, "itemNodeTransfer", 4, 1, 64, "The base, un-upgraded rate that Item Nodes can transfer, in items per tick.");

@@ -18,17 +18,17 @@ public class DataNEssenceClientConfig {
     }
 
     public DataNEssenceClientConfig(ModConfigSpec.Builder builder) {
-        builder.push("shaders").comment("Individual toggles for the mod's shaders - use if having issues.");
+        builder.comment("Individual toggles for the mod's shaders - use if having issues.").push("shaders");
         genderEuphoriaShaderValue = buildBoolean(builder, "genderEuphoriaShader", true, "Should the gender euphoria shader be enabled?");
         pingShaderValue = buildBoolean(builder, "pingShader", true, "Should the signal tracker ping shader be enabled?");
         progressionShaderValue = buildBoolean(builder, "progressionShader", true, "Should the progression shader be enabled?");
         builder.pop();
 
-        builder.push("accessibility").comment("Settings that try to accommodate for certain disabilities.");
+        builder.comment("Settings that try to accommodate for certain disabilities.").push("accessibility");
         colorAssistValue = buildBoolean(builder, "colorAssist", false, "Whether to enable color-assist mode. When on, various tweaks to color-dependent puzzles will be made to hopefully help in their completion, or in the case of one puzzle, will be outright bypassed.");
         builder.pop();
 
-        builder.push("sounds").comment("Particular sound settings that we cannot easily put ingame.");
+        builder.comment("Particular sound settings that we cannot easily add to the ingame menu.").push("sounds");
         factorySongVolumeValue = buildInteger(builder, "factorySongVolume", 100, 0, 100, "Volume at which the Factory Song will play, in percent. Setting this to 0 disables the Song.");
         builder.pop();
     }
