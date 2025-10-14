@@ -17,8 +17,9 @@ public class DataNEssenceConfig {
             COMMON_SPEC = specPair.getRight();
         }
     }
+
     public DataNEssenceConfig(ModConfigSpec.Builder builder) {
-        builder.push("balancing");
+        builder.comment("Values able to be adjusted to fit your modpack's balance, or personal tastes.").push("balancing");
         fluidPointTransferValue = buildInteger(builder, "fluidNodeTransfer", 125, 1, 1000000, "The base, un-upgraded rate that Fluid Nodes can transfer, in mB per tick. (Also applies to Chemical Nodes if Mekanism is installed)"); // 125mB should cap out at 2B once 16x speed upgrade exists
         essencePointTransferValue = buildInteger(builder, "essenceNodeTransfer", 50, 1, 1000000, "The base, un-upgraded rate that all Essence Nodes can transfer per tick.");
         itemPointTransferValue = buildInteger(builder, "itemNodeTransfer", 4, 1, 64, "The base, un-upgraded rate that Item Nodes can transfer, in items per tick.");
@@ -26,15 +27,19 @@ public class DataNEssenceConfig {
         maxNodeWiresValue = buildInteger(builder, "maxNodeWires", 4, 1, 50, "Connection limit for all Nodes - a Node cannot have more Wires than this.");
         wireDistanceLimitValue = buildInteger(builder, "wireDistanceLimit", 24, 1, 64, "Distance limit for wire length, in blocks.");
     }
+
     private static ModConfigSpec.BooleanValue buildBoolean(ModConfigSpec.Builder builder, String name, boolean defaultValue, String comment) {
         return builder.comment(comment).translation(name).define(name, defaultValue);
     }
+
     private static ModConfigSpec.IntValue buildInteger(ModConfigSpec.Builder builder, String name, int defaultValue, int min, int max, String comment) {
         return builder.comment(comment).translation(name).defineInRange(name, defaultValue, min, max);
     }
+
     private static ModConfigSpec.DoubleValue buildDouble(ModConfigSpec.Builder builder, String name, double defaultValue, double min, double max, String comment) {
         return builder.comment(comment).translation(name).defineInRange(name, defaultValue, min, max);
     }
+
     public static int fluidPointTransfer = 125;
     public static int essencePointTransfer = 50;
     public static int itemPointTransfer = 4;
@@ -47,6 +52,7 @@ public class DataNEssenceConfig {
     public final ModConfigSpec.IntValue essenceBatteryMaxValue;
     public final ModConfigSpec.IntValue maxNodeWiresValue;
     public final ModConfigSpec.IntValue wireDistanceLimitValue;
+
     public static void bake(ModConfig config) {
         try {
             fluidPointTransfer = COMMON.fluidPointTransferValue.get();

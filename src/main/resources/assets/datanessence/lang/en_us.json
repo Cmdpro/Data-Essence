@@ -59,6 +59,7 @@
   "item.datanessence.healing_lens": "Laser Lens: Healing",
   "item.datanessence.heating_coil": "Heating Coil",
   "item.datanessence.illumination_rod": "Illumination Rod",
+  "item.datanessence.illumination_rod.tooltip": " ◇ Use to place a Flare Light (%s Industrial Essence)",
   "item.datanessence.iron_drill": "Iron Drill",
   "item.datanessence.item_wire": "Item Wire",
   "item.datanessence.lens": "Lens",
@@ -83,6 +84,7 @@
   "item.datanessence.magitech_8_ball.result8": "Go ahead. See what happens.",
   "item.datanessence.magitech_8_ball.result9": "That sounds funny, do it.",
   "item.datanessence.mineral_finding_rod": "Mineral-Finding Rod",
+  "item.datanessence.mineral_finding_rod.tooltip": " ◇ Use to scan for ore (%s Industrial Essence)",
   "item.datanessence.music_disc_player": "Harmonic Resonator",
   "item.datanessence.natural_essence_bomb": "Earth Destabilization Bomb",
   "item.datanessence.natural_essence_bomb.info": " ◇ Volatile! Makes the earth collapse in on itself.",
@@ -789,5 +791,6 @@
 
   "datanessence.configuration.balancing": "Balancing",
   "datanessence.configuration.shaders": "Shaders",
-  "datanessence.configuration.accessibility": "Accessibility"
+  "datanessence.configuration.accessibility": "Accessibility",
+  "datanessence.configuration.sounds": "Sounds"
 }
