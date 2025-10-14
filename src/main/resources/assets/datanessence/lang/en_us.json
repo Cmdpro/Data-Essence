@@ -755,5 +755,6 @@
 
   "datanessence.configuration.balancing": "Balancing",
   "datanessence.configuration.shaders": "Shaders",
-  "datanessence.configuration.accessibility": "Accessibility"
+  "datanessence.configuration.accessibility": "Accessibility",
+  "datanessence.configuration.sounds": "Sounds"
 }
