@@ -19,6 +19,7 @@ public class SmeltingType extends CraftingType {
             page.renderIngredientWithTooltip(screen, graphics, Ingredient.of(Items.FURNACE), xOffset + x + 74, yOffset + y + 43, pMouseX, pMouseY);
             page.renderItemWithTooltip(graphics, recipe.getResultItem(RegistryAccess.EMPTY), xOffset + x + 74, yOffset + y + 22, pMouseX, pMouseY);
             page.renderIngredientWithTooltip(screen, graphics, smeltingRecipe.getIngredients().get(0), xOffset + x + 30, yOffset + y + 22, pMouseX, pMouseY);
+            page.renderCraftTime(graphics, smeltingRecipe.getCookingTime(), xOffset + x + 74, yOffset + y + 8);
         }
     }
 

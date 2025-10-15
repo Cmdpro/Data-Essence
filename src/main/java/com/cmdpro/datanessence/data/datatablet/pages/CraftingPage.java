@@ -166,6 +166,14 @@ public class CraftingPage extends TextPage {
         }
     }
 
+    public void renderCraftTime(GuiGraphics graphics, int ticks, int x, int y) {
+        double seconds = (double) ticks / 20;
+        Component text = Component.translatable("emi.datanessence.time_seconds", seconds);
+        var font = Minecraft.getInstance().font;
+
+        graphics.drawString(font, text, (x+8) - font.width(text) / 2, y, 0xffffff, false);
+    }
+
     public void renderFluidIngredientWithTooltip(DataTabletScreen screen, GuiGraphics graphics, FluidIngredient fluid, int x, int y, int mouseX, int mouseY) {
         if (!fluid.isEmpty()) {
             FluidStack currentFluid = fluid.getStacks()[(screen.ticks / 20) % fluid.getStacks().length];

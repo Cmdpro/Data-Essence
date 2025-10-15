@@ -17,6 +17,7 @@
 - Factory Song loops are not disabled by muting the Blocks sound category any more
 - Synthesis Chamber requires an Essence Pathways instead of Logical Matrix
 - Data Tablet hides recipes you do not know about yet, as in EMI, and additionally hides recipes using machines you have not unlocked
+- Data Tablet displays craft time on recipe cards, as in EMI
 
 ### Fixes
 - Fixed Essence Burner voiding fuel remainders (e.g. buckets); it now expels them out into the world
