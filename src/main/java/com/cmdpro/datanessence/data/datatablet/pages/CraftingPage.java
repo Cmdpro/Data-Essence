@@ -104,7 +104,10 @@ public class CraftingPage extends TextPage {
     }
 
     public void renderLocked(GuiGraphics graphics, int xOffset, int x, int yOffset, int y) {
-        graphics.blit( DataNEssence.locate("textures/gui/emi_recipe_locked.png") , xOffset + x, yOffset + y, 0, 0, 123, 60);
+        int backgroundWidth = 123;
+        int backgroundHeight = 60;
+
+        graphics.blit( DataNEssence.locate("textures/gui/emi_recipe_locked.png") , xOffset + x, yOffset + y, 0, 0, backgroundWidth, backgroundHeight);
 
         // forgive the bad code, adapted from TextPage while terrified ~Eset
         var line1 = Component.translatable("emi.datanessence.recipe_locked_line_1");
@@ -113,15 +116,15 @@ public class CraftingPage extends TextPage {
         FormattedCharSequence sequence1;
         FormattedCharSequence sequence2;
 
-        textX = xOffset+((123 - 4)-Minecraft.getInstance().font.width(line1));
+        textX = xOffset+((backgroundWidth - 4)-Minecraft.getInstance().font.width(line1));
         SubStringSource substr = SubStringSource.create(line1, UCharacter::getMirror, (str) -> str);
         sequence1 = FormattedCharSequence.composite(substr.substring(0, substr.getPlainText().length(), false));
-        graphics.drawString(Minecraft.getInstance().font, sequence1, textX+x, yOffset + y + 30, 0xFFFF96B5, false);
+        graphics.drawString(Minecraft.getInstance().font, sequence1, textX+x, (yOffset + y) + (backgroundHeight / 2), 0xFFFF96B5, false);
 
-        textX = xOffset+((123 - 4)-Minecraft.getInstance().font.width(line2));
+        textX = xOffset+((backgroundWidth - 4)-Minecraft.getInstance().font.width(line2));
         substr = SubStringSource.create(line2, UCharacter::getMirror, (str) -> str);
         sequence2 = FormattedCharSequence.composite(substr.substring(0, substr.getPlainText().length(), false));
-        graphics.drawString(Minecraft.getInstance().font, sequence2, textX+x, yOffset + y + 40, 0xFFF25EA1, false);
+        graphics.drawString(Minecraft.getInstance().font, sequence2, textX+x, (yOffset + y) + (backgroundHeight / 2 + 10), 0xFFF25EA1, false);
     }
 
     @Override
