@@ -1,0 +1,11 @@
+{
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 20
+  },
+  "input": { "item": "datanessence:conductance_rod" },
+  "input2": { "tag": "datanessence:capacitance_panel" },
+  "time": 100,
+  "result": { "id": "datanessence:logical_matrix", "count": 1 },
+  "entry": "datanessence:basics/crafting_components"
+}

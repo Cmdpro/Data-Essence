@@ -314,6 +314,7 @@ public class DataNEssence
             event.accept(ItemRegistry.LOGICAL_MATRIX.get());
             event.accept(ItemRegistry.PROPELLER.get());
             event.accept(ItemRegistry.EXCITER.get());
+            event.accept(ItemRegistry.ESSENCE_PATHWAYS.get());
             event.accept(ItemRegistry.HEATING_COIL.get());
             event.accept(ItemRegistry.IRON_DRILL.get());
             event.accept(ItemRegistry.LENS.get());
