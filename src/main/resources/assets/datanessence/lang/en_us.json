@@ -333,8 +333,8 @@
 
   "_comment.data_tablet_pages": "Data Tablet Page texts.",
   "_comment.data_tablet_pages.basics": "Basic Information category texts.",
-  "data_tablet.pages.components.name": "Basic Crafting Components",
-  "data_tablet.pages.components.page1.text": "Unrefined materials can only go so far, so we devised several more refined crafting components that make assembly of Essence-driven machinery far more reasonable. These range from machined parts to circuitry to yet more advanced components.",
+  "data_tablet.pages.components.name": "Basic Industrial Components",
+  "data_tablet.pages.components.page1.text": "Unrefined materials can only go so far, so we devised several more refined crafting components that make assembly of Essence-driven machinery far more reasonable. These range from machined parts to circuitry to yet more advanced parts. Some can be made more efficiently with more advanced machinery.",
   "data_tablet.pages.data_tablet.flavor": " ◇ Ancient lexicon",
   "data_tablet.pages.data_tablet.name": "Data Tablet",
   "data_tablet.pages.data_tablet.page1.text": "Every researcher is given a personal Data Tablet which contains records of our discoveries, inventions, and knowledge - data. Its contents may be added to by visiting any active research center and copying from its Data Bank, assuming sufficient credentials.\n\nThe Data Tablet contains a set of security mechanisms that prevent a Tablet from accepting data of a higher tier than itself. To tier up, a researcher requires all of the critical data of their current tier and authorization from higher-ranked peers. This is to ensure our gathered knowledge does not fall into the wrong hands, and that a given researcher is skilled enough to receive our teachings.\n\nCritical data is typically loaded onto the Data Tablet in two parts. The first part is usually presented as a set of hints, or incomplete research logs. After retracing our steps, the second part - which is the finalized data entry - replaces the first. Upon completion, the Tablet will register the Critical Data as unlocked, and may allow further progress at one of our research centers.",

@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.recipe;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.Map;
 
-public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, Recipe<RecipeInput> {
+public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, Recipe<RecipeInput>, DataNEssenceRecipe {
     private final ItemStack output;
     private final Ingredient input;
     private final ResourceLocation entry;
@@ -80,6 +81,11 @@ public class InfusionRecipe implements IHasEssenceCost, IHasRequiredKnowledge, R
     @Override
     public int getCompletionStage() {
         return completionStage;
+    }
+
+    @Override
+    public ResourceLocation getMachineEntry() {
+        return DataNEssence.locate("machinery/infuser");
     }
 
     public static class Serializer implements RecipeSerializer<InfusionRecipe> {

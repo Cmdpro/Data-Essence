@@ -1,6 +1,11 @@
 package com.cmdpro.datanessence.api.util;
 
+import com.ibm.icu.lang.UCharacter;
+import net.minecraft.client.resources.language.FormattedBidiReorder;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.SubStringSource;
+import net.minecraft.util.FormattedCharSequence;
 
 import java.text.DecimalFormat;
 
@@ -21,7 +26,7 @@ public class TextUtil {
             }
         }
         String num = String.valueOf(Math.round(endAmount));
-        if (!type.equals("mb")) {
+        if (!type.equals("millibucket")) {
             DecimalFormat format = new DecimalFormat("0.0##");
             num = format.format(endAmount);
         }
