@@ -78,6 +78,7 @@ public class ItemRegistry {
     public static final Supplier<Item> HEATING_COIL = register("heating_coil", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> COPPER_SHELL = register("copper_shell", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> ESSENCE_PATHWAYS = register("essence_pathways", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> ASSEMBLY_ACTUATOR = register("assembly_actuator", () -> new Item(new Item.Properties()));
 
     // Ore Processing Intermediates and Nuggets
     public static final Supplier<Item> COPPER_NUGGET = register("copper_nugget", () -> new Item(new Item.Properties()));

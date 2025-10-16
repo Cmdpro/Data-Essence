@@ -3,7 +3,7 @@
 - Added distance display to the Signal Tracker
 - Added new Copper Vent deco block
 - Added a Factory Song volume client config setting
-- Added new Essence Pathways crafting component
+- Added new Assembly Actuator and Essence Pathways crafting components
 - Added more efficient Logical Matrix synthesis recipe
 - Added mouse-based structure rotation to Data Tablet multiblock page
 
@@ -17,6 +17,7 @@
 - Added diamond and emerald to Mineral-Finding Rod's recipe
 - Factory Song loops are not disabled by muting the Blocks sound category any more
 - Synthesis Chamber requires an Essence Pathways instead of Logical Matrix
+- Auto-Fabricator requires an Assembly Actuator
 - Data Tablet hides recipes you do not know about yet, as in EMI, and additionally hides recipes using machines you have not unlocked
 - Data Tablet displays craft time on recipe cards, as in EMI
 
