@@ -19,17 +19,34 @@ public class MultiblockPage extends Page {
     public ResourceLocation multiblock;
     float renderRotationX;
     float renderRotationY;
+    int mode; // 0 = multiblock renderer; 1 = material list
 
     public MultiblockPage(ResourceLocation multiblock) {
         this.multiblock = multiblock;
         renderRotationX = -30f;
         renderRotationY = -45f;
+        mode = 0;
     }
 
     @Override
-    public void render(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset) {
+    public void render(DataTabletScreen screen, GuiGraphics graphics, float partialTicks, int mouseX, int mouseY, int xOffset, int yOffset) {
         Multiblock multiblock = MultiblockManager.multiblocks.get(this.multiblock);
-        pGuiGraphics.pose().pushPose();
+
+        if (mode == 0)
+            renderMultiblock(graphics, multiblock, xOffset, yOffset);
+
+        graphics.pose().pushPose();
+        graphics.pose().translate(0, 0, 200);
+        if (mouseX >= xOffset+120 && mouseX <= xOffset+120+16 && mouseY >= yOffset + 142 && mouseY <= yOffset + 142 + 16) {
+            graphics.blit(DataTabletScreen.TEXTURE_MISC, xOffset+120, yOffset+142, 0, 54, 16, 16);
+        } else {
+            graphics.blit(DataTabletScreen.TEXTURE_MISC, xOffset+120, yOffset+142, 0, 38, 16, 16);
+        }
+        graphics.pose().popPose();
+    }
+
+    public void renderMultiblock(GuiGraphics graphics, Multiblock multiblock, int xOffset, int yOffset) {
+        graphics.pose().pushPose();
         int sizeX = multiblock.multiblockLayers[0][0].length();
         int sizeY = multiblock.multiblockLayers.length;
         int sizeZ = multiblock.multiblockLayers[0].length;
@@ -39,27 +56,18 @@ public class MultiblockPage extends Page {
         float scaleX = maxX / diag;
         float scaleY = maxY / sizeY;
         float scale = -Math.min(scaleX, scaleY);
-        pGuiGraphics.pose().translate(xOffset+(DataTabletScreen.imageWidth/2f), yOffset+(DataTabletScreen.imageHeight/2f), 100);
-        pGuiGraphics.pose().scale(scale, scale, scale);
-        pGuiGraphics.pose().translate(-(float) sizeX / 2, -(float) sizeY / 2, 0);
+        graphics.pose().translate(xOffset+(DataTabletScreen.imageWidth/2f), yOffset+(DataTabletScreen.imageHeight/2f), 100);
+        graphics.pose().scale(scale, scale, scale);
+        graphics.pose().translate(-(float) sizeX / 2, -(float) sizeY / 2, 0);
         float offX = (float) -sizeX / 2f;
         float offZ = (float) -sizeZ / 2f;
-        pGuiGraphics.pose().mulPose(Axis.XP.rotationDegrees(renderRotationX));
-        pGuiGraphics.pose().translate(-offX, 0, -offZ);
-        pGuiGraphics.pose().mulPose(Axis.YP.rotationDegrees(renderRotationY)); // (((float)screen.ticks+Minecraft.getInstance().getTimer().getRealtimeDeltaTicks())/5f)%360f
-        //pGuiGraphics.pose().mulPose(Axis.YP.rotationDegrees(-45));
-        pGuiGraphics.pose().translate(offX, 0, offZ);
-        pGuiGraphics.pose().translate(-multiblock.center.getX(), -multiblock.center.getY(), -multiblock.center.getZ());
-        MultiblockRenderer.renderMultiblock(multiblock, null, pGuiGraphics.pose(), Minecraft.getInstance().getTimer(), Rotation.NONE, Minecraft.getInstance().renderBuffers().bufferSource());
-        pGuiGraphics.pose().popPose();
-        pGuiGraphics.pose().pushPose();
-        pGuiGraphics.pose().translate(0, 0, 200);
-        if (pMouseX >= xOffset+120 && pMouseX <= xOffset+120+16 && pMouseY >= yOffset + 142 && pMouseY <= yOffset + 142 + 16) {
-            pGuiGraphics.blit(DataTabletScreen.TEXTURE_MISC, xOffset+120, yOffset+142, 0, 54, 16, 16);
-        } else {
-            pGuiGraphics.blit(DataTabletScreen.TEXTURE_MISC, xOffset+120, yOffset+142, 0, 38, 16, 16);
-        }
-        pGuiGraphics.pose().popPose();
+        graphics.pose().mulPose(Axis.XP.rotationDegrees(renderRotationX));
+        graphics.pose().translate(-offX, 0, -offZ);
+        graphics.pose().mulPose(Axis.YP.rotationDegrees(renderRotationY));
+        graphics.pose().translate(offX, 0, offZ);
+        graphics.pose().translate(-multiblock.center.getX(), -multiblock.center.getY(), -multiblock.center.getZ());
+        MultiblockRenderer.renderMultiblock(multiblock, null, graphics.pose(), Minecraft.getInstance().getTimer(), Rotation.NONE, Minecraft.getInstance().renderBuffers().bufferSource());
+        graphics.pose().popPose();
     }
 
     @Override

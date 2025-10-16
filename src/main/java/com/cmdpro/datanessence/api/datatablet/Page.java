@@ -5,6 +5,11 @@ import net.minecraft.client.gui.GuiGraphics;
 
 public abstract class Page {
 
+    /**
+     * Your standard render method.
+     * @param xOffset the X coord of the top left corner of the data tablet screen
+     * @param yOffset the Y coord of the top left corner of the data tablet screen
+     */
     public abstract void render(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset);
 
     public void renderPost(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset) {}
