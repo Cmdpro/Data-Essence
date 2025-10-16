@@ -24,3 +24,4 @@
 - Fixed Essence Burner voiding fuel remainders (e.g. buckets); it now expels them out into the world
 - Fixed (Auto-)Fabricators' issues with crafting remainders (e.g. buckets, bottles) again
 - Fabricators do nothing and log a warning if their current recipe has an empty result or empty ingredients
+- Fixed Essence Sparkle animation frame order
