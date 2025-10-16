@@ -72,6 +72,9 @@ public class DataTabletScreen extends Screen {
 
     @Override
     public boolean mouseDragged(double pMouseX, double pMouseY, int pButton, double pDragX, double pDragY) {
+        if ( screenType == 2 )
+            return clickedEntry.getPagesClient().get(page).onDrag(this, pMouseX, pMouseY, pButton, pDragX, pDragY);
+
         if (pButton == 0 && (screenType == 0 || screenType == 1)) {
             offsetX += pDragX;
             offsetY += pDragY;

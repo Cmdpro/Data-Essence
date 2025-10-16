@@ -16,10 +16,16 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Rotation;
 
 public class MultiblockPage extends Page {
+    public ResourceLocation multiblock;
+    float renderRotationX;
+    float renderRotationY;
+
     public MultiblockPage(ResourceLocation multiblock) {
         this.multiblock = multiblock;
+        renderRotationX = -30f;
+        renderRotationY = -45f;
     }
-    public ResourceLocation multiblock;
+
     @Override
     public void render(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset) {
         Multiblock multiblock = MultiblockManager.multiblocks.get(this.multiblock);
@@ -38,10 +44,10 @@ public class MultiblockPage extends Page {
         pGuiGraphics.pose().translate(-(float) sizeX / 2, -(float) sizeY / 2, 0);
         float offX = (float) -sizeX / 2f;
         float offZ = (float) -sizeZ / 2f;
-        pGuiGraphics.pose().mulPose(Axis.XP.rotationDegrees(-30));
+        pGuiGraphics.pose().mulPose(Axis.XP.rotationDegrees(renderRotationX));
         pGuiGraphics.pose().translate(-offX, 0, -offZ);
-        pGuiGraphics.pose().mulPose(Axis.YP.rotationDegrees((((float)screen.ticks+Minecraft.getInstance().getTimer().getRealtimeDeltaTicks())/5f)%360f));
-        pGuiGraphics.pose().mulPose(Axis.YP.rotationDegrees(-45));
+        pGuiGraphics.pose().mulPose(Axis.YP.rotationDegrees(renderRotationY)); // (((float)screen.ticks+Minecraft.getInstance().getTimer().getRealtimeDeltaTicks())/5f)%360f
+        //pGuiGraphics.pose().mulPose(Axis.YP.rotationDegrees(-45));
         pGuiGraphics.pose().translate(offX, 0, offZ);
         pGuiGraphics.pose().translate(-multiblock.center.getX(), -multiblock.center.getY(), -multiblock.center.getZ());
         MultiblockRenderer.renderMultiblock(multiblock, null, pGuiGraphics.pose(), Minecraft.getInstance().getTimer(), Rotation.NONE, Minecraft.getInstance().renderBuffers().bufferSource());
@@ -69,6 +75,15 @@ public class MultiblockPage extends Page {
             }
         }
         return super.onClick(screen, pMouseX, pMouseY, pButton, xOffset, yOffset);
+    }
+
+    @Override
+    public boolean onDrag(DataTabletScreen screen, double mouseX, double mouseY, int button, double xDrag, double yDrag) {
+
+        renderRotationX -= (float) (0.5*yDrag);
+        renderRotationY += (float) (0.5*xDrag);
+
+        return true;
     }
 
     @Override
