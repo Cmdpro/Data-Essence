@@ -1,19 +1,18 @@
 {
     "animation": {
-        "frametime": 2,
         "frames": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            4,
-            5,
-            4,
-            2,
-            1,
-            0
+            { "index": 0, "time": 2 },
+            { "index": 1, "time": 2 },
+            { "index": 2, "time": 2 },
+            { "index": 3, "time": 2 },
+            { "index": 4, "time": 2 },
+            { "index": 3, "time": 2 },
+            { "index": 4, "time": 2 },
+            { "index": 3, "time": 2 },
+            { "index": 4, "time": 2 },
+            { "index": 2, "time": 2 },
+            { "index": 1, "time": 2 },
+            { "index": 0, "time": 2 }
         ]
     }
 }

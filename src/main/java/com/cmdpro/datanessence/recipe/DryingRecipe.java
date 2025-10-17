@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.recipe;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -8,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -15,7 +17,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.Optional;
 
-public class DryingRecipe implements Recipe<RecipeInputWithFluid> {
+public class DryingRecipe implements Recipe<RecipeInputWithFluid>, DataNEssenceRecipe {
     private final FluidStack input;
     private final ItemStack output;
     private final Optional<Ingredient> additive;
@@ -71,6 +73,11 @@ public class DryingRecipe implements Recipe<RecipeInputWithFluid> {
     @Override
     public RecipeType<?> getType() {
         return RecipeRegistry.DRYING_TYPE.get();
+    }
+
+    @Override
+    public ResourceLocation getMachineEntry() {
+        return DataNEssence.locate("machinery/drying_table");
     }
 
     public static class Serializer implements RecipeSerializer<DryingRecipe> {

@@ -84,6 +84,8 @@ public class ItemRegistry {
     public static final Supplier<Item> EXCITER = register("exciter", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> HEATING_COIL = register("heating_coil", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> COPPER_SHELL = register("copper_shell", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> ESSENCE_PATHWAYS = register("essence_pathways", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> ASSEMBLY_ACTUATOR = register("assembly_actuator", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> ECLIPTRUM_INGOT = register("ecliptrum_ingot", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> TRANSFORMATIVE_ROD = register("transformative_rod", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> REFLECTIVE_PANEL = register("reflective_panel", () -> new Item(new Item.Properties()));

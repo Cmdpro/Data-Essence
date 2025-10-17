@@ -75,6 +75,7 @@ public class FabricatorType extends CraftingType {
                     y2 += 17;
                 }
             }
+            page.renderCraftTime(pGuiGraphics, recipe2.getTime(), xOffset + x + 88, yOffset + y + 8);
         }
     }
 

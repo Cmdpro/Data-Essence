@@ -85,6 +85,7 @@
       "datanessence:fabrication/sigils/speed",
       "datanessence:fabrication/wire_spool",
       "datanessence:fluid_mixing/genderfluid",
+      "datanessence:infusion/essence_pathways",
       "datanessence:infusion/lens_from_glass",
       "datanessence:infusion/music_disc_underthesky",
       "datanessence:infusion/traversite_road",
@@ -101,6 +102,7 @@
       "datanessence:stonecutting/polished_obsidian_column",
       "datanessence:stonecutting/polished_obsidian_tiles",
       "datanessence:stonecutting/polished_obsidian_tract",
+      "datanessence:synthesis/assembly_actuator",
       "datanessence:synthesis/ecliptrum_ingot",
       "datanessence:synthesis/essence_bomb",
       "datanessence:synthesis/essence_wire_synthesis",
@@ -112,6 +114,7 @@
       "datanessence:synthesis/lens_harming",
       "datanessence:synthesis/lens_healing",
       "datanessence:synthesis/lens_precision",
+      "datanessence:synthesis/logical_matrix",
       "datanessence:synthesis/lunar_essence_wire"
     ]
 }

@@ -56,6 +56,7 @@ public class SynthesisType extends CraftingType {
             page.renderItemWithTooltip(pGuiGraphics, recipe.getResultItem(RegistryAccess.EMPTY), xOffset + x + 82, yOffset + y + 22, pMouseX, pMouseY);
             page.renderIngredientWithTooltip(screen, pGuiGraphics, recipe2.getIngredients().get(0), xOffset + x + 38, yOffset + y + 11, pMouseX, pMouseY);
             page.renderIngredientWithTooltip(screen, pGuiGraphics, recipe2.getIngredients().get(1), xOffset + x + 38, yOffset + y + 33, pMouseX, pMouseY);
+            page.renderCraftTime(pGuiGraphics, recipe2.getTime(), xOffset + x + 82, yOffset + y + 8);
         }
     }
 

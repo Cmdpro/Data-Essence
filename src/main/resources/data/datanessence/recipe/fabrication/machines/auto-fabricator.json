@@ -6,11 +6,12 @@
   "entry": "datanessence:machinery/auto-fabricator",
   "pattern": [
     "CCC",
-    "E E",
+    "EAE",
     "ROR"
   ],
   "time": 100,
   "key": {
+    "A": { "item": "datanessence:assembly_actuator" },
     "C": { "item": "datanessence:capacitance_panel" },
     "E": { "item": "datanessence:exciter" },
     "R": { "item": "datanessence:conductance_rod" },

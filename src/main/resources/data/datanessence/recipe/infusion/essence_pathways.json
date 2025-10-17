@@ -1,0 +1,15 @@
+{
+  "type": "datanessence:infusion",
+  "essenceCost": {
+    "datanessence:essence": 200
+  },
+  "entry": "datanessence:basics/components",
+  "input": {
+    "item": "minecraft:copper_block",
+    "count": 1
+  },
+  "result": {
+    "id": "datanessence:essence_pathways",
+    "count": 4
+  }
+}

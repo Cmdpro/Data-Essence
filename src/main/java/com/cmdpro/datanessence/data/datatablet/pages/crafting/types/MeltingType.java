@@ -19,6 +19,7 @@ public class MeltingType extends CraftingType {
             page.renderIngredientWithTooltip(screen, pGuiGraphics, Ingredient.of(BlockRegistry.MELTER.get()), xOffset + x + 74, yOffset + y + 43, pMouseX, pMouseY);
             page.renderFluidWithTooltip(pGuiGraphics, meltingRecipe.getOutput(), xOffset + x + 74, yOffset + y + 22, pMouseX, pMouseY);
             page.renderIngredientWithTooltip(screen, pGuiGraphics, meltingRecipe.getIngredients().get(0), xOffset + x + 30, yOffset + y + 22, pMouseX, pMouseY);
+            page.renderCraftTime(pGuiGraphics, meltingRecipe.getTime(), xOffset + x + 74, yOffset + y + 8);
         }
     }
 

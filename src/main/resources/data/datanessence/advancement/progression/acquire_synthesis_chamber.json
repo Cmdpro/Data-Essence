@@ -11,7 +11,7 @@
     },
     "hidden": false
   },
-  "parent": "datanessence:progression/use_data_drive",
+  "parent": "datanessence:progression/acquire_infuser",
   "criteria": {
     "has_synthesis_chamber": {
       "trigger": "minecraft:inventory_changed",

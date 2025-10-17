@@ -1,0 +1,11 @@
+{
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 100
+  },
+  "input": { "item": "datanessence:essence_pathways" },
+  "input2": { "item": "datanessence:essence_shard" },
+  "time": 100,
+  "result": { "id": "datanessence:assembly_actuator", "count": 1 },
+  "entry": "datanessence:basics/components"
+}

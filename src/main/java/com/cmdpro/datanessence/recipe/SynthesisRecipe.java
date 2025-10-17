@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.recipe;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.Map;
 
-public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IHasRequiredKnowledge {
+public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IHasRequiredKnowledge, DataNEssenceRecipe {
     private final ItemStack output;
     private final Ingredient input;
     private final Ingredient input2;
@@ -89,6 +90,11 @@ public class SynthesisRecipe implements Recipe<RecipeInput>, IHasEssenceCost, IH
     @Override
     public ResourceLocation getEntry() {
         return entry;
+    }
+
+    @Override
+    public ResourceLocation getMachineEntry() {
+        return DataNEssence.locate("machinery/synthesis_chamber");
     }
 
     public static class Serializer implements RecipeSerializer<SynthesisRecipe> {

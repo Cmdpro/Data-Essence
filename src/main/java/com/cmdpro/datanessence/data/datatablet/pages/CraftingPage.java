@@ -1,15 +1,24 @@
 package com.cmdpro.datanessence.data.datatablet.pages;
 
+import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.moddata.ClientPlayerData;
+import com.cmdpro.datanessence.moddata.ClientPlayerUnlockedEntries;
+import com.cmdpro.datanessence.recipe.DataNEssenceRecipe;
+import com.cmdpro.datanessence.recipe.IHasRequiredKnowledge;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.api.datatablet.PageSerializer;
 import com.cmdpro.datanessence.api.datatablet.CraftingType;
 import com.cmdpro.datanessence.api.datatablet.CraftingTypes;
 import com.cmdpro.datanessence.data.datatablet.pages.serializers.CraftingPageSerializer;
+import com.ibm.icu.lang.UCharacter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.resources.language.FormattedBidiReorder;
+import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.SubStringSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -25,11 +34,15 @@ import java.util.List;
 import java.util.Optional;
 
 public class CraftingPage extends TextPage {
+    public List<ResourceLocation> recipes;
+    public boolean showTooltip;
+    public List<FormattedCharSequence> tooltipToShow = new ArrayList<>();
+
     public CraftingPage(Component text, boolean rtl, List<ResourceLocation> recipes) {
         super(text, rtl);
         this.recipes = recipes;
     }
-    public List<ResourceLocation> recipes;
+
     @Override
     public int textYOffset() {
         int x = 4;
@@ -46,20 +59,36 @@ public class CraftingPage extends TextPage {
         }
         return y+58;
     }
-    public List<FormattedCharSequence> tooltipToShow = new ArrayList<>();
-    public boolean showTooltip;
+
     @Override
     public void render(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset) {
         super.render(screen, pGuiGraphics, pPartialTick, pMouseX, pMouseY, xOffset, yOffset);
         int x = 4;
         int y = 4;
         int p = 0;
-        for (ResourceLocation i : recipes) {
-            Optional<? extends RecipeHolder<?>> optional = Minecraft.getInstance().level.getRecipeManager().byKey(i);
-            if (optional.isPresent()) {
-                for (CraftingType o : CraftingTypes.types) {
-                    if (o.isRecipeType(optional.get().value())) {
-                        o.render(this, screen, pGuiGraphics, xOffset, x, yOffset, y, optional.get().value(), pMouseX, pMouseY);
+        for (ResourceLocation recipeId : recipes) {
+            Optional<? extends RecipeHolder<?>> holder = Minecraft.getInstance().level.getRecipeManager().byKey(recipeId);
+            if (holder.isPresent()) {
+                for (CraftingType craftingType : CraftingTypes.types) {
+                    var recipe = holder.get().value();
+
+                    if (craftingType.isRecipeType(recipe)) {
+
+                        var isUnlocked = false;
+
+                        if (recipe instanceof IHasRequiredKnowledge dataLockedRecipe)
+                            isUnlocked = ClientPlayerUnlockedEntries.getUnlocked().contains( dataLockedRecipe.getEntry())
+                                    || ( ClientPlayerUnlockedEntries.getIncomplete().containsKey(dataLockedRecipe.getEntry())
+                                    && ClientPlayerUnlockedEntries.getIncomplete().get(dataLockedRecipe.getEntry()) >= dataLockedRecipe.getCompletionStage() );
+
+                        if (recipe instanceof DataNEssenceRecipe dneRecipe)
+                            isUnlocked = ClientPlayerUnlockedEntries.getUnlocked().contains( dneRecipe.getMachineEntry() );
+
+                        if ( isUnlocked || !(recipe instanceof IHasRequiredKnowledge) ) {
+                            craftingType.render(this, screen, pGuiGraphics, xOffset, x, yOffset, y, holder.get().value(), pMouseX, pMouseY);
+                        } else {
+                            renderLocked(pGuiGraphics, xOffset, x, yOffset, y);
+                        }
                         break;
                     }
                 }
@@ -73,6 +102,31 @@ public class CraftingPage extends TextPage {
             }
         }
     }
+
+    public void renderLocked(GuiGraphics graphics, int xOffset, int x, int yOffset, int y) {
+        int backgroundWidth = 123;
+        int backgroundHeight = 60;
+
+        graphics.blit( DataNEssence.locate("textures/gui/emi_recipe_locked.png") , xOffset + x, yOffset + y, 0, 0, backgroundWidth, backgroundHeight);
+
+        // forgive the bad code, adapted from TextPage while terrified ~Eset
+        var line1 = Component.translatable("emi.datanessence.recipe_locked_line_1");
+        var line2 = Component.translatable("emi.datanessence.recipe_locked_line_2");
+        int textX;
+        FormattedCharSequence sequence1;
+        FormattedCharSequence sequence2;
+
+        textX = xOffset+((backgroundWidth - 4)-Minecraft.getInstance().font.width(line1));
+        SubStringSource substr = SubStringSource.create(line1, UCharacter::getMirror, (str) -> str);
+        sequence1 = FormattedCharSequence.composite(substr.substring(0, substr.getPlainText().length(), false));
+        graphics.drawString(Minecraft.getInstance().font, sequence1, textX+x, (yOffset + y) + (backgroundHeight / 2), 0xFFFF96B5, false);
+
+        textX = xOffset+((backgroundWidth - 4)-Minecraft.getInstance().font.width(line2));
+        substr = SubStringSource.create(line2, UCharacter::getMirror, (str) -> str);
+        sequence2 = FormattedCharSequence.composite(substr.substring(0, substr.getPlainText().length(), false));
+        graphics.drawString(Minecraft.getInstance().font, sequence2, textX+x, (yOffset + y) + (backgroundHeight / 2 + 10), 0xFFF25EA1, false);
+    }
+
     @Override
     public void renderPost(DataTabletScreen screen, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY, int xOffset, int yOffset) {
         super.renderPost(screen, pGuiGraphics, pPartialTick, pMouseX, pMouseY, xOffset, yOffset);
@@ -81,6 +135,7 @@ public class CraftingPage extends TextPage {
             pGuiGraphics.renderTooltip(Minecraft.getInstance().font, tooltipToShow, pMouseX, pMouseY);
         }
     }
+
     public void renderItemWithTooltip(GuiGraphics graphics, ItemStack item, int x, int y, int mouseX, int mouseY) {
         graphics.renderItem(item, x, y);
         graphics.renderItemDecorations(Minecraft.getInstance().font, item, x, y);
@@ -94,6 +149,7 @@ public class CraftingPage extends TextPage {
             }
         }
     }
+
     public void renderIngredientWithTooltip(DataTabletScreen screen, GuiGraphics graphics, Ingredient item, int x, int y, int mouseX, int mouseY) {
         if (!item.isEmpty()) {
             ItemStack currentItem = item.getItems()[(screen.ticks / 20) % item.getItems().length];
@@ -109,12 +165,22 @@ public class CraftingPage extends TextPage {
             }
         }
     }
+
+    public void renderCraftTime(GuiGraphics graphics, int ticks, int x, int y) {
+        double seconds = (double) ticks / 20;
+        Component text = Component.translatable("emi.datanessence.time_seconds", seconds);
+        var font = Minecraft.getInstance().font;
+
+        graphics.drawString(font, text, (x+8) - font.width(text) / 2, y, 0xffffff, false);
+    }
+
     public void renderFluidIngredientWithTooltip(DataTabletScreen screen, GuiGraphics graphics, FluidIngredient fluid, int x, int y, int mouseX, int mouseY) {
         if (!fluid.isEmpty()) {
             FluidStack currentFluid = fluid.getStacks()[(screen.ticks / 20) % fluid.getStacks().length];
             renderFluidWithTooltip(graphics, currentFluid, x, y, mouseX, mouseY);
         }
     }
+
     public void renderFluidWithTooltip(GuiGraphics graphics, FluidStack fluid, int x, int y, int mouseX, int mouseY) {
         IClientFluidTypeExtensions fluidTypeExtensions = IClientFluidTypeExtensions.of(fluid.getFluid());
         ResourceLocation stillTexture = fluidTypeExtensions.getStillTexture(fluid);
@@ -136,6 +202,7 @@ public class CraftingPage extends TextPage {
             }
         }
     }
+
     @Override
     public PageSerializer getSerializer() {
         return CraftingPageSerializer.INSTANCE;
