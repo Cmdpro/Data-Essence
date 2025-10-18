@@ -13,6 +13,7 @@ public class TallSanctuaryGrass extends DoublePlantBlock {
     public TallSanctuaryGrass(Properties pProperties) {
         super(pProperties);
     }
+
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         super.animateTick(state, level, pos, random);

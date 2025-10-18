@@ -3,11 +3,10 @@
   "category": "misc",
   "pattern": [
     "RC ",
-    " cR"
+    " CR"
   ],
   "key": {
     "C": { "item": "datanessence:ecliptrum_cog_assembly_2x" },
-    "c": { "item": "datanessence:ecliptrum_cog" },
     "R": { "item": "datanessence:transformative_rod" }
   },
   "result": { "id": "datanessence:ecliptrum_cog_assembly_4x" }

@@ -386,6 +386,8 @@
   "data_tablet.pages.locator.flavor": " ◇ Begin transmission",
   "data_tablet.pages.locator.name": "Locating Structures",
   "data_tablet.pages.locator.page1.text": "Around this realm, we have setup numerous outposts, homes, and research centers - as has been elsewhere detailed. It may be desirable to be able to find these locations without blind exploration, and for that a special tool was devised by fusing together memories of two similar tools - an aura-attuned rod and a colorful compass - from our ancient history.\n\nUsage is simple: tapping the locator crystal promotes it to resonate, sending out a ping that reports the nearest locations of our constructions in the world.",
+  "data_tablet.pages.lunar_components.name": "Basic Lunar Components",
+  "data_tablet.pages.lunar_components.page1.text": "With our development of Ecliptrum, it is only natural that components be shaped from it. These will serve in the construction of the new Lunar machines, where basic copper components fail to serve. Some of the more mechanical parts will aid in more advanced Industrial machinery, too.",
   "data_tablet.pages.lunarium.flavor": " ◇ Not a casting room",
   "data_tablet.pages.lunarium.name": "Fabrication II",
   "data_tablet.pages.lunarium.page1.incomplete_text": "We have been experimenting with our existing fabrication infrastructure, attempting to tune it to this new Lunar Essence. What we have ultimately landed on will be an... interesting construct, with a carefully-carved base inlaid with both shards in our possession, a pair of mechanized Ecliptrum arms, and a Lensing Crystal to focus the energies. Naturally, this prototype must be assembled before any further research can be made.",
