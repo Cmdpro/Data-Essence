@@ -335,6 +335,8 @@ public class DataNEssence
             event.accept(ItemRegistry.EMERALD_SHARD.get());
             event.accept(ItemRegistry.COAL_LUMP.get());
             event.accept(ItemRegistry.TRAVERSITE_ROAD_CHUNK.get());
+            // Sanctuary
+            event.accept(ItemRegistry.WEIGHTY_MAGNETITE.get());
 
             // Buckets
             event.accept(FluidRegistry.GENDERFLUID.bucket.get());

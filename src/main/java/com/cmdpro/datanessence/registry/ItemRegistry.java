@@ -102,6 +102,9 @@ public class ItemRegistry {
     public static final Supplier<Item> EMERALD_SHARD = register("emerald_shard", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> COAL_LUMP = register("coal_lump", () -> new FuelItem(new Item.Properties(), 200));
 
+    // World Resources
+    public static final Supplier<Item> WEIGHTY_MAGNETITE = register("weighty_magnetite", () -> new Item(new Item.Properties()));
+
     // Misc
     public static final Supplier<Item> COGNIZANT_CUBE = register("cognizant_cube", () -> new CognizantCube(new Item.Properties().stacksTo(1)));
     public static final Supplier<Item> MUSIC_DISC_PLAYER = register("music_disc_player", () -> new MusicDiscPlayer(new Item.Properties().stacksTo(1).component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)));

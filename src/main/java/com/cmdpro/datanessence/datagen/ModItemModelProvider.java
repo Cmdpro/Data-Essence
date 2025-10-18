@@ -145,6 +145,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItem(ItemRegistry.FROZEN_MOONLIGHT_CHUNK);
         simpleItem(ItemRegistry.TRANSFORMATIVE_GEL);
 
+        simpleItem(ItemRegistry.WEIGHTY_MAGNETITE);
+
         essencePoint(BlockRegistry.LUNAR_ESSENCE_POINT);
         essencePoint(BlockRegistry.NATURAL_ESSENCE_POINT);
         essencePoint(BlockRegistry.EXOTIC_ESSENCE_POINT);

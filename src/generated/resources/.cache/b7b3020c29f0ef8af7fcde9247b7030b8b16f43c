@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-16T20:24:45.971417805	Item Models: datanessence
+// 1.21.1	2025-10-18T17:38:19.791065813	Item Models: datanessence
 801fa8d0e9ae7e6c0f2ec1e83133257158c467a8 assets/datanessence/models/item/acceleration_lens.json
 42e19f03380a5b483a179ea05813050a7348f5f5 assets/datanessence/models/item/ancient_lantern.json
 dabf087382678b82cf3270c905fa9dd54ed369bc assets/datanessence/models/item/ancient_rock_bricks.json
@@ -103,4 +103,5 @@ c59e3defdbb8ac0274beed11eb09856a7af108e4 assets/datanessence/models/item/travers
 286c4712fa70bd60839c9c3a0acf83e4ea11cafd assets/datanessence/models/item/traversite_trudgers.json
 4485455f0e5dc7ecc006f422e21b5a1dcb972ab0 assets/datanessence/models/item/under_the_sky_music_disc.json
 33d219aaa0c9db2f389822001aefe11e8ca231ce assets/datanessence/models/item/warp_capsule.json
+f5477b76ef70e2fc9e7d99fc9889f151f5589b8f assets/datanessence/models/item/weighty_magnetite.json
 bd1e151052c1b37e23c298b45aff10570e4c6299 assets/datanessence/models/item/wire_spool.json
