@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:vermilion_sprout"
+    },
+    "title": {
+      "translate": "advancements.datanessence.visit_sanctuary.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.visit_sanctuary.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:progression/acquire_synthesis_chamber",
+  "criteria": {
+    "visit_sanctuary": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

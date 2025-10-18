@@ -1,0 +1,11 @@
+{
+  "icon": {
+    "id": "datanessence:vermilion_sprout"
+  },
+  "name": {
+    "translate": "data_tablet.tabs.sanctuary.name"
+  },
+  "placement": {
+    "place_after": "datanessence:lore"
+  }
+}

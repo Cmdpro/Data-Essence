@@ -347,6 +347,7 @@
   "data_tablet.tabs.tools.name": "Tools and Utilities",
   "data_tablet.tabs.mod_integration.name": "Mod Integration",
   "data_tablet.tabs.lore.name": "Ancient History",
+  "data_tablet.tabs.sanctuary.name": "A Sanctified World",
 
   "_comment.data_tablet_pages": "Data Tablet Page texts.",
   "_comment.data_tablet_pages.basics": "Basic Information category texts.",
@@ -621,6 +622,15 @@
   "data_tablet.pages.book_flora_survey.page5.text": "Section IV: Other Mundane Plants.\n\nThe last of the mundane plants to cover do not neatly fit in one of the other three categories. Hence, I am placing them all under this section, before moving on to plants of more interest.\n\nCacti and Lilypads seem to look and act as in Makutu, and so no differences need be noted. Phenuan mushrooms come in red and brown forms and seem to spread in low light. Spore Blossoms are rather unique, letting off green spores in their lush, cavernous surroundings.",
   "data_tablet.pages.book_flora_survey.page6.text": "Section V: Minorly Attuned Flora.\n\nFinally, we move on to the true value of this text: Phenuan flora which prove useful in Essence manipulation. These are noted in slightly more detail in their related technical entries, but I shall comment on any similarities to Makutuin plants that I notice.\n\nFirstly, Tethergrass. This plant is notable for its slight glow and secretion of a form of blue Bonding Powder that acts as a sort of glue - this quality has been elsewhere described. Tethergrass is somewhat similar to the Makutuin Aura Bloom, which likewise carries a blue powder - Aura Dust - but it is used for a wholly different purpose: attuning something to the energy aura. A notable example of this quality is demonstrated in the rods our ancestors used to locate sites of high energy concentration for the construction of their [REDACTED; CLASSIFIED].",
   "data_tablet.pages.book_flora_survey.wip": "[Further pages of this text are yet to be decrypted... you see something about \"mod updates\". Maybe that's relevant?]",
+
+  "_comment.data_tablet.pages.sanctuary": "A Sanctified World category texts",
+  "data_tablet.pages.sanctuary_portal.incomplete_flavor": " ◇ Can it be done?",
+  "data_tablet.pages.sanctuary_portal.incomplete_name": "To Reach Another Realm",
+  "data_tablet.pages.sanctuary_portal.page1.incomplete_text": "Arekko mentioned to you that a long time ago, their people were once attempting to reach a realm they called Sanctuary. Their work never bore fruit until *after* they had came here, to your realm, and thus no longer needed it - Phenua was deemed enough of a haven, you suppose.\n\nAlong with this, you were given a set of notes on this realm, and an organized hypothesis on how to reach it. You have compiled them here on the following pages.",
+  "data_tablet.pages.sanctuary_portal.page2.incomplete_text": "Compiled Notes on Sanctuary\nAuthority: Nekkeko kh'Velor\n\n",
+  "data_tablet.pages.sanctuary_portal.page3.incomplete_text": "A Theoretical Portal\n\nFrom what you have gleaned both from Arekko, and from Nekkeko's notes, you surmise that the path to Sanctuary will involve a [structure description], which, when sufficiently powered and activated [hint as to how], will project a portal in the sky above it. You will have to fly up through it to enter.",
+  "data_tablet.pages.sanctuary_portal.flavor": " ◇ The maw of heaven",
+  "data_tablet.pages.sanctuary_portal.name": " ◇ The Portal to Sanctuary",
 
   "emi.category.datanessence.fabrication": "Fabrication",
   "emi.category.datanessence.infusion": "Infusion",
