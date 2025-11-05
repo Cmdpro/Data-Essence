@@ -3,6 +3,7 @@ package com.cmdpro.datanessence.data.datatablet.pages;
 import com.cmdpro.databank.multiblock.Multiblock;
 import com.cmdpro.databank.multiblock.MultiblockManager;
 import com.cmdpro.databank.multiblock.MultiblockRenderer;
+import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.screen.DataTabletScreen;
 import com.cmdpro.datanessence.api.datatablet.Page;
 import com.cmdpro.datanessence.api.datatablet.PageSerializer;
@@ -34,6 +35,8 @@ public class MultiblockPage extends Page {
 
         if (mode == 0)
             renderMultiblock(graphics, multiblock, xOffset, yOffset);
+        if (mode == 1)
+            renderMaterialsList(graphics, multiblock, xOffset, yOffset);
 
         graphics.pose().pushPose();
         graphics.pose().translate(0, 0, 200);
@@ -70,6 +73,11 @@ public class MultiblockPage extends Page {
         graphics.pose().popPose();
     }
 
+    public void renderMaterialsList(GuiGraphics graphics, Multiblock multiblock, int xOffset, int yOffset) {
+        var list = multiblock.getStates();
+        // TODO ^ there should be a method made to get the quantity of different blockstates in a structure, this is unsuitable
+    }
+
     @Override
     public boolean onClick(DataTabletScreen screen, double pMouseX, double pMouseY, int pButton, int xOffset, int yOffset) {
         if (pMouseX >= xOffset+120 && pMouseX <= xOffset+120+16) {
@@ -98,9 +106,11 @@ public class MultiblockPage extends Page {
     public PageSerializer getSerializer() {
         return MultiblockPageSerializer.INSTANCE;
     }
+
     public static class Client {
+
         public static void playClick() {
-            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+            Minecraft.getInstance().getSoundManager().play(SimpleSoundInstance.forUI(SoundRegistry.UI_CLICK, 1.0F));
         }
     }
 }
