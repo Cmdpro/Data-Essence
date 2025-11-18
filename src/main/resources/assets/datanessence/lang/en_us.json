@@ -439,7 +439,7 @@
   "data_tablet.pages.entropic_processor.flavor": " ◇ 24-wheeled grinding champion",
   "data_tablet.pages.entropic_processor.name": "Entropic Processor",
   "data_tablet.pages.entropic_processor.page1.text": "Diamonds are one of the hardest materials in the world. It is only sensible to utilize that hardness for raw cutting power, and the Entropic Processor is the result. This machine has three sets of eight diamond grinding wheels that are able to crush, grind, macerate, and pulverize whatever runs through it.",
-  "data_tablet.pages.entropic_processor.page2.text": " ◇ Accepts item inputs from sides: Up, Down\n ◇ It is generally advised to avoid contacting the grinding wheels while they are spinning.",
+  "data_tablet.pages.entropic_processor.page2.text": " ◇ Accepts item inputs from sides: Up, Down\n ◇ Also accepts items dropped on top of it\n ◇ It is generally advised to avoid contacting the grinding wheels while they are spinning.",
   "data_tablet.pages.entropic_processor.page3.text": "As is typical of something that grinds, loose cobblestones can be smashed into gravel, and gravel into sand.",
   "data_tablet.pages.entropic_processor.page4.text": "A variety of flowers, and some other items, can be made into more Dye than crushing them with one's hands.",
   "data_tablet.pages.entropic_processor.page5.text": "Processing materials like bone and reed into fertilizer and sugar is more efficient in this machine than when done by hand.",
