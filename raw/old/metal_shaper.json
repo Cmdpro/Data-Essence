@@ -130,13 +130,8 @@
       ]
     }
   },
-  "textureSize": [
-    128,
-    128
-  ],
   "parts": [
     {
-      "type": "databank:group",
       "name": "root",
       "rotation": [
         0,
@@ -148,9 +143,10 @@
         0,
         0
       ],
+      "isCube": false,
+      "isMesh": false,
       "children": [
         {
-          "type": "databank:group",
           "name": "press",
           "rotation": [
             0,
@@ -162,9 +158,10 @@
             0,
             0
           ],
+          "isCube": false,
+          "isMesh": false,
           "children": [
             {
-              "type": "databank:cube",
               "name": "the squasher",
               "rotation": [
                 0,
@@ -176,6 +173,8 @@
                 10,
                 0
               ],
+              "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 40
@@ -194,7 +193,6 @@
               "inflate": 0
             },
             {
-              "type": "databank:cube",
               "name": "press rod",
               "rotation": [
                 0,
@@ -206,6 +204,8 @@
                 12,
                 0
               ],
+              "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 51
@@ -226,7 +226,6 @@
           ]
         },
         {
-          "type": "databank:cube",
           "name": "base",
           "rotation": [
             0,
@@ -238,6 +237,8 @@
             0,
             0
           ],
+          "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             0
@@ -256,7 +257,6 @@
           "inflate": 0
         },
         {
-          "type": "databank:cube",
           "name": "right panel",
           "rotation": [
             0,
@@ -268,6 +268,8 @@
             3,
             0
           ],
+          "isCube": true,
+          "isMesh": false,
           "texOffset": [
             0,
             17
@@ -286,7 +288,6 @@
           "inflate": 0
         },
         {
-          "type": "databank:cube",
           "name": "right decoration",
           "rotation": [
             0,
@@ -298,6 +299,8 @@
             14,
             0
           ],
+          "isCube": true,
+          "isMesh": false,
           "texOffset": [
             32,
             40
@@ -316,7 +319,6 @@
           "inflate": 0
         },
         {
-          "type": "databank:cube",
           "name": "left panel",
           "rotation": [
             0,
@@ -328,6 +330,8 @@
             3,
             0
           ],
+          "isCube": true,
+          "isMesh": false,
           "texOffset": [
             24,
             17
@@ -346,7 +350,6 @@
           "inflate": 0
         },
         {
-          "type": "databank:cube",
           "name": "left decoration",
           "rotation": [
             0,
@@ -358,6 +361,8 @@
             14,
             0
           ],
+          "isCube": true,
+          "isMesh": false,
           "texOffset": [
             48,
             17
@@ -376,7 +381,6 @@
           "inflate": 0
         },
         {
-          "type": "databank:cube",
           "name": "rod",
           "rotation": [
             0,
@@ -388,6 +392,8 @@
             13,
             0
           ],
+          "isCube": true,
+          "isMesh": false,
           "texOffset": [
             48,
             31
@@ -408,5 +414,8 @@
       ]
     }
   ],
-  "version": 1
+  "textureSize": [
+    128,
+    128
+  ]
 }
