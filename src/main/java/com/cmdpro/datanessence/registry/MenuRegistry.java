@@ -19,7 +19,6 @@ public class MenuRegistry {
     public static final Supplier<MenuType<EssenceBurnerMenu>> ESSENCE_BURNER_MENU = register(EssenceBurnerMenu::new, "essence_burner");
     public static final Supplier<MenuType<InfuserMenu>> INFUSER_MENU = register(InfuserMenu::new, "infuser");
     public static final Supplier<MenuType<SynthesisChamberMenu>> SYNTHESIS_CHAMBER_MENU = register(SynthesisChamberMenu::new, "synthesis_chamber");
-    public static final Supplier<MenuType<ChargerMenu>> CHARGER_MENU = register(ChargerMenu::new, "charger");
     public static final Supplier<MenuType<LaserEmitterMenu>> LASER_EMITTER_MENU = register(LaserEmitterMenu::new, "laser_emitter");
     public static final Supplier<MenuType<AutoFabricatorMenu>> AUTO_FABRICATOR_MENU = register(AutoFabricatorMenu::new, "auto_fabricator");
     public static final Supplier<MenuType<FluidBottlerMenu>> FLUID_BOTTLER_MENU = register(FluidBottlerMenu::new, "fluid_bottler");
