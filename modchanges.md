@@ -1,3 +1,6 @@
+### Additions
+- Added Pastel gemstone shard "reconstruction" syntheses and data entry
+
 ### Changes
 - Entropic Processor now inserts items dropped on top of it to its input slot (multyfora)
 - Lightslash Blade's attack speed is constant again instead of variable, fixing its lack of proper cooldown
