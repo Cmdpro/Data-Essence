@@ -18,6 +18,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.item.ItemStack;
 
 public class Charger extends Block implements EntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
@@ -60,6 +61,7 @@ public class Charger extends Block implements EntityBlock {
         ChargerBlockEntity ent = new ChargerBlockEntity(pPos, pState);
         return ent;
     }
+
     @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (pState.getBlock() != pNewState.getBlock()) {
@@ -70,18 +72,27 @@ public class Charger extends Block implements EntityBlock {
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
+
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
-        if (!pLevel.isClientSide()) {
-            BlockEntity entity = pLevel.getBlockEntity(pPos);
-            if(entity instanceof ChargerBlockEntity ent) {
-                pPlayer.openMenu(ent, pPos);
-            } else {
-                throw new IllegalStateException("Our Container provider is missing!");
-            }
+        if (pLevel.isClientSide()) {
+            return InteractionResult.SUCCESS;
         }
 
-        return InteractionResult.sidedSuccess(pLevel.isClientSide());
+        BlockEntity entity = pLevel.getBlockEntity(pPos);
+        if (!(entity instanceof ChargerBlockEntity ent)) {
+            return InteractionResult.PASS;
+        }
+
+        ItemStack heldStack = pPlayer.getItemInHand(pPlayer.getUsedItemHand());
+
+        if (!heldStack.isEmpty()) {
+            InteractionResult result = ent.tryInsertItem(pPlayer, heldStack);
+            if (result.consumesAction()) {
+                return result;
+            }
+        }
+        return ent.tryExtractItem(pPlayer);
     }
 
     @Nullable
