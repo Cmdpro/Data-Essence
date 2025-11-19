@@ -34,7 +34,7 @@ public class EssenceSword extends SwordItem implements AdjustableAttributes {
     public static final Tier ESSENCE_SWORD = new SimpleTier(
             BlockTags.INCORRECT_FOR_IRON_TOOL,
             0,
-            0f,
+            1.8f,
             0f,
             14,
             () -> Ingredient.of(ItemRegistry.ESSENCE_SHARD.get())
@@ -46,6 +46,7 @@ public class EssenceSword extends SwordItem implements AdjustableAttributes {
     public EssenceSword(Properties properties) {
         super(ESSENCE_SWORD, properties
                 .rarity(Rarity.UNCOMMON)
+                .attributes(SwordItem.createAttributes(ESSENCE_SWORD, -1, -2.2f))
                 .component(DataComponents.UNBREAKABLE, new Unbreakable(false))
                 .component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 2500)));
     }
@@ -61,10 +62,10 @@ public class EssenceSword extends SwordItem implements AdjustableAttributes {
     @Override
     public void adjustAttributes(ItemAttributeModifierEvent event) {
         ItemStack blade = event.getItemStack();
-        float damage = ( ItemEssenceContainer.getEssence(blade, FUEL_ESSENCE_TYPE) >= COST_HIT ) ? 6f : 0f;
+        float damage = ( ItemEssenceContainer.getEssence(blade, FUEL_ESSENCE_TYPE) >= COST_HIT ) ? 5f : -1f;
 
-        event.replaceModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier(DataNEssence.locate("lightslash_kukri_damage"), damage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
-        event.replaceModifier(Attributes.ATTACK_SPEED, new AttributeModifier(DataNEssence.locate("lightslash_kukri_speed"), 1.8f, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+        event.replaceModifier(Attributes.ATTACK_DAMAGE, new AttributeModifier( SwordItem.BASE_ATTACK_DAMAGE_ID, damage, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
+        //event.replaceModifier(Attributes.ATTACK_SPEED, new AttributeModifier( SwordItem.BASE_ATTACK_SPEED_ID, 1.8f, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
     }
 
     @Override

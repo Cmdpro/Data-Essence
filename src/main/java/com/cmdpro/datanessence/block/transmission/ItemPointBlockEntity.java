@@ -6,7 +6,6 @@ import com.cmdpro.datanessence.api.node.ICustomItemPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -19,19 +18,27 @@ import java.awt.*;
 import java.util.List;
 
 public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
+
     public ItemPointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.ITEM_POINT.get(), pos, state);
     }
+
     @Override
     public Color linkColor() {
         return new Color(0xef4d3d);
     }
+
     @Override
-    public void transfer(BaseCapabilityPointBlockEntity from, List<GraphPath<BlockPos, DefaultEdge>> other) {
+    public void transfer(BaseCapabilityPointBlockEntity sourceNode, List<GraphPath<BlockPos, DefaultEdge>> other) {
         int transferAmount = (int)Math.floor((float)getFinalSpeed(DataNEssenceConfig.itemPointTransfer)/(float)other.size());
         for (GraphPath<BlockPos, DefaultEdge> i : other) {
-            if (level.getBlockEntity(i.getEndVertex()) instanceof BaseCapabilityPointBlockEntity ent) {
+            if (level.getBlockEntity(i.getEndVertex()) instanceof BaseCapabilityPointBlockEntity destinationNode) {
                 List<ItemStack> allowedItemstacks = null;
+                var sourceTile = sourceNode.getBlockPos().relative(sourceNode.getDirection().getOpposite());
+                var destTile = destinationNode.getBlockPos().relative(destinationNode.getDirection().getOpposite());
+                IItemHandler sourceHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, sourceTile, sourceNode.getDirection());
+                IItemHandler destHandler = level.getCapability(Capabilities.ItemHandler.BLOCK, destTile, destinationNode.getDirection());
+
                 for (BlockPos j : i.getVertexList()) {
                     if (level.getBlockEntity(j) instanceof BaseCapabilityPointBlockEntity ent2) {
                         List<ItemStack> value = ent2.getValue(DataNEssence.locate("allowed_itemstacks"), null);
@@ -42,47 +49,67 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
                         }
                     }
                 }
-                IItemHandler resolved = level.getCapability(Capabilities.ItemHandler.BLOCK, ent.getBlockPos().relative(ent.getDirection().getOpposite()), ent.getDirection());
-                IItemHandler resolved2 = level.getCapability(Capabilities.ItemHandler.BLOCK, from.getBlockPos().relative(from.getDirection().getOpposite()), from.getDirection());
-                if (resolved == null || resolved2 == null) {
+
+                if (destHandler == null || sourceHandler == null) {
                     continue;
                 }
-                if (level.getBlockEntity(from.getBlockPos().relative(from.getDirection().getOpposite())) instanceof ICustomItemPointBehaviour behaviour) {
-                    if (!behaviour.canExtractItem(resolved, resolved2)) {
+
+                if (level.getBlockEntity(sourceTile) instanceof ICustomItemPointBehaviour behaviour) {
+                    if (!behaviour.canExtractItem(destHandler, sourceHandler)) {
                         continue;
                     }
                 }
-                if (level.getBlockEntity(ent.getBlockPos().relative(ent.getDirection().getOpposite())) instanceof ICustomItemPointBehaviour behaviour) {
-                    if (!behaviour.canInsertItem(resolved, resolved2)) {
+
+                if (level.getBlockEntity(destTile) instanceof ICustomItemPointBehaviour behaviour) {
+                    if (!behaviour.canInsertItem(destHandler, sourceHandler)) {
                         continue;
                     }
                 }
-                boolean movedAnything = false;
-                for (int o = 0; o < resolved2.getSlots(); o++) {
-                    ItemStack copy = resolved2.extractItem(o, transferAmount, true).copy();
-                    if (allowedItemstacks != null && allowedItemstacks.stream().noneMatch((stack) -> ItemStack.isSameItem(stack, copy))) {
-                        continue;
+
+                if (isDestinationFull(destHandler))
+                    continue;
+
+                moveItems(sourceHandler, destHandler, transferAmount, allowedItemstacks);
+            }
+        }
+    }
+
+    // the way this is coded feels inelegant. but we really shouldn't be doing any work if the current destination container is full
+    public boolean isDestinationFull(IItemHandler destHandler) {
+        int fullSlots = 0;
+        for (int slot = 0; slot < destHandler.getSlots(); slot++) {
+            if ( destHandler.getStackInSlot(slot).getCount() >= destHandler.getSlotLimit(slot) )
+                fullSlots++;
+        }
+        return fullSlots >= destHandler.getSlots();
+    }
+
+    public void moveItems(IItemHandler sourceHandler, IItemHandler destHandler, int transferAmount, List<ItemStack> allowedItemstacks) {
+        boolean movedAnything = false;
+
+        for (int o = 0; o < sourceHandler.getSlots(); o++) {
+            ItemStack copy = sourceHandler.extractItem(o, transferAmount, true).copy();
+            if (allowedItemstacks != null && allowedItemstacks.stream().noneMatch((stack) -> ItemStack.isSameItem(stack, copy))) {
+                continue;
+            }
+            if (!copy.isEmpty()) {
+                ItemStack copy2 = copy.copy();
+                int p = 0;
+                while (p < destHandler.getSlots()) {
+                    ItemStack copyCopy = copy.copy();
+                    int remaining = destHandler.insertItem(p, copyCopy, false).getCount();
+                    copy.setCount(remaining);
+                    if (copy2.getCount() - copy.getCount() > 0) {
+                        movedAnything = true;
                     }
-                    if (!copy.isEmpty()) {
-                        ItemStack copy2 = copy.copy();
-                        int p = 0;
-                        while (p < resolved.getSlots()) {
-                            ItemStack copyCopy = copy.copy();
-                            int remaining = resolved.insertItem(p, copyCopy, false).getCount();
-                            copy.setCount(remaining);
-                            if (copy2.getCount() - copy.getCount() > 0) {
-                                movedAnything = true;
-                            }
-                            if (remaining <= 0) {
-                                break;
-                            }
-                            p++;
-                        }
-                        if (movedAnything) {
-                            resolved2.extractItem(o, copy2.getCount() - copy.getCount(), false);
-                            break;
-                        }
+                    if (remaining <= 0) {
+                        break;
                     }
+                    p++;
+                }
+                if (movedAnything) {
+                    sourceHandler.extractItem(o, copy2.getCount() - copy.getCount(), false);
+                    break;
                 }
             }
         }

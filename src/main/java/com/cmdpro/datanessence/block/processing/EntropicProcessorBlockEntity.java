@@ -27,7 +27,9 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -50,11 +52,16 @@ import java.util.List;
 import java.util.Optional;
 
 public class EntropicProcessorBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, Machine {
+
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
             .addAnim(new DatabankAnimationReference("working", (state, anim) -> {}, (state, anim) -> {}));
 
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
+
+    public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
+    }
 
     @Override
     public EssenceStorage getStorage() {
@@ -77,10 +84,8 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
 
     public void drops() {
         SimpleContainer inventory = getInv();
-
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
-
 
     @Override
     public void setLevel(Level level) {
@@ -97,9 +102,6 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     private final CombinedInvWrapper combinedInvWrapper = new CombinedInvWrapper(itemHandler, outputItemHandler);
     public CombinedInvWrapper getCombinedInvWrapper() {
         return combinedInvWrapper;
-    }
-    public EntropicProcessorBlockEntity(BlockPos pos, BlockState state) {
-        super(BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), pos, state);
     }
 
     @Override
@@ -187,12 +189,36 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     public int workTime;
     public EntropicProcessingRecipe recipe;
     public float essenceCost;
+
+
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, EntropicProcessorBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
+
             BufferUtil.getEssenceFromBuffersBelow(pBlockEntity, EssenceTypeRegistry.ESSENCE.get());
             BufferUtil.getItemsFromBuffersBelow(pBlockEntity, pBlockEntity.itemHandler);
+
+
+            // Get the list of items inside the block
+            List<ItemEntity> items = getItemsAt(pLevel, pPos);
+
+            // Loop through them and try to add them to the inventory
+            for (ItemEntity itemEntity : items) {
+                ItemStack stack = itemEntity.getItem();
+
+                // Try to insert into the input
+                ItemStack remainder = pBlockEntity.itemHandler.insertItem(0, stack, false);
+
+                //update the itemstack
+                if (remainder.isEmpty()) {
+                    itemEntity.discard();
+                } else {
+                    itemEntity.setItem(remainder);
+                }
+            }
+
             boolean resetWorkTime = true;
             if (pBlockEntity.getStorage().getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
+
                 if (pBlockEntity.recipe != null) {
                     ItemStack assembled = pBlockEntity.recipe.assemble(pBlockEntity.getCraftingInv(), pLevel.registryAccess());
                     if (pBlockEntity.outputItemHandler.insertItem(0, assembled, true).isEmpty()) {
@@ -233,12 +259,19 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
             }
         }
     }
+
+    // Returns items inside the block
+    public static List<ItemEntity> getItemsAt(Level level, BlockPos pPos) {
+        return level.getEntitiesOfClass(ItemEntity.class, AABB.ofSize(pPos.getCenter(), 0.9f, 0.9f, 0.9f), EntitySelector.ENTITY_STILL_ALIVE);
+    }
+
     private ClientHandler clientHandler;
     protected void updateBlock() {
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
     }
+
     @Override
     public Component getDisplayName() {
         return Component.empty();
@@ -249,11 +282,13 @@ public class EntropicProcessorBlockEntity extends BlockEntity implements MenuPro
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pInventory, Player pPlayer) {
         return new EntropicProcessorMenu(pContainerId, pInventory, this);
     }
+
     private static boolean hasNotReachedStackLimit(EntropicProcessorBlockEntity entity, ItemStack toAdd) {
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
             return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
         } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();
     }
+
     private static class ClientHandler {
         public SoundInstance workingSound;
         public void createWorkingSound(BlockPos pos) {

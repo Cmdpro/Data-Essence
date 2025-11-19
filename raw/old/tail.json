@@ -106,13 +106,8 @@
       ]
     }
   },
-  "textureSize": [
-    32,
-    32
-  ],
   "parts": [
     {
-      "type": "databank:group",
       "name": "root",
       "rotation": [
         0,
@@ -124,9 +119,10 @@
         0,
         0
       ],
+      "isCube": false,
+      "isMesh": false,
       "children": [
         {
-          "type": "databank:group",
           "name": "tail",
           "rotation": [
             0,
@@ -138,9 +134,10 @@
             -9,
             3
           ],
+          "isCube": false,
+          "isMesh": false,
           "children": [
             {
-              "type": "databank:group",
               "name": "part1",
               "rotation": [
                 0,
@@ -152,9 +149,10 @@
                 0,
                 5
               ],
+              "isCube": false,
+              "isMesh": false,
               "children": [
                 {
-                  "type": "databank:cube",
                   "name": "cube",
                   "rotation": [
                     0,
@@ -166,6 +164,8 @@
                     0.5,
                     -5
                   ],
+                  "isCube": true,
+                  "isMesh": false,
                   "texOffset": [
                     0,
                     11
@@ -184,7 +184,6 @@
                   "inflate": 0
                 },
                 {
-                  "type": "databank:group",
                   "name": "part2",
                   "rotation": [
                     0,
@@ -196,9 +195,10 @@
                     0.5,
                     6
                   ],
+                  "isCube": false,
+                  "isMesh": false,
                   "children": [
                     {
-                      "type": "databank:cube",
                       "name": "cube1",
                       "rotation": [
                         0,
@@ -210,6 +210,8 @@
                         0.5,
                         -5
                       ],
+                      "isCube": true,
+                      "isMesh": false,
                       "texOffset": [
                         12,
                         14
@@ -232,7 +234,6 @@
               ]
             },
             {
-              "type": "databank:cube",
               "name": "cube2",
               "rotation": [
                 0,
@@ -244,6 +245,8 @@
                 0,
                 0
               ],
+              "isCube": true,
+              "isMesh": false,
               "texOffset": [
                 0,
                 0
@@ -266,5 +269,8 @@
       ]
     }
   ],
-  "version": 1
+  "textureSize": [
+    32,
+    32
+  ]
 }

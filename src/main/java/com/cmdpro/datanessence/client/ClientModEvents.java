@@ -180,7 +180,6 @@ public class ClientModEvents {
         event.register(MenuRegistry.FABRICATOR_MENU.get(), FabricatorScreen::new);
         event.register(MenuRegistry.ESSENCE_BURNER_MENU.get(), EssenceBurnerScreen::new);
         event.register(MenuRegistry.INFUSER_MENU.get(), InfuserScreen::new);
-        event.register(MenuRegistry.CHARGER_MENU.get(), ChargerScreen::new);
         event.register(MenuRegistry.LASER_EMITTER_MENU.get(), LaserEmitterScreen::new);
         event.register(MenuRegistry.AUTO_FABRICATOR_MENU.get(), AutoFabricatorScreen::new);
         event.register(MenuRegistry.FLUID_BOTTLER_MENU.get(), FluidBottlerScreen::new);

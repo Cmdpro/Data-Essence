@@ -24,3 +24,4 @@ Eventually you may unlock enough entries to advance in Tier, garnering more entr
 ### Contributors
 - **DavidRarria09**: Music contributions ("UnderTheSky" music disc)
 - **K King**: Sound contributions (Structure Protector noises, Fabricator noises, Ancient Sentinel noises)
+- **multyfora**: Code contributions (various qol and fixes)
