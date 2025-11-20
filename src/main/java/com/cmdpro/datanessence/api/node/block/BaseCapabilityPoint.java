@@ -157,9 +157,8 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                                     ent.updateBlock();
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
-                                    if (!pPlayer.isCreative()) {
+                                    if (!pPlayer.isCreative())
                                         pPlayer.getInventory().clearOrCountMatchingItems((item) -> item.is(getRequiredWire()), 1, pPlayer.inventoryMenu.getCraftSlots());
-                                    }
                                     pLevel.playSound(null, pPos, SoundRegistry.NODE_LINK_TO.value(), SoundSource.BLOCKS, 1f, 1f);
                                 }
                             }
