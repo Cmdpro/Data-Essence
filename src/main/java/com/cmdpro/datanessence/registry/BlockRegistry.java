@@ -219,9 +219,8 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Storage
-    public static final Supplier<Block> ESSENCE_BATTERY = register("essence_battery",
-            () -> new EssenceBattery(getMachineProperties()),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ESSENCE_BATTERY = registerBlock("essence_battery",
+            () -> new EssenceBattery(getMachineProperties()));
     public static final Supplier<Block> LUNAR_ESSENCE_BATTERY = register("lunar_essence_battery",
             () -> new LunarEssenceBattery(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
