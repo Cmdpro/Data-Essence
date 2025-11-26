@@ -1,0 +1,293 @@
+{
+  "animations": {
+    "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "root",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "idle": {
+      "length": 2,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "root",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "ring",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                360,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "crystal",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.66667,
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.41667,
+              "target": [
+                0,
+                -0.5,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        -1,
+        0
+      ],
+      "isCube": false,
+      "isMesh": false,
+      "children": [
+        {
+          "name": "ring",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            9,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "ring",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                0,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -5,
+                -1.5,
+                -5
+              ],
+              "dimensions": [
+                10,
+                3,
+                10
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "ring insert",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                64,
+                9
+              ],
+              "mirror": false,
+              "origin": [
+                3,
+                1.5,
+                3
+              ],
+              "dimensions": [
+                -6,
+                -3,
+                -6
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "ring filigree",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -0.5,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                32,
+                5
+              ],
+              "mirror": false,
+              "origin": [
+                -4,
+                -3,
+                -4
+              ],
+              "dimensions": [
+                8,
+                7,
+                8
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "name": "crystal",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            9,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "cube",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                0,
+                13
+              ],
+              "mirror": false,
+              "origin": [
+                -1.5,
+                -6,
+                -1.5
+              ],
+              "dimensions": [
+                3,
+                12,
+                3
+              ],
+              "inflate": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    64,
+    64
+  ]
+}

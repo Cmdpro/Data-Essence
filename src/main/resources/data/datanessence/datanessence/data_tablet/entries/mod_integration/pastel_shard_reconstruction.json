@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pastel"
+    }
+  ],
+  "icon": {
+    "id": "minecraft:amethyst_shard"
+  },
+  "tab": "datanessence:mod_integration",
+  "x": 2,
+  "y": -3,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.integration_pastel_shard_reconstruction.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "text": {
+        "translate": "data_tablet.pages.integration_pastel_shard_reconstruction.page2.text"
+      },
+      "recipes": [
+        "datanessence:mod_integration/pastel/synthesis/amethyst_shard"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.integration_pastel_shard_reconstruction.name"
+  },
+  "parents": [
+    "datanessence:mod_integration/pastel_intro",
+    "datanessence:machinery/synthesis_chamber"
+  ]
+}

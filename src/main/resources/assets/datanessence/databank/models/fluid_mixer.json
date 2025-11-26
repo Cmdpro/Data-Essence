@@ -100,8 +100,13 @@
       ]
     }
   },
+  "textureSize": [
+    64,
+    64
+  ],
   "parts": [
     {
+      "type": "databank:group",
       "name": "root",
       "rotation": [
         0,
@@ -113,10 +118,9 @@
         0,
         0
       ],
-      "isCube": false,
-      "isMesh": false,
       "children": [
         {
+          "type": "databank:group",
           "name": "base",
           "rotation": [
             0,
@@ -128,10 +132,9 @@
             0,
             0
           ],
-          "isCube": false,
-          "isMesh": false,
           "children": [
             {
+              "type": "databank:cube",
               "name": "foundation",
               "rotation": [
                 0,
@@ -143,8 +146,6 @@
                 0,
                 7
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 0,
                 0
@@ -163,6 +164,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "pillar",
               "rotation": [
                 0,
@@ -174,8 +176,6 @@
                 3,
                 -7
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 44,
                 32
@@ -194,6 +194,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "pillar1",
               "rotation": [
                 0,
@@ -205,8 +206,6 @@
                 3,
                 -7
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 44,
                 32
@@ -225,6 +224,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "pillar2",
               "rotation": [
                 0,
@@ -236,8 +236,6 @@
                 3,
                 6
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 44,
                 32
@@ -256,6 +254,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "pillar3",
               "rotation": [
                 0,
@@ -267,8 +266,6 @@
                 3,
                 7
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 44,
                 32
@@ -287,6 +284,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "glass",
               "rotation": [
                 0,
@@ -298,8 +296,6 @@
                 3,
                 6
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 0,
                 42
@@ -318,6 +314,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "glass1",
               "rotation": [
                 0,
@@ -329,8 +326,6 @@
                 3,
                 -8
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 0,
                 42
@@ -349,6 +344,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "glass2",
               "rotation": [
                 0,
@@ -360,8 +356,6 @@
                 3,
                 3
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 0,
                 32
@@ -380,6 +374,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "glass3",
               "rotation": [
                 0,
@@ -391,8 +386,6 @@
                 3,
                 3
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 0,
                 32
@@ -413,6 +406,7 @@
           ]
         },
         {
+          "type": "databank:group",
           "name": "rotor",
           "rotation": [
             0,
@@ -424,10 +418,9 @@
             0,
             0
           ],
-          "isCube": false,
-          "isMesh": false,
           "children": [
             {
+              "type": "databank:cube",
               "name": "axle",
               "rotation": [
                 0,
@@ -439,8 +432,6 @@
                 3,
                 0
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 22,
                 46
@@ -459,6 +450,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "blades",
               "rotation": [
                 0,
@@ -470,8 +462,6 @@
                 4,
                 0
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 0,
                 19
@@ -494,8 +484,5 @@
       ]
     }
   ],
-  "textureSize": [
-    64,
-    64
-  ]
+  "version": 1
 }

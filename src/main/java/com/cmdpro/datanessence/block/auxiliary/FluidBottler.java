@@ -27,11 +27,36 @@ public class FluidBottler extends Block implements EntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
-
+    private static final VoxelShape SHAPE_FALLOFF =  Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape SHAPE_WEST =  Shapes.or(
+            Block.box(2, 0, 2, 10, 2, 14),
+            Block.box(10, 0, 2, 16, 16, 14),
+            Block.box(4, 11, 4, 10, 16, 12)
+    );
+    private static final VoxelShape SHAPE_EAST =  Shapes.or(
+            Block.box(6, 0, 2, 14, 2, 14),
+            Block.box(0, 0, 2, 6, 16, 14),
+            Block.box(6, 11, 4, 12, 16, 12)
+    );
+    private static final VoxelShape SHAPE_SOUTH =  Shapes.or(
+            Block.box(2, 0, 6, 14, 2, 14),
+            Block.box(2, 0, 0, 14, 16, 6),
+            Block.box(4, 11, 6, 12, 16, 12)
+    );
+    private static final VoxelShape SHAPE_NORTH =  Shapes.or(
+            Block.box(2, 0, 2, 14, 2, 14),
+            Block.box(2, 0, 10, 14, 16, 16),
+            Block.box(4, 11, 4, 12, 16, 10)
+    );
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
+        return switch (pState.getValue(FACING)) {
+            case EAST -> SHAPE_EAST;
+            case WEST -> SHAPE_WEST;
+            case NORTH -> SHAPE_NORTH;
+            case SOUTH -> SHAPE_SOUTH;
+            default -> SHAPE_FALLOFF;
+        };
     }
     @Override
     public RenderShape getRenderShape(BlockState pState) {

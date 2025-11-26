@@ -1,0 +1,1084 @@
+{
+  "animations": {
+    "idle": {
+      "length": 2,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "left_wing",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -30,
+                12.5
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -1.370709969,
+                -32.465388284,
+                15.457828426
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                -30,
+                12.5
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "left_wing_lower_arm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                14.065732685,
+                -20.881272338,
+                -87.604505628
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                23.242748614,
+                -18.974339828,
+                -92.521459747
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                14.065732685,
+                -20.881272338,
+                -87.604505628
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "left_wingtip",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                62.5
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                57.5
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                0,
+                62.5
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "right_wing",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                30,
+                -12.5
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -1.481274491,
+                32.467707043,
+                -15.460717054
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                30,
+                -12.5
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "right_wing_lower_arm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                7.085312287,
+                22.627716875,
+                87.913196018
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                18.70094511,
+                18.712260873,
+                92.17676681
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                7.085312287,
+                22.627716875,
+                87.913196018
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "right_wingtip",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                -62.5
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0,
+                -57.5
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                0,
+                -62.5
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        }
+      ]
+    },
+    "fly": {
+      "length": 0.5,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "left_wing",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -26.03344536,
+                -50.331545921,
+                32.39768976
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                -17.404780903,
+                -30.225984497,
+                18.537052804
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                -26.03344536,
+                -50.331545921,
+                32.39768976
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "left_wing_lower_arm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -0.870384675,
+                4.923849755,
+                -25.037423046
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                -0.897441623,
+                14.922666095,
+                -25.193833177
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                -0.870384675,
+                4.923849755,
+                -25.037423046
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "left_wingtip",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                12.5,
+                -12.5
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                25,
+                -12.5
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                12.5,
+                -12.5
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "right_wing",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -26.03344536,
+                50.331545921,
+                -32.39768976
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                -20.077105722,
+                28.61818364,
+                -23.973384583
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                -26.03344536,
+                50.331545921,
+                -32.39768976
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "right_wing_lower_arm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -0.870384675,
+                -4.923849755,
+                25.037423046
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                -0.897441623,
+                -14.922666095,
+                25.193833177
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                -0.870384675,
+                -4.923849755,
+                25.037423046
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "right_wingtip",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -12.5,
+                12.5
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                -25,
+                12.5
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -12.5,
+                12.5
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        2.5,
+        2
+      ],
+      "isCube": false,
+      "isMesh": false,
+      "children": [
+        {
+          "name": "wings",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            1,
+            -1.5,
+            1.5
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "left_wing",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -2,
+                0,
+                0
+              ],
+              "isCube": false,
+              "isMesh": false,
+              "children": [
+                {
+                  "name": "left_wing_upper_arm",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": false,
+                  "isMesh": false,
+                  "children": [
+                    {
+                      "name": "cube",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "isCube": true,
+                      "isMesh": false,
+                      "texOffset": [
+                        16,
+                        39
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        -7,
+                        -2,
+                        0
+                      ],
+                      "dimensions": [
+                        7,
+                        3,
+                        1
+                      ],
+                      "inflate": 0
+                    },
+                    {
+                      "name": "left_wing_lower_arm",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        -7,
+                        0,
+                        0
+                      ],
+                      "isCube": false,
+                      "isMesh": false,
+                      "children": [
+                        {
+                          "name": "cube1",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "isCube": true,
+                          "isMesh": false,
+                          "texOffset": [
+                            36,
+                            25
+                          ],
+                          "mirror": false,
+                          "origin": [
+                            -9,
+                            -1,
+                            0
+                          ],
+                          "dimensions": [
+                            10,
+                            2,
+                            1
+                          ],
+                          "inflate": 0
+                        },
+                        {
+                          "name": "left_wingtip",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            -9,
+                            0,
+                            0
+                          ],
+                          "isCube": false,
+                          "isMesh": false,
+                          "children": [
+                            {
+                              "name": "finger",
+                              "rotation": [
+                                0,
+                                2.168404344971009e-19,
+                                0.04363323129985824
+                              ],
+                              "offset": [
+                                -0.5,
+                                0,
+                                0
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                36,
+                                6
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -14,
+                                0,
+                                0
+                              ],
+                              "dimensions": [
+                                15,
+                                1,
+                                1
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "finger1",
+                              "rotation": [
+                                3.472752242589666e-18,
+                                0.04363323129985824,
+                                0.7853981633974484
+                              ],
+                              "offset": [
+                                -0.25,
+                                0,
+                                0
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                36,
+                                2
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -16.70643377221289,
+                                -0.7071067811865474,
+                                -0.03084356459723203
+                              ],
+                              "dimensions": [
+                                17,
+                                0.9999999999999999,
+                                1
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "finger2",
+                              "rotation": [
+                                -0.04363323129985824,
+                                4.336808689942018e-19,
+                                0.08726646259971646
+                              ],
+                              "offset": [
+                                0,
+                                -0.25,
+                                0
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                36,
+                                39
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                0,
+                                -12,
+                                0
+                              ],
+                              "dimensions": [
+                                1,
+                                12,
+                                1
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "left_wingtip_membrane",
+                              "rotation": [
+                                -0.04363323129985824,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                0,
+                                -0.25
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                0,
+                                14
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -15,
+                                -13,
+                                1
+                              ],
+                              "dimensions": [
+                                18,
+                                14,
+                                0
+                              ],
+                              "inflate": 0
+                            }
+                          ]
+                        },
+                        {
+                          "name": "left_membrane_inner",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            -7,
+                            -3,
+                            -0.25
+                          ],
+                          "isCube": true,
+                          "isMesh": false,
+                          "texOffset": [
+                            28,
+                            28
+                          ],
+                          "mirror": false,
+                          "origin": [
+                            -1,
+                            -9,
+                            1
+                          ],
+                          "dimensions": [
+                            14,
+                            11,
+                            0
+                          ],
+                          "inflate": 0
+                        }
+                      ]
+                    },
+                    {
+                      "name": "left_membrane_start",
+                      "rotation": [
+                        -0.04363323129985824,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        -4,
+                        -2,
+                        -0.25
+                      ],
+                      "isCube": true,
+                      "isMesh": false,
+                      "texOffset": [
+                        36,
+                        18
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        -5,
+                        -6,
+                        1
+                      ],
+                      "dimensions": [
+                        9,
+                        7,
+                        0
+                      ],
+                      "inflate": 0
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "right_wing",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": false,
+              "isMesh": false,
+              "children": [
+                {
+                  "name": "right_wing_upper_arm",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "isCube": false,
+                  "isMesh": false,
+                  "children": [
+                    {
+                      "name": "right_wing_lower_arm",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        7,
+                        0,
+                        0
+                      ],
+                      "isCube": false,
+                      "isMesh": false,
+                      "children": [
+                        {
+                          "name": "right_wingtip",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            9,
+                            0,
+                            0
+                          ],
+                          "isCube": false,
+                          "isMesh": false,
+                          "children": [
+                            {
+                              "name": "right_wingtip_membrane",
+                              "rotation": [
+                                -0.04363323129985824,
+                                0,
+                                0
+                              ],
+                              "offset": [
+                                0,
+                                0,
+                                -0.25
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                0,
+                                0
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -3,
+                                -13,
+                                1
+                              ],
+                              "dimensions": [
+                                18,
+                                14,
+                                0
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "finger3",
+                              "rotation": [
+                                -0.04363323129985824,
+                                -4.336808689942018e-19,
+                                -0.08726646259971646
+                              ],
+                              "offset": [
+                                0,
+                                -0.25,
+                                0
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                32,
+                                39
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -1,
+                                -12,
+                                0
+                              ],
+                              "dimensions": [
+                                1,
+                                12,
+                                1
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "finger4",
+                              "rotation": [
+                                3.472752242589666e-18,
+                                -0.04363323129985824,
+                                -0.7853981633974484
+                              ],
+                              "offset": [
+                                0.25,
+                                0,
+                                0
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                36,
+                                0
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -0.2935662277871103,
+                                -0.7071067811865474,
+                                -0.03084356459723203
+                              ],
+                              "dimensions": [
+                                17,
+                                0.9999999999999999,
+                                1
+                              ],
+                              "inflate": 0
+                            },
+                            {
+                              "name": "finger5",
+                              "rotation": [
+                                0,
+                                -2.168404344971009e-19,
+                                -0.04363323129985824
+                              ],
+                              "offset": [
+                                0.5,
+                                0,
+                                0
+                              ],
+                              "isCube": true,
+                              "isMesh": false,
+                              "texOffset": [
+                                36,
+                                4
+                              ],
+                              "mirror": false,
+                              "origin": [
+                                -1,
+                                0,
+                                0
+                              ],
+                              "dimensions": [
+                                15,
+                                1,
+                                1
+                              ],
+                              "inflate": 0
+                            }
+                          ]
+                        },
+                        {
+                          "name": "right_membrane_inner",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            7,
+                            -3,
+                            -0.25
+                          ],
+                          "isCube": true,
+                          "isMesh": false,
+                          "texOffset": [
+                            0,
+                            28
+                          ],
+                          "mirror": false,
+                          "origin": [
+                            -13,
+                            -9,
+                            1
+                          ],
+                          "dimensions": [
+                            14,
+                            11,
+                            0
+                          ],
+                          "inflate": 0
+                        },
+                        {
+                          "name": "cube2",
+                          "rotation": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "offset": [
+                            0,
+                            0,
+                            0
+                          ],
+                          "isCube": true,
+                          "isMesh": false,
+                          "texOffset": [
+                            36,
+                            8
+                          ],
+                          "mirror": false,
+                          "origin": [
+                            -1,
+                            -1,
+                            0
+                          ],
+                          "dimensions": [
+                            10,
+                            2,
+                            1
+                          ],
+                          "inflate": 0
+                        }
+                      ]
+                    },
+                    {
+                      "name": "cube3",
+                      "rotation": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "isCube": true,
+                      "isMesh": false,
+                      "texOffset": [
+                        0,
+                        39
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        0,
+                        -2,
+                        0
+                      ],
+                      "dimensions": [
+                        7,
+                        3,
+                        1
+                      ],
+                      "inflate": 0
+                    },
+                    {
+                      "name": "right_membrane_start",
+                      "rotation": [
+                        -0.04363323129985824,
+                        0,
+                        0
+                      ],
+                      "offset": [
+                        4,
+                        -2,
+                        -0.25
+                      ],
+                      "isCube": true,
+                      "isMesh": false,
+                      "texOffset": [
+                        36,
+                        11
+                      ],
+                      "mirror": false,
+                      "origin": [
+                        -4,
+                        -6,
+                        1
+                      ],
+                      "dimensions": [
+                        9,
+                        7,
+                        0
+                      ],
+                      "inflate": 0
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    128,
+    128
+  ]
+}

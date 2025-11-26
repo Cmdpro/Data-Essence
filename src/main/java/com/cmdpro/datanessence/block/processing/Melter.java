@@ -27,7 +27,12 @@ public class Melter extends Block implements EntityBlock {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
-    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 16, 16);
+
+    private static final VoxelShape SHAPE = Shapes.or(
+            Block.box(1, 0, 1, 15, 5, 15),
+            Block.box(2, 5, 2, 14, 15, 14)
+
+    );
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {

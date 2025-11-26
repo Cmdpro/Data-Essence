@@ -5,10 +5,7 @@ import com.cmdpro.datanessence.api.block.SpreadingPlant;
 
 import com.cmdpro.datanessence.block.DirectionalPillarBlock;
 import com.cmdpro.datanessence.block.auxiliary.*;
-import com.cmdpro.datanessence.block.decoration.Dewlamp;
-import com.cmdpro.datanessence.block.decoration.EssenceBridge;
-import com.cmdpro.datanessence.block.decoration.FlareLight;
-import com.cmdpro.datanessence.block.decoration.LightFixture;
+import com.cmdpro.datanessence.block.decoration.*;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphon;
@@ -289,9 +286,8 @@ public class BlockRegistry {
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Storage
-    public static final Supplier<Block> ESSENCE_BATTERY = register("essence_battery",
-            () -> new EssenceBattery(getMachineProperties()),
-            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+    public static final Supplier<Block> ESSENCE_BATTERY = registerBlock("essence_battery",
+            () -> new EssenceBattery(getMachineProperties()));
     public static final Supplier<Block> LUNAR_ESSENCE_BATTERY = register("lunar_essence_battery",
             () -> new LunarEssenceBattery(getMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
@@ -425,22 +421,22 @@ public class BlockRegistry {
 
     // Obsidian Deco
     public static final Supplier<Block> POLISHED_OBSIDIAN = register("polished_obsidian",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new PolishedObsidian(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> POLISHED_OBSIDIAN_COLUMN = register("polished_obsidian_column",
-            () -> new DirectionalPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new PolishedObsidianColumn(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> ENGRAVED_POLISHED_OBSIDIAN = register("engraved_polished_obsidian",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new PolishedObsidian(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> POLISHED_OBSIDIAN_BRICKS = register("polished_obsidian_bricks",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new PolishedObsidian(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> POLISHED_OBSIDIAN_TRACT = register("polished_obsidian_tract",
-            () -> new DirectionalPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new PolishedObsidianColumn(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> POLISHED_OBSIDIAN_TILES = register("polished_obsidian_tiles",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
+            () -> new PolishedObsidian(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> OBSIDIAN_FRAMED_GLASS = register("obsidian_framed_glass",
             () -> new TransparentBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).noOcclusion().isViewBlocking(BlockRegistry::never).isSuffocating(BlockRegistry::never).isValidSpawn(BlockRegistry::never).isRedstoneConductor(BlockRegistry::never)),
@@ -449,7 +445,7 @@ public class BlockRegistry {
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN)),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
     public static final Supplier<Block> LIGHT_FIXTURE = register("essence_light_fixture",
-            () -> new LightFixture(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).instabreak().noOcclusion().noCollission().lightLevel((blockState) -> { return 15;})),
+            () -> new LightFixture(BlockBehaviour.Properties.ofFullCopy(Blocks.OBSIDIAN).instabreak().noOcclusion().lightLevel((blockState) -> { return 15;})),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
     // Copper Deco

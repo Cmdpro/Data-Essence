@@ -100,8 +100,13 @@
       ]
     }
   },
+  "textureSize": [
+    64,
+    64
+  ],
   "parts": [
     {
+      "type": "databank:group",
       "name": "root",
       "rotation": [
         0,
@@ -113,10 +118,9 @@
         0,
         0
       ],
-      "isCube": false,
-      "isMesh": false,
       "children": [
         {
+          "type": "databank:cube",
           "name": "cube",
           "rotation": [
             -2.9234264970905017,
@@ -128,8 +132,6 @@
             0,
             -7
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             8,
             23
@@ -148,6 +150,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "cube1",
           "rotation": [
             0.2181661564992912,
@@ -159,8 +162,6 @@
             0,
             7
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             8,
             23
@@ -179,6 +180,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "cube2",
           "rotation": [
             0,
@@ -190,8 +192,6 @@
             0,
             0
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             8,
             23
@@ -210,6 +210,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "cube3",
           "rotation": [
             0,
@@ -221,8 +222,6 @@
             0.25,
             0
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             8,
             23
@@ -241,6 +240,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "cube4",
           "rotation": [
             0,
@@ -252,8 +252,6 @@
             4,
             0
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             0,
             0
@@ -272,6 +270,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "cube5",
           "rotation": [
             0,
@@ -283,8 +282,6 @@
             5,
             0
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             0,
             14
@@ -303,6 +300,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:group",
           "name": "crystal",
           "rotation": [
             0,
@@ -314,10 +312,9 @@
             0,
             0
           ],
-          "isCube": false,
-          "isMesh": false,
           "children": [
             {
+              "type": "databank:cube",
               "name": "cube6",
               "rotation": [
                 0,
@@ -329,8 +326,6 @@
                 7,
                 -1
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 0,
                 23
@@ -349,6 +344,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:group",
               "name": "inner",
               "rotation": [
                 0,
@@ -360,10 +356,9 @@
                 0,
                 0
               ],
-              "isCube": false,
-              "isMesh": false,
               "children": [
                 {
+                  "type": "databank:cube",
                   "name": "cube7",
                   "rotation": [
                     0.47996554429844057,
@@ -375,8 +370,6 @@
                     3,
                     1
                   ],
-                  "isCube": true,
-                  "isMesh": false,
                   "texOffset": [
                     0,
                     23
@@ -395,6 +388,7 @@
                   "inflate": 0
                 },
                 {
+                  "type": "databank:cube",
                   "name": "cube8",
                   "rotation": [
                     -0.47996554429844057,
@@ -406,8 +400,6 @@
                     3,
                     -1
                   ],
-                  "isCube": true,
-                  "isMesh": false,
                   "texOffset": [
                     0,
                     23
@@ -426,6 +418,7 @@
                   "inflate": 0
                 },
                 {
+                  "type": "databank:cube",
                   "name": "cube9",
                   "rotation": [
                     0,
@@ -437,8 +430,6 @@
                     3,
                     0
                   ],
-                  "isCube": true,
-                  "isMesh": false,
                   "texOffset": [
                     0,
                     23
@@ -457,6 +448,7 @@
                   "inflate": 0
                 },
                 {
+                  "type": "databank:cube",
                   "name": "cube10",
                   "rotation": [
                     0,
@@ -468,8 +460,6 @@
                     3,
                     0
                   ],
-                  "isCube": true,
-                  "isMesh": false,
                   "texOffset": [
                     0,
                     23
@@ -490,6 +480,7 @@
               ]
             },
             {
+              "type": "databank:group",
               "name": "outer",
               "rotation": [
                 0,
@@ -501,10 +492,9 @@
                 0,
                 0
               ],
-              "isCube": false,
-              "isMesh": false,
               "children": [
                 {
+                  "type": "databank:cube",
                   "name": "cube11",
                   "rotation": [
                     0.6981317007977318,
@@ -516,8 +506,6 @@
                     3,
                     1
                   ],
-                  "isCube": true,
-                  "isMesh": false,
                   "texOffset": [
                     0,
                     23
@@ -536,6 +524,7 @@
                   "inflate": 0
                 },
                 {
+                  "type": "databank:cube",
                   "name": "cube12",
                   "rotation": [
                     -0.6981317007977318,
@@ -547,8 +536,6 @@
                     3,
                     -1
                   ],
-                  "isCube": true,
-                  "isMesh": false,
                   "texOffset": [
                     0,
                     23
@@ -567,6 +554,7 @@
                   "inflate": 0
                 },
                 {
+                  "type": "databank:cube",
                   "name": "cube13",
                   "rotation": [
                     0,
@@ -578,8 +566,6 @@
                     3,
                     0
                   ],
-                  "isCube": true,
-                  "isMesh": false,
                   "texOffset": [
                     0,
                     23
@@ -598,6 +584,7 @@
                   "inflate": 0
                 },
                 {
+                  "type": "databank:cube",
                   "name": "cube14",
                   "rotation": [
                     0,
@@ -609,8 +596,6 @@
                     3,
                     0
                   ],
-                  "isCube": true,
-                  "isMesh": false,
                   "texOffset": [
                     0,
                     23
@@ -635,8 +620,5 @@
       ]
     }
   ],
-  "textureSize": [
-    64,
-    64
-  ]
+  "version": 1
 }

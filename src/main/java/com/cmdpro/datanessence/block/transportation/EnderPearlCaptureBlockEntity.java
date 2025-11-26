@@ -49,20 +49,22 @@ public class EnderPearlCaptureBlockEntity extends PearlNetworkBlockEntity {
                         .filter((i) -> pLevel.getBlockEntity(i.getEndVertex()) instanceof EnderPearlDestinationBlockEntity).toList();
                 if (!ends.isEmpty()) {
                     for (ThrownEnderpearl i : pearls) {
-                        Entity owner = i.getOwner();
-                        GraphPath<BlockPos, DefaultEdge> end = ends.get(owner.getRandom().nextInt(0, ends.size()));
-                        Vec3 pos = end.getEndVertex().getCenter();
-                        owner.teleportTo(pos.x, pos.y, pos.z);
-                        List<BlockPos> vertexes = end.getVertexList();
-                        for (ServerPlayer j : ((ServerLevel)pLevel).players()) {
-                            List<BlockPos> nodes = vertexes.stream().filter((block) -> block.getCenter().distanceTo(j.position()) <= 64).toList();
-                            PlayEnderPearlRedirectionEffect message = new PlayEnderPearlRedirectionEffect(nodes);
-                            boolean canSend = !nodes.isEmpty();
-                            if (canSend) {
-                                ModMessages.sendToPlayer(message, j);
+                        if (i.getOwner() != null) {
+                            Entity owner = i.getOwner();
+                            GraphPath<BlockPos, DefaultEdge> end = ends.get(owner.getRandom().nextInt(0, ends.size()));
+                            Vec3 pos = end.getEndVertex().getCenter();
+                            owner.teleportTo(pos.x, pos.y, pos.z);
+                            List<BlockPos> vertexes = end.getVertexList();
+                            for (ServerPlayer j : ((ServerLevel) pLevel).players()) {
+                                List<BlockPos> nodes = vertexes.stream().filter((block) -> block.getCenter().distanceTo(j.position()) <= 64).toList();
+                                PlayEnderPearlRedirectionEffect message = new PlayEnderPearlRedirectionEffect(nodes);
+                                boolean canSend = !nodes.isEmpty();
+                                if (canSend) {
+                                    ModMessages.sendToPlayer(message, j);
+                                }
                             }
+                            i.remove(Entity.RemovalReason.DISCARDED);
                         }
-                        i.remove(Entity.RemovalReason.DISCARDED);
                     }
                 }
             }
