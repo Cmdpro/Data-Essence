@@ -3,12 +3,16 @@ package com.cmdpro.datanessence.block.transmission;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.HitResult;
 import org.jetbrains.annotations.Nullable;
 
 public class FluidPoint extends BaseCapabilityPoint {
@@ -36,4 +40,14 @@ public class FluidPoint extends BaseCapabilityPoint {
             }
         };
     }
+
+    @Override
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
+
+        if(player.isShiftKeyDown()) {
+            return new ItemStack(ItemRegistry.FLUID_WIRE.get());
+        }
+        return super.getCloneItemStack(state,target,level,pos,player);
+    }
+
 }

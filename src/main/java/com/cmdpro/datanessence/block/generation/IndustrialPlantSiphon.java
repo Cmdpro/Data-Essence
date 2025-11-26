@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,11 +27,76 @@ public class IndustrialPlantSiphon extends Block implements EntityBlock {
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
-    private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
+//    private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
+
+    private static final VoxelShape SHAPE_NORTH =  Shapes.or(
+            //bottom
+            Block.box(0, 0, 0, 16, 6, 16),
+
+            //left
+            Block.box(0, 6, 2, 2, 14, 14),
+
+            //right
+            Block.box(14, 6, 2, 16, 14, 14),
+
+            //back
+            Block.box(0, 6, 14, 16, 16, 16)
+
+    );
+    private static final VoxelShape SHAPE_SOUTH =  Shapes.or(
+            //bottom
+            Block.box(0, 0, 0, 16, 6, 16),
+
+            //left
+            Block.box(0, 6, 2, 2, 14, 14),
+
+            //right
+            Block.box(14, 6, 2, 16, 14, 14),
+
+            //back
+            Block.box(0, 6, 0, 16, 16, 2)
+
+    );
+    private static final VoxelShape SHAPE_EAST =  Shapes.or(
+            //bottom
+            Block.box(0, 0, 0, 16, 6, 16),
+
+            //left
+            Block.box(2, 6, 0, 14, 14, 2),
+
+            //right
+            Block.box(2, 6, 14, 14, 14, 16),
+
+            //back
+            Block.box(0, 6, 0, 2, 16, 16)
+
+    );
+    private static final VoxelShape SHAPE_WEST =  Shapes.or(
+            //bottom
+            Block.box(0, 0, 0, 16, 6, 16),
+
+            //left
+            Block.box(2, 6, 0, 14, 14, 2),
+
+            //right
+            Block.box(2, 6, 14, 14, 14, 16),
+
+            //back
+            Block.box(14, 6, 0, 16, 16, 16)
+
+    );
+    private static final VoxelShape SHAPE_FALLOFF = Block.box(0,0,0,16,16,16);
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
+
+        return switch (pState.getValue(FACING)) {
+            case EAST -> SHAPE_EAST;
+            case WEST -> SHAPE_WEST;
+            case NORTH -> SHAPE_NORTH;
+            case SOUTH -> SHAPE_SOUTH;
+            default -> SHAPE_FALLOFF;
+        };
     }
     @Override
     public RenderShape getRenderShape(BlockState pState) {
