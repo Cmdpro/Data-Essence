@@ -43,12 +43,15 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> COGNIZANT_CUBE_SHAKE = createBasicSound("item.cognizant_cube.shake");
     public static final Holder<SoundEvent> COGNIZANT_CUBE_MESSAGE = createBasicSound("item.cognizant_cube.message");
 
-    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE =
-            createBasicSound("item.energy_rifle.charge");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_1 = createBasicSound("item.energy_rifle.charge1");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_2 = createBasicSound("item.energy_rifle.charge2");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_3 = createBasicSound("item.energy_rifle.charge3");
 
-    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE =
-            SOUND_EVENTS.register("item.energy_rifle.fire",
-                    () -> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(DataNEssence.MOD_ID, "item.energy_rifle.fire")));
+    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE_1 = createBasicSound("item.energy_rifle.fire1");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE_2 = createBasicSound("item.energy_rifle.fire2");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE_3 = createBasicSound("item.energy_rifle.fire3");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_OVERCHARGE = createBasicSound("item.energy_rifle.overcharge");
+
     public static final Holder<SoundEvent> ENERGY_RIFLE_INTERRUPT =
             createBasicSound("item.energy_rifle.interrupt");
 

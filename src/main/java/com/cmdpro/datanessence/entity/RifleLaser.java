@@ -21,6 +21,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -57,6 +59,21 @@ public class RifleLaser extends Entity {
         this.r = r; // default: 3
         this.damage = damage; // default: 21
         this.entityData.set(SYNCHED_DISTANCE, distance); // default: 35
+    }
+
+    public RifleLaser(EntityType<RifleLaser> entityType, LivingEntity shooter, Level world, int r, int damage, int distance, boolean overcharged) {
+        this(entityType, shooter.getX(), shooter.getEyeY(), shooter.getZ(), world);
+        this.owner = shooter;
+        this.setDeltaMovement(shooter.getLookAngle());
+        this.r = r; // default: 3
+        this.damage = damage; // default: 21
+        this.entityData.set(SYNCHED_DISTANCE, distance); // default: 35
+        if(overcharged==true){
+            shooter.hurt(shooter.damageSources().magic(),20f);
+            this.damage = 30;
+            this.r = 10;
+            this.entityData.set(SYNCHED_DISTANCE, 0);
+        }
     }
 
     private boolean shot;
