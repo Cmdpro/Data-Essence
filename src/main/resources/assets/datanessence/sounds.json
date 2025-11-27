@@ -105,6 +105,24 @@
         ],
         "subtitle": "subtitle.datanessence.item.ore_scanner.scan_ore"
     },
+  "item.energy_rifle.charge": {
+    "subtitle": "subtitles.item.energy_rifle.charge",
+    "sounds": [
+      "datanessence:item/energy_rifle/charge"
+    ]
+  },
+    "item.energy_rifle.fire": {
+      "subtitle": "subtitles.item.energy_rifle.fire",
+      "sounds": [
+        "datanessence:item/energy_rifle/fire"
+      ]
+    },
+  "item.energy_rifle.interrupt": {
+    "subtitle": "subtitles.item.energy_rifle.interrupt",
+    "sounds": [
+      "datanessence:item/energy_rifle/interrupt"
+    ]
+  },
     "ui_click": {
         "sounds": [
             "datanessence:ui/ui_click"

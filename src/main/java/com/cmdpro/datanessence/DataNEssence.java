@@ -4,12 +4,14 @@ import com.cmdpro.datanessence.block.transmission.ItemFilter;
 import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
+import com.cmdpro.datanessence.particle.EnergyParticle;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.*;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModLoadingContext;
@@ -19,6 +21,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
@@ -79,6 +82,15 @@ public class DataNEssence
 
         if (FMLEnvironment.dist.isClient())
             modLoadingContext.getActiveContainer().registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+    }
+
+    @EventBusSubscriber(modid = "datanessence", bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public class ClientSetup {
+
+        @SubscribeEvent
+        public static void registerParticles(RegisterParticleProvidersEvent event) {
+            event.registerSpriteSet(ParticleRegistry.ENERGY_PARTICLE.get(), EnergyParticle.Provider::new);
+        }
     }
 
     @SubscribeEvent

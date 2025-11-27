@@ -1,19 +1,23 @@
 package com.cmdpro.datanessence.entity;
 
 import com.cmdpro.databank.impact.ImpactFrameHandler;
-import com.cmdpro.databank.misc.CollisionTestCube;
 import com.cmdpro.databank.misc.FloatGradient;
 import com.cmdpro.databank.misc.ScreenshakeHandler;
 import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
 import com.cmdpro.datanessence.client.renderers.entity.RifleLaserRenderer;
 import com.cmdpro.datanessence.registry.DamageTypeRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
+import com.cmdpro.datanessence.registry.ParticleRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -22,19 +26,23 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
 
 import java.awt.*;
+import java.util.HashSet;
+import java.util.Set;
 
 public class RifleLaser extends Entity {
     public LivingEntity owner;
     public int time;
-    public final int maxTime = 25;
+    public final int maxTime = 50;
+    int r;
+    int damage;
+    private static final EntityDataAccessor<Integer> SYNCHED_DISTANCE = SynchedEntityData.defineId(RifleLaser.class, EntityDataSerializers.INT); // please dont ask me how this works
     public RifleLaser(EntityType<RifleLaser> entityType, Level world) {
         super(entityType, world);
     }
@@ -42,25 +50,38 @@ public class RifleLaser extends Entity {
         this(entityType, world);
         this.setPos(x, y, z);
     }
-    public RifleLaser(EntityType<RifleLaser> entityType, LivingEntity shooter, Level world) {
+    public RifleLaser(EntityType<RifleLaser> entityType, LivingEntity shooter, Level world, int r, int damage, int distance) {
         this(entityType, shooter.getX(), shooter.getEyeY(), shooter.getZ(), world);
         this.owner = shooter;
         this.setDeltaMovement(shooter.getLookAngle());
+        this.r = r; // default: 3
+        this.damage = damage; // default: 21
+        this.entityData.set(SYNCHED_DISTANCE, distance); // default: 35
     }
 
     private boolean shot;
     private Vec3 end;
+    private Set<BlockPos> brokenBlocks = new HashSet<>();
+
+
     @Override
     public void tick() {
         super.tick();
-        HitResult hit = getHit(35, false);
-        end = hit.getLocation();
+        int currentDistance = this.entityData.get(SYNCHED_DISTANCE);
+        // Calculate end point without collision detection (pass through blocks)
+        Vec3 vec3 = this.position();
+        Vec3 vec31 = this.getDeltaMovement().normalize();
+        end = vec3.add(vec31.x * currentDistance, vec31.y * currentDistance, vec31.z * currentDistance);
+
         time++;
         if (level().isClientSide) {
+
+            spawnBeamParticles();
+
             if (!shot) {
                 ClientMethods.particle(getRandom(), end, level());
-                double distance = Math.min(ClientMethods.getPlayerDistance(position()), ClientMethods.getPlayerDistance(end));
-                if (distance <= 35) {
+                double lDistance = Math.min(ClientMethods.getPlayerDistance(position()), ClientMethods.getPlayerDistance(end));
+                if (lDistance <= currentDistance) {
                     ClientMethods.screenshake(end, level());
                     ClientMethods.impact(this);
                 }
@@ -68,30 +89,120 @@ public class RifleLaser extends Entity {
             }
         } else {
             if (!shot) {
-                CollisionTestCube cube = new CollisionTestCube(AABB.ofSize(position().lerp(end, 0.5f), 0.75, 0.75, position().distanceTo(end)*2f));
-                Quaternionf rotation = new Quaternionf();
-                Vec2 angle = calculateRotationVector(position(), end);
-                rotation.rotateY((float) Math.toRadians(-angle.y + 180));
-                rotation.rotateX((float)Math.toRadians(-angle.x));
-                cube.rotation = rotation;
-                cube.getEntitiesOfClass(LivingEntity.class, level()).forEach((i) -> {
-                    if (i != owner) {
-                        DamageSource damagesource = null;
-                        if (owner instanceof LivingEntity) {
-                            damagesource = this.damageSources().source(DamageTypeRegistry.magicProjectile, this, owner);
-                            owner.setLastHurtMob(i);
-                        }
-                        float damage = 7.5f;
-                        i.hurt(damagesource, damage);
-                    }
-                });
-                level().explode(null, end.x, end.y, end.z, 4, Level.ExplosionInteraction.TNT);
+                // Break blocks along the laser path and damage entities
+                breakBlocksAndDamageEntitiesAlongPath(position(), end);
                 shot = true;
             }
             if (time >= maxTime) {
                 remove(RemovalReason.KILLED);
             }
         }
+    }
+
+    private void spawnBeamParticles() {
+        if (end == null) return;
+
+        Vec3 start = this.position();
+        Vec3 direction = end.subtract(start).normalize();
+        double distance = start.distanceTo(end);
+
+        double step = 0.9; // particle spacing along the beam
+
+        for (double d = 0; d <= distance; d += step) {
+            Vec3 point = start.add(direction.scale(d));
+
+            // Random offset around beam
+            double ox = (random.nextDouble() - 0.5) * 0.4;
+            double oy = (random.nextDouble() - 0.5) * 0.4;
+            double oz = (random.nextDouble() - 0.5) * 0.4;
+
+            level().addParticle(
+                    ParticleRegistry.ENERGY_PARTICLE.get(),
+                    point.x + ox,
+                    point.y + oy,
+                    point.z + oz,
+                    0, 0, 0
+            );
+        }
+    }
+
+
+    private void breakBlocksAndDamageEntitiesAlongPath(Vec3 start, Vec3 end) {
+        Vec3 direction = end.subtract(start).normalize();
+        double distance = start.distanceTo(end);
+        Set<BlockPos> blocksToBreak = new HashSet<>();
+        Set<LivingEntity> damagedEntities = new HashSet<>();
+
+        // Sample points along the laser path
+        double step = 0.5; // Check every 0.5 blocks
+        for (double d = 0; d <= distance; d += step) {
+            Vec3 point = start.add(direction.scale(d));
+            BlockPos centerPos = BlockPos.containing(point);
+            // Break blocks in a randomized 3-block radius around the laser
+            for (int dx = -r; dx <= r; dx++) {
+                for (int dy = -r; dy <= r; dy++) {
+                    for (int dz = -r; dz <= r; dz++) {
+                        double distSq = dx * dx + dy * dy + dz * dz;
+                        if (distSq <= r*r) { // Radius of 3 blocks (3^2 = 9)
+                            // Randomize whether this block gets destroyed (70% chance)
+                            if (random.nextFloat() < 0.4f) {
+                                blocksToBreak.add(centerPos.offset(dx, dy, dz));
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Damage entities in the 3-block radius
+            AABB searchBox = new AABB(point.subtract(r, r, r), point.add(r, r, r));
+            for (LivingEntity entity : level().getEntitiesOfClass(LivingEntity.class, searchBox)) {
+                if (entity != owner && !damagedEntities.contains(entity)) {
+                    double entityDist = entity.position().distanceTo(point);
+                    if (entityDist <= r) {
+                        DamageSource damagesource = this.damageSources().source(DamageTypeRegistry.magicProjectile, this, owner);
+                        if (owner != null) {
+                            owner.setLastHurtMob(entity);
+                        }
+                        float damage = this.damage;
+                        entity.hurt(damagesource, damage);
+                        damagedEntities.add(entity);
+                    }
+                }
+            }
+        }
+
+// Break all collected blocks without dropping items
+        for (BlockPos pos : blocksToBreak) {
+            BlockState state = level().getBlockState(pos);
+            if (!state.isAir() && state.getDestroySpeed(level(), pos) >= 0) {
+
+                // Break block (no drops)
+                level().destroyBlock(pos, false);
+
+                // Spawn cloud particles
+                if (level() instanceof ServerLevel serverLevel) {
+                    // spawn between 3–6 particles randomly
+                    for (int i = 0; i < 5; i++) {
+                        double px = pos.getX() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
+                        double py = pos.getY() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
+                        double pz = pos.getZ() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
+
+                        double vx = (serverLevel.random.nextDouble() - 0.5) * 0.1;
+                        double vy = (serverLevel.random.nextDouble()) * 0.1;
+                        double vz = (serverLevel.random.nextDouble() - 0.5) * 0.1;
+
+                        serverLevel.sendParticles(
+                                ParticleTypes.CAMPFIRE_COSY_SMOKE,
+                                px, py, pz,
+                                1,       // count per iteration
+                                vx, vy, vz,
+                                0.05     // speed
+                        );
+                    }
+                }
+            }
+        }
+
     }
 
     private static Vec2 calculateRotationVector(Vec3 pVec, Vec3 pTarget) {
@@ -122,7 +233,7 @@ public class RifleLaser extends Entity {
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
-
+        builder.define(SYNCHED_DISTANCE, 0);
     }
 
     @Override
