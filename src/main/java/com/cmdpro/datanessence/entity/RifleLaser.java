@@ -21,8 +21,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,16 +33,25 @@ import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 
 import java.awt.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.List;
 
 public class RifleLaser extends Entity {
     public LivingEntity owner;
     public int time;
-    public final int maxTime = 50;
+    public final int maxTime = 50; // Increased slightly to allow the beam to finish travel
     int r;
     int damage;
-    private static final EntityDataAccessor<Integer> SYNCHED_DISTANCE = SynchedEntityData.defineId(RifleLaser.class, EntityDataSerializers.INT); // please dont ask me how this works
+    private static final EntityDataAccessor<Integer> SYNCHED_DISTANCE = SynchedEntityData.defineId(RifleLaser.class, EntityDataSerializers.INT);
+
+    // -- QUEUE SETTINGS --
+    private final Queue<BlockPos> blockQueue = new ArrayDeque<>();
+
+    // Controls the "Speed" of the destruction wave.
+    // 5 = Slow drill effect. 50 = Near instant.
+    private static final int BLOCKS_PER_TICK = 50;
+    // --------------------
+
     public RifleLaser(EntityType<RifleLaser> entityType, Level world) {
         super(entityType, world);
     }
@@ -56,20 +63,25 @@ public class RifleLaser extends Entity {
         this(entityType, shooter.getX(), shooter.getEyeY(), shooter.getZ(), world);
         this.owner = shooter;
         this.setDeltaMovement(shooter.getLookAngle());
-        this.r = r; // default: 3
-        this.damage = damage; // default: 21
-        this.entityData.set(SYNCHED_DISTANCE, distance); // default: 35
+        this.r = r;
+        this.damage = damage;
+        this.entityData.set(SYNCHED_DISTANCE, distance);
     }
 
     public RifleLaser(EntityType<RifleLaser> entityType, LivingEntity shooter, Level world, int r, int damage, int distance, boolean overcharged) {
         this(entityType, shooter.getX(), shooter.getEyeY(), shooter.getZ(), world);
         this.owner = shooter;
         this.setDeltaMovement(shooter.getLookAngle());
-        this.r = r; // default: 3
-        this.damage = damage; // default: 21
-        this.entityData.set(SYNCHED_DISTANCE, distance); // default: 35
-        if(overcharged==true){
-            shooter.hurt(shooter.damageSources().magic(),20f);
+        this.r = r;
+        this.damage = damage;
+        this.entityData.set(SYNCHED_DISTANCE, distance);
+        if(overcharged){
+            DamageSource laserDamage = shooter.damageSources().source(
+                    DamageTypeRegistry.laser,
+                    shooter,
+                    shooter
+            );
+            shooter.hurt(laserDamage, 20f);
             this.damage = 30;
             this.r = 10;
             this.entityData.set(SYNCHED_DISTANCE, 0);
@@ -78,23 +90,18 @@ public class RifleLaser extends Entity {
 
     private boolean shot;
     private Vec3 end;
-    private Set<BlockPos> brokenBlocks = new HashSet<>();
-
 
     @Override
     public void tick() {
         super.tick();
         int currentDistance = this.entityData.get(SYNCHED_DISTANCE);
-        // Calculate end point without collision detection (pass through blocks)
         Vec3 vec3 = this.position();
         Vec3 vec31 = this.getDeltaMovement().normalize();
         end = vec3.add(vec31.x * currentDistance, vec31.y * currentDistance, vec31.z * currentDistance);
 
         time++;
         if (level().isClientSide) {
-
             spawnBeamParticles();
-
             if (!shot) {
                 ClientMethods.particle(getRandom(), end, level());
                 double lDistance = Math.min(ClientMethods.getPlayerDistance(position()), ClientMethods.getPlayerDistance(end));
@@ -106,10 +113,13 @@ public class RifleLaser extends Entity {
             }
         } else {
             if (!shot) {
-                // Break blocks along the laser path and damage entities
-                breakBlocksAndDamageEntitiesAlongPath(position(), end);
+                scanPathAndPopulateQueue(position(), end);
                 shot = true;
             }
+
+            processBlockQueue();
+
+            // Keep entity alive until the blocks are done breaking
             if (time >= maxTime) {
                 remove(RemovalReason.KILLED);
             }
@@ -123,103 +133,100 @@ public class RifleLaser extends Entity {
         Vec3 direction = end.subtract(start).normalize();
         double distance = start.distanceTo(end);
 
-        double step = 0.9; // particle spacing along the beam
+        double step = 0.9;
 
         for (double d = 0; d <= distance; d += step) {
             Vec3 point = start.add(direction.scale(d));
-
-            // Random offset around beam
             double ox = (random.nextDouble() - 0.5) * 0.4;
             double oy = (random.nextDouble() - 0.5) * 0.4;
             double oz = (random.nextDouble() - 0.5) * 0.4;
 
             level().addParticle(
                     ParticleRegistry.ENERGY_PARTICLE.get(),
-                    point.x + ox,
-                    point.y + oy,
-                    point.z + oz,
+                    point.x + ox, point.y + oy, point.z + oz,
                     0, 0, 0
             );
         }
     }
 
-
-    private void breakBlocksAndDamageEntitiesAlongPath(Vec3 start, Vec3 end) {
+    private void scanPathAndPopulateQueue(Vec3 start, Vec3 end) {
         Vec3 direction = end.subtract(start).normalize();
         double distance = start.distanceTo(end);
-        Set<BlockPos> blocksToBreak = new HashSet<>();
+
+        // CHANGE: Use LinkedHashSet to preserve the "Path" order (Closest to Furthest)
+        Set<BlockPos> orderedBlocksToBreak = new LinkedHashSet<>();
         Set<LivingEntity> damagedEntities = new HashSet<>();
 
-        // Sample points along the laser path
-        double step = 0.5; // Check every 0.5 blocks
+        double step = 0.5;
+        // This loop goes from 0 (start) to distance (end), creating the path order
         for (double d = 0; d <= distance; d += step) {
             Vec3 point = start.add(direction.scale(d));
             BlockPos centerPos = BlockPos.containing(point);
-            // Break blocks in a randomized 3-block radius around the laser
+
             for (int dx = -r; dx <= r; dx++) {
                 for (int dy = -r; dy <= r; dy++) {
                     for (int dz = -r; dz <= r; dz++) {
                         double distSq = dx * dx + dy * dy + dz * dz;
-                        if (distSq <= r*r) { // Radius of 3 blocks (3^2 = 9)
-                            // Randomize whether this block gets destroyed (70% chance)
+                        if (distSq <= r*r) {
                             if (random.nextFloat() < 0.4f) {
-                                blocksToBreak.add(centerPos.offset(dx, dy, dz));
+                                // LinkedHashSet adds this to the END of the list.
+                                // Since 'd' increases, we add further blocks later.
+                                orderedBlocksToBreak.add(centerPos.offset(dx, dy, dz));
                             }
                         }
                     }
                 }
             }
 
-            // Damage entities in the 3-block radius
             AABB searchBox = new AABB(point.subtract(r, r, r), point.add(r, r, r));
             for (LivingEntity entity : level().getEntitiesOfClass(LivingEntity.class, searchBox)) {
                 if (entity != owner && !damagedEntities.contains(entity)) {
                     double entityDist = entity.position().distanceTo(point);
                     if (entityDist <= r) {
                         DamageSource damagesource = this.damageSources().source(DamageTypeRegistry.magicProjectile, this, owner);
-                        if (owner != null) {
-                            owner.setLastHurtMob(entity);
-                        }
-                        float damage = this.damage;
-                        entity.hurt(damagesource, damage);
+                        if (owner != null) owner.setLastHurtMob(entity);
+                        entity.hurt(damagesource, this.damage);
                         damagedEntities.add(entity);
                     }
                 }
             }
         }
 
-// Break all collected blocks without dropping items
-        for (BlockPos pos : blocksToBreak) {
-            BlockState state = level().getBlockState(pos);
-            if (!state.isAir() && state.getDestroySpeed(level(), pos) >= 0) {
+        blockQueue.addAll(orderedBlocksToBreak);
+    }
 
-                // Break block (no drops)
-                level().destroyBlock(pos, false);
+    private void processBlockQueue() {
+        if (blockQueue.isEmpty()) return;
 
-                // Spawn cloud particles
-                if (level() instanceof ServerLevel serverLevel) {
-                    // spawn between 3–6 particles randomly
-                    for (int i = 0; i < 5; i++) {
-                        double px = pos.getX() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
-                        double py = pos.getY() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
-                        double pz = pos.getZ() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
+        int processed = 0;
+        while (processed < BLOCKS_PER_TICK && !blockQueue.isEmpty()) {
+            BlockPos pos = blockQueue.poll(); // Pulls the oldest (closest) block first
 
-                        double vx = (serverLevel.random.nextDouble() - 0.5) * 0.1;
-                        double vy = (serverLevel.random.nextDouble()) * 0.1;
-                        double vz = (serverLevel.random.nextDouble() - 0.5) * 0.1;
-
-                        serverLevel.sendParticles(
-                                ParticleTypes.CAMPFIRE_COSY_SMOKE,
-                                px, py, pz,
-                                1,       // count per iteration
-                                vx, vy, vz,
-                                0.05     // speed
-                        );
-                    }
+            if (pos != null && level().isLoaded(pos)) {
+                BlockState state = level().getBlockState(pos);
+                if (!state.isAir() && state.getDestroySpeed(level(), pos) >= 0) {
+                    level().destroyBlock(pos, false);
+                    spawnBlockBreakParticles(pos);
+                    processed++;
                 }
             }
         }
+    }
 
+    private void spawnBlockBreakParticles(BlockPos pos) {
+        if (level() instanceof ServerLevel serverLevel) {
+            for (int i = 0; i < 3; i++) { // Reduced count slightly for performance
+                double px = pos.getX() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
+                double py = pos.getY() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
+                double pz = pos.getZ() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
+
+                double vx = (serverLevel.random.nextDouble() - 0.5) * 0.1;
+                double vy = (serverLevel.random.nextDouble()) * 0.1;
+                double vz = (serverLevel.random.nextDouble() - 0.5) * 0.1;
+
+                serverLevel.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, px, py, pz, 1, vx, vy, vz, 0.05);
+            }
+        }
     }
 
     private static Vec2 calculateRotationVector(Vec3 pVec, Vec3 pTarget) {
@@ -237,12 +244,6 @@ public class RifleLaser extends Entity {
         return end;
     }
 
-    private HitResult getHit(double hitDistance, boolean hitFluids) {
-        Vec3 vec3 = this.position();
-        Vec3 vec31 = this.getDeltaMovement().normalize();
-        Vec3 vec32 = vec3.add(vec31.x * hitDistance, vec31.y * hitDistance, vec31.z * hitDistance);
-        return this.level().clip(new ClipContext(vec3, vec32, ClipContext.Block.OUTLINE, hitFluids ? ClipContext.Fluid.ANY : ClipContext.Fluid.NONE, this));
-    }
     @Override
     public boolean shouldBeSaved() {
         return false;
@@ -254,14 +255,10 @@ public class RifleLaser extends Entity {
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
-
-    }
+    protected void readAdditionalSaveData(CompoundTag compound) {}
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
-
-    }
+    protected void addAdditionalSaveData(CompoundTag compound) {}
 
     private static class ClientMethods {
         public static void particle(RandomSource random, Vec3 pos, Level level) {
@@ -278,7 +275,6 @@ public class RifleLaser extends Entity {
         }
         public static void impact(RifleLaser entity) {
             ImpactFrameHandler.addImpact(12, (renderTarget, buffer, poseStack, deltaTracker, camera, frustum, renderTicks, progress) -> {
-
             }, (renderTarget, buffer, poseStack, deltaTracker, camera, frustum, renderTicks, progress) -> {
                 Vec3 center = entity.end;
                 float partialTick = deltaTracker.getGameTimeDeltaPartialTick(true);
