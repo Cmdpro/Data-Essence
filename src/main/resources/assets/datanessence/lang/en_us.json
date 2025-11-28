@@ -611,6 +611,7 @@
   "commands.datanessence.check_entry_overlaps.no_found": "No entry overlaps found.",
   "commands.datanessence.give_dragon_part": "Given %2$s the \"%1$s\" dragon part.",
   "commands.datanessence.give_all_dragon_parts": "Given %1$s all dragon parts.",
+  "commands.datanessence.maximize": "Maximized %1$s's progression.",
   "commands.datanessence.charge_item.success": "Item Charged.",
   "commands.datanessence.charge_item.fail_no_container": "The item doesn't use essence",
 
