@@ -1,4 +1,5 @@
 ### Additions
+- Added a command to instantly charge items with Essence (multyfora)
 - Added Pastel gemstone shard "reconstruction" syntheses and data entry
 - Polished Obsidian variants can now be used to build Nether Portals (multyfora)
 
@@ -8,6 +9,7 @@
 - Essence Light Fixture has collision (multyfora)
 - Lightslash Blade's attack speed is constant again instead of variable, fixing its lack of proper cooldown
 - Interaction with the Charger is now in-world, instead of via a GUI (multyfora)
+- When pick-blocking a Node, sneaking now picks its correspondent wire (multyfora)
 
 ### Fixes
 - Corrected voxel shapes for several blocks (multyfora)
