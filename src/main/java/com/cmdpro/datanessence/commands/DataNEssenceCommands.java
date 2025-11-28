@@ -1,12 +1,14 @@
 package com.cmdpro.datanessence.commands;
 
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.DataTabletUtil;
 import com.cmdpro.datanessence.api.util.PlayerDataUtil;
 import com.cmdpro.datanessence.networking.ModMessages;
 import com.cmdpro.datanessence.networking.packet.s2c.DragonPartsSync;
 import com.cmdpro.datanessence.networking.packet.s2c.OpenEntryEditor;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
+import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.data.datatablet.Entries;
 import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.mojang.brigadier.Command;
@@ -26,9 +28,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class DataNEssenceCommands {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher){
@@ -82,6 +87,15 @@ public class DataNEssenceCommands {
                             return givedragonpart(command);
                         }))
                 )
+                .then(Commands.literal("charge_item")
+                        .executes(command -> {
+                            return chargeItem(command, command.getSource().getPlayerOrException());
+                        })
+                        .then(Commands.argument("target", EntityArgument.player())
+                                .executes(command -> {
+                                    return chargeItem(command, EntityArgument.getPlayer(command, "target"));
+                                }))
+                )
                 .then(Commands.literal("maximize")
                         .executes(command -> {
                             return maximize(command);
@@ -93,6 +107,33 @@ public class DataNEssenceCommands {
                                 })))
         );
     }
+
+    private static int chargeItem(CommandContext<CommandSourceStack> command, ServerPlayer player) {
+        ItemStack stack = player.getMainHandItem();
+
+        if (stack.has(DataComponentRegistry.ESSENCE_STORAGE)) {
+
+            float maxCapacity = ItemEssenceContainer.getMaxEssence(stack);
+            Set<ResourceLocation> supportedTypes = ItemEssenceContainer.getSupportedEssenceTypes(stack);
+
+            Map<ResourceLocation, Float> filledMap = new HashMap<>();
+            for (ResourceLocation type : supportedTypes) {
+                filledMap.put(type, maxCapacity);
+            }
+
+            ItemEssenceContainer filledContainer = new ItemEssenceContainer(filledMap, maxCapacity);
+            stack.set(DataComponentRegistry.ESSENCE_STORAGE, filledContainer);
+
+            command.getSource().sendSuccess(() -> {
+                return Component.translatable("commands.datanessence.charge_item.success", player.getName(), stack.getDisplayName());
+            }, true);
+            return Command.SINGLE_SUCCESS;
+        } else {
+            command.getSource().sendFailure(Component.translatable("commands.datanessence.charge_item.fail_no_container", stack.getDisplayName()));
+            return 0;
+        }
+    }
+
     private static int entryeditor(CommandContext<CommandSourceStack> command) {
         if (command.getSource().getEntity() instanceof ServerPlayer player) {
             ModMessages.sendToPlayer(new OpenEntryEditor(), player);
