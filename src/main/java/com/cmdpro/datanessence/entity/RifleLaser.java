@@ -39,18 +39,15 @@ import java.util.List;
 public class RifleLaser extends Entity {
     public LivingEntity owner;
     public int time;
-    public final int maxTime = 50; // Increased slightly to allow the beam to finish travel
+    public final int maxTime = 50;
     int r;
     int damage;
     private static final EntityDataAccessor<Integer> SYNCHED_DISTANCE = SynchedEntityData.defineId(RifleLaser.class, EntityDataSerializers.INT);
 
-    // -- QUEUE SETTINGS --
+
     private final Queue<BlockPos> blockQueue = new ArrayDeque<>();
 
-    // Controls the "Speed" of the destruction wave.
-    // 5 = Slow drill effect. 50 = Near instant.
     private static final int BLOCKS_PER_TICK = 50;
-    // --------------------
 
     public RifleLaser(EntityType<RifleLaser> entityType, Level world) {
         super(entityType, world);
@@ -119,7 +116,7 @@ public class RifleLaser extends Entity {
 
             processBlockQueue();
 
-            // Keep entity alive until the blocks are done breaking
+
             if (time >= maxTime) {
                 remove(RemovalReason.KILLED);
             }
@@ -153,12 +150,11 @@ public class RifleLaser extends Entity {
         Vec3 direction = end.subtract(start).normalize();
         double distance = start.distanceTo(end);
 
-        // CHANGE: Use LinkedHashSet to preserve the "Path" order (Closest to Furthest)
+
         Set<BlockPos> orderedBlocksToBreak = new LinkedHashSet<>();
         Set<LivingEntity> damagedEntities = new HashSet<>();
 
         double step = 0.5;
-        // This loop goes from 0 (start) to distance (end), creating the path order
         for (double d = 0; d <= distance; d += step) {
             Vec3 point = start.add(direction.scale(d));
             BlockPos centerPos = BlockPos.containing(point);
@@ -169,8 +165,6 @@ public class RifleLaser extends Entity {
                         double distSq = dx * dx + dy * dy + dz * dz;
                         if (distSq <= r*r) {
                             if (random.nextFloat() < 0.4f) {
-                                // LinkedHashSet adds this to the END of the list.
-                                // Since 'd' increases, we add further blocks later.
                                 orderedBlocksToBreak.add(centerPos.offset(dx, dy, dz));
                             }
                         }
@@ -215,7 +209,7 @@ public class RifleLaser extends Entity {
 
     private void spawnBlockBreakParticles(BlockPos pos) {
         if (level() instanceof ServerLevel serverLevel) {
-            for (int i = 0; i < 3; i++) { // Reduced count slightly for performance
+            for (int i = 0; i < 3; i++) {
                 double px = pos.getX() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
                 double py = pos.getY() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
                 double pz = pos.getZ() + 0.5 + (serverLevel.random.nextDouble() - 0.5) * 0.4;
