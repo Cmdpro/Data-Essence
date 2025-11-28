@@ -84,14 +84,7 @@ public class DataNEssence
             modLoadingContext.getActiveContainer().registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
 
-    @EventBusSubscriber(modid = "datanessence", bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public class ClientSetup {
 
-        @SubscribeEvent
-        public static void registerParticles(RegisterParticleProvidersEvent event) {
-            event.registerSpriteSet(ParticleRegistry.ENERGY_PARTICLE.get(), EnergyParticle.Provider::new);
-        }
-    }
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {

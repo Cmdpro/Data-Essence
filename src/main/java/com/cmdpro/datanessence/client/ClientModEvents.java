@@ -23,6 +23,7 @@ import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.integration.mekanism.ChemicalNodeRenderer;
 import com.cmdpro.datanessence.client.particle.*;
 import com.cmdpro.datanessence.item.equipment.GrapplingHook;
+import com.cmdpro.datanessence.particle.EnergyParticle;
 import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.client.renderers.block.*;
 import com.cmdpro.datanessence.client.renderers.layer.HornsLayer;
@@ -233,6 +234,10 @@ public class ClientModEvents {
                 MoteParticle.Provider::new);
         Minecraft.getInstance().particleEngine.register(ParticleRegistry.SANCTUARY_SPARKLE.get(),
                 SanctuarySparkleParticle.Provider::new);
+    }
+    @SubscribeEvent
+    public static void registerParticles(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(ParticleRegistry.ENERGY_PARTICLE.get(), EnergyParticle.Provider::new);
     }
     @SubscribeEvent
     public static void registerBlockColorHandlers(RegisterColorHandlersEvent.Block event) {
