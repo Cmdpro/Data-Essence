@@ -4,9 +4,14 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.client.FactorySong;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import javax.xml.crypto.Data;
+
+import static net.minecraft.world.entity.Entity.MovementEmission.SOUNDS;
 
 public class SoundRegistry {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, DataNEssence.MOD_ID);
@@ -37,6 +42,19 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> HAMMER_AND_CHISEL_MINE = createBasicSound("item.hammer_and_chisel.mine");
     public static final Holder<SoundEvent> COGNIZANT_CUBE_SHAKE = createBasicSound("item.cognizant_cube.shake");
     public static final Holder<SoundEvent> COGNIZANT_CUBE_MESSAGE = createBasicSound("item.cognizant_cube.message");
+
+    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_1 = createBasicSound("item.energy_rifle.charge1");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_2 = createBasicSound("item.energy_rifle.charge2");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_3 = createBasicSound("item.energy_rifle.charge3");
+
+    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE_1 = createBasicSound("item.energy_rifle.fire1");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE_2 = createBasicSound("item.energy_rifle.fire2");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE_3 = createBasicSound("item.energy_rifle.fire3");
+    public static final Holder<SoundEvent> ENERGY_RIFLE_OVERCHARGE = createBasicSound("item.energy_rifle.overcharge");
+
+    public static final Holder<SoundEvent> ENERGY_RIFLE_INTERRUPT =
+            createBasicSound("item.energy_rifle.interrupt");
+
 
     //Blocks
     public static final Holder<SoundEvent> ENTROPIC_PROCESSOR_WORKING = createBasicSound("block.entropic_processor.working");

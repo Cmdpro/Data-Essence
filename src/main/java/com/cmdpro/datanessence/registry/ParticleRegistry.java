@@ -19,6 +19,11 @@ public class ParticleRegistry {
             register("essence_sparkle", () -> new SimpleParticleType(false));
     public static final Supplier<SimpleParticleType> SANCTUARY_SPARKLE =
             register("sanctuary_sparkle", () -> new SimpleParticleType(false));
+
+    public static final Supplier<SimpleParticleType> ENERGY_PARTICLE =
+            register("energy_particle", () -> new SimpleParticleType(false));
+
+
     public static final Supplier<ParticleType> CIRCLE =
             register("circle", () -> new ParticleType<CircleParticleOptions>(false) {
 

@@ -105,6 +105,54 @@
         ],
         "subtitle": "subtitle.datanessence.item.ore_scanner.scan_ore"
     },
+  "item.energy_rifle.charge1": {
+    "subtitle": "subtitles.item.energy_rifle.charge1",
+    "sounds": [
+      "datanessence:item/energy_rifle/charge1"
+    ]
+  },
+  "item.energy_rifle.charge2": {
+    "subtitle": "subtitles.item.energy_rifle.charge2",
+    "sounds": [
+      "datanessence:item/energy_rifle/charge2"
+    ]
+  },
+  "item.energy_rifle.charge3": {
+    "subtitle": "subtitles.item.energy_rifle.charge3",
+    "sounds": [
+      "datanessence:item/energy_rifle/charge3"
+    ]
+  },
+    "item.energy_rifle.fire1": {
+      "subtitle": "subtitles.item.energy_rifle.fire1",
+      "sounds": [
+        "datanessence:item/energy_rifle/fire1"
+      ]
+    },
+  "item.energy_rifle.fire2": {
+    "subtitle": "subtitles.item.energy_rifle.fire2",
+    "sounds": [
+      "datanessence:item/energy_rifle/fire2"
+    ]
+  },
+  "item.energy_rifle.fire3": {
+    "subtitle": "subtitles.item.energy_rifle.fire3",
+    "sounds": [
+      "datanessence:item/energy_rifle/fire3"
+    ]
+  },
+  "item.energy_rifle.overcharge": {
+    "subtitle": "subtitles.item.energy_rifle.overcharge",
+    "sounds": [
+      "datanessence:item/energy_rifle/overcharge"
+    ]
+  },
+  "item.energy_rifle.interrupt": {
+    "subtitle": "subtitles.item.energy_rifle.interrupt",
+    "sounds": [
+      "datanessence:item/energy_rifle/interrupt"
+    ]
+  },
     "ui_click": {
         "sounds": [
             "datanessence:ui/ui_click"
