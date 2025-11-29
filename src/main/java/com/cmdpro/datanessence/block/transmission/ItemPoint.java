@@ -41,13 +41,4 @@ public class ItemPoint extends BaseCapabilityPoint {
         };
     }
 
-    @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-
-        if(player.isShiftKeyDown()) {
-            return new ItemStack(ItemRegistry.ITEM_WIRE.get());
-        }
-        return super.getCloneItemStack(state,target,level,pos,player);
-    }
-
 }
