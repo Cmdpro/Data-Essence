@@ -1,34 +1,51 @@
 package com.cmdpro.datanessence.item.equipment;
 
-import com.cmdpro.databank.rendering.ColorUtil;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.entity.RifleLaser;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EntityRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
 
-public class EnergyRifle extends Item {
+public class FallingMoon extends Item {
 
     public static ResourceLocation LUNAR = DataNEssence.locate("lunar_essence");
     private final int TICKS_PER_CHARGE = 40; // 2 seconds per charge level
     private final int COOLDOWN = 20;
 
-    public EnergyRifle(Properties properties) {
-        super(properties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(LUNAR), 5000)));
+    final int COST_LOW = 100;
+    final int COST_MED = 500;
+    final int COST_HIGH = 1000;
+
+    public FallingMoon(Properties properties) {
+        super(properties
+                .component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(LUNAR), 5000))
+                .rarity(Rarity.UNCOMMON));
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        tooltipComponents.add(Component.translatable("item.datanessence.falling_moon.tooltip_1" ).withStyle(Style.EMPTY.withColor( 0xffe8cc6d ).withItalic(true)));
+        tooltipComponents.add(Component.translatable("item.datanessence.falling_moon.tooltip_2",
+                Component.literal(String.valueOf(COST_LOW)).withColor(0xffe8cc6d),
+                Component.literal(String.valueOf(COST_MED)).withColor(0xffe8cc6d),
+                Component.literal(String.valueOf(COST_HIGH)).withColor(0xffe8cc6d)
+        ).withStyle(Style.EMPTY.withColor(EssenceTypeRegistry.LUNAR_ESSENCE.get().getColor())));
     }
 
 
@@ -62,9 +79,9 @@ public class EnergyRifle extends Item {
 
 
             int essenceCost = switch (chargeLevel) {
-                case 1 -> 100;
-                case 2 -> 500;
-                case 3, 4 -> 1000;
+                case 1 -> COST_LOW;
+                case 2 -> COST_MED;
+                case 3, 4 -> COST_HIGH;
                 default -> 0;
             };
 
@@ -95,9 +112,9 @@ public class EnergyRifle extends Item {
 
                 // Calculate projected cost to check if we should play the "ready" sound
                 int projectedCost = switch (currentCharge) {
-                    case 1 -> 100;
-                    case 2 -> 500;
-                    case 3, 4 -> 1000;
+                    case 1 -> COST_LOW;
+                    case 2 -> COST_MED;
+                    case 3, 4 -> COST_HIGH;
                     default -> 0;
                 };
 
