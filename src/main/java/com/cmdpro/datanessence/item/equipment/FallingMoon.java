@@ -121,10 +121,10 @@ public class FallingMoon extends Item {
                 if (currentCharge <= 4 && ItemEssenceContainer.getEssence(stack, LUNAR) >= projectedCost) {
                     player.playNotifySound(
                             switch (currentCharge) {
-                                case 1 -> SoundRegistry.ENERGY_RIFLE_CHARGE_1.value();
-                                case 2 -> SoundRegistry.ENERGY_RIFLE_CHARGE_2.value();
-                                case 3, 4 -> SoundRegistry.ENERGY_RIFLE_CHARGE_3.value();
-                                default -> SoundRegistry.ENERGY_RIFLE_CHARGE_1.value();
+                                case 1 -> SoundRegistry.FALLING_MOON_CHARGE_1.value();
+                                case 2 -> SoundRegistry.FALLING_MOON_CHARGE_2.value();
+                                case 3, 4 -> SoundRegistry.FALLING_MOON_CHARGE_3.value();
+                                default -> SoundRegistry.FALLING_MOON_CHARGE_1.value();
                             },
                             SoundSource.PLAYERS,
                             1.0F,
@@ -169,10 +169,10 @@ public class FallingMoon extends Item {
 
         player.playNotifySound(
                 switch (chargeLevel) {
-                    case 1 -> SoundRegistry.ENERGY_RIFLE_FIRE_1.value();
-                    case 2 -> SoundRegistry.ENERGY_RIFLE_FIRE_2.value();
-                    case 3 -> SoundRegistry.ENERGY_RIFLE_FIRE_3.value();
-                    case 4 -> SoundRegistry.ENERGY_RIFLE_OVERCHARGE.value();
+                    case 1 -> SoundRegistry.FALLING_MOON_FIRE_1.value();
+                    case 2 -> SoundRegistry.FALLING_MOON_FIRE_2.value();
+                    case 3 -> SoundRegistry.FALLING_MOON_FIRE_3.value();
+                    case 4 -> SoundRegistry.FALLING_MOON_OVERCHARGE.value();
                     default -> SoundRegistry.ENERGY_RIFLE_INTERRUPT.value();
                 },
                 SoundSource.PLAYERS,

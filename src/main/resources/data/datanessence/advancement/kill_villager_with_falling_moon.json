@@ -1,18 +1,18 @@
 {
   "display": {
     "icon": {
-      "id": "datanessence:energy_rifle"
+      "id": "datanessence:falling_moon"
     },
     "title": {
-      "translate": "advancements.datanessence.villager_rifle_kill.title"
+      "translate": "advancements.datanessence.kill_villager_with_falling_moon.title"
     },
     "description": {
-      "translate": "advancements.datanessence.villager_rifle_kill.description"
+      "translate": "advancements.datanessence.kill_villager_with_falling_moon.description"
     },
     "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false
+    "hidden": true
   },
   "parent": "datanessence:progression/acquire_lunarium",
   "criteria": {
