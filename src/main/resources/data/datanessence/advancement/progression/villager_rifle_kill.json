@@ -1,0 +1,38 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:energy_rifle"
+    },
+    "title": {
+      "translate": "advancements.datanessence.villager_rifle_kill.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.villager_rifle_kill.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_lunarium",
+  "criteria": {
+    "kill_villager_with_laser": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:villager"
+        },
+        "killing_blow": {
+          "direct_entity": {
+            "type": "datanessence:rifle_laser"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "kill_villager_with_laser"
+    ]
+  ]
+}

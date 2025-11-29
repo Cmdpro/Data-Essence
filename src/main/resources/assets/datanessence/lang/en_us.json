@@ -728,6 +728,8 @@
   "advancements.datanessence.place_fluid_collector.description": "Place down a Fluid Collector to begin gathering liquid.",
   "advancements.datanessence.use_data_drive.title": "Providing Patterns",
   "advancements.datanessence.use_data_drive.description": "Make use of a Data Drive for assigning recipes to your machines.",
+  "advancements.datanessence.villager_rifle_kill.title": "I alone am the honored one.",
+  "advancements.datanessence.villager_rifle_kill.description": "kill a particularly cocky villager with the Energy Rifle",
 
   "tooltip.datanessence.progression_requirement": " ◇ Further experimentation is needed.",
   "tooltip.datanessence.toggle_lock": "Toggle Slot Locking",
