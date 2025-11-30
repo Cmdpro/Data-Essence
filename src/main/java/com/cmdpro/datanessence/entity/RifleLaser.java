@@ -26,6 +26,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
@@ -130,7 +131,7 @@ public class RifleLaser extends Entity {
         Vec3 direction = end.subtract(start).normalize();
         double distance = start.distanceTo(end);
 
-        double step = 0.9;
+        double step = 0.4;
 
         for (double d = 0; d <= distance; d += step) {
             Vec3 point = start.add(direction.scale(d));
@@ -199,7 +200,7 @@ public class RifleLaser extends Entity {
             if (pos != null && level().isLoaded(pos)) {
                 BlockState state = level().getBlockState(pos);
                 if (!state.isAir() && state.getDestroySpeed(level(), pos) >= 0) {
-                    level().destroyBlock(pos, false);
+                    level().setBlock(pos, Blocks.AIR.defaultBlockState(),2);
                     spawnBlockBreakParticles(pos);
                     processed++;
                 }

@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
+import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
@@ -38,7 +39,7 @@ public class FallingMoon extends Item {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
         tooltipComponents.add(Component.translatable("item.datanessence.falling_moon.tooltip_1" ).withStyle(Style.EMPTY.withColor( 0xffe8cc6d ).withItalic(true)));
         tooltipComponents.add(Component.translatable("item.datanessence.falling_moon.tooltip_2",
@@ -107,9 +108,9 @@ public class FallingMoon extends Item {
         if (!level.isClientSide && livingEntity instanceof Player player) {
             int usedDuration = this.getUseDuration(stack, livingEntity) - remainingUseDuration;
 
-            if (usedDuration > 0 && usedDuration % TICKS_PER_CHARGE == 0) {
+            if (usedDuration >= 0 && usedDuration % TICKS_PER_CHARGE == 0) {
                 int currentCharge = calculateCharge(usedDuration);
-
+                System.out.println("current charge: " + currentCharge);
                 // Calculate projected cost to check if we should play the "ready" sound
                 int projectedCost = switch (currentCharge) {
                     case 1 -> COST_LOW;
@@ -119,17 +120,27 @@ public class FallingMoon extends Item {
                 };
 
                 if (currentCharge <= 4 && ItemEssenceContainer.getEssence(stack, LUNAR) >= projectedCost) {
+                    System.out.println("sound started playing");
                     player.playNotifySound(
                             switch (currentCharge) {
-                                case 1 -> SoundRegistry.ENERGY_RIFLE_CHARGE_1.value();
-                                case 2 -> SoundRegistry.ENERGY_RIFLE_CHARGE_2.value();
-                                case 3, 4 -> SoundRegistry.ENERGY_RIFLE_CHARGE_3.value();
-                                default -> SoundRegistry.ENERGY_RIFLE_CHARGE_1.value();
+                                case 0 -> SoundRegistry.ENERGY_RIFLE_CHARGE_0_1.value();
+                                case 1 -> SoundRegistry.ENERGY_RIFLE_CHARGE_1_2.value();
+                                case 2 -> SoundRegistry.ENERGY_RIFLE_CHARGE_2_3.value();
+                                case 3 -> SoundRegistry.ENERGY_RIFLE_CHARGE_3_OVERCHARGE.value();
+                                default -> null;
                             },
                             SoundSource.PLAYERS,
                             1.0F,
                             1.0F
                     );
+                    if(currentCharge>0){
+                        player.playNotifySound(
+                                SoundRegistry.ENERGY_RIFLE_CHARGE_DING.value(),
+                                SoundSource.PLAYERS,
+                                1.0F,
+                                (float) (1.0F + Math.random())
+                        );
+                    }
                 }
             }
         }

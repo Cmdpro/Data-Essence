@@ -105,22 +105,34 @@
         ],
         "subtitle": "subtitle.datanessence.item.ore_scanner.scan_ore"
     },
-  "item.energy_rifle.charge1": {
-    "subtitle": "subtitles.item.energy_rifle.charge1",
+  "item.energy_rifle.charge0-1": {
+    "subtitle": "subtitles.item.energy_rifle.charge0-1",
     "sounds": [
-      "datanessence:item/energy_rifle/charge1"
+      "datanessence:item/energy_rifle/charge0-1"
     ]
   },
-  "item.energy_rifle.charge2": {
-    "subtitle": "subtitles.item.energy_rifle.charge2",
+  "item.energy_rifle.charge1-2": {
+    "subtitle": "subtitles.item.energy_rifle.charge1-2",
     "sounds": [
-      "datanessence:item/energy_rifle/charge2"
+      "datanessence:item/energy_rifle/charge1-2"
     ]
   },
-  "item.energy_rifle.charge3": {
-    "subtitle": "subtitles.item.energy_rifle.charge3",
+  "item.energy_rifle.charge2-3": {
+    "subtitle": "subtitles.item.energy_rifle.charge2-3",
     "sounds": [
-      "datanessence:item/energy_rifle/charge3"
+      "datanessence:item/energy_rifle/charge2-3"
+    ]
+  },
+  "item.energy_rifle.charge3-overcharge": {
+    "subtitle": "subtitles.item.energy_rifle.charge3-overcharge",
+    "sounds": [
+      "datanessence:item/energy_rifle/charge3-overcharge"
+    ]
+  },
+  "item.energy_rifle.ding": {
+    "subtitle": "subtitles.item.energy_rifle.ding",
+    "sounds": [
+      "datanessence:item/energy_rifle/ding"
     ]
   },
     "item.energy_rifle.fire1": {
