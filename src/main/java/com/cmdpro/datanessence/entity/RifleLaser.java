@@ -99,7 +99,7 @@ public class RifleLaser extends Entity {
 
         time++;
         if (level().isClientSide) {
-            spawnBeamParticles();
+//            spawnBeamParticles();
             if (!shot) {
                 ClientMethods.particle(getRandom(), end, level());
                 double lDistance = Math.min(ClientMethods.getPlayerDistance(position()), ClientMethods.getPlayerDistance(end));

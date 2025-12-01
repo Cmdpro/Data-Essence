@@ -7,7 +7,6 @@ import com.cmdpro.datanessence.registry.DataComponentRegistry;
 import com.cmdpro.datanessence.registry.EntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
-import net.minecraft.client.resources.sounds.Sound;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
@@ -93,7 +92,7 @@ public class FallingMoon extends Item {
                 player.getCooldowns().addCooldown(this, COOLDOWN);
             } else {
                 player.playNotifySound(
-                        SoundRegistry.ENERGY_RIFLE_INTERRUPT.value(),
+                        SoundRegistry.FALLING_MOON_INTERRUPT.value(),
                         SoundSource.PLAYERS,
                         3.0F,
                         1.0F
@@ -123,10 +122,10 @@ public class FallingMoon extends Item {
                     System.out.println("sound started playing");
                     player.playNotifySound(
                             switch (currentCharge) {
-                                case 0 -> SoundRegistry.ENERGY_RIFLE_CHARGE_0_1.value();
-                                case 1 -> SoundRegistry.ENERGY_RIFLE_CHARGE_1_2.value();
-                                case 2 -> SoundRegistry.ENERGY_RIFLE_CHARGE_2_3.value();
-                                case 3 -> SoundRegistry.ENERGY_RIFLE_CHARGE_3_OVERCHARGE.value();
+                                case 0 -> SoundRegistry.FALLING_MOON_CHARGE_0_1.value();
+                                case 1 -> SoundRegistry.FALLING_MOON_CHARGE_1_2.value();
+                                case 2 -> SoundRegistry.FALLING_MOON_CHARGE_2_3.value();
+                                case 3 -> SoundRegistry.FALLING_MOON_CHARGE_3_OVERCHARGE.value();
                                 default -> null;
                             },
                             SoundSource.PLAYERS,
@@ -135,7 +134,7 @@ public class FallingMoon extends Item {
                     );
                     if(currentCharge>0){
                         player.playNotifySound(
-                                SoundRegistry.ENERGY_RIFLE_CHARGE_DING.value(),
+                                SoundRegistry.FALLING_MOON_CHARGE_DING.value(),
                                 SoundSource.PLAYERS,
                                 1.0F,
                                 (float) (1.0F + Math.random())
@@ -180,11 +179,11 @@ public class FallingMoon extends Item {
 
         player.playNotifySound(
                 switch (chargeLevel) {
-                    case 1 -> SoundRegistry.ENERGY_RIFLE_FIRE_1.value();
-                    case 2 -> SoundRegistry.ENERGY_RIFLE_FIRE_2.value();
-                    case 3 -> SoundRegistry.ENERGY_RIFLE_FIRE_3.value();
-                    case 4 -> SoundRegistry.ENERGY_RIFLE_OVERCHARGE.value();
-                    default -> SoundRegistry.ENERGY_RIFLE_INTERRUPT.value();
+                    case 1 -> SoundRegistry.FALLING_MOON_FIRE_1.value();
+                    case 2 -> SoundRegistry.FALLING_MOON_FIRE_2.value();
+                    case 3 -> SoundRegistry.FALLING_MOON_FIRE_3.value();
+                    case 4 -> SoundRegistry.FALLING_MOON_OVERCHARGE.value();
+                    default -> SoundRegistry.FALLING_MOON_INTERRUPT.value();
                 },
                 SoundSource.PLAYERS,
                 3.0F,

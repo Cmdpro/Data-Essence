@@ -105,64 +105,64 @@
         ],
         "subtitle": "subtitle.datanessence.item.ore_scanner.scan_ore"
     },
-  "item.energy_rifle.charge0-1": {
-    "subtitle": "subtitles.item.energy_rifle.charge0-1",
+  "item.falling_moon.charge0-1": {
+    "subtitle": "subtitles.item.falling_moon.charge0-1",
     "sounds": [
-      "datanessence:item/energy_rifle/charge0-1"
+      "datanessence:item/falling_moon/charge0-1"
     ]
   },
-  "item.energy_rifle.charge1-2": {
-    "subtitle": "subtitles.item.energy_rifle.charge1-2",
+  "item.falling_moon.charge1-2": {
+    "subtitle": "subtitles.item.falling_moon.charge1-2",
     "sounds": [
-      "datanessence:item/energy_rifle/charge1-2"
+      "datanessence:item/falling_moon/charge1-2"
     ]
   },
-  "item.energy_rifle.charge2-3": {
-    "subtitle": "subtitles.item.energy_rifle.charge2-3",
+  "item.falling_moon.charge2-3": {
+    "subtitle": "subtitles.item.falling_moon.charge2-3",
     "sounds": [
-      "datanessence:item/energy_rifle/charge2-3"
+      "datanessence:item/falling_moon/charge2-3"
     ]
   },
-  "item.energy_rifle.charge3-overcharge": {
-    "subtitle": "subtitles.item.energy_rifle.charge3-overcharge",
+  "item.falling_moon.charge3-overcharge": {
+    "subtitle": "subtitles.item.falling_moon.charge3-overcharge",
     "sounds": [
-      "datanessence:item/energy_rifle/charge3-overcharge"
+      "datanessence:item/falling_moon/charge3-overcharge"
     ]
   },
-  "item.energy_rifle.ding": {
-    "subtitle": "subtitles.item.energy_rifle.ding",
+  "item.falling_moon.ding": {
+    "subtitle": "subtitles.item.falling_moon.ding",
     "sounds": [
-      "datanessence:item/energy_rifle/ding"
+      "datanessence:item/falling_moon/ding"
     ]
   },
-    "item.energy_rifle.fire1": {
-      "subtitle": "subtitles.item.energy_rifle.fire1",
+    "item.falling_moon.fire1": {
+      "subtitle": "subtitles.item.falling_moon.fire1",
       "sounds": [
-        "datanessence:item/energy_rifle/fire1"
+        "datanessence:item/falling_moon/fire1"
       ]
     },
-  "item.energy_rifle.fire2": {
-    "subtitle": "subtitles.item.energy_rifle.fire2",
+  "item.falling_moon.fire2": {
+    "subtitle": "subtitles.item.falling_moon.fire2",
     "sounds": [
-      "datanessence:item/energy_rifle/fire2"
+      "datanessence:item/falling_moon/fire2"
     ]
   },
-  "item.energy_rifle.fire3": {
-    "subtitle": "subtitles.item.energy_rifle.fire3",
+  "item.falling_moon.fire3": {
+    "subtitle": "subtitles.item.falling_moon.fire3",
     "sounds": [
-      "datanessence:item/energy_rifle/fire3"
+      "datanessence:item/falling_moon/fire3"
     ]
   },
-  "item.energy_rifle.overcharge": {
-    "subtitle": "subtitles.item.energy_rifle.overcharge",
+  "item.falling_moon.overcharge": {
+    "subtitle": "subtitles.item.falling_moon.overcharge",
     "sounds": [
-      "datanessence:item/energy_rifle/overcharge"
+      "datanessence:item/falling_moon/overcharge"
     ]
   },
-  "item.energy_rifle.interrupt": {
-    "subtitle": "subtitles.item.energy_rifle.interrupt",
+  "item.falling_moon.interrupt": {
+    "subtitle": "subtitles.item.falling_moon.interrupt",
     "sounds": [
-      "datanessence:item/energy_rifle/interrupt"
+      "datanessence:item/falling_moon/interrupt"
     ]
   },
     "ui_click": {

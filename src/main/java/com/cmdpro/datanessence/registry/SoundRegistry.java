@@ -4,14 +4,9 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.client.FactorySong;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import javax.xml.crypto.Data;
-
-import static net.minecraft.world.entity.Entity.MovementEmission.SOUNDS;
 
 public class SoundRegistry {
     public static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, DataNEssence.MOD_ID);
@@ -43,19 +38,18 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> COGNIZANT_CUBE_SHAKE = createBasicSound("item.cognizant_cube.shake");
     public static final Holder<SoundEvent> COGNIZANT_CUBE_MESSAGE = createBasicSound("item.cognizant_cube.message");
 
-    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_0_1 = createBasicSound("item.energy_rifle.charge0-1");
-    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_1_2 = createBasicSound("item.energy_rifle.charge1-2");
-    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_2_3 = createBasicSound("item.energy_rifle.charge2-3");
-    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_3_OVERCHARGE = createBasicSound("item.energy_rifle.charge3-overcharge");
-    public static final Holder<SoundEvent> ENERGY_RIFLE_CHARGE_DING = createBasicSound("item.energy_rifle.ding");
+    public static final Holder<SoundEvent> FALLING_MOON_CHARGE_0_1 = createBasicSound("item.falling_moon.charge0-1");
+    public static final Holder<SoundEvent> FALLING_MOON_CHARGE_1_2 = createBasicSound("item.falling_moon.charge1-2");
+    public static final Holder<SoundEvent> FALLING_MOON_CHARGE_2_3 = createBasicSound("item.falling_moon.charge2-3");
+    public static final Holder<SoundEvent> FALLING_MOON_CHARGE_3_OVERCHARGE = createBasicSound("item.falling_moon.charge3-overcharge");
+    public static final Holder<SoundEvent> FALLING_MOON_CHARGE_DING = createBasicSound("item.falling_moon.ding");
 
-    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE_1 = createBasicSound("item.energy_rifle.fire1");
-    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE_2 = createBasicSound("item.energy_rifle.fire2");
-    public static final Holder<SoundEvent> ENERGY_RIFLE_FIRE_3 = createBasicSound("item.energy_rifle.fire3");
-    public static final Holder<SoundEvent> ENERGY_RIFLE_OVERCHARGE = createBasicSound("item.energy_rifle.overcharge");
+    public static final Holder<SoundEvent> FALLING_MOON_FIRE_1 = createBasicSound("item.falling_moon.fire1");
+    public static final Holder<SoundEvent> FALLING_MOON_FIRE_2 = createBasicSound("item.falling_moon.fire2");
+    public static final Holder<SoundEvent> FALLING_MOON_FIRE_3 = createBasicSound("item.falling_moon.fire3");
+    public static final Holder<SoundEvent> FALLING_MOON_OVERCHARGE = createBasicSound("item.falling_moon.overcharge");
 
-    public static final Holder<SoundEvent> ENERGY_RIFLE_INTERRUPT =
-            createBasicSound("item.energy_rifle.interrupt");
+    public static final Holder<SoundEvent> FALLING_MOON_INTERRUPT = createBasicSound("item.falling_moon.interrupt");
 
 
     //Blocks
