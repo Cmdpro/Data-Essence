@@ -187,7 +187,6 @@ public class ClientModEvents {
         event.register(MenuRegistry.ESSENCE_FURNACE_MENU.get(), EssenceFurnaceScreen::new);
         event.register(MenuRegistry.SYNTHESIS_CHAMBER_MENU.get(), SynthesisChamberScreen::new);
         event.register(MenuRegistry.FLUID_MIXER_MENU.get(), FluidMixerScreen::new);
-        event.register(MenuRegistry.ENTICING_LURE_MENU.get(), EnticingLureScreen::new);
         event.register(MenuRegistry.MINERAL_PURIFICATION_CHAMBER_MENU.get(), MineralPurificationChamberScreen::new);
         event.register(MenuRegistry.ITEM_FILTER_MENU.get(), ItemFilterScreen::new);
         event.register(MenuRegistry.MUSIC_DISC_PLAYER_MENU.get(), MusicDiscPlayerScreen::new);
