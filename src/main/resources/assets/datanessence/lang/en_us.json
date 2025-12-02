@@ -467,7 +467,7 @@
   "data_tablet.pages.fluid_mixer.page2.text": " ◇ Accepts item inputs from sides: Down\n ◇ Must have a loaded Data Drive inserted to know what to craft.",
   "data_tablet.pages.fluid_tank.flavor": " ◇ Rainy-day reserves",
   "data_tablet.pages.fluid_tank.name": "Fluid Storage",
-  "data_tablet.pages.fluid_tank.page1.text": "This specially constructed tank, or bulb, serves as a simple way to store a decent amount of fluid in a reasonable amount of space. It may be filled manually with Buckets.",
+  "data_tablet.pages.fluid_tank.page1.text": "This specially constructed tank, or bulb, serves as a simple way to store a decent amount of fluid in a reasonable amount of space. It may be filled manually with Buckets. Due to its design, a Bulb placed above another one will drain its contents into the one below it. If making a column of them, it is preferential to insert from the topmost Bulb and extract from the bottommost Bulb.",
   "data_tablet.pages.fluidworks.name": "Fluid Transfer",
   "data_tablet.pages.fluidworks.page1.text": "Fluid manipulation, particularly moving it between machines, is an important facet of our work. Building upon the existing design that suits Essence so well, we designed Fluid Nodes and corresponding Wire. These work just as one may expect, allowing for point-to-point transportation of any liquids we wish.",
   "data_tablet.pages.fluidworks.page2.text": " ◇ The linking order of nodes controls the direction of flow - sender to receiver.\n ◇ Intermediate nodes cannot send nor receive.",
