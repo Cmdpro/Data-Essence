@@ -180,6 +180,14 @@ public class IndustrialPlantSiphonBlockEntity extends BlockEntity implements Men
         return 0f;
     }
 
+    public float getTickTime(IndustrialPlantSiphonBlockEntity tile) {
+        PlantSiphonEssenceMap map = tile.itemHandler.getStackInSlot(0).getItemHolder().getData(DataNEssenceDatamaps.PLANT_SIPHON_ESSENCE);
+        if (map != null) {
+            return map.ticks();
+        }
+        return 0f;
+    }
+
     protected void updateBlock() {
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);

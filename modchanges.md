@@ -1,13 +1,15 @@
 ### Additions
 - Added a command to instantly charge items with Essence (multyfora)
-- Added Pastel gemstone shard "reconstruction" syntheses and data entry
+- Added information about the Industrial Plant Siphon's current fuel in its gui (Esét)
+- Added Pastel gemstone shard "reconstruction" syntheses and data entry (Esét)
 - Polished Obsidian variants can now be used to build Nether Portals (multyfora)
 
 ### Changes
+- Charger now shows what item is inside it, and its charge level, in its Essence Meter display (multyfora)
 - Entropic Processor now inserts items dropped on top of it to its input slot (multyfora)
 - Essence Batteries retain their Essence contents when broken (multyfora)
 - Essence Light Fixture has collision (multyfora)
-- Lightslash Blade's attack speed is constant again instead of variable, fixing its lack of proper cooldown
+- Lightslash Blade's attack speed is constant again instead of variable, fixing its lack of proper cooldown (Esét)
 - Interaction with the Charger is now in-world, instead of via a GUI (multyfora)
 - When pick-blocking a Node, sneaking now picks its correspondent wire (multyfora)
 

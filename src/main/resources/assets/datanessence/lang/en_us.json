@@ -755,6 +755,7 @@
   "emi.info.datanessence.dimension_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found.",
   "emi.info.datanessence.hammer_and_chisel": "The Hammer and Chisel is a tool that can gather certain blocks, such as Obsidian and its derivatives, far more expeditiously than most other pieces of equipment. Use it on a suitable block to cause it to drop instantly.",
   "emi.info.datanessence.signal_tracker": "This device may at first be acquired from Computers inside of strange structures built from an otherworldly, purple rock. It seems to guide you to other, similar structures.",
+  "emi.datanessence.rate": "\uD83D\uDD25: %1$s/s",
   "emi.datanessence.recipe_locked_line_1": "Data insufficient for",
   "emi.datanessence.recipe_locked_line_2": "recipe reconstruction",
   "emi.datanessence.average_yield": "Average Yield:",
