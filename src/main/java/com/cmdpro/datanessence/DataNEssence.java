@@ -367,6 +367,7 @@ public class DataNEssence
             event.accept(BlockRegistry.METAL_SHAPER.get());
             event.accept(BlockRegistry.MELTER.get());
             event.accept(BlockRegistry.DRYING_TABLE.get());
+            event.accept(BlockRegistry.SURVEY_TUNNELER.get());
 
             // Logistics
             event.accept(BlockRegistry.ITEM_FILTER.get());

@@ -240,6 +240,10 @@ public class BlockEntityRegistry {
             register("essence_reader", () ->
                     BlockEntityType.Builder.of(EssenceReaderBlockEntity::new,
                             BlockRegistry.ESSENCE_READER.get()).build(null));
+    public static final Supplier<BlockEntityType<SurveyTunnelerBlockEntity>> SURVEY_TUNNELER =
+            register("survey_tunneler", () ->
+                    BlockEntityType.Builder.of(SurveyTunnelerBlockEntity::new,
+                            BlockRegistry.SURVEY_TUNNELER.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {
