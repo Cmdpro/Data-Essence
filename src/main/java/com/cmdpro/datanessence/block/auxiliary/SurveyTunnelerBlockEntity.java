@@ -31,8 +31,14 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
         return storage;
     }
 
-    public SurveyTunnelerBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(BlockEntityRegistry.SURVEY_TUNNELER.get(), pPos, pBlockState);
+    public SurveyTunnelerBlockEntity(BlockPos pos, BlockState state) {
+        super(BlockEntityRegistry.SURVEY_TUNNELER.get(), pos, state);
+
+        if (hasLevel()) {
+            maxDepth = level.getMinBuildHeight();
+            currentDepth = pos.below().getY();
+            isDone = false;
+        }
     }
 
     public static void tick(Level world, BlockPos pos, BlockState state, SurveyTunnelerBlockEntity tunneler) {
@@ -43,49 +49,31 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
             if (tunneler.isDone)
                 return;
 
-            if (tunneler.currentDepth <= tunneler.maxDepth) {
-                tunneler.isDone = true;
-                tunneler.progress = -1;
+            if (tunneler.breakTime <= 0) {
+                tunneler.breakTime = tunneler.getBlockBreakTime(pos, world);
             }
 
-            if (tunneler.currentDepth >= tunneler.worldPosition.getY()) {
-                tunneler.currentDepth = tunneler.worldPosition.getY()-1;
-                tunneler.maxDepth = world.getMinBuildHeight();
-            }
-
-            if (tunneler.breakTime == -1) {
-                var breakPos = new BlockPos(pos.getX(), tunneler.currentDepth, pos.getZ());
-                var block = world.getBlockState(breakPos);
-
-                if ( (block.is(BlockTags.MINEABLE_WITH_PICKAXE) ||
-                        block.is(BlockTags.MINEABLE_WITH_AXE) ||
-                        block.is(BlockTags.MINEABLE_WITH_HOE) ||
-                        block.is(BlockTags.MINEABLE_WITH_SHOVEL)) &&
-                        !block.is(BlockTags.INCORRECT_FOR_DIAMOND_TOOL) &&
-                        !(block.getDestroySpeed(world, breakPos) <= -1.0f)
-                ) {
-                    tunneler.breakTime = tunneler.getBlockBreakTime(block.getBlock());
-                }
-                else {
-                    tunneler.maxDepth = breakPos.getY(); // assume block is unbreakable, stop work
-                    return;
-                }
-            }
-
-            if (tunneler.progress >= tunneler.breakTime && tunneler.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= tunneler.breakTime) {
+            if (tunneler.progress >= tunneler.breakTime) {
                 var breakPos = new BlockPos(pos.getX(), tunneler.currentDepth, pos.getZ());
                 var blockState = world.getBlockState(breakPos);
 
                 world.destroyBlock(breakPos, false);
                 Block.dropResources(blockState, world, pos.above(), tunneler, null, ItemStack.EMPTY);
-                tunneler.storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), tunneler.breakTime);
 
                 tunneler.breakTime = -1;
                 tunneler.progress = 0;
                 tunneler.currentDepth--;
+
+                if (tunneler.currentDepth <= tunneler.maxDepth) {
+                    tunneler.isDone = true;
+                    tunneler.progress = -1;
+                }
             }
 
-            tunneler.progress++;
+            if ( tunneler.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1 ) {
+                tunneler.storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
+                tunneler.progress++;
+            }
         }
     }
 
@@ -94,10 +82,25 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
     }
 
     /**
-     * Returns amount of ticks the Tunneler takes to break a given block, based on its hardness
+     * Returns amount of ticks the Tunneler takes to break a given block
      */
-    public int getBlockBreakTime(Block block) {
-        return 5;
+    public int getBlockBreakTime(BlockPos pos, Level world) {
+        var breakPos = new BlockPos(pos.getX(), currentDepth, pos.getZ());
+        var block = world.getBlockState(breakPos);
+
+        if ( (block.is(BlockTags.MINEABLE_WITH_PICKAXE) ||
+                block.is(BlockTags.MINEABLE_WITH_AXE) ||
+                block.is(BlockTags.MINEABLE_WITH_HOE) ||
+                block.is(BlockTags.MINEABLE_WITH_SHOVEL)) &&
+                !block.is(BlockTags.INCORRECT_FOR_DIAMOND_TOOL) &&
+                !(block.getDestroySpeed(world, breakPos) <= -1.0f)
+        ) {
+            return Math.max( 1, (int) block.getBlock().defaultDestroyTime() * 10 );
+        }
+        else {
+            maxDepth = breakPos.getY(); // assume block is unbreakable, stop work
+            return -1;
+        }
     }
 
 
@@ -111,18 +114,33 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider registries){
         CompoundTag tag = pkt.getTag();
         storage.fromNbt(tag.getCompound("EssenceStorage"));
+        maxDepth = tag.getInt("MaxDepth");
+        currentDepth = tag.getInt("CurrentDepth");
+        isDone = tag.getBoolean("IsDone");
+        breakTime = tag.getInt("BreakTime");
+        progress = tag.getInt("Progress");
     }
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = new CompoundTag();
         tag.put("EssenceStorage", storage.toNbt());
+        tag.putInt("MaxDepth", maxDepth);
+        tag.putInt("CurrentDepth", currentDepth);
+        tag.putBoolean("IsDone", isDone);
+        tag.putInt("BreakTime", breakTime);
+        tag.putInt("Progress", progress);
         return tag;
     }
 
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.Provider registries) {
         tag.put("EssenceStorage", storage.toNbt());
+        tag.putInt("MaxDepth", maxDepth);
+        tag.putInt("CurrentDepth", currentDepth);
+        tag.putBoolean("IsDone", isDone);
+        tag.putInt("BreakTime", breakTime);
+        tag.putInt("Progress", progress);
         super.saveAdditional(tag, registries);
     }
 
@@ -130,5 +148,10 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
     public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         storage.fromNbt(tag.getCompound("EssenceStorage"));
+        maxDepth = tag.getInt("MaxDepth");
+        currentDepth = tag.getInt("CurrentDepth");
+        isDone = tag.getBoolean("IsDone");
+        breakTime = tag.getInt("BreakTime");
+        progress = tag.getInt("Progress");
     }
 }
