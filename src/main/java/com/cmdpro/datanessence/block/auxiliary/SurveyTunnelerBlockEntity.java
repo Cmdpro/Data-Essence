@@ -10,21 +10,22 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlockEntity {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
-    int maxDepth; // the deepest Y level of the current dimension, or of the first unbreakable block we find
-    int currentDepth; // what Y level are we currently on?
-    boolean isDone; // whether currentDepth <= maxDepth - i.e. there is no work to do
-    int breakTime; // how many ticks does it take to break the current block we are working at?
-    int progress; // how far along are we in the current block break?
+
+    int maxDepth;      // deepest Y we will go to (usually world min Y)
+    int currentDepth;  // current Y we’re working at
+    boolean isDone;    // no more work to do
+    int breakTime;     // ticks needed to break current block
+    int progress;      // how many progress “ticks” we have on current block
 
     @Override
     public EssenceStorage getStorage() {
@@ -33,46 +34,98 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
 
     public SurveyTunnelerBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.SURVEY_TUNNELER.get(), pos, state);
+        System.out.println("SurveyTunnelerBlockEntity created at " + pos);
 
-        if (hasLevel()) {
-            maxDepth = level.getMinBuildHeight();
-            currentDepth = pos.below().getY();
-            isDone = false;
-        }
+        // Start just below the block
+        this.currentDepth = pos.below().getY();
+
+        // Default, will be corrected on first tick
+        this.maxDepth = -64;
+
+        this.isDone = false;
+        this.breakTime = -1;
+        this.progress = 0;
     }
 
     public static void tick(Level world, BlockPos pos, BlockState state, SurveyTunnelerBlockEntity tunneler) {
         if (world.isClientSide) {
             clientTick(world, pos, state, tunneler);
-        } else {
+            return;
+        }
 
-            if (tunneler.isDone)
+        // Initialize maxDepth to current dimension's minimum build height
+        int minY = world.getMinBuildHeight();
+        if (tunneler.maxDepth < minY) {
+            tunneler.maxDepth = minY;
+        }
+
+        if (tunneler.isDone) {
+            return;
+        }
+
+        // If we somehow went below min Y, stop
+        if (tunneler.currentDepth < tunneler.maxDepth) {
+            tunneler.isDone = true;
+            tunneler.progress = -1;
+            return;
+        }
+
+        BlockPos breakPos = new BlockPos(pos.getX(), tunneler.currentDepth, pos.getZ());
+        BlockState blockState = world.getBlockState(breakPos);
+
+        // Stop if we hit bedrock or any unbreakable block
+        if (blockState.is(Blocks.BEDROCK) || blockState.getDestroySpeed(world, breakPos) < 0.0F) {
+            tunneler.maxDepth = breakPos.getY();
+            tunneler.isDone = true;
+            tunneler.progress = -1;
+            return;
+        }
+
+        // Skip air and keep going down
+        if (blockState.isAir()) {
+            tunneler.currentDepth--;
+            if (tunneler.currentDepth < tunneler.maxDepth) {
+                tunneler.isDone = true;
+                tunneler.progress = -1;
+            }
+            return;
+        }
+
+        // If we don't yet know how long to break this block, calculate it
+        if (tunneler.breakTime <= 0) {
+            tunneler.breakTime = tunneler.getBlockBreakTime(pos, world);
+            // Unbreakable
+            if (tunneler.breakTime < 0) {
+                tunneler.maxDepth = breakPos.getY();
+                tunneler.isDone = true;
+                tunneler.progress = -1;
                 return;
-
-            if (tunneler.breakTime <= 0) {
-                tunneler.breakTime = tunneler.getBlockBreakTime(pos, world);
             }
+        }
 
-            if (tunneler.progress >= tunneler.breakTime) {
-                var breakPos = new BlockPos(pos.getX(), tunneler.currentDepth, pos.getZ());
-                var blockState = world.getBlockState(breakPos);
 
-                world.destroyBlock(breakPos, false);
-                Block.dropResources(blockState, world, pos.above(), tunneler, null, ItemStack.EMPTY);
+        if (tunneler.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1) {
+            tunneler.storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1); //maybe change this
+            tunneler.progress++;
+        } else {
+            // No fuel, can't dig this tick
+            return;
+        }
 
-                tunneler.breakTime = -1;
-                tunneler.progress = 0;
-                tunneler.currentDepth--;
+        // Only actually break the block once we've reached the break time
+        if (tunneler.progress >= tunneler.breakTime) {
+            world.destroyBlock(breakPos, false);
+            Block.dropResources(blockState, world, pos.above(), tunneler, null, ItemStack.EMPTY);
 
-                if (tunneler.currentDepth <= tunneler.maxDepth) {
-                    tunneler.isDone = true;
-                    tunneler.progress = -1;
-                }
-            }
+            // Reset for next block
+            tunneler.breakTime = -1;
+            tunneler.progress = 0;
+            tunneler.currentDepth--;
 
-            if ( tunneler.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1 ) {
-                tunneler.storage.removeEssence(EssenceTypeRegistry.ESSENCE.get(), 1);
-                tunneler.progress++;
+            // If we've gone as deep as we can, stop
+            if (tunneler.currentDepth < tunneler.maxDepth) {
+                tunneler.isDone = true;
+                tunneler.progress = -1;
             }
         }
     }
@@ -82,28 +135,27 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
     }
 
     /**
-     * Returns amount of ticks the Tunneler takes to break a given block
+     * Returns amount of ticks the Tunneler takes to break a given block.
+     * Negative means "unbreakable -> stop".
      */
     public int getBlockBreakTime(BlockPos pos, Level world) {
         var breakPos = new BlockPos(pos.getX(), currentDepth, pos.getZ());
-        var block = world.getBlockState(breakPos);
+        var blockState = world.getBlockState(breakPos);
 
-        if ( (block.is(BlockTags.MINEABLE_WITH_PICKAXE) ||
-                block.is(BlockTags.MINEABLE_WITH_AXE) ||
-                block.is(BlockTags.MINEABLE_WITH_HOE) ||
-                block.is(BlockTags.MINEABLE_WITH_SHOVEL)) &&
-                !block.is(BlockTags.INCORRECT_FOR_DIAMOND_TOOL) &&
-                !(block.getDestroySpeed(world, breakPos) <= -1.0f)
-        ) {
-            return Math.max( 1, (int) block.getBlock().defaultDestroyTime() * 10 );
+        // If it's air, treat as cheap "skip" block
+        if (blockState.isAir()) {
+            return 1;
         }
-        else {
-            maxDepth = breakPos.getY(); // assume block is unbreakable, stop work
+
+        float destroyTime = blockState.getBlock().defaultDestroyTime();
+
+        // Unbreakable according to block's destroy time
+        if (destroyTime < 0.0F) {
             return -1;
         }
+
+        return Math.max(1, (int) (destroyTime * 10));
     }
-
-
 
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket(){
