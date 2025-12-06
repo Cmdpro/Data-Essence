@@ -58,6 +58,9 @@ public class ItemRegistry {
     public static final Supplier<Item> CHEMICAL_WIRE = register("chemical_wire", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> DATA_TABLET = register("data_tablet", () -> new DataTablet(new Item.Properties().stacksTo(1)));
 
+    public static final Supplier<Item> STRUCTURAL_WIRE_RED = ITEMS.register("structural_wire_red", () -> new Item(new Item.Properties()));
+    public static final Supplier<Item> STRUCTURAL_WIRE_GREEN = ITEMS.register("structural_wire_green", () -> new Item(new Item.Properties()));
+
     // Bombs
     public static final Supplier<Item> ESSENCE_BOMB = register("essence_bomb", () -> new EssenceBombItem(new Item.Properties()));
     public static final Supplier<Item> LUNAR_ESSENCE_BOMB = register("lunar_essence_bomb", () -> new LunarEssenceBombItem(new Item.Properties()));

@@ -7,6 +7,8 @@ import com.cmdpro.datanessence.block.decoration.FlareLightBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphonBlockEntity;
+import com.cmdpro.datanessence.block.logic.SignalEmitterBlockEntity;
+import com.cmdpro.datanessence.block.logic.SignalReaderBlockEntity;
 import com.cmdpro.datanessence.block.processing.*;
 import com.cmdpro.datanessence.block.production.EssenceBreakerBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
@@ -240,6 +242,22 @@ public class BlockEntityRegistry {
             register("essence_reader", () ->
                     BlockEntityType.Builder.of(EssenceReaderBlockEntity::new,
                             BlockRegistry.ESSENCE_READER.get()).build(null));
+
+
+    public static final Supplier<BlockEntityType<StructuralPointBlockEntity>> STRUCTURAL_POINT =
+            register("structural_point", () ->
+                    BlockEntityType.Builder.of(StructuralPointBlockEntity::new,
+                            BlockRegistry.STRUCTURAL_POINT.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SignalEmitterBlockEntity>> SIGNAL_EMITTER =
+            register("signal_emitter", () ->
+                    BlockEntityType.Builder.of(SignalEmitterBlockEntity::new,
+                            BlockRegistry.SIGNAL_EMITTER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<SignalReaderBlockEntity>> SIGNAL_READER =
+            register("signal_reader", () ->
+                    BlockEntityType.Builder.of(SignalReaderBlockEntity::new,
+                            BlockRegistry.SIGNAL_READER.get()).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {
