@@ -23,8 +23,11 @@ public class EssencePointBlockEntity extends BaseEssencePointBlockEntity {
     }
 
     @Override
-    public Color linkColor() {
-        return new Color(EssenceTypeRegistry.ESSENCE.get().getColor());
+    public Color[] linkColor() {
+        return new Color[] {
+                new Color(EssenceTypeRegistry.ESSENCE.get().color),
+                new Color(0x6910cb)
+        };
     }
 
     @Override

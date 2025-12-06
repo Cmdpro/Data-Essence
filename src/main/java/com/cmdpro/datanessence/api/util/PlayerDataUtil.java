@@ -28,9 +28,9 @@ public class PlayerDataUtil {
         if (linkFromEntity.isPresent()) {
             linkFrom = linkFromEntity.get().getBlockPos();
             if (linkFromEntity.get() instanceof BaseEssencePointBlockEntity linkFrom2) {
-                linkColor = linkFrom2.linkColor();
+                linkColor = linkFrom2.linkColor()[0];
             } else if (linkFromEntity.get() instanceof BaseCapabilityPointBlockEntity linkFrom2) {
-                linkColor = linkFrom2.linkColor();
+                linkColor = linkFrom2.linkColor()[0];
             } else if (linkFromEntity.get() instanceof PearlNetworkBlockEntity linkFrom2) {
                 linkColor = PearlNetworkBlock.getColor();
             }

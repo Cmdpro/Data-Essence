@@ -1,13 +1,11 @@
 package com.cmdpro.datanessence.block.transmission;
 
 import com.cmdpro.datanessence.DataNEssence;
-import com.cmdpro.datanessence.api.node.ICustomItemPointBehaviour;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPointBlockEntity;
 import com.cmdpro.datanessence.api.node.ICustomFluidPointBehaviour;
 import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -23,10 +21,15 @@ public class FluidPointBlockEntity extends BaseCapabilityPointBlockEntity {
     public FluidPointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.FLUID_POINT.get(), pos, state);
     }
+
     @Override
-    public Color linkColor() {
-        return new Color(0x56bae9);
+    public Color[] linkColor() {
+        return new Color[] {
+                new Color(0x56bae9),
+                new Color(0x2e3ee7)
+        };
     }
+
     @Override
     public void transfer(BaseCapabilityPointBlockEntity from, List<GraphPath<BlockPos, DefaultEdge>> other) {
         int transferAmount = (int)Math.floor((float)getFinalSpeed(DataNEssenceConfig.fluidPointTransfer)/(float)other.size());

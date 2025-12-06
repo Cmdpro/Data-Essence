@@ -2,6 +2,7 @@
 - Added a command to instantly charge items with Essence (multyfora)
 - Added information about the Industrial Plant Siphon's current fuel in its gui (Esét)
 - Added Pastel gemstone shard "reconstruction" syntheses and data entry (Esét)
+- Added Survey Tunneler machine, inspired by and serving a similar function as BuildCraft's Mining Well (Esét)
 - Polished Obsidian variants can now be used to build Nether Portals (multyfora)
 
 ### Changes
@@ -14,6 +15,7 @@
 - Lightslash Blade's attack speed is constant again instead of variable, fixing its lack of proper cooldown (Esét)
 - Interaction with the Charger is now in-world, instead of via a GUI (multyfora)
 - Interaction with the Enticing Lure is now in-world instead of via a GUI (multyfora)
+- Nodes may now customize the color of their wires' "pulses" (Esét)
 - When pick-blocking a Node, sneaking now picks its correspondent wire (multyfora)
 
 ### Fixes
