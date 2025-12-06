@@ -24,10 +24,9 @@ public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity {
 
     @Override
     public Color[] linkColor() {
-        var base = new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().color);
-        float darken = 1.5f;
-        return new Color[] {base,
-                new Color((int) (base.getRed() / darken), (int) (base.getGreen() / darken), (int) (base.getBlue() / darken), base.getAlpha())
+        return new Color[] {
+                new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().color),
+                new Color(0xddc587)
         };
     }
 

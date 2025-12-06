@@ -19,8 +19,11 @@ public class RFNodeBlockEntity extends BaseCapabilityPointBlockEntity {
     }
 
     @Override
-    public Color linkColor() {
-        return new Color(0x64719e);
+    public Color[] linkColor() {
+        return new Color[] {
+                new Color(0x64719e),
+                new Color(0x332a63)
+        };
     }
 
     @Override
