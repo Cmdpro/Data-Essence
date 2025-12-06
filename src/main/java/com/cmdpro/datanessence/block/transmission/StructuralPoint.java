@@ -102,8 +102,8 @@ public class StructuralPoint extends BaseEssencePoint {
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new StructuralPointBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new StructuralPointBlockEntity(pos, state);
     }
 
     @Override

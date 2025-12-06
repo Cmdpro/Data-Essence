@@ -56,6 +56,7 @@ public class ClientModEvents {
     public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(BlockEntityRegistry.FABRICATOR.get(), FabricatorRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ESSENCE_POINT.get(), EssencePointRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.STRUCTURAL_POINT.get(), StructuralPointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.LUNAR_ESSENCE_POINT.get(), LunarEssencePointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.NATURAL_ESSENCE_POINT.get(), NaturalEssencePointRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.EXOTIC_ESSENCE_POINT.get(), ExoticEssencePointRenderer::new);
@@ -195,6 +196,7 @@ public class ClientModEvents {
         event.register(MenuRegistry.INDUSTRIAL_PLANT_SIPHON_MENU.get(), IndustrialPlantSiphonScreen::new);
         event.register(MenuRegistry.MELTER_MENU.get(), MelterScreen::new);
         event.register(MenuRegistry.DRYING_TABLE_MENU.get(), DryingTableScreen::new);
+        event.register(MenuRegistry.SIGNAL_EMITTER.get(), SignalEmitterScreen::new);
     }
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {
