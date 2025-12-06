@@ -1,0 +1,17 @@
+{
+  "icon": {
+    "id": "datanessence:survey_tunneler"
+  },
+  "tier": 1,
+  "minigames": [
+    {
+      "type": "datanessence:minesweeper",
+      "bombs": 3,
+      "size": 2
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.survey_tunneler.name"
+  },
+  "entry": "datanessence:machinery/survey_tunneler"
+}
