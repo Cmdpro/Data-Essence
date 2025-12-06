@@ -56,9 +56,8 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             for (BlockPos i : pBlockEntity.link) {
                 Vec3 target = i.getCenter();
                 VertexConsumer vertexConsumer = RenderHandler.createBufferSource().getBuffer(DataNEssenceRenderTypes.WIRES);
-                float darken = 1.5f;
-                Color segColor1 = pBlockEntity.linkColor();
-                Color segColor2 = new Color((int)(segColor1.getRed()/darken), (int)(segColor1.getGreen()/darken), (int)(segColor1.getBlue()/darken), segColor1.getAlpha());
+                Color segColor1 = pBlockEntity.linkColor()[0];
+                Color segColor2 = pBlockEntity.linkColor()[1];
                 Color segColor3 = ColorUtil.blendColors(segColor1, segColor2, 0.35f);
                 float ticks = (Minecraft.getInstance().level.getGameTime() % 8)+pPartialTick;
                 int currentSeg = (int)(ticks % 8);
@@ -71,7 +70,7 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             }
             pPoseStack.popPose();
         }
-        Color color = pBlockEntity.linkColor();
+        Color color = pBlockEntity.linkColor()[0];
         pBufferSource.getBuffer(getModel(pBlockEntity).getRenderType(pBlockEntity));
         AttachFace face = pBlockEntity.getBlockState().getValue(EssencePoint.FACE);
         Direction facing = pBlockEntity.getBlockState().getValue(EssencePoint.FACING);

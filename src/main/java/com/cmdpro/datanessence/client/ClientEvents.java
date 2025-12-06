@@ -17,6 +17,7 @@ import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlockEntity;
 import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.api.util.client.ClientRenderingUtil;
+import com.cmdpro.datanessence.block.auxiliary.ChargerBlockEntity;
 import com.cmdpro.datanessence.block.auxiliary.EssenceReaderBlockEntity;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
@@ -229,53 +230,141 @@ public class ClientEvents {
                     }
 
                     // Essence Meter rendering
-                    if (mc.player.isHolding((item) -> item.getItem() instanceof EssenceMeter)) {
-                        if (EssenceMeter.currentMachineEssenceValue != null && EssenceMeter.currentMachineEssenceValue.pos.equals(blockHitResult.getBlockPos())) {
-                            if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity essenceBlockEntity) {
-                                List<EssenceType> supported = EssenceMeter.currentMachineEssenceValue.values.keySet().stream().sorted(Comparator.comparing((i) -> i.tier)).toList();
-                                Map<EssenceType, Float> values = EssenceMeter.currentMachineEssenceValue.values;
-                                float max = EssenceMeter.currentMachineEssenceValue.maxValue;
-                                float shift = -(supported.size() - 1f) / 2f;
-                                int width = 13 * supported.size();
-                                int height = 54 + 11;
-                                float worldWidth = width / 96f;
-                                float worldHeight = height / 96f;
-                                RenderProjectionUtil.project((graphics) -> {
-                                    float shift2 = shift;
-                                    for (EssenceType i : supported) {
-                                        ClientEssenceBarUtil.drawEssenceIcon(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)), 0, i, essenceBlockEntity.getMeterBackgroundType(), false, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), false));
-                                        ClientEssenceBarUtil.drawEssenceBar(graphics, (int) (((width / 2f) - 4f) + (shift2 * 13)) + 1, 12, i, values.get(i), max, essenceBlockEntity.getMeterBackgroundType());
-                                        shift2 += 1;
-                                    }
-                                }, (poseStack) -> {
-                                    Vec3 center = blockHitResult.getBlockPos().getCenter();
-                                    Vec2 angle = calculateRotationVector(center, Minecraft.getInstance().player.getEyePosition());
-                                    boolean horizontal = true;
-                                    if (mc.player.getEyePosition().y >= center.y + essenceBlockEntity.getMeterSideLength(Direction.UP)) {
-                                        if (mc.level.getBlockState(blockHitResult.getBlockPos().above()).isAir()) {
-                                            center = center.add(0, (essenceBlockEntity.getMeterSideLength(Direction.UP)+essenceBlockEntity.getMeterRenderOffset(Direction.UP)), 0);
-                                            horizontal = false;
-                                        }
-                                    } else if (mc.player.getEyePosition().y <= center.y - essenceBlockEntity.getMeterSideLength(Direction.DOWN)) {
-                                        if (mc.level.getBlockState(blockHitResult.getBlockPos().below()).isAir()) {
-                                            center = center.add(0, -(essenceBlockEntity.getMeterSideLength(Direction.DOWN) + essenceBlockEntity.getMeterRenderOffset(Direction.DOWN)), 0);
-                                            horizontal = false;
+                    if (EssenceMeter.currentMachineEssenceValue != null && EssenceMeter.currentMachineEssenceValue.pos.equals(blockHitResult.getBlockPos())) {
+                        if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity essenceBlockEntity) {
+
+                            List<EssenceType> machineSupported = EssenceMeter.currentMachineEssenceValue.values.keySet().stream().sorted(Comparator.comparing((i) -> i.tier)).toList();
+                            Map<EssenceType, Float> machineValues = EssenceMeter.currentMachineEssenceValue.values;
+                            float machineMax = EssenceMeter.currentMachineEssenceValue.maxValue;
+
+                            ItemStack stackRef = ItemStack.EMPTY;
+                            List<EssenceType> itemSupported = new ArrayList<>();
+
+                            if (essenceBlockEntity instanceof ChargerBlockEntity charger) {
+                                stackRef = charger.item;
+                                if (!stackRef.isEmpty()) {
+                                    for (ResourceLocation key : ItemEssenceContainer.getSupportedEssenceTypes(stackRef)) {
+                                        EssenceType type = DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(key);
+                                        if (type != null) {
+                                            itemSupported.add(type);
                                         }
                                     }
-                                    if (horizontal) {
-                                        Direction direction = Direction.fromYRot(angle.y);
-                                        float offset = (essenceBlockEntity.getMeterSideLength(direction)+essenceBlockEntity.getMeterRenderOffset(direction));
-                                        center = center.add(direction.getStepX()*offset, 0, direction.getStepZ()*offset);
-                                    }
-                                    poseStack.pushPose();
-                                    poseStack.translate(center.x, center.y, center.z);
-                                    poseStack.pushPose();
-                                    poseStack.mulPose(Axis.YP.rotationDegrees(-angle.y + 180));
-                                }, (poseStack) -> {
-                                    poseStack.popPose();
-                                    poseStack.popPose();
-                                }, bufferSource, new Vec3(-worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, -worldHeight / 2f, 0), new Vec3(-worldWidth / 2f, -worldHeight / 2f, 0), width, height);
+                                    itemSupported.sort(Comparator.comparing(i -> i.tier));
+                                }
                             }
+
+                            final ItemStack chargerItem = stackRef;
+                            boolean hasItem = !chargerItem.isEmpty();
+
+                            final int TOP_PADDING = hasItem ? 15 : 0;
+
+                            int machineWidth = 13 * machineSupported.size();
+
+                            int barLength = 52;
+                            int itemRowWidth = hasItem ? (13 + 3 + barLength) : 0;
+
+                            int maxWidth = Math.max(machineWidth, Math.max(itemRowWidth, hasItem ? 16 : 0));
+
+
+                            int machineContentHeight = 65;
+                            int itemSectionContentHeight = hasItem ? (18 + (!itemSupported.isEmpty() ? (itemSupported.size() * 14) : 0) + 5) : 0;
+
+
+                            int totalHeight = machineContentHeight + itemSectionContentHeight + TOP_PADDING;
+
+                            float worldWidth = maxWidth / 96f;
+                            float worldHeight = totalHeight / 96f;
+
+                            float machineShift = -(machineSupported.size() - 1f) / 2f;
+
+                            RenderProjectionUtil.project((graphics) -> {
+
+                                int currentY = TOP_PADDING;
+
+
+                                if (hasItem) {
+
+                                    int itemX = (maxWidth / 2) - 8;
+
+                                    graphics.renderItem(chargerItem, itemX, currentY - 15, 200);
+
+
+                                    currentY += 3;
+
+                                    if (!itemSupported.isEmpty()) {
+                                        float itemMax = ItemEssenceContainer.getMaxEssence(chargerItem);
+
+
+                                        int rowBlockWidth = 13 + 3 + barLength;
+                                        int startX = (maxWidth - rowBlockWidth) / 2;
+
+                                        for (EssenceType i : itemSupported) {
+                                            float val = ItemEssenceContainer.getEssence(chargerItem, DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i));
+
+                                            ClientEssenceBarUtil.drawEssenceIcon(graphics, startX + 8, currentY - 8, i, essenceBlockEntity.getMeterBackgroundType(), false, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), false));
+
+                                            graphics.pose().pushPose();
+
+                                            int barX = startX + 8;
+                                            int barY = currentY + 4;
+
+                                            graphics.pose().translate(barX, barY, 0);
+                                            graphics.pose().mulPose(Axis.ZP.rotationDegrees(90));
+
+
+                                            ClientEssenceBarUtil.drawEssenceBar(graphics, 0, -barLength, i, val, itemMax, essenceBlockEntity.getMeterBackgroundType());
+
+                                            graphics.pose().popPose();
+
+                                            currentY += 12;
+                                        }
+                                        currentY += 5;
+                                    } else {
+                                        currentY += 5;
+                                    }
+                                }
+
+
+                                float currentMachineShift = machineShift;
+                                for (EssenceType i : machineSupported) {
+                                    int xPos = (int) (((maxWidth / 2f) - 4f) + (currentMachineShift * 13));
+
+                                    ClientEssenceBarUtil.drawEssenceIcon(graphics, xPos, currentY, i, essenceBlockEntity.getMeterBackgroundType(), false, ClientPlayerData.getUnlockedEssences().getOrDefault(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(i), false));
+                                    ClientEssenceBarUtil.drawEssenceBar(graphics, xPos + 1, currentY + 12, i, machineValues.get(i), machineMax, essenceBlockEntity.getMeterBackgroundType());
+                                    currentMachineShift += 1;
+                                }
+                            }, (poseStack) -> {
+                                Vec3 center = blockHitResult.getBlockPos().getCenter();
+
+                                final double RENDER_HEIGHT_OFFSET = 0.15;
+                                center = center.add(0, RENDER_HEIGHT_OFFSET, 0);
+
+                                Vec2 angle = calculateRotationVector(center, Minecraft.getInstance().player.getEyePosition());
+                                boolean horizontal = true;
+                                if (mc.player.getEyePosition().y >= center.y + essenceBlockEntity.getMeterSideLength(Direction.UP)) {
+                                    if (mc.level.getBlockState(blockHitResult.getBlockPos().above()).isAir()) {
+                                        center = center.add(0, (essenceBlockEntity.getMeterSideLength(Direction.UP)+essenceBlockEntity.getMeterRenderOffset(Direction.UP)), 0);
+                                        horizontal = false;
+                                    }
+                                } else if (mc.player.getEyePosition().y <= center.y - essenceBlockEntity.getMeterSideLength(Direction.DOWN)) {
+                                    if (mc.level.getBlockState(blockHitResult.getBlockPos().below()).isAir()) {
+                                        center = center.add(0, -(essenceBlockEntity.getMeterSideLength(Direction.DOWN) + essenceBlockEntity.getMeterRenderOffset(Direction.DOWN)), 0);
+                                        horizontal = false;
+                                    }
+                                }
+                                if (horizontal) {
+                                    Direction direction = Direction.fromYRot(angle.y);
+                                    float offset = (essenceBlockEntity.getMeterSideLength(direction)+essenceBlockEntity.getMeterRenderOffset(direction));
+                                    center = center.add(direction.getStepX()*offset, 0, direction.getStepZ()*offset);
+                                }
+                                poseStack.pushPose();
+                                poseStack.translate(center.x, center.y, center.z);
+                                poseStack.pushPose();
+                                poseStack.mulPose(Axis.YP.rotationDegrees(-angle.y + 180));
+                            }, (poseStack) -> {
+                                poseStack.popPose();
+                                poseStack.popPose();
+                            }, bufferSource, new Vec3(-worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, worldHeight / 2f, 0), new Vec3(worldWidth / 2f, -worldHeight / 2f, 0), new Vec3(-worldWidth / 2f, -worldHeight / 2f, 0), maxWidth, totalHeight);
                         }
                     }
                 }
@@ -400,6 +489,7 @@ public class ClientEvents {
             SoundEvent mus = null;
             if (mc.player != null) {
                 if (mc.hitResult instanceof BlockHitResult blockHitResult) {
+                    if (!mc.player.isHolding((item) -> item.getItem() instanceof EssenceMeter)) EssenceMeter.currentMachineEssenceValue = null;
                     if (mc.player.isHolding((item) -> item.getItem() instanceof EssenceMeter)) {
                         if (mc.level.getBlockEntity(blockHitResult.getBlockPos()) instanceof EssenceBlockEntity) {
                             ModMessages.sendToServer(new RequestMachineEssenceValue(blockHitResult.getBlockPos()));

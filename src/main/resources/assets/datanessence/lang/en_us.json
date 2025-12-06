@@ -499,7 +499,7 @@
   "data_tablet.pages.fluid_mixer.page2.text": " ◇ Accepts item inputs from sides: Down\n ◇ Must have a loaded Data Drive inserted to know what to craft.",
   "data_tablet.pages.fluid_tank.flavor": " ◇ Rainy-day reserves",
   "data_tablet.pages.fluid_tank.name": "Fluid Storage",
-  "data_tablet.pages.fluid_tank.page1.text": "This specially constructed tank, or bulb, serves as a simple way to store a decent amount of fluid in a reasonable amount of space. It may be filled manually with Buckets.",
+  "data_tablet.pages.fluid_tank.page1.text": "This specially constructed tank, or bulb, serves as a simple way to store a decent amount of fluid in a reasonable amount of space. It may be filled manually with Buckets. Due to its design, a Bulb placed above another one will drain its contents into the one below it. If making a column of them, it is preferential to insert from the topmost Bulb and extract from the bottommost Bulb.",
   "data_tablet.pages.fluidworks.name": "Fluid Transfer",
   "data_tablet.pages.fluidworks.page1.text": "Fluid manipulation, particularly moving it between machines, is an important facet of our work. Building upon the existing design that suits Essence so well, we designed Fluid Nodes and corresponding Wire. These work just as one may expect, allowing for point-to-point transportation of any liquids we wish.",
   "data_tablet.pages.fluidworks.page2.text": " ◇ The linking order of nodes controls the direction of flow - sender to receiver.\n ◇ Intermediate nodes cannot send nor receive.",
@@ -745,6 +745,8 @@
   "tooltip.datanessence.save_and_exit_sneak": "Clear Saved Entry",
   "tooltip.datanessence.plant_siphon_display.text": "When used as Siphon Fuel:",
   "tooltip.datanessence.plant_siphon_display.values": "  Produces %1$s %3$s for %2$s ticks",
+  "tooltip.datanessence.fluid_tank.contains": "%s / %s of %s",
+  "tooltip.datanessence.fluid_tank.empty": "Empty",
 
 
   "subtitle.datanessence.block.entropic_processor.working": "Entropic Processor grinds",
@@ -827,6 +829,7 @@
   "emi.info.datanessence.dimension_loot_items": "This item is from another realm entirely. It cannot be crafted, and must instead be found.",
   "emi.info.datanessence.hammer_and_chisel": "The Hammer and Chisel is a tool that can gather certain blocks, such as Obsidian and its derivatives, far more expeditiously than most other pieces of equipment. Use it on a suitable block to cause it to drop instantly.",
   "emi.info.datanessence.signal_tracker": "This device may at first be acquired from Computers inside of strange structures built from an otherworldly, purple rock. It seems to guide you to other, similar structures.",
+  "emi.datanessence.rate": "\uD83D\uDD25: %1$s/s",
   "emi.datanessence.recipe_locked_line_1": "Data insufficient for",
   "emi.datanessence.recipe_locked_line_2": "recipe reconstruction",
   "emi.datanessence.average_yield": "Average Yield:",
