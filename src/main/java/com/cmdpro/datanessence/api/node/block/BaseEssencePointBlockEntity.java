@@ -6,7 +6,6 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.misc.BlockPosNetworks;
 import com.cmdpro.datanessence.api.node.item.INodeUpgrade;
 import com.cmdpro.datanessence.client.particle.CircleParticleOptions;
-import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
 import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,19 +16,16 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.graph.DefaultEdge;
-import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 import java.awt.*;
@@ -104,7 +100,8 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
             }
         }
     }
-    public abstract Color linkColor();
+
+    public abstract Color[] linkColor();
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseEssencePointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
@@ -125,7 +122,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
                 pBlockEntity.link = new ArrayList<>();
             }
             if (pBlockEntity.wasRelay != pBlockEntity.isRelay) {
-                Color color = pBlockEntity.linkColor();
+                Color color = pBlockEntity.linkColor()[0];
                 for (int i = 0; i < 32; i++) {
                     CircleParticleOptions options = new CircleParticleOptions();
                     options.setColor(color);

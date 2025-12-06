@@ -16,7 +16,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -101,7 +100,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
             }
         }
     }
-    public abstract Color linkColor();
+    public abstract Color[] linkColor();
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseCapabilityPointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
@@ -128,7 +127,7 @@ public abstract class BaseCapabilityPointBlockEntity extends BlockEntity {
                 pBlockEntity.link = new ArrayList<>();
             }
             if (pBlockEntity.wasRelay != pBlockEntity.isRelay) {
-                Color color = pBlockEntity.linkColor();
+                Color color = pBlockEntity.linkColor()[0];
                 for (int i = 0; i < 32; i++) {
                     CircleParticleOptions options = new CircleParticleOptions();
                     options.setColor(color);

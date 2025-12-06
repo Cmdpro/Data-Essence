@@ -15,6 +15,7 @@
 - Lightslash Blade's attack speed is constant again instead of variable, fixing its lack of proper cooldown (Esét)
 - Interaction with the Charger is now in-world, instead of via a GUI (multyfora)
 - Interaction with the Enticing Lure is now in-world instead of via a GUI (multyfora)
+- Nodes may now customize the color of their wires' "pulses" (Esét)
 - When pick-blocking a Node, sneaking now picks its correspondent wire (multyfora)
 
 ### Fixes
