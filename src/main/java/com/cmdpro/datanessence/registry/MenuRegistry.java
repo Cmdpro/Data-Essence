@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.registry;
 
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.auxiliary.EnticingLureBlockEntity;
+import com.cmdpro.datanessence.block.logic.SignalConditionMenu;
 import com.cmdpro.datanessence.block.logic.SignalEmitterMenu;
 import com.cmdpro.datanessence.screen.*;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -34,6 +35,8 @@ public class MenuRegistry {
     public static final Supplier<MenuType<IndustrialPlantSiphonMenu>> INDUSTRIAL_PLANT_SIPHON_MENU = register(IndustrialPlantSiphonMenu::new, "industrial_plant_siphon");
     public static final Supplier<MenuType<MelterMenu>> MELTER_MENU = register(MelterMenu::new, "melter");
     public static final Supplier<MenuType<DryingTableMenu>> DRYING_TABLE_MENU = register(DryingTableMenu::new, "drying_table");
+    public static final Supplier<MenuType<SignalConditionMenu>> SIGNAL_CONDITION_MENU = register(SignalConditionMenu::new, "signal_condition");
+
 
     public static final Supplier<MenuType<SignalEmitterMenu>> SIGNAL_EMITTER = register(SignalEmitterMenu::new, "signal_emitter");
 

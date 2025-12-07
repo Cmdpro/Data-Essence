@@ -1,14 +1,40 @@
 package com.cmdpro.datanessence.api.signal;
 
+import java.util.Collections;
+import java.util.Map;
+
+/**
+ * Provides structural “signals” to structural nodes.
+ *
+ * New multi-signal API: getSignals() returns (id -> amount) for EVERYTHING.
+ * Old single-signal methods still exist for compatibility.
+ */
 public interface IStructuralSignalProvider {
-    /**
-     * Identifier of the signal (for now, just "x").
-     * Later this can be something like "number:5", "block:minecraft:stone", etc.
-     */
-    String getSignalId();
 
     /**
-     * Quantity / strength of the signal.
+     * Old single-signal id. Can be ignored if you override getSignals().
      */
-    int getSignalAmount();
+    default String getSignalId() {
+        return null;
+    }
+
+    /**
+     * Old single-signal amount. Can be ignored if you override getSignals().
+     */
+    default int getSignalAmount() {
+        return 0;
+    }
+
+    /**
+     * New multi-signal API.
+     * Default implementation wraps the old pair into a single-entry map.
+     */
+    default Map<String, Integer> getSignals() {
+        String id = getSignalId();
+        int amount = getSignalAmount();
+        if (id == null || amount <= 0) {
+            return Collections.emptyMap();
+        }
+        return Collections.singletonMap(id, amount);
+    }
 }

@@ -1,7 +1,7 @@
 package com.cmdpro.datanessence.block.logic;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -13,20 +13,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Map;
-import java.util.Set;
+public abstract class AbstractSignalCondition extends Block implements EntityBlock {
 
-public class SignalReader extends Block implements EntityBlock {
-
-    public SignalReader(Properties properties) {
+    public AbstractSignalCondition(Properties properties) {
         super(properties);
     }
 
     @Nullable
     @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new SignalReaderBlockEntity(pos, state);
-    }
+    public abstract BlockEntity newBlockEntity(BlockPos pos, BlockState state);
 
     @Override
     public RenderShape getRenderShape(BlockState state) {
@@ -36,14 +31,10 @@ public class SignalReader extends Block implements EntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                Player player, BlockHitResult hit) {
-        if (!level.isClientSide) {
+        if (!level.isClientSide && player instanceof ServerPlayer sp) {
             BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof SignalReaderBlockEntity reader) {
-                Map<String, Integer> map = reader.getSignals();
-                for(int i = 0; i < map.size(); i++){
-                    player.sendSystemMessage(Component.literal(map.get(map.keySet().toArray()[i]) + ": " + map.keySet().toArray()[i]));
-                }
-
+            if (be instanceof AbstractSignalConditionBlockEntity cond) {
+                player.openMenu(cond, pos);
             }
         }
         return InteractionResult.sidedSuccess(level.isClientSide);

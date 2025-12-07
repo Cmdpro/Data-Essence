@@ -197,6 +197,8 @@ public class ClientModEvents {
         event.register(MenuRegistry.MELTER_MENU.get(), MelterScreen::new);
         event.register(MenuRegistry.DRYING_TABLE_MENU.get(), DryingTableScreen::new);
         event.register(MenuRegistry.SIGNAL_EMITTER.get(), SignalEmitterScreen::new);
+        event.register(MenuRegistry.SIGNAL_CONDITION_MENU.get(), SignalConditionScreen::new);
+
     }
     @SubscribeEvent
     public static void registerParticleFactories(RegisterParticleProvidersEvent event) {

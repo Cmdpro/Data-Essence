@@ -12,6 +12,7 @@ import org.jgrapht.graph.DefaultEdge;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 public class StructuralPointBlockEntity extends BaseEssencePointBlockEntity {
 
@@ -40,32 +41,48 @@ public class StructuralPointBlockEntity extends BaseEssencePointBlockEntity {
      * Works similarly to EssencePointBlockEntity.transfer but for signals.
      */
     @Override
-    public void transfer(BaseEssencePointBlockEntity from,
-                         List<GraphPath<BlockPos, DefaultEdge>> other) {
+    public void transfer(BaseEssencePointBlockEntity from, List<GraphPath<BlockPos, DefaultEdge>> other) {
+        if (level == null || level.isClientSide) {
+            return;
+        }
 
+        // Block the node is attached to on the "from" side
+        BlockEntity fromEnt = from.getLevel().getBlockEntity(
+                from.getBlockPos().relative(from.getDirection().getOpposite())
+        );
+        if (!(fromEnt instanceof IStructuralSignalProvider provider)) {
+            return;
+        }
+
+        //Get ALL signals from the provider (multi-signal)
+        Map<String, Integer> signals = provider.getSignals();
+        if (signals.isEmpty()) {
+            return;
+        }
+
+        // Send the same bundle of signals along every outgoing path
         for (GraphPath<BlockPos, DefaultEdge> path : other) {
-            if (level.getBlockEntity(path.getEndVertex()) instanceof BaseEssencePointBlockEntity endNode) {
+            BlockPos endPos = path.getEndVertex();
+            if (!(level.getBlockEntity(endPos) instanceof BaseEssencePointBlockEntity endNode)) {
+                continue;
+            }
 
-                BlockEntity fromEnt = from.getLevel()
-                        .getBlockEntity(from.getBlockPos().relative(from.getDirection().getOpposite()));
-                BlockEntity toEnt = endNode.getLevel()
-                        .getBlockEntity(endNode.getBlockPos().relative(endNode.getDirection().getOpposite()));
+            BlockEntity toEnt = endNode.getLevel().getBlockEntity(
+                    endNode.getBlockPos().relative(endNode.getDirection().getOpposite())
+            );
 
-                if (fromEnt instanceof IStructuralSignalProvider provider &&
-                        toEnt   instanceof IStructuralSignalReceiver receiver) {
-
-                    String id = provider.getSignalId();
-                    int amount = provider.getSignalAmount();
-
-                    if (id != null && !id.isEmpty() && amount > 0) {
-                        receiver.acceptSignal(id, amount);
-                        updateBlock(fromEnt);
-                        updateBlock(toEnt);
-                    }
+            if (toEnt instanceof IStructuralSignalReceiver receiver) {
+                receiver.acceptSignals(signals);
+                if (toEnt instanceof BlockEntity be) {
+                    // force client update if your reader has a GUI
+                    BlockState st = be.getLevel().getBlockState(be.getBlockPos());
+                    be.getLevel().sendBlockUpdated(be.getBlockPos(), st, st, 3);
+                    be.setChanged();
                 }
             }
         }
     }
+
 
     /**
      * Same helper pattern as in EssencePointBlockEntity to force a block update on connected blocks.

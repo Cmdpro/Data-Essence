@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "datanessence:block/redstone_signal_condition",
+    "particle": "datanessence:block/redstone_signal_condition"
+  }
+}

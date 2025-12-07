@@ -1,8 +1,23 @@
 package com.cmdpro.datanessence.api.signal;
 
+import java.util.Map;
+
+/**
+ * Something that can receive structural signals.
+ */
 public interface IStructuralSignalReceiver {
+
     /**
-     * Called by a structural node when a signal reaches this block.
+     * New multi-signal receive call.
      */
-    void acceptSignal(String signalId, int amount);
+    default void acceptSignals(Map<String, Integer> signals) {
+        signals.forEach(this::acceptSignal);
+    }
+
+    /**
+     * Old single-signal style callback (optional).
+     */
+    default void acceptSignal(String id, int amount) {
+        // default: do nothing
+    }
 }

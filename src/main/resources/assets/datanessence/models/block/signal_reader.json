@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "datanessence:block/signal_reader",
+    "particle": "datanessence:block/signal_reader"
+  }
+}

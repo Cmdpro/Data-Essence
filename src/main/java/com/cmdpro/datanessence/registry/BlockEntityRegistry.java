@@ -7,6 +7,8 @@ import com.cmdpro.datanessence.block.decoration.FlareLightBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphonBlockEntity;
+import com.cmdpro.datanessence.block.logic.InventorySignalEmitterBlockEntity;
+import com.cmdpro.datanessence.block.logic.RedstoneSignalConditionBlockEntity;
 import com.cmdpro.datanessence.block.logic.SignalEmitterBlockEntity;
 import com.cmdpro.datanessence.block.logic.SignalReaderBlockEntity;
 import com.cmdpro.datanessence.block.processing.*;
@@ -262,6 +264,19 @@ public class BlockEntityRegistry {
             register("signal_reader", () ->
                     BlockEntityType.Builder.of(SignalReaderBlockEntity::new,
                             BlockRegistry.SIGNAL_READER.get()).build(null));
+
+    public static final Supplier<BlockEntityType<InventorySignalEmitterBlockEntity>> INVENTORY_SIGNAL_EMITTER =
+            register("inventory_signal_emitter", () ->
+                    BlockEntityType.Builder.of(
+                            InventorySignalEmitterBlockEntity::new,
+                            BlockRegistry.INVENTORY_SIGNAL_EMITTER.get()
+                    ).build(null));
+    public static final Supplier<BlockEntityType<RedstoneSignalConditionBlockEntity>> REDSTONE_SIGNAL_CONDITION =
+            register("redstone_signal_condition", () ->
+                    BlockEntityType.Builder.of(
+                            RedstoneSignalConditionBlockEntity::new,
+                            BlockRegistry.REDSTONE_SIGNAL_CONDITION.get()
+                    ).build(null));
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {
