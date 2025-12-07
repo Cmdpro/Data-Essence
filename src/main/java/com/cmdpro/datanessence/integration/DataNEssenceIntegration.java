@@ -18,14 +18,16 @@ public class DataNEssenceIntegration {
     public static boolean hasOpalescence;
     public static boolean hasPastel;
 
-    public static BlockCapability<IChemicalHandler, Direction> BLOCK_CHEMICAL = hasMekanism ? BlockCapability.createSided(ResourceLocation.fromNamespaceAndPath(MekanismAPI.MEKANISM_MODID, "chemical_handler"), IChemicalHandler.class) : null;
+    public static BlockCapability<IChemicalHandler, Direction> BLOCK_CHEMICAL = null;
     public static void init() {
         hasMekanism = ModList.get().isLoaded("mekanism");
         hasOpalescence = ModList.get().isLoaded("opalescence");
         hasPastel = ModList.get().isLoaded("pastel");
 
-        if (hasMekanism)
+        if (hasMekanism) {
             DataNEssence.LOGGER.info("[DATANESSENCE] Mekanism detected; enabling integration features. Careful with your reactors!");
+             BLOCK_CHEMICAL = BlockCapability.createSided(ResourceLocation.fromNamespaceAndPath(MekanismAPI.MEKANISM_MODID, "chemical_handler"), IChemicalHandler.class);
+        }
         if (hasOpalescence)
             DataNEssence.LOGGER.info("[DATANESSENCE] Opalescence detected; enabling integration features. I hear this rock is a favorite of dragons!");
         if (hasPastel)

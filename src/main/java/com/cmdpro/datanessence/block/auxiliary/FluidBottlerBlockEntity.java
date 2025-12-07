@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.EssenceType;
@@ -9,6 +10,7 @@ import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.FluidBottlerMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -45,7 +47,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, Machine {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
     public EssenceStorage getStorage() {
@@ -215,5 +217,10 @@ public class FluidBottlerBlockEntity extends BlockEntity implements MenuProvider
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
             return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
         } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();
+    }
+
+    @Override
+    public List<Direction> getValidInputDirections() {
+        return List.of(Direction.DOWN, Direction.SOUTH);
     }
 }

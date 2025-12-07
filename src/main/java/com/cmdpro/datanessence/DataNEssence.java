@@ -6,6 +6,7 @@ import com.cmdpro.datanessence.config.DataNEssenceConfig;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
 import com.cmdpro.datanessence.registry.*;
 import com.mojang.logging.LogUtils;
+import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -86,66 +87,82 @@ public class DataNEssence
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INFUSER.get(), (o, direction) -> {
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INFUSER.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getOutputHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : machine.getOutputHandler();
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.AUTO_FABRICATOR.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.AUTO_FABRICATOR.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getOutputHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : machine.getOutputHandler();
         });
+
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_BUFFER.get(), (o, direction) -> o.getItemHandler());
+
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.LIMITED_ITEM_BUFFER.get(), (o, direction) -> o.getItemHandler());
+
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_BUFFER.get(), (o, direction) -> o.getFluidHandler());
+
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_COLLECTOR.get(), (o, direction) -> o.getFluidHandler());
+
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_SPILLER.get(), (o, direction) -> o.getFluidHandler());
+
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_TANK.get(), (o, direction) -> o.getFluidHandler());
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FLUID_BOTTLER.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FLUID_BOTTLER.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getOutputHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : machine.getOutputHandler();
         });
+
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_BOTTLER.get(), (o, direction) -> {
             return o.getFluidHandler();
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTROPIC_PROCESSOR.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getOutputHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : machine.getOutputHandler();
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ESSENCE_FURNACE.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ESSENCE_FURNACE.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getOutputHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : machine.getOutputHandler();
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.SYNTHESIS_CHAMBER.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.SYNTHESIS_CHAMBER.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getOutputHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : machine.getOutputHandler();
         });
+
         event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.FLUID_MIXER.get(), (o, direction) -> {
             return o.getOutputHandler();
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FLUID_MIXER.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FLUID_MIXER.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getItemHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : null;
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MINERAL_PURIFICATION_CHAMBER.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getOutputHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : machine.getOutputHandler();
         });
+
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ITEM_FILTER.get(), (o, direction) -> {
             if (direction == null) {
                 return null;
@@ -164,77 +181,76 @@ public class DataNEssence
             }
             return null;
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.METAL_SHAPER.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.METAL_SHAPER.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getOutputHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : machine.getOutputHandler();
         });
+
         event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> new ComponentItemHandler(stack, DataComponents.CONTAINER, 1), ItemRegistry.MUSIC_DISC_PLAYER.get());
-        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (o, direction) -> {
-            return o.getOutputHandler();
-        });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.DRYING_TABLE.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return o.getOutputHandler();
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : null;
         });
+
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (machine, direction) -> {
+            return machine.getOutputHandler();
+        });
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.DRYING_TABLE.get(), (machine, direction) -> {
+            if (direction == null) {
+                return machine.getCombinedInvWrapper();
+            }
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : machine.getOutputHandler();
+        });
+
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.CHARGER.get(), (o, direction) -> {
             if (direction == null) {
                 return o.getCombinedInvWrapper();
             }
             return null;
         });
+
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ENTICING_LURE.get(), (o, direction) -> {
             if (direction == null) {
                 return o.getCombinedInvWrapper();
             }
             return null;
         });
+
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.LASER_EMITTER.get(), (o, direction) -> {
             if (direction == null) {
                 return o.getCombinedInvWrapper();
             }
             return null;
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ESSENCE_BURNER.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.ESSENCE_BURNER.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return null;
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : null;
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), (o, direction) -> {
+
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.INDUSTRIAL_PLANT_SIPHON.get(), (machine, direction) -> {
             if (direction == null) {
-                return o.getCombinedInvWrapper();
+                return machine.getCombinedInvWrapper();
             }
-            return null;
+            return machine.getValidInputDirections().contains(direction) ? machine.getItemHandler() : null;
         });
+
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.FABRICATOR.get(), (o, direction) -> {
             if (direction == null) {
                 return o.getCombinedInvWrapper();
             }
             return null;
         });
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, BlockEntityRegistry.MELTER.get(), (o, direction) -> {
-            if (direction == null) {
-                return o.getCombinedInvWrapper();
-            }
-            return null;
-        });
 
-
-
-        //TODO: REMOVE IN A FEW UPDATES, THIS IS TO NOT BREAK EXISTING FACTORIES
-        event.registerItem(Capabilities.ItemHandler.ITEM, (stack, ctx) -> {
-            if (stack.has(DataComponents.CONTAINER)) {
-                ItemContainerContents contents = stack.get(DataComponents.CONTAINER);
-                if (contents != null && contents.getSlots() >= 1) {
-                    stack.set(DataComponentRegistry.FILTER_STACK, ItemContainerContents.fromItems(List.of(contents.getStackInSlot(0))));
-                }
-            }
-            return null;
-        }, ItemRegistry.FILTER_UPGRADE.get());
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -298,6 +314,8 @@ public class DataNEssence
             event.accept(ItemRegistry.LOGICAL_MATRIX.get());
             event.accept(ItemRegistry.PROPELLER.get());
             event.accept(ItemRegistry.EXCITER.get());
+            event.accept(ItemRegistry.ESSENCE_PATHWAYS.get());
+            event.accept(ItemRegistry.ASSEMBLY_ACTUATOR.get());
             event.accept(ItemRegistry.HEATING_COIL.get());
             event.accept(ItemRegistry.IRON_DRILL.get());
             event.accept(ItemRegistry.LENS.get());
@@ -349,6 +367,7 @@ public class DataNEssence
             event.accept(BlockRegistry.METAL_SHAPER.get());
             event.accept(BlockRegistry.MELTER.get());
             event.accept(BlockRegistry.DRYING_TABLE.get());
+            event.accept(BlockRegistry.SURVEY_TUNNELER.get());
 
             // Logistics
             event.accept(BlockRegistry.ITEM_FILTER.get());
@@ -364,6 +383,9 @@ public class DataNEssence
             event.accept(BlockRegistry.ITEM_BUFFER.get());
             event.accept(BlockRegistry.FLUID_BUFFER.get());
             event.accept(BlockRegistry.LIMITED_ITEM_BUFFER.get());
+
+            // Redstone Components
+            event.accept(BlockRegistry.ESSENCE_READER.get());
 
             // Storage Blocks
             event.accept(BlockRegistry.ESSENCE_BATTERY.get());
@@ -397,6 +419,7 @@ public class DataNEssence
             event.accept(BlockRegistry.LIGHT_FIXTURE.get());
             event.accept(BlockRegistry.DEWLAMP.get());
             event.accept(BlockRegistry.PATTERNED_COPPER.get());
+            event.accept(BlockRegistry.COPPER_VENT.get());
             event.accept(BlockRegistry.DECO_ESSENCE_BUFFER.get());
             event.accept(BlockRegistry.DECO_ITEM_BUFFER.get());
             event.accept(BlockRegistry.DECO_FLUID_BUFFER.get());
@@ -425,6 +448,7 @@ public class DataNEssence
             event.accept(BlockRegistry.SHIELDLESS_ANCIENT_GLYPH_STONE_ESSENCE.get());
             event.accept(BlockRegistry.COMPUTER.get());
             event.accept(BlockRegistry.ANCIENT_DATA_BANK.get());
+            event.accept(BlockRegistry.STRUCTURE_PROTECTOR.get());
         }
     }
 }

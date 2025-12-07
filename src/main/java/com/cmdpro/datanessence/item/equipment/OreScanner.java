@@ -11,6 +11,7 @@ import com.cmdpro.datanessence.networking.packet.s2c.AddScannedOre;
 import com.cmdpro.datanessence.networking.packet.s2c.CreatePingShader;
 import com.cmdpro.datanessence.networking.packet.s2c.PingStructures;
 import com.cmdpro.datanessence.registry.DataComponentRegistry;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import com.cmdpro.datanessence.registry.TagRegistry;
 import net.minecraft.advancements.AdvancementHolder;
@@ -19,6 +20,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,6 +31,7 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,9 +45,9 @@ import java.util.Optional;
 
 public class OreScanner extends Item {
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
-    public static float ESSENCE_COST = 50f;
+    public static int ESSENCE_COST = 50;
     public OreScanner(Properties pProperties) {
-        super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 1000)));
+        super(pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 2500)));
     }
 
     @Override
@@ -71,5 +75,11 @@ public class OreScanner extends Item {
             }
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> components, TooltipFlag flag) {
+        super.appendHoverText(stack, context, components, flag);
+        components.add(Component.translatable("item.datanessence.mineral_finding_rod.tooltip", Component.literal(String.valueOf(ESSENCE_COST)).withColor(0xFFFF96B5) ).withStyle(Style.EMPTY.withColor(EssenceTypeRegistry.ESSENCE.get().getColor())));
     }
 }

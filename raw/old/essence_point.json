@@ -1,0 +1,436 @@
+{
+  "animations": {
+    "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "root",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "idle": {
+      "length": 1,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "spinning orb",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                360,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "isCube": false,
+      "isMesh": false,
+      "children": [
+        {
+          "name": "base",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            0
+          ],
+          "mirror": false,
+          "origin": [
+            -4,
+            0,
+            -4
+          ],
+          "dimensions": [
+            8,
+            3,
+            8
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "top",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            11
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            3,
+            -2
+          ],
+          "dimensions": [
+            4,
+            1,
+            4
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "arm w base",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -3,
+            3,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            18,
+            11
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            -1
+          ],
+          "dimensions": [
+            1,
+            2,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "arm w top",
+          "rotation": [
+            0,
+            0,
+            0.2617993877991494
+          ],
+          "offset": [
+            -4,
+            5,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            24,
+            11
+          ],
+          "mirror": true,
+          "origin": [
+            0,
+            -1,
+            0
+          ],
+          "dimensions": [
+            2,
+            3,
+            0
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "arm e base",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            4,
+            3,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            18,
+            11
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            -1
+          ],
+          "dimensions": [
+            1,
+            2,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "arm e top",
+          "rotation": [
+            0,
+            0,
+            -0.2617993877991494
+          ],
+          "offset": [
+            4,
+            5,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            24,
+            11
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            -1,
+            0
+          ],
+          "dimensions": [
+            2,
+            3,
+            0
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "arm s base",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            1,
+            3,
+            4
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            12,
+            12
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            0,
+            -1
+          ],
+          "dimensions": [
+            2,
+            2,
+            1
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "arm s top",
+          "rotation": [
+            0.2617993877991494,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            5,
+            4
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            24,
+            9
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            -1,
+            -2
+          ],
+          "dimensions": [
+            0,
+            3,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "arm n base",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            1,
+            3,
+            -3
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            12,
+            12
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            0,
+            -1
+          ],
+          "dimensions": [
+            2,
+            2,
+            1
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "arm n top",
+          "rotation": [
+            -2.879793265790644,
+            -1.2246467991473542e-16,
+            3.141592653589793
+          ],
+          "offset": [
+            0,
+            5,
+            -4
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            24,
+            9
+          ],
+          "mirror": false,
+          "origin": [
+            1.224646799147354e-16,
+            -1,
+            -2
+          ],
+          "dimensions": [
+            0,
+            3,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "spinning orb",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            8,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "cube",
+              "rotation": [
+                -0.6154797086703868,
+                -0.5235987755982984,
+                -0.6154797086703876
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                0,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -1,
+                -1
+              ],
+              "dimensions": [
+                2,
+                2,
+                2
+              ],
+              "inflate": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    32,
+    32
+  ]
+}

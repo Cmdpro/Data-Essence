@@ -47,7 +47,7 @@ public class ChargerRenderer extends DatabankBlockEntityRenderer<ChargerBlockEnt
         super.render(charger, pPartialTick, poseStack, pBufferSource, pPackedLight, pPackedOverlay);
         poseStack.pushPose();
         poseStack.translate(0.5D, 0.5D, 0.5D);
-        poseStack.mulPose(Axis.YP.rotationDegrees(charger.getLevel().getLevelData().getGameTime() % 360));
+        poseStack.mulPose(Axis.YP.rotationDegrees((charger.getLevel().getLevelData().getGameTime() % 360)+pPartialTick));
         poseStack.scale(0.25F, 0.25F, 0.25F);
         Minecraft.getInstance().getItemRenderer().renderStatic(charger.item, ItemDisplayContext.FIXED, pPackedLight, pPackedOverlay, poseStack, pBufferSource, charger.getLevel(), 0);
         poseStack.popPose();

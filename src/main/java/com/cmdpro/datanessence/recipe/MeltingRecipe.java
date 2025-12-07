@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.recipe;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -8,12 +9,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.fluids.FluidStack;
 
-public class MeltingRecipe implements Recipe<RecipeInput> {
+public class MeltingRecipe implements Recipe<RecipeInput>, DataNEssenceRecipe {
     private final FluidStack output;
     private final Ingredient input;
     private final int time;
@@ -64,6 +66,11 @@ public class MeltingRecipe implements Recipe<RecipeInput> {
     @Override
     public RecipeType<?> getType() {
         return RecipeRegistry.MELTING_TYPE.get();
+    }
+
+    @Override
+    public ResourceLocation getMachineEntry() {
+        return DataNEssence.locate("machinery/melter");
     }
 
     public static class Serializer implements RecipeSerializer<MeltingRecipe> {

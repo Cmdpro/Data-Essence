@@ -7,6 +7,7 @@ import com.cmdpro.datanessence.api.util.client.ClientEssenceBarUtil;
 import com.cmdpro.datanessence.moddata.ClientPlayerData;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -50,5 +51,13 @@ public class IndustrialPlantSiphonScreen extends AbstractContainerScreen<Industr
         if (component != null) {
             pGuiGraphics.renderTooltip(font, component, pMouseX, pMouseY);
         }
+
+        var siphon = menu.blockEntity;
+
+        var rate = (int) siphon.generationRate * 20;
+        var time = (( siphon.getTickTime(siphon) * siphon.getItemHandler().getStackInSlot(0).getCount()) / 20) + (siphon.essenceGenerationTicks / 20);
+
+        pGuiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("emi.datanessence.rate", rate), x+108, y+34, 0xFFFF96B5, false);
+        pGuiGraphics.drawString(Minecraft.getInstance().font, Component.translatable("emi.datanessence.time_seconds", time), x+108, y+43, 0xFFFF96B5, false);
     }
 }

@@ -3,8 +3,11 @@ package com.cmdpro.datanessence.registry;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -15,9 +18,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.neoforged.neoforge.fluids.SimpleFluidContent;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -56,4 +61,18 @@ public class DataComponentRegistry {
             .networkSynchronized(ItemContainerContents.STREAM_CODEC)
             .cacheEncoding()
     );
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Float>> STORED_ESSENCE =
+            DATA_COMPONENTS.registerComponentType("stored_essence", builder -> builder
+                    .persistent(Codec.FLOAT)
+                    .networkSynchronized(ByteBufCodecs.FLOAT)
+                    .cacheEncoding()
+            );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SimpleFluidContent>> STORED_FLUID =
+            DATA_COMPONENTS.registerComponentType("stored_fluid", builder -> builder
+                    .persistent(SimpleFluidContent.CODEC)
+                    .networkSynchronized(SimpleFluidContent.STREAM_CODEC)
+                    .cacheEncoding()
+            );
+
 }

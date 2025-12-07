@@ -1,0 +1,31 @@
+{
+  "icon": {
+    "id": "datanessence:survey_tunneler"
+  },
+  "tab": "datanessence:machinery",
+  "x": 3,
+  "y": 5,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.survey_tunneler.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/machines/survey_tunneler"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.survey_tunneler.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.survey_tunneler.flavor"
+  },
+  "parents": [
+    "datanessence:basics/components"
+  ]
+}

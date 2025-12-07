@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,7 +35,23 @@ public class Computer extends Block implements EntityBlock {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
-    private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape SHAPE_FALLOFF =  Block.box(0, 0, 0, 16, 16, 16);
+    private static final VoxelShape SHAPE_WEST =  Shapes.or(
+            Block.box(1, 0, 1, 15, 4, 15),
+            Block.box(2, 4, 2.5f, 13, 14, 13.5f)
+    );
+    private static final VoxelShape SHAPE_EAST =  Shapes.or(
+            Block.box(1, 0, 1, 15, 4, 15),
+            Block.box(3, 4, 2.5f, 14, 14, 13.5f)
+    );
+    private static final VoxelShape SHAPE_SOUTH =  Shapes.or(
+            Block.box(1, 0, 1, 15, 4, 15),
+            Block.box(2.5, 4, 3, 13.5, 14, 14)
+    );
+    private static final VoxelShape SHAPE_NORTH =  Shapes.or(
+            Block.box(1, 0, 1, 15, 4, 15),
+            Block.box(2.5, 4, 2, 13.5, 14, 13)
+    );
 
     @Override
     protected InteractionResult useWithoutItem(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
@@ -78,7 +95,13 @@ public class Computer extends Block implements EntityBlock {
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return SHAPE;
+        return switch (pState.getValue(FACING)) {
+            case EAST -> SHAPE_EAST;
+            case WEST -> SHAPE_WEST;
+            case NORTH -> SHAPE_NORTH;
+            case SOUTH -> SHAPE_SOUTH;
+            default -> SHAPE_FALLOFF;
+        };
     }
     @Override
     public RenderShape getRenderShape(BlockState pState) {

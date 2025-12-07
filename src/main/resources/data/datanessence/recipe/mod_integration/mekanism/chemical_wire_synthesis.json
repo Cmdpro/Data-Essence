@@ -11,7 +11,7 @@
   },
   "input": { "item": "datanessence:wire_spool" },
   "input2": { "item": "mekanism:fluorite_gem" },
-  "time": 100,
+  "time": 50,
   "result": { "id": "datanessence:chemical_wire", "count": 4 },
   "entry": "datanessence:mod_integration/mekanism"
 }

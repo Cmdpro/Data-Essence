@@ -1,0 +1,56 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:translucent",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "datanessence:block/essence_reader",
+		"1": "datanessence:block/essence_reader_overlay",
+		"2": "datanessence:block/essence_reader_correction",
+		"particle": "datanessence:block/essence_reader"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [0, 0, 0],
+			"to": [16, 5, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 10.5, 8, 13], "texture": "#0"},
+				"east": {"uv": [8, 8, 16, 10.5], "texture": "#0"},
+				"south": {"uv": [8, 10.5, 16, 13], "texture": "#0"},
+				"west": {"uv": [0, 8, 8, 10.5], "texture": "#0"},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#0"},
+				"down": {"uv": [8, 0, 16, 8], "texture": "#0"}
+			}
+		},
+		{
+			"name": "overlay",
+			"from": [-0.01, -0.01, -0.01],
+			"to": [16.01, 5.01, 16.01],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 10.5, 8, 13], "texture": "#1", "tintindex": 1},
+				"east": {"uv": [8, 8, 16, 10.5], "texture": "#1", "tintindex": 1},
+				"south": {"uv": [8, 10.5, 16, 13], "texture": "#1", "tintindex": 1},
+				"west": {"uv": [0, 8, 8, 10.5], "texture": "#1", "tintindex": 1},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#1", "tintindex": 1},
+				"down": {"uv": [8, 0, 16, 8], "texture": "#1", "tintindex": 1}
+			}
+		},
+		{
+			"name": "correction",
+			"from": [-0.01, -0.01, -0.01],
+			"to": [16.01, 5.01, 16.01],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 10.5, 8, 13], "texture": "#2", "tintindex": 2},
+				"east": {"uv": [8, 8, 16, 10.5], "texture": "#2", "tintindex": 2},
+				"south": {"uv": [8, 10.5, 16, 13], "texture": "#2", "tintindex": 2},
+				"west": {"uv": [0, 8, 8, 10.5], "texture": "#2", "tintindex": 2},
+				"up": {"uv": [0, 0, 8, 8], "texture": "#2", "tintindex": 2},
+				"down": {"uv": [8, 0, 16, 8], "texture": "#2", "tintindex": 2}
+			}
+		}
+	]
+}

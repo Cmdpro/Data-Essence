@@ -9,11 +9,14 @@ import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.api.item.ItemDecorators;
 import com.cmdpro.datanessence.api.item.ItemEssenceContainer;
 import com.cmdpro.datanessence.api.util.client.AnimatedBlockItemUtil;
+import com.cmdpro.datanessence.block.auxiliary.EssenceReader;
+import com.cmdpro.datanessence.block.auxiliary.EssenceReaderBlockEntity;
 import com.cmdpro.datanessence.client.gui.PingsGuiLayer;
 import com.cmdpro.datanessence.client.renderers.entity.*;
 import com.cmdpro.datanessence.client.shaders.*;
 import com.cmdpro.datanessence.fluid.Genderfluid;
 import com.cmdpro.datanessence.client.renderers.entity.ThrownTrailItemRenderer;
+import com.cmdpro.datanessence.client.renderers.entity.*;
 import com.cmdpro.datanessence.client.shaders.MachineOutputShader;
 import com.cmdpro.datanessence.client.shaders.OrePingShader;
 import com.cmdpro.datanessence.integration.DataNEssenceIntegration;
@@ -80,6 +83,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_RELAY.get(), EnderPearlRelayRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_DESTINATION.get(), EnderPearlDestinationRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.STRUCTURE_PROTECTOR.get(), StructureProtectorRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.SURVEY_TUNNELER.get(), SurveyTunnelerRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -102,6 +106,7 @@ public class ClientModEvents {
         EntityRenderers.register(EntityRegistry.ESSENCE_SLASH_PROJECTILE.get(), EssenceSlashRenderer::new);
         EntityRenderers.register(EntityRegistry.ANCIENT_COMBAT_UNIT.get(), AncientCombatUnitRenderer::new);
         EntityRenderers.register(EntityRegistry.SHOCKWAVE.get(), ShockwaveRenderer::new);
+        EntityRenderers.register(EntityRegistry.ANCIENT_SENTINEL_LASER.get(), AncientSentinelLaserRenderer::new);
 
         event.enqueueWork(() -> {
             ItemProperties.register(ItemRegistry.MUSIC_DISC_PLAYER.get(), DataNEssence.locate("playing"), (stack, level, entity, seed) -> {
@@ -168,6 +173,7 @@ public class ClientModEvents {
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_capture.png"), DataNEssence.locate("ender_pearl_capture")), BlockRegistry.ENDER_PEARL_CAPTURE.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_relay.png"), DataNEssence.locate("ender_pearl_relay")), BlockRegistry.ENDER_PEARL_RELAY.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_destination.png"), DataNEssence.locate("ender_pearl_destination")), BlockRegistry.ENDER_PEARL_DESTINATION.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/survey_tunneler.png"), DataNEssence.locate("survey_tunneler")), BlockRegistry.SURVEY_TUNNELER.get().asItem());
     }
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {
@@ -183,7 +189,6 @@ public class ClientModEvents {
         event.register(MenuRegistry.FABRICATOR_MENU.get(), FabricatorScreen::new);
         event.register(MenuRegistry.ESSENCE_BURNER_MENU.get(), EssenceBurnerScreen::new);
         event.register(MenuRegistry.INFUSER_MENU.get(), InfuserScreen::new);
-        event.register(MenuRegistry.CHARGER_MENU.get(), ChargerScreen::new);
         event.register(MenuRegistry.LASER_EMITTER_MENU.get(), LaserEmitterScreen::new);
         event.register(MenuRegistry.AUTO_FABRICATOR_MENU.get(), AutoFabricatorScreen::new);
         event.register(MenuRegistry.FLUID_BOTTLER_MENU.get(), FluidBottlerScreen::new);
@@ -191,7 +196,6 @@ public class ClientModEvents {
         event.register(MenuRegistry.ESSENCE_FURNACE_MENU.get(), EssenceFurnaceScreen::new);
         event.register(MenuRegistry.SYNTHESIS_CHAMBER_MENU.get(), SynthesisChamberScreen::new);
         event.register(MenuRegistry.FLUID_MIXER_MENU.get(), FluidMixerScreen::new);
-        event.register(MenuRegistry.ENTICING_LURE_MENU.get(), EnticingLureScreen::new);
         event.register(MenuRegistry.MINERAL_PURIFICATION_CHAMBER_MENU.get(), MineralPurificationChamberScreen::new);
         event.register(MenuRegistry.ITEM_FILTER_MENU.get(), ItemFilterScreen::new);
         event.register(MenuRegistry.MUSIC_DISC_PLAYER_MENU.get(), MusicDiscPlayerScreen::new);
@@ -238,6 +242,16 @@ public class ClientModEvents {
                 return Color.getHSBColor((float) (Math.sin(blendAmount/(360f/5f))+1f)/2f, 0.8f, 1f).getRGB();
             }
         }, BlockRegistry.CRYSTALLINE_LEAVES.get());
+        event.register( (pState, pLevel, pPos, pTintIndex) -> {
+            if (pPos != null && pLevel != null) {
+                if (pTintIndex == 1) {
+                    if (pLevel.getBlockEntity(pPos) instanceof EssenceReaderBlockEntity reader) {
+                        return reader.getColor().getRGB();
+                    }
+                }
+            }
+            return 0xFFFFFFFF;
+        }, BlockRegistry.ESSENCE_READER.get());
         if (hasOpalescence) {
             event.register((pState, pLevel, pPos, pTintIndex) -> {
                 if (pPos != null) {

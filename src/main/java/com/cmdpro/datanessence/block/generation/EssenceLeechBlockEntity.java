@@ -53,7 +53,7 @@ public class EssenceLeechBlockEntity extends BlockEntity implements EssenceBlock
                     if (i.isAlive()) {
                         i.hurt(i.damageSources().source(DamageTypeRegistry.essenceSiphoned), 5);
                         if (!i.isAlive()) {
-                            pBlockEntity.getStorage().addEssence(EssenceTypeRegistry.ESSENCE.get(), Math.clamp(i.getMaxHealth(), 0f, 20f));
+                            pBlockEntity.getStorage().addEssence(EssenceTypeRegistry.ESSENCE.get(), Math.clamp(i.getMaxHealth() * 5, 0f, 100f));
                         }
                     }
                 }

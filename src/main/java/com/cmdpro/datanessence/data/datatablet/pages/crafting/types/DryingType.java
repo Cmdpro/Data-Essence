@@ -23,6 +23,7 @@ public class DryingType extends CraftingType {
             if (!dryingRecipe.getIngredients().isEmpty()) {
                 page.renderIngredientWithTooltip(screen, pGuiGraphics, dryingRecipe.getIngredients().get(0), xOffset + x + 30, yOffset + y + 32, pMouseX, pMouseY);
             }
+            page.renderCraftTime(pGuiGraphics, dryingRecipe.getTime(), xOffset + x + 74, yOffset + y + 8);
         }
     }
 

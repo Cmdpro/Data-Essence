@@ -7,7 +7,7 @@
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:ores/osmium" },
-    "time": 400,
+    "time": 300,
     "result": { "id": "alltheores:osmium_ingot" },
     "nuggetResult": { "id": "alltheores:osmium_nugget", "count": 2 }
 }

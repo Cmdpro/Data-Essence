@@ -21,9 +21,14 @@ public class ExoticEssencePointBlockEntity extends BaseEssencePointBlockEntity {
     public ExoticEssencePointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.EXOTIC_ESSENCE_POINT.get(), pos, state);
     }
+
     @Override
-    public Color linkColor() {
-        return new Color(EssenceTypeRegistry.EXOTIC_ESSENCE.get().getColor());
+    public Color[] linkColor() {
+        var base = new Color(EssenceTypeRegistry.EXOTIC_ESSENCE.get().color);
+        float darken = 1.5f;
+        return new Color[] {base,
+                new Color((int) (base.getRed() / darken), (int) (base.getGreen() / darken), (int) (base.getBlue() / darken), base.getAlpha())
+        };
     }
 
     @Override

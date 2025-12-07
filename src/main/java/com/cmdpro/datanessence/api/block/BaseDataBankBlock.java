@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.api.block;
 
 import com.cmdpro.datanessence.api.util.DataBankUtil;
 import com.cmdpro.datanessence.data.databank.DataBankTypeManager;
+import com.cmdpro.datanessence.item.DataTablet;
 import com.cmdpro.datanessence.registry.ItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -43,7 +44,7 @@ public abstract class BaseDataBankBlock extends Block {
         return InteractionResult.sidedSuccess(pLevel.isClientSide());
     }
     public boolean canUse(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
-        return pPlayer.getInventory().contains(new ItemStack(ItemRegistry.DATA_TABLET.get(), 1));
+        return pPlayer.getInventory().contains((stack) -> stack.getItem() instanceof DataTablet);
     }
     public boolean isOkayToOpen(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, BlockHitResult pHitResult) {
         return true;

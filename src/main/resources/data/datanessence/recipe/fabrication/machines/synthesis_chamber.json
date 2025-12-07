@@ -6,13 +6,13 @@
   "entry": "datanessence:machinery/synthesis_chamber",
   "pattern": [
     "CCC",
-    "RLR",
+    "RPR",
     "OOO"
   ],
   "time": 200,
   "key": {
     "C": { "item": "datanessence:capacitance_panel" },
-    "L": { "item": "datanessence:logical_matrix" },
+    "P": { "item": "datanessence:essence_pathways" },
     "R": { "item": "datanessence:conductance_rod" },
     "O": { "item": "datanessence:polished_obsidian" }
   },

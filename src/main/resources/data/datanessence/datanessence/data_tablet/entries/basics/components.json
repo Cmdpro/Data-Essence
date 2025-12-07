@@ -17,6 +17,16 @@
       "recipes": [
         "datanessence:crafting/capacitance_panel",
         "datanessence:crafting/conductance_rod",
+        "datanessence:crafting/propeller",
+        "datanessence:crafting/exciter",
+        "datanessence:crafting/heating_coil",
+        "datanessence:crafting/copper_shell",
+        "datanessence:crafting/iron_drill"
+      ]
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
         "datanessence:fabrication/logical_matrix",
         "datanessence:fabrication/wire_spool"
       ]
@@ -25,16 +35,14 @@
       "type": "datanessence:crafting",
       "recipes": [
         "datanessence:infusion/lens_from_glass",
-        "datanessence:crafting/propeller",
-        "datanessence:crafting/exciter",
-        "datanessence:crafting/iron_drill"
+        "datanessence:infusion/essence_pathways"
       ]
     },
     {
       "type": "datanessence:crafting",
       "recipes": [
-        "datanessence:crafting/heating_coil",
-        "datanessence:crafting/copper_shell"
+        "datanessence:synthesis/assembly_actuator",
+        "datanessence:synthesis/logical_matrix"
       ]
     }
   ],

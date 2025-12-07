@@ -1,0 +1,728 @@
+{
+  "animations": {
+    "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "root",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "idle": {
+      "length": 2,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "root",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "sigil",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -45,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                -90,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                0,
+                -135,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                -180,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "sigil",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                0,
+                0.25,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 2,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "isCube": false,
+      "isMesh": false,
+      "children": [
+        {
+          "name": "cube",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -6,
+            0,
+            -6
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            0
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            -1
+          ],
+          "dimensions": [
+            14,
+            2,
+            14
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "cube1",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            6,
+            1,
+            -2
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            7
+          ],
+          "dimensions": [
+            2,
+            5,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "cube2",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -6,
+            1,
+            -2
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            7
+          ],
+          "dimensions": [
+            2,
+            5,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "cube3",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -6,
+            1,
+            -2
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            18,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            0,
+            6
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "cube4",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -6,
+            1,
+            -12
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            18,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            0,
+            6
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "cube5",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            4,
+            1,
+            -12
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            18,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            0,
+            6
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "cube6",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            4,
+            1,
+            -2
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            18,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            0,
+            6
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "cube7",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -6,
+            1,
+            -14
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            7
+          ],
+          "dimensions": [
+            2,
+            5,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "cube8",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            6,
+            1,
+            -14
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            7
+          ],
+          "dimensions": [
+            2,
+            5,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "cube9",
+          "rotation": [
+            0,
+            0,
+            -0.6108652381980153
+          ],
+          "offset": [
+            5,
+            1.25,
+            5
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            9,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": -0.05
+        },
+        {
+          "name": "cube10",
+          "rotation": [
+            0.6108652381980153,
+            0,
+            0
+          ],
+          "offset": [
+            5,
+            1.25,
+            5
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            9,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": -0.05
+        },
+        {
+          "name": "cube11",
+          "rotation": [
+            0,
+            0,
+            0.6108652381980153
+          ],
+          "offset": [
+            -5,
+            1.25,
+            5
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            9,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            0,
+            0
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": -0.05
+        },
+        {
+          "name": "cube12",
+          "rotation": [
+            0,
+            0,
+            0.6108652381980153
+          ],
+          "offset": [
+            -5,
+            1.25,
+            -5
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            9,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            0,
+            -2
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": -0.05
+        },
+        {
+          "name": "cube13",
+          "rotation": [
+            -0.6108652381980153,
+            0,
+            0
+          ],
+          "offset": [
+            -5,
+            1.25,
+            -5
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            9,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            0,
+            -2
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": -0.05
+        },
+        {
+          "name": "cube14",
+          "rotation": [
+            -0.6108652381980153,
+            0,
+            0
+          ],
+          "offset": [
+            5,
+            1.25,
+            -5
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            9,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            0,
+            -2
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": -0.05
+        },
+        {
+          "name": "cube15",
+          "rotation": [
+            0,
+            0,
+            -0.6108652381980153
+          ],
+          "offset": [
+            5,
+            1.25,
+            -5
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            9,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            0,
+            -2
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": -0.05
+        },
+        {
+          "name": "cube16",
+          "rotation": [
+            0.6108652381980153,
+            0,
+            0
+          ],
+          "offset": [
+            -5,
+            1.25,
+            5
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            9,
+            16
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            0,
+            0
+          ],
+          "dimensions": [
+            2,
+            4,
+            2
+          ],
+          "inflate": -0.05
+        },
+        {
+          "name": "sigil",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            2.25,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "cube17",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                26,
+                16
+              ],
+              "mirror": false,
+              "origin": [
+                -6,
+                1,
+                -6
+              ],
+              "dimensions": [
+                12,
+                0,
+                12
+              ],
+              "inflate": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    64,
+    64
+  ]
+}

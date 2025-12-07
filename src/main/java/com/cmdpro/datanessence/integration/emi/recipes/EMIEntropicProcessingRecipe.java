@@ -7,8 +7,10 @@ import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
@@ -19,11 +21,13 @@ public class EMIEntropicProcessingRecipe implements EmiRecipe {
     private final ResourceLocation id;
     private final List<EmiIngredient> input;
     private final List<EmiStack> output;
+    private final int time;
 
     public EMIEntropicProcessingRecipe(ResourceLocation id, EntropicProcessingRecipe recipe) {
         this.id = id;
         this.input = recipe.getIngredients().stream().map(s -> EmiIngredient.of(Arrays.stream(s.getItems()).map(EmiStack::of).toList())).toList();
         this.output = List.of(EmiStack.of(recipe.getResultItem(Minecraft.getInstance().level.registryAccess())));
+        this.time = recipe.getTime();
     }
     @Override
     public EmiRecipeCategory getCategory() {
@@ -65,5 +69,6 @@ public class EMIEntropicProcessingRecipe implements EmiRecipe {
         widgetHolder.addSlot(input.get(0), 29, 21).drawBack(false);
         // Output
         widgetHolder.addSlot(output.get(0), 73, 21).recipeContext(this).drawBack(false);
+        widgetHolder.addText(Component.translatable("emi.datanessence.time_seconds", (double) time / 20), 82, 44, 0xffffff, false).horizontalAlign(TextWidget.Alignment.CENTER);
     }
 }

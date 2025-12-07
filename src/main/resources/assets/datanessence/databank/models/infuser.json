@@ -37,8 +37,13 @@
       ]
     }
   },
+  "textureSize": [
+    64,
+    64
+  ],
   "parts": [
     {
+      "type": "databank:group",
       "name": "root",
       "rotation": [
         0,
@@ -50,10 +55,9 @@
         0,
         0
       ],
-      "isCube": false,
-      "isMesh": false,
       "children": [
         {
+          "type": "databank:cube",
           "name": "base bottom",
           "rotation": [
             0,
@@ -65,8 +69,6 @@
             0,
             0
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             0,
             18
@@ -85,6 +87,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "base top",
           "rotation": [
             0,
@@ -96,8 +99,6 @@
             14,
             0
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             0,
             0
@@ -116,6 +117,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "base top insert",
           "rotation": [
             0,
@@ -127,8 +129,6 @@
             12,
             -6
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             64,
             48
@@ -147,6 +147,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "filigree",
           "rotation": [
             0,
@@ -158,8 +159,6 @@
             2,
             -6
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             0,
             38
@@ -178,6 +177,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "filigree1",
           "rotation": [
             0,
@@ -189,8 +189,6 @@
             2,
             8
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             0,
             38
@@ -209,6 +207,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "filigree2",
           "rotation": [
             0,
@@ -220,8 +219,6 @@
             2,
             0
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             0,
             38
@@ -240,6 +237,7 @@
           "inflate": 0
         },
         {
+          "type": "databank:cube",
           "name": "filigree3",
           "rotation": [
             0,
@@ -251,8 +249,6 @@
             2,
             0
           ],
-          "isCube": true,
-          "isMesh": false,
           "texOffset": [
             0,
             38
@@ -273,8 +269,5 @@
       ]
     }
   ],
-  "textureSize": [
-    64,
-    64
-  ]
+  "version": 1
 }

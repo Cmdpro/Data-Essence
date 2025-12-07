@@ -21,10 +21,16 @@ public class LunarEssencePointBlockEntity extends BaseEssencePointBlockEntity {
     public LunarEssencePointBlockEntity(BlockPos pos, BlockState state) {
         super(BlockEntityRegistry.LUNAR_ESSENCE_POINT.get(), pos, state);
     }
+
     @Override
-    public Color linkColor() {
-        return new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().getColor());
+    public Color[] linkColor() {
+        var base = new Color(EssenceTypeRegistry.LUNAR_ESSENCE.get().color);
+        float darken = 1.5f;
+        return new Color[] {base,
+                new Color((int) (base.getRed() / darken), (int) (base.getGreen() / darken), (int) (base.getBlue() / darken), base.getAlpha())
+        };
     }
+
     @Override
     public void transfer(BaseEssencePointBlockEntity from, List<GraphPath<BlockPos, DefaultEdge>> other) {
         int transferAmount = (int) Math.floor((float)getFinalSpeed(DataNEssenceConfig.essencePointTransfer)/(float)other.size());

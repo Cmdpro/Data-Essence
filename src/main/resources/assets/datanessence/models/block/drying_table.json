@@ -1,16 +1,17 @@
 {
+	"format_version": "1.21.6",
 	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "datanessence:block/drying_table",
 		"particle": "datanessence:block/deco/patterned_copper"
 	},
-	"render_type": "minecraft:cutout",
 	"elements": [
 		{
 			"name": "stand north",
-			"from": [0, 0, 0],
-			"to": [16, 10, 0],
+			"from": [0, 0, 0.01],
+			"to": [16, 10, 0.01],
 			"faces": {
 				"north": {"uv": [0, 2.5, 8, 7.5], "texture": "#0"},
 				"south": {"uv": [0, 2.5, 8, 7.5], "texture": "#0"}
@@ -18,8 +19,8 @@
 		},
 		{
 			"name": "stand south",
-			"from": [0, 0, 16],
-			"to": [16, 10, 16],
+			"from": [0, 0, 15.99],
+			"to": [16, 10, 15.99],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 0, 16]},
 			"faces": {
 				"north": {"uv": [0, 2.5, 8, 7.5], "texture": "#0"},
@@ -28,8 +29,8 @@
 		},
 		{
 			"name": "stand east",
-			"from": [0, 0, 0],
-			"to": [0, 10, 16],
+			"from": [0.01, 0, 0],
+			"to": [0.01, 10, 16],
 			"faces": {
 				"east": {"uv": [0, 2.5, 8, 7.5], "texture": "#0"},
 				"west": {"uv": [0, 2.5, 8, 7.5], "texture": "#0"}
@@ -37,8 +38,8 @@
 		},
 		{
 			"name": "stand west",
-			"from": [16, 0, 0],
-			"to": [16, 10, 16],
+			"from": [15.99, 0, 0],
+			"to": [15.99, 10, 16],
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
 			"faces": {
 				"east": {"uv": [0, 2.5, 8, 7.5], "texture": "#0"},

@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.client;
 
 import com.cmdpro.databank.misc.SoundUtil;
 import com.cmdpro.datanessence.DataNEssence;
+import com.cmdpro.datanessence.config.DataNEssenceClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
@@ -24,10 +25,23 @@ import java.util.List;
 @EventBusSubscriber(value = Dist.CLIENT, modid = DataNEssence.MOD_ID)
 public class FactorySong {
     public static final HashMap<ResourceLocation, FactoryLoop> FACTORY_LOOPS = new HashMap<>();
-    private static float lastBlockVolume = 1.0f;
+    private static float lastMasterVolume = 1.0f;
 
     public static void addFactorySongSound(ResourceLocation id) {
-        FACTORY_LOOPS.put(id, new FactorySong.FactoryLoop(new FactorySong.FactorySoundInstance(id, SoundSource.BLOCKS, 0.5f, 1.0f, SoundInstance.createUnseededRandom(), false, 0, SoundInstance.Attenuation.NONE, 0.0, 0.0, 0.0, true)));
+        FACTORY_LOOPS.put(id, new FactorySong.FactoryLoop(
+                new FactorySong.FactorySoundInstance(
+                        id,
+                        SoundSource.MASTER,
+                        0.5f,
+                        1.0f,
+                        SoundInstance.createUnseededRandom(),
+                        false,
+                        0,
+                        SoundInstance.Attenuation.NONE,
+                        0.0,
+                        0.0,
+                        0.0,
+                        true)));
     }
 
     public static FactoryLoop getLoop(SoundEvent event) {
@@ -44,9 +58,9 @@ public class FactorySong {
 
         List<SoundInstance> toSync = new ArrayList<>();
 
-        float currentVolume = client.options.getSoundSourceVolume(SoundSource.BLOCKS);
-        boolean volumeJustCameBack = lastBlockVolume == 0f && currentVolume > 0f;
-        lastBlockVolume = currentVolume;
+        float currentVolume = client.options.getSoundSourceVolume(SoundSource.MASTER);
+        boolean volumeJustCameBack = lastMasterVolume == 0f && currentVolume > 0f;
+        lastMasterVolume = currentVolume;
 
         if (currentVolume > 0f || volumeJustCameBack) {
             for (var sound : FactorySong.FACTORY_LOOPS.values()) {
@@ -148,8 +162,9 @@ public class FactorySong {
 
         public float getDynamicVolume(float original) {
             if (original <= 0f) return 0f;
-            float blockVolume = Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.BLOCKS);
-            if (blockVolume <= 0f) return 0f;
+            float masterVolume = Minecraft.getInstance().options.getSoundSourceVolume(SoundSource.MASTER);
+            if (masterVolume <= 0f) return 0f;
+            if (DataNEssenceClientConfig.factorySongVolume <= 0) return 0f;
 
             float volume = original;
 
@@ -167,6 +182,9 @@ public class FactorySong {
                 double dist = center.distanceTo(eye);
                 double clampedDist = Math.max(0, Math.min(maxDist, dist));
                 volume *= (float)((maxDist - clampedDist) / maxDist);
+
+                // additionally, adjust based on the player's set Song volume
+                volume *= ( DataNEssenceClientConfig.factorySongVolume * 0.01f );
             }
 
             return volume;

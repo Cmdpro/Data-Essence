@@ -13,8 +13,10 @@ import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
+import dev.emi.emi.api.widget.TextWidget;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
@@ -25,6 +27,7 @@ import java.util.Map;
 
 public class EMISynthesisRecipe extends DataNEssenceEMIRecipe {
     private final Map<EssenceType, Float> essenceCost;
+    private final int time;
 
     public EMISynthesisRecipe(ResourceLocation id, SynthesisRecipe recipe) {
         super(DataNEssenceEMIPlugin.SYNTHESIS, id, recipe.getEntry(), 123, 60);
@@ -35,6 +38,7 @@ public class EMISynthesisRecipe extends DataNEssenceEMIRecipe {
         for (Map.Entry<ResourceLocation, Float> i : recipe.getEssenceCost().entrySet()) {
             this.essenceCost.put(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.get(i.getKey()), i.getValue());
         }
+        this.time = recipe.getTime();
     }
 
     @Override
@@ -58,6 +62,7 @@ public class EMISynthesisRecipe extends DataNEssenceEMIRecipe {
         widgetHolder.addSlot(inputs.get(1), 37, 32).drawBack(false);
         // Output
         widgetHolder.addSlot(outputs.get(0), 81, 21).recipeContext(this).drawBack(false);
+        widgetHolder.addText(Component.translatable("emi.datanessence.time_seconds", (double) time / 20), 90, 44, 0xffffff, false).horizontalAlign(TextWidget.Alignment.CENTER);
 
         // Essence bars
         widgetHolder.add(new EssenceBarWidget(5, 6, EssenceTypeRegistry.ESSENCE.get(), essenceCost.getOrDefault(EssenceTypeRegistry.ESSENCE.get(), 0f), 1000f, EssenceBarBackgroundTypes.INDUSTRIAL));

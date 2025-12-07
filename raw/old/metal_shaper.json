@@ -1,0 +1,421 @@
+{
+  "animations": {
+    "idle": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "press",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "press",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "lower_press": {
+      "length": 0.5,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "press",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                -2,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                -6,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "raise_press": {
+      "length": 0.5,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "press",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                -6,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.125,
+              "target": [
+                0,
+                -4,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0.75,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "isCube": false,
+      "isMesh": false,
+      "children": [
+        {
+          "name": "press",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": false,
+          "isMesh": false,
+          "children": [
+            {
+              "name": "the squasher",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                10,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                0,
+                40
+              ],
+              "mirror": false,
+              "origin": [
+                -4,
+                -1,
+                -4
+              ],
+              "dimensions": [
+                8,
+                3,
+                8
+              ],
+              "inflate": 0
+            },
+            {
+              "name": "press rod",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                12,
+                0
+              ],
+              "isCube": true,
+              "isMesh": false,
+              "texOffset": [
+                0,
+                51
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                0,
+                -2
+              ],
+              "dimensions": [
+                4,
+                10,
+                4
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "name": "base",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            0
+          ],
+          "mirror": false,
+          "origin": [
+            -8,
+            0,
+            -7
+          ],
+          "dimensions": [
+            16,
+            3,
+            14
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "right panel",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            7,
+            3,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            17
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            -5
+          ],
+          "dimensions": [
+            2,
+            13,
+            10
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "right decoration",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            5,
+            14,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            32,
+            40
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            -2,
+            -5
+          ],
+          "dimensions": [
+            3,
+            4,
+            10
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "left panel",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -7,
+            3,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            24,
+            17
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            -5
+          ],
+          "dimensions": [
+            2,
+            13,
+            10
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "left decoration",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -4,
+            14,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            48,
+            17
+          ],
+          "mirror": false,
+          "origin": [
+            -2,
+            -2,
+            -5
+          ],
+          "dimensions": [
+            3,
+            4,
+            10
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "rod",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            5,
+            13,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            48,
+            31
+          ],
+          "mirror": false,
+          "origin": [
+            -11,
+            0,
+            -1
+          ],
+          "dimensions": [
+            12,
+            2,
+            2
+          ],
+          "inflate": 0
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    128,
+    128
+  ]
+}

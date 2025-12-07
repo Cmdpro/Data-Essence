@@ -1,0 +1,6 @@
+{
+  "type": "datanessence:entropic_processing",
+  "input": { "item": "minecraft:blaze_rod" },
+  "time": 150,
+  "result": { "id": "minecraft:blaze_powder", "count": 6 }
+}

@@ -26,7 +26,7 @@ public class PrimitiveAntiGravityPack extends ArmorItem {
     public static final AttributeModifier FALL_HEIGHT_MODIFIER = new AttributeModifier(FALL_HEIGHT_ATTRIBUTE, 0.8, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
     public static ResourceLocation FUEL_ESSENCE_TYPE = DataNEssence.locate("essence");
     public PrimitiveAntiGravityPack(Properties pProperties) {
-        super(ArmorMaterialRegistry.PRIMITIVE_ANTI_GRAVITY_PACK, Type.CHESTPLATE, pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 1000)));
+        super(ArmorMaterialRegistry.PRIMITIVE_ANTI_GRAVITY_PACK, Type.CHESTPLATE, pProperties.component(DataComponentRegistry.ESSENCE_STORAGE, new ItemEssenceContainer(List.of(FUEL_ESSENCE_TYPE), 2500)));
     }
 
     @Override

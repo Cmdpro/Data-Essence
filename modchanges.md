@@ -1,22 +1,23 @@
 ### Additions
-- Added trails to Explosive Charges (also applied to the essence bombs that aren't survival accessible)
-- Added trails to Essence Slashes
-- Added new Data Bank minigame type, Laser
-- Added Factory Song melody to Industrial Plant Siphon
-- Added Polished Obsidian Tiles variant
-- Added Obsidian-Framed Glass
-- Data Bank minigames now render their names
+- Added a command to instantly charge items with Essence (multyfora)
+- Added information about the Industrial Plant Siphon's current fuel in its gui (Esét)
+- Added Pastel gemstone shard "reconstruction" syntheses and data entry (Esét)
+- Added Survey Tunneler machine, inspired by and serving a similar function as BuildCraft's Mining Well (Esét)
+- Polished Obsidian variants can now be used to build Nether Portals (multyfora)
 
 ### Changes
-- Essence Crystals, Essence Lasers, and Lensing Crystals entries require simple Laser puzzles to unlock
-- Removed Polished Obsidian from Fluidic Glass's recipe (replaced with more Capacitance Panels)
-- Made Decorative Blocks entry's Color Mixing puzzle easier
-- Gave Color Mixing puzzles to Traversite Road and Genderfluid
-- Changed Mineral-Finding Rod's use cost to 50 (was 25)
+- Charger now shows what item is inside it, and its charge level, in its Essence Meter display (multyfora)
+- Entropic Processor now inserts items dropped on top of it to its input slot (multyfora)
+- Essence Batteries retain their Essence contents when broken (multyfora)
+- Essence Light Fixture has collision (multyfora)
+- Fluid Bulbs retain their contents on being broken (multyfora)
+- Fluid Bulbs transfer fluid to other Bulbs below them, allowing vertical stacking (multyfora)
+- Lightslash Blade's attack speed is constant again instead of variable, fixing its lack of proper cooldown (Esét)
+- Interaction with the Charger is now in-world, instead of via a GUI (multyfora)
+- Interaction with the Enticing Lure is now in-world instead of via a GUI (multyfora)
+- Nodes may now customize the color of their wires' "pulses" (Esét)
+- When pick-blocking a Node, sneaking now picks its correspondent wire (multyfora)
 
 ### Fixes
-- Fixed Ancient Windows culling block faces they should not be
-- Removed a workaround that is no longer needed
-- Fixed Oritech integration Duratium synthesis requiring potentially-nonexistent netherite dust instead of netherite ingot
-- Fixed Mineral-Finding Rod not actually consuming Essence
-- Fixed Essence Wires sometimes not properly showing their direction
+- Corrected voxel shapes for several blocks (multyfora)
+- Fixed crash when the Ender Redirection Pearl Absorber encounters an ownerless ender pearl (multyfora)

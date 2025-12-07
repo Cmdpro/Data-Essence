@@ -22,6 +22,7 @@ public class EntityRegistry {
     public static final Supplier<EntityType<EssenceSlashProjectile>> ESSENCE_SLASH_PROJECTILE = ENTITY_TYPES.register("essence_slash", () -> EntityType.Builder.of((EntityType.EntityFactory<EssenceSlashProjectile>) EssenceSlashProjectile::new, MobCategory.MISC).sized(1f, 1f).build(DataNEssence.MOD_ID + ":" + "essence_slash"));
     public static final Supplier<EntityType<AncientCombatUnit>> ANCIENT_COMBAT_UNIT = register("ancient_combat_unit", () -> EntityType.Builder.of((EntityType.EntityFactory<AncientCombatUnit>) AncientCombatUnit::new, MobCategory.MONSTER).sized(0.6F, 1.8F).build(DataNEssence.MOD_ID + ":" + "ancient_combat_unit"));
     public static final Supplier<EntityType<ShockwaveEntity>> SHOCKWAVE = register("shockwave", () -> EntityType.Builder.of((EntityType.EntityFactory<ShockwaveEntity>) ShockwaveEntity::new, MobCategory.MISC).sized(0F, 0F).build(DataNEssence.MOD_ID + ":" + "shockwave"));
+    public static final Supplier<EntityType<AncientSentinelLaser>> ANCIENT_SENTINEL_LASER = ENTITY_TYPES.register("ancient_sentinel_laser", () -> EntityType.Builder.of((EntityType.EntityFactory<AncientSentinelLaser>) AncientSentinelLaser::new, MobCategory.MISC).sized(0f, 0f).build(DataNEssence.MOD_ID + ":" + "ancient_sentinel_laser"));
 
     private static <T extends EntityType<?>> Supplier<T> register(final String name, final Supplier<T> entity) {
         return ENTITY_TYPES.register(name, entity);

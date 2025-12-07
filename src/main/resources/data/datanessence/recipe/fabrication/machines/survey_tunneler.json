@@ -1,0 +1,21 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 50
+  },
+  "entry": "datanessence:machinery/survey_tunneler",
+  "pattern": [
+    "CIC",
+    "CcC",
+    "PDP"
+  ],
+  "time": 100,
+  "key": {
+    "C": { "item": "datanessence:conductance_rod" },
+    "I": { "item": "minecraft:iron_ingot" },
+    "c": { "item": "minecraft:chain" },
+    "P": { "item": "datanessence:capacitance_panel" },
+    "D": { "item": "datanessence:iron_drill" }
+  },
+  "result": { "id": "datanessence:survey_tunneler" }
+}

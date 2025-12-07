@@ -111,6 +111,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         simpleItemWithSubdirectory(ItemRegistry.EXCITER, "components");
         simpleItemWithSubdirectory(ItemRegistry.HEATING_COIL, "components");
         simpleItemWithSubdirectory(ItemRegistry.COPPER_SHELL, "components");
+        simpleItemWithSubdirectory(ItemRegistry.ESSENCE_PATHWAYS, "components");
+        simpleItemWithSubdirectory(ItemRegistry.ASSEMBLY_ACTUATOR, "components");
 
         simpleItemWithSubdirectory(ItemRegistry.COPPER_NUGGET, "intermediates");
         simpleItemWithSubdirectory(ItemRegistry.DIAMOND_SHARD, "intermediates");

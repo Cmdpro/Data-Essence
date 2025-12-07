@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.recipe;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -8,11 +9,12 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public class MetalShaperRecipe implements Recipe<RecipeInput> {
+public class MetalShaperRecipe implements Recipe<RecipeInput>, DataNEssenceRecipe {
     private final ItemStack output;
     private final Ingredient input;
     private final int time;
@@ -61,6 +63,11 @@ public class MetalShaperRecipe implements Recipe<RecipeInput> {
     @Override
     public RecipeType<?> getType() {
         return RecipeRegistry.METAL_SHAPING_TYPE.get();
+    }
+
+    @Override
+    public ResourceLocation getMachineEntry() {
+        return DataNEssence.locate("machinery/metal_shaper");
     }
 
     public static class Serializer implements RecipeSerializer<MetalShaperRecipe> {

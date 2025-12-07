@@ -16,6 +16,9 @@ public class TagRegistry {
         public static final TagKey<Block> HAMMER_AND_CHISEL_COLLECTABLE = tag("hammer_and_chisel_collectable"); // for the Hammer and Chisel tool
         public static final TagKey<Block> SCANNABLE_ORES = tag("scannable_ores");
 
+        public static final TagKey<Block> PUZZLE_COMPONENTS = tag("puzzle_components"); // blocks used in in-world structure puzzles
+        public static final TagKey<Block> STRUCTURE_PROTECTOR_IGNORED = tag("structure_protector_ignored");
+
         private static TagKey<Block> tag(String name) {
             return BlockTags.create(DataNEssence.locate(name));
         }

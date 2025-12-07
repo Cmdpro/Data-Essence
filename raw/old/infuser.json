@@ -1,0 +1,280 @@
+{
+  "animations": {
+    "idle": {
+      "length": 1.5,
+      "looping": true,
+      "animation": []
+    },
+    "active": {
+      "length": 0.5,
+      "looping": true,
+      "animation": []
+    },
+    "deactivated": {
+      "length": 6.66667,
+      "looping": true,
+      "animation": []
+    },
+    "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "root",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "isCube": false,
+      "isMesh": false,
+      "children": [
+        {
+          "name": "base bottom",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            18
+          ],
+          "mirror": false,
+          "origin": [
+            -8,
+            0,
+            -8
+          ],
+          "dimensions": [
+            16,
+            2,
+            16
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "base top",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            14,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            0
+          ],
+          "mirror": false,
+          "origin": [
+            -8,
+            0,
+            -8
+          ],
+          "dimensions": [
+            16,
+            2,
+            16
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "base top insert",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            -6,
+            12,
+            -6
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            64,
+            48
+          ],
+          "mirror": false,
+          "origin": [
+            11,
+            4,
+            11
+          ],
+          "dimensions": [
+            -10,
+            -2,
+            -10
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "filigree",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            2,
+            -6
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            38
+          ],
+          "mirror": false,
+          "origin": [
+            -7,
+            0,
+            -1
+          ],
+          "dimensions": [
+            14,
+            12,
+            0
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "filigree1",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            2,
+            8
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            38
+          ],
+          "mirror": false,
+          "origin": [
+            -7,
+            0,
+            -1
+          ],
+          "dimensions": [
+            14,
+            12,
+            0
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "filigree2",
+          "rotation": [
+            0,
+            1.5707963267948966,
+            0
+          ],
+          "offset": [
+            8,
+            2,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            38
+          ],
+          "mirror": false,
+          "origin": [
+            -7,
+            0,
+            -1
+          ],
+          "dimensions": [
+            14,
+            12,
+            0
+          ],
+          "inflate": 0
+        },
+        {
+          "name": "filigree3",
+          "rotation": [
+            0,
+            1.5707963267948966,
+            0
+          ],
+          "offset": [
+            -6,
+            2,
+            0
+          ],
+          "isCube": true,
+          "isMesh": false,
+          "texOffset": [
+            0,
+            38
+          ],
+          "mirror": false,
+          "origin": [
+            -7,
+            0,
+            -1
+          ],
+          "dimensions": [
+            14,
+            12,
+            0
+          ],
+          "inflate": 0
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    64,
+    64
+  ]
+}

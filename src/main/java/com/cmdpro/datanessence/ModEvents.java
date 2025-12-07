@@ -3,6 +3,7 @@ package com.cmdpro.datanessence;
 import com.cmdpro.datanessence.api.block.RedirectorInteractable;
 import com.cmdpro.datanessence.api.block.TraversiteBlock;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
+import com.cmdpro.datanessence.api.item.AdjustableAttributes;
 import com.cmdpro.datanessence.api.node.block.BaseCapabilityPoint;
 import com.cmdpro.datanessence.api.node.block.BaseEssencePoint;
 import com.cmdpro.datanessence.api.pearlnetwork.PearlNetworkBlock;
@@ -26,16 +27,13 @@ import com.cmdpro.datanessence.client.particle.RhombusParticleOptions;
 import com.cmdpro.datanessence.client.particle.SmallCircleParticleOptions;
 import com.cmdpro.datanessence.networking.packet.s2c.GrapplingHookSync;
 import com.cmdpro.datanessence.networking.packet.s2c.PingableSync;
-import com.cmdpro.datanessence.registry.AttachmentTypeRegistry;
-import com.cmdpro.datanessence.registry.BlockRegistry;
+import com.cmdpro.datanessence.registry.*;
 import com.cmdpro.datanessence.data.databank.DataBankEntryManager;
 import com.cmdpro.datanessence.data.databank.DataBankTypeManager;
 import com.cmdpro.datanessence.data.datatablet.DataTabManager;
 import com.cmdpro.datanessence.data.datatablet.Entries;
 import com.cmdpro.datanessence.data.datatablet.Entry;
 import com.cmdpro.datanessence.data.datatablet.EntryManager;
-import com.cmdpro.datanessence.registry.ItemRegistry;
-import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -55,6 +53,7 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDestroyBlockEvent;
@@ -150,7 +149,7 @@ public class ModEvents {
     public static void preventBreakingProtectedBlocks(BlockEvent.BreakEvent event) {
 
         if (!event.getPlayer().isCreative()) {
-            if (!event.getLevel().getBlockState(event.getPos()).is(BlockRegistry.STRUCTURE_PROTECTOR.get())) {
+            if (!event.getLevel().getBlockState(event.getPos()).is( TagRegistry.Blocks.STRUCTURE_PROTECTOR_IGNORED )) {
                 if (!event.getLevel().isClientSide()) {
                     if (((Level) event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                         List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
@@ -170,14 +169,10 @@ public class ModEvents {
 
     @SubscribeEvent
     public static void preventPlacingInProtectedZone(BlockEvent.EntityPlaceEvent event) {
-        boolean creative = false;
-        if (event.getEntity() instanceof Player player) {
-            if (player.isCreative()) {
-                creative = true;
-            }
-        }
+        boolean creative = event.getEntity() instanceof Player player && player.isCreative(); // ...this does not block fake players does it? should it? ~Eset
+
         if (!creative) {
-            if (!event.getLevel().isClientSide()) {
+            if (!event.getLevel().isClientSide() && !event.getPlacedBlock().is( TagRegistry.Blocks.STRUCTURE_PROTECTOR_IGNORED ) ) {
                 if (((Level)event.getLevel()).hasData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS)) {
                     List<StructureProtectorBlockEntity> ents = ((Level) event.getLevel()).getData(AttachmentTypeRegistry.STRUCTURE_CONTROLLERS);
                     for (StructureProtectorBlockEntity i : ents) {
@@ -191,6 +186,7 @@ public class ModEvents {
             }
         }
     }
+
     @SubscribeEvent
     public static void onExplosion(ExplosionEvent.Detonate event) {
         if (!event.getLevel().isClientSide()) {
@@ -246,32 +242,29 @@ public class ModEvents {
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Pre event) {
         if (!event.getEntity().level().isClientSide) {
+
             Optional<BlockEntity> ent = event.getEntity().getData(AttachmentTypeRegistry.LINK_FROM);
             if (ent.isPresent()) {
-                if (ent.get().getBlockPos().getCenter().distanceTo(event.getEntity().getBoundingBox().getCenter()) > 20) {
-                    event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                    PlayerDataUtil.updateData((ServerPlayer)event.getEntity());
-                } else {
-                    if (ent.get().getBlockState().getBlock() instanceof BaseEssencePoint block) {
-                        if (!event.getEntity().isHolding(block.getRequiredWire())) {
-                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
-                        }
+                if (ent.get().getBlockState().getBlock() instanceof BaseEssencePoint block) {
+                    if (!event.getEntity().isHolding(block.getRequiredWire())) {
+                        event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                        PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                     }
-                    if (ent.get().getBlockState().getBlock() instanceof BaseCapabilityPoint block) {
-                        if (!event.getEntity().isHolding(block.getRequiredWire())) {
-                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
-                        }
+                }
+                if (ent.get().getBlockState().getBlock() instanceof BaseCapabilityPoint block) {
+                    if (!event.getEntity().isHolding(block.getRequiredWire())) {
+                        event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                        PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                     }
-                    if (ent.get().getBlockState().getBlock() instanceof PearlNetworkBlock block) {
-                        if (!event.getEntity().isHolding(PearlNetworkBlock.getLinkItem())) {
-                            event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
-                            PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
-                        }
+                }
+                if (ent.get().getBlockState().getBlock() instanceof PearlNetworkBlock block) {
+                    if (!event.getEntity().isHolding(PearlNetworkBlock.getLinkItem())) {
+                        event.getEntity().setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
+                        PlayerDataUtil.updateData((ServerPlayer) event.getEntity());
                     }
                 }
             }
+
             if (event.getEntity().getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).isPresent()) {
                 event.getEntity().resetFallDistance();
                 if (!event.getEntity().isHolding((stack) -> stack.getItem() instanceof GrapplingHook)) {
@@ -328,6 +321,14 @@ public class ModEvents {
         }
         for (Entry i : entries) {
             DataTabletUtil.unlockEntry(event.getEntity(), i.id, i.getIncompleteStageServer(event.getEntity())+1);
+        }
+    }
+
+    // for tools/items/etc whose attributes can change over time
+    @SubscribeEvent
+    public static void adjustItemAttributes(ItemAttributeModifierEvent event) {
+        if (event.getItemStack().getItem() instanceof AdjustableAttributes item) {
+            item.adjustAttributes(event);
         }
     }
 }

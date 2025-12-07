@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pastel"
+    }
+  ],
+  "type": "datanessence:synthesis",
+  "essenceCost": {
+    "datanessence:essence": 50
+  },
+  "input": { "item": "pastel:topaz_powder" },
+  "input2": { "item": "pastel:topaz_powder" },
+  "time": 100,
+  "result": { "id": "pastel:topaz_shard", "count": 1 },
+  "entry": "datanessence:mod_integration/pastel_shard_reconstruction"
+}

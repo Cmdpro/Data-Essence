@@ -8,8 +8,6 @@ import mekanism.api.Action;
 import mekanism.api.chemical.ChemicalStack;
 import mekanism.api.chemical.IChemicalHandler;
 import net.minecraft.core.BlockPos;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jgrapht.GraphPath;
 import org.jgrapht.graph.DefaultEdge;
@@ -27,8 +25,12 @@ public class ChemicalNodeBlockEntity extends BaseCapabilityPointBlockEntity {
     }
 
     @Override
-    public Color linkColor() {
-        return new Color(0x65EA0C); // a mad science-y radioactive green
+    public Color[] linkColor() {
+        var base = new Color(0x65EA0C); // a mad science-y radioactive green
+        float darken = 1.5f;
+        return new Color[] {base,
+                new Color((int) (base.getRed() / darken), (int) (base.getGreen() / darken), (int) (base.getBlue() / darken), base.getAlpha())
+        };
     }
 
     @Override

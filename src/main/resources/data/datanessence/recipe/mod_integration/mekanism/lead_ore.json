@@ -7,7 +7,7 @@
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:ores/lead" },
-    "time": 400,
+    "time": 300,
     "result": { "id": "mekanism:ingot_lead" },
     "nuggetResult": { "id": "mekanism:nugget_lead", "count": 2 }
 }

@@ -370,9 +370,15 @@
     },
     "entity.ancient_sentinel.shoot": {
         "sounds": [
-            "mob/ghast/fireball4"
+            "datanessence:entity/ancient_sentinel/shoot"
         ],
         "subtitle": "subtitle.datanessence.entity.ancient_sentinel.shoot"
+    },
+    "entity.ancient_sentinel_projectile.hit_block": {
+        "sounds": [
+            "datanessence:entity/ancient_sentinel_projectile/hit_block"
+        ],
+        "subtitle": "subtitle.datanessence.entity.ancient_sentinel_projectile.hit_block"
     },
     "item.cognizant_cube.shake": {
         "sounds": [

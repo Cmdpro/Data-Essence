@@ -39,6 +39,7 @@ public class FluidMixingType extends CraftingType {
             if (!recipe2.getIngredients().isEmpty()) {
                 page.renderIngredientWithTooltip(screen, pGuiGraphics, recipe2.getIngredients().get(0), xOffset + x + 35, yOffset + y + 22, pMouseX, pMouseY);
             }
+            page.renderCraftTime(pGuiGraphics, recipe2.getTime(), xOffset + x + 78, yOffset + y + 8);
         }
     }
 

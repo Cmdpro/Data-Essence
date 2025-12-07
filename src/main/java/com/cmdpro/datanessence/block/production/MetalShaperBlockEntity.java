@@ -2,6 +2,7 @@ package com.cmdpro.datanessence.block.production;
 
 import com.cmdpro.databank.model.animation.DatabankAnimationReference;
 import com.cmdpro.databank.model.animation.DatabankAnimationState;
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
@@ -42,7 +43,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, Machine {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
             .addAnim(new DatabankAnimationReference("idle", (state, anim) -> {}, (state, anim) -> {}))
@@ -287,5 +288,10 @@ public class MetalShaperBlockEntity extends BlockEntity implements MenuProvider,
         public static void markFactorySong(BlockPos pos) {
             workingSound.addSource(pos);
         }
+    }
+
+    @Override
+    public List<Direction> getValidInputDirections() {
+        return List.of(Direction.DOWN, Direction.EAST, Direction.WEST);
     }
 }

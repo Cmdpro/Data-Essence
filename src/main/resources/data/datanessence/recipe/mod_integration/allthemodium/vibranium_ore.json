@@ -7,7 +7,7 @@
     ],
     "type": "datanessence:mineral_purification",
     "input": { "tag": "c:ores/vibranium" },
-    "time": 400,
+    "time": 300,
     "result": { "id": "allthemodium:vibranium_ingot" },
     "nuggetResult": { "id": "allthemodium:vibranium_nugget", "count": 2 }
 }

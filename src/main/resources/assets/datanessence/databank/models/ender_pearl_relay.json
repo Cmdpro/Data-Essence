@@ -109,8 +109,13 @@
       ]
     }
   },
+  "textureSize": [
+    64,
+    64
+  ],
   "parts": [
     {
+      "type": "databank:group",
       "name": "root",
       "rotation": [
         0,
@@ -122,10 +127,9 @@
         -1,
         0
       ],
-      "isCube": false,
-      "isMesh": false,
       "children": [
         {
+          "type": "databank:group",
           "name": "ring",
           "rotation": [
             0,
@@ -137,10 +141,9 @@
             9,
             0
           ],
-          "isCube": false,
-          "isMesh": false,
           "children": [
             {
+              "type": "databank:cube",
               "name": "ring",
               "rotation": [
                 0,
@@ -152,8 +155,6 @@
                 0,
                 0
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 0,
                 0
@@ -172,6 +173,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "ring insert",
               "rotation": [
                 0,
@@ -183,8 +185,6 @@
                 0,
                 0
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 64,
                 9
@@ -203,6 +203,7 @@
               "inflate": 0
             },
             {
+              "type": "databank:cube",
               "name": "ring filigree",
               "rotation": [
                 0,
@@ -214,8 +215,6 @@
                 -0.5,
                 0
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 32,
                 5
@@ -236,6 +235,7 @@
           ]
         },
         {
+          "type": "databank:group",
           "name": "crystal",
           "rotation": [
             0,
@@ -247,10 +247,9 @@
             9,
             0
           ],
-          "isCube": false,
-          "isMesh": false,
           "children": [
             {
+              "type": "databank:cube",
               "name": "cube",
               "rotation": [
                 0,
@@ -262,8 +261,6 @@
                 0,
                 0
               ],
-              "isCube": true,
-              "isMesh": false,
               "texOffset": [
                 0,
                 13
@@ -286,8 +283,5 @@
       ]
     }
   ],
-  "textureSize": [
-    64,
-    64
-  ]
+  "version": 1
 }

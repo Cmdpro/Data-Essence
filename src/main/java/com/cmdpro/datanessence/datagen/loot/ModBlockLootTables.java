@@ -42,6 +42,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         dropSelf(BlockRegistry.DECO_ESSENCE_BUFFER.get());
         dropSelf(BlockRegistry.DECO_ITEM_BUFFER.get());
         dropSelf(BlockRegistry.DECO_FLUID_BUFFER.get());
+        dropSelf(BlockRegistry.COPPER_VENT.get());
         this.add(BlockRegistry.ANCIENT_DATA_BANK.get(),
                 block -> noDrop());
         this.add(BlockRegistry.COMPUTER.get(),
@@ -134,6 +135,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
         this.add(BlockRegistry.CREATIVE_ESSENCE_BATTERY.get(),
                 block -> noDrop());
         dropSelf(BlockRegistry.OBSIDIAN_FRAMED_GLASS.get());
+        dropSelf(BlockRegistry.ESSENCE_READER.get());
 
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));

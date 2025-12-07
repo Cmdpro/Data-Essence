@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.recipe;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -16,7 +17,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.Optional;
 
-public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequiredKnowledge {
+public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequiredKnowledge, DataNEssenceRecipe {
     private final FluidStack output;
     private final FluidStack input;
     private final Optional<FluidStack> input2;
@@ -94,6 +95,11 @@ public class FluidMixingRecipe implements Recipe<RecipeInputWithFluid>, IHasRequ
     @Override
     public RecipeType<?> getType() {
         return RecipeRegistry.FLUID_MIXING_TYPE.get();
+    }
+
+    @Override
+    public ResourceLocation getMachineEntry() {
+        return DataNEssence.locate("machinery/fluid_mixer");
     }
 
     @Override

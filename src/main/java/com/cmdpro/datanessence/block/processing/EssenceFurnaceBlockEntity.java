@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.block.processing;
 
+import com.cmdpro.datanessence.api.block.Machine;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
@@ -8,6 +9,7 @@ import com.cmdpro.datanessence.registry.BlockEntityRegistry;
 import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.cmdpro.datanessence.screen.EssenceFurnaceMenu;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -32,9 +34,10 @@ import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
-public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity {
+public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvider, EssenceBlockEntity, Machine {
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
     @Override
     public EssenceStorage getStorage() {
@@ -208,5 +211,10 @@ public class EssenceFurnaceBlockEntity extends BlockEntity implements MenuProvid
         if (toAdd.is(entity.outputItemHandler.getStackInSlot(0).getItem())) {
             return entity.outputItemHandler.getStackInSlot(0).getCount() + toAdd.getCount() <= entity.outputItemHandler.getStackInSlot(0).getMaxStackSize();
         } else return entity.outputItemHandler.getStackInSlot(0).isEmpty();
+    }
+
+    @Override
+    public List<Direction> getValidInputDirections() {
+        return List.of(Direction.DOWN, Direction.UP);
     }
 }

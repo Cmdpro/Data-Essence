@@ -1,5 +1,6 @@
 package com.cmdpro.datanessence.recipe;
 
+import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.registry.RecipeRegistry;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -8,12 +9,13 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public class MineralPurificationRecipe implements Recipe<RecipeInput> {
+public class MineralPurificationRecipe implements Recipe<RecipeInput>, DataNEssenceRecipe {
     private final ItemStack output;
     private final ItemStack nuggetOutput;
     private final Ingredient input;
@@ -72,6 +74,11 @@ public class MineralPurificationRecipe implements Recipe<RecipeInput> {
     @Override
     public RecipeType<?> getType() {
         return RecipeRegistry.MINERAL_PURIFICATION_TYPE.get();
+    }
+
+    @Override
+    public ResourceLocation getMachineEntry() {
+        return DataNEssence.locate("machinery/mineral_purification_chamber");
     }
 
     public static class Serializer implements RecipeSerializer<MineralPurificationRecipe> {

@@ -409,8 +409,13 @@
       ]
     }
   },
+  "textureSize": [
+    128,
+    128
+  ],
   "parts": [
     {
+      "type": "databank:group",
       "name": "root",
       "rotation": [
         0,
@@ -422,10 +427,9 @@
         2.5,
         2
       ],
-      "isCube": false,
-      "isMesh": false,
       "children": [
         {
+          "type": "databank:group",
           "name": "wings",
           "rotation": [
             0,
@@ -437,10 +441,9 @@
             -1.5,
             1.5
           ],
-          "isCube": false,
-          "isMesh": false,
           "children": [
             {
+              "type": "databank:group",
               "name": "left_wing",
               "rotation": [
                 0,
@@ -452,10 +455,9 @@
                 0,
                 0
               ],
-              "isCube": false,
-              "isMesh": false,
               "children": [
                 {
+                  "type": "databank:group",
                   "name": "left_wing_upper_arm",
                   "rotation": [
                     0,
@@ -467,10 +469,9 @@
                     0,
                     0
                   ],
-                  "isCube": false,
-                  "isMesh": false,
                   "children": [
                     {
+                      "type": "databank:cube",
                       "name": "cube",
                       "rotation": [
                         0,
@@ -482,8 +483,6 @@
                         0,
                         0
                       ],
-                      "isCube": true,
-                      "isMesh": false,
                       "texOffset": [
                         16,
                         39
@@ -502,6 +501,7 @@
                       "inflate": 0
                     },
                     {
+                      "type": "databank:group",
                       "name": "left_wing_lower_arm",
                       "rotation": [
                         0,
@@ -513,10 +513,9 @@
                         0,
                         0
                       ],
-                      "isCube": false,
-                      "isMesh": false,
                       "children": [
                         {
+                          "type": "databank:cube",
                           "name": "cube1",
                           "rotation": [
                             0,
@@ -528,8 +527,6 @@
                             0,
                             0
                           ],
-                          "isCube": true,
-                          "isMesh": false,
                           "texOffset": [
                             36,
                             25
@@ -548,6 +545,7 @@
                           "inflate": 0
                         },
                         {
+                          "type": "databank:group",
                           "name": "left_wingtip",
                           "rotation": [
                             0,
@@ -559,10 +557,9 @@
                             0,
                             0
                           ],
-                          "isCube": false,
-                          "isMesh": false,
                           "children": [
                             {
+                              "type": "databank:cube",
                               "name": "finger",
                               "rotation": [
                                 0,
@@ -574,8 +571,6 @@
                                 0,
                                 0
                               ],
-                              "isCube": true,
-                              "isMesh": false,
                               "texOffset": [
                                 36,
                                 6
@@ -594,6 +589,7 @@
                               "inflate": 0
                             },
                             {
+                              "type": "databank:cube",
                               "name": "finger1",
                               "rotation": [
                                 3.472752242589666e-18,
@@ -605,8 +601,6 @@
                                 0,
                                 0
                               ],
-                              "isCube": true,
-                              "isMesh": false,
                               "texOffset": [
                                 36,
                                 2
@@ -625,6 +619,7 @@
                               "inflate": 0
                             },
                             {
+                              "type": "databank:cube",
                               "name": "finger2",
                               "rotation": [
                                 -0.04363323129985824,
@@ -636,8 +631,6 @@
                                 -0.25,
                                 0
                               ],
-                              "isCube": true,
-                              "isMesh": false,
                               "texOffset": [
                                 36,
                                 39
@@ -656,6 +649,7 @@
                               "inflate": 0
                             },
                             {
+                              "type": "databank:cube",
                               "name": "left_wingtip_membrane",
                               "rotation": [
                                 -0.04363323129985824,
@@ -667,8 +661,6 @@
                                 0,
                                 -0.25
                               ],
-                              "isCube": true,
-                              "isMesh": false,
                               "texOffset": [
                                 0,
                                 14
@@ -689,6 +681,7 @@
                           ]
                         },
                         {
+                          "type": "databank:cube",
                           "name": "left_membrane_inner",
                           "rotation": [
                             0,
@@ -700,8 +693,6 @@
                             -3,
                             -0.25
                           ],
-                          "isCube": true,
-                          "isMesh": false,
                           "texOffset": [
                             28,
                             28
@@ -722,6 +713,7 @@
                       ]
                     },
                     {
+                      "type": "databank:cube",
                       "name": "left_membrane_start",
                       "rotation": [
                         -0.04363323129985824,
@@ -733,8 +725,6 @@
                         -2,
                         -0.25
                       ],
-                      "isCube": true,
-                      "isMesh": false,
                       "texOffset": [
                         36,
                         18
@@ -757,6 +747,7 @@
               ]
             },
             {
+              "type": "databank:group",
               "name": "right_wing",
               "rotation": [
                 0,
@@ -768,10 +759,9 @@
                 0,
                 0
               ],
-              "isCube": false,
-              "isMesh": false,
               "children": [
                 {
+                  "type": "databank:group",
                   "name": "right_wing_upper_arm",
                   "rotation": [
                     0,
@@ -783,10 +773,9 @@
                     0,
                     0
                   ],
-                  "isCube": false,
-                  "isMesh": false,
                   "children": [
                     {
+                      "type": "databank:group",
                       "name": "right_wing_lower_arm",
                       "rotation": [
                         0,
@@ -798,10 +787,9 @@
                         0,
                         0
                       ],
-                      "isCube": false,
-                      "isMesh": false,
                       "children": [
                         {
+                          "type": "databank:group",
                           "name": "right_wingtip",
                           "rotation": [
                             0,
@@ -813,10 +801,9 @@
                             0,
                             0
                           ],
-                          "isCube": false,
-                          "isMesh": false,
                           "children": [
                             {
+                              "type": "databank:cube",
                               "name": "right_wingtip_membrane",
                               "rotation": [
                                 -0.04363323129985824,
@@ -828,8 +815,6 @@
                                 0,
                                 -0.25
                               ],
-                              "isCube": true,
-                              "isMesh": false,
                               "texOffset": [
                                 0,
                                 0
@@ -848,6 +833,7 @@
                               "inflate": 0
                             },
                             {
+                              "type": "databank:cube",
                               "name": "finger3",
                               "rotation": [
                                 -0.04363323129985824,
@@ -859,8 +845,6 @@
                                 -0.25,
                                 0
                               ],
-                              "isCube": true,
-                              "isMesh": false,
                               "texOffset": [
                                 32,
                                 39
@@ -879,6 +863,7 @@
                               "inflate": 0
                             },
                             {
+                              "type": "databank:cube",
                               "name": "finger4",
                               "rotation": [
                                 3.472752242589666e-18,
@@ -890,8 +875,6 @@
                                 0,
                                 0
                               ],
-                              "isCube": true,
-                              "isMesh": false,
                               "texOffset": [
                                 36,
                                 0
@@ -910,6 +893,7 @@
                               "inflate": 0
                             },
                             {
+                              "type": "databank:cube",
                               "name": "finger5",
                               "rotation": [
                                 0,
@@ -921,8 +905,6 @@
                                 0,
                                 0
                               ],
-                              "isCube": true,
-                              "isMesh": false,
                               "texOffset": [
                                 36,
                                 4
@@ -943,6 +925,7 @@
                           ]
                         },
                         {
+                          "type": "databank:cube",
                           "name": "right_membrane_inner",
                           "rotation": [
                             0,
@@ -954,8 +937,6 @@
                             -3,
                             -0.25
                           ],
-                          "isCube": true,
-                          "isMesh": false,
                           "texOffset": [
                             0,
                             28
@@ -974,6 +955,7 @@
                           "inflate": 0
                         },
                         {
+                          "type": "databank:cube",
                           "name": "cube2",
                           "rotation": [
                             0,
@@ -985,8 +967,6 @@
                             0,
                             0
                           ],
-                          "isCube": true,
-                          "isMesh": false,
                           "texOffset": [
                             36,
                             8
@@ -1007,6 +987,7 @@
                       ]
                     },
                     {
+                      "type": "databank:cube",
                       "name": "cube3",
                       "rotation": [
                         0,
@@ -1018,8 +999,6 @@
                         0,
                         0
                       ],
-                      "isCube": true,
-                      "isMesh": false,
                       "texOffset": [
                         0,
                         39
@@ -1038,6 +1017,7 @@
                       "inflate": 0
                     },
                     {
+                      "type": "databank:cube",
                       "name": "right_membrane_start",
                       "rotation": [
                         -0.04363323129985824,
@@ -1049,8 +1029,6 @@
                         -2,
                         -0.25
                       ],
-                      "isCube": true,
-                      "isMesh": false,
                       "texOffset": [
                         36,
                         11
@@ -1077,8 +1055,5 @@
       ]
     }
   ],
-  "textureSize": [
-    128,
-    128
-  ]
+  "version": 1
 }
