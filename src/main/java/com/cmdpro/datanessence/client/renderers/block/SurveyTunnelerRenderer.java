@@ -7,6 +7,7 @@ import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.auxiliary.SurveyTunneler;
 import com.cmdpro.datanessence.block.auxiliary.SurveyTunnelerBlockEntity;
+import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -52,15 +53,15 @@ public class SurveyTunnelerRenderer extends DatabankBlockEntityRenderer<SurveyTu
         }
 
         @Override
-        public void setupModelPose(SurveyTunnelerBlockEntity pEntity, float partialTick) {
-            pEntity.animState.updateAnimDefinitions(getModel());
-            if (pEntity.progress >= 0) {
-                pEntity.animState.setAnim("gears_turn");
+        public void setupModelPose(SurveyTunnelerBlockEntity tunneler, float partialTick) {
+            tunneler.animState.updateAnimDefinitions(getModel());
+            if ( tunneler.progress >= 0 && tunneler.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1 ) {
+                tunneler.animState.setAnim("gears_turn");
                 // axle_turn should play when it is waiting between block breaks (it currently does not even have this functionality)
             } else {
-                pEntity.animState.setAnim("idle");
+                tunneler.animState.setAnim("idle");
             }
-            animate(pEntity.animState);
+            animate(tunneler.animState);
         }
     }
 }

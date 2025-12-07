@@ -23,6 +23,10 @@ import org.jetbrains.annotations.NotNull;
 public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlockEntity {
     public DatabankAnimationState animState = new DatabankAnimationState("idle")
             .addAnim( new DatabankAnimationReference(
+                    "idle",
+                    (state, anim) -> {},
+                    (state, anim) -> {}))
+            .addAnim( new DatabankAnimationReference(
                     "axle_turn",
                     (state, anim) -> {},
                     (state, anim) -> {}))
@@ -56,7 +60,7 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
 
         this.isDone = false;
         this.breakTime = -1;
-        this.progress = 0;
+        this.progress = -1;
     }
 
     public static void tick(Level world, BlockPos pos, BlockState state, SurveyTunnelerBlockEntity tunneler) {
@@ -78,7 +82,7 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
         // If we somehow went below min Y, stop
         if (tunneler.currentDepth < tunneler.maxDepth) {
             tunneler.isDone = true;
-            tunneler.progress = -1;
+            tunneler.progress = 0;
             return;
         }
 
