@@ -144,6 +144,7 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
                 tunneler.progress = -1;
             }
         }
+        tunneler.updateBlock();
     }
 
     public static void clientTick(Level world, BlockPos pos, BlockState state, SurveyTunnelerBlockEntity tunneler) {
@@ -221,5 +222,11 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
         isDone = tag.getBoolean("IsDone");
         breakTime = tag.getInt("BreakTime");
         progress = tag.getInt("Progress");
+    }
+
+    protected void updateBlock() {
+        BlockState blockState = level.getBlockState(this.getBlockPos());
+        this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
+        this.setChanged();
     }
 }
