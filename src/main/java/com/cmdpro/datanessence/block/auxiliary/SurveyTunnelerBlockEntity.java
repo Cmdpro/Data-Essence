@@ -1,5 +1,7 @@
 package com.cmdpro.datanessence.block.auxiliary;
 
+import com.cmdpro.databank.model.animation.DatabankAnimationReference;
+import com.cmdpro.databank.model.animation.DatabankAnimationState;
 import com.cmdpro.datanessence.api.essence.EssenceBlockEntity;
 import com.cmdpro.datanessence.api.essence.EssenceStorage;
 import com.cmdpro.datanessence.api.essence.container.SingleEssenceContainer;
@@ -19,13 +21,23 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
 public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlockEntity {
+    public DatabankAnimationState animState = new DatabankAnimationState("idle")
+            .addAnim( new DatabankAnimationReference(
+                    "axle_turn",
+                    (state, anim) -> {},
+                    (state, anim) -> {}))
+            .addAnim( new DatabankAnimationReference(
+                    "gears_turn",
+                    (state, anim) -> {},
+                    (state, anim) -> {}));
+
     public SingleEssenceContainer storage = new SingleEssenceContainer(EssenceTypeRegistry.ESSENCE.get(), 1000);
 
-    int maxDepth;      // deepest Y we will go to (usually world min Y)
-    int currentDepth;  // current Y we’re working at
-    boolean isDone;    // no more work to do
-    int breakTime;     // ticks needed to break current block
-    int progress;      // how many progress “ticks” we have on current block
+    public int maxDepth;      // deepest Y we will go to (usually world min Y)
+    public int currentDepth;  // current Y we’re working at
+    public boolean isDone;    // no more work to do
+    public int breakTime;     // ticks needed to break current block
+    public int progress;      // how many progress “ticks” we have on current block
 
     @Override
     public EssenceStorage getStorage() {

@@ -1,0 +1,1268 @@
+{
+  "animations": {
+  "hand": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "root",
+          "target": "position",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "idle": {
+      "length": 0,
+      "looping": true,
+      "animation": []
+    },
+    "axle_turn": {
+      "length": 0.5,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "axle",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.125,
+              "target": [
+                0,
+                0,
+                -85
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                0,
+                0,
+                -180
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                -270
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                0,
+                0,
+                -360
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "gears_turn": {
+      "length": 0.33333,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "gear_nw",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.08233,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.08333,
+              "target": [
+                -22.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.16567,
+              "target": [
+                -22.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.16667,
+              "target": [
+                -45,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.249,
+              "target": [
+                -45,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                -67.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33233,
+              "target": [
+                -67.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33333,
+              "target": [
+                -90,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "gear_ne",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.08233,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.08333,
+              "target": [
+                -22.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.16567,
+              "target": [
+                -22.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.16667,
+              "target": [
+                -45,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.249,
+              "target": [
+                -45,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                -67.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33233,
+              "target": [
+                -67.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33333,
+              "target": [
+                -90,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "gear_sw",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.08233,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.08333,
+              "target": [
+                22.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.16567,
+              "target": [
+                22.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.16667,
+              "target": [
+                45,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.249,
+              "target": [
+                45,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                67.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33233,
+              "target": [
+                67.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33333,
+              "target": [
+                90,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "gear_se",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.08233,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.08333,
+              "target": [
+                22.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.16567,
+              "target": [
+                22.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.16667,
+              "target": [
+                45,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.249,
+              "target": [
+                45,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                67.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33233,
+              "target": [
+                67.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.33333,
+              "target": [
+                90,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "type": "databank:group",
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "children": [
+        {
+          "type": "databank:group",
+          "name": "support_nw",
+          "rotation": [
+            0.39269908169872414,
+            -0.7853981633974483,
+            0
+          ],
+          "offset": [
+            5,
+            2.5,
+            -5
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "support_nw_base",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                56,
+                51
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                0,
+                -1
+              ],
+              "dimensions": [
+                2,
+                2,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "support_nw1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                2,
+                0
+              ],
+              "texOffset": [
+                50,
+                41
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                0,
+                -1
+              ],
+              "dimensions": [
+                2,
+                8,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "support_nw_filigree",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                6,
+                -1
+              ],
+              "texOffset": [
+                0,
+                55
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -4,
+                -3
+              ],
+              "dimensions": [
+                0,
+                8,
+                3
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "type": "databank:group",
+          "name": "support_sw",
+          "rotation": [
+            -0.39269908169872414,
+            0.7853981633974483,
+            0
+          ],
+          "offset": [
+            5,
+            2.5,
+            5
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "support_sw_base",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                58,
+                41
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                0,
+                -1
+              ],
+              "dimensions": [
+                2,
+                2,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "support_sw1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                2,
+                0
+              ],
+              "texOffset": [
+                48,
+                51
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                0,
+                -1
+              ],
+              "dimensions": [
+                2,
+                8,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "support_sw_filigree",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                6,
+                1
+              ],
+              "texOffset": [
+                12,
+                55
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -4,
+                0
+              ],
+              "dimensions": [
+                0,
+                8,
+                3
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "type": "databank:group",
+          "name": "support_ne",
+          "rotation": [
+            0.39269908169872414,
+            0.7853981633974483,
+            0
+          ],
+          "offset": [
+            -5,
+            2.5,
+            -5
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "support_ne_base",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                56,
+                55
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                0,
+                -1
+              ],
+              "dimensions": [
+                2,
+                2,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "support_ne1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                2,
+                0
+              ],
+              "texOffset": [
+                40,
+                51
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                0,
+                -1
+              ],
+              "dimensions": [
+                2,
+                8,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "support_ne_filigree",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                6,
+                -1
+              ],
+              "texOffset": [
+                6,
+                55
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -4,
+                -3
+              ],
+              "dimensions": [
+                0,
+                8,
+                3
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "type": "databank:group",
+          "name": "support_se",
+          "rotation": [
+            -0.39269908169872414,
+            -0.7853981633974483,
+            0
+          ],
+          "offset": [
+            -5,
+            2.5,
+            5
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "support_se_base",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                58,
+                45
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                0,
+                -1
+              ],
+              "dimensions": [
+                2,
+                2,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "support_se1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                2,
+                0
+              ],
+              "texOffset": [
+                30,
+                54
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                0,
+                -1
+              ],
+              "dimensions": [
+                2,
+                8,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "support_se_filigree",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                6,
+                1
+              ],
+              "texOffset": [
+                18,
+                55
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -4,
+                0
+              ],
+              "dimensions": [
+                0,
+                8,
+                3
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "type": "databank:cube",
+          "name": "platform",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "texOffset": [
+            0,
+            0
+          ],
+          "mirror": false,
+          "origin": [
+            -8,
+            0,
+            -8
+          ],
+          "dimensions": [
+            16,
+            3,
+            16
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "platform_inner_ns",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "texOffset": [
+            0,
+            19
+          ],
+          "mirror": false,
+          "origin": [
+            -4,
+            0,
+            -6
+          ],
+          "dimensions": [
+            8,
+            3,
+            12
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "platform_inner_ew",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            0,
+            0
+          ],
+          "texOffset": [
+            0,
+            34
+          ],
+          "mirror": false,
+          "origin": [
+            -6,
+            0,
+            -4
+          ],
+          "dimensions": [
+            12,
+            3,
+            8
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "upper_platform",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            11,
+            0
+          ],
+          "texOffset": [
+            40,
+            19
+          ],
+          "mirror": false,
+          "origin": [
+            -4,
+            0,
+            -4
+          ],
+          "dimensions": [
+            8,
+            2,
+            8
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "gearbox",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            13,
+            0
+          ],
+          "texOffset": [
+            40,
+            29
+          ],
+          "mirror": false,
+          "origin": [
+            -3,
+            0,
+            -3
+          ],
+          "dimensions": [
+            6,
+            6,
+            6
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:group",
+          "name": "axle",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            15.5,
+            -3
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "axle1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                30,
+                45
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2.5,
+                -5
+              ],
+              "dimensions": [
+                0,
+                4,
+                5
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "type": "databank:group",
+          "name": "gear_nw",
+          "rotation": [
+            0,
+            -0.7853981633974483,
+            0
+          ],
+          "offset": [
+            3,
+            15.5,
+            -3
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "gear",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                40,
+                41
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2.5,
+                -2.5
+              ],
+              "dimensions": [
+                0,
+                5,
+                5
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "type": "databank:group",
+          "name": "gear_ne",
+          "rotation": [
+            0,
+            0.7853981633974483,
+            0
+          ],
+          "offset": [
+            -3,
+            15.5,
+            -3
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "gear1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                0,
+                45
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2.5,
+                -2.5
+              ],
+              "dimensions": [
+                0,
+                5,
+                5
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "type": "databank:group",
+          "name": "gear_sw",
+          "rotation": [
+            0,
+            0.7853981633974483,
+            0
+          ],
+          "offset": [
+            3,
+            15.5,
+            3
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "gear2",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                10,
+                45
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2.5,
+                -2.5
+              ],
+              "dimensions": [
+                0,
+                5,
+                5
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "type": "databank:group",
+          "name": "gear_se",
+          "rotation": [
+            0,
+            -0.7853981633974483,
+            0
+          ],
+          "offset": [
+            -3,
+            15.5,
+            3
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "gear3",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                20,
+                45
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -2.5,
+                -2.5
+              ],
+              "dimensions": [
+                0,
+                5,
+                5
+              ],
+              "inflate": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    128,
+    128
+  ],
+  "version": 1
+}
