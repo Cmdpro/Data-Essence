@@ -1,13 +1,21 @@
 package com.cmdpro.datanessence.networking.packet.s2c;
 
+import com.cmdpro.databank.misc.ColorGradient;
+import com.cmdpro.databank.misc.TrailLeftoverHandler;
+import com.cmdpro.databank.misc.TrailRender;
+import com.cmdpro.databank.misc.TrailTickHandler;
+import com.cmdpro.databank.rendering.RenderHandler;
+import com.cmdpro.databank.rendering.RenderTypeHandler;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.networking.Message;
 import com.cmdpro.datanessence.registry.SoundRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -19,6 +27,8 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
+
+import java.awt.*;
 
 public record PlayAncientCombatUnitBlinkEffect(Vec3 from, Vec3 to, boolean curve) implements Message {
 
@@ -63,6 +73,10 @@ public record PlayAncientCombatUnitBlinkEffect(Vec3 from, Vec3 to, boolean curve
         Vec3 center = from.lerp(to, 0.5f);
         float length = (float) from.vectorTo(to).length();
         int maxShifts = (int) (from.distanceTo(to) / 0.25);
+
+        ClientHandler handler = new ClientHandler();
+        handler.spawnTrail(from, maxShifts+1, maxShifts+1, 0.1f, DataNEssence.locate("textures/vfx/trail.png"));
+
         for (int j = 0; j < maxShifts; j++) {
             Vec3 shifted = from.lerp(to, (float) j / (float) maxShifts);
             if (curve) {
@@ -77,8 +91,9 @@ public record PlayAncientCombatUnitBlinkEffect(Vec3 from, Vec3 to, boolean curve
                     shift.x, shift.y, shift.z
                 );
             }
-            Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.WITCH, shifted.x, shifted.y, shifted.z, 0, 0, 0);
+            handler.move(shifted);
         }
+        handler.finishTrail();
         for (int i = 0; i < 32; i++) {
             level
                     .addParticle(
@@ -91,6 +106,21 @@ public record PlayAncientCombatUnitBlinkEffect(Vec3 from, Vec3 to, boolean curve
                             0.0,
                             random.nextGaussian()/2f
                     );
+        }
+    }
+    public static class ClientHandler {
+        public TrailRender trail;
+        public ColorGradient trailColor;
+        public void spawnTrail(Vec3 position, int segments, int time, float size, ResourceLocation texture) {
+            trail = new TrailRender(position, segments, time, size, texture, (a) -> RenderTypeHandler.ADDITIVE.apply(a, false)).setShrink(true);
+            trailColor = ColorGradient.singleColor(Color.MAGENTA);
+        }
+        public void move(Vec3 pos) {
+            trail.position = pos;
+            trail.tick();
+        }
+        public void finishTrail() {
+            TrailLeftoverHandler.addTrail(trail, RenderHandler.createBufferSource(), LightTexture.FULL_BRIGHT, trailColor);
         }
     }
 }
