@@ -41,12 +41,14 @@ public class SurveyTunnelerRenderer extends DatabankBlockEntityRenderer<SurveyTu
 
     public static class Model extends DatabankBlockEntityModel<SurveyTunnelerBlockEntity> {
         public DatabankModel model;
+
         public DatabankModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("survey_tunneler"));
             }
             return model;
         }
+
         @Override
         public ResourceLocation getTextureLocation() {
             return DataNEssence.locate("textures/block/survey_tunneler.png");
