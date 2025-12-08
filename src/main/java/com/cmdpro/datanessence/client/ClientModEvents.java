@@ -81,6 +81,7 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_RELAY.get(), EnderPearlRelayRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_DESTINATION.get(), EnderPearlDestinationRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.STRUCTURE_PROTECTOR.get(), StructureProtectorRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.SURVEY_TUNNELER.get(), SurveyTunnelerRenderer::new);
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -165,6 +166,7 @@ public class ClientModEvents {
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_capture.png"), DataNEssence.locate("ender_pearl_capture")), BlockRegistry.ENDER_PEARL_CAPTURE.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_relay.png"), DataNEssence.locate("ender_pearl_relay")), BlockRegistry.ENDER_PEARL_RELAY.get().asItem());
         event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/ender_pearl_destination.png"), DataNEssence.locate("ender_pearl_destination")), BlockRegistry.ENDER_PEARL_DESTINATION.get().asItem());
+        event.registerItem(AnimatedBlockItemUtil.createBasicExtensions(DataNEssence.locate("textures/block/survey_tunneler.png"), DataNEssence.locate("survey_tunneler")), BlockRegistry.SURVEY_TUNNELER.get().asItem());
     }
     @SubscribeEvent
     public static void registerItemDecorations(RegisterItemDecorationsEvent event) {
@@ -187,7 +189,6 @@ public class ClientModEvents {
         event.register(MenuRegistry.ESSENCE_FURNACE_MENU.get(), EssenceFurnaceScreen::new);
         event.register(MenuRegistry.SYNTHESIS_CHAMBER_MENU.get(), SynthesisChamberScreen::new);
         event.register(MenuRegistry.FLUID_MIXER_MENU.get(), FluidMixerScreen::new);
-        event.register(MenuRegistry.ENTICING_LURE_MENU.get(), EnticingLureScreen::new);
         event.register(MenuRegistry.MINERAL_PURIFICATION_CHAMBER_MENU.get(), MineralPurificationChamberScreen::new);
         event.register(MenuRegistry.ITEM_FILTER_MENU.get(), ItemFilterScreen::new);
         event.register(MenuRegistry.MUSIC_DISC_PLAYER_MENU.get(), MusicDiscPlayerScreen::new);

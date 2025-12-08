@@ -24,8 +24,11 @@ public class ItemPointBlockEntity extends BaseCapabilityPointBlockEntity {
     }
 
     @Override
-    public Color linkColor() {
-        return new Color(0xef4d3d);
+    public Color[] linkColor() {
+        return new Color[] {
+                new Color(0xef4d3d),
+                new Color(0xbb163d)
+        };
     }
 
     @Override

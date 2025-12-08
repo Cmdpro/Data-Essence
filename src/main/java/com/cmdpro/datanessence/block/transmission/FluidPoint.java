@@ -40,14 +40,4 @@ public class FluidPoint extends BaseCapabilityPoint {
             }
         };
     }
-
-    @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-
-        if(player.isShiftKeyDown()) {
-            return new ItemStack(ItemRegistry.FLUID_WIRE.get());
-        }
-        return super.getCloneItemStack(state,target,level,pos,player);
-    }
-
 }
