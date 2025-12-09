@@ -277,6 +277,16 @@ public class DataTabletScreen extends Screen {
     }
 
     @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        // Close on inventory key (E by default)
+        if (Minecraft.getInstance().options.keyInventory.matches(keyCode, scanCode)) {
+            super.onClose();
+            return true;
+        }
+        return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    @Override
     public void onClose() {
         if (screenType != 2) {
             super.onClose();
