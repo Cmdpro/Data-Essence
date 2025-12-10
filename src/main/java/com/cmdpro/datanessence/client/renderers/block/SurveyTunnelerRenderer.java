@@ -7,7 +7,6 @@ import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 import com.cmdpro.datanessence.DataNEssence;
 import com.cmdpro.datanessence.block.auxiliary.SurveyTunneler;
 import com.cmdpro.datanessence.block.auxiliary.SurveyTunnelerBlockEntity;
-import com.cmdpro.datanessence.registry.EssenceTypeRegistry;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
