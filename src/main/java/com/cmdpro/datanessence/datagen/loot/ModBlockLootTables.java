@@ -136,6 +136,7 @@ public class ModBlockLootTables extends BlockLootSubProvider {
                 block -> noDrop());
         dropSelf(BlockRegistry.OBSIDIAN_FRAMED_GLASS.get());
         dropSelf(BlockRegistry.ESSENCE_READER.get());
+        dropSelf(BlockRegistry.SURVEY_TUNNELER.get());
 
         this.add(BlockRegistry.TETHERGRASS.get(),
                 block -> createTethergrassDrops(block, ItemRegistry.BONDING_POWDER.get()));
