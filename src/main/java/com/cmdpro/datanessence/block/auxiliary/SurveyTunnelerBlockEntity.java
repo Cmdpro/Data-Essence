@@ -63,7 +63,22 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
         this.progress = -1;
     }
 
+    //just to be safe
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        if (this.level != null) {
+            this.animState.setLevel(this.level);
+        }
+    }
+
+
     public static void tick(Level world, BlockPos pos, BlockState state, SurveyTunnelerBlockEntity tunneler) {
+        // Make sure animation time uses this world's clock
+        if (tunneler.animState.level != world) {
+            tunneler.animState.setLevel(world);
+        }
+
         if (world.isClientSide) {
             clientTick(world, pos, state, tunneler);
             return;
@@ -148,7 +163,19 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
     }
 
     public static void clientTick(Level world, BlockPos pos, BlockState state, SurveyTunnelerBlockEntity tunneler) {
+        if (!world.isClientSide) return;
 
+        boolean hasFuel = tunneler.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1;
+        boolean isDigging = tunneler.progress >= 0;
+        //idk eset tweak this yourself im super confused and i am not gonna do this rn, works strangely
+        // 😔😔😔😔
+        //nvm it works now
+        //delete this
+        if (hasFuel && isDigging) {
+            tunneler.animState.setAnim("gears_turn");
+        } else {
+            tunneler.animState.setAnim("idle");
+        }
     }
 
     /**
@@ -224,9 +251,13 @@ public class SurveyTunnelerBlockEntity extends BlockEntity implements EssenceBlo
         progress = tag.getInt("Progress");
     }
 
+    //idk if this helps at all
     protected void updateBlock() {
+        if (this.level == null) return;
         BlockState blockState = level.getBlockState(this.getBlockPos());
-        this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
-        this.setChanged();
+        level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
+        setChanged();
     }
+
+
 }

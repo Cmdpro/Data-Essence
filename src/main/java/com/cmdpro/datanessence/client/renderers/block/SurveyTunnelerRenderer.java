@@ -40,8 +40,9 @@ public class SurveyTunnelerRenderer extends DatabankBlockEntityRenderer<SurveyTu
 
 
     public static class Model extends DatabankBlockEntityModel<SurveyTunnelerBlockEntity> {
-        public DatabankModel model;
+        private DatabankModel model;
 
+        @Override
         public DatabankModel getModel() {
             if (model == null) {
                 model = DatabankModels.models.get(DataNEssence.locate("survey_tunneler"));
@@ -56,14 +57,17 @@ public class SurveyTunnelerRenderer extends DatabankBlockEntityRenderer<SurveyTu
 
         @Override
         public void setupModelPose(SurveyTunnelerBlockEntity tunneler, float partialTick) {
-            tunneler.animState.updateAnimDefinitions(getModel());
-            if ( tunneler.progress >= 0 && tunneler.storage.getEssence(EssenceTypeRegistry.ESSENCE.get()) >= 1 ) {
-                tunneler.animState.setAnim("gears_turn");
-                // axle_turn should play when it is waiting between block breaks (it currently does not even have this functionality)
-            } else {
-                tunneler.animState.setAnim("idle");
+            DatabankModel databankModel = getModel();
+            if (databankModel == null) {
+                return;
             }
+
+            tunneler.animState.updateAnimDefinitions(databankModel);
             animate(tunneler.animState);
         }
+
     }
+
+
+
 }
