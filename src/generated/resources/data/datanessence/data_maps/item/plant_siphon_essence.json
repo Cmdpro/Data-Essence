@@ -4,6 +4,10 @@
       "amount_per_tick": 2.0,
       "ticks": 20
     },
+    "#c:mushrooms": {
+      "amount_per_tick": 2.0,
+      "ticks": 20
+    },
     "#c:seeds": {
       "amount_per_tick": 2.0,
       "ticks": 10
@@ -75,6 +79,10 @@
     "minecraft:torchflower": {
       "amount_per_tick": 4.0,
       "ticks": 50
+    },
+    "minecraft:vine": {
+      "amount_per_tick": 1.0,
+      "ticks": 5
     },
     "minecraft:wither_rose": {
       "amount_per_tick": 6.0,

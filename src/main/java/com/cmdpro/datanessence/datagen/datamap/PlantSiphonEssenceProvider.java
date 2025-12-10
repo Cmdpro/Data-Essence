@@ -29,6 +29,7 @@ public class PlantSiphonEssenceProvider extends DataMapProvider {
     protected void gather() {
         this.builder(DataNEssenceDatamaps.PLANT_SIPHON_ESSENCE)
                 .add(Tags.Items.CROPS, new PlantSiphonEssenceMap(20, 2), false)
+                .add(Tags.Items.MUSHROOMS, new PlantSiphonEssenceMap(20, 2), false)
                 .add(Tags.Items.SEEDS, new PlantSiphonEssenceMap(10, 2), false)
                 .add(ItemTags.SAPLINGS, new PlantSiphonEssenceMap(10, 2), false)
                 .add(ItemTags.LEAVES, new PlantSiphonEssenceMap(20, 2), false)
@@ -38,6 +39,7 @@ public class PlantSiphonEssenceProvider extends DataMapProvider {
                 .add(getHolder(Items.SEA_PICKLE), new PlantSiphonEssenceMap(10, 2), false)
                 .add(getHolder(Items.SWEET_BERRIES), new PlantSiphonEssenceMap(20, 2), false)
                 .add(getHolder(Items.GLOW_BERRIES), new PlantSiphonEssenceMap(20, 2), false)
+                .add(getHolder(Items.VINE), new PlantSiphonEssenceMap(5, 1), false)
 
                 .add(getHolder(Items.WITHER_ROSE), new PlantSiphonEssenceMap(50, 6), false)
                 .add(getHolder(Items.CHORUS_FLOWER), new PlantSiphonEssenceMap(60, 6), false)
