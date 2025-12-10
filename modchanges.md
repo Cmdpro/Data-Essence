@@ -7,6 +7,7 @@
 
 ### Changes
 - Charger now shows what item is inside it, and its charge level, in its Essence Meter display (multyfora)
+- Data Tablet screen can be closed with the inventory key (multyfora)
 - Entropic Processor now inserts items dropped on top of it to its input slot (multyfora)
 - Essence Batteries retain their Essence contents when broken (multyfora)
 - Essence Light Fixture has collision (multyfora)
