@@ -42,7 +42,7 @@ public class StructuralPointRenderer implements BlockEntityRenderer<StructuralPo
         poseStack.translate(-origin.x, -origin.y, -origin.z);
         poseStack.translate(0.5, 0.5, 0.5);
 
-        Color segColor1 = be.linkColor();
+        Color segColor1 = be.linkColor()[0];
         float darken = 1.5f;
         Color segColor2 = new Color(
                 (int) (segColor1.getRed() / darken),

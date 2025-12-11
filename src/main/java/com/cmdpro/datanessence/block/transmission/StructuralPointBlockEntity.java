@@ -21,9 +21,8 @@ public class StructuralPointBlockEntity extends BaseEssencePointBlockEntity {
     }
 
     @Override
-    public Color linkColor() {
-        // yellow-ish color for structural network
-        return new Color(0xFFFF55);
+    public Color[] linkColor() {
+        return new Color[]{new Color((0xFFFF55)), new Color((0xFFFF55))};
     }
 
     /**

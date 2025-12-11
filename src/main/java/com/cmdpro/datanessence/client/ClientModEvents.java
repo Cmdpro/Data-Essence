@@ -82,6 +82,8 @@ public class ClientModEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_RELAY.get(), EnderPearlRelayRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.ENDER_PEARL_DESTINATION.get(), EnderPearlDestinationRenderer::new);
         event.registerBlockEntityRenderer(BlockEntityRegistry.STRUCTURE_PROTECTOR.get(), StructureProtectorRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistry.DISPLAY_SIGNAL.get(), DisplaySignalRenderer::new);
+
     }
     @SubscribeEvent
     public static void addLayers(EntityRenderersEvent.AddLayers event) {
@@ -198,6 +200,8 @@ public class ClientModEvents {
         event.register(MenuRegistry.DRYING_TABLE_MENU.get(), DryingTableScreen::new);
         event.register(MenuRegistry.SIGNAL_EMITTER.get(), SignalEmitterScreen::new);
         event.register(MenuRegistry.SIGNAL_CONDITION_MENU.get(), SignalConditionScreen::new);
+        event.register(MenuRegistry.DISPLAY_SIGNAL_MENU.get(), DisplaySignalScreen::new);
+
 
     }
     @SubscribeEvent

@@ -9,10 +9,7 @@ import com.cmdpro.datanessence.block.decoration.*;
 import com.cmdpro.datanessence.block.generation.EssenceBurner;
 import com.cmdpro.datanessence.block.generation.EssenceLeech;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphon;
-import com.cmdpro.datanessence.block.logic.InventorySignalEmitter;
-import com.cmdpro.datanessence.block.logic.RedstoneSignalCondition;
-import com.cmdpro.datanessence.block.logic.SignalEmitter;
-import com.cmdpro.datanessence.block.logic.SignalReader;
+import com.cmdpro.datanessence.block.logic.*;
 import com.cmdpro.datanessence.block.processing.*;
 import com.cmdpro.datanessence.block.production.*;
 import com.cmdpro.datanessence.block.storage.*;
@@ -234,6 +231,19 @@ public class BlockRegistry {
     public static final Supplier<Block> REDSTONE_SIGNAL_CONDITION = register("redstone_signal_condition",
             () -> new RedstoneSignalCondition(getToollessMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
+    public static final Supplier<Block> DISPLAY_SIGNAL = register("display_signal",
+            () -> new DisplaySignal(getToollessMachineProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
+
+//    public static final Supplier<Block> DISPLAY_SIGNAL =
+//            BLOCKS.register("display_signal",
+//                    () -> new DisplaySignalBlock(
+//                            BlockBehaviour.Properties.of()
+//                                    .strength(1.0F)
+//                                    .noOcclusion()
+//                    ));
+
 
 
 

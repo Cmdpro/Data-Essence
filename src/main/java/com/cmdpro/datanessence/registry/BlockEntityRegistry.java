@@ -7,10 +7,7 @@ import com.cmdpro.datanessence.block.decoration.FlareLightBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceBurnerBlockEntity;
 import com.cmdpro.datanessence.block.generation.EssenceLeechBlockEntity;
 import com.cmdpro.datanessence.block.generation.IndustrialPlantSiphonBlockEntity;
-import com.cmdpro.datanessence.block.logic.InventorySignalEmitterBlockEntity;
-import com.cmdpro.datanessence.block.logic.RedstoneSignalConditionBlockEntity;
-import com.cmdpro.datanessence.block.logic.SignalEmitterBlockEntity;
-import com.cmdpro.datanessence.block.logic.SignalReaderBlockEntity;
+import com.cmdpro.datanessence.block.logic.*;
 import com.cmdpro.datanessence.block.processing.*;
 import com.cmdpro.datanessence.block.production.EssenceBreakerBlockEntity;
 import com.cmdpro.datanessence.block.production.FluidCollectorBlockEntity;
@@ -277,6 +274,13 @@ public class BlockEntityRegistry {
                             RedstoneSignalConditionBlockEntity::new,
                             BlockRegistry.REDSTONE_SIGNAL_CONDITION.get()
                     ).build(null));
+    public static final Supplier<BlockEntityType<DisplaySignalBlockEntity>> DISPLAY_SIGNAL =
+            register("display_signal", () ->
+                    BlockEntityType.Builder.of(
+                            DisplaySignalBlockEntity::new,
+                            BlockRegistry.DISPLAY_SIGNAL.get()
+                    ).build(null));
+
 
 
     private static <T extends BlockEntityType<?>> Supplier<T> register(final String name, final Supplier<T> blockentity) {
