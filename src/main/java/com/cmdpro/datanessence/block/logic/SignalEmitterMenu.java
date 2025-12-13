@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.List;
 
-public class SignalEmitterMenu extends AbstractContainerMenu {
+public class SignalEmitterMenu extends AbstractContainerMenu implements ISignalConfigMenu {
 
     //button id ranges
 
@@ -167,16 +167,17 @@ public class SignalEmitterMenu extends AbstractContainerMenu {
 
     //API for screen
 
-    // Which TAB is open (for UI): true = blocks tab, false = chars tab.
+    @Override
     public boolean isBlockMode() {
         return tabIndex == TAB_BLOCKS;
     }
 
-    // Whether the *actual signal* is a block signal.
+    @Override
     public boolean isBlockSignal() {
         return signalType == TYPE_BLOCK;
     }
 
+    @Override
     public String getSignalId() {
         if (signalType == TYPE_BLOCK) {
             if (blockIndex < 0 || blockIndex >= ALL_BLOCK_IDS.size()) return "block:?";
@@ -185,20 +186,14 @@ public class SignalEmitterMenu extends AbstractContainerMenu {
         return String.valueOf((char) charCode);
     }
 
-    public char getSignalChar() {
-        return (char) charCode;
-    }
-
+    @Override
     public int getAmount() {
         return amount;
     }
 
+    @Override
     public int getBlockIndex() {
         return blockIndex;
-    }
-
-    public BlockPos getBlockPos() {
-        return pos;
     }
 
     //button handling (SERVER side)

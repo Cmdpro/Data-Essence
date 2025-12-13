@@ -280,6 +280,12 @@ public class BlockEntityRegistry {
                             DisplaySignalBlockEntity::new,
                             BlockRegistry.DISPLAY_SIGNAL.get()
                     ).build(null));
+    public static final Supplier<BlockEntityType<SignalMathBlockEntity>> SIGNAL_MATH =
+            register("signal_math", () ->
+                    BlockEntityType.Builder.of(
+                            SignalMathBlockEntity::new,
+                            BlockRegistry.SIGNAL_MATH.get()
+                    ).build(null));
 
 
 

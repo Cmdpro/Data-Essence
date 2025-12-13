@@ -236,14 +236,9 @@ public class BlockRegistry {
             () -> new DisplaySignal(getToollessMachineProperties()),
             object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
-//    public static final Supplier<Block> DISPLAY_SIGNAL =
-//            BLOCKS.register("display_signal",
-//                    () -> new DisplaySignalBlock(
-//                            BlockBehaviour.Properties.of()
-//                                    .strength(1.0F)
-//                                    .noOcclusion()
-//                    ));
-
+    public static final Supplier<Block> SIGNAL_MATH = register("signal_math",
+            () -> new SignalMath(getToollessMachineProperties()),
+            object -> () -> new BlockItem(object.get(), new Item.Properties()));
 
 
 

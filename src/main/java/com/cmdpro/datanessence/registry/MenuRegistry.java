@@ -5,6 +5,7 @@ import com.cmdpro.datanessence.block.auxiliary.EnticingLureBlockEntity;
 import com.cmdpro.datanessence.block.logic.DisplaySignalMenu;
 import com.cmdpro.datanessence.block.logic.SignalConditionMenu;
 import com.cmdpro.datanessence.block.logic.SignalEmitterMenu;
+import com.cmdpro.datanessence.block.logic.SignalMathMenu;
 import com.cmdpro.datanessence.screen.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -38,6 +39,8 @@ public class MenuRegistry {
     public static final Supplier<MenuType<DryingTableMenu>> DRYING_TABLE_MENU = register(DryingTableMenu::new, "drying_table");
     public static final Supplier<MenuType<SignalConditionMenu>> SIGNAL_CONDITION_MENU = register(SignalConditionMenu::new, "signal_condition");
     public static final Supplier<MenuType<DisplaySignalMenu>> DISPLAY_SIGNAL_MENU = register(DisplaySignalMenu::new, "display_signal");
+    public static final Supplier<MenuType<SignalMathMenu>> SIGNAL_MATH_MENU = register(SignalMathMenu::new, "signal_math");
+
 
 
 
