@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "pastel"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "pastel:pure_prismarine" },
+    "time": 300,
+    "result": { "id": "minecraft:prismarine_shard", "count": 2 },
+    "nuggetResult": { "id": "minecraft:prismarine_shard", "count": 5 }
+}

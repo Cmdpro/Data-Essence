@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "pastel"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "pastel:pure_redstone" },
+    "time": 300,
+    "result": { "id": "minecraft:redstone", "count": 2 },
+    "nuggetResult": { "id": "minecraft:redstone", "count": 5 }
+}

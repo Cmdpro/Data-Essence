@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "pastel"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "pastel:pure_emerald" },
+    "time": 300,
+    "result": { "id": "minecraft:emerald" },
+    "nuggetResult": { "id": "datanessence:emerald_shard", "count": 5 }
+}

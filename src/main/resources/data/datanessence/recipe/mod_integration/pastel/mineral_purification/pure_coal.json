@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "pastel"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "pastel:pure_coal" },
+    "time": 300,
+    "result": { "id": "minecraft:coal" },
+    "nuggetResult": { "id": "datanessence:coal_lump", "count": 5 }
+}

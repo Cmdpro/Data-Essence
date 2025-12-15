@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "pastel"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "pastel:pure_diamond" },
+    "time": 300,
+    "result": { "id": "minecraft:diamond" },
+    "nuggetResult": { "id": "datanessence:diamond_shard", "count": 5 }
+}

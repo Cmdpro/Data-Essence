@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "pastel"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "pastel:pure_lapis" },
+    "time": 300,
+    "result": { "id": "minecraft:lapis_lazuli", "count": 2 },
+    "nuggetResult": { "id": "minecraft:lapis_lazuli", "count": 5 }
+}

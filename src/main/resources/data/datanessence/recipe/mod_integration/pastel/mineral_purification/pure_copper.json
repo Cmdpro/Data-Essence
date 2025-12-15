@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "pastel"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "pastel:pure_copper" },
+    "time": 300,
+    "result": { "id": "minecraft:copper_ingot" },
+    "nuggetResult": { "id": "datanessence:copper_nugget", "count": 5 }
+}

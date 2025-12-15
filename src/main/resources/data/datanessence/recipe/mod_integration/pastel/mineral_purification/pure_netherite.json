@@ -1,0 +1,13 @@
+{
+    "neoforge:conditions": [
+        {
+            "type": "neoforge:mod_loaded",
+            "modid": "pastel"
+        }
+    ],
+    "type": "datanessence:mineral_purification",
+    "input": { "item": "pastel:pure_netherite" },
+    "time": 300,
+    "result": { "id": "minecraft:netherite_scrap" },
+    "nuggetResult": { "id": "minecraft:netherite_scrap", "count": 5 }
+}

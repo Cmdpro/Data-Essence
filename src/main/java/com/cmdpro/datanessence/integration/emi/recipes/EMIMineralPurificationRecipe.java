@@ -69,7 +69,9 @@ public class EMIMineralPurificationRecipe implements EmiRecipe {
 
         var primary = output.get(0);
         var secondary = output.get(1);
-        var yield = !primary.isEqual(secondary) ? primary.getAmount() * ( 1.45 * secondary.getAmount()) : primary.getAmount() * ( 4.5 * secondary.getAmount());
+        var yield = !primary.isEqual(secondary)
+                ? primary.getAmount() + ( 0.45 * secondary.getAmount())
+                : primary.getAmount() + ( 4.5 * secondary.getAmount());
 
         // Yield
         widgets.addText(Component.translatable("emi.datanessence.average_yield"), 118, 2, 0xFFFF96B5, false).horizontalAlign(TextWidget.Alignment.END);
