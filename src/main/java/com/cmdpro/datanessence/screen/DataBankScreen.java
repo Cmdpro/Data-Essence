@@ -359,11 +359,13 @@ public class DataBankScreen extends Screen {
             }
         }
     }
+
     public boolean isMouseInsideMinigame(double pMouseX, double pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
         return pMouseX >= x+(imageWidth/2)-75 && pMouseY >= y+(imageHeight/2)-75 && pMouseX <= x+(imageWidth/2)+75 && pMouseY <= y+(imageHeight/2)+75;
     }
+
     public void drawMinigame(Minigame minigame, GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -372,6 +374,7 @@ public class DataBankScreen extends Screen {
         minigame.render(this, pGuiGraphics, pPartialTick, pMouseX, pMouseY, x+(imageWidth/2)-75, y+(imageHeight/2)-75);
         pGuiGraphics.disableScissor();
     }
+
     public void drawEntries(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -381,6 +384,7 @@ public class DataBankScreen extends Screen {
         HashMap<Integer, Integer> tiers = new HashMap<>();
         List<DataBankEntry> entries = new ArrayList<>(DataBankEntries.clientEntries.values().stream().toList());
         entries.sort(Comparator.comparingInt((a) -> a.tier));
+
         for (DataBankEntry i : entries) {
             if (downloading.containsKey(i.id) || i.tier <= ClientPlayerData.getTier() && !ClientPlayerUnlockedEntries.getUnlocked().contains(i.entry) && !ClientPlayerUnlockedEntries.getIncomplete().containsKey(i.entry)) {
                 Entry entry = Entries.entries.get(i.entry);
@@ -393,7 +397,9 @@ public class DataBankScreen extends Screen {
                     x2 = 4;
                 }
                 x2 += 30;
-                pGuiGraphics.blit(TEXTURE, x + (x2 - 10) + (int) offsetX, y + (y2 - 10) + (int) offsetY, 0, 166, 20, 20);
+
+                var vOffset = entry.critical ? 206 : 166;
+                pGuiGraphics.blit(TEXTURE, x + (x2 - 10) + (int) offsetX, y + (y2 - 10) + (int) offsetY, 0, vOffset, 20, 20);
                 pGuiGraphics.renderItem(i.icon, x + (x2 - 8) + (int) offsetX, y + (y2 - 8) + (int) offsetY);
 
                 if (downloading.containsKey(i.id)) {
