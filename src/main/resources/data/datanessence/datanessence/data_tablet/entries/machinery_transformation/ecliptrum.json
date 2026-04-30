@@ -1,0 +1,54 @@
+{
+  "icon": {
+    "id": "datanessence:ecliptrum_ingot"
+  },
+  "tab": "datanessence:machinery_transformation",
+  "x": 0,
+  "y": -2,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:ecliptrum_ingot"
+      },
+      "text": {
+        "translate": "data_tablet.pages.ecliptrum.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:synthesis/ecliptrum_ingot",
+        "datanessence:synthesis/ecliptrum_ingot_flipped",
+        "datanessence:crafting/ecliptrum_compacting",
+        "datanessence:crafting/ecliptrum_decompacting"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.ecliptrum.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.ecliptrum.flavor"
+  },
+  "parents": [
+    "datanessence:machinery/synthesis_chamber",
+    "datanessence:machinery_transformation/lunar_strikes"
+  ],
+  "critical": true,
+  "completion_stages": [
+    {
+      "completion_advancements": [
+        "datanessence:progression/acquire_ecliptrum"
+      ],
+      "pages": [
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.ecliptrum.page1.incomplete_text"
+          }
+        }
+      ]
+    }
+  ]
+}

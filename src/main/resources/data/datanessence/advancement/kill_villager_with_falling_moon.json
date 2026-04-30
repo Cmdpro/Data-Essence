@@ -1,0 +1,38 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:falling_moon"
+    },
+    "title": {
+      "translate": "advancements.datanessence.kill_villager_with_falling_moon.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.kill_villager_with_falling_moon.description"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "datanessence:progression/acquire_lunarium",
+  "criteria": {
+    "kill_villager_with_laser": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "entity": {
+          "type": "minecraft:villager"
+        },
+        "killing_blow": {
+          "direct_entity": {
+            "type": "datanessence:rifle_laser"
+          }
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "kill_villager_with_laser"
+    ]
+  ]
+}

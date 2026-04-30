@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:lunarium"
+  },
+  "tier": 3,
+  "name": {
+    "translate": "data_tablet.pages.lunarium.name"
+  },
+  "entry": "datanessence:basics/lunarium"
+}

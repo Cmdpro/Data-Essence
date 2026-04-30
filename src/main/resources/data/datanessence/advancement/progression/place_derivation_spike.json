@@ -1,0 +1,28 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:essence_derivation_spike"
+    },
+    "title": {
+      "translate": "advancements.datanessence.place_derivation_spike.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.place_derivation_spike.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_lunarium",
+  "criteria": {
+    "placed_spike": {
+      "trigger": "minecraft:placed_block",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": { "block": { "blocks": [ "datanessence:essence_derivation_spike" ] } }
+          }
+        ]
+      }
+    }
+  }
+}

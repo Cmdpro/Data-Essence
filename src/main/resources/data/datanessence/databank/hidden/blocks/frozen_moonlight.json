@@ -1,0 +1,12 @@
+{
+  "condition": {
+    "type": "datanessence:entry",
+    "entry": "datanessence:basics/frozen_moonlight",
+    "completion_stage": 0
+  },
+  "type": {
+    "type": "databank:block",
+    "hidden_as": "minecraft:packed_ice",
+    "original": "datanessence:frozen_moonlight"
+  }
+}

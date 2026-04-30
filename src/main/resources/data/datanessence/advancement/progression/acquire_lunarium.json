@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:lunarium"
+    },
+    "title": {
+      "translate": "advancements.datanessence.acquire_lunarium.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.acquire_lunarium.description"
+    },
+    "hidden": false
+  },
+  "parent": "datanessence:progression/acquire_ecliptrum",
+  "criteria": {
+    "has_lunarium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:lunarium" ] } ] }
+    }
+  }
+}

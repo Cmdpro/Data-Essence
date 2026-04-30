@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:essence_derivation_spike"
+  },
+  "tier": 3,
+  "name": {
+    "translate": "data_tablet.pages.essence_derivation_spike.name"
+  },
+  "entry": "datanessence:essence_manipulation/essence_derivation_spike"
+}

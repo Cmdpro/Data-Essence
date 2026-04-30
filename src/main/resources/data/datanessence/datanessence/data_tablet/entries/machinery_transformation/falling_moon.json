@@ -1,0 +1,32 @@
+{
+  "icon": {
+    "id": "datanessence:falling_moon"
+  },
+  "tab": "datanessence:machinery_transformation",
+  "x": 0,
+  "y": 2,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.falling_moon.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/equipment/falling_moon"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.falling_moon.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.falling_moon.flavor"
+  },
+  "parents": [
+    "datanessence:machinery_transformation/ecliptrum",
+    "datanessence:tools/charger"
+  ]
+}

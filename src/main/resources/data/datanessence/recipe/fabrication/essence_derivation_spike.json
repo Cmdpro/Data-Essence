@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": { "datanessence:essence": 200 },
+  "time": 200,
+  "entry": "datanessence:essence_manipulation/essence_derivation_spike",
+  "pattern": [
+    " R ",
+    "PGP",
+    "OEO"
+  ],
+  "key": {
+    "P": { "item": "datanessence:prepared_panel" },
+    "G": { "item": "datanessence:ecliptrum_cog_assembly_2x" },
+    "R": { "item": "datanessence:extrication_rod" },
+    "E": { "item": "datanessence:essence_shard" },
+    "O": { "item": "datanessence:polished_obsidian" }
+  },
+  "result": { "id": "datanessence:essence_derivation_spike" }
+}

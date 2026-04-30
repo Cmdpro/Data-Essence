@@ -1,0 +1,62 @@
+{
+  "icon": {
+    "id": "datanessence:vermilion_sprout"
+  },
+  "tab": "datanessence:sanctuary",
+  "x": 0,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.sanctuary_portal.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.sanctuary_portal.page2.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.sanctuary_portal.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.sanctuary_portal.flavor"
+  },
+  "critical": true,
+  "completion_stages": [
+    {
+      "completion_advancements": [
+        "datanessence:progression/visit_sanctuary"
+      ],
+      "pages": [
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.sanctuary_portal.page1.incomplete_text"
+          }
+        },
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.sanctuary_portal.page2.incomplete_text"
+          }
+        },
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.sanctuary_portal.page3.incomplete_text"
+          }
+        }
+      ],
+      "name_override": {
+        "translate": "data_tablet.pages.sanctuary_portal.incomplete_name"
+      },
+      "flavor_override": {
+        "translate": "data_tablet.pages.sanctuary_portal.incomplete_flavor"
+      }
+    }
+  ]
+}

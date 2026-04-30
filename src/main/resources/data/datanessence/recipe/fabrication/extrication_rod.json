@@ -1,0 +1,17 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 50
+  },
+  "entry": "datanessence:essence_manipulation/essence_derivation_spike",
+  "pattern": [
+    " SR",
+    "SRS",
+    "RS "
+  ],
+  "key": {
+    "S": { "item": "datanessence:essence_shard" },
+    "R": { "item": "datanessence:conductance_rod" }
+  },
+  "result": { "id": "datanessence:extrication_rod" }
+}

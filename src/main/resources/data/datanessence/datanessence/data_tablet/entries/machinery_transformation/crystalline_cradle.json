@@ -1,0 +1,33 @@
+{
+  "icon": {
+    "id": "datanessence:crystalline_cradle"
+  },
+  "tab": "datanessence:machinery_transformation",
+  "x": 0,
+  "y": -4,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": { "id": "datanessence:crystalline_cradle" },
+      "text": {
+        "translate": "data_tablet.pages.crystalline_cradle.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:fabrication/machines/crystalline_cradle"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.crystalline_cradle.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.crystalline_cradle.flavor"
+  },
+  "parents": [
+    "datanessence:machinery_transformation/ecliptrum",
+    "datanessence:basics/lunar_strikes"
+  ]
+}

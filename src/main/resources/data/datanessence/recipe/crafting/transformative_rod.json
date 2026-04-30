@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "  C",
+    " C ",
+    "C  "
+  ],
+  "key": {
+    "C": { "item": "datanessence:ecliptrum_ingot" }
+  },
+  "result": { "id": "datanessence:transformative_rod", "count": 2 }
+}

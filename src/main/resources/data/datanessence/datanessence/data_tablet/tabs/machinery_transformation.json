@@ -1,0 +1,12 @@
+{
+  "icon": {
+    "id": "datanessence:lunar_essence_wire"
+  },
+  "name": {
+    "translate": "data_tablet.tabs.machinery_transformation.name"
+  },
+  "placement": {
+    "place_after": "datanessence:machinery",
+    "place_before": "datanessence:tools"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "datanessence:frozen_moonlight"
+    },
+    "title": {
+      "translate": "advancements.datanessence.discover_frozen_moonlight.title"
+    },
+    "description": {
+      "translate": "advancements.datanessence.discover_frozen_moonlight.description"
+    },
+    "hidden": true
+  },
+  "parent": "datanessence:exploration/discover_lensing_crystals",
+  "criteria": {
+    "has_frozen_moonlight": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [ { "items": ["datanessence:frozen_moonlight_chunk" ] } ] }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "icon": {
+    "id": "datanessence:ecliptrum_cog_assembly_2x"
+  },
+  "tab": "datanessence:basics",
+  "x": -5,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:text",
+      "text": {
+        "translate": "data_tablet.pages.lunar_components.page1.text"
+      }
+    },
+    {
+      "type": "datanessence:crafting",
+      "recipes": [
+        "datanessence:crafting/reflective_panel",
+        "datanessence:crafting/transformative_rod",
+        "datanessence:crafting/ecliptrum_cog",
+        "datanessence:crafting/ecliptrum_cog_assembly_2x",
+        "datanessence:crafting/ecliptrum_cog_assembly_4x"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.lunar_components.name"
+  },
+  "parents": [
+    "datanessence:basics/components",
+    "datanessence:machinery_transformation/ecliptrum"
+  ]
+}

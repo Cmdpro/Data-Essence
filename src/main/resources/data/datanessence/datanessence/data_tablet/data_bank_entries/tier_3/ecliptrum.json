@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:ecliptrum_ingot"
+  },
+  "tier": 3,
+  "name": {
+    "translate": "data_tablet.pages.ecliptrum.name"
+  },
+  "entry": "datanessence:machinery_transformation/ecliptrum"
+}

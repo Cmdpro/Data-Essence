@@ -1,0 +1,41 @@
+{
+  "icon": {
+    "id": "datanessence:lunar_essence_crystal"
+  },
+  "tab": "datanessence:machinery_transformation",
+  "x": 0,
+  "y": 0,
+  "pages": [
+    {
+      "type": "datanessence:item",
+      "item": {
+        "id": "datanessence:lunar_crystal_seed"
+      },
+      "text": {
+        "translate": "data_tablet.pages.lunar_strikes.page1.text"
+      }
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.lunar_strikes.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.lunar_strikes.flavor"
+  },
+  "critical": true,
+  "completion_stages": [
+    {
+      "completion_advancements": [
+        "datanessence:progression/acquire_lunar_essence_shard"
+      ],
+      "pages": [
+        {
+          "type": "datanessence:text",
+          "text": {
+            "translate": "data_tablet.pages.lunar_strikes.page1.incomplete_text"
+          }
+        }
+      ]
+    }
+  ]
+}

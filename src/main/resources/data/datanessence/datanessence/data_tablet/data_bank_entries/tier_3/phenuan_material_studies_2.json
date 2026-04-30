@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "minecraft:lapis_lazuli"
+  },
+  "tier": 3,
+  "name": {
+    "translate": "data_tablet.pages.phenuan_material_studies_2.name"
+  },
+  "entry": "datanessence:lore/phenuan_material_studies_2"
+}

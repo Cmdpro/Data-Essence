@@ -1,0 +1,60 @@
+{
+  "icon": {
+    "id": "datanessence:lunar_essence_wire"
+  },
+  "tier": 3,
+  "minigames": [
+    {
+      "type": "datanessence:traces",
+      "tiles": [
+        {
+          "x": 5,
+          "y": 7,
+          "type": 1,
+          "essence": 0
+        },
+        {
+          "x": 6,
+          "y": 9,
+          "type": 2,
+          "essence": 0
+        },
+        {
+          "x": 9,
+          "y": 5,
+          "type": 1,
+          "essence": 1
+        },
+        {
+          "x": 7,
+          "y": 5,
+          "type": 2,
+          "essence": 1
+        }
+      ],
+      "size": 2
+    },
+    {
+      "type": "datanessence:traces",
+      "tiles": [
+        {
+          "x": 7,
+          "y": 7,
+          "type": 1,
+          "essence": 1
+        },
+        {
+          "x": 10,
+          "y": 10,
+          "type": 2,
+          "essence": 1
+        }
+      ],
+      "size": 3
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.lunar_essence_transfer.name"
+  },
+  "entry": "datanessence:essence_manipulation/lunar_essence_transfer"
+}

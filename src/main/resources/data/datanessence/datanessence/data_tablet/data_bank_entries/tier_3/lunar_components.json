@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:ecliptrum_cog_assembly_2x"
+  },
+  "tier": 3,
+  "name": {
+    "translate": "data_tablet.pages.lunar_components.name"
+  },
+  "entry": "datanessence:basics/lunar_components"
+}

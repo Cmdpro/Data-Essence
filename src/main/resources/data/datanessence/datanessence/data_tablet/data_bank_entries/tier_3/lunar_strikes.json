@@ -1,0 +1,10 @@
+{
+  "icon": {
+    "id": "datanessence:lunar_essence_crystal"
+  },
+  "tier": 3,
+  "name": {
+    "translate": "data_tablet.pages.lunar_strikes.name"
+  },
+  "entry": "datanessence:machinery_transformation/lunar_strikes"
+}

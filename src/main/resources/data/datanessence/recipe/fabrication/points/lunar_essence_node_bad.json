@@ -1,0 +1,19 @@
+{
+  "type": "datanessence:shaped_fabrication_recipe",
+  "essenceCost": {
+    "datanessence:essence": 500
+  },
+  "time": 153,
+  "entry": "datanessence:essence_manipulation/lunar_essence_transfer",
+  "completion_stage": 0,
+  "pattern": [
+    "RAR",
+    " O "
+  ],
+  "key": {
+    "A": { "item": "datanessence:lunar_essence_shard" },
+    "R": { "item": "datanessence:conductance_rod" },
+    "O": { "item": "datanessence:polished_obsidian" }
+  },
+  "result": { "id": "datanessence:lunar_essence_point", "count": 1 }
+}
