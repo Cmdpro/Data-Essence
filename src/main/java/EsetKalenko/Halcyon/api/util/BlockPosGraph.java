@@ -48,6 +48,8 @@ public class BlockPosGraph {
                 graph.addEdge(vertices.indexToId(source), vertices.indexToId(target));
             }
 
+            graph.version = 0;
+
             return graph;
         }
 
