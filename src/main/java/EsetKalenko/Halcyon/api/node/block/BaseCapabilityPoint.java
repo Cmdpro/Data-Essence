@@ -136,6 +136,8 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                     ItemEntity upgradeSigil = new ItemEntity(pLevel, pPos.getCenter().x, pPos.getCenter().y, pPos.getCenter().z, node.universalUpgrade.getStackInSlot(0).copy() );
                     pLevel.addFreshEntity(upgradeSigil);
                 }
+
+                pLevel.syncData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
@@ -180,12 +182,13 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                         } else {
                             var from = linkFrom.get();
                             var fromPos = from.getBlockPos();
-                            if (ent != from && from.getBlockState().getBlock() instanceof BaseCapabilityPoint other && other.getRequiredWire() == getRequiredWire() && (ent.link.isEmpty() || !ent.link.contains(fromPos))) {
+                            if (ent != from && from.getBlockState().getBlock() instanceof BaseCapabilityPoint other && other.getRequiredWire() == getRequiredWire() && (networks.graph.outEdges(pPos).isEmpty() || !networks.graph.containsEdge(fromPos, pPos))) {
                                 if (networks.graph.inEdges(fromPos).size() + networks.graph.outEdges(fromPos).size() < DataNEssenceConfig.maxNodeWires) {
                                     if ((from instanceof BaseCapabilityPointBlockEntity linkFrom2) && from.getBlockPos().closerThan(ent.getBlockPos(), DataNEssenceConfig.wireDistanceLimit)) {
                                         networks.graph.addEdge(linkFrom2.getBlockPos(), pPos);
                                         linkFrom2.updateBlock();
                                         ent.updateBlock();
+                                        pLevel.syncData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
                                         pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                         PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                                         if (!pPlayer.isCreative())
@@ -254,6 +257,7 @@ public abstract class BaseCapabilityPoint extends Block implements EntityBlock {
                             toEnt.updateBlock();
                         }
                         ent.updateBlock();
+                        pLevel.syncData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
                     }
                 }
             }

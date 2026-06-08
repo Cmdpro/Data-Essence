@@ -157,6 +157,43 @@ public class BlockPosGraph {
     }
 
     /**
+     * Check whether the graph contains an edge with the given source and target.
+     *
+     * <p>
+     * If the graph is undirected, the method will return {@code true} if there is an edge whose end-points are
+     * {@code source} and {@code target}, regardless of which is the source and which is the target.
+     *
+     * @param  source                the source vertex
+     * @param  target                the target vertex
+     * @return                       {@code true} if the graph contains an edge with the given source and target,
+     *                               {@code false} otherwise
+     * @throws NoSuchVertexException if {@code source} or {@code target} are not valid vertices identifiers
+     */
+    public boolean containsEdge(BlockPos source, BlockPos target) {
+        return getEdge(source, target) != null;
+    }
+
+    /**
+     * Get the edge whose source is {@code source} and target is {@code target}.
+     *
+     * <p>
+     * If the graph is not directed, the return edge is an edge that its end-points are {@code source} and
+     * {@code target}.
+     *
+     * <p>
+     * In case there are multiple (parallel) edges between {@code source} and {@code target}, a single arbitrary one is
+     * returned.
+     *
+     * @param  source                a source vertex
+     * @param  target                a target vertex
+     * @return                       id of the edge or {@code null} if no such edge exists
+     * @throws NoSuchVertexException if {@code source} or {@code target} are not valid vertices identifiers
+     */
+    public BlockPosEdge getEdge(BlockPos source, BlockPos target) {
+        return this.inner.getEdge(source, target);
+    }
+
+    /**
      * Remove a vertex and all its edges from the graph.
      *
      * @param  vertex                the vertex identifier to remove

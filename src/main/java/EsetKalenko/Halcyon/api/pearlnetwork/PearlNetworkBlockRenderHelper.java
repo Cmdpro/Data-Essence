@@ -1,5 +1,7 @@
 package EsetKalenko.Halcyon.api.pearlnetwork;
 
+import EsetKalenko.Halcyon.api.misc.BlockPosNetworks;
+import EsetKalenko.Halcyon.registry.AttachmentTypeRegistry;
 import com.cmdpro.databank.rendering.RenderHandler;
 import EsetKalenko.Halcyon.client.shaders.DataNEssenceRenderTypes;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -12,15 +14,18 @@ import java.awt.*;
 
 public interface PearlNetworkBlockRenderHelper {
     default void renderPearlConnections(PearlNetworkBlockEntity entity, PoseStack stack) {
-        if (entity.link != null) {
-            Vec3 pos = entity.getBlockPos().getCenter();
+        BlockPosNetworks network = entity.getLevel().getData(AttachmentTypeRegistry.ENDER_PEARL_NETWORKS);
+        BlockPos blockPos = entity.getBlockPos();
+
+        if (network.graph.vertices().contains(blockPos) && !network.graph.outEdges(blockPos).isEmpty()) {
+            Vec3 pos = blockPos.getCenter();
             stack.pushPose();
             stack.translate(-pos.x, -pos.y, -pos.z);
             stack.translate(0.5, 0.5, 0.5);
             Vec3 origin = entity.getBlockPos().getCenter().add(entity.getLinkShift());
-            for (BlockPos i : entity.link) {
-                BlockEntity otherEnt = entity.getLevel().getBlockEntity(i);
-                Vec3 target = i.getCenter();
+            for (var edge : network.graph.outEdges(blockPos)) {
+                BlockEntity otherEnt = entity.getLevel().getBlockEntity(edge.target());
+                Vec3 target = edge.target().getCenter();
                 if (otherEnt instanceof PearlNetworkBlockEntity ent) {
                     target = target.add(ent.getLinkShift());
                 }
