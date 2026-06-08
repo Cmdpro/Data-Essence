@@ -7,8 +7,14 @@ import com.jgalgo.graph.EdgeSet;
 import com.jgalgo.graph.Graph;
 import com.jgalgo.graph.NoSuchEdgeException;
 import com.jgalgo.graph.NoSuchVertexException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -17,8 +23,28 @@ public class BlockPosGraph {
     private final Graph<BlockPos, BlockPosEdge> inner;
     private long version;
 
+    public static final Codec<BlockPosGraph> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+            BlockPos.CODEC.listOf().fieldOf("vertices").forGetter((graph) -> new ArrayList<>(graph.vertices())),
+            BlockPosEdge.CODEC.listOf().fieldOf("edges").forGetter((graph) -> new ArrayList<>(graph.edges()))
+    ).apply(instance, BlockPosGraph::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, BlockPosGraph> STREAM_CODEC = StreamCodec.composite(
+            BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), graph -> new ArrayList<>(graph.vertices()),
+            BlockPosEdge.STREAM_CODEC.apply(ByteBufCodecs.list()), graph -> new ArrayList<>(graph.edges()),
+            BlockPosGraph::new
+    );
+
     public BlockPosGraph() {
         this.inner = Graph.newDirected();
+    }
+
+    public BlockPosGraph(Collection<BlockPos> vertices, Collection<BlockPosEdge> edges) {
+        this();
+        this.addVertices(vertices);
+        for (var edge : edges) {
+            this.addEdge(edge);
+        }
+        this.version = 0;
     }
 
     /**

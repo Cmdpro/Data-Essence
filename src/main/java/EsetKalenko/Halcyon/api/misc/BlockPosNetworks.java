@@ -11,12 +11,12 @@ public class BlockPosNetworks {
     public @NotNull BlockPosGraph graph;
 
     public static final Codec<BlockPosNetworks> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
-        BlockPosGraphSerialization.SerializationGraph.CODEC.fieldOf("graph").xmap(BlockPosGraphSerialization.SerializationGraph::toGraph, BlockPosGraphSerialization.SerializationGraph::fromGraph).forGetter((networks) -> networks.graph)
+        BlockPosGraph.CODEC.fieldOf("graph").forGetter((networks) -> networks.graph)
     ).apply(instance, BlockPosNetworks::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, BlockPosNetworks> STREAM_CODEC = StreamCodec.composite(
-            BlockPosGraphSerialization.SerializationGraph.STREAM_CODEC, (BlockPosNetworks network) -> BlockPosGraphSerialization.SerializationGraph.fromGraph(network.graph),
-            ser -> new BlockPosNetworks(BlockPosGraphSerialization.SerializationGraph.toGraph(ser))
+            BlockPosGraph.STREAM_CODEC, network -> network.graph,
+            BlockPosNetworks::new
     );
 
     public BlockPosNetworks(@NotNull BlockPosGraph graph) {
