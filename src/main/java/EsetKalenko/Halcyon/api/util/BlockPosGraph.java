@@ -13,6 +13,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,11 +29,44 @@ public class BlockPosGraph {
             BlockPosEdge.CODEC.listOf().fieldOf("edges").forGetter((graph) -> new ArrayList<>(graph.edges()))
     ).apply(instance, BlockPosGraph::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, BlockPosGraph> STREAM_CODEC = StreamCodec.composite(
-            BlockPos.STREAM_CODEC.apply(ByteBufCodecs.list()), graph -> new ArrayList<>(graph.vertices()),
-            BlockPosEdge.STREAM_CODEC.apply(ByteBufCodecs.list()), graph -> new ArrayList<>(graph.edges()),
-            BlockPosGraph::new
-    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, BlockPosGraph> STREAM_CODEC = new StreamCodec<>() {
+        @Override
+        public @NotNull BlockPosGraph decode(RegistryFriendlyByteBuf buf) {
+            var graph = new BlockPosGraph();
+
+            var numVertices = buf.readVarInt();
+            graph.inner.ensureVertexCapacity(numVertices);
+            for (int i = 0; i < numVertices; i++) {
+                graph.addVertex(buf.readBlockPos());
+            }
+
+            var numEdges = buf.readVarInt();
+            graph.inner.ensureEdgeCapacity(numEdges);
+            var vertices = graph.inner.indexGraphVerticesMap();
+            for (int i = 0; i < numEdges; i++) {
+                var source = buf.readVarInt();
+                var target = buf.readVarInt();
+                graph.addEdge(vertices.indexToId(source), vertices.indexToId(target));
+            }
+
+            return graph;
+        }
+
+        @Override
+        public void encode(@NotNull RegistryFriendlyByteBuf buf, @NotNull BlockPosGraph graph) {
+            buf.writeVarInt(graph.vertices().size());
+            for (var vertex : graph.vertices()) {
+                buf.writeBlockPos(vertex);
+            }
+
+            buf.writeVarInt(graph.edges().size());
+            var vertices = graph.inner.indexGraphVerticesMap();
+            for (var edge : graph.edges()) {
+                buf.writeVarInt(vertices.idToIndex(edge.source()));
+                buf.writeVarInt(vertices.idToIndex(edge.target()));
+            }
+        }
+    };
 
     public BlockPosGraph() {
         this.inner = Graph.newDirected();
