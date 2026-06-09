@@ -33,19 +33,35 @@ public class BlockPosGraph {
         public @NotNull BlockPosGraph decode(RegistryFriendlyByteBuf buf) {
             var graph = new BlockPosGraph();
 
-            var numVertices = buf.readVarInt();
-            graph.inner.ensureVertexCapacity(numVertices);
-            for (int i = 0; i < numVertices; i++) {
-                graph.addVertex(buf.readBlockPos());
+            var totalSize = buf.readVarInt();
+            graph.inner.ensureVertexCapacity(totalSize);
+
+            var numUnedged = buf.readVarInt();
+            for (int i = 0; i < numUnedged; i++) {
+                var source = buf.readBlockPos();
+                graph.addVertex(source);
             }
 
-            var numEdges = buf.readVarInt();
-            graph.inner.ensureEdgeCapacity(numEdges);
+            var numEdged = totalSize - numUnedged;
+            var edges = new int[numEdged][];
+            for (int i = 0; i < numEdged; i++) {
+                var source = buf.readBlockPos();
+                graph.addVertex(source);
+
+                var numEdges = buf.readVarInt();
+                var targets = new int[numEdges];
+                for (int j = 0; j < numEdges; j++) {
+                    targets[j] = buf.readVarInt();
+                }
+                edges[i] = targets;
+            }
+
             var vertices = graph.inner.indexGraphVerticesMap();
-            for (int i = 0; i < numEdges; i++) {
-                var source = buf.readVarInt();
-                var target = buf.readVarInt();
-                graph.addEdge(vertices.indexToId(source), vertices.indexToId(target));
+            for (int i = 0; i < numEdged; i++) {
+                var source = vertices.indexToId(numUnedged + i);
+                for (var target : edges[i]) {
+                    graph.addEdge(source, vertices.indexToId(target));
+                }
             }
 
             graph.version = 0;
@@ -56,15 +72,48 @@ public class BlockPosGraph {
         @Override
         public void encode(@NotNull RegistryFriendlyByteBuf buf, @NotNull BlockPosGraph graph) {
             buf.writeVarInt(graph.vertices().size());
-            for (var vertex : graph.vertices()) {
-                buf.writeBlockPos(vertex);
+
+            var vertices = graph.inner.indexGraphVerticesMap();
+            var numVertices = graph.vertices().size();
+            var unedged = new int[numVertices];
+            var numUnedged = 0;
+            var edged = new int[numVertices];
+            var numEdged = 0;
+            var meta = new int[numVertices];
+            for (int i = 0; i < numVertices; i++) {
+                var vertex = vertices.indexToId(i);
+                if (graph.outEdges(vertex).isEmpty()) {
+                    unedged[numUnedged] = i;
+                    meta[i] = numUnedged;
+                    numUnedged++;
+                } else {
+                    edged[numEdged++] = i;
+                    meta[i] = ~numUnedged;
+                }
             }
 
-            buf.writeVarInt(graph.edges().size());
-            var vertices = graph.inner.indexGraphVerticesMap();
-            for (var edge : graph.edges()) {
-                buf.writeVarInt(vertices.idToIndex(edge.source()));
-                buf.writeVarInt(vertices.idToIndex(edge.target()));
+            buf.writeVarInt(numUnedged);
+            for (int i = 0; i < numUnedged; i++) {
+                var pos = vertices.indexToId(unedged[i]);
+                buf.writeBlockPos(pos);
+            }
+
+            for (int i = 0; i < numEdged; i++) {
+                var pos = vertices.indexToId(edged[i]);
+                buf.writeBlockPos(pos);
+                var edges = graph.outEdges(pos);
+                buf.writeVarInt(edges.size());
+                for (var edge : edges) {
+                    var idx = vertices.idToIndex(edge.target());
+                    var m = meta[idx];
+                    if (m >= 0) {
+                        idx = m;
+                    } else {
+                        idx += numUnedged;
+                        idx -= ~m;
+                    }
+                    buf.writeVarInt(idx);
+                }
             }
         }
     };
