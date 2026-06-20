@@ -1,5 +1,7 @@
 package EsetKalenko.Halcyon.api.node.renderers;
 
+import EsetKalenko.Halcyon.api.misc.BlockPosNetworks;
+import EsetKalenko.Halcyon.registry.AttachmentTypeRegistry;
 import com.cmdpro.databank.misc.RenderingUtil;
 import com.cmdpro.databank.model.DatabankModel;
 import com.cmdpro.databank.model.DatabankModels;
@@ -50,8 +52,10 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
 
     @Override
     public void render(T pBlockEntity, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBufferSource, int pPackedLight, int pPackedOverlay) {
-        if (pBlockEntity.link != null) {
-            BlockPos blockPos = pBlockEntity.getBlockPos();
+        BlockPosNetworks network = pBlockEntity.getLevel().getData(AttachmentTypeRegistry.CAPABILITY_NODE_NETWORKS);
+        BlockPos blockPos = pBlockEntity.getBlockPos();
+
+        if (network.graph.vertices().contains(blockPos) && !network.graph.outEdges(blockPos).isEmpty()) {
             pPoseStack.pushPose();
             pPoseStack.translate(0.5, 0.5, 0.5);
 
@@ -64,8 +68,8 @@ public abstract class BaseCapabilityPointRenderer<T extends BaseCapabilityPointB
             Vec3 origin = ClientRenderingUtil.transformPosition(blockPos.getCenter());
 
             pPoseStack.translate(-origin.x, -origin.y, -origin.z);
-            for (BlockPos i : pBlockEntity.link) {
-                Vec3 target = ClientRenderingUtil.transformPosition(i.getCenter());
+            for (var edge : network.graph.outEdges(blockPos)) {
+                Vec3 target = ClientRenderingUtil.transformPosition(edge.target().getCenter());
                 VertexConsumer vertexConsumer = RenderHandler.createBufferSource().getBuffer(DataNEssenceRenderTypes.WIRES);
                 Color segColor1 = pBlockEntity.linkColor()[0];
                 Color segColor2 = pBlockEntity.linkColor()[1];

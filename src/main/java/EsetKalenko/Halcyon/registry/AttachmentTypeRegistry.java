@@ -25,11 +25,11 @@ public class AttachmentTypeRegistry {
             register("twining_lanterns", () -> AttachmentType.builder(() -> new ArrayList<TwiningLanternBlockEntity>()).build());
 
     public static final Supplier<AttachmentType<BlockPosNetworks>> ESSENCE_NODE_NETWORKS =
-            register("essence_node_networks", () -> AttachmentType.builder(() -> new BlockPosNetworks(new BlockPosGraph())).serialize(BlockPosNetworks.CODEC).build());
+            register("essence_node_networks", () -> AttachmentType.builder(() -> new BlockPosNetworks(new BlockPosGraph())).serialize(BlockPosNetworks.CODEC).sync(BlockPosNetworks.STREAM_CODEC).build());
     public static final Supplier<AttachmentType<BlockPosNetworks>> CAPABILITY_NODE_NETWORKS =
-            register("capability_node_networks", () -> AttachmentType.builder(() -> new BlockPosNetworks(new BlockPosGraph())).serialize(BlockPosNetworks.CODEC).build());
+            register("capability_node_networks", () -> AttachmentType.builder(() -> new BlockPosNetworks(new BlockPosGraph())).serialize(BlockPosNetworks.CODEC).sync(BlockPosNetworks.STREAM_CODEC).build());
     public static final Supplier<AttachmentType<BlockPosNetworks>> ENDER_PEARL_NETWORKS =
-            register("ender_pearl_networks", () -> AttachmentType.builder(() -> new BlockPosNetworks(new BlockPosGraph())).serialize(BlockPosNetworks.CODEC).build());
+            register("ender_pearl_networks", () -> AttachmentType.builder(() -> new BlockPosNetworks(new BlockPosGraph())).serialize(BlockPosNetworks.CODEC).sync(BlockPosNetworks.STREAM_CODEC).build());
 
 
     public static final Supplier<AttachmentType<Integer>> TIER =

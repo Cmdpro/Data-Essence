@@ -13,8 +13,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -28,7 +26,6 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.joml.Vector3f;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,7 +39,6 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
         animState.setLevel(level);
     }
 
-    public List<BlockPos> link;
     public boolean isRelay;
     boolean wasRelay;
 
@@ -94,6 +90,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
                 BlockPosNetworks networks = level.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
                 if (!networks.graph.vertices().contains(getBlockPos())) {
                     networks.graph.addVertex(getBlockPos());
+                    level.syncData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
                 }
                 updateBlock();
             }
@@ -104,9 +101,6 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
 
     public static void tick(Level pLevel, BlockPos pPos, BlockState pState, BaseEssencePointBlockEntity pBlockEntity) {
         if (!pLevel.isClientSide()) {
-            if (pBlockEntity.link == null) {
-                pBlockEntity.updateLinks();
-            }
             BlockPosNetworks networks = pLevel.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
             if (networks.graph.inEdges(pPos).isEmpty() && !networks.graph.outEdges(pPos).isEmpty()) {
                 var paths = networks.graph.getPaths(pPos);
@@ -116,9 +110,6 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
                 pBlockEntity.postTransferHooks(pBlockEntity, ends);
             }
         } else {
-            if (pBlockEntity.link == null) {
-                pBlockEntity.link = new ArrayList<>();
-            }
             if (pBlockEntity.wasRelay != pBlockEntity.isRelay) {
                 Color color = pBlockEntity.linkColor()[0];
                 for (int i = 0; i < 32; i++) {
@@ -138,18 +129,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
             pBlockEntity.wasRelay = pBlockEntity.isRelay;
         }
     }
-    public void updateLinks() {
-        if (link == null) {
-            link = new ArrayList<>();
-        }
-        link.clear();
-        BlockPosNetworks networks = level.getData(AttachmentTypeRegistry.ESSENCE_NODE_NETWORKS);
-        if (networks.graph.vertices().contains(getBlockPos())) {
-            for (var i : networks.graph.outEdges(getBlockPos())) {
-                link.add(i.target());
-            }
-        }
-    }
+
     public boolean preTransferHooks(BlockEntity from, List<Path<BlockPos, BlockPosEdge>> other) {
         boolean cancel = false;
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
@@ -164,6 +144,7 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
         }
         return cancel;
     }
+
     public void postTransferHooks(BlockEntity from, List<Path<BlockPos, BlockPosEdge>> other) {
         if (universalUpgrade.getStackInSlot(0).getItem() instanceof INodeUpgrade upgrade) {
             upgrade.postTransfer(universalUpgrade.getStackInSlot(0), from, other);
@@ -172,7 +153,9 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
             upgrade.postTransfer(uniqueUpgrade.getStackInSlot(0), from, other);
         }
     }
+
     public abstract void transfer(BaseEssencePointBlockEntity from, List<Path<BlockPos, BlockPosEdge>> other);
+
     public Direction getDirection() {
         if (getBlockState().getValue(BaseCapabilityPoint.FACE).equals(AttachFace.CEILING)) {
             return Direction.DOWN;
@@ -189,15 +172,6 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
     @Override
     public void onDataPacket(Connection connection, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider pRegistries) {
         CompoundTag tag = pkt.getTag();
-        ListTag list = (ListTag)tag.get("link");
-        if (link == null) {
-            link = new ArrayList<>();
-        }
-        link.clear();
-        for (Tag i : list) {
-            CompoundTag blockpos = (CompoundTag)i;
-            link.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
-        }
         uniqueUpgrade.deserializeNBT(pRegistries, tag.getCompound("uniqueUpgrade"));
         universalUpgrade.deserializeNBT(pRegistries, tag.getCompound("universalUpgrade"));
         isRelay = tag.getBoolean("Relay");
@@ -205,18 +179,6 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         CompoundTag tag = new CompoundTag();
-        ListTag list = new ListTag();
-        if (link != null) {
-            for (BlockPos target : link) {
-                CompoundTag blockpos = new CompoundTag();
-                blockpos.putInt("linkX", target.getX());
-                blockpos.putInt("linkY", target.getY());
-                blockpos.putInt("linkZ", target.getZ());
-                list.add(blockpos);
-            }
-        }
-        tag.put("link", list);
-        tag.put("link", list);
         tag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
         tag.put("universalUpgrade", universalUpgrade.serializeNBT(pRegistries));
         tag.putBoolean("Relay", isRelay);
@@ -227,7 +189,6 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
         var incoming = networks.graph.inEdges(getBlockPos());
         var outgoing = networks.graph.outEdges(getBlockPos());
         isRelay = (!incoming.isEmpty() && !outgoing.isEmpty());
-        updateLinks();
         BlockState blockState = level.getBlockState(this.getBlockPos());
         this.level.sendBlockUpdated(this.getBlockPos(), blockState, blockState, 3);
         this.setChanged();
@@ -238,15 +199,6 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
         super.loadAdditional(tag, pRegistries);
         uniqueUpgrade.deserializeNBT(pRegistries, tag.getCompound("uniqueUpgrade"));
         universalUpgrade.deserializeNBT(pRegistries, tag.getCompound("universalUpgrade"));
-        ListTag list = (ListTag)tag.get("link");
-        if (link == null) {
-            link = new ArrayList<>();
-        }
-        link.clear();
-        for (Tag i : list) {
-            CompoundTag blockpos = (CompoundTag)i;
-            link.add(new BlockPos(blockpos.getInt("linkX"), blockpos.getInt("linkY"), blockpos.getInt("linkZ")));
-        }
         isRelay = tag.getBoolean("Relay");
     }
 
@@ -255,17 +207,6 @@ public abstract class BaseEssencePointBlockEntity extends BlockEntity {
         super.saveAdditional(tag, pRegistries);
         tag.put("uniqueUpgrade", uniqueUpgrade.serializeNBT(pRegistries));
         tag.put("universalUpgrade", universalUpgrade.serializeNBT(pRegistries));
-        ListTag list = new ListTag();
-        if (link != null) {
-            for (BlockPos target : link) {
-                CompoundTag blockpos = new CompoundTag();
-                blockpos.putInt("linkX", target.getX());
-                blockpos.putInt("linkY", target.getY());
-                blockpos.putInt("linkZ", target.getZ());
-                list.add(blockpos);
-            }
-        }
-        tag.put("link", list);
         tag.putBoolean("Relay", isRelay);
     }
 

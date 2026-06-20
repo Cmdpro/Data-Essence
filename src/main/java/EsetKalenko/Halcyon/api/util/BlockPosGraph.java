@@ -7,8 +7,14 @@ import com.jgalgo.graph.EdgeSet;
 import com.jgalgo.graph.Graph;
 import com.jgalgo.graph.NoSuchEdgeException;
 import com.jgalgo.graph.NoSuchVertexException;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -17,8 +23,112 @@ public class BlockPosGraph {
     private final Graph<BlockPos, BlockPosEdge> inner;
     private long version;
 
+    public static final Codec<BlockPosGraph> CODEC = RecordCodecBuilder.create((instance) -> instance.group(
+            BlockPos.CODEC.listOf().fieldOf("vertices").forGetter((graph) -> new ArrayList<>(graph.vertices())),
+            BlockPosEdge.CODEC.listOf().fieldOf("edges").forGetter((graph) -> new ArrayList<>(graph.edges()))
+    ).apply(instance, BlockPosGraph::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, BlockPosGraph> STREAM_CODEC = new StreamCodec<>() {
+        @Override
+        public @NotNull BlockPosGraph decode(RegistryFriendlyByteBuf buf) {
+            var graph = new BlockPosGraph();
+
+            var totalSize = buf.readVarInt();
+            graph.inner.ensureVertexCapacity(totalSize);
+
+            var numUnedged = buf.readVarInt();
+            for (int i = 0; i < numUnedged; i++) {
+                var source = buf.readBlockPos();
+                graph.addVertex(source);
+            }
+
+            var numEdged = totalSize - numUnedged;
+            var edges = new int[numEdged][];
+            for (int i = 0; i < numEdged; i++) {
+                var source = buf.readBlockPos();
+                graph.addVertex(source);
+
+                var numEdges = buf.readVarInt();
+                var targets = new int[numEdges];
+                for (int j = 0; j < numEdges; j++) {
+                    targets[j] = buf.readVarInt();
+                }
+                edges[i] = targets;
+            }
+
+            var vertices = graph.inner.indexGraphVerticesMap();
+            for (int i = 0; i < numEdged; i++) {
+                var source = vertices.indexToId(numUnedged + i);
+                for (var target : edges[i]) {
+                    graph.addEdge(source, vertices.indexToId(target));
+                }
+            }
+
+            graph.version = 0;
+
+            return graph;
+        }
+
+        @Override
+        public void encode(@NotNull RegistryFriendlyByteBuf buf, @NotNull BlockPosGraph graph) {
+            buf.writeVarInt(graph.vertices().size());
+
+            var vertices = graph.inner.indexGraphVerticesMap();
+            var numVertices = graph.vertices().size();
+            var unedged = new int[numVertices];
+            var numUnedged = 0;
+            var edged = new int[numVertices];
+            var numEdged = 0;
+            var meta = new int[numVertices];
+            for (int i = 0; i < numVertices; i++) {
+                var vertex = vertices.indexToId(i);
+                if (graph.outEdges(vertex).isEmpty()) {
+                    unedged[numUnedged] = i;
+                    meta[i] = numUnedged;
+                    numUnedged++;
+                } else {
+                    edged[numEdged++] = i;
+                    meta[i] = ~numUnedged;
+                }
+            }
+
+            buf.writeVarInt(numUnedged);
+            for (int i = 0; i < numUnedged; i++) {
+                var pos = vertices.indexToId(unedged[i]);
+                buf.writeBlockPos(pos);
+            }
+
+            for (int i = 0; i < numEdged; i++) {
+                var pos = vertices.indexToId(edged[i]);
+                buf.writeBlockPos(pos);
+                var edges = graph.outEdges(pos);
+                buf.writeVarInt(edges.size());
+                for (var edge : edges) {
+                    var idx = vertices.idToIndex(edge.target());
+                    var m = meta[idx];
+                    if (m >= 0) {
+                        idx = m;
+                    } else {
+                        idx += numUnedged;
+                        idx -= ~m;
+                    }
+                    buf.writeVarInt(idx);
+                }
+            }
+        }
+    };
+
     public BlockPosGraph() {
         this.inner = Graph.newDirected();
+    }
+
+    public BlockPosGraph(Collection<BlockPos> vertices, Collection<BlockPosEdge> edges) {
+        this();
+        this.addVertices(vertices);
+        for (var edge : edges) {
+            this.addEdge(edge);
+        }
+        this.version = 0;
     }
 
     /**
@@ -154,6 +264,43 @@ public class BlockPosGraph {
      */
     public EdgeSet<BlockPos, BlockPosEdge> outEdges(BlockPos source) {
         return this.inner.outEdges(source);
+    }
+
+    /**
+     * Check whether the graph contains an edge with the given source and target.
+     *
+     * <p>
+     * If the graph is undirected, the method will return {@code true} if there is an edge whose end-points are
+     * {@code source} and {@code target}, regardless of which is the source and which is the target.
+     *
+     * @param  source                the source vertex
+     * @param  target                the target vertex
+     * @return                       {@code true} if the graph contains an edge with the given source and target,
+     *                               {@code false} otherwise
+     * @throws NoSuchVertexException if {@code source} or {@code target} are not valid vertices identifiers
+     */
+    public boolean containsEdge(BlockPos source, BlockPos target) {
+        return getEdge(source, target) != null;
+    }
+
+    /**
+     * Get the edge whose source is {@code source} and target is {@code target}.
+     *
+     * <p>
+     * If the graph is not directed, the return edge is an edge that its end-points are {@code source} and
+     * {@code target}.
+     *
+     * <p>
+     * In case there are multiple (parallel) edges between {@code source} and {@code target}, a single arbitrary one is
+     * returned.
+     *
+     * @param  source                a source vertex
+     * @param  target                a target vertex
+     * @return                       id of the edge or {@code null} if no such edge exists
+     * @throws NoSuchVertexException if {@code source} or {@code target} are not valid vertices identifiers
+     */
+    public BlockPosEdge getEdge(BlockPos source, BlockPos target) {
+        return this.inner.getEdge(source, target);
     }
 
     /**

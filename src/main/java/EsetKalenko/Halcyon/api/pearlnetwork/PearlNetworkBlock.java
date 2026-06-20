@@ -52,9 +52,10 @@ public class PearlNetworkBlock extends Block {
                     } else {
                         if (canConnectTo(linkFrom.get())) {
                             if (linkFrom.get() instanceof PearlNetworkBlockEntity other) {
-                                if ((ent != linkFrom.get() && (ent.link.isEmpty() || !ent.link.contains(linkFrom.get().getBlockPos()))) && linkFrom.get().getBlockPos().closerThan(ent.getBlockPos(), DataNEssenceConfig.wireDistanceLimit)) {
+                                if ((ent != linkFrom.get() && (networks.graph.outEdges(pPos).isEmpty() || !networks.graph.containsEdge(linkFrom.get().getBlockPos(), pPos))) && linkFrom.get().getBlockPos().closerThan(ent.getBlockPos(), DataNEssenceConfig.wireDistanceLimit)) {
                                     networks.graph.addEdge(other.getBlockPos(), pPos);
                                     other.updateBlock();
+                                    pLevel.syncData(AttachmentTypeRegistry.ENDER_PEARL_NETWORKS);
                                     pPlayer.setData(AttachmentTypeRegistry.LINK_FROM, Optional.empty());
                                     PlayerDataUtil.updateData((ServerPlayer) pPlayer);
                                     pLevel.playSound(null, pPos, SoundRegistry.PEARL_NETWORK_LINK_TO.value(), SoundSource.BLOCKS, 1f, 1f);
@@ -85,6 +86,7 @@ public class PearlNetworkBlock extends Block {
                     }
                 }
                 networks.graph.removeVertex(pPos);
+                pLevel.syncData(AttachmentTypeRegistry.ENDER_PEARL_NETWORKS);
             }
         }
         super.onRemove(pState, pLevel, pPos, pNewState, pMovedByPiston);
