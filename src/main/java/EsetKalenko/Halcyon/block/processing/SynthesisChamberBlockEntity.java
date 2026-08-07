@@ -278,6 +278,8 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
             if (synthesisChamber.workTime >= 0 && synthesisChamber.essenceCost != null && synthesisChamber.itemHandler.locked) {
                 if ( synthesisChamber.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.ESSENCE.get())) )
                     ClientHandler.markIndustrialFactorySong(pPos);
+                if ( synthesisChamber.essenceCost.containsKey(DataNEssenceRegistries.ESSENCE_TYPE_REGISTRY.getKey(EssenceTypeRegistry.LUNAR_ESSENCE.get())) )
+                    ClientHandler.markLunarFactorySong(pPos);
             }
         }
     }
@@ -317,9 +319,14 @@ public class SynthesisChamberBlockEntity extends BlockEntity implements MenuProv
 
     private static class ClientHandler {
         static FactorySong.FactoryLoop industrialSound = FactorySong.getLoop(SoundRegistry.SYNTHESIS_LOOP_INDUSTRIAL.value());
+        static FactorySong.FactoryLoop lunarSound = FactorySong.getLoop(SoundRegistry.SYNTHESIS_LOOP_LUNAR.value());
 
         public static void markIndustrialFactorySong(BlockPos pos) {
             industrialSound.addSource(pos);
+        }
+
+        public static void markLunarFactorySong(BlockPos pos) {
+            lunarSound.addSource(pos);
         }
     }
 

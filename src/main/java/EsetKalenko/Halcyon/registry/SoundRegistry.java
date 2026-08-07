@@ -103,6 +103,7 @@ public class SoundRegistry {
     public static final Holder<SoundEvent> METAL_SHAPER_LOOP = createBasicFactoryLoopSound("ost.factory_loops.metal_shaper");
     public static final Holder<SoundEvent> AUTO_FABRICATOR_LOOP_INDUSTRIAL = createBasicFactoryLoopSound("ost.factory_loops.auto-fabricator");
     public static final Holder<SoundEvent> SYNTHESIS_LOOP_INDUSTRIAL = createBasicFactoryLoopSound("ost.factory_loops.synthesis_industrial");
+    public static final Holder<SoundEvent> SYNTHESIS_LOOP_LUNAR = createBasicFactoryLoopSound("ost.factory_loops.synthesis_lunar");
 
     public static Holder<SoundEvent> createBasicSound(String name) {
         return SOUND_EVENTS.register(name,

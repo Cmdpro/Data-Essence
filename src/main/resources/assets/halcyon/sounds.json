@@ -71,6 +71,12 @@
         ],
         "stream": true
     },
+    "ost.factory_loops.synthesis_lunar": {
+        "sounds": [
+            "halcyon:ost/factory_loops/synthesis_lunar"
+        ],
+        "stream": true
+    },
     "critical_data_unlocked": {
         "sounds": [
             "halcyon:critical_data_unlocked"
