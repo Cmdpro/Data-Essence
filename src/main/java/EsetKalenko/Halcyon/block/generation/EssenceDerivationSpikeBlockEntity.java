@@ -125,8 +125,11 @@ public class EssenceDerivationSpikeBlockEntity extends BlockEntity implements Es
                 if ( spike.temperature >= spike.getMaxTemperature() )
                     spike.overheat(spike);
 
-                //if ( world.random.nextInt() % 15 == 0)
-                //    spike.temperature = Math.max(spike.temperature - 1, TemperatureUtil.getBiomeTemperature(world.getBiome(pos).value()));// todo only if coolant is present
+                // todo coolant-dependent values
+                if ( world.random.nextInt() % 15 == 0 && spike.coolantTank.getFluidAmount() >= 10) {
+                    spike.temperature = Math.max(spike.temperature - 1, TemperatureUtil.getBiomeTemperature(world.getBiome(pos).value()));
+                    spike.coolantTank.drain(10, IFluidHandler.FluidAction.EXECUTE);
+                }
 
                 if ( spike.isBroken && world.random.nextInt() % 17 == 0 ) {
                     world.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.4f, 0.75f);

@@ -250,6 +250,10 @@ public class Halcyon
             return null;
         });
 
+        event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, BlockEntityRegistry.ESSENCE_DERIVATION_SPIKE.get(), (machine, direction) -> {
+            return machine.getFluidHandler();
+        });
+
     }
     @SubscribeEvent
     public static void addCreative(BuildCreativeModeTabContentsEvent event) {
