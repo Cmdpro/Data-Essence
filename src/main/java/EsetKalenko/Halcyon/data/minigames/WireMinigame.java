@@ -116,6 +116,9 @@ public class WireMinigame extends Minigame {
         if (startLine != null && endLine != null) {
             Tile start = getTile(startLine);
             Tile end = getTile(endLine);
+            if (start == null && end == null)
+                return;
+
             boolean invalid = false;
             Line2D line = new Line2D.Double((start.pos.x * 10) + 5, (start.pos.y * 10) + 5, (end.pos.x * 10) + 5, (end.pos.y * 10) + 5);
             for (Tile i : tiles.values()) {

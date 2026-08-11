@@ -36,7 +36,7 @@
   "parents": [
     "halcyon:basics/fabricator",
     "halcyon:machinery_transformation/ecliptrum",
-    "halcyon:basics/lunar_strikes"
+    "halcyon:machinery_transformation/lunar_strikes"
   ],
   "completion_stages": [
     {
