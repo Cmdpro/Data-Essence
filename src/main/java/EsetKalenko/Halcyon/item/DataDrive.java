@@ -28,6 +28,8 @@ public class DataDrive extends Item {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
         if (pStack.has(DataComponentRegistry.DATA_ID)) {
             Entry entry = Entries.entries.get(pStack.get(DataComponentRegistry.DATA_ID));
+            if (entry == null)
+                return;
             int stage = pStack.getOrDefault(DataComponentRegistry.DATA_INCOMPLETE, entry.completionStages.size());
             pTooltipComponents.add(Component.translatable("item.halcyon.data_drive.loaded", entry.getName(stage)).withStyle(ChatFormatting.GRAY));
             if (pStack.has(DataComponentRegistry.DATA_INCOMPLETE)) {
