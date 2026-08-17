@@ -496,14 +496,19 @@ public class ClientEvents {
                     if (offset.length() > grapplingHookData.distance) {
                         Vec3 direction = offset.normalize();
                         // position-dependent component; if too far away, pulls in
-                        double posForce = (offset.length() - grapplingHookData.distance) * 2;
+                        double posForce = (offset.length() - grapplingHookData.distance);
                         posForce *= posForce;
                         // velocity-dependent component; make velocity perpendicular using only outward force
                         double radialVelocity = mc.player.getDeltaMovement().dot(direction);
-                        double vecForce = radialVelocity * -1;
+                        double velForce = radialVelocity * -1;
+                        if (direction.y < 0) velForce = 0;
 
-                        double force = Math.clamp(vecForce, 2, posForce);
-                        if (force > 0 && force > radialVelocity) mc.player.addDeltaMovement(direction.scale(force));
+                        double force = posForce + velForce;
+                        force = Math.clamp(-2, 2, force);
+                        if (
+                                Math.signum(force) != Math.signum(radialVelocity)
+                                || Math.abs(force + radialVelocity) < 2
+                        ) mc.player.addDeltaMovement(direction.scale(force));
                     }
                 }
                 for (int index = 0; index < player.getInventory().getContainerSize(); index++) {
