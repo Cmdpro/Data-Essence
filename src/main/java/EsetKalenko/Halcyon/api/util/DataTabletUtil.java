@@ -1,5 +1,6 @@
 package EsetKalenko.Halcyon.api.util;
 
+import EsetKalenko.Halcyon.Halcyon;
 import EsetKalenko.Halcyon.api.DataNEssenceRegistries;
 import EsetKalenko.Halcyon.api.essence.EssenceType;
 import EsetKalenko.Halcyon.data.databank.DataBankEntries;
@@ -19,6 +20,12 @@ import java.util.Optional;
 public class DataTabletUtil {
     public static void unlockEntry(Player player, ResourceLocation entry, int incompleteStage) {
         Entry entry2 = Entries.entries.get(entry);
+
+        if (entry2 == null) {
+            Halcyon.LOGGER.error("[HALCYON] Tried to unlock non-existent data entry \"{}\"!?", entry);
+            return;
+        }
+
         HashMap<ResourceLocation, Integer> incompleteEntries = player.getData(AttachmentTypeRegistry.INCOMPLETE_STAGES);
         List<ResourceLocation> unlocked = player.getData(AttachmentTypeRegistry.UNLOCKED);
         int finalIncompleteStage = incompleteStage;

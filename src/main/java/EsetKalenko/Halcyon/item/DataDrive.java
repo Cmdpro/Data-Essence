@@ -28,8 +28,10 @@ public class DataDrive extends Item {
         super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
         if (pStack.has(DataComponentRegistry.DATA_ID)) {
             Entry entry = Entries.entries.get(pStack.get(DataComponentRegistry.DATA_ID));
-            if (entry == null)
+            if (entry == null) {
+                pTooltipComponents.add(Component.translatable("tooltip.halcyon.data_invalid"));
                 return;
+            }
             int stage = pStack.getOrDefault(DataComponentRegistry.DATA_INCOMPLETE, entry.completionStages.size());
             pTooltipComponents.add(Component.translatable("item.halcyon.data_drive.loaded", entry.getName(stage)).withStyle(ChatFormatting.GRAY));
             if (pStack.has(DataComponentRegistry.DATA_INCOMPLETE)) {
@@ -42,6 +44,7 @@ public class DataDrive extends Item {
             pTooltipComponents.add(Component.translatable("item.halcyon.data_drive.empty").withStyle(ChatFormatting.GRAY));
         }
     }
+
     public static Entry getEntry(ItemStack stack) {
         if (stack != null) {
             if (stack.has(DataComponentRegistry.DATA_ID)) {
@@ -50,6 +53,7 @@ public class DataDrive extends Item {
         }
         return null;
     }
+
     public static ResourceLocation getEntryId(ItemStack stack) {
         if (stack != null) {
             if (stack.has(DataComponentRegistry.DATA_ID)) {
@@ -58,6 +62,7 @@ public class DataDrive extends Item {
         }
         return null;
     }
+
     public static Integer getEntryCompletionStage(ItemStack stack) {
         if (stack != null) {
             if (stack.has(DataComponentRegistry.DATA_ID)) {
@@ -66,6 +71,7 @@ public class DataDrive extends Item {
         }
         return null;
     }
+
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (pLevel.isClientSide) {
@@ -73,6 +79,7 @@ public class DataDrive extends Item {
         }
         return InteractionResultHolder.sidedSuccess(pPlayer.getItemInHand(pUsedHand), pLevel.isClientSide);
     }
+
     public static class Client {
         public static void openScreen(boolean offhand) {
             Minecraft.getInstance().setScreen(new DataDriveScreen(Component.empty(), offhand));

@@ -1,5 +1,6 @@
 package EsetKalenko.Halcyon.block.auxiliary;
 
+import EsetKalenko.Halcyon.Halcyon;
 import EsetKalenko.Halcyon.api.block.BaseDataBankBlock;
 import EsetKalenko.Halcyon.api.util.DataTabletUtil;
 import EsetKalenko.Halcyon.data.datatablet.Entries;
@@ -49,6 +50,12 @@ public class DataBank extends BaseDataBankBlock implements EntityBlock {
                     player.sendSystemMessage(Component.translatable("block.halcyon.player_data_bank.receive", entries.size()));
                     for (ResourceLocation i : entries) {
                         Entry entry = Entries.entries.get(i);
+
+                        if (entry == null) {
+                            Halcyon.LOGGER.error("[HALCYON] Tried to load non-existent data entry \"{}\" from Data Bank!?", i);
+                            continue;
+                        }
+
                         DataTabletUtil.unlockEntryAndParents(player, i, entry.completionStages.size());
                     }
                 }

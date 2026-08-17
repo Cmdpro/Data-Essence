@@ -1,5 +1,6 @@
 package EsetKalenko.Halcyon.data.hidden;
 
+import EsetKalenko.Halcyon.Halcyon;
 import com.cmdpro.databank.hidden.HiddenCondition;
 import EsetKalenko.Halcyon.data.datatablet.Entries;
 import EsetKalenko.Halcyon.data.datatablet.Entry;
@@ -28,6 +29,10 @@ public class EntryCondition extends HiddenCondition {
             return true;
         } else if (completionStage != -1) {
             Entry entry = Entries.entries.get(this.entry);
+
+            if (entry == null)
+                return false;
+
             return entry.getIncompleteStageServer(player) >= completionStage;
         }
         return false;
