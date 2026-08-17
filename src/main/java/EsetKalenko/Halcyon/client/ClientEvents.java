@@ -492,21 +492,23 @@ public class ClientEvents {
                 }
                 GrapplingHook.GrapplingHookData grapplingHookData = player.getData(AttachmentTypeRegistry.GRAPPLING_HOOK_DATA).orElse(null);
                 if (grapplingHookData != null) {
-                    if (mc.player.position().distanceTo(grapplingHookData.pos) > 0) {
-                        Vector3d direction = new Vector3d(grapplingHookData.pos.subtract(mc.player.position()).toVector3f()).normalize();
-                        double theta = direction.angle(new Vector3d(0, 1, 0));
-                        double angle = Math.toDegrees(theta);
-                        double distanceToUp = Math.abs(180-(angle > 180 ? 180-(angle-180) : angle));
-                        double intensity = 1d;
-                        if (distanceToUp <= 90) {
-                            intensity = distanceToUp/90d;
-                        }
-                        double centripetalAcceleration = mc.player.getDeltaMovement().lengthSqr() / (1d + grapplingHookData.distance);
-                        double mass = 1;
-                        double gravity = mc.player.getGravity();
-                        Vector3d tension = new Vector3d(direction).mul(mass * (centripetalAcceleration + gravity * Math.cos(theta)));
-                        Vector3d force = new Vector3d(tension).div(mass);
-                        mc.player.setDeltaMovement(mc.player.getDeltaMovement().add(new Vec3(force.x, force.y > 0 ? force.y*intensity : force.y, force.z)));
+                    Vec3 offset = grapplingHookData.pos.subtract(mc.player.position());
+                    if (offset.length() > grapplingHookData.distance) {
+                        Vec3 direction = offset.normalize();
+                        // position-dependent component; if too far away, pulls in
+                        double posForce = (offset.length() - grapplingHookData.distance);
+                        posForce *= posForce;
+                        // velocity-dependent component; make velocity perpendicular using only outward force
+                        double radialVelocity = mc.player.getDeltaMovement().dot(direction);
+                        double velForce = radialVelocity * -1;
+                        if (direction.y < 0) velForce = 0;
+
+                        double force = posForce + velForce;
+                        force = Math.clamp(-2, 2, force);
+                        if (
+                                Math.signum(force) != Math.signum(radialVelocity)
+                                || Math.abs(force + radialVelocity) < 2
+                        ) mc.player.addDeltaMovement(direction.scale(force));
                     }
                 }
                 for (int index = 0; index < player.getInventory().getContainerSize(); index++) {
