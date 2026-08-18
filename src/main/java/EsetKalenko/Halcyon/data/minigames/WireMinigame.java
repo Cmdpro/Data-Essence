@@ -116,7 +116,7 @@ public class WireMinigame extends Minigame {
         if (startLine != null && endLine != null) {
             Tile start = getTile(startLine);
             Tile end = getTile(endLine);
-            if (start == null && end == null)
+            if (start == null || end == null)
                 return;
 
             boolean invalid = false;
