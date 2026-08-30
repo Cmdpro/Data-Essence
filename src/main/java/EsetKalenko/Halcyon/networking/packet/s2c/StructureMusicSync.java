@@ -11,12 +11,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
+import java.util.Map;
+
 public record StructureMusicSync(ResourceLocation music, boolean schedule) implements Message {
     @Override
     public void handleClient(Minecraft minecraft, Player player, IPayloadContext ctx) {
         if (minecraft.level == null) return;
         var soundRegistry = minecraft.level.registryAccess().registry(Registries.SOUND_EVENT);
         if (soundRegistry.isEmpty()) return;
+
+        if (music == null) {
+            for (StructureSongs.StructureMusic song : StructureSongs.STRUCTURE_SONGS.values()) {
+                song.stop();
+            }
+        }
 
         var song = StructureSongs.getSong( soundRegistry.get().get(music) );
 

@@ -315,7 +315,7 @@ public class ModEvents {
                 );
             } else {
                 ModMessages.sendToPlayer(
-                        new StructureMusicSync( Halcyon.locate("ost.abandoned_factory"), false ),
+                        new StructureMusicSync( null, false ),
                         player
                 );
             }
