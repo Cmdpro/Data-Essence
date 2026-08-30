@@ -315,7 +315,7 @@ public class ModEvents {
                 );
             } else {
                 ModMessages.sendToPlayer(
-                        new StructureMusicSync( null, false ),
+                        new StructureMusicSync( Halcyon.locate("all"), false ),
                         player
                 );
             }

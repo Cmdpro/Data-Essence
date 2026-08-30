@@ -20,7 +20,8 @@ public record StructureMusicSync(ResourceLocation music, boolean schedule) imple
         var soundRegistry = minecraft.level.registryAccess().registry(Registries.SOUND_EVENT);
         if (soundRegistry.isEmpty()) return;
 
-        if (music == null) {
+        // ...
+        if (music.equals( Halcyon.locate("all") )) {
             for (StructureSongs.StructureMusic song : StructureSongs.STRUCTURE_SONGS.values()) {
                 song.stop();
             }
