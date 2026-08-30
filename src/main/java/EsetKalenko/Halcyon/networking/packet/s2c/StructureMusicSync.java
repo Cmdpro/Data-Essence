@@ -25,6 +25,7 @@ public record StructureMusicSync(ResourceLocation music, boolean schedule) imple
             for (StructureSongs.StructureMusic song : StructureSongs.STRUCTURE_SONGS.values()) {
                 song.stop();
             }
+            return;
         }
 
         var song = StructureSongs.getSong( soundRegistry.get().get(music) );
