@@ -1,0 +1,762 @@
+{
+  "animations": {
+    "idle": {
+      "length": 0,
+      "looping": true,
+      "animation": [
+        {
+          "bone": "arm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                27.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "hammer",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -12.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    "hit_bell": {
+      "length": 1.5,
+      "looping": false,
+      "animation": [
+        {
+          "bone": "bell",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0.375,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.45833,
+              "target": [
+                7.5,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.54167,
+              "target": [
+                22.5,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                5,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1,
+              "target": [
+                -12.5,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.25,
+              "target": [
+                10,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                0,
+                0,
+                0
+              ],
+              "interpolation": "smooth"
+            }
+          ]
+        },
+        {
+          "bone": "arm",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                15,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.25,
+              "target": [
+                32.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.5,
+              "target": [
+                -27.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 0.75,
+              "target": [
+                -22.5,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            },
+            {
+              "timestamp": 1.5,
+              "target": [
+                15,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        },
+        {
+          "bone": "hammer",
+          "target": "rotation",
+          "keyframes": [
+            {
+              "timestamp": 0,
+              "target": [
+                -15,
+                0,
+                0
+              ],
+              "interpolation": "linear"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "parts": [
+    {
+      "type": "databank:group",
+      "name": "root",
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "offset": [
+        0,
+        0,
+        0
+      ],
+      "children": [
+        {
+          "type": "databank:cube",
+          "name": "base",
+          "rotation": [
+            0,
+            -0.7853981633974483,
+            0
+          ],
+          "offset": [
+            0,
+            1.5,
+            0
+          ],
+          "texOffset": [
+            0,
+            0
+          ],
+          "mirror": false,
+          "origin": [
+            -6,
+            -1.5,
+            -6
+          ],
+          "dimensions": [
+            12,
+            3,
+            12
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "bellstand_sides",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            3,
+            0
+          ],
+          "texOffset": [
+            0,
+            15
+          ],
+          "mirror": false,
+          "origin": [
+            -5,
+            0,
+            -3
+          ],
+          "dimensions": [
+            10,
+            17,
+            6
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "bellstand_in",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            3,
+            0
+          ],
+          "texOffset": [
+            32,
+            15
+          ],
+          "mirror": false,
+          "origin": [
+            -4,
+            2,
+            -3
+          ],
+          "dimensions": [
+            8,
+            15,
+            6
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "bellstand_in2",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            3,
+            0
+          ],
+          "texOffset": [
+            32,
+            36
+          ],
+          "mirror": false,
+          "origin": [
+            -5,
+            2,
+            -2
+          ],
+          "dimensions": [
+            10,
+            12,
+            4
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "bellstand_top",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            20,
+            0
+          ],
+          "texOffset": [
+            0,
+            38
+          ],
+          "mirror": false,
+          "origin": [
+            -7,
+            -2,
+            0
+          ],
+          "dimensions": [
+            14,
+            6,
+            0
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "arm_base",
+          "rotation": [
+            0,
+            -0.7853981633974483,
+            0
+          ],
+          "offset": [
+            0,
+            3,
+            7
+          ],
+          "texOffset": [
+            38,
+            52
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            -1
+          ],
+          "dimensions": [
+            2,
+            5,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "arm_base_filigree",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            10,
+            7.25
+          ],
+          "texOffset": [
+            20,
+            44
+          ],
+          "mirror": false,
+          "origin": [
+            0,
+            -7,
+            0
+          ],
+          "dimensions": [
+            0,
+            7,
+            5
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:cube",
+          "name": "arm_base_shoulder",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            8,
+            7
+          ],
+          "texOffset": [
+            0,
+            55
+          ],
+          "mirror": false,
+          "origin": [
+            -1,
+            0,
+            -1
+          ],
+          "dimensions": [
+            2,
+            2,
+            2
+          ],
+          "inflate": 0
+        },
+        {
+          "type": "databank:group",
+          "name": "bell",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            18.625,
+            0
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "bell_top",
+              "rotation": [
+                0.7853981633974483,
+                0,
+                -0.7853981633974483
+              ],
+              "offset": [
+                0,
+                -0.625,
+                0
+              ],
+              "texOffset": [
+                8,
+                55
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                -1,
+                -1
+              ],
+              "dimensions": [
+                2,
+                2,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "bell1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -0.5,
+                -3.625,
+                -0.5
+              ],
+              "texOffset": [
+                0,
+                44
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -4,
+                -2
+              ],
+              "dimensions": [
+                5,
+                6,
+                5
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "bell_out",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -0.5,
+                -3.625,
+                -0.5
+              ],
+              "texOffset": [
+                48,
+                0
+              ],
+              "mirror": false,
+              "origin": [
+                -2,
+                -4,
+                -2
+              ],
+              "dimensions": [
+                5,
+                2,
+                5
+              ],
+              "inflate": 0.25
+            },
+            {
+              "type": "databank:cube",
+              "name": "bell_pendulum",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                -9.625,
+                0
+              ],
+              "texOffset": [
+                20,
+                56
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                1,
+                -1
+              ],
+              "dimensions": [
+                2,
+                1,
+                2
+              ],
+              "inflate": 0
+            }
+          ]
+        },
+        {
+          "type": "databank:group",
+          "name": "arm",
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "offset": [
+            0,
+            10,
+            7
+          ],
+          "children": [
+            {
+              "type": "databank:cube",
+              "name": "arm1",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                0,
+                0
+              ],
+              "texOffset": [
+                16,
+                55
+              ],
+              "mirror": false,
+              "origin": [
+                0,
+                -1,
+                -1
+              ],
+              "dimensions": [
+                0,
+                5,
+                2
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:cube",
+              "name": "hand",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                0,
+                4,
+                -0.5
+              ],
+              "texOffset": [
+                48,
+                7
+              ],
+              "mirror": false,
+              "origin": [
+                -1,
+                0,
+                -1
+              ],
+              "dimensions": [
+                2,
+                4,
+                3
+              ],
+              "inflate": 0
+            },
+            {
+              "type": "databank:group",
+              "name": "hammer",
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "offset": [
+                -0.25,
+                6,
+                0
+              ],
+              "children": [
+                {
+                  "type": "databank:cube",
+                  "name": "hammer_handle",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    1,
+                    -0.5
+                  ],
+                  "texOffset": [
+                    30,
+                    52
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    0,
+                    -6,
+                    -1
+                  ],
+                  "dimensions": [
+                    0,
+                    10,
+                    4
+                  ],
+                  "inflate": 0
+                },
+                {
+                  "type": "databank:cube",
+                  "name": "hammer_head",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    3,
+                    -1
+                  ],
+                  "texOffset": [
+                    46,
+                    52
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    0,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    2,
+                    3
+                  ],
+                  "inflate": 0
+                },
+                {
+                  "type": "databank:cube",
+                  "name": "hammer_head_out",
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "offset": [
+                    0,
+                    3,
+                    -1
+                  ],
+                  "texOffset": [
+                    56,
+                    52
+                  ],
+                  "mirror": false,
+                  "origin": [
+                    -1,
+                    0,
+                    -1
+                  ],
+                  "dimensions": [
+                    2,
+                    2,
+                    1
+                  ],
+                  "inflate": 0.25
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "textureSize": [
+    128,
+    128
+  ],
+  "version": 1
+}
