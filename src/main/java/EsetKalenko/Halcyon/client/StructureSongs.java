@@ -28,7 +28,7 @@ public class StructureSongs {
         STRUCTURE_SONGS.put(id, new StructureMusic(
                 new StructureSongSoundInstance(
                         id,
-                        SoundSource.MUSIC,
+                        SoundSource.MASTER,
                         1.0f,
                         1.0f,
                         SoundInstance.createUnseededRandom(),
