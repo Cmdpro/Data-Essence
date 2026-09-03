@@ -2,22 +2,24 @@ package EsetKalenko.Halcyon.client.renderers.block;
 
 import EsetKalenko.Halcyon.Halcyon;
 import EsetKalenko.Halcyon.block.production.CrystallineCradleBlockEntity;
+import com.cmdpro.databank.model.DatabankModel;
+import com.cmdpro.databank.model.DatabankModels;
+import com.cmdpro.databank.model.blockentity.DatabankBlockEntityModel;
+import com.cmdpro.databank.model.blockentity.DatabankBlockEntityRenderer;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
+import net.minecraft.resources.ResourceLocation;
 
 import java.awt.*;
 
-public class CrystallineCradleRenderer implements BlockEntityRenderer<CrystallineCradleBlockEntity> {
-    EntityRenderDispatcher renderDispatcher;
+public class CrystallineCradleRenderer extends DatabankBlockEntityRenderer<CrystallineCradleBlockEntity> {
 
     public CrystallineCradleRenderer(BlockEntityRendererProvider.Context rendererProvider) {
-        renderDispatcher = rendererProvider.getEntityRenderer();
+        super(new Model());
     }
 
     @Override
@@ -38,6 +40,28 @@ public class CrystallineCradleRenderer implements BlockEntityRenderer<Crystallin
         renderQuad(bufferSource.getBuffer(RenderType.entityTranslucent(Halcyon.locate("textures/vfx/damage_circle.png"))), poseStack, -1*range, 0, -1*range, 1*range, 0, 1*range, 0, 0, 1, 1, packedLight, packedOverlay, color.getRGB());
         RenderSystem.disableBlend();
         poseStack.popPose();
+    }
+
+    public static class Model extends DatabankBlockEntityModel<CrystallineCradleBlockEntity> {
+        public DatabankModel model;
+
+        @Override
+        public ResourceLocation getTextureLocation() {
+            return Halcyon.locate("textures/block/crystalline_cradle.png");
+        }
+
+        @Override
+        public void setupModelPose(CrystallineCradleBlockEntity cradle, float partialTick) {
+            // TODO. animating with "hit_bell" should be done 0.5s before the thing harvests crystals
+        }
+
+        @Override
+        public DatabankModel getModel() {
+            if (model == null) {
+                model = DatabankModels.models.get(Halcyon.locate("crystalline_cradle"));
+            }
+            return model;
+        }
     }
 
     private static void drawVertex(VertexConsumer builder, PoseStack poseStack, float x, float y, float z, float u, float v, int packedLight, int packedOverlay, int color) {
