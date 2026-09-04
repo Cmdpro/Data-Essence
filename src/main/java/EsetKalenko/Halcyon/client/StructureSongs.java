@@ -55,6 +55,8 @@ public class StructureSongs {
 
         if (currentVolume > 0f) {
             for (var sound : StructureSongs.STRUCTURE_SONGS.values()) {
+                sound.sound.resolve(soundManager);
+
                 boolean playing = false;
 
                 if (soundManager.isActive(sound.sound)) {
