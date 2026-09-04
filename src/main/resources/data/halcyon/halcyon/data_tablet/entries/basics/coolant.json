@@ -1,0 +1,34 @@
+{
+  "icon": {
+    "id": "halcyon:fabricator"
+  },
+  "tab": "halcyon:basics",
+  "x": -1,
+  "y": 0,
+  "pages": [
+    {
+      "type": "halcyon:item",
+      "item": {
+        "id": "halcyon:fabricator"
+      },
+      "text": {
+        "translate": "data_tablet.pages.coolant.page1.text"
+      }
+    },
+    {
+      "type": "halcyon:crafting",
+      "text": {
+        "translate": "data_tablet.pages.coolant.page2.text"
+      },
+      "recipes": [
+        "halcyon:fluid_mixing/cooled_water"
+      ]
+    }
+  ],
+  "name": {
+    "translate": "data_tablet.pages.coolant.name"
+  },
+  "flavor": {
+    "translate": "data_tablet.pages.coolant.flavor"
+  }
+}

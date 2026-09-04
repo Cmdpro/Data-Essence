@@ -1,0 +1,19 @@
+{
+  "type": "halcyon:shaped_fabrication_recipe",
+  "essenceCost": { "halcyon:essence": 1000, "halcyon:lunar_essence": 100 },
+  "time": 200,
+  "entry": "halcyon:essence_manipulation/essence_derivation_spike",
+  "pattern": [
+    " R ",
+    "PGP",
+    "OEO"
+  ],
+  "key": {
+    "P": { "item": "halcyon:prepared_panel" },
+    "G": { "item": "halcyon:ecliptrum_cog_assembly_2x" },
+    "R": { "item": "halcyon:extrication_rod" },
+    "E": { "item": "halcyon:essence_shard" },
+    "O": { "item": "halcyon:polished_obsidian" }
+  },
+  "result": { "id": "halcyon:essence_derivation_spike" }
+}

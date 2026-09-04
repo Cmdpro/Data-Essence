@@ -48,6 +48,7 @@
     "halcyon:tier_2/synthesis_chamber",
     "halcyon:tier_2/twining_lantern",
     "halcyon:tier_2/warp_capsule",
+    "halcyon:tier_3/essence_derivation_spike",
     "halcyon:tier_3/integration_redstoneflux_nodes",
     { "value": "halcyon:tier_1/mod_integration_opalescence", "required": false },
     { "value": "halcyon:tier_2/mod_integration_ae2", "required": false },

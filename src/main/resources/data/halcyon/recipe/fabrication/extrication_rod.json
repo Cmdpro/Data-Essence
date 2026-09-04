@@ -1,0 +1,20 @@
+{
+  "type": "halcyon:shaped_fabrication_recipe",
+  "essenceCost": {
+    "halcyon:essence": 500,
+    "halcyon:lunar_essence": 50
+  },
+  "time": 120,
+  "entry": "halcyon:essence_manipulation/essence_derivation_spike",
+  "pattern": [
+    " SR",
+    "SRS",
+    "FS "
+  ],
+  "key": {
+    "S": { "item": "halcyon:essence_shard" },
+    "R": { "item": "halcyon:conductance_rod" },
+    "F": { "item": "halcyon:frozen_moonlight_chunk" }
+  },
+  "result": { "id": "halcyon:extrication_rod" }
+}

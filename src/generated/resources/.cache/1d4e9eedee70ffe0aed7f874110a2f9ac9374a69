@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-03T12:39:21.73923484	Tags for minecraft:item mod id halcyon
+// 1.21.1	2026-09-03T23:32:13.784481371	Tags for minecraft:item mod id halcyon
 44c0dd0f8e589310fa2f008f13cf0f0003508967 data/c/tags/item/armors.json
 fc3f55950ce15cf7fb538bbd87ed2175a35d1a7b data/c/tags/item/gems.json
 4b8c7d45502e3d351747c096f8a92f57030ad921 data/c/tags/item/glass_blocks.json
@@ -28,5 +28,5 @@ bce5073bf52115ba41d2a7876709ffc5ecdf34f7 data/halcyon/tags/item/makes_pink_dye.j
 73a0f0ef78ea29bdc25208fc70b485fbc5620512 data/halcyon/tags/item/makes_yellow_dye.json
 c72c82fb7be28a737be47d94b7639e28a2c67fec data/halcyon/tags/item/polished_obsidian_blocks.json
 6624f8e71bef0f0247e97715fb33ea181166a7b7 data/halcyon/tags/item/shaped_polished_obsidian_blocks.json
-2ed866af24109cb714183866d00fecd8b536356e data/halcyon/tags/item/wip.json
+181587836f206cdfb588a74c5ba2259903572034 data/halcyon/tags/item/wip.json
 c86a05edd8dbb37c17af2c0ce1ce8e41e62cf791 data/minecraft/tags/item/freeze_immune_wearables.json

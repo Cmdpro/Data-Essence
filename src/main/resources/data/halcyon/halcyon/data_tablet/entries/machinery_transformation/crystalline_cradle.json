@@ -27,7 +27,7 @@
     "translate": "data_tablet.pages.crystalline_cradle.flavor"
   },
   "parents": [
-    "halcyon:machinery_transformation/ecliptrum",
-    "halcyon:basics/lunar_strikes"
+    "halcyon:machinery_transformation/lunarium",
+    "halcyon:basics/frozen_moonlight"
   ]
 }
