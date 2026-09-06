@@ -397,21 +397,21 @@ public class ModEvents {
         var pos = new Vec3( event.getX(), event.getY(), event.getZ() );
         var entity = event.getEntity();
 
-        if (entity.getType().getCategory() == MobCategory.MONSTER) {
-            // she getLevel on my event til i getLevel
-            List<TwiningLanternBlockEntity> twiningLanterns = ( (ServerLevel) event.getLevel().getLevel()).getData(AttachmentTypeRegistry.TWINING_LANTERNS.get());
+        // she getLevel on my event til i getLevel
+        List<TwiningLanternBlockEntity> twiningLanterns = ( (ServerLevel) event.getLevel().getLevel()).getData(AttachmentTypeRegistry.TWINING_LANTERNS.get());
 
-            for (TwiningLanternBlockEntity lantern : twiningLanterns) {
+        for (TwiningLanternBlockEntity lantern : twiningLanterns) {
 
-                if (lantern.industrialTicksLeft > 0 ) {
-                    AABB area = AABB.encapsulatingFullBlocks(lantern.corner1, lantern.corner2);
+            if (lantern.industrialTicksLeft > 0 ) {
+                AABB area = AABB.encapsulatingFullBlocks(lantern.corner1, lantern.corner2);
 
+                if (entity.getType().getCategory() == MobCategory.MONSTER || lantern.lunarTicksLeft > 0) {
                     if ( area.contains(pos) ) {
                         event.setCanceled(true);
                     }
                 }
-
             }
+
         }
 
     }

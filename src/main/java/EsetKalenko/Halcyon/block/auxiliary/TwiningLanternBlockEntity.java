@@ -158,6 +158,7 @@ public class TwiningLanternBlockEntity extends BlockEntity implements EssenceBlo
         } else if (tide == EssenceTypeRegistry.LUNAR_ESSENCE.get()) {
             lunarTicksLeft--;
             // TODO transformatively enhances function of the other three, does nothing alone
+            // +industrial: makes it block ALL spawns
         } else if (tide == EssenceTypeRegistry.NATURAL_ESSENCE.get()) {
             livingTicksLeft--;
             // TODO accelerates plant and animal growth, maybe also breeds them?
