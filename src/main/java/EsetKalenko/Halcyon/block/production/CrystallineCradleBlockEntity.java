@@ -30,8 +30,10 @@ public class CrystallineCradleBlockEntity extends BlockEntity implements Essence
     public int destroyTicks;
     public int visualDestroyTicks;
     // sixth note on every line does not play; but they are needed for positioning
-    private final int[] notes = {6, 8, 10, 13, 18, 12,
-                                 18, 13, 17, 18, 20, 12};
+    private final int[] notes = {6, 8, 10, 13, 18, 0,
+                                 18, 13, 17, 18, 20, 0};
+    private final int[] chords = {6, 0, 0, 0, 0, 0,
+                                  18, 0, 0, 0, 0, 0};
     private int currentNote;
 
     public CrystallineCradleBlockEntity(BlockPos pPos, BlockState pBlockState) {
@@ -101,17 +103,27 @@ public class CrystallineCradleBlockEntity extends BlockEntity implements Essence
             }
             if (tile.destroyTicks < tile.maxDestroyTicks) {
                 tile.destroyTicks++;
-                if (tile.destroyTicks % 5 == 0) {
-                    world.playSound(null, pos, SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f-((float)tile.destroyTicks/(float)tile.maxDestroyTicks), NoteBlock.getPitchFromNote(tile.notes[tile.currentNote]));
-                    tile.currentNote++;
-                    if (tile.currentNote >= tile.notes.length)
-                        tile.currentNote = 0;
-                }
+                tile.playNote(world, pos, tile);
             }
         } else {
             if (tile.visualDestroyTicks < tile.maxDestroyTicks) {
                 tile.visualDestroyTicks++;
             }
+        }
+    }
+
+    public void playNote(Level world, BlockPos pos, CrystallineCradleBlockEntity tile) {
+        if (tile.destroyTicks % 5 == 0) {
+
+            var noteIndex = tile.notes[tile.currentNote];
+            var chordIndex = tile.chords[tile.currentNote];
+            if (noteIndex != 0)
+                world.playSound(null, pos, SoundEvents.NOTE_BLOCK_CHIME.value(), SoundSource.BLOCKS, 1f-((float)tile.destroyTicks/(float)tile.maxDestroyTicks), NoteBlock.getPitchFromNote(noteIndex));
+            if (chordIndex != 0)
+                world.playSound(null, pos, SoundEvents.NOTE_BLOCK_BELL.value(), SoundSource.BLOCKS, 1f-((float)tile.destroyTicks/(float)tile.maxDestroyTicks), NoteBlock.getPitchFromNote(chordIndex));
+            tile.currentNote++;
+            if (tile.currentNote >= tile.notes.length)
+                tile.currentNote = 0;
         }
     }
 
